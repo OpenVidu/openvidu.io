@@ -51,7 +51,7 @@ Everything else — full builds, validating like CI, previewing the versioned la
 | [`docs/`](docs/) | Content root. Non-versioned pages at the top level (landing, pricing, blog, …) |
 | [`docs/meet/`](docs/meet/) | **OpenVidu Meet** docs (versioned, served at `/{version}/meet/`) |
 | [`docs/docs/`](docs/docs/) | **OpenVidu Platform** docs (versioned, served at `/{version}/docs/`) |
-| [`overrides/`](overrides/) | Material theme customization (`main.html`, `home.html`, `partials/`) |
+| [`docs/overrides/`](docs/overrides/) | Material theme customization (`main.html`, `home.html`, `partials/`) |
 | [`shared/`](shared/) | Reusable Markdown snippets, included with `--8<--` |
 | `docs/assets/`, `docs/stylesheets/`, `docs/javascripts/` | Images/videos (organized by consuming page), CSS, JS |
 | [`publish-tool/`](publish-tool/) | `ovweb`, the publishing CLI, plus `ovweb.yaml` (site layout + every redirect) |

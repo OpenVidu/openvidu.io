@@ -104,16 +104,6 @@ release-notes section must be an **absolute, version-pinned** URL to that same v
 same pinned form — see the blog conventions). The full releases-pages contract is in
 [versioning.md](versioning.md).
 
-## External links and new tabs
-
-- **New tab**: the one canonical spelling is `{:target="_blank"}` (`ovweb lint` warns on
-  variants). Never add `rel="noopener"` — modern browsers imply it for `target="_blank"`, and
-  the privacy plugin adds it to published pages anyway.
-- **External-link icon** (`:fontawesome-solid-external-link:{.external-link-icon}`) marks a link
-  that **leaves the site**. Internal links that open a new tab get `target` only, no icon.
-  Test/example domains (`openvidu.example.io`, local-deployment URLs) are neither. Applying the
-  icon to the existing back catalog is a pending sweep; use it on new content.
-
 ## Anchors and warnings
 
 > [!IMPORTANT]

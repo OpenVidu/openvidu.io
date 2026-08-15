@@ -34,7 +34,10 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img }
+    <figcaption>OpenVidu High Availability Architecture with DNS Load Balancing</figcaption>
+    </figure>
 
     - The Master Nodes act as Load Balancers, managing the traffic and distributing it among the other Master Nodes and Media Nodes.
     - Each Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -86,7 +89,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol | <div class="w-8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
+| Protocol | <div style="width:8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 80          | 0.0.0.0/0, ::/0           | Redirect HTTP to HTTPS and Let's Encrypt validation.                                              |
 | TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -116,7 +119,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
+| Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
@@ -144,7 +147,7 @@ docker run --pull always --rm -it \
     --deployment-type=ha
 ```
 
---8<-- "self-hosting/common/install-version.md"
+--8<-- "shared/self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -185,7 +188,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -217,7 +220,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -256,8 +259,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "self-hosting/on-premises/credentials-general.md"
---8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/on-premises/credentials-general.md"
+--8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -299,7 +302,7 @@ Each installation command for each type of node looks like this:
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "self-hosting/common/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         Notes:
 
@@ -337,7 +340,7 @@ Each installation command for each type of node looks like this:
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "self-hosting/common/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -378,7 +381,7 @@ Each installation command for each type of node looks like this:
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "self-hosting/common/install-version.md"
+        --8<-- "shared/self-hosting/common/install-version.md"
 
         - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
@@ -397,7 +400,7 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
     - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.

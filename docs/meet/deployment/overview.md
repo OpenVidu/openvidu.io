@@ -9,7 +9,7 @@ description: "The four ways to run OpenVidu Meet, from a local Docker Compose se
 
 OpenVidu Meet is designed to be **self-hosted**, whether it is on premises or in a cloud provider. It brings to your own managed service advanced capabilities usually reserved only for SaaS solutions. There are two main reasons why you may need to self-host the real-time solution yourself:
 
---8<-- "self-hosting/common/production-ready.md"
+--8<-- "shared/self-hosting/common/production-ready.md"
 
 ## OpenVidu Meet editions
 

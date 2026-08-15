@@ -64,15 +64,15 @@ def test_a_page_with_no_includes_is_its_own_only_source():
 
 
 def test_an_include_is_followed():
-    files = {"docs/a.md": '--8<-- "x.md"', "shared/x.md": "text"}
+    files = {"docs/a.md": '--8<-- "shared/x.md"', "shared/x.md": "text"}
     assert sources_of("docs/a.md", reader(files)) == {"docs/a.md", "shared/x.md"}
 
 
 def test_includes_are_followed_to_any_depth():
     files = {
-        "docs/a.md": '--8<-- "x.md"',
-        "shared/x.md": '--8<-- "y.md"',
-        "shared/y.md": '--8<-- "z.md"',
+        "docs/a.md": '--8<-- "shared/x.md"',
+        "shared/x.md": '--8<-- "shared/y.md"',
+        "shared/y.md": '--8<-- "shared/z.md"',
         "shared/z.md": "text",
     }
     assert sources_of("docs/a.md", reader(files)) == {
@@ -85,21 +85,21 @@ def test_includes_are_followed_to_any_depth():
 
 def test_an_indented_include_counts():
     """Many of them sit inside admonitions, so the marker is not at column zero."""
-    files = {"docs/a.md": '!!! note\n    --8<-- "x.md"\n', "shared/x.md": "t"}
+    files = {"docs/a.md": '!!! note\n    --8<-- "shared/x.md"\n', "shared/x.md": "t"}
     assert sources_of("docs/a.md", reader(files)) == {"docs/a.md", "shared/x.md"}
 
 
 def test_a_missing_include_is_not_an_error():
     """`shared/README.md` documents the syntax with a placeholder path inside a code fence."""
-    files = {"docs/a.md": '--8<-- "<folder>/<snippet>.md"'}
+    files = {"docs/a.md": '--8<-- "shared/<folder>/<snippet>.md"'}
     assert sources_of("docs/a.md", reader(files)) == {"docs/a.md", "shared/<folder>/<snippet>.md"}
 
 
 def test_a_snippet_included_twice_is_visited_once():
     files = {
-        "docs/a.md": '--8<-- "x.md"\n--8<-- "y.md"',
-        "shared/x.md": '--8<-- "shared.md"',
-        "shared/y.md": '--8<-- "shared.md"',
+        "docs/a.md": '--8<-- "shared/x.md"\n--8<-- "shared/y.md"',
+        "shared/x.md": '--8<-- "shared/shared.md"',
+        "shared/y.md": '--8<-- "shared/shared.md"',
         "shared/shared.md": "t",
     }
     assert sources_of("docs/a.md", reader(files)) == {
@@ -111,12 +111,14 @@ def test_a_snippet_included_twice_is_visited_once():
 
 
 def test_a_cycle_terminates():
-    files = {"shared/a.md": '--8<-- "b.md"', "shared/b.md": '--8<-- "a.md"'}
+    files = {"shared/a.md": '--8<-- "shared/b.md"', "shared/b.md": '--8<-- "shared/a.md"'}
     assert sources_of("shared/a.md", reader(files)) == {"shared/a.md", "shared/b.md"}
 
 
 def test_a_snippet_that_includes_itself_terminates():
-    assert sources_of("shared/a.md", reader({"shared/a.md": '--8<-- "a.md"'})) == {"shared/a.md"}
+    assert sources_of("shared/a.md", reader({"shared/a.md": '--8<-- "shared/a.md"'})) == {
+        "shared/a.md"
+    }
 
 
 # -- choosing the date to publish --------------------------------------------------------
@@ -129,7 +131,7 @@ def test_a_page_without_includes_takes_its_own_date():
 
 def test_a_newer_snippet_moves_the_page_forward():
     """The reason this module exists: one shared snippet is shown by up to 34 pages."""
-    files = {"docs/install.md": '--8<-- "version.md"', "shared/version.md": "3.8.0"}
+    files = {"docs/install.md": '--8<-- "shared/version.md"', "shared/version.md": "3.8.0"}
     dates = {"docs/install.md": "2026-06-25", "shared/version.md": "2026-07-22"}
     assert newest_dates(["docs/install.md"], dates=dates, read=reader(files)) == {
         "docs/install.md": "2026-07-22"
@@ -137,14 +139,14 @@ def test_a_newer_snippet_moves_the_page_forward():
 
 
 def test_an_older_snippet_does_not_drag_the_page_back():
-    files = {"docs/install.md": '--8<-- "version.md"', "shared/version.md": "3.8.0"}
+    files = {"docs/install.md": '--8<-- "shared/version.md"', "shared/version.md": "3.8.0"}
     dates = {"docs/install.md": "2026-07-22", "shared/version.md": "2026-01-01"}
     resolved = newest_dates(["docs/install.md"], dates=dates, read=reader(files))
     assert resolved == {"docs/install.md": "2026-07-22"}
 
 
 def test_a_page_git_has_never_seen_can_still_be_dated_by_its_snippet():
-    files = {"docs/new.md": '--8<-- "x.md"', "shared/x.md": "t"}
+    files = {"docs/new.md": '--8<-- "shared/x.md"', "shared/x.md": "t"}
     dates = {"shared/x.md": "2026-07-22"}
     assert newest_dates(["docs/new.md"], dates=dates, read=reader(files)) == {
         "docs/new.md": "2026-07-22"
@@ -158,8 +160,8 @@ def test_a_page_with_nothing_dated_is_left_out_rather_than_invented():
 
 def test_each_file_is_read_once_however_many_pages_include_it():
     files = {
-        "docs/a.md": '--8<-- "x.md"',
-        "docs/b.md": '--8<-- "x.md"',
+        "docs/a.md": '--8<-- "shared/x.md"',
+        "docs/b.md": '--8<-- "shared/x.md"',
         "shared/x.md": "t",
     }
     reads: list[str] = []

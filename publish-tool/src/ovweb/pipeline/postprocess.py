@@ -97,10 +97,11 @@ def postprocess(
     _guard(version_dir, force=force)
 
     # 1. Drop what must never be published.
+    report.step("remove-overrides", "Remove the theme override folder")
+    removed = fsops.remove(version_dir / "overrides", required=False)
     # `site/` only exists when the tree came from a checkout rather than a fresh worktree.
-    report.step("remove-stray-site", "Remove a stray site/ folder from checkout builds")
-    removed = fsops.remove(tree / "site", required=False)
-    report.result("remove-stray-site", removed=int(removed))
+    removed += fsops.remove(tree / "site", required=False)
+    report.result("remove-overrides", removed=int(removed))
 
     # 2. Versioned pages: pin assets, absolutise root links, consolidate SEO URLs.
     report.step("rewrite-versioned", "Rewrite links in versioned pages")

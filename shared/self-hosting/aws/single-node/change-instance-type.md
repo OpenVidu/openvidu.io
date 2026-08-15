@@ -8,6 +8,8 @@ You can change the instance type of the OpenVidu Single Node instance to adapt i
 
     === "Change instance type"
 
-        ![Change instance type](/assets/images/platform/self-hosting/single-node/aws/ec2-instance-type.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Change instance type](/assets/images/platform/self-hosting/single-node/aws/ec2-instance-type.png){ .svg-img .dark-img }
+        </figure>
 
 3. Select the new instance type and click on _"Apply"_.

@@ -30,11 +30,11 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
             To show the app with a mobile device appearance, open the dev tools in your browser and find the button to adapt the viewport to a mobile device aspect ratio. You may also choose predefined types of devices to see the behavior of your app in different resolutions.
 
-        <div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/join-ionic-web.png" loading="lazy" alt="Join screen of the Ionic tutorial app in a browser"/></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ionic-web.png" loading="lazy" alt="Join screen of the Ionic tutorial app in a browser"/></a></p></div>
 
-        <div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/room-ionic-web.png" loading="lazy" alt="Video call room of the Ionic tutorial app in a browser"/></p></div>
+        <div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ionic-web.png" loading="lazy" alt="Video call room of the Ionic tutorial app in a browser"/></a></p></div>
 
-        --8<-- "tutorials/testing-other-devices.md"
+        --8<-- "shared/tutorials/testing-other-devices.md"
 
     === ":fontawesome-solid-mobile-screen-button:{.icon .lg-icon .tab-icon} Mobile"
 
@@ -82,7 +82,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         <div class="grid-container">
 
-        <div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></p></div>
+        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></a></p></div>
 
         </div>
 
@@ -92,8 +92,8 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         <div class="grid-container">
 
-        <div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/join-ionic-device.png" loading="lazy" style="width: 50%;" alt="Join screen of the Ionic tutorial app on a mobile device"/></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ionic-device.png" loading="lazy" style="width: 50%;" alt="Join screen of the Ionic tutorial app on a mobile device"/></a></p></div>
 
-        <div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/room-ionic-device.png" loading="lazy" style="width: 50%;" alt="Video call room of the Ionic tutorial app on a mobile device"/></p></div>
+        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ionic-device.png" loading="lazy" style="width: 50%;" alt="Video call room of the Ionic tutorial app on a mobile device"/></a></p></div>
 
         </div>

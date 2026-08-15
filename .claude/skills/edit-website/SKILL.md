@@ -21,14 +21,13 @@ versions — details in [`contributing/versioning.md`](../../../contributing/ver
 |---|---|
 | Any internal link or image reference | [`contributing/link-rules.md`](../../../contributing/link-rules.md) |
 | A new page, snippet or asset (placement, frontmatter, nav, llmstxt, layout) | [`contributing/authoring.md`](../../../contributing/authoring.md) + [`shared/README.md`](../../../shared/README.md) |
-| HTML blocks, `page_features:`, theme overrides/partials, JSON-LD frontmatter, light/dark images | [`contributing/page-composition.md`](../../../contributing/page-composition.md) |
+| HTML blocks, `tags:`, theme overrides/partials, JSON-LD frontmatter, light/dark images | [`contributing/page-composition.md`](../../../contributing/page-composition.md) |
 | URLs, versions, redirects, the releases pages | [`contributing/versioning.md`](../../../contributing/versioning.md) (+ [`publish-tool/README.md`](../../../publish-tool/README.md)) |
 | Blog posts | The `blog-plan`/`blog-write`/`blog-review` skills, not this one |
 
 ## The facts that bite most often
 
-- **Copy a visual pattern → copy its `page_features:` too** — the feature keys load the JS/CSS
-  the pattern needs.
+- **Copy a visual pattern → copy its `tags:` too** — the tags load the JS/CSS the pattern needs.
 - **GLightbox HTML**: the `#only-dark`/`#only-light` suffix goes in the `<img>`/`<video>` `src`,
   never in the parent `<a href>`, and each `<a>` must be a one-liner.
 - **`shared/` snippets render on many pages** — grep the snippet's `--8<--` usages before

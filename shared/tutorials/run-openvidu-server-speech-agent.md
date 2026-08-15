@@ -1,6 +1,6 @@
 === "Run OpenVidu locally"
 
-    --8<-- "tutorials/run-openvidu-locally-speech-agent.md"
+    --8<-- "shared/tutorials/run-openvidu-locally-speech-agent.md"
 
 === "Deploy OpenVidu"
 

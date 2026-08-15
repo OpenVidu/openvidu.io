@@ -11,10 +11,6 @@
 {% endblock %} #}
 
 {% block site_meta %}
-{{ super() }}
-
-<!-- Anti-clickjacking frame buster: GitHub Pages cannot send frame-ancestors /
-     X-Frame-Options headers, so this JS guard is the only available defense. -->
 <style id="antiClickjack">body{display:none !important;}</style>
 <script>
   if (self === top) {
@@ -24,59 +20,33 @@
     top.location = self.location;
   }
 </script>
-<noscript><style>body{display:block !important;}</style></noscript>
+
+{{ super() }}
 
 {% endblock %}
 
 {% block libs %}
 
-<!-- Reveal-on-scroll (in-house wow.js replacement). Hiding is gated on the
-     html.js-reveal class this function adds, so JS-off visitors see content. -->
+<!-- wow.js -->
 <script>
   window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
-
-<!-- Use-cases carousel (Splide) -->
-<script>
-  window.setupCarousel = function () {
-    document.querySelectorAll(".splide").forEach((el) => {
-      new Splide(el, {
-        type: "loop",
-        autoWidth: true,
-        autoHeight: true,
-        focus: "center",
-        gap: "4%",
-      }).mount();
-    });
+    new WOW().init();
+    console.debug("WOW.js initialized");
   };
 </script>
 
 <!-- Card glow effect -->
 <script>
-  window.openviduCardGlowRetries = 0;
   window.setupCardGlow = function () {
     console.debug("starting card glow setup");
     const cards = document.querySelectorAll(
       ".feature-cards .grid.cards > ul > li"
     );
     const maxRetries = 10;
-    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
       console.debug("No cards found, retrying in 100ms");
-      window.openviduCardGlowRetries++;
+      retryCount++;
       setTimeout(() => {
         window.setupCardGlow();
       }, 100);
@@ -173,42 +143,42 @@
 
 <!-- Add scripts that need to run before here -->
 
-{% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
+<script src="{{ 'javascripts/target-blank.js' | url }}"></script>
+
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<script src="{{ 'javascripts/wow.min.js' | url }}"></script>
 <script>
   window.setupWowJs();
 </script>
 {% endif %}
 
-{% if page.meta and page.meta.page_features and "setupcardglow" in page.meta.page_features %}
+{% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
 <script>
   window.setupCardGlow();
 </script>
 {% endif %}
 
-{% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
-<script src="{{ 'javascripts/splide.min.js' | url }}"></script>
-<script>
-  window.setupCarousel();
-</script>
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<script src="{{ 'javascripts/flickity.pkgd.min.js' | url }}"></script>
 {% endif %}
 
-{% if page.meta and page.meta.page_features and "setupcustomgallery" in page.meta.page_features %}
+{% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
 <script src="{{ 'javascripts/glightbox-custom-gallery.js' | url }}"></script>
 {% endif %}
 
-{% if page.meta and page.meta.page_features and "lazyvideo" in page.meta.page_features %}
-<script src="{{ 'javascripts/lazy-video.js' | url }}"></script>
+{% if page.meta and page.meta.tags and "copyclipboard" in page.meta.tags %}
+<script src="/javascripts/copy-clipboard.js"></script>
 {% endif %}
 
-{% if page.meta and page.meta.page_features and "scrolltoversion" in page.meta.page_features %}
-<script src="{{ 'javascripts/releases-scroll-to-version.js' | url }}"></script>
+{% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}
+<script src="/javascripts/releases-scroll-to-version.js"></script>
 {% endif %}
 
 {{ super() }}
 
 <!-- Add scripts that need to run afterwards here -->
 
-{% if page.meta and page.meta.page_features and "openviduregister" in page.meta.page_features %}
+{% if page.meta and page.meta.tags and "openviduregister" in page.meta.tags %}
 <script src="{{ 'javascripts/openvidu-register/openvidu-register.js' | url }}"></script>
 {% endif %}
 
@@ -216,14 +186,53 @@
 
 {% block styles %}
 
-{% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
-<link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/animate.min.css' | url }}" />
 {% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
+{% endif %}
+
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
+  }
+</style>
 
 {{ super() }}
 
 {% if page.meta %}
 {% if page.meta.hide %}
+{% if "footer-prev" in page.meta.hide %}
+<style>
+  .md-footer__link--prev {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "footer-next" in page.meta.hide %}
+<style>
+  .md-footer__link--next {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "search-bar" in page.meta.hide %}
+<style>
+  div.md-search {
+    display: none;
+  }
+
+  label.md-header__button.md-icon[for="__search"] {
+    display: none;
+  }
+</style>
+{% endif %}
 {% if "version-selector" in page.meta.hide %}
 <style>
   div.md-version {
@@ -233,29 +242,15 @@
 {% endif %}
 {% endif %}
 
-{% if page.meta.page_features and ("Meet" in page.meta.page_features or "Platform" in page.meta.page_features) %}
-<link rel="stylesheet" href="{{ 'stylesheets/product.css' | url }}" />
-{% endif %}
-
-{% if page.meta.page_features and "Platform" in page.meta.page_features %}
+{% if page.meta.tags and "Platform" in page.meta.tags %}
 <link rel="stylesheet" href="{{ 'stylesheets/platform.css' | url }}" />
 {% endif %}
 
-{% if page.meta.page_features and "Meet" in page.meta.page_features %}
+{% if page.meta.tags and "Meet" in page.meta.tags %}
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
-{% if page.meta.page_features and "homestyles" in page.meta.page_features %}
-<link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
-{% endif %}
-
-{% if page.meta.page_features and "openviduregister" in page.meta.page_features %}
-<!-- Material Symbols is only consumed by the signed-in account chip the register
-     bundle injects on this page -->
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/>
+{% if page.meta.tags and "openviduregister" in page.meta.tags %}
 <link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
 <link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
 {% endif %}

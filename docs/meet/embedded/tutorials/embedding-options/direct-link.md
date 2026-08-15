@@ -1,8 +1,8 @@
 ---
 title: "Direct link tutorial for OpenVidu Meet"
 description: "Build a video conferencing app that sends users into an OpenVidu Meet room through a direct link, with a Node.js backend and a JavaScript frontend."
-page_features:
-  - setupcustomgallery
+tags:
+    - setupcustomgallery
 ---
 
 # Direct Link Tutorial
@@ -28,7 +28,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to cre
 
 #### 1. Run OpenVidu Meet
 
---8<-- "tutorials/run-openvidu-meet.md"
+--8<-- "shared/tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -62,10 +62,10 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/direct-link/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room opened through a direct link"/>
-<img src="/assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room opened through a direct link"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room opened through a direct link"/></a>
+<a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room opened through a direct link"/></a></p></div>
 
 </div>
 

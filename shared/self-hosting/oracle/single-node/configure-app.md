@@ -4,11 +4,11 @@ To configure your OpenVidu application, you will need your OCI credentials. You 
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "self-hosting/oracle/credentials-general.md"
+--8<-- "shared/self-hosting/oracle/credentials-general.md"
 
 ### Troubleshooting initial Oracle Cloud Infrastructure deployment
 
---8<-- "self-hosting/oracle/troubleshooting.md"
+--8<-- "shared/self-hosting/oracle/troubleshooting.md"
 
 3. If everything appears to be in order, check the [status](../on-premises/admin.md#checking-the-status-of-services) and [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

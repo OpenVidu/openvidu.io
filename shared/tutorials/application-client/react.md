@@ -22,10 +22,10 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/join-react.png" loading="lazy" alt="Join screen of the React tutorial app"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-react.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-react.png" loading="lazy" alt="Join screen of the React tutorial app"/></a></p></div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/room-react.png" loading="lazy" alt="Video call room of the React tutorial app"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-react.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-react.png" loading="lazy" alt="Video call room of the React tutorial app"/></a></p></div>
 
 </div>
 
---8<-- "tutorials/testing-other-devices.md"
+--8<-- "shared/tutorials/testing-other-devices.md"

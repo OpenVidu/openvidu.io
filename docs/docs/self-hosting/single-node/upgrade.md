@@ -3,7 +3,7 @@ title: "Upgrade OpenVidu Single Node COMMUNITY"
 description: "Upgrade an OpenVidu Single Node COMMUNITY deployment to a newer version, in place with the updater or by redeploying your cloud template."
 ---
 
-# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span>
+# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span>
 
 There are two ways to upgrade an OpenVidu Single Node deployment:
 
@@ -22,4 +22,4 @@ There are two ways to upgrade an OpenVidu Single Node deployment:
 
 If you prefer not to redeploy, the in-place procedure below works on all of these providers too.
 
---8<-- "self-hosting/on-premises/single-node/upgrade.md"
+--8<-- "shared/self-hosting/on-premises/single-node/upgrade.md"

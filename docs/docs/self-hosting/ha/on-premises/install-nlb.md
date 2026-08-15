@@ -34,7 +34,10 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is how the architecture of the deployment looks:
 
-    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .svg-img .dark-img }
+    <figcaption>OpenVidu High Availability Architecture with Network Load Balancer</figcaption>
+    </figure>
 
     - The Load Balancer must be a Network Load Balancer that supports TCP and UDP traffic.
     - The Load Balancer distributes traffic across all Master Nodes.
@@ -89,7 +92,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol | <div class="w-8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
+| Protocol | <div style="width:8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 1945        | Load Balancer             | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP      | 5349        | Load Balancer             | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -118,7 +121,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
+| Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
@@ -146,7 +149,7 @@ docker run --pull always --rm -it \
     --deployment-type=ha
 ```
 
---8<-- "self-hosting/common/install-version.md"
+--8<-- "shared/self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -178,7 +181,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -210,7 +213,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -379,8 +382,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "self-hosting/on-premises/credentials-general.md"
---8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "shared/self-hosting/on-premises/credentials-general.md"
+--8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -419,7 +422,7 @@ Each installation command for each type of node looks like this:
         --external-load-balancer
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     Notes:
 
@@ -441,7 +444,7 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "self-hosting/common/install-version.md"
+    --8<-- "shared/self-hosting/common/install-version.md"
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change, and Media Nodes should be able to reach all Master Nodes using these IPs.
     - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.

@@ -15,7 +15,7 @@ The Speech Processing agent provides all the AI services related to transcribing
 
 ### 1. SSH into an OpenVidu Node and go to configuration folder
 
---8<-- "self-hosting/common/ssh-openvidu-deployment.md"
+--8<-- "shared/self-hosting/common/ssh-openvidu-deployment.md"
 
 ### 2. Modify file `agent-speech-processing.yaml`
 
@@ -35,7 +35,7 @@ You can set up the following AI services in this agent:
 
 ### 3. Restart OpenVidu
 
---8<-- "self-hosting/common/restart-openvidu-deployment.md"
+--8<-- "shared/self-hosting/common/restart-openvidu-deployment.md"
 
 After restarting OpenVidu your agent will be up and running, ready to process new Rooms.
 

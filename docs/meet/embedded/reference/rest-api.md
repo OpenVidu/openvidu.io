@@ -1,9 +1,8 @@
 ---
 title: "OpenVidu Meet REST API reference"
 description: "Manage rooms, room members, recordings and users from your backend with the OpenVidu Meet REST API, including API key authentication."
-page_features:
-  - lazyvideo
-  - setupcustomgallery
+tags:
+    - setupcustomgallery
 ---
 
 ## Overview
@@ -31,8 +30,8 @@ X-API-KEY: your-api-key
 2. Navigate to the **"Embedded"** page.
 3. Click on **"Generate API Key"** button.
 
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark" preload="none" muted playsinline loop style="margin-bottom: 2em"></video></a>
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light" preload="none" muted playsinline loop style="margin-bottom: 2em"></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="/assets/videos/meet/embedded/reference/generate-api-key-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" style="margin-bottom: 2em" src="/assets/videos/meet/embedded/reference/generate-api-key-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
 
 ## Reference
 
@@ -47,9 +46,9 @@ The reference documentation provides code snippets for each REST API method. You
 
 <div class="grid cards no-border no-shadow two-columns" markdown>
 
-![OpenVidu Meet Prejoin](../../../assets/images/meet/embedded/reference/rest-snippets-1.png){ .round-corners loading=lazy }
+<a class="glightbox" href="/assets/images/meet/embedded/reference/rest-snippets-1.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/rest-snippets-1.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
-![OpenVidu Meet Prejoin](../../../assets/images/meet/embedded/reference/rest-snippets-2.png){ .round-corners loading=lazy }
+<a class="glightbox" href="/assets/images/meet/embedded/reference/rest-snippets-2.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/rest-snippets-2.png" loading="lazy" class="round-corners" alt="OpenVidu Meet Prejoin"/></a>
 
 </div>
 
@@ -59,4 +58,4 @@ When accessing the REST API documentation from your own OpenVidu Meet deployment
 
 Just configure a valid API key in the `X-API-KEY` header input.
 
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" defer muted playsinline autoplay loop async></video></a>

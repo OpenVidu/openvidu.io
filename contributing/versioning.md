@@ -128,21 +128,3 @@ Add `--dry-run` to print the plan without building or pushing, or `--no-push` to
 locally and inspect the result before it goes out. The step-by-step description of what a publish
 does is in [`publish-tool/README.md`](../publish-tool/README.md#what-a-publish-does); how to
 preview the versioned layout locally is in [local-testing.md](local-testing.md).
-
-## robots.txt and CNAME live on gh-pages
-
-Neither file has a source copy in this repository: both persist at the **gh-pages root** across
-publishes (mike's commits never touch root entries it does not manage), and editing them means a
-manual commit to `gh-pages`. GitHub Pages also rewrites `CNAME` from the repository settings.
-
-What the live `robots.txt` encodes, and why:
-
-- **Every page stays crawlable — including the old version folders** (`/3.0/` … `/3.7/`). They
-  must be crawlable so Google can read their `rel="canonical"` pointing at `/latest/` and
-  consolidate the duplicates. Blocking them would be counterproductive: a blocked URL can still
-  be indexed from links, just without the canonical ever being read.
-- **The only disallow is `/*/sitemap.xml`** — the per-version sitemaps exist solely for the
-  Material version selector (which runs in the browser and ignores robots.txt); they list
-  version-pinned URLs whose canonical is `/latest/`, so there is nothing in them for a crawler.
-  The root `/sitemap.xml` has no preceding path segment and stays allowed.
-- **`Sitemap: https://openvidu.io/sitemap.xml`** advertises the root sitemap.

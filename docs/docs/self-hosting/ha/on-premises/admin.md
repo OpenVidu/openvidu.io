@@ -84,19 +84,19 @@ Depending on the node type, you will see different services running.
     alloy        docker.io/grafana/alloy                        "/usr/bin/alloy -…"      alloy        53 seconds ago   Up 52 seconds
     ```
 
---8<-- "self-hosting/on-premises/openvidu-pro-checking-logs.md"
+--8<-- "shared/self-hosting/on-premises/openvidu-pro-checking-logs.md"
 
 ## Adding Media Nodes
 
 To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](./install-nlb.md#media-node) on the new Media Node.
 
---8<-- "self-hosting/on-premises/openvidu-pro-removing-media-nodes.md"
+--8<-- "shared/self-hosting/on-premises/openvidu-pro-removing-media-nodes.md"
 
 ## Changing the configuration
 
 You can check how to change the configuration in the [Changing Configuration](../../configuration/changing-config.md) section. Also, there are multiple guides in the [How to Guides](../../how-to-guides/index.md) section that can help you with specific configuration changes.
 
---8<-- "self-hosting/on-premises/openvidu-pro-uninstall.md"
+--8<-- "shared/self-hosting/on-premises/openvidu-pro-uninstall.md"
 
 ## Backup and Restore
 

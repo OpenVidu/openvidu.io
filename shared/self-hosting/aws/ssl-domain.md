@@ -8,7 +8,7 @@ There are three possible scenarios for this section:
 
     It will deploy OpenVidu with a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate issued for the public IP created for the deployment.
 
-    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/aws/letsencrypt-nodomain.png){ loading=lazy }
+    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/aws/letsencrypt-nodomain.png)
 
 === "Let's Encrypt With Domain Name (recommended)"
 
@@ -16,7 +16,7 @@ There are three possible scenarios for this section:
 
     Create an Elastic IP beforehand and ensure your Domain Name points to it.
 
-    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/aws/letsencrypt.png){ loading=lazy }
+    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/aws/letsencrypt.png)
 
     You can specify the **DomainName** with your FQDN and optionally the **PublicElasticIP** with the Elastic IP that the domain points to.
 
@@ -28,7 +28,7 @@ There are three possible scenarios for this section:
 
     The configured parameters would look like this:
 
-    ![Custom certificates](/assets/images/platform/self-hosting/shared/aws/owncert.png){ loading=lazy }
+    ![Custom certificates](/assets/images/platform/self-hosting/shared/aws/owncert.png)
 
     Specify the certificate files in base64 in **OwnPublicCertificate** and **OwnPrivateCertificate**. The **DomainName** and **PublicElasticIP** parameters are mandatory.
 
@@ -47,6 +47,6 @@ There are three possible scenarios for this section:
 
     These are the parameters needed in this section to use self-signed certificates:
 
-    ![Self-signed certificates](/assets/images/platform/self-hosting/shared/aws/selfsigned.png){ loading=lazy }
+    ![Self-signed certificates](/assets/images/platform/self-hosting/shared/aws/selfsigned.png)
 
     You can optionally specify a **DomainName**. If no domain name is provided, the public IP is used as the domain name. You can select the **CertificateType** as _letsencrypt_ or _selfsigned_.

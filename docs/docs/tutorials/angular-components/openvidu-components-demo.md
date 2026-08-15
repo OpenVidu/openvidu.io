@@ -10,7 +10,10 @@ description: "Run, deploy and customize the OpenVidu Components Demo App, the re
 Introducing **OpenVidu Components Demo App**, the premier videoconference application that showcases the full potential of the OpenVidu platform. OpenVidu Components Demo App is not just any videoconferencing tool; it’s the default and flagship app built with the robust and versatile [OpenVidu Components](../../ui-components/angular-components.md).
 
 
-  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .round-corners .mkdocs-img}
+<figure markdown>
+  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
+  <figcaption>OpenVidu Components Demo App</figcaption>
+</figure>
 
 ## Run OpenVidu Components Demo App
 
@@ -18,7 +21,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 === "Run OpenVidu locally"
 
-    --8<-- "tutorials/run-openvidu-locally.md"
+    --8<-- "shared/tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 
@@ -88,7 +91,10 @@ The OpenVidu Components Demo App architecture is divided into two main component
 * **frontend**: which is the client-side application built with Angular and OpenVidu Components.
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
+<figure markdown>
   ![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy .svg-img .mkdocs-img}
+  <figcaption>OpenVidu Components Demo App Architecture</figcaption>
+</figure>
 
 === ":simple-angular:{.icon .lg-icon .tab-icon} Demo App frontend"
 

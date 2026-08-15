@@ -36,7 +36,7 @@ The only required attribute is **`room-url`**, which determines the room to acce
 
 Declare attributes in the component to customize the meeting for your user.
 
---8<-- "meet/webcomponent/attributes.md"
+--8<-- "shared/meet/webcomponent/attributes.md"
 
 Example:
 
@@ -54,7 +54,7 @@ Example:
 
 The OpenVidu Meet component exposes a set of commands that allow you to control the room from your application's logic.
 
---8<-- "meet/webcomponent/commands.md"
+--8<-- "shared/meet/webcomponent/commands.md"
 
 Invoke commands using JavaScript:
 
@@ -69,7 +69,7 @@ openviduMeet.leaveRoom();
 
 The OpenVidu Meet component emits events that you can listen to in your application.
 
---8<-- "meet/webcomponent/events.md"
+--8<-- "shared/meet/webcomponent/events.md"
 
 
 Listen to events using JavaScript event listeners:

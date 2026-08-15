@@ -8,7 +8,7 @@ The application will initiate as a native Android program. Once the application 
 
 <div class="grid-container">
 
-<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></a></p></div>
 
 </div>
 
@@ -22,8 +22,8 @@ Once you have configured the URLs, you can join a video call room by providing a
 
 <div class="grid-container">
 
-<div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/join-android.png" loading="lazy" style="width: 50%;" alt="Join screen of the Android tutorial app"/></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-android.png" loading="lazy" style="width: 50%;" alt="Join screen of the Android tutorial app"/></a></p></div>
 
-<div class="grid-50"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/room-android.png" loading="lazy" style="width: 50%;" alt="Video call room of the Android tutorial app"/></p></div>
+<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-android.png" loading="lazy" style="width: 50%;" alt="Video call room of the Android tutorial app"/></a></p></div>
 
 </div>

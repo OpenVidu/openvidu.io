@@ -8,7 +8,7 @@ file=$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("tool_input",
 [ -n "$file" ] || exit 0
 
 case "$file" in
-  */docs/*.md | */shared/*.md | */overrides/*.html) ;;
+  */docs/*.md | */shared/*.md | */docs/overrides/*.html) ;;
   *) exit 0 ;;
 esac
 

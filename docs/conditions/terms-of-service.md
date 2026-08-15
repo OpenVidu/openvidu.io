@@ -3,7 +3,6 @@ title: "Terms of Service"
 description: "The terms governing use of the openvidu.io website and the OpenVidu services, including your rights, your obligations and the applicable law."
 hide:
   - navigation
-  - footer
   - toc
   - search-bar
   - version-selector

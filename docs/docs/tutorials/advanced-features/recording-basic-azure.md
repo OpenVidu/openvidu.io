@@ -1,7 +1,7 @@
 ---
 title: "Basic recording tutorial with Azure"
 description: "Record a room and manage the recordings in a simple Node.js and JavaScript video-call app, storing the files in Azure Blob Storage."
-page_features:
+tags:
   - setupcustomgallery
 ---
 
@@ -25,7 +25,7 @@ For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob 
 
 === "Run OpenVidu locally"
 
-    --8<-- "tutorials/run-openvidu-locally-azure.md"
+    --8<-- "shared/tutorials/run-openvidu-locally-azure.md"
 
 === "Deploy OpenVidu in Azure"
 
@@ -79,9 +79,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></a></p></div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></a></p></div>
 
 </div>
 
@@ -777,8 +777,8 @@ The `recordings.html` file defines the HTML for the general recording page. This
 
 <div class="grid-container">
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording3.png" loading="lazy" alt="General recording page listing recordings from all rooms"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording3.png" loading="lazy" alt="General recording page listing recordings from all rooms"/></a></p></div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording4.png" loading="lazy" alt="Recording playback in the general recording page"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording4.png" loading="lazy" alt="Recording playback in the general recording page"/></a></p></div>
 
 </div>

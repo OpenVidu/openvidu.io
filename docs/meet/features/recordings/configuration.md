@@ -1,7 +1,7 @@
 ---
 title: "Recording configuration in OpenVidu Meet"
 description: "Configure recording per OpenVidu Meet room: enable it, pick the layout and resolution, choose the trigger and allow anonymous sharing."
-page_features:
+tags:
   - setupcustomgallery
 ---
 
@@ -18,8 +18,8 @@ Recording behaviour is configured **per room**, when [creating](../rooms/managem
 
 Recording must be enabled in the room before any meeting in it can be recorded. It is enabled in the **Recording Settings** step of the room wizard, or with the `config.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
 
-![Recording Settings step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording Settings step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-light.png#only-light){ .round-corners loading=lazy }
+<a class="glightbox" href="/assets/images/meet/recordings/configuration/room-wizard-recording-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/configuration/room-wizard-recording-dark.png#only-dark" loading="lazy" class="round-corners" alt="Recording Settings step of the room configuration wizard"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/configuration/room-wizard-recording-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/configuration/room-wizard-recording-light.png#only-light" loading="lazy" class="round-corners" alt="Recording Settings step of the room configuration wizard"/></a>
 
 !!! info
     Recording and [end-to-end encryption](../meetings/e2e-encryption.md) are mutually exclusive: a room cannot have both enabled at the same time.
@@ -39,8 +39,8 @@ OpenVidu Meet provides multiple **recording layout options**. These layouts dete
 * **Single Speaker layout** (`single-speaker`)
   Records only the active speaker, hiding all other participants. This layout is best suited for presentations, lectures, or interviews where the focus should remain entirely on the speaker.
 
-![Recording layout options in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-layouts-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording layout options in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-layouts-light.png#only-light){ .round-corners loading=lazy }
+<a class="glightbox" href="/assets/images/meet/recordings/configuration/room-wizard-recording-layouts-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/configuration/room-wizard-recording-layouts-dark.png#only-dark" loading="lazy" class="round-corners" alt="Recording layout options in the room configuration wizard"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/configuration/room-wizard-recording-layouts-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/configuration/room-wizard-recording-layouts-light.png#only-light" loading="lazy" class="round-corners" alt="Recording layout options in the room configuration wizard"/></a>
 
 ## Recording encoding { #recording-encoding }
 
@@ -80,5 +80,5 @@ A recording's [shareable link](management.md#sharing-recordings) can be created 
 
 Anonymous recording sharing is **enabled by default**, so both scopes are available. You can disable it per room to restrict sharing to OpenVidu Meet users only — the "anyone" scope is then no longer offered. It is configured in the **Recording Settings** step of the room wizard ("Anonymous Recording Access"), or with the `access.anonymous.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
 
-![Anonymous recording sharing setting in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-dark.png#only-dark){ .round-corners loading=lazy }
-![Anonymous recording sharing setting in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-light.png#only-light){ .round-corners loading=lazy }
+<a class="glightbox" href="/assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-dark.png#only-dark" loading="lazy" class="round-corners" alt="Anonymous recording sharing setting in the room configuration wizard"/></a>
+<a class="glightbox" href="/assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-light.png#only-light" loading="lazy" class="round-corners" alt="Anonymous recording sharing setting in the room configuration wizard"/></a>

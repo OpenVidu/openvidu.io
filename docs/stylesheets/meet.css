@@ -1,27 +1,55 @@
 :root:root {
-  --product-primary-color: rgb(0, 147, 73) !important;
-  --product-primary-color-rgb: 0, 147, 73 !important;
-  --product-primary-dark: rgb(0, 95, 48) !important;
-  --product-primary-dark-rgb: 0, 95, 48 !important;
-  --product-primary-color-light: rgb(6, 211, 98) !important;
-  --product-primary-color-light-rgb: 6, 211, 98 !important;
-  --product-body-color-dark: rgb(0, 37, 19) !important;
-  --product-body-color-dark-rgb: 0, 37, 19 !important;
+  --meet-primary-color: rgb(0, 147, 73) !important;
+  --meet-primary-color-rgb: 0, 147, 73 !important;
+  --meet-primary-dark: rgb(0, 95, 48) !important;
+  --meet-primary-dark-rgb: 0, 95, 48 !important;
+  --meet-primary-color-light: rgb(6, 211, 98) !important;
+  --meet-primary-color-light-rgb: 6, 211, 98 !important;
+  --meet-body-color-dark: rgb(0, 37, 19) !important;
+  --meet-body-color-dark-rgb: 0, 37, 19 !important;
   --md-hue: 140deg !important;
+
+  --md-primary-fg-color: var(--meet-primary-color) !important;
+  --md-primary-fg-color--light: var(--meet-primary-color-light) !important;
+  --md-primary-fg-color--dark: var(--meet-primary-color) !important;
+  --md-primary-bg-color: rgb(255, 255, 255) !important;
+  --md-primary-bg-color--dark: var(--meet-primary-color) !important;
+  --md-accent-fg-color: rgba(var(--meet-primary-color-rgb), 0.8) !important;
+  --md-accent-fg-color--transparent: rgb(129, 129, 129) !important;
+  --md-accent-bg-color: rgb(255, 255, 255) !important;
+  --md-accent-bg-color--light: rgb(255, 255, 255) !important;
+
+  --gradient: conic-gradient(
+    from 60deg at 50% 50%,
+    var(--md-primary-fg-color--light) 0%,
+    var(--md-primary-fg-color--light) 13%,
+    var(--md-primary-fg-color--light) 61%,
+    var(--md-primary-fg-color--light) 99%
+  ) !important;
+
+  --plyr-color-main: var(--meet-primary-color-light);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
+}
+
+[data-md-color-scheme="default"] {
+  --meet-body-color-dark: #f5f5f5;
 }
 
 /* START: MkDocs Material custom admonition styles */
 .md-typeset .admonition.info,
 .md-typeset details.info {
-  border-color: var(--product-primary-color);
+  border-color: var(--meet-primary-color);
 }
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
-  background-color: rgba(var(--product-primary-color-rgb), 0.1);
+  background-color: rgba(var(--meet-primary-color-rgb), 0.1);
 }
 .md-typeset .info > .admonition-title::before,
 .md-typeset .info > summary::before {
-  background-color: var(--product-primary-color);
+  background-color: var(--meet-primary-color);
 }
 /* END: MkDocs Material custom admonition styles */
 
@@ -71,9 +99,26 @@
   font-weight: 500 !important;
 }
 
+.meet-features {
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
 .meet-header .img-title {
   width: 100% !important;
   max-width: 750px !important;
+}
+
+.openvidu-call-features-cards > ul {
+  display: block !important;
+}
+
+.ov-meet-commercial-img {
+  max-width: 100% !important; /* Default for small screens */
+  width: auto;
+  height: auto;
+  margin: auto;
+  text-align: center;
 }
 
 .feature-cards .two-columns li {
@@ -81,12 +126,25 @@
 }
 
 .feature-cards .two-columns li:hover {
-  background-color: rgba(var(--product-primary-color-rgb), 0.04) !important;
+  background-color: rgba(var(--meet-primary-color-rgb), 0.04) !important;
 }
 
 .ov-meet-commercial-feature-cards {
   padding: 0 25px !important;
   text-align: center !important;
+}
+.ov-meet-commercial-title {
+  text-align: center !important;
+  font-size: 3em !important;
+  font-weight: bold !important;
+  margin: 0 !important;
+}
+
+.ov-meet-commercial-features-title {
+  text-align: center !important;
+  font-size: 2em !important;
+  font-weight: bold !important;
+  /* margin: 0 0 2rem 0 !important; */
 }
 
 .ov-meet-commercial-icon {
@@ -131,24 +189,64 @@
   background-color: #C74634;
 }
 
+.ov-meet-footer-btn-container p {
+  text-align: center;
+}
+
 /* Dark mode */
+body[data-md-color-scheme="slate"] .ov-meet-commercial-icon {
+}
 
 /* Light mode */
 body[data-md-color-scheme="default"] {
   .feature-cards .two-columns li:hover {
-    background-color: rgba(var(--product-primary-color-rgb), 0.08) !important;
+    background-color: rgba(var(--meet-primary-color-rgb), 0.08) !important;
   }
 }
 
-.ov-call-commercial-feature-cards {
-  padding: 0 25px !important;
-  text-align: center !important;
+.no-border li {
+  border: none !important;
+}
+.no-shadow li {
+  box-shadow: none !important;
+}
+.round-corners {
+  border-radius: 14px;
+}
+.three-cols {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 12rem), 1fr)
+  ) !important;
+}
+@media (min-width: 576px) {
+  .ov-meet-commercial-img {
+    max-width: 80vw !important; /* Small devices (landscape phones, 576px and up) */
+  }
 }
 
-.ov-call-commercial-feature-cards > ul > li {
-  display: flex !important;
-  justify-content: space-between;
-  flex-direction: column;
+@media (min-width: 768px) {
+  .ov-meet-commercial-img {
+    max-width: 70vw !important; /* Medium devices (tablets, 768px and up) */
+  }
+}
+
+@media (min-width: 992px) {
+  .ov-meet-commercial-img {
+    max-width: 60vw !important; /* Large devices (desktops, 992px and up) */
+  }
+}
+
+@media (min-width: 1200px) {
+  .ov-meet-commercial-img {
+    max-width: 50vw !important; /* Extra large devices (large desktops, 1200px and up) */
+  }
+}
+
+@media (min-width: 1400px) {
+  .ov-meet-commercial-img {
+    max-width: 48vw !important; /* XX-Large devices (very large desktops, 1400px and up) */
+  }
 }
 
 .ov-meet-commercial-card-title {
@@ -156,41 +254,45 @@ body[data-md-color-scheme="default"] {
   font-weight: 500 !important;
 }
 
-.splide {
+.carousel {
   margin-top: 3em;
-  margin-bottom: 4em;
 }
 
-.splide__slide {
+.carousel-cell {
   width: 85%;
-  transition: opacity 0.4s;
-  opacity: 0.3;
-}
-
-.splide__slide.is-active {
-  opacity: 1;
+  margin-right: 4%;
 }
 
 .carousel-cell-content {
   padding: 1.5em;
   padding-bottom: 2em;
   border-radius: 10px;
-  background-color: rgba(var(--product-primary-color-light-rgb), 0.1) !important;
+  background-color: rgba(var(--meet-primary-color-light-rgb), 0.1) !important;
   box-shadow: none;
   transition: box-shadow 0.4s ease;
 }
 
-.splide__slide.is-active .carousel-cell-content {
+.carousel-cell.is-selected .carousel-cell-content {
   box-shadow: var(--md-shadow-z2);
   height: 100%;
 }
 
-.splide__slide p {
+.carousel-cell {
+  transition: opacity 0.4s;
+  opacity: 0.3;
+}
+
+.carousel-cell.is-selected {
+  opacity: 1;
+  height: calc(100% - 12px) !important;
+}
+
+.carousel-cell p {
   margin-top: 0.5em !important;
   font-size: 1.1em !important;
 }
 
-.splide__slide .fake-title {
+.carousel-cell .fake-title {
   font-size: 1.3em !important;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -199,49 +301,44 @@ body[data-md-color-scheme="default"] {
   margin-top: 0 !important;
 }
 
-.splide__track {
+.flickity-viewport {
   transition: height 0.2s;
 }
 
-/* transparent, big arrow buttons */
-button.splide__arrow {
+/* no circle */
+.flickity-button {
   background: transparent;
   transition: background-color 0.3s ease !important;
+}
+/* big previous & next buttons */
+.flickity-prev-next-button {
   width: 60px;
   height: 60px;
 }
-
-button.splide__arrow svg {
+/* icon color */
+.flickity-button-icon {
   fill: var(--md-primary-fg-color--light) !important;
-  width: 2.2em;
-  height: 2.2em;
 }
-
-button.splide__arrow:hover {
-  background: rgba(var(--product-primary-color-rgb), 0.08) !important;
-}
-
-button.splide__arrow:disabled {
+/* hide disabled button */
+.flickity-button:disabled {
   display: none;
 }
 
-/* dots are lines, below the carousel */
-ul.splide__pagination {
-  bottom: -30px;
+.flickity-button:hover {
+  background: rgba(var(--meet-primary-color-rgb), 0.08) !important;
 }
 
-.splide__pagination__page {
+/* position dots at top */
+ol.flickity-page-dots {
+  bottom: -50px;
+}
+
+/* dots are lines */
+ol.flickity-page-dots li.dot {
   height: 4px;
   width: 40px;
   margin: 0 !important;
   border-radius: 0;
-  background: var(--md-primary-fg-color--light);
-  opacity: 0.25;
-}
-
-.splide__pagination__page.is-active {
-  opacity: 1;
-  transform: none;
   background: var(--md-primary-fg-color--light);
 }
 
@@ -305,7 +402,7 @@ li:has(.coming-soon-overlay)::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-30deg);
-  background: rgba(var(--product-primary-color-rgb), 0.8);
+  background: rgba(var(--meet-primary-color-rgb), 0.8);
   color: white;
   padding: 0.4rem 1.2rem;
   font-size: 0.9rem;

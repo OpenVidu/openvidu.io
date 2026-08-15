@@ -2,7 +2,9 @@
 
     Parameters in this section look like this:
 
-    ![Media Nodes Virtual Machine Scale Set (VMSS) Configuration](/assets/images/platform/self-hosting/shared/azure/media-nodes-asg-config.png){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![Media Nodes Virtual Machine Scale Set (VMSS) Configuration](/assets/images/platform/self-hosting/shared/azure/media-nodes-asg-config.png){ .svg-img .dark-img }
+    </figure>
 
     The **Initial Number Of Media Nodes** parameter specifies the initial number of Media Nodes to deploy. The **Min Number Of Media Nodes** and **Max Number Of Media Nodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 

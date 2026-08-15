@@ -32,13 +32,21 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
 
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} and go to the Resource Group where you deployed OpenVidu Elastic.
     2. Then click into the Virtual Machine Scale Set resource called `<STACK_NAME>-mediaNodeScaleSet` and click _"Availability + scale"_ on the left panel, then click the _"Scaling"_ option.
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .svg-img .dark-img }
+        </figure>
     3. On this tab, scroll to the bottom and modify the _"Instance Limits"_ to 0.
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-to-stop.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-to-stop.png){ .svg-img .dark-img }
+        </figure>
     4. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .svg-img .dark-img }
+        </figure>
     5. After confirming that all Media Node instances are terminated, go back to the Resource Group and locate the resource called _"stackName-VM-MasterNode"_. Click on it to go to the Master Node instance. There, click on _"Stop"_ to stop the instance.
-        ![Delete Deployment Stack](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-stop-master.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Delete Deployment Stack](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-stop-master.png){ .svg-img .dark-img }
+        </figure>
 
 === "Starting up the cluster"
 
@@ -46,14 +54,22 @@ The Master Node is a Virtual Machine Instance, while the Media Nodes are part of
 
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} and go to the Resource Group where you deployed OpenVidu Elastic.
     2. In the resource group click on the resource called _"stackName-VM-MasterNode"_, then click _"Start"_ to start the Master Node.
-        ![Start Master Node](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-start-master.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Start Master Node](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-start-master.png){ .svg-img .dark-img }
+        </figure>
     3. Wait until the instance is running.
     4. Go back to the Resource Group, and there click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, then click the _"Scaling"_ option.
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .svg-img .dark-img }
+        </figure>
     5. On this tab, modify the _"Instance Limits"_ to your desired values.
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-to-start.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-to-start.png){ .svg-img .dark-img }
+        </figure>
     6. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .svg-img .dark-img }
+        </figure>
 
 ## Change the instance type
 
@@ -72,7 +88,9 @@ It is possible to change the instance type of both the Master Node and the Media
             You can stop only the Master Node instance to change its instance type, but it is recommended to stop the whole cluster to avoid any issues.
     2. Go to the Azure Resource Group where you deployed and locate the resource with the name _"stackName-VM-MasterNode"_ and click on it.
     3. On the left panel click on _"Availability + scale"_ tab and inside click on _"Size"_ tab. Then select the size you desire and click on _"Resize"_
-        ![Change instance type master](../../../../assets/images/platform/self-hosting/elastic/azure/instance-type-master.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Change instance type master](../../../../assets/images/platform/self-hosting/elastic/azure/instance-type-master.png){ .svg-img .dark-img }
+        </figure>
     4. [Start the cluster](#starting-up-the-cluster).
 
 === "Media Nodes"
@@ -85,7 +103,9 @@ It is possible to change the instance type of both the Master Node and the Media
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_. Click on it to navigate to the Virtual Machine Scale Set.
     4. On the left panel click on _"Availability + scale"_ tab, then on _"Size"_.
-        ![Change instance type media](../../../../assets/images/platform/self-hosting/elastic/azure/instance-type-media.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Change instance type media](../../../../assets/images/platform/self-hosting/elastic/azure/instance-type-media.png){ .svg-img .dark-img }
+        </figure>
     5. Select the new instance type and click on _"Resize"_.
 
 ## Media Nodes Autoscaling Configuration
@@ -98,24 +118,32 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. Locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it.
     4. On the left panel click on _"Availability + scale"_ tab and inside click on _"Scaling"_ option.
-        ![Select scaling option](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-scaling-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Select scaling option](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-scaling-tab.png){ .svg-img .dark-img }
+        </figure>
     5. In the _"Default"_ box you will find a section called _"Rules"_. Here you can add new rules or modify existing ones.
 
         !!! info
 
             Currently there is only one rule to scale out. We are actively working on providing a graceful scale-in process for Media Nodes to avoid active Rooms disruption.
 
-        ![Rules section](../../../../assets/images/platform/self-hosting/elastic/azure/rules-section-ss.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Rules section](../../../../assets/images/platform/self-hosting/elastic/azure/rules-section-ss.png){ .svg-img .dark-img }
+        </figure>
 
     === "Modify existing rules"
 
         Click on the rule you want to modify and change the **Criteria** as desired. To accept the changes click on _"Update_".
-        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/elastic/azure/rules-modify-rule-ss.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/elastic/azure/rules-modify-rule-ss.png){ .svg-img .dark-img }
+        </figure>
 
     === "Add a new rule"
 
         Click on _"Add a rule"_ option and fill the **Criteria** as desired. To add the rule click on _"Add"_.
-        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/elastic/azure/rules-add-rule-ss.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Modify an existing rule](../../../../assets/images/platform/self-hosting/elastic/azure/rules-add-rule-ss.png){ .svg-img .dark-img }
+        </figure>
 
     !!! info
 
@@ -130,11 +158,17 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
     1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic, locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it
     3. On the left panel click on _"Availability + scale"_ and then in _"Scaling"_ tab.
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .svg-img .dark-img }
+        </figure>
     4. On this tab, scroll to the bottom and modify the _"Instance Limits"_ to the value of fixed number of Media Nodes you want. In this case it is set to 2.
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-fixed.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-fixed.png){ .svg-img .dark-img }
+        </figure>
     5. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .svg-img .dark-img }
+        </figure>
 
 ## Administration and configuration
 
@@ -149,13 +183,21 @@ In addition to these, an Azure deployment provides the capability to manage glob
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed OpenVidu Elastic.
     3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu Elastic deployment.
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
+        </figure>
     4. Click on the desired secret you want to change and click on _"New Version"_.
-        ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .svg-img .dark-img }
+        </figure>
     5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
-        ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .svg-img .dark-img }
+        </figure>
     6. Go to the Master Node resource and click on _"Restart"_ to apply the changes to the OpenVidu Elastic deployment.
-        ![Reboot Instance](../../../../assets/images/platform/self-hosting/elastic/azure/reboot-instance.png){ .svg-img .dark-img loading=lazy }
+        <figure markdown>
+        ![Reboot Instance](../../../../assets/images/platform/self-hosting/elastic/azure/reboot-instance.png){ .svg-img .dark-img }
+        </figure>
 
     Changes will be applied automatically.
 

@@ -102,7 +102,7 @@ def test_a_collapsed_admonition_without_a_space_is_an_error(tmp_path):
 
 def test_glightbox_html_pulled_in_by_a_snippet_needs_the_tag_on_the_page(tmp_path):
     write(tmp_path, "shared/tutorials/gallery.md", '<a class="glightbox" href="/x.png">i</a>')
-    write(tmp_path, "docs/docs/tutorial.md", '--8<-- "tutorials/gallery.md"\n')
+    write(tmp_path, "docs/docs/tutorial.md", '--8<-- "shared/tutorials/gallery.md"\n')
 
     (finding,) = findings_of(tmp_path, "tag-contract")
     assert finding.file == "docs/docs/tutorial.md"
@@ -115,7 +115,7 @@ def test_the_tag_on_the_page_satisfies_the_contract(tmp_path):
     write(
         tmp_path,
         "docs/docs/tutorial.md",
-        '---\npage_features:\n  - setupcustomgallery\n---\n--8<-- "tutorials/gallery.md"\n',
+        '---\ntags:\n  - setupcustomgallery\n---\n--8<-- "shared/tutorials/gallery.md"\n',
     )
 
     assert findings_of(tmp_path, "tag-contract") == []

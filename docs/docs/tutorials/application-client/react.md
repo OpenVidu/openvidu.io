@@ -1,7 +1,7 @@
 ---
 title: "React video call tutorial"
 description: "Build a React video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
-page_features:
+tags:
   - setupcustomgallery
 ---
 
@@ -22,7 +22,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 
 #### 1. Run OpenVidu Server
 
---8<-- "tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +32,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "tutorials/application-server/tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "tutorials/application-client/react.md"
+--8<-- "shared/tutorials/application-client/react.md"
 
 ## Understanding the code
 
@@ -115,7 +115,7 @@ The `App.tsx` file defines the following variables:
 -   `participantName`: The participant's name.
 -   `roomName`: The room name.
 
---8<-- "tutorials/configure-urls.md"
+--8<-- "shared/tutorials/configure-urls.md"
 
 ---
 

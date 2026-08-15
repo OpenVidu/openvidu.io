@@ -12,6 +12,10 @@ tags:
   - Networking
 authors:
   - pabloFuente
+hide:
+  - navigation
+  - search-bar
+  - version-selector
 ---
 
 # How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform

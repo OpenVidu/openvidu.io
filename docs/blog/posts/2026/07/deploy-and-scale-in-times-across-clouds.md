@@ -15,6 +15,10 @@ tags:
   - Benchmarks
 authors:
   - sergio
+hide:
+  - navigation
+  - search-bar
+  - version-selector
 ---
 
 # We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason
@@ -71,8 +75,8 @@ But before the "why," there's a "how reliably" — and it matters just as much.
 
 Averages are comforting and occasionally dishonest. Here's every individual run:
 
-![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-light.svg#only-light){ loading=lazy }
-![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-dark.svg#only-dark){ loading=lazy }
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-light.svg#only-light)
+![Every individual deployment run, by cloud and topology, showing spread around the mean](/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-variability-dark.svg#only-dark)
 
 Three things this shows that the table can't:
 

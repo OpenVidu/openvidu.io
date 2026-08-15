@@ -103,7 +103,7 @@ def _point_self_urls_at_latest(text: str, *, version: str, layout: SiteLayout) -
     Ranking signals then consolidate on one evergreen URL per page instead of churning every
     release. These two tags are the only ones carrying `page.canonical_url` for a versioned page:
     the JSON-LD emitted for the two documentation index pages already hardcodes `/latest/` (see
-    overrides/partials/json-ld.html), and no other versioned page emits JSON-LD.
+    docs/overrides/partials/json-ld.html), and no other versioned page emits JSON-LD.
 
     Nothing else is touched — not the `/3.8/assets/` pins applied above, and not an author-pinned
     `/X.Y/…` link elsewhere on the page.

@@ -1,8 +1,8 @@
 ---
 title: "OpenVidu vs LiveKit Cloud, SaaS and SFUs"
 description: "How OpenVidu compares with LiveKit Cloud, SaaS video APIs and bare SFUs like mediasoup, on cost, data control, features and operational effort."
-page_features:
-  - setupcustomgallery
+tags:
+    - setupcustomgallery
 ---
 
 # How OpenVidu compares to other solutions
@@ -21,7 +21,7 @@ First of all, and perhaps the most obvious question, how does OpenVidu differ fr
 - OpenVidu is a **production-ready self-hosted solution**. It offers an easy deployment process to self-host a high performance, fault-tolerant, scalable and observable cluster. OpenVidu provides an interactive installer that manages all the complexities, so you can quickly host a production deployment that would otherwise require advanced DevOps/SRE expertise.
 - OpenVidu is a **support team** for self-hosted deployments. The OpenVidu team is made up of real-time experts with over a decade of experience in the field. We specialize in customer support and are always ready to help you bring your ideas to life.
 
-![Diagram comparing an OpenVidu deployment with a LiveKit deployment](../assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg){ .mkdocs-img loading=lazy }
+<a class="glightbox" href="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" loading="lazy" class="mkdocs-img" alt="Diagram comparing an OpenVidu deployment with a LiveKit deployment"/></a>
 /// caption
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your cluster.
 ///

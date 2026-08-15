@@ -169,7 +169,7 @@ def doc_file(src_uri: str, *, generated: bool = False):
 
 def env_call(tmp_path: Path, monkeypatch, files, dates):
     """Run `on_env` over `files` with `dates` standing in for the git log."""
-    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root, trees: dates)
+    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root: dates)
     cfg = {"docs_dir": str(tmp_path / "docs"), "plugins": {}}
     return on_env("env", cfg, SimpleNamespace(documentation_pages=lambda: files))
 
@@ -204,7 +204,7 @@ def test_git_being_unable_to_answer_leaves_every_date_alone(tmp_path, monkeypatc
 def test_an_included_snippet_is_read_from_disk_and_can_move_the_date(tmp_path, monkeypatch):
     (tmp_path / "docs").mkdir()
     (tmp_path / "shared").mkdir()
-    (tmp_path / "docs" / "install.md").write_text('--8<-- "version.md"', encoding="utf8")
+    (tmp_path / "docs" / "install.md").write_text('--8<-- "shared/version.md"', encoding="utf8")
     (tmp_path / "shared" / "version.md").write_text("3.8.0", encoding="utf8")
     page = doc_file("install.md")
     env_call(
@@ -307,7 +307,7 @@ def test_the_url_shapes_come_from_the_plugins_own_configuration():
 def test_no_blog_plugin_means_no_view_metadata(tmp_path, monkeypatch):
     """`_blog_url_shapes` returns None and `on_env` must not try to describe anything."""
     item = doc_file("blog/archive/2026/07.md", generated=True)
-    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root, trees: {})
+    monkeypatch.setattr(mkdocs_hook, "_source_dates", lambda root: {})
     on_env(
         "env",
         {"docs_dir": str(tmp_path / "docs"), "plugins": {}},

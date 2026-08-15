@@ -73,7 +73,7 @@ def test_a_source_path_in_html_is_an_error(tmp_path):
 
 
 def test_jinja_and_external_targets_are_skipped(tmp_path):
-    write(tmp_path, "overrides/main.html", "<link href=\"{{ 'x.css' | url }}\">")
+    write(tmp_path, "docs/overrides/main.html", "<link href=\"{{ 'x.css' | url }}\">")
     write(tmp_path, "docs/index.md", '<a href="https://example.com/x">x</a>')
 
     assert findings_of(tmp_path, "html-target") == []

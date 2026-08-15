@@ -3,7 +3,7 @@ title: "Upgrade OpenVidu Single Node PRO"
 description: "Upgrade an OpenVidu Single Node PRO deployment to a newer version, in place with the updater or by redeploying your cloud template."
 ---
 
-# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span>
+# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span>
 
 There are two ways to upgrade an OpenVidu Single Node PRO deployment:
 
@@ -22,4 +22,4 @@ There are two ways to upgrade an OpenVidu Single Node PRO deployment:
 
 If you prefer not to redeploy, the in-place procedure below works on all of these providers too.
 
---8<-- "self-hosting/on-premises/single-node/upgrade.md"
+--8<-- "shared/self-hosting/on-premises/single-node/upgrade.md"

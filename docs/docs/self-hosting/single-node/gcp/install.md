@@ -1,9 +1,11 @@
 ---
 title: "Install OpenVidu Single Node COMMUNITY on Google Cloud"
 description: "Deploy OpenVidu Single Node COMMUNITY on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
+tags:
+  - copyclipboard
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: Google Cloud Platform
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -20,19 +22,26 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .svg-img .dark-img }
+    <figcaption>OpenVidu Single Node Google Cloud Platform Architecture</figcaption>
+    </figure>
 
 ## Deployment details
 
---8<-- "self-hosting/gcp/info-deployment.md"
+--8<-- "shared/self-hosting/gcp/info-deployment.md"
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
-![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .svg-img .dark-img loading=lazy }
+<figure markdown>
+![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .svg-img .dark-img }
+</figure>
 
 Once you click the button, you will see this window.
 
-![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .svg-img .dark-img loading=lazy }
+<figure markdown>
+![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .svg-img .dark-img }
+</figure>
 
 * Fill **Deployment ID** with any name you prefer (for example, openvidu-singlenode-deployment).   
 * Change the **Region** to the one you prefer.
@@ -45,42 +54,28 @@ Once you click the button, you will see this window.
 ??? details "New Service Account Steps"
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .svg-img .dark-img }
     <figcaption>Step 1: Create Service Account</figcaption>
     </figure>
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .svg-img .dark-img }
     <figcaption>Step 2: Service Account Details</figcaption>
     </figure>
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .svg-img .dark-img }
     <figcaption>Step 3: Grant Permissions</figcaption>
     </figure>
 
     <figure markdown>
-    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .svg-img .dark-img }
     <figcaption>Step 4: Complete Setup</figcaption>
     </figure>
 
-* Fill **Git repository** with this link, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located:
-
-    ```
-    https://github.com/OpenVidu/openvidu.git
-    ```
-
-* Fill the **Git directory** with the following path:
-
-    ```
-    openvidu-deployment/community/singlenode/gcp
-    ```
-
-* For the **Git ref**, use the version you want to deploy:
-
-    ```
-    v3.8.0
-    ```
+* Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
+* Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/community/singlenode/gcp"><code>openvidu-deployment/community/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
+* For the **Git ref**, use <span class="copy-inline" data-copy="v3.8.0"><code>v3.8.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
 
 Finally, click Continue.
 
@@ -89,13 +84,25 @@ Finally, click Continue.
 In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters declared in our Terraform files into the console, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
-| Input Value | Description |
-|---|---|
-| projectId | GCP project id where the resources will be created. |
-| stackName | Stack name for OpenVidu deployment. |
+<div style="text-align: center;">
+    <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
+      <tr>
+        <th>Input Value</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>projectId</td>
+        <td>GCP project id where the resources will be created.</td>
+      </tr>
+      <tr>
+        <td>stackName</td>
+        <td>Stack name for OpenVidu deployment.</td>
+      </tr>
+    </table>
+</div>
 
 ### Optional Parameters
-<div class="text-center">
+<div style="text-align: center;">
     <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
       <tr>
         <th>Input Value</th>
@@ -176,11 +183,13 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
 
-    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .svg-img .dark-img }
+    </figure>
 
 ## Deploying the stack
 
---8<-- "self-hosting/gcp/deploying-stack.md"
+--8<-- "shared/self-hosting/gcp/deploying-stack.md"
 
 ## Configure your application to use the deployment 
 
@@ -188,11 +197,11 @@ You need the secret outputs from Google Cloud Platform to configure your OpenVid
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "self-hosting/gcp/credentials-general.md"
+--8<-- "shared/self-hosting/gcp/credentials-general.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 
---8<-- "self-hosting/gcp/troubleshooting.md"
+--8<-- "shared/self-hosting/gcp/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

@@ -117,7 +117,7 @@ def test_expansion_rules_claim_their_paths(tmp_path):
 def test_blog_posts_and_non_pages_are_exempt(tmp_path):
     removed = [
         "docs/blog/posts/2026/08/old-post.md",
-        "overrides/partials/notes.md",
+        "docs/overrides/partials/notes.md",
         "shared/self-hosting/common/step.md",
         "docs/assets/images/x.png",
     ]

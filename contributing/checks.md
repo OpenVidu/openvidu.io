@@ -68,7 +68,7 @@ trees as sources are all excluded by design.
 ## The edit-time hook
 
 [`.claude/settings.json`](../.claude/settings.json) registers a `PostToolUse` hook: every
-Edit/Write to `docs/**/*.md`, `shared/**/*.md` or `overrides/**/*.html` is immediately
+Edit/Write to `docs/**/*.md`, `shared/**/*.md` or `docs/overrides/**/*.html` is immediately
 linted, and error-severity findings bounce back to the agent (exit 2), which self-corrects in the
 same turn. It degrades silently when `ovweb` is not installed.
 

@@ -1,7 +1,7 @@
 ---
 title: "iOS video call tutorial"
 description: "Build an iOS video-call app on OpenVidu in Swift with the LiveKit-compatible Swift SDK: join a room, publish your camera and subscribe to media."
-page_features:
+tags:
   - setupcustomgallery
 ---
 
@@ -22,7 +22,7 @@ It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-
 
 ### 1. Run OpenVidu Server
 
---8<-- "tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +32,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "tutorials/application-server/tabs.md"
+--8<-- "shared/tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "tutorials/application-client/ios.md"
+--8<-- "shared/tutorials/application-client/ios.md"
 
 ## Understanding the Code
 
@@ -135,7 +135,7 @@ If these URLs are left empty, the user will be prompted to enter them when the a
 
 <div class="grid-container">
 
-<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></a></p></div>
 
 </div>
 
@@ -169,7 +169,7 @@ Before joining a room, the `ConnectView.swift` defines the view for the connecti
 
 <div class="grid-container">
 
-<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 25%;" alt="Join screen of the iOS tutorial app"/></p></div>
+<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 25%;" alt="Join screen of the iOS tutorial app"/></a></p></div>
 
 </div>
 

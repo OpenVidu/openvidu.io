@@ -14,12 +14,7 @@ from .redirects import resolve_file_redirects
 #: `always`, `latest` (only when the root pages are refreshed) or `past` (only when they are
 #: left alone). Kept in step with the pipeline by `tests/unit/test_plan.py`, which runs it.
 POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
-    (
-        "remove-stray-site",
-        "always",
-        "Remove a stray site/ folder from checkout builds",
-        "<version>/site/",
-    ),
+    ("remove-overrides", "always", "Remove the theme override folder", "<version>/overrides/"),
     (
         "rewrite-versioned",
         "always",

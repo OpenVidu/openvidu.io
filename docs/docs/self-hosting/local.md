@@ -113,7 +113,7 @@ To install OpenVidu locally, follow these steps:
 
     !!! info
         
-        <th colspan="2" class="title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th> runs locally in evaluation mode for free for development and testing purposes. Some limits apply:
+        <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th> runs locally in evaluation mode for free for development and testing purposes. Some limits apply:
 
         - Maximum 8 Participants across all Rooms
         - Maximum 5 minutes duration per Room
@@ -152,7 +152,7 @@ The deployment is ready when you see the following message:
 
 By visiting [http://localhost:7880](http://localhost:7880){:target="_blank"} you have the OpenVidu Developer UI available, with a summary of the deployed services and passwords. You can access the following services:
 
-- **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
+- **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong style="white-space: nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
 - **OpenVidu Dashboard** ([http://localhost:7880/dashboard](http://localhost:7880/dashboard){:target="_blank"}): a web application interface to visualize your Rooms, Ingress and Egress services.
 - **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="_blank"}): an S3 storage service for recordings.
 - **OpenVidu Meet** ([http://localhost:9080](http://localhost:9080){:target="_blank"}): a high-quality video calling service based on OpenVidu.
@@ -213,7 +213,9 @@ Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the events.
 
 Testing WebRTC applications can be challenging because devices require a secure context (HTTPS) to access the camera and microphone. When using LiveKit Open Source, this isn't an issue if you access your app from the same computer where the LiveKit Server is running, as `localhost` is considered a secure context even over plain HTTP. Consider the following architecture:
 
-  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture.svg){ width="450" style="border-radius: 8px" loading=lazy }
+<figure markdown="span">
+  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture.svg){ width="450" style="border-radius: 8px" }
+</figure>
 
 The simplest way to test your application is:
 

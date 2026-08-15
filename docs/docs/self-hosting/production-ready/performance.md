@@ -20,11 +20,15 @@ The key points of how this works are:
 
 LiveKit created its own WebRTC SFU, based on the [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc){:target="_blank"} library to route media between participants:
 
-  ![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .mkdocs-img loading=lazy }
+<figure markdown>
+  ![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .mkdocs-img }
+</figure>
 
 OpenVidu is built by a team of expert WebRTC developers who know all the ins and outs of low-level WebRTC development, so it was possible to replace LiveKit's own implementation with an alternative, and _mediasoup_ was the clear best choice given its fantastic performance characteristics:
 
-  ![OpenVidu with mediasoup WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-mediasoup.svg){ .mkdocs-img loading=lazy }
+<figure markdown>
+  ![OpenVidu with mediasoup WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-mediasoup.svg){ .mkdocs-img }
+</figure>
 
 This means that applications built on top of LiveKit will continue to work exactly the same, while the internal WebRTC engine inside the server can be swapped at will and applications can benefit from that change, without having to be rebuilt.
 
@@ -58,7 +62,9 @@ This test increasingly adds Rooms of 8 Participants each, every one sending 1 vi
 
 The following plot shows the number of Participants that can be added to a Room in OpenVidu using Pion and using mediasoup as WebRTC engines:
 
-  ![Pion vs mediasoup. Multiple Conference Rooms](../../../assets/images/platform/self-hosting/production-ready/performance/benchmark-conference.png){style="max-width: 600px" loading=lazy }
+<figure markdown>
+  ![Pion vs mediasoup. Multiple Conference Rooms](../../../assets/images/platform/self-hosting/production-ready/performance/benchmark-conference.png){style="max-width: 600px"}
+</figure>
 
 The conclusion is that for multiple Rooms, mediasoup performs much better than Pion, almost doubling the total number of Participants (and Tracks) that fit in the server.
 
@@ -74,11 +80,15 @@ CPU load of the server is also shown with a black marked plot (from 0 to 1, repr
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 <div class="grid-50 tablet-grid-50" markdown>
-![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png){ loading=lazy }
+<figure markdown>
+![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png)
+</figure>
 <figcaption>Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with Pion</figcaption>
 </div>
 <div class="grid-50 tablet-grid-50" markdown>
-![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png){ loading=lazy }
+<figure markdown>
+![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png)
+</figure>
 <figcaption>Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with mediasoup</figcaption>
 </div>
 </div>

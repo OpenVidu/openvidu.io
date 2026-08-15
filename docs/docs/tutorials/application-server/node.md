@@ -1,7 +1,7 @@
 ---
 title: "Node.js application server tutorial"
 description: "Build a minimal Node.js application server for OpenVidu with Express and the LiveKit-compatible JS SDK: issue access tokens and handle webhooks."
-page_features:
+tags:
   - setupcustomgallery
 ---
 
@@ -20,7 +20,7 @@ It internally uses [LiveKit JS SDK :fontawesome-solid-external-link:{.external-l
 
 ### 1. Run OpenVidu Server
 
---8<-- "tutorials/run-openvidu-server.md"
+--8<-- "shared/tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -30,11 +30,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run the server application
 
---8<-- "tutorials/application-server/node.md"
+--8<-- "shared/tutorials/application-server/node.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "tutorials/application-client/tabs.md"
+--8<-- "shared/tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -160,6 +160,6 @@ The endpoint receives the incoming webhook with the async method `WebhookReceive
 
 Remember to return a `200` OK response at the end to let LiveKit Server know that the webhook was received correctly.
 
---8<-- "tutorials/webhook-local-server.md"
+--8<-- "shared/tutorials/webhook-local-server.md"
 
 <br>

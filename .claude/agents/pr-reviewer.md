@@ -31,8 +31,8 @@ for the caller.
      in pairs; no files at the `images/`/`videos/` root.
    - **Snippets**: edits to `shared/` files affect every including page — grep the snippet's
      usages and say which pages change.
-   - **Feature-key contract**: copied visual patterns (glightbox HTML, feature-cards,
-     carousels, lazy videos) carry the matching `page_features:` entry.
+   - **Tags contract**: copied visual patterns (glightbox HTML, feature-cards, carousels)
+     carry the matching `tags:` entry.
 4. If the PR branch is available locally (`gh pr checkout` is NOT allowed — instead use
    `git fetch origin pull/<number>/head` and `git diff`/`git show` against FETCH_HEAD), run
    `ovweb lint` on the changed files from FETCH_HEAD content only when it can be done without

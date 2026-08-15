@@ -39,10 +39,6 @@ on:
 permissions:
   contents: write
 
-# Two overlapping publishes end in a manual gh-pages reconcile; queue them instead.
-concurrency:
-  group: publish-web
-
 jobs:
   deploy:
     runs-on: ubuntu-latest

@@ -8,7 +8,7 @@ There are three possible scenarios for this section:
 
     It will deploy OpenVidu with a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate issued for the public IP created for the deployment.
 
-    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/azure/letsencrypt-nodomain.png){ loading=lazy }
+    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/azure/letsencrypt-nodomain.png)
 
 === "Let's Encrypt With Domain Name (recommended)"
 
@@ -18,7 +18,9 @@ There are three possible scenarios for this section:
 
     Then, fill in the following parameters:
 
-    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/azure/letsencrypt.png){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![Let's Encrypt certificates](/assets/images/platform/self-hosting/shared/azure/letsencrypt.png){ .svg-img .dark-img }
+    </figure>
 
     As you can see, specify **Public IP Address** with the Public IP that the domain points to, **Domain Name** with your FQDN, and **Lets Encrypt Email** with your email address for Let’s Encrypt notifications. These parameters are mandatory.
 
@@ -30,7 +32,9 @@ There are three possible scenarios for this section:
 
     The configured parameters would look like this:
     
-    ![Custom certificates](/assets/images/platform/self-hosting/shared/azure/owncert.png){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![Custom certificates](/assets/images/platform/self-hosting/shared/azure/owncert.png){ .svg-img .dark-img }
+    </figure>
 
     
     Specify the certificate files in base64 in **Own Public Certificate** and **Own Private Certificate**. The **Domain Name** and **Public IP Address** parameters are mandatory.
@@ -50,6 +54,8 @@ There are three possible scenarios for this section:
 
     These are the parameters needed in this section to use self-signed certificates:
     
-    ![Self-signed certificates](/assets/images/platform/self-hosting/shared/azure/selfsigned.png){ .svg-img .dark-img loading=lazy }
+    <figure markdown>
+    ![Self-signed certificates](/assets/images/platform/self-hosting/shared/azure/selfsigned.png){ .svg-img .dark-img }
+    </figure>
     
     You don’t need to specify any parameters; just select the **CertificateType** as _self-signed_. The domain name used will be an Azure-generated one.

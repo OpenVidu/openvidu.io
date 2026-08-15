@@ -10,14 +10,6 @@ docker build --pull --no-cache --rm=true -t squidfunk/mkdocs-material .
 docker run --name=mkdocs --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
 ```
 
-The default serve runs in `--dirty` mode: fast, but only the edited page is re-rendered, so
-nav changes and snippet edits show stale on other pages until they are touched or the server
-restarts. For a full-fidelity serve (every change rebuilds the whole site), override the CMD:
-
-```bash
-docker run --name=mkdocs --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material serve --dev-addr=0.0.0.0:8000 --livereload
-```
-
 Then open http://localhost:8000. Notes:
 
 - Run from the repo root. When running non-interactively (scripts, agents), drop `-it`.

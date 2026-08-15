@@ -1,7 +1,7 @@
 ---
 title: "Advanced recording tutorial with S3"
 description: "Extend the basic S3 recording tutorial with complete recording metadata and real-time recording status notifications pushed to the client."
-page_features:
+tags:
   - setupcustomgallery
 ---
 
@@ -28,7 +28,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 === "Run OpenVidu locally"
 
-    --8<-- "tutorials/run-openvidu-locally.md"
+    --8<-- "shared/tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 
@@ -82,9 +82,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 <div class="grid-container">
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></a></p></div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></p></div>
+<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></a></p></div>
 
 </div>
 

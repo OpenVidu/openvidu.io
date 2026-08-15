@@ -34,7 +34,16 @@
   {% endif %}
 
   <!-- Navigation link title -->
+  <!-- BEGIN TODO: WHEN REMOVING "NEW" BADGE FROM "BLOG" ITEM REPLACE BELOW ... -->
+  {% if ref.title == "Blog" %}
+    <span class="md-tabs__link-text">{{ ref.title }}</span>
+    <span class="md-tabs__new-badge">NEW</span>
+  {% else %}
+    {{ ref.title }}
+  {% endif %}
+  <!-- ... WITH ...
   {{ ref.title }}
+   ... END TODO -->
 {% endmacro %}
 
 <!-- Render navigation item -->

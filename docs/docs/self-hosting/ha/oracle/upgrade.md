@@ -5,7 +5,7 @@ description: "Upgrade an existing OpenVidu High Availability deployment on Oracl
 
 # Upgrade OpenVidu High Availability: Oracle Cloud Infrastructure
 
---8<-- "self-hosting/oracle/provider-chip.md"
+--8<-- "shared/self-hosting/oracle/provider-chip.md"
 
 For Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying the [OpenVidu High Availability Oracle Cloud Infrastructure](../oracle/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, since Oracle Cloud Infrastructure Terraform files and related configurations may differ between releases. Redeploying guarantees that all necessary changes are properly applied.
 

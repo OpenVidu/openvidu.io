@@ -109,7 +109,7 @@ def load_corpus(root: Path) -> Corpus:
                 continue
             target[relpath] = parse_source(relpath, path.read_text(encoding="utf-8"))
 
-    overrides_dir = root / "overrides"
+    overrides_dir = root / "docs" / "overrides"
     if overrides_dir.is_dir():
         for path in sorted(overrides_dir.rglob("*.html")):
             if path.is_file() and not path.is_symlink():

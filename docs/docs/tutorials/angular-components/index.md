@@ -5,7 +5,10 @@ description: "Customize the video conferencing UI with OpenVidu Angular Componen
 
 # Angular Components Tutorials
 
+<figure markdown>
   ![Angular Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
+  <figcaption>Angular Components</figcaption>
+</figure>
 
 In the following tutorials you can learn how to use each one of the available [Angular Components](../../ui-components/angular-components.md) to build your application UI tailored to your needs:
 

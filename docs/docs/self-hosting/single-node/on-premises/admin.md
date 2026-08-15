@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node COMMUNITY on-premises"
 description: "Administer OpenVidu Single Node COMMUNITY on your own servers: check the status of every service, and back up and restore its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: On-premises
 
 <div class="provider-chip" markdown>
 
@@ -16,7 +16,7 @@ The OpenVidu installer offers an easy way to deploy OpenVidu Single Node <span c
 
 This section provides details on configuration parameters and common administrative tasks for this deployment.
 
---8<-- "self-hosting/on-premises/single-node/admin-start-stop.md"
+--8<-- "shared/self-hosting/on-premises/single-node/admin-start-stop.md"
 
 ## Checking the status of services
 
@@ -46,11 +46,11 @@ alloy        docker.io/grafana/alloy                      "/usr/bin/alloy -…" 
 redis        docker.io/redis                              "docker-entrypoint.s…"   redis        19 seconds ago   Up 15 seconds
 ```
 
---8<-- "self-hosting/on-premises/single-node/admin-checking-logs.md"
+--8<-- "shared/self-hosting/on-premises/single-node/admin-checking-logs.md"
 
---8<-- "self-hosting/on-premises/single-node/admin-change-config.md"
+--8<-- "shared/self-hosting/on-premises/single-node/admin-change-config.md"
 
---8<-- "self-hosting/on-premises/single-node/admin-uninstall.md"
+--8<-- "shared/self-hosting/on-premises/single-node/admin-uninstall.md"
 
 ## Backup and Restore
 
