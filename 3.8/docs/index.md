@@ -55,7 +55,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 Info
 
-If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.8/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ### Live-streaming
 
@@ -136,8 +136,8 @@ Apart from these basic building blocks, there are other concepts that will be ty
 
 OpenVidu is available in two editions:
 
-- **OpenVidu** [COMMUNITY](/pricing/#openvidu-community): free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
-- **OpenVidu** [PRO](/pricing/#openvidu-pro): OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards. You can start with OpenVidu Community and upgrade to OpenVidu Pro when needed.
+- **OpenVidu** [COMMUNITY](https://openvidu.io/pricing/#openvidu-community): free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
+- **OpenVidu** [PRO](https://openvidu.io/pricing/#openvidu-pro): OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards. You can start with OpenVidu Community and upgrade to OpenVidu Pro when needed.
 
 | Type of deployment            | **OpenVidu Local (development)**                                                                                                                                      | **OpenVidu Single Node**                                                                                                                                                         | **OpenVidu Elastic**                                                                                          | **OpenVidu High Availability**                                           |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |

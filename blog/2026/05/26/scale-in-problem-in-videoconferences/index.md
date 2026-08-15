@@ -4,6 +4,8 @@ Autoscaling is one of the killer features of cloud infrastructure. It promises z
 
 Scale In
 
+Scale in situation
+
 This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.
 
 ## The Scaling Illusion: Why "Turning it Off" is Harder than "Turning it On"
@@ -15,6 +17,8 @@ Scaling *in* is where the illusion shatters. Your CPU drops, the policy fires in
 The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.
 
 Scale Out
+
+Scale out situation
 
 ## The "Stateful" Trap: Why Media Servers Aren't Web Servers
 
