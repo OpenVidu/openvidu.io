@@ -1,0 +1,259 @@
+<!-- Elements added to main will be displayed on all pages -->
+{% extends "base.html" %}
+
+<!-- Jinja comment necessary to properly ignore this block -->
+{# {% block announce %}
+<div id="announce">
+  We would love to hear your feedback about OpenVidu. Please take a moment to fill out
+  <a href="https://forms.gle/a2HuPSWPCnwsCMf98" target="_blank">this survey</a>
+  and help us improve it. Thank you!
+</div>
+{% endblock %} #}
+
+{% block site_meta %}
+<style id="antiClickjack">body{display:none !important;}</style>
+<script>
+  if (self === top) {
+    var antiClickjack = document.getElementById("antiClickjack");
+    antiClickjack.parentNode.removeChild(antiClickjack);
+  } else {
+    top.location = self.location;
+  }
+</script>
+
+{{ super() }}
+
+{% endblock %}
+
+{% block libs %}
+
+<!-- wow.js -->
+<script>
+  window.setupWowJs = function () {
+    new WOW().init();
+    console.debug("WOW.js initialized");
+  };
+</script>
+
+<!-- Card glow effect -->
+<script>
+  window.setupCardGlow = function () {
+    console.debug("starting card glow setup");
+    const cards = document.querySelectorAll(
+      ".feature-cards .grid.cards > ul > li"
+    );
+    const maxRetries = 10;
+    let retryCount = 0;
+    if (cards.length === 0 && retryCount < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      retryCount++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
+    function handleMouseMove(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+      angle = (angle + 360) % 360;
+      this.style.setProperty("--start", angle + 60);
+    }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
+  };
+</script>
+
+{{ super() }}
+
+{% endblock %}
+
+{% block outdated %}
+<span class="outdated-warning-text" id="outdated-warning-text"><strong>Warning:</strong> You are reading docs for an old version<br /></span>
+<a href="#" id="latest-version-link">
+  <strong>GO TO LATEST VERSION</strong>
+</a>
+<script>
+  (function () {
+    const currentPath = window.location.pathname;
+    const version = currentPath.split('/')[1];
+
+    // Point the "go to latest" link at the same page under /latest/
+    const link = document.getElementById('latest-version-link');
+    if (link) {
+      link.href = currentPath.replace(/^\/[^\/]+\//, '/latest/');
+    }
+
+    // Split "/3.4/docs/foo/" into its version segment ("3.4") and the rest ("docs/foo/")
+    const splitVersion = (path) => {
+      const segments = path.replace(/^\//, '').split('/');
+      return { version: segments[0], rest: segments.slice(1).join('/') };
+    };
+
+    // Replace the generic warning only when the visitor got here by following a link that
+    // lives inside ANOTHER version's release notes: that version jump is the one thing that
+    // needs explaining. Everything else keeps the generic "old version" warning, and the two
+    // conditions below are what tell them apart:
+    //
+    //   - A DIFFERENT version segment. The navigation menu, tabs, footer and search links
+    //     never leave the version being browsed, so any click on them lands on the same
+    //     version and is ruled out here — including clicks made from a releases page, and
+    //     links inside the release notes that point at their own version.
+    //   - A DIFFERENT path after the version segment. The version selector DOES change the
+    //     version, but it lands on the same page of another version
+    //     (/latest/docs/releases/ -> /3.4/docs/releases/), so it is ruled out here. Release
+    //     notes never link to the same page of another version: their cross-links between
+    //     the two products always change the product too (docs/releases -> meet/releases).
+    let fromOtherVersionReleaseNotes = false;
+    try {
+      if (document.referrer) {
+        const referrer = new URL(document.referrer);
+        const from = splitVersion(referrer.pathname);
+        const here = splitVersion(currentPath);
+        fromOtherVersionReleaseNotes =
+          referrer.origin === window.location.origin &&
+          /^(meet|docs)\/releases\/?$/.test(from.rest) &&
+          from.version !== here.version &&
+          from.rest !== here.rest;
+      }
+    } catch (e) {}
+
+    const warning = document.getElementById('outdated-warning-text');
+    if (warning && fromOtherVersionReleaseNotes && version && version !== 'latest') {
+      warning.innerHTML =
+        `<strong>Warning:</strong> You are viewing the <strong>${version}</strong> version of the docs<br />` +
+        `because you followed a link from the ${version}.x release notes<br />`;
+    }
+  })();
+</script>
+{% endblock %}
+
+{% block extrahead %}
+<!-- Add head tags that need to be applied before here -->
+{{ super() }}
+{% include "partials/og.html" %}
+{% include "partials/json-ld.html" %}
+<!-- Add head tags that need to be applied afterwards here -->
+{% endblock %}
+
+{% block scripts %}
+
+<!-- Add scripts that need to run before here -->
+
+<script src="{{ 'javascripts/target-blank.js' | url }}"></script>
+
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<script src="{{ 'javascripts/wow.min.js' | url }}"></script>
+<script>
+  window.setupWowJs();
+</script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcardglow" in page.meta.tags %}
+<script>
+  window.setupCardGlow();
+</script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<script src="{{ 'javascripts/flickity.pkgd.min.js' | url }}"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcustomgallery" in page.meta.tags %}
+<script src="{{ 'javascripts/glightbox-custom-gallery.js' | url }}"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "copyclipboard" in page.meta.tags %}
+<script src="/javascripts/copy-clipboard.js"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}
+<script src="/javascripts/releases-scroll-to-version.js"></script>
+{% endif %}
+
+{{ super() }}
+
+<!-- Add scripts that need to run afterwards here -->
+
+{% if page.meta and page.meta.tags and "openviduregister" in page.meta.tags %}
+<script src="{{ 'javascripts/openvidu-register/openvidu-register.js' | url }}"></script>
+{% endif %}
+
+{% endblock %}
+
+{% block styles %}
+
+{% if page.meta and page.meta.tags and "setupwowjs" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/animate.min.css' | url }}" />
+{% endif %}
+
+{% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
+{% endif %}
+
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon Ember.woff") format("woff");
+  }
+</style>
+
+{{ super() }}
+
+{% if page.meta %}
+{% if page.meta.hide %}
+{% if "footer-prev" in page.meta.hide %}
+<style>
+  .md-footer__link--prev {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "footer-next" in page.meta.hide %}
+<style>
+  .md-footer__link--next {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "search-bar" in page.meta.hide %}
+<style>
+  div.md-search {
+    display: none;
+  }
+
+  label.md-header__button.md-icon[for="__search"] {
+    display: none;
+  }
+</style>
+{% endif %}
+{% if "version-selector" in page.meta.hide %}
+<style>
+  div.md-version {
+    display: none;
+  }
+</style>
+{% endif %}
+{% endif %}
+
+{% if page.meta.tags and "Platform" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/platform.css' | url }}" />
+{% endif %}
+
+{% if page.meta.tags and "Meet" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
+{% endif %}
+
+{% if page.meta.tags and "openviduregister" in page.meta.tags %}
+<link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
+<link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
+{% endif %}
+
+{% endif %}
+{% endblock %}
