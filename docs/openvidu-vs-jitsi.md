@@ -69,15 +69,7 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 
 This is the sharpest operational difference between the two projects. OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</span> ships
 [Egress](docs/developing-your-openvidu-app/how-to.md) wired up by default, writing to
-S3-compatible storage out of the box.
-
-Jitsi's Jibri takes a different, more literal approach: it opens a real headless Chrome browser
-pointed at the meeting, renders it in a virtual framebuffer, and captures the output with ffmpeg —
-recording exactly what a participant would see, custom branding included. The tradeoff is
-resource cost: each simultaneous recording needs its own Jibri instance (typically 8GB of RAM for
-1080x720, more for higher resolutions), and Jitsi's own operators recommend running Jibri on
-separate hardware from the videobridge, since it can degrade conference performance otherwise. Five
-concurrent recordings means five separate Jibri instances to provision and keep healthy.
+S3-compatible storage out of the box. Jitsi's Jibri is the service responsible for recordings, but storing and serving recordings is a DIY. 
 
 ## Scaling: Elastic/HA vs Octo plus a separate autoscaler
 
