@@ -108,7 +108,8 @@ That said, Janus ships more out of the box than a bare media engine:
 ## When raw Janus is still the right call
 
 To be fair about it: Janus's plugin ecosystem reaches further than conferencing rooms alone — SIP
-gateway integrations (although that's also possible through [LiveKit's SIP API](https://docs.livekit.io/reference/telephony/sip-api/)), one-to-many streaming, and other topologies its plugins already cover. Teams
+gateway integrations (although that's also possible through [LiveKit's SIP API](https://docs.livekit.io/reference/telephony/sip-api/)), 
+one-to-many streaming, and other topologies its plugins already cover. Teams
 building one of those use cases, or something custom enough that a room-centric platform like
 OpenVidu doesn't fit, get real value from working directly with Janus's core-plus-plugins design.
 

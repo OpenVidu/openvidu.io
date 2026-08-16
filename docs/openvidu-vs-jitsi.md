@@ -112,12 +112,9 @@ finished app experience inside their product rather than building a custom UI fr
 
 ## Where Jitsi still has the edge
 
-To be direct about it: Jitsi has years more real-world deployment at extreme scale — it saw a huge
-adoption wave during the pandemic and is embedded in products well beyond video conferencing
-proper — and Jibri's browser-based recording captures pixel-perfect output (custom UI, branding and
-all) in a way an RTP-based Egress pipeline doesn't attempt to. If your priority is a long
-track record at very large scale, or recordings that must exactly match what participants visually
-saw, Jitsi's approach has real advantages.
+To be direct about it: Jitsi has years more real-world deployment at extreme scale and is embedded in products well beyond video conferencing.
+If your priority is a long
+track record at very large scale Jitsi's approach has real advantages.
 
 ## Pricing
 
@@ -138,9 +135,7 @@ tier — Jitsi itself has no self-hosted paid edition the way OpenVidu does.
 
 ### Does Jitsi have a recording feature?
 
-Yes, via Jibri, a component that drives a headless Chrome browser and ffmpeg to capture exactly
-what a participant sees. It's accurate but resource-heavy: each simultaneous recording needs its
-own dedicated Jibri instance, typically 8-12GB of RAM, separate from the videobridge hardware.
+Yes, via Jibri.
 
 ### Can I embed Jitsi in my own app?
 
