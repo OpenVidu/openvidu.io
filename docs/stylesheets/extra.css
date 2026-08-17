@@ -127,6 +127,13 @@ span:has(> a > .openvidu-tag) {
   max-height: 1.1rem;
 }
 
+/* Icon shortcodes wrap their SVG in a .twemoji span, which sizes it from this variable
+   and aligns itself rather than the SVG */
+.md-social__link .twemoji {
+  --md-icon-size: 1.1rem;
+  vertical-align: -25%;
+}
+
 .footer-grid {
   width: 100%;
   text-align: center;
