@@ -104,14 +104,14 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     ??? details "Information about parameters"
 
-        <h4>Mandatory Parameters</h4>
+        #### Mandatory Parameters
 
         | Input Value | Description |
         |:---:|:---:|
         | `doToken`{ .nowrap } | DigitalOcean Personal Access Token for API authentication. |
         | `stackName`{ .nowrap } | Stack name for OpenVidu deployment. |
 
-        <h4>Optional Parameters</h4>
+        #### Optional Parameters
 
         | Input Value | Default Value | Description |
         |:---:|:---:|:---:|

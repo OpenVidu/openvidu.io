@@ -50,7 +50,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
     ??? details "Information about parameters"
 
-        <h4>Mandatory Parameters</h4>
+        ### Mandatory Parameters
 
         | Input Value | Description |
         |:---:|:---:|
@@ -58,7 +58,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
         | `stackName`{ .nowrap } | Stack name for OpenVidu deployment. |
         | `openviduLicense`{ .nowrap } | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account){:target="_blank"} for more information. |
 
-        <h4>Optional Parameters</h4>
+        ### Optional Parameters
 
         | Input Value | Default Value | Description |
         |:---:|:---:|:---:|

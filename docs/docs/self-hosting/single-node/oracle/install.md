@@ -48,7 +48,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     ??? details "Information about parameters"
 
-        <h4>Mandatory Parameters</h4>
+        #### Mandatory Parameters
 
         | Input Value | Description |
         |:---:|:---:|
@@ -57,7 +57,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
         | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
 
-        <h4>Optional Parameters</h4>
+        #### Optional Parameters
 
         | Input Value | Default Value | Description |
         |:---:|:---:|:---:|

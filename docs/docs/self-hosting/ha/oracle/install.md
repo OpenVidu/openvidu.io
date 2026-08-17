@@ -61,7 +61,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
     ??? details "Information about parameters"
 
-        <h4>Mandatory Parameters</h4>
+        ### Mandatory Parameters
 
         | Input Value | Description |
         |:---:|:---:|
@@ -72,7 +72,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
         | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [https://openvidu.io/account](https://openvidu.io/account){:target="_blank"} to obtain your license. |
         | `scale_in_function_image`{ .nowrap } | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
 
-        <h4>Optional Parameters</h4>
+        ### Optional Parameters
 
         | Input Value | Default Value | Description |
         |:---:|:---:|:---:|

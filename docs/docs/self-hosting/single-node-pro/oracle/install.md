@@ -48,7 +48,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     ??? details "Information about parameters"
 
-        <h4>Mandatory Parameters</h4>
+        #### Mandatory Parameters
 
         | Input Value | Description |
         |:---:|:---:|
@@ -58,7 +58,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
         | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [https://openvidu.io/account](https://openvidu.io/account){:target="_blank"} to obtain your license. |
 
-        <h4>Optional Parameters</h4>
+        #### Optional Parameters
 
         | Input Value | Default Value | Description |
         |:---:|:---:|:---:|
