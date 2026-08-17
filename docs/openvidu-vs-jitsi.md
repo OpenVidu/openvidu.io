@@ -104,9 +104,8 @@ finished app experience inside their product rather than building a custom UI fr
 
 ## Where Jitsi still has the edge
 
-To be direct about it: Jitsi has years more real-world deployment at extreme scale and is embedded in products well beyond video conferencing.
-If your priority is a long
-track record at very large scale Jitsi's approach has real advantages.
+Jitsi has real-world deployment at extreme scale and is embedded in products well beyond video conferencing.
+If your main needs are scale or usage beyond video calls, Jitsi's approach has real advantages.
 
 ## Pricing
 
