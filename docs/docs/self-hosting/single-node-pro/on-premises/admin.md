@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on-premises"
 description: "Administer OpenVidu Single Node PRO on your own servers: check the status of every service, and back up and restore its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: On-premises
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } administration: On-premises
 
 <div class="provider-chip" markdown>
 
@@ -12,7 +12,7 @@ description: "Administer OpenVidu Single Node PRO on your own servers: check the
 </div>
 
 
-The OpenVidu installer offers an easy way to deploy OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .5em">PRO</span> on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
+The OpenVidu installer offers an easy way to deploy OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .5em" } on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
 
 This section provides details on configuration parameters and common administrative tasks for this deployment.
 

@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node COMMUNITY on DigitalOcean"
 description: "Administer OpenVidu Single Node COMMUNITY on DigitalOcean: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: DigitalOcean
+# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } administration: DigitalOcean
 
 <div class="provider-chip" markdown>
 

@@ -5,7 +5,7 @@ page_features:
   - setupcustomgallery
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> installation: AWS
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } installation: AWS
 
 <div class="provider-chip" markdown>
 
@@ -16,7 +16,7 @@ page_features:
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on AWS. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px" } deployment on AWS. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
 First, import the template in the AWS CloudFormation console. You can click the following button...
 

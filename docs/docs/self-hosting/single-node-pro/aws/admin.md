@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on AWS"
 description: "Administer OpenVidu Single Node PRO on AWS: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: AWS
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } administration: AWS
 
 <div class="provider-chip" markdown>
 

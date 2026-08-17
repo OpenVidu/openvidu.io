@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node PRO on Google Cloud"
 description: "Deploy OpenVidu Single Node PRO on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> installation: Google Cloud Platform
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } installation: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -14,7 +14,7 @@ description: "Deploy OpenVidu Single Node PRO on Google Cloud from a deployment 
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px">PRO</span> deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
+This section contains instructions for deploying a production-ready OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px" } deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node PRO installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
 
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 

@@ -22,7 +22,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Single Node"
 
     !!! note
-        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 10px">COMMUNITY</span> Deployment](../single-node/on-premises/install.md) and the [Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span> Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the installation guides before proceeding with this guide for a better understanding of the deployment.
+        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 10px" } Deployment](../single-node/on-premises/install.md) and the [Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the installation guides before proceeding with this guide for a better understanding of the deployment.
 
     This is what the architecture of the deployment looks like:
 
@@ -79,7 +79,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     To deploy OpenVidu with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu with an external proxy is as follows:
 
-    === "Single Node <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+    === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
@@ -104,7 +104,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-    === "Single Node <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+    === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
@@ -137,8 +137,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     - Replace `openvidu.example.io` with your FQDN.
     - Replace `turn.example.io` with your TURN server FQDN.
-    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](../../../account.md){:target="_blank"}.
-    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](../../../account.md){:target="_blank"}.
+    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     **4. Configure the external proxy**
 

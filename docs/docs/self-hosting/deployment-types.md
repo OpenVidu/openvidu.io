@@ -11,9 +11,9 @@ There are different deployment options available, depending on your needs:
 
 | Type of deployment        | <a href="#openvidu-local-development"><strong>OpenVidu<br><span class="nowrap">Local (development)</span></strong></a>         | <div style="width:10em"><a href="#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node</span></strong></a></div> | <a href="#openvidu-elastic"><strong>OpenVidu<br><span class="nowrap">Elastic</span></strong></a> | <a href="#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a> |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
-| **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
+| **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
-| **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br><span class="openvidu-tag openvidu-pro-tag">PRO</span> Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
+| **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br>**PRO**{ .openvidu-tag .openvidu-pro-tag } Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
 | **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="nowrap">N Media Nodes</span> | 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span> |
 | **Installation instructions** | [Install](./local.md){ .md-button } | [Install](./single-node/index.md){ .md-button } | [Install](./elastic/index.md){ .md-button } | [Install](./ha/index.md){ .md-button } |
 
@@ -25,8 +25,8 @@ To run OpenVidu in your local machine, this is the quickest option. It is a Dock
 
 It comes in two flavors:
 
- - <strong>OpenVidu Local <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>, fine-tuned for local development.
- - <strong>OpenVidu Local <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>, fine-tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
+ - **OpenVidu Local** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }: mirrors the experience of **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }, fine-tuned for local development.
+ - **OpenVidu Local** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }: mirrors the experience of **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }, fine-tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
 
 ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
 
@@ -36,8 +36,8 @@ This is the simplest production-ready OpenVidu deployment available. It provides
 
 It is composed of a single OpenVidu Node hosting all the necessary services in a monolithic setup. It comes in two flavors:
 
- - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: all the features you need to build your real-time application.
- - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: for users who want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
+ - **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }: all the features you need to build your real-time application.
+ - **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }: for users who want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
 
   ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
 

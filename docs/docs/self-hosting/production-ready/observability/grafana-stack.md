@@ -37,7 +37,7 @@ The **Grafana stack** that comes with OpenVidu is composed of the following serv
 
 This dashboard provides **metrics** about **OpenVidu Server**. It includes charts about **active rooms**, **active participants**, **published tracks**, **subscribed tracks**, **send/receive bytes**, **packet loss percentage** and **quality score**.
 
-In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a> and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a> and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
 
 <div class="grid-container">
 
@@ -49,7 +49,7 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class=
 
 #### OpenVidu Media Nodes Server Metrics
 
-!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
+!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a></span> edition."
 
 This dashboard provides the same **metrics** as the [OpenVidu Server Metrics](#openvidu-server-metrics) dashboard, but grouped by **Media Node**.
 
@@ -65,7 +65,7 @@ You can select the **Media Node** you want to see metrics from in the **media_no
 
 #### OpenVidu Logs
 
-In case you are using **OpenVidu** <a href="/pricing/#openvidu-community"><span class="openvidu-tag openvidu-community-tag">COMMUNITY</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-community">**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }</a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
 
 There is a panel showing **all containers** logs,
 
@@ -93,9 +93,9 @@ You can also filter logs containing a specific **text** by using the **filter se
 
 #### OpenVidu Cluster Nodes Logs
 
-!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
+!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a></span> edition."
 
-In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
 
 First, there is a panel showing **all containers'** logs from all nodes.
 
@@ -137,9 +137,9 @@ You can also filter logs containing a specific **text** by using the **filter se
 
 #### OpenVidu Cluster Services Logs
 
-!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a></span> edition."
+!!! info "This dashboard is part of <span>OpenVidu <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a></span> edition."
 
-In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag">PRO</span></a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
+In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a>, this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
 
 First, there is a panel to **filter** logs by **room_id** and **participant_id**.
 

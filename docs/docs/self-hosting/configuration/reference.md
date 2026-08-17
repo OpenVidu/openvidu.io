@@ -32,8 +32,8 @@ This file defines global configuration parameters used by other services, such a
 | **`DASHBOARD_ADMIN_PASSWORD`** | Admin password for OpenVidu Dashboard |
 | **`GRAFANA_ADMIN_USERNAME`** | Admin username for Grafana |
 | **`GRAFANA_ADMIN_PASSWORD`** | Admin password for Grafana |
-| **`OPENVIDU_PRO_LICENSE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Pro license key. Get an OpenVidu Pro License [here](../../../account.md){:target="_blank"}. |
-| **`OPENVIDU_RTC_ENGINE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> The WebRTC engine to use. Can be `pion` or `mediasoup`. |
+| **`OPENVIDU_PRO_LICENSE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Pro license key. Get an OpenVidu Pro License [here](../../../account.md){:target="_blank"}. |
+| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `pion` or `mediasoup`. |
 | **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
 ## `meet.env`
@@ -86,11 +86,11 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_CAPTIONS_ENABLED`** | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](../../../meet/features/meetings/live-captions.md). |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
 
-## <span class="openvidu-tag openvidu-pro-tag">PRO</span> `v2compatibility.env`
+## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
     
-    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
@@ -134,7 +134,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 
 As OpenVidu Server is [built on top of LiveKit](../../comparing-openvidu.md#openvidu-vs-livekit), the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/master/config-sample.yaml){:target="_blank"}.
 
-### <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> OpenVidu Server Configuration:
+### **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } OpenVidu Server Configuration:
 
 ```yaml
 openvidu:
@@ -151,7 +151,7 @@ openvidu:
 4. Time interval to send analytics data to MongoDB.
 5. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
 
-### <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Server Configuration:
+### **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Server Configuration:
 
 
 !!! info

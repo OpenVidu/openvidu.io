@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on Oracle Cloud"
 description: "Administer OpenVidu Single Node PRO on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: Oracle Cloud Infrastructure
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } administration: Oracle Cloud Infrastructure
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 

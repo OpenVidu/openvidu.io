@@ -28,7 +28,7 @@ The installation consists of cloning a repository and running a script to config
 
 To install OpenVidu locally, follow these steps:
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     1.  Clone the following repository:
 
@@ -69,7 +69,7 @@ To install OpenVidu locally, follow these steps:
         docker compose up
         ```
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     1.  Clone the following repository:
 
@@ -165,7 +165,7 @@ You just need to point your OpenVidu and LiveKit applications to `http://localho
 
 To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880){:target="_blank"} or simply check the `.env` file. All access credentials for all services are defined in this file.
 
-=== "OpenVidu <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     Your authentication credentials and URLs to point your applications to are:
 
@@ -173,7 +173,7 @@ To point your applications to your local OpenVidu Local deployment, check the cr
     - **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
     - **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
 
-=== "OpenVidu <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     Your authentication credentials and URLs to point your applications to are:
 

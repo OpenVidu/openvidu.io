@@ -3,7 +3,7 @@ title: "Upgrade OpenVidu Single Node PRO"
 description: "Upgrade an OpenVidu Single Node PRO deployment to a newer version, in place with the updater or by redeploying your cloud template."
 ---
 
-# Upgrade OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span>
+# Upgrade OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading }
 
 There are two ways to upgrade an OpenVidu Single Node PRO deployment:
 

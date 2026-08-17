@@ -35,7 +35,7 @@ If you need to integrate OpenVidu with other services, you can use webhooks to s
 
     This command will restart the services whose configuration files changed across your entire OpenVidu deployment.
 
-## <span class="openvidu-tag openvidu-pro-tag">PRO</span> V2 Compatibility Configuration
+## **PRO**{ .openvidu-tag .openvidu-pro-tag } V2 Compatibility Configuration
 
 If you are using the V2 Compatibility module, you can also enable webhooks for the V2 Compatibility layer.
 

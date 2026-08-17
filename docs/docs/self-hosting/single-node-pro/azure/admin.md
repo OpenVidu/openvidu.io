@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on Azure"
 description: "Administer OpenVidu Single Node PRO on Azure: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-heading">PRO</span> administration: Azure
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } administration: Azure
 
 <div class="provider-chip" markdown>
 

@@ -90,10 +90,10 @@ page_features:
 
 OpenVidu offers two editions:
 
-- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
-- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+- <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.8rem" }</strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.8rem" }</strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
 
-OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.8rem" }</strong> or <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.8rem" }</strong> deployment.
 
 </div>
 

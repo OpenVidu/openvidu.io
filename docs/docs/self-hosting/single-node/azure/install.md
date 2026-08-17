@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node COMMUNITY on Azure"
 description: "Deploy OpenVidu Single Node COMMUNITY on Azure from an Azure Resource Manager template spec, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: Azure
+# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } installation: Azure
 
 <div class="provider-chip" markdown>
 
@@ -12,7 +12,7 @@ description: "Deploy OpenVidu Single Node COMMUNITY on Azure from an Azure Resou
 </div>
 
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Azure. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through ARM Template Specs.
+This section contains instructions for deploying a production-ready OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 12px" } deployment on Azure. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through ARM Template Specs.
 
 To import the template into Azure, click the button below (you will be redirected to Azure).
 

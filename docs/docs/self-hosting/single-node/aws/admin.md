@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node COMMUNITY on AWS"
 description: "Administer OpenVidu Single Node COMMUNITY on AWS: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: AWS
+# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } administration: AWS
 
 <div class="provider-chip" markdown>
 
