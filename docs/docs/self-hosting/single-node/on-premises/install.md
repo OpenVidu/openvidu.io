@@ -3,7 +3,7 @@ title: "Install OpenVidu Single Node COMMUNITY on-premises"
 description: "Deploy OpenVidu Single Node COMMUNITY on your own servers with the guided installer, non-interactively or with plain Docker Compose."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: On-premises
+# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: On-premises
 
 <div class="provider-chip" markdown>
 
@@ -18,10 +18,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
-    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node On Premises Architecture</figcaption>
-    </figure>
+    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 All services are deployed on a single machine, which includes:
 
@@ -49,7 +46,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 
 **Inbound port rules**:
 
-| Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+| Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -141,7 +138,7 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
 sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -193,7 +190,7 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/on-premises/credentials-general.md"
+--8<-- "self-hosting/on-premises/credentials-general.md"
 
 ## Non-interactive installation
 
@@ -205,7 +202,7 @@ docker run --pull always --rm -it \
     --deployment-type=single_node
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 This is going to generate a command like this, but it may vary depending on the answers you provide. Here are examples of the command you can run depending on the certificate type and domain configuration:
 
@@ -236,7 +233,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
     === "Self-signed certificates"
 
@@ -263,7 +260,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
 === "With Domain Name"
 
@@ -293,7 +290,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
     === "Self-signed certificates"
 
@@ -321,7 +318,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
     === "Custom certificates"
 
@@ -354,7 +351,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
 

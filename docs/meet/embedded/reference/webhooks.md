@@ -1,8 +1,8 @@
 ---
 title: "OpenVidu Meet webhooks reference"
 description: "Receive meeting and recording events from OpenVidu Meet in your backend, and verify webhook signatures before acting on them."
-tags:
-    - setupcustomgallery
+page_features:
+  - setupcustomgallery
 ---
 
 # Webhooks
@@ -27,8 +27,8 @@ You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There yo
 - Set up your webhook endpoint URL
 - Test the current webhook configuration with a fake event
 
-<a class="glightbox" href="/assets/images/meet/embedded/reference/webhook-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/webhook-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Webhook configuration form in the OpenVidu Meet console"/></a>
-<a class="glightbox" href="/assets/images/meet/embedded/reference/webhook-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/webhook-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Webhook configuration form in the OpenVidu Meet console"/></a>
+![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-light.png#only-light){ .control-height .round-corners loading=lazy }
 
 ## Validate events
 

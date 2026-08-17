@@ -70,7 +70,6 @@ layout:
     - index.html
     - index.md
     - 404.html
-    - robots.txt
     - llms.txt
     - feed_rss_created.xml
     - feed_rss_updated.xml

@@ -4,26 +4,12 @@
 
 {{ super() }}
 
-<script defer>
-  window.openviduPreviousUrl = "";
-  if (!window.openviduObserver) {
-    window.openviduObserver = new MutationObserver(function (mutations) {
-      if (location.pathname !== window.openviduPreviousUrl) {
-        window.openviduPreviousUrl = location.pathname;
-      }
-    });
-    window.openviduObserver.observe(document, {
-      subtree: true,
-      childList: true,
-    });
-  }
-</script>
-
 <section class="top-home-section md-grid md-typeset">
   <div class="center-align">
     <img
       class="top-home-img"
       src="assets/images/logos/openvidu_white_bg_transp.png"
+      fetchpriority="high"
       draggable="false"
       alt=""
     />
@@ -59,7 +45,8 @@
     <span class="home-under-cta-sep">·</span>
     <a
       title="Start a tour"
-      onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
+      href="#get-started"
+      onclick="event.preventDefault(); event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
     >
       Start a tour
     </a>

@@ -19,10 +19,6 @@ tags:
  - AI Startup Ideas
 authors:
  - csantosm
-hide:
- - navigation
- - search-bar
- - version-selector
 ---
 
 # 5 conversational AI app ideas you can build this weekend
@@ -71,8 +67,8 @@ Let's look at a few more ways WebRTC and conversational AI can be combined to cr
 
 ## 1. The AI running coach in your ear
 
-![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-light.webp#only-light "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time")
-![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-dark.webp#only-dark "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time")
+![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-light.webp#only-light "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time"){ loading=lazy }
+![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-dark.webp#only-dark "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time"){ loading=lazy }
 
 
 **The idea.** Imagine having a running coach who never falls behind.
@@ -97,8 +93,8 @@ Start with a single rule: when heart rate crosses a threshold, generate a spoken
 
 ## 2. The AI tour guide on your smart glasses
 
-![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-light.webp#only-light "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time")
-![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-dark.webp#only-dark "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time")
+![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-light.webp#only-light "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time"){ loading=lazy }
+![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-dark.webp#only-dark "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time"){ loading=lazy }
 
 **The idea.** Imagine walking through a city and never wondering what you're looking at.
 
@@ -120,8 +116,8 @@ If you can point the camera at a monument and hear a useful explanation a second
 
 ## 3. The AI chef on your kitchen counter
 
-![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-light.webp#only-light "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time")
-![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-dark.webp#only-dark "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time")
+![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-light.webp#only-light "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time"){ loading=lazy }
+![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-dark.webp#only-dark "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time"){ loading=lazy }
 
 **The idea.** Prop your phone against the backsplash and start cooking.
 
@@ -150,8 +146,8 @@ If it can reliably tell you when the pan is too hot or when the onions are ready
 
 ## 4. The AI sales copilot on your call
 
-![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-light.webp#only-light "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice")
-![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-dark.webp#only-dark "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice")
+![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-light.webp#only-light "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice"){ loading=lazy }
+![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-dark.webp#only-dark "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice"){ loading=lazy }
 
 **The idea.** You're on a live sales or negotiation call.
 
@@ -192,8 +188,8 @@ The goal isn't a perfect copilot.
 
 ## 5. The AI that argues the other side
 
-![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-light.webp#only-light "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time")
-![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-dark.webp#only-dark "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time")
+![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-light.webp#only-light "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time"){ loading=lazy }
+![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-dark.webp#only-dark "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time"){ loading=lazy }
 
 **The idea.** Imagine having a sparring partner that never agrees with you too easily.
 
@@ -235,8 +231,8 @@ Technically, all of them share the same pipeline:
 
 **Speech-to-text (STT) → Large language model (LLM) → Text-to-speech (TTS)**
 
-![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-light.webp#only-light "Conversational AI pipeline")
-![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-dark.webp#only-dark "Conversational AI pipeline")
+![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-light.webp#only-light "Conversational AI pipeline"){ loading=lazy }
+![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-dark.webp#only-dark "Conversational AI pipeline"){ loading=lazy }
 
 The model listens, the model thinks, the model speaks. Add vision or sensor data when the idea calls for it, and the structure barely changes.
 

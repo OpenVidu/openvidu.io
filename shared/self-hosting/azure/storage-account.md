@@ -10,9 +10,7 @@ You need to fill some parameters about the storage account that the deployment w
     
     Parameters in this section look like this:
 
-    <figure markdown>
-    ![Azure Instance configuration](/assets/images/platform/self-hosting/shared/azure/storageaccount.png){ .svg-img .dark-img }
-    </figure>
+    ![Azure Instance configuration](/assets/images/platform/self-hosting/shared/azure/storageaccount.png){ .svg-img .dark-img loading=lazy }
 
     **Storage Account Name**: leave blank to create a new Storage Account for this deployment. You can specify an already existing Storage Account name  if you want (remember it must belong to the same resource group as your deployment).
 

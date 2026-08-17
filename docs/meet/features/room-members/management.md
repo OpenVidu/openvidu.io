@@ -1,8 +1,9 @@
 ---
 title: "Room member management in OpenVidu Meet"
 description: "Add, edit, list and remove the users and identified guests of an OpenVidu Meet room, from the application or the Room Members REST API."
-tags:
-    - setupcustomgallery
+page_features:
+  - lazyvideo
+  - setupcustomgallery
 ---
 
 # Creation & Management
@@ -25,22 +26,22 @@ From the room's **"Room Members"** tab, click **"Add Member"** and choose the me
 
 Then choose a **base role** (`Moderator` or `Speaker`) that sets the default [permissions](../rooms/access.md#predefined-roles), and optionally fine-tune them with **custom permissions**.
 
-<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/add-member-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/add-member-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/add-member-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/add-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/add-member-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## List & filter members
 
 The **"Room Members"** tab lists the room's users and identified guests, showing each member's name, role and type. You can **search** by name and **filter** by base role or by type (user / identified guest).
 
-<a class="glightbox" href="/assets/images/meet/room-members/management/room-members-list-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/room-members-list-dark.png#only-dark" loading="lazy" class="round-corners" alt="Room Members tab listing users and identified guests"/></a>
-<a class="glightbox" href="/assets/images/meet/room-members/management/room-members-list-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/room-members-list-light.png#only-light" loading="lazy" class="round-corners" alt="Room Members tab listing users and identified guests"/></a>
+![Room Members tab listing users and identified guests](../../../assets/images/meet/room-members/management/room-members-list-dark.png#only-dark){ .round-corners loading=lazy }
+![Room Members tab listing users and identified guests](../../../assets/images/meet/room-members/management/room-members-list-light.png#only-light){ .round-corners loading=lazy }
 
 ## Edit a member
 
 Update a member's **base role** or **custom permissions** from the member list. Changes apply **immediately** — even if the member is currently in a meeting, their permissions are updated on the fly.
 
-<a class="glightbox" href="/assets/images/meet/room-members/management/edit-member-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/edit-member-dark.png#only-dark" loading="lazy" class="round-corners" alt="Member edit dialog with base role and custom permissions"/></a>
-<a class="glightbox" href="/assets/images/meet/room-members/management/edit-member-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/edit-member-light.png#only-light" loading="lazy" class="round-corners" alt="Member edit dialog with base role and custom permissions"/></a>
+![Member edit dialog with base role and custom permissions](../../../assets/images/meet/room-members/management/edit-member-dark.png#only-dark){ .round-corners loading=lazy }
+![Member edit dialog with base role and custom permissions](../../../assets/images/meet/room-members/management/edit-member-light.png#only-light){ .round-corners loading=lazy }
 
 ## Copy a member's access link
 
@@ -49,15 +50,15 @@ Every member's access link can be copied from the member list:
 - **Identified guests** have a **unique personal access link**. Copy it and deliver it privately to the intended individual.
 - **Users** do not have a personal link, but their link can also be copied from the member list — it is the shared [user access link](../rooms/access.md#member-access-links) that every user of the room logs in through.
 
-<a class="glightbox" href="/assets/images/meet/room-members/management/copy-member-link-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/copy-member-link-dark.png#only-dark" loading="lazy" class="round-corners" alt="Member list with the action to copy a member's access link"/></a>
-<a class="glightbox" href="/assets/images/meet/room-members/management/copy-member-link-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/room-members/management/copy-member-link-light.png#only-light" loading="lazy" class="round-corners" alt="Member list with the action to copy a member's access link"/></a>
+![Member list with the action to copy a member's access link](../../../assets/images/meet/room-members/management/copy-member-link-dark.png#only-dark){ .round-corners loading=lazy }
+![Member list with the action to copy a member's access link](../../../assets/images/meet/room-members/management/copy-member-link-light.png#only-light){ .round-corners loading=lazy }
 
 ## Remove members
 
 Members can be removed individually or in bulk from the **"Room Members"** tab.
 
-<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/room-members/management/remove-member-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/remove-member-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! warning
 

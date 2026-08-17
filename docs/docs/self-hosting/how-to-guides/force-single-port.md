@@ -17,7 +17,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
     **Inbound port rules**:
 
-    | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+    | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
     | -------- | ----- | ------ | ----------- |
     | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
     | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -39,7 +39,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
         | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -66,7 +66,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | UDP | 443 | 0.0.0.0/0, ::/0 | STUN/TURN over UDP. |
         | TCP | 1935 | Master Node | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
@@ -89,7 +89,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:15em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div style="width:15em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -120,7 +120,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | UDP | 443 | 0.0.0.0/0, ::/0 | STUN/TURN over UDP. |
         | TCP | 1935 | Master Nodes | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
@@ -149,7 +149,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
     **Inbound port rules**:
 
-    | Protocol | Ports | <div style="width:8em">Source</div> | Description |
+    | Protocol | Ports | <div class="w-8em">Source</div> | Description |
     | -------- | ----- | ------ | ----------- |
     | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
     | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -170,7 +170,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | Ports | <div style="width:8em">Source</div> | Description |
+        | Protocol | Ports | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
         | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -196,7 +196,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1935 | Master Node | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Master Node | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -218,7 +218,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:15em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div style="width:15em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -249,7 +249,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1935 | Master Nodes | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Master Nodes | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS. (TURNS) |

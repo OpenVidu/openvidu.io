@@ -23,10 +23,7 @@ This section contains instructions for deploying a production-ready OpenVidu Ela
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
-    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Elastic On Premises</figcaption>
-    </figure>
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .svg-img .dark-img loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -73,7 +70,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
+| Protocol    | Ports          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -98,7 +95,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
@@ -126,7 +123,7 @@ docker run --pull always --rm -it \
     --deployment-type=elastic
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -166,7 +163,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Execute that command in your Master Node to install it. When the installation process finishes, you will see the following output:
 
@@ -196,7 +193,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -235,8 +232,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/on-premises/credentials-general.md"
---8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "self-hosting/on-premises/credentials-general.md"
+--8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -279,7 +276,7 @@ Each installation command for each type of node looks like this:
                 --certificate-type='letsencrypt'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -314,7 +311,7 @@ Each installation command for each type of node looks like this:
                 --certificate-type='selfsigned'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -354,7 +351,7 @@ Each installation command for each type of node looks like this:
             --certificate-type='letsencrypt'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         Notes:
 
@@ -392,7 +389,7 @@ Each installation command for each type of node looks like this:
             --certificate-type='selfsigned'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -433,7 +430,7 @@ Each installation command for each type of node looks like this:
             --owncert-public-key="$CERT_PUBLIC_KEY"
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
@@ -452,7 +449,7 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     - The `--master-node-private-ip` is the private IP of the Master Node. Media Nodes should be able to reach the Master Node using this IP.
     - The `--redis-password` is the password defined in the Master Node installation. It is used to connect to the Redis service in the Master Node and register itself as a Media Node in the cluster.

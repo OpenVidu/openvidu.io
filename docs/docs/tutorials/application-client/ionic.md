@@ -1,7 +1,7 @@
 ---
 title: "Ionic video call tutorial"
 description: "Build a mobile video-call app on OpenVidu with Ionic, Angular and the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe."
-tags:
+page_features:
   - setupcustomgallery
 ---
 
@@ -22,7 +22,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +32,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "shared/tutorials/application-client/ionic.md"
+--8<-- "tutorials/application-client/ionic.md"
 
 ## Understanding the code
 
@@ -184,7 +184,7 @@ If you leave them empty and app is launched in a mobile device, the user will be
 
 <div class="grid-container">
 
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></a></p></div>
+<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></p></div>
 
 </div>
 
