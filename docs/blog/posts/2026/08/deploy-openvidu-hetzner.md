@@ -32,7 +32,7 @@ hide:
 
 This post is a getting-started guide to OpenVidu on Hetzner Cloud. It gathers in one place all the steps needed to go from an empty Hetzner account to a working OpenVidu deployment in a few minutes: which instance to pick, which ports to open, and the one command that installs everything. It is deliberately shorter than the official self-hosting documentation; the goal here is a running deployment today, not covering every option.
 
-The server and its firewall are created in the <a href="https://console.hetzner.com/" target="_blank">Hetzner Cloud console</a>, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running <a href="/meet/index.md">OpenVidu Meet</a>, reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
+The server and its firewall are created in the [Hetzner Cloud console](https://console.hetzner.com/){:target="_blank"}, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running [OpenVidu Meet](/meet/index.md), reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
 
 <!-- more -->
 
