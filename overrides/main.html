@@ -216,6 +216,22 @@
 
 {% block styles %}
 
+<!-- Deliberately INLINE, never in a .css file: the privacy plugin removes any CSS file
+     that references an external URL from the build and re-emits it from a thread whose
+     failure is silently swallowed - the 2026-08-14 publish shipped without extra.css
+     because this @font-face lived there. Inline <style> is invisible to the plugin, so
+     AWS pages keep one live cdnfonts request (the pre-existing behavior). -->
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
+    font-display: swap;
+  }
+</style>
+
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
 {% endif %}

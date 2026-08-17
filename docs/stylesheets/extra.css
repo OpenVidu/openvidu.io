@@ -202,15 +202,6 @@ span:has(> a > .openvidu-tag) {
   --md-code-font: "Roboto Mono";
 }
 
-@font-face {
-  font-family: "Amazon Ember";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Amazon Ember"),
-    url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-  font-display: swap;
-}
-
 img.mkdocs-img {
   width: 80%;
   margin: auto;
