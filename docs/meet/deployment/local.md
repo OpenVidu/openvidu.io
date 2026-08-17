@@ -223,7 +223,7 @@ Follow these steps:
 
     When OpenVidu Meet is ready to be used the terminal will show the URL where it is accessible.
 
-    For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.no-break}.
+    For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.nowrap}.
 
     You will see the following instructions in the terminal when OpenVidu Meet is ready:
 

@@ -362,11 +362,11 @@ Sherpa provider supports GPU acceleration for faster, more efficient transcripti
 
 **Prerequisites**
 
-- The OpenVidu node running the Speech Processing agent must have a compatible **NVIDIA GPU (>= CUDA 11.0)**{.no-break} with the appropriate [NVIDIA Container Toolkit :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html){:target="_blank" .no-break} installed.
+- The OpenVidu node running the Speech Processing agent must have a compatible **NVIDIA GPU (>= CUDA 11.0)**{.nowrap} with the appropriate [NVIDIA Container Toolkit :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html){:target="_blank" .nowrap} installed.
 - The OpenVidu node must have enough disk and memory to handle the large Docker containers with GPU support (+4GB).
 
     !!! info
-        - Check your Nvidia GPU compatibility by running the following command, which must show a table with GPU info: `nvidia-smi`{.no-break}
+        - Check your Nvidia GPU compatibility by running the following command, which must show a table with GPU info: `nvidia-smi`{.nowrap}
         - Check your NVIDIA Container Toolkit installation with command: `nvidia-ctk --version`
         - You can run a smoke test to confirm that containers will have access to the GPU:
             - For CUDA >= 12: `docker run --rm --gpus all nvidia/cuda:12.9.1-base-ubuntu24.04 nvidia-smi`

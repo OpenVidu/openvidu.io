@@ -39,7 +39,7 @@ X-API-KEY: your-api-key
 You can access the REST API reference documentation at:
 
 - [**OpenVidu Meet REST API Reference** :fontawesome-solid-external-link:{.external-link-icon}](api.html){:target="_blank"}
-- **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/meet/api/v1/docs/`**{.no-break}
+- **Your own OpenVidu Meet deployment** serves the documentation at **`https://{{ your-openvidu-deployment-domain }}/meet/api/v1/docs/`**{.nowrap}
 
 ### Code snippets
 
@@ -55,7 +55,7 @@ The reference documentation provides code snippets for each REST API method. You
 
 ### Testing API Endpoints
 
-When accessing the REST API documentation from your own OpenVidu Meet deployment at **`https://{{ your-openvidu-deployment-domain }}/meet/api/v1/docs/`**{.no-break}, you can test every endpoint directly from the browser. This is a great way to explore the API's body requests and responses.
+When accessing the REST API documentation from your own OpenVidu Meet deployment at **`https://{{ your-openvidu-deployment-domain }}/meet/api/v1/docs/`**{.nowrap}, you can test every endpoint directly from the browser. This is a great way to explore the API's body requests and responses.
 
 Just configure a valid API key in the `X-API-KEY` header input.
 

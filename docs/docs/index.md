@@ -198,12 +198,12 @@ OpenVidu is available in two editions:
 
 <br>
 
-| Type of deployment        | <strong>OpenVidu<br><span class="no-break">Local (development)</span></strong>         | <div style="width:10em"><strong>OpenVidu<br><span class="no-break">Single Node</span></strong></div> | <strong>OpenVidu<br><span class="no-break">Elastic</span></strong> | <strong>OpenVidu<br><span class="no-break">High Availability</span></strong> |
+| Type of deployment        | <strong>OpenVidu<br><span class="nowrap">Local (development)</span></strong>         | <div style="width:10em"><strong>OpenVidu<br><span class="nowrap">Single Node</span></strong></div> | <strong>OpenVidu<br><span class="nowrap">Elastic</span></strong> | <strong>OpenVidu<br><span class="nowrap">High Availability</span></strong> |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
 | **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br><span class="openvidu-tag openvidu-pro-tag">PRO</span> Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
-| **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="no-break">N Media Nodes</span> | 4 Master Nodes +<br><span class="no-break">N Media Nodes</span> |
+| **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="nowrap">N Media Nodes</span> | 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span> |
 | **Installation instructions** | [Install](./self-hosting/local.md){ .md-button } | [Install](./self-hosting/single-node/index.md){ .md-button } | [Install](./self-hosting/elastic/index.md){ .md-button } | [Install](./self-hosting/ha/index.md){ .md-button } |
 
 <div style="text-align: center; margin: 3em 0;" markdown>

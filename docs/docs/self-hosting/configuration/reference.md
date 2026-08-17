@@ -62,11 +62,11 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
-| **`MEET_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for OpenVidu Meet service. |
+| **`MEET_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for OpenVidu Meet service. |
 | **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
 | **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
-| **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
 | **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm for the OpenVidu Meet S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
 | **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
 | **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
@@ -81,7 +81,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REDIS_DB`** | Redis database used by the OpenVidu Meet service. Default value is `0`. |
 | **`MEET_REDIS_SENTINEL_HOST_LIST`** | Redis Sentinel host list used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_REDIS_SENTINEL_PASSWORD`** | Redis Sentinel password used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
-| **`MEET_REDIS_SENTINEL_MASTER_NAME`{.no-break}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
+| **`MEET_REDIS_SENTINEL_MASTER_NAME`{.nowrap}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_BASE_PATH`** | Base path where the OpenVidu Meet application is served. Default is `/meet`. |
 | **`MEET_CAPTIONS_ENABLED`** | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](../../../meet/features/meetings/live-captions.md). |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
@@ -113,13 +113,13 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_REDIS_MASTER_NAME`** | Redis Sentinel master name used by the OpenVidu V2 Compatibility Server to connect to Redis Sentinel servers. |
 | **`V2COMPAT_REDIS_DB`** | Redis database used by the OpenVidu V2 Compatibility Server. Default value is `0`. |
 | **`V2COMPAT_OPENVIDU_RECORDING_PATH`** | Path where the OpenVidu V2 Compatibility Server will store recordings locally. By default in the deployments is `/opt/openvidu/recordings`. |
-| **`V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE`{.no-break}** | Where to store the recordings. Valid values are: <ul><li>`local`: Store the recordings in the local filesystem at the path `V2COMPAT_OPENVIDU_RECORDING_PATH`</li><li>`s3`: Store the recordings in the configured S3 bucket</li></ul> Default value is `local` |
+| **`V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE`{.nowrap}** | Where to store the recordings. Valid values are: <ul><li>`local`: Store the recordings in the local filesystem at the path `V2COMPAT_OPENVIDU_RECORDING_PATH`</li><li>`s3`: Store the recordings in the configured S3 bucket</li></ul> Default value is `local` |
 | **`V2COMPAT_OPENVIDU_RECORDING_CUSTOM_LAYOUT_URL`** | URL of the custom layout used by the OpenVidu V2 Compatibility Server to generate the recordings. |
-| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
 | **`V2COMPAT_OPENVIDU_RECORDING_ZIP_FILES`** | If `true`, save individual recordings as zip files |
 | **`V2COMPAT_OPENVIDU_RECORDING_RAW_FILES`** | If `true`, save individual recordings as files directly |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET`** | Default bucket name for recordings |
-| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for the recordings |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for the recordings |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY`** | Access key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_SECRET_KEY`** | Secret key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_REGION`** | AWS region of the recordings S3 bucket |

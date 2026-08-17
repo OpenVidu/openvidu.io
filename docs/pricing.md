@@ -51,22 +51,22 @@ page_features:
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
-        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
     <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
-    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="no-break">High Availability</span></strong></a></td>
+    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
   </tr>
   <tr>
     <td class="first-column border-right">Suitability</td>
     <td class="border-right">For applications with medium user load</td>
-    <td class="border-right">Enjoy the benefits of OpenVidu PRO in a <span class="no-break">single-node</span> installation</td>
+    <td class="border-right">Enjoy the benefits of OpenVidu PRO in a <span class="nowrap">single-node</span> installation</td>
     <td class="border-right">For applications with dynamic user load that require scalability</td>
     <td>For applications where both scalability and fault tolerance are critical</td>
   </tr>
   <tr>
     <td class="first-column border-right">Features</td>
     <td class="border-right">Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability</td>
-    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong class="nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
+    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong class="nowrap">2x performance</strong> and <strong class="nowrap">advanced observability</strong></td>
     <td class="border-right">Same benefits as OpenVidu Single Node PRO plus <strong>scalability</strong></td>
     <td>Same benefits as OpenVidu Elastic plus <strong>fault tolerance</strong></td>
   </tr>
@@ -74,13 +74,13 @@ page_features:
     <td class="first-column border-right">Number of servers</td>
     <td class="border-right">1 Node</td>
     <td class="border-right">1 Node</td>
-    <td class="border-right">1 Master Node +<br><span class="no-break">N Media Nodes</span></td>
-    <td> 4 Master Nodes +<br><span class="no-break">N Media Nodes</span></td>
+    <td class="border-right">1 Master Node +<br><span class="nowrap">N Media Nodes</span></td>
+    <td> 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span></td>
   </tr>
   <tr>
     <td class="first-column border-right">Installation instructions</td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node">Install</a></td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node-pro">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node-pro/">Install</a></td>
     <td class="border-right"><a class="md-button" href="../docs/self-hosting/elastic/">Install</a></td>
     <td><a class="md-button" href="../docs/self-hosting/ha/">Install</a></td>
   </tr>

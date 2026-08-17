@@ -401,7 +401,7 @@ Each installation command for each type of node looks like this:
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
     - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.
-    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.no-break}.
+    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.nowrap}.
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
 

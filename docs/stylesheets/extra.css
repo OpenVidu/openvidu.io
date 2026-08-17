@@ -679,10 +679,6 @@ hr {
   height: 1px;
 }
 
-.no-break {
-  white-space: nowrap;
-}
-
 /* Outdated warning */
 div[data-md-component="outdated"] {
   position: fixed;

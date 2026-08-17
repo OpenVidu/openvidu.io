@@ -95,7 +95,7 @@ page_features:
 
     ---
 
-    OpenVidu is designed from the ground up to be [**self-hosted**](docs/self-hosting/production-ready/index.md){.no-break} in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
+    OpenVidu is designed from the ground up to be [**self-hosted**](docs/self-hosting/production-ready/index.md){.nowrap} in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
 
 -   :material-face-agent:{ .feature-icon } __Professional support__{ .feature-name }
 
