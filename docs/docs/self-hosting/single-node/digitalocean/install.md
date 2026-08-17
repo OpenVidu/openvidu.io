@@ -107,14 +107,14 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         #### Mandatory Parameters
 
         | Input Value | Description |
-        |:---:|:---:|
+        |---|---|
         | `doToken`{ .nowrap } | DigitalOcean Personal Access Token for API authentication. |
         | `stackName`{ .nowrap } | Stack name for OpenVidu deployment. |
 
         #### Optional Parameters
 
         | Input Value | Default Value | Description |
-        |:---:|:---:|:---:|
+        |---|---|---|
         | `region`{ .nowrap } | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
         | `instanceType`{ .nowrap } | `"s-2vcpu-4gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your OpenVidu instance. |
         | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |

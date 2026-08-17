@@ -53,7 +53,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
         ### Mandatory Parameters
 
         | Input Value | Description |
-        |:---:|:---:|
+        |---|---|
         | `doToken`{ .nowrap } | DigitalOcean Personal Access Token for API authentication. |
         | `stackName`{ .nowrap } | Stack name for OpenVidu deployment. |
         | `openviduLicense`{ .nowrap } | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account){:target="_blank"} for more information. |
@@ -61,7 +61,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
         ### Optional Parameters
 
         | Input Value | Default Value | Description |
-        |:---:|:---:|:---:|
+        |---|---|---|
         | `region`{ .nowrap } | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
         | `masterNodeInstanceType`{ .nowrap } | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Node. |
         | `mediaNodeInstanceType`{ .nowrap } | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Media Nodes. |

@@ -51,7 +51,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         #### Mandatory Parameters
 
         | Input Value | Description |
-        |:---:|:---:|
+        |---|---|
         | `tenancy_ocid`{ .nowrap } | OCI Tenancy OCID. Required for the Object Storage namespace. |
         | `compartment_ocid`{ .nowrap } | OCI Compartment OCID where resources will be created. |
         | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
@@ -60,7 +60,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         #### Optional Parameters
 
         | Input Value | Default Value | Description |
-        |:---:|:---:|:---:|
+        |---|---|---|
         | `region`{ .nowrap } | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
         | `availability_domain`{ .nowrap } | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
         | `instanceType`{ .nowrap } | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu instance. |

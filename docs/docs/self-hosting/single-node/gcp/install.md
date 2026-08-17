@@ -90,13 +90,13 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 
 ### Mandatory Parameters
 | Input Value | Description |
-|:---:|:---:|
+|---|---|
 | projectId | GCP project id where the resources will be created. |
 | stackName | Stack name for OpenVidu deployment. |
 
 ### Optional Parameters
 | Input Value | Default Value | Description |
-|:---:|:---:|:---:|
+|---|---|---|
 | region | "europe-west2" | GCP region where resources will be created. |
 | zone | "europe-west2-b" | GCP zone that some resources will use. |
 | certificateType | "letsEncrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
