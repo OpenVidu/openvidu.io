@@ -48,105 +48,36 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     ??? details "Information about parameters"
 
-        --8<-- "self-hosting/oracle/mandatory-params-pro.md"
-        --8<-- "self-hosting/oracle/mandatory-params-pro-end.md"
+        <h4>Mandatory Parameters</h4>
+
+        | Input Value | Description |
+        |:---:|:---:|
+        | `tenancy_ocid`{ .nowrap } | OCI Tenancy OCID. Required for the Object Storage namespace. |
+        | `compartment_ocid`{ .nowrap } | OCI Compartment OCID where resources will be created. |
+        | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
+        | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
+        | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [https://openvidu.io/account](https://openvidu.io/account){:target="_blank"} to obtain your license. |
 
         <h4>Optional Parameters</h4>
 
-        <div align="center">
-        <table>
-        <thead>
-        <tr>
-        <th>Input Value</th>
-        <th>Default Value</th>
-        <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td class="nowrap"><code>region</code></td>
-        <td class="nowrap"><code>"eu-frankfurt-1"</code></td>
-        <td>OCI region where resources will be created.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>availability_domain</code></td>
-        <td class="nowrap"><code>1</code></td>
-        <td>Availability Domain number (1, 2, or 3) to use for resources.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>instanceType</code></td>
-        <td class="nowrap"><code>"VM.Standard.E4.Flex"</code></td>
-        <td>OCI Compute shape for the OpenVidu instance.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>instanceOCPUs</code></td>
-        <td class="nowrap"><code>4</code></td>
-        <td>Number of OCPUs for the instance (applies to Flex shapes only).</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>instanceMemory</code></td>
-        <td class="nowrap"><code>4</code></td>
-        <td>Memory in GB for the instance (applies to Flex shapes only).</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>certificateType</code></td>
-        <td class="nowrap"><code>"letsencrypt"</code></td>
-        <td>Certificate type for the OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li><code>owncert</code> - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li><code>letsencrypt</code> - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
-        </td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>domainName</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>ownPublicCertificate</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate in base64 format.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>ownPrivateCertificate</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate in base64 format.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>initialMeetAdminPassword</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>initialMeetApiKey</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>bucketName</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>RTCEngine</code></td>
-        <td class="nowrap"><code>"pion"</code></td>
-        <td>WebRTC media engine to use. Options: <ul><li><code>pion</code> - Default media engine.</li><li><code>mediasoup</code> - Alternative media engine with different performance characteristics.</li></ul></td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>vault_ocid</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>key_ocid</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>OCI KMS Key OCID for secrets management. If left empty, a new key will be created.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>additionalInstallFlags</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., <code>--flag1=value, --flag2</code>).</td>
-        </tr>
-        </tbody>
-        </table>
-        </div>
+        | Input Value | Default Value | Description |
+        |:---:|:---:|:---:|
+        | `region`{ .nowrap } | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
+        | `availability_domain`{ .nowrap } | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
+        | `instanceType`{ .nowrap } | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu instance. |
+        | `instanceOCPUs`{ .nowrap } | `4`{ .nowrap } | Number of OCPUs for the instance (applies to Flex shapes only). |
+        | `instanceMemory`{ .nowrap } | `4`{ .nowrap } | Memory in GB for the instance (applies to Flex shapes only). |
+        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `domainName`{ .nowrap } | `(none)`{ .nowrap } | Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name. |
+        | `ownPublicCertificate`{ .nowrap } | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the public certificate in base64 format. |
+        | `ownPrivateCertificate`{ .nowrap } | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the private certificate in base64 format. |
+        | `initialMeetAdminPassword`{ .nowrap } | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
+        | `initialMeetApiKey`{ .nowrap } | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
+        | `bucketName`{ .nowrap } | `(none)`{ .nowrap } | Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
+        | `RTCEngine`{ .nowrap } | `"pion"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`pion` - Default media engine.</li><li>`mediasoup` - Alternative media engine with different performance characteristics.</li></ul> |
+        | `vault_ocid`{ .nowrap } | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
+        | `key_ocid`{ .nowrap } | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
+        | `additionalInstallFlags`{ .nowrap } | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
 
 3. Deploy with Terraform using the following commands:
 

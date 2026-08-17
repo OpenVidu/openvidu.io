@@ -52,147 +52,36 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
         <h4>Mandatory Parameters</h4>
 
-        <div align="center">
-        <table>
-        <thead>
-        <tr>
-        <th>Input Value</th>
-        <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td class="nowrap"><code>doToken</code></td>
-        <td>DigitalOcean Personal Access Token for API authentication.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>stackName</code></td>
-        <td>Stack name for OpenVidu deployment.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>openviduLicense</code></td>
-        <td>OpenVidu License for PRO deployments. Go <a href="https://openvidu.io/account" target="_blank">here</a> for more information.</td>
-        </tr>
-        </tbody>
-        </table>
-        </div>
+        | Input Value | Description |
+        |:---:|:---:|
+        | `doToken`{ .nowrap } | DigitalOcean Personal Access Token for API authentication. |
+        | `stackName`{ .nowrap } | Stack name for OpenVidu deployment. |
+        | `openviduLicense`{ .nowrap } | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account){:target="_blank"} for more information. |
 
         <h4>Optional Parameters</h4>
 
-        <div align="center">
-        <table>
-        <thead>
-        <tr>
-        <th>Input Value</th>
-        <th>Default Value</th>
-        <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td class="nowrap"><code>region</code></td>
-        <td class="nowrap"><code>"ams3"</code></td>
-        <td>DigitalOcean region where resources will be created.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>masterNodeInstanceType</code></td>
-        <td class="nowrap"><code>"s-4vcpu-8gb"</code></td>
-        <td>Specifies the DigitalOcean Droplet size for your Master Node.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>mediaNodeInstanceType</code></td>
-        <td class="nowrap"><code>"s-4vcpu-8gb"</code></td>
-        <td>Specifies the DigitalOcean Droplet size for your Media Nodes.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>initialNumberOfMediaNodes</code></td>
-        <td class="nowrap"><code>1</code></td>
-        <td>Number of initial media nodes to deploy.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>minNumberOfMediaNodes</code></td>
-        <td class="nowrap"><code>1</code></td>
-        <td>Minimum number of media nodes to deploy (for reference, manual scaling required).</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>maxNumberOfMediaNodes</code></td>
-        <td class="nowrap"><code>5</code></td>
-        <td>Maximum number of media nodes to deploy (for reference, manual scaling required).</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>scaleTargetCPU</code></td>
-        <td class="nowrap"><code>50</code></td>
-        <td>Target CPU percentage to scale up or down.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>fixedNumberOfMediaNodes</code></td>
-        <td class="nowrap"><code>0</code></td>
-        <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>rtcEngine</code></td>
-        <td class="nowrap"><code>"pion"</code></td>
-        <td>Media Engine. Available options: <code>pion</code>, <code>mediasoup</code>.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>certificateType</code></td>
-        <td class="nowrap"><code>"letsencrypt"</code></td>
-        <td>Certificate type for OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li><code>owncert</code> - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li><code>letsencrypt</code> - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
-        </td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>domainName</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>ownPublicCertificate</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>ownPrivateCertificate</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>initialMeetAdminPassword</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>initialMeetApiKey</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>spaceName</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>spaceRegion</code></td>
-        <td class="nowrap"><code>"ams3"</code></td>
-        <td>DigitalOcean Spaces region where the bucket will be created.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>spacesAccessId</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>spacesSecretKey</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty.</td>
-        </tr>
-        <tr>
-        <td class="nowrap"><code>additionalInstallFlags</code></td>
-        <td class="nowrap"><code>(none)</code></td>
-        <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary.</td>
-        </tr>
-        </tbody>
-        </table>
-        </div>
+        | Input Value | Default Value | Description |
+        |:---:|:---:|:---:|
+        | `region`{ .nowrap } | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
+        | `masterNodeInstanceType`{ .nowrap } | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Node. |
+        | `mediaNodeInstanceType`{ .nowrap } | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Media Nodes. |
+        | `initialNumberOfMediaNodes`{ .nowrap } | `1`{ .nowrap } | Number of initial media nodes to deploy. |
+        | `minNumberOfMediaNodes`{ .nowrap } | `1`{ .nowrap } | Minimum number of media nodes to deploy (for reference, manual scaling required). |
+        | `maxNumberOfMediaNodes`{ .nowrap } | `5`{ .nowrap } | Maximum number of media nodes to deploy (for reference, manual scaling required). |
+        | `scaleTargetCPU`{ .nowrap } | `50`{ .nowrap } | Target CPU percentage to scale up or down. |
+        | `fixedNumberOfMediaNodes`{ .nowrap } | `0`{ .nowrap } | Fixed number of media nodes to create (0 = use autoscaling). |
+        | `rtcEngine`{ .nowrap } | `"pion"`{ .nowrap } | Media Engine. Available options: `pion`, `mediasoup`. |
+        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `domainName`{ .nowrap } | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
+        | `ownPublicCertificate`{ .nowrap } | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
+        | `ownPrivateCertificate`{ .nowrap } | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
+        | `initialMeetAdminPassword`{ .nowrap } | `(none)`{ .nowrap } | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
+        | `initialMeetApiKey`{ .nowrap } | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
+        | `spaceName`{ .nowrap } | `(none)`{ .nowrap } | Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name. |
+        | `spaceRegion`{ .nowrap } | `"ams3"`{ .nowrap } | DigitalOcean Spaces region where the bucket will be created. |
+        | `spacesAccessId`{ .nowrap } | `(none)`{ .nowrap } | Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty. |
+        | `spacesSecretKey`{ .nowrap } | `(none)`{ .nowrap } | Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty. |
+        | `additionalInstallFlags`{ .nowrap } | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary. |
 
     !!! warning
 

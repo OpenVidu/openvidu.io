@@ -100,131 +100,35 @@ Finally, click Continue.
 In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
 
 ### Mandatory Parameters
-<div class="text-center" markdown>
 | Input Value | Description |
-|---|---|
+|:---:|:---:|
 | projectId | GCP project id where the resources will be created. |
 | stackName | Stack name for OpenVidu deployment. |
 | openviduLicense | Your OpenVidu License. Get one [here](https://openvidu.io/account) if you don't have one. |
 
-</div>
-
 ### Optional Parameters
-<div class="text-center">
-    <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-      <tr>
-        <th>Input Value</th>
-        <th>Default Value</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td>region</td>
-        <td>"europe-west2"</td>
-        <td>GCP region where resources will be created.</td>
-      </tr>
-      <tr>
-        <td>zone</td>
-        <td>"europe-west2-b"</td>
-        <td>GCP zone that some resources will use.</td>
-      </tr>
-      <tr>
-        <td>certificateType</td>
-        <td>"letsEncrypt"</td>
-        <td>Certificate type for OpenVidu deployment. Options:
-          <ul>
-            <li><strong>[selfsigned]</strong> Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li>
-            <li><strong>[owncert]</strong> Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li>
-            <li><strong>[letsencrypt]</strong> Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li>
-          </ul>
-              </td>    </tr>
-      <tr>
-        <td>publicIpAddress</td>
-        <td>(none)</td>
-        <td>Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP.</td>
-      </tr>
-      <tr>
-        <td>domainName</td>
-        <td>(none)</td>
-        <td>Domain name for the OpenVidu Deployment.</td>
-      </tr>
-      <tr>
-        <td>ownPublicCertificate</td>
-        <td>(none)</td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format.</td>
-      </tr>
-      <tr>
-        <td>ownPrivateCertificate</td>
-        <td>(none)</td>
-        <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format.</td>
-      </tr>
-      <tr>
-        <td>initialMeetAdminPassword</td>
-        <td>(none)</td>
-        <td>Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated.</td>
-      </tr>
-      <tr>
-        <td>initialMeetApiKey</td>
-        <td>(none)</td>
-        <td>Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.</td>
-      </tr>
-      <tr>
-        <td>masterNodesInstanceType</td>
-        <td>"e2-standard-2"</td>
-        <td>Specifies the GCE machine type for your OpenVidu Master Node.</td>
-      </tr>
-      </tr>
-      <tr>
-        <td>masterNodesDiskSize</td>
-        <td>100</td>
-        <td>Size of the disk in GB for master nodes</td>
-      </tr>
-      <tr>
-        <td>mediaNodeInstanceType</td>
-        <td>"e2-standard-2"</td>
-        <td>Specifies the GCE machine type for your OpenVidu Media Nodes.</td>
-      </tr>
-      <tr>
-        <td>initialNumberOfMediaNodes</td>
-        <td>1</td>
-        <td>Number of initial media nodes to deploy.</td>
-      </tr>
-      <tr>
-        <td>minNumberOfMediaNodes</td>
-        <td>1</td>
-        <td>Minimum number of media nodes to deploy.</td>
-      </tr>
-      <tr>
-        <td>maxNumberOfMediaNodes</td>
-        <td>5</td>
-        <td>Maximum number of media nodes to deploy.</td>
-      </tr>
-      <tr>
-        <td>scaleTargetCPU</td>
-        <td>50</td>
-        <td>Target CPU percentage to scale out or in.</td>
-      </tr>
-      <tr>
-        <td>GCSAppDataBucketName</td>
-        <td>(none)</td>
-        <td>Name of the GCS bucket to store application data and recordings. If empty, a bucket will be created</td>
-      </tr>
-      <tr>
-        <td>GCSClusterDataBucketName</td>
-        <td>(none)</td>
-        <td>Name of the GCS bucket to store cluster data. If empty, a bucket will be created</td>
-      </tr>
-      <tr>
-        <td>rtcEngine</td>
-        <td>"pion"</td>
-        <td>RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'.</td>
-      </tr>
-      <tr>
-        <td>additionalInstallFlags</td>
-        <td>(none)</td>
-        <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
-      </tr>
-    </table>
-</div>
+| Input Value | Default Value | Description |
+|:---:|:---:|:---:|
+| region | "europe-west2" | GCP region where resources will be created. |
+| zone | "europe-west2-b" | GCP zone that some resources will use. |
+| certificateType | "letsEncrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
+| publicIpAddress | (none) | Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP. |
+| domainName | (none) | Domain name for the OpenVidu Deployment. |
+| ownPublicCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
+| ownPrivateCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
+| initialMeetAdminPassword | (none) | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
+| initialMeetApiKey | (none) | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
+| masterNodesInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Master Node. |
+| masterNodesDiskSize | 100 | Size of the disk in GB for master nodes |
+| mediaNodeInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
+| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
+| GCSAppDataBucketName | (none) | Name of the GCS bucket to store application data and recordings. If empty, a bucket will be created |
+| GCSClusterDataBucketName | (none) | Name of the GCS bucket to store cluster data. If empty, a bucket will be created |
+| rtcEngine | "pion" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
+| additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
 For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/ha/gcp/variables.tf) file to see additional information about the inputs.   
 
