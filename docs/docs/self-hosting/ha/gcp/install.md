@@ -55,25 +55,25 @@ Once you click the button, you will see this window.
 * For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   
 ??? details "New Service Account Steps"
 
-    <figure markdown>
     ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .svg-img .dark-img loading=lazy }
-    <figcaption>Step 1: Create Service Account</figcaption>
-    </figure>
+    /// caption
+    Step 1: Create Service Account
+    ///
 
-    <figure markdown>
     ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .svg-img .dark-img loading=lazy }
-    <figcaption>Step 2: Service Account Details</figcaption>
-    </figure>
+    /// caption
+    Step 2: Service Account Details
+    ///
 
-    <figure markdown>
     ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .svg-img .dark-img loading=lazy }
-    <figcaption>Step 3: Grant Permissions</figcaption>
-    </figure>
+    /// caption
+    Step 3: Grant Permissions
+    ///
 
-    <figure markdown>
     ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .svg-img .dark-img loading=lazy }
-    <figcaption>Step 4: Complete Setup</figcaption>
-    </figure>
+    /// caption
+    Step 4: Complete Setup
+    ///
 
 * Fill **Git repository** with this link, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located:
 

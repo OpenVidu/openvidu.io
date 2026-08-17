@@ -203,6 +203,7 @@ span:has(> a > .openvidu-tag) {
 }
 
 img.mkdocs-img {
+  display: block;
   width: 80%;
   margin: auto;
 }
@@ -664,6 +665,12 @@ nav .md-tabs__item {
 
 .basic-concepts-img-2 {
   width: 100%;
+}
+
+/* The left diagram is the narrower of the pair, so its caption has to drop to
+   line up with the caption of the one beside it */
+.basic-concepts-caption figcaption {
+  margin-top: 3em;
 }
 
 hr {

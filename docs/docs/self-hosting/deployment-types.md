@@ -28,10 +28,7 @@ It comes in two flavors:
  - <strong>OpenVidu Local <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>, fine-tuned for local development.
  - <strong>OpenVidu Local <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: mirrors the experience of <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>, fine-tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
 
-<figure markdown>
-  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
-  <figcaption>OpenVidu Local (development)</figcaption>
-</figure>
+![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 ## OpenVidu Single Node
 

@@ -75,11 +75,15 @@ CPU load of the server is also shown with a black marked plot (from 0 to 1, repr
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 <div class="grid-50 tablet-grid-50" markdown>
 ![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png){ loading=lazy }
-<figcaption>Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with Pion</figcaption>
+/// caption
+Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with Pion
+///
 </div>
 <div class="grid-50 tablet-grid-50" markdown>
 ![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png){ loading=lazy }
-<figcaption>Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with mediasoup</figcaption>
+/// caption
+Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with mediasoup
+///
 </div>
 </div>
 

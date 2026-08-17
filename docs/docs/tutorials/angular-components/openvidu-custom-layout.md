@@ -11,10 +11,7 @@ The **openvidu-custom-layout** tutorial demonstrates how to replace the default 
 
 Replacing the default layout is made simple with the **LayoutDirective**, which offers a straightforward way to customize the **LayoutComponent**.
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-layout.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Custom Layout</figcaption>
-</figure>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-layout.svg){ loading=lazy .svg-img  .mkdocs-img}
 
 ## Running this tutorial
 

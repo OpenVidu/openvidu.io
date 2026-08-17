@@ -20,10 +20,10 @@ You will need a domain to be able to create and associate the certificate.
     These are the steps you need to follow to create the AWS certificate; keep in mind that you need a domain.
 
     First, go to AWS Certificate Manager and request a new public certificate. The following parameter is the most important.
-    <figure markdown>
     ![AWS Certificate Manager view](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-name-for-certificate.png){ .png-img .dark-img loading=lazy }
-    <figcaption>Domain configuration</figcaption>
-    </figure>
+    /// caption
+    Domain configuration
+    ///
 
     You need to replace **`yourdesiredname`** for whatever name you want and **`yourdomain`** for the name of the domain that you own.
 
@@ -45,10 +45,10 @@ The next page will display the certificate status. Here you will need to create 
 
     You need to click the button called **`Create records in Route 53`**. This will lead you to the next page, where you just click Create records and that's it.
 
-    <figure markdown>
     ![Create record page](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-record-page.png){ .png-img .dark-img loading=lazy }
-    <figcaption>Create record for certificate</figcaption>
-    </figure>
+    /// caption
+    Create record for certificate
+    ///
 
     Please verify that you have a new entry in the records table of the specified Hosted Zone in Route 53 with the CNAME of the certificate you just created.
 
@@ -68,10 +68,10 @@ Finally, when deploying the HA stack in CloudFormation, follow these steps:
 
     Next, for the **`OpenViduCertificateARN`**, you can find it at the top of the same page mentioned earlier; it is called **`ARN`**, as you can see in the image below.
 
-    <figure markdown>
     ![ARN and domain location](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-arn-location.png){ .png-img .dark-img loading=lazy }
-    <figcaption>Domain name and ARN location</figcaption>
-    </figure>
+    /// caption
+    Domain name and ARN location
+    ///
 
 When everything is up and running, you will need to create a new record in the Hosted Zone referring to the Load Balancer resource created in the stack.
 

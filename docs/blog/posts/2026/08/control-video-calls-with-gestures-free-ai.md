@@ -124,10 +124,10 @@ The first time I tried the prototype, I did exactly what anyone would do: I clos
 
 Brilliant, I thought. The model recognized the gesture perfectly and turned off the camera... What I didn't think about is that by turning off the camera, the model stopped seeing my hand and recognizing any gesture at all.
 
-<figure markdown>
-  ![Confused robot gif representing the model losing hand tracking](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2c0OHYyemhvaXZkZDdpb20xZTkxNGNtNnh2bDRqaWNtZjhvdmVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h8HmN0UcEKR0xWnv3R/giphy.gif){ loading=lazy }
-  <figcaption>What the model thought when I tried this</figcaption>
-</figure>
+![Confused robot gif representing the model losing hand tracking](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2c0OHYyemhvaXZkZDdpb20xZTkxNGNtNnh2bDRqaWNtZjhvdmVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h8HmN0UcEKR0xWnv3R/giphy.gif){ loading=lazy }
+/// caption
+What the model thought when I tried this
+///
 
 The fix is to feed the model from a hidden capture, not from the track that gets published to the room. That way, the AI model keeps seeing your hand exactly the same whether the camera is off or on.
 

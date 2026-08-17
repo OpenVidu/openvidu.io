@@ -30,10 +30,7 @@ OpenVidu Meet can be easily deployed in a single server (follow the [basic deplo
 
 To run OpenVidu in your local machine, this is the quickest option. It is a Docker Compose setup that includes all the necessary services to run OpenVidu in your LAN, including automated SSL certificates that will be valid across all devices in your network.
 
-<figure markdown>
-  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
-  <figcaption>OpenVidu Local (development)</figcaption>
-</figure>
+![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
 
 ### OpenVidu Single Node
 

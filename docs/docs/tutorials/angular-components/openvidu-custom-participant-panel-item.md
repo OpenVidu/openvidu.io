@@ -11,10 +11,7 @@ The **openvidu-custom-participant-panel-item** tutorial demonstrates how to repl
 
 Replacing the default participant item is made simple with the **ParticipantsPanelItemDirective**, which offers a straightforward way to replace and adapt the **ParticipantsPanelItemComponent** to your needs.
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-participant-panel-item.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Custom Participants Panel Item</figcaption>
-</figure>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-participant-panel-item.svg){ loading=lazy .svg-img  .mkdocs-img}
 
 ## Running this tutorial
 

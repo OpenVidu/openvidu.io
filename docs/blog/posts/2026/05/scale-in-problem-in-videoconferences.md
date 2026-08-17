@@ -64,10 +64,7 @@ The idea is straightforward:
 
 The challenge is integrating this logic with the autoscaling mechanisms of each cloud provider, all of which have their own opinions about how termination should work.
 
-<figure markdown>
 ![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy.png){ .svg-img .dark-img loading=lazy }
-<figcaption>Draining strategy</figcaption>
-</figure>
 
 ## Bringing Scale-In to the Major Clouds
 
