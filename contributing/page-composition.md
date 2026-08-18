@@ -164,16 +164,34 @@ small downscaled `-preview.mp4` with a `poster`; the full-size file appears only
 `href` (see `docs/meet/index.md` for the reference):
 
 ```html
-<a class="glightbox" href="/assets/videos/full.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
+<a class="glightbox" href="/assets/videos/full.mp4" data-type="video" data-desc-position="bottom"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
 ```
 
 Rules for both patterns:
 
 > - Theme-variant videos carry the `#only-dark`/`#only-light` suffix in the `src` attribute (in
 >   pairs), **never** in the `href` of the `<a>` parent, and declare `data-gallery="dark"` /
->   `data-gallery="light"` so each theme's lightbox gallery only contains its own variants.
->   Videos without theme variants share any per-page gallery name (e.g. `gallery1`).
+>   `data-gallery="light"` to mark which variant they are (see the lightbox below). A video
+>   without theme variants needs no `data-gallery` at all.
 > - Each HTML `<a>` element is a **one-liner**. There are some strange behaviors when it is not.
+
+### The lightbox
+
+Every image and video on a page shares **one** gallery, so the arrows walk the whole page.
+[`glightbox-gallery.js`](../docs/javascripts/glightbox-gallery.js) is loaded site-wide and owns
+the only [GLightbox](https://biati-digital.github.io/glightbox/) instance; nothing needs a page
+feature key. What each side controls:
+
+- **mkdocs.yml** (`glightbox:`) configures the image slides — width, effects, `zoomable`, the
+  classes that opt out. The plugin computes it, the hook hands it over as `glightboxOptions`
+  and the script builds its instance on top, so that block stays the one place to change them.
+- **The script** adds what that configuration cannot express: the Plyr player options and the
+  wider video frame.
+- **The palette** decides membership. A themed pair contributes only the variant currently on
+  screen, and the gallery is rebuilt when the palette changes — so `data-gallery="dark"` /
+  `"light"` is a *marker*, not a gallery name (the `#only-*` suffix serves as a fallback).
+  A per-page gallery name would only split the page in two; there is none.
+- **`skip-gallery`** on an image keeps it out of the lightbox altogether.
 
 ## Theme overrides
 

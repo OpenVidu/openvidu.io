@@ -329,7 +329,7 @@ Just link to the room URL from any element in your frontend. For example, with a
 
 After clicking on the element, the individual will be redirected to the OpenVidu Meet room, ready to join the meeting.
 
-<a class="glightbox" href="/assets/videos/meet/embedded/embed-url.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/embed-url.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/embed-url.mp4" data-type="video" data-desc-position="bottom"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/embed-url.mp4" preload="none" muted playsinline loop></video></a>
 
 !!! info
     You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after a participant leaves the meeting by appending this query param: <code class="nowrap">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>

@@ -62,4 +62,4 @@ When accessing the REST API documentation from your own OpenVidu Meet deployment
 
 Just configure a valid API key in the `X-API-KEY` header input.
 
-<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/embedded/reference/rest-api-test.mp4" data-type="video" data-desc-position="bottom"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/reference/rest-api-test.mp4" preload="none" muted playsinline loop></video></a>

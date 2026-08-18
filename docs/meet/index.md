@@ -21,7 +21,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 </h1>
 
 <div>
-    <a class="glightbox" href="/assets/videos/meet/home/demo.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/home/demo-preview.mp4" poster="/assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
+    <a class="glightbox" href="/assets/videos/meet/home/demo.mp4" data-type="video" data-desc-position="bottom"><video class="round-corners" src="/assets/videos/meet/home/demo-preview.mp4" poster="/assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
 <div style="text-align: center; margin: 3em 0;" markdown>
@@ -251,7 +251,7 @@ __Pre-built web component__{ .ov-meet-commercial-card-title }
 
 Embed the OpenVidu Meet UI right into your app.
 
-<a class="glightbox" href="/assets/videos/meet/home/embed-html.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners lazy-video" src="/assets/videos/meet/home/embed-html.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/home/embed-html.mp4" data-type="video" data-desc-position="bottom"><video class="round-corners lazy-video" src="/assets/videos/meet/home/embed-html.mp4" preload="none" muted playsinline loop></video></a>
 
 ![OpenVidu Meet embedded meeting](../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy width=1600 height=900 }
 
