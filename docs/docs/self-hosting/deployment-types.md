@@ -9,7 +9,7 @@ OpenVidu offers **user-friendly installers** that facilitate quick **on-premises
 
 There are different deployment options available, depending on your needs:
 
-| Type of deployment        | <a href="#openvidu-local-development"><strong>OpenVidu<br><span class="nowrap">Local (development)</span></strong></a>         | <div style="width:10em"><a href="#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node</span></strong></a></div> | <a href="#openvidu-elastic"><strong>OpenVidu<br><span class="nowrap">Elastic</span></strong></a> | <a href="#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a> |
+| Type of deployment        | [**OpenVidu**<br>**Local (development)**{ .nowrap }](#openvidu-local-development)         | <div style="width:10em">[**OpenVidu**<br>**Single Node**{ .nowrap }](#openvidu-single-node)</div> | [**OpenVidu**<br>**Elastic**{ .nowrap }](#openvidu-elastic) | [**OpenVidu**<br>**High Availability**{ .nowrap }](#openvidu-high-availability) |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
 | **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |

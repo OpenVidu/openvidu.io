@@ -42,7 +42,7 @@ The following documentation pages focus on three different deployments:
 
 The table below summarizes the main characteristics of each deployment type.
 
-| Type of deployment        | <strong><span class="nowrap">OpenVidu Meet:</span><br>Local deployment</strong> | <div style="width:10em"><strong>OpenVidu Meet:<br><span class="nowrap">Basic deployment</span></strong></div> | <strong>OpenVidu Meet:<br><span class="nowrap">Advanced deployment</span></strong> |
+| Type of deployment        | **OpenVidu Meet:**{ .nowrap }<br>**Local deployment** | <div style="width:10em">**OpenVidu Meet:**<br>**Basic deployment**{ .nowrap }</div> | **OpenVidu Meet:**<br>**Advanced deployment**{ .nowrap } |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- |
 | **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | Suitable to test and develop | Suitable for production applications with medium user load | Suitable for production applications with dynamic user load and need for high availability |
