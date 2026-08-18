@@ -19,19 +19,27 @@ To access **OpenVidu Dashboard**, go to `https://your.domain/dashboard/` and **l
 
 Display **graphical analytics** for client SDKs, connection types, bandwidth usage, unique participants, rooms and egresses created over different **time periods** (last 24 hours, last 7 days, last 28 days or current month).
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png" loading="lazy" alt="Analytics page of OpenVidu Dashboard with client SDK and connection charts"/></p></div>
+<div class="grid-50" markdown>
+![Analytics page of OpenVidu Dashboard with client SDK and connection charts](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics1.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png" loading="lazy" alt="Bandwidth usage charts in the OpenVidu Dashboard analytics page"/></p></div>
+<div class="grid-50" markdown>
+![Bandwidth usage charts in the OpenVidu Dashboard analytics page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics2.png){ loading=lazy }
+</div>
 
 </div>
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png" loading="lazy" alt="Participant and room charts in the OpenVidu Dashboard analytics page"/></p></div>
+<div class="grid-50" markdown>
+![Participant and room charts in the OpenVidu Dashboard analytics page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics3.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png" loading="lazy" alt="Egress charts in the OpenVidu Dashboard analytics page"/></p></div>
+<div class="grid-50" markdown>
+![Egress charts in the OpenVidu Dashboard analytics page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics4.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -47,13 +55,19 @@ Review the total count of **active rooms** and **active participants**, along wi
 
 Retrieve in-depth information about a specific **room**, including its duration, bandwidth consumption, participants and related events. A chart illustrating the active participants count over time is also provided.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-33"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png" loading="lazy" alt="OpenVidu Dashboard listing with an active room"/></p></div>
+<div class="grid-33" markdown>
+![OpenVidu Dashboard listing with an active room](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room_active.png){ loading=lazy }
+</div>
 
-<div class="grid-33"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png" loading="lazy" alt="Room details page with duration, bandwidth and participants"/></p></div>
+<div class="grid-33" markdown>
+![Room details page with duration, bandwidth and participants](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room1.png){ loading=lazy }
+</div>
 
-<div class="grid-33"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png" loading="lazy" alt="Timeline and related egresses in the room details page"/></p></div>
+<div class="grid-33" markdown>
+![Timeline and related egresses in the room details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/room2.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -63,11 +77,15 @@ Retrieve in-depth information about a specific **room**, including its duration,
 
 Obtain detailed insights into each **participant**, covering their duration, bandwidth usage, average audio and video quality score, information about the client they are connecting with, connection stats, published tracks and related events.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png" loading="lazy" alt="Participant details page with duration and bandwidth usage"/></p></div>
+<div class="grid-50" markdown>
+![Participant details page with duration and bandwidth usage](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant1.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png" loading="lazy" alt="Audio and video quality scores in the participant details page"/></p></div>
+<div class="grid-50" markdown>
+![Audio and video quality scores in the participant details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant2.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -87,11 +105,15 @@ Review an overview of all **egresses** and **ingresses**, including their durati
 
 Access comprehensive details about a specific **egress**, including its duration, current status, type, associated room, destinations, status timeline and request information.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png" loading="lazy" alt="Egress details page with duration, status and type"/></p></div>
+<div class="grid-50" markdown>
+![Egress details page with duration, status and type](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress1.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png" loading="lazy" alt="Destination and room information in the egress details page"/></p></div>
+<div class="grid-50" markdown>
+![Destination and room information in the egress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress2.png){ loading=lazy }
+</div>
 
 </div>
 

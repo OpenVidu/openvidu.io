@@ -125,11 +125,15 @@ The Output Key **ServicesAndCredentials** of the [previous section](#deploying-t
 
 Then, click on **Retrieve secret value** to get the JSON with all the information.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/elastic/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/elastic/aws/2-secrets.png){ loading=lazy }
+</div>
 
 </div>
 

@@ -55,12 +55,16 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/webcomponent/home.png){ .control-height .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/>
-<img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![OpenVidu Meet room embedded in the tutorial app](../../../../assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark){ .control-height .round-corners loading=lazy }
+![OpenVidu Meet room embedded in the tutorial app](../../../../assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light){ .control-height .round-corners loading=lazy }
+</div>
 
 </div>
 

@@ -80,11 +80,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></p></div>
+<div class="grid-50" markdown>
+![Video call room of the recording tutorial app with recording controls](../../../assets/images/platform/tutorials/advanced-features/recording1.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+</div>
 
 </div>
 

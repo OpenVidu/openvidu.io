@@ -138,9 +138,11 @@ You should configure these URLs according to your deployment settings. In case y
 
 If these URLs are left empty, the user will be prompted to enter the URLs when the application starts. This configuration is managed in the `ConfigureUrlsActivity.kt` file:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-100"><p class="text-center"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></p></div>
+<div class="grid-100 text-center" markdown>
+![URL configuration of the Android tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-android.png){ loading=lazy style="width: 25%" }
+</div>
 
 </div>
 

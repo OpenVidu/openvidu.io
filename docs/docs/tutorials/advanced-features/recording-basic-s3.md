@@ -81,11 +81,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></p></div>
+<div class="grid-50" markdown>
+![Video call room of the recording tutorial app with recording controls](../../../assets/images/platform/tutorials/advanced-features/recording1.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -797,10 +801,14 @@ function displayRecording(recordingName) {
 
 The `recordings.html` file defines the HTML for the general recording page. This page lists all available recordings from all rooms and allows the user to filter them by room name. It also provides buttons to play and delete each recording.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording3.png" loading="lazy" alt="General recording page listing recordings from all rooms"/></p></div>
+<div class="grid-50" markdown>
+![General recording page listing recordings from all rooms](../../../assets/images/platform/tutorials/advanced-features/recording3.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/advanced-features/recording4.png" loading="lazy" alt="Recording playback in the general recording page"/></p></div>
+<div class="grid-50" markdown>
+![Recording playback in the general recording page](../../../assets/images/platform/tutorials/advanced-features/recording4.png){ loading=lazy }
+</div>
 
 </div>

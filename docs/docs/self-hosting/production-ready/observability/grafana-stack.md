@@ -39,11 +39,15 @@ This dashboard provides **metrics** about **OpenVidu Server**. It includes chart
 
 In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag }</a> and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png" loading="lazy" alt="Grafana dashboard with OpenVidu server metrics"/></p></div>
+<div class="grid-50" markdown>
+![Grafana dashboard with OpenVidu server metrics](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics1.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png" loading="lazy" alt="Further panels of the OpenVidu server metrics dashboard in Grafana"/></p></div>
+<div class="grid-50" markdown>
+![Further panels of the OpenVidu server metrics dashboard in Grafana](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/metrics2.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -73,11 +77,15 @@ There is a panel showing **all containers** logs,
 
 another panel to **filter** logs by **room_id** and **participant_id**,
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png" loading="lazy" alt="Grafana logs dashboard with filters by room and participant"/></p></div>
+<div class="grid-50" markdown>
+![Grafana logs dashboard with filters by room and participant](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs3.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png" loading="lazy" alt="OpenVidu log entries in the Grafana logs dashboard"/></p></div>
+<div class="grid-50" markdown>
+![OpenVidu log entries in the Grafana logs dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs4.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -103,19 +111,27 @@ First, there is a panel showing **all containers'** logs from all nodes.
 
 Then, there is a row for each selected **node**, containing **all logs**, **warnings** and **errors** from that node. Additionally, each row contains a panel for each selected container, showing all its logs.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png" loading="lazy" alt="Cluster Nodes Logs dashboard with a row of panels per node"/></p></div>
+<div class="grid-50" markdown>
+![Cluster Nodes Logs dashboard with a row of panels per node](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs2.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png" loading="lazy" alt="Log panels of a Master Node in the Cluster Nodes Logs dashboard"/></p></div>
+<div class="grid-50" markdown>
+![Log panels of a Master Node in the Cluster Nodes Logs dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs3.png){ loading=lazy }
+</div>
 
 </div>
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png" loading="lazy" alt="Warnings and errors panels of a node in the Cluster Nodes Logs dashboard"/></p></div>
+<div class="grid-50" markdown>
+![Warnings and errors panels of a node in the Cluster Nodes Logs dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs4.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png" loading="lazy" alt="Log panels of a Media Node in the Cluster Nodes Logs dashboard"/></p></div>
+<div class="grid-50" markdown>
+![Log panels of a Media Node in the Cluster Nodes Logs dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs5.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -123,11 +139,15 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
     
     Note that some panels have no data. This is because some containers are running in **Master Nodes** and others in **Media Nodes**.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png" loading="lazy" alt="Node panels with no data for containers running on other nodes"/></p></div>
+<div class="grid-50" markdown>
+![Node panels with no data for containers running on other nodes](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs6.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png" loading="lazy" alt="Per-container log panels in the Cluster Nodes Logs dashboard"/></p></div>
+<div class="grid-50" markdown>
+![Per-container log panels in the Cluster Nodes Logs dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs7.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -143,11 +163,15 @@ In case you are using **OpenVidu** <a href="/pricing/#openvidu-pro">**PRO**{ .op
 
 First, there is a panel to **filter** logs by **room_id** and **participant_id**.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png" loading="lazy" alt="Cluster Services Logs dashboard with filters by room and participant"/></p></div>
+<div class="grid-50" markdown>
+![Cluster Services Logs dashboard with filters by room and participant](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs3.png){ loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png" loading="lazy" alt="Per-service log panels in the Cluster Services Logs dashboard"/></p></div>
+<div class="grid-50" markdown>
+![Per-service log panels in the Cluster Services Logs dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs4.png){ loading=lazy }
+</div>
 
 </div>
 
