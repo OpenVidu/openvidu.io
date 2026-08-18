@@ -216,13 +216,13 @@ page_features:
 </div>
 </div>
 
-<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;">
-  <a title="Get started with OpenVidu Meet" class="md-button md-button--primary home-meet-button" href="meet/">Deploy Meet in minutes</a>
-  <a title="Build with OpenVidu Platform SDKs" class="md-button home-platform-button" href="docs/">Start building with the SDKs</a>
+<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown="span">
+[Deploy Meet in minutes](meet/index.md){ .md-button .md-button--primary .home-meet-button title="Get started with OpenVidu Meet" }
+[Start building with the SDKs](docs/index.md){ .md-button .home-platform-button title="Build with OpenVidu Platform SDKs" }
 </div>
-<p class="home-under-cta">
-  Not sure which fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
-</p>
+
+Not sure which fits? [Compare Meet vs Platform](openvidu-meet-vs-openvidu-platform.md)
+{ .home-under-cta }
 
 <hr style="margin: 7em 0 3.5em 0;">
 
