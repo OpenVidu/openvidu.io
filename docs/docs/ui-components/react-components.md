@@ -51,14 +51,14 @@ A curated set of components that we believe are essential and serve as a solid f
 
 Prefabricated are constructed using components and enhanced with additional functionalities, unique styles, and practical defaults. They are designed for immediate use and are not meant to be extended.
 
-<div class="grid three-cols">
+<div class="grid three-cols" markdown="span">
 
-<a href="https://docs.livekit.io/reference/components/react/component/audioconference/" target="_blank" class="card no-shadow">AudioConference</a>
-<a href="https://docs.livekit.io/reference/components/react/component/chat/" target="_blank" class="card no-shadow">Chat</a>
-<a href="https://docs.livekit.io/reference/components/react/component/controlbar/" target="_blank" class="card no-shadow">ControlBar</a>
-<a href="https://docs.livekit.io/reference/components/react/component/mediadevicemenu/" target="_blank" class="card no-shadow">MediaDeviceMenu</a>
-<a href="https://docs.livekit.io/reference/components/react/component/prejoin/" target="_blank" class="card no-shadow">PreJoin</a>
-<a href="https://docs.livekit.io/reference/components/react/component/videoconference/" target="_blank" class="card no-shadow">VideoConference</a>
+[AudioConference](https://docs.livekit.io/reference/components/react/component/audioconference/){ .card .no-shadow target="_blank" }
+[Chat](https://docs.livekit.io/reference/components/react/component/chat/){ .card .no-shadow target="_blank" }
+[ControlBar](https://docs.livekit.io/reference/components/react/component/controlbar/){ .card .no-shadow target="_blank" }
+[MediaDeviceMenu](https://docs.livekit.io/reference/components/react/component/mediadevicemenu/){ .card .no-shadow target="_blank" }
+[PreJoin](https://docs.livekit.io/reference/components/react/component/prejoin/){ .card .no-shadow target="_blank" }
+[VideoConference](https://docs.livekit.io/reference/components/react/component/videoconference/){ .card .no-shadow target="_blank" }
 
 </div>
 
@@ -66,15 +66,15 @@ Prefabricated are constructed using components and enhanced with additional func
 
 Contexts are used to allow child components to access parent state without having to pass it down the component tree via props
 
-<div class="grid three-cols">
+<div class="grid three-cols" markdown="span">
 
-<a href="https://docs.livekit.io/reference/components/react/component/participantcontext/" target="_blank" class="card no-shadow">Participant</a>
-<a href="https://docs.livekit.io/reference/components/react/component/roomcontext/" target="_blank" class="card no-shadow">Room</a>
-<a href="https://github.com/livekit/components-js/blob/main/packages/react/src/context/chat-context.ts" target="_blank" class="card no-shadow">Chat</a>
-<a href="https://github.com/livekit/components-js/blob/main/packages/react/src/context/feature-context.ts" target="_blank" class="card no-shadow">Feature</a>
-<a href="https://docs.livekit.io/reference/components/react/component/layoutcontext/" target="_blank" class="card no-shadow">Layout</a>
-<a href="https://github.com/livekit/components-js/blob/main/packages/react/src/context/pin-context.ts" target="_blank" class="card no-shadow">Pin</a>
-<a href="https://docs.livekit.io/reference/components/react/component/trackrefcontext/" target="_blank" class="card no-shadow">TrackRef</a>
+[Participant](https://docs.livekit.io/reference/components/react/component/participantcontext/){ .card .no-shadow target="_blank" }
+[Room](https://docs.livekit.io/reference/components/react/component/roomcontext/){ .card .no-shadow target="_blank" }
+[Chat](https://github.com/livekit/components-js/blob/main/packages/react/src/context/chat-context.ts){ .card .no-shadow target="_blank" }
+[Feature](https://github.com/livekit/components-js/blob/main/packages/react/src/context/feature-context.ts){ .card .no-shadow target="_blank" }
+[Layout](https://docs.livekit.io/reference/components/react/component/layoutcontext/){ .card .no-shadow target="_blank" }
+[Pin](https://github.com/livekit/components-js/blob/main/packages/react/src/context/pin-context.ts){ .card .no-shadow target="_blank" }
+[TrackRef](https://docs.livekit.io/reference/components/react/component/trackrefcontext/){ .card .no-shadow target="_blank" }
 
 </div>
 
