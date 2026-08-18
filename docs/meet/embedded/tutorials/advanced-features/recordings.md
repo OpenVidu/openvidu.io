@@ -1,8 +1,6 @@
 ---
 title: "Recordings tutorial for OpenVidu Meet"
 description: "Add recording management to an OpenVidu Meet Web Component application: list recordings, play them back and delete the ones you no longer need."
-page_features:
-  - setupcustomgallery
 ---
 
 # Recordings Tutorial

@@ -3,7 +3,6 @@ title: "Recording management in OpenVidu Meet"
 description: "Start and stop recordings, then list, play, share, download and delete them, from the OpenVidu Meet application or the Recordings REST API."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Creation & Management

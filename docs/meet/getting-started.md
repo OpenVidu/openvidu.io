@@ -3,7 +3,6 @@ description: "Take a guided tour of OpenVidu Meet: log in, create a room, invite
 title: "Getting started with OpenVidu Meet"
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 **OpenVidu Meet** is a fully fledged video call solution built on top of OpenVidu. Whether you use it out of the box or embed it in your own application, OpenVidu Meet offers a full suite of features and extensive customization options. Tailor it to your workflow, match your branding, and deliver a professional video call experience to your users.

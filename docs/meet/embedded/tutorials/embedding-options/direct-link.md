@@ -1,8 +1,6 @@
 ---
 title: "Direct link tutorial for OpenVidu Meet"
 description: "Build a video conferencing app that sends users into an OpenVidu Meet room through a direct link, with a Node.js backend and a JavaScript frontend."
-page_features:
-  - setupcustomgallery
 ---
 
 # Direct Link Tutorial

@@ -3,7 +3,6 @@ description: "Embed OpenVidu Meet in your web app step by step: run the server, 
 title: "Embed OpenVidu Meet step by step"
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, embedding options, and deployment best practices.

@@ -3,7 +3,6 @@ title: "Users in OpenVidu Meet"
 description: "Registered users in OpenVidu Meet: the admin, room_manager and room_member roles, the root administrator, and how each one reaches a room."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Users

@@ -1,8 +1,6 @@
 ---
 title: "OpenVidu vs LiveKit Cloud, SaaS and SFUs"
 description: "How OpenVidu compares with LiveKit Cloud, SaaS video APIs and bare SFUs like mediasoup, on cost, data control, features and operational effort."
-page_features:
-  - setupcustomgallery
 ---
 
 # How OpenVidu compares to other solutions

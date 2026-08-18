@@ -7,7 +7,6 @@ page_features:
   - setupwowjs
   - setupcardglow
   - setupcarousel
-  - setupcustomgallery
 ---
 
 ## Intro { .hide-without-display }

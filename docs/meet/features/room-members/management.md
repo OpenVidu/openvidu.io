@@ -3,7 +3,6 @@ title: "Room member management in OpenVidu Meet"
 description: "Add, edit, list and remove the users and identified guests of an OpenVidu Meet room, from the application or the Room Members REST API."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Creation & Management

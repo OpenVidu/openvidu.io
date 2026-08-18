@@ -68,12 +68,6 @@ page, copy its feature keys too.** These are the keys currently used:
   </div>
   ```
 
-- `setupcustomgallery`: the page has **video** lightbox anchors (hand-written
-  `<a class="glightbox" data-type="video">` — see the video patterns below). The script
-  re-initializes [GLightbox](https://biati-digital.github.io/glightbox/) with the video player
-  options (autoplaying plyr slides). Pages with only images never need it: Markdown images are
-  wrapped by the mkdocs-glightbox plugin automatically.
-
 - `lazyvideo`: the page has below-the-fold videos (`<video class="lazy-video">`, the default
   video pattern below). Loads [`lazy-video.js`](../docs/javascripts/lazy-video.js), which plays
   each video only while it is on screen and never downloads the hidden theme variant.
@@ -180,7 +174,6 @@ Rules for both patterns:
 >   `data-gallery="light"` so each theme's lightbox gallery only contains its own variants.
 >   Videos without theme variants share any per-page gallery name (e.g. `gallery1`).
 > - Each HTML `<a>` element is a **one-liner**. There are some strange behaviors when it is not.
-> - Video lightbox anchors need the `setupcustomgallery` page tag.
 
 ## Theme overrides
 

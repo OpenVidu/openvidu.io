@@ -1,8 +1,6 @@
 ---
 title: "Advanced recording tutorial with S3"
 description: "Extend the basic S3 recording tutorial with complete recording metadata and real-time recording status notifications pushed to the client."
-page_features:
-  - setupcustomgallery
 ---
 
 # Advanced Recording Tutorial S3

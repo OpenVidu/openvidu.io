@@ -29,7 +29,6 @@ def _class_token(token: str) -> re.Pattern[str]:
 #: HTML class names that only work when the page carries the matching functional tag, which
 #: loads the JS behind them (see contributing/page-composition.md).
 TAG_CONTRACT = (
-    (_class_token("glightbox"), "glightbox", "setupcustomgallery"),
     (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
     (_class_token("splide"), "splide", "setupcarousel"),
     (_class_token("lazy-video"), "lazy-video", "lazyvideo"),

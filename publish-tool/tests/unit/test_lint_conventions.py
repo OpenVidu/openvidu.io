@@ -100,22 +100,22 @@ def test_a_collapsed_admonition_without_a_space_is_an_error(tmp_path):
 # -- the tags contract -----------------------------------------------------------------------
 
 
-def test_glightbox_html_pulled_in_by_a_snippet_needs_the_tag_on_the_page(tmp_path):
-    write(tmp_path, "shared/tutorials/gallery.md", '<a class="glightbox" href="/x.png">i</a>')
-    write(tmp_path, "docs/docs/tutorial.md", '--8<-- "tutorials/gallery.md"\n')
+def test_video_html_pulled_in_by_a_snippet_needs_the_tag_on_the_page(tmp_path):
+    write(tmp_path, "shared/tutorials/demo.md", '<video class="lazy-video" src="/x.mp4"></video>')
+    write(tmp_path, "docs/docs/tutorial.md", '--8<-- "tutorials/demo.md"\n')
 
     (finding,) = findings_of(tmp_path, "tag-contract")
     assert finding.file == "docs/docs/tutorial.md"
-    assert "setupcustomgallery" in finding.message
+    assert "lazyvideo" in finding.message
     assert finding.severity == "error"
 
 
 def test_the_tag_on_the_page_satisfies_the_contract(tmp_path):
-    write(tmp_path, "shared/tutorials/gallery.md", '<a class="glightbox" href="/x.png">i</a>')
+    write(tmp_path, "shared/tutorials/demo.md", '<video class="lazy-video" src="/x.mp4"></video>')
     write(
         tmp_path,
         "docs/docs/tutorial.md",
-        '---\npage_features:\n  - setupcustomgallery\n---\n--8<-- "tutorials/gallery.md"\n',
+        '---\npage_features:\n  - lazyvideo\n---\n--8<-- "tutorials/demo.md"\n',
     )
 
     assert findings_of(tmp_path, "tag-contract") == []
@@ -141,10 +141,12 @@ def test_the_class_token_must_match_whole_not_substring(tmp_path):
 
 
 def test_the_class_token_matches_among_other_classes(tmp_path):
-    write(tmp_path, "docs/index.md", '<a class="dark-img glightbox" href="/x.png">i</a>')
+    write(
+        tmp_path, "docs/index.md", '<video class="round-corners lazy-video" src="/x.mp4"></video>'
+    )
 
     (finding,) = findings_of(tmp_path, "tag-contract")
-    assert "setupcustomgallery" in finding.message
+    assert "lazyvideo" in finding.message
 
 
 # -- image alt text --------------------------------------------------------------------------

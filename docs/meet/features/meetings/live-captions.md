@@ -4,7 +4,6 @@ description: "Turn on real-time speech-to-text captions in an OpenVidu Meet meet
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Live Captions

@@ -1,8 +1,6 @@
 ---
 title: "Basic recording tutorial with Azure"
 description: "Record a room and manage the recordings in a simple Node.js and JavaScript video-call app, storing the files in Azure Blob Storage."
-page_features:
-  - setupcustomgallery
 ---
 
 # Basic Recording Tutorial Azure

@@ -1,8 +1,6 @@
 ---
 title: "Install OpenVidu Single Node PRO on AWS"
 description: "Deploy OpenVidu Single Node PRO on AWS from a CloudFormation stack, then point your application at the result."
-page_features:
-  - setupcustomgallery
 ---
 
 # OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } installation: AWS

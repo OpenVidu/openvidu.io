@@ -1,8 +1,6 @@
 ---
 title: "Python application server tutorial"
 description: "Build a minimal Python application server for OpenVidu with Flask and the LiveKit-compatible Python SDK: issue access tokens and handle webhooks."
-page_features:
-  - setupcustomgallery
 ---
 
 # Python Server Tutorial

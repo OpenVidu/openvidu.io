@@ -3,7 +3,6 @@ title: "Room access in OpenVidu Meet"
 description: "The four ways into an OpenVidu Meet room: shared anonymous links, registered users and identified guests, each with a Moderator or Speaker role."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Room Access

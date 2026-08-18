@@ -1,8 +1,6 @@
 ---
 title: "Web Component commands and events tutorial"
 description: "Drive the OpenVidu Meet Web Component programmatically and react to meeting events: commands, role-based UI, meeting header and room management."
-page_features:
-  - setupcustomgallery
 ---
 
 # WebComponent Commands & Events Tutorial

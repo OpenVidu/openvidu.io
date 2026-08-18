@@ -3,7 +3,6 @@ title: "Meetings in OpenVidu Meet"
 description: "What a meeting is in OpenVidu Meet: the live session held inside a room, when it starts and ends, and how participants join one."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Meetings
