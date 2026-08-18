@@ -45,11 +45,15 @@ You can access the REST API reference documentation at:
 
 The reference documentation provides code snippets for each REST API method. You can choose from countless languages and frameworks and copy-paste directly to your code.
 
-<div class="grid cards no-border no-shadow two-columns" markdown>
+<div class="grid-container" markdown>
 
+<div class="grid-50" markdown>
 ![OpenVidu Meet Prejoin](../../../assets/images/meet/embedded/reference/rest-snippets-1.png){ .round-corners loading=lazy }
+</div>
 
+<div class="grid-50" markdown>
 ![OpenVidu Meet Prejoin](../../../assets/images/meet/embedded/reference/rest-snippets-2.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 

@@ -59,17 +59,21 @@ To receive webhooks from OpenVidu on your local machine, you need to expose your
 
 The following images illustrate the difference between an unreachable and a reachable local application server:
 
-<div class="grid cards" markdown>
+<div class="grid-container" markdown>
 
+<div class="grid-50" markdown>
 ![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail.svg){ loading=lazy .svg-img  .mkdocs-img}
 /// caption
 Unreachable local application server
 ///
+</div>
 
+<div class="grid-50" markdown>
 ![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success.svg){ loading=lazy .svg-img  .mkdocs-img}
 /// caption
 Reachable local application server
 ///
+</div>
 
 </div>
 

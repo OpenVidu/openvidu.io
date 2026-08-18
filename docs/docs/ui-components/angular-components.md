@@ -46,7 +46,7 @@ Using Angular Components in your application is straightforward. The official [A
 
 ## Featured Components
 
-<div class="grid cards three-cols" markdown>
+<div class="grid cards" markdown>
 
 -   __Videoconference__
 
@@ -76,19 +76,19 @@ Using Angular Components in your application is straightforward. The official [A
 
 **Angular Components** provides a wide range of prefabricated components that you can use to build your videoconferencing application in a matter of minutes. These components are designed for direct use without any extensions or modifications.
 
-<div class="grid three-cols" markdown="span">
+<div class="grid cards three-cols" markdown>
 
-  [Toolbar](../reference-docs/openvidu-components-angular/components/ToolbarComponent.html){ .card .no-shadow target="_blank" }
-  [Layout](../reference-docs/openvidu-components-angular/components/LayoutComponent.html){ .card .no-shadow target="_blank" }
-  [Stream](../reference-docs/openvidu-components-angular/components/StreamComponent.html){ .card .no-shadow target="_blank" }
-  [ChatPanel](../reference-docs/openvidu-components-angular/components/ChatPanelComponent.html){ .card .no-shadow target="_blank" }
-  [ParticipantsPanel](../reference-docs/openvidu-components-angular/components/ParticipantsPanelComponent.html){ .card .no-shadow target="_blank" }
-  [ParticipantPanelItem](../reference-docs/openvidu-components-angular/components/ParticipantPanelItemComponent.html){ .card .no-shadow target="_blank" }
-  [ActivitiesPanel](../reference-docs/openvidu-components-angular/components/ActivitiesPanelComponent.html){ .card .no-shadow target="_blank" }
-  [RecordingActivity](../reference-docs/openvidu-components-angular/components/RecordingActivityComponent.html){ .card .no-shadow target="_blank" }
-  [BroadcastingActivity](../reference-docs/openvidu-components-angular/components/BroadcastingActivityComponent.html){ .card .no-shadow target="_blank" }
-  [AdminLogin](../reference-docs/openvidu-components-angular/components/AdminLoginComponent.html){ .card .no-shadow target="_blank" }
-  [AdminDashboard](../reference-docs/openvidu-components-angular/components/AdminDashboardComponent.html){ .card .no-shadow target="_blank" }
+-   [Toolbar](../reference-docs/openvidu-components-angular/components/ToolbarComponent.html){ target="_blank" }
+-   [Layout](../reference-docs/openvidu-components-angular/components/LayoutComponent.html){ target="_blank" }
+-   [Stream](../reference-docs/openvidu-components-angular/components/StreamComponent.html){ target="_blank" }
+-   [ChatPanel](../reference-docs/openvidu-components-angular/components/ChatPanelComponent.html){ target="_blank" }
+-   [ParticipantsPanel](../reference-docs/openvidu-components-angular/components/ParticipantsPanelComponent.html){ target="_blank" }
+-   [ParticipantPanelItem](../reference-docs/openvidu-components-angular/components/ParticipantPanelItemComponent.html){ target="_blank" }
+-   [ActivitiesPanel](../reference-docs/openvidu-components-angular/components/ActivitiesPanelComponent.html){ target="_blank" }
+-   [RecordingActivity](../reference-docs/openvidu-components-angular/components/RecordingActivityComponent.html){ target="_blank" }
+-   [BroadcastingActivity](../reference-docs/openvidu-components-angular/components/BroadcastingActivityComponent.html){ target="_blank" }
+-   [AdminLogin](../reference-docs/openvidu-components-angular/components/AdminLoginComponent.html){ target="_blank" }
+-   [AdminDashboard](../reference-docs/openvidu-components-angular/components/AdminDashboardComponent.html){ target="_blank" }
 
 </div>
 
