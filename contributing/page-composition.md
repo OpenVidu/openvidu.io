@@ -175,7 +175,37 @@ Site-wide changes go here — follow the "before/after" comment markers inside t
 
 ## HTML-in-Markdown
 
-Pages mix raw HTML and Markdown via `md_in_html` (`<div markdown>`). Layout uses unsemantic-grid
-classes (`grid-50`, `grid-90`, `tablet-grid-...`). Material features in use: admonitions, `???`
-collapsible details, content tabs, attr_list (`{ .class }`, `{:target="_blank"}`). Links inside
-raw HTML follow their own rule — see [link rules](link-rules.md), rule 3.
+Layout uses unsemantic-grid classes (`grid-50`, `grid-90`, `tablet-grid-...`). Material features in
+use: admonitions, `???` collapsible details, content tabs, attr_list (`{ .class }`,
+`{:target="_blank"}`). Links inside raw HTML follow their own rule — see
+[link rules](link-rules.md), rule 3.
+
+To put Markdown inside a styled element, pick the mechanism by **where the element sits**:
+
+| Where | Write | Why |
+|---|---|---|
+| Top level of a page | `<div class="x" markdown>` | `md_in_html`, the usual case |
+| Inside a content tab, an admonition or a list item — including a snippet that is *included* at an indent | `/// html \| div.x` | `md_in_html` only honours the attribute at the top level of a document (see below) |
+
+**`md_in_html` does not work at depth.** Its preprocessor runs before the block parsers, so once
+content sits inside a tab or an admonition the attribute is never read: it is passed through into
+the page as a literal `markdown=""`, the element is treated as inline HTML, and the Markdown inside
+loses its paragraph. `mkdocs build --strict` reports nothing. This bites snippets hardest, because
+[`tutorials/application-client/tabs.md`](../shared/tutorials/application-client/tabs.md) includes
+the client snippets indented inside tabs while the tutorial pages include the same files at the top
+level — no attribute is right in both places, so those snippets use `/// html` blocks
+(`pymdownx.blocks.html`), which the block parser handles at any depth.
+
+**Block or span.** Both mechanisms default to block mode, which wraps loose text and images in a
+`<p>`:
+
+- **block** (`markdown`, or `/// html | div.x`) — the element holds paragraphs, lists, tables,
+  headings or nested wrappers, or a standalone image that should sit in its own paragraph. If the
+  element is styled as a flex/grid row, the CSS has to account for that `<p>` — as
+  `.provider-chip p` does.
+- **span** (`markdown="span"`) — the element is a layout row whose direct children must be the
+  links or images themselves: `.md-social`, a `grid cards` row of links, an image cell that had no
+  `<p>`. Block mode there inserts a paragraph and shifts the layout.
+
+Check the rendered HTML when in doubt: the mode is right when the element's children match what
+they were before the conversion.
