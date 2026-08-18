@@ -173,6 +173,10 @@
 
 <!-- Add scripts that need to run before here -->
 
+<!-- Owns the lightbox on every page: one gallery per page, theme-aware (see
+     contributing/page-composition.md) -->
+<script src="{{ 'javascripts/glightbox-gallery.js' | url }}"></script>
+
 {% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
 <script>
   window.setupWowJs();
@@ -190,10 +194,6 @@
 <script>
   window.setupCarousel();
 </script>
-{% endif %}
-
-{% if page.meta and page.meta.page_features and "setupcustomgallery" in page.meta.page_features %}
-<script src="{{ 'javascripts/glightbox-custom-gallery.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "lazyvideo" in page.meta.page_features %}

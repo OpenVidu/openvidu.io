@@ -246,25 +246,54 @@ def _required(meta, key: str, src_uri: str) -> str:
 
 _GLIGHTBOX_JS = re.compile(r'<script src="([^"]*glightbox\.min\.js)"></script>')
 _GLIGHTBOX_INIT = '<script id="init-glightbox">'
+_GLIGHTBOX_INSTANCE = re.compile(
+    r"const lightbox = GLightbox\((\{[^{}]*\})\);.*?(?=</script>)", re.DOTALL
+)
 
 
 def on_post_page(output, page, config, **kwargs):
-    """Move glightbox.min.js out of <head> to just before its init script.
+    """Two fixes to what the glightbox plugin appends to a page.
 
-    The glightbox plugin injects its ~57 KB library as a synchronous head script on every page
-    with lightbox content, blocking first paint. The library is only needed by the
-    `#init-glightbox` script the plugin appends at the end of <body>, so it loads there instead.
+    * **The library moves out of `<head>`.** The plugin injects its ~57 KB script there
+      synchronously on every page, blocking first paint. It is only needed by the
+      `#init-glightbox` script at the end of `<body>`, so it loads there instead.
+    * **The plugin's instance becomes plain configuration.** `javascripts/glightbox-gallery.js`
+      owns the page's lightbox (one gallery per page, theme-aware), so a second instance would
+      only bind every thumbnail twice, and the `document$` subscription the plugin ships for
+      `navigation.instant` (off here) would revive it after our script replaced it. What the
+      plugin computed from the `glightbox:` block in mkdocs.yml is kept as `glightboxOptions`,
+      still the single source of truth for image slides.
+
     Runs after the plugin's own `on_post_page` (hooks run after plugins for the same event).
     """
+    updated = _hand_the_glightbox_config_over(_move_the_glightbox_library(output))
+    return updated if updated != output else None
+
+
+def _move_the_glightbox_library(output: str) -> str:
     match = _GLIGHTBOX_JS.search(output)
-    if match is None:
-        return None
     init_pos = output.find(_GLIGHTBOX_INIT)
-    if init_pos == -1:
-        return None
+    if match is None or init_pos == -1:
+        return output
     output = output[: match.start()] + output[match.end() :]
     init_pos = output.find(_GLIGHTBOX_INIT)
     return output[:init_pos] + match.group(0) + output[init_pos:]
+
+
+def _hand_the_glightbox_config_over(output: str) -> str:
+    if _GLIGHTBOX_INIT not in output:
+        return output
+    updated, replaced = _GLIGHTBOX_INSTANCE.subn(
+        lambda match: f"const glightboxOptions = {match.group(1)};\n", output, count=1
+    )
+    if not replaced:
+        raise PluginError(
+            "the glightbox plugin's init script no longer builds its instance as "
+            "`const lightbox = GLightbox({...});`, so its configuration cannot be handed to "
+            "javascripts/glightbox-gallery.js. Check the plugin's `on_post_page` after the "
+            "upgrade and update the pattern here."
+        )
+    return updated
 
 
 def on_page_content(html, page, config, **kwargs):
