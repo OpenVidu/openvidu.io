@@ -64,24 +64,6 @@
   padding: 8px 0;
 }
 
-.custom-svg-icon {
-  width: var(--md-icon-size);
-}
-
-[data-md-color-scheme="slate"] {
-  .custom-svg-icon {
-    filter: brightness(0) saturate(100%) invert(85%) sepia(10%) saturate(115%)
-      hue-rotate(139deg) brightness(94%) contrast(85%);
-  }
-}
-
-[data-md-color-scheme="default"] {
-  .custom-svg-icon {
-    filter: brightness(0) saturate(100%) invert(30%) sepia(0%) saturate(6%)
-      hue-rotate(190deg) brightness(98%) contrast(97%);
-  }
-}
-
 .feature-cards .grid.cards > ul > li {
   --start: 0;
   position: relative;

@@ -131,6 +131,27 @@ lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#onl
   recompresses but never resizes, so oversized sources ship oversized.
 - To keep an image out of the lightbox, add the `skip-gallery` class.
 
+### Icons
+
+Material's bundled sets (`:material-…:`, `:simple-…:`, `:octicons-…:`, `:fontawesome-…:`) cover
+most needs. Site-specific icons live in [`overrides/.icons/custom/`](../overrides/.icons/custom) and
+are addressed by file name — `multiplatform.svg` → `:custom-multiplatform:`. Both kinds take
+attr_list classes: `:custom-multiplatform:{ .feature-icon }`.
+
+What a file in `.icons/custom/` must look like:
+
+- One `<svg>` element and nothing else. The file is inlined **verbatim** into every page that uses
+  it, so an XML declaration, a DOCTYPE or a draw.io `content=` blob would ship into the HTML.
+- No `fill` on the paths — `.md-typeset .twemoji svg` sets `fill: currentcolor`, so the icon takes
+  the surrounding text color in both palettes with no per-palette CSS.
+- Nested `<svg>` children flattened into `<g transform="translate(…) scale(…)">`: the theme's
+  `.md-typeset .twemoji svg` width rule matches nested viewports too and would resize each one.
+- A non-square `viewBox` is fine — the glyph is letterboxed inside the square icon slot.
+
+Never fake an icon with an `<img>`: an image cannot inherit `currentcolor` (it needs one `filter`
+per palette to be recolored), and sizing it in `em` inside the icon span resolves `--md-icon-size`
+against the image's own font size instead of the span's.
+
 ### Videos
 
 Two canonical patterns — nothing else. `<video>` never takes `defer`, `async` or `loading`
