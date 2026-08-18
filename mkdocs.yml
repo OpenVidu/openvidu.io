@@ -602,6 +602,10 @@ markdown_extensions:
         custom_icons:
           - overrides/.icons
   - pymdownx.blocks.caption
+  # Wraps Markdown in a styled element where md_in_html cannot: the `markdown`
+  # attribute is ignored inside a nested block (a content tab, an admonition) and
+  # ships as literal HTML, while a block works at any depth.
+  - pymdownx.blocks.html
 
 extra:
   analytics:
