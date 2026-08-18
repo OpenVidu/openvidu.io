@@ -3,9 +3,9 @@ title: "OpenVidu Platform: Self-Hosted WebRTC SDKs"
 description: "Build real-time video, audio and AI applications on infrastructure you control, with LiveKit-compatible SDKs and a self-hosted media server."
 ---
 
-<div class="logo-header platform-header">
-<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title skip-gallery not-selectable" alt="" loading="lazy">
-<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title skip-gallery not-selectable" alt="" loading="lazy">
+<div class="logo-header platform-header" markdown="span">
+![](../assets/images/logos/platform_greyfont_transback.png#only-light){ .img-title .skip-gallery .not-selectable loading=lazy }
+![](../assets/images/logos/platform_whitefont_transback.png#only-dark){ .img-title .skip-gallery .not-selectable loading=lazy }
 </div>
 
 <h1 class="meetplatform-slogan">
@@ -65,8 +65,8 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
-<div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" loading="lazy"/>
+<div class="grid-35 tablet-grid-35" markdown="span">
+![OpenVidu videoconference use case](../assets/images/platform/getting-started/videoconference.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -97,8 +97,8 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 - A **global live auction platform** where the auctioneer can be seen by the bidders in real-time with sub-second latency all around the world.
 </div>
 
-<div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" loading="lazy"/>
+<div class="grid-35 tablet-grid-35" markdown="span">
+![OpenVidu livestream use case](../assets/images/platform/getting-started/livestream.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 </div>
@@ -107,8 +107,8 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
-<div class="grid-40 tablet-grid-40">
-<img class="skip-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" loading="lazy"/>
+<div class="grid-40 tablet-grid-40" markdown="span">
+![OpenVidu robotics use case](../assets/images/platform/getting-started/ai-agents.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
@@ -135,8 +135,8 @@ The future lies in the integration of cameras and sensors in all kinds of device
 - A **real-time translation app** that uses the latest AI models to provide high-quality translations of spoken language in real time.
 </div>
 
-<div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" loading="lazy"/>
+<div class="grid-35 tablet-grid-35" markdown="span">
+![OpenVidu livestream use case](../assets/images/platform/getting-started/robotics.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 </div>

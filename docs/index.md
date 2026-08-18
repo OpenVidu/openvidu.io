@@ -171,7 +171,7 @@ page_features:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="skip-gallery custom-svg-icon feature-icon" src="/assets/images/home/multiplatform.svg" loading="lazy" alt=""/></span> __Multiplatform__{ .feature-name }
+-   <span class="twemoji feature-icon">![](assets/images/home/multiplatform.svg){ .skip-gallery .custom-svg-icon .feature-icon loading=lazy }</span> __Multiplatform__{ .feature-name }
 
     ---
 

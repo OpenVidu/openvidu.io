@@ -12,9 +12,9 @@ page_features:
 
 ## Intro { .hide-without-display }
 
-<div class="logo-header meet-header">
-<img src="/assets/images/logos/meet_greyfont_transback.png#only-light" class="img-title skip-gallery not-selectable" alt="" loading="lazy" width="1441" height="345">
-<img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" class="img-title skip-gallery not-selectable" alt="" loading="lazy" width="1441" height="345">
+<div class="logo-header meet-header" markdown="span">
+![](../assets/images/logos/meet_greyfont_transback.png#only-light){ .img-title .skip-gallery .not-selectable loading=lazy width=1441 height=345 }
+![](../assets/images/logos/meet_whitefont_transback.png#only-dark){ .img-title .skip-gallery .not-selectable loading=lazy width=1441 height=345 }
 </div>
 
 <h1 class="meetplatform-slogan">
