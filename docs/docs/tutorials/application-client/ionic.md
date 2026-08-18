@@ -182,13 +182,7 @@ In case you are [running OpenVidu locally](#run-openvidu-locally) and launching 
 
 If you leave them empty and app is launched in a mobile device, the user will be prompted to enter the URLs when the application starts:
 
-<div class="grid-container" markdown>
-
-<div class="grid-100 text-center" markdown>
-![URL configuration of the Ionic tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ loading=lazy style="width: 25%" }
-</div>
-
-</div>
+![URL configuration of the Ionic tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ .center-img loading=lazy style="width: 25%" }
 
 ---
 
