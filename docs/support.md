@@ -13,7 +13,7 @@ hide:
 
 # Support
 
-<div markdown="1" style="font-size: 20px">
+<div style="font-size: 20px" markdown>
 
 Self-hosting your own solutions can be challenging. We have built OpenVidu to make this task as easy as possible. But of course you may encounter difficulties in the process, or your particular use case may require customized assistance. The OpenVidu team specializes in customer support. Together we will make your project a success!
 
