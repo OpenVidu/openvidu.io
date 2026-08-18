@@ -101,6 +101,10 @@
          <lastmod>2026-08-15</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/08/18/deploy-openvidu-hetzner/</loc>
+         <lastmod>2026-08-17</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/2026/08/04/transcriber-summarizer-agent/</loc>
          <lastmod>2026-08-15</lastmod>
     </url>
@@ -897,11 +901,15 @@
          
     </url>
     <url>
-         <loc>https://openvidu.io/blog/category/ai/</loc>
+         <loc>https://openvidu.io/blog/category/openvidu-how-to/</loc>
          
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/technology/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/ai/</loc>
          
     </url>
     <url>
