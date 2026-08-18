@@ -198,8 +198,8 @@ Apart from these basic building blocks, there are other concepts that will be ty
 
 OpenVidu is available in two editions:
 
-- **OpenVidu** <a href="/pricing/#openvidu-community">**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 1em" }</a>: free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
-- **OpenVidu** <a href="/pricing/#openvidu-pro">**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 1em" }</a>: OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards. You can start with OpenVidu Community and upgrade to OpenVidu Pro when needed.
+- **OpenVidu** [**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 1em" }](../pricing.md#openvidu-community): free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
+- **OpenVidu** [**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 1em" }](../pricing.md#openvidu-pro): OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards. You can start with OpenVidu Community and upgrade to OpenVidu Pro when needed.
 
 <br>
 
