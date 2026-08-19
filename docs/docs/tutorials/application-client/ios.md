@@ -131,7 +131,7 @@ You should configure these URLs according to your deployment settings. If you ar
 
 If these URLs are left empty, the user will be prompted to enter them when the application starts. This configuration is managed in the `ConfigureUrlsView.swift` file:
 
-![URL configuration of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ios.png){ .center-img loading=lazy style="width: 25%" }
+![URL configuration of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ios.png){ loading=lazy style="width: 25%" }
 
 When the user clicks the `Save` button, the `LKButton` action triggers the validation and saves the URLs into the `AppContext` and `RoomContext`. The `ConfigureUrlsView` handles this logic:
 
@@ -161,7 +161,7 @@ In this code snippet, the `isValidURL` function checks the validity of the URLs.
 
 Before joining a room, the `ConnectView.swift` defines the view for the connection screen. It includes a logo, text fields for participant name and room name, and buttons for joining the room and resetting URLs.
 
-![Join screen of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/join-ios.png){ .center-img loading=lazy style="width: 25%" }
+![Join screen of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/join-ios.png){ loading=lazy style="width: 25%" }
 
 After define the participant and room name, the user can click the `Join` button to connect to the room. This action triggers the `connectToRoom` method asynchronously:
 

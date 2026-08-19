@@ -12,7 +12,7 @@ If you encounter code signing issues, make sure you change the **Team** and **bu
 
 The application will initiate as a native iOS application. Once the app is opened, you should see a screen like this:
 
-![URL configuration of the iOS tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ios.png){ .center-img loading=lazy style="width: 25%" }
+![URL configuration of the iOS tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ios.png){ loading=lazy style="width: 25%" }
 
 This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 

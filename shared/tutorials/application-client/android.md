@@ -6,7 +6,7 @@ To run the client application tutorial, you need [Android Studio :fontawesome-so
 
 The application will initiate as a native Android program. Once the application is opened, you should see a screen like this:
 
-![URL configuration of the Android tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-android.png){ .center-img loading=lazy style="width: 25%" }
+![URL configuration of the Android tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-android.png){ loading=lazy style="width: 25%" }
 
 This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 

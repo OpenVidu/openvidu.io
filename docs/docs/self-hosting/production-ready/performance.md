@@ -20,11 +20,11 @@ The key points of how this works are:
 
 LiveKit created its own WebRTC SFU, based on the [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc){:target="_blank"} library to route media between participants:
 
-  ![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .mkdocs-img loading=lazy }
+![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .control-height loading=lazy }
 
 OpenVidu is built by a team of expert WebRTC developers who know all the ins and outs of low-level WebRTC development, so it was possible to replace LiveKit's own implementation with an alternative, and _mediasoup_ was the clear best choice given its fantastic performance characteristics:
 
-  ![OpenVidu with mediasoup WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-mediasoup.svg){ .mkdocs-img loading=lazy }
+![OpenVidu with mediasoup WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-mediasoup.svg){ .control-height loading=lazy }
 
 This means that applications built on top of LiveKit will continue to work exactly the same, while the internal WebRTC engine inside the server can be swapped at will and applications can benefit from that change, without having to be rebuilt.
 
