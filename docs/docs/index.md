@@ -143,7 +143,7 @@ The future lies in the integration of cameras and sensors in all kinds of device
 
 ## OpenVidu application architecture
 
-![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg){ loading=lazy }
+![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg){ .control-height loading=lazy }
 
 Every OpenVidu application consists of 3 main components:
 
@@ -170,7 +170,7 @@ With these three concepts you can build any kind of real-time application you ca
 <div style="display: flex; align-items: start; justify-content: center;" markdown>
 
 <div class="grid-45 tablet-grid-45" markdown>
-![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){.basic-concepts-img-1 loading=lazy }
+![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){ .basic-concepts-img-1 loading=lazy }
 /// caption
     attrs: {class: basic-concepts-caption}
 Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" and "Mic" and is receiving Track "Screen" from "Bob". "Bob" is publishing Track "Screen" and receiving Tracks "Webcam" and "Mic" from "Alice".
@@ -178,7 +178,7 @@ Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" an
 </div>
 
 <div class="grid-55 tablet-grid-55" markdown>
-![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){.basic-concepts-img-2 loading=lazy }
+![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){ .basic-concepts-img-2 loading=lazy }
 /// caption
 Room "Remote support" has 3 Participants: Participant "Dan" is not publishing any Track, but receiving all Tracks in the Room. Participant "Erin" is only receiving Track "Mic" from Participant "Carol", but not Track "Screen".
 ///

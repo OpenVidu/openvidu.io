@@ -11,7 +11,7 @@ The **openvidu-custom-layout** tutorial demonstrates how to replace the default 
 
 Replacing the default layout is made simple with the **LayoutDirective**, which offers a straightforward way to customize the **LayoutComponent**.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/layout.svg){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/layout.svg){ .control-height loading=lazy }
 
 ## Running this tutorial
 

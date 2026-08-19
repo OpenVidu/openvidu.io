@@ -11,7 +11,7 @@ The **openvidu-additional-panels** tutorial demonstrates how to add new panels t
 
 Adding new videoconference panels is made simple with the **AdditionalPanelsDirective**, which offers a straightforward way to replace and adapt the **PanelComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/additional-panel.svg){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/additional-panel.svg){ .control-height loading=lazy }
 
 This tutorial combines the use of the **ToolbarAdditionalPanelButtonsDirective** and the **AdditionalPanelsDirective** to add new buttons to the toolbar and new panels to the videoconference. If you want to learn how to add new buttons to the toolbar, you can check the [openvidu-toolbar-panel-buttons](./openvidu-toolbar-panel-buttons.md) tutorial.
 

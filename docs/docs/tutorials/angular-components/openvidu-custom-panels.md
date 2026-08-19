@@ -11,7 +11,7 @@ The **openvidu-custom-panels** tutorial demonstrates how to replace the default 
 
 Customizing the videoconference panels is made simple with the **PanelDirective**, which offers a straightforward way to replace and adapt the **PanelComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/panels.svg){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/panels.svg){ .control-height loading=lazy }
 
 ## Running this tutorial
 

@@ -7,7 +7,7 @@ description: "A quick reference for the operations you need most while building 
 
 This page is a collection of the most common operations you may want to perform in your application while integrating OpenVidu. Depending on the scope of the operation, these operations will be performed on the client side using a LiveKit Client SDK, or on the server side using a LiveKit Server SDK (or directly using the HTTP server API). Consider the architecture of an OpenVidu application:
 
-  ![OpenVidu app architecture](../../assets/images/platform/getting-started/openvidu-app-architecture.svg){ loading=lazy }
+![OpenVidu app architecture](../../assets/images/platform/getting-started/openvidu-app-architecture.svg){ loading=lazy }
 
 You can use this page as a cheat sheet to know at a glance how to do something, and you have links to the LiveKit reference documentation of each operation for a more detailed explanation.
 
