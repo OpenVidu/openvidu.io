@@ -63,12 +63,19 @@ In addition to these, an Azure deployment provides the capability to manage glob
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed your OpenVidu Single Node PRO Stack.
     3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu deployment.
+
         ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners loading=lazy }
+
     4. Click on the desired secret you want to change and click on _"New Version"_.
+
         ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .round-corners loading=lazy }
+
     5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
+
         ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .round-corners loading=lazy }
+
     6. Go to the Instance resource of OpenVidu and click on _"Restart"_ to apply the changes to the OpenVidu Single Node PRO deployment.
+
         ![Reboot Instance](../../../../assets/images/platform/self-hosting/single-node/azure/reboot-instance.png){ .round-corners loading=lazy }
 
     Changes will be applied automatically.

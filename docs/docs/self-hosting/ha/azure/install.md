@@ -119,12 +119,15 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     1. Go to the resource group where you deployed OpenVidu High Availability and click one of the Master Node virtual machines.
     2. Inside the Virtual Machine resource, click on _"Connect"_ 🡒 _"Connect via Bastion"_.
+
             ![Connect via bastion](../../../../assets/images/platform/self-hosting/ha/azure/connect-bastion.png){ .round-corners loading=lazy }
 
     3. Click on _"Deploy Bastion"_ button.
+
             ![Deploy bastion](../../../../assets/images/platform/self-hosting/ha/azure/bastion-deploy.png){ .round-corners loading=lazy }
 
     4. Change **Authentication Type** to _"SSH Private Key from Local File"_, set the same username used when you deployed OpenVidu, and select the local file corresponding to the SSH Private Key of the SSH Key used when deploying.
+
             ![Bastion parameters](../../../../assets/images/platform/self-hosting/ha/azure/bastion-parameters.png){ .round-corners loading=lazy }
 
     5. Click on connect and you will be inside the Virtual Machine of the Master Node. This process works the same way for any of the Master Nodes.

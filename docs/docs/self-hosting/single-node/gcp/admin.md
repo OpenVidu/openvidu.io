@@ -63,9 +63,13 @@ In addition to these, a Google Cloud Platform deployment provides the capability
 
     1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
+
         ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .round-corners loading=lazy }
+
     3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
+
         ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .round-corners loading=lazy }
+
     4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
 
     Changes will be applied automatically.

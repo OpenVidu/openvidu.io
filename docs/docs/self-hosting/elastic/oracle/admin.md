@@ -28,10 +28,15 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
 
     1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}.
     2. Click into the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
+
         ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/elastic/oracle/edit-instance-pool.png){ .round-corners loading=lazy }
+
     3. Set the **Number of instances** to 0, then click _"Save changes"_ and wait for the change to be applied.
+
         ![Set instances to 0](../../../../assets/images/platform/self-hosting/elastic/oracle/instances-to-0.png){ .round-corners loading=lazy }
+
     4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click the instance called `<STACK_NAME>-master-node`. There, click *"Stop"* to stop the Master Node.
+
         ![Stop Master Node](../../../../assets/images/platform/self-hosting/elastic/oracle/stop-master-node.png){ .round-corners loading=lazy }
 
 
@@ -41,10 +46,14 @@ The Master Node is a Compute instance, while the Media Nodes are part of an OCI 
 
     1. Navigate to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
     2. Select the instance named `<STACK_NAME>-master-node`, then click _"Start"_ to start the Master Node.
+
         ![Start Master Node](../../../../assets/images/platform/self-hosting/elastic/oracle/start-master-node.png){ .round-corners loading=lazy }
+
     3. Wait until the instance is running.
     4. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
+
         ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/elastic/oracle/edit-instance-pool.png){ .round-corners loading=lazy }
+
     5. Set the **Number of instances** to your desired value and click _"Save changes"_, then wait for the Instance Pool to apply the changes.
 
         !!! warning
@@ -68,7 +77,9 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
             You can stop only the Master Node instance to change its shape, but it is recommended to stop the whole cluster to avoid any issues.
     2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node` and click on it.
     3. Click _"Edit"_ next to the **Shape** field, select the new shape (or adjust OCPUs/Memory for Flex shapes) and click _"Save changes"_.
+
         ![Change Master Node shape](../../../../assets/images/platform/self-hosting/elastic/oracle/change-shape-master.png){ .round-corners loading=lazy }
+
     4. [Start the cluster](#starting-up-the-cluster).
 
 === "Media Nodes"
@@ -78,6 +89,7 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
 
     1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target="_blank"}.
     2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it, open the *"Actions"* menu and select *"Create duplicate"*. The form opens pre-filled with the current configuration — adjust the shape (or OCPUs/Memory for Flex shapes) and create the new Instance Configuration.
+
         ![Create Instance Configuration](../../../../assets/images/platform/self-hosting/elastic/oracle/create-instance-configuration.png){ .round-corners loading=lazy }
 
         !!! warning
@@ -85,7 +97,9 @@ You can change the OCI Compute shape of both the Master Node and the Media Nodes
             **Only change the shape** (or OCPUs/Memory for Flex shapes). Do **not** modify any other field — the rest of the configuration must remain identical to the original so the Instance Pool keeps working as expected.
 
     3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
+
         ![Change Instance Configuration in Pool](../../../../assets/images/platform/self-hosting/elastic/oracle/change-instance-configuration.png){ .round-corners loading=lazy }
+
     4. Terminate the existing Media Nodes from the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} page so the Instance Pool replaces them with new ones launched from the updated Instance Configuration. Old Media Nodes are **not** replaced automatically when the Instance Configuration changes — only newly launched instances use the new shape.
 
 ## Media Nodes Autoscaling Configuration
@@ -108,6 +122,7 @@ You can modify the autoscaling configuration of the Media Nodes via the `terrafo
     terraform apply
     ```
     3. Confirm the change that Terraform proposes (it will update the autoscaling configuration, and the scale-in OCI Function when `scaleTargetCPU` or `minNumberOfMediaNodes` change), and the changes will take effect.
+
         ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/oracle/terraform-output-autoscale-change.png){ .round-corners loading=lazy }
 
 ## Fixed Number of Media Nodes
@@ -131,6 +146,7 @@ Switching modes does **not** recreate the Master Node. It carries a `scale-in-mo
         ```
 
     3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and the autoscaling configuration, flip the Master Node's `scale-in-mode` tag to `fixed`, and resize the Instance Pool to the fixed number of Media Nodes.
+
         ![Terraform output activate fixed media nodes](../../../../assets/images/platform/self-hosting/elastic/oracle/terraform-output-activate-fixed.png){ .round-corners loading=lazy }
 
 ## Activate Scale In
@@ -151,6 +167,7 @@ Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automat
         ```
 
     3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function, re-attach the autoscaling configuration to the Instance Pool, and flip the Master Node's `scale-in-mode` tag back to `elastic`.
+
         ![Terraform output activate scale in](../../../../assets/images/platform/self-hosting/elastic/oracle/terraform-output-activate-scalein.png){ .round-corners loading=lazy }
 
 ## Administration and configuration
@@ -166,9 +183,13 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click the secret you want to change.
     3. Scroll down to _"Versions"_ and click _"Create secret version"_ to add a new version with the updated value.
+
             ![Create Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/create-secret-version.png){ .round-corners loading=lazy }
+
     4. Enter the new secret value and click _"Create secret version"_.
+
             ![New Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/new-secret-version.png){ .round-corners loading=lazy }
+
     5. [Shut down](#shutting-down-the-cluster) and [start up](#starting-up-the-cluster) the cluster to apply the changes to the OpenVidu Elastic deployment.
 
     Changes will be applied automatically on all nodes of your OpenVidu Elastic deployment.

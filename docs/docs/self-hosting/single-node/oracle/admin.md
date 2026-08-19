@@ -59,9 +59,13 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click on the desired secret you want to change.
     3. Scroll down to _"Versions"_ and click on _"Create secret version"_ to add a new version with the updated value.
+
             ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/create-secret-version.png){ .round-corners loading=lazy }
+
     4. Enter the new secret value and click on _"Create secret version"_.
+
             ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/new-secret-version.png){ .round-corners loading=lazy }
+
     5. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click on [_Stop_](#stop-openvidu-single-node) → [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
 
     Changes will be applied automatically.

@@ -121,6 +121,9 @@ lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#onl
   ```
 
 - Every image below the first viewport takes `loading=lazy`.
+- **Leave a blank line before an image that follows text**, above all inside a numbered step:
+  without it the image is a lazy continuation of that paragraph, and inside a list item it
+  renders inline at the end of the sentence instead of as its own centred block.
 - **`.round-corners`** on every screen capture, photo and video — the one rounding class.
   Logos, icons, transparent art and SVG diagrams stay square: a mark is not a picture, and a
   transparent image has no corner to round.

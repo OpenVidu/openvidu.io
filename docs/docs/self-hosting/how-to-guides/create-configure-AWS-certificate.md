@@ -20,7 +20,9 @@ You will need a domain to be able to create and associate the certificate.
     These are the steps you need to follow to create the AWS certificate; keep in mind that you need a domain.
 
     First, go to AWS Certificate Manager and request a new public certificate. The following parameter is the most important.
+
     ![AWS Certificate Manager view](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-name-for-certificate.png){ .round-corners loading=lazy }
+
     /// caption
     Domain configuration
     ///

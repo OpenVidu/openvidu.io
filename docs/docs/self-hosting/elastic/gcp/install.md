@@ -165,6 +165,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
     - `master_node/meet.env`
 
     To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
+
     ![Google Cloud Platform gcloud command](../../../../assets/images/platform/self-hosting/elastic/gcp/gcloud-command.png){ .round-corners loading=lazy }
 
     To install gcloud in your shell follow the official [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install?hl=en#linux){:target="_blank"}.

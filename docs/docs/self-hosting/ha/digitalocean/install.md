@@ -100,6 +100,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
+
     ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/ha/digitalocean/bucket-ssh-key.png){ .round-corners loading=lazy }
 
 2. Give the SSH Key the necessary permissions for it to work.
@@ -123,6 +124,7 @@ To verify that your OpenVidu deployment works correctly wait for the `secrets.en
 
 === "View OpenVidu credentials in the Web"
     - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
+
     ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/ha/digitalocean/secrets-env.png){ .round-corners loading=lazy }
 
 
