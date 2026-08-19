@@ -20,8 +20,8 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
-![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .skip-gallery loading=lazy }
-![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .skip-gallery loading=lazy }
+![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .skip-gallery loading=lazy }
+![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .skip-gallery loading=lazy }
 /// caption
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.
 ///

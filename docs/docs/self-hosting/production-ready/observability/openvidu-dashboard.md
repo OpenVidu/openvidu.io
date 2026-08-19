@@ -9,7 +9,7 @@ It is a web application designed to provide **OpenVidu administrators** with a c
 
 To access **OpenVidu Dashboard**, go to `https://your.domain/dashboard/` and **log in** using your **admin credentials**.
 
-  ![OpenVidu Dashboard login](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login.png){ .round-corners .mkdocs-img loading=lazy }
+  ![OpenVidu Dashboard login](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login.png){ .round-corners loading=lazy }
 
 ### Views
 
@@ -45,7 +45,7 @@ Display **graphical analytics** for client SDKs, connection types, bandwidth usa
 
 Review the total count of **active rooms** and **active participants**, along with a roster of currently active rooms and a history of **closed rooms** within the last 28 days. Detailed information on each room is accessible by clicking on the respective row.
 
-  ![OpenVidu Dashboard rooms](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms.png){ .round-corners .mkdocs-img loading=lazy }
+  ![OpenVidu Dashboard rooms](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms.png){ .round-corners loading=lazy }
 
 #### Room Details
 
@@ -89,13 +89,13 @@ Obtain detailed insights into each **participant**, covering their duration, ban
 
 A participant may **connect** and **disconnect** from a room multiple times while it remains open. Each instance of connection using the same **participant identity** is referred to as a **`participant session`**. If multiple sessions occur, we will aggregate all participant sessions together and organize them into a timeline at the top of the participant details view. You can easily switch between participant sessions by clicking on each corresponding row:
 
-  ![OpenVidu Dashboard participant sessions](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant3.png){ .round-corners .mkdocs-img loading=lazy }
+  ![OpenVidu Dashboard participant sessions](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant3.png){ .round-corners loading=lazy }
 
 #### Egress-Ingress
 
 Review an overview of all **egresses** and **ingresses**, including their duration and status. Detailed information for each egress or ingress can be accessed by clicking on the respective row.
 
-  ![OpenVidu Dashboard egress-ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-ingress.png){ .round-corners .mkdocs-img loading=lazy }
+  ![OpenVidu Dashboard egress-ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-ingress.png){ .round-corners loading=lazy }
 
 #### Egress Details
 
@@ -121,4 +121,4 @@ Access comprehensive details about a specific **egress**, including its duration
 
 Explore detailed information about a specific **ingress**, including its total duration, status and a list of all associated rooms.
 
-  ![OpenVidu Dashboard ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress.png){ .round-corners .mkdocs-img loading=lazy }
+  ![OpenVidu Dashboard ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress.png){ .round-corners loading=lazy }

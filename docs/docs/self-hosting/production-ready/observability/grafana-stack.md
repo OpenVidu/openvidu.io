@@ -13,11 +13,11 @@ OpenVidu also provides different **Grafana dashboards** to monitor **metrics** f
 
 Grafana is available at `https://your.domain/grafana/` and can be accessed using your **Grafana admin credentials**.
 
-  ![Grafana login](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/login.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Grafana login](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/login.png){ .round-corners loading=lazy }
 
 Dashboards can be found in the **OpenVidu** folder at `https://your.domain/grafana/dashboards/f/openvidu-dashboards/openvidu`.
 
-  ![Grafana dashboards folder](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/dashboards_folder.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Grafana dashboards folder](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/dashboards_folder.png){ .round-corners loading=lazy }
 
 ### Services
 
@@ -57,13 +57,13 @@ This dashboard provides the same **metrics** as the [OpenVidu Server Metrics](#o
 
 You can select the **Media Node** you want to see metrics from in the **media_node** dropdown. You will see different charts in the same panel according to the selected **Media Nodes**.
 
-  ![Media Node dropdown](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics2.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Media Node dropdown](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics2.png){ .round-corners loading=lazy }
 
 !!! info
     
     If you add new Media Nodes to your OpenVidu deployment, you will have to refresh the page in order to see the new Media Nodes in the dropdown.
 
-  ![Media Node metrics](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics1.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Media Node metrics](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics1.png){ .round-corners loading=lazy }
 
 #### OpenVidu Logs
 
@@ -71,7 +71,7 @@ In case you are using **OpenVidu** [**COMMUNITY**{ .openvidu-tag .openvidu-commu
 
 There is a panel showing **all containers** logs,
 
-  ![Single Node logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs1.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Single Node logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs1.png){ .round-corners loading=lazy }
 
 another panel to **filter** logs by **room_id** and **participant_id**,
 
@@ -89,13 +89,13 @@ another panel to **filter** logs by **room_id** and **participant_id**,
 
 and one row for each selected **service**, containing **all logs**, **warnings** and **errors** from that service.
 
-  ![Single Node select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs2.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Single Node select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs2.png){ .round-corners loading=lazy }
 
-  ![Single Node service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs6.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Single Node service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs6.png){ .round-corners loading=lazy }
 
 You can also filter logs containing a specific **text** by using the **filter search box**.
 
-  ![Single Node filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs5.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Single Node filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs5.png){ .round-corners loading=lazy }
 
 #### OpenVidu Cluster Nodes Logs
 
@@ -105,7 +105,7 @@ In case you are using **OpenVidu** [**PRO**{ .openvidu-tag .openvidu-pro-tag }](
 
 First, there is a panel showing **all containers'** logs from all nodes.
 
-  ![Cluster logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs1.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Cluster logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs1.png){ .round-corners loading=lazy }
 
 Then, there is a row for each selected **node**, containing **all logs**, **warnings** and **errors** from that node. Additionally, each row contains a panel for each selected container, showing all its logs.
 
@@ -151,7 +151,7 @@ Then, there is a row for each selected **node**, containing **all logs**, **warn
 
 You can also filter logs containing a specific **text** by using the **filter search box**.
 
-  ![Cluter filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs8.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Cluter filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs8.png){ .round-corners loading=lazy }
 
 #### OpenVidu Cluster Services Logs
 
@@ -175,9 +175,9 @@ First, there is a panel to **filter** logs by **room_id** and **participant_id**
 
 Then, there is a row for each selected **service**, containing **all logs**, **warnings** and **errors** from that service.
 
-  ![Cluster select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs1.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Cluster select services](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs1.png){ .round-corners loading=lazy }
 
-  ![Cluster service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs2.png){ .round-corners .mkdocs-img loading=lazy }
+  ![Cluster service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs2.png){ .round-corners loading=lazy }
 
 ### Limitations
 

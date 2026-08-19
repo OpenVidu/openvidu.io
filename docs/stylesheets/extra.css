@@ -209,12 +209,6 @@ span:has(> a > .openvidu-tag) {
   --md-code-font: "Roboto Mono";
 }
 
-img.mkdocs-img {
-  display: block;
-  width: 80%;
-  margin: auto;
-}
-
 /* A standalone screenshot that sets its own width and needs no grid to sit centred */
 /* Shared card/image utilities (moved from the retired openvidu-call.css) */
 .ov-call-docs-icon {
@@ -422,10 +416,6 @@ p:has(> img) {
 
   .home-description {
     font-size: 0.9rem !important;
-  }
-
-  img.mkdocs-img {
-    width: 100%;
   }
 
   .log-in-div {
