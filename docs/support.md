@@ -7,6 +7,8 @@ hide:
   - footer
   - search-bar
   - version-selector
+tags:
+  - leadform
 ---
 
 # Support
@@ -17,9 +19,56 @@ Self-hosting your own solutions can be challenging. We have built OpenVidu to ma
 
 </div>
 
-## Commercial support
+## Talk to an expert
 
-Do not hesitate to contact us at [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}. We provide consultancy, prioritizing bug fixes or new features, custom app development, etc.
+We provide consultancy, prioritized bug fixes and new features, custom app development, and help sizing and operating your deployment. Tell us what you are building and we will get back to you within one business day.
+
+<form id="lead-form" class="lead-form" novalidate>
+  <div class="lead-form-row">
+    <label for="lead-name">Name</label>
+    <input type="text" id="lead-name" name="name" maxlength="200" autocomplete="name" required>
+    <p class="lead-form-error" data-field="name" hidden></p>
+  </div>
+  <div class="lead-form-row">
+    <label for="lead-email">Work email</label>
+    <input type="email" id="lead-email" name="email" maxlength="254" autocomplete="email" required>
+    <p class="lead-form-error" data-field="email" hidden></p>
+  </div>
+  <div class="lead-form-row">
+    <label for="lead-company">Company</label>
+    <input type="text" id="lead-company" name="company" maxlength="200" autocomplete="organization" required>
+    <p class="lead-form-error" data-field="company" hidden></p>
+  </div>
+  <div class="lead-form-row">
+    <label for="lead-scale">Expected scale</label>
+    <select id="lead-scale" name="scale" required>
+      <option value="exploring">Just exploring</option>
+      <option value="lt100">Up to 100 concurrent users</option>
+      <option value="hundreds">Hundreds of concurrent users</option>
+      <option value="thousands">Thousands of concurrent users</option>
+    </select>
+    <p class="lead-form-error" data-field="scale" hidden></p>
+  </div>
+  <div class="lead-form-row">
+    <label for="lead-message">What are you building?</label>
+    <textarea id="lead-message" name="message" rows="4" minlength="10" maxlength="2000" required></textarea>
+    <p class="lead-form-error" data-field="message" hidden></p>
+  </div>
+  <div class="lead-form-consent">
+    <input type="checkbox" id="lead-consent" name="consent" required>
+    <label for="lead-consent">I accept the <a href="/conditions/privacy-policy/">privacy policy</a> and agree to be contacted about my request.</label>
+    <p class="lead-form-error" data-field="consent" hidden></p>
+  </div>
+  <div class="lead-form-honeypot" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off">
+  </div>
+  <div class="md-typeset">
+    <button type="submit" class="md-button md-button--primary lead-form-submit">Send message</button>
+  </div>
+  <p class="lead-form-status" role="status" hidden></p>
+</form>
+
+Prefer email? Write to us directly at [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
 Let's work together and build something great!
 

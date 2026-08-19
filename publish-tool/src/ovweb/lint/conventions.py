@@ -31,6 +31,7 @@ TAG_CONTRACT = (
     (_class_token("glightbox"), "glightbox", "setupcustomgallery"),
     (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
     (_class_token("carousel-cell"), "carousel-cell", "setupcarousel"),
+    (_class_token("lead-form"), "lead-form", "leadform"),
 )
 
 

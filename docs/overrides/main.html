@@ -136,6 +136,9 @@
 {{ super() }}
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
+{% if page.meta and page.meta.robots %}
+<meta name="robots" content="{{ page.meta.robots }}" />
+{% endif %}
 <!-- Add head tags that need to be applied afterwards here -->
 {% endblock %}
 
@@ -168,6 +171,10 @@
 
 {% if page.meta and page.meta.tags and "copyclipboard" in page.meta.tags %}
 <script src="/javascripts/copy-clipboard.js"></script>
+{% endif %}
+
+{% if page.meta and page.meta.tags and "leadform" in page.meta.tags %}
+<script src="{{ 'javascripts/lead-form.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}

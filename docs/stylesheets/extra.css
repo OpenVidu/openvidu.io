@@ -1055,3 +1055,85 @@ h1.meetplatform-slogan {
 }
 
 /* END TODO */
+
+/* Lead form ("Talk to an expert" on /support/) */
+.lead-form {
+  max-width: 34rem;
+  margin: 1.5em 0 2em;
+}
+
+.lead-form-row {
+  margin-bottom: 1em;
+}
+
+.lead-form label {
+  display: block;
+  margin-bottom: 0.3em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.lead-form input[type="text"],
+.lead-form input[type="email"],
+.lead-form select,
+.lead-form textarea {
+  width: 100%;
+  padding: 0.5em 0.7em;
+  font-family: var(--md-text-font-family);
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color);
+  background-color: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+}
+
+.lead-form input:focus,
+.lead-form select:focus,
+.lead-form textarea:focus {
+  border-color: var(--md-primary-fg-color);
+  outline: none;
+}
+
+.lead-form [aria-invalid="true"] {
+  border-color: #f44336;
+}
+
+.lead-form textarea {
+  resize: vertical;
+}
+
+.lead-form-consent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: 1.2em;
+}
+
+.lead-form-consent label {
+  flex: 1 1 16rem;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.lead-form-error {
+  margin: 0.3em 0 0;
+  font-size: 0.7rem;
+  color: #f44336;
+}
+
+.lead-form-status {
+  margin-top: 1em;
+  font-size: 0.75rem;
+}
+
+/* Invisible to humans, filled by bots: a non-empty value gets the submission rejected */
+.lead-form-honeypot {
+  position: absolute;
+  left: -5000px;
+}
+
+.lead-form-submit[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
