@@ -47,7 +47,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 1. Open **Docker Desktop** and click on the **"Terminal"** button in the bottom right corner.
 
-    ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local/open-terminal.png){ loading=lazy }
+    ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local/open-terminal.png){ .round-corners loading=lazy }
 
 2. Copy and paste the following command into the terminal:
 
@@ -73,7 +73,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
         This is a known Docker Desktop bug that **has not been fixed yet**. Until it is resolved in an upcoming release, use the [Advanced Local Deployment](#advanced-local-deployment), which relies directly on docker compose files instead of OCI artifacts, to deploy OpenVidu Meet locally on Windows.
 
-    ![Docker Desktop - Run Command](../../assets/images/meet/deployment/local/command.png){ loading=lazy }
+    ![Docker Desktop - Run Command](../../assets/images/meet/deployment/local/command.png){ .round-corners loading=lazy }
 
 
 3. After pasting the command, press **Enter** to execute the command.
@@ -135,7 +135,7 @@ You can change them later from the [OpenVidu Meet app](../features/users/managem
 
 Once installed and executed, **`openvidu-meet`** will appear in **Docker Desktop → Containers** section.
 
-![Docker Desktop - Containers](../../assets/images/meet/deployment/local/containers.png){ loading=lazy }
+![Docker Desktop - Containers](../../assets/images/meet/deployment/local/containers.png){ .round-corners loading=lazy }
 
 You can manage OpenVidu Meet execution interactively:
 
@@ -143,13 +143,13 @@ You can manage OpenVidu Meet execution interactively:
 
     3. Click the **Stop** button.
 
-    ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local/stop.png){ loading=lazy }
+    ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local/stop.png){ .round-corners loading=lazy }
 
 === "Start"
 
     3. Click the **Start** button.
 
-    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local/start.png){ loading=lazy }
+    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local/start.png){ .round-corners loading=lazy }
 
 === "Remove"
 
@@ -159,24 +159,24 @@ You can manage OpenVidu Meet execution interactively:
 
     1. Click the **Delete** button.
 
-        ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local/remove.png){ loading=lazy }
+        ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local/remove.png){ .round-corners loading=lazy }
 
     2. Go to **Docker Desktop → Images**.
     3. Remove the images related to **OpenVidu Meet**.
 
-        ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local/remove-images.png){ loading=lazy }
+        ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local/remove-images.png){ .round-corners loading=lazy }
 
     4. Go to **Docker Desktop → Volumes**.
     5. Remove the volumes related to **OpenVidu Meet**.
 
-        ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local/remove-volumes.png){ loading=lazy }
+        ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local/remove-volumes.png){ .round-corners loading=lazy }
 
 === "View logs"
 
     2. Click on the container group to open its details. The logs will be shown after clicking on the container group.
 
-    ![Select container group](../../assets/images/meet/deployment/local/select-containers.png){ loading=lazy }
-    ![Check logs](../../assets/images/meet/deployment/local/logs.png){ loading=lazy }
+    ![Select container group](../../assets/images/meet/deployment/local/select-containers.png){ .round-corners loading=lazy }
+    ![Check logs](../../assets/images/meet/deployment/local/logs.png){ .round-corners loading=lazy }
 
 ## Accessing OpenVidu Meet from other computers or phones
 

@@ -31,11 +31,11 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
             To show the app with a mobile device appearance, open the dev tools in your browser and find the button to adapt the viewport to a mobile device aspect ratio. You may also choose predefined types of devices to see the behavior of your app in different resolutions.
 
         /// html | div.grid-50
-        ![Join screen of the Ionic tutorial app in a browser](/assets/images/platform/tutorials/application-client/join-ionic-web.png){ loading=lazy }
+        ![Join screen of the Ionic tutorial app in a browser](/assets/images/platform/tutorials/application-client/join-ionic-web.png){ .round-corners loading=lazy }
         ///
 
         /// html | div.grid-50
-        ![Video call room of the Ionic tutorial app in a browser](/assets/images/platform/tutorials/application-client/room-ionic-web.png){ loading=lazy }
+        ![Video call room of the Ionic tutorial app in a browser](/assets/images/platform/tutorials/application-client/room-ionic-web.png){ .round-corners loading=lazy }
         ///
 
         --8<-- "tutorials/testing-other-devices.md"

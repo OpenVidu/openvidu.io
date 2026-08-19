@@ -215,10 +215,6 @@ img.mkdocs-img {
   margin: auto;
 }
 
-img.svg-img {
-  border-radius: 7px;
-}
-
 /* A standalone screenshot that sets its own width and needs no grid to sit centred */
 img.center-img {
   display: block;

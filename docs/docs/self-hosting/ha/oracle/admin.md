@@ -28,11 +28,11 @@ The Master Nodes are 4 individual Compute instances, while the Media Nodes are p
 
     1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}.
     2. Click into the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
-        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .svg-img .dark-img loading=lazy }
+        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .round-corners .dark-img loading=lazy }
     3. Set the **Number of instances** to 0, then click _"Save changes"_ and wait for the change to be applied.
-        ![Set instances to 0](../../../../assets/images/platform/self-hosting/ha/oracle/instances-to-0.png){ .svg-img .dark-img loading=lazy }
+        ![Set instances to 0](../../../../assets/images/platform/self-hosting/ha/oracle/instances-to-0.png){ .round-corners .dark-img loading=lazy }
     4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and stop each Master Node one by one. The Master Nodes are named `<STACK_NAME>-master-node-x`. Click each one and select *"Stop"*.
-        ![Stop Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/stop-master-node.png){ .svg-img .dark-img loading=lazy }
+        ![Stop Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/stop-master-node.png){ .round-corners .dark-img loading=lazy }
 
         !!! info
             All 4 Master Nodes must be stopped to fully shut down the cluster. Stopping fewer than 4 leaves the deployment in a degraded state.
@@ -44,9 +44,9 @@ The Master Nodes are 4 individual Compute instances, while the Media Nodes are p
 
     1. Navigate to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
     2. Select all the instances named `<STACK_NAME>-master-node-x`, then click _"Start"_. Wait until the instances are running.
-        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/start-master-node.png){ .svg-img .dark-img loading=lazy }
+        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/start-master-node.png){ .round-corners .dark-img loading=lazy }
     3. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
-        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .svg-img .dark-img loading=lazy }
+        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .round-corners .dark-img loading=lazy }
     4. Set the **Number of instances** to your desired value and click _"Save changes"_, then wait for the Instance Pool to apply the changes.
 
         !!! warning
@@ -71,7 +71,7 @@ You can change the OCI Compute shape of both the Master Nodes and the Media Node
 
     2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and locate the resource named `<STACK_NAME>-master-node-1`. Click on it.
     3. Click _"Edit"_ next to the **Shape** field, select the new shape (or adjust OCPUs/Memory for Flex shapes) and click _"Save changes"_.
-        ![Change Master Node shape](../../../../assets/images/platform/self-hosting/ha/oracle/change-shape-master.png){ .svg-img .dark-img loading=lazy }
+        ![Change Master Node shape](../../../../assets/images/platform/self-hosting/ha/oracle/change-shape-master.png){ .round-corners .dark-img loading=lazy }
     4. Repeat steps 2 and 3 for `<STACK_NAME>-master-node-2`, `<STACK_NAME>-master-node-3` and `<STACK_NAME>-master-node-4`, using the same shape and size on every Master Node.
     5. [Start the cluster](#starting-up-the-cluster).
 
@@ -82,14 +82,14 @@ You can change the OCI Compute shape of both the Master Nodes and the Media Node
 
     1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target="_blank"}.
     2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it, open the _"Actions"_ menu and select _"Create duplicate"_. The form opens pre-filled with the current configuration — adjust the shape (or OCPUs/Memory for Flex shapes) and create the new Instance Configuration.
-        ![Create Instance Configuration](../../../../assets/images/platform/self-hosting/ha/oracle/create-instance-configuration.png){ .svg-img .dark-img loading=lazy }
+        ![Create Instance Configuration](../../../../assets/images/platform/self-hosting/ha/oracle/create-instance-configuration.png){ .round-corners .dark-img loading=lazy }
 
         !!! warning
 
             **Only change the shape** (or OCPUs/Memory for Flex shapes). Do **not** modify any other field — the rest of the configuration must remain identical to the original so the Instance Pool keeps working as expected.
 
     3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
-        ![Change Instance Configuration in Pool](../../../../assets/images/platform/self-hosting/ha/oracle/change-instance-configuration.png){ .svg-img .dark-img loading=lazy }
+        ![Change Instance Configuration in Pool](../../../../assets/images/platform/self-hosting/ha/oracle/change-instance-configuration.png){ .round-corners .dark-img loading=lazy }
     4. Terminate the existing Media Nodes from the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} page so the Instance Pool replaces them with new ones launched from the updated Instance Configuration. Old Media Nodes are **not** replaced automatically when the Instance Configuration changes — only newly launched instances use the new shape.
 
 ## Media Nodes Autoscaling Configuration
@@ -112,7 +112,7 @@ You can modify the autoscaling configuration of the Media Nodes via the `terrafo
     terraform apply
     ```
     3. Confirm the change that Terraform proposes (it will update the autoscaling configuration, and the scale-in OCI Function when `scaleTargetCPU` or `minNumberOfMediaNodes` change), and the changes will take effect.
-        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/oracle/terraform-output-autoscale-change.png){ .svg-img .dark-img loading=lazy }
+        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/oracle/terraform-output-autoscale-change.png){ .round-corners .dark-img loading=lazy }
 
 ## Fixed Number of Media Nodes
 
@@ -135,7 +135,7 @@ Switching modes does **not** recreate the Master Nodes. Each Master Node carries
         ```
 
     3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and the autoscaling configuration, flip the Master Nodes' `scale-in-mode` tag to `fixed`, and resize the Instance Pool to the fixed number of Media Nodes.
-        ![Terraform output activate fixed media nodes](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-fixed.png){ .svg-img .dark-img loading=lazy }
+        ![Terraform output activate fixed media nodes](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-fixed.png){ .round-corners .dark-img loading=lazy }
 
 ## Activate Scale In
 
@@ -155,7 +155,7 @@ Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automat
         ```
 
     3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function, re-attach the autoscaling configuration to the Instance Pool, and flip the Master Nodes' `scale-in-mode` tag back to `elastic`.
-        ![Terraform output activate scale in](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-scalein.png){ .svg-img .dark-img loading=lazy }
+        ![Terraform output activate scale in](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-scalein.png){ .round-corners .dark-img loading=lazy }
 
 
 ## Administration and configuration
@@ -171,9 +171,9 @@ In addition to these, an Oracle Cloud Infrastructure deployment provides the cap
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click the secret you want to change.
     3. Scroll down to _"Versions"_ and click _"Create secret version"_ to add a new version with the updated value.
-        ![Create Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/create-secret-version.png){ .svg-img .dark-img loading=lazy }
+        ![Create Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/create-secret-version.png){ .round-corners .dark-img loading=lazy }
     4. Enter the new secret value and click _"Create secret version"_.
-        ![New Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/new-secret-version.png){ .svg-img .dark-img loading=lazy }
+        ![New Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/new-secret-version.png){ .round-corners .dark-img loading=lazy }
     5. [Shut down](#shutting-down-the-cluster) and [start up](#starting-up-the-cluster) the cluster to apply the changes to the OpenVidu High Availability deployment.
 
     Changes will be applied automatically on all nodes of your OpenVidu High Availability deployment.

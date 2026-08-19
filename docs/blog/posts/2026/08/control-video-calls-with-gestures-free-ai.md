@@ -25,7 +25,7 @@ authors:
 
 # Control your video calls with hand gestures, thanks to a free AI from Google
 
-![Hand gesture recognition in a video call, processed in the browser with free AI](/assets/images/blog/2026/08/control-video-calls-with-gestures-free-ai/cover.webp "Control your video call with gestures")
+![Hand gesture recognition in a video call, processed in the browser with free AI](/assets/images/blog/2026/08/control-video-calls-with-gestures-free-ai/cover.webp "Control your video call with gestures"){ .round-corners }
 
 If you're tired of reaching for the cursor to hit the camera icon every time you want to disappear from the meeting, you're in luck. At **OpenVidu** we've built an open-source prototype that lets you control your video call's features with gestures, like an actual tech shaman.
 

@@ -34,7 +34,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .dark-img loading=lazy }
 
     - The Master Nodes act as Load Balancers, managing the traffic and distributing it among the other Master Nodes and Media Nodes.
     - Each Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.

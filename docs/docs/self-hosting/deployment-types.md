@@ -28,7 +28,7 @@ It comes in two flavors:
  - **OpenVidu Local** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }: mirrors the experience of **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }, fine-tuned for local development.
  - **OpenVidu Local** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }: mirrors the experience of **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }, fine-tuned for local development. In this case, OpenVidu runs in evaluation mode for free for development and testing purposes (some limits apply: maximum 8 Participants across all Rooms, maximum 5 minutes duration per Room).
 
-![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
+![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .dark-img loading=lazy }
 
 ## OpenVidu Single Node
 
@@ -39,7 +39,7 @@ It is composed of a single OpenVidu Node hosting all the necessary services in a
  - **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }: all the features you need to build your real-time application.
  - **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }: for users who want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
 
-  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
+  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture.svg){ .dark-img loading=lazy }
 
 ## OpenVidu Elastic
 
@@ -50,7 +50,7 @@ It is composed of two different types of nodes, one of them running on a cluster
 - **A cluster of Media Nodes** hosting all the media-related services. Your video rooms scale up and down thanks to this cluster.
 - **A single Master Node** hosting all the support services in a monolithic setup.
 
-  ![OpenVidu Elastic](../../assets/images/platform/self-hosting/deployment-types/openvidu-elastic-architecture.svg){ .svg-img .dark-img loading=lazy }
+  ![OpenVidu Elastic](../../assets/images/platform/self-hosting/deployment-types/openvidu-elastic-architecture.svg){ .dark-img loading=lazy }
 
 ## OpenVidu High Availability
 
@@ -61,7 +61,7 @@ It is composed of two different types of nodes running on two separate clusters:
 - **A cluster of Media Nodes** hosting all the media-related services. Your video rooms scale up and down thanks to this cluster. The minimum number of nodes in this cluster is **1**, and it is designed to scale up and down dynamically according to workload.
 - **A cluster of Master Nodes** hosting all the support services in their high availability format. Your deployment is fault-tolerant thanks to this cluster. The minimum number of nodes in this cluster is **4**, and it is designed to have a fixed number of nodes at all times.
 
-  ![OpenVidu High Availability cluster](../../assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture.svg){ .svg-img .dark-img loading=lazy }
+  ![OpenVidu High Availability cluster](../../assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture.svg){ .dark-img loading=lazy }
 
 ## Node services
 

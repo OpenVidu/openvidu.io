@@ -77,7 +77,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![Video call room of the recording tutorial app with recording controls](../../../assets/images/platform/tutorials/advanced-features/recording1.png){ loading=lazy }
+![Video call room of the recording tutorial app with recording controls](../../../assets/images/platform/tutorials/advanced-features/recording1.png){ .round-corners loading=lazy }
 </div>
 
 <div class="grid-50" markdown>

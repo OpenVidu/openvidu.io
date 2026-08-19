@@ -11,7 +11,7 @@ Angular Components are the simplest way to create real-time videoconferencing ap
 
 This **Angular library**, offers developers a robust set of **powerful and comprehensive videoconferencing components**. These components are highly adaptable, extendable, and easily replaceable, allowing you to tailor them to your application's specific requirements.
 
-  ![Angular Components Angular](../../assets/images/platform/tutorials/angular-components/openvidu-components-generic.svg){ loading=lazy .svg-img  .mkdocs-img}
+  ![Angular Components Angular](../../assets/images/platform/tutorials/angular-components/openvidu-components-generic.svg){ loading=lazy .mkdocs-img }
 
 
 The primary goal of the OpenVidu team is to minimize the developer's effort when creating videoconferencing applications. **Angular Components** significantly contribute to this objective for several reasons:

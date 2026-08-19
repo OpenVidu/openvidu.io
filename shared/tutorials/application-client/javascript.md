@@ -21,11 +21,11 @@ Once the server is up and running, you can test the application by visiting [`ht
 /// html | div.grid-container
 
 /// html | div.grid-50
-![Join screen of the JavaScript tutorial app](/assets/images/platform/tutorials/application-client/join-js.png){ loading=lazy }
+![Join screen of the JavaScript tutorial app](/assets/images/platform/tutorials/application-client/join-js.png){ .round-corners loading=lazy }
 ///
 
 /// html | div.grid-50
-![Video call room of the JavaScript tutorial app](/assets/images/platform/tutorials/application-client/room-js.png){ loading=lazy }
+![Video call room of the JavaScript tutorial app](/assets/images/platform/tutorials/application-client/room-js.png){ .round-corners loading=lazy }
 ///
 
 ///

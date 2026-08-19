@@ -16,13 +16,13 @@ Recordings are started from the meeting view by a participant with the `canRecor
 
 While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
 
-![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark){ loading=lazy }
-![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-light.png#only-light){ loading=lazy }
+![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark){ .round-corners loading=lazy }
+![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-light.png#only-light){ .round-corners loading=lazy }
 
 To stop the recording, a participant with the `canRecord` permission must simply click the **"Stop recording"** button. The recording is then automatically saved on the OpenVidu Meet server.
 
-![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ loading=lazy }
-![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ loading=lazy }
+![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ .round-corners loading=lazy }
+![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info "Starting and stopping recordings via REST API"
     Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that specific recording.

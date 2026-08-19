@@ -19,8 +19,8 @@ During a meeting, these permissions are not fixed. Participants with the `canMak
 
 A participant with the `canMakeModerator` permission can **promote to moderator** any other participant whose permissions are **lower** than the full set of `Moderator` predefined role permissions. The promotion grants that participant all the moderator permissions they were missing.
 
-![Participant menu with the option to promote to moderator](../../../assets/images/meet/meetings/role-management/promote-moderator-dark.png#only-dark){ loading=lazy }
-![Participant menu with the option to promote to moderator](../../../assets/images/meet/meetings/role-management/promote-moderator-light.png#only-light){ loading=lazy }
+![Participant menu with the option to promote to moderator](../../../assets/images/meet/meetings/role-management/promote-moderator-dark.png#only-dark){ .round-corners loading=lazy }
+![Participant menu with the option to promote to moderator](../../../assets/images/meet/meetings/role-management/promote-moderator-light.png#only-light){ .round-corners loading=lazy }
 
 The promotion is **temporary** and scoped to the ongoing meeting:
 
@@ -31,8 +31,8 @@ The promotion is **temporary** and scoped to the ongoing meeting:
 
 A participant with the `canMakeModerator` permission can also **demote** a promoted participant at any time, reverting them to the **original permissions** they joined the meeting with.
 
-![Participant menu with the option to demote a moderator](../../../assets/images/meet/meetings/role-management/demote-moderator-dark.png#only-dark){ loading=lazy }
-![Participant menu with the option to demote a moderator](../../../assets/images/meet/meetings/role-management/demote-moderator-light.png#only-light){ loading=lazy }
+![Participant menu with the option to demote a moderator](../../../assets/images/meet/meetings/role-management/demote-moderator-dark.png#only-dark){ .round-corners loading=lazy }
+![Participant menu with the option to demote a moderator](../../../assets/images/meet/meetings/role-management/demote-moderator-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
     A **promoted** moderator cannot demote an **original** moderator — a participant who already had moderator permissions when they joined, rather than being promoted during the meeting. This prevents temporarily-promoted moderators from stripping permissions from the participants who were moderators from the start.

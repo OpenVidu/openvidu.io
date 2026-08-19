@@ -12,11 +12,11 @@ The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin da
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-admin-login.svg){ loading=lazy .svg-img  .mkdocs-img}
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-admin-login.svg){ loading=lazy .mkdocs-img }
 </div>
 
 <div class="grid-50" markdown>
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-admin-dashboard.svg){ loading=lazy .svg-img  .mkdocs-img}
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-admin-dashboard.svg){ loading=lazy .mkdocs-img }
 </div>
 
 </div>

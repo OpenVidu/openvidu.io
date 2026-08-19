@@ -36,7 +36,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .dark-img loading=lazy }
 
 ## CloudFormation Parameters
 
@@ -54,7 +54,7 @@ You need to specify some properties for the EC2 instance that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png){ loading=lazy }
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png){ .round-corners loading=lazy }
 
     Simply select the type of instance you want to deploy at **InstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
@@ -72,7 +72,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png){ loading=lazy }
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png){ .round-corners loading=lazy }
 
 ## Configure your application to use the deployment
 
@@ -83,11 +83,11 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ loading=lazy }
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
 </div>
 
 <div class="grid-50" markdown>
-![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/single-node/aws/2-secrets.png){ loading=lazy }
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/single-node/aws/2-secrets.png){ .round-corners loading=lazy }
 </div>
 
 </div>

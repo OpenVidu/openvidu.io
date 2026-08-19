@@ -26,7 +26,7 @@ To import the template into Azure, click the button below and you will be redire
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Elastic Azure Architecture](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-architecture.svg){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu Elastic Azure Architecture](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-architecture.svg){ .dark-img loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -53,7 +53,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     Parameters of this section look like this:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/elastic/azure/openvidu-elastic-config.png){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/elastic/azure/openvidu-elastic-config.png){ .round-corners .dark-img loading=lazy }
 
     Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
@@ -67,7 +67,7 @@ You need to specify some properties for the Azure instances that will be created
 
     Parameters in this section look like this:
 
-    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/elastic/azure/instance-config.png){ .svg-img .dark-img loading=lazy }
+    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/elastic/azure/instance-config.png){ .round-corners .dark-img loading=lazy }
 
     Simply select the type of instance you want for your Master Node in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
  
@@ -99,15 +99,15 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img loading=lazy }
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners .dark-img loading=lazy }
 
     3. Click the secret you want to inspect, then click the current version of that secret.
 
-        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .svg-img .dark-img loading=lazy }
+        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .round-corners .dark-img loading=lazy }
 
     4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .svg-img .dark-img loading=lazy }
+        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .round-corners .dark-img loading=lazy }
 
 === "Check deployment outputs in the instance"
 

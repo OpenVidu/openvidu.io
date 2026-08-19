@@ -18,7 +18,7 @@ authors:
 
 # 5 React video call platforms in 2026: Is SaaS still the right choice?
 
-![React video call platforms in 2026 — SaaS vs Self-hosted](/assets/images/blog/2026/05/5-react-video-call-platforms/poster.png "React video call platforms in 2026")
+![React video call platforms in 2026 — SaaS vs Self-hosted](/assets/images/blog/2026/05/5-react-video-call-platforms/poster.png "React video call platforms in 2026"){ .round-corners }
 
 
 ## 1. Introduction

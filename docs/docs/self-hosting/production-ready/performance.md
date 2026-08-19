@@ -58,7 +58,7 @@ This test increasingly adds Rooms of 8 Participants each, every one sending 1 vi
 
 The following plot shows the number of Participants that can be added to a Room in OpenVidu using Pion and using mediasoup as WebRTC engines:
 
-  ![Pion vs mediasoup. Multiple Conference Rooms](../../../assets/images/platform/self-hosting/production-ready/performance/benchmark-conference.png){style="max-width: 600px" loading=lazy }
+  ![Pion vs mediasoup. Multiple Conference Rooms](../../../assets/images/platform/self-hosting/production-ready/performance/benchmark-conference.png){ .round-corners style="max-width: 600px" loading=lazy }
 
 The conclusion is that for multiple Rooms, mediasoup performs much better than Pion, almost doubling the total number of Participants (and Tracks) that fit in the server.
 
@@ -74,13 +74,13 @@ CPU load of the server is also shown with a black marked plot (from 0 to 1, repr
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 <div class="grid-50 tablet-grid-50" markdown>
-![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png){ loading=lazy }
+![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png){ .round-corners loading=lazy }
 /// caption
 Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with Pion
 ///
 </div>
 <div class="grid-50 tablet-grid-50" markdown>
-![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png){ loading=lazy }
+![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png){ .round-corners loading=lazy }
 /// caption
 Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with mediasoup
 ///

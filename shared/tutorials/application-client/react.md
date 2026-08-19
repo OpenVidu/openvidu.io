@@ -23,11 +23,11 @@ Once the server is up and running, you can test the application by visiting [`ht
 /// html | div.grid-container
 
 /// html | div.grid-50
-![Join screen of the React tutorial app](/assets/images/platform/tutorials/application-client/join-react.png){ loading=lazy }
+![Join screen of the React tutorial app](/assets/images/platform/tutorials/application-client/join-react.png){ .round-corners loading=lazy }
 ///
 
 /// html | div.grid-50
-![Video call room of the React tutorial app](/assets/images/platform/tutorials/application-client/room-react.png){ loading=lazy }
+![Video call room of the React tutorial app](/assets/images/platform/tutorials/application-client/room-react.png){ .round-corners loading=lazy }
 ///
 
 ///

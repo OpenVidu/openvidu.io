@@ -23,7 +23,7 @@ This is what the deployment architecture looks like:
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture.svg){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture.svg){ .dark-img loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
@@ -39,11 +39,11 @@ This is what the deployment architecture looks like:
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
-![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .svg-img .dark-img loading=lazy }
+![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .round-corners .dark-img loading=lazy }
 
 Once you click the button, you will see this window.
 
-![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .svg-img .dark-img loading=lazy }
+![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .round-corners .dark-img loading=lazy }
 
 * Fill **Deployment ID** with any name you prefer (for example, openvidu-ha-deployment).   
 * Change the **Region** to the one you prefer.
@@ -55,22 +55,22 @@ Once you click the button, you will see this window.
 * For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   
 ??? details "New Service Account Steps"
 
-    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .round-corners .dark-img loading=lazy }
     /// caption
     Step 1: Create Service Account
     ///
 
-    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .round-corners .dark-img loading=lazy }
     /// caption
     Step 2: Service Account Details
     ///
 
-    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .round-corners .dark-img loading=lazy }
     /// caption
     Step 3: Grant Permissions
     ///
 
-    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .round-corners .dark-img loading=lazy }
     /// caption
     Step 4: Complete Setup
     ///
@@ -135,7 +135,7 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
 
-    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .round-corners .dark-img loading=lazy }
 
 ## Deploying the stack
 
@@ -145,7 +145,7 @@ When you are satisfied with your input values, click _"Continue"_ and then _"Cre
 
     If deployment fails, check the Cloud Build logs shown at the top of the screen and redeploy after applying the required changes. If the failure is related to an API, delete the deployment and create a new one. If it keeps failing, contact us.
     
-    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/ha/gcp/cloud-build-logs.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/ha/gcp/cloud-build-logs.png){ .round-corners .dark-img loading=lazy }
 
 When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instances:
 
@@ -155,11 +155,11 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
 
     2. Once you are in the Secret Manager you will see all the secrets by their name.
 
-        ![Google Cloud Platform Secrets location](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-manager.png){ .svg-img .dark-img loading=lazy }
+        ![Google Cloud Platform Secrets location](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-manager.png){ .round-corners .dark-img loading=lazy }
 
     3. Here click on the secret of your choice, choose the last version and then click on the _"3 dots"_ -> _"View secret value"_ to retrieve that secret.
 
-        ![Google Cloud Platform Secrets version](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-version.png){ .svg-img .dark-img loading=lazy }
+        ![Google Cloud Platform Secrets version](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-version.png){ .round-corners .dark-img loading=lazy }
 
 === "Check deployment outputs in the instance"
 
@@ -169,7 +169,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
     - `master_node/meet.env`
 
     To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
-    ![Google Cloud Platform gcloud command](../../../../assets/images/platform/self-hosting/ha/gcp/gcloud-command.png){ .svg-img .dark-img loading=lazy }
+    ![Google Cloud Platform gcloud command](../../../../assets/images/platform/self-hosting/ha/gcp/gcloud-command.png){ .round-corners .dark-img loading=lazy }
 
     To install gcloud in your shell follow the official [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install?hl=en#linux){:target="_blank"}.
 

@@ -50,11 +50,11 @@ Once the server is up and running, you can test the application by visiting [`ht
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![Join screen of the JavaScript tutorial app](../../../assets/images/platform/tutorials/application-client/join-js.png){ loading=lazy }
+![Join screen of the JavaScript tutorial app](../../../assets/images/platform/tutorials/application-client/join-js.png){ .round-corners loading=lazy }
 </div>
 
 <div class="grid-50" markdown>
-![Video call room of the JavaScript tutorial app](../../../assets/images/platform/tutorials/application-client/room-js.png){ loading=lazy }
+![Video call room of the JavaScript tutorial app](../../../assets/images/platform/tutorials/application-client/room-js.png){ .round-corners loading=lazy }
 </div>
 
 </div>

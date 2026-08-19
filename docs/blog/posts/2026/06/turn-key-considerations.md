@@ -20,7 +20,7 @@ authors:
 
 # Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN
 
-![Sloth watching a spinner waiting to connect to the Daily Meeting](/assets/images/blog/2026/06/turn-key-considerations/vsc.png "Sloth watching a spinner waiting to connect to the Daily Meeting"){ width=50% }
+![Sloth watching a spinner waiting to connect to the Daily Meeting](/assets/images/blog/2026/06/turn-key-considerations/vsc.png "Sloth watching a spinner waiting to connect to the Daily Meeting"){ .round-corners width=50% }
 
 There's a clear gap between a WebRTC demo and something you can actually run in production, and it usually sits at the TURN layer. Your demo might work fine on a clean network, but once real users show up behind NATs, corporate firewalls, and mobile gateways, the calls simply die without it.
 
@@ -115,7 +115,7 @@ At OpenVidu we've applied hardening recommendations while always keeping platfor
 3. **Restricting the relay port range.** In cases where OpenVidu is deployed in a NAT environment, the relay only forwards traffic to destination ports within the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.
 4. **Credentials are short-lived** (see the TTL above) and generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.
 
-![OpenVidu TURN architecture](/assets/images/blog/2026/06/turn-key-considerations/turn_openvidu.png "OpenVidu TURN architecture"){ width=80% loading=lazy }
+![OpenVidu TURN architecture](/assets/images/blog/2026/06/turn-key-considerations/turn_openvidu.png "OpenVidu TURN architecture"){ .round-corners width=80% loading=lazy }
 
 ## Conclusion
 

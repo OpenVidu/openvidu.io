@@ -17,7 +17,7 @@ authors:
 
 # The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System
 
-![WebRTC connectivity paths](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png){ .round-corners align=left }
 
 ## Introduction: The Success Trap
 

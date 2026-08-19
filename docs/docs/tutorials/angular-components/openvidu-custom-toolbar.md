@@ -11,7 +11,7 @@ The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default
 
 Customizing the toolbar is made simple with the **ToolbarDirective**, which offers a straightforward way to replace and adapt the **ToolbarComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-toolbar.svg){ loading=lazy .svg-img  .mkdocs-img}
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-toolbar.svg){ loading=lazy .mkdocs-img }
 
 ## Running this tutorial
 

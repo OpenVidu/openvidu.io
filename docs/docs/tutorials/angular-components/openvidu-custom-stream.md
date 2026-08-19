@@ -11,7 +11,7 @@ The **openvidu-custom-stream** tutorial demonstrates how to replace the default 
 
 Customizing the video stream component is made simple with the **StreamDirective**, which offers a straightforward way to replace and adapt the **StreamComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-stream.svg){ loading=lazy .svg-img  .mkdocs-img}
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-stream.svg){ loading=lazy .mkdocs-img }
 
 ## Running this tutorial
 

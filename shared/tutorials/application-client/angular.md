@@ -23,11 +23,11 @@ Once the server is up and running, you can test the application by visiting [`ht
 /// html | div.grid-container
 
 /// html | div.grid-50
-![Join screen of the Angular tutorial app](/assets/images/platform/tutorials/application-client/join-angular.png){ loading=lazy }
+![Join screen of the Angular tutorial app](/assets/images/platform/tutorials/application-client/join-angular.png){ .round-corners loading=lazy }
 ///
 
 /// html | div.grid-50
-![Video call room of the Angular tutorial app](/assets/images/platform/tutorials/application-client/room-angular.png){ loading=lazy }
+![Video call room of the Angular tutorial app](/assets/images/platform/tutorials/application-client/room-angular.png){ .round-corners loading=lazy }
 ///
 
 ///

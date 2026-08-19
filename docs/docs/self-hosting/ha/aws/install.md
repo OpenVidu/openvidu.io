@@ -38,7 +38,7 @@ This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .dark-img loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
@@ -58,7 +58,7 @@ In this section, you need to specify the domain name and the SSL certificate to 
 
     The parameters in this section might look like this:
 
-    ![Domain and Load Balancer configuration](../../../../assets/images/platform/self-hosting/ha/aws/domain-and-lb-config.png){ loading=lazy }
+    ![Domain and Load Balancer configuration](../../../../assets/images/platform/self-hosting/ha/aws/domain-and-lb-config.png){ .round-corners loading=lazy }
 
     Set the **DomainName** parameter to the domain name you intend to use for your OpenVidu deployment. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
@@ -72,7 +72,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     Parameters of this section look like this:
 
-    ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/aws/openvidu-ha-config.png){ loading=lazy }
+    ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/aws/openvidu-ha-config.png){ .round-corners loading=lazy }
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
 
@@ -88,7 +88,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/ha/aws/ec2-instance-config.png){ loading=lazy }
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/ha/aws/ec2-instance-config.png){ .round-corners loading=lazy }
 
     Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
@@ -108,7 +108,7 @@ You can specify two S3 buckets to store the application data, cluster data, and 
 
     Parameters in this section look like this:
 
-    ![S3 bucket for application data and recordings](../../../../assets/images/platform/self-hosting/ha/aws/s3-bucket.png){ loading=lazy }
+    ![S3 bucket for application data and recordings](../../../../assets/images/platform/self-hosting/ha/aws/s3-bucket.png){ .round-corners loading=lazy }
 
     If these parameters are not specified, new S3 buckets will be created by the CloudFormation stack.
 
@@ -120,7 +120,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     Parameters in this section look like this:
 
-    ![VPC Configuration](../../../../assets/images/platform/self-hosting/ha/aws/vpc-config.png){ loading=lazy }
+    ![VPC Configuration](../../../../assets/images/platform/self-hosting/ha/aws/vpc-config.png){ .round-corners loading=lazy }
 
     The **OpenViduVPC** parameter specifies the VPC where the deployment will be created.
 
@@ -141,7 +141,7 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
     Parameters in this section look like this:
 
-    ![Volumes Configuration](../../../../assets/images/platform/self-hosting/ha/aws/volumes-config.png){ loading=lazy }
+    ![Volumes Configuration](../../../../assets/images/platform/self-hosting/ha/aws/volumes-config.png){ .round-corners loading=lazy }
 
     The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
@@ -155,7 +155,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/ha/aws/outputs.png){ loading=lazy }
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/ha/aws/outputs.png){ .round-corners loading=lazy }
 
 ## Configure your application to use the deployment
 
@@ -166,11 +166,11 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png){ loading=lazy }
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
 </div>
 
 <div class="grid-50" markdown>
-![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/ha/aws/2-secrets.png){ loading=lazy }
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/ha/aws/2-secrets.png){ .round-corners loading=lazy }
 </div>
 
 </div>

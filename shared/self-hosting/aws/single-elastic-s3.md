@@ -7,6 +7,6 @@ You can specify an S3 bucket to store the recordings and application data. If th
 
     Parameters in this section look like this:
 
-    ![S3 bucket for application data and recordings](/assets/images/platform/self-hosting/shared/aws/s3-bucket.png){ loading=lazy }
+    ![S3 bucket for application data and recordings](/assets/images/platform/self-hosting/shared/aws/s3-bucket.png){ .round-corners loading=lazy }
 
     You can specify an existing S3 bucket or leave it empty to create a new one.
