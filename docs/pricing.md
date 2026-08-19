@@ -139,6 +139,14 @@ After the free trial period, a **monthly billing cycle** will charge all your ex
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Not sure which setup fits your scale?</h2>
+  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>
+
 ## Pricing examples
 
 As explained above, every minute of an OpenVidu Pro cluster is charged according to the number of cores available for the cluster. So let's see some actual examples, first noting the following points:
