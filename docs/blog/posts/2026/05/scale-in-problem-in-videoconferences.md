@@ -72,7 +72,7 @@ OpenVidu implements the draining strategy on every cloud it supports. The approa
 
 ### 1. AWS: Intercepting Scale-In with Lifecycle Hooks
 
-![AWS logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/aws-logo.png){ .dark-img loading=lazy }
+![AWS logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/aws-logo.png){ .skip-gallery .dark-img loading=lazy }
 
 [AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"} support a native feature called [**Lifecycle Hooks**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html){:target="_blank"}. When the ASG decides to terminate an instance (because CPU has dropped below the target), instead of killing it immediately it puts the instance in a `Terminating:Wait` state and fires a lifecycle transition event. The instance stays alive in this pending state until something either completes the hook or the wait timeout expires.
 
@@ -88,7 +88,7 @@ Of the three clouds, this is the most direct implementation. The Lifecycle Hook 
 
 ### 2. Azure: Orchestrating Virtual Machine Scale Sets (VMSS)
 
-![Azure logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/azure-logo.png){ .dark-img loading=lazy }
+![Azure logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/azure-logo.png){ .skip-gallery .dark-img loading=lazy }
 
 
 Azure's native scale-in mechanism for [Virtual Machine Scale Sets (VMSS)](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview){:target="_blank"} is a [**termination notification**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-terminate-notification){:target="_blank"}: when a scale-in event fires, Azure notifies the instance and gives it up to **15 minutes** to wrap up — after that, it terminates the VM regardless of what is running inside. Unlike the AWS Lifecycle Hook, this ceiling is hard and cannot be extended. A business meeting can easily last longer than 15 minutes, so relying on this native feature alone would still risk disrupting active sessions.
@@ -104,7 +104,7 @@ The trade-off is a **latency of up to 5 minutes** between the moment an instance
 
 ### 3. Google Cloud (GCP): Precision with Managed Instance Groups (MIGs)
 
-![GCP logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/gcp-logo.png){ .dark-img loading=lazy }
+![GCP logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/gcp-logo.png){ .skip-gallery .dark-img loading=lazy }
 
 
 [GCP Managed Instance Groups](https://cloud.google.com/compute/docs/instance-groups){:target="_blank"} don't provide a native "wait for draining" hook at the level of a single instance in the same way AWS does. OpenVidu's approach here is to sidestep the native scale-in mechanism entirely:
@@ -118,7 +118,7 @@ This approach gives OpenVidu full control over the termination decision and time
 
 ### 4. Digital Ocean (DO): External Orchestration with Functions
 
-![DO logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/digitalocean-logo.png){ .dark-img loading=lazy }
+![DO logo](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/digitalocean-logo.png){ .skip-gallery .dark-img loading=lazy }
 
 Unlike AWS, Azure, or GCP, DigitalOcean does not provide a high-level "Auto Scaling Group" abstraction that manages instance lifecycles for you. To achieve elasticity in DO, OpenVidu implements a custom orchestration layer using **DigitalOcean Functions** acting as an external control plane.
 

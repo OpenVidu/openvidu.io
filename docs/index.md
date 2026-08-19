@@ -26,8 +26,8 @@ page_features:
     <div class="product-card openvidu-meet">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
-          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
         </h3>
         <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
       </div>
@@ -50,8 +50,8 @@ page_features:
     <div class="product-card openvidu-platform">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
-          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
         </h3>
         <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
       </div>
