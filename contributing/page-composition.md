@@ -191,6 +191,8 @@ feature key. What each side controls:
   screen, and the gallery is rebuilt when the palette changes — so `data-gallery="dark"` /
   `"light"` is a *marker*, not a gallery name (the `#only-*` suffix serves as a fallback).
   A per-page gallery name would only split the page in two; there is none.
+- **Repeats collapse.** The same asset used more than once on a page — including the slides
+  Splide clones to loop a carousel — is one entry, and a click on any copy opens it.
 - **`skip-gallery`** on an image keeps it out of the lightbox altogether.
 
 ## Theme overrides

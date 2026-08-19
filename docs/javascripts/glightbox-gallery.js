@@ -8,8 +8,9 @@
 // `light` gallery, so a page mixing themed and plain assets ends up with several disjoint
 // ones — and the plain gallery leaks the hidden variant, because GLightbox skips gallery
 // filtering altogether for an element without `data-gallery`. Here every asset joins one
-// gallery per page and the variant the current palette hides is kept out of the instance,
-// so the lightbox holds exactly what the page shows. Rebuilt on a palette change.
+// gallery per page — once, however many times the page repeats it — and the variant the current
+// palette hides is kept out of the instance, so the lightbox holds exactly what the page shows.
+// Rebuilt on a palette change.
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof GLightbox === "undefined") return;
 
@@ -42,6 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // over by the hook (publish-tool/mkdocs_hook.py) in place of the instance it would build itself.
   const pluginOptions = typeof glightboxOptions === "undefined" ? {} : glightboxOptions;
 
+  // The URL identifies the picture: the same asset used twice on a page, and the slides Splide
+  // clones to loop a carousel, are the same picture and belong in the gallery once.
+  const assetOf = (anchor) => {
+    const media = anchor.querySelector("img, video");
+    return media ? media.src : anchor.href;
+  };
+
   const themeVariantOf = (anchor) => {
     const gallery = anchor.getAttribute("data-gallery");
     if (gallery === "dark" || gallery === "light") return gallery;
@@ -52,9 +60,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return "any";
   };
 
+  const primaries = new Map();
   document.querySelectorAll("a.glightbox").forEach((anchor) => {
     anchor.dataset.themeVariant = themeVariantOf(anchor);
     anchor.setAttribute("data-gallery", "page");
+    const primary = primaries.get(assetOf(anchor));
+    if (!primary) {
+      primaries.set(assetOf(anchor), anchor);
+      return;
+    }
+    // A repeat stays out of the gallery and hands its clicks to the copy that is in it, which
+    // shows the same picture. Both copies of a themed pair keep their own entry: their URLs
+    // differ by the `#only-*` suffix.
+    anchor.dataset.galleryRepeat = "";
+    anchor.addEventListener("click", (event) => {
+      event.preventDefault();
+      primary.click();
+    });
   });
 
   let instance = null;
@@ -66,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     instance = GLightbox({
       ...pluginOptions,
       ...videoOptions,
-      selector: `a.glightbox:not([data-theme-variant="${hidden}"])`,
+      selector: `a.glightbox:not([data-theme-variant="${hidden}"]):not([data-gallery-repeat])`,
     });
     instance.on("close", () => {
       if (!rebuildWhenClosed) return;
