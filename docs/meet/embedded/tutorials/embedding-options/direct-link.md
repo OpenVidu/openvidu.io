@@ -61,12 +61,12 @@ Once the server is up and running, you can test the application by visiting [`ht
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/direct-link/home.png){ .control-height .round-corners loading=lazy }
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/direct-link/home.png){ .round-corners loading=lazy }
 </div>
 
 <div class="grid-50" markdown>
-![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark){ .control-height .round-corners loading=lazy }
-![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light){ .control-height .round-corners loading=lazy }
+![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark){ .round-corners loading=lazy }
+![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light){ .round-corners loading=lazy }
 </div>
 
 </div>

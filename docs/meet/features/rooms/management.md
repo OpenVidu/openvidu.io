@@ -44,8 +44,8 @@ The advanced wizard guides you through the following steps:
 
 Reopen the configuration wizard for an existing room from the **"Rooms"** page or the [room details page](#room-details) to change its **features**, **access** settings and **recording** options, as long as no meeting is currently active.
 
-![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-dark.png#only-dark){ .control-height .round-corners loading=lazy }
-![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-light.png#only-light){ .control-height .round-corners loading=lazy }
+![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-dark.png#only-dark){ .round-corners loading=lazy }
+![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
 

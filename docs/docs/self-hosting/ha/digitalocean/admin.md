@@ -155,7 +155,7 @@ In addition to these, a DigitalOcean deployment provides the capability to manag
 
     1. Navigate to the [DigitalOcean Spaces Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and click on the cluster data bucket that you are using for the deployment.
     2. Download the `secrets.env` file that is in the bucket.
-        ![Secrets.env download](../../../../assets/images/platform/self-hosting/ha/digitalocean/download-secrets-env.png){ .round-corners .dark-img loading=lazy }
+        ![Secrets.env download](../../../../assets/images/platform/self-hosting/ha/digitalocean/download-secrets-env.png){ .control-height .round-corners .dark-img loading=lazy }
     3. Open it and edit the credential values of your choice.
     4. Upload the edited `secrets.env` to the bucket, select private file and replace it.
         ![Secrets.env upload](../../../../assets/images/platform/self-hosting/ha/digitalocean/upload-secrets-env.png){ .round-corners .dark-img loading=lazy }

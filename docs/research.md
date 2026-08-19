@@ -570,7 +570,7 @@ Francisco Gortázar[ ![ORCID iD](assets/images/research/ORCID-iD_icon_16x16.png)
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Architecture of the OpenVidu Load Test platform](assets/images/research/ovlt-arch.png){ .round-corners .dark-img loading=lazy width=706 height=566 }
+![Architecture of the OpenVidu Load Test platform](assets/images/research/ovlt-arch.png){ .control-height .round-corners .dark-img loading=lazy width=706 height=566 }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
@@ -728,7 +728,7 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Perceptual video quality scores across a WebRTC session](assets/images/research/qoe-session.png){ .round-corners .dark-img loading=lazy width=1600 height=1571 }
+![Perceptual video quality scores across a WebRTC session](assets/images/research/qoe-session.png){ .control-height .round-corners .dark-img loading=lazy width=1600 height=1571 }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">

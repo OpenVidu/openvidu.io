@@ -24,7 +24,7 @@
 6. In the **Security** tab, keep the default options and click _"Next"_.
 7. Create a new `VNIC` with a new `virtual cloud network` and a new `public subnet`.
 
-    ![Network configuration](/assets/images/platform/self-hosting/single-node/oracle/install-tutorial/network-config.png){ .round-corners .dark-img loading=lazy }
+    ![Network configuration](/assets/images/platform/self-hosting/single-node/oracle/install-tutorial/network-config.png){ .control-height .round-corners .dark-img loading=lazy }
 
 8. Scroll down and download the private key for the instance so you can connect via SSH. Then click _"Next"_.
 

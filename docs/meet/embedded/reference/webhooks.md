@@ -25,8 +25,8 @@ You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There yo
 - Set up your webhook endpoint URL
 - Test the current webhook configuration with a fake event
 
-![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .control-height .round-corners loading=lazy }
-![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-light.png#only-light){ .control-height .round-corners loading=lazy }
+![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .round-corners loading=lazy }
+![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-light.png#only-light){ .round-corners loading=lazy }
 
 ## Validate events
 

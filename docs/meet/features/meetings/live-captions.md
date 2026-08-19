@@ -66,8 +66,8 @@ Apply your changes by restarting OpenVidu. This ensures the system recognizes th
 
 Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Room Features** step of the room configuration wizard, using the **Captions** toggle.
 
-![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .round-corners loading=lazy }
-![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .round-corners loading=lazy }
+![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 ## Using Live Captions in a Meeting
 

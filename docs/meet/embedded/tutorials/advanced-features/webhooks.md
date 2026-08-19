@@ -56,11 +56,11 @@ Once the server is up and running, you can test the application by visiting [`ht
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/webhooks/home.png){ .control-height .round-corners loading=lazy }
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/webhooks/home.png){ .round-corners loading=lazy }
 </div>
 
 <div class="grid-50" markdown>
-![Recordings page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/webhooks/recordings.png){ .control-height .round-corners loading=lazy }
+![Recordings page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/webhooks/recordings.png){ .round-corners loading=lazy }
 </div>
 
 </div>

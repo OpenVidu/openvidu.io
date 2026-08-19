@@ -121,9 +121,17 @@ lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#onl
   ```
 
 - Every image below the first viewport takes `loading=lazy`.
+- **`.round-corners`** on every screen capture, photo and video — the one rounding class.
+  Logos, icons, transparent art and SVG diagrams stay square: a mark is not a picture, and a
+  transparent image has no corner to round.
+- **`.control-height`** caps an image at half the viewport. Use it when a capture is 4:3 or
+  taller *and* wide enough to fill the reading column (~700px), which is when it would
+  otherwise run most of a screen tall. A 16:9 capture never needs it — its width already
+  governs its height.
+- **`.skip-gallery`** keeps an image out of the lightbox: logos, product marks and inline
+  icons, which have nothing to enlarge.
 - Resize sources to their rendered size **before** committing them — the `optimize` plugin
   recompresses but never resizes, so oversized sources ship oversized.
-- To keep an image out of the lightbox, add the `skip-gallery` class.
 
 ### Icons
 

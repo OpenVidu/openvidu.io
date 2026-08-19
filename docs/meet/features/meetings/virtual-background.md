@@ -15,8 +15,8 @@ This feature works both before joining a meeting and while already inside one, g
 
 Virtual backgrounds can be enabled or disabled per room when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing room managers to decide when and where the feature is available.
 
-![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark){ .round-corners loading=lazy }
-![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light){ .round-corners loading=lazy }
+![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 ## Key Benefits
 
