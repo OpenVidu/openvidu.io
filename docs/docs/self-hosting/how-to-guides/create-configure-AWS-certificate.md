@@ -20,7 +20,7 @@ You will need a domain to be able to create and associate the certificate.
     These are the steps you need to follow to create the AWS certificate; keep in mind that you need a domain.
 
     First, go to AWS Certificate Manager and request a new public certificate. The following parameter is the most important.
-    ![AWS Certificate Manager view](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-name-for-certificate.png){ .round-corners .dark-img loading=lazy }
+    ![AWS Certificate Manager view](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-name-for-certificate.png){ .round-corners loading=lazy }
     /// caption
     Domain configuration
     ///
@@ -41,11 +41,11 @@ The next page will display the certificate status. Here you will need to create 
 
 === "Create record in Route 53"
 
-    ![Create record in Route 53](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-record-route53.png){ .round-corners .dark-img loading=lazy }
+    ![Create record in Route 53](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-record-route53.png){ .round-corners loading=lazy }
 
     You need to click the button called **`Create records in Route 53`**. This will lead you to the next page, where you just click Create records and that's it.
 
-    ![Create record page](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-record-page.png){ .round-corners .dark-img loading=lazy }
+    ![Create record page](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-record-page.png){ .round-corners loading=lazy }
     /// caption
     Create record for certificate
     ///
@@ -60,7 +60,7 @@ Finally, when deploying the HA stack in CloudFormation, follow these steps:
 === "Configuration of Load Balancer"
 
 
-    ![Load Balancer configuration](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/load-balancer-config.png){ .round-corners .dark-img loading=lazy }
+    ![Load Balancer configuration](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/load-balancer-config.png){ .round-corners loading=lazy }
 
     These are parameters related to the certificate you just created.
 
@@ -68,7 +68,7 @@ Finally, when deploying the HA stack in CloudFormation, follow these steps:
 
     Next, for the **`OpenViduCertificateARN`**, you can find it at the top of the same page mentioned earlier; it is called **`ARN`**, as you can see in the image below.
 
-    ![ARN and domain location](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-arn-location.png){ .round-corners .dark-img loading=lazy }
+    ![ARN and domain location](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-arn-location.png){ .round-corners loading=lazy }
     /// caption
     Domain name and ARN location
     ///
@@ -77,7 +77,7 @@ When everything is up and running, you will need to create a new record in the H
 
 === "Associating the Load Balancer"
 
-    ![Create Load Balancer record](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-lbrecord.png){ .round-corners .dark-img loading=lazy }
+    ![Create Load Balancer record](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-lbrecord.png){ .round-corners loading=lazy }
 
     Note that Alias is checked.
 

@@ -38,7 +38,7 @@ This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .dark-img loading=lazy }
+    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.

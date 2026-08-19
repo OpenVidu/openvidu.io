@@ -88,7 +88,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the instance — if exposed, unauthorized users could gain access.
-    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .round-corners .dark-img loading=lazy }
+    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .round-corners loading=lazy }
 
 5. Set the correct permissions on the SSH key so it can be used.
 

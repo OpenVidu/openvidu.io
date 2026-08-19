@@ -26,13 +26,13 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. Then click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
-        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners .dark-img loading=lazy }
+        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners loading=lazy }
     3. On this tab, go to the **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to 0.
-        ![Edit MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-instances-0.png){ .round-corners .dark-img loading=lazy }
+        ![Edit MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-instances-0.png){ .round-corners loading=lazy }
     4. Click _"Save"_ and wait for the operation to complete. You can check the progress in the _"VM instances"_ tab.
-        ![Save Edits MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-save.png){ .round-corners .dark-img loading=lazy }
+        ![Save Edits MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-save.png){ .round-corners loading=lazy }
     5. After confirming that all Media Node instances are terminated, in _"VM instances"_ tab select the instance called `<STACK_NAME>-master-node-1`. Click on it to go to the Master Node 1 instance. There, click on "Stop" to stop the instance.
-        ![Stop Master Node MIG](../../../../assets/images/platform/self-hosting/ha/gcp/stop-master-node.png){ .round-corners .dark-img loading=lazy }
+        ![Stop Master Node MIG](../../../../assets/images/platform/self-hosting/ha/gcp/stop-master-node.png){ .round-corners loading=lazy }
     6. Repeat step 5 for all the Master Nodes.
 
 
@@ -42,15 +42,15 @@ You can start and stop the OpenVidu High Availability cluster at any time. The f
 
     1. Navigate to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. In _"VM instances"_ tab select the instance called `<STACK_NAME>-master-node-1`, here click on start to start the Master Node 1.
-        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/gcp/start-master-node.png){ .round-corners .dark-img loading=lazy }
+        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/gcp/start-master-node.png){ .round-corners loading=lazy }
     3. Wait until the instance is running.
     4. Repeat step 2 and 3 for all the Master Nodes until they are all up and running.
     5. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
-        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners .dark-img loading=lazy }
+        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners loading=lazy }
     5. Go to **Group Size & autoscaling** tab and change the _"Minimum"_ and _"Maximum"_ number of instances to your desired values.
-        ![Edit MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-instances-1.png){ .round-corners .dark-img loading=lazy }
+        ![Edit MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-instances-1.png){ .round-corners loading=lazy }
     6. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
-        ![Save Edits MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-save.png){ .round-corners .dark-img loading=lazy }
+        ![Save Edits MIG](../../../../assets/images/platform/self-hosting/shared/gcp/mig-save.png){ .round-corners loading=lazy }
 
 ## Change the instance type
 
@@ -65,7 +65,7 @@ It is possible to change the instance type of both the Master Node and the Media
     1. [Shutdown the cluster](#shutting-down-the-cluster).
     2. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"} and locate the resource with the name `<STACK_NAME>-master-node-1` and click on it.
     3. Click on _"Edit"_ and inside change the _"Machine Type"_. Then select the size you desire and click on _"Save"_
-        ![Change instance type master](../../../../assets/images/platform/self-hosting/shared/gcp/change-master-node-size.png){ .round-corners .dark-img loading=lazy }
+        ![Change instance type master](../../../../assets/images/platform/self-hosting/shared/gcp/change-master-node-size.png){ .round-corners loading=lazy }
     4. Repeat steps 2 and 3 for all the Master Nodes just in case you want to resize all of them, if not just do it for the ones you want.
     5. [Start the cluster](#starting-up-the-cluster).
 
@@ -76,15 +76,15 @@ It is possible to change the instance type of both the Master Node and the Media
         This will delete the media nodes without the graceful delete option, if you want to stop them gracefully check the [Shutdown the Cluster](#shutting-down-the-cluster) tab
 
     1. Go to the _"Instance Group"_ tab and select the resource called `<STACK_NAME>-media-node-group` and click on the _"Template"_.
-        ![Select Template MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-template.png){ .round-corners .dark-img loading=lazy }
+        ![Select Template MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-template.png){ .round-corners loading=lazy }
     2. To change the size click on _"Create similar"_ and create a new one with the desired size.
-        ![Create Similar Template](../../../../assets/images/platform/self-hosting/ha/gcp/ha-create-similar.png){ .round-corners .dark-img loading=lazy }
+        ![Create Similar Template](../../../../assets/images/platform/self-hosting/ha/gcp/ha-create-similar.png){ .round-corners loading=lazy }
     3. Go back to the _"Instance Group"_ and click on _"Edit"_
-        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners .dark-img loading=lazy }
+        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners loading=lazy }
     4. In _"Instance template & overrides"_ change the template for the one you've created previously and then _"Save"_.
-        ![Change Template MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-change-template.png){ .round-corners .dark-img loading=lazy }
+        ![Change Template MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-change-template.png){ .round-corners loading=lazy }
     5. Delete the old sized instances.
-        ![Delete old sized instances MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-delete-old-instances.png){ .round-corners .dark-img loading=lazy }
+        ![Delete old sized instances MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-delete-old-instances.png){ .round-corners loading=lazy }
 
 ## Media Nodes Autoscaling Configuration
 
@@ -94,7 +94,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
     1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
-        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners .dark-img loading=lazy }
+        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners loading=lazy }
     3. On this tab, go to _"Group size & autoscaling"_ and change the tab called _"Autoscaling signals"_
     5. In the _"Default"_ box you will find a section called _"Rules"_. Here you can add new rules or modify existing ones.
         
@@ -102,7 +102,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
             Currently there is only one rule to scale out. We are actively working on providing a graceful scale-in process for Media Nodes to avoid active Rooms disruption.
 
-        ![Signals MIG](../../../../assets/images/platform/self-hosting/shared/gcp/signals.png){ .round-corners .dark-img loading=lazy }
+        ![Signals MIG](../../../../assets/images/platform/self-hosting/shared/gcp/signals.png){ .round-corners loading=lazy }
 
     !!! info
 
@@ -117,9 +117,9 @@ If you prefer to maintain a fixed number of Media Nodes instead of allowing the 
 
     1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
     2. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
-        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners .dark-img loading=lazy }
+        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/ha/gcp/ha-mig-edit-tab.png){ .round-corners loading=lazy }
     3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the fixed number of Media Nodes you want. In this case, it is set to 3. Click _"Save"_ and wait for it to be applied.
-        ![Fixed Number Media Nodes](../../../../assets/images/platform/self-hosting/shared/gcp/fixed-media-nodes.png){ .round-corners .dark-img loading=lazy }
+        ![Fixed Number Media Nodes](../../../../assets/images/platform/self-hosting/shared/gcp/fixed-media-nodes.png){ .round-corners loading=lazy }
 
     !!! info
 
@@ -131,7 +131,7 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 === "Deactivate Cloud Run Function"
 
     1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
-        ![Deactivate Scale In](../../../../assets/images/platform/self-hosting/ha/gcp/scalein-deactivate.png){ .round-corners .dark-img loading=lazy }
+        ![Deactivate Scale In](../../../../assets/images/platform/self-hosting/ha/gcp/scalein-deactivate.png){ .round-corners loading=lazy }
 
 ## Administration and configuration
 
@@ -145,9 +145,9 @@ In addition to these, a Google Cloud Platform deployment provides the capability
 
     1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
-        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .round-corners .dark-img loading=lazy }
+        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .round-corners loading=lazy }
     3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
-        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .round-corners .dark-img loading=lazy }
+        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .round-corners loading=lazy }
     4. Go to the Master Node resource whose secrets you want to change and click on _"Stop"_ -> _"Start"_ to apply the changes to the OpenVidu High Availability deployment.
 
     Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.

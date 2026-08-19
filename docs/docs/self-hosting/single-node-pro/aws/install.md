@@ -38,7 +38,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .dark-img loading=lazy }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ## CloudFormation Parameters
 

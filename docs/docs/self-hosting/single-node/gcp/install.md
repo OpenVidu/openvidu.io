@@ -20,7 +20,7 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .dark-img loading=lazy }
+    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ## Deployment details
 
@@ -28,11 +28,11 @@ To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :
 
 To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
 
-![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .round-corners .dark-img loading=lazy }
+![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .round-corners loading=lazy }
 
 Once you click the button, you will see this window.
 
-![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .round-corners .dark-img loading=lazy }
+![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .round-corners loading=lazy }
 
 * Fill **Deployment ID** with any name you prefer (for example, openvidu-singlenode-deployment).   
 * Change the **Region** to the one you prefer.
@@ -44,22 +44,22 @@ Once you click the button, you will see this window.
 * For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   
 ??? details "New Service Account Steps"
 
-    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .round-corners .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .round-corners loading=lazy }
     /// caption
     Step 1: Create Service Account
     ///
 
-    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .round-corners .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .round-corners loading=lazy }
     /// caption
     Step 2: Service Account Details
     ///
 
-    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .round-corners .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .round-corners loading=lazy }
     /// caption
     Step 3: Grant Permissions
     ///
 
-    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .round-corners .dark-img loading=lazy }
+    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .round-corners loading=lazy }
     /// caption
     Step 4: Complete Setup
     ///
@@ -115,7 +115,7 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
 
-    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .round-corners .dark-img loading=lazy }
+    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .round-corners loading=lazy }
 
 ## Deploying the stack
 

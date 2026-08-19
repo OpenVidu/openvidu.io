@@ -496,11 +496,11 @@ Iván Chicano-Capelo[ ![ORCID iD](assets/images/research/ORCID-iD_icon_16x16.png
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Media server scaling architecture from the thesis](assets/images/research/thesis-webrtc-scaling-architecture-alg-C.png){ .round-corners .dark-img loading=lazy width=2130 height=706 style="padding: 10px; background-color: white;" }
+![Media server scaling architecture from the thesis](assets/images/research/thesis-webrtc-scaling-architecture-alg-C.png){ .round-corners loading=lazy width=2130 height=706 style="padding: 10px; background-color: white;" }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Media servers in use during the thesis experiments](assets/images/research/thesis-servers-in-use.png){ .round-corners .dark-img loading=lazy width=1600 height=800 style="padding: 10px; background-color: white;" }
+![Media servers in use during the thesis experiments](assets/images/research/thesis-servers-in-use.png){ .round-corners loading=lazy width=1600 height=800 style="padding: 10px; background-color: white;" }
 </div>
 
 ---
@@ -531,11 +531,11 @@ Videoconference applications are becoming increasingly popular, and the demand f
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Quality of Experience results for Pion under load](assets/images/research/qoe-pion.png){ .round-corners .dark-img loading=lazy width=820 height=562 }
+![Quality of Experience results for Pion under load](assets/images/research/qoe-pion.png){ .round-corners loading=lazy width=820 height=562 }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Quality of Experience results for mediasoup under load](assets/images/research/qoe-mediasoup.png){ .round-corners .dark-img loading=lazy width=820 height=562 }
+![Quality of Experience results for mediasoup under load](assets/images/research/qoe-mediasoup.png){ .round-corners loading=lazy width=820 height=562 }
 </div>
 
 ---
@@ -570,11 +570,11 @@ Francisco Gortázar[ ![ORCID iD](assets/images/research/ORCID-iD_icon_16x16.png)
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Architecture of the OpenVidu Load Test platform](assets/images/research/ovlt-arch.png){ .control-height .round-corners .dark-img loading=lazy width=706 height=566 }
+![Architecture of the OpenVidu Load Test platform](assets/images/research/ovlt-arch.png){ .control-height .round-corners loading=lazy width=706 height=566 }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Results from the OpenVidu Load Test platform](assets/images/research/ovlt-results.png){ .round-corners .dark-img loading=lazy width=706 height=472 }
+![Results from the OpenVidu Load Test platform](assets/images/research/ovlt-results.png){ .round-corners loading=lazy width=706 height=472 }
 </div>
 
 ---
@@ -632,7 +632,7 @@ Selenium is often considered the de-facto standard framework for end-to-end web 
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Figure from the Selenium ecosystem survey](assets/images/research/selenium.png){ .round-corners .dark-img loading=lazy width=1600 height=963 }
+![Figure from the Selenium ecosystem survey](assets/images/research/selenium.png){ .round-corners loading=lazy width=1600 height=963 }
 </div>
 
 ---
@@ -664,7 +664,7 @@ WebRTC is a set of standard technologies that allows exchanging video and audio 
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![QoE assessment of video and audio in WebRTC applications](assets/images/research/qoe-assessment.png){ .round-corners .dark-img loading=lazy width=1600 height=973 }
+![QoE assessment of video and audio in WebRTC applications](assets/images/research/qoe-assessment.png){ .round-corners loading=lazy width=1600 height=973 }
 </div>
 
 ---
@@ -696,7 +696,7 @@ WebRTC comprises a set of technologies and standards that provide real-time comm
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Relationship between QoS parameters and Quality of Experience](assets/images/research/qos-qoe.png){ .round-corners .dark-img loading=lazy width=1381 height=491 }
+![Relationship between QoS parameters and Quality of Experience](assets/images/research/qos-qoe.png){ .round-corners loading=lazy width=1381 height=491 }
 </div>
 
 ---
@@ -728,11 +728,11 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Perceptual video quality scores across a WebRTC session](assets/images/research/qoe-session.png){ .control-height .round-corners .dark-img loading=lazy width=1600 height=1571 }
+![Perceptual video quality scores across a WebRTC session](assets/images/research/qoe-session.png){ .control-height .round-corners loading=lazy width=1600 height=1571 }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![WebRTC video quality against packet loss](assets/images/research/webrtc-qoe-vs-packet-loss.png){ .round-corners .dark-img loading=lazy width=2887 height=1577 }
+![WebRTC video quality against packet loss](assets/images/research/webrtc-qoe-vs-packet-loss.png){ .round-corners loading=lazy width=2887 height=1577 }
 </div>
 
 ---
@@ -846,11 +846,11 @@ In the last few years, multimedia technologies in general, and Real-Time multime
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Kurento API design from the usability study](assets/images/research/kurento-api.png){ .round-corners .dark-img loading=lazy width=472 height=390 }
+![Kurento API design from the usability study](assets/images/research/kurento-api.png){ .round-corners loading=lazy width=472 height=390 }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![API usability evaluation results](assets/images/research/api-eval.png){ .round-corners .dark-img loading=lazy width=378 height=247 }
+![API usability evaluation results](assets/images/research/api-eval.png){ .round-corners loading=lazy width=378 height=247 }
 </div>
 
 ---

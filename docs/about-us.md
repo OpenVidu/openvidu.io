@@ -44,7 +44,7 @@ My main research activities are related to software engineering, software testin
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Micael Gallego](assets/images/about-us/authorMG.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=752 height=1000 }
+![Portrait of Micael Gallego](assets/images/about-us/authorMG.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -67,7 +67,7 @@ My main research activities are related to software testing and real-time commun
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Francisco Gortázar](assets/images/about-us/authorFG.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=752 height=1000 }
+![Portrait of Francisco Gortázar](assets/images/about-us/authorFG.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -88,7 +88,7 @@ My academic background consists of a Double Degree in Computer Science and Softw
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Pablo Fuente](assets/images/about-us/authorPF.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=752 height=1000 }
+![Portrait of Pablo Fuente](assets/images/about-us/authorPF.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -109,7 +109,7 @@ My experience centers on Node.js, TypeScript, and Angular, complemented by stron
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Carlos Santos](assets/images/about-us/authorCS.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=752 height=1000 }
+![Portrait of Carlos Santos](assets/images/about-us/authorCS.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -131,7 +131,7 @@ My expertise spans backend development (Java, Node.js, Golang), frontend develop
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Carlos Ruiz](assets/images/about-us/authorCR.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=752 height=1000 }
+![Portrait of Carlos Ruiz](assets/images/about-us/authorCR.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -152,7 +152,7 @@ I have professional experience mainly with Node.js, TypeScript, and Angular, as 
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Juan Carlos Moreno](assets/images/about-us/authorJCM.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=750 height=1000 }
+![Portrait of Juan Carlos Moreno](assets/images/about-us/authorJCM.jpg){ .round-corners .about-us-img loading=lazy width=750 height=1000 }
 </div>
 
 ---
@@ -173,7 +173,7 @@ My experience includes working with the most common public clouds and with their
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Portrait of Sergio Fernández](assets/images/about-us/authorSF.jpg){ .round-corners .dark-img .about-us-img loading=lazy width=1200 height=1478 }
+![Portrait of Sergio Fernández](assets/images/about-us/authorSF.jpg){ .round-corners .about-us-img loading=lazy width=1200 height=1478 }
 </div>
 
 </div>

@@ -23,7 +23,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .dark-img loading=lazy }
+    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 All services are deployed on a single machine, which includes:
 
