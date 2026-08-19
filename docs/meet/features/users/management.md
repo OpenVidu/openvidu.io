@@ -17,8 +17,8 @@ From the **"Users"** page, click **"Create User"** and provide a `userId`, a nam
 
     The `userId` must be between 5 and 20 characters and contain only lowercase letters, numbers and underscores.
 
-<a class="glightbox" href="/assets/videos/meet/users/management/create-user-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/create-user-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/users/management/create-user-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/create-user-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/create-user-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/create-user-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/create-user-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/create-user-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 Send the credentials to the user. On their **first login** they are required to change the temporary password before they can use OpenVidu Meet.
 
@@ -29,15 +29,15 @@ Send the credentials to the user. On their **first login** they are required to 
 
 Change a user's [role](overview.md#user-roles) from the user list at any time. The [root administrator](overview.md#root-administrator) (**`admin`**) and your own account cannot be modified.
 
-<a class="glightbox" href="/assets/videos/meet/users/management/update-user-role-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/update-user-role-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/users/management/update-user-role-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/update-user-role-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/update-user-role-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/update-user-role-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/update-user-role-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/update-user-role-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## Reset a user's password
 
 Generate a new temporary password for a user from the user list (for example, if they forgot theirs). As with creation, the user must set a new password on their next login.
 
-<a class="glightbox" href="/assets/videos/meet/users/management/reset-user-password-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/reset-user-password-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/users/management/reset-user-password-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/reset-user-password-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/reset-user-password-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/reset-user-password-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/reset-user-password-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/reset-user-password-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## List & filter users
 
@@ -58,8 +58,8 @@ Users can be deleted individually or in bulk from the **"Users"** page. The root
 - If the user **owns rooms**, ownership of those rooms is transferred to the [root administrator](overview.md#root-administrator).
 - If the user is **currently in a meeting**, they are kicked from it immediately.
 
-<a class="glightbox" href="/assets/videos/meet/users/management/delete-user-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/delete-user-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/users/management/delete-user-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/delete-user-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/delete-user-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/delete-user-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/users/management/delete-user-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/users/management/delete-user-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## Changing your password { #changing-credentials }
 

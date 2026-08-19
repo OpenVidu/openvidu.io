@@ -59,7 +59,7 @@ Replace your environment with a ready-to-use image selected to match different m
 2. Select **Virtual Background**
 3. Choose an effect to apply it instantly
 
-<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The background options will be disabled when the camera is turned off.

@@ -163,8 +163,8 @@ Two canonical patterns — nothing else. `<video>` never takes `defer`, `async` 
 scrolled into view. Requires the `lazyvideo` page tag:
 
 ```html
-<a class="glightbox" href="/assets/videos/x-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/x-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/x-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/x-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/x-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/x-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/x-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/x-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 ```
 
 **Above the fold (showcase heroes only).** `autoplay` is allowed, but the inline `src` must be a
@@ -172,7 +172,7 @@ small downscaled `-preview.mp4` with a `poster`; the full-size file appears only
 `href` (see `docs/meet/index.md` for the reference):
 
 ```html
-<a class="glightbox" href="/assets/videos/full.mp4" data-type="video" data-desc-position="bottom"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
+<a class="glightbox" href="/assets/videos/full.mp4" data-type="video"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
 ```
 
 Rules for both patterns:

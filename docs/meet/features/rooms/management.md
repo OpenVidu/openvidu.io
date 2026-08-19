@@ -20,8 +20,8 @@ Create a new room from the **"Rooms"** page with the **"Create Room"** button. T
 - **Basic creation**: just give the room a name and create it immediately with default settings.
 - **Advanced creation**: open the configuration **wizard** to fine-tune the room before creating it.
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-basic-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-basic-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-basic-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The advanced wizard guides you through the following steps:
 
@@ -33,8 +33,8 @@ The advanced wizard guides you through the following steps:
 | **Recording Settings** | Enable recording and choose whether to enable anonymous access to individual recordings.                                                                                                                     |
 | **Recording Layout**   | The visual [layout](../recordings/configuration.md#recording-layouts) of the recordings.                                                                                                                     |
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! info
 
@@ -61,8 +61,8 @@ Every room has a status that controls whether it can host meetings:
 
 Managers can **close** or **reopen** a room at any time from the **"Rooms"** page or the [room details page](#room-details).
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/update-room-status-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/update-room-status-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/update-room-status-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/update-room-status-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/update-room-status-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## List & filter rooms { #list-rooms }
 
@@ -92,8 +92,8 @@ Clicking a room opens its **details page**, which shows the room information and
 
 Rooms can be deleted individually or in bulk from the **"Rooms"** page. Deleting a room removes it and all associated data (meetings, members and recordings).
 
-<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/delete-room-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/delete-room-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/delete-room-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/management/delete-room-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/delete-room-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! warning
 
