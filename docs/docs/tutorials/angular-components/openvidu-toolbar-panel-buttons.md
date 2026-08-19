@@ -11,7 +11,7 @@ The **openvidu-toolbar-panel-buttons** tutorial demonstrates how to add custom b
 
 Adding toolbar buttons is made simple with the **ToolbarAdditionalPanelButtonsDirective**, which offers a straightforward way to add custom buttons to the **ToolbarComponent**.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-toolbar-panel-buttons.svg){ loading=lazy .mkdocs-img }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar-panel-buttons.svg){ loading=lazy .mkdocs-img }
 
 ## Running this tutorial
 

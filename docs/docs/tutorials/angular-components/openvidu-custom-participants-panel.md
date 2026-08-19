@@ -11,7 +11,7 @@ The **openvidu-custom-participants-panel** tutorial demonstrates how to customiz
 
 Replacing the default participants panel is made simple with the **ParticipantsPanelDirective**, which offers a straightforward way to replace and adapt the **ParticipantsPanelComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-participants-panel.svg){ loading=lazy .mkdocs-img }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/participants-panel.svg){ loading=lazy .mkdocs-img }
 
 ## Running this tutorial
 
