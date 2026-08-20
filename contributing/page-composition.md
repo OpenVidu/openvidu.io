@@ -5,9 +5,13 @@
 - `title`, `description` — required SEO fields; budgets and uniqueness in
   [authoring.md](authoring.md).
 - `template: home.html` — the landing page uses a custom template.
-- `hide:` — `navigation`, `toc`, `footer`, `search-bar`, `version-selector`. The non-standard
-  ones (`search-bar`, `version-selector`) are implemented in
+- `hide:` — `navigation`, `toc`, `footer`, `path`, `feedback`, `search-bar`, `version-selector`.
+  The non-standard ones (`search-bar`, `version-selector`) are implemented in
   [`overrides/main.html`](../overrides/main.html).
+- `robots:` — the page's `robots` meta tag, emitted by
+  [`overrides/main.html`](../overrides/main.html). Only
+  [`support/thanks.md`](../docs/support/thanks.md) uses it (`noindex, follow`); pair it with
+  `search: {exclude: true}` and leave the page out of the `llmstxt` sections.
 - **Structured data lives in frontmatter**: `publications:` (`research.md`) and `faq:`
   (`pricing.md`) feed the JSON-LD emitted by
   [`overrides/partials/json-ld.html`](../overrides/partials/json-ld.html). When editing

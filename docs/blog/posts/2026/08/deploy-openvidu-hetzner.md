@@ -11,7 +11,7 @@ categories:
   - OpenVidu How-to
   - Technology
 tags:
-  - self-hosted
+  - Self-hosted
   - WebRTC
   - Hetzner
   - VPS
@@ -20,15 +20,11 @@ tags:
   - OpenVidu Meet
 authors:
   - sergio
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Deploy OpenVidu on Hetzner Cloud in 15 Minutes
 
-![OpenVidu servers inside a Hetzner cloud serving a video call](/assets/images/blog/2026/08/deploy-openvidu-hetzner/poster.png){ width=100% }
+![OpenVidu servers inside a Hetzner cloud serving a video call](/assets/images/blog/2026/08/deploy-openvidu-hetzner/poster.png){ .round-corners width=100% }
 
 This post is a getting-started guide to OpenVidu on Hetzner Cloud. It gathers in one place all the steps needed to go from an empty Hetzner account to a working OpenVidu deployment in a few minutes: which instance to pick, which ports to open, and the one command that installs everything. It is deliberately shorter than the official self-hosting documentation; the goal here is a running deployment today, not covering every option.
 
@@ -55,13 +51,13 @@ The [minimum requirements](/docs/self-hosting/single-node/on-premises/install.md
 
 Prices are from August 2026, taken from the server creation form itself; Hetzner has adjusted them several times this year, so check the [current pricing](https://www.hetzner.com/cloud/){:target="_blank"} before relying on this table. The number that matters for this post is the hourly one: the bill covers the hours the server exists and that's it. For reference, this is what the deployment behind this post actually cost — server, IPv4 and VAT included:
 
-![Hetzner usage bill for this post's deployment, seven cents total](/assets/images/blog/2026/08/deploy-openvidu-hetzner/final-bill.png){ width=80% }
+![Hetzner usage bill for this post's deployment, seven cents total](/assets/images/blog/2026/08/deploy-openvidu-hetzner/final-bill.png){ .round-corners width=80% loading=lazy }
 
 ## Step 1: Create the server
 
 Create a [Hetzner Cloud account](https://console.hetzner.com/){:target="_blank"} (sign-up asks for a payment method) and, once inside the console, create a project; the server and its firewall will live in it:
 
-![Creating a new project in the Hetzner Cloud console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/create-project.png){ width=80% }
+![Creating a new project in the Hetzner Cloud console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/create-project.png){ .round-corners width=80% loading=lazy }
 
 An SSH key is needed to log into the server. If there isn't one on your machine yet, generate it, then print the public half; that's what Hetzner asks for (the private key never leaves your machine):
 
@@ -78,7 +74,7 @@ Then, inside the project, add a server. The creation form is a single page; goin
 4. **Networking**: keep the **public IPv4** enabled; an IPv6-only server would lock out clients that can't reach it.
 5. **SSH keys**: click **Add SSH key**. In the **SSH key** field, paste the exact output of the `cat` command above — one line starting with `ssh-ed25519` and ending with `user@host`. Never paste the private key (the file without `.pub`). Fill **Name** with anything that identifies the key and confirm with **Add SSH key**:
 
-    ![The Add an SSH key dialog in the Hetzner console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/ssh-key-modal.png){ width=60% }
+    ![The Add an SSH key dialog in the Hetzner console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/ssh-key-modal.png){ .round-corners width=60% loading=lazy }
 
 Everything else can stay at its default; the firewall is handled in the next step.
 
@@ -90,7 +86,7 @@ A detail worth knowing about Hetzner: a fresh cloud server has **no firewall at 
 
 In the console, go to **Firewalls** and click **Create Firewall**:
 
-![Creating a firewall in the Hetzner Cloud console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/create-firewall.png){ width=80% }
+![Creating a firewall in the Hetzner Cloud console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/create-firewall.png){ .round-corners width=80% loading=lazy }
 
 Add these inbound rules and apply the firewall to the server:
 
@@ -103,7 +99,7 @@ Add these inbound rules and apply the firewall to the server:
 | TCP | 7881 | Any IPv4/IPv6 | WebRTC over TCP, for clients behind strict NATs |
 | UDP | 50000–60000 | Any IPv4/IPv6 | WebRTC media traffic |
 
-![The six inbound rules of the OpenVidu firewall in the Hetzner console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/firewall-rules.png){ width=100% }
+![The six inbound rules of the OpenVidu firewall in the Hetzner console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/firewall-rules.png){ .round-corners width=100% loading=lazy }
 
 Before clicking **Create Firewall**, use the **Apply to** section of the same form to attach it to the server in one step.
 
@@ -168,11 +164,11 @@ grep -E 'LIVEKIT_URL|LIVEKIT_API_KEY|LIVEKIT_API_SECRET' /opt/openvidu/config/op
 
 Now open `https://<your-server-ip>/` in a browser — the same public IPv4 the server list shows in the Hetzner console:
 
-![The server's public IPv4 address in the Hetzner server list](/assets/images/blog/2026/08/deploy-openvidu-hetzner/server-ip.png)
+![The server's public IPv4 address in the Hetzner server list](/assets/images/blog/2026/08/deploy-openvidu-hetzner/server-ip.png){ .round-corners loading=lazy }
 
 That's OpenVidu Meet, served from that address. Log in with `admin` and the `MEET_INITIAL_ADMIN_PASSWORD` value from `meet.env` to reach the management console:
 
-![The OpenVidu Meet console running on the same bare IP](/assets/images/blog/2026/08/deploy-openvidu-hetzner/meet-console.png){ width=100% }
+![The OpenVidu Meet console running on the same bare IP](/assets/images/blog/2026/08/deploy-openvidu-hetzner/meet-console.png){ .round-corners width=100% loading=lazy }
 
 From there, **Create Room**, and open the invite link on your phone.
 

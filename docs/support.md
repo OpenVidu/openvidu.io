@@ -9,7 +9,7 @@ hide:
   - footer
   - search-bar
   - version-selector
-tags:
+page_features:
   - leadform
 ---
 
