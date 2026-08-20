@@ -1,6 +1,6 @@
 ---
 title: "Thanks for contacting the OpenVidu team"
-description: "We received your message and will reply within one business day. Meanwhile, explore the OpenVidu documentation to get started with your self-hosted deployment."
+description: "We received your message and will reply as soon as possible. Meanwhile, explore the OpenVidu documentation to get started with your self-hosted deployment."
 robots: "noindex, follow"
 search:
   exclude: true
@@ -16,7 +16,7 @@ hide:
 
 <div markdown="1" style="font-size: 20px">
 
-We have received your message and a member of the OpenVidu team will reply **within one business day**, at the email address you provided.
+We have received your message and a member of the OpenVidu team will reply **as soon as possible**, at the email address you provided.
 
 </div>
 

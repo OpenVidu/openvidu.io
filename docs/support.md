@@ -155,7 +155,6 @@ tags:
     color: var(--lead-form-disabled-fg);
     background-color: var(--lead-form-disabled-bg);
     border-color: var(--lead-form-disabled-bg);
-    cursor: not-allowed;
   }
 
   .md-typeset .lead-form.is-sending .lead-form-submit:disabled {
@@ -200,7 +199,7 @@ Self-hosting your own solutions can be challenging. We have built OpenVidu to ma
 
 ## Talk to an expert
 
-We provide consultancy, prioritized bug fixes and new features, custom app development, and help sizing and operating your deployment. Tell us what you are building and we will get back to you within one business day.
+We provide consultancy, prioritized bug fixes and new features, custom app development, and help sizing and operating your deployment. Tell us what you are building and we will get back to you as soon as possible.
 
 <form id="lead-form" class="lead-form" novalidate>
   <div class="lead-form-grid">
@@ -246,7 +245,7 @@ We provide consultancy, prioritized bug fixes and new features, custom app devel
   </div>
   <div class="lead-form-actions md-typeset">
     <button type="submit" class="md-button md-button--primary lead-form-submit">Send message</button>
-    <p class="lead-form-reassurance">We reply within one business day.</p>
+    <p class="lead-form-reassurance">We reply as soon as possible.</p>
   </div>
   <p class="lead-form-status" role="status" hidden></p>
 </form>
