@@ -111,3 +111,11 @@ The test stops when it determines that no more users can be added to a room. Thi
 ### About OpenVidu LoadTest
 
 Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+
+<div class="second-slogan" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Want a performance estimate for your own workload?</h2>
+  <p style="margin-bottom: 1.5em">Tell us your expected load and we will help you benchmark and size it.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>

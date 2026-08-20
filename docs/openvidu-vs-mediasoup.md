@@ -145,3 +145,11 @@ all out of scope by design. You would build every one of those yourself.
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 
 </div>
+
+<div class="second-slogan" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Weighing a DIY mediasoup build against a ready platform?</h2>
+  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>
