@@ -5,6 +5,9 @@
  * /support/thanks/ on success. The endpoint answers 400 with per-field errors,
  * 429 when rate limited, and an empty 403 for a rejected origin or a filled
  * honeypot — all of which fall back to the mailto address shown on the page.
+ *
+ * The submit button starts enabled in the markup and is disabled here on load,
+ * so the form still works if this script never runs.
  */
 
 const LEADS_ENDPOINT = "https://crm-api.openvidu.io/leads";
@@ -24,6 +27,27 @@ function setupLeadForm() {
   const status = form.querySelector(".lead-form-status");
   const submitButton = form.querySelector(".lead-form-submit");
 
+  const syncSubmitState = function () {
+    if (form.classList.contains("is-sending")) return;
+    submitButton.disabled = !form.checkValidity();
+  };
+
+  form.addEventListener("input", syncSubmitState);
+  form.addEventListener("change", syncSubmitState);
+  syncSubmitState();
+
+  // Explains a greyed-out button while it is still greyed out. Only fields the
+  // visitor actually filled in are flagged, so tabbing through stays quiet.
+  form.addEventListener("focusout", function (event) {
+    const field = event.target;
+    if (!field.name || field.name === "website") return;
+    if (field.validity.valid) {
+      setFieldError(form, field.name, "");
+    } else if (field.value) {
+      setFieldError(form, field.name, field.validationMessage);
+    }
+  });
+
   let startReported = false;
   form.addEventListener("focusin", function () {
     if (startReported) return;
@@ -37,6 +61,7 @@ function setupLeadForm() {
 
     clearErrors(form);
     setStatus(status, "");
+    form.classList.add("is-sending");
     submitButton.disabled = true;
 
     const data = new FormData(form);
@@ -51,6 +76,11 @@ function setupLeadForm() {
       website: data.get("website") || ""
     };
 
+    const recover = function () {
+      form.classList.remove("is-sending");
+      syncSubmitState();
+    };
+
     fetch(LEADS_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -61,7 +91,7 @@ function setupLeadForm() {
           window.location.href = THANKS_URL;
           return;
         }
-        submitButton.disabled = false;
+        recover();
         if (response.status === 400) {
           return response.json().then(function (body) {
             showFieldErrors(form, body.errors || {});
@@ -75,7 +105,7 @@ function setupLeadForm() {
         setStatus(status, genericFailure());
       })
       .catch(function () {
-        submitButton.disabled = false;
+        recover();
         setStatus(status, genericFailure());
       });
   });
@@ -91,6 +121,22 @@ function setStatus(status, message) {
   status.hidden = !message;
 }
 
+function setFieldError(form, field, message) {
+  const element = form.querySelector('.lead-form-error[data-field="' + field + '"]');
+  if (element) {
+    element.textContent = message;
+    element.hidden = !message;
+  }
+  const input = form.querySelector('[name="' + field + '"]');
+  if (input) {
+    if (message) {
+      input.setAttribute("aria-invalid", "true");
+    } else {
+      input.removeAttribute("aria-invalid");
+    }
+  }
+}
+
 function clearErrors(form) {
   form.querySelectorAll(".lead-form-error").forEach(function (element) {
     element.textContent = "";
@@ -103,15 +149,7 @@ function clearErrors(form) {
 
 function showFieldErrors(form, errors) {
   Object.keys(errors).forEach(function (field) {
-    const message = form.querySelector('.lead-form-error[data-field="' + field + '"]');
-    if (message) {
-      message.textContent = errors[field];
-      message.hidden = false;
-    }
-    const input = form.querySelector('[name="' + field + '"]');
-    if (input) {
-      input.setAttribute("aria-invalid", "true");
-    }
+    setFieldError(form, field, errors[field]);
   });
 }
 

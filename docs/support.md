@@ -21,8 +21,10 @@ tags:
     --lead-form-field-bg: #ffffff;
     --lead-form-border: rgba(0, 0, 0, 0.14);
     --lead-form-shadow: rgba(0, 0, 0, 0.12);
+    --lead-form-disabled-bg: #dbe3e7;
+    --lead-form-disabled-fg: #8b9aa1;
     max-width: 44rem;
-    margin: 2em 0 2.5em;
+    margin: 2em auto 2.5em;
     padding: 2.2em 2.4em 2em;
     background-color: var(--lead-form-surface);
     border: 1px solid var(--lead-form-border);
@@ -37,6 +39,8 @@ tags:
     --lead-form-field-bg: hsla(var(--md-hue), 15%, 13%, 1);
     --lead-form-border: hsla(var(--md-hue), 15%, 90%, 0.16);
     --lead-form-shadow: rgba(0, 0, 0, 0.3);
+    --lead-form-disabled-bg: hsla(var(--md-hue), 12%, 30%, 1);
+    --lead-form-disabled-fg: hsla(var(--md-hue), 15%, 90%, 0.4);
   }
 
   /* Two columns for the short fields, one for the message: keeps the form
@@ -145,6 +149,19 @@ tags:
     border-color: #007394;
   }
 
+  /* Disabled until every required field is valid, so the button itself shows
+     whether the form is ready to send */
+  .md-typeset .lead-form .lead-form-submit:disabled {
+    color: var(--lead-form-disabled-fg);
+    background-color: var(--lead-form-disabled-bg);
+    border-color: var(--lead-form-disabled-bg);
+    cursor: not-allowed;
+  }
+
+  .md-typeset .lead-form.is-sending .lead-form-submit:disabled {
+    cursor: progress;
+  }
+
   .lead-form-reassurance {
     margin: 0;
     font-size: 0.68rem;
@@ -160,11 +177,6 @@ tags:
   .lead-form-honeypot {
     position: absolute;
     left: -5000px;
-  }
-
-  .lead-form-submit[disabled] {
-    opacity: 0.6;
-    cursor: progress;
   }
 
   @media screen and (max-width: 44em) {
