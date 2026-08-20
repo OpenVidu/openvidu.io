@@ -104,24 +104,8 @@ finished app experience inside their product rather than building a custom UI fr
 
 ## Where Jitsi still has the edge
 
-Jitsi has real-world deployment at extreme scale and is embedded in products well beyond video conferencing.
-If your main needs are scale or usage beyond video calls, Jitsi's approach has real advantages.
-
-Comparing the finished apps directly — [OpenVidu Meet](meet/index.md) against Jitsi Meet — Jitsi also
-ships a few in-meeting features OpenVidu Meet doesn't have yet:
-
-- **Lobby**: a moderator can require approval before letting anyone in. OpenVidu Meet's equivalent,
-  locked rooms, is on the roadmap but not shipped.
-- **Live streaming to YouTube**, built into the toolbar via Jibri. OpenVidu Meet's broadcasting
-  feature is also on the roadmap, not shipped.
-- **Breakout rooms** and a **built-in collaborative whiteboard** — neither exists in OpenVidu Meet
-  today.
-- **Native, downloadable apps** for iOS, Android and F-Droid, distributed through the app stores.
-  OpenVidu Meet is a web app you deploy or embed, with no dedicated app-store presence — a different
-  case from the native *SDKs* mentioned above, which are for embedding Jitsi into *your own* app, not
-  Jitsi's own packaged one.
-
-If any of these are what you need today rather than what's on the roadmap, Jitsi has them now.
+Jitsi Meet has features OpenVidu Meet doesn't have yet, such as a lobby, used by a moderator to require approval before letting anyone in, whose OpenVidu Meet's equivalent,
+locked rooms, is on the roadmap but not shipped; breakout rooms and a collaborative whiteboard; and native mobile apps for iOS and Android.
 
 ## Pricing
 
@@ -156,4 +140,12 @@ Platform.
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 [Evaluating a raw SFU instead?](openvidu-vs-janus.md){ .md-button }
 
+</div>
+
+<div class="second-slogan" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Weighing OpenVidu against Jitsi for your deployment?</h2>
+  <p style="margin-bottom: 1.5em">Tell us about your use case and we will help you size it and compare the tradeoffs.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
 </div>
