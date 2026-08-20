@@ -150,11 +150,13 @@ tags:
   }
 
   /* Disabled until every required field is valid, so the button itself shows
-     whether the form is ready to send */
+     whether the form is ready to send. The cursor is reset to the plain arrow
+     because .md-button sets pointer, which would invite a click that does nothing. */
   .md-typeset .lead-form .lead-form-submit:disabled {
     color: var(--lead-form-disabled-fg);
     background-color: var(--lead-form-disabled-bg);
     border-color: var(--lead-form-disabled-bg);
+    cursor: default;
   }
 
   .md-typeset .lead-form.is-sending .lead-form-submit:disabled {
