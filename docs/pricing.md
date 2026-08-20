@@ -30,12 +30,6 @@ page_features:
   - setupwowjs
 ---
 
-<style>
-  main > div.md-grid {
-    max-width: 61rem;
-  }
-</style>
-
 # Pricing
 
 <table id="pricing-table" name="big-pricing-table">
@@ -140,6 +134,14 @@ When purchasing an OpenVidu License, you will have to indicate your billing addr
 After the free trial period, a **monthly billing cycle** will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your [OpenVidu account](account.md) page. And don't worry: we don't store any credit card data. The entire billing process is securely done via [Stripe :fontawesome-solid-external-link:{.external-link-icon}](https://stripe.com/){:target="_blank"}.
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Not sure which setup fits your scale?</h2>
+  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>
 
 ## Pricing examples
 

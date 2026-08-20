@@ -15,12 +15,6 @@ page_features:
 dropdown_label: Team
 ---
 
-<style>
-  main > div.md-grid {
-    max-width: 61rem;
-  }
-</style>
-
 # About Us
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>

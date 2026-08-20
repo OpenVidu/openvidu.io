@@ -32,6 +32,7 @@ TAG_CONTRACT = (
     (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
     (_class_token("splide"), "splide", "setupcarousel"),
     (_class_token("lazy-video"), "lazy-video", "lazyvideo"),
+    (_class_token("lead-form"), "lead-form", "leadform"),
 )
 
 

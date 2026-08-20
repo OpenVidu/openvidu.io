@@ -388,10 +388,6 @@ publications:
 ---
 
 <style>
-  main > div.md-grid {
-    max-width: 61rem;
-  }
-
   /* Publication type badges */
   .pub-badge {
     display: inline-block;
