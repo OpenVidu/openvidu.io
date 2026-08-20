@@ -82,6 +82,13 @@ copy its tags too.** These are the tags currently used:
   being viewed. Loads
   [`releases-scroll-to-version.js`](../docs/javascripts/releases-scroll-to-version.js).
 
+- `leadform`: the page has the enterprise lead form (a `<form class="lead-form">`, only
+  [`support.md`](../docs/support.md)). Loads
+  [`lead-form.js`](../docs/javascripts/lead-form.js), which submits to the leads endpoint and
+  redirects to `/support/thanks/`. The field names are the endpoint's contract — changing them
+  requires changing the backend too (the `CreateLead` function in
+  [openvidu-deployments-manager](https://github.com/OpenVidu/openvidu-deployments-manager)).
+
 - `openviduregister`: the page embeds the `<openvidu-register>` Amplify sign-in web component
   (only [`account.md`](../docs/account.md)). Loads the ~4.4 MB `openvidu-register.js` bundle plus
   `openvidu-register.css` and `amplify.css` — never load these site-wide. On every other page the

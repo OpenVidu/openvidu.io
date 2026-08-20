@@ -136,6 +136,9 @@
 {{ super() }}
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
+{% if page.meta and page.meta.robots %}
+<meta name="robots" content="{{ page.meta.robots }}" />
+{% endif %}
 <!-- Add head tags that need to be applied afterwards here -->
 {% endblock %}
 
@@ -170,6 +173,10 @@
 <script src="/javascripts/copy-clipboard.js"></script>
 {% endif %}
 
+{% if page.meta and page.meta.tags and "leadform" in page.meta.tags %}
+<script src="{{ 'javascripts/lead-form.js' | url }}"></script>
+{% endif %}
+
 {% if page.meta and page.meta.tags and "scrolltoversion" in page.meta.tags %}
 <script src="/javascripts/releases-scroll-to-version.js"></script>
 {% endif %}
@@ -192,6 +199,21 @@
 
 {% if page.meta and page.meta.tags and "setupcarousel" in page.meta.tags %}
 <link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
+{% endif %}
+
+{#- With no side nav and no table of contents, the content column keeps the site-wide 70rem
+    and stretches to within a few pixels of the window edge on a laptop screen. These pages
+    get the narrower text measure and a gutter that survives every viewport. The home page
+    opts out through its own template: its hero is deliberately full-bleed. -#}
+{% if page.meta and page.meta.hide and not page.meta.template
+      and "navigation" in page.meta.hide and "toc" in page.meta.hide %}
+<style>
+  main > div.md-grid {
+    max-width: 61rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+</style>
 {% endif %}
 
 <style>
