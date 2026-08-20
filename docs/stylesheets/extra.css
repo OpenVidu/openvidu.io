@@ -224,7 +224,7 @@ span:has(> a > .openvidu-tag) {
   box-shadow: none !important;
 }
 .round-corners {
-  border-radius: 14px;
+  border-radius: 8px;
 }
 .three-cols {
   grid-template-columns: repeat(
