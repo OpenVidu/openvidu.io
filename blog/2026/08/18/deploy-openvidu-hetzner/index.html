@@ -248,6 +248,7 @@
   ]
 }
 </script>
+
 <!-- Add head tags that need to be applied afterwards here -->
 
   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
@@ -11380,9 +11381,9 @@
 <h1 id="deploy-openvidu-on-hetzner-cloud-in-15-minutes">Deploy OpenVidu on Hetzner Cloud in 15 Minutes<a class="headerlink" href="#deploy-openvidu-on-hetzner-cloud-in-15-minutes" title="Anchor link to this section for reference">#</a></h1>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu servers inside a Hetzner cloud serving a video call" src="../../../../../assets/images/blog/2026/08/deploy-openvidu-hetzner/poster.png" width="100%"></a></p>
 <p>This post is a getting-started guide to OpenVidu on Hetzner Cloud. It gathers in one place all the steps needed to go from an empty Hetzner account to a working OpenVidu deployment in a few minutes: which instance to pick, which ports to open, and the one command that installs everything. It is deliberately shorter than the official self-hosting documentation; the goal here is a running deployment today, not covering every option.</p>
-<p>The server and its firewall are created in the <a href="https://console.hetzner.com/" target="_blank" rel="noopener">Hetzner Cloud console</a>, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running <a href="/latest/meet/">OpenVidu Meet</a>, reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.</p>
 <!-- more -->
 
+<p>The server and its firewall are created in the <a href="https://console.hetzner.com/" target="_blank" rel="noopener">Hetzner Cloud console</a>, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running <a href="/latest/meet/">OpenVidu Meet</a>, reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.</p>
 <p>This is the first post in a series of per-cloud quick starts. Hetzner comes first for two reasons: its hourly billing makes a complete test run cost well under a euro, and this guide adds one more provider alongside the <a href="/latest/docs/self-hosting/single-node/aws/install/">official installation guides</a> for AWS, Azure, GCP, DigitalOcean and Oracle. The deployment below uses the generic <a href="/latest/docs/self-hosting/single-node/on-premises/install/">on-premises installer</a>, which works on any Ubuntu machine with a public IP.</p>
 <h2 id="what-youre-deploying-and-what-it-costs">What you're deploying, and what it costs<a class="headerlink" href="#what-youre-deploying-and-what-it-costs" title="Anchor link to this section for reference">#</a></h2>
 <p>The deployment is <strong>OpenVidu Single Node Community</strong>. One VM running the OpenVidu server (LiveKit protocol compatible), OpenVidu Meet as a ready-to-use video calling app, an administration dashboard, MinIO for recordings, Redis, MongoDB, and Caddy as a reverse proxy that handles the TLS certificate. It is the same production-ready setup the official docs describe, not a stripped-down demo. It's free and open source, and a single node has far more headroom than a test call needs.</p>
@@ -11907,6 +11908,8 @@
 <!-- Add scripts that need to run before here -->
 
 <script src="../../../../../javascripts/target-blank.js"></script>
+
+
 
 
 

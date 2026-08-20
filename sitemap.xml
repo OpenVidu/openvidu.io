@@ -6,7 +6,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/about-us/</loc>
-         <lastmod>2026-08-15</lastmod>
+         <lastmod>2026-08-20</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/account/</loc>
@@ -30,15 +30,15 @@
     </url>
     <url>
          <loc>https://openvidu.io/pricing/</loc>
-         <lastmod>2026-08-15</lastmod>
+         <lastmod>2026-08-20</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/research/</loc>
-         <lastmod>2026-08-15</lastmod>
+         <lastmod>2026-08-20</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/support/</loc>
-         <lastmod>2026-08-15</lastmod>
+         <lastmod>2026-08-20</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/blog/</loc>
@@ -102,7 +102,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/2026/08/18/deploy-openvidu-hetzner/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-20</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/blog/2026/08/04/transcriber-summarizer-agent/</loc>
@@ -879,6 +879,10 @@
     <url>
          <loc>https://openvidu.io/latest/meet/features/users/overview/</loc>
          <lastmod>2026-08-15</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/support/thanks/</loc>
+         <lastmod>2026-08-20</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/blog/archive/2026/08/</loc>

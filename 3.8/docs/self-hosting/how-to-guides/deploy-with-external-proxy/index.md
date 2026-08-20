@@ -136,7 +136,7 @@ Notes:
 
 - Replace `openvidu.example.io` with your FQDN.
 - Replace `turn.example.io` with your TURN server FQDN.
-- In PRO edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](https://openvidu.io/3.8/account/index.md).
+- In PRO edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](https://openvidu.io/account/).
 - In PRO edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **4. Configure the external proxy**
@@ -388,7 +388,7 @@ In case you want to deploy a specific version, just replace `latest` with the de
 
 Notes:
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Replace `openvidu.example.io` with your FQDN.
 - Replace `turn.example.io` with your TURN server FQDN.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
