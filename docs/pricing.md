@@ -28,12 +28,6 @@ tags:
   - setupwowjs
 ---
 
-<style>
-  main > div.md-grid {
-    max-width: 61rem;
-  }
-</style>
-
 # Pricing
 
 <table id="pricing-table" name="big-pricing-table">

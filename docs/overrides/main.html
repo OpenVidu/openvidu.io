@@ -201,6 +201,21 @@
 <link rel="stylesheet" href="{{ 'stylesheets/flickity.min.css' | url }}" />
 {% endif %}
 
+{#- With no side nav and no table of contents, the content column keeps the site-wide 70rem
+    and stretches to within a few pixels of the window edge on a laptop screen. These pages
+    get the narrower text measure and a gutter that survives every viewport. The home page
+    opts out through its own template: its hero is deliberately full-bleed. -#}
+{% if page.meta and page.meta.hide and not page.meta.template
+      and "navigation" in page.meta.hide and "toc" in page.meta.hide %}
+<style>
+  main > div.md-grid {
+    max-width: 61rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+</style>
+{% endif %}
+
 <style>
   @font-face {
     font-family: "Amazon Ember";
