@@ -10,8 +10,11 @@
   [`overrides/main.html`](../overrides/main.html).
 - `robots:` — the page's `robots` meta tag, emitted by
   [`overrides/main.html`](../overrides/main.html). Only
-  [`support/thanks.md`](../docs/support/thanks.md) uses it (`noindex, follow`); pair it with
-  `search: {exclude: true}` and leave the page out of the `llmstxt` sections.
+  [`support/thanks.md`](../docs/support/thanks.md) uses it (`noindex, follow`): the form
+  confirmation is the signal that a lead arrived, so an organic visitor landing there would
+  count as one. A `noindex` page also drops out of `sitemap.xml` on its own (see the overrides
+  below); pair the key with `search: {exclude: true}` and leave the page out of the `llmstxt`
+  sections.
 - **Structured data lives in frontmatter**: `publications:` (`research.md`) and `faq:`
   (`pricing.md`) feed the JSON-LD emitted by
   [`overrides/partials/json-ld.html`](../overrides/partials/json-ld.html). When editing
@@ -226,6 +229,9 @@ Material theme customization lives in [`overrides/`](../overrides) (`custom_dir`
 - `home.html` extends `main.html` (the landing page template).
 - `partials/` adds or overrides partials: `header.html`, `footer.html`, `tabs.html`,
   `json-ld.html`, `og.html`.
+- `sitemap.xml` is MkDocs' own template (Material ships none) with one added clause: a page
+  declaring `robots: noindex` is left out, so the sitemap never submits a URL that then
+  refuses indexing. Re-copy it from `mkdocs/templates/sitemap.xml` on a MkDocs bump.
 
 Site-wide changes go here — follow the "before/after" comment markers inside the blocks.
 
