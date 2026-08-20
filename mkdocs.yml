@@ -262,7 +262,7 @@ nav:
   - Blog:
       - blog/index.md
   - Support:
-      - support.md
+      - support/index.md
   - Pricing:
       - pricing.md
   - About Us:
@@ -481,7 +481,7 @@ plugins:
         - openvidu-vs-livekit.md
         - openvidu-vs-mediasoup.md
         - pricing.md
-        - support.md
+        - support/index.md
         - about-us.md
         - research.md
 

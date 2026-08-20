@@ -81,7 +81,7 @@ page, copy its feature keys too.** These are the keys currently used:
   [`releases-scroll-to-version.js`](../docs/javascripts/releases-scroll-to-version.js).
 
 - `leadform`: the page has the enterprise lead form (a `<form class="lead-form">`, only
-  [`support.md`](../docs/support.md)). Loads
+  [`support/index.md`](../docs/support/index.md)). Loads
   [`lead-form.js`](../docs/javascripts/lead-form.js), which submits to the leads endpoint and
   redirects to `/support/thanks/`. The field names are the endpoint's contract — changing them
   requires changing the backend too (the `CreateLead` function in

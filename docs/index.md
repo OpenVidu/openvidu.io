@@ -101,7 +101,7 @@ page_features:
 
     ---
 
-    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](support.md) now.
+    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](support/index.md) now.
 
 -   :material-progress-check:{ .feature-icon .padding-icon } __Easy to deploy__{ .feature-name }
 

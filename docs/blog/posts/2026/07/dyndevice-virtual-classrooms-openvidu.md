@@ -113,6 +113,6 @@ If DynDevice's "before" picture looked uncomfortably familiar, the fastest way o
 Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](/docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](/openvidu-meet-vs-openvidu-platform.md) settles it in five minutes.
 
 !!! tip "Thinking about your own success story?"
-    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support.md) — we'll do the writing, you get the visibility and the backlinks.
+    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support/index.md) — we'll do the writing, you get the visibility and the backlinks.
 
 *Our thanks to Matteo Resconi and the Mega Italia Media team for sharing their experience.*
