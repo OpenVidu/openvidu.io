@@ -174,12 +174,34 @@ redirects:
 
     - id: removed-oracle-install-tutorial-pro
       description: >
-        As above for the PRO tree, where the page was removed before 3.7 shipped.
+        As above for the PRO tree, where the page was removed before 3.7 shipped. Points straight
+        at the merged single-node/ page (issue #46) rather than through single-node-pro/, which
+        `files` rules do not auto-chain through the way `expand` rules do; the target has existed
+        at this path since long before 3.7, so this is safe for every version the rule covers.
       at: "{version}/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.html"
-      to: "../install/"
-      canonical: "{site_url}/latest/docs/self-hosting/single-node-pro/oracle/install/"
+      to: "../../../single-node/oracle/install/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
       body: "Redirecting to the Oracle Cloud installation guide…"
       versions: ">=3.7"
+
+    - id: single-node-pro-index-merged
+      description: >
+        single-node-pro/ merged into single-node/ with a COMMUNITY/PRO tab on each page
+        (issue #46); see single-node-pro-provider-pages-merged below for the per-provider pages.
+      at: "{version}/docs/self-hosting/single-node-pro/index.html"
+      to: "../single-node/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/"
+      body: "Redirecting to the Single Node guide…"
+      versions: ">=3.8"
+
+    - id: single-node-pro-upgrade-merged
+      description: >
+        As above, for the merged per-edition upgrade page.
+      at: "{version}/docs/self-hosting/single-node-pro/upgrade/index.html"
+      to: "../../single-node/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
+      body: "Redirecting to the Single Node upgrade guide…"
+      versions: ">=3.8"
 
     - id: removed-self-hosting-faq
       description: >
@@ -351,6 +373,26 @@ redirects:
       versions: "<3.8"
       values:
         edition: [single-node, single-node-pro]
+
+    # single-node-pro/{provider}/install|admin merged into their single-node/ counterpart with a
+    # COMMUNITY/PRO tab (issue #46). A cross-product rather than a tree-rename, because a
+    # tree-rename mirrors every page the destination tree answers — including the
+    # install-tutorial stub the two rules above already generate for both editions — and that
+    # collides with removed-oracle-install-tutorial-pro, which owns that path already.
+    # removed-provider-index and merged-single-node-upgrade above still generate candidates
+    # inside single-node-pro/ for edition=single-node-pro; those targets are now themselves
+    # stubs from the rules below, and expand rules follow a generated redirect to its final
+    # destination, so they resolve straight through to single-node/ in one hop for readers.
+    - id: single-node-pro-provider-pages-merged
+      kind: cross-product
+      at: "{version}/docs/self-hosting/single-node-pro/{provider}/{page}/index.html"
+      to: "../../../single-node/{provider}/{page}/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/{provider}/{page}/"
+      body: "Redirecting to the Single Node guide…"
+      versions: ">=3.8"
+      values:
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+        page: [install, admin]
 
     # OpenVidu Meet arrived in 3.4; the versions before it documented OpenVidu Call. Every URL
     # the meet section answers in any newer version redirects to the Call docs here, so the

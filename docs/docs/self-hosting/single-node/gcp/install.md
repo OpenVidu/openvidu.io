@@ -1,11 +1,11 @@
 ---
-title: "Install OpenVidu Single Node COMMUNITY on Google Cloud"
-description: "Deploy OpenVidu Single Node COMMUNITY on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
+title: "Install OpenVidu Single Node on Google Cloud"
+description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
 tags:
   - copyclipboard
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Google Cloud Platform
+# OpenVidu Single Node installation: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -14,7 +14,9 @@ tags:
 </div>
 
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Google Cloud Platform. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Google Cloud Platform, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Google Cloud Console.
+
+--8<-- "shared/self-hosting/common/single-node-pro-license-intro.md"
 
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 
@@ -74,7 +76,11 @@ Once you click the button, you will see this window.
     </figure>
 
 * Fill **Git repository** with this link <span class="copy-inline" data-copy="https://github.com/OpenVidu/openvidu.git"><code>https://github.com/OpenVidu/openvidu.git</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located. 
-* Fill the **Git directory** with the following path <span class="copy-inline" data-copy="openvidu-deployment/community/singlenode/gcp"><code>openvidu-deployment/community/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span> 
+* Fill the **Git directory** with the path corresponding to the edition you want to deploy:
+    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+        <span class="copy-inline" data-copy="openvidu-deployment/community/singlenode/gcp"><code>openvidu-deployment/community/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>
+    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+        <span class="copy-inline" data-copy="openvidu-deployment/pro/singlenode/gcp"><code>openvidu-deployment/pro/singlenode/gcp</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>
 * For the **Git ref**, use <span class="copy-inline" data-copy="v3.8.0"><code>v3.8.0</code><span class="copy-btn" title="Copy">:material-content-copy:</span></span>, corresponding to the version you want to deploy. 
 
 Finally, click Continue.
@@ -97,6 +103,10 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
       <tr>
         <td>stackName</td>
         <td>Stack name for OpenVidu deployment.</td>
+      </tr>
+      <tr>
+        <td>openviduLicense <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span></td>
+        <td>Only required for the PRO edition. Your OpenVidu License. Get one <a href="https://openvidu.io/account" target="_blank" rel="noopener">here</a> if you don't have one.</td>
       </tr>
     </table>
 </div>
@@ -171,6 +181,11 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
         <td>Name of the GCS bucket to store data and recordings. If empty, a bucket will be created.</td>
       </tr>
       <tr>
+        <td>rtcEngine <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span></td>
+        <td>"pion"</td>
+        <td>RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition.</td>
+      </tr>
+      <tr>
         <td>additionalInstallFlags</td>
         <td>(none)</td>
         <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2').</td>
@@ -178,7 +193,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
     </table>
 </div>
 
-For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
+For more details, you can check the variables.tf file to see additional information about the inputs: [COMMUNITY :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/community/singlenode/gcp/variables.tf){:target="_blank"} / [PRO :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/singlenode/gcp/variables.tf){:target="_blank"}.
 
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
@@ -198,6 +213,8 @@ You need the secret outputs from Google Cloud Platform to configure your OpenVid
 Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "shared/self-hosting/gcp/credentials-general.md"
+
+--8<-- "shared/self-hosting/gcp/credentials-v2compatibility.md"
 
 ## Troubleshooting initial Google Cloud Platform deployment creation
 

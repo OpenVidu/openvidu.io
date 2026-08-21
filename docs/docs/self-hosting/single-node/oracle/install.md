@@ -1,19 +1,20 @@
 ---
-title: "Install OpenVidu Single Node COMMUNITY on Oracle Cloud"
-description: "Deploy OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
+title: "Install OpenVidu Single Node on Oracle Cloud"
+description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
 tags:
   - copyclipboard
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Oracle Cloud Infrastructure
+# OpenVidu Single Node installation: Oracle Cloud Infrastructure
 
 --8<-- "shared/self-hosting/oracle/provider-chip.md"
 
-This section describes two ways to install OpenVidu Single Node on Oracle Cloud Infrastructure:
+This section describes two ways to install OpenVidu Single Node on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition:
 
 * [**Web Console**](#web-console): Can be deployed without installing anything on your machine, but requires more manual steps and has some limitations. For example, recordings are stored on the machine itself rather than in OCI Object Storage.
 * [**Terraform**](#terraform): More powerful and fully automated, but requires the Terraform CLI to be installed on your machine.
 
+--8<-- "shared/self-hosting/common/single-node-pro-license-intro.md"
 
 ## Web Console
 
@@ -32,7 +33,7 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 
 ## Terraform
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Oracle Cloud Infrastructure. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
 
 --8<-- "shared/self-hosting/oracle/single-node/terraform-architecture.md"
 
@@ -40,11 +41,21 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
 1. Clone the OpenVidu repository containing the Terraform files:
 
-    ```bash
-    git clone https://github.com/OpenVidu/openvidu-oracle.git
-    git -C openvidu-oracle checkout 3.8.0
-    cd openvidu-oracle/community/singlenode
-    ```
+    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+
+        ```bash
+        git clone https://github.com/OpenVidu/openvidu-oracle.git
+        git -C openvidu-oracle checkout 3.8.0
+        cd openvidu-oracle/community/singlenode
+        ```
+
+    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+
+        ```bash
+        git clone https://github.com/OpenVidu/openvidu-oracle.git
+        git -C openvidu-oracle checkout 3.8.0
+        cd openvidu-oracle/pro/singlenode
+        ```
 
 2. Copy **`terraform.tfvars.example`** to **`terraform.tfvars`**, update the required parameters with your values, and adjust any optional defaults as needed.
   <details>
@@ -76,6 +87,10 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <tr>
     <td style="white-space: nowrap;"><code>stackName</code></td>
     <td>Stack name for the OpenVidu deployment.</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>openviduLicense</code> <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span></td>
+    <td>Only required for the PRO edition. OpenVidu PRO license key. Visit <a href="https://openvidu.io/account" target="_blank">https://openvidu.io/account</a> to obtain your license.</td>
     </tr>
     </tbody>
     </table>
@@ -117,6 +132,11 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     <td style="white-space: nowrap;"><code>instanceMemory</code></td>
     <td style="white-space: nowrap;"><code>4</code></td>
     <td>Memory in GB for the instance (applies to Flex shapes only).</td>
+    </tr>
+    <tr>
+    <td style="white-space: nowrap;"><code>RTCEngine</code> <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span></td>
+    <td style="white-space: nowrap;"><code>"pion"</code></td>
+    <td>WebRTC media engine to use. Only applies to the PRO edition. Options: <ul><li><code>pion</code> - Default media engine.</li><li><code>mediasoup</code> - Alternative media engine with different performance characteristics.</li></ul></td>
     </tr>
     <tr>
     <td style="white-space: nowrap;"><code>certificateType</code></td>
@@ -186,9 +206,18 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the instance — if exposed, unauthorized users could gain access.
-    <figure markdown>
-    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
-    </figure>
+
+    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+
+        <figure markdown>
+        ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
+        </figure>
+
+    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+
+        <figure markdown>
+        ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key-pro.png){ .svg-img .dark-img }
+        </figure>
 
 5. Set the correct permissions on the SSH key so it can be used.
 

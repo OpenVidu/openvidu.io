@@ -361,6 +361,7 @@ def test_the_real_config_declares_the_expansions(config):
         "removed-provider-index",
         "merged-single-node-upgrade",
         "split-single-node-upgrade",
+        "single-node-pro-provider-pages-merged",
         "meet-was-openvidu-call",
         "legacy-patch-folders",
         "unversioned-pages",

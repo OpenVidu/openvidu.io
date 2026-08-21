@@ -226,7 +226,7 @@ Once your server is up and running, there are a few things you can do to get mor
 
 This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](/docs/self-hosting/deployment-types.md):
 
-- **[OpenVidu Single Node PRO](/docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability. 
+- **[OpenVidu Single Node PRO](/docs/self-hosting/single-node/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability. 
 - **[OpenVidu Elastic](/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
 - **[OpenVidu High Availability](/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
 - **[OpenVidu Local](/docs/self-hosting/local.md)**: a development setup for your own laptop. 

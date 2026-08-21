@@ -1,9 +1,9 @@
 ---
-title: "Administer OpenVidu Single Node COMMUNITY on Oracle Cloud"
-description: "Administer OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
+title: "Administer OpenVidu Single Node on Oracle Cloud"
+description: "Administer OpenVidu Single Node on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> administration: Oracle Cloud Infrastructure
+# OpenVidu Single Node administration: Oracle Cloud Infrastructure
 
 --8<-- "shared/self-hosting/oracle/provider-chip.md"
 
@@ -21,9 +21,17 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Compute instance that runs OpenVidu.
     3. Click the three-dots action menu next to the instance and select _"Stop"_ to stop the instance (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance.png){ .svg-img .dark-img }
-    </figure>
+    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+
+        <figure markdown>
+        ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance.png){ .svg-img .dark-img }
+        </figure>
+
+    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+
+        <figure markdown>
+        ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance-pro.png){ .svg-img .dark-img }
+        </figure>
 
 === "Start OpenVidu Single Node"
 
@@ -31,9 +39,17 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Compute instance that runs OpenVidu.
     3. Click the three-dots action menu next to the instance and select _"Start"_ to start the instance (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance.png){ .svg-img .dark-img }
-    </figure>
+    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+
+        <figure markdown>
+        ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance.png){ .svg-img .dark-img }
+        </figure>
+
+    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+
+        <figure markdown>
+        ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance-pro.png){ .svg-img .dark-img }
+        </figure>
 
 ## Change the instance shape
 
@@ -44,10 +60,16 @@ You can change the shape (instance type) of the OpenVidu Single Node instance to
 3. [Stop](#stop-openvidu-single-node) the instance if it is not already stopped. Wait for it to reach the **Stopped** state.
 4. Click on the instance name to open its details, then click _"Edit"_ next to the **Shape** field and select the new shape.
 
-    === "Change instance shape"
+    === "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
 
         <figure markdown>
         ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape.png){ .svg-img .dark-img }
+        </figure>
+
+    === "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+
+        <figure markdown>
+        ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape-pro.png){ .svg-img .dark-img }
         </figure>
 
 5. Confirm the new shape and [start](#start-openvidu-single-node) the instance again.

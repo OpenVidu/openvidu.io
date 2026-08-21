@@ -128,7 +128,7 @@ nav:
                   - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
                   - Grafana Stack: docs/self-hosting/production-ready/observability/grafana-stack.md
           - Local (Development): docs/self-hosting/local.md
-          - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node:
+          - Single Node:
               - docs/self-hosting/single-node/index.md
               - On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
@@ -149,27 +149,6 @@ nav:
                   - Install: docs/self-hosting/single-node/oracle/install.md
                   - Administration: docs/self-hosting/single-node/oracle/admin.md
               - Upgrade: docs/self-hosting/single-node/upgrade.md
-          - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
-              - docs/self-hosting/single-node-pro/index.md
-              - On Premises:
-                  - Install: docs/self-hosting/single-node-pro/on-premises/install.md
-                  - Administration: docs/self-hosting/single-node-pro/on-premises/admin.md
-              - AWS:
-                  - Install: docs/self-hosting/single-node-pro/aws/install.md
-                  - Administration: docs/self-hosting/single-node-pro/aws/admin.md
-              - Azure:
-                  - Install: docs/self-hosting/single-node-pro/azure/install.md
-                  - Administration: docs/self-hosting/single-node-pro/azure/admin.md
-              - GCP:
-                  - Install: docs/self-hosting/single-node-pro/gcp/install.md
-                  - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
-              - DigitalOcean:
-                  - Install: docs/self-hosting/single-node-pro/digitalocean/install.md
-                  - Administration: docs/self-hosting/single-node-pro/digitalocean/admin.md
-              - Oracle:
-                  - Install: docs/self-hosting/single-node-pro/oracle/install.md
-                  - Administration: docs/self-hosting/single-node-pro/oracle/admin.md
-              - Upgrade: docs/self-hosting/single-node-pro/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
@@ -516,7 +495,6 @@ plugins:
         - docs/self-hosting/deployment-types.md
         - docs/self-hosting/local.md
         - docs/self-hosting/single-node/index.md
-        - docs/self-hosting/single-node-pro/index.md
         - docs/self-hosting/elastic/index.md
         - docs/self-hosting/ha/index.md
 
@@ -530,13 +508,9 @@ plugins:
         - docs/self-hosting/how-to-guides/*.md
         - docs/troubleshooting/*.md
 
-        OpenVidu Single Node COMMUNITY deployment guides:
+        OpenVidu Single Node deployment guides:
         - docs/self-hosting/single-node/upgrade.md
         - docs/self-hosting/single-node/*/*.md
-
-        OpenVidu Single Node PRO deployment guides:
-        - docs/self-hosting/single-node-pro/upgrade.md
-        - docs/self-hosting/single-node-pro/*/*.md
 
         OpenVidu Elastic deployment guides:
         - docs/self-hosting/elastic/*/*.md

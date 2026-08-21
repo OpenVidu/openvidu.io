@@ -35,7 +35,7 @@ shared/
 
 Conventions inside `self-hosting/`:
 
-- **Provider folders mirror the provider names of the docs tree** (`docs/docs/self-hosting/{single-node,single-node-pro,elastic,ha}/<provider>/`). A snippet lives in a provider folder when all its host pages belong to that provider, no matter how many deployment types include it — that cross-deployment-type reuse is precisely why these snippets exist.
+- **Provider folders mirror the provider names of the docs tree** (`docs/docs/self-hosting/{single-node,elastic,ha}/<provider>/`). A snippet lives in a provider folder when all its host pages belong to that provider, no matter how many deployment types include it — that cross-deployment-type reuse is precisely why these snippets exist.
 - **Filenames don't repeat the folder name**: `aws/troubleshooting.md`, not `aws/aws-troubleshooting.md`.
-- **A `single-node/` subfolder inside a provider folder** holds snippets used only by that provider's `single-node/` + `single-node-pro/` pages (e.g. `aws/single-node/config.md`, `on-premises/single-node/upgrade.md`).
+- **A `single-node/` subfolder inside a provider folder** holds snippets used only by that provider's `single-node/` pages (e.g. `aws/single-node/config.md`, `on-premises/single-node/upgrade.md`).
 - **`common/` is for snippets spanning several providers** or used outside the self-hosting section (e.g. `restart-openvidu-deployment.md` is included from AI and Meet pages).
