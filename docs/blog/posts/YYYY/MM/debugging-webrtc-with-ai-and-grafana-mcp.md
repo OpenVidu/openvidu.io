@@ -40,11 +40,15 @@ We know that pain, which is why every OpenVidu deployment ships with a full [obs
 
 So we tried handing that job to an AI agent. This is known as AIOps, using AI to operate and troubleshoot running systems. We ran a small, informal test to see what an agent can do.
 
+!!! warning "An important note on privacy"
+
+    When you hand an agent your metrics and logs, that data leaves for the model provider. If your observability carries sensitive information (room IDs, IPs, user data), make sure you use a provider with a solid privacy policy and a no-training-on-your-data commitment. And if you'd rather nothing leaves your network at all, you can always run the agent harness with a local model: same workflow, same MCPs, without a single log going out.
+
 ## How we ran it
 
 An agent harness (here, Claude Code) normally lets an LLM run commands, write files, and act on a machine on its own. We took all of that away. The agent got exactly one tool: the [Grafana MCP](https://github.com/grafana/mcp-grafana){:target="_blank"} (Model Context Protocol, the standard way to give an agent access to a tool) pointed at the deployment's Grafana in read-only mode. No shell, no files, no source code, no config. We launched it with `--strict-mcp-config` so no other tool could sneak in, disabled the Bash and file tools, and put only two things in the prompt: the operator's one-sentence complaint and the Grafana URL. The agent had no context about the underlying issue.
 
-The deployment under test is a real **OpenVidu Single Node Community** stack (the free edition) running inside a simulated VM, [openvidu-fake-vm](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}, with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
+The deployment under test is a real [**OpenVidu Single Node Community**](/docs/self-hosting/single-node/index.md) stack (the free edition) running inside a simulated VM, [openvidu-fake-vm](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}, with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
 
 We broke it in five ways, one at a time:
 
@@ -58,7 +62,7 @@ Each fault ran twice, with the same prompt, the same deployment, and the same mo
 
 ## Watching Claude debug, live
 
-For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run.
+For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/prompts/scenarios.yaml){:target="_blank"}, alongside the answer key we graded each run against.
 
 ### Fault 1: Blocked media (ICE)
 
@@ -222,10 +226,6 @@ Want this on your own OpenVidu? Four steps:
 4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
 
 That's it: the same setup you saw throughout this post, pointed at your own deployment.
-
-## An important note on privacy
-
-When you hand an agent your metrics and logs, that data leaves for the model provider. If your observability carries sensitive information (room IDs, IPs, user data), make sure you use a provider with a solid privacy policy and a no-training-on-your-data commitment. And if you'd rather nothing leaves your network at all, you can always run the agent harness with a local model: same workflow, same MCPs, without a single log going out.
 
 ## Conclusion
 
