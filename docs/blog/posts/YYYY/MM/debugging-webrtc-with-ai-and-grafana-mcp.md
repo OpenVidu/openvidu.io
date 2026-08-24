@@ -58,11 +58,11 @@ We broke it in five ways, one at a time:
 - An ingress fed a bad stream key: the RTMP publish never lands in the room.
 - Recordings refused: a bogus "CPU exhausted" error caused by a bad config value.
 
-Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"}, that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, it got two of them wrong.
+Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"}, that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, it got two of them wrong.
 
 ## Watching Claude debug, live
 
-For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/prompts/scenarios.yaml){:target="_blank"}, alongside the answer key we graded each run against.
+For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/prompts/scenarios.yaml){:target="_blank"}, alongside the answer key we graded each run against.
 
 ### Fault 1: Blocked media (ICE)
 
@@ -173,7 +173,7 @@ The two tricky faults are where the skill mattered most: on **congestion** it re
 
 ## Reproduce the whole thing yourself
 
-Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab){:target="_blank"}, that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab creates its own).
+Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/tree/v0.1.0){:target="_blank"}, that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab creates its own).
 
 **What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full [observability module](/docs/self-hosting/production-ready/observability/index.md) (Grafana + Prometheus + Loki). What makes this feel like a real deployment?
 
@@ -183,7 +183,7 @@ Everything you just watched, you can run on your own machine. We packaged the ex
 **Run it.** Three commands from a cold start:
 
 ```bash
-git clone https://github.com/openvidu-labs/openvidu-grafana-mcp-lab
+git clone --branch v0.1.0 https://github.com/openvidu-labs/openvidu-grafana-mcp-lab
 cd openvidu-grafana-mcp-lab
 ./up.sh                    # VM + OpenVidu Community + read-only Grafana token (first run ~15 min)
 ```
@@ -230,7 +230,7 @@ Want this on your own OpenVidu? Four steps:
 
     `--disable-write` plus the Viewer token keep it read-only. Check it with `/mcp` in Claude Code and ask it to *"list the datasources."*
 
-4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
+4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
 
 That's it: the same setup you saw throughout this post, pointed at your own deployment.
 
