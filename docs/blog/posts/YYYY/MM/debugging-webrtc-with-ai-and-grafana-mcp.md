@@ -29,7 +29,7 @@ hide:
 
 What if you gave an AI agent nothing but **read-only access to your Grafana**, pointed it at a WebRTC deployment it had never seen, and asked what was broken? No shell, no source code, no config files, nothing but the dashboards and logs any on-call engineer would stare at. Could it actually find the root cause?
 
-That is the experiment we ran at OpenVidu. We took a real OpenVidu deployment, broke it on purpose in five different ways, and handed a blind Claude Code session a single vague complaint and a link to Grafana. This post walks through what it found, where it shined and where it fell flat, and it ships with a companion repo so you can reproduce every bit of it yourself.
+That is the experiment we ran at OpenVidu. We took a real OpenVidu deployment, broke it on purpose in five different ways, and handed a blind Claude Code session a single vague complaint and a link to Grafana. This post walks through what it found, where it shone and where it fell flat, and it ships with a companion repo so you can reproduce every bit of it yourself.
 <!-- more -->
 
 ## Debugging web apps is hard, debugging WebRTC apps is harder
@@ -96,7 +96,7 @@ That's where the skill mattered. The skilled session correctly identified it as 
 
 > *"After a brief blip, no new rooms or recordings will start at all, existing stuff is limping. Here's Grafana: https://10-5-0-3.openvidu-local.dev/grafana/. What's broken?"*
 
-**What it found:** both nailed it. Redis is unreachable on `127.0.0.1:7000`, and both spotted the key tell (`connection refused` is an active reject (process down), not a timeout (network)) so the fix is *restart Redis*; the one already-running call survives because media (RTP) flows peer↔SFU and doesn't go through Redis, while new rooms and recordings can't start.
+**What it found:** both nailed it. Redis is unreachable on `127.0.0.1:7000`, and both spotted the key tell: `connection refused` is an active reject, not a network timeout, so the process is down, not the network. The fix is to *restart Redis*. The one already-running call survives because media (RTP) flows peer↔SFU and never goes through Redis, while new rooms and recordings can't start.
 
 Both reached the same right answer.
 
@@ -148,8 +148,6 @@ One clear pattern emerged: **with the skill, the agent got every scenario right.
 | Redis down | loud but logs-only | ✅ found | ✅ found |
 | Ingress bad stream key | logs-only but explicit | ✅ found | ✅ found |
 | Recordings refused ("CPU exhausted") | logs-only but explicit | ❌ took the error at face value | ✅ saw past the error |
-
-A couple of things stand out. On the **loud/explicit** faults (ICE, Redis, ingress) both arms reach the right answer.
 
 On the **congestion** fault the skill earns its keep on *correctness*: both saw the one-directional packet loss, but only the skilled session reliably placed it on the server side, while the bare one often blamed the callers' own networks.
 
