@@ -52,7 +52,7 @@ We decided to connect an agent harness (in this blog's case, Claude Code) to a l
 
 It found the problem. With nothing but metrics and logs, it concluded that the media path was blocked on the server side, which is *exactly* what we'd done. We replay that run in full as Fault 1 below.
 
-Then we did it again with a twist: the same session, but this time with a small **skill** that teaches it how OpenVidu's observability is laid out. On most faults it was just faster. On one, the ambiguous-signal case, it was the difference between the right answer and a convincing but wrong one.
+Then we did it again with a twist: the same session, but this time with a small **skill** that teaches it how OpenVidu's observability is laid out. With it, the agent got every scenario right, and on the tricky ones it was the difference between the right answer and a convincing but wrong one.
 
 Why not improve the experience of operating an OpenVidu deployment simply by giving an agent harness read-only access to the observability stack?
 
@@ -86,8 +86,6 @@ For each fault you'll see three things: **what we broke**, **the exact prompt** 
 
 And here's the honest part: **neither could see the firewall rule itself** (a dropped packet logs no reason), so both pinned the cause on the *nearest visible thing*, the SFU advertising Docker-internal IPs (`10.5.0.3`, `172.17.0.1`) as ICE candidates, and recommended fixing that config so it advertised a reachable IP, plus opening the media ports. They pointed at the right area, which is exactly as far as observability reaches: it localizes the effect but not a cause that leaves no trace.
 
-The skilled session got there in **28 calls**; the bare one took **49**, much of it chasing the `172.17.0.1` candidate warning down a dead end.
-
 <figure markdown>
 ![Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-1-ice.webp)
 <figcaption>Loki, the instant media breaks: the SFU floods ICE/DTLS timeouts. People joined the room, but no media path could form.</figcaption>
@@ -99,9 +97,9 @@ The skilled session got there in **28 calls**; the bare one took **49**, much of
 
 > *"Users say calls have been choppy and freezing for the last hour or so. Here's our Grafana. Is the problem on our side or theirs?"*
 
-**What it found:** both answered the operator's real question, *"us or them?"*, correctly: **it's us.** Both split the quality metrics by direction and saw a clean, one-directional story: 0% loss on the uplink, **12→23% loss on the downlink** with jitter and a NACK/PLI-retransmit storm, all at ~7 Mbps and ~4% CPU, so *not* capacity, and not the callers' networks (a client problem wouldn't be systematic across every subscriber).
+**What it found:** the skilled session answered the operator's real question, *"us or them?"*, correctly: **it's us.** It split the quality metrics by direction and saw a clean, one-directional story: 0% loss on the uplink, **12→23% loss on the downlink** with jitter and a NACK/PLI-retransmit storm, all at ~7 Mbps and ~4% CPU, so *not* capacity, and not the callers' networks (a client problem wouldn't be systematic across every subscriber).
 
-That's where the skill mattered. The **skilled** session (25 calls) named the mechanism: a network impairment / traffic-shaping on the host path, which is exactly the injected fault. The **bare** session (35 calls) correctly ruled out the clients but pinned the root cause on the ICE-candidate config again (the same Docker-NAT red herring), which would have sent you tuning the wrong knob.
+That's where the skill mattered. The skilled session correctly identified it as a server-side problem, not the callers. The bare session was unreliable: in repeated runs it often pinned the blame on the users' own networks, the confidently wrong answer that would have sent you chasing your customers instead of your server.
 
 <figure markdown>
 ![Grafana chart showing average packet loss jumping from zero to ten percent](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-2-congestion.webp)
@@ -116,7 +114,7 @@ That's where the skill mattered. The **skilled** session (25 calls) named the me
 
 **What it found:** both nailed it. Redis is unreachable on `127.0.0.1:7000`, and both spotted the key tell (`connection refused` is an active reject (process down), not a timeout (network)) so the fix is *restart Redis*; the one already-running call survives because media (RTP) flows peer↔SFU and doesn't go through Redis, while new rooms and recordings can't start.
 
-The **skilled** session solved it in **21 calls** and the **bare** one in **29**, both reaching the same right answer.
+Both reached the same right answer.
 
 <figure markdown>
 ![Grafana Loki logs showing every service logging connection refused on port 7000](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-3-redis.webp)
@@ -129,7 +127,7 @@ The **skilled** session solved it in **21 calls** and the **bare** one in **29**
 
 > *"We're trying to bring an RTMP stream into a room and it just won't come through, the room stays empty. Grafana. Can you see why the ingest is failing?"*
 
-**What it found:** both solved it, fast and clean (skilled **11 calls**, bare **16**). The RTMP connection reaches the server but the publish is rejected with `ingress does not exist` for stream key `BADKEY123`. Both correctly called it a **client-side** problem, the encoder is using a key that was never issued; create the ingress via the API first, then point the encoder at the returned key, and confirmed the server pipeline (ingress, Redis, RTMP) is healthy. Here the signal, though logs-only, is **explicit**, so even the bare model reads it without breaking a sweat.
+**What it found:** both solved it, fast and clean. The RTMP connection reaches the server but the publish is rejected with `ingress does not exist` for stream key `BADKEY123`. Both correctly called it a **client-side** problem, the encoder is using a key that was never issued; create the ingress via the API first, then point the encoder at the returned key, and confirmed the server pipeline (ingress, Redis, RTMP) is healthy. Here the signal, though logs-only, is **explicit**, so even the bare model reads it without breaking a sweat.
 
 <figure markdown>
 ![Grafana Loki logs showing the ingress rejecting a publish with a bad stream key](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-4-ingress.webp)
@@ -144,11 +142,11 @@ It's the kind of fat-fingered config value that produces a real, scary-looking s
 
 > *"Our recordings stopped working since about 13:00, the calls themselves are totally fine, but nothing gets recorded anymore. Can you dig into Grafana and tell me why the recordings won't start?"*
 
-**What it found:** both got it, and (the nice part) **neither took the error message at face value.** They found egress logging *"not enough cpu for some egress types"* and *"can not accept request … reason: cpu … not enough CPU"*, and the SFU logging `StartEgress … request canceled` after a 10-second wait.
+**What it found:** the skilled session got it, and (the nice part) **it didn't take the error message at face value.** It found egress logging *"not enough cpu for some egress types"* and *"can not accept request … reason: cpu … not enough CPU"*, and the SFU logging `StartEgress … request canceled` after a 10-second wait.
 
-But instead of concluding "add more CPU," both spotted the tell: the log says the job *requires 100 CPUs while 16 are available*, a nonsensical demand on an almost-idle host. Both correctly diagnosed it as a **bad `cpu_cost` config value** (one even spotted the exact restart where the node came up with `max cost: 100` instead of the healthy `2`), and both explicitly warned *not* to scale the hardware: *"you'd need >100 vCPUs to satisfy a cost of 100; the config value is what's wrong, not the box."*
+Instead of concluding "add more CPU," the skilled session spotted the tell: the log says the job *requires 100 CPUs while 16 are available*, a nonsensical demand on an almost-idle host. It correctly diagnosed a **bad `cpu_cost` config value** (spotting the exact restart where the node came up with `max cost: 100` instead of the healthy `2`), and explicitly warned *not* to scale the hardware: *"the config value is what's wrong, not the box."* The bare session took the error at face value and recommended adding CPU, the expensive wrong fix.
 
-The skilled session got there in **10 calls**, the bare one in **20**. A reassuring result: handed a loud, misleading error, the model reasoned past it to the real cause.
+A reassuring result: handed a loud, misleading error, the skilled session reasoned past it to the real cause.
 
 <figure markdown>
 ![Grafana Loki logs showing egress refusing recordings with a not enough CPU error](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-5-cpu.webp)
@@ -157,21 +155,21 @@ The skilled session got there in **10 calls**, the bare one in **20**. A reassur
 
 ## The scorecard (and where it failed)
 
-Two clear patterns emerged. **The skill made every session more efficient**, 25% to 50% fewer calls on every single fault, and on the one fault where the cause was ambiguous it was also the difference between the right root cause and a plausible but wrong reading.
+One clear pattern emerged: **with the skill, the agent got every scenario right.** On the two tricky faults it was also the difference between the right root cause and a plausible but wrong reading.
 
 | Fault | Signal | Bare MCP | With skill |
 |---|---|---|---|
-| Blocked media ports (ICE) | loud (metric + logs) | ✅ localized (49 calls) | ✅ localized (28 calls) |
-| Network congestion | loud (metric) | ⚠️ right symptom, wrong cause (35 calls) | ✅ named the mechanism (25 calls) |
-| Redis down | loud but logs-only | ✅ found (29 calls) | ✅ found (21 calls) |
-| Ingress bad stream key | logs-only but explicit | ✅ found (16 calls) | ✅ found (11 calls) |
-| Recordings refused ("CPU exhausted") | logs-only but explicit | ✅ found, saw past the error (20 calls) | ✅ found, saw past the error (10 calls) |
+| Blocked media ports (ICE) | loud (metric + logs) | ✅ localized | ✅ localized |
+| Network congestion | loud (metric) | ⚠️ often blamed the users | ✅ found (server-side) |
+| Redis down | loud but logs-only | ✅ found | ✅ found |
+| Ingress bad stream key | logs-only but explicit | ✅ found | ✅ found |
+| Recordings refused ("CPU exhausted") | logs-only but explicit | ❌ took the error at face value | ✅ saw past the error |
 
-A couple of things stand out. On the **loud/explicit** faults (ICE, Redis, ingress, the recording refusal) both arms reach the right answer; the skill just gets there in half to two-thirds the calls.
+A couple of things stand out. On the **loud/explicit** faults (ICE, Redis, ingress) both arms reach the right answer.
 
-On the **congestion** fault the skill earns its keep on *correctness*: both saw the one-directional packet loss, but only the skilled session named it as network shaping, the bare one drifted back to the ICE-candidate config it had latched onto earlier.
+On the **congestion** fault the skill earns its keep on *correctness*: both saw the one-directional packet loss, but only the skilled session reliably placed it on the server side, while the bare one often blamed the callers' own networks.
 
-And the recording refusal was, quietly, the most encouraging result: handed a big *"not enough CPU"* error, **both** sessions recognized it as a nonsensical config value (100 CPUs required, 16 available) rather than a real shortage, and told us to fix the config, not buy hardware.
+And the recording refusal was, quietly, the most revealing result: handed a big *"not enough CPU"* error, the skilled session recognized it as a nonsensical config value (100 CPUs required, 16 available) rather than a real shortage, and told us to fix the config, not buy hardware. The bare session took the error at face value and told us to add CPU.
 
 **Be honest about the limits.** A few things this approach *cannot* do, and we won't pretend otherwise:
 
@@ -247,7 +245,7 @@ That's it: the same setup you saw throughout this post, pointed at your own depl
 
 Let's go back to the question we opened with: can an AI agent, with nothing but read-only access to Grafana, understand what's wrong with a WebRTC cluster it has never seen?
 
-The short answer is yes, and surprisingly well. In almost every scenario the agent walked the metrics, jumped to the logs, and reached the right cause, often with just a handful of queries. With the domain skill it was even faster and, in the confusing congestion case, it was the difference between naming the real mechanism and settling for a plausible but wrong explanation. And our favorite part: when we handed it a misleading error (*"not enough CPU"*), it didn't take the bait; it reasoned that asking for 100 CPUs when you only have 16 makes no sense, and pointed at the configuration, not the hardware.
+The short answer is yes, and surprisingly well. In almost every scenario the agent walked the metrics, jumped to the logs, and reached the right cause, often with just a handful of queries. With the domain skill it got every scenario right, and in the confusing congestion case it was the difference between correctly blaming the server and settling for a plausible but wrong explanation. And our favorite part: when we handed it a misleading error (*"not enough CPU"*), the skilled session didn't take the bait; it reasoned that asking for 100 CPUs when you only have 16 makes no sense, and pointed at the configuration, not the hardware.
 
 But let's be honest, which is exactly the honesty we felt was missing at the start: this doesn't replace your judgment. An agent that only reads Grafana inherits Grafana's blind spots. What isn't in a metric or a log, it won't see, and when there's no signal it can hand you a beautiful, wrong answer with total confidence. It's great for first-pass triage, for answering *"is it us or them?"*, for narrowing a vague complaint down to a subsystem and a node. For everything else, it's still you.
 
