@@ -36,7 +36,7 @@ That is the experiment we ran at OpenVidu. We took a real OpenVidu deployment, b
 
 Most web developers live in HTTP, frontend code, and database queries. The network environment, where the media actually flows, stays someone else's problem right up until a call breaks. WebRTC drags all of it into the foreground: ICE, DTLS, the SFU, packet loss, jitter, bandwidth, CPU. When something fails, the cause is usually buried somewhere in that stack, and reading it takes experience most teams simply don't have.
 
-We know that pain, which is why every OpenVidu deployment ships with a full [observability stack](/docs/self-hosting/production-ready/observability/index.md) (Grafana, Mimir, Loki) so our users can see what their media servers are actually doing. Turning those logs and metrics into a diagnosis, though, still takes a human who knows where to look.
+We know that pain, which is why every OpenVidu deployment ships with a full [observability stack](/docs/self-hosting/production-ready/observability/index.md) (Grafana, Prometheus, Loki) so our users can see what their media servers are actually doing. Turning those logs and metrics into a diagnosis, though, still takes a human who knows where to look.
 
 So we tried handing that job to an AI agent. This is what people call AIOps, using AI to operate and troubleshoot running systems, and it is a harder problem than the code generation that coding agents have gotten good at. Both have benchmarks, but the AIOps ones are still rough and nowhere near a shared standard, so we measured our own case directly: given nothing but read-only Grafana, can an agent diagnose a broken OpenVidu deployment?
 
@@ -87,7 +87,7 @@ That's where the skill mattered. The skilled session correctly identified it as 
 
 <figure markdown>
 ![Grafana chart showing average packet loss jumping from zero to ten percent](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-2-congestion.webp)
-<figcaption>Metrics (Mimir): average packet loss jumps from ~0 to ~10% the moment the link degrades. All of it is on the downlink; the uplink stays at 0, which is why the per-direction breakdown in the text reaches 23%. The calls connect fine, they just fall apart.</figcaption>
+<figcaption>Metrics (Prometheus): average packet loss jumps from ~0 to ~10% the moment the link degrades. All of it is on the downlink; the uplink stays at 0, which is why the per-direction breakdown in the text reaches 23%. The calls connect fine, they just fall apart.</figcaption>
 </figure>
 
 ### Fault 3: Redis down (coordination plane)
@@ -166,7 +166,7 @@ And the recording refusal was, quietly, the most revealing result: handed a big 
 
 Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab){:target="_blank"}, that stands up a complete lab and breaks it for you, one command at a time. The only things you need installed are Docker and Claude Code; the Grafana MCP, the load generator, and everything else run in containers, and there are no credentials to configure (the lab mints its own).
 
-**What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full observability module (Grafana + Mimir + Loki). The clever bits that make it feel real:
+**What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full observability module (Grafana + Prometheus + Loki). The clever bits that make it feel real:
 
 - The VM ([`openvidu-fake-vm`](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}) comes up on a fixed IP and answers on a real, trusted HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
 - Everything is fixed and scripted: the LiveKit keys, the Grafana admin, and a read-only Grafana token minted straight into the two `.mcp.json` arms. Nothing to click.
