@@ -34,15 +34,15 @@ That is the experiment we ran at OpenVidu. We took a real OpenVidu deployment, b
 
 ## Debugging web apps is hard, debugging WebRTC apps is harder
 
-Most web developers live in HTTP, frontend code, and database queries. The network environment, where the media actually flows, stays someone else's problem right up until a call breaks. WebRTC drags all of it into the foreground: ICE, DTLS, the SFU, packet loss, jitter, bandwidth, CPU. When something fails, the cause is usually buried somewhere in that stack, and reading it takes experience most teams simply don't have.
+Most web developers live in basic HTTP backend APIs, frontend code, and database queries. The network environment, where the media actually flows, stays someone else's problem right up until a call breaks. WebRTC drags all of it into the foreground: ICE, DTLS, the SFU, packet loss, jitter, bandwidth, CPU. When something fails, the cause is usually buried somewhere in that stack, and reading it takes experience most teams simply don't have.
 
 We know that pain, which is why every OpenVidu deployment ships with a full [observability stack](/docs/self-hosting/production-ready/observability/index.md) (Grafana, Prometheus, Loki) so our users can see what their media servers are actually doing. Turning those logs and metrics into a diagnosis, though, still takes a human who knows where to look.
 
-So we tried handing that job to an AI agent. This is what people call AIOps, using AI to operate and troubleshoot running systems, and it is a harder problem than the code generation that coding agents have gotten good at. Both have benchmarks, but the AIOps ones are still rough and nowhere near a shared standard, so we measured our own case directly: given nothing but read-only Grafana, can an agent diagnose a broken OpenVidu deployment?
+So we tried handing that job to an AI agent. This is known as AIOps, using AI to operate and troubleshoot running systems. We ran a small, informal test to see what an agent can do.
 
 ## How we ran it
 
-An agent harness (here, Claude Code) normally lets an LLM run commands, write files, and act on a machine on its own. We took all of that away. The agent got exactly one tool: the [Grafana MCP](https://github.com/grafana/mcp-grafana){:target="_blank"} (Model Context Protocol, the standard way to give an agent access to a tool) pointed at the deployment's Grafana in read-only mode. No shell, no files, no source code, no config. We launched it with `--strict-mcp-config` so no other tool could sneak in, disabled the Bash and file tools, and put only two things in the prompt: the operator's one-sentence complaint and the Grafana URL. Nothing told it a fault even existed.
+An agent harness (here, Claude Code) normally lets an LLM run commands, write files, and act on a machine on its own. We took all of that away. The agent got exactly one tool: the [Grafana MCP](https://github.com/grafana/mcp-grafana){:target="_blank"} (Model Context Protocol, the standard way to give an agent access to a tool) pointed at the deployment's Grafana in read-only mode. No shell, no files, no source code, no config. We launched it with `--strict-mcp-config` so no other tool could sneak in, disabled the Bash and file tools, and put only two things in the prompt: the operator's one-sentence complaint and the Grafana URL. The agent had no context about the underlying issue.
 
 The deployment under test is a real **OpenVidu Single Node Community** stack (the free edition) running inside a simulated VM, [openvidu-fake-vm](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}, with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
 
@@ -54,21 +54,21 @@ We broke it in five ways, one at a time:
 - An ingress fed a bad stream key: the RTMP publish never lands in the room.
 - Recordings refused: a bogus "CPU exhausted" error caused by a bad config value.
 
-Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a single page of OpenVidu domain knowledge: a **skill** we wrote, `openvidu-grafana-triage`, that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. Both live in the [companion repo](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab){:target="_blank"}, so you can rerun any of this yourself. With the skill it got all five right; without it, two of them tripped it up.
+Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"}, that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, two of them tripped it up.
 
 ## Watching Claude debug, live
 
-For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints.
+For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run.
 
 ### Fault 1: Blocked media (ICE)
 
 **What we broke:** we firewalled off the WebRTC media ports on the machine. Signaling still worked, so people joined the room but couldn't see or hear each other.
 
-> *"Our video calls are broken since about 14:30, people join the room but nobody can see or hear anyone. It worked this morning. You've got access to our Grafana. Can you investigate and tell me what's going on?"*
+> *"Our video calls are broken since about HH:MM, people join the room but nobody can see or hear anyone. It worked earlier today. You've got access to our Grafana at https://10-5-0-3.openvidu-local.dev/grafana/. Can you dig in and tell me what's going on?"*
 
 **What it found:** both sessions localized it correctly. They saw participants climbing while `livekit_packet_bytes` stayed flat, jumped to the logs, found ICE/DTLS timing out (`context deadline exceeded`, *"Failed to ping without candidate pairs"*) and concluded (correctly) that the media path was unreachable and it was a server-side networking problem, not the callers'.
 
-And here's the honest part: **neither could see the firewall rule itself** (a dropped packet logs no reason), so both pinned the cause on the *nearest visible thing*, the SFU advertising Docker-internal IPs (`10.5.0.3`, `172.17.0.1`) as ICE candidates, and recommended fixing that config so it advertised a reachable IP, plus opening the media ports. They pointed at the right area, which is exactly as far as observability reaches: it localizes the effect but not a cause that leaves no trace.
+But **neither session could see the firewall rule itself** (a dropped packet logs no reason), so both pinned the cause on the *nearest visible thing*, the SFU advertising Docker-internal IPs (`10.5.0.3`, `172.17.0.1`) as ICE candidates, and recommended fixing that config so it advertised a reachable IP, plus opening the media ports. They pointed at the right area, which is exactly as far as observability reaches: it localizes the effect but not a cause that leaves no trace.
 
 <figure markdown>
 ![Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-1-ice.webp)
@@ -79,7 +79,7 @@ And here's the honest part: **neither could see the firewall rule itself** (a dr
 
 **What we broke:** we injected packet loss and jitter (with `tc netem`) on the machine's outbound network path, simulating a congested uplink.
 
-> *"Users say calls have been choppy and freezing for the last hour or so. Here's our Grafana. Is the problem on our side or theirs?"*
+> *"Users say calls have been choppy and freezing for the last hour or so. Here's our Grafana: https://10-5-0-3.openvidu-local.dev/grafana/. Is the problem on our side or theirs?"*
 
 **What it found:** the skilled session answered the operator's real question, *"us or them?"*, correctly: **it's us.** It split the quality metrics by direction and saw a clean, one-directional story: 0% loss on the uplink, **12→23% loss on the downlink** with jitter and a NACK/PLI-retransmit storm, all at ~7 Mbps and ~4% CPU, so *not* capacity, and not the callers' networks (a client problem wouldn't be systematic across every subscriber).
 
@@ -94,7 +94,7 @@ That's where the skill mattered. The skilled session correctly identified it as 
 
 **What we broke:** we killed Redis, which coordinates the whole deployment (room registration, routing, egress dispatch). Every service started logging `connection refused` on `:7000`.
 
-> *"After a brief blip, no new rooms or recordings will start, and the existing stuff is limping along. Here's Grafana. What's broken?"*
+> *"After a brief blip, no new rooms or recordings will start at all, existing stuff is limping. Here's Grafana: https://10-5-0-3.openvidu-local.dev/grafana/. What's broken?"*
 
 **What it found:** both nailed it. Redis is unreachable on `127.0.0.1:7000`, and both spotted the key tell (`connection refused` is an active reject (process down), not a timeout (network)) so the fix is *restart Redis*; the one already-running call survives because media (RTP) flows peer↔SFU and doesn't go through Redis, while new rooms and recordings can't start.
 
@@ -109,7 +109,7 @@ Both reached the same right answer.
 
 **What we broke:** we simulated a misconfigured streamer, an ffmpeg publishing to RTMP with the wrong stream key. Ingress rejects it every few seconds and the room stays empty. (Ingress has no metrics either, logs only.)
 
-> *"We're trying to bring an RTMP stream into a room and it just won't come through, the room stays empty. Grafana. Can you see why the ingest is failing?"*
+> *"We're trying to bring an RTMP stream into a room and it just won't come through, the room stays empty. Grafana: https://10-5-0-3.openvidu-local.dev/grafana/. Can you see why the ingest is failing?"*
 
 **What it found:** both solved it, fast and clean. The RTMP connection reaches the server but the publish is rejected with `ingress does not exist` for stream key `BADKEY123`. Both correctly called it a **client-side** problem, the encoder is using a key that was never issued; create the ingress via the API first, then point the encoder at the returned key, and confirmed the server pipeline (ingress, Redis, RTMP) is healthy. Here the signal, though logs-only, is **explicit**, so even the bare model reads it without breaking a sweat.
 
@@ -124,7 +124,7 @@ Both reached the same right answer.
 
 It's the kind of fat-fingered config value that produces a real, scary-looking symptom. Calls are unaffected; only recordings die.
 
-> *"Our recordings stopped working since about 13:00, the calls themselves are totally fine, but nothing gets recorded anymore. Can you dig into Grafana and tell me why the recordings won't start?"*
+> *"Our recordings stopped working since about HH:MM, the calls themselves are totally fine, but nothing gets recorded anymore. Can you dig into Grafana (https://10-5-0-3.openvidu-local.dev/grafana/) and tell me why the recordings won't start?"*
 
 **What it found:** the skilled session got it, and (the nice part) **it didn't take the error message at face value.** It found egress logging *"not enough cpu for some egress types"* and *"can not accept request … reason: cpu … not enough CPU"*, and the SFU logging `StartEgress … request canceled` after a 10-second wait.
 
@@ -153,22 +153,22 @@ A couple of things stand out. On the **loud/explicit** faults (ICE, Redis, ingre
 
 On the **congestion** fault the skill earns its keep on *correctness*: both saw the one-directional packet loss, but only the skilled session reliably placed it on the server side, while the bare one often blamed the callers' own networks.
 
-And the recording refusal was, quietly, the most revealing result: handed a big *"not enough CPU"* error, the skilled session recognized it as a nonsensical config value (100 CPUs required, 16 available) rather than a real shortage, and told us to fix the config, not buy hardware. The bare session took the error at face value and told us to add CPU.
+And the recording refusal was the most revealing result: handed a big *"not enough CPU"* error, the skilled session recognized it as a nonsensical config value (100 CPUs required, 16 available) rather than a real shortage, and told us to fix the config. The bare session took the error at face value and told us to add CPU.
 
-**Be honest about the limits.** A few things this approach *cannot* do, and we won't pretend otherwise:
+**Honest limits.** A few things this approach *cannot* do:
 
-- **Some root causes are invisible to Grafana, full stop.** A firewall rule doesn't log itself: in the ICE fault, the most either session could do was localize the *effect* ("media unreachable, check the firewall / the node's network config") and point at the right area; neither can read the `iptables` rule it will never see. When a cause leaves no trace in the data, expect a confident guess, not the truth, so verify infra out-of-band.
+- **Some root causes are invisible to Grafana.** A firewall rule doesn't log itself: in the ICE fault, the most either session could do was localize the *effect* ("media unreachable, check the firewall / the node's network config") and point at the right area; neither can read the `iptables` rule it will never see. When a cause leaves no trace in the data, expect a confident guess, not the truth, so verify infra out-of-band.
 - **A quiet environment full of benign warnings is a trap.** The Docker-internal ICE candidates you saw in the first two faults are harmless, but the bare model chased them as if they were the cause. The skill helped precisely because it knew what "normal noise" looks like.
 - **It can be confidently wrong.** The scariest failures weren't "I don't know," they were fluent, plausible, and wrong. Trust this to *localize* and to *draft a hypothesis*, then verify before you act.
 - **This is a lab.** A single Dockerized node with synthetic load is not your production network; ICE behind real NAT behaves differently, and our sample is small. Treat it as illustrative, not a benchmark.
 
 ## Reproduce the whole thing yourself
 
-Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab){:target="_blank"}, that stands up a complete lab and breaks it for you, one command at a time. The only things you need installed are Docker and Claude Code; the Grafana MCP, the load generator, and everything else run in containers, and there are no credentials to configure (the lab mints its own).
+Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab){:target="_blank"}, that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab mints its own).
 
-**What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full observability module (Grafana + Prometheus + Loki). The clever bits that make it feel real:
+**What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full observability module (Grafana + Prometheus + Loki). What makes this feel like a real deployment?
 
-- The VM ([`openvidu-fake-vm`](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}) comes up on a fixed IP and answers on a real, trusted HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
+- The VM ([`openvidu-fake-vm`](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}) comes up on a fixed IP and answers on a real HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
 - Everything is fixed and scripted: the LiveKit keys, the Grafana admin, and a read-only Grafana token minted straight into the two `.mcp.json` arms. Nothing to click.
 
 **Run it.** Three commands from a cold start:
@@ -221,23 +221,24 @@ Want this on your own OpenVidu? Four steps:
 
     `--disable-write` plus the Viewer token keep it read-only. Check it with `/mcp` in Claude Code and ask it to *"list the datasources."*
 
-4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/tree/main/mcp/with-skill/.claude/skills/openvidu-grafana-triage){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
+4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/main/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
 
 That's it: the same setup you saw throughout this post, pointed at your own deployment.
 
+## An important note on privacy
+
+When you hand an agent your metrics and logs, that data leaves for the model provider. If your observability carries sensitive information (room IDs, IPs, user data), make sure you use a provider with a solid privacy policy and a no-training-on-your-data commitment. And if you'd rather nothing leaves your network at all, you can always run the agent harness with a local model: same workflow, same MCPs, without a single log going out.
+
 ## Conclusion
 
-Let's go back to the question we opened with: can an AI agent, with nothing but read-only access to Grafana, understand what's wrong with a WebRTC deployment it has never seen?
+Back to the question we opened with: can an AI agent, with nothing but read-only access to Grafana, understand what's wrong with a WebRTC deployment it has never seen?
 
-The short answer is yes, and surprisingly well. In almost every scenario the agent walked the metrics, jumped to the logs, and reached the right cause, often with just a handful of queries. With the domain skill it got every scenario right, and in the confusing congestion case it was the difference between correctly blaming the server and settling for a plausible but wrong explanation. And our favorite part: when we handed it a misleading error (*"not enough CPU"*), the skilled session didn't take the bait; it reasoned that asking for 100 CPUs when you only have 16 makes no sense, and pointed at the configuration, not the hardware.
+The short answer is yes, and surprisingly well. In almost every scenario the agent walked the metrics, jumped to the logs, and reached the right cause, often with just a handful of queries. With the domain skill it got every scenario right, and in the confusing congestion case it was the difference between correctly blaming the server and settling for a plausible but wrong explanation. It even saw through the misleading *"not enough CPU"* error, blaming the config rather than the hardware.
 
-But let's be honest, which is exactly the honesty we felt was missing at the start: this doesn't replace your judgment. An agent that only reads Grafana inherits Grafana's blind spots. What isn't in a metric or a log, it won't see, and when there's no signal it can hand you a beautiful, wrong answer with total confidence. It's great for first-pass triage, for answering *"is it us or them?"*, for narrowing a vague complaint down to a subsystem and a node. For everything else, it's still you.
+But it doesn't replace your judgment. An agent that only reads Grafana inherits Grafana's blind spots. What isn't in a metric or a log, it won't see, and when there's no signal it can hand you a beautiful, wrong answer with total confidence. It's great for first-pass triage, for answering *"is it us or them?"*, for narrowing a vague complaint down to a subsystem and a node. For everything else, it's still you.
 
-And coming back to that developer who has never handled a media stream in their life: our bet is that tools like this lower the bar enormously. You no longer need to master ICE, DTLS, or the guts of the SFU to start understanding what's failing; you just need observability turned on and an agent to ask. It's all in a repo ready to reproduce, so break your own deployment, wire up Claude, and see for yourself.
+As for that developer who has never handled a media stream in their life: our bet is that tools like this lower the bar enormously. You no longer need to master ICE, DTLS, or the guts of the SFU to start understanding what's failing; you just need observability turned on and an agent to ask. It's all in a repo ready to reproduce, so break your own deployment, wire up Claude, and see for yourself.
 
-!!! warning "A note on privacy"
-    When you hand an agent your metrics and logs, that data leaves for the model provider. If your observability carries sensitive information (room IDs, IPs, user data), make sure you use a provider with a solid privacy policy and a no-training-on-your-data commitment. And if you'd rather nothing leaves your network at all, you can always run the agent harness with a local model: same workflow, same MCPs, without a single log going out.
+One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. Follow OpenVidu's releases and the blog if you want to see the rest as it lands.
 
-And one last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents know how to manage and operate OpenVidu stacks, and can help you build applications on top of OpenVidu. What you've seen here is an early taste, so follow OpenVidu's releases and blog if you want to see where it goes.
-
-*Now it's your turn: break your own and [tell us what you find](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues){:target="_blank"}. And may your on-calls be boring.* 😉
+*Now it's your turn: [tell us what you find](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues){:target="_blank"}. And may your on-calls be boring.* 😉
