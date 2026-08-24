@@ -8,6 +8,7 @@ cover_image: poster.webp
 categories:
     - Research
     - AI
+    - OpenVidu Platform
 tags:
     - WebRTC
     - Observability
