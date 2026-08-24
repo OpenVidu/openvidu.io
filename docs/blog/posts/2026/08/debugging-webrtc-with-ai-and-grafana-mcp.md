@@ -1,32 +1,35 @@
 ---
-title: "Debugging WebRTC with an AI agent and Grafana MCP"
+title: Debugging WebRTC with an AI agent and Grafana MCP
 draft: false
-date: 2026-08-21
+date: 2026-08-25
 slug: debugging-webrtc-with-ai-and-grafana-mcp
-description: "We give a Claude Code agent nothing but read-only Grafana and a broken OpenVidu deployment, then watch it find each root cause in a reproducible case study."
+description: >-
+  We give a Claude Code agent nothing but read-only Grafana and a broken
+  OpenVidu deployment, then watch it find each root cause in a reproducible case
+  study.
 cover_image: poster.webp
 categories:
-    - Research
-    - AI
-    - OpenVidu Platform
+  - Research
+  - AI
+  - OpenVidu Platform
 tags:
-    - WebRTC
-    - Observability
-    - Grafana
-    - MCP
-    - LiveKit
-    - AI agents
+  - WebRTC
+  - Observability
+  - Grafana
+  - MCP
+  - LiveKit
+  - AI agents
 authors:
-    - carlosRuiz
+  - carlosRuiz
 hide:
-    - navigation
-    - search-bar
-    - version-selector
+  - navigation
+  - search-bar
+  - version-selector
 ---
 
 # Debugging WebRTC with an AI agent and Grafana MCP
 
-![Debugging WebRTC with an AI agent and Grafana MCP: read-only Grafana, a broken deployment, and an agent that works through the metrics to find each root cause](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/poster.webp){ width=100% }
+![Debugging WebRTC with an AI agent and Grafana MCP: read-only Grafana, a broken deployment, and an agent that works through the metrics to find each root cause](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/poster.webp){ width=100% }
 
 What if you gave an AI agent nothing but **read-only access to your Grafana**, pointed it at a WebRTC deployment it had never seen, and asked what was broken? No shell, no source code, no config files, nothing but the dashboards and logs any on-call engineer would stare at. Could it actually find the root cause?
 
@@ -76,7 +79,7 @@ For each fault you'll see three things: **what we broke**, **the exact prompt** 
 But **neither session could see the firewall rule itself** (a dropped packet logs no reason), so both pinned the cause on the *nearest visible thing*, the SFU advertising Docker-internal IPs (`10.5.0.3`, `172.17.0.1`) as ICE candidates, and recommended fixing that config so it advertised a reachable IP, plus opening the media ports. They pointed at the right area, which is exactly as far as observability reaches: it localizes the effect but not a cause that leaves no trace.
 
 <figure markdown>
-![Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-1-ice.webp)
+![Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-1-ice.webp)
 <figcaption>Loki, the instant media breaks: the SFU floods ICE/DTLS timeouts. People joined the room, but no media path could form.</figcaption>
 </figure>
 
@@ -91,7 +94,7 @@ But **neither session could see the firewall rule itself** (a dropped packet log
 That's where the skill mattered. The skilled session correctly identified it as a server-side problem, not the callers. The bare session was unreliable: in repeated runs it often pinned the blame on the users' own networks, the confidently wrong answer that would have sent you chasing your customers instead of your server.
 
 <figure markdown>
-![Grafana chart showing average packet loss jumping from zero to ten percent](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-2-congestion.webp)
+![Grafana chart showing average packet loss jumping from zero to ten percent](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-2-congestion.webp)
 <figcaption>Metrics (Prometheus): average packet loss jumps from ~0 to ~10% the moment the link degrades. All of it is on the downlink; the uplink stays at 0, which is why the per-direction breakdown in the text reaches 23%. The calls connect fine, they just fall apart.</figcaption>
 </figure>
 
@@ -106,7 +109,7 @@ That's where the skill mattered. The skilled session correctly identified it as 
 Both reached the same right answer.
 
 <figure markdown>
-![Grafana Loki logs showing every service logging connection refused on port 7000](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-3-redis.webp)
+![Grafana Loki logs showing every service logging connection refused on port 7000](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-3-redis.webp)
 <figcaption>Loki: every service floods "connection refused" on 127.0.0.1:7000 the instant Redis dies. An active reject, not a timeout: the process is down, not the network.</figcaption>
 </figure>
 
@@ -119,7 +122,7 @@ Both reached the same right answer.
 **What it found:** both solved it, fast and clean. The RTMP connection reaches the server but the publish is rejected with `ingress does not exist` for stream key `BADKEY123`. Both correctly called it a **client-side** problem, the encoder is using a key that was never issued; create the ingress via the API first, then point the encoder at the returned key, and confirmed the server pipeline (ingress, Redis, RTMP) is healthy. Here the signal, though logs-only, is **explicit**, so even the bare model reads it easily.
 
 <figure markdown>
-![Grafana Loki logs showing the ingress rejecting a publish with a bad stream key](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-4-ingress.webp)
+![Grafana Loki logs showing the ingress rejecting a publish with a bad stream key](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-4-ingress.webp)
 <figcaption>Loki: the ingress rejects the publish with "ingress does not exist" for stream key BADKEY123. A client-side misconfiguration, stated explicitly in the logs.</figcaption>
 </figure>
 
@@ -138,7 +141,7 @@ Instead of concluding "add more CPU," the skilled session spotted the clue: the 
 A reassuring result: handed a loud, misleading error, the skilled session reasoned past it to the real cause.
 
 <figure markdown>
-![Grafana Loki logs showing egress refusing recordings with a not enough CPU error](/assets/images/blog/YYYY/MM/debugging-webrtc-with-ai-and-grafana-mcp/scenario-5-cpu.webp)
+![Grafana Loki logs showing egress refusing recordings with a not enough CPU error](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-5-cpu.webp)
 <figcaption>Loki: egress refuses every recording with "not enough CPU". Note "required: 100" against "available: 16", a nonsensical config value, not a real shortage.</figcaption>
 </figure>
 
