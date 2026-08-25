@@ -113,7 +113,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | rtcEngine | "pion" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
-For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/singlenode/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
+For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.8.0/openvidu-deployment/pro/singlenode/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
 
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
