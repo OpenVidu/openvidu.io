@@ -1000,8 +1000,13 @@ button.md-tabs__dropdown-toggle {
   opacity: 1;
 }
 
-.about-us-img {
-  max-height: 500px;
+/* Constrains the width, not the height: the portraits carry width/height attributes, so
+   their width is definite, and a max-height would clamp the two axes independently and
+   stretch them. 376px is the intended display width - half the 752px source, so the
+   portraits stay sharp on a 2x display. Needs the `.md-typeset` prefix to outrank the
+   theme's own `.md-typeset img { max-width: 100% }`. */
+.md-typeset .about-us-img {
+  max-width: 376px;
 }
 
 /* Tutorial cards, provider buttons/chips (merged from livekit-tutorials.css) */

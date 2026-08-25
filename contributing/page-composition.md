@@ -144,9 +144,15 @@ lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#onl
 - **`.control-height`** caps an image at half the viewport. Use it when a capture is 4:3 or
   taller *and* wide enough to fill the reading column (~700px), which is when it would
   otherwise run most of a screen tall. A 16:9 capture never needs it — its width already
-  governs its height.
+  governs its height. **Never give it `width=`/`height=`** — see the dimensions rule below.
 - **`.skip-gallery`** keeps an image out of the lightbox: logos, product marks and inline
   icons, which have nothing to enlarge.
+- **`width=`/`height=` are the source's real pixel dimensions**, and they reserve the image's
+  box so text below does not reflow while it loads (measured: they take `/about-us/` from
+  0.048 CLS to 0.010). They also make the width *definite*, so a CSS `max-height` on the same
+  image clamps the two axes independently and **stretches** it — `height: auto` and
+  `aspect-ratio` cannot undo that. Constrain such an image on the width axis instead (as
+  `.md-typeset .about-us-img` does), or leave the attributes off.
 - Resize sources to their rendered size **before** committing them — the `optimize` plugin
   recompresses but never resizes, so oversized sources ship oversized.
 
@@ -186,7 +192,7 @@ scrolled into view. Requires the `lazyvideo` page tag:
 
 **Above the fold (showcase heroes only).** `autoplay` is allowed, but the inline `src` must be a
 small downscaled `-preview.mp4` with a `poster`; the full-size file appears only in the lightbox
-`href` (see `docs/meet/index.md` for the reference):
+`href` (see `docs/meet/index.md` for the reference).
 
 ```html
 <a class="glightbox" href="/assets/videos/full.mp4" data-type="video"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
