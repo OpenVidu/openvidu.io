@@ -46,7 +46,7 @@ The breakout product in this category already has a name: the **AI voice agent**
 
 Today, these systems are answering business phone lines, handling appointment requests, qualifying leads, resolving common questions, and routing callers to the right person when needed.
 
-Thanks to platforms like [Vapi](https://vapi.ai/) and real-time infrastructure providers such as [LiveKit](https://livekit.io/) or [OpenVidu](https://openvidu.io/), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
+Thanks to platforms like [Vapi :fontawesome-solid-external-link:{.external-link-icon}](https://vapi.ai/){:target="_blank"} and real-time infrastructure providers such as [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} or [OpenVidu](/index.md), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
 
 But voice agents aren't interesting because they can talk.
 
@@ -242,7 +242,7 @@ The hard part was never the AI. It's making the whole loop happen fast enough to
 
 Start with the smallest possible loop — one sensor reading, one camera frame, one spoken reply — and get it talking back to you in under a second. Once that loop feels alive, everything else is just iteration.
 
-And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](/docs/ai/custom-agents.md) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
+And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](/index.md) handles the live audio and video transport, and its [custom AI agents](/docs/ai/custom-agents.md) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
 
 Now go build one of them. We'd love to see what you ship.
 

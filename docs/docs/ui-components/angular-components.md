@@ -56,7 +56,7 @@ Using Angular Components in your application is straightforward. The official [A
 
     ---
 
-    [:octicons-arrow-right-24: See Reference](../reference-docs/openvidu-components-angular/components/VideoconferenceComponent.html){:target="_blank"}
+    [:octicons-arrow-right-24: See Reference :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/VideoconferenceComponent.html){:target="_blank"}
 
 -   __Panel__
 
@@ -67,7 +67,7 @@ Using Angular Components in your application is straightforward. The official [A
 
     ---
 
-    [:octicons-arrow-right-24: See Reference](../reference-docs/openvidu-components-angular/components/PanelComponent.html){:target="_blank"}
+    [:octicons-arrow-right-24: See Reference :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/PanelComponent.html){:target="_blank"}
 
 </div>
 
@@ -78,17 +78,17 @@ Using Angular Components in your application is straightforward. The official [A
 
 <div class="grid cards three-cols" markdown>
 
--   [Toolbar](../reference-docs/openvidu-components-angular/components/ToolbarComponent.html){ target="_blank" }
--   [Layout](../reference-docs/openvidu-components-angular/components/LayoutComponent.html){ target="_blank" }
--   [Stream](../reference-docs/openvidu-components-angular/components/StreamComponent.html){ target="_blank" }
--   [ChatPanel](../reference-docs/openvidu-components-angular/components/ChatPanelComponent.html){ target="_blank" }
--   [ParticipantsPanel](../reference-docs/openvidu-components-angular/components/ParticipantsPanelComponent.html){ target="_blank" }
--   [ParticipantPanelItem](../reference-docs/openvidu-components-angular/components/ParticipantPanelItemComponent.html){ target="_blank" }
--   [ActivitiesPanel](../reference-docs/openvidu-components-angular/components/ActivitiesPanelComponent.html){ target="_blank" }
--   [RecordingActivity](../reference-docs/openvidu-components-angular/components/RecordingActivityComponent.html){ target="_blank" }
--   [BroadcastingActivity](../reference-docs/openvidu-components-angular/components/BroadcastingActivityComponent.html){ target="_blank" }
--   [AdminLogin](../reference-docs/openvidu-components-angular/components/AdminLoginComponent.html){ target="_blank" }
--   [AdminDashboard](../reference-docs/openvidu-components-angular/components/AdminDashboardComponent.html){ target="_blank" }
+-   [Toolbar :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/ToolbarComponent.html){ target="_blank" }
+-   [Layout :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/LayoutComponent.html){ target="_blank" }
+-   [Stream :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/StreamComponent.html){ target="_blank" }
+-   [ChatPanel :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/ChatPanelComponent.html){ target="_blank" }
+-   [ParticipantsPanel :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/ParticipantsPanelComponent.html){ target="_blank" }
+-   [ParticipantPanelItem :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/ParticipantPanelItemComponent.html){ target="_blank" }
+-   [ActivitiesPanel :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/ActivitiesPanelComponent.html){ target="_blank" }
+-   [RecordingActivity :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/RecordingActivityComponent.html){ target="_blank" }
+-   [BroadcastingActivity :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/BroadcastingActivityComponent.html){ target="_blank" }
+-   [AdminLogin :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/AdminLoginComponent.html){ target="_blank" }
+-   [AdminDashboard :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/components/AdminDashboardComponent.html){ target="_blank" }
 
 </div>
 
@@ -102,12 +102,12 @@ Angular Components provides two types of directives: **Structural Directives** a
 
     For example, the `*ovToolbar` directive allows you to add a custom toolbar to the videoconference, replacing the default one.
 
-    You can check the list of available structural directives in the [Angular Components API Reference](../reference-docs/openvidu-components-angular/modules/OpenViduComponentsDirectiveModule.html){:target="_blank"}.
+    You can check the list of available structural directives in the [Angular Components API Reference :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/modules/OpenViduComponentsDirectiveModule.html){:target="_blank"}.
 
 
 - **Attribute Directives**: Commonly known as **Components Inputs**, allow you to manipulate the appearance or behavior of an element.
 
-    You can check the list of available structural directives in the [Angular Components API Reference](../reference-docs/openvidu-components-angular/modules/OpenViduComponentsDirectiveModule.html){:target="_blank"}.
+    You can check the list of available structural directives in the [Angular Components API Reference :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/modules/OpenViduComponentsDirectiveModule.html){:target="_blank"}.
 
 ## Events
 
@@ -115,7 +115,7 @@ Each component in **Angular Components** emits a set of events that you can list
 
 These events are designed to provide you with the flexibility to customize your videoconferencing application according to your requirements.
 
-You can check out all component events in the [Angular Components API Reference](../reference-docs/openvidu-components-angular/index.html){:target="_blank"}.
+You can check out all component events in the [Angular Components API Reference :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/index.html){:target="_blank"}.
 
 ## Applications
 
@@ -127,4 +127,4 @@ It demonstrates real‑world concerns like theming, scalability, authentication,
 
 ## References
 
-- [Angular Components API Reference](../reference-docs/openvidu-components-angular/index.html){:target="_blank"}
+- [Angular Components API Reference :fontawesome-solid-external-link:{.external-link-icon}](../reference-docs/openvidu-components-angular/index.html){:target="_blank"}

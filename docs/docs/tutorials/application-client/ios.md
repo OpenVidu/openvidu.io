@@ -49,7 +49,7 @@ This iOS project, created with Xcode and written in Swift, includes various file
 
 ### Integrating LiveKit
 
-To use LiveKit in your iOS app, you need to add the [LiveKit Swift SDK](https://github.com/livekit/client-sdk-swift) as a Swift Package. You can do this using either `Package.swift` or Xcode.
+To use LiveKit in your iOS app, you need to add the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-swift){:target="_blank"} as a Swift Package. You can do this using either `Package.swift` or Xcode.
 
 #### Adding LiveKit via `Package.swift`
 
@@ -127,7 +127,7 @@ The `ConfigureUrlsView.swift` file defines a SwiftUI view for configuring the UR
 -   **`applicationServerUrl`**: The URL of the application server used to obtain tokens for joining the video call room.
 -   **`livekitUrl`**: The URL of the LiveKit server used to connect to the video call room and handle video communication.
 
-You should configure these URLs according to your deployment settings. If you are [running OpenVidu locally](#run-openvidu-locally), you can set `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443) and `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:7443), where `xxx-yyy-zzz-www` represents the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+You should configure these URLs according to your deployment settings. If you are [running OpenVidu locally](#run-openvidu-locally), you can set `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:7443), where `xxx-yyy-zzz-www` represents the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If these URLs are left empty, the user will be prompted to enter them when the application starts. This configuration is managed in the `ConfigureUrlsView.swift` file:
 

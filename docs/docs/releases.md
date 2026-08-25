@@ -119,9 +119,9 @@ page_features:
 
 - **Plain Docker Compose deployment**: OpenVidu Single Node COMMUNITY can now be deployed using a plain Docker Compose. This is an installer-free, less opinionated deployment option, friendlier with GitOps procedures. See [Plain Docker Compose installation](https://openvidu.io/3.6/docs/self-hosting/single-node/on-premises/install/#plain-docker-compose-installation) for more details.
 - **Local providers for Live Captions**: the [Live Captions](https://openvidu.io/3.6/docs/ai/live-captions/) service now supports [local providers](https://openvidu.io/3.6/docs/ai/live-captions/#local-providers) that will run in your own nodes, offline, without the need of configuring and paying a third-party service. This greatly aligns with the self-hosted, private nature of OpenVidu deployments. Currently we support:
-    - [Vosk](https://github.com/alphacep/vosk-api){:target="_blank"}: available in OpenVidu COMMUNITY deployments, it supports multiple languages and can run on modest hardware.
-    - [Sherpa](https://github.com/k2-fsa/sherpa-onnx){:target="_blank"}: available in OpenVidu PRO deployments, it offers state-of-the-art accuracy and performance. It also offers GPU acceleration if your Media Nodes are equipped with an NVIDIA GPU.
-- **New cloud providers for Live Captions**: we have also expanded the collection of supported third-party AI [cloud providers](https://openvidu.io/3.6/docs/ai/live-captions/#cloud-providers): [MistralAI](https://mistral.ai/){:target="_blank"}, [NVIDIA Riva](https://www.nvidia.com/en-us/ai-data-science/products/riva/){:target="_blank"}, [Spitch](https://spitch.app/){:target="_blank"}, [ElevenLabs](https://elevenlabs.io/){:target="_blank"}, [Simplismart](https://simplismart.ai/){:target="_blank"}.
+    - [Vosk :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/alphacep/vosk-api){:target="_blank"}: available in OpenVidu COMMUNITY deployments, it supports multiple languages and can run on modest hardware.
+    - [Sherpa :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx){:target="_blank"}: available in OpenVidu PRO deployments, it offers state-of-the-art accuracy and performance. It also offers GPU acceleration if your Media Nodes are equipped with an NVIDIA GPU.
+- **New cloud providers for Live Captions**: we have also expanded the collection of supported third-party AI [cloud providers](https://openvidu.io/3.6/docs/ai/live-captions/#cloud-providers): [MistralAI :fontawesome-solid-external-link:{.external-link-icon}](https://mistral.ai/){:target="_blank"}, [NVIDIA Riva :fontawesome-solid-external-link:{.external-link-icon}](https://www.nvidia.com/en-us/ai-data-science/products/riva/){:target="_blank"}, [Spitch :fontawesome-solid-external-link:{.external-link-icon}](https://spitch.app/){:target="_blank"}, [ElevenLabs :fontawesome-solid-external-link:{.external-link-icon}](https://elevenlabs.io/){:target="_blank"}, [Simplismart :fontawesome-solid-external-link:{.external-link-icon}](https://simplismart.ai/){:target="_blank"}.
 - **Deployment improvements**
     - It is now possible to deploy a custom application on the same host as OpenVidu Single Node and serve it directly at the root path `/`. Learn how to do it [here](https://openvidu.io/3.6/meet/embedded/deploy-your-app/#deploy-alongside-openvidu).
     - OpenVidu now supports restricted-network deployments (for example, NAT environments) for both internal and external clients out of the box. Before, clients connecting from the same network where OpenVidu was deployed could experience connection issues. Now, OpenVidu handles these scenarios transparently.
@@ -181,13 +181,13 @@ page_features:
 - **ARM support**: OpenVidu can now be deployed in ARM-based systems. This broadens the range of instances in which OpenVidu can be deployed, offering new opportunities and alternatives that may be more cost-effective. To deploy OpenVidu in ARM architecture, you don't have to do anything special: just follow the default installation instructions for your desired OpenVidu deployment type. The installer will automatically detect the architecture and set up the appropriate services.
 - **Google Cloud Platform support for all OpenVidu deployments**: we continue to expand our cloud-native deployment options. Now you can deploy [OpenVidu Single Node PRO](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/gcp/install/), [OpenVidu Elastic](https://openvidu.io/3.5/docs/self-hosting/elastic/gcp/install/) and [OpenVidu High Availability](https://openvidu.io/3.5/docs/self-hosting/ha/gcp/install/) in Google Cloud Platform using Terraform templates.
 - **LiveKit stack updated to v1.9.8**: OpenVidu is now based on LiveKit v1.9.8, bringing all bug fixes and improvements since version v1.9.0. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/releases/tag/v1.9.8){:target="_blank"}.
-    - Particularly relevant is the fix for [issue #3858](https://github.com/livekit/livekit/issues/3858){:target="_blank"}, which fixes a fatal problem in the connection of the services with the Redis Cluster.
+    - Particularly relevant is the fix for [issue #3858 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/issues/3858){:target="_blank"}, which fixes a fatal problem in the connection of the services with the Redis Cluster.
 - **Egress updated to v1.12.0**: the Egress service has been updated to v1.12.0, which includes several improvements and bug fixes when exporting media from rooms. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/releases/tag/v1.12.0){:target="_blank"}.
-    - Particularly relevant is the change of the `unhealthyShutdownWatchdogDelay` value from 20 seconds to 10 minutes (see [commit e86593c](https://github.com/OpenVidu/egress/commit/e86593c25ab20e02d8e6d4a2edc4ac4b03fd2dbc){:target="_blank"}), preventing premature termination of egress processes under high CPU load or poor network conditions.
+    - Particularly relevant is the change of the `unhealthyShutdownWatchdogDelay` value from 20 seconds to 10 minutes (see [commit e86593c :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/egress/commit/e86593c25ab20e02d8e6d4a2edc4ac4b03fd2dbc){:target="_blank"}), preventing premature termination of egress processes under high CPU load or poor network conditions.
 - **Ingress updated to latest**: the Ingress service has been updated to latest available commit *[#e42b67a :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/ingress/commit/e42b67acf7d2c1ca5b463bb0d8f71bc4f6bf26c5){:target="_blank"}* with multiple improvements over last official release.
 - **Live Captions**:
-    - Fixed critical bug that caused slow response when transcribing 3 or more simultaneous participants in the same Room using AWS Transcribe provider. See related issue in the official LiveKit Agents repository ([#3739](https://github.com/livekit/agents/issues/3739){:target="_blank"}) and PR fixing it ([PR 4111](https://github.com/livekit/agents/pull/4111){:target="_blank"}).
-    - Added [Cartesia](https://cartesia.ai/sonic){:target="_blank"} and [Soniox](https://soniox.com/){:target="_blank"} to the list of [supported AI providers](https://openvidu.io/3.5/docs/ai/live-captions/#supported-ai-providers).
+    - Fixed critical bug that caused slow response when transcribing 3 or more simultaneous participants in the same Room using AWS Transcribe provider. See related issue in the official LiveKit Agents repository ([#3739 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/issues/3739){:target="_blank"}) and PR fixing it ([PR 4111 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/pull/4111){:target="_blank"}).
+    - Added [Cartesia :fontawesome-solid-external-link:{.external-link-icon}](https://cartesia.ai/sonic){:target="_blank"} and [Soniox :fontawesome-solid-external-link:{.external-link-icon}](https://soniox.com/){:target="_blank"} to the list of [supported AI providers](https://openvidu.io/3.5/docs/ai/live-captions/#supported-ai-providers).
     - [Interim transcriptions](https://openvidu.io/3.5/docs/ai/live-captions/#final-vs-interim-transcriptions) now available for existing [AI providers](https://openvidu.io/3.5/docs/ai/live-captions/#supported-ai-providers) Speechmatics and Gladia.
 - **MongoDB**: OpenVidu now allows [configuring an external MongoDB](https://openvidu.io/3.5/docs/self-hosting/how-to-guides/external-mongodb/) instead of using the bundled one, or you can choose to completely [disable the use of MongoDB](https://openvidu.io/3.5/docs/self-hosting/how-to-guides/enable-disable-mongodb/) if your use case can do without services that require a database.
 - **New backup and restore documentation for OpenVidu deployments**: we have carefully crafted a new [how-to guide](https://openvidu.io/3.5/docs/self-hosting/how-to-guides/backup-and-restore/) explaining how to migrate your existing persistent data (recordings, analytics, monitoring data, etc.) when upgrading or changing your OpenVidu deployment. This process mainly affects the MongoDB and S3 services, responsible for persisting data in OpenVidu deployments.
@@ -266,7 +266,7 @@ page_features:
 
     We are starting with the **Speech Processing agent**: it focuses on transcribing audio speech to text and processing the results in various ways. Currently offering the [**Live Captions**](https://openvidu.io/3.3/docs/ai/live-captions/) service, which generates live captions for your users' speech with great accuracy to display them in your frontend application. The Live Captions service supports many leading AI providers, such as OpenAI, Google, Azure, Amazon and more (see [Supported AI providers](https://openvidu.io/3.3/docs/ai/live-captions/#supported-ai-providers)).
 
-    Of course, you can also implement your own custom agents using the powerful [LiveKit Agents framework](https://docs.livekit.io/agents/){:target="_blank"} and deploy it along your OpenVidu deployment. Any LiveKit agent is compatible with OpenVidu. Learn how to do so [here](https://openvidu.io/3.3/docs/ai/custom-agents/).
+    Of course, you can also implement your own custom agents using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){:target="_blank"} and deploy it along your OpenVidu deployment. Any LiveKit agent is compatible with OpenVidu. Learn how to do so [here](https://openvidu.io/3.3/docs/ai/custom-agents/).
 
 - **Use a single domain for your deployment (EXPERIMENTAL)**: OpenVidu deployments now support TURN with TLS without an additional Domain Name using the flag `--experimental-turn-tls-with-main-domain`. This is great for production deployments, as it allows you to use a single domain and still support users behind restrictive firewalls.
 
@@ -279,7 +279,7 @@ page_features:
 - **Azure deployment bug fixes**:
     - Media Nodes are now automatically deleted if the installation process fails, preventing unwanted resources being left in your Azure account.
     - A misconfiguration was preventing the TURN server from working correctly in Azure. This is now fixed.
-    - Fixed a race condition during the deployment process in Azure that sometimes caused problems when creating multiple subnets concurrently ([9728d96](https://github.com/OpenVidu/openvidu/commit/9728d96){:target="_blank"}).
+    - Fixed a race condition during the deployment process in Azure that sometimes caused problems when creating multiple subnets concurrently ([9728d96 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/commit/9728d96){:target="_blank"}).
 
 ### Version table
 
@@ -309,22 +309,22 @@ page_features:
     - [Recording Basic Azure](https://openvidu.io/3.2/docs/tutorials/advanced-features/recording-basic-azure/).
     - [Recording Advanced Azure](https://openvidu.io/3.2/docs/tutorials/advanced-features/recording-advanced-azure/).
 
-- **External proxy configuration**: By default, OpenVidu is deployed with an internal [Caddy server](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
+- **External proxy configuration**: By default, OpenVidu is deployed with an internal [Caddy server :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/){:target="_blank"} to configure and manage SSL certificates. However, there are certain scenarios where using an external proxy might be preferable:
     - You wish to manage SSL certificates manually.
     - A specific proxy server is required for enhanced security.
     - You need to integrate a proxy server already in your infrastructure.
 
     For any of these cases, now all OpenVidu deployments allow configuring external proxies. You can find the instructions to do so in [this how-to guide](https://openvidu.io/3.2/docs/self-hosting/how-to-guides/deploy-with-external-proxy/).
 
-- **LiveKit stack updated to v1.8.4**: OpenVidu 3.2.0 is now based on LiveKit v1.8.4, which includes several improvements and bug fixes. You can find the [release notes here](https://github.com/livekit/livekit/releases/tag/v1.8.4).
+- **LiveKit stack updated to v1.8.4**: OpenVidu 3.2.0 is now based on LiveKit v1.8.4, which includes several improvements and bug fixes. You can find the [release notes here :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/releases/tag/v1.8.4){:target="_blank"}.
 - **OpenVidu installer improvements**: Some users have reported issues when installing OpenVidu, which were finally caused by old versions of Docker and/or Docker Compose. The OpenVidu installer now checks both versions and displays a descriptive error message if they are incompatible.
 - **OpenVidu Angular Components**: see [Angular Components documentation](https://openvidu.io/3.2/docs/ui-components/angular-components/).
-    - Virtual Backgrounds improvements: More efficient use of resources by reusing the existing context. Avoid video flickering when changing the background. Improved resource reallocation management for smoother rendering. Contribution to LiveKit’s track-processors-js package ([PR 86](https://github.com/livekit/track-processors-js/pull/86)) resolving an issue affecting its dependencies.
+    - Virtual Backgrounds improvements: More efficient use of resources by reusing the existing context. Avoid video flickering when changing the background. Improved resource reallocation management for smoother rendering. Contribution to LiveKit’s track-processors-js package ([PR 86 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/86){:target="_blank"}) resolving an issue affecting its dependencies.
     - Fixed panel reopening issue with [`ovAdditionalPanels`](https://openvidu.io/3.2/docs/reference-docs/openvidu-components-angular/directives/AdditionalPanelsDirective.html) directive. Custom panels created with `ovAdditionalPanels` would not reopen correctly after switching between default panels (activities, participants or chat). Now, returning to a custom panel restores it as expected without closing all panels.
     - Minor style fixes.
 
 - **Deployment bug fixes**:
-    - OpenVidu On Premises deployments that made use of [v2compatibility module](https://docs.openvidu.io/en/stable/openvidu3/#updating-from-openvidu-v2-to-openvidu-v3){:target="_blank"} had a wrong configuration affecting the S3 MinIO bucket. This could cause issues when recording sessions from your OpenVidu v2 application. This is now fixed.
+    - OpenVidu On Premises deployments that made use of [v2compatibility module :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/openvidu3/#updating-from-openvidu-v2-to-openvidu-v3){:target="_blank"} had a wrong configuration affecting the S3 MinIO bucket. This could cause issues when recording sessions from your OpenVidu v2 application. This is now fixed.
     - Wrong Caddy configuration in OpenVidu High Availability deployments made some services not reachable in specific scenarios of fault tolerance. This is now fixed.
  
 ### Breaking changes
@@ -353,18 +353,18 @@ page_features:
 
 ### Changelog
 
-- **IP cameras support**: OpenVidu now allows you to connect RTSP IP cameras to your Rooms. This feature has been included in our custom fork of the [Ingress](https://docs.livekit.io/home/ingress/overview/){:target="_blank"} module, which is used to ingest media into a Room. Check out how to do it [here](https://openvidu.io/3.1/docs/developing-your-openvidu-app/how-to/#ip-cameras). IP cameras support has also been included into the **v2 compatibility module**. This means that if your OpenVidu 2 application is using the [IP cameras feature](https://docs.openvidu.io/en/stable/advanced-features/ip-cameras/){:target="_blank"}, you can now upgrade your deployment to OpenVidu 3 and keep using this feature.
+- **IP cameras support**: OpenVidu now allows you to connect RTSP IP cameras to your Rooms. This feature has been included in our custom fork of the [Ingress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"} module, which is used to ingest media into a Room. Check out how to do it [here](https://openvidu.io/3.1/docs/developing-your-openvidu-app/how-to/#ip-cameras). IP cameras support has also been included into the **v2 compatibility module**. This means that if your OpenVidu 2 application is using the [IP cameras feature :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/advanced-features/ip-cameras/){:target="_blank"}, you can now upgrade your deployment to OpenVidu 3 and keep using this feature.
 - **OpenVidu Updater**: you can now update the version of your OpenVidu deployment very easily using our new OpenVidu Updater module. OpenVidu Updater will take care of the whole process, from stopping the services to updating the configuration files. It will also manage backups to allow rollbacks in case of any issue. You can update your OpenVidu deployment from 3.0.0 to 3.1.0:
     - Update your **OpenVidu On Premises** deployment: [Update OpenVidu Single Node](https://openvidu.io/3.1/docs/self-hosting/single-node/on-premises/upgrade/), [Update OpenVidu Elastic](https://openvidu.io/3.1/docs/self-hosting/elastic/on-premises/upgrade/), [Update OpenVidu High Availability](https://openvidu.io/3.1/docs/self-hosting/ha/on-premises/upgrade/).
     - Update your **OpenVidu AWS** deployment: for AWS deployment we recommend updating from 3.0.0 to 3.1.0 by redeploying the CloudFormation. From 3.1.0 onwards OpenVidu Updater will also be able to seamlessly update your AWS deployment.
 - **mediasoup stability**: we believe we have reached the right point of maturity to take [mediasoup](https://openvidu.io/3.1/docs/self-hosting/production-ready/performance/) as the internal RTC engine from experimental to production ready. There are still some [limitations](https://openvidu.io/3.1/docs/self-hosting/production-ready/performance/#limitations) to take into account, but the general stability of the system is now considered production ready.
 - **v2 Compatibility bug fixes**: there have been several improvements to the compatibility between OpenVidu v2 applications and OpenVidu v3 deployments:
-    - **REST API**: Field `clientData` of the [Connection object](https://docs.openvidu.io/en/stable/reference-docs/REST-API/#the-connection-object){:target="_blank"} wasn't being properly set. Now it is.
-    - **Webhook**: webhook event [`webrtcConnectionCreated`](https://docs.openvidu.io/en/stable/reference-docs/openvidu-server-webhook/#webrtcconnectioncreated){:target="_blank"} wasn't being sent when an audio-only Publisher published to the Session. Now it is.
+    - **REST API**: Field `clientData` of the [Connection object :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/REST-API/#the-connection-object){:target="_blank"} wasn't being properly set. Now it is.
+    - **Webhook**: webhook event [`webrtcConnectionCreated` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/openvidu-server-webhook/#webrtcconnectioncreated){:target="_blank"} wasn't being sent when an audio-only Publisher published to the Session. Now it is.
     - **openvidu-browser-v2compatibility**:
-        - Event [`videoElementCreated`](https://docs.openvidu.io/en/stable/api/openvidu-browser/interfaces/StreamManagerEventMap.html#videoElementCreated){:target="_blank"} wasn't being triggered for Subscriber participants. Now it is.
-        - Event [`streamCreated`](https://docs.openvidu.io/en/stable/api/openvidu-browser/interfaces/SessionEventMap.html#streamCreated){:target="_blank"} wasn't being triggered by the Session object for Streams coming from audio-only Publishers. Now it is.
-        - Event [`streamPropertyChanged`](https://docs.openvidu.io/en/stable/api/openvidu-browser/classes/StreamPropertyChangedEvent.html){:target="_blank"} wasn't being triggered when an audio-only Publisher muted/unmuted its audio. Now it is.
+        - Event [`videoElementCreated` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-browser/interfaces/StreamManagerEventMap.html#videoElementCreated){:target="_blank"} wasn't being triggered for Subscriber participants. Now it is.
+        - Event [`streamCreated` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-browser/interfaces/SessionEventMap.html#streamCreated){:target="_blank"} wasn't being triggered by the Session object for Streams coming from audio-only Publishers. Now it is.
+        - Event [`streamPropertyChanged` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-browser/classes/StreamPropertyChangedEvent.html){:target="_blank"} wasn't being triggered when an audio-only Publisher muted/unmuted its audio. Now it is.
 
 ### Version table
 
@@ -392,9 +392,9 @@ page_features:
 ### Known limitations
 
 - When using [mediasoup](https://openvidu.io/3.0/docs/self-hosting/production-ready/performance/):
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
-    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
-    - Limited [ingress](https://docs.livekit.io/home/ingress/overview/){:target="_blank"} support: non-simulcast video tracks are not supported. Firefox may experience issues when subscribing to ingress video.
+    - No `ConnectionQualityChanged` event ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
+    - No `TrackStreamStateChanged` event ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
+    - Limited [ingress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"} support: non-simulcast video tracks are not supported. Firefox may experience issues when subscribing to ingress video.
 
 ### Version table
 
@@ -419,27 +419,27 @@ page_features:
 
 - Centralized configuration: OpenVidu now automatically manages and synchronizes the configuration of all its components. This means that updating any configuration parameter in multi-node deployments ([OpenVidu Elastic](https://openvidu.io/3.0/docs/self-hosting/deployment-types/#openvidu-elastic) and [OpenVidu High Availability](https://openvidu.io/3.0/docs/self-hosting/deployment-types/#openvidu-high-availability)) is as simple as updating the required file in a single node. OpenVidu handles the distribution and restart of the affected services across all nodes. See how easily you can change the configuration [here](https://openvidu.io/3.0/docs/self-hosting/configuration/changing-config/).
 - [mediasoup](https://openvidu.io/3.0/docs/self-hosting/production-ready/performance/) support:
-    - Dynacast is now supported ([LiveKit reference](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){:target="_blank"}).
-    - Adaptive Streaming is now supported ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){:target="_blank"}).
-    - Speaker Detection events ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){:target="_blank"}).
-    - Server API method `MutePublishTrack` ([LiveKit reference](https://docs.livekit.io/reference/server/server-apis/#MutePublishedTrack){:target="_blank"}).
-    - Client API method `RemoteTrackPublication.setEnabled` ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/classes/RemoteTrackPublication.html#setEnabled){:target="_blank"}).
+    - Dynacast is now supported ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){:target="_blank"}).
+    - Adaptive Streaming is now supported ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){:target="_blank"}).
+    - Speaker Detection events ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){:target="_blank"}).
+    - Server API method `MutePublishTrack` ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#MutePublishedTrack){:target="_blank"}).
+    - Client API method `RemoteTrackPublication.setEnabled` ([LiveKit JS reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/classes/RemoteTrackPublication.html#setEnabled){:target="_blank"}).
 - [OpenVidu Call](https://openvidu.io/3.0/docs/openvidu-call/docs/#run-openvidu-locally):
     - When using it against an [OpenVidu Local Deployment](https://openvidu.io/3.0/docs/self-hosting/local/), recordings couldn't be accessed from the application's frontend. This is now fixed and OpenVidu Call is able to access recordings.
     - There was an error when applying Virtual Backgrounds ("No camera tracks found. Cannot apply background"). This is now fixed.
-    - Docker image [openvidu/openvidu-call](https://hub.docker.com/r/openvidu/openvidu-call){:target="_blank"} is now 50% smaller.
-- [OpenVidu v2 compatibility](https://docs.openvidu.io/en/stable/openvidu3/#updating-from-openvidu-v2-to-openvidu-v3){:target="_blank"}:
-    - There was a race condition when multiple participants connected to the Session at the same time that could cause remote [`streamCreated`](https://docs.openvidu.io/en/stable/api/openvidu-browser/classes/StreamEvent.html){:target="_blank"} events to not be triggered. This is now fixed.
+    - Docker image [openvidu/openvidu-call :fontawesome-solid-external-link:{.external-link-icon}](https://hub.docker.com/r/openvidu/openvidu-call){:target="_blank"} is now 50% smaller.
+- [OpenVidu v2 compatibility :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/openvidu3/#updating-from-openvidu-v2-to-openvidu-v3){:target="_blank"}:
+    - There was a race condition when multiple participants connected to the Session at the same time that could cause remote [`streamCreated` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-browser/classes/StreamEvent.html){:target="_blank"} events to not be triggered. This is now fixed.
     - Configuration parameter `V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET` did not allow configuring sub-buckets ("openvidu" worked fine, but "openvidu/subbucket" did not). Now it is possible to do so.
-    - The operation to list recordings (available for [REST API](https://docs.openvidu.io/en/stable/reference-docs/REST-API/#get-all-recordings){:target="_blank"}, [openvidu-java-client](https://docs.openvidu.io/en/stable/api/openvidu-java-client/io/openvidu/java/client/OpenVidu.html#listRecordings()){:target="_blank"}, [openvidu-node-client](https://docs.openvidu.io/en/stable/api/openvidu-node-client/classes/OpenVidu.html#listRecordings){:target="_blank"}) was limited to 1000 recordings. This is now fixed and all recordings are always returned.
-- AWS deployments: all secrets are now synchronized with [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager){:target="_blank"}. You can update any secret from the AWS console and restart your cluster for them to have immediate effect in all your nodes. This is also true in reverse: you can update any secret inside your node, and after restarting the cluster, the values in AWS Secrets Manager will be properly synchronized.
+    - The operation to list recordings (available for [REST API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/REST-API/#get-all-recordings){:target="_blank"}, [openvidu-java-client :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-java-client/io/openvidu/java/client/OpenVidu.html#listRecordings%28%29){:target="_blank"}, [openvidu-node-client :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/api/openvidu-node-client/classes/OpenVidu.html#listRecordings){:target="_blank"}) was limited to 1000 recordings. This is now fixed and all recordings are always returned.
+- AWS deployments: all secrets are now synchronized with [AWS Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/secretsmanager){:target="_blank"}. You can update any secret from the AWS console and restart your cluster for them to have immediate effect in all your nodes. This is also true in reverse: you can update any secret inside your node, and after restarting the cluster, the values in AWS Secrets Manager will be properly synchronized.
 - New application tutorials available: [iOS](https://openvidu.io/3.0/docs/tutorials/application-client/ios/), [Android](https://openvidu.io/3.0/docs/tutorials/application-client/android/), [Recording](https://openvidu.io/3.0/docs/tutorials/advanced-features/).
 
 ### Known limitations
 
 - When using [mediasoup](https://openvidu.io/3.0/docs/self-hosting/production-ready/performance/):
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
-    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
+    - No `TrackStreamStateChanged` event ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
 
 ### Version table
 
@@ -463,11 +463,11 @@ page_features:
 ### Changelog
 
 - Improved [mediasoup](https://openvidu.io/3.0/docs/self-hosting/production-ready/performance/) support:
-    - Data messages work ([LiveKit reference](https://docs.livekit.io/home/client/data/#Data-messages){:target="_blank"}).
-    - Ingress supported ([LiveKit reference](https://docs.livekit.io/home/ingress/overview/){:target="_blank"}).
+    - Data messages work ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/data/#Data-messages){:target="_blank"}).
+    - Ingress supported ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"}).
 - Improved [OpenVidu Local Deployment](https://openvidu.io/3.0/docs/self-hosting/local/):
-    - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/home/egress/room-composite/){:target="_blank"}) support when using mediasoup.
-    - WebHooks ([LiveKit reference](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}) supported against a local [OpenVidu Call](https://openvidu.io/3.0/docs/openvidu-call/docs/#run-openvidu-locally).
+    - Fixed Room Composite Egress ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/room-composite/){:target="_blank"}) support when using mediasoup.
+    - WebHooks ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}) supported against a local [OpenVidu Call](https://openvidu.io/3.0/docs/openvidu-call/docs/#run-openvidu-locally).
 - Production deployments have a better private IP discovery process when there are multiple valid private IPs in the same host. This will make more deployments work out-of-the-box without the need of manual intervention.
 - [OpenVidu PRO Evaluation Mode](https://openvidu.io/3.0/docs/self-hosting/local/#openvidu-pro) improved. Before, a maximum of 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example, you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
 - Minor bug fixes related to [OpenVidu Call](https://openvidu.io/3.0/docs/openvidu-call/).
@@ -475,10 +475,10 @@ page_features:
 ### Known limitations
 
 - When using [mediasoup](https://openvidu.io/3.0/docs/self-hosting/production-ready/performance/):
-    - No support for Speaker Detection events ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){:target="_blank"}).
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
-    - No support for Dynacast ([LiveKit reference](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){:target="_blank"}).
-    - No support for Adaptive Streaming ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){:target="_blank"}).
+    - No support for Speaker Detection events ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){:target="_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){:target="_blank"}).
+    - No support for Dynacast ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){:target="_blank"}).
+    - No support for Adaptive Streaming ([LiveKit reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){:target="_blank"}).
 - When using [OpenVidu Call](https://openvidu.io/3.0/docs/openvidu-call/docs/#run-openvidu-locally) against an [OpenVidu Local Deployment](https://openvidu.io/3.0/docs/self-hosting/local/), recordings cannot be accessed.
 
 ### Version table

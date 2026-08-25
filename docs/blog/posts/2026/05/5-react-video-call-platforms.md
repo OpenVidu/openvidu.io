@@ -80,7 +80,7 @@ Several platforms make it possible to add video calls to React applications quic
 
 Here are five solutions developers commonly evaluate in 2026.
 
-### **[Agora.io](https://www.agora.io/en/)**
+### **[Agora.io :fontawesome-solid-external-link:{.external-link-icon}](https://www.agora.io/en/){:target="_blank"}**
 
 ![React video call platforms in 2026 — Agora.io](/assets/images/blog/2026/05/5-react-video-call-platforms/agora.png "Agora.io"){ .skip-gallery loading=lazy }
 
@@ -90,8 +90,8 @@ Cloud-based video API with a globally distributed low-latency network and advanc
 
 **Docs**:
 
-- [Agora Docs](https://docs.agora.io/)
-- [React SDK (`agora-rtc-react`)](https://www.npmjs.com/package/agora-rtc-react)
+- [Agora Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.agora.io/){:target="_blank"}
+- [React SDK (`agora-rtc-react`) :fontawesome-solid-external-link:{.external-link-icon}](https://www.npmjs.com/package/agora-rtc-react){:target="_blank"}
 
 **Quick React integration (minimal example)**
 
@@ -142,7 +142,7 @@ Product teams that want a fully managed, globally distributed video layer and ar
 
 ---
 
-### **[Zoom](https://www.zoom.com/)**
+### **[Zoom :fontawesome-solid-external-link:{.external-link-icon}](https://www.zoom.com/){:target="_blank"}**
 
 ![React video call platforms in 2026 — Zoom](/assets/images/blog/2026/05/5-react-video-call-platforms/zoom.png "Zoom"){ .skip-gallery loading=lazy }
 
@@ -152,8 +152,8 @@ Zoom’s Video SDK allows developers to build custom video applications using Zo
 
 **Docs**:
 
-- [Zoom Video SDK Docs](https://developers.zoom.us/docs/video-sdk/)
-- [Web SDK](https://developers.zoom.us/docs/video-sdk/web/)
+- [Zoom Video SDK Docs :fontawesome-solid-external-link:{.external-link-icon}](https://developers.zoom.us/docs/video-sdk/){:target="_blank"}
+- [Web SDK :fontawesome-solid-external-link:{.external-link-icon}](https://developers.zoom.us/docs/video-sdk/web/){:target="_blank"}
 
 **Quick React integration (minimal example)**
 
@@ -211,7 +211,7 @@ Enterprise or B2B apps that want Zoom-grade reliability and compliance while emb
 
 ---
 
-### **[Stream](https://getstream.io/video/)**
+### **[Stream :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/video/){:target="_blank"}**
 
 ![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-light.png#only-dark "Stream"){ .skip-gallery loading=lazy }
 ![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-dark.png#only-light "Stream"){ .skip-gallery loading=lazy }
@@ -222,7 +222,7 @@ Developer-focused video API designed to integrate real-time video and collaborat
 
 **Docs**:
 
-* [Stream Video Docs](https://getstream.io/video/docs/)
+* [Stream Video Docs :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/video/docs/){:target="_blank"}
 
 **Quick React integration (minimal example)**
 
@@ -271,7 +271,7 @@ Product teams building collaborative applications that combine **chat, notificat
 ---
 
 
-### **[LiveKit](https://livekit.io/)**
+### **[LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"}**
 
 ![React video call platforms in 2026 — LiveKit](/assets/images/blog/2026/05/5-react-video-call-platforms/livekit.png "LiveKit"){ .skip-gallery loading=lazy }
 
@@ -281,8 +281,8 @@ Open source WebRTC stack with self-host or cloud options for highly customizable
 
 **Docs**:
 
-- [LiveKit Docs](https://docs.livekit.io/)
-- [React Components](https://docs.livekit.io/reference/components/react/)
+- [LiveKit Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/){:target="_blank"}
+- [React Components :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/){:target="_blank"}
 
 **Quick React integration (minimal example)**
 
@@ -323,7 +323,7 @@ Engineering-heavy teams that want ownership and deep customization of real-time 
 
 ---
 
-### **[OpenVidu Meet](https://openvidu.io/)**
+### **[OpenVidu Meet](/index.md)**
 
 ![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet"){ .skip-gallery loading=lazy }
 ![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet"){ .skip-gallery loading=lazy }
@@ -338,7 +338,7 @@ Open source video platform built on top of LiveKit, increasing performance, redu
 
 - [OpenVidu Meet Embedded](/meet/embedded/intro.md)
 - [Web Component Reference](/meet/embedded/reference/webcomponent.md)
-- [GitHub](https://github.com/OpenVidu)
+- [GitHub :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu){:target="_blank"}
 
 **Quick React integration (minimal example)**
 

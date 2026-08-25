@@ -14,7 +14,7 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers, 
 
 !!! info
 
-    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
@@ -154,7 +154,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 !!! info
     
-    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
@@ -230,15 +230,15 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
+- OpenVidu Meet: `https://openvidu.example.io/`
+- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
+- MinIO: `https://openvidu.example.io/minio-console`
+- Grafana: `https://openvidu.example.io/grafana`
 
 OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 
-- OpenVidu Server PRO: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- LiveKit API: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"} and [wss://openvidu.example.io/](wss://openvidu.example.io/){:target="_blank"}
+- OpenVidu Server PRO: `https://openvidu.example.io/`
+- LiveKit API: `https://openvidu.example.io/` and [wss://openvidu.example.io/ :fontawesome-solid-external-link:{.external-link-icon}](wss://openvidu.example.io/){:target="_blank"}
 
 ## Load Balancer Configuration
 
@@ -423,7 +423,7 @@ Each installation command for each type of node looks like this:
 
     Notes:
 
-    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
     - Replace `openvidu.example.io` with your FQDN.
     - Replace `turn.example.io` with your TURN server FQDN.
     - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.

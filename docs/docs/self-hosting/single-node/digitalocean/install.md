@@ -29,7 +29,7 @@ This page explains how to create a Droplet (VM) in DigitalOcean, configure netwo
 
 ### 1. Create the Droplet
 
-1. Log in to your [**DigitalOcean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/) account.
+1. Log in to your [**DigitalOcean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/){:target="_blank"} account.
 2. Search for **Droplets**, click it, and then click _"Create Droplet"_.
 
     ![Create Droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/create-droplet.png){ .round-corners loading=lazy }
@@ -128,7 +128,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         |---|---|---|
         | `region`{ .nowrap } | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
         | `instanceType`{ .nowrap } | `"s-2vcpu-4gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your OpenVidu instance. |
-        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
         | `domainName`{ .nowrap } | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
         | `ownPublicCertificate`{ .nowrap } | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
         | `ownPrivateCertificate`{ .nowrap } | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
@@ -149,7 +149,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
   terraform init
   terraform apply
   ```
-1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
+1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.

@@ -132,7 +132,7 @@ The `Urls.kt` file defines an object that contains the following URLs required f
 -   `applicationServerUrl`: The URL of the application server. This variable is used to make requests to the server to obtain a token for joining the video call room.
 -   `livekitUrl`: The URL of the LiveKit server. This variable is used to connect to the LiveKit server and interact with the video call room.
 
-You should configure these URLs according to your deployment settings. In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+You should configure these URLs according to your deployment settings. In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443` :fontawesome-solid-external-link:{.external-link-icon}](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If these URLs are left empty, the user will be prompted to enter the URLs when the application starts. This configuration is managed in the `ConfigureUrlsActivity.kt` file:
 
@@ -354,7 +354,7 @@ The `connectToRoom()` method performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-android/livekit-android-sdk/io.livekit.android.events/-room-event/index.html)
+        You can take a look at all the events in the [Livekit Documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/livekit-android-sdk/io.livekit.android.events/-room-event/index.html){:target="_blank"}
 
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 

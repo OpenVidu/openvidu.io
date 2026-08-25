@@ -264,4 +264,4 @@ Let's work together and build something great!
 
 ## Community support
 
-The [public forum :simple-discourse:](https://openvidu.discourse.group/){:target="_blank"} is the right place to ask any questions that do not involve private information, so that the whole community can benefit from the exchange of ideas.
+The [public forum :simple-discourse: :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.discourse.group/){:target="_blank"} is the right place to ask any questions that do not involve private information, so that the whole community can benefit from the exchange of ideas.

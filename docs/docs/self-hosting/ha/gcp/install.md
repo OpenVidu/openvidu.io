@@ -17,7 +17,7 @@ description: "Deploy OpenVidu High Availability on Google Cloud from a deploymen
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
 
 
-To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow these steps and fill in your preferred parameters.
+To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console. Then follow these steps and fill in your preferred parameters.
 
 This is what the deployment architecture looks like:
 
@@ -104,14 +104,14 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 |---|---|
 | projectId | GCP project id where the resources will be created. |
 | stackName | Stack name for OpenVidu deployment. |
-| openviduLicense | Your OpenVidu License. Get one [here](https://openvidu.io/account) if you don't have one. |
+| openviduLicense | Your OpenVidu License. Get one [here](../../../../account.md) if you don't have one. |
 
 ### Optional Parameters
 | Input Value | Default Value | Description |
 |---|---|---|
 | region | "europe-west2" | GCP region where resources will be created. |
 | zone | "europe-west2-b" | GCP zone that some resources will use. |
-| certificateType | "letsEncrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
+| certificateType | "letsEncrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
 | publicIpAddress | (none) | Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP. |
 | domainName | (none) | Domain name for the OpenVidu Deployment. |
 | ownPublicCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
@@ -130,7 +130,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | rtcEngine | "pion" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
-For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/ha/gcp/variables.tf) file to see additional information about the inputs.   
+For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/master/openvidu-deployment/pro/ha/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
 
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
@@ -147,11 +147,11 @@ When you are satisfied with your input values, click _"Continue"_ and then _"Cre
     
     ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/ha/gcp/cloud-build-logs.png){ .round-corners loading=lazy }
 
-When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager) or by connecting through SSH to the instances:
+When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} or by connecting through SSH to the instances:
 
 === "Check deployment outputs in GCP Secret Manager"
 
-    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager).
+    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"}.
 
     2. Once you are in the Secret Manager you will see all the secrets by their name.
 
@@ -168,7 +168,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
     - `openvidu.env`
     - `master_node/meet.env`
 
-    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances) and click on the arrow close to the SSH letters and then _"View gcloud command"_.
+    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} and click on the arrow close to the SSH letters and then *"View gcloud command"*.
 
     ![Google Cloud Platform gcloud command](../../../../assets/images/platform/self-hosting/ha/gcp/gcloud-command.png){ .round-corners loading=lazy }
 

@@ -14,7 +14,7 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers, 
 
 !!! info
     
-    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing DNS for load balancing traffic. DNS allows multiple records, even of the same kind, to be registered, enabling the listing of multiple hosts under the same domain name. Such a mechanism allows for the distribution of traffic among the Master Nodes, offering an alternative to Network Load Balancers.
@@ -152,7 +152,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 !!! info
 
-    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 - **Do you want to use an external load balancer?**: Select _**No**_. It means that you are going to use DNS Load Balancing.
 - **Select which certificate type to use**:
     - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
@@ -237,15 +237,15 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
+- OpenVidu Meet: `https://openvidu.example.io/`
+- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
+- MinIO: `https://openvidu.example.io/minio-console`
+- Grafana: `https://openvidu.example.io/grafana`
 
 OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 
-- OpenVidu Server PRO: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- LiveKit API: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"} and [wss://openvidu.example.io/](wss://openvidu.example.io/){:target="_blank"}
+- OpenVidu Server PRO: `https://openvidu.example.io/`
+- LiveKit API: `https://openvidu.example.io/` and [wss://openvidu.example.io/ :fontawesome-solid-external-link:{.external-link-icon}](wss://openvidu.example.io/){:target="_blank"}
 
 ## Configure your application to use the deployment
 
@@ -303,7 +303,7 @@ Each installation command for each type of node looks like this:
 
         Notes:
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
@@ -339,7 +339,7 @@ Each installation command for each type of node looks like this:
 
         --8<-- "self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
@@ -381,7 +381,7 @@ Each installation command for each type of node looks like this:
         --8<-- "self-hosting/common/install-version.md"
 
         - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 

@@ -18,15 +18,15 @@ This local deployment is the ideal choice to develop the [embedding of OpenVidu 
 - A computer with **Windows**, **macOS**, or **Linux** installed.
 - 4 CPU cores and 8 GB of RAM (16 GB recommended for better performance).
 - At least 10 GB of free disk space.
-- [Docker Desktop](https://docs.docker.com/desktop/) (see installation instructions below).
+- [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/){:target="_blank"} (see installation instructions below).
 
 ## Installing Docker Desktop
 
-[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology that simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
+[Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/get-started/docker-overview/){:target="_blank"} is a technology that simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
 
 In the Docker terminology, an application is downloaded as a one or several **docker images**. When the application is executed, it is composed of one or several **docker containers**.
 
-Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the software needed to execute Docker containers):
+Instructions to install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/){:target="_blank"} (the software needed to execute Docker containers):
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
@@ -119,7 +119,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 ## Accessing OpenVidu Meet
 
-You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080) in your web browser with credentials:
+You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080){:target="_blank"} in your web browser with credentials:
 
 - User ID: `admin`
 - Password: `admin`

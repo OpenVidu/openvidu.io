@@ -58,7 +58,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
         |---|---|
         | `doToken`{ .nowrap } | DigitalOcean Personal Access Token for API authentication. |
         | `stackName`{ .nowrap } | Stack name for OpenVidu deployment. |
-        | `openviduLicense`{ .nowrap } | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account){:target="_blank"} for more information. |
+        | `openviduLicense`{ .nowrap } | OpenVidu License for PRO deployments. Go [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} for more information. |
 
         ### Optional Parameters
 
@@ -73,7 +73,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
         | `scaleTargetCPU`{ .nowrap } | `50`{ .nowrap } | Target CPU percentage to scale up or down. |
         | `fixedNumberOfMediaNodes`{ .nowrap } | `0`{ .nowrap } | Fixed number of media nodes to create (0 = use autoscaling). |
         | `rtcEngine`{ .nowrap } | `"pion"`{ .nowrap } | Media Engine. Available options: `pion`, `mediasoup`. |
-        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
         | `domainName`{ .nowrap } | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
         | `ownPublicCertificate`{ .nowrap } | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
         | `ownPrivateCertificate`{ .nowrap } | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
@@ -96,7 +96,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
   terraform init
   terraform apply
   ```
-1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
+1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.

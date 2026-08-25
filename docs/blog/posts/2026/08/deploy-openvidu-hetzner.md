@@ -30,7 +30,7 @@ This post is a getting-started guide to OpenVidu on Hetzner Cloud. It gathers in
 
 <!-- more -->
 
-The server and its firewall are created in the [Hetzner Cloud console](https://console.hetzner.com/){:target="_blank"}, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running [OpenVidu Meet](/meet/index.md), reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
+The server and its firewall are created in the [Hetzner Cloud console :fontawesome-solid-external-link:{.external-link-icon}](https://console.hetzner.com/){:target="_blank"}, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running [OpenVidu Meet](/meet/index.md), reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
 
 This is the first post in a series of per-cloud quick starts. Hetzner comes first for two reasons: its hourly billing makes a complete test run cost well under a euro, and this guide adds one more provider alongside the [official installation guides](/docs/self-hosting/single-node/aws/install.md) for AWS, Azure, GCP, DigitalOcean and Oracle. The deployment below uses the generic [on-premises installer](/docs/self-hosting/single-node/on-premises/install.md), which works on any Ubuntu machine with a public IP.
 
@@ -49,13 +49,13 @@ The [minimum requirements](/docs/self-hosting/single-node/on-premises/install.md
 | Price | ~€42.94/month + €0.50/month for the IPv4 |
 | Billed | Hourly (~€0.069/h), capped at the monthly price |
 
-Prices are from August 2026, taken from the server creation form itself; Hetzner has adjusted them several times this year, so check the [current pricing](https://www.hetzner.com/cloud/){:target="_blank"} before relying on this table. The number that matters for this post is the hourly one: the bill covers the hours the server exists and that's it. For reference, this is what the deployment behind this post actually cost — server, IPv4 and VAT included:
+Prices are from August 2026, taken from the server creation form itself; Hetzner has adjusted them several times this year, so check the [current pricing :fontawesome-solid-external-link:{.external-link-icon}](https://www.hetzner.com/cloud/){:target="_blank"} before relying on this table. The number that matters for this post is the hourly one: the bill covers the hours the server exists and that's it. For reference, this is what the deployment behind this post actually cost — server, IPv4 and VAT included:
 
 ![Hetzner usage bill for this post's deployment, seven cents total](/assets/images/blog/2026/08/deploy-openvidu-hetzner/final-bill.png){ .round-corners width=80% loading=lazy }
 
 ## Step 1: Create the server
 
-Create a [Hetzner Cloud account](https://console.hetzner.com/){:target="_blank"} (sign-up asks for a payment method) and, once inside the console, create a project; the server and its firewall will live in it:
+Create a [Hetzner Cloud account :fontawesome-solid-external-link:{.external-link-icon}](https://console.hetzner.com/){:target="_blank"} (sign-up asks for a payment method) and, once inside the console, create a project; the server and its firewall will live in it:
 
 ![Creating a new project in the Hetzner Cloud console](/assets/images/blog/2026/08/deploy-openvidu-hetzner/create-project.png){ .round-corners width=80% loading=lazy }
 
@@ -129,7 +129,7 @@ sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
 
 The script checks for Docker and installs it if missing, then launches a configuration wizard right there in the terminal. For a test deployment you don't even need a domain name: use the defaults suggested by the wizard. What those defaults mean:
 
-- **Domain name**: empty. Since [January 2026, Let's Encrypt issues certificates for bare IP addresses](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"}, so the installer requests a valid short-lived certificate for the server's public IP directly. Real HTTPS, no domain, no DNS records, no self-signed warnings to click through.
+- **Domain name**: empty. Since [January 2026, Let's Encrypt issues certificates for bare IP addresses :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"}, so the installer requests a valid short-lived certificate for the server's public IP directly. Real HTTPS, no domain, no DNS records, no self-signed warnings to click through.
 - **Certificate type**: Let's Encrypt.
 - **Modules**: **OpenVidu Meet** and **Observability** (the Grafana stack, with the deployment's logs and metrics). Both can stay enabled.
 - **Secrets and passwords**: left empty, the wizard generates random values for all of them.

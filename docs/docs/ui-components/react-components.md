@@ -22,7 +22,7 @@ A curated set of components that we believe are essential and serve as a solid f
 
 	---
 
-	[:octicons-arrow-right-24: See Reference](https://docs.livekit.io/reference/components/react/component/livekitroom/){:target="_blank"}
+	[:octicons-arrow-right-24: See Reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/livekitroom/){:target="_blank"}
 
 -   __RoomAudioRenderer__
 
@@ -32,7 +32,7 @@ A curated set of components that we believe are essential and serve as a solid f
 
 	---
 
-    [:octicons-arrow-right-24: See Reference](https://docs.livekit.io/reference/components/react/component/roomaudiorenderer/){:target="_blank"}
+    [:octicons-arrow-right-24: See Reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/roomaudiorenderer/){:target="_blank"}
 
 
 -   __TrackLoop__
@@ -43,7 +43,7 @@ A curated set of components that we believe are essential and serve as a solid f
 
 	---
 
-    [:octicons-arrow-right-24: See Reference](https://docs.livekit.io/reference/components/react/component/trackloop/){:target="_blank"}
+    [:octicons-arrow-right-24: See Reference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/trackloop/){:target="_blank"}
 
 </div>
 
@@ -53,12 +53,12 @@ Prefabricated are constructed using components and enhanced with additional func
 
 <div class="grid cards three-cols" markdown>
 
--   [AudioConference](https://docs.livekit.io/reference/components/react/component/audioconference/){ target="_blank" }
--   [Chat](https://docs.livekit.io/reference/components/react/component/chat/){ target="_blank" }
--   [ControlBar](https://docs.livekit.io/reference/components/react/component/controlbar/){ target="_blank" }
--   [MediaDeviceMenu](https://docs.livekit.io/reference/components/react/component/mediadevicemenu/){ target="_blank" }
--   [PreJoin](https://docs.livekit.io/reference/components/react/component/prejoin/){ target="_blank" }
--   [VideoConference](https://docs.livekit.io/reference/components/react/component/videoconference/){ target="_blank" }
+-   [AudioConference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/audioconference/){ target="_blank" }
+-   [Chat :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/chat/){ target="_blank" }
+-   [ControlBar :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/controlbar/){ target="_blank" }
+-   [MediaDeviceMenu :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/mediadevicemenu/){ target="_blank" }
+-   [PreJoin :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/prejoin/){ target="_blank" }
+-   [VideoConference :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/videoconference/){ target="_blank" }
 
 </div>
 
@@ -68,13 +68,13 @@ Contexts are used to allow child components to access parent state without havin
 
 <div class="grid cards three-cols" markdown>
 
--   [Participant](https://docs.livekit.io/reference/components/react/component/participantcontext/){ target="_blank" }
--   [Room](https://docs.livekit.io/reference/components/react/component/roomcontext/){ target="_blank" }
--   [Chat](https://github.com/livekit/components-js/blob/main/packages/react/src/context/chat-context.ts){ target="_blank" }
--   [Feature](https://github.com/livekit/components-js/blob/main/packages/react/src/context/feature-context.ts){ target="_blank" }
--   [Layout](https://docs.livekit.io/reference/components/react/component/layoutcontext/){ target="_blank" }
--   [Pin](https://github.com/livekit/components-js/blob/main/packages/react/src/context/pin-context.ts){ target="_blank" }
--   [TrackRef](https://docs.livekit.io/reference/components/react/component/trackrefcontext/){ target="_blank" }
+-   [Participant :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/participantcontext/){ target="_blank" }
+-   [Room :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/roomcontext/){ target="_blank" }
+-   [Chat :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/components-js/blob/main/packages/react/src/context/chat-context.ts){ target="_blank" }
+-   [Feature :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/components-js/blob/main/packages/react/src/context/feature-context.ts){ target="_blank" }
+-   [Layout :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/layoutcontext/){ target="_blank" }
+-   [Pin :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/components-js/blob/main/packages/react/src/context/pin-context.ts){ target="_blank" }
+-   [TrackRef :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/components/react/component/trackrefcontext/){ target="_blank" }
 
 </div>
 
@@ -84,7 +84,7 @@ Hooks are functions that let you use state and other React features without writ
 
 React Components provides a set of hooks that you can use to interact with the components and the underlying LiveKit client.
 
-[:octicons-arrow-right-24: See Reference](https://github.com/livekit/components-js/tree/main/packages/react/src/hooks){:target="_blank"}
+[:octicons-arrow-right-24: See Reference :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/components-js/tree/main/packages/react/src/hooks){:target="_blank"}
 
 ## Applications
 

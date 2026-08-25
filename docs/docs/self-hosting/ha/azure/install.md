@@ -57,7 +57,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/azure/openvidu-ha-config.png){ .round-corners loading=lazy }
 
-    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
+    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
     For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 

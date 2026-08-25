@@ -278,7 +278,7 @@ systemctl restart openvidu
 
 ## How it works
 
-Both configurations work thanks to the [TURN protocol](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT){:target="_blank"}, which acts as a relay between the client and the Media Server. When a client connects through port 443 (either UDP or TLS), the TURN server receives the traffic on that port and relays it internally to the Media Server. This relay happens entirely within the internal network: the TURN server presents the node's private IP as the relay address and forwards the media to the Media Server using the configured RTC port range (50000-60000 by default).
+Both configurations work thanks to the [TURN protocol :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT){:target="_blank"}, which acts as a relay between the client and the Media Server. When a client connects through port 443 (either UDP or TLS), the TURN server receives the traffic on that port and relays it internally to the Media Server. This relay happens entirely within the internal network: the TURN server presents the node's private IP as the relay address and forwards the media to the Media Server using the configured RTC port range (50000-60000 by default).
 
 This is why the port rules above require the internal UDP range (50000-60000) to be open between cluster nodes (or to the node itself in Single Node deployments) — it is the path used by TURN to deliver relayed media to the Media Server.
 
@@ -286,7 +286,7 @@ OpenVidu includes built-in security layers in its TURN server implementation to 
 
 - **Cluster-aware IP allowlist**: TURN only permits relay traffic to IPs belonging to registered cluster nodes. In multi-node deployments, this is dynamically maintained via the shared cluster state, so only legitimate nodes can receive relayed media.
 - **Port range enforcement**: Every relayed packet is validated against the configured RTC port range at the packet level. Traffic destined to ports outside this range is rejected.
-- **TCP relay denial**: TCP relay allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"}) are explicitly denied, limiting TURN to its intended use for UDP media relay.
+- **TCP relay denial**: TCP relay allocations ([RFC 6062 :fontawesome-solid-external-link:{.external-link-icon}](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"}) are explicitly denied, limiting TURN to its intended use for UDP media relay.
 
 ## Troubleshooting: media not flowing
 

@@ -39,7 +39,7 @@ I'll confess it: you'll feel like Harry Potter on his first day of class...
 
 ![OpenVidu gesture control](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXBvdmlnMjF4a2phc3ZnejI1dndsemhuZjR0dzhuNWF4MmZsMG9ydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/N7aCOnWxcmMSlOy2eH/giphy.gif){ loading=lazy }
 
-but no, it's not magic. These gestures are recognized in real time with [MediaPipe Gesture Recognizer](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer){:target="_blank"}, a **free** AI model that runs in the browser itself and lets you detect gestures without sending video to the cloud. We can pair these gestures with real actions in the video call, like turning off the camera, muting the microphone, and so on.
+but no, it's not magic. These gestures are recognized in real time with [MediaPipe Gesture Recognizer :fontawesome-solid-external-link:{.external-link-icon}](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer){:target="_blank"}, a **free** AI model that runs in the browser itself and lets you detect gestures without sending video to the cloud. We can pair these gestures with real actions in the video call, like turning off the camera, muting the microphone, and so on.
 
 The gestures we've wired up are:
 
@@ -52,7 +52,7 @@ Each gesture has to be held steady for a period of time (650 ms) for the action 
 
 ## What MediaPipe is
 
-[MediaPipe](https://developers.google.com/edge/mediapipe){:target="_blank"} is Google's family of computer vision models, built to run on your own device instead of on a server.
+[MediaPipe :fontawesome-solid-external-link:{.external-link-icon}](https://developers.google.com/edge/mediapipe){:target="_blank"} is Google's family of computer vision models, built to run on your own device instead of on a server.
 
 And no, it's not complex to install and set up:
 
@@ -78,13 +78,13 @@ this.recognizer = await vision.GestureRecognizer.createFromOptions(fileSet, {
 
 MediaPipe's own quick-start snippet points `WASM_FILESET_URL` and `MODEL_URL` straight at jsDelivr and Google Cloud Storage instead. That's fine for trying something out, but it means every participant's browser calls out to both on every single call. We vendor both locally and serve them from our own origin.
 
-The MediaPipe *library* is free and open source, maintained by Google under the Apache 2.0 license. The pretrained models it ships, including the gesture recognizer, come with their own [model card](https://storage.googleapis.com/mediapipe-assets/gesture_recognizer/model_card_hand_gesture_classification_with_faireness_2022.pdf){:target="_blank"} and aren't necessarily covered by that same license, so it's worth checking before you redistribute a model binary yourself. MediaPipe's [privacy notice](https://github.com/google-ai-edge/mediapipe#privacy-notice){:target="_blank"} is also worth reading closely: your video frames stay on-device, but MediaPipe can still send usage metrics to Google, and getting informed consent from your users for that is on you, not Google.
+The MediaPipe *library* is free and open source, maintained by Google under the Apache 2.0 license. The pretrained models it ships, including the gesture recognizer, come with their own [model card :fontawesome-solid-external-link:{.external-link-icon}](https://storage.googleapis.com/mediapipe-assets/gesture_recognizer/model_card_hand_gesture_classification_with_faireness_2022.pdf){:target="_blank"} and aren't necessarily covered by that same license, so it's worth checking before you redistribute a model binary yourself. MediaPipe's [privacy notice :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/google-ai-edge/mediapipe#privacy-notice){:target="_blank"} is also worth reading closely: your video frames stay on-device, but MediaPipe can still send usage metrics to Google, and getting informed consent from your users for that is on you, not Google.
 
-MediaPipe isn't the only option, though. If you need more precision or dedicated commercial support instead, [Banuba](https://www.banuba.com/technology/hand-tracking-and-gesture-recognition){:target="_blank"}, a commercial SDK built on its own proprietary neural networks, explicitly marketed for video chats, is worth a look too.
+MediaPipe isn't the only option, though. If you need more precision or dedicated commercial support instead, [Banuba :fontawesome-solid-external-link:{.external-link-icon}](https://www.banuba.com/technology/hand-tracking-and-gesture-recognition){:target="_blank"}, a commercial SDK built on its own proprietary neural networks, explicitly marketed for video chats, is worth a look too.
 
-Want to inspect the training data yourself instead of trusting a black box? [HaGRIDv2](https://github.com/hukenovs/hagrid){:target="_blank"} is a million-plus-image gesture dataset built with video calls in mind, with a lightest baseline that classifies a frame in 5ms on CPU alone.
+Want to inspect the training data yourself instead of trusting a black box? [HaGRIDv2 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/hukenovs/hagrid){:target="_blank"} is a million-plus-image gesture dataset built with video calls in mind, with a lightest baseline that classifies a frame in 5ms on CPU alone.
 
-It isn't open source, though. Its own [license file](https://github.com/hukenovs/hagrid/blob/master/license/en_us.pdf){:target="_blank"} states outright that it's "not a Creative Commons license": it's a bespoke, share-alike-style license, explicitly non-sublicensable, published by SaluteDevices (part of Russia's Sber group) and defined under Russian civil law for its database rights. Read it yourself before building anything commercial on it, a non-sublicensable share-alike license is a real obstacle to shipping a derived product, not a formality. It also only ships as PyTorch checkpoints; MediaPipe already did the "export it for the browser" homework for you, HaGRIDv2 doesn't, yet.
+It isn't open source, though. Its own [license file :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/hukenovs/hagrid/blob/master/license/en_us.pdf){:target="_blank"} states outright that it's "not a Creative Commons license": it's a bespoke, share-alike-style license, explicitly non-sublicensable, published by SaluteDevices (part of Russia's Sber group) and defined under Russian civil law for its database rights. Read it yourself before building anything commercial on it, a non-sublicensable share-alike license is a real obstacle to shipping a derived product, not a formality. It also only ships as PyTorch checkpoints; MediaPipe already did the "export it for the browser" homework for you, HaGRIDv2 doesn't, yet.
 
 ## Wiring gestures up to OpenVidu
 
@@ -145,9 +145,9 @@ Measuring the resources needed, on a laptop with an integrated GPU, we can see t
 
 ## Try it in two minutes
 
-**Repository:** [github.com/openvidu-labs/openvidu-ai-gestures](https://github.com/openvidu-labs/openvidu-ai-gestures){:target="_blank"}
+**Repository:** [github.com/openvidu-labs/openvidu-ai-gestures :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-ai-gestures){:target="_blank"}
 
-You'll need [Node.js](https://nodejs.org/en/download){:target="_blank"} and Docker installed. Then:
+You'll need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} and Docker installed. Then:
 
 ```bash
 # Terminal 1: OpenVidu
@@ -167,7 +167,7 @@ npm install
 npm run dev
 ```
 
-Open [`http://localhost:5094`](http://localhost:5094) and start trying out the gestures.
+Open [`http://localhost:5094`](http://localhost:5094){:target="_blank"} and start trying out the gestures.
 
 ## Where to go from here
 

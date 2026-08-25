@@ -27,7 +27,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
     - `openvidu.env`
     - `meet.env`
 
-    To find the command, go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"}, click the arrow next to **SSH**, and then click _"View gcloud command"_.
+    To find the command, go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"}, click the arrow next to **SSH**, and then click *"View gcloud command"*.
 
     ![Google Cloud Platform gcloud command](/assets/images/platform/self-hosting/shared/gcp/gcloud-command.png){ .round-corners loading=lazy }
 

@@ -163,7 +163,7 @@ page_features:
 
     ---
 
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit](https://livekit.io/){:target="_blank"} and [mediasoup](https://mediasoup.org/){:target="_blank"}-->
+    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
 
 -   :octicons-shield-check-16:{ .feature-icon .padding-icon } __Security at all levels__{ .feature-name }
 

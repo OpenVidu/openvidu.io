@@ -256,3 +256,69 @@ def test_a_snippet_repeating_its_folder_name_warns(tmp_path):
 
     (finding,) = findings_of(tmp_path, "snippet-name")
     assert finding.file == "shared/aws/aws-troubleshooting.md"
+
+
+# -- external-link icon and new tabs ---------------------------------------------------------
+
+
+def _with_link(link):
+    return f'---\ntitle: "P"\ndescription: "A fine description of the page."\n---\n{link}\n'
+
+
+def test_an_external_link_in_the_same_tab_is_an_error(tmp_path):
+    write(tmp_path, "docs/docs/a.md", _with_link("See [LiveKit](https://livekit.io/)."))
+
+    (finding,) = findings_of(tmp_path, "external-link-target")
+    assert finding.severity == "error"
+    assert "livekit.io" in finding.message
+
+
+def test_a_new_tab_link_without_the_icon_warns(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link('See [LiveKit](https://livekit.io/){:target="_blank"}.'),
+    )
+
+    (finding,) = findings_of(tmp_path, "external-link-icon")
+    assert finding.severity == "warn"
+
+
+def test_a_marked_external_link_is_clean(tmp_path):
+    icon = ":fontawesome-solid-external-link:{.external-link-icon}"
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link(f'See [LiveKit {icon}](https://livekit.io/){{:target="_blank"}}.'),
+    )
+
+    assert findings_of(tmp_path, "external-link-icon") == []
+    assert findings_of(tmp_path, "external-link-target") == []
+
+
+def test_the_icon_is_not_asked_of_labels_that_are_already_one(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link(
+            '[:simple-github:](https://github.com/x){:target="_blank"}\n'
+            '[![Badge](/assets/images/x/b.png)](https://example.org/deploy){:target="_blank"}\n'
+            '[Deploy](https://console.aws.amazon.com/x){ .md-button target="_blank" }'
+        ),
+    )
+
+    assert findings_of(tmp_path, "external-link-icon") == []
+
+
+def test_the_readers_own_deployment_is_not_an_external_site(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link(
+            "Open [http://localhost:5080](http://localhost:5080) or "
+            "[the console](https://openvidu.example.io/dashboard)."
+        ),
+    )
+
+    assert findings_of(tmp_path, "external-link-target") == []
+    assert findings_of(tmp_path, "external-link-icon") == []

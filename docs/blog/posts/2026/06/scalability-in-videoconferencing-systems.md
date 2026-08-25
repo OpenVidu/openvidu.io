@@ -282,7 +282,7 @@ The roadmap here is straightforward: start with a single node to move fast, add 
 
 You don't have to build all of this yourself.
 
-At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
+At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
 
 - [**Single Node**](/docs/self-hosting/single-node/index.md) to launch quickly.
 - [**Elastic**](/docs/self-hosting/elastic/index.md) to scale media capacity dynamically.

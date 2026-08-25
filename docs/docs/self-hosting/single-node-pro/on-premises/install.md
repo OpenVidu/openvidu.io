@@ -14,7 +14,7 @@ description: "Deploy OpenVidu Single Node PRO on your own servers with the guide
 
 !!! info
     
-    OpenVidu Single Node Pro is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu Single Node Pro is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px" } deployment on-premises. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
@@ -191,10 +191,10 @@ systemctl start openvidu
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
+- OpenVidu Meet: `https://openvidu.example.io/`
+- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
+- MinIO: `https://openvidu.example.io/minio-console`
+- Grafana: `https://openvidu.example.io/grafana`
 
 ## Configure your application to use the deployment
 
@@ -253,7 +253,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
         --8<-- "self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     === "Self-signed certificates"
@@ -285,7 +285,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
         --8<-- "self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 === "With Domain Name"
@@ -320,7 +320,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
         --8<-- "self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     === "Self-signed certificates"
@@ -353,7 +353,7 @@ This is going to generate a command like this, but it may vary depending on the 
 
         --8<-- "self-hosting/common/install-version.md"
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     === "Custom certificates"
@@ -392,7 +392,7 @@ This is going to generate a command like this, but it may vary depending on the 
         --8<-- "self-hosting/common/install-version.md"
 
         - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
         - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 You can run that command in a CI/CD pipeline or in a script to automate the installation process.

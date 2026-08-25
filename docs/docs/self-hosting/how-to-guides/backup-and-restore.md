@@ -60,9 +60,9 @@ If you deploy OpenVidu on a cloud provider **without externalizing S3 or MongoDB
     - **Single Node**: snapshot the VM that runs the whole stack.
     - **Elastic & High Availability**: snapshot every master node. Media nodes can be reprovisioned because they do not keep stateful data.
 2. Follow your cloud provider's snapshot workflow:
-    - AWS: Check [Amazon EBS snapshots](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html){:target="_blank"} and [Amazon Machine Images (AMIs)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html){:target="_blank"}.
-    - Azure: Check [VM backups from VM settings](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-first-look-arm){:target="_blank"}.
-    - Google Cloud: Check [Backup and DR Service for Compute Engine instances and disks](https://docs.cloud.google.com/backup-disaster-recovery/docs/concepts/backupdr-for-compute-engine?hl=en){:target="_blank"}.
+    - AWS: Check [Amazon EBS snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html){:target="_blank"} and [Amazon Machine Images (AMIs) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html){:target="_blank"}.
+    - Azure: Check [VM backups from VM settings :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-first-look-arm){:target="_blank"}.
+    - Google Cloud: Check [Backup and DR Service for Compute Engine instances and disks :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/backup-disaster-recovery/docs/concepts/backupdr-for-compute-engine?hl=en){:target="_blank"}.
 3. Automate snapshots using your provider's scheduler (AWS Backup, Azure Automation, Cloud Scheduler) for consistent recovery points.
 4. Restore by cloning a new node from the snapshot/AMI and updating DNS or load balancer targets.
 5. Check the [After restore](#after-restore) section to verify everything works correctly.
@@ -70,13 +70,13 @@ If you deploy OpenVidu on a cloud provider **without externalizing S3 or MongoDB
 
 ## Method 2: File-level snapshots of `/opt/openvidu/` on master nodes
 
-When you still host MinIO and MongoDB inside the OpenVidu nodes but lack hypervisor or cloud-level snapshots, you can capture the full application state by backing up `/opt/openvidu/` with [restic](https://restic.net/){:target="_blank"}. This directory includes OpenVidu configuration, MinIO data, and MongoDB volumes for deployments that keep everything local to the master nodes.
+When you still host MinIO and MongoDB inside the OpenVidu nodes but lack hypervisor or cloud-level snapshots, you can capture the full application state by backing up `/opt/openvidu/` with [restic :fontawesome-solid-external-link:{.external-link-icon}](https://restic.net/){:target="_blank"}. This directory includes OpenVidu configuration, MinIO data, and MongoDB volumes for deployments that keep everything local to the master nodes.
 
 Run the following procedure on **each master node** in Single Node or Elastic/HA deployments. Media nodes do not require backups because they do not keep stateful data.
 
 ### Prerequisites
 
-- A [compatible backend storage for restic](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html){:target="_blank"}.
+- A [compatible backend storage for restic :fontawesome-solid-external-link:{.external-link-icon}](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html){:target="_blank"}.
 - Enough free space in the backend to hold the backups. The first snapshot will be a full copy of `/opt/openvidu/`, while subsequent snapshots will only store incremental changes.
 
 !!! warning
@@ -84,7 +84,7 @@ Run the following procedure on **each master node** in Single Node or Elastic/HA
 
 ### Backup and Restore example
 
-In this example, we use an [S3-compatible object storage](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html#amazon-s3){:target="_blank"} service as the restic backend. You can adapt the commands if you prefer another supported backend.
+In this example, we use an [S3-compatible object storage :fontawesome-solid-external-link:{.external-link-icon}](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html#amazon-s3){:target="_blank"} service as the restic backend. You can adapt the commands if you prefer another supported backend.
 
 First, export reusable variables once per shell session on each master node. Adjust the repository URL, credentials, and cache paths to match your environment:
 
@@ -293,7 +293,7 @@ export AWS_DEFAULT_REGION="<S3_REGION>"
 
 ## Method 3: Only backup data from MinIO/S3 and MongoDB
 
-Generate portable snapshots using [restic](https://restic.net/){:target="_blank"} when you need point-in-time backups of MinIO objects and MongoDB collections. Run these backups from an **external machine with enough disk space** (for example, a bastion host or operations workstation) that can reach your OpenVidu network.
+Generate portable snapshots using [restic :fontawesome-solid-external-link:{.external-link-icon}](https://restic.net/){:target="_blank"} when you need point-in-time backups of MinIO objects and MongoDB collections. Run these backups from an **external machine with enough disk space** (for example, a bastion host or operations workstation) that can reach your OpenVidu network.
 
 ### Prerequisites
 
@@ -303,7 +303,7 @@ Generate portable snapshots using [restic](https://restic.net/){:target="_blank"
         You can run the backup commands from any OpenVidu node or master node, but it is **not recommended** because it adds load to production services and it requires extra disk space on those nodes to stage the backup data.
 
 - Enough disk space on the backup machine to stage at least one full copy of your MinIO buckets and MongoDB dump before uploading to S3.
-- A [compatible backend storage for restic](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html){:target="_blank"}.
+- A [compatible backend storage for restic :fontawesome-solid-external-link:{.external-link-icon}](https://restic.readthedocs.io/en/v0.18.1/030_preparing_a_new_repo.html){:target="_blank"}.
 
 Export the following variables once on your backup machine so that every command reuses the same paths and credentials:
 
@@ -625,21 +625,21 @@ About the exported variables:
         ```
 
 !!! info
-    If any of the MongoDB or MinIO restore commands fail, check the version compatibility between the Docker images used in the backup/restore process and the versions running in your OpenVidu deployment. You can check the versions in the [Release Notes](../../releases.md){:target="_blank"} and adjust the image tags in the `docker run` commands to match your environment.
+    If any of the MongoDB or MinIO restore commands fail, check the version compatibility between the Docker images used in the backup/restore process and the versions running in your OpenVidu deployment. You can check the versions in the [Release Notes :fontawesome-solid-external-link:{.external-link-icon}](../../releases.md){:target="_blank"} and adjust the image tags in the `docker run` commands to match your environment.
 
 ## Method 4: Only snapshots provided by external services used for S3 or MongoDB
 
 When you use **managed S3-compatible services or managed MongoDB providers**, rely on their built-in snapshot and backup capabilities.
 
 - **S3/Object storage providers**
-    - AWS S3: [AWS Backup for S3](https://docs.aws.amazon.com/aws-backup/latest/devguide/s3-backups.html){:target="_blank"}
-    - Azure Storage: [Blob storage snapshots](https://learn.microsoft.com/azure/storage/blobs/snapshots-overview){:target="_blank"}
-    - Google Cloud Storage: implement [Object Versioning and Retention](https://cloud.google.com/storage/docs/object-versioning){:target="_blank"}
+    - AWS S3: [AWS Backup for S3 :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/aws-backup/latest/devguide/s3-backups.html){:target="_blank"}
+    - Azure Storage: [Blob storage snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/storage/blobs/snapshots-overview){:target="_blank"}
+    - Google Cloud Storage: implement [Object Versioning and Retention :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/storage/docs/object-versioning){:target="_blank"}
 
 - **MongoDB providers**
-    - MongoDB Atlas: [Cloud backups and snapshots](https://www.mongodb.com/docs/atlas/backup/cloud-backup/snapshot-management/){:target="_blank"}
-    - AWS DocumentDB: [DocumentDB Backups and snapshots](https://docs.aws.amazon.com/documentdb/latest/developerguide/backup_restore.html){:target="_blank"}
-    - Azure Cosmos DB for MongoDB: [Online backup and on-demand data restore in Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/online-backup-and-restore){:target="_blank"}
+    - MongoDB Atlas: [Cloud backups and snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://www.mongodb.com/docs/atlas/backup/cloud-backup/snapshot-management/){:target="_blank"}
+    - AWS DocumentDB: [DocumentDB Backups and snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/documentdb/latest/developerguide/backup_restore.html){:target="_blank"}
+    - Azure Cosmos DB for MongoDB: [Online backup and on-demand data restore in Azure Cosmos DB :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/cosmos-db/online-backup-and-restore){:target="_blank"}
 
 ## After restore
 
@@ -668,7 +668,7 @@ To ensure everything works correctly after restoring data, follow these steps:
             MASTER_NODE_PRIVATE_IP=<MASTER_NODE_PRIVATE_IP>
             ```
 
-        - In case you need to reinstall Media Nodes, follow [this command](../elastic/on-premises/install.md#non-interactive-installation){:target="_blank"}
+        - In case you need to reinstall Media Nodes, follow [this command :fontawesome-solid-external-link:{.external-link-icon}](../elastic/on-premises/install.md#non-interactive-installation){:target="_blank"}
 
     === "High Availability"
 
@@ -692,7 +692,7 @@ To ensure everything works correctly after restoring data, follow these steps:
             MASTER_NODE_4_PRIVATE_IP=<MASTER_NODE_4_PRIVATE_IP>
             ```
 
-        - In case you need to reinstall Media Nodes, follow [this command](../ha/on-premises/install-dlb.md#non-interactive-installation){:target="_blank"}
+        - In case you need to reinstall Media Nodes, follow [this command :fontawesome-solid-external-link:{.external-link-icon}](../ha/on-premises/install-dlb.md#non-interactive-installation){:target="_blank"}
 
 
 2. **Check if all containers are running smoothly**
@@ -707,4 +707,4 @@ To ensure everything works correctly after restoring data, follow these steps:
 
 ## About restic
 
-[Method 2](#method-2-file-level-snapshots-of-optopenvidu-on-master-nodes) and [Method 3](#method-3-only-backup-data-from-minios3-and-mongodb) use [restic](https://restic.net/){:target="_blank"}, an open-source CLI that creates encrypted, deduplicated backups to a wide range of storage backends such as S3, local disks, and SFTP servers. In this guide we call the official Docker image and use S3-compatible storage as the backend for ease of use, but you can install restic natively on your Linux distribution by following the [official installation instructions](https://restic.readthedocs.io/en/stable/020_installation.html){:target="_blank"} and use any supported backend.
+[Method 2](#method-2-file-level-snapshots-of-optopenvidu-on-master-nodes) and [Method 3](#method-3-only-backup-data-from-minios3-and-mongodb) use [restic :fontawesome-solid-external-link:{.external-link-icon}](https://restic.net/){:target="_blank"}, an open-source CLI that creates encrypted, deduplicated backups to a wide range of storage backends such as S3, local disks, and SFTP servers. In this guide we call the official Docker image and use S3-compatible storage as the backend for ease of use, but you can install restic natively on your Linux distribution by following the [official installation instructions :fontawesome-solid-external-link:{.external-link-icon}](https://restic.readthedocs.io/en/stable/020_installation.html){:target="_blank"} and use any supported backend.

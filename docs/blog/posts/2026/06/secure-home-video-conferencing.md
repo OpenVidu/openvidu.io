@@ -27,7 +27,7 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/meet/" target="_blank">OpenVidu Meet</a>.
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/meet/" target="_blank">OpenVidu Meet :fontawesome-solid-external-link:{.external-link-icon}</a>.
 <!-- more -->
 
 ## Why self-host your video calls?
@@ -48,7 +48,7 @@ Is this setup valid for everyone? If you need five-nines uptime for a business, 
 
 - **A computer to run it on.** A **Raspberry Pi 5 (4 GB or more) is the recommended option**: quiet, cheap and low-power. Any idle PC or laptop works too, as long as it has **at least 4 GB of RAM and 4 CPU cores** and runs **Linux (Ubuntu is recommended)**.
 - **A home internet connection with a real public IP.**
-- **A free [DuckDNS](https://www.duckdns.org){:target="_blank"} account**. This gives your home OpenVidu Meet server an easy-to-remember web address that keeps working even when your IP changes.
+- **A free [DuckDNS :fontawesome-solid-external-link:{.external-link-icon}](https://www.duckdns.org){:target="_blank"} account**. This gives your home OpenVidu Meet server an easy-to-remember web address that keeps working even when your IP changes.
 - **Access to your router's admin page**, to forward a few ports.
 
 ## Prerequisites & Connectivity Checks
@@ -56,13 +56,13 @@ Is this setup valid for everyone? If you need five-nines uptime for a business, 
 Before you start, make sure your network setup is ready for hosting a server.
 
 ### 1. Are you behind a CGNAT?
-Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **[CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT){:target="_blank"}**), and that prevents people from reaching your server.
+Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **[CGNAT :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Carrier-grade_NAT){:target="_blank"}**), and that prevents people from reaching your server.
 
 Quick check: look at the "Internet" / "WAN" IP your **router** reports. Open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
 
 ![Router label with credentials](/assets/images/blog/2026/06/secure-home-video-conferencing/router-label.png){ .round-corners width=80% loading=lazy }
 
-Then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
+Then compare it with the IP shown at [whatismyip.com :fontawesome-solid-external-link:{.external-link-icon}](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
 
 - If **they match**, you have a public IP.
 - If **they differ**, or your router's WAN IP starts with `100.64.x.x` to `100.127.x.x`, you're behind CGNAT. **Contact your ISP** and ask for a public IP (often free, sometimes a small monthly fee).
@@ -74,9 +74,9 @@ If all the prerequisites above are good, you're all set. OpenVidu Meet is just f
 
 ### Step 1: Get a free address with DuckDNS
 
-Your home IP usually changes from time to time. [DuckDNS](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `<your-subdomain>.duckdns.org`) that automatically follows it, for free.
+Your home IP usually changes from time to time. [DuckDNS :fontawesome-solid-external-link:{.external-link-icon}](https://www.duckdns.org){:target="_blank"} gives you a fixed name (like `<your-subdomain>.duckdns.org`) that automatically follows it, for free.
 
-1. Go to [duckdns.org](https://www.duckdns.org){:target="_blank"} and sign in (with Google, GitHub, etc.).
+1. Go to [duckdns.org :fontawesome-solid-external-link:{.external-link-icon}](https://www.duckdns.org){:target="_blank"} and sign in (with Google, GitHub, etc.).
 2. In the **sub domain** box, type the name you want for your subdomain (e.g. `my-home-video`) and click **add domain**. This will be your `<your-subdomain>` throughout this guide.
 3. Copy your **token** from the top of the page. You'll need it in a moment.
 
@@ -131,7 +131,7 @@ To confirm that ports 80 and 443 are open from the internet:
 
     > This keeps the port open and waiting for connections, nothing else.
 
-2. **Check from the outside.** Open [canyouseeme.org](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener.
+2. **Check from the outside.** Open [canyouseeme.org :fontawesome-solid-external-link:{.external-link-icon}](https://canyouseeme.org){:target="_blank"} and check **port 80**. Once it shows "Success", repeat the same check for **port 443**. **Both ports must be open.** Press `Ctrl+C` to stop each listener.
 
 If both ports show "Success", proceed to Step 3.
 
@@ -141,7 +141,7 @@ If either port fails, your ISP is blocking inbound connections on it. Automatic 
 
 Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
-- via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
+- via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.
 
 You'll also serve the app on a non-standard port. In your router, **forward port `8443` (TCP) to your server's IP**, exactly as you did for ports 80 and 443 above. Then set `CADDY_HTTPS_PUBLIC_PORT=8443` in `/opt/openvidu/config/openvidu.env` and run `sudo systemctl restart openvidu`. Your server will be reachable at `https://<your-subdomain>.duckdns.org:8443/` (note the `:8443` in the URL).
@@ -222,7 +222,7 @@ Once your server is up and running, there are a few things you can do to get mor
 
 This guide deploys **OpenVidu Single Node Community**, which is perfect for family and friends and can comfortably host a crowd. But the very same OpenVidu can grow far beyond a single box. If one day you outgrow your little home server or running into its limits, check the other [deployment types](/docs/self-hosting/deployment-types.md):
 
-- **[OpenVidu Single Node PRO](/docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup](https://mediasoup.org/) and advanced observability. 
+- **[OpenVidu Single Node PRO](/docs/self-hosting/single-node-pro/index.md)**: the same single-machine setup, with 2x performance using [Mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"} and advanced observability. 
 - **[OpenVidu Elastic](/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
 - **[OpenVidu High Availability](/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
 - **[OpenVidu Local](/docs/self-hosting/local.md)**: a development setup for your own laptop. 

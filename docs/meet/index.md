@@ -27,7 +27,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 <div style="text-align: center; margin: 3em 0;" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
-[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
+[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
 
 </div>
 
@@ -235,7 +235,7 @@ With all the features you need to fine-tune your perfect video calling service.
 <div style="text-align: center; margin: 3em 0;" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
-[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
+[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
 
 </div>
 
@@ -501,7 +501,7 @@ Build trust with instant, reliable support through embedded video calls that per
 <div style="text-align: center; margin: 3em 0;" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
-[Try OpenVidu Meet Demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
+[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
 
 </div>
 
