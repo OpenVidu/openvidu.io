@@ -201,7 +201,18 @@ scrolled into view. Requires the `lazyvideo` page tag:
 
 **Above the fold (showcase heroes only).** `autoplay` is allowed, but the inline `src` must be a
 small downscaled `-preview.mp4` with a `poster`; the full-size file appears only in the lightbox
-`href` (see `docs/meet/index.md` for the reference).
+`href` (see `docs/meet/index.md` for the reference). Encode the preview at **half to two-thirds
+the original's width, 30 fps, ~0.8–1.2 Mbps, no audio track** — enough for UI text to stay
+legible, an order of magnitude under the original:
+
+```bash
+ffmpeg -i full.mp4 -vf "scale=1280:720:flags=lanczos,setsar=1" -r 30 \
+  -c:v libx264 -preset slower -profile:v high -pix_fmt yuv420p \
+  -b:v 1000k -pass 1 -an -f mp4 /dev/null
+ffmpeg -i full.mp4 -vf "scale=1280:720:flags=lanczos,setsar=1" -r 30 \
+  -c:v libx264 -preset slower -profile:v high -pix_fmt yuv420p \
+  -b:v 1000k -pass 2 -an -movflags +faststart full-preview.mp4
+```
 
 ```html
 <a class="glightbox" href="/assets/videos/full.mp4" data-type="video"><video class="round-corners" src="/assets/videos/full-preview.mp4" poster="/assets/videos/full-poster.jpg" muted playsinline autoplay loop></video></a>
