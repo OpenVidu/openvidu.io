@@ -176,7 +176,7 @@ The `app.component.ts` file defines the following variables:
 
 When [running OpenVidu locally](#run-openvidu-locally) and launching the app in a web browser, leave `APPLICATION_SERVER_URL` and `LIVEKIT_URL` variables empty. The function `configureUrls()` will automatically configure them with default values. However, for other deployment type or when launching the app in a mobile device, you should configure these variables with the correct URLs depending on your deployment.
 
-In case you are [running OpenVidu locally](#run-openvidu-locally) and launching the app in a mobile device, you can set the `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443` :fontawesome-solid-external-link:{.external-link-icon}](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+In case you are [running OpenVidu locally](#run-openvidu-locally) and launching the app in a mobile device, you can set the `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and the `livekitUrl` to `wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If you leave them empty and app is launched in a mobile device, the user will be prompted to enter the URLs when the application starts:
 

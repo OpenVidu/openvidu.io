@@ -69,7 +69,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
         | `compartment_ocid`{ .nowrap } | OCI Compartment OCID where resources will be created. |
         | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
         | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
-        | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [https://openvidu.io/account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
+        | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [your OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
         | `scale_in_function_image`{ .nowrap } | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
 
         ### Optional Parameters

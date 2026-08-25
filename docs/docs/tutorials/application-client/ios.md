@@ -127,7 +127,7 @@ The `ConfigureUrlsView.swift` file defines a SwiftUI view for configuring the UR
 -   **`applicationServerUrl`**: The URL of the application server used to obtain tokens for joining the video call room.
 -   **`livekitUrl`**: The URL of the LiveKit server used to connect to the video call room and handle video communication.
 
-You should configure these URLs according to your deployment settings. If you are [running OpenVidu locally](#run-openvidu-locally), you can set `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:7443), where `xxx-yyy-zzz-www` represents the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+You should configure these URLs according to your deployment settings. If you are [running OpenVidu locally](#run-openvidu-locally), you can set `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and `livekitUrl` to `wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`, where `xxx-yyy-zzz-www` represents the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If these URLs are left empty, the user will be prompted to enter them when the application starts. This configuration is managed in the `ConfigureUrlsView.swift` file:
 
@@ -165,7 +165,7 @@ Before joining a room, the `ConnectView.swift` defines the view for the connecti
 
 After define the participant and room name, the user can click the `Join` button to connect to the room. This action triggers the `connectToRoom` method asynchronously:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/82d64332150b5c4204ba0d065d40c411175dee51/application-client/openvidu-ios/Shared/Views/ConnectView.swift#L96-L123' target='_blank'>ConnectView.swift</a>" linenums="96"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/ConnectView.swift#L93-L122' target='_blank'>ConnectView.swift</a>" linenums="96"
 func connectToRoom() async {
     let livekitUrl = roomCtx.livekitUrl
     let roomName = roomCtx.name
@@ -346,7 +346,7 @@ struct ParticipantView: View {
 
 To leave the room, the user can click the `Leave` button in the `RoomView`. This action triggers the `leaveRoom` method asynchronously:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/55d303d7b5f57edcaadd5d7864734fe6fa062067/application-client/openvidu-ios/Shared/Views/RoomView.swift#L111-L127' target='_blank'>RoomView.swift</a>" linenums="111"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/RoomView.swift#L49-L108' target='_blank'>RoomView.swift</a>" linenums="111"
 func content(geometry: GeometryProxy) -> some View {
 
     // ...

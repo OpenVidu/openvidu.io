@@ -238,7 +238,7 @@ If everything goes well, all containers will be up and running without restarts,
 OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 
 - OpenVidu Server PRO: `https://openvidu.example.io/`
-- LiveKit API: `https://openvidu.example.io/` and [wss://openvidu.example.io/ :fontawesome-solid-external-link:{.external-link-icon}](wss://openvidu.example.io/){:target="_blank"}
+- LiveKit API: `https://openvidu.example.io/` and `wss://openvidu.example.io/`
 
 ## Load Balancer Configuration
 

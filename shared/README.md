@@ -1,6 +1,6 @@
 # Shared snippets
 
-Reusable Markdown fragments included in pages (and in other snippets) with the [`pymdownx.snippets` :fontawesome-solid-external-link:{.external-link-icon}](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/){:target="_blank"} syntax, where the path is always relative to **this `shared/` folder** (the configured `base_path`, independent of the build directory):
+Reusable Markdown fragments included in pages (and in other snippets) with the [`pymdownx.snippets`](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/) syntax, where the path is always relative to **this `shared/` folder** (the configured `base_path`, independent of the build directory):
 
 ```markdown
 --8<-- "<folder>/<snippet>.md"

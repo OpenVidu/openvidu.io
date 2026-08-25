@@ -56,7 +56,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         | `compartment_ocid`{ .nowrap } | OCI Compartment OCID where resources will be created. |
         | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
         | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
-        | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [https://openvidu.io/account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
+        | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [your OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
 
         #### Optional Parameters
 
