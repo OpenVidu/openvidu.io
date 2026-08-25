@@ -101,6 +101,10 @@
          <lastmod>2026-08-15</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/08/25/debugging-webrtc-with-ai-and-grafana-mcp/</loc>
+         <lastmod>2026-08-24</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/2026/08/18/deploy-openvidu-hetzner/</loc>
          <lastmod>2026-08-20</lastmod>
     </url>
@@ -905,15 +909,23 @@
          
     </url>
     <url>
+         <loc>https://openvidu.io/blog/category/research/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/ai/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/openvidu-platform/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/category/openvidu-how-to/</loc>
          
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/technology/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/ai/</loc>
          
     </url>
     <url>
@@ -938,14 +950,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/release/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/research/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/openvidu-platform/</loc>
          
     </url>
     <url>
