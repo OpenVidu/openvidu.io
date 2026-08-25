@@ -25,8 +25,8 @@ This view allows members to tune their microphone and camera before joining the 
 
 The Meeting View is the central interface where all participants can see, hear, and interact with each other in real time. It features a [smart, dynamic layout](smart-layout.md) that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.
 
-![Meeting view with participant videos and the toolbar](../../../assets/images/meet/meetings/lifecycle/meeting-view-dark.webp#only-dark){ .round-corners loading=lazy }
-![Meeting view with participant videos and the toolbar](../../../assets/images/meet/meetings/lifecycle/meeting-view-light.webp#only-light){ .round-corners loading=lazy }
+![Meeting view with participant videos and the toolbar](../../../assets/images/meet/meetings/lifecycle/meeting-view-dark.png#only-dark){ .round-corners loading=lazy }
+![Meeting view with participant videos and the toolbar](../../../assets/images/meet/meetings/lifecycle/meeting-view-light.png#only-light){ .round-corners loading=lazy }
 
 ## Recordings view
 

@@ -179,7 +179,7 @@ publications:
       - name: Micael Gallego
         orcid: https://orcid.org/0000-0002-2875-7342
     images:
-      - /assets/images/research/qoe-session.webp
+      - /assets/images/research/qoe-session.png
       - /assets/images/research/webrtc-qoe-vs-packet-loss.png
     abstract: >-
       WebRTC is the umbrella term for several emergent technologies aimed to exchange real-time media in the Web. Like other media-related services, the perceived quality of WebRTC communication can be measured using Quality of Experience (QoE) indicators. QoE assessment methods can be classified as subjective (users' evaluation scores) or objective (models computed as a function of different parameters). In this paper, we focus on VMAF (Video Multi-method Assessment Fusion), which is an emergent full-reference objective video quality assessment model developed by Netflix. VMAF is typically used to assess video streaming services. This paper evaluates the use of VMAF in a different type of application: WebRTC. To that aim, we present a practical use case built on the top of well-known open source technologies, such as JUnit, Selenium, Docker, and FFmpeg. In addition to VMAF, we also calculate other objective QoE video metrics such as Visual Information Fidelity in the pixel domain (VIFp), Structural Similarity (SSIM), or Peak Signal-to-Noise Ratio (PSNR) applied to a WebRTC communication in different network conditions in terms of packet loss. Finally, we compare these objective results with a subjective evaluation using a Mean Opinion Score (MOS) scale to the same WebRTC streams. As a result, we found a strong correlation of the subjective video quality perceived in WebRTC video calls with the objective results computed with VMAF and VIFp in comparison with SSIM and PSNR and their variants.
@@ -724,7 +724,7 @@ WebRTC is the umbrella term for several emergent technologies aimed to exchange 
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
-![Perceptual video quality scores across a WebRTC session](assets/images/research/qoe-session.webp){ .control-height .round-corners loading=lazy }
+![Perceptual video quality scores across a WebRTC session](assets/images/research/qoe-session.png){ .control-height .round-corners loading=lazy }
 </div>
 
 <div class="grid-40 tablet-grid-40" markdown="span">

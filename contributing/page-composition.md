@@ -158,12 +158,13 @@ lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#onl
   down to it. Images displayed small (portraits, device frames) are exported at twice their
   display size instead. Resize sources **before** committing them — the `optimize` plugin
   recompresses but never resizes, so oversized sources ship oversized.
-- **Photographic screenshots ship as WebP** (quality 92) — anything with video thumbnails or
-  camera footage in it. The `optimize` plugin runs PNGs through `pngquant`, which reduces them
-  to a 256-colour palette and bands that kind of content; it does not touch WebP, so the
-  quality is whatever the export sets. Flat UI captures, diagrams and charts stay PNG: they
-  quantize cleanly. The handful that band but are not WebP candidates — blog covers, where
-  PNG/JPEG is safer for social previews — are listed in `optimize_exclude` in `mkdocs.yml`.
+- **Screenshots are PNG, and every image goes through the same pipeline.** No per-image
+  formats, no `optimize_exclude` entries. The publish build reduces each PNG to a 256-colour
+  palette with `pngquant` (`optimize_png_speed: 1`, its best search effort), which is a real
+  loss on photographic content — measured 36–38 dB PSNR on the captures that contain video
+  thumbnails, against 42–49 dB on flat UI, diagrams and charts. That is the accepted cost of
+  one uniform pipeline; the palette is capped at 256 colours by the PNG format itself, so
+  there is no setting that removes it.
 
 ### Icons
 

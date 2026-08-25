@@ -79,8 +79,8 @@ __Multi-Party smart layout__{ .ov-meet-commercial-card-title .wow .animated .ani
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
 {.wow .animated .animatedFadeInUp .fadeInUp}
 
-![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-light.webp#only-light){ .round-corners loading=lazy width=1920 height=1080 }
-![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-dark.webp#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
+![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-light.png#only-light){ .round-corners loading=lazy width=1920 height=1080 }
+![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-dark.png#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
 </div>
 
 <div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
@@ -253,7 +253,7 @@ Embed the OpenVidu Meet UI right into your app.
 
 <a class="glightbox" href="/assets/videos/meet/home/embed-html.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/meet/home/embed-html.mp4" preload="none" muted playsinline loop></video></a>
 
-![OpenVidu Meet embedded meeting](../assets/images/meet/embedded/use-cases/support-meeting.webp){ .round-corners loading=lazy width=1920 height=1080 }
+![OpenVidu Meet embedded meeting](../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy width=1920 height=1080 }
 
 </div>
 
@@ -346,8 +346,8 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-![Use case Team meeting](../assets/images/meet/home/multiparty-light.webp#only-light){ .round-corners loading=lazy width=1920 height=1080 }
-![Use case Team meeting](../assets/images/meet/home/multiparty-dark.webp#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
+![Use case Team meeting](../assets/images/meet/home/multiparty-light.png#only-light){ .round-corners loading=lazy width=1920 height=1080 }
+![Use case Team meeting](../assets/images/meet/home/multiparty-dark.png#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
 
 -	OpenVidu Meet is the perfect tool for **collaborative work**. With its user-friendly interface and powerful features, teams can easily connect, share ideas, and make decisions in real-time.
 
@@ -388,7 +388,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 -	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features coming soon to enhance the learning experience.
 
-![Use case e-learning](../assets/images/meet/embedded/use-cases/elearning.webp){ .round-corners loading=lazy width=1920 height=1079 }
+![Use case e-learning](../assets/images/meet/embedded/use-cases/elearning.png){ .round-corners loading=lazy width=1920 height=1079 }
 
 </div>
 
@@ -425,7 +425,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
-![Use case Telehealth](../assets/images/meet/embedded/use-cases/telehealth.webp){ .round-corners loading=lazy width=1920 height=1080 }
+![Use case Telehealth](../assets/images/meet/embedded/use-cases/telehealth.png){ .round-corners loading=lazy width=1920 height=1080 }
 
 -	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption.
 
@@ -466,7 +466,7 @@ Build trust with instant, reliable support through embedded video calls that per
 
 -	Connecting your **remote assistance** team with your **customers** has never been so easy. OpenVidu Meet provides all the necessary tools for effective communication and collaboration, ensuring a seamless support experience.
 
-![Use case Customer support](../assets/images/meet/embedded/use-cases/support-meeting.webp){ .round-corners loading=lazy width=1920 height=1080 }
+![Use case Customer support](../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy width=1920 height=1080 }
 
 </div>
 

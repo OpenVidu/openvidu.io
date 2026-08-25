@@ -60,7 +60,7 @@ Many internet providers no longer give each home a unique public IP. They share 
 
 Quick check: look at the "Internet" / "WAN" IP your **router** reports. Open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
 
-![Router label with credentials](/assets/images/blog/2026/06/secure-home-video-conferencing/router-label.webp){ .round-corners width=80% loading=lazy }
+![Router label with credentials](/assets/images/blog/2026/06/secure-home-video-conferencing/router-label.png){ .round-corners width=80% loading=lazy }
 
 Then compare it with the IP shown at [whatismyip.com](https://www.whatismyip.com){:target="_blank"} (or run `curl ifconfig.me`).
 
@@ -107,7 +107,7 @@ Then, in your router's admin page, find **Port forwarding** (usually under *Adva
 
 </div>
 
-![Port forwarding rules in a router admin panel](/assets/images/blog/2026/06/secure-home-video-conferencing/router-admin.webp){ .round-corners width=80% loading=lazy }
+![Port forwarding rules in a router admin panel](/assets/images/blog/2026/06/secure-home-video-conferencing/router-admin.png){ .round-corners width=80% loading=lazy }
 
 If your server's Linux firewall is active, open ports 80 and 443 there too. We also recommend giving your server a **fixed local IP** (DHCP reservation) in your router so the forwarding rules stay put after a reboot.
 
@@ -232,6 +232,6 @@ And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on
 
 ---
 
-![A family video call running on your own home server](/assets/images/blog/2026/06/secure-home-video-conferencing/meeting.webp){ .round-corners align=right width=60% loading=lazy }
+![A family video call running on your own home server](/assets/images/blog/2026/06/secure-home-video-conferencing/meeting.png){ .round-corners align=right width=60% loading=lazy }
 
 That's all it takes. For the price of a tiny computer and a fun weekend, you are now sovereign over your own video conferencing server, with the power to connect with anyone, anywhere, without giving up your privacy. Happy calling!

@@ -55,7 +55,7 @@ While it works out of the box, it remains highly flexible on the outside, allowi
 * **Privacy & Tech**: Virtual backgrounds and End-to-End Encryption (E2EE).
 * **Identity**: Full UI white-labeling and branding.
 
-![OpenVidu Meet screenshot](/assets/images/blog/2026/06/meet-vs-platform/webcomponent-meeting.webp){ .round-corners loading=lazy }
+![OpenVidu Meet screenshot](/assets/images/blog/2026/06/meet-vs-platform/webcomponent-meeting.png){ .round-corners loading=lazy }
 
 ### OpenVidu Platform: The Developer’s Canvas
 
