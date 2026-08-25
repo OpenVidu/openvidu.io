@@ -294,7 +294,9 @@ level — no attribute is right in both places, so those snippets use `/// html`
   `.provider-chip p` does.
 - **span** (`markdown="span"`) — the element is a layout row whose direct children must be the
   links or images themselves: `.md-social`, a `grid cards` row of links, an image cell that had no
-  `<p>`. Block mode there inserts a paragraph and shifts the layout.
+  `<p>`. Block mode there inserts a paragraph and shifts the layout. A standalone image in such a
+  cell is still centred: the centring rule in `extra.css` matches a grid cell whose own child is
+  the image, not just a paragraph's.
 
 Check the rendered HTML when in doubt: the mode is right when the element's children match what
 they were before the conversion.

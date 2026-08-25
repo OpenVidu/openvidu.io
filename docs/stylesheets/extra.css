@@ -249,10 +249,14 @@ span:has(> a > .openvidu-tag) {
   max-width: 1500px;
 }
 
-/* A standalone image is centred whether or not the lightbox wrapped it in an anchor:
-   `skip-gallery` images (logos, marks) never get one. */
+/* A standalone image is centred whether or not the lightbox wrapped it in an anchor
+   (`skip-gallery` images never get one), and whether its parent is a paragraph or a layout
+   cell: an image written into a `markdown="span"` cell has no paragraph at all, and without
+   the second pair it sits hard against the neighbouring text column. */
 p:has(> a.glightbox),
-p:has(> img) {
+p:has(> img),
+div[class*="grid-"]:has(> a.glightbox),
+div[class*="grid-"]:has(> img) {
   text-align: center;
 }
 
