@@ -359,7 +359,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 </html>
 ```
 
-![OpenVidu Meet meeting embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy }
+![OpenVidu Meet meeting embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-meeting.webp){ .round-corners loading=lazy }
 
 ### Use an iframe
 
@@ -417,7 +417,7 @@ To show the list of recordings of a room, declare attribute **`show-only-recordi
 
 This will show the list of recordings for the specified room:
 
-![List of room recordings embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-room-recordings.png){ .round-corners loading=lazy }
+![List of room recordings embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-room-recordings.webp){ .round-corners loading=lazy }
 
 ### Embed the player for a specific recording
 
@@ -435,7 +435,7 @@ To show the player for a specific recording, replace attribute `room-url` with *
 
 This will show the player for the specified recording:
 
-![Recording player embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-display-recording.png){ .round-corners loading=lazy }
+![Recording player embedded in the example support app](../../assets/images/meet/embedded/use-cases/support-display-recording.webp){ .round-corners loading=lazy }
 
 ## 6. REST API and Webhooks
 

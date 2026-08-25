@@ -413,9 +413,24 @@ plugins:
       enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
-      # Never recompress the vendored compodoc bundle (reference docs ship as-is)
+      # The plugin default is 60, which visibly softens the team portraits.
+      optimize_jpg_quality: 82
       optimize_exclude:
+        # Never recompress the vendored compodoc bundle (reference docs ship as-is)
         - docs/reference-docs/*
+        # pngquant reduces a PNG to a 256-colour palette, which bands anything
+        # photographic. The screenshots that suffered most now ship as WebP, which the
+        # plugin does not touch; these are the rest — blog covers, where PNG/JPEG is the
+        # safer format for social previews, and small figures where the PNG costs little.
+        # Measured: each of these loses more than 40 dB PSNR to the quantizer.
+        - assets/images/blog/2026/06/meet-vs-platform/meet-vs-platform.png
+        - assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png
+        - assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-dark.png
+        - assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png
+        - assets/images/meet/rooms/access/meeting-share-link-dark.png
+        - assets/images/meet/rooms/access/meeting-share-link-light.png
+        - assets/images/research/kurento-api.png
+        - assets/images/research/ovlt-arch.png
   - glightbox:
       width: 100%
       skip_classes:

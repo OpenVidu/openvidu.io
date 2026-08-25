@@ -38,8 +38,8 @@ A saved recording can be **listed**, **played**, **shared**, **downloaded** and 
 
 - The **detail recording page** — accessed from the general "Recordings" page when clicking a recording — which shows the recording's metadata and a player displaying it.
 
-![Recording detail page with metadata and actions](../../../assets/images/meet/recordings/management/recording-detail-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording detail page with metadata and actions](../../../assets/images/meet/recordings/management/recording-detail-light.png#only-light){ .round-corners loading=lazy }
+![Recording detail page with metadata and actions](../../../assets/images/meet/recordings/management/recording-detail-dark.webp#only-dark){ .round-corners loading=lazy }
+![Recording detail page with metadata and actions](../../../assets/images/meet/recordings/management/recording-detail-light.webp#only-light){ .round-corners loading=lazy }
 
 - The **"Recordings"** tab of a [room's detail page](../rooms/management.md#room-details), listing that single room's recordings.
 
@@ -53,8 +53,8 @@ A saved recording can be **listed**, **played**, **shared**, **downloaded** and 
 
 - The **display recording view** — accessed when clicking the play button for a recording — which displays the recording.
 
-![Recording playback view](../../../assets/images/meet/recordings/management/recording-display-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording playback view](../../../assets/images/meet/recordings/management/recording-display-light.png#only-light){ .round-corners loading=lazy }
+![Recording playback view](../../../assets/images/meet/recordings/management/recording-display-dark.webp#only-dark){ .round-corners loading=lazy }
+![Recording playback view](../../../assets/images/meet/recordings/management/recording-display-light.webp#only-light){ .round-corners loading=lazy }
 
 ### Sharing recordings { #sharing-recordings }
 

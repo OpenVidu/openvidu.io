@@ -65,8 +65,8 @@ Once the server is up and running, you can test the application by visiting [`ht
 </div>
 
 <div class="grid-50" markdown>
-![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark){ .round-corners loading=lazy }
-![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light){ .round-corners loading=lazy }
+![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.webp#only-dark){ .round-corners loading=lazy }
+![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.webp#only-light){ .round-corners loading=lazy }
 </div>
 
 </div>

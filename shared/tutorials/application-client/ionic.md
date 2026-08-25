@@ -97,7 +97,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
         ///
 
         /// html | div.grid-50.text-center
-        ![Video call room of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/room-ionic-device.png){ loading=lazy style="width: 50%" }
+        ![Video call room of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/room-ionic-device.webp){ loading=lazy style="width: 50%" }
         ///
 
         ///

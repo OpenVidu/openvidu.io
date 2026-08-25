@@ -4,7 +4,7 @@ draft: false
 date: 2026-06-09
 slug: turn-key-considerations
 description: "Why TURN is what separates a WebRTC demo from a production deployment: connectivity resilience and security behind NATs, firewalls and mobile gateways."
-cover_image: vsc.png
+cover_image: vsc.webp
 categories:
   - OpenVidu Platform
   - Technology
@@ -20,7 +20,7 @@ authors:
 
 # Connectivity Resilience and Security in WebRTC Deployments: Key Considerations on TURN
 
-![Sloth watching a spinner waiting to connect to the Daily Meeting](/assets/images/blog/2026/06/turn-key-considerations/vsc.png "Sloth watching a spinner waiting to connect to the Daily Meeting"){ .round-corners width=50% }
+![Sloth watching a spinner waiting to connect to the Daily Meeting](/assets/images/blog/2026/06/turn-key-considerations/vsc.webp "Sloth watching a spinner waiting to connect to the Daily Meeting"){ .round-corners width=50% }
 
 There's a clear gap between a WebRTC demo and something you can actually run in production, and it usually sits at the TURN layer. Your demo might work fine on a clean network, but once real users show up behind NATs, corporate firewalls, and mobile gateways, the calls simply die without it.
 

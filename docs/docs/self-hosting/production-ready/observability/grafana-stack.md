@@ -13,7 +13,7 @@ OpenVidu also provides different **Grafana dashboards** to monitor **metrics** f
 
 Grafana is available at `https://your.domain/grafana/` and can be accessed using your **Grafana admin credentials**.
 
-  ![Grafana login](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/login.png){ .round-corners loading=lazy }
+  ![Grafana login](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/login.webp){ .round-corners loading=lazy }
 
 Dashboards can be found in the **OpenVidu** folder at `https://your.domain/grafana/dashboards/f/openvidu-dashboards/openvidu`.
 
