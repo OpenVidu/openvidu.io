@@ -1,7 +1,4 @@
 {
-  // Material's schema enumerates only the extensions it documents, so it flags
-  // `pymdownx.blocks.html` as "not accepted" even though pymdown-extensions ships it
-  // and the build uses it. Editor-only false positive - do not remove the extension.
   "yaml.schemas": {
     "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
   },
