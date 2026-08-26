@@ -318,7 +318,8 @@ theme:
     - navigation.tracking
     - navigation.footer
     # Breadcrumbs on meet/** + docs/** only: the sectioned marketing pages and the blog
-    # opt out per page/folder with `hide: - path`.
+    # opt out per page/folder with `hide: - path`. The trail starts at the product,
+    # not at "Home" - see overrides/partials/path.html.
     - navigation.path
     # Every page embeds its own product tree instead of both (~250 entries). Upstream
     # prunes every inactive section at every level, which turns collapsed sections into
