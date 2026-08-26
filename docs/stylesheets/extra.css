@@ -940,15 +940,20 @@ h1.meetplatform-slogan {
   opacity: 1;
 }
 
-/* The toggle is a real <button> (keyboard/touch operable); strip UA styles so
-   it renders like the sibling tab links. */
+/* The toggle is a real <button> (keyboard/touch operable), so it needs the UA chrome
+   stripped - but only that: a `font` or `margin` reset also cancels the font-size and
+   margin-top .md-tabs__link sets, which is what made this tab render smaller and higher
+   than its siblings. Everything the sibling links inherit is inherited here explicitly,
+   since a button inherits none of it by default. */
 button.md-tabs__dropdown-toggle {
+  appearance: none;
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
-  font: inherit;
   color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   cursor: pointer;
 }
 
