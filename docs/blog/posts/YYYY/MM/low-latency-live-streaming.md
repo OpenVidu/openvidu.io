@@ -4,6 +4,7 @@ draft: true
 date: 2026-08-26
 slug: low-latency-live-streaming
 description: "What counts as low latency, why WebRTC hits sub-second delivery where HLS and DASH structurally can't, and where low latency live streaming actually gets used."
+cover_image: poster-light.webp
 categories:
     - Comparison
     - Technology
@@ -25,7 +26,6 @@ hide:
 
 # Low Latency Live Streaming: WebRTC vs. HLS and DASH
 
-<!-- 🖼️ PLACEHOLDER: poster image needed before publish (light/dark webp variants). Suggested visual: a split-screen clock graphic showing "0.1s" next to a videoconference and "20s" next to a broadcast stadium feed, to make the latency gap visceral at a glance. -->
 ![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/YYYY/MM/low-latency-live-streaming/poster-light.webp#only-light "Low latency live streaming vs. traditional broadcast delay")
 ![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/YYYY/MM/low-latency-live-streaming/poster-dark.webp#only-dark "Low latency live streaming vs. traditional broadcast delay")
 
