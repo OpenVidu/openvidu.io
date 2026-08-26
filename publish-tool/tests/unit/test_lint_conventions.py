@@ -270,7 +270,7 @@ def test_an_external_link_in_the_same_tab_is_an_error(tmp_path):
 
     (finding,) = findings_of(tmp_path, "external-link-target")
     assert finding.severity == "error"
-    assert "livekit.io" in finding.message
+    assert finding.message == 'external link to "https://livekit.io/" opens in the same tab'
 
 
 def test_a_new_tab_link_without_the_icon_warns(tmp_path):
