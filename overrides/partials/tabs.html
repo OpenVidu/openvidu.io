@@ -34,8 +34,7 @@
                     {% endif %}
                 {% endfor %}
                 {# The label comes from the first grouped item's dropdown_label
-                   frontmatter (falling back to its title). A <button> plus the
-                   :focus-within CSS keeps the menu keyboard- and touch-operable. #}
+                   frontmatter (falling back to its title). #}
                 {% set first_drop = ns.dropdown_items[0] %}
                 {% set drop_meta = first_drop.meta or (first_drop.children and first_drop.children[0].meta) or {} %}
                 {% set drop_label = drop_meta.dropdown_label or first_drop.title %}

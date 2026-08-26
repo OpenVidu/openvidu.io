@@ -56,8 +56,7 @@
     </label>
 
     {# Header title. The first topic span is deliberately empty (the logo already
-       carries the wordmark; the version selector is injected here client-side);
-       its twin shows the page title on scroll, rendered in Arciform. #}
+       carries the wordmark). Its twin shows the page title on scroll, rendered in Arciform. #}
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
@@ -94,9 +93,7 @@
       {% include "partials/alternate.html" %}
     {% endif %}
 
-    {# Button to open search modal. `hide: search-bar` skips the whole search UI
-       (the version-selector hide stays CSS-based in main.html: that widget is
-       injected client-side and has no template markup to skip). #}
+    {# Button to open search modal. `hide: search-bar` skips the whole search UI #}
     {% if "material/search" in config.plugins and not (page.meta and page.meta.hide and "search-bar" in page.meta.hide) %}
       {% set search = config.plugins["material/search"] | attr("config") %}
 
@@ -119,8 +116,7 @@
       </div>
     {% endif %}
 
-    {# Static on every page; on /account/ the openvidu-register bundle relabels it
-       after sign-in (a loading placeholder belongs to that app's modernization). #}
+    {# Static on every page; on /account/ the openvidu-register bundle relabels it after sign-in. #}
     <div class="md-typeset log-in-div">
       <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
     </div>

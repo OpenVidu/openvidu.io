@@ -1,8 +1,5 @@
-{# Elements added to main will be displayed on all pages #}
 {% extends "base.html" %}
 
-{# Disabled announcement bar. Commented out in Jinja form on purpose: inside an HTML
-   comment the block would still be executed and rendered. #}
 {# {% block announce %}
 <div id="announce">
   We would love to hear your feedback about OpenVidu. Please take a moment to fill out
@@ -163,22 +160,17 @@
 {% endblock %}
 
 {% block extrahead %}
-{# Add head tags that need to be applied before here #}
 {{ super() }}
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
 {% if page.meta and page.meta.robots %}
 <meta name="robots" content="{{ page.meta.robots }}" />
 {% endif %}
-{# Add head tags that need to be applied afterwards here #}
 {% endblock %}
 
 {% block scripts %}
 
-{# Add scripts that need to run before here #}
-
-{# Owns the lightbox on every page: one gallery per page, theme-aware (see
-   contributing/page-composition.md) #}
+{# Owns the lightbox on every page: one gallery per page, theme-aware #}
 <script src="{{ 'javascripts/glightbox-gallery.js' | url }}"></script>
 
 {% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
@@ -214,8 +206,6 @@
 
 {{ super() }}
 
-{# Add scripts that need to run afterwards here #}
-
 {% if page.meta and page.meta.page_features and "openviduregister" in page.meta.page_features %}
 <script src="{{ 'javascripts/openvidu-register/openvidu-register.js' | url }}"></script>
 {% endif %}
@@ -224,11 +214,6 @@
 
 {% block styles %}
 
-{# Deliberately INLINE, never in a .css file: the privacy plugin removes any CSS file
-   that references an external URL from the build and re-emits it from a thread whose
-   failure is silently swallowed - the 2026-08-14 publish shipped without extra.css
-   because this @font-face lived there. Inline <style> is invisible to the plugin, so
-   AWS pages keep one live cdnfonts request (the pre-existing behavior). #}
 <style>
   @font-face {
     font-family: "Amazon Ember";
