@@ -20,13 +20,17 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 The application will seamlessly initiate as a native desktop program, adapting itself to the specific operating system you are using. Once the application is open, you should see a screen like this:
 
-<div class="grid-container">
+/// html | div.grid-container
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-electron.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-electron.png" loading="lazy" alt="Join screen of the Electron tutorial app"/></a></p></div>
+/// html | div.grid-50
+![Join screen of the Electron tutorial app](/assets/images/platform/tutorials/application-client/join-electron.png){ .round-corners loading=lazy }
+///
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-electron.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-electron.png" loading="lazy" alt="Video call room of the Electron tutorial app"/></a></p></div>
+/// html | div.grid-50
+![Video call room of the Electron tutorial app](/assets/images/platform/tutorials/application-client/room-electron.png){ .round-corners loading=lazy }
+///
 
-</div>
+///
 
 !!! info "Running your application client from other devices in your local network"
 

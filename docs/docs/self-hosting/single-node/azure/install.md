@@ -14,40 +14,37 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Azure from an Azur
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Azure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through ARM Template Specs.
 
---8<-- "shared/self-hosting/common/single-node-pro-license-intro.md"
+--8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
 To use the Azure template, click the button below (you will be redirected to Azure).
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
-    </div>
+    /// html | div.center-align.deploy-button.deploy-to-azure-btn
+    [![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
+    ///
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    <div class="center-align deploy-button deploy-to-azure-btn" markdown>
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
-    </div>
+    /// html | div.center-align.deploy-button.deploy-to-azure-btn
+    [![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.8.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
+    ///
 
 === "Architecture overview"
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
-    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node Azure Architecture</figcaption>
-    </figure>
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ## Template Parameters
 
 To deploy the template, you need to fill in the following parameters.
 
---8<-- "shared/self-hosting/azure/resource-group-stack-name.md"
+--8<-- "self-hosting/azure/resource-group-stack-name.md"
 
---8<-- "shared/self-hosting/azure/ssl-domain.md"
+--8<-- "self-hosting/azure/ssl-domain.md"
 
-## OpenVidu Single Node PRO configuration <span class="openvidu-tag openvidu-pro-tag" style="font-size: 11px">PRO</span>
+## OpenVidu Single Node PRO configuration **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 11px" }
 
 If you are deploying the PRO edition, you need to specify some additional properties.
 
@@ -55,13 +52,13 @@ If you are deploying the PRO edition, you need to specify some additional proper
 
     Parameters of this section look like this:
 
-    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png)
+    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png){ .round-corners loading=lazy }
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
---8<-- "shared/self-hosting/azure/meet.md"
+--8<-- "self-hosting/azure/meet.md"
 
 ### Azure Instance Configuration
 
@@ -71,15 +68,13 @@ Specify properties for the Azure instance that will host OpenVidu.
 
     Parameters in this section look like this:
 
-    <figure markdown>
-    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/single-node/azure/instance-config.png){ .svg-img .dark-img }
-    </figure>
+    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/single-node/azure/instance-config.png){ .round-corners loading=lazy }
 
     Simply select the type of instance you want to deploy in **Type of Instance**. Fill in **Admin Username**, which will be set as the admin username on the instance. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instance.
 
---8<-- "shared/self-hosting/azure/storage-account.md"
+--8<-- "self-hosting/azure/storage-account.md"
 
---8<-- "shared/self-hosting/azure/additional-flags.md"
+--8<-- "self-hosting/azure/additional-flags.md"
 
 ## Deploying the stack
 
@@ -97,21 +92,15 @@ When everything is ready, you can check the output secrets on the Key Vault or b
 
     2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
 
-        <figure markdown>
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
-        </figure>
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners loading=lazy }
 
     3. Click the secret you want to inspect, then click the current version of that secret.
 
-        <figure markdown>
-        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .svg-img .dark-img }
-        </figure>
+        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .round-corners loading=lazy }
 
     4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
 
-        <figure markdown>
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .svg-img .dark-img }
-        </figure>
+        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .round-corners loading=lazy }
 
 === "Check deployment outputs in the instance"
 
@@ -126,13 +115,13 @@ You need your Azure deployment outputs to configure your OpenVidu application. I
 
 Your authentication credentials and the URL to point your applications to are:
 
---8<-- "shared/self-hosting/azure/credentials-general.md"
+--8<-- "self-hosting/azure/credentials-general.md"
 
---8<-- "shared/self-hosting/azure/credentials-v2compatibility.md"
+--8<-- "self-hosting/azure/credentials-v2compatibility.md"
 
 ## Troubleshooting initial Azure stack creation
 
---8<-- "shared/self-hosting/azure/troubleshooting.md"
+--8<-- "self-hosting/azure/troubleshooting.md"
 
 3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

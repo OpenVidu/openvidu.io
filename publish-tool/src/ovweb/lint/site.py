@@ -22,6 +22,10 @@ from pathlib import Path
 from .findings import ERROR, Finding
 
 MINOR = re.compile(r"\d+\.\d+")
+#: An attr_list block that reached the page as text instead of becoming attributes. The usual
+#: cause is the `_` in `target="_blank"` pairing with a later `_..._` emphasis run on the same
+#: line, which swallows the block and silently drops the attribute it carried.
+ATTR_BLOCK = re.compile(r"\{:?\s*[.\w-]+=[\"'][^\"']*[\"']\s*\}")
 SITE_URL = re.compile(r"https://openvidu\.io(/|$)")
 
 SKIP_SCHEMES = ("mailto:", "tel:", "data:", "javascript:", "about:")
@@ -38,6 +42,11 @@ class _PageParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.ids: set[str] = set()
         self.refs: list[tuple[int, str]] = []
+        self.leaks: list[tuple[int, str]] = []
+
+    def handle_data(self, data: str) -> None:
+        for match in ATTR_BLOCK.finditer(data):
+            self.leaks.append((self.getpos()[0], match.group(0)))
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         line = self.getpos()[0]
@@ -130,6 +139,19 @@ def check_site(site: Path) -> list[Finding]:
         page = path.relative_to(site).as_posix()
         parsed = _parse_page(path)
         ids_cache[path] = parsed.ids
+
+        for line, leak in parsed.leaks:
+            findings.append(
+                Finding(
+                    "attr-block-leak",
+                    ERROR,
+                    page,
+                    line,
+                    f'attr_list block "{leak}" reached the page as text',
+                    "an underscore later on the source line paired with the one in "
+                    '"_blank" and swallowed the block; use *emphasis* there, or move the link',
+                )
+            )
 
         for line, ref in parsed.refs:
             normalized = _normalize(ref, page)

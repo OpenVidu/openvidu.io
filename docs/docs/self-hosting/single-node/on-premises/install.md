@@ -14,16 +14,13 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on your own servers w
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on-premises, in either the COMMUNITY or PRO edition. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
 
---8<-- "shared/self-hosting/common/single-node-pro-license-intro.md"
+--8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
 === "Architecture overview"
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
-    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node On Premises Architecture</figcaption>
-    </figure>
+    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 All services are deployed on a single machine, which includes:
 
@@ -36,7 +33,7 @@ All services are deployed on a single machine, which includes:
 - **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates.
 - **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
-- **OpenVidu V2 Compatibility (v2compatibility module)** <span class="openvidu-tag openvidu-pro-tag" style="font-size: 11px">PRO</span> is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
+- **OpenVidu V2 Compatibility (v2compatibility module)** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 11px" } is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
 
 ## Prerequisites
 
@@ -52,7 +49,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 
 **Inbound port rules**:
 
-| Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+| Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -62,7 +59,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
 | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
 | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
-| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | <span class="openvidu-tag openvidu-pro-tag" style="font-size: 11px">PRO</span> Needed for WebRTC media traffic over TCP when using the Mediasoup engine. |
+| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 11px" } Needed for WebRTC media traffic over TCP when using the Mediasoup engine. |
 
 ??? warning "Make sure the proper ports are opened in the internal Linux firewall!"
 
@@ -149,13 +146,13 @@ Typically, all outbound traffic is allowed.
 
 Before the installation, ensure that your machine meets the [prerequisites](#prerequisites) and the [port rules](#port-rules). Then, execute the following command on the machine where you want to deploy OpenVidu:
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -185,13 +182,13 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
     > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
     ```
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     ```bash
     sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh)
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -232,10 +229,10 @@ systemctl start openvidu
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
+- OpenVidu Meet: [https://openvidu.example.io/ :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.example.io/){:target="_blank"}
+- OpenVidu Dashboard: [https://openvidu.example.io/dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.example.io/dashboard/){:target="_blank"}
+- MinIO: [https://openvidu.example.io/minio-console :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.example.io/minio-console/){:target="_blank"}
+- Grafana: [https://openvidu.example.io/grafana :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.example.io/grafana/){:target="_blank"}
 
 ## Configure your application to use the deployment
 
@@ -246,9 +243,9 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/on-premises/credentials-general.md"
+--8<-- "self-hosting/on-premises/credentials-general.md"
 
---8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -260,11 +257,11 @@ docker run --pull always --rm -it \
     --deployment-type=single_node
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 This is going to generate a command like this, but it may vary depending on the answers you provide. Here are examples of the command you can run depending on the certificate type and domain configuration:
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     === "Without Domain Name"
 
@@ -293,7 +290,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='letsencrypt'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
         === "Self-signed certificates"
 
@@ -320,7 +317,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='selfsigned'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
     === "With Domain Name"
 
@@ -350,7 +347,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='letsencrypt'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
         === "Self-signed certificates"
 
@@ -378,7 +375,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='selfsigned'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
         === "Custom certificates"
 
@@ -411,11 +408,11 @@ This is going to generate a command like this, but it may vary depending on the 
                 --owncert-public-key="$CERT_PUBLIC_KEY"
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
             - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     === "Without Domain Name"
 
@@ -446,9 +443,9 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='letsencrypt'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
         === "Self-signed certificates"
@@ -478,9 +475,9 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='selfsigned'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     === "With Domain Name"
@@ -513,9 +510,9 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='letsencrypt'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
         === "Self-signed certificates"
@@ -546,9 +543,9 @@ This is going to generate a command like this, but it may vary depending on the 
                 --certificate-type='selfsigned'
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
         === "Custom certificates"
@@ -584,9 +581,9 @@ This is going to generate a command like this, but it may vary depending on the 
                 --owncert-public-key="$CERT_PUBLIC_KEY"
             ```
 
-            --8<-- "shared/self-hosting/common/install-version.md"
+            --8<-- "self-hosting/common/install-version.md"
 
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
             - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
             - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
 
@@ -611,7 +608,7 @@ Once you have OpenVidu deployed, you can check the [Administration](./admin.md) 
 
 ## Plain Docker Compose installation
 
-!!! warning "This installation method is targeted to advanced users, and is only available for the <span class="openvidu-tag openvidu-community-tag" style="font-size: 11px">COMMUNITY</span> edition"
+!!! warning "This installation method is targeted to advanced users, and is only available for the **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 11px" } edition"
 
 This installation mechanism is more friendly with GitOps procedures, because all the configuration and deployment is managed through plain text files.
 

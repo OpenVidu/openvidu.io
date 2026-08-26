@@ -11,24 +11,21 @@ categories:
 tags:
   - AI agents
   - Claude Code
-  - OpenVidu Meet
   - Embedded video
   - WebComponent
   - WebRTC
   - Video Conferencing
   - CRM
+page_features:
+  - lazyvideo
 authors:
   - patxi
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Building a video-enabled CRM with an AI agent and OpenVidu Meet
 
-![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png#only-light "A video meeting, right inside the CRM")
-![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-dark.png#only-dark "A video meeting, right inside the CRM")
+![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png#only-light "A video meeting, right inside the CRM"){ .round-corners }
+![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-dark.png#only-dark "A video meeting, right inside the CRM"){ .round-corners }
 
 What does it take today to go from an empty folder to a working business app with **video meetings embedded in it**? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and **seven prompts**.
 
@@ -36,9 +33,7 @@ We recently ran this experiment: build a small CRM — clients, support issues, 
 
 <!-- more -->
 
-<video autoplay muted loop playsinline width="100%" style="border-radius: 10px; margin: 0.5em 0 1em 0;">
-  <source src="/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" type="video/mp4">
-</video>
+<video class="round-corners lazy-video" src="/assets/videos/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" preload="none" muted playsinline loop width="100%" style="margin: 0.5em 0 1em 0;"></video>
 
 *The result in 10 seconds: sign in, open the client's issue, hit **Join** — and the meeting happens right inside the CRM. Real capture of the running app (participant video is stock footage).*
 
@@ -68,9 +63,9 @@ Note two things. First, we asked for **tests first** — that gives the agent a 
 
 A few minutes later we had a working app: Express backend, in-memory store, session auth with self-registration, and a clean single-page UI with the requested light-purple branding — 27 passing tests, runnable with a single `npm start`.
 
-![The clients page of the generated CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/clients.png "Clients as cards in a grid")
+![The clients page of the generated CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/clients.png "Clients as cards in a grid"){ .round-corners loading=lazy }
 
-![The meetings calendar of the generated CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/calendar.png "Meetings shown as a monthly calendar")
+![The meetings calendar of the generated CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/calendar.png "Meetings shown as a monthly calendar"){ .round-corners loading=lazy }
 
 ## Prompt 2: "make meetings happen inside the app"
 
@@ -93,9 +88,9 @@ We pointed it at three documentation pages: the [WebComponent reference](/meet/e
 
 This is how the three pieces fit together — your app server drives the Meet REST API, and the webcomponent turns each member's personal link into the meeting UI:
 
-![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture.svg "How the CRM, the browser and OpenVidu Meet fit together"){ .svg-img }
+![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture.svg "How the CRM, the browser and OpenVidu Meet fit together"){ loading=lazy }
 
-![An issue with its planned and past meetings](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png "Each issue tracks its meetings — with a Join button that opens the meeting in-app")
+![An issue with its planned and past meetings](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png "Each issue tracks its meetings — with a Join button that opens the meeting in-app"){ .round-corners loading=lazy }
 
 ### Where reality pushed back
 
@@ -115,9 +110,9 @@ The agent extracted the exact contract from the 3.8.0 sources and rebuilt the in
 - The client contact is added as an **invited guest with speaker permissions** and a personal, private link the CRM user can copy and send.
 - A new panel on the client page edits the guest's base role plus OpenVidu Meet's **14 fine-grained permissions** — camera, microphone, screen share, chat, recording, kick and end-meeting rights — pushed to the Meet API on save.
 
-![The client page showing meeting room access](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/client-meet-access.png "The client's guest membership, managed from the CRM")
+![The client page showing meeting room access](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/client-meet-access.png "The client's guest membership, managed from the CRM"){ .round-corners loading=lazy }
 
-![The fine-grained permissions editor](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/permissions-editor.png "Base role plus 14 per-member permissions, straight from the CRM UI")
+![The fine-grained permissions editor](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/permissions-editor.png "Base role plus 14 per-member permissions, straight from the CRM UI"){ .round-corners loading=lazy }
 
 Once more, the final prompt was to run the full stack and verify live — which surfaced one last real-world nugget (a member's `effectivePermissions` must be requested explicitly via `extraFields`), fixed and covered by the test suite: 44 tests by the end.
 

@@ -7,8 +7,8 @@ description: "Every OpenVidu service on one server. Install, upgrade and adminis
 
 OpenVidu Single Node is a production-ready deployment option that provides all the necessary features for running real-time applications with medium user load. It is available in two editions:
 
-- **<span style="font-size: 12px;" class="openvidu-tag openvidu-community-tag">COMMUNITY</span>**: the open-source edition, free to use.
-- **<span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span>**: adds [**2x performance**](../production-ready/performance.md) and [**advanced observability**](../production-ready/observability/index.md) on top of everything COMMUNITY offers. [Create an OpenVidu account](../../../account.md){:target="_blank"} to get a 15-day free trial license key.
+- **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 12px" }: the open-source edition, free to use.
+- **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px" }: adds [**2x performance**](../production-ready/performance.md) and [**advanced observability**](../production-ready/observability/index.md) on top of everything COMMUNITY offers. [Create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get a 15-day free trial license key.
 
 !!! info
 

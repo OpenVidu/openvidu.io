@@ -70,7 +70,6 @@ layout:
     - index.html
     - index.md
     - 404.html
-    - robots.txt
     - llms.txt
     - feed_rss_created.xml
     - feed_rss_updated.xml
@@ -174,15 +173,18 @@ redirects:
 
     - id: removed-oracle-install-tutorial-pro
       description: >
-        As above for the PRO tree, where the page was removed before 3.7 shipped. Points straight
-        at the merged single-node/ page (issue #46) rather than through single-node-pro/, which
-        `files` rules do not auto-chain through the way `expand` rules do; the target has existed
-        at this path since long before 3.7, so this is safe for every version the rule covers.
+        As above for the PRO tree, where the page was removed before 3.7 shipped.
       at: "{version}/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.html"
-      to: "../../../single-node/oracle/install/"
-      canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
+      to: "../install/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node-pro/oracle/install/"
       body: "Redirecting to the Oracle Cloud installation guide…"
       versions: ">=3.7"
+      when:
+        # From 3.8 the PRO install page it pointed at is itself a stub, so this one skips
+        # straight to the merged page: `files` rules are not chained the way `expand` ones are.
+        - versions: ">=3.8"
+          to: "../../../single-node/oracle/install/"
+          canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
 
     - id: single-node-pro-index-merged
       description: >

@@ -16,7 +16,7 @@ The OpenVidu installer offers an easy way to deploy OpenVidu Single Node on-prem
 
 This section provides details on configuration parameters and common administrative tasks for this deployment.
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-start-stop.md"
+--8<-- "self-hosting/on-premises/single-node/admin-start-stop.md"
 
 ## Checking the status of services
 
@@ -29,7 +29,7 @@ docker compose ps
 
 The services are operating correctly if you see an output similar to the following and there are no restarts from any of the services:
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     ```bash
     NAME         IMAGE                                        COMMAND                  SERVICE      CREATED          STATUS
@@ -48,7 +48,7 @@ The services are operating correctly if you see an output similar to the followi
     redis        docker.io/redis                              "docker-entrypoint.s…"   redis        19 seconds ago   Up 15 seconds
     ```
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     ```bash
     NAME                       IMAGE                                              COMMAND                   SERVICE                    CREATED          STATUS
@@ -69,11 +69,11 @@ The services are operating correctly if you see an output similar to the followi
     redis                      docker.io/redis:7.4.2-alpine                       "/bin/sh -c '\n  . /c…"   redis                      18 seconds ago   Up 6 seconds
     ```
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-checking-logs.md"
+--8<-- "self-hosting/on-premises/single-node/admin-checking-logs.md"
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-change-config.md"
+--8<-- "self-hosting/on-premises/single-node/admin-change-config.md"
 
---8<-- "shared/self-hosting/on-premises/single-node/admin-uninstall.md"
+--8<-- "self-hosting/on-premises/single-node/admin-uninstall.md"
 
 ## Backup and Restore
 

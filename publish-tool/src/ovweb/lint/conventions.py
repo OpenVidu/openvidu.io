@@ -1,7 +1,8 @@
-"""Page-composition conventions: admonitions, the `tags:` contract, assets and snippets.
+"""Page-composition conventions: admonitions, the `page_features:` contract, assets and snippets.
 
-The `tags:` contract is include-aware: a page's snippets are inlined before checking, because
-the HTML that requires a tag usually lives in a snippet while the tag must sit on the page.
+The `page_features:` contract is include-aware: a page's snippets are inlined before
+checking, because the HTML that requires a feature key usually lives in a snippet while
+the key must sit on the page.
 """
 
 from __future__ import annotations
@@ -28,9 +29,9 @@ def _class_token(token: str) -> re.Pattern[str]:
 #: HTML class names that only work when the page carries the matching functional tag, which
 #: loads the JS behind them (see contributing/page-composition.md).
 TAG_CONTRACT = (
-    (_class_token("glightbox"), "glightbox", "setupcustomgallery"),
     (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
-    (_class_token("carousel-cell"), "carousel-cell", "setupcarousel"),
+    (_class_token("splide"), "splide", "setupcarousel"),
+    (_class_token("lazy-video"), "lazy-video", "lazyvideo"),
     (_class_token("lead-form"), "lead-form", "leadform"),
 )
 
@@ -66,22 +67,23 @@ def _effective_text(page: Source, corpus: Corpus) -> str:
 def check_tag_contract(corpus: Corpus) -> list[Finding]:
     findings = []
     for path, page in corpus.docs.items():
-        tags = page.meta.get("tags") or []
-        if not isinstance(tags, list):
-            tags = []
+        features = page.meta.get("page_features") or []
+        if not isinstance(features, list):
+            features = []
         effective = _effective_text(page, corpus)
-        for pattern, token, tag in TAG_CONTRACT:
-            if pattern.search(effective) and tag not in tags:
+        for pattern, token, feature in TAG_CONTRACT:
+            if pattern.search(effective) and feature not in features:
                 findings.append(
                     Finding(
                         "tag-contract",
                         ERROR,
                         path,
                         1,
-                        f'page renders `class="{token}"` content but lacks `tags: [{tag}]`',
-                        "the tag loads the JS behind that markup (possibly pulled in by a "
-                        "snippet); without it the element falls back to default behaviour "
-                        "or renders inert",
+                        f'page renders `class="{token}"` content but lacks '
+                        f"`page_features: [{feature}]`",
+                        "the feature key loads the JS behind that markup (possibly pulled in "
+                        "by a snippet); without it the element falls back to default "
+                        "behaviour or renders inert",
                     )
                 )
     return findings
@@ -142,6 +144,81 @@ def check_target_blank_form(corpus: Corpus) -> list[Finding]:
                         'write {:target="_blank"}',
                     )
                 )
+    return findings
+
+
+#: A Markdown inline link with its optional attr_list block.
+MD_LINK = re.compile(
+    r"(?<!!)\[((?:[^\[\]]|\[[^\]]*\])*)\]\(<?([^)\s]+?)>?(?:\s+[\"'][^\"']*[\"'])?\)(\{[^}]*\})?"
+)
+EXTERNAL_ICON = re.compile(r":fontawesome-solid-external-link:\{\s*\.external-link-icon\s*\}")
+#: Hosts that only look external: the reader's own deployment, or an illustrative domain.
+LOCAL_HOSTS = (
+    "localhost",
+    "127.0.0.1",
+    "openvidu-local.dev",
+    "openvidu.example.io",
+    "your-domain.com",
+    "example.com",
+)
+ICON_ONLY_LABEL = re.compile(r"\s*:[a-z0-9-]+:\s*(\{[^}]*\})?\s*")
+
+
+def _link_kind(url: str) -> str:
+    if not url.startswith(("http://", "https://")):
+        return "internal" if not url.startswith(("#", "mailto:", "tel:")) else ""
+    host = url.split("//", 1)[1].split("/", 1)[0].lower()
+    if any(h in host for h in LOCAL_HOSTS):
+        return "local"
+    if host in ("openvidu.io", "www.openvidu.io"):
+        return "own"
+    return "external"
+
+
+def check_external_link_icon(corpus: Corpus) -> list[Finding]:
+    """A link that leaves the page says so: `target="_blank"` plus the external-link icon.
+
+    Exempt, because the marker would be noise or impossible: a label that is itself an image or
+    a single icon shortcode, an `md-button` CTA (already its own affordance), `mailto:`, and the
+    hosts in :data:`LOCAL_HOSTS` — the reader's own deployment is not another site.
+    """
+    findings = []
+    for collection in (corpus.docs, corpus.snippets):
+        for source in collection.values():
+            for match in MD_LINK.finditer(source.visible):
+                label, url, attrs = match.group(1), match.group(2), match.group(3) or ""
+                kind = _link_kind(url)
+                if kind in ("", "own", "local"):
+                    continue
+                if label.lstrip().startswith("!") or ICON_ONLY_LABEL.fullmatch(label):
+                    continue
+                if "md-button" in attrs:
+                    continue
+                line = source.line_of(match.start())
+                if kind == "external" and "_blank" not in attrs:
+                    findings.append(
+                        Finding(
+                            "external-link-target",
+                            ERROR,
+                            source.path,
+                            line,
+                            f'external link to "{url}" opens in the same tab',
+                            'add {:target="_blank"} — leaving the site should not cost the '
+                            "reader their place",
+                        )
+                    )
+                if "_blank" in attrs and not EXTERNAL_ICON.search(label):
+                    findings.append(
+                        Finding(
+                            "external-link-icon",
+                            WARN,
+                            source.path,
+                            line,
+                            f'link to "{url}" opens a new tab without the external-link icon',
+                            "append :fontawesome-solid-external-link:{.external-link-icon} to "
+                            "the label",
+                        )
+                    )
     return findings
 
 

@@ -3,6 +3,8 @@ site_url: https://openvidu.io/
 site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
+# Absolute on purpose: edit links point at this repo, not repo_url. Update the branch on a branch cut.
+edit_uri: https://github.com/OpenVidu/openvidu.io/edit/main/docs/
 
 nav:
   - Home: index.md
@@ -237,7 +239,7 @@ nav:
   - Blog:
       - blog/index.md
   - Support:
-      - support.md
+      - support/index.md
   - Pricing:
       - pricing.md
   - About Us:
@@ -246,9 +248,7 @@ nav:
       - research.md
 
 
-# Pages intentionally excluded from the nav (reached via direct links, not browsable
-# through the navigation). Listed here so validation.nav.omitted_files can stay at "warn"
-# and still flag genuinely-forgotten pages, while these known ones produce no warning.
+# Pages reached by direct link only, never through the nav.
 not_in_nav: |
   /account.md
   /acknowledgments.md
@@ -265,24 +265,13 @@ validation:
     absolute_links: warn
   links:
     not_found: warn
-    # Absolute Markdown links (starting with "/") are resolved relative to docs_dir,
-    # validated, and rewritten to relative URLs at build time. This form is what shared
-    # snippets use for their links and images: snippets are included in pages at different
-    # hierarchy levels, so relative paths would break. Regular pages use relative links
-    # (editor-navigable); see contributing/link-rules.md.
     absolute_links: relative_to_docs
     unrecognized_links: warn
-    # Kept at "info" (NOT "warn") on purpose. pymdownx.tabbed generates id anchors for tab
-    # labels via its slugify option, but MkDocs's anchor validator runs before that extension
-    # and cannot see those ids, so every link to a tab anchor is reported as a false-positive
-    # "no such anchor" message. Raising this to "warn" would emit ~110+ false warnings and
-    # break `mkdocs build --strict`. INFO messages do not fail --strict, so real broken
-    # anchors still surface in the log without blocking the build.
     anchors: info
 
 theme:
   name: material
-  custom_dir: docs/overrides
+  custom_dir: overrides
   language: en
   features:
     - content.code.copy
@@ -290,52 +279,57 @@ theme:
     - content.code.annotate
     - content.tooltips
     - navigation.tabs
-    # - navigation.tabs.sticky
     - navigation.tracking
     - navigation.footer
-    # - navigation.expand
-    # - navigation.path
-    # - navigation.sections
+    - navigation.path
+    - navigation.prune
     - navigation.top
     - navigation.indexes
-    # - toc.follow
-    # - toc.integrate
     - search.suggest
     - search.highlight
-    # - header.autohide
     - announce.dismiss
-  font:
-    text: Tomorrow # Nunito Sans, Rubik, Barlow, Raleway, Open Sans, Tomorrow, IBM Plex Sans
-    code: Roboto Mono
+  # The header override loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
+  font: false
   palette:
-    # Palette toggle for dark mode
-    - scheme: slate
-      primary: custom
-      accent: custom
+    - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/brightness-4
+        icon: material/brightness-auto
         name: Switch to light mode
-    # Palette toggle for light mode
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
-# Sets each page's sitemap <lastmod> from git and feeds the llmstxt plugin every page's own
-# title and description. See publish-tool/mkdocs_hook.py.
+# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
 hooks:
   - publish-tool/mkdocs_hook.py
+
+watch:
+  - shared
+  - overrides
+  - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_preprocess.py
+  - publish-tool/src/ovweb
 
 plugins:
   - meta
   - search
   - blog:
       post_excerpt: required
-      draft: false
       draft_if_future_date: true
       archive_date_format: MMMM yyyy
       archive_url_date_format: yyyy/MM
@@ -343,60 +337,51 @@ plugins:
         - Comparison
         - How-to
         - Research
-        - Livekit
+        - LiveKit
         - Technology
         - Vertical
         - Success story
         - Implementation
         - OpenVidu How-to
         - OpenVidu Meet
-        - Openvidu Implementation
+        - OpenVidu Implementation
         - OpenVidu
         - OpenVidu comparison
         - OpenVidu Platform
         - Release
         - AI
-  # The CI env var selects the build profile via three states:
-  #   • unset   -> local `mkdocs serve` / `build`
-  #   • "false" -> lightweight link-validation build (validate-web.yaml sets this)
-  #   • "true"  -> real publish build (GitHub Actions sets CI=true automatically)
-  #
-  # privacy (self-hosts external assets): runs locally AND in publish; skipped only in the
-  # validation build. Default true, so it is on unless CI is explicitly "false".
-  # optimize (image compression, needs the imaging stack): runs ONLY in publish. Default
-  # false, so it is off both locally and in validation, on only when CI is "true".
+  # CI unset = local build, "false" = link-validation build, "true" = publish. So privacy runs
+  # everywhere except validation, and optimize only in publish.
   - privacy:
       enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
+      # The default 60 visibly softens the team portraits.
+      optimize_jpg_quality: 82
+      # pngquant's palette is capped at 256 colours, so search effort is its only quality lever.
+      optimize_png_speed: 1
+      # The vendored compodoc bundle ships as it is.
+      optimize_exclude:
+        - docs/reference-docs/*
   - glightbox:
-      touchNavigation: true
-      loop: false
-      effect: zoom
-      slide_effect: slide
       width: 100%
-      height: auto
-      zoomable: true
-      draggable: true
       skip_classes:
-        - do-not-include-in-gallery
-      auto_caption: false
-      caption_position: bottom
+        - skip-gallery
+      auto_themed: true
       background: none
       shadow: false
+  # Registered in every profile: Material emits the feed <link> tags as soon as the plugin
+  # exists. Only the git-history walk is publish-only (it needs a full clone at the repo root).
   - rss:
+      use_git: !ENV [CI, false]
       match_path: blog/posts/.*
       date_from_meta:
         as_creation: date
-      image: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
+      image: https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
         - tags
   - llmstxt:
-      # Emitted as the free-prose paragraph after the blockquote, which the llms.txt spec
-      # reserves for how to interpret the rest of the file. It used to restate the blockquote
-      # in weaker words; what a reader actually needs is which of the two products a question
-      # belongs to, because that decides the whole answer.
       markdown_description: >-
         OpenVidu is self-hosted: it runs on infrastructure you control. Two products share this
         documentation. OpenVidu Meet is a complete video conferencing application, deployed as
@@ -404,32 +389,14 @@ plugins:
         layer you build your own real-time application on. The "Optional" section at the end
         holds legal and acknowledgment pages, and can be skipped when a shorter context is
         needed.
-      # The plugin's own cleaning runs BEFORE the preprocess hook and deletes every <img> and
-      # <svg>, so a hook cannot recover the alt text, the comparison-table icons or the tab
-      # labels. publish-tool/llmstxt_preprocess.py reimplements all of autoclean and keeps those
-      # three, because an assistant cannot see an image — the words describing it are the content.
+      # The plugin's own cleaning drops every <img>/<svg> before the preprocess hook runs, so
+      # llmstxt_preprocess.py reimplements it and keeps alt text, table icons and tab labels.
       autoclean: false
       preprocess: publish-tool/llmstxt_preprocess.py
-      # Paths only: publish-tool/mkdocs_hook.py fills each entry in from the page's own
-      # frontmatter — the `title` as the link text and the `description` after it — so both live
-      # in one place and a glob can select pages that each name and describe themselves. A listed
-      # page missing either one fails the build.
-      #
-      # The title override is not cosmetic: the plugin uses `page.title`, which MkDocs resolves as
-      # the *nav label* first, so a labelled nav entry (`- Install: …/install.md`) produced the
-      # entry `[Install]` — 23 of those, telling an assistant nothing.
-      #
-      # Prefer a glob wherever a whole folder belongs to one section: a page added there is then
-      # picked up without an edit here, and a page nobody adds is the one failure mode worth
-      # avoiding (it would be missing from llms.txt *and* linked as a dead `.md`).
-      #
-      # The plugin matches with `fnmatch`, where `*` CROSSES `/`. That cuts both ways:
-      #   * `meet/features/*.md` covers the whole subtree, subfolders included — which is why
-      #     18 feature pages need one line;
-      #   * `docs/*.md` would NOT mean "the top-level Platform pages", it would swallow every
-      #     page under docs/. Folders whose children belong to different sections are therefore
-      #     listed page by page, and a literal segment is what fences a glob in:
-      #     `single-node/*/*.md` takes the 24 provider guides but not `single-node/index.md`.
+      # Paths only: mkdocs_hook.py fills in each page's own `title` and `description`, and a
+      # listed page missing either fails the build. Matching is fnmatch, where `*` crosses `/`:
+      # `meet/features/*.md` takes that whole subtree, so a folder whose children belong to
+      # different sections is listed page by page, and a literal segment fences a glob in.
       sections:
         Product and pricing:
         - index.md
@@ -437,7 +404,7 @@ plugins:
         - openvidu-vs-livekit.md
         - openvidu-vs-mediasoup.md
         - pricing.md
-        - support.md
+        - support/index.md
         - about-us.md
         - research.md
 
@@ -530,7 +497,6 @@ markdown_extensions:
   - toc:
       permalink: "#"
       permalink_title: Anchor link to this section for reference
-  - footnotes
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
@@ -543,20 +509,38 @@ markdown_extensions:
         kwds:
           case: lower
   - pymdownx.snippets:
-      url_download: true
+      base_path: [!relative $config_dir/shared]
       check_paths: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
       options:
         custom_icons:
-          - docs/overrides/.icons
+          - overrides/.icons
   - pymdownx.blocks.caption
+  # For the wrappers md_in_html cannot reach: its `markdown` attribute is ignored inside a
+  # nested block (a content tab, an admonition) and ships as literal HTML.
+  - pymdownx.blocks.html
 
 extra:
   analytics:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
+    # Rendered only after the visitor accepts the analytics cookie.
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            <a href="https://github.com/OpenVidu/openvidu.io/issues/new?labels=documentation&amp;title=Docs%20feedback:%20{title}&amp;body=Feedback%20about%20https://openvidu.io{url}%0A%0A(Tell%20us%20what%20you%20were%20looking%20for)" target="_blank" rel="noopener">opening a quick GitHub issue</a>.
   version:
     provider: mike
     default: latest
@@ -589,10 +573,8 @@ extra_css:
   - stylesheets/colors.css
   - stylesheets/extra.css
   - stylesheets/unsemantic-grid.css
-  - stylesheets/livekit-tutorials.css
-  - stylesheets/home.css
-  - stylesheets/openvidu-call.css
 
+# {year} is replaced with the build year by publish-tool/mkdocs_hook.py
 copyright: >
-  2026 &copy; OpenVidu<br>
+  {year} &copy; OpenVidu<br>
   <a href="#__consent">Change cookie settings</a>

@@ -1,8 +1,6 @@
 ---
 title: "Install OpenVidu Elastic on AWS"
 description: "Deploy OpenVidu Elastic on AWS from a CloudFormation stack, then point your application at the result."
-tags:
-  - setupcustomgallery
 ---
 
 # OpenVidu Elastic installation: AWS
@@ -14,7 +12,7 @@ tags:
 </div>
 
 
---8<-- "shared/self-hosting/common/elastic-license-intro.md"
+--8<-- "self-hosting/common/elastic-license-intro.md"
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on AWS. The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
@@ -40,10 +38,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
     This is how the architecture of the deployment looks:
 
-    <figure markdown>
-    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Elastic AWS Architecture</figcaption>
-    </figure>
+    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -54,7 +49,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 Depending on your needs, you need to fill in the following CloudFormation parameters:
 
---8<-- "shared/self-hosting/aws/ssl-domain.md"
+--8<-- "self-hosting/aws/ssl-domain.md"
 
 ### OpenVidu Elastic Configuration
 
@@ -64,13 +59,13 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     Parameters of this section look like this:
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/elastic/aws/openvidu-elastic-config.png)
+    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/elastic/aws/openvidu-elastic-config.png){ .round-corners loading=lazy }
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
 
---8<-- "shared/self-hosting/aws/meet.md"
+--8<-- "self-hosting/aws/meet.md"
 
 ### EC2 Instance Configuration
 
@@ -80,7 +75,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/elastic/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/elastic/aws/ec2-instance-config.png){ .round-corners loading=lazy }
 
     Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
@@ -90,9 +85,9 @@ You need to specify some properties for the EC2 instances that will be created.
 
 The number of Media Nodes can scale up or down based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up or down.
 
---8<-- "shared/self-hosting/aws/media-nodes-asg-config.md"
+--8<-- "self-hosting/aws/media-nodes-asg-config.md"
 
---8<-- "shared/self-hosting/aws/single-elastic-s3.md"
+--8<-- "self-hosting/aws/single-elastic-s3.md"
 
 ### VPC Configuration
 
@@ -102,7 +97,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     Parameters in this section look like this:
 
-    ![VPC Configuration](../../../../assets/images/platform/self-hosting/elastic/aws/vpc-config.png)
+    ![VPC Configuration](../../../../assets/images/platform/self-hosting/elastic/aws/vpc-config.png){ .round-corners loading=lazy }
 
     The **OpenViduVPC** parameter specifies the VPC where the deployment will be created.
 
@@ -120,7 +115,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/elastic/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/elastic/aws/outputs.png){ .round-corners loading=lazy }
 
 ## Configure your application to use the deployment
 
@@ -128,22 +123,26 @@ The Output Key **ServicesAndCredentials** of the [previous section](#deploying-t
 
 Then, click on **Retrieve secret value** to get the JSON with all the information.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/elastic/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/elastic/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/elastic/aws/2-secrets.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
 To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
---8<-- "shared/self-hosting/aws/credentials-general.md"
---8<-- "shared/self-hosting/aws/credentials-v2compatibility.md"
+--8<-- "self-hosting/aws/credentials-general.md"
+--8<-- "self-hosting/aws/credentials-v2compatibility.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "shared/self-hosting/aws/troubleshooting.md"
+--8<-- "self-hosting/aws/troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in the Master Node and Media Nodes.
 

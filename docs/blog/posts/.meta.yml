@@ -1,0 +1,6 @@
+hide:
+  - path
+  - feedback
+  - navigation
+  - search-bar
+  - version-selector

@@ -1,0 +1,132 @@
+{# https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html #}
+
+{# Determine classes #}
+{% set class = "md-header" %}
+{% if "navigation.tabs.sticky" in features %}
+  {% set class = class ~ " md-header--shadow md-header--lifted" %}
+{% elif "navigation.tabs" not in features %}
+  {% set class = class ~ " md-header--shadow" %}
+{% endif %}
+
+{# The site's single font stylesheet (theme.font is false): every Tomorrow weight the
+   CSS uses plus the code font. Self-hosted at build time by the privacy plugin. #}
+<link
+    rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet"
+        type="text/css"
+    />
+</noscript>
+
+{# Header #}
+<header class="{{ class }}" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="{{ lang.t('header') }}"
+  >
+
+    {# Link to home #}
+    <a
+      href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
+      title="{{ config.site_name | e }}"
+      class="md-header__button md-logo"
+      aria-label="{{ config.site_name }}"
+      data-md-component="logo"
+    >
+      {% set page_path = page.file.src_path if page.file else "" %}
+      {% if page_path.startswith("meet/") %}
+        <img src="{{ base_url }}/assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo"/>
+      {% elif page_path.startswith("docs/") %}
+        <img src="{{ base_url }}/assets/images/logos/platform_whiteallfont_transback_cropped.png" alt="OpenVidu Platform" class="custom-logo"/>
+      {% else %}
+        {% include "partials/logo.html" %}
+      {% endif %}
+    </a>
+
+    {# Button to open drawer #}
+    <label class="md-header__button md-icon" for="__drawer">
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+
+    {# Header title. The first topic span is deliberately empty (the logo already
+       carries the wordmark). Its twin shows the page title on scroll, rendered in Arciform. #}
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            {% if page.meta and page.meta.title %}
+              {{ page.meta.title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    {# Color palette toggle #}
+    {% if config.theme.palette %}
+      {% if not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+      {% endif %}
+    {% endif %}
+
+    {# User preference: color palette #}
+    {% if not config.theme.palette is mapping %}
+      {% include "partials/javascripts/palette.html" %}
+    {% endif %}
+
+    {# Site language selector #}
+    {% if config.extra.alternate %}
+      {% include "partials/alternate.html" %}
+    {% endif %}
+
+    {# Button to open search modal. `hide: search-bar` skips the whole search UI #}
+    {% if "material/search" in config.plugins and not (page.meta and page.meta.hide and "search-bar" in page.meta.hide) %}
+      {% set search = config.plugins["material/search"] | attr("config") %}
+
+      {# Check if search is actually enabled - see https://t.ly/DT_0V #}
+      {% if search.enabled %}
+        <label class="md-header__button md-icon" for="__search">
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+
+        {# Search interface #}
+        {% include "partials/search.html" %}
+      {% endif %}
+    {% endif %}
+
+    {# Repository information #}
+    {% if config.repo_url %}
+      <div class="md-header__source">
+        {% include "partials/source.html" %}
+      </div>
+    {% endif %}
+
+    {# Static on every page; on /account/ the openvidu-register bundle relabels it after sign-in. #}
+    <div class="md-typeset log-in-div">
+      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
+    </div>
+
+  </nav>
+
+  {# Navigation tabs (sticky) #}
+  {% if "navigation.tabs.sticky" in features %}
+    {% if "navigation.tabs" in features %}
+      {% include "partials/tabs.html" %}
+    {% endif %}
+  {% endif %}
+</header>
