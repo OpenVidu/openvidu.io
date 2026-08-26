@@ -25,7 +25,7 @@ Recordings can be started **on-demand** or **automatically**:
     - `StartParticipantEgress`
     - `StartTrackEgress`
     - `StartWebEgress`
-- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](../reference/server-api.md) method: then the room will be automatically recorded during its lifetime. See [auto-egress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/autoegress/){:target="_blank"} documentation for more details.
+- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](../reference/room-service-api.md) method: then the room will be automatically recorded during its lifetime. See [Auto Egress](../reference/egress.md#auto-egress) for more details.
 
 !!! warning
 
@@ -93,7 +93,7 @@ room:
   auto_create: false
 ```
 
-When a room is auto-created on participant join, OpenVidu uses the room settings included in that participant’s token ([`RoomConfiguration`](../reference/server-api.md)).
+When a room is auto-created on participant join, OpenVidu uses the room settings included in that participant’s token ([`RoomConfiguration`](../reference/room-service-api.md)).
 
 A common problem appears when these chain of events happens:
 
@@ -146,7 +146,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
       auto_create: false
     ```
 
-- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the [`RoomConfiguration`](../reference/server-api.md) in both the [`CreateRoom`](../reference/server-api.md) request and the [participant's access token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/frontends/reference/tokens-grants/#room-configuration){:target="_blank"}. In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
+- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the [`RoomConfiguration`](../reference/room-service-api.md) in both the [`CreateRoom`](../reference/room-service-api.md) request and the [participant's access token](../reference/access-tokens.md#token-claims) (its `roomConfig` claim). In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
 - Increase the room timeout properties in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#config-files). This can reduce the probability of rooms being cleaned up before a participant tries to join:
 
     ```yaml
@@ -299,7 +299,7 @@ Then look for a new `mediaTrack published` from the same participant identity in
 
 The recorder connects and subscribes to the track successfully, but the recording pipeline never starts because no media ever arrives from the publisher. When the track finally closes, the egress aborts having recorded nothing.
 
-This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](../developing-your-openvidu-app/how-to.md#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
+This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](../reference/client-sdk.md#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
 
 It is **not** a network, egress-node or capacity problem. The same peer connection's other tracks (for example the microphone) typically record fine at the same time, which proves the media path works; there is simply no video being sent.
 

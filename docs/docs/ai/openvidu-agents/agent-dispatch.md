@@ -218,7 +218,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
              -d '{"agent_name": "AGENT_NAME", "room": "my-room"}'
         ```
 
-        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. See [Creating a token](../../reference/access-tokens.md#minting-a-token)
+        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. See [Generating a token](../../reference/access-tokens.md#generating-a-token)
 
         <br>
 

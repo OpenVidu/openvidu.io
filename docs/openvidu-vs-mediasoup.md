@@ -92,7 +92,7 @@ everything on top of it ready to use:
 | --- | --- | --- |
 | Media engine | [mediasoup](docs/self-hosting/production-ready/performance.md), integrated | The library itself |
 | Signaling | Bundled | Build it yourself |
-| Room/session model | [Bundled](docs/developing-your-openvidu-app/how-to.md#manage-rooms) | Not provided |
+| Room/session model | [Bundled](docs/reference/client-sdk.md#connecting-to-a-room) | Not provided |
 | Authentication | [JWT tokens with grants](docs/developing-your-openvidu-app/how-to.md#generate-access-tokens), bundled | Not provided |
 | Recording (Egress) | [Bundled](docs/developing-your-openvidu-app/how-to.md#recording) (S3-compatible storage) | Manual RTP piping to GStreamer/FFmpeg |
 | Server/REST API | Full [server API](docs/developing-your-openvidu-app/how-to.md) | None |

@@ -81,7 +81,7 @@ Decoded, the payload of a typical participant token looks like this:
 | `metadata` | string | Participant metadata |
 | `attributes` | key/value pairs of strings | Key/value data attached to the participant, individually updatable during the Room |
 | `video` | object | The video grants: the permission set in the room for this participant (see [Video grants](#video-grants)) |
-| `roomConfig` | object | Configuration applied to the Room if this token is the one that creates it |
+| `roomConfig` | object | Configuration applied to the Room if this token is the one that creates it. Among other things it allows automatically dispatching agents and recording rooms. See the type definition for [RoomConfiguration :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#roomconfiguration){:target="_blank"} |
 
 </div>
 
@@ -311,13 +311,13 @@ OpenVidu keeps issuing refreshed tokens to participants while they are connected
 
 - Refreshed tokens let a client recover from a dropped connection without asking your backend for a new token.
 - Each refreshed token is rebuilt from the participant's current claims, so it always carries the permissions in effect at that moment.
-- Any change to the participant's name, metadata, attributes or permissions ([`UpdateParticipant`](./server-api.md#participants)) triggers a refresh immediately.
+- Any change to the participant's name, metadata, attributes or permissions ([`UpdateParticipant`](./room-service-api.md#participants)) triggers a refresh immediately.
 
 The refreshed token exchange is invisible to your application: the client SDK replaces the token it holds in memory and raises no event for it, and your backend is not involved.
 
 ### Revocation
 
-An issued token cannot be revoked. Neither [`RemoveParticipant`](./server-api.md#participants) nor narrowing a participant's grants invalidates a token that is already out: it stays usable to connect until it expires on its own.
+An issued token cannot be revoked. Neither [`RemoveParticipant`](./room-service-api.md#participants) nor narrowing a participant's grants invalidates a token that is already out: it stays usable to connect until it expires on its own.
 
 Two habits follow from that:
 
@@ -326,9 +326,9 @@ Two habits follow from that:
 
 ### Updating token permissions
 
-[`UpdateParticipant`](./server-api.md#participants) applies new permissions to an already-connected participant without a reconnect, for example promoting a viewer to speaker:
+[`UpdateParticipant`](./room-service-api.md#participants) applies new permissions to an already-connected participant without a reconnect, for example promoting a viewer to speaker:
 
-- The client observes a [`ParticipantPermissionsChanged`](./client-sdk.md#participants) event.
+- The client observes a [`ParticipantPermissionsChanged`](./client-sdk.md#participants-and-room-state) event.
 - Revoking [`canPublish` video grant](#video-grants) automatically unpublishes every track that participant had published.
 
 ## Designing your permission model
@@ -338,4 +338,4 @@ Access tokens are the whole authorization surface: OpenVidu Platform has no noti
 - **Authenticate before you generate.** The token endpoint must be behind your own login. An open `/token` endpoint lets anyone join any Room under any name.
 - **Generate the narrowest token that works.** Scope it to one Room, set `canPublish: false` for viewers, and keep administration grants out of client tokens.
 
-For server-side operations run from your application server, all LiveKit server SDKs automatically generate a token with the required grants for each operation. Visit the [Server API reference](./server-api.md), [Egress API reference](./egress.md) and [Ingress API reference](./ingress.md) for further information.
+For server-side operations run from your application server, all LiveKit server SDKs automatically generate a token with the required grants for each operation. Visit the [Room Service API reference](./room-service-api.md), [Egress API reference](./egress.md) and [Ingress API reference](./ingress.md) for further information.

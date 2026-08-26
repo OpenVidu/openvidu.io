@@ -1055,3 +1055,32 @@ h1.meetplatform-slogan {
 }
 
 /* END TODO */
+
+/* Keep identifiers in a table's first column on one line. Material sets
+   word-break: break-word on all inline code, which splits names like
+   `roomConfig` mid-word in narrow cells.
+
+   Opt a table in by wrapping it (not the table itself) in:
+       <div class="nowrap-first-column" markdown>
+   Material finds tables with "table:not([class])" to apply both its own
+   styling and its horizontal-scroll wrapper, so putting the class on the
+   <table> element would break the table instead of fixing it. Tables too wide
+   to shrink still scroll inside Material's .md-typeset__scrollwrap. */
+.md-typeset .nowrap-first-column th:first-child code,
+.md-typeset .nowrap-first-column td:first-child code {
+  white-space: nowrap;
+}
+
+
+/* Flow a list of short items into as many columns as the width allows, instead
+   of one tall single-file column. Opt in by wrapping the list in:
+       <div class="column-list" markdown>
+   The column width drives the count, so it collapses to one column on phones. */
+.md-typeset .column-list ul {
+  column-width: 11em;
+  column-gap: 1.5rem;
+}
+
+.md-typeset .column-list li {
+  break-inside: avoid;
+}
