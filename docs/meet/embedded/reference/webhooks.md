@@ -1,8 +1,6 @@
 ---
 title: "OpenVidu Meet webhooks reference"
 description: "Receive meeting and recording events from OpenVidu Meet in your backend, and verify webhook signatures before acting on them."
-tags:
-    - setupcustomgallery
 ---
 
 # Webhooks
@@ -27,8 +25,8 @@ You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There yo
 - Set up your webhook endpoint URL
 - Test the current webhook configuration with a fake event
 
-<a class="glightbox" href="/assets/images/meet/embedded/reference/webhook-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/webhook-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="Webhook configuration form in the OpenVidu Meet console"/></a>
-<a class="glightbox" href="/assets/images/meet/embedded/reference/webhook-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/reference/webhook-light.png#only-light" loading="lazy" class="control-height round-corners" alt="Webhook configuration form in the OpenVidu Meet console"/></a>
+![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .round-corners loading=lazy }
+![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-light.png#only-light){ .round-corners loading=lazy }
 
 ## Validate events
 
@@ -51,7 +49,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/node){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/node){:target="_blank"}
 
     ```javascript
     import crypto from "crypto";
@@ -95,7 +93,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/java){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/java){:target="_blank"}
 
     ```java
     package com.example;
@@ -178,7 +176,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/go){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/go){:target="_blank"}
 
     ```go
     package main
@@ -241,7 +239,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-python:{.icon .lg-icon .tab-icon} Python"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/python){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/python){:target="_blank"}
 
     ```python
     import hmac
@@ -288,7 +286,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/php){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/php){:target="_blank"}
 
     ```php
     <?php
@@ -333,7 +331,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/dotnet){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/dotnet){:target="_blank"}
 
     ```csharp
     using System.Security.Cryptography;
@@ -386,7 +384,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/ruby){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/ruby){:target="_blank"}
 
     ```ruby
     require 'openssl'
@@ -426,7 +424,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
-    Checkout [working example :fontawesome-brands-github:](https://github.com/OpenVidu/openvidu-meet/tree/main/webhooks-snippets/rust){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.8.0/webhooks-snippets/rust){:target="_blank"}
 
     ```rust
     use chrono::Utc;

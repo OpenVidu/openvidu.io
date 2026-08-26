@@ -32,8 +32,8 @@ This file defines global configuration parameters used by other services, such a
 | **`DASHBOARD_ADMIN_PASSWORD`** | Admin password for OpenVidu Dashboard |
 | **`GRAFANA_ADMIN_USERNAME`** | Admin username for Grafana |
 | **`GRAFANA_ADMIN_PASSWORD`** | Admin password for Grafana |
-| **`OPENVIDU_PRO_LICENSE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Pro license key. Get an OpenVidu Pro License [here](../../../account.md){:target="_blank"}. |
-| **`OPENVIDU_RTC_ENGINE`** | <span class="openvidu-tag openvidu-pro-tag">PRO</span> The WebRTC engine to use. Can be `pion` or `mediasoup`. |
+| **`OPENVIDU_PRO_LICENSE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Pro license key. Get an OpenVidu Pro License [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. |
+| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `pion` or `mediasoup`. |
 | **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
 ## `meet.env`
@@ -62,11 +62,11 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
-| **`MEET_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for OpenVidu Meet service. |
+| **`MEET_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for OpenVidu Meet service. |
 | **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
 | **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
-| **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
 | **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm for the OpenVidu Meet S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
 | **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
 | **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
@@ -81,23 +81,23 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REDIS_DB`** | Redis database used by the OpenVidu Meet service. Default value is `0`. |
 | **`MEET_REDIS_SENTINEL_HOST_LIST`** | Redis Sentinel host list used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_REDIS_SENTINEL_PASSWORD`** | Redis Sentinel password used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
-| **`MEET_REDIS_SENTINEL_MASTER_NAME`{.no-break}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
+| **`MEET_REDIS_SENTINEL_MASTER_NAME`{.nowrap}** | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers. |
 | **`MEET_BASE_PATH`** | Base path where the OpenVidu Meet application is served. Default is `/meet`. |
 | **`MEET_CAPTIONS_ENABLED`** | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](../../../meet/features/meetings/live-captions.md). |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
 
-## <span class="openvidu-tag openvidu-pro-tag">PRO</span> `v2compatibility.env`
+## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
     
-    OpenVidu V2 Compatibility is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
 
 | Parameter | Description |
 | --------- | ----------- |
-| **`OPENVIDU_PRO_LICENSE`** |  OpenVidu Pro license key. Get an OpenVidu Pro License [here](../../../account.md){:target="_blank"}. |
+| **`OPENVIDU_PRO_LICENSE`** |  OpenVidu Pro license key. Get an OpenVidu Pro License [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. |
 | **`V2COMPAT_OPENVIDU_SHIM_PORT`** | Port where the OpenVidu V2 Compatibility will be running. Defaults to `4443`. |
 | **`V2COMPAT_OPENVIDU_SHIM_URL`** | Public URL for OpenVidu v2 applications, used by external clients to connect to the OpenVidu V2 Compatibility Server. |
 | **`V2COMPAT_OPENVIDU_SECRET`** | OpenVidu Secret used by OpenVidu v2 applications to connect to the OpenVidu deployment. |
@@ -113,13 +113,13 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_REDIS_MASTER_NAME`** | Redis Sentinel master name used by the OpenVidu V2 Compatibility Server to connect to Redis Sentinel servers. |
 | **`V2COMPAT_REDIS_DB`** | Redis database used by the OpenVidu V2 Compatibility Server. Default value is `0`. |
 | **`V2COMPAT_OPENVIDU_RECORDING_PATH`** | Path where the OpenVidu V2 Compatibility Server will store recordings locally. By default in the deployments is `/opt/openvidu/recordings`. |
-| **`V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE`{.no-break}** | Where to store the recordings. Valid values are: <ul><li>`local`: Store the recordings in the local filesystem at the path `V2COMPAT_OPENVIDU_RECORDING_PATH`</li><li>`s3`: Store the recordings in the configured S3 bucket</li></ul> Default value is `local` |
+| **`V2COMPAT_OPENVIDU_PRO_RECORDING_STORAGE`{.nowrap}** | Where to store the recordings. Valid values are: <ul><li>`local`: Store the recordings in the local filesystem at the path `V2COMPAT_OPENVIDU_RECORDING_PATH`</li><li>`s3`: Store the recordings in the configured S3 bucket</li></ul> Default value is `local` |
 | **`V2COMPAT_OPENVIDU_RECORDING_CUSTOM_LAYOUT_URL`** | URL of the custom layout used by the OpenVidu V2 Compatibility Server to generate the recordings. |
-| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_WITH_PATH_STYLE_ACCESS`{.no-break}** | If `true`, use path-style access for S3. |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
 | **`V2COMPAT_OPENVIDU_RECORDING_ZIP_FILES`** | If `true`, save individual recordings as zip files |
 | **`V2COMPAT_OPENVIDU_RECORDING_RAW_FILES`** | If `true`, save individual recordings as files directly |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET`** | Default bucket name for recordings |
-| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT`{.no-break}** | S3 service endpoint for the recordings |
+| **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for the recordings |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY`** | Access key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_SECRET_KEY`** | Secret key for the recordings S3 bucket |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_REGION`** | AWS region of the recordings S3 bucket |
@@ -134,7 +134,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 
 As OpenVidu Server is [built on top of LiveKit](../../comparing-openvidu.md#openvidu-vs-livekit), the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/master/config-sample.yaml){:target="_blank"}.
 
-### <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> OpenVidu Server Configuration:
+### **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } OpenVidu Server Configuration:
 
 ```yaml
 openvidu:
@@ -151,12 +151,12 @@ openvidu:
 4. Time interval to send analytics data to MongoDB.
 5. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
 
-### <span class="openvidu-tag openvidu-pro-tag">PRO</span> OpenVidu Server Configuration:
+### **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Server Configuration:
 
 
 !!! info
     
-    Before deploying OpenVidu PRO, you need to [create an OpenVidu account](../../../account.md){:target="_blank"} to get your license key.
+    Before deploying OpenVidu PRO, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 ```yaml
@@ -176,7 +176,7 @@ openvidu:
         log_tags: [info, ice, rtp, rtcp, message] # (11)
 ```
 
-1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](../../../account.md){:target="_blank"}.
+1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
 2. The cluster ID for the OpenVidu deployment. It is configured by default by OpenVidu Installer with the domain name of the deployment.
 3. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 4. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.

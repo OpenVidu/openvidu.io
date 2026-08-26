@@ -71,6 +71,12 @@ def test_a_removed_non_versioned_page_maps_to_an_unversioned_stub(tmp_path):
     assert finding.file == "docs/support.md"
 
 
+def test_a_move_that_keeps_the_url_needs_no_rule(tmp_path):
+    write(tmp_path, "docs/support/index.md")
+
+    assert check_removed_pages(["docs/support.md"], root=tmp_path, config=build()) == []
+
+
 def test_an_index_page_maps_to_its_directory_url(tmp_path):
     config = build(files=[{"id": "gone", "at": "{version}/meet/embedded/index.html", "to": "../"}])
 
@@ -117,7 +123,7 @@ def test_expansion_rules_claim_their_paths(tmp_path):
 def test_blog_posts_and_non_pages_are_exempt(tmp_path):
     removed = [
         "docs/blog/posts/2026/08/old-post.md",
-        "docs/overrides/partials/notes.md",
+        "overrides/partials/notes.md",
         "shared/self-hosting/common/step.md",
         "docs/assets/images/x.png",
     ]

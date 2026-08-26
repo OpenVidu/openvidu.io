@@ -3,7 +3,7 @@ title: "Administer OpenVidu Single Node PRO on Azure"
 description: "Administer OpenVidu Single Node PRO on Azure: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: .6em; vertical-align: text-bottom">PRO</span> administration: Azure
+# OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading } administration: Azure
 
 <div class="provider-chip" markdown>
 
@@ -26,9 +26,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**. Click on it.
     3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/azure/stop-instance.png){ .svg-img .dark-img }
-    </figure>
+    ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/azure/stop-instance.png){ .round-corners loading=lazy }
 
 === "Start OpenVidu Single Node PRO"
 
@@ -36,9 +34,7 @@ You can start and stop all services as explained in the [On Premises Single Node
     2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like **yourstackname-VM-CE**.  Click on it.
     3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
-    <figure markdown>
-    ![Start instance](../../../../assets/images/platform/self-hosting/single-node/azure/start-instance.png){ .svg-img .dark-img }
-    </figure>
+    ![Start instance](../../../../assets/images/platform/self-hosting/single-node/azure/start-instance.png){ .round-corners loading=lazy }
 
 ## Change the instance type
 
@@ -50,9 +46,7 @@ You can change the instance type of the OpenVidu Single Node PRO instance to ada
 
     === "Change instance type"
 
-        <figure markdown>
-        ![Change instance type](../../../../assets/images/platform/self-hosting/single-node/azure/instance-type.png){ .svg-img .dark-img }
-        </figure>
+        ![Change instance type](../../../../assets/images/platform/self-hosting/single-node/azure/instance-type.png){ .control-height .round-corners loading=lazy }
 
 4. Select the new instance type and click on _"Resize"_.
 
@@ -69,21 +63,20 @@ In addition to these, an Azure deployment provides the capability to manage glob
     1. Navigate to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
     2. Select the Resource Group where you deployed your OpenVidu Single Node PRO Stack.
     3. In the _"stackname-keyvault"_ resource, click on _"Objects"_ -> _"Secrets"_ on the left panel. This will show you all the secrets that are stored in the Key Vault of the OpenVidu deployment.
-        <figure markdown>
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .svg-img .dark-img }
-        </figure>
+
+        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners loading=lazy }
+
     4. Click on the desired secret you want to change and click on _"New Version"_.
-        <figure markdown>
-        ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .svg-img .dark-img }
-        </figure>
+
+        ![Azure Key Vault New Version Secret](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-new-version-secret.png){ .round-corners loading=lazy }
+
     5. Enter the new secret value on _"Secret Value"_ field and click on _"Create"_.
-        <figure markdown>
-        ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .svg-img .dark-img }
-        </figure>
+
+        ![Azure Key Vault New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-create.png){ .round-corners loading=lazy }
+
     6. Go to the Instance resource of OpenVidu and click on _"Restart"_ to apply the changes to the OpenVidu Single Node PRO deployment.
-        <figure markdown>
-        ![Reboot Instance](../../../../assets/images/platform/self-hosting/single-node/azure/reboot-instance.png){ .svg-img .dark-img }
-        </figure>
+
+        ![Reboot Instance](../../../../assets/images/platform/self-hosting/single-node/azure/reboot-instance.png){ .round-corners loading=lazy }
 
     Changes will be applied automatically.
 

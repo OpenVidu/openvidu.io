@@ -12,11 +12,7 @@ If you encounter code signing issues, make sure you change the **Team** and **bu
 
 The application will initiate as a native iOS application. Once the app is opened, you should see a screen like this:
 
-<div class="grid-container">
-
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ios.png" loading="lazy" style="width: 25%;" alt="URL configuration of the iOS tutorial app"/></a></p></div>
-
-</div>
+![URL configuration of the iOS tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ios.png){ loading=lazy style="width: 25%" }
 
 This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 
@@ -26,10 +22,14 @@ This screen allows you to configure the URLs of the application server and the L
 
 Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
 
-<div class="grid-container">
+/// html | div.grid-container
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ios.png" loading="lazy" style="width: 50%;" alt="Join screen of the iOS tutorial app"/></a></p></div>
+/// html | div.grid-50.text-center
+![Join screen of the iOS tutorial app](/assets/images/platform/tutorials/application-client/join-ios.png){ loading=lazy style="width: 50%" }
+///
 
-<div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ios.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ios.png" loading="lazy" style="width: 50%;" alt="Video call room of the iOS tutorial app"/></a></p></div>
+/// html | div.grid-50.text-center
+![Video call room of the iOS tutorial app](/assets/images/platform/tutorials/application-client/room-ios.png){ loading=lazy style="width: 50%" }
+///
 
-</div>
+///

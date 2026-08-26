@@ -22,14 +22,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Single Node"
 
     !!! note
-        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 10px">COMMUNITY</span> Deployment](../single-node/on-premises/install.md) and the [Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 10px">PRO</span> Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the installation guides before proceeding with this guide for a better understanding of the deployment.
+        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 10px" } Deployment](../single-node/on-premises/install.md) and the [Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the installation guides before proceeding with this guide for a better understanding of the deployment.
 
     This is what the architecture of the deployment looks like:
 
-    <figure markdown>
-    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node On Premises Architecture with External Proxy</figcaption>
-    </figure>
+    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .round-corners .dark-img loading=lazy }
 
     **1. Prerequisites**
 
@@ -51,7 +48,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880           | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 5349           | External proxy | TURN with TLS. |
@@ -71,7 +68,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
         | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
@@ -82,7 +79,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     To deploy OpenVidu with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu with an external proxy is as follows:
 
-    === "Single Node <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+    === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
@@ -107,7 +104,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-    === "Single Node <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+    === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
         ```bash
         sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
@@ -134,18 +131,18 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Notes:
 
     - Replace `openvidu.example.io` with your FQDN.
     - Replace `turn.example.io` with your TURN server FQDN.
-    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](../../../account.md){:target="_blank"}.
-    - In <span class='openvidu-tag openvidu-pro-tag'>PRO</span> edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
+    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
     **4. Configure the external proxy**
 
-    --8<-- "shared/self-hosting/common/proxy-nginx-advanced.md"
+    --8<-- "self-hosting/common/proxy-nginx-advanced.md"
 
     Notes:
 
@@ -162,10 +159,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     This is what the architecture of the deployment looks like:
 
-    <figure markdown>
-    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Elastic On Premises Architecture with External Proxy</figcaption>
-    </figure>
+    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .round-corners .dark-img loading=lazy }
 
     **1. Prerequisites**
 
@@ -187,7 +181,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div> | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880           | External Proxy | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 5349           | External Proxy | TURN with TLS. |
@@ -209,7 +203,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         **Inbound Rules**
 
-        | Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+        | Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
         | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
@@ -229,7 +223,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
         And the inbound rules for the proxy server would be as follows:
 
-        | Protocol    | Ports          | <div style="width:8em">Source</div>          | Description                                                |
+        | Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 80             | 0.0.0.0/0, ::/0 | HTTP redirection to HTTPS. |
         | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
@@ -268,11 +262,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --external-proxy
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         Notes:
 
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../account.md){:target="_blank"}.
+        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
         - Replace `openvidu.example.io` with your FQDN.
         - Replace `turn.example.io` with your TURN server FQDN.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
@@ -290,14 +284,14 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --redis-password='xxxxx'
         ```
 
-        --8<-- "shared/self-hosting/common/install-version.md"
+        --8<-- "self-hosting/common/install-version.md"
 
         - The `--master-node-private-ip` is the private IP of the Master Node. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
         - The `--redis-password` is the password used to connect to the Redis service. Replace `xxxxx` with the same password used in the Master Node installation.
 
     **4. Configure the external proxy**
 
-    --8<-- "shared/self-hosting/common/proxy-nginx-advanced-elastic.md"
+    --8<-- "self-hosting/common/proxy-nginx-advanced-elastic.md"
 
     Notes:
 

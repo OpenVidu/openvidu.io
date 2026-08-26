@@ -8,25 +8,21 @@ cover_image: transcriber-summarizer-agent.png
 categories:
   - AI
   - Implementation
-  - Livekit
+  - LiveKit
   - Technology
 tags:
-  - AI Agents
+  - AI agents
   - STT
   - Transcription
   - LiveKit
   - WebRTC
 authors:
   - pabloFuente
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Building an AI agent for transcribing and summarizing audio calls
 
-![Header image: a microphone turning into text inside an audio call](/assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png)
+![Header image: a microphone turning into text inside an audio call](/assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png){ .round-corners }
 
 With the world being flooded with all kinds of agents, bots, and AI services, let's keep things grounded and code something tangible in a few simple steps. Let's build an AI agent that helps people in an audio call. Our agent will:
 
@@ -34,7 +30,7 @@ With the world being flooded with all kinds of agents, bots, and AI services, le
 2. Send **live captions** to everyone in the call.
 3. When someone joins late, send them a **private summary** of what they missed.
 
-We'll be using **OpenVidu** as our media server, and [**LiveKit Agents**](https://docs.livekit.io/agents/) Python framework to build our agent. These tools handle all the hard parts of real-time audio transport, so we can focus on our agent features.
+We'll be using **OpenVidu** as our media server, and [**LiveKit Agents** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){:target="_blank"} Python framework to build our agent. These tools handle all the hard parts of real-time audio transport, so we can focus on our agent features.
 
 <!-- more -->
 
@@ -48,14 +44,14 @@ Three moving parts:
 
 The data flows like this:
 
-![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow.png)
+![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow.png){ .round-corners loading=lazy }
 
 ## Running the demo
 
 You will need:
 
 - **Python 3.10+**.
-- An [**OpenAI**](https://auth.openai.com/create-account) or [**AWS**](https://signin.aws.amazon.com) account for the summary feature. You can still run the demo without one — just leave `LLM_PROVIDER` empty. Live captions and the saved transcript work regardless; you only lose the catch-up summaries.
+- An [**OpenAI** :fontawesome-solid-external-link:{.external-link-icon}](https://auth.openai.com/create-account){:target="_blank"} or [**AWS** :fontawesome-solid-external-link:{.external-link-icon}](https://signin.aws.amazon.com){:target="_blank"} account for the summary feature. You can still run the demo without one — just leave `LLM_PROVIDER` empty. Live captions and the saved transcript work regardless; you only lose the catch-up summaries.
 
 Now simply follow these steps to run the demo locally:
 
@@ -104,9 +100,9 @@ Now simply follow these steps to run the demo locally:
           python app/server.py
           ```
 
-Open [`http://localhost:8080`](http://localhost:8080), type a name, and join. Talk for a bit and watch the transcript fill in. Open the page in a **second tab**, join with a different name, and within a couple of seconds a yellow box appears summarizing what the first tab said. The full timestamped record waits in `transcripts/`.
+Open [`http://localhost:8080`](http://localhost:8080){:target="_blank"}, type a name, and join. Talk for a bit and watch the transcript fill in. Open the page in a **second tab**, join with a different name, and within a couple of seconds a yellow box appears summarizing what the first tab said. The full timestamped record waits in `transcripts/`.
 
-![Web app screenshot](/assets/images/blog/2026/08/transcriber-summarizer-agent/web-app-screenshot.png)
+![Web app screenshot](/assets/images/blog/2026/08/transcriber-summarizer-agent/web-app-screenshot.png){ .round-corners loading=lazy }
 
 > **NOTE**: If you are using AWS, make sure that your credentials have the necessary policies to access Amazon Transcribe and Amazon Bedrock:
 > ```

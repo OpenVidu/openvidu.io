@@ -5,15 +5,12 @@ description: "Run, deploy and customize the OpenVidu Components Demo App, the re
 
 # Demo App using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/master/openvidu-components-angular/openvidu-demo-app){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-demo-app){ .md-button target="_blank" }
 
 Introducing **OpenVidu Components Demo App**, the premier videoconference application that showcases the full potential of the OpenVidu platform. OpenVidu Components Demo App is not just any videoconferencing tool; it’s the default and flagship app built with the robust and versatile [OpenVidu Components](../../ui-components/angular-components.md).
 
 
-<figure markdown>
-  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .ov-call-docs-img .round-corners .mkdocs-img}
-  <figcaption>OpenVidu Components Demo App</figcaption>
-</figure>
+  ![OpenVidu Components Demo App](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app.jpg){ loading=lazy .round-corners}
 
 ## Run OpenVidu Components Demo App
 
@@ -21,7 +18,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 === "Run OpenVidu locally"
 
-    --8<-- "shared/tutorials/run-openvidu-locally.md"
+    --8<-- "tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 
@@ -29,7 +26,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
     !!! info "Configure Webhooks"
 
-        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="_blank"} section for more information.
+        OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server :fontawesome-solid-external-link:{.external-link-icon}](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="_blank"} section for more information.
 
 
 #### 2. Download the demo code
@@ -91,10 +88,7 @@ The OpenVidu Components Demo App architecture is divided into two main component
 * **frontend**: which is the client-side application built with Angular and OpenVidu Components.
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
-<figure markdown>
-  ![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy .svg-img .mkdocs-img}
-  <figcaption>OpenVidu Components Demo App Architecture</figcaption>
-</figure>
+![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy }
 
 === ":simple-angular:{.icon .lg-icon .tab-icon} Demo App frontend"
 

@@ -1,11 +1,9 @@
 ---
 title: "Install OpenVidu Single Node COMMUNITY on AWS"
 description: "Deploy OpenVidu Single Node COMMUNITY on AWS from a CloudFormation stack, then point your application at the result."
-tags:
-  - setupcustomgallery
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: AWS
+# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } installation: AWS
 
 <div class="provider-chip" markdown>
 
@@ -14,7 +12,7 @@ tags:
 </div>
 
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on AWS. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 12px" } deployment on AWS. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
 First, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -38,18 +36,15 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 
     This is what the deployment architecture looks like:
 
-    <figure markdown>
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu Single Node AWS Architecture</figcaption>
-    </figure>
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ## CloudFormation Parameters
 
 Depending on your needs, you need to fill the following CloudFormation parameters:
 
---8<-- "shared/self-hosting/aws/ssl-domain.md"
+--8<-- "self-hosting/aws/ssl-domain.md"
 
---8<-- "shared/self-hosting/aws/meet.md"
+--8<-- "self-hosting/aws/meet.md"
 
 ### EC2 Instance Configuration
 
@@ -59,15 +54,15 @@ You need to specify some properties for the EC2 instance that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png){ .round-corners loading=lazy }
 
     Simply select the type of instance you want to deploy at **InstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
     By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
---8<-- "shared/self-hosting/aws/single-elastic-s3.md"
+--8<-- "self-hosting/aws/single-elastic-s3.md"
 
---8<-- "shared/self-hosting/aws/additional-flags.md"
+--8<-- "self-hosting/aws/additional-flags.md"
 
 ## Deploying the stack
 
@@ -77,7 +72,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png){ .round-corners loading=lazy }
 
 ## Configure your application to use the deployment
 
@@ -85,21 +80,25 @@ The Output Key **ServicesAndCredentials** of the [previous section](#deploying-t
 
 Then, click on **Retrieve secret value** to get the JSON with all the information.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/single-node/aws/2-secrets.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
 To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
---8<-- "shared/self-hosting/aws/credentials-general.md"
+--8<-- "self-hosting/aws/credentials-general.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "shared/self-hosting/aws/troubleshooting.md"
+--8<-- "self-hosting/aws/troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
 

@@ -4,26 +4,12 @@
 
 {{ super() }}
 
-<script defer>
-  window.openviduPreviousUrl = "";
-  if (!window.openviduObserver) {
-    window.openviduObserver = new MutationObserver(function (mutations) {
-      if (location.pathname !== window.openviduPreviousUrl) {
-        window.openviduPreviousUrl = location.pathname;
-      }
-    });
-    window.openviduObserver.observe(document, {
-      subtree: true,
-      childList: true,
-    });
-  }
-</script>
-
 <section class="top-home-section md-grid md-typeset">
   <div class="center-align">
     <img
       class="top-home-img"
       src="assets/images/logos/openvidu_white_bg_transp.png"
+      fetchpriority="high"
       draggable="false"
       alt=""
     />
@@ -59,14 +45,15 @@
     <span class="home-under-cta-sep">·</span>
     <a
       title="Start a tour"
-      onclick="event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
+      href="#get-started"
+      onclick="event.preventDefault(); event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })"
     >
       Start a tour
     </a>
   </p>
-  <!-- Single wrapper: the hero is a space-around flex column, so as separate
-       flex items these lines would get leftover viewport height distributed
-       between them regardless of their margins. -->
+  {# Single wrapper: the hero is a space-around flex column, so as separate
+     flex items these lines would get leftover viewport height distributed
+     between them regardless of their margins. #}
   <div class="home-trust-block">
   <p class="home-trust-line">⭐ Free &amp; open source</p>
   <p class="home-badges">
@@ -122,9 +109,7 @@
 
 {# The hero above already provides the page's single <h1> (.slogan). Render the
    markdown body directly so Material's content.html does NOT auto-inject a
-   second <h1> (page title) when the body has no heading of its own. The landing
-   page hides nav/toc/footer/search, so the edit/feedback/comments partials are
-   intentionally omitted too. #}
+   second <h1> (page title) when the body has no heading of its own. #}
 {% block content %}
   {{ page.content }}
 {% endblock %}

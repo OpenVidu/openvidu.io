@@ -14,7 +14,7 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers, 
 
 !!! info
 
-    OpenVidu High Availability is part of **OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 12px; vertical-align: top;">PRO</span>**. Before deploying, you need to [create an OpenVidu account](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
@@ -34,10 +34,7 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is how the architecture of the deployment looks:
 
-    <figure markdown>
-    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability Architecture with Network Load Balancer</figcaption>
-    </figure>
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .round-corners .dark-img loading=lazy }
 
     - The Load Balancer must be a Network Load Balancer that supports TCP and UDP traffic.
     - The Load Balancer distributes traffic across all Master Nodes.
@@ -92,7 +89,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol | <div style="width:8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
+| Protocol | <div class="w-8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 1945        | Load Balancer             | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP      | 5349        | Load Balancer             | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -121,7 +118,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol    | <div style="width:8em">Ports</div>          | <div style="width:8em">Source</div> | Description                                                |
+| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
@@ -149,7 +146,7 @@ docker run --pull always --rm -it \
     --deployment-type=ha
 ```
 
---8<-- "shared/self-hosting/common/install-version.md"
+--8<-- "self-hosting/common/install-version.md"
 
 A wizard will guide you through the installation process. You will be asked for the following information:
 
@@ -157,7 +154,7 @@ A wizard will guide you through the installation process. You will be asked for 
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 !!! info
     
-    If you don't have a license key for OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>, you can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 - **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
@@ -181,7 +178,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -213,7 +210,7 @@ This command will output the following instructions, which you should follow:
     ...
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
 
@@ -233,15 +230,15 @@ This command will output the following instructions, which you should follow:
 
 If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
 
-- OpenVidu Meet: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- OpenVidu Dashboard: [https://openvidu.example.io/dashboard](https://openvidu.example.io/dashboard/){:target="_blank"}
-- MinIO: [https://openvidu.example.io/minio-console](https://openvidu.example.io/minio-console/){:target="_blank"}
-- Grafana: [https://openvidu.example.io/grafana](https://openvidu.example.io/grafana/){:target="_blank"}
+- OpenVidu Meet: `https://openvidu.example.io/`
+- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
+- MinIO: `https://openvidu.example.io/minio-console`
+- Grafana: `https://openvidu.example.io/grafana`
 
 OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
 
-- OpenVidu Server PRO: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"}
-- LiveKit API: [https://openvidu.example.io/](https://openvidu.example.io/){:target="_blank"} and [wss://openvidu.example.io/](wss://openvidu.example.io/){:target="_blank"}
+- OpenVidu Server PRO: `https://openvidu.example.io/`
+- LiveKit API: `https://openvidu.example.io/` and `wss://openvidu.example.io/`
 
 ## Load Balancer Configuration
 
@@ -382,8 +379,8 @@ To point your applications to your OpenVidu deployment, check the following file
 
 The most relevant parameters are:
 
---8<-- "shared/self-hosting/on-premises/credentials-general.md"
---8<-- "shared/self-hosting/on-premises/credentials-v2compatibility.md"
+--8<-- "self-hosting/on-premises/credentials-general.md"
+--8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
 
 ## Non-interactive installation
 
@@ -422,11 +419,11 @@ Each installation command for each type of node looks like this:
         --external-load-balancer
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     Notes:
 
-    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](../../../../account.md){:target="_blank"}.
+    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
     - Replace `openvidu.example.io` with your FQDN.
     - Replace `turn.example.io` with your TURN server FQDN.
     - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
@@ -444,11 +441,11 @@ Each installation command for each type of node looks like this:
         --redis-password='xxxxx'
     ```
 
-    --8<-- "shared/self-hosting/common/install-version.md"
+    --8<-- "self-hosting/common/install-version.md"
 
     - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change, and Media Nodes should be able to reach all Master Nodes using these IPs.
     - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.
-    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.no-break}.
+    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.nowrap}.
 
 You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
 

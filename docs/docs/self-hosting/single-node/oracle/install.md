@@ -1,13 +1,11 @@
 ---
 title: "Install OpenVidu Single Node COMMUNITY on Oracle Cloud"
 description: "Deploy OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
-tags:
-  - copyclipboard
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: .6em; vertical-align: text-bottom">COMMUNITY</span> installation: Oracle Cloud Infrastructure
+# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } installation: Oracle Cloud Infrastructure
 
---8<-- "shared/self-hosting/oracle/provider-chip.md"
+--8<-- "self-hosting/oracle/provider-chip.md"
 
 This section describes two ways to install OpenVidu Single Node on Oracle Cloud Infrastructure:
 
@@ -19,7 +17,7 @@ This section describes two ways to install OpenVidu Single Node on Oracle Cloud 
 
 This page explains how to create a Compute instance in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for an OpenVidu Single Node On-Premises installation. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
 
---8<-- "shared/self-hosting/oracle/single-node/webconsole-steps.md"
+--8<-- "self-hosting/oracle/single-node/webconsole-steps.md"
 
 6. Follow the [On-Premises install instructions](../on-premises/install.md) to install OpenVidu on the instance.
 
@@ -32,9 +30,9 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 
 ## Terraform
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on Oracle Cloud Infrastructure. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
+This section contains instructions for deploying a production-ready OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 12px" } deployment on Oracle Cloud Infrastructure. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
 
---8<-- "shared/self-hosting/oracle/single-node/terraform-architecture.md"
+--8<-- "self-hosting/oracle/single-node/terraform-architecture.md"
 
 ### Deployment details
 
@@ -47,133 +45,37 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
     ```
 
 2. Copy **`terraform.tfvars.example`** to **`terraform.tfvars`**, update the required parameters with your values, and adjust any optional defaults as needed.
-  <details>
-    <summary>Information about parameters</summary>
 
-    <h4>Mandatory Parameters</h4>
+    ??? details "Information about parameters"
 
-    <div align="center">
-    <table>
-    <thead>
-    <tr>
-    <th>Input Value</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="white-space: nowrap;"><code>tenancy_ocid</code></td>
-    <td>OCI Tenancy OCID. Required for the Object Storage namespace.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>compartment_ocid</code></td>
-    <td>OCI Compartment OCID where resources will be created.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>user_ocid</code></td>
-    <td>OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>stackName</code></td>
-    <td>Stack name for the OpenVidu deployment.</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+        #### Mandatory Parameters
 
-    <h4>Optional Parameters</h4>
+        | Input Value | Description |
+        |---|---|
+        | `tenancy_ocid`{ .nowrap } | OCI Tenancy OCID. Required for the Object Storage namespace. |
+        | `compartment_ocid`{ .nowrap } | OCI Compartment OCID where resources will be created. |
+        | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
+        | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
 
-    <div align="center">
-    <table>
-    <thead>
-    <tr>
-    <th>Input Value</th>
-    <th>Default Value</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="white-space: nowrap;"><code>region</code></td>
-    <td style="white-space: nowrap;"><code>"eu-frankfurt-1"</code></td>
-    <td>OCI region where resources will be created.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>availability_domain</code></td>
-    <td style="white-space: nowrap;"><code>1</code></td>
-    <td>Availability Domain number (1, 2, or 3) to use for resources.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>instanceType</code></td>
-    <td style="white-space: nowrap;"><code>"VM.Standard.E4.Flex"</code></td>
-    <td>OCI Compute shape for the OpenVidu instance.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>instanceOCPUs</code></td>
-    <td style="white-space: nowrap;"><code>4</code></td>
-    <td>Number of OCPUs for the instance (applies to Flex shapes only).</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>instanceMemory</code></td>
-    <td style="white-space: nowrap;"><code>4</code></td>
-    <td>Memory in GB for the instance (applies to Flex shapes only).</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>certificateType</code></td>
-    <td style="white-space: nowrap;"><code>"letsencrypt"</code></td>
-    <td>Certificate type for the OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li><code>owncert</code> - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li><code>letsencrypt</code> - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
-    </td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>domainName</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>ownPublicCertificate</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If the certificate type is <code>owncert</code>, this parameter specifies the public certificate in base64 format.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>ownPrivateCertificate</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>If the certificate type is <code>owncert</code>, this parameter specifies the private certificate in base64 format.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>initialMeetAdminPassword</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial password for the <code>admin</code> user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>initialMeetApiKey</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>bucketName</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>vault_ocid</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>key_ocid</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>OCI KMS Key OCID for secrets management. If left empty, a new key will be created.</td>
-    </tr>
-    <tr>
-    <td style="white-space: nowrap;"><code>additionalInstallFlags</code></td>
-    <td style="white-space: nowrap;"><code>(none)</code></td>
-    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., <code>--flag1=value, --flag2</code>).</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+        #### Optional Parameters
 
-  </details>
+        | Input Value | Default Value | Description |
+        |---|---|---|
+        | `region`{ .nowrap } | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
+        | `availability_domain`{ .nowrap } | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
+        | `instanceType`{ .nowrap } | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu instance. |
+        | `instanceOCPUs`{ .nowrap } | `4`{ .nowrap } | Number of OCPUs for the instance (applies to Flex shapes only). |
+        | `instanceMemory`{ .nowrap } | `4`{ .nowrap } | Memory in GB for the instance (applies to Flex shapes only). |
+        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `domainName`{ .nowrap } | `(none)`{ .nowrap } | Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name. |
+        | `ownPublicCertificate`{ .nowrap } | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the public certificate in base64 format. |
+        | `ownPrivateCertificate`{ .nowrap } | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the private certificate in base64 format. |
+        | `initialMeetAdminPassword`{ .nowrap } | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
+        | `initialMeetApiKey`{ .nowrap } | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
+        | `bucketName`{ .nowrap } | `(none)`{ .nowrap } | Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
+        | `vault_ocid`{ .nowrap } | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
+        | `key_ocid`{ .nowrap } | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
+        | `additionalInstallFlags`{ .nowrap } | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
 
 3. Deploy with Terraform using the following commands:
 
@@ -186,14 +88,13 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the instance — if exposed, unauthorized users could gain access.
-    <figure markdown>
-    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .svg-img .dark-img }
-    </figure>
+
+    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .round-corners loading=lazy }
 
 5. Set the correct permissions on the SSH key so it can be used.
 
---8<-- "shared/self-hosting/oracle/ssh-key-permissions.md"
+--8<-- "self-hosting/oracle/ssh-key-permissions.md"
 
---8<-- "shared/self-hosting/oracle/single-node/access-openvidu.md"
+--8<-- "self-hosting/oracle/single-node/access-openvidu.md"
 
---8<-- "shared/self-hosting/oracle/single-node/configure-app.md"
+--8<-- "self-hosting/oracle/single-node/configure-app.md"

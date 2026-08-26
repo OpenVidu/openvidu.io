@@ -2,12 +2,14 @@
 title: "OpenVidu support and consultancy"
 description: "Commercial support and consultancy from the OpenVidu team, plus the community channels where COMMUNITY edition users get help with self-hosting."
 hide:
+  - feedback
+  - path
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
-tags:
+page_features:
   - leadform
 ---
 
@@ -193,7 +195,7 @@ tags:
 
 # Support
 
-<div markdown="1" style="font-size: 20px">
+<div style="font-size: 20px" markdown>
 
 Self-hosting your own solutions can be challenging. We have built OpenVidu to make this task as easy as possible. But of course you may encounter difficulties in the process, or your particular use case may require customized assistance. The OpenVidu team specializes in customer support. Together we will make your project a success!
 
@@ -262,4 +264,4 @@ Let's work together and build something great!
 
 ## Community support
 
-The [public forum :simple-discourse:](https://openvidu.discourse.group/){:target="_blank"} is the right place to ask any questions that do not involve private information, so that the whole community can benefit from the exchange of ideas.
+The [public forum :simple-discourse: :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.discourse.group/){:target="_blank"} is the right place to ask any questions that do not involve private information, so that the whole community can benefit from the exchange of ideas.
