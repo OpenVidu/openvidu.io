@@ -255,7 +255,11 @@ Material theme customization lives in [`overrides/`](../overrides) (`custom_dir`
   `styles`, `outdated`...).
 - `home.html` extends `main.html` (the landing page template).
 - `partials/` adds or overrides partials: `header.html`, `footer.html`, `tabs.html`,
-  `json-ld.html`, `og.html`.
+  `tabs-item.html`, `json-ld.html`, `og.html`, `nav-item.html`.
+- `partials/nav-item.html` restricts `navigation.prune` to the top nav level: the product tree
+  the visitor is in keeps its expandable sections, while the other product collapses to a single
+  link. Upstream prunes every inactive section at every level, which turns each collapsed section
+  into a link to its first page. Copy of the Material 9.7.6 original — re-diff it on a bump.
 - `sitemap.xml` is MkDocs' own template (Material ships none) with one added clause: a page
   declaring `robots: noindex` is left out, so the sitemap never submits a URL that then
   refuses indexing. Re-copy it from `mkdocs/templates/sitemap.xml` on a MkDocs bump.

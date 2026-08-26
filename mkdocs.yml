@@ -320,7 +320,10 @@ theme:
     # Breadcrumbs on meet/** + docs/** only: the sectioned marketing pages and the blog
     # opt out per page/folder with `hide: - path`.
     - navigation.path
-    # Every page embeds only its own nav branch instead of all ~250 entries.
+    # Every page embeds its own product tree instead of both (~250 entries). Upstream
+    # prunes every inactive section at every level, which turns collapsed sections into
+    # links to their first page; overrides/partials/nav-item.html keeps pruning to the
+    # top level so the tree the visitor is in still expands.
     # Incompatible with navigation.expand; navigation.instant must also stay off
     # (the per-feature inline scripts in main.html would not re-run across
     # instant navigations).
