@@ -1,31 +1,9 @@
-<!-- https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/footer.html -->
+{# https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/footer.html #}
 
-<!--
-  Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to
-  deal in the Software without restriction, including without limitation the
-  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-  sell copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-
-  The above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-  IN THE SOFTWARE.
--->
-
-<!-- Footer -->
+{# Footer #}
 <footer class="md-footer">
 
-  <!-- Link to previous and/or next page -->
+  {# Link to previous and/or next page #}
   {% if "navigation.footer" in features %}
     {% if page.previous_page or page.next_page %}
       {% if page.meta and page.meta.hide %}
@@ -37,7 +15,7 @@
         {{ hidden }}
       >
 
-        <!-- Link to previous page -->
+        {# Link to previous page #}
         {% if page.previous_page %}
           {% set direction = lang.t("footer.previous") %}
           <a
@@ -60,7 +38,7 @@
           </a>
         {% endif %}
 
-        <!-- Link to next page -->
+        {# Link to next page #}
         {% if page.next_page %}
           {% set direction = lang.t("footer.next") %}
           <a
@@ -86,7 +64,7 @@
     {% endif %}
   {% endif %}
 
-  <!-- Further information -->
+  {# Further information #}
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
 
@@ -102,7 +80,7 @@
           <div class="subscription">
             <h4>NEWSLETTER</h4>
             <div class="md-copyright__highlight" style="font-size: .64rem">Keep up with OpenVidu news. Enter your e-mail and subscribe to our newsletter!</div>
-            <!-- Begin MailChimp Signup Form -->
+            {# Begin MailChimp Signup Form #}
             <div style="width:100%; padding-top: .4rem;">
                 <div id="mc_embed_signup">
                     <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post"
@@ -110,7 +88,7 @@
                       <div class="form-validation alert"></div>
                       <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: wrap; gap: 10px;">
                           <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required style="flex: 1 1 120px; min-width: 0;">
-                          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                          {# real people should not fill this in and expect good things - do not remove this or risk form bot signups #}
                           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
                           <div class="md-typeset" style="flex-shrink: 0;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
                       </div>

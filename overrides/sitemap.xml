@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-{# MkDocs' own sitemap template (1.6.1) plus one clause: a page declaring
+{# https://github.com/mkdocs/mkdocs/blob/master/mkdocs/templates/sitemap.xml
+
+   MkDocs' own sitemap template (1.6.1) plus one clause: a page declaring
    `robots: noindex` is left out, because submitting a URL that then refuses
    indexing is what Search Console reports as an error. Material ships no
-   sitemap.xml, so this overrides mkdocs/templates/sitemap.xml directly. -#}
+   sitemap.xml of its own, so this overrides MkDocs' directly. -#}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for file in pages -%}
     {% if not file.page.is_link and (file.page.abs_url or file.page.canonical_url)

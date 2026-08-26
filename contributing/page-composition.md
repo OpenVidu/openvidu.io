@@ -261,6 +261,9 @@ Material theme customization lives in [`overrides/`](../overrides) (`custom_dir`
   refuses indexing. Re-copy it from `mkdocs/templates/sitemap.xml` on a MkDocs bump.
 
 Site-wide changes go here — follow the "before/after" comment markers inside the blocks.
+Comments in these templates use the Jinja form (`{# … #}`): an HTML comment is copied into every
+built page. A partial copied from upstream opens with a Jinja comment naming the file it came
+from, so it can be re-diffed on a theme bump.
 
 ## HTML-in-Markdown
 
