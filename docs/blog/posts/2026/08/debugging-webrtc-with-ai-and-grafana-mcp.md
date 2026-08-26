@@ -21,15 +21,11 @@ tags:
   - AI agents
 authors:
   - carlosRuiz
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # Debugging WebRTC with an AI agent and Grafana MCP
 
-![Debugging WebRTC with an AI agent and Grafana MCP: read-only Grafana, a broken deployment, and an agent that works through the metrics to find each root cause](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/poster.webp){ width=100% }
+![Debugging WebRTC with an AI agent and Grafana MCP: read-only Grafana, a broken deployment, and an agent that works through the metrics to find each root cause](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/poster.webp){ .round-corners width=100% }
 
 What if you gave an AI agent nothing but **read-only access to your Grafana**, pointed it at a WebRTC deployment it had never seen, and asked what was broken? No shell, no source code, no config files, nothing but the dashboards and logs any on-call engineer would stare at. Could it actually find the root cause?
 
@@ -50,9 +46,9 @@ So we tried handing that job to an AI agent. This is known as AIOps, using AI to
 
 ## How we ran it
 
-An agent harness (here, Claude Code) normally lets an LLM run commands, write files, and act on a machine on its own. We took all of that away. The agent got exactly one tool: the [Grafana MCP](https://github.com/grafana/mcp-grafana){:target="_blank"} (Model Context Protocol, the standard way to give an agent access to a tool) pointed at the deployment's Grafana in read-only mode. No shell, no files, no source code, no config. We launched it with `--strict-mcp-config` so no other tool could load, disabled the Bash and file tools, and put only two things in the prompt: the operator's one-sentence complaint and the Grafana URL. The agent had no context about the underlying issue.
+An agent harness (here, Claude Code) normally lets an LLM run commands, write files, and act on a machine on its own. We took all of that away. The agent got exactly one tool: the [Grafana MCP :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/grafana/mcp-grafana){:target="_blank"} (Model Context Protocol, the standard way to give an agent access to a tool) pointed at the deployment's Grafana in read-only mode. No shell, no files, no source code, no config. We launched it with `--strict-mcp-config` so no other tool could load, disabled the Bash and file tools, and put only two things in the prompt: the operator's one-sentence complaint and the Grafana URL. The agent had no context about the underlying issue.
 
-The deployment under test is a real [**OpenVidu Single Node Community**](/docs/self-hosting/single-node/index.md) stack (the free edition) running inside a simulated VM, [openvidu-fake-vm](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}, with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
+The deployment under test is a real [**OpenVidu Single Node Community**](/docs/self-hosting/single-node/index.md) stack (the free edition) running inside a simulated VM, [openvidu-fake-vm :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}, with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
 
 We broke it in five ways, one at a time:
 
@@ -62,11 +58,11 @@ We broke it in five ways, one at a time:
 - An ingress fed a bad stream key: the RTMP publish never lands in the room.
 - Recordings refused: a bogus "CPU exhausted" error caused by a bad config value.
 
-Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"}, that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, it got two of them wrong.
+Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"}, that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, it got two of them wrong.
 
 ## Watching Claude debug, live
 
-For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/prompts/scenarios.yaml){:target="_blank"}, alongside the answer key we graded each run against.
+For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/prompts/scenarios.yaml){:target="_blank"}, alongside the answer key we graded each run against.
 
 ### Fault 1: Blocked media (ICE)
 
@@ -78,10 +74,10 @@ For each fault you'll see three things: **what we broke**, **the exact prompt** 
 
 But **neither session could see the firewall rule itself** (a dropped packet logs no reason), so both pinned the cause on the *nearest visible thing*, the SFU advertising Docker-internal IPs (`10.5.0.3`, `172.17.0.1`) as ICE candidates, and recommended fixing that config so it advertised a reachable IP, plus opening the media ports. They pointed at the right area, which is exactly as far as observability reaches: it localizes the effect but not a cause that leaves no trace.
 
-<figure markdown>
-![Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-1-ice.webp)
-<figcaption>Loki, the instant media breaks: the SFU floods ICE/DTLS timeouts. People joined the room, but no media path could form.</figcaption>
-</figure>
+![Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-1-ice.webp){ .round-corners loading=lazy }
+/// caption
+Loki, the instant media breaks: the SFU floods ICE/DTLS timeouts. People joined the room, but no media path could form.
+///
 
 ### Fault 2: Network congestion (choppy calls)
 
@@ -93,10 +89,10 @@ But **neither session could see the firewall rule itself** (a dropped packet log
 
 That's where the skill mattered. The skilled session correctly identified it as a server-side problem, not the callers. The bare session was unreliable: in repeated runs it often pinned the blame on the users' own networks, the confidently wrong answer that would have sent you chasing your customers instead of your server.
 
-<figure markdown>
-![Grafana chart showing average packet loss jumping from zero to ten percent](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-2-congestion.webp)
-<figcaption>Metrics (Prometheus): average packet loss jumps from ~0 to ~10% the moment the link degrades. All of it is on the downlink; the uplink stays at 0, which is why the per-direction breakdown in the text reaches 23%. The calls connect fine, they just fall apart.</figcaption>
-</figure>
+![Grafana chart showing average packet loss jumping from zero to ten percent](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-2-congestion.webp){ .round-corners loading=lazy }
+/// caption
+Metrics (Prometheus): average packet loss jumps from ~0 to ~10% the moment the link degrades. All of it is on the downlink; the uplink stays at 0, which is why the per-direction breakdown in the text reaches 23%. The calls connect fine, they just fall apart.
+///
 
 ### Fault 3: Redis down (coordination plane)
 
@@ -108,10 +104,10 @@ That's where the skill mattered. The skilled session correctly identified it as 
 
 Both reached the same right answer.
 
-<figure markdown>
-![Grafana Loki logs showing every service logging connection refused on port 7000](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-3-redis.webp)
-<figcaption>Loki: every service floods "connection refused" on 127.0.0.1:7000 the instant Redis dies. An active reject, not a timeout: the process is down, not the network.</figcaption>
-</figure>
+![Grafana Loki logs showing every service logging connection refused on port 7000](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-3-redis.webp){ .round-corners loading=lazy }
+/// caption
+Loki: every service floods "connection refused" on 127.0.0.1:7000 the instant Redis dies. An active reject, not a timeout: the process is down, not the network.
+///
 
 ### Fault 4: Ingress RTMP with a bad stream key
 
@@ -121,10 +117,10 @@ Both reached the same right answer.
 
 **What it found:** both solved it, fast and clean. The RTMP connection reaches the server but the publish is rejected with `ingress does not exist` for stream key `BADKEY123`. Both correctly called it a **client-side** problem, the encoder is using a key that was never issued; create the ingress via the API first, then point the encoder at the returned key, and confirmed the server pipeline (ingress, Redis, RTMP) is healthy. Here the signal, though logs-only, is **explicit**, so even the bare model reads it easily.
 
-<figure markdown>
-![Grafana Loki logs showing the ingress rejecting a publish with a bad stream key](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-4-ingress.webp)
-<figcaption>Loki: the ingress rejects the publish with "ingress does not exist" for stream key BADKEY123. A client-side misconfiguration, stated explicitly in the logs.</figcaption>
-</figure>
+![Grafana Loki logs showing the ingress rejecting a publish with a bad stream key](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-4-ingress.webp){ .round-corners loading=lazy }
+/// caption
+Loki: the ingress rejects the publish with "ingress does not exist" for stream key BADKEY123. A client-side misconfiguration, stated explicitly in the logs.
+///
 
 ### Fault 5: Recordings won't start (CPU "exhausted")
 
@@ -140,10 +136,10 @@ Instead of concluding "add more CPU," the skilled session spotted the clue: the 
 
 A reassuring result: handed a loud, misleading error, the skilled session reasoned past it to the real cause.
 
-<figure markdown>
-![Grafana Loki logs showing egress refusing recordings with a not enough CPU error](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-5-cpu.webp)
-<figcaption>Loki: egress refuses every recording with "not enough CPU". Note "required: 100" against "available: 16", a nonsensical config value, not a real shortage.</figcaption>
-</figure>
+![Grafana Loki logs showing egress refusing recordings with a not enough CPU error](/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/scenario-5-cpu.webp){ .round-corners loading=lazy }
+/// caption
+Loki: egress refuses every recording with "not enough CPU". Note "required: 100" against "available: 16", a nonsensical config value, not a real shortage.
+///
 
 ## The scorecard (and where it failed)
 
@@ -177,11 +173,11 @@ The two tricky faults are where the skill mattered most: on **congestion** it re
 
 ## Reproduce the whole thing yourself
 
-Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/tree/v0.1.0){:target="_blank"}, that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab creates its own).
+Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/tree/v0.1.0){:target="_blank"}, that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab creates its own).
 
 **What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full [observability module](/docs/self-hosting/production-ready/observability/index.md) (Grafana + Prometheus + Loki). What makes this feel like a real deployment?
 
-- The VM ([`openvidu-fake-vm`](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}) comes up on a fixed IP and answers on a real HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
+- The VM ([`openvidu-fake-vm` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-fake-vm){:target="_blank"}) comes up on a fixed IP and answers on a real HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
 - Everything is fixed and scripted: the LiveKit keys, the Grafana admin, and a read-only Grafana token generated straight into the two `.mcp.json` arms. Nothing to click.
 
 **Run it.** Three commands from a cold start:
@@ -215,7 +211,7 @@ Want this on your own OpenVidu? Four steps:
 
 1. **Enable observability.** Add `observability` to `ENABLED_MODULES` in `openvidu.env` (with `GRAFANA_ADMIN_USERNAME`/`GRAFANA_ADMIN_PASSWORD`) and restart. See the [modules guide](/docs/self-hosting/how-to-guides/enable-disable-modules.md).
 2. **Create a read-only Grafana token:** in Grafana, go to *Administration → Users and access → Service accounts* (or just search for *Service accounts*, the menu path varies slightly across Grafana versions), make an account with the **Viewer** role, and generate a token.
-3. **Point Claude Code at the [Grafana MCP](https://github.com/grafana/mcp-grafana){:target="_blank"}**, read-only. Install the binary following the instructions in that repo, then drop a `.mcp.json` next to your project:
+3. **Point Claude Code at the [Grafana MCP :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/grafana/mcp-grafana){:target="_blank"}**, read-only. Install the binary following the instructions in that repo, then drop a `.mcp.json` next to your project:
 
     ```json
     {
@@ -234,7 +230,7 @@ Want this on your own OpenVidu? Four steps:
 
     `--disable-write` plus the Viewer token keep it read-only. Check it with `/mcp` in Claude Code and ask it to *"list the datasources."*
 
-4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
+4. **(Optional) Give it the signal map:** install the [`openvidu-grafana-triage` skill :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md){:target="_blank"} into `.claude/skills/`. That's the "with-skill" arm from the experiment above.
 
 That's it: the same setup you saw throughout this post, pointed at your own deployment.
 
@@ -250,4 +246,4 @@ As for that developer who has never handled a media stream in their life: our be
 
 One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. Follow OpenVidu's releases and the blog if you want to see the rest as it lands.
 
-*Now it's your turn: [tell us what you find](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues){:target="_blank"}. And may your on-calls be boring.* 😉
+*Now it's your turn: [tell us what you find :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues){:target="_blank"}. And may your on-calls be boring.* 😉
