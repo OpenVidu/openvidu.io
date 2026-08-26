@@ -69,7 +69,7 @@ How OpenVidu Meet implements it
 Every room exposes two shared anonymous links — one per predefined role — and, new in 3.8.0, you can **enable or disable each role's link per room** (allow anonymous speakers, say, but require an identity to moderate). Each anonymous guest picks a name before joining.
 
 - **In the app:** copy either link from the **"Rooms"** or **"Room Details"** page — or from inside a live meeting if you hold the `canShareAccessLinks` permission — and toggle each role's anonymous access in the room creation/edit wizard.
-- **Over the REST API:** the links come back on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom), at `access.anonymous.moderator.url` and `access.anonymous.speaker.url`; enable or disable each role with [`PUT /rooms/{roomId}/access`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomAccess).
+- **Over the REST API:** the links come back on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom) , at `access.anonymous.moderator.url` and `access.anonymous.speaker.url`; enable or disable each role with [`PUT /rooms/{roomId}/access`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomAccess) .
 
 See [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for the full picture.
 
@@ -98,7 +98,7 @@ How OpenVidu Meet implements it
 You add a member of type `identified_guest` with a display name and a base role (`Moderator` or `Speaker`), optionally overriding individual permissions. Meet generates a unique personal link for them; removing the member **instantly** invalidates it and expels them if they're mid-meeting.
 
 - **In the app:** open the room's **"Room Members"** tab, click **"Add Member"**, choose **Identified guest**, then grab their link later with the **copy access link** button in the member list.
-- **Over the REST API:** create them with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) — the response carries the personal link in the member's `accessUrl` (also retrievable via [`GET /rooms/{roomId}/members/{memberId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoomMember)).
+- **Over the REST API:** create them with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) — the response carries the personal link in the member's `accessUrl` (also retrievable via [`GET /rooms/{roomId}/members/{memberId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoomMember) ).
 
 See [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md).
 
@@ -134,7 +134,7 @@ How OpenVidu Meet implements it
 Meet ships a built-in user system with three account roles — `admin` (full control), `room_manager` (manages their own rooms) and `room_member` (accesses rooms they belong to). Everyone joins through the same shared **user access link**, which renders a login form and carries no secret, so your app never handles passwords. Admins and room owners are implicit full-access members, and a room can be opened to all users (who then join as `Speaker`).
 
 - **In the app:** create accounts on the **"Users"** page (**"Create User"**, admins only), then add one to a room from its **"Room Members"** tab → **"Add Member"** → **User**. Copy the shared link from that member's row in the member list (all users share one link — they log in to prove who they are).
-- **Over the REST API:** create accounts with [`POST /users`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createUser), add a user as a member with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember), and read the shared link at `access.user.url` on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom).
+- **Over the REST API:** create accounts with [`POST /users`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createUser) , add a user as a member with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) , and read the shared link at `access.user.url` on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom) .
 
 See [Users](https://openvidu.io/latest/meet/features/users/overview/index.md).
 

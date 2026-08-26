@@ -206,7 +206,7 @@ OpenVidu Single Node Oracle Cloud Infrastructure Architecture
    | `compartment_ocid` | OCI Compartment OCID where resources will be created.                                                                     |
    | `user_ocid`        | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.                             |
    | `stackName`        | Stack name for the OpenVidu deployment.                                                                                   |
-   | `openviduLicense`  | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/3.8/account/index.md) to obtain your license. |
+   | `openviduLicense`  | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/account/) to obtain your license. |
 
    #### Optional Parameters
 

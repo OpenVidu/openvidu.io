@@ -12,7 +12,7 @@ I'll confess it: you'll feel like Harry Potter on his first day of class...
 
 OpenVidu gesture control
 
-but no, it's not magic. These gestures are recognized in real time with [MediaPipe Gesture Recognizer](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer), a **free** AI model that runs in the browser itself and lets you detect gestures without sending video to the cloud. We can pair these gestures with real actions in the video call, like turning off the camera, muting the microphone, and so on.
+but no, it's not magic. These gestures are recognized in real time with [MediaPipe Gesture Recognizer](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer) , a **free** AI model that runs in the browser itself and lets you detect gestures without sending video to the cloud. We can pair these gestures with real actions in the video call, like turning off the camera, muting the microphone, and so on.
 
 The gestures we've wired up are:
 
@@ -53,7 +53,7 @@ MediaPipe's own quick-start snippet points `WASM_FILESET_URL` and `MODEL_URL` st
 
 The MediaPipe *library* is free and open source, maintained by Google under the Apache 2.0 license. The pretrained models it ships, including the gesture recognizer, come with their own [model card](https://storage.googleapis.com/mediapipe-assets/gesture_recognizer/model_card_hand_gesture_classification_with_faireness_2022.pdf) and aren't necessarily covered by that same license, so it's worth checking before you redistribute a model binary yourself. MediaPipe's [privacy notice](https://github.com/google-ai-edge/mediapipe#privacy-notice) is also worth reading closely: your video frames stay on-device, but MediaPipe can still send usage metrics to Google, and getting informed consent from your users for that is on you, not Google.
 
-MediaPipe isn't the only option, though. If you need more precision or dedicated commercial support instead, [Banuba](https://www.banuba.com/technology/hand-tracking-and-gesture-recognition), a commercial SDK built on its own proprietary neural networks, explicitly marketed for video chats, is worth a look too.
+MediaPipe isn't the only option, though. If you need more precision or dedicated commercial support instead, [Banuba](https://www.banuba.com/technology/hand-tracking-and-gesture-recognition) , a commercial SDK built on its own proprietary neural networks, explicitly marketed for video chats, is worth a look too.
 
 Want to inspect the training data yourself instead of trusting a black box? [HaGRIDv2](https://github.com/hukenovs/hagrid) is a million-plus-image gesture dataset built with video calls in mind, with a lightest baseline that classifies a frame in 5ms on CPU alone.
 

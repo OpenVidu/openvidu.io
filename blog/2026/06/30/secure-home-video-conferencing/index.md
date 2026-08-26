@@ -6,7 +6,7 @@ We're all used to reaching for a third-party app to call friends and family: Goo
 
 In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.
 
-With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/meet/).
+With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using [OpenVidu Meet](https://openvidu.io/meet/) .
 
 ## Why self-host your video calls?
 
@@ -36,7 +36,7 @@ Before you start, make sure your network setup is ready for hosting a server.
 
 ### 1. Are you behind a CGNAT?
 
-Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **[CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT)**), and that prevents people from reaching your server.
+Many internet providers no longer give each home a unique public IP. They share one between many customers (this is called **[CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT)** ), and that prevents people from reaching your server.
 
 Quick check: look at the "Internet" / "WAN" IP your **router** reports. Open a browser and go to `192.168.0.1` or `192.168.1.1` (the most common addresses). If neither works, check the label on the underside of your router, which usually shows the address, username, and password.
 

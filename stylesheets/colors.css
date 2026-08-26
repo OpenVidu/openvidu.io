@@ -85,7 +85,7 @@
     background-color: var(--slate-md-typeset-color);
     border-color: var(--slate-md-typeset-color);
   }
-  figure img.dark-img {
+  img.dark-img {
     background-color: var(--slate-md-default-bg-color);
   }
   /* Fully opaque white for the hero text so it stays maximally readable over
@@ -110,14 +110,6 @@
   .ai-provider-icon {
     filter: brightness(0.4);
   }
-}
-
-.red-color {
-  color: #ff5252;
-}
-
-.green-color {
-  color: #2b9b46;
 }
 
 /* Audience-routed CTA buttons (hero and end of features grid): each product's

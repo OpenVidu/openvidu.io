@@ -35,16 +35,16 @@ Any LiveKit tutorial, any third-party LiveKit example, works against an OpenVidu
 |                         | **OpenVidu**                                                                                                                                                                                        | **LiveKit** (self-hosted)                         |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | Identity                | Fork of LiveKit, 100% API/SDK-compatible                                                                                                                                                            | The upstream open-source project                  |
-| Media engine            | PionCOMMUNITY or [**mediasoup**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md) (~2x more efficient)PRO                                                           | Pion                                              |
-| Autoscaling             | Yes: [Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/index.md) & [HA](https://openvidu.io/latest/docs/self-hosting/ha/index.md) modesPRO                                                   | Autoscaling is yours to build and operate         |
-| License                 | Apache 2.0COMMUNITY / commercialPRO                                                                                                                                                                 | Apache 2.0                                        |
-| Egress/Ingress          | [Bundled by default](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md)COMMUNITY                                                                                            | Separate services you deploy and operate yourself |
+| Media engine            | Pion**COMMUNITY** or [**mediasoup**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md) (~2x more efficient)**PRO**                                                   | Pion                                              |
+| Autoscaling             | Yes: [Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/index.md) & [HA](https://openvidu.io/latest/docs/self-hosting/ha/index.md) modes**PRO**                                               | Autoscaling is yours to build and operate         |
+| License                 | Apache 2.0**COMMUNITY** / commercial**PRO**                                                                                                                                                         | Apache 2.0                                        |
+| Egress/Ingress          | [Bundled by default](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md)**COMMUNITY**                                                                                        | Separate services you deploy and operate yourself |
 | AI agents               | [OpenVidu Agents](https://openvidu.io/latest/docs/ai/overview/index.md) (on top of LiveKit's Agent framework), speech-processing agent bundled                                                         | LiveKit's Agent framework, DIY (no agent bundled) |
 | High-level integrations | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md), a ready-to-use videoconferencing application, optionally [embeddable in your own app](https://openvidu.io/latest/meet/embedded/intro/index.md) | None                                              |
-| Dashboard               | [OpenVidu Dashboard](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md)COMMUNITY, with detailed per-room and per-participant viewsPRO            | No                                                |
-| Observability           | Bundled [Grafana dashboards](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/index.md)PRO                                                                    | Prometheus metrics exposed; dashboards are DIY    |
+| Dashboard               | [OpenVidu Dashboard](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md)**COMMUNITY**, with detailed per-room and per-participant views**PRO**    | No                                                |
+| Observability           | Bundled [Grafana dashboards](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/index.md)**PRO**                                                                | Prometheus metrics exposed; dashboards are DIY    |
 | Cloud automation        | [One-click automated deployments](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md) on AWS, Azure, GCP, DigitalOcean and OCI                                                     | None — Helm chart or manual VM setup              |
-| Pricing                 | FreeCOMMUNITY, flat **$0.0006/core/minute**PRO                                                                                                                                                      | Free                                              |
+| Pricing                 | Free**COMMUNITY**, flat **$0.0006/core/minute\*\*\*\*PRO**                                                                                                                                          | Free                                              |
 
 LiveKit Cloud, LiveKit's managed SaaS, is out of scope for this table — see [Where LiveKit still has the edge](#where-livekit-still-has-the-edge) for what it does better than any self-hosted option, OpenVidu included.
 
@@ -52,7 +52,7 @@ LiveKit Cloud, LiveKit's managed SaaS, is out of scope for this table — see [W
 
 Deploying LiveKit's Egress and Ingress services yourself means running them as **separate processes**, each with its own API keys and sizing (LiveKit's own docs recommend at least 4 CPUs / 4GB RAM per instance). None of that is optional plumbing you can skip — recording and streaming simply don't work until it's wired up.
 
-OpenVidu COMMUNITY ships all of it pre-integrated by default:
+OpenVidu **COMMUNITY** ships all of it pre-integrated by default:
 
 - [**Egress and Ingress**](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md) — no separate deployment step.
 - [**S3-compatible storage for recordings**](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-s3/index.md), pre-configured (MinIO) out of the box.
@@ -77,9 +77,9 @@ If you're weighing the underlying media engine rather than the platform, see [Op
 
 ## Pricing
 
-OpenVidu COMMUNITY is free, forever, and so is self-hosted LiveKit. The difference is at the top end: OpenVidu offers first-class, production-ready Elastic and HA self-hosted deployments on a pay-per-core basis, which self-hosted LiveKit does not.
+OpenVidu **COMMUNITY** is free, forever, and so is self-hosted LiveKit. The difference is at the top end: OpenVidu offers first-class, production-ready Elastic and HA self-hosted deployments on a pay-per-core basis, which self-hosted LiveKit does not.
 
-OpenVidu PRO's pricing is a single number: **$0.0006 per core per minute**, billed while your cluster is running. See our [worked examples](https://openvidu.io/pricing/index.md) for concrete monthly costs at several cluster sizes.
+OpenVidu **PRO**'s pricing is a single number: **$0.0006 per core per minute**, billed while your cluster is running. See our [worked examples](https://openvidu.io/pricing/index.md) for concrete monthly costs at several cluster sizes.
 
 Combined with the mediasoup engine, that pricing gives OpenVidu a hard-to-match price/performance ratio.
 
@@ -105,7 +105,7 @@ Yes, and there's no real "migration" work involved beyond redeploying: your exis
 
 ### Does OpenVidu have a hosted or cloud option?
 
-No. OpenVidu is self-hosted only, in both its free COMMUNITY edition and its paid PRO edition. There is no OpenVidu-hosted SaaS equivalent to LiveKit Cloud — every OpenVidu deployment runs on your own infrastructure or cloud account.
+No. OpenVidu is self-hosted only, in both its free **COMMUNITY** edition and its paid **PRO** edition. There is no OpenVidu-hosted SaaS equivalent to LiveKit Cloud — every OpenVidu deployment runs on your own infrastructure or cloud account.
 
 However, OpenVidu does provide production-ready single-node, Elastic and HA deployments for the five major cloud providers, which you run in your own cloud account. See the [deployment types page](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md) for details.
 

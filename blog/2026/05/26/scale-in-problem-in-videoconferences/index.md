@@ -4,8 +4,6 @@ Autoscaling is one of the killer features of cloud infrastructure. It promises z
 
 Scale In
 
-Scale in situation
-
 This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.
 
 ## The Scaling Illusion: Why "Turning it Off" is Harder than "Turning it On"
@@ -17,8 +15,6 @@ Scaling *in* is where the illusion shatters. Your CPU drops, the policy fires in
 The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.
 
 Scale Out
-
-Scale out situation
 
 ## The "Stateful" Trap: Why Media Servers Aren't Web Servers
 
@@ -50,8 +46,6 @@ The challenge is integrating this logic with the autoscaling mechanisms of each 
 
 Scale In
 
-Draining strategy
-
 ## Bringing Scale-In to the Major Clouds
 
 OpenVidu implements the draining strategy on every cloud it supports. The approach differs per provider because each exposes different primitives for intercepting a termination decision.
@@ -60,7 +54,7 @@ OpenVidu implements the draining strategy on every cloud it supports. The approa
 
 AWS logo
 
-[AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) support a native feature called [**Lifecycle Hooks**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html). When the ASG decides to terminate an instance (because CPU has dropped below the target), instead of killing it immediately it puts the instance in a `Terminating:Wait` state and fires a lifecycle transition event. The instance stays alive in this pending state until something either completes the hook or the wait timeout expires.
+[AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) support a native feature called [**Lifecycle Hooks**](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) . When the ASG decides to terminate an instance (because CPU has dropped below the target), instead of killing it immediately it puts the instance in a `Terminating:Wait` state and fires a lifecycle transition event. The instance stays alive in this pending state until something either completes the hook or the wait timeout expires.
 
 OpenVidu uses this hook as its scale-in interception point:
 
@@ -76,7 +70,7 @@ Of the three clouds, this is the most direct implementation. The Lifecycle Hook 
 
 Azure logo
 
-Azure's native scale-in mechanism for [Virtual Machine Scale Sets (VMSS)](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview) is a [**termination notification**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-terminate-notification): when a scale-in event fires, Azure notifies the instance and gives it up to **15 minutes** to wrap up — after that, it terminates the VM regardless of what is running inside. Unlike the AWS Lifecycle Hook, this ceiling is hard and cannot be extended. A business meeting can easily last longer than 15 minutes, so relying on this native feature alone would still risk disrupting active sessions.
+Azure's native scale-in mechanism for [Virtual Machine Scale Sets (VMSS)](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview) is a [**termination notification**](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-terminate-notification) : when a scale-in event fires, Azure notifies the instance and gives it up to **15 minutes** to wrap up — after that, it terminates the VM regardless of what is running inside. Unlike the AWS Lifecycle Hook, this ceiling is hard and cannot be extended. A business meeting can easily last longer than 15 minutes, so relying on this native feature alone would still risk disrupting active sessions.
 
 To work around it, OpenVidu takes a more active stance and bypasses the native scale-in policy altogether:
 
@@ -94,7 +88,7 @@ GCP logo
 [GCP Managed Instance Groups](https://cloud.google.com/compute/docs/instance-groups) don't provide a native "wait for draining" hook at the level of a single instance in the same way AWS does. OpenVidu's approach here is to sidestep the native scale-in mechanism entirely:
 
 1. The MIG is configured for **scale-out only**. GCP autoscaling can add instances but will never directly terminate one.
-1. A [**Cloud Run Function**](https://cloud.google.com/functions){:target="*blank"}, triggered on a schedule by [Cloud Scheduler](https://cloud.google.com/scheduler/docs), periodically compares the current MIG size with the current recommended size (i.e., how many nodes the autoscaler \_would* request given load). If the current count exceeds the target, it calculates the excess instances and removes them from the MIG.
+1. A [**Cloud Run Function**](https://cloud.google.com/functions) , triggered on a schedule by [Cloud Scheduler](https://cloud.google.com/scheduler/docs) , periodically compares the current MIG size with the current recommended size (i.e., how many nodes the autoscaler *would* request given load). If the current count exceeds the target, it calculates the excess instances and removes them from the MIG.
 1. Removed instances don't die immediately. Each Media Node runs a **cron job every minute** that checks whether it is still registered in the MIG. If it detects that it has been removed, it invokes the graceful shutdown script.
 1. The shutdown script marks the node as draining, waits for all active Rooms and jobs to complete, and then terminates the process — letting GCP reclaim the VM.
 

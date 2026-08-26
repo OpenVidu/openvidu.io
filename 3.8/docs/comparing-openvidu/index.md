@@ -4,7 +4,7 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 
 Comparing OpenVidu Meet and OpenVidu Platform instead?
 
-This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ## OpenVidu vs LiveKit
 
@@ -51,7 +51,7 @@ Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims 
 - OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](https://openvidu.io/3.8/docs/self-hosting/production-ready/observability/index.md).
 - We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](https://openvidu.io/3.8/docs/self-hosting/production-ready/scalability/#big-videoconferences-and-massive-live-streams-working-on-it).
 
-**[Read the full OpenVidu vs LiveKit comparison](https://openvidu.io/3.8/openvidu-vs-livekit/index.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
+**[Read the full OpenVidu vs LiveKit comparison](https://openvidu.io/openvidu-vs-livekit/index.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
 
 ## OpenVidu vs SaaS solutions
 
@@ -79,7 +79,7 @@ SFUs are generally low-level tools. Using them directly to implement real-time a
 
 OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md).
 
-**[Read the full OpenVidu vs mediasoup comparison](https://openvidu.io/3.8/openvidu-vs-mediasoup/index.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
+**[Read the full OpenVidu vs mediasoup comparison](https://openvidu.io/openvidu-vs-mediasoup/index.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Microsoft Teams, Google Meet, Zoom
 

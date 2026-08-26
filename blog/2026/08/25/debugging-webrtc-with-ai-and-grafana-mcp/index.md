@@ -22,7 +22,7 @@ When you hand an agent your metrics and logs, that data leaves for the model pro
 
 An agent harness (here, Claude Code) normally lets an LLM run commands, write files, and act on a machine on its own. We took all of that away. The agent got exactly one tool: the [Grafana MCP](https://github.com/grafana/mcp-grafana) (Model Context Protocol, the standard way to give an agent access to a tool) pointed at the deployment's Grafana in read-only mode. No shell, no files, no source code, no config. We launched it with `--strict-mcp-config` so no other tool could load, disabled the Bash and file tools, and put only two things in the prompt: the operator's one-sentence complaint and the Grafana URL. The agent had no context about the underlying issue.
 
-The deployment under test is a real [**OpenVidu Single Node Community**](https://openvidu.io/latest/docs/self-hosting/single-node/index.md) stack (the free edition) running inside a simulated VM, [openvidu-fake-vm](https://github.com/OpenVidu/openvidu-fake-vm), with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
+The deployment under test is a real [**OpenVidu Single Node Community**](https://openvidu.io/latest/docs/self-hosting/single-node/index.md) stack (the free edition) running inside a simulated VM, [openvidu-fake-vm](https://github.com/OpenVidu/openvidu-fake-vm) , with the observability module turned on. The VM answers on a real, publicly trusted HTTPS name built from its IP, `https://10-5-0-3.openvidu-local.dev`, so there is no `/etc/hosts` editing and no self-signed certificate warnings.
 
 We broke it in five ways, one at a time:
 
@@ -32,11 +32,11 @@ We broke it in five ways, one at a time:
 - An ingress fed a bad stream key: the RTMP publish never lands in the room.
 - Recordings refused: a bogus "CPU exhausted" error caused by a bad config value.
 
-Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md), that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, it got two of them wrong.
+Each fault ran twice, with the same prompt, the same deployment, and the same model, a small and inexpensive one (Claude Haiku 4.5). The only thing that changed between the two runs was a bit of OpenVidu domain knowledge: a **skill** we wrote, [`openvidu-grafana-triage`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/mcp/with-skill/.claude/skills/openvidu-grafana-triage/SKILL.md) , that teaches the agent how OpenVidu's observability is laid out and what its signals mean. The first run used the bare MCP; the second added the skill. With the skill it got all five right; without it, it got two of them wrong.
 
 ## Watching Claude debug, live
 
-For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/prompts/scenarios.yaml), alongside the answer key we graded each run against.
+For each fault you'll see three things: **what we broke**, **the exact prompt** the session started from (the operator's complaint, verbatim, is all it got, plus the Grafana URL), and **what it found**. The prompts are written the way someone with no inside knowledge of the system would write them, with no metric names and no hints. Where a prompt says `HH:MM`, that's the time the incident started, which the lab fills in with the real clock time on each run. Every prompt below lives verbatim in the lab's [`prompts/scenarios.yaml`](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/blob/v0.1.0/prompts/scenarios.yaml) , alongside the answer key we graded each run against.
 
 ### Fault 1: Blocked media (ICE)
 
@@ -142,11 +142,11 @@ The two tricky faults are where the skill mattered most: on **congestion** it re
 
 ## Reproduce the whole thing yourself
 
-Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/tree/v0.1.0), that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab creates its own).
+Everything you just watched, you can run on your own machine. We packaged the experiment into a companion repo, [openvidu-grafana-mcp-lab](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/tree/v0.1.0) , that builds the whole lab and breaks it, one fault per command. The only things you need installed are Docker and Claude Code; the Grafana MCP and everything else run in containers, and there are no credentials to configure (the lab creates its own).
 
 **What it builds.** A local **OpenVidu Single Node Community** deployment, the free edition, running inside a simulated VM, with the full [observability module](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/index.md) (Grafana + Prometheus + Loki). What makes this feel like a real deployment?
 
-- The VM ([`openvidu-fake-vm`](https://github.com/OpenVidu/openvidu-fake-vm)) comes up on a fixed IP and answers on a real HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
+- The VM ([`openvidu-fake-vm`](https://github.com/OpenVidu/openvidu-fake-vm) ) comes up on a fixed IP and answers on a real HTTPS name built from it, `https://10-5-0-3.openvidu-local.dev`, with nothing to add to `/etc/hosts` and no certificate warnings.
 - Everything is fixed and scripted: the LiveKit keys, the Grafana admin, and a read-only Grafana token generated straight into the two `.mcp.json` arms. Nothing to click.
 
 **Run it.** Three commands from a cold start:
@@ -182,7 +182,7 @@ Want this on your own OpenVidu? Four steps:
 
 1. **Create a read-only Grafana token:** in Grafana, go to *Administration → Users and access → Service accounts* (or just search for *Service accounts*, the menu path varies slightly across Grafana versions), make an account with the **Viewer** role, and generate a token.
 
-1. **Point Claude Code at the [Grafana MCP](https://github.com/grafana/mcp-grafana)**, read-only. Install the binary following the instructions in that repo, then drop a `.mcp.json` next to your project:
+1. **Point Claude Code at the [Grafana MCP](https://github.com/grafana/mcp-grafana)** , read-only. Install the binary following the instructions in that repo, then drop a `.mcp.json` next to your project:
 
    ```json
    {
@@ -217,4 +217,4 @@ As for that developer who has never handled a media stream in their life: our be
 
 One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. Follow OpenVidu's releases and the blog if you want to see the rest as it lands.
 
-*Now it's your turn: [tell us what you find](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues). And may your on-calls be boring.* 😉
+*Now it's your turn: [tell us what you find](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues) . And may your on-calls be boring.* 😉

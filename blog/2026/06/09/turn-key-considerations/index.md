@@ -18,7 +18,7 @@ The TURN layer is one of those silent but essential pieces of WebRTC: it wrestle
 
 Let's talk about how to deploy a simple TURN server, and then we'll see all the things that can go wrong with it.
 
-The reference open-source TURN server, [**coturn**](https://github.com/coturn/coturn), is an excellent community-maintained project and the project is very active and well-maintained. TURN is a complex protocol, it can be a double-edged sword and that's why it's easy to misconfigure it. It's not coturn's implementation faults that make it hard to operate, but the protocol itself.
+The reference open-source TURN server, [**coturn**](https://github.com/coturn/coturn) , is an excellent community-maintained project and the project is very active and well-maintained. TURN is a complex protocol, it can be a double-edged sword and that's why it's easy to misconfigure it. It's not coturn's implementation faults that make it hard to operate, but the protocol itself.
 
 Deploying a basic coturn instance is, in principle, fairly straightforward. You need a machine with Docker and Linux, a **public IP**, and an open **relay port range**. Following a simple standard deployment using the default port, your docker-compose with coturn could look like this:
 
@@ -85,10 +85,10 @@ OpenVidu automatically scales TURN along with its Media Nodes. Since each Media 
 
 > 5. Security hardening by default, with UDP-only relay to peers, an allow-list of peer IPs to master and Media Node IPs, and restricting the relay port range to the configured media port range.
 
-At OpenVidu we've applied hardening recommendations while always keeping platform usability in mind. From [Enable Security's recommendations](https://www.enablesecurity.com/blog/coturn-security-configuration-guide/), we've applied the following:
+At OpenVidu we've applied hardening recommendations while always keeping platform usability in mind. From [Enable Security's recommendations](https://www.enablesecurity.com/blog/coturn-security-configuration-guide/) , we've applied the following:
 
 1. **Allow-list of IPs known by the cluster:** peer connections can only be made to IPs known by the cluster. If nodes have public IPs and are directly reachable from the internet, TURN servers will only be able to make peer connections to IPs within the cluster. If nodes are behind NAT, peer traffic is restricted to the cluster's private IPs.
-1. **To prevent the TCP-to-peer abuse vector**, peer traffic is restricted to UDP-only relay: TCP allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062)) are disabled by default, though they can be enabled via configuration. By preventing the TURN server from establishing outgoing TCP connections to peers, the door is closed to an attacker using the relay as a TCP proxy toward internal services. This doesn't entirely prevent an attacker with valid credentials from abusing the infrastructure, but it drastically reduces the attack vector.
+1. **To prevent the TCP-to-peer abuse vector**, peer traffic is restricted to UDP-only relay: TCP allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062) ) are disabled by default, though they can be enabled via configuration. By preventing the TURN server from establishing outgoing TCP connections to peers, the door is closed to an attacker using the relay as a TCP proxy toward internal services. This doesn't entirely prevent an attacker with valid credentials from abusing the infrastructure, but it drastically reduces the attack vector.
 1. **Restricting the relay port range.** In cases where OpenVidu is deployed in a NAT environment, the relay only forwards traffic to destination ports within the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.
 1. **Credentials are short-lived** (see the TTL above) and generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.
 

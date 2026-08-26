@@ -300,7 +300,7 @@ Engineering-heavy teams that want ownership and deep customization of real-time 
 
 ______________________________________________________________________
 
-### **[OpenVidu Meet](https://openvidu.io/)**
+### **[OpenVidu Meet](https://openvidu.io/index.md)**
 
 React video call platforms in 2026 — OpenVidu Meet
 

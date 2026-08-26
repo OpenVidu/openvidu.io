@@ -158,7 +158,7 @@ ______________________________________________________________________
 
 [Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/latest/docs/index.md "Build with OpenVidu Platform SDKs")
 
-Not sure which fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/)
+Not sure which fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)
 
 ______________________________________________________________________
 

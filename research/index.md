@@ -6,27 +6,27 @@ The table below lists our publications from newest to oldest. Select any title t
 
 ## Index
 
-| Year | Type       | Publication                                                                                                                                                                                                                                            |
-| ---- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 2026 | PHD Thesis | [Scalability and Quality of Experience of WebRTC media servers for Large-Scale, Low-Latency Streaming](#scalability-and-quality-of-experience-of-webrtc-media-servers-for-large-scale-low-latency-streaming) PHD Thesis — Universidad Rey Juan Carlos  |
-| 2025 | Journal    | [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](#quality-of-experience-under-huge-load-for-webrtc-applications-a-case-study-of-three-media-servers) IEEE Access                                   |
-| 2022 | Journal    | [Cost-effective load testing of WebRTC applications](#cost-effective-load-testing-of-webrtc-applications) Journal of Systems and Software                                                                                                              |
-| 2020 | Conference | [Quality-of-Experience driven configuration of WebRTC services through automated testing](#quality-of-experience-driven-configuration-of-webrtc-services-through-automated-testing) IEEE QRS                                                           |
-| 2020 | Journal    | [A Survey of the Selenium Ecosystem](#a-survey-of-the-selenium-ecosystem) Electronics (MDPI)                                                                                                                                                           |
-| 2020 | Journal    | [Assessment of QoE for Video and Audio in WebRTC Applications Using Full-Reference Models](#assessment-of-qoe-for-video-and-audio-in-webrtc-applications-using-full-reference-models) Electronics (MDPI)                                               |
-| 2019 | Journal    | [Understanding and estimating quality of experience in WebRTC applications](#understanding-and-estimating-quality-of-experience-in-webrtc-applications) Computing (Springer)                                                                           |
-| 2019 | Journal    | [Practical Evaluation of VMAF Perceptual Video Quality for WebRTC Applications](#practical-evaluation-of-vmaf-perceptual-video-quality-for-webrtc-applications) Electronics (MDPI)                                                                     |
-| 2017 | Conference | [NUBOMEDIA: The First Open Source WebRTC PaaS](#nubomedia-the-first-open-source-webrtc-paas) ACM Multimedia                                                                                                                                            |
-| 2017 | Journal    | [Kurento: The Swiss Army Knife of WebRTC Media Servers](#kurento-the-swiss-army-knife-of-webrtc-media-servers) IEEE Communications Standards Magazine                                                                                                  |
-| 2017 | Journal    | [WebRTC Testing: Challenges and Practical Solutions](#webrtc-testing-challenges-and-practical-solutions) IEEE Communications Standards Magazine                                                                                                        |
-| 2017 | Journal    | [Designing and evaluating the usability of an API for real-time multimedia services in the Internet](#designing-and-evaluating-the-usability-of-an-api-for-real-time-multimedia-services-in-the-internet) Multimedia Tools and Applications (Springer) |
-| 2017 | Conference | [WebRTC Testing: State of the Art](#webrtc-testing-state-of-the-art) ICSOFT                                                                                                                                                                            |
-| 2016 | Conference | [Analysis of Video Quality and End-to-End Latency in WebRTC](#analysis-of-video-quality-and-end-to-end-latency-in-webrtc) IEEE Globecom Workshops                                                                                                      |
-| 2016 | Conference | [Kurento: The WebRTC Modular Media Server](#kurento-the-webrtc-modular-media-server) ACM Multimedia                                                                                                                                                    |
-| 2016 | Conference | [Testing Framework for WebRTC Services](#testing-framework-for-webrtc-services) EAI MobiMedia                                                                                                                                                          |
-| 2016 | Conference | [NUBOMEDIA: An Elastic PaaS Enabling the Convergence of Real-Time and Big Data Multimedia](#nubomedia-an-elastic-paas-enabling-the-convergence-of-real-time-and-big-data-multimedia) IEEE SmartCloud                                                   |
-| 2016 | Conference | [Design and Implementation of a High Performant PaaS Platform for Creating Novel Real-Time Communication Paradigms](#design-and-implementation-of-a-high-performant-paas-platform-for-creating-novel-real-time-communication-paradigms) IEEE ICIN      |
-| 2014 | Journal    | [Authentication, Authorization, and Accounting in WebRTC PaaS Infrastructures: The Case of Kurento](#authentication-authorization-and-accounting-in-webrtc-paas-infrastructures-the-case-of-kurento) IEEE Internet Computing                           |
+| Year | Type           | Publication                                                                                                                                                                                                                                            |
+| ---- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2026 | **PHD Thesis** | [Scalability and Quality of Experience of WebRTC media servers for Large-Scale, Low-Latency Streaming](#scalability-and-quality-of-experience-of-webrtc-media-servers-for-large-scale-low-latency-streaming) PHD Thesis — Universidad Rey Juan Carlos  |
+| 2025 | **Journal**    | [Quality of Experience Under Huge Load for WebRTC Applications: A Case Study of Three Media Servers](#quality-of-experience-under-huge-load-for-webrtc-applications-a-case-study-of-three-media-servers) IEEE Access                                   |
+| 2022 | **Journal**    | [Cost-effective load testing of WebRTC applications](#cost-effective-load-testing-of-webrtc-applications) Journal of Systems and Software                                                                                                              |
+| 2020 | **Conference** | [Quality-of-Experience driven configuration of WebRTC services through automated testing](#quality-of-experience-driven-configuration-of-webrtc-services-through-automated-testing) IEEE QRS                                                           |
+| 2020 | **Journal**    | [A Survey of the Selenium Ecosystem](#a-survey-of-the-selenium-ecosystem) Electronics (MDPI)                                                                                                                                                           |
+| 2020 | **Journal**    | [Assessment of QoE for Video and Audio in WebRTC Applications Using Full-Reference Models](#assessment-of-qoe-for-video-and-audio-in-webrtc-applications-using-full-reference-models) Electronics (MDPI)                                               |
+| 2019 | **Journal**    | [Understanding and estimating quality of experience in WebRTC applications](#understanding-and-estimating-quality-of-experience-in-webrtc-applications) Computing (Springer)                                                                           |
+| 2019 | **Journal**    | [Practical Evaluation of VMAF Perceptual Video Quality for WebRTC Applications](#practical-evaluation-of-vmaf-perceptual-video-quality-for-webrtc-applications) Electronics (MDPI)                                                                     |
+| 2017 | **Conference** | [NUBOMEDIA: The First Open Source WebRTC PaaS](#nubomedia-the-first-open-source-webrtc-paas) ACM Multimedia                                                                                                                                            |
+| 2017 | **Journal**    | [Kurento: The Swiss Army Knife of WebRTC Media Servers](#kurento-the-swiss-army-knife-of-webrtc-media-servers) IEEE Communications Standards Magazine                                                                                                  |
+| 2017 | **Journal**    | [WebRTC Testing: Challenges and Practical Solutions](#webrtc-testing-challenges-and-practical-solutions) IEEE Communications Standards Magazine                                                                                                        |
+| 2017 | **Journal**    | [Designing and evaluating the usability of an API for real-time multimedia services in the Internet](#designing-and-evaluating-the-usability-of-an-api-for-real-time-multimedia-services-in-the-internet) Multimedia Tools and Applications (Springer) |
+| 2017 | **Conference** | [WebRTC Testing: State of the Art](#webrtc-testing-state-of-the-art) ICSOFT                                                                                                                                                                            |
+| 2016 | **Conference** | [Analysis of Video Quality and End-to-End Latency in WebRTC](#analysis-of-video-quality-and-end-to-end-latency-in-webrtc) IEEE Globecom Workshops                                                                                                      |
+| 2016 | **Conference** | [Kurento: The WebRTC Modular Media Server](#kurento-the-webrtc-modular-media-server) ACM Multimedia                                                                                                                                                    |
+| 2016 | **Conference** | [Testing Framework for WebRTC Services](#testing-framework-for-webrtc-services) EAI MobiMedia                                                                                                                                                          |
+| 2016 | **Conference** | [NUBOMEDIA: An Elastic PaaS Enabling the Convergence of Real-Time and Big Data Multimedia](#nubomedia-an-elastic-paas-enabling-the-convergence-of-real-time-and-big-data-multimedia) IEEE SmartCloud                                                   |
+| 2016 | **Conference** | [Design and Implementation of a High Performant PaaS Platform for Creating Novel Real-Time Communication Paradigms](#design-and-implementation-of-a-high-performant-paas-platform-for-creating-novel-real-time-communication-paradigms) IEEE ICIN      |
+| 2014 | **Journal**    | [Authentication, Authorization, and Accounting in WebRTC PaaS Infrastructures: The Case of Kurento](#authentication-authorization-and-accounting-in-webrtc-paas-infrastructures-the-case-of-kurento) IEEE Internet Computing                           |
 
 ______________________________________________________________________
 
@@ -34,7 +34,7 @@ ______________________________________________________________________
 
 Iván Chicano-CapeloORCID iD (Author), Francisco GortázarORCID iD (Supervisor), Micael GallegoORCID iD (Supervisor)
 
-PHD Thesis **Universidad Rey Juan Carlos** · 2026 · Doctoral Program in Information and Communication Technologies (International Doctoral School) · [Full text](https://dialnet.unirioja.es/servlet/tesis?codigo=402576&orden=0&info=link)
+**PHD Thesis** **Universidad Rey Juan Carlos** · 2026 · Doctoral Program in Information and Communication Technologies (International Doctoral School) · [Full text](https://dialnet.unirioja.es/servlet/tesis?codigo=402576&orden=0&info=link)
 
 Cite this publication (BibTeX)
 
@@ -69,7 +69,7 @@ ______________________________________________________________________
 
 Iván Chicano-CapeloORCID iD, Francisco GortázarORCID iD, Micael GallegoORCID iD
 
-Journal **IEEE Access** · 2025 · [DOI: 10.1109/ACCESS.2025.3589785](https://doi.org/10.1109/ACCESS.2025.3589785)
+**Journal** **IEEE Access** · 2025 · [DOI: 10.1109/ACCESS.2025.3589785](https://doi.org/10.1109/ACCESS.2025.3589785)
 
 Cite this publication (BibTeX)
 
@@ -97,7 +97,7 @@ ______________________________________________________________________
 
 Francisco GortázarORCID iD, Micael GallegoORCID iD, Michel Maes-BermejoORCID iD, Iván Chicano-CapeloORCID iD, Carlos Santos
 
-Journal **Journal of Systems and Software** · 2022 · [DOI: 10.1016/j.jss.2022.111439](https://doi.org/10.1016/j.jss.2022.111439)
+**Journal** **Journal of Systems and Software** · 2022 · [DOI: 10.1016/j.jss.2022.111439](https://doi.org/10.1016/j.jss.2022.111439)
 
 Cite this publication (BibTeX)
 
@@ -125,7 +125,7 @@ ______________________________________________________________________
 
 Antonia BertolinoORCID iD, Antonello CalabróORCID iD, Guglielmo De AngelisORCID iD, Francisco GortázarORCID iD, Francesca LonettiORCID iD, Michel MaesORCID iD, Guiomar Tuñón
 
-Conference **IEEE 20th International Conference on Software Quality, Reliability and Security (QRS)** · 2020 · [DOI: 10.1109/QRS51102.2020.00031](https://doi.org/10.1109/QRS51102.2020.00031)
+**Conference** **IEEE 20th International Conference on Software Quality, Reliability and Security (QRS)** · 2020 · [DOI: 10.1109/QRS51102.2020.00031](https://doi.org/10.1109/QRS51102.2020.00031)
 
 Cite this publication (BibTeX)
 
@@ -148,7 +148,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Mario Munoz-OrganeroORCID iD
 
-Journal **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9071067](https://doi.org/10.3390/electronics9071067)
+**Journal** **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9071067](https://doi.org/10.3390/electronics9071067)
 
 Cite this publication (BibTeX)
 
@@ -175,7 +175,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Andrew HinesORCID iD
 
-Journal **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9030462](https://doi.org/10.3390/electronics9030462)
+**Journal** **Electronics** (MDPI) · 2020 · [DOI: 10.3390/electronics9030462](https://doi.org/10.3390/electronics9030462)
 
 Cite this publication (BibTeX)
 
@@ -202,7 +202,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Antonia BertolinoORCID iD
 
-Journal **Computing** (Springer) · 2019 · [DOI: 10.1007/s00607-018-0669-7](https://doi.org/10.1007/s00607-018-0669-7)
+**Journal** **Computing** (Springer) · 2019 · [DOI: 10.1007/s00607-018-0669-7](https://doi.org/10.1007/s00607-018-0669-7)
 
 Cite this publication (BibTeX)
 
@@ -229,7 +229,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Luis López-Fernández, Francisco GortázarORCID iD, Micael GallegoORCID iD
 
-Journal **Electronics** (MDPI) · 2019 · [DOI: 10.3390/electronics8080854](https://doi.org/10.3390/electronics8080854)
+**Journal** **Electronics** (MDPI) · 2019 · [DOI: 10.3390/electronics8080854](https://doi.org/10.3390/electronics8080854)
 
 Cite this publication (BibTeX)
 
@@ -258,7 +258,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Luis López, Francisco GortázarORCID iD, Micael GallegoORCID iD, Giuseppe Antonio Carella
 
-Conference **ACM International Conference on Multimedia (MM '17)** · 2017 · [DOI: 10.1145/3123266.3129392](https://doi.org/10.1145/3123266.3129392)
+**Conference** **ACM International Conference on Multimedia (MM '17)** · 2017 · [DOI: 10.1145/3123266.3129392](https://doi.org/10.1145/3123266.3129392)
 
 Cite this publication (BibTeX)
 
@@ -281,7 +281,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Luis López, Micael GallegoORCID iD, Francisco GortázarORCID iD
 
-Journal **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700006](https://doi.org/10.1109/MCOMSTD.2017.1700006)
+**Journal** **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700006](https://doi.org/10.1109/MCOMSTD.2017.1700006)
 
 Cite this publication (BibTeX)
 
@@ -306,7 +306,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Francisco GortázarORCID iD, Luis López, Micael GallegoORCID iD, Miguel Paris
 
-Journal **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700005](https://doi.org/10.1109/MCOMSTD.2017.1700005)
+**Journal** **IEEE Communications Standards Magazine** · 2017 · [DOI: 10.1109/MCOMSTD.2017.1700005](https://doi.org/10.1109/MCOMSTD.2017.1700005)
 
 Cite this publication (BibTeX)
 
@@ -331,7 +331,7 @@ ______________________________________________________________________
 
 Luis López-Fernández, Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD
 
-Journal **Multimedia Tools and Applications** (Springer) · 2017 · [DOI: 10.1007/s11042-016-3729-z](https://doi.org/10.1007/s11042-016-3729-z)
+**Journal** **Multimedia Tools and Applications** (Springer) · 2017 · [DOI: 10.1007/s11042-016-3729-z](https://doi.org/10.1007/s11042-016-3729-z)
 
 Cite this publication (BibTeX)
 
@@ -360,7 +360,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Eduardo Jiménez
 
-Conference **12th International Conference on Software Technologies (ICSOFT)** · 2017 · [DOI: 10.5220/0006442003630371](https://doi.org/10.5220/0006442003630371)
+**Conference** **12th International Conference on Software Technologies (ICSOFT)** · 2017 · [DOI: 10.5220/0006442003630371](https://doi.org/10.5220/0006442003630371)
 
 Cite this publication (BibTeX)
 
@@ -383,7 +383,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Luis López-Fernández, Francisco GortázarORCID iD, Micael GallegoORCID iD
 
-Conference **IEEE Globecom Workshops (GC Wkshps)** · 2016 · [DOI: 10.1109/GLOCOMW.2016.7848838](https://doi.org/10.1109/GLOCOMW.2016.7848838)
+**Conference** **IEEE Globecom Workshops (GC Wkshps)** · 2016 · [DOI: 10.1109/GLOCOMW.2016.7848838](https://doi.org/10.1109/GLOCOMW.2016.7848838)
 
 Cite this publication (BibTeX)
 
@@ -406,7 +406,7 @@ ______________________________________________________________________
 
 Luis López, Miguel París, Santiago Carot, Boni GarcíaORCID iD, Micael GallegoORCID iD, Francisco GortázarORCID iD, Raul Benítez, Jose A. Santos, David Fernández, Radu Tom Vlad, Iván Gracia, Francisco Javier López
 
-Conference **ACM International Conference on Multimedia (MM '16)** · 2016 · [DOI: 10.1145/2964284.2973798](https://doi.org/10.1145/2964284.2973798)
+**Conference** **ACM International Conference on Multimedia (MM '16)** · 2016 · [DOI: 10.1145/2964284.2973798](https://doi.org/10.1145/2964284.2973798)
 
 Cite this publication (BibTeX)
 
@@ -429,7 +429,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Luis López-Fernández, Micael GallegoORCID iD, Francisco GortázarORCID iD
 
-Conference **9th EAI International Conference on Mobile Multimedia Communications (MobiMedia)** · 2016 · [ACM Digital Library ↗](https://dl.acm.org/doi/10.5555/3021385.3021393)
+**Conference** **9th EAI International Conference on Mobile Multimedia Communications (MobiMedia)** · 2016 · [ACM Digital Library ↗](https://dl.acm.org/doi/10.5555/3021385.3021393)
 
 Cite this publication (BibTeX)
 
@@ -452,7 +452,7 @@ ______________________________________________________________________
 
 Boni GarcíaORCID iD, Micael GallegoORCID iD, Luis López, Giuseppe Antonio Carella, Alice Cheambe
 
-Conference **IEEE International Conference on Smart Cloud (SmartCloud)** · 2016 · [DOI: 10.1109/SmartCloud.2016.11](https://doi.org/10.1109/SmartCloud.2016.11)
+**Conference** **IEEE International Conference on Smart Cloud (SmartCloud)** · 2016 · [DOI: 10.1109/SmartCloud.2016.11](https://doi.org/10.1109/SmartCloud.2016.11)
 
 Cite this publication (BibTeX)
 
@@ -475,7 +475,7 @@ ______________________________________________________________________
 
 Alice Cheambe, Flavio Murgia, Pasquale Maiorano Picone, Boni GarcíaORCID iD, Micael GallegoORCID iD, Giuseppe Antonio Carella, Lorenzo Tomasini, Alin Calinciuc, Cristian Spoiala
 
-Conference **19th IEEE Conference on Innovations in Clouds, Internet and Networks (ICIN)** · 2016 · [Full text](https://dl.ifip.org/db/conf/icin/icin2016/1570230514.pdf)
+**Conference** **19th IEEE Conference on Innovations in Clouds, Internet and Networks (ICIN)** · 2016 · [Full text](https://dl.ifip.org/db/conf/icin/icin2016/1570230514.pdf)
 
 Cite this publication (BibTeX)
 
@@ -497,7 +497,7 @@ ______________________________________________________________________
 
 Luis López-Fernández, Micael GallegoORCID iD, Boni GarcíaORCID iD, David Fernández-López, Francisco Javier López
 
-Journal **IEEE Internet Computing** · 2014 · [DOI: 10.1109/MIC.2014.102](https://doi.org/10.1109/MIC.2014.102)
+**Journal** **IEEE Internet Computing** · 2014 · [DOI: 10.1109/MIC.2014.102](https://doi.org/10.1109/MIC.2014.102)
 
 Cite this publication (BibTeX)
 

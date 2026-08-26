@@ -117,7 +117,7 @@ OpenVidu Single Node PRO DigitalOcean Architecture
    | ----------------- | --------------------------------------------------------------------------------------------------------------- |
    | `doToken`         | DigitalOcean Personal Access Token for API authentication.                                                      |
    | `stackName`       | Stack name for OpenVidu deployment.                                                                             |
-   | `openviduLicense` | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/3.8/account/index.md) for more information. |
+   | `openviduLicense` | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account/) for more information. |
 
    #### Optional Parameters
 

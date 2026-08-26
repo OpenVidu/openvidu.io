@@ -4,7 +4,7 @@ OpenVidu servers inside a Hetzner cloud serving a video call
 
 This post is a getting-started guide to OpenVidu on Hetzner Cloud. It gathers in one place all the steps needed to go from an empty Hetzner account to a working OpenVidu deployment in a few minutes: which instance to pick, which ports to open, and the one command that installs everything. It is deliberately shorter than the official self-hosting documentation; the goal here is a running deployment today, not covering every option.
 
-The server and its firewall are created in the [Hetzner Cloud console](https://console.hetzner.com/), and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running [OpenVidu Meet](https://openvidu.io/latest/meet/index.md), reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
+The server and its firewall are created in the [Hetzner Cloud console](https://console.hetzner.com/) , and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running [OpenVidu Meet](https://openvidu.io/latest/meet/index.md), reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
 
 This is the first post in a series of per-cloud quick starts. Hetzner comes first for two reasons: its hourly billing makes a complete test run cost well under a euro, and this guide adds one more provider alongside the [official installation guides](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/index.md) for AWS, Azure, GCP, DigitalOcean and Oracle. The deployment below uses the generic [on-premises installer](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md), which works on any Ubuntu machine with a public IP.
 
@@ -107,7 +107,7 @@ sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
 
 The script checks for Docker and installs it if missing, then launches a configuration wizard right there in the terminal. For a test deployment you don't even need a domain name: use the defaults suggested by the wizard. What those defaults mean:
 
-- **Domain name**: empty. Since [January 2026, Let's Encrypt issues certificates for bare IP addresses](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability), so the installer requests a valid short-lived certificate for the server's public IP directly. Real HTTPS, no domain, no DNS records, no self-signed warnings to click through.
+- **Domain name**: empty. Since [January 2026, Let's Encrypt issues certificates for bare IP addresses](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) , so the installer requests a valid short-lived certificate for the server's public IP directly. Real HTTPS, no domain, no DNS records, no self-signed warnings to click through.
 - **Certificate type**: Let's Encrypt.
 - **Modules**: **OpenVidu Meet** and **Observability** (the Grafana stack, with the deployment's logs and metrics). Both can stay enabled.
 - **Secrets and passwords**: left empty, the wizard generates random values for all of them.
