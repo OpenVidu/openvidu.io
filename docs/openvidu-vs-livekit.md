@@ -36,12 +36,15 @@ faq:
       the LiveKit stack (SDKs, API, token model) unchanged. OpenVidu's own benchmarks show roughly double
       the media-track capacity per server as a result.
 hide:
+  - feedback
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
 tags: []
+page_features:
+  - setupwowjs
 ---
 
 # OpenVidu vs LiveKit
@@ -92,16 +95,16 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.
 | | **OpenVidu** | **LiveKit** (self-hosted) |
 | --- | --- | --- |
 | Identity | Fork of LiveKit, 100% API/SDK-compatible | The upstream open-source project |
-| Media engine | Pion<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> or [**mediasoup**](docs/self-hosting/production-ready/performance.md) (~2x more efficient)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Pion |
-| Autoscaling | Yes: [Elastic](docs/self-hosting/elastic/index.md) & [HA](docs/self-hosting/ha/index.md) modes<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Autoscaling is yours to build and operate |
-| License | Apache 2.0<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> / commercial<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Apache 2.0 |
-| Egress/Ingress | [Bundled by default](docs/developing-your-openvidu-app/how-to.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> | Separate services you deploy and operate yourself |
+| Media engine | Pion**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } or [**mediasoup**](docs/self-hosting/production-ready/performance.md) (~2x more efficient)**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | Pion |
+| Autoscaling | Yes: [Elastic](docs/self-hosting/elastic/index.md) & [HA](docs/self-hosting/ha/index.md) modes**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | Autoscaling is yours to build and operate |
+| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | Apache 2.0 |
+| Egress/Ingress | [Bundled by default](docs/developing-your-openvidu-app/how-to.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } | Separate services you deploy and operate yourself |
 | AI agents | [OpenVidu Agents](docs/ai/overview.md) (on top of LiveKit's Agent framework), speech-processing agent bundled | LiveKit's Agent framework, DIY (no agent bundled) |
 | High-level integrations | [OpenVidu Meet](meet/index.md), a ready-to-use videoconferencing application, optionally [embeddable in your own app](meet/embedded/intro.md) | None |
-| Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span>, with detailed per-room and per-participant views<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | No |
-| Observability | Bundled [Grafana dashboards](docs/self-hosting/production-ready/observability/grafana-stack.md)<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Prometheus metrics exposed; dashboards are DIY |
+| Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" }, with detailed per-room and per-participant views**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | No |
+| Observability | Bundled [Grafana dashboards](docs/self-hosting/production-ready/observability/grafana-stack.md)**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | Prometheus metrics exposed; dashboards are DIY |
 | Cloud automation | [One-click automated deployments](docs/self-hosting/deployment-types.md) on AWS, Azure, GCP, DigitalOcean and OCI | None — Helm chart or manual VM setup |
-| Pricing | Free<span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span>, flat **$0.0006/core/minute**<span class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</span> | Free |
+| Pricing | Free**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" }, flat **$0.0006/core/minute****PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | Free |
 
 LiveKit Cloud, LiveKit's managed SaaS, is out of scope for this table — see
 [Where LiveKit still has the edge](#where-livekit-still-has-the-edge) for what it does better than
@@ -114,7 +117,7 @@ processes**, each with its own API keys and sizing (LiveKit's own docs recommend
 4GB RAM per instance). None of that is optional plumbing you can skip — recording and streaming
 simply don't work until it's wired up.
 
-OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</span> ships all of it pre-integrated by default:
+OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .8em" } ships all of it pre-integrated by default:
 
 - [**Egress and Ingress**](docs/developing-your-openvidu-app/how-to.md) — no separate deployment step.
 - [**S3-compatible storage for recordings**](docs/tutorials/advanced-features/recording-basic-s3.md), pre-configured (MinIO) out of the box.
@@ -150,11 +153,11 @@ mediasoup is the right call.
 
 ## Pricing
 
-OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</span> is free, forever, and so is self-hosted LiveKit. The difference is at
+OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } is free, forever, and so is self-hosted LiveKit. The difference is at
 the top end: OpenVidu offers first-class, production-ready Elastic and HA self-hosted deployments on
 a pay-per-core basis, which self-hosted LiveKit does not.
 
-OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</span>'s pricing is a single number: **$0.0006 per core per minute**, billed while
+OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .8em" }'s pricing is a single number: **$0.0006 per core per minute**, billed while
 your cluster is running. See our [worked examples](pricing.md) for concrete monthly costs at several
 cluster sizes.
 
@@ -188,7 +191,7 @@ unmodified against OpenVidu.
 
 ### Does OpenVidu have a hosted or cloud option?
 
-No. OpenVidu is self-hosted only, in both its free <span class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</span> edition and its paid <span class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</span> edition.
+No. OpenVidu is self-hosted only, in both its free **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .8em" } edition and its paid **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .8em" } edition.
 There is no OpenVidu-hosted SaaS equivalent to LiveKit Cloud — every OpenVidu deployment runs on
 your own infrastructure or cloud account.
 
@@ -210,4 +213,12 @@ the media-track capacity per server as a result.
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 [Evaluating mediasoup directly instead?](openvidu-vs-mediasoup.md){ .md-button }
 
+</div>
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Planning a migration from LiveKit, or evaluating both at scale?</h2>
+  <p style="margin-bottom: 1.5em">Tell us about your deployment and we will help you size it and plan the switch.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
 </div>

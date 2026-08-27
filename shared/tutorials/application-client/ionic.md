@@ -30,11 +30,15 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
             To show the app with a mobile device appearance, open the dev tools in your browser and find the button to adapt the viewport to a mobile device aspect ratio. You may also choose predefined types of devices to see the behavior of your app in different resolutions.
 
-        <div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ionic-web.png" loading="lazy" alt="Join screen of the Ionic tutorial app in a browser"/></a></p></div>
+        /// html | div.grid-50
+        ![Join screen of the Ionic tutorial app in a browser](/assets/images/platform/tutorials/application-client/join-ionic-web.png){ .round-corners loading=lazy }
+        ///
 
-        <div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ionic-web.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ionic-web.png" loading="lazy" alt="Video call room of the Ionic tutorial app in a browser"/></a></p></div>
+        /// html | div.grid-50
+        ![Video call room of the Ionic tutorial app in a browser](/assets/images/platform/tutorials/application-client/room-ionic-web.png){ .round-corners loading=lazy }
+        ///
 
-        --8<-- "shared/tutorials/testing-other-devices.md"
+        --8<-- "tutorials/testing-other-devices.md"
 
     === ":fontawesome-solid-mobile-screen-button:{.icon .lg-icon .tab-icon} Mobile"
 
@@ -80,20 +84,20 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         Once the mobile device has been selected, the script will launch the application on the device and you will see a screen like this:
 
-        <div class="grid-container">
-
-        <div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-ionic.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Ionic tutorial app"/></a></p></div>
-
-        </div>
+        ![URL configuration of the Ionic tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ loading=lazy style="width: 25%" }
 
         This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 
         Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
 
-        <div class="grid-container">
+        /// html | div.grid-container
 
-        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-ionic-device.png" loading="lazy" style="width: 50%;" alt="Join screen of the Ionic tutorial app on a mobile device"/></a></p></div>
+        /// html | div.grid-50.text-center
+        ![Join screen of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/join-ionic-device.png){ loading=lazy style="width: 50%" }
+        ///
 
-        <div class="grid-50"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-ionic-device.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-ionic-device.png" loading="lazy" style="width: 50%;" alt="Video call room of the Ionic tutorial app on a mobile device"/></a></p></div>
+        /// html | div.grid-50.text-center
+        ![Video call room of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/room-ionic-device.png){ loading=lazy style="width: 50%" }
+        ///
 
-        </div>
+        ///

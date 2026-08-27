@@ -1,8 +1,6 @@
 ---
 title: "Vue video call tutorial"
 description: "Build a Vue video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
-tags:
-  - setupcustomgallery
 ---
 
 # Vue Tutorial
@@ -22,7 +20,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +30,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "shared/tutorials/application-client/vue.md"
+--8<-- "tutorials/application-client/vue.md"
 
 ## Understanding the code
 
@@ -115,7 +113,7 @@ The `App.vue` file defines the following variables:
 -   `participantName`: The participant's name.
 -   `roomName`: The room name.
 
---8<-- "shared/tutorials/configure-urls.md"
+--8<-- "tutorials/configure-urls.md"
 
 ---
 
@@ -193,7 +191,7 @@ The `joinRoom()` function performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html)
+        You can take a look at all the events in the [Livekit Documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html){:target="_blank"}
 
 3.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:
 

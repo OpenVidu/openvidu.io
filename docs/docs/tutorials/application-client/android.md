@@ -1,8 +1,6 @@
 ---
 title: "Android video call tutorial"
 description: "Build an Android video-call app on OpenVidu in Kotlin with the LiveKit-compatible Android SDK: join a room, publish your camera and subscribe."
-tags:
-  - setupcustomgallery
 ---
 
 # Android Tutorial
@@ -22,7 +20,7 @@ It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.exter
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +30,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "shared/tutorials/application-client/android.md"
+--8<-- "tutorials/application-client/android.md"
 
 ## Understanding the code
 
@@ -134,15 +132,11 @@ The `Urls.kt` file defines an object that contains the following URLs required f
 -   `applicationServerUrl`: The URL of the application server. This variable is used to make requests to the server to obtain a token for joining the video call room.
 -   `livekitUrl`: The URL of the LiveKit server. This variable is used to connect to the LiveKit server and interact with the video call room.
 
-You should configure these URLs according to your deployment settings. In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"} and the `livekitUrl` to [`wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`](wss://xxx-yyy-zzz-www.openvidu-local.dev:5443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
+You should configure these URLs according to your deployment settings. In case you are [running OpenVidu locally](#run-openvidu-locally), you can set the `applicationServerUrl` to `https://xxx-yyy-zzz-www.openvidu-local.dev:6443` and the `livekitUrl` to `wss://xxx-yyy-zzz-www.openvidu-local.dev:7443`, where `xxx-yyy-zzz-www` part of the domain is the LAN private IP address of the machine running OpenVidu, with dashes (-) instead of dots (.).
 
 If these URLs are left empty, the user will be prompted to enter the URLs when the application starts. This configuration is managed in the `ConfigureUrlsActivity.kt` file:
 
-<div class="grid-container">
-
-<div class="grid-100"><p style="text-align: center;"><a class="glightbox" href="/assets/images/platform/tutorials/application-client/configure-urls-android.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/configure-urls-android.png" loading="lazy" style="width: 25%;" alt="URL configuration of the Android tutorial app"/></a></p></div>
-
-</div>
+![URL configuration of the Android tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-android.png){ loading=lazy style="width: 25%" }
 
 When the user clicks the `Save` button, the `onSaveUrls()` method is called, which saves the URLs in the `Urls` object and finishes the activity, returning to the MainActivity:
 
@@ -360,7 +354,7 @@ The `connectToRoom()` method performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-android/livekit-android-sdk/io.livekit.android.events/-room-event/index.html)
+        You can take a look at all the events in the [Livekit Documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/livekit-android-sdk/io.livekit.android.events/-room-event/index.html){:target="_blank"}
 
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 

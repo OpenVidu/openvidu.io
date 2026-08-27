@@ -9,7 +9,7 @@ from __future__ import annotations
 from ovweb.plan import build_plan
 
 LATEST_STEPS = [
-    "remove-overrides",
+    "remove-stray-site",
     "rewrite-versioned",
     "rewrite-search-index",
     "rewrite-non-versioned",
@@ -27,7 +27,7 @@ LATEST_STEPS = [
 ]
 
 PAST_STEPS = [
-    "remove-overrides",
+    "remove-stray-site",
     "rewrite-versioned",
     "rewrite-search-index",
     "strip-non-versioned",

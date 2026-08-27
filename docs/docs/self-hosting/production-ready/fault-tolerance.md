@@ -1,6 +1,8 @@
 ---
 title: "Fault tolerance in OpenVidu deployments"
 description: "How OpenVidu survives losing a node: which services are replicated, what happens to a room in progress, and what Elastic and HA each guarantee."
+page_features:
+  - setupwowjs
 ---
 
 # Fault tolerance :material-shield-refresh:
@@ -27,7 +29,7 @@ In the event of a Media Node failure, there are [3 services](../deployment-types
 
 - Active [Rooms :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/api-primitives/){:target="_blank"} hosted by the failed Media Node will suffer a temporary interruption of about 5 seconds (this is the time the clients take to realize the Media Node has crashed). After that time has elapsed, the Room will be automatically reconstructed in a healthy Media Node. Every participant and track will be recreated and the Room will be fully operational again.
 - Active [Egress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/){:target="_blank"} hosted by the failed Media Node will be interrupted. If the node's disk is still accessible, egress output files can still be recovered. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
-- Active [Ingress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"} hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events](https://docs.livekit.io/home/client/events/#Events){:target="_blank"} indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some popular tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
+- Active [Ingress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"} hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/events/#Events){:target="_blank"} indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some popular tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
 
 ## Fault tolerance in OpenVidu High Availability
 
@@ -74,3 +76,11 @@ In both cases, files are not lost and can be recovered. They will be available i
 If the Media Node hosting an ongoing Egress process crashes, then the Egress process will be immediately interrupted. But as long as the disk of the crashed Media Node is still accessible, you may recover the output files. They will be available in the Media Node at path `/opt/openvidu/egress_data/home/egress/tmp`.
 
 It is possible that if the crashed Egress had **MP4** as [configured output :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/outputs/){:target="_blank"} (which is an option available for [Room Composite :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/composite-recording/#roomcomposite-egress){:target="_blank"} and [Track Composite :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/participant/#trackcomposite-egress){:target="_blank"}) the recovered file may not be directly playable and it may require a repair process.
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Need specific uptime or SLA guarantees?</h2>
+  <p style="margin-bottom: 1.5em">Tell us your availability requirements and we will help you choose between Elastic and High Availability.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>

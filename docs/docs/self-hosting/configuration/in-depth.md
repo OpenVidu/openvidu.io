@@ -26,7 +26,7 @@ To understand how variable interpolation works in OpenVidu, it is important to c
 3. **Interpolation Rules**:
 
     - The interpolation follows the Docker Compose specification, which provides robust handling of global variables.
-    - If a variable is mandatory and not set, the syntax `${VAR:?mandatory}` can be used to throw an error if the parameter is not defined, ensuring required configurations are not missed. For more detailed information about the interpolation rules, you can refer to the Docker Compose documentation on [variable interpolation](https://docs.docker.com/compose/compose-file/12-interpolation/).
+    - If a variable is mandatory and not set, the syntax `${VAR:?mandatory}` can be used to throw an error if the parameter is not defined, ensuring required configurations are not missed. For more detailed information about the interpolation rules, you can refer to the Docker Compose documentation on [variable interpolation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/compose-file/12-interpolation/){:target="_blank"}.
 
 4. **Example**:
 

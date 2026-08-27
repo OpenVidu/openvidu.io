@@ -105,7 +105,7 @@ EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=<YOUR_KMS_ENCRYPTION_CONTEXT>
 
 !!! info
 
-    AWS S3 enables [server-side encryption by default](https://aws.amazon.com/blogs/aws/amazon-s3-encrypts-new-objects-by-default/){:target="_blank"} for new objects, but other S3 providers may not. The OpenVidu SSE settings allow you to **explicitly enforce** encryption regardless of the provider's default behavior, ensuring consistent data protection across all deployments.
+    AWS S3 enables [server-side encryption by default :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/blogs/aws/amazon-s3-encrypts-new-objects-by-default/){:target="_blank"} for new objects, but other S3 providers may not. The OpenVidu SSE settings allow you to **explicitly enforce** encryption regardless of the provider's default behavior, ensuring consistent data protection across all deployments.
 
 ### SSE-S3 Example
 

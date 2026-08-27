@@ -1,8 +1,6 @@
 ---
 title: "Room members in OpenVidu Meet"
 description: "Room members in OpenVidu Meet: registered users and identified guests who each get a personal access link, and how they differ from anonymous guests."
-tags:
-    - setupcustomgallery
 ---
 
 # Room Members

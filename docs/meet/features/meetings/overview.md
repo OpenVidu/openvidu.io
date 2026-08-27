@@ -1,8 +1,8 @@
 ---
 title: "Meetings in OpenVidu Meet"
 description: "What a meeting is in OpenVidu Meet: the live session held inside a room, when it starts and ends, and how participants join one."
-tags:
-    - setupcustomgallery
+page_features:
+  - lazyvideo
 ---
 
 # Meetings
@@ -15,13 +15,13 @@ A meeting starts as soon as a member opens a valid **room access link** and pres
 
 OpenVidu Meet users can access a room to join a meeting directly from the "Rooms" page:
 
-<a class="glightbox" href="/assets/videos/meet/meetings/overview/access-room-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/overview/access-room-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/overview/access-room-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/meetings/overview/access-room-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/overview/access-room-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/overview/access-room-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/overview/access-room-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/overview/access-room-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 Users can also copy a room access link and share it with other members:
 
-<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" loading="lazy" defer muted playsinline autoplay loop async></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="gallery1"><video class="round-corners" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" loading="lazy" defer muted playsinline autoplay loop async></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The access link for an [identified guest](../room-members/overview.md) is unique and personal. It can be copied from the **"Room Members"** tab of the [room details page](../rooms/management.md#room-details) and delivered privately to that individual.
 
