@@ -77,7 +77,11 @@ openviduMeet.leaveRoom();
 
 The OpenVidu Meet component emits events that you can listen to in your application.
 
+<div class="nowrap-first-column" markdown>
+
 --8<-- "meet/webcomponent/events.md"
+
+</div>
 
 
 Listen to events using JavaScript event listeners:

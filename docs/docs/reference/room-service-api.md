@@ -256,6 +256,6 @@ The same split holds beyond this API. [Egress](./egress.md) and [Ingress](./ingr
 ## Related
 
 - [Access tokens reference](./access-tokens.md): the access token grants in detail
-- [How to develop your OpenVidu app](../developing-your-openvidu-app/how-to.md): worked snippets for the common operations
+- [How to develop your OpenVidu app](../developing-your-openvidu-app/how-to.md): the cheat sheet of common operations, client-side and server-side
 - [Application server tutorials](../tutorials/application-server/index.md): complete servers in nine languages
 - [Client SDK reference](./client-sdk.md): the same Room, seen from inside

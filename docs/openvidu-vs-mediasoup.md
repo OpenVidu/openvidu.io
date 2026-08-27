@@ -96,10 +96,10 @@ everything on top of it ready to use:
 | Media engine | [mediasoup](docs/self-hosting/production-ready/performance.md), integrated | The library itself |
 | Signaling | Bundled | Build it yourself |
 | Room/session model | [Bundled](docs/reference/room-service-api.md#rooms) | Not provided |
-| Authentication | [JWT tokens with grants](docs/developing-your-openvidu-app/how-to.md#generate-access-tokens), bundled | Not provided |
-| Recording (Egress) | [Bundled](docs/developing-your-openvidu-app/how-to.md#recording) (S3-compatible storage) | Manual RTP piping to GStreamer/FFmpeg |
-| Server/REST API | Full [server API](docs/developing-your-openvidu-app/how-to.md) | None |
-| Webhooks | Bundled [event set](docs/developing-your-openvidu-app/how-to.md#webhooks) | None |
+| Authentication | [JWT tokens with grants](docs/reference/access-tokens.md#video-grants), bundled | Not provided |
+| Recording (Egress) | [Bundled](docs/reference/egress.md) (S3-compatible storage) | Manual RTP piping to GStreamer/FFmpeg |
+| Server/REST API | Full [server API](docs/reference/room-service-api.md) | None |
+| Webhooks | Bundled [event set](docs/reference/webhooks.md#events) | None |
 | Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md) | None |
 | Client SDKs | [8 SDKs, including native Android and iOS](docs/tutorials/application-client/index.md) | JS + C++ only |
 | Clustering | [One-click automated deployment](docs/self-hosting/deployment-types.md) with autoscaling on 5 cloud providers | Your own orchestration |

@@ -54,7 +54,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
     ---
 
-    OpenVidu Meet is designed from the ground up to be **self-hosted** on your own servers (AWS, Azure, GCP and other cloud templates also available). It provides the highest level of **privacy and security** for your video calls.
+    OpenVidu Meet is designed from the ground up to be **self-hosted** on your own servers (with ready-made templates for AWS, Azure, Google Cloud, DigitalOcean and Oracle Cloud). It provides the highest level of **privacy and security** for your video calls.
 
 -   :fontawesome-solid-user-md:{ .more-padding-icon .ov-meet-commercial-icon } __Designed for most common use cases__{ .feature-name }
 

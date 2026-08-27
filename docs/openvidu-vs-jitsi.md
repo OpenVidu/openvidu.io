@@ -63,7 +63,7 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 | --- | --- | --- |
 | Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } and [OpenVidu Meet](meet/index.md) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
 | License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | Apache 2.0 |
-| Recording/streaming | [Egress bundled by default](docs/developing-your-openvidu-app/how-to.md), no extra hardware sizing | Jibri, can be deployed as an additional bundle |
+| Recording/streaming | [Egress bundled by default](docs/reference/egress.md), no extra hardware sizing | Jibri, can be deployed as an additional bundle |
 | Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" }, one product to configure & one-click deploy for 5 cloud providers | Octo relays media across an existing pool of Videobridges; actually growing that pool needs a separate `jitsi-autoscaler` service, supporting only Oracle OCI, DigitalOcean or a custom provider you implement |
 | Admin dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" }, per-room and per-participant views**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | None bundled |
 | Ready-to-use app | [OpenVidu Meet](meet/index.md), embeddable via [iframe](meet/embedded/step-by-step-guide.md#use-an-iframe) or [web component](meet/embedded/step-by-step-guide.md#use-the-web-component) | Jitsi Meet, embeddable via iframe, lib-jitsi-meet, or native SDKs |
@@ -73,7 +73,7 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 ## Recording: bundled Egress vs Jibri
 
 This is the sharpest operational difference between the two projects. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .8em" } ships
-[Egress](docs/developing-your-openvidu-app/how-to.md) wired up by default, writing to
+[Egress](docs/reference/egress.md) wired up by default, writing to
 S3-compatible storage out of the box. Jitsi's Jibri is the service responsible for recordings, but
 storing and serving the resulting files is left to you.
 

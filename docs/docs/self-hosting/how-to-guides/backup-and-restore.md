@@ -63,7 +63,9 @@ If you deploy OpenVidu on a cloud provider **without externalizing S3 or MongoDB
     - AWS: Check [Amazon EBS snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html){:target="_blank"} and [Amazon Machine Images (AMIs) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html){:target="_blank"}.
     - Azure: Check [VM backups from VM settings :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-first-look-arm){:target="_blank"}.
     - Google Cloud: Check [Backup and DR Service for Compute Engine instances and disks :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/backup-disaster-recovery/docs/concepts/backupdr-for-compute-engine?hl=en){:target="_blank"}.
-3. Automate snapshots using your provider's scheduler (AWS Backup, Azure Automation, Cloud Scheduler) for consistent recovery points.
+    - DigitalOcean: Check [Snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/snapshots/){:target="_blank"}.
+    - Oracle Cloud: Check [Block volume backups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Block/Concepts/blockvolumebackups.htm){:target="_blank"}.
+3. Automate snapshots using your provider's scheduler (AWS Backup, Azure Automation, Cloud Scheduler, DigitalOcean snapshot policies, OCI backup policies) for consistent recovery points.
 4. Restore by cloning a new node from the snapshot/AMI and updating DNS or load balancer targets.
 5. Check the [After restore](#after-restore) section to verify everything works correctly.
 
@@ -703,7 +705,7 @@ To ensure everything works correctly after restoring data, follow these steps:
 
 3. **Verify Data Integrity**: Check that recordings, observability metrics, and operational data are intact and accessible.
 
-4. **In AWS, Azure, or GCP deployments**: If you followed [Method 1](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider), ensure that the restored VMs have the correct security groups, IAM roles, and network configurations.
+4. **In any cloud deployment**: If you followed [Method 1](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider), ensure that the restored VMs have the correct security groups, IAM roles, and network configurations.
 
 ## About restic
 

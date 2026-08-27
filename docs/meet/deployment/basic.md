@@ -7,7 +7,7 @@ This section contains the instructions to deploy a production-ready deployment o
 
 !!! info
 
-    This guide shows a single-node installation in a Linux machine. To see other deployment options, such as deploying in cloud providers like AWS, Azure, or GCP, or deploying in a multi-node architecture, check the [Other deployment options](#other-deployment-options) section at the end of this page.
+    This guide shows a single-node installation in a Linux machine. To see other deployment options, such as deploying in cloud providers like AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud, or deploying in a multi-node architecture, check the [Other deployment options](#other-deployment-options) section at the end of this page.
 
 ## Prerequisites
 
