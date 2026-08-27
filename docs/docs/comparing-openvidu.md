@@ -1,6 +1,6 @@
 ---
-title: "OpenVidu vs LiveKit Cloud, SaaS and SFUs"
-description: "How OpenVidu compares with LiveKit Cloud, SaaS video APIs and bare SFUs like mediasoup, on cost, data control, features and operational effort."
+title: "OpenVidu vs LiveKit, Jitsi, SaaS and SFUs"
+description: "How OpenVidu compares with LiveKit, Jitsi, SaaS video APIs and bare SFUs like mediasoup and Janus, on cost, data control, features and effort."
 ---
 
 # How OpenVidu compares to other solutions
@@ -58,6 +58,12 @@ Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims 
 
 :octicons-arrow-right-24: **[Read the full OpenVidu vs LiveKit comparison](../openvidu-vs-livekit.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
 
+## OpenVidu vs Jitsi
+
+[Jitsi :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.org/){:target="_blank"} is the other major open-source, self-hosted video platform, but it shares no codebase with OpenVidu the way LiveKit does — this is a peer comparison, not a compatibility one. Jitsi's architecture splits signaling (Prosody), conference orchestration (Jicofo) and media routing (Jitsi Videobridge) into separate components, whereas OpenVidu ships as one integrated stack. Both are Apache 2.0 licensed; Jitsi's paid option is 8x8's hosted Jitsi as a Service rather than a self-hosted PRO tier.
+
+:octicons-arrow-right-24: **[Read the full OpenVidu vs Jitsi comparison](../openvidu-vs-jitsi.md)**, covering recording (Egress vs Jibri), scaling (Elastic/HA vs Octo), SDKs and pricing.
+
 ## OpenVidu vs SaaS solutions
 
 This includes many services like [Agora :fontawesome-solid-external-link:{.external-link-icon}](https://www.agora.io/){:target="_blank"}, [GetStream :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/){:target="_blank"}, [Daily :fontawesome-solid-external-link:{.external-link-icon}](https://www.daily.co/){:target="_blank"}, [Vonage :fontawesome-solid-external-link:{.external-link-icon}](https://www.vonage.com/communications-apis/video/){:target="_blank"}, [Jitsi as a Service :fontawesome-solid-external-link:{.external-link-icon}](https://jaas.8x8.vc/#/){:target="_blank"}, [Whereby :fontawesome-solid-external-link:{.external-link-icon}](https://whereby.com/){:target="_blank"}, [Zoom SDK :fontawesome-solid-external-link:{.external-link-icon}](https://developers.zoom.us/docs/video-sdk/){:target="_blank"}, [Dolby Millicast :fontawesome-solid-external-link:{.external-link-icon}](https://dolby.io/){:target="_blank"}, [Amazon Chime SDK :fontawesome-solid-external-link:{.external-link-icon}](https://aws.amazon.com/chime/chime-sdk/){:target="_blank"}.
@@ -85,6 +91,12 @@ SFUs are generally low-level tools. Using them directly to implement real-time a
 OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](./self-hosting/production-ready/performance.md).
 
 :octicons-arrow-right-24: **[Read the full OpenVidu vs mediasoup comparison](../openvidu-vs-mediasoup.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
+
+## OpenVidu vs Janus
+
+[Janus :fontawesome-solid-external-link:{.external-link-icon}](https://janus.conf.meetecho.com/){:target="_blank"} is a general-purpose, plugin-based [WebRTC SFU](#openvidu-vs-sfus) from Meetecho. Its VideoRoom plugin provides a basic multistream room, but signaling, authentication, managed recording and a REST API are left for the integrating application to build — and it's released under GPL v3, a copyleft license unlike OpenVidu's Apache 2.0.
+
+:octicons-arrow-right-24: **[Read the full OpenVidu vs Janus comparison](../openvidu-vs-janus.md)**, including exactly what Janus leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Microsoft Teams, Google Meet, Zoom
 

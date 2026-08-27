@@ -255,6 +255,8 @@ not_in_nav: |
   /openvidu-meet-vs-openvidu-platform.md
   /openvidu-vs-livekit.md
   /openvidu-vs-mediasoup.md
+  /openvidu-vs-jitsi.md
+  /openvidu-vs-janus.md
   /conditions/
   /support/thanks.md
 
@@ -403,6 +405,8 @@ plugins:
         - openvidu-meet-vs-openvidu-platform.md
         - openvidu-vs-livekit.md
         - openvidu-vs-mediasoup.md
+        - openvidu-vs-jitsi.md
+        - openvidu-vs-janus.md
         - pricing.md
         - support/index.md
         - about-us.md
