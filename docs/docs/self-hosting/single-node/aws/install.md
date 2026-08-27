@@ -116,11 +116,15 @@ The Output Key **ServicesAndCredentials** of the [previous section](#deploying-t
 
 Then, click on **Retrieve secret value** to get the JSON with all the information.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/single-node/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/single-node/aws/2-secrets.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
