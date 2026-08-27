@@ -313,8 +313,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.8.
 
         To build a custom Sherpa image [with GPU acceleration](#gpu-acceleration-for-sherpa-provider), just change the FROM line to:
         
-          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda11-base:3.8.0` if your GPU is compatible only with CUDA 11.
-          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.8.0` if your GPU is compatible with CUDA 12 or higher.
+          - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.8.0`
 
 2. Download and unzip the [desired sherpa-onnx streaming models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"} into a local folder `sherpa-onnx-streaming-models`. The folder structure should be like this:
 
@@ -362,15 +361,13 @@ Sherpa provider supports GPU acceleration for faster, more efficient transcripti
 
 **Prerequisites**
 
-- The OpenVidu node running the Speech Processing agent must have a compatible **NVIDIA GPU (>= CUDA 11.0)**{.nowrap} with the appropriate [NVIDIA Container Toolkit :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html){:target="_blank" .nowrap} installed.
+- The OpenVidu node running the Speech Processing agent must have an **NVIDIA GPU whose driver supports CUDA 12 or higher (driver >= 525)**{.no-break} with the appropriate [NVIDIA Container Toolkit :fontawesome-solid-external-link:{.external-link-icon}](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html){:target="_blank" .no-break} installed.
 - The OpenVidu node must have enough disk and memory to handle the large Docker containers with GPU support (+4GB).
 
     !!! info
         - Check your Nvidia GPU compatibility by running the following command, which must show a table with GPU info: `nvidia-smi`{.nowrap}
         - Check your NVIDIA Container Toolkit installation with command: `nvidia-ctk --version`
-        - You can run a smoke test to confirm that containers will have access to the GPU:
-            - For CUDA >= 12: `docker run --rm --gpus all nvidia/cuda:12.9.1-base-ubuntu24.04 nvidia-smi`
-            - For CUDA == 11: `docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi`
+        - You can run a smoke test to confirm that containers will have access to the GPU: `docker run --rm --gpus all nvidia/cuda:12.9.1-base-ubuntu24.04 nvidia-smi`
 
 **Enable GPU acceleration**
 
@@ -391,7 +388,7 @@ live_captions:
     provider: cuda  #(4)!
 ```
 
-1. **agent-speech-processing-sherpa-cuda12** image is compatible with NVIDIA GPUs with CUDA 12.0 or higher. **agent-speech-processing-sherpa-cuda11** image is compatible with NVIDIA GPUs with CUDA 11.x.
+1. **agent-speech-processing-sherpa-cuda12** image is compatible with NVIDIA GPUs whose driver supports CUDA 12.0 or higher (driver >= 525).
 2. This property is necessary for the agent container to launch.
 3. These Docker options are necessary to enable GPU access for the agent container.
 4. This property is necessary to tell the agent to use the GPU-enabled runtime of Sherpa ONNX instead of CPU.
