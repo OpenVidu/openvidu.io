@@ -171,7 +171,7 @@ Now look at the [dashboard](http://localhost:7880/dashboard){:target="_blank"}: 
 
     ---
 
-    Permissions, room management, recording, screen sharing and the rest, as a cheat sheet.
+    Every operation at a glance — tokens, room management, recording, screen sharing — each one linking to its reference page.
 
     [:octicons-arrow-right-24: How to develop your OpenVidu app](./developing-your-openvidu-app/how-to.md)
 

@@ -10,7 +10,7 @@ description: "Build a minimal PHP application server for OpenVidu with the LiveK
 This is a minimal server application built for PHP that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+-   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
 It internally uses [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}.
 
@@ -112,7 +112,7 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" &
 ```
 
 1. Create an `AccessTokenOptions` object with the participant's identity.
-2. Create a `VideoGrant` object setting the necessary video grants options. `setRoomJoin` allows the user to join a room and `setRoomName` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="_blank"}.
+2. Create a `VideoGrant` object setting the necessary video grants options. `setRoomJoin` allows the user to join a room and `setRoomName` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 3. We create the `AccessToken` providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, initialize it with the token options, set the video grants and generate the JWT token.
 4. Finally, the token is sent back to the client.
 
@@ -121,7 +121,7 @@ The endpoint first obtains the `roomName` and `participantName` parameters from 
 If required fields are available, a new JWT token is created. For that we use the [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}:
 
 1. Create an `AccessTokenOptions` object with the participant's identity.
-2. Create a `VideoGrant` object setting the necessary video grants options. `setRoomJoin` allows the user to join a room and `setRoomName` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="_blank"}.
+2. Create a `VideoGrant` object setting the necessary video grants options. `setRoomJoin` allows the user to join a room and `setRoomName` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 3. We create the `AccessToken` providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, initialize it with the token options, set the video grants and generate the JWT token.
 4. Finally, the token is sent back to the client.
 
@@ -129,7 +129,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 #### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](../../reference/webhooks.md#events).
 
 ```php title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/php/index.php#L45-L62' target='_blank'>index.php</a>" linenums="44"
 <?php
@@ -153,7 +153,7 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST" &
 }
 ```
 
-1. Create a new `WebhookReceiver` object providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+1. Create a new `WebhookReceiver` object providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. It will help validating and decoding incoming [webhook events](../../reference/webhooks.md).
 2. The `Authorization` header of the HTTP request.
 3. The raw body of the HTTP request as a string.
 4. Obtain the `WebhookEvent` object using the `WebhookReceiver#receive` method. It takes the raw body as a String and the Authorization header of the request.

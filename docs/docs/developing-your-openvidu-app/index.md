@@ -16,7 +16,7 @@ Here's a high-level overview of the steps involved in building an OpenVidu appli
 
 The quickest way is to use [OpenVidu local deployment](../self-hosting/local.md).
 
-If you feel like it, you can directly launch a production-ready deployment on **AWS**, **Azure** or **your own servers**. Check out the different options at [Deployment types](../self-hosting/deployment-types.md).
+If you feel like it, you can directly launch a production-ready deployment on **your own servers** or on **AWS**, **Azure**, **Google Cloud**, **DigitalOcean** or **Oracle Cloud**. Check out the different options at [Deployment types](../self-hosting/deployment-types.md).
 
 ## 2. Use LiveKit Server SDK in your application server
 
@@ -24,13 +24,13 @@ OpenVidu is fully compatibly with LiveKit APIs. This means that any LiveKit Serv
 
 The only mandatory task to perform in your application server is:
 
-- **Creating access tokens**. Your Participants will only be able to connect to your Rooms by using a valid access token. Visit the official documentation about [Authentication :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/){:target="_blank"} to learn how to generate access tokens and which permissions you can assign to them.
+- **Creating access tokens**. Your Participants will only be able to connect to your Rooms by using a valid access token. See the [access tokens reference](../reference/access-tokens.md) to learn how to generate them and which permissions you can assign.
 
 There are other optional tasks that you can perform from your application server, depending on your requirements:
 
-- **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. This is the official LiveKit documentation with all the available methods of the **[`RoomServiceClient` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/#RoomService-APIs){:target="_blank"}** exposed by the Server API. These methods are also available in all LiveKit Server SDKs.
-- **Manage Egress and Ingress**: if your application needs some kind of recording, broadcasting or media ingestion, this operations must all be performed by your application server.
-- **Receive Webhook events**: you can also listen to Webhook events in your application backend. In this way you can react to events happening in your Rooms: a Room has started, a Room has finished, a Participant has joined a Room, a Track has been published... Visit the official documentation about [Webhooks :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+- **Manage your Rooms and Participants**: although most of your application logic will be in the frontend, you can also manage the logic of your Rooms and Participants from the security of your application backend. You can list, create, update and destroy Rooms and Participants. The [Room Service API reference](../reference/room-service-api.md) lists every operation, the access token grant it requires and what it returns. The same operations are available in all LiveKit Server SDKs.
+- **Manage Egress and Ingress**: if your application needs some kind of recording, broadcasting or media ingestion, these operations must all be performed by your application server. See the [Egress](../reference/egress.md) and [Ingress](../reference/ingress.md) references for every request type, output and status.
+- **Receive Webhook events**: you can also listen to Webhook events in your application backend. In this way you can react to events happening in your Rooms: a Room has started, a Room has finished, a Participant has joined a Room, a Track has been published... See the [webhooks reference](../reference/webhooks.md) for every event and its payload.
 - **Publish Tracks from your backend**: this is only for advanced applications that require server-side media publishing. Publishing media from your backend is possible by using [LiveKit CLI :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"}, [Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}, [Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}, [Node.js SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/node-sdks){:target="_blank"} or [Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}.
 
 To get you started, here is a list of all available LiveKit Server SDKs and an application server tutorial using them. These tutorials are all set up to **generate access tokens** and **receive webhook events**, so they are perfect starting points for your application server.
@@ -87,7 +87,7 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     If your backend technology does not have its own SDK, you have two different options:
 
-    1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server/server-apis/){:target="_blank"}
+    1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs](../reference/room-service-api.md)
 
     2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"}
 

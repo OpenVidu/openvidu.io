@@ -96,6 +96,8 @@ turn:
     # relay_preferred_interface: eth0
 ```
 
+<div class="nowrap-first-column" markdown>
+
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `enable_rfc6062` | boolean | `false` | Allow TURN TCP allocations (RFC 6062). Keep disabled unless you specifically need TCP relays. |
@@ -103,6 +105,8 @@ turn:
 | `deny_peer_cidrs` | list | _empty_ | CIDRs whose peer IPs are denied. Takes precedence over the allow list, local IPs and cluster nodes. |
 | `relay_address` | string | _auto_ | Force the relay IP. Overrides auto-discovery. |
 | `relay_preferred_interface` | string | _auto_ | Interface to source the relay IP from when the node is not publicly reachable. |
+
+</div>
 
 After changing any of these values, restart the service:
 

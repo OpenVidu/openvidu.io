@@ -9,6 +9,8 @@ description: "Reference for every configuration file an OpenVidu deployment uses
 
 This file defines global configuration parameters used by other services, such as the domain name, credentials, etc.
 
+<div class="nowrap-first-column" markdown>
+
 | <div style="width: 17em;">Parameter</div> | Description |
 | --------- | ----------- |
 | **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access OpenVidu APIs and services. |
@@ -36,9 +38,13 @@ This file defines global configuration parameters used by other services, such a
 | **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `pion` or `mediasoup`. |
 | **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
+</div>
+
 ## `meet.env`
 
 This file defines the configuration parameters for the OpenVidu Meet service.
+
+<div class="nowrap-first-column" markdown>
 
 | Parameter | Description |
 | --------- | ----------- |
@@ -86,6 +92,8 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_CAPTIONS_ENABLED`** | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](../../../meet/features/meetings/live-captions.md). |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
 
+</div>
+
 ## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
@@ -94,6 +102,8 @@ This file defines the configuration parameters for the OpenVidu Meet service.
     There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
+
+<div class="nowrap-first-column" markdown>
 
 | Parameter | Description |
 | --------- | ----------- |
@@ -129,6 +139,8 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_OPENVIDU_WEBHOOK`** | If `true`, the OpenVidu V2 Compatibility Server will send webhooks to `V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT` |
 | **`V2COMPAT_OPENVIDU_WEBHOOK_HEADERS`** | JSON Array list of headers to send in the OpenVidu V2 Webhook events. For example: <br>`["Content-Type: application/json"]` |
 | **`V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`** | Comma-separated list of OpenVidu V2 Webhook events to send. All available events are: <ul><li>sessionCreated</li><li>sessionDestroyed</li><li>participantJoined</li><li>participantLeft</li><li>webrtcConnectionCreated</li><li>webrtcConnectionDestroyed</li><li>recordingStatusChanged</li><li>signalSent</li></ul> |
+
+</div>
 
 ## `livekit.yaml`:
 

@@ -119,6 +119,13 @@ nav:
           - AI Services:
               - docs/tutorials/ai-services/index.md
               - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
+      - Reference:
+          - Access tokens: docs/reference/access-tokens.md
+          - Client SDK: docs/reference/client-sdk.md
+          - Room Service API: docs/reference/room-service-api.md
+          - Webhooks: docs/reference/webhooks.md
+          - Egress: docs/reference/egress.md
+          - Ingress: docs/reference/ingress.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
@@ -460,6 +467,9 @@ plugins:
 
         OpenVidu Platform tutorials — AI services:
         - docs/tutorials/ai-services/*.md
+
+        OpenVidu Platform API reference:
+        - docs/reference/*.md
 
         OpenVidu Platform AI services:
         - docs/ai/*.md

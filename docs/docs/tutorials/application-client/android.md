@@ -354,7 +354,7 @@ The `connectToRoom()` method performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/livekit-android-sdk/io.livekit.android.events/-room-event/index.html){:target="_blank"}
+        You can take a look at all the events in the [Room events reference](../../reference/client-sdk.md#room-events)
 
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:
 
