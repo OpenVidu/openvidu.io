@@ -67,7 +67,7 @@ Let's have a look at some use cases to understand what actually lands in each la
 - **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more — input lag above a few tens of milliseconds is felt directly in your hands.
 - **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely — industrial machinery, a drone, a surgical robot — then the use case needs a genuine real-time control loop, not just real-time-looking video.
 
-![World Cup retransmissions work just well with a 20 seconds latency](/docs/assets/images/blog/YYYY/MM/low-latency-live-streaming/broadcasting-match.webp)
+![World Cup retransmissions work just well with a 20 seconds latency](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/broadcasting-match.webp)
 
 So, as I said before: it's never the content itself that sets the latency budget. It's whether someone downstream has to act on what they're seeing before it goes stale.
 
@@ -97,7 +97,7 @@ That last row is the whole story of this post.
 
 WebRTC was designed backwards from HLS and DASH: instead of optimizing for cacheable files, it optimizes for the shortest possible path between a captured frame and a rendered one.
 
-![An interactive streaming session needs latencies under 1 second](/docs/assets/images/blog/YYYY/MM/low-latency-live-streaming/game-streaming.webp)
+![An interactive streaming session needs latencies under 1 second](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/game-streaming.webp)
 
 There's no segment, no manifest, no "wait for the file to finish." Media flows continuously as RTP packets over UDP the moment a connection is established, packet by packet, frame by frame. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure — none of it exists to buffer or batch anything.
 
@@ -119,7 +119,7 @@ The dividing line was never "is it live," it's **whether the interaction loops b
 
 If you're building something in that second category — a stream someone needs to react to, not just watch — the protocol choice mostly makes itself: you need WebRTC, and you need it end to end, not just for capture.
 
-![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/docs/assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp)
+![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp)
 
 [OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC — with the option to skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too, so you're never quietly falling back to a multi-second HLS path just because the audience grew. See the [stream ingestion guide](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion) for how to wire a WHIP source into your own app.
 
