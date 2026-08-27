@@ -17,7 +17,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
     **Inbound port rules**:
 
-    | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+    | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
     | -------- | ----- | ------ | ----------- |
     | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
     | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -39,7 +39,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
         | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -66,7 +66,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | UDP | 443 | 0.0.0.0/0, ::/0 | STUN/TURN over UDP. |
         | TCP | 1935 | Master Node | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
@@ -89,7 +89,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:15em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div style="width:15em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -120,7 +120,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | UDP | 443 | 0.0.0.0/0, ::/0 | STUN/TURN over UDP. |
         | TCP | 1935 | Master Nodes | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
@@ -149,7 +149,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
     **Inbound port rules**:
 
-    | Protocol | Ports | <div style="width:8em">Source</div> | Description |
+    | Protocol | Ports | <div class="w-8em">Source</div> | Description |
     | -------- | ----- | ------ | ----------- |
     | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
     | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -170,7 +170,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | Ports | <div style="width:8em">Source</div> | Description |
+        | Protocol | Ports | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
         | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
@@ -196,7 +196,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1935 | Master Node | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Master Node | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -218,7 +218,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:15em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div style="width:15em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -249,7 +249,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div style="width:8em">Ports</div> | <div style="width:8em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1935 | Master Nodes | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Master Nodes | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS. (TURNS) |
@@ -278,7 +278,7 @@ systemctl restart openvidu
 
 ## How it works
 
-Both configurations work thanks to the [TURN protocol](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT){:target="_blank"}, which acts as a relay between the client and the Media Server. When a client connects through port 443 (either UDP or TLS), the TURN server receives the traffic on that port and relays it internally to the Media Server. This relay happens entirely within the internal network: the TURN server presents the node's private IP as the relay address and forwards the media to the Media Server using the configured RTC port range (50000-60000 by default).
+Both configurations work thanks to the [TURN protocol :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT){:target="_blank"}, which acts as a relay between the client and the Media Server. When a client connects through port 443 (either UDP or TLS), the TURN server receives the traffic on that port and relays it internally to the Media Server. This relay happens entirely within the internal network: the TURN server presents the node's private IP as the relay address and forwards the media to the Media Server using the configured RTC port range (50000-60000 by default).
 
 This is why the port rules above require the internal UDP range (50000-60000) to be open between cluster nodes (or to the node itself in Single Node deployments) — it is the path used by TURN to deliver relayed media to the Media Server.
 
@@ -286,7 +286,7 @@ OpenVidu includes built-in security layers in its TURN server implementation to 
 
 - **Cluster-aware IP allowlist**: TURN only permits relay traffic to IPs belonging to registered cluster nodes. In multi-node deployments, this is dynamically maintained via the shared cluster state, so only legitimate nodes can receive relayed media.
 - **Port range enforcement**: Every relayed packet is validated against the configured RTC port range at the packet level. Traffic destined to ports outside this range is rejected.
-- **TCP relay denial**: TCP relay allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"}) are explicitly denied, limiting TURN to its intended use for UDP media relay.
+- **TCP relay denial**: TCP relay allocations ([RFC 6062 :fontawesome-solid-external-link:{.external-link-icon}](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"}) are explicitly denied, limiting TURN to its intended use for UDP media relay.
 
 ## Troubleshooting: media not flowing
 

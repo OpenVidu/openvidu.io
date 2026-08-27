@@ -11,16 +11,13 @@ The **openvidu-custom-layout** tutorial demonstrates how to replace the default 
 
 Replacing the default layout is made simple with the **LayoutDirective**, which offers a straightforward way to customize the **LayoutComponent**.
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-layout.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Custom Layout</figcaption>
-</figure>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/layout.svg){ .control-height loading=lazy }
 
 ## Running this tutorial
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 #### 2. Download the tutorial code
 
@@ -31,7 +28,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 
 #### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 #### 4. Run the openvidu-custom-layout tutorial
 
@@ -57,21 +54,20 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}.
 
-<!-- ![OpenVidu Angular Components - Custom Toolbar](../../../assets/images/platform/tutorials/angular-components/custom-toolbar.png){ loading=lazy } -->
 
---8<-- "shared/tutorials/testing-other-devices.md"
+--8<-- "tutorials/testing-other-devices.md"
 
 ## Understanding the code
 
---8<-- "shared/tutorials/openvidu-components/files.md"
+--8<-- "tutorials/openvidu-components/files.md"
 
 ---
 
---8<-- "shared/tutorials/openvidu-components/install.md"
+--8<-- "tutorials/openvidu-components/install.md"
 
 === "main.ts"
 
-    --8<-- "shared/tutorials/openvidu-components/import.md"
+    --8<-- "tutorials/openvidu-components/import.md"
 
 === "app.component.ts"
 
@@ -233,11 +229,11 @@ Once the server is up and running, you can test the application by visiting [`ht
     - `subscribeToParticipants` method that subscribes to updates for local and remote participants.
     - `getToken` method that requests a token to the server application.
 
-    --8<-- "shared/tutorials/configure-urls.md"
+    --8<-- "tutorials/configure-urls.md"
 
 === "styles.scss"
 
-    --8<-- "shared/tutorials/openvidu-components/styles.md"
+    --8<-- "tutorials/openvidu-components/styles.md"
 
 ### Adding custom buttons to the toolbar
 

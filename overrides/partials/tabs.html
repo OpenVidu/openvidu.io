@@ -1,0 +1,59 @@
+{# https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/tabs.html #}
+
+{% import "partials/tabs-item.html" as item with context %}
+
+{# Navigation tabs #}
+<nav
+  class="md-tabs"
+  aria-label="{{ lang.t('tabs') }}"
+  data-md-component="tabs"
+>
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      {% set ns = namespace(dropdown_items=[]) %}
+      {% for nav_item in nav.items %}
+        {% set is_dropdown = false %}
+        {% if nav_item.meta and nav_item.meta.page_features and "dropdown" in nav_item.meta.page_features %}
+            {% set is_dropdown = true %}
+        {% elif nav_item.children and nav_item.children[0].meta and nav_item.children[0].meta.page_features and "dropdown" in nav_item.children[0].meta.page_features %}
+            {% set is_dropdown = true %}
+        {% endif %}
+
+        {% if is_dropdown %}
+            {% set ns.dropdown_items = ns.dropdown_items + [nav_item] %}
+        {% endif %}
+      {% endfor %}
+
+      {% for nav_item in nav.items %}
+        {% if nav_item in ns.dropdown_items %}
+            {% if nav_item == ns.dropdown_items[0] %}
+                {% set ns.dropdown_active = false %}
+                {% for drop_item in ns.dropdown_items %}
+                    {% if drop_item.active %}
+                        {% set ns.dropdown_active = true %}
+                    {% endif %}
+                {% endfor %}
+                {# The label comes from the first grouped item's dropdown_label
+                   frontmatter (falling back to its title). #}
+                {% set first_drop = ns.dropdown_items[0] %}
+                {% set drop_meta = first_drop.meta or (first_drop.children and first_drop.children[0].meta) or {} %}
+                {% set drop_label = drop_meta.dropdown_label or first_drop.title %}
+                <li class="md-tabs__item md-tabs__item--dropdown{% if ns.dropdown_active %} md-tabs__item--active{% endif %}">
+                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle{% if ns.dropdown_active %} md-tabs__link--active{% endif %}" aria-haspopup="true">
+                        {{ drop_label }}
+                        <span class="dropdown-caret"></span>
+                    </button>
+                    <div class="md-tabs__dropdown">
+                        {% for drop_item in ns.dropdown_items %}
+                            {{ item.render_dropdown_link(drop_item) }}
+                        {% endfor %}
+                    </div>
+                </li>
+            {% endif %}
+        {% else %}
+            {{ item.render(nav_item) }}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

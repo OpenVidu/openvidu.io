@@ -2,18 +2,20 @@
 title: "OpenVidu account: sign up or log in"
 description: "Create an OpenVidu PRO account, or log in to the account you already have."
 hide:
+  - feedback
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
+page_features:
+  - openviduregister
 ---
 <style>
   .md-typeset h1 {
     display: none;
   }
 </style>
-<link rel="stylesheet" type="text/css" href="../javascripts/openvidu-register/openvidu-register.css">
 <script>
 window.amplifyActive = true;
 </script>

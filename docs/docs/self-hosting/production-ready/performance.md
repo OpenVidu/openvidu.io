@@ -1,6 +1,8 @@
 ---
 title: "OpenVidu performance: 2x with mediasoup"
 description: "OpenVidu replaces LiveKit's Pion WebRTC engine with mediasoup, doubling the media tracks one server handles while keeping the LiveKit API."
+page_features:
+  - setupwowjs
 ---
 
 # Performance :material-lightning-bolt:
@@ -20,15 +22,11 @@ The key points of how this works are:
 
 LiveKit created its own WebRTC SFU, based on the [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc){:target="_blank"} library to route media between participants:
 
-<figure markdown>
-  ![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .mkdocs-img }
-</figure>
+![OpenVidu with Pion WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-pion.svg){ .round-corners .control-height loading=lazy }
 
 OpenVidu is built by a team of expert WebRTC developers who know all the ins and outs of low-level WebRTC development, so it was possible to replace LiveKit's own implementation with an alternative, and _mediasoup_ was the clear best choice given its fantastic performance characteristics:
 
-<figure markdown>
-  ![OpenVidu with mediasoup WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-mediasoup.svg){ .mkdocs-img }
-</figure>
+![OpenVidu with mediasoup WebRTC engine](../../../assets/images/platform/self-hosting/production-ready/performance/openvidu-webrtc-engine-mediasoup.svg){ .round-corners .control-height loading=lazy }
 
 This means that applications built on top of LiveKit will continue to work exactly the same, while the internal WebRTC engine inside the server can be swapped at will and applications can benefit from that change, without having to be rebuilt.
 
@@ -62,9 +60,7 @@ This test increasingly adds Rooms of 8 Participants each, every one sending 1 vi
 
 The following plot shows the number of Participants that can be added to a Room in OpenVidu using Pion and using mediasoup as WebRTC engines:
 
-<figure markdown>
-  ![Pion vs mediasoup. Multiple Conference Rooms](../../../assets/images/platform/self-hosting/production-ready/performance/benchmark-conference.png){style="max-width: 600px"}
-</figure>
+![Pion vs mediasoup. Multiple Conference Rooms](../../../assets/images/platform/self-hosting/production-ready/performance/benchmark-conference.png){ .round-corners style="max-width: 600px" loading=lazy }
 
 The conclusion is that for multiple Rooms, mediasoup performs much better than Pion, almost doubling the total number of Participants (and Tracks) that fit in the server.
 
@@ -80,16 +76,16 @@ CPU load of the server is also shown with a black marked plot (from 0 to 1, repr
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 <div class="grid-50 tablet-grid-50" markdown>
-<figure markdown>
-![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png)
-</figure>
-<figcaption>Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with Pion</figcaption>
+![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png){ .control-height .round-corners loading=lazy }
+/// caption
+Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with Pion
+///
 </div>
 <div class="grid-50 tablet-grid-50" markdown>
-<figure markdown>
-![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png)
-</figure>
-<figcaption>Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with mediasoup</figcaption>
+![Mediasoup connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-mediasoup.png){ .control-height .round-corners loading=lazy }
+/// caption
+Progression of the connection of each Participant through the test execution. Benchmark test for Rooms with 8 Participants using OpenVidu with mediasoup
+///
 </div>
 </div>
 
@@ -110,4 +106,12 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 ### About OpenVidu LoadTest
 
-Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Want a performance estimate for your own workload?</h2>
+  <p style="margin-bottom: 1.5em">Tell us your expected load and we will help you benchmark and size it.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>

@@ -30,7 +30,8 @@ LOG_ARGS = ("log", f"--format={MARKER}%cs", "--name-only", "--no-renames")
 
 #: A `pymdownx.snippets` include. The marker has to open the line — indented is fine, many sit
 #: inside admonitions — and only the quoted-path form is matched, which is the only one this site
-#: uses: no `path:section`, no `;optional` prefix, no URLs.
+#: uses: no `path:section`, no `;optional` prefix, no URLs. Paths resolve against `shared/`
+#: (the configured `base_path` in mkdocs.yml), so readers get them prefixed with `shared/`.
 SNIPPET = re.compile(r'^[ \t]*--8<--[ \t]*"([^"]+)"[ \t]*$', re.MULTILINE)
 
 #: Reads a repository-relative path, or returns None when there is nothing there. A miss is normal:
@@ -71,7 +72,7 @@ def sources_of(path: str, read: Reader) -> frozenset[str]:
         found.add(current)
         text = read(current)
         if text is not None:
-            pending.extend(SNIPPET.findall(text))
+            pending.extend("shared/" + name for name in SNIPPET.findall(text))
     return frozenset(found)
 
 

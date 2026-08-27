@@ -1,8 +1,6 @@
 ---
 title: "Basic recording tutorial with S3"
 description: "Record a room and manage the recordings in a simple Node.js and JavaScript video-call app, storing the files in S3-compatible storage."
-tags:
-  - setupcustomgallery
 ---
 
 # Basic Recording Tutorial S3
@@ -29,7 +27,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 === "Run OpenVidu locally"
 
-    --8<-- "shared/tutorials/run-openvidu-locally.md"
+    --8<-- "tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 
@@ -40,12 +38,12 @@ Recordings are always persisted in some kind of storage system. This type of sto
             Make sure you deploy with at least 4 CPUs in the Virtual Machine of AWS.
 
     2. Point the tutorial to your AWS deployment:
-          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-basic-node/.env){:target="_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).   
-          - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-basic-node/public/app.js#L3) to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
+          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/.env){:target="_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html){:target="_blank"}).   
+          - Modify file [`app.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/public/app.js#L3){:target="_blank"} to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
 
     !!! warning
 
-        If you are using self-signed certificate you will need to add this line in the first line after the imports on the [`index.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-basic-node/src/index.js) ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable TLS verification for local testing```
+        If you are using self-signed certificate you will need to add this line in the first line after the imports on the [`index.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js){:target="_blank"} ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable TLS verification for local testing```
 
     !!! info "Configure Webhooks"
 
@@ -81,11 +79,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></a></p></div>
+<div class="grid-50" markdown>
+![Video call room of the recording tutorial app with recording controls](../../../assets/images/platform/tutorials/advanced-features/recording1.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></a></p></div>
+<div class="grid-50" markdown>
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -93,7 +95,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application with other devices in your local network very easily without worrying about SSL certificates.
 
-    Access your application client through [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){:target="_blank"}.
+    Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network :fontawesome-solid-external-link:{.external-link-icon}](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){:target="_blank"}.
 
 ## Understanding the code
 
@@ -123,7 +125,7 @@ The server application extends the [Node.js server tutorial](../application-serv
 
 Before we dive into the code of each endpoint, let's first see the changes introduced in the `index.js` file:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L15-L27' target='_blank'>index.js</a>" linenums="15" hl_lines="5 6-7 15-18"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L15-L27' target='_blank'>index.js</a>" linenums="15" hl_lines="5 6-7 15-18"
 // Configuration
 const SERVER_PORT = process.env.SERVER_PORT || 6080;
 const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || "devkey";
@@ -159,7 +161,7 @@ Besides, the `index.js` file configures the server to serve static files from th
 
 It also initializes the `EgressClient`, which will help interacting with [Egress API](../../reference/egress.md) to manage recordings, and the `S3Service`, which will help interacting with the S3 bucket:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L34-L39' target='_blank'>index.js</a>" linenums="34"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L34-L39' target='_blank'>index.js</a>" linenums="34"
 const egressClient = new EgressClient(
   LIVEKIT_URL,
   LIVEKIT_API_KEY,
@@ -170,7 +172,7 @@ const s3Service = new S3Service();
 
 The `POST /token` endpoint has been modified to add the `roomRecord` permission to the access token, so that participants can start recording a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L46-L63' target='_blank'>index.js</a>" linenums="46" hl_lines="14"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L46-L63' target='_blank'>index.js</a>" linenums="46" hl_lines="14"
 app.post("/token", async (req, res) => {
   const roomName = req.body.roomName;
   const participantName = req.body.participantName;
@@ -199,7 +201,7 @@ Now let's explore the code for each recording feature:
 
 The `POST /recordings/start` endpoint starts the recording of a room. It receives the name of the room to record as parameter and returns the recording metadata:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L80-L118' target='_blank'>index.js</a>" linenums="80"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L80-L118' target='_blank'>index.js</a>" linenums="80"
 app.post("/recordings/start", async (req, res) => {
   const { roomName } = req.body;
 
@@ -257,7 +259,7 @@ This endpoint does the following:
 1.  Obtains the `roomName` parameter from the request body. If it is not available, it returns a `400` error.
 2.  Check if there is already an active recording for the room. If there is, it returns a `409` error to prevent starting a new recording. To accomplish this, we use the `getActiveRecordingByRoom` function, which lists all active egresses for a specified room by calling the `listEgress` method of the `EgressClient` with the `roomName` and `active` parameters, and then returns the egress ID of the first active egress found:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L236-L245' target='_blank'>index.js</a>" linenums="236"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L236-L245' target='_blank'>index.js</a>" linenums="236"
     const getActiveRecordingByRoom = async (roomName) => {
       try {
         // List all active egresses for the room
@@ -377,7 +379,7 @@ This endpoint does the following:
 
 The `GET /recordings/:recordingName` endpoint retrieves a specific portion of a recording from the S3 bucket and returns it as a stream. The server sends the recording file in portions of `5 MB` each time the client requests a range of the recording file. This is done to prevent loading the entire recording file into memory and to allow the client to play the recording while it is being downloaded and seek to a specific time:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L176-L207' target='_blank'>index.js</a>" linenums="176"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L176-L207' target='_blank'>index.js</a>" linenums="176"
 app.get("/recordings/:recordingName", async (req, res) => {
   const { recordingName } = req.params;
   const { range } = req.headers;
@@ -429,7 +431,7 @@ This endpoint does the following:
 2.  Checks if the recording exists in the S3 bucket by calling the `exists` method of the `S3Service` with the `key` as a parameter. If the recording does not exist, it returns a `404` error.
 3.  Gets the requested range of the recording file by calling the `getRecordingStream` function:
 
-    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L247-L261' target='_blank'>index.js</a>" linenums="247"
+    ```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L247-L261' target='_blank'>index.js</a>" linenums="247"
     const getRecordingStream = async (recordingName, range) => {
       const key = RECORDINGS_PATH + recordingName;
       const size = await s3Service.getObjectSize(key);
@@ -479,7 +481,7 @@ This endpoint does the following:
 
 The `DELETE /recordings/:recordingName` endpoint deletes a recording from the S3 bucket:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/src/index.js#L210-L227' target='_blank'>index.js</a>" linenums="210"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/src/index.js#L210-L227' target='_blank'>index.js</a>" linenums="210"
 app.delete("/recordings/:recordingName", async (req, res) => {
   const { recordingName } = req.params;
   const key = RECORDINGS_PATH + recordingName;
@@ -649,7 +651,7 @@ In order to update the user interface of all participants in the room according 
 
     To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](./recording-advanced-s3.md), where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/public/app.js#L20-L87' target='_blank'>app.js</a>" linenums="20" hl_lines="32-37 62-63"
 async function joinRoom() {
   // Disable 'Join' button
   document.getElementById("join-button").disabled = true;
@@ -724,7 +726,7 @@ The `updateRecordingInfo` function updates the recording information of the room
 
 This function retrieves all recordings available for the room from the backend and displays their relevant information by invoking the `showRecordingList` function:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/app.js#L337-L370' target='_blank'>app.js</a>" linenums="337"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/public/app.js#L337-L370' target='_blank'>app.js</a>" linenums="337"
 function showRecordingList(recordings) {
   const recordingsList = document.getElementById("recording-list");
 
@@ -771,7 +773,7 @@ The `showRecordingList` function creates a new `div` element for each recording 
 
 When the user clicks the play button, the `displayRecording` function is called to play the recording. This function opens a dialog window with an embedded video element and sets the source of the video to the [get recording endpoint](#get-recording) of the server application:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/app.js#L372-L379' target='_blank'>app.js</a>" linenums="372"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/public/app.js#L372-L379' target='_blank'>app.js</a>" linenums="372"
 function displayRecording(recordingName) {
   const recordingVideoDialog = document.getElementById(
     "recording-video-dialog"
@@ -782,7 +784,7 @@ function displayRecording(recordingName) {
 }
 ```
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/master/advanced-features/openvidu-recording-basic-node/public/index.html#L94-L99' target='_blank'>index.html</a>" linenums="94"
+```html title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-basic-node/public/index.html#L94-L99' target='_blank'>index.html</a>" linenums="94"
 <dialog id="recording-video-dialog">
     <video id="recording-video" autoplay controls></video>
     <button class="btn btn-secondary" id="close-recording-video-dialog" onclick="closeRecording()">
@@ -797,10 +799,14 @@ function displayRecording(recordingName) {
 
 The `recordings.html` file defines the HTML for the general recording page. This page lists all available recordings from all rooms and allows the user to filter them by room name. It also provides buttons to play and delete each recording.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording3.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording3.png" loading="lazy" alt="General recording page listing recordings from all rooms"/></a></p></div>
+<div class="grid-50" markdown>
+![General recording page listing recordings from all rooms](../../../assets/images/platform/tutorials/advanced-features/recording3.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording4.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording4.png" loading="lazy" alt="Recording playback in the general recording page"/></a></p></div>
+<div class="grid-50" markdown>
+![Recording playback in the general recording page](../../../assets/images/platform/tutorials/advanced-features/recording4.png){ loading=lazy }
+</div>
 
 </div>

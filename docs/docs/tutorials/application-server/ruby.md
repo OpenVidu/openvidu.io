@@ -1,8 +1,6 @@
 ---
 title: "Ruby application server tutorial"
 description: "Build a minimal Ruby application server for OpenVidu with Sinatra and the LiveKit-compatible Ruby SDK: issue access tokens and handle webhooks."
-tags:
-  - setupcustomgallery
 ---
 
 # Ruby Server Tutorial
@@ -20,7 +18,7 @@ It internally uses [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -30,11 +28,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run the server application
 
---8<-- "shared/tutorials/application-server/ruby.md"
+--8<-- "tutorials/application-server/ruby.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/tabs.md"
+--8<-- "tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -159,6 +157,6 @@ If the verification is successful, we can parse the request JSON body and consum
 
 Remember to return a `200` OK response at the end to let LiveKit Server know that the webhook was received correctly.
 
---8<-- "shared/tutorials/webhook-local-server.md"
+--8<-- "tutorials/webhook-local-server.md"
 
 <br>

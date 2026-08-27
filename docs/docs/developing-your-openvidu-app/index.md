@@ -39,49 +39,49 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     [:octicons-arrow-right-24: Node.js Tutorial](../tutorials/application-server/node.md)
 
-    [:octicons-arrow-right-24: Reference Docs](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    [:octicons-arrow-right-24: Reference Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
     [:octicons-arrow-right-24: Go Tutorial](../tutorials/application-server/go.md)
 
-    [:octicons-arrow-right-24: Reference Docs](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}
+    [:octicons-arrow-right-24: Reference Docs :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
     [:octicons-arrow-right-24: Ruby Tutorial](../tutorials/application-server/ruby.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+    [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
     [:octicons-arrow-right-24: Java Tutorial](../tutorials/application-server/java.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+    [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
 
 === ":simple-python:{.icon .lg-icon .tab-icon} Python"
 
     [:octicons-arrow-right-24: Python Tutorial](../tutorials/application-server/python.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/python-sdks){:target="_blank"}
+    [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
     [:octicons-arrow-right-24: Rust Tutorial](../tutorials/application-server/rust.md)
 
-    [:octicons-arrow-right-24: Reference Docs](https://docs.rs/livekit-api/latest/livekit_api/index.html){:target="_blank"}
+    [:octicons-arrow-right-24: Reference Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.rs/livekit-api/latest/livekit_api/index.html){:target="_blank"}
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
     [:octicons-arrow-right-24: PHP Tutorial](../tutorials/application-server/php.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+    [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
     [:octicons-arrow-right-24: .NET Tutorial](../tutorials/application-server/dotnet.md)
 
-    [:octicons-arrow-right-24: GitHub Repository](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+    [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
@@ -89,7 +89,7 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     1. Consume the Server API directly: [:octicons-arrow-right-24: Reference Docs](../reference/room-service-api.md)
 
-    2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/livekit-cli){:target="_blank"}
+    2. Use the livekit-cli: [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"}
 
 ## 3. Build the UI of your client application
 
