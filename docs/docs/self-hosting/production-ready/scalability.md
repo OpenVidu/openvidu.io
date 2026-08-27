@@ -1,6 +1,8 @@
 ---
 title: "OpenVidu scalability and autoscaling"
 description: "How OpenVidu scales from a small meeting to a large live stream, with autoscaling Media Nodes and a control plane that keeps up with them."
+page_features:
+  - setupwowjs
 ---
 
 # Scalability :material-chart-timeline-variant-shimmer:
@@ -75,7 +77,7 @@ Upon a new Room creation request:
 ### Egress
 
 !!! info
-    Check out the official Egress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/){:target="_blank"}.
+    Check out the [Egress reference](../../reference/egress.md) for every Egress type, output format and status value.
 
 The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). 
 
@@ -143,7 +145,7 @@ openvidu:
 ### Ingress
 
 !!! info
-    Check out the official Ingress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"}.
+    Check out the [Ingress reference](../../reference/ingress.md) for every input type, transcoding option and Ingress state.
 
 The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 
@@ -231,7 +233,7 @@ When deploying in a supported **cloud provider** using our official templates, O
 
     The cluster scales automatically thanks to [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"}. You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
 
-    --8<-- "shared/self-hosting/aws/media-nodes-asg-config.md"
+    --8<-- "self-hosting/aws/media-nodes-asg-config.md"
   
 === ":material-microsoft-azure:{.icon .lg-icon .tab-icon} Azure"
 
@@ -242,7 +244,7 @@ When deploying in a supported **cloud provider** using our official templates, O
   
     The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target="_blank"}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
-    --8<-- "shared/self-hosting/azure/media-nodes-asg-config.md"
+    --8<-- "self-hosting/azure/media-nodes-asg-config.md"
 
 === ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
 
@@ -252,35 +254,12 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
 
     The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
-        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-            <tr>
-              <th>Input Value</th>
-              <th>Default Value</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-                <td>initialNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Number of initial media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>minNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Minimum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>maxNumberOfMediaNodes</td>
-                <td>5</td>
-                <td>Maximum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>scaleTargetCPU</td>
-                <td>50</td>
-                <td>Target CPU percentage to scale out or in.</td>
-            </tr>
-        </table>
-    </div>
+    | Input Value | Default Value | Description |
+|---|---|---|
+| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
 
 === ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
 
@@ -290,40 +269,13 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
     The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
-        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-            <tr>
-              <th>Input Value</th>
-              <th>Default Value</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-                <td>initialNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Number of initial media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>minNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Minimum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>maxNumberOfMediaNodes</td>
-                <td>5</td>
-                <td>Maximum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>scaleTargetCPU</td>
-                <td>50</td>
-                <td>Target CPU percentage to scale up or down.</td>
-            </tr>
-            <tr>
-                <td>fixedNumberOfMediaNodes</td>
-                <td>0</td>
-                <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
-            </tr>
-        </table>
-    </div>
+    | Input Value | Default Value | Description |
+|---|---|---|
+| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
+| fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
 
 === ":custom-oracle-cloud-infrastructure:{.icon .lg-icon .tab-icon} OCI"
 
@@ -333,40 +285,13 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in Oracle Cloud Infrastructure](../ha/oracle/install.md)
 
     The cluster scales automatically thanks to an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} for scale-out, combined with an [OCI Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm){:target="_blank"} that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](../elastic/oracle/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-    <div style="text-align: center;">
-        <table border="1" cellspacing="0" cellpadding="6" style="margin: 0 auto;">
-            <tr>
-              <th>Input Value</th>
-              <th>Default Value</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-                <td>initialNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Number of initial media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>minNumberOfMediaNodes</td>
-                <td>1</td>
-                <td>Minimum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>maxNumberOfMediaNodes</td>
-                <td>5</td>
-                <td>Maximum number of media nodes to deploy.</td>
-            </tr>
-            <tr>
-                <td>scaleTargetCPU</td>
-                <td>50</td>
-                <td>Target CPU percentage to scale up or down.</td>
-            </tr>
-            <tr>
-                <td>fixedNumberOfMediaNodes</td>
-                <td>0</td>
-                <td>Fixed number of media nodes to create (0 = use autoscaling).</td>
-            </tr>
-        </table>
-    </div>
+    | Input Value | Default Value | Description |
+|---|---|---|
+| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+| scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
+| fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
 
 ### Autoscaling On Premises
 
@@ -380,3 +305,11 @@ When deploying an OpenVidu cluster **On Premises** you are responsible for monit
     - [Adding Media Nodes](../ha/on-premises/admin.md#adding-media-nodes)
     - [Removing Media Nodes gracefully](../ha/on-premises/admin.md#removing-media-nodes-gracefully)
     - [Removing Media Nodes forcefully](../ha/on-premises/admin.md#removing-media-nodes-forcefully)
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Planning for a specific scale target?</h2>
+  <p style="margin-bottom: 1.5em">Tell us your expected rooms and participants and we will help you size the deployment.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>

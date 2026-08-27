@@ -1,8 +1,6 @@
 ---
 title: "Install OpenVidu High Availability on AWS"
 description: "Deploy OpenVidu High Availability on AWS from a CloudFormation stack, then point your application at the result."
-tags:
-  - setupcustomgallery
 ---
 
 # OpenVidu High Availability installation: AWS
@@ -14,7 +12,7 @@ tags:
 </div>
 
 
---8<-- "shared/self-hosting/common/ha-license-intro.md"
+--8<-- "self-hosting/common/ha-license-intro.md"
 
 This section contains instructions for deploying a production-ready OpenVidu High Availability deployment on AWS. The deployed services are the same as in the [On Premises High Availability installation](../on-premises/install-nlb.md), but the process is automated through AWS CloudFormation.
 
@@ -40,10 +38,7 @@ This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
-    <figure markdown>
-    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .svg-img .dark-img }
-    <figcaption>OpenVidu High Availability AWS Architecture</figcaption>
-    </figure>
+    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
@@ -63,7 +58,7 @@ In this section, you need to specify the domain name and the SSL certificate to 
 
     The parameters in this section might look like this:
 
-    ![Domain and Load Balancer configuration](../../../../assets/images/platform/self-hosting/ha/aws/domain-and-lb-config.png)
+    ![Domain and Load Balancer configuration](../../../../assets/images/platform/self-hosting/ha/aws/domain-and-lb-config.png){ .round-corners loading=lazy }
 
     Set the **DomainName** parameter to the domain name you intend to use for your OpenVidu deployment. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
@@ -77,13 +72,13 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
     Parameters of this section look like this:
 
-    ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/aws/openvidu-ha-config.png)
+    ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/aws/openvidu-ha-config.png){ .round-corners loading=lazy }
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](../../../../account.md){:target="_blank"}.
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
     For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
---8<-- "shared/self-hosting/aws/meet.md"
+--8<-- "self-hosting/aws/meet.md"
 
 ### EC2 Instance Configuration
 
@@ -93,7 +88,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     Parameters in this section look like this:
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/ha/aws/ec2-instance-config.png)
+    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/ha/aws/ec2-instance-config.png){ .round-corners loading=lazy }
 
     Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
 
@@ -103,7 +98,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
 The number of Media Nodes can scale up or down based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up or down.
 
---8<-- "shared/self-hosting/aws/media-nodes-asg-config.md"
+--8<-- "self-hosting/aws/media-nodes-asg-config.md"
 
 ### S3 bucket for application data, cluster data and recordings
 
@@ -113,7 +108,7 @@ You can specify two S3 buckets to store the application data, cluster data, and 
 
     Parameters in this section look like this:
 
-    ![S3 bucket for application data and recordings](../../../../assets/images/platform/self-hosting/ha/aws/s3-bucket.png)
+    ![S3 bucket for application data and recordings](../../../../assets/images/platform/self-hosting/ha/aws/s3-bucket.png){ .round-corners loading=lazy }
 
     If these parameters are not specified, new S3 buckets will be created by the CloudFormation stack.
 
@@ -125,7 +120,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     Parameters in this section look like this:
 
-    ![VPC Configuration](../../../../assets/images/platform/self-hosting/ha/aws/vpc-config.png)
+    ![VPC Configuration](../../../../assets/images/platform/self-hosting/ha/aws/vpc-config.png){ .round-corners loading=lazy }
 
     The **OpenViduVPC** parameter specifies the VPC where the deployment will be created.
 
@@ -146,11 +141,11 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
     Parameters in this section look like this:
 
-    ![Volumes Configuration](../../../../assets/images/platform/self-hosting/ha/aws/volumes-config.png)
+    ![Volumes Configuration](../../../../assets/images/platform/self-hosting/ha/aws/volumes-config.png){ .round-corners loading=lazy }
 
     The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
 
---8<-- "shared/self-hosting/aws/additional-flags.md"
+--8<-- "self-hosting/aws/additional-flags.md"
 
 ## Deploying the stack
 
@@ -160,7 +155,7 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 
 === "CloudFormation Outputs"
 
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/ha/aws/outputs.png)
+    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/ha/aws/outputs.png){ .round-corners loading=lazy }
 
 ## Configure your application to use the deployment
 
@@ -168,22 +163,26 @@ The Output Key **ServicesAndCredentials** of the [previous section](#deploying-t
 
 Then, click on **Retrieve secret value** to get the JSON with all the information.
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png" loading="lazy" alt="AWS Secrets Manager console with the Retrieve secret value button"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/self-hosting/ha/aws/2-secrets.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/self-hosting/ha/aws/2-secrets.png" loading="lazy" alt="AWS Secrets Manager showing the deployment's secret values"/></a></p></div>
+<div class="grid-50" markdown>
+![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/ha/aws/2-secrets.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
 To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
---8<-- "shared/self-hosting/aws/credentials-general.md"
---8<-- "shared/self-hosting/aws/credentials-v2compatibility.md"
+--8<-- "self-hosting/aws/credentials-general.md"
+--8<-- "self-hosting/aws/credentials-v2compatibility.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 
---8<-- "shared/self-hosting/aws/troubleshooting.md"
+--8<-- "self-hosting/aws/troubleshooting.md"
 
 4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in all the Master Nodes and Media Nodes.
 

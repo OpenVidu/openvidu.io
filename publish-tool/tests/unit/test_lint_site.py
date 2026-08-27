@@ -111,3 +111,26 @@ def test_a_reference_docs_page_still_resolves_as_a_target(tmp_path):
     write(tmp_path, "docs/index.html", '<a href="reference-docs/api/index.html">x</a>')
 
     assert findings_of(tmp_path, "site-target") == []
+
+
+def test_an_attr_block_that_reached_the_page_as_text_is_an_error(tmp_path):
+    write(
+        tmp_path,
+        "docs/index.html",
+        '<p>Go to <a href="../a/">X</a>{:target="_blank"}, then click <em>View</em>.</p>',
+    )
+    write(tmp_path, "docs/a/index.html", "<p>ok</p>")
+
+    (finding,) = findings_of(tmp_path, "attr-block-leak")
+    assert finding.severity == "error"
+    assert 'target="_blank"' in finding.message
+
+
+def test_an_attr_block_inside_an_html_comment_is_left_alone(tmp_path):
+    write(
+        tmp_path,
+        "docs/index.html",
+        '<!-- [X](https://e.com){:target="_blank"} commented out -->\n<p>ok</p>',
+    )
+
+    assert findings_of(tmp_path, "attr-block-leak") == []

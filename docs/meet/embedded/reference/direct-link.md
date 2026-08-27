@@ -20,7 +20,7 @@ When someone clicks the link, they'll be redirected to the OpenVidu Meet room in
 !!! info "A room URL is a room access link"
     The room URL is a [room access link](../../features/rooms/access.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for all of them.
 
-    You can get them programmatically from your backend with the [REST API](api.html#/schemas/MeetRoom){:target="_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
+    You can get them programmatically from your backend with the [REST API :fontawesome-solid-external-link:{.external-link-icon}](api.html#/schemas/MeetRoom){:target="_blank"}: the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 

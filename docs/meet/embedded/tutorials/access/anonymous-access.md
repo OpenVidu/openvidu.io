@@ -1,8 +1,6 @@
 ---
 title: "Anonymous access tutorial for OpenVidu Meet"
 description: "Let anyone join an OpenVidu Meet room through a shared moderator or speaker link, with a Node.js and Express backend and a JavaScript frontend."
-tags:
-    - setupcustomgallery
 ---
 
 # Anonymous Access Tutorial
@@ -23,7 +21,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to cre
 
 #### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-meet.md"
+--8<-- "tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -55,12 +53,16 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/webcomponent/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></a>
-<a class="glightbox" href="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room embedded in the tutorial app"/></a></p></div>
+<div class="grid-50" markdown>
+![OpenVidu Meet room embedded in the tutorial app](../../../../assets/images/meet/embedded/tutorials/webcomponent/room-dark.png#only-dark){ .round-corners loading=lazy }
+![OpenVidu Meet room embedded in the tutorial app](../../../../assets/images/meet/embedded/tutorials/webcomponent/room-light.png#only-light){ .round-corners loading=lazy }
+</div>
 
 </div>
 
@@ -162,8 +164,8 @@ Because anonymous links are shared and not tied to a specific person, this is th
 
 ## Accessing this tutorial from other computers or phones
 
---8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+--8<-- "tutorials/access-tutorial-from-other-devices.md"
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
---8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"
+--8<-- "tutorials/connect-tutorial-to-production-deployment.md"

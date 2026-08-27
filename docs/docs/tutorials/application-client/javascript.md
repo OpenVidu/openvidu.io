@@ -1,8 +1,6 @@
 ---
 title: "JavaScript video call tutorial"
 description: "Build a video-call app on OpenVidu in plain JavaScript, HTML and CSS with the LiveKit-compatible JS SDK: join a room and publish media."
-tags:
-  - setupcustomgallery
 ---
 
 # JavaScript Tutorial
@@ -22,7 +20,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 
 #### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -32,11 +30,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
---8<-- "shared/tutorials/application-client/javascript.md"
+--8<-- "tutorials/application-client/javascript.md"
 
 ## Understanding the code
 
@@ -99,7 +97,7 @@ The `app.js` file defines the following variables:
 -   `LivekitClient`: The LiveKit JS SDK object, which is the entry point to the LiveKit JS SDK.
 -   `room`: The room object, which represents the video call room.
 
---8<-- "shared/tutorials/configure-urls.md"
+--8<-- "tutorials/configure-urls.md"
 
 ---
 
@@ -232,7 +230,7 @@ The `joinRoom()` function performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html)
+        You can take a look at all the events in the [Room events reference](../../reference/client-sdk.md#room-events)
 
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:

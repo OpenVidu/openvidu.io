@@ -13,6 +13,7 @@ anything. No logic is duplicated: the source-date rules have one implementation,
 
 from __future__ import annotations
 
+import datetime
 import logging
 import re
 import sys
@@ -27,9 +28,19 @@ if _SRC.is_dir() and str(_SRC) not in sys.path:
 from ovweb.gitrepo import Git, GitError  # noqa: E402
 from ovweb.sources import newest_dates, parse_git_log  # noqa: E402
 
-#: Everything the sitemap dates are read out of, relative to the repository root: the pages
-#: themselves, and the snippets they include.
-_DATED_TREES = ("docs", "shared")
+
+def _dated_trees(config) -> tuple[str, ...]:
+    """Everything the sitemap dates are read out of, relative to the repository root.
+
+    The pages tree comes from `docs_dir`; the snippets tree from the `pymdownx.snippets`
+    `base_path`, so a relocation of either follows the config instead of drifting.
+    """
+    trees = [Path(config["docs_dir"]).resolve().name]
+    snippets = (config.get("mdx_configs") or {}).get("pymdownx.snippets") or {}
+    for base in snippets.get("base_path") or ():
+        trees.append(Path(base).resolve().name)
+    return tuple(dict.fromkeys(trees))
+
 
 #: Descriptions for the blog views the plugin generates, which have no source file to carry
 #: frontmatter and would otherwise fall back to `site_description`. Templates rather than a
@@ -45,7 +56,7 @@ _VIEW_TOPIC = "self-hosted video conferencing and WebRTC engineering"
 _log = logging.getLogger(f"mkdocs.hooks.{Path(__file__).stem}")
 
 
-def _source_dates(root: Path) -> dict[str, str] | None:
+def _source_dates(root: Path, trees: tuple[str, ...]) -> dict[str, str] | None:
     """`{repository-relative path: date of its last commit}`, or None when git cannot answer.
 
     None means "leave MkDocs' build date alone". Three ordinary situations reach it, none of which
@@ -61,7 +72,7 @@ def _source_dates(root: Path) -> dict[str, str] | None:
         if git.is_shallow():
             _log.info("Shallow clone: sitemap <lastmod> falls back to the build date.")
             return None
-        return parse_git_log(git.log_dates_for(*_DATED_TREES))
+        return parse_git_log(git.log_dates_for(*trees))
     except (GitError, OSError) as error:
         _log.info(
             "Could not read dates from git (%s): <lastmod> falls back to the build date.", error
@@ -85,6 +96,13 @@ def _blog_url_shapes(config) -> dict[str, str] | None:
                 "category": options["categories_url_format"],
                 "pagination": options["pagination_url_format"],
             }
+    if "material/blog" in config.get("plugins", {}):
+        # Same strictness as the llmstxt path: a plugin update that renames these options
+        # must fail the build, not silently publish undescribed blog views.
+        raise PluginError(
+            "the blog plugin no longer exposes its URL-format options, so the generated views "
+            "cannot be described. Update publish-tool/mkdocs_hook.py to the new API."
+        )
     return None
 
 
@@ -138,6 +156,16 @@ def _view_metadata(page, src_uri: str, shapes: dict[str, str]) -> dict[str, str]
     return metadata
 
 
+def on_config(config, **kwargs):
+    """Replace {year} in the footer copyright with the build year.
+
+    The year was hand-edited every January (see commit 772076997); the build stamps it.
+    """
+    if config.copyright and "{year}" in config.copyright:
+        config.copyright = config.copyright.replace("{year}", str(datetime.date.today().year))
+    return config
+
+
 def on_env(env, config, files, **kwargs):
     """Set each page's `update_date`, and describe the blog views the plugin generates.
 
@@ -155,8 +183,6 @@ def on_env(env, config, files, **kwargs):
     templates — `sitemap.xml` among them — *before* the pages, so `on_page_content` and
     `on_page_context` both run too late. Here every `file.page` exists and the work happens once.
     """
-    # `_DATED_TREES` is relative to the project root, which is also the repository root here and
-    # what pymdownx.snippets resolves an include against.
     docs_dir = Path(config["docs_dir"]).resolve()
     root = docs_dir.parent
     shapes = _blog_url_shapes(config)
@@ -177,7 +203,7 @@ def on_env(env, config, files, **kwargs):
 
     _log.info("Described %d of %d generated blog views from the view itself.", described, generated)
 
-    dates = _source_dates(root)
+    dates = _source_dates(root, _dated_trees(config))
     if dates is None:
         return env
 
@@ -216,6 +242,58 @@ def _required(meta, key: str, src_uri: str) -> str:
             f"they are the line that tells an assistant whether to read the page."
         )
     return _one_line(value)
+
+
+_GLIGHTBOX_JS = re.compile(r'<script src="([^"]*glightbox\.min\.js)"></script>')
+_GLIGHTBOX_INIT = '<script id="init-glightbox">'
+_GLIGHTBOX_INSTANCE = re.compile(
+    r"const lightbox = GLightbox\((\{[^{}]*\})\);.*?(?=</script>)", re.DOTALL
+)
+
+
+def on_post_page(output, page, config, **kwargs):
+    """Two fixes to what the glightbox plugin appends to a page.
+
+    * **The library moves out of `<head>`.** The plugin injects its ~57 KB script there
+      synchronously on every page, blocking first paint. It is only needed by the
+      `#init-glightbox` script at the end of `<body>`, so it loads there instead.
+    * **The plugin's instance becomes plain configuration.** `javascripts/glightbox-gallery.js`
+      owns the page's lightbox (one gallery per page, theme-aware), so a second instance would
+      only bind every thumbnail twice, and the `document$` subscription the plugin ships for
+      `navigation.instant` (off here) would revive it after our script replaced it. What the
+      plugin computed from the `glightbox:` block in mkdocs.yml is kept as `glightboxOptions`,
+      still the single source of truth for image slides.
+
+    Runs after the plugin's own `on_post_page` (hooks run after plugins for the same event).
+    """
+    updated = _hand_the_glightbox_config_over(_move_the_glightbox_library(output))
+    return updated if updated != output else None
+
+
+def _move_the_glightbox_library(output: str) -> str:
+    match = _GLIGHTBOX_JS.search(output)
+    init_pos = output.find(_GLIGHTBOX_INIT)
+    if match is None or init_pos == -1:
+        return output
+    output = output[: match.start()] + output[match.end() :]
+    init_pos = output.find(_GLIGHTBOX_INIT)
+    return output[:init_pos] + match.group(0) + output[init_pos:]
+
+
+def _hand_the_glightbox_config_over(output: str) -> str:
+    if _GLIGHTBOX_INIT not in output:
+        return output
+    updated, replaced = _GLIGHTBOX_INSTANCE.subn(
+        lambda match: f"const glightboxOptions = {match.group(1)};\n", output, count=1
+    )
+    if not replaced:
+        raise PluginError(
+            "the glightbox plugin's init script no longer builds its instance as "
+            "`const lightbox = GLightbox({...});`, so its configuration cannot be handed to "
+            "javascripts/glightbox-gallery.js. Check the plugin's `on_post_page` after the "
+            "upgrade and update the pattern here."
+        )
+    return updated
 
 
 def on_page_content(html, page, config, **kwargs):

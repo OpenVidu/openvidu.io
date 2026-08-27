@@ -172,11 +172,15 @@ As an alternative to using the OpenVidu Meet app, you can configure the initial 
 
 The relevant parameters are:
 
+<div class="nowrap-first-column" markdown>
+
 | Parameter | Description |
 | --------- | ----------- |
 | **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. Used by applications developed with OpenVidu Meet. |
 | **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
 | **`MEET_INITIAL_WEBHOOK_URL`** | The URL where the OpenVidu Meet webhooks will be sent. |
+
+</div>
 
 !!! warning
     The `MEET_INITIAL_*` parameters are only used the first time OpenVidu Meet runs. After that first run, use the OpenVidu Meet app to modify their values.

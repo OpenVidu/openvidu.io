@@ -35,7 +35,7 @@ If you need to integrate OpenVidu with other services, you can use webhooks to s
 
     This command will restart the services whose configuration files changed across your entire OpenVidu deployment.
 
-## <span class="openvidu-tag openvidu-pro-tag">PRO</span> V2 Compatibility Configuration
+## **PRO**{ .openvidu-tag .openvidu-pro-tag } V2 Compatibility Configuration
 
 If you are using the V2 Compatibility module, you can also enable webhooks for the V2 Compatibility layer.
 
@@ -59,17 +59,21 @@ To receive webhooks from OpenVidu on your local machine, you need to expose your
 
 The following images illustrate the difference between an unreachable and a reachable local application server:
 
-<div class="grid cards" markdown>
+<div class="grid-container" markdown>
 
-<figure markdown>
-  ![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>Unreachable local application server</figcaption>
-</figure>
+<div class="grid-50" markdown>
+![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail.svg){ loading=lazy }
+/// caption
+Unreachable local application server
+///
+</div>
 
-<figure markdown>
-  ![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>Reachable local application server</figcaption>
-</figure>
+<div class="grid-50" markdown>
+![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success.svg){ loading=lazy }
+/// caption
+Reachable local application server
+///
+</div>
 
 </div>
 

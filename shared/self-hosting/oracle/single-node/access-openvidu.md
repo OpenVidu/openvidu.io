@@ -6,9 +6,8 @@ To verify that your OpenVidu deployment is working correctly, check the credenti
     1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
     2. Click the secret you want to view.
     3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
-        <figure markdown>
-        ![View Secret](/assets/images/platform/self-hosting/shared/oracle/view-secret.png){ .svg-img .dark-img }
-        </figure>
+
+        ![View Secret](/assets/images/platform/self-hosting/shared/oracle/view-secret.png){ .round-corners loading=lazy }
 
         !!! warning
             Click _"Show decoded Base64 digit"_ to see the actual value of the secret.

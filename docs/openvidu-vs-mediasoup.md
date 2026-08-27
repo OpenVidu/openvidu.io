@@ -29,12 +29,15 @@ faq:
       persistence, authentication, a managed recording API, a REST API, an admin dashboard, and
       native mobile SDKs are all out of scope by design. You would build every one of those yourself.
 hide:
+  - feedback
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
 tags: []
+page_features:
+  - setupwowjs
 ---
 
 # OpenVidu vs mediasoup
@@ -92,11 +95,11 @@ everything on top of it ready to use:
 | --- | --- | --- |
 | Media engine | [mediasoup](docs/self-hosting/production-ready/performance.md), integrated | The library itself |
 | Signaling | Bundled | Build it yourself |
-| Room/session model | [Bundled](docs/build-your-app/common-operations.md#manage-rooms) | Not provided |
-| Authentication | [JWT tokens with grants](docs/build-your-app/common-operations.md#generate-access-tokens), bundled | Not provided |
-| Recording (Egress) | [Bundled](docs/build-your-app/common-operations.md#recording) (S3-compatible storage) | Manual RTP piping to GStreamer/FFmpeg |
-| Server/REST API | Full [server API](docs/build-your-app/common-operations.md) | None |
-| Webhooks | Bundled [event set](docs/build-your-app/common-operations.md#webhooks) | None |
+| Room/session model | [Bundled](docs/reference/room-service-api.md#rooms) | Not provided |
+| Authentication | [JWT tokens with grants](docs/reference/access-tokens.md#video-grants), bundled | Not provided |
+| Recording (Egress) | [Bundled](docs/reference/egress.md) (S3-compatible storage) | Manual RTP piping to GStreamer/FFmpeg |
+| Server/REST API | Full [server API](docs/reference/room-service-api.md) | None |
+| Webhooks | Bundled [event set](docs/reference/webhooks.md#events) | None |
 | Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md) | None |
 | Client SDKs | [8 SDKs, including native Android and iOS](docs/tutorials/application-client/index.md) | JS + C++ only |
 | Clustering | [One-click automated deployment](docs/self-hosting/deployment-types.md) with autoscaling on 5 cloud providers | Your own orchestration |
@@ -144,4 +147,12 @@ all out of scope by design. You would build every one of those yourself.
 
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 
+</div>
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Weighing a DIY mediasoup build against a ready platform?</h2>
+  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
 </div>

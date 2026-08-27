@@ -1,8 +1,6 @@
 ---
 title: "Python application server tutorial"
 description: "Build a minimal Python application server for OpenVidu with Flask and the LiveKit-compatible Python SDK: issue access tokens and handle webhooks."
-tags:
-  - setupcustomgallery
 ---
 
 # Python Server Tutorial
@@ -12,7 +10,7 @@ tags:
 This is a minimal server application built for Python with [Flask :fontawesome-solid-external-link:{.external-link-icon}](https://flask.palletsprojects.com/en/stable/){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+-   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
 It internally uses [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}.
 
@@ -20,7 +18,7 @@ It internally uses [LiveKit Python SDK :fontawesome-solid-external-link:{.extern
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -30,11 +28,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run the server application
 
---8<-- "shared/tutorials/application-server/python.md"
+--8<-- "tutorials/application-server/python.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/tabs.md"
+--8<-- "tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -107,7 +105,7 @@ def create_token():
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's identity in the AccessToken.
-3. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="_blank"}.
+3. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 4. Finally, we convert the AccessToken to a JWT token and send it back to the client.
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
@@ -116,14 +114,14 @@ If required fields are available, a new JWT token is created. For that we use th
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 2. We set participant's identity in the AccessToken.
-3. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="_blank"}.
+3. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 4. Finally, we convert the AccessToken to a JWT token and send it back to the client.
 
 ---
 
 #### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](../../reference/webhooks.md#events).
 
 ```python title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/python/app.py#L34-L51' target='_blank'>app.py</a>" linenums="34"
 token_verifier = TokenVerifier(LIVEKIT_API_KEY, LIVEKIT_API_SECRET) # (1)!
@@ -147,7 +145,7 @@ def receive_webhook():
 ```
 
 1. Initialize a `TokenVerifier` using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
-2. Initialize a `WebhookReceiver` using the `TokenVerifier`. It will help validating and decoding incoming [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+2. Initialize a `WebhookReceiver` using the `TokenVerifier`. It will help validating and decoding incoming [webhook events](../../reference/webhooks.md).
 3. Get the 'Authorization' header from the HTTP request.
 4. Obtain the webhook event using the `WebhookReceiver#receive` method. It expects the raw body of the request and the 'Authorization' header.
 5. Consume the event as you whish.
@@ -160,6 +158,6 @@ Inside the `receive_webhook` handler we:
 2. Obtain the webhook event using the `WebhookReceiver#receive` method. It expects the raw body of the request and the `Authorization` header. In this way, we can validate the event to confirm it is actually coming from our LiveKit Server.
 3. If everything is ok, you can consume the event as you whish (in this case, we just log it).
 
---8<-- "shared/tutorials/webhook-local-server.md"
+--8<-- "tutorials/webhook-local-server.md"
 
 <br>

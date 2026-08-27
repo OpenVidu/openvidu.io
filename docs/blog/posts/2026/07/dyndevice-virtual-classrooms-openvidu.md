@@ -17,18 +17,14 @@ tags:
   - Build vs buy
 authors:
   - patxi
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # How DynDevice Built Virtual Classrooms Into Its LMS with OpenVidu
 
-![DynDevice and OpenVidu customer success story](/assets/images/blog/2026/07/dyndevice-virtual-classrooms-openvidu/poster-light.webp#only-light "DynDevice + OpenVidu")
-![DynDevice and OpenVidu customer success story](/assets/images/blog/2026/07/dyndevice-virtual-classrooms-openvidu/poster-dark.webp#only-dark "DynDevice + OpenVidu")
+![DynDevice and OpenVidu customer success story](/assets/images/blog/2026/07/dyndevice-virtual-classrooms-openvidu/poster-light.webp#only-light "DynDevice + OpenVidu"){ .round-corners }
+![DynDevice and OpenVidu customer success story](/assets/images/blog/2026/07/dyndevice-virtual-classrooms-openvidu/poster-dark.webp#only-dark "DynDevice + OpenVidu"){ .round-corners }
 
-What do you do when your product depends on video meetings that happen somewhere else? For years, the trainers using [DynDevice](https://www.dyndevice.com/){:target="_blank"}, the corporate eLearning platform built by [Mega Italia Media](https://www.megaitaliamedia.com/){:target="_blank"}, had to send their learners out of the LMS and into Zoom, Meet, Teams, WebEx or GoToWebinar links to run a live class. It worked — and it fragmented the learning experience every single day.
+What do you do when your product depends on video meetings that happen somewhere else? For years, the trainers using [DynDevice :fontawesome-solid-external-link:{.external-link-icon}](https://www.dyndevice.com/){:target="_blank"}, the corporate eLearning platform built by [Mega Italia Media :fontawesome-solid-external-link:{.external-link-icon}](https://www.megaitaliamedia.com/){:target="_blank"}, had to send their learners out of the LMS and into Zoom, Meet, Teams, WebEx or GoToWebinar links to run a live class. It worked — and it fragmented the learning experience every single day.
 
 This post kicks off our series on how engineering teams solve real WebRTC and infrastructure challenges. We interviewed **Matteo Resconi**, IT & Development Area Manager at Mega Italia Media, about the journey from juggling five external meeting tools to one-click virtual classrooms built into their own platform: what they evaluated, why they didn't build on raw WebRTC, and what changed for their team and their users.
 
@@ -62,7 +58,7 @@ So the team reframed the question. Not *"can we build this?"* — a good enginee
 
 > "We pivoted to looking for a solution that provided an easy and intuitive way to manage the code, while still giving us the flexibility to add all the custom features necessary for our specific use case."
 
-That middle ground — more than a rigid SaaS widget, less than a raw [WebRTC](https://webrtc.org/){:target="_blank"} stack you assemble yourself — is precisely the gap OpenVidu is designed to fill.
+That middle ground — more than a rigid SaaS widget, less than a raw [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){:target="_blank"} stack you assemble yourself — is precisely the gap OpenVidu is designed to fill.
 
 ## Why OpenVidu
 
@@ -117,6 +113,6 @@ If DynDevice's "before" picture looked uncomfortably familiar, the fastest way o
 Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](/docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](/openvidu-meet-vs-openvidu-platform.md) settles it in five minutes.
 
 !!! tip "Thinking about your own success story?"
-    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support.md) — we'll do the writing, you get the visibility and the backlinks.
+    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support/index.md) — we'll do the writing, you get the visibility and the backlinks.
 
 *Our thanks to Matteo Resconi and the Mega Italia Media team for sharing their experience.*

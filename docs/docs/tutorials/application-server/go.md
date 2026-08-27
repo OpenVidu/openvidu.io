@@ -1,8 +1,6 @@
 ---
 title: "Go application server tutorial"
 description: "Build a minimal Go application server for OpenVidu with Gin and the LiveKit-compatible Go SDK: issue access tokens and handle webhook events."
-tags:
-  - setupcustomgallery
 ---
 
 # Go Server Tutorial
@@ -12,7 +10,7 @@ tags:
 This is a minimal server application built for Go with [Gin :fontawesome-solid-external-link:{.external-link-icon}](https://gin-gonic.com/){:target="_blank"} that allows:
 
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
--   Receiving LiveKit [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+-   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
 It internally uses the [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}.
 
@@ -20,7 +18,7 @@ It internally uses the [LiveKit Go SDK :fontawesome-solid-external-link:{.extern
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server.md"
+--8<-- "tutorials/run-openvidu-server.md"
 
 ### 2. Download the tutorial code
 
@@ -30,11 +28,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run the server application
 
---8<-- "shared/tutorials/application-server/go.md"
+--8<-- "tutorials/application-server/go.md"
 
 ### 4. Run a client application to test against this server
 
---8<-- "shared/tutorials/application-client/tabs.md"
+--8<-- "tutorials/application-client/tabs.md"
 
 ## Understanding the code
 
@@ -125,7 +123,7 @@ func createToken(context *gin.Context) {
 ```
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
-2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="_blank"}.
+2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 3. We convert the AccessToken to a JWT token.
 4. Finally, the token is sent back to the client.
 
@@ -134,7 +132,7 @@ We first load the request body into a struct with `roomName` and `participantNam
 If required fields are available, a new JWT token is created. For that we use the [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go){:target="_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
-2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#Video-grant){:target="_blank"}.
+2. We set the video grants and identity of the participant in the AccessToken. `RoomJoin` allows the user to join a room and `Room` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
 3. We convert the AccessToken to a JWT token and return it to the client.
 4. Finally, the token is sent back to the client.
 
@@ -142,7 +140,7 @@ If required fields are available, a new JWT token is created. For that we use th
 
 ### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/#Events){:target="_blank"}.
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](../../reference/webhooks.md#events).
 
 ```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/go/main.go#L51-L61' target='_blank'>main.go</a>" linenums="51"
 func receiveWebhook(context *gin.Context) {
@@ -159,15 +157,15 @@ func receiveWebhook(context *gin.Context) {
 ```
 
 1. Create a `SimpleKeyProvider` with the `LIVEKIT_API_KEY` and `LIVEKIT_API`.
-2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](../../reference/webhooks.md).
 3. Consume the event as you whish.
 
 <span></span>
 
 1. Create a `SimpleKeyProvider` with the `LIVEKIT_API_KEY` and `LIVEKIT_API`.
-2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/server/webhooks/){:target="_blank"}.
+2. Receive the webhook event providing the `http.Request` in the Gin context and the `SimpleKeyProvider` we just created. This will validate and decode the incoming [webhook event](../../reference/webhooks.md).
 3. Consume the event as you whish.
 
---8<-- "shared/tutorials/webhook-local-server.md"
+--8<-- "tutorials/webhook-local-server.md"
 
 <br>

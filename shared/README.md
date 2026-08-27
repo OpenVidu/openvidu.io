@@ -1,9 +1,9 @@
 # Shared snippets
 
-Reusable Markdown fragments included in pages (and in other snippets) with the [`pymdownx.snippets`](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/) syntax, where the path is always relative to the **repository root**:
+Reusable Markdown fragments included in pages (and in other snippets) with the [`pymdownx.snippets`](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/) syntax, where the path is always relative to **this `shared/` folder** (the configured `base_path`, independent of the build directory):
 
 ```markdown
---8<-- "shared/<folder>/<snippet>.md"
+--8<-- "<folder>/<snippet>.md"
 ```
 
 See [contributing/authoring.md](../contributing/authoring.md#adding-a-new-shared-snippet) for the full authoring rules (most importantly the [**link rules**](../contributing/link-rules.md): links in snippets are root-absolute, except deployment-type-parametric ones).
@@ -35,7 +35,7 @@ shared/
 
 Conventions inside `self-hosting/`:
 
-- **Provider folders mirror the provider names of the docs tree** (`docs/docs/self-hosting/{single-node,single-node-pro,elastic,ha}/<provider>/`). A snippet lives in a provider folder when all its host pages belong to that provider, no matter how many deployment types include it — that cross-deployment-type reuse is precisely why these snippets exist.
+- **Provider folders mirror the provider names of the docs tree** (`docs/docs/self-hosting/{single-node,elastic,ha}/<provider>/`). A snippet lives in a provider folder when all its host pages belong to that provider, no matter how many deployment types include it — that cross-deployment-type reuse is precisely why these snippets exist.
 - **Filenames don't repeat the folder name**: `aws/troubleshooting.md`, not `aws/aws-troubleshooting.md`.
-- **A `single-node/` subfolder inside a provider folder** holds snippets used only by that provider's `single-node/` + `single-node-pro/` pages (e.g. `aws/single-node/config.md`, `on-premises/single-node/upgrade.md`).
+- **A `single-node/` subfolder inside a provider folder** holds snippets used only by that provider's `single-node/` pages (e.g. `aws/single-node/config.md`, `on-premises/single-node/upgrade.md`).
 - **`common/` is for snippets spanning several providers** or used outside the self-hosting section (e.g. `restart-openvidu-deployment.md` is included from AI and Meet pages).

@@ -5,9 +5,9 @@ description: "How OpenVidu's embedded TURN server protects relayed media with a 
 
 # TURN server security
 
-OpenVidu embeds a [TURN](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT){:target="_blank"} server so that clients on restrictive networks can still exchange WebRTC media: when a direct WebRTC connection is not possible, media is relayed through the TURN server on port `443` (UDP) or over `443` TLS. See [Force media traffic through port 443](force-single-port.md) for the networking side of this.
+OpenVidu embeds a [TURN :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT){:target="_blank"} server so that clients on restrictive networks can still exchange WebRTC media: when a direct WebRTC connection is not possible, media is relayed through the TURN server on port `443` (UDP) or over `443` TLS. See [Force media traffic through port 443](force-single-port.md) for the networking side of this.
 
-A TURN relay is, by design, a packet forwarder. Left unrestricted, an authenticated client could try to use it as an open proxy to reach hosts and ports it should never touch — a well-documented class of attack (see [TURN security best practices](https://www.enablesecurity.com/blog/turn-security-best-practices/){:target="_blank"} by Enable Security). To prevent this, OpenVidu's TURN server ships with several **security mechanisms enabled by default**. This guide explains that behavior and the configuration values that control it.
+A TURN relay is, by design, a packet forwarder. Left unrestricted, an authenticated client could try to use it as an open proxy to reach hosts and ports it should never touch — a well-documented class of attack (see [TURN security best practices :fontawesome-solid-external-link:{.external-link-icon}](https://www.enablesecurity.com/blog/turn-security-best-practices/){:target="_blank"} by Enable Security). To prevent this, OpenVidu's TURN server ships with several **security mechanisms enabled by default**. This guide explains that behavior and the configuration values that control it.
 
 ## Why the relay needs protecting
 
@@ -48,7 +48,7 @@ Every relayed packet is validated **at the packet level** against the configured
 
 ### TCP relay disabled (RFC 6062)
 
-[RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"} (TURN Extensions for TCP Allocations) lets a client ask the server to relay traffic to a peer over an **outbound TCP connection** (`Connect` / `ConnectionBind`). OpenVidu **disables this by default**: clients can only allocate UDP relays, which is all WebRTC media needs. TCP allocation requests are rejected.
+[RFC 6062 :fontawesome-solid-external-link:{.external-link-icon}](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"} (TURN Extensions for TCP Allocations) lets a client ask the server to relay traffic to a peer over an **outbound TCP connection** (`Connect` / `ConnectionBind`). OpenVidu **disables this by default**: clients can only allocate UDP relays, which is all WebRTC media needs. TCP allocation requests are rejected.
 
 ### Time-limited, per-participant credentials
 
@@ -96,6 +96,8 @@ turn:
     # relay_preferred_interface: eth0
 ```
 
+<div class="nowrap-first-column" markdown>
+
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `enable_rfc6062` | boolean | `false` | Allow TURN TCP allocations (RFC 6062). Keep disabled unless you specifically need TCP relays. |
@@ -103,6 +105,8 @@ turn:
 | `deny_peer_cidrs` | list | _empty_ | CIDRs whose peer IPs are denied. Takes precedence over the allow list, local IPs and cluster nodes. |
 | `relay_address` | string | _auto_ | Force the relay IP. Overrides auto-discovery. |
 | `relay_preferred_interface` | string | _auto_ | Interface to source the relay IP from when the node is not publicly reachable. |
+
+</div>
 
 After changing any of these values, restart the service:
 
@@ -232,4 +236,4 @@ Keep in mind:
 
 - [Force media traffic through port 443](force-single-port.md)
 - [Deploy and configure with an external proxy](deploy-with-external-proxy.md)
-- [TURN security best practices](https://www.enablesecurity.com/blog/turn-security-best-practices/){:target="_blank"}
+- [TURN security best practices :fontawesome-solid-external-link:{.external-link-icon}](https://www.enablesecurity.com/blog/turn-security-best-practices/){:target="_blank"}

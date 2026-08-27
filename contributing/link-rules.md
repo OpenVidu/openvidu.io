@@ -44,7 +44,7 @@ editor-navigable, which is why they are reserved for snippets and blog posts.
 
 **Exception — deployment-type-parametric snippets.** A few `shared/self-hosting/**` snippets are
 included in **parallel deployment-type trees** (e.g. the same snippet is used in both
-`single-node/oracle/` and `single-node-pro/oracle/`) and link to a *sibling* page that must
+`single-node/oracle/` and `elastic/oracle/`) and link to a *sibling* page that must
 differ per tree, such as `[Admin](../on-premises/admin.md)` or `[Admin](./admin.md)`. These are
 intentionally **relative** so they resolve to the correct deployment type at each inclusion
 point — keep them relative. Only links to *fixed* targets (anything under
@@ -84,7 +84,17 @@ see [checks.md](checks.md).
 
 Links from HTML to **versioned** pages (rare) still use relative-to-built-folder paths: a page
 `performance.md` builds to `performance/index.html`, so add one extra `../` compared to the
-Markdown path (unless linking from an `index.md`).
+Markdown path (unless linking from an `index.md`). This works only **within one version**, where
+source and target share the version folder.
+
+> [!WARNING]
+> **A link to `/latest/…` must be absolute — never relative, never `{{ base_url }}`-based.**
+> `latest` is a sibling of the version folders, not a page inside one, so no relative path from a
+> versioned page reaches it: MkDocs computes the depth without knowing the version segment mike
+> adds later, and nothing rewrites it at publish time (`_absolutise_non_versioned_links` only
+> covers `non_versioned_pages`). `{{ base_url }}/latest/meet/` renders as
+> `../../latest/meet/`, which on `/3.8/docs/x/` resolves to the 404 `/3.8/latest/meet/`. The
+> theme footer's two product links are the site-wide instance of this.
 
 ## 4. Releases pages are the one exception
 
@@ -93,6 +103,33 @@ release-notes section must be an **absolute, version-pinned** URL to that same v
 `/3.4/docs/...`). **Never hardcode a version anywhere else** (`Release` blog posts follow the
 same pinned form — see the blog conventions). The full releases-pages contract is in
 [versioning.md](versioning.md).
+
+## External links and new tabs
+
+- **New tab**: the one canonical spelling is `{:target="_blank"}` (`ovweb lint` warns on
+  variants). Never add `rel="noopener"` — modern browsers imply it for `target="_blank"`, and
+  the privacy plugin adds it to published pages anyway.
+- **Every external link opens in a new tab**, and **every link that opens a new tab carries the
+  external-link icon** (`:fontawesome-solid-external-link:{.external-link-icon}`, appended inside
+  the label). That includes internal links given `target="_blank"` so the reader keeps their
+  place: on this site the icon means "this opens elsewhere", not "this is a third party".
+  `ovweb lint` enforces both — a same-tab external link is an error, a missing icon a warning.
+- **Exempt from the icon**, because it would be noise or impossible: a label that is already an
+  image or a single icon shortcode (`:simple-github:`, the `:octicons-link-24:` cells in the
+  releases tables), an `md-button` CTA (a button is its own affordance), and `mailto:` (no tab
+  opens). Same for the source links in a code block's `title=` caption: the shortcode is not
+  processed inside a fence attribute, and a filename chip is already its own affordance.
+- **Illustrative URLs are code, not links**: `openvidu.example.io`, the
+  `xxx-yyy-zzz-www.openvidu-local.dev` placeholder host — nothing resolves, so write
+  `` `https://openvidu.example.io/dashboard` ``. A `localhost:PORT` URL that really answers while
+  the tutorial runs stays a link, in a new tab, without the icon: it is the reader's own machine,
+  not another site.
+- **Watch the underscore in `_blank`.** If the same source line later contains `_..._` emphasis,
+  the two underscores pair, the attr block is swallowed, and the link silently loses its
+  `target` while `{:target="` shows up as text on the page. Use `*emphasis*` on such a line.
+  `ovweb lint --site` catches the leak (`attr-block-leak`).
+- Inside a blog excerpt the link must stay raw HTML (see rule 3), but the icon shortcode still
+  renders inside inline raw HTML, so it goes in the anchor's text as usual.
 
 ## Anchors and warnings
 
