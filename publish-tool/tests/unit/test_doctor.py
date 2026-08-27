@@ -7,6 +7,8 @@ from ovweb.doctor import PINNED_DISTRIBUTIONS, check_pins
 PYPROJECT = """
 build = [
     "mike==2.2.0",
+    "mkdocs==1.6.1",
+    "pymdown-extensions==11.0.1",
     "mkdocs-material[imaging]==9.7.6",
     "pygments==2.19.2",
     "mkdocs-glightbox==0.5.2",
@@ -14,6 +16,8 @@ build = [
     "mkdocs-rss-plugin==1.19.0",
 ]
 validate = [
+    "mkdocs==1.6.1",
+    "pymdown-extensions==11.0.1",
     "mkdocs-material==9.7.6",
     "pygments==2.19.2",
     "mkdocs-glightbox==0.5.2",
@@ -24,7 +28,8 @@ validate = [
 
 DOCKERFILE = (
     "FROM squidfunk/mkdocs-material:9.7.6\n"
-    "RUN pip install mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 "
+    "RUN pip install mkdocs==1.6.1 pymdown-extensions==11.0.1 "
+    "mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 "
     "mkdocs-rss-plugin==1.19.0 pygments==2.19.2\n"
 )
 
@@ -41,6 +46,8 @@ def write_repo(root, *, pyproject=PYPROJECT, dockerfile=DOCKERFILE, mike_dockerf
 #: Deterministic stand-in for the running environment, matching the fixture's declared pins.
 #: The real lookup would make the tests depend on whatever this environment has installed.
 INSTALLED = {
+    "mkdocs": "1.6.1",
+    "pymdown-extensions": "11.0.1",
     "mkdocs-material": "9.7.6",
     "mike": "2.2.0",
     "mkdocs-glightbox": "0.5.2",

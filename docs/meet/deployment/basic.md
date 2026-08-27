@@ -47,17 +47,17 @@ Follow the instructions of the installation wizard. They are self-explanatory, b
 
 1.  Select **Yes** to continue when prompted after the installation summary:
 
-    ![Installation summary](../../assets/images/meet/deployment/basic/wizard-1.png)
+    ![Installation summary](../../assets/images/meet/deployment/basic/wizard-1.png){ .round-corners loading=lazy }
 
 2.  If you have a domain name, enter it when prompted. If you don't have one, just press **Enter** to continue and the public IP will be used as the domain name, with a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate issued for it:
 
-    ![Press Enter](../../assets/images/meet/deployment/basic/wizard-2.png)
+    ![Press Enter](../../assets/images/meet/deployment/basic/wizard-2.png){ .round-corners loading=lazy }
 
 3.  The installer will ask you to confirm if you want to proceed with the installation. Select **Yes** to start the installation.
 
     The installation will begin, downloading the software and configuring your server. Once the installation is complete, you will see this message:
 
-    ![Installation complete](../../assets/images/meet/deployment/basic/wizard-3.png)
+    ![Installation complete](../../assets/images/meet/deployment/basic/wizard-3.png){ .round-corners loading=lazy }
 
     You can access OpenVidu Meet in your browser using the URL and credentials shown in the installation completion message.
 

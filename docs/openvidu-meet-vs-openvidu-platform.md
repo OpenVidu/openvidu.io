@@ -2,6 +2,7 @@
 title: "OpenVidu Meet vs OpenVidu Platform"
 description: "OpenVidu Meet is a finished video conferencing app you deploy; OpenVidu Platform is the SDK layer you build on. Compare both and pick one."
 hide:
+  - feedback
   - navigation
   - toc
   - footer
@@ -17,8 +18,8 @@ OpenVidu offers two different products:
 - **OpenVidu Meet**: a complete, high-quality video calling service designed to be self-hosted. Ideal for teams, businesses and organizations that need a reliable, secure and customizable video conferencing solution running on their servers.
 - **OpenVidu Platform**: a solution comprised of a self-hosted deployment and a set of SDKs and APIs that greatly simplifies the development of any type of real-time application.
 
-![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-light.svg#only-light){ .do-not-include-in-gallery }
-![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-dark.svg#only-dark){ .do-not-include-in-gallery }
+![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-light.svg#only-light){ .skip-gallery loading=lazy }
+![OpenVidu Meet vs OpenVidu Platform](assets/images/openvidu-meet-vs-openvidu-platform/meet-vs-platform-dark.svg#only-dark){ .skip-gallery loading=lazy }
 /// caption
 ///
 
@@ -31,7 +32,7 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 <div style="text-align: center" markdown>
 
---8<-- "shared/meet-vs-platform-table.md"
+--8<-- "meet-vs-platform-table.md"
 
 </div>
 

@@ -1,8 +1,6 @@
 ---
 title: "Live captions tutorial for OpenVidu"
 description: "Transcribe a video call in real time and show the captions in a plain JavaScript frontend, using the OpenVidu Speech Processing agent."
-tags:
-  - setupcustomgallery
 ---
 
 # Live Captions tutorial
@@ -15,7 +13,7 @@ This tutorial is a simple variation of the [JavaScript client](../application-cl
 
 ### 1. Run OpenVidu Server
 
---8<-- "shared/tutorials/run-openvidu-server-speech-agent.md"
+--8<-- "tutorials/run-openvidu-server-speech-agent.md"
 
 ### 2. Download the tutorial code
 
@@ -25,11 +23,11 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 
 ### 3. Run a server application
 
---8<-- "shared/tutorials/application-server/tabs.md"
+--8<-- "tutorials/application-server/tabs.md"
 
 ### 4. Run the client application
 
-To run the client application tutorial, you need an HTTP web server installed on your development computer. A great option is [http-server :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/http-party/http-server){:target="_blank"}. You can install it via [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm){:target="_blank"}:
+To run the client application tutorial, you need an HTTP web server installed on your development computer. A great option is [http-server :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/http-party/http-server){:target="_blank"}. You can install it via [NPM :fontawesome-solid-external-link:{.external-link-icon}](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm){:target="_blank"}:
 
 ```bash
 npm install -g http-server
@@ -49,15 +47,19 @@ npm install -g http-server
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/join-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/join-js.png" loading="lazy" alt="Join screen of the JavaScript tutorial app"/></a></p></div>
+<div class="grid-50" markdown>
+![Join screen of the JavaScript tutorial app](../../../assets/images/platform/tutorials/application-client/join-js.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/application-client/room-js.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/application-client/room-js.png" loading="lazy" alt="Video call room of the JavaScript tutorial app"/></a></p></div>
+<div class="grid-50" markdown>
+![Video call room of the JavaScript tutorial app](../../../assets/images/platform/tutorials/application-client/room-js.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
---8<-- "shared/tutorials/testing-other-devices.md"
+--8<-- "tutorials/testing-other-devices.md"
 
 
 ## Understanding the code

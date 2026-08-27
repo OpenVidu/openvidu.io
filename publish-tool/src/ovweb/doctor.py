@@ -20,6 +20,8 @@ from .redirects import RedirectError, resolve_file_redirects
 #: run. Each is named both in pyproject.toml and in the Dockerfiles (mkdocs-material as the
 #: base-image tag, the rest in the pip install lines), so all the places must agree.
 PINNED_DISTRIBUTIONS = (
+    "mkdocs",
+    "pymdown-extensions",
     "mkdocs-material",
     "mike",
     "mkdocs-glightbox",
@@ -164,7 +166,32 @@ def _check_config(repo: Git | None) -> list[Check]:
         )
     ]
     checks.append(_check_redirects_resolve(config, repo))
+    site_url_check = _check_site_url_agreement(config)
+    if site_url_check is not None:
+        checks.append(site_url_check)
     return checks
+
+
+def _check_site_url_agreement(config: SiteConfig) -> Check | None:
+    """mkdocs.yml and ovweb.yaml both name the site URL; a drift breaks every rewrite."""
+    source = Path(config.source)
+    if not source.is_file():  # config parsed from memory (tests)
+        return None
+    mkdocs_yml = source.resolve().parent.parent / "mkdocs.yml"
+    if not mkdocs_yml.is_file():
+        return None
+    match = re.search(r"^site_url:\s*(\S+)", mkdocs_yml.read_text(encoding="utf-8"), re.MULTILINE)
+    if match is None:
+        return Check("config", False, "mkdocs.yml has no site_url")
+    mkdocs_url = match.group(1).strip("\"'").rstrip("/")
+    ovweb_url = config.layout.site_url.rstrip("/")
+    if mkdocs_url != ovweb_url:
+        return Check(
+            "config",
+            False,
+            f"site_url disagrees: mkdocs.yml has {mkdocs_url}, {config.source} has {ovweb_url}",
+        )
+    return Check("config", True, f"site_url agrees across mkdocs.yml and ovweb.yaml ({ovweb_url})")
 
 
 def _mirror_summary(config: SiteConfig) -> str:

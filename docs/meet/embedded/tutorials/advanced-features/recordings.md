@@ -1,8 +1,6 @@
 ---
 title: "Recordings tutorial for OpenVidu Meet"
 description: "Add recording management to an OpenVidu Meet Web Component application: list recordings, play them back and delete the ones you no longer need."
-tags:
-    - setupcustomgallery
 ---
 
 # Recordings Tutorial
@@ -21,7 +19,7 @@ The application includes all the features from the basic tutorial, plus:
 
 #### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-meet.md"
+--8<-- "tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -53,11 +51,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/recordings/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/recordings/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/recordings/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/recordings/recordings.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/recordings/recordings.png" loading="lazy" class="control-height round-corners" alt="Recordings page of the tutorial app"/></a></p></div>
+<div class="grid-50" markdown>
+![Recordings page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/recordings/recordings.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
@@ -487,8 +489,8 @@ The `deleteRecording()` function simply makes a `DELETE` request to the `/record
 
 ## Accessing this tutorial from other computers or phones
 
---8<-- "shared/tutorials/access-tutorial-from-other-devices.md"
+--8<-- "tutorials/access-tutorial-from-other-devices.md"
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
---8<-- "shared/tutorials/connect-tutorial-to-production-deployment.md"
+--8<-- "tutorials/connect-tutorial-to-production-deployment.md"

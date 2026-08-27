@@ -7,6 +7,9 @@ that is gone from the working tree must be claimed by a redirect rule — a `fil
 its URL, or an expansion (cross-product template, tree-rename or section-fallback prefix)
 covering it.
 
+A move that keeps the URL needs no rule: `x.md` and `x/index.md` are both served at `/x/`,
+so the check compares URLs, not file paths.
+
 Blog posts are exempt: their URLs derive from `date` + `slug`, not from the file path, and the
 draft-publish transition moves the file by design.
 """
@@ -67,12 +70,23 @@ def _claimed(stub: str, config: SiteConfig) -> bool:
     return False
 
 
+def _served(root: Path, layout) -> set[str]:
+    """The redirect-page path of every URL the working tree still serves."""
+    stubs = {
+        _stub_template(path.relative_to(root).as_posix(), layout)
+        for path in (root / "docs").rglob("*.md")
+    }
+    stubs.discard(None)
+    return stubs
+
+
 def check_removed_pages(base_pages: list[str], *, root: Path, config: SiteConfig) -> list[Finding]:
-    """Every page of the base revision that is gone must be claimed by a redirect rule."""
+    """Every URL of the base revision that is gone must be claimed by a redirect rule."""
     findings = []
+    served = _served(root, config.layout)
     for page in sorted(set(base_pages)):
         stub = _stub_template(page, config.layout)
-        if stub is None or (root / page).is_file():
+        if stub is None or stub in served:
             continue
         if _claimed(stub, config):
             continue

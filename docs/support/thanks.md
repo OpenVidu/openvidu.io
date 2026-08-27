@@ -5,6 +5,8 @@ robots: "noindex, follow"
 search:
   exclude: true
 hide:
+  - feedback
+  - path
   - navigation
   - toc
   - footer
@@ -14,7 +16,7 @@ hide:
 
 # Thanks for reaching out
 
-<div markdown="1" style="font-size: 20px">
+<div style="font-size: 20px" markdown>
 
 We have received your message and a member of the OpenVidu team will reply **as soon as possible**, at the email address you provided.
 
