@@ -11,7 +11,7 @@ To turn webhooks on, see [Enable OpenVidu webhooks](../self-hosting/how-to-guide
 
 OpenVidu is API-compatible with LiveKit, so all LiveKit webhook events are supported. Visit the LiveKit docs for a complete reference of webhook management:
 
-[:octicons-arrow-right-24: **LiveKit docs**](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#managing-webhooks){:target="_blank"}
+[:octicons-arrow-right-24: **LiveKit docs** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#managing-webhooks){:target="_blank"}
 
 
 

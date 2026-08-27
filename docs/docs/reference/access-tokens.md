@@ -9,7 +9,7 @@ Any client requires an **access token** to connect to a Room in OpenVidu. The to
 
 OpenVidu is API-compatible with LiveKit, so any LiveKit server SDK can generate valid OpenVidu tokens. Visit the LiveKit docs for a complete reference of token claims and grants:
 
-[:octicons-arrow-right-24: **LiveKit docs**](https://docs.livekit.io/frontends/reference/tokens-grants/){:target="_blank"}
+[:octicons-arrow-right-24: **LiveKit docs** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/frontends/reference/tokens-grants/){:target="_blank"}
 
 The tutorials show a working token endpoint in different languages:
 

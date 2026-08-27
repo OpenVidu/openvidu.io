@@ -39,7 +39,7 @@ OpenVidu is API-compatible with LiveKit, so the LiveKit client SDKs work unchang
 
 Visit the LiveKit docs for the complete client-side documentation, and for the exact signatures of your own SDK:
 
-[:octicons-arrow-right-24: **LiveKit docs**](https://docs.livekit.io/reference/#livekit-sdks){:target="_blank"}
+[:octicons-arrow-right-24: **LiveKit docs** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/#livekit-sdks){:target="_blank"}
 
 The tutorials build a complete application client in different frameworks:
 
@@ -198,7 +198,7 @@ await room.localParticipant.unpublishTrack(track, true);
 
 The second boolean parameter indicates if the local Track should be stopped. This usually means freeing the device capturing it (switching off the camera LED, for example).
 
-> [:octicons-arrow-right-24: LiveKit reference docs](https://docs.livekit.io/reference/client-sdk-js/classes/LocalParticipant.html#unpublishTrack){:target="_blank"}
+> [:octicons-arrow-right-24: LiveKit reference docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/classes/LocalParticipant.html#unpublishTrack){:target="_blank"}
 
 ### Subscribe to a Track
 
@@ -314,7 +314,7 @@ await room.localParticipant.publishTrack(videoTrack);
 
 The same package processes audio tracks, and is the starting point for writing your own processor:
 
-> [:octicons-arrow-right-24: GitHub Repository](https://github.com/livekit/track-processors-js){:target="_blank"}
+> [:octicons-arrow-right-24: GitHub Repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js){:target="_blank"}
 
 ### Bandwidth optimizations
 
@@ -399,7 +399,7 @@ room.registerByteStreamHandler("my-files", async (reader, participantInfo) => {
 
 Two things to keep in mind: a participant that joins after a stream was opened does not receive it, and OpenVidu does not persist any message. Storing history is up to your application.
 
-> [:octicons-arrow-right-24: LiveKit reference docs](https://docs.livekit.io/transport/data/text-streams/){:target="_blank"}
+> [:octicons-arrow-right-24: LiveKit reference docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/data/text-streams/){:target="_blank"}
 
 ### Remote procedure calls
 
@@ -417,7 +417,7 @@ const response = await room.localParticipant.performRpc({
 });
 ```
 
-> [:octicons-arrow-right-24: LiveKit reference docs](https://docs.livekit.io/transport/data/rpc/){:target="_blank"}
+> [:octicons-arrow-right-24: LiveKit reference docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/data/rpc/){:target="_blank"}
 
 ### Continuous data
 
@@ -427,7 +427,7 @@ Data tracks carry a continuous flow of frames, sending each one only once and dr
 const track = await room.localParticipant.publishDataTrack({ name: "my_sensor_data" });
 ```
 
-> [:octicons-arrow-right-24: LiveKit reference docs](https://docs.livekit.io/transport/data/data-tracks/){:target="_blank"}
+> [:octicons-arrow-right-24: LiveKit reference docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/data/data-tracks/){:target="_blank"}
 
 ### Shared state
 
@@ -448,7 +448,7 @@ room.on(RoomEvent.ParticipantAttributesChanged, (changed, participant) => {
 
 Metadata is limited to 512 KiB and attributes to 64 KiB across all keys. Neither is meant for frequent updates: more than one every few seconds is a sign you want data packets or a data track instead.
 
-> [:octicons-arrow-right-24: LiveKit reference docs](https://docs.livekit.io/transport/data/state/){:target="_blank"}
+> [:octicons-arrow-right-24: LiveKit reference docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/data/state/){:target="_blank"}
 
 ### Data packets
 

@@ -9,7 +9,7 @@ The Room Service API is what your **application server** uses to manage Rooms fr
 
 The API is **Twirp-based HTTP** (plain `POST` requests with a JSON body) so any language can call it. OpenVidu is API-compatible with LiveKit, so any LiveKit server SDK can be used to manage Rooms. Visit the LiveKit docs for a complete reference of the Room Service API:
 
-[:octicons-arrow-right-24: **LiveKit docs**](https://docs.livekit.io/reference/other/roomservice-api/){:target="_blank"}
+[:octicons-arrow-right-24: **LiveKit docs** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/){:target="_blank"}
 
 ## Calling the API
 

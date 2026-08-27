@@ -100,7 +100,7 @@ That said, Janus ships more out of the box than a bare media engine:
 | | **OpenVidu** | **Janus** |
 | --- | --- | --- |
 | License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | GPL v3 (commercial license available) |
-| Room/session model | [Bundled](docs/developing-your-openvidu-app/how-to.md#manage-rooms) | Basic, via the VideoRoom plugin only |
+| Room/session model | [Bundled](docs/reference/room-service-api.md) | Basic, via the VideoRoom plugin only |
 | Authentication | [JWT tokens with grants](docs/developing-your-openvidu-app/how-to.md#generate-access-tokens), bundled | Not provided for application rooms |
 | Recording (Egress) | [Bundled](docs/developing-your-openvidu-app/how-to.md#recording), S3-compatible storage | Raw `.mjr` dumps, manual post-processing |
 | Server/REST API | Full [server API](docs/developing-your-openvidu-app/how-to.md) | Admin/Monitor API only (session-level, not app-level) |
