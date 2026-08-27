@@ -25,7 +25,7 @@ The full enum is [`IngressInput` :fontawesome-solid-external-link:{.external-lin
 
 !!! tip "IP cameras"
 
-    RTSP cameras are ingested through `URL_INPUT`, passing the camera's `rtsp://` URL. There is a worked example in eight languages under [IP Cameras](../developing-your-openvidu-app/how-to.md#ip-cameras).
+    RTSP cameras are ingested through `URL_INPUT`, passing the camera's `rtsp://` URL. There is a worked example in eight languages under [IP Cameras](../build-your-app/common-operations.md#ip-cameras).
 
 ### Push and pull workflows
 
@@ -436,8 +436,8 @@ An Ingress publishing into a Room also produces ordinary participant and track e
 
 ## Related
 
-- [IP Cameras](../developing-your-openvidu-app/how-to.md#ip-cameras): RTSP ingest in eight languages.
-- [Stream ingestion](../developing-your-openvidu-app/how-to.md#stream-ingestion): choosing between the input types.
+- [IP Cameras](../build-your-app/common-operations.md#ip-cameras): RTSP ingest in eight languages.
+- [Stream ingestion](../build-your-app/common-operations.md#stream-ingestion): choosing between the input types.
 - [Access tokens reference](./access-tokens.md): the `ingressAdmin` grant gates these operations.
 - [Webhooks reference](./webhooks.md): the Ingress events and their payloads.
 - [Egress reference](./egress.md): media in the other direction.

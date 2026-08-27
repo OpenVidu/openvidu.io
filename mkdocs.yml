@@ -68,9 +68,9 @@ nav:
       - docs/index.md
       - Getting started: docs/getting-started.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
-      - Developing your OpenVidu app:
-          - docs/developing-your-openvidu-app/index.md
-          - How to: docs/developing-your-openvidu-app/how-to.md
+      - Build your app:
+          - docs/build-your-app/index.md
+          - Common operations: docs/build-your-app/common-operations.md
       - Tutorials:
           - Application Server:
               - docs/tutorials/application-server/index.md
@@ -117,7 +117,6 @@ nav:
               - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
               - Demo App: docs/tutorials/angular-components/openvidu-components-demo.md
           - AI Services:
-              - docs/tutorials/ai-services/index.md
               - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
       - Reference:
           - Access tokens: docs/reference/access-tokens.md
@@ -450,7 +449,7 @@ plugins:
         - docs/getting-started.md
         - docs/comparing-openvidu.md
         - docs/releases.md
-        - docs/developing-your-openvidu-app/*.md
+        - docs/build-your-app/*.md
         - docs/ui-components/*.md
 
         OpenVidu Platform tutorials — application server:

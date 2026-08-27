@@ -251,11 +251,11 @@ Each side can do things the other cannot:
 
 </div>
 
-The same split holds beyond this API. [Egress](./egress.md) and [Ingress](./ingress.md) are server-side services as well, so a participant cannot start a recording or pull in an external stream on its own. See [_Manage Rooms_ > _From your application server_](../developing-your-openvidu-app/how-to.md#from-your-application-server) for a list of every operation that only exists on the server side.
+The same split holds beyond this API. [Egress](./egress.md) and [Ingress](./ingress.md) are server-side services as well, so a participant cannot start a recording or pull in an external stream on its own. See [_Common operations_ > _From your application server_](../build-your-app/common-operations.md#from-your-application-server) for a list of every operation that only exists on the server side.
 
 ## Related
 
 - [Access tokens reference](./access-tokens.md): the access token grants in detail
-- [How to develop your OpenVidu app](../developing-your-openvidu-app/how-to.md): the cheat sheet of common operations, client-side and server-side
+- [Common operations](../build-your-app/common-operations.md): the cheat sheet of every operation, client-side and server-side
 - [Application server tutorials](../tutorials/application-server/index.md): complete servers in nine languages
 - [Client SDK reference](./client-sdk.md): the same Room, seen from inside

@@ -291,6 +291,34 @@ redirects:
       body: "Redirecting to the advanced recording tutorial with S3 storage…"
       versions: ">=3.2"
 
+    - id: removed-ai-tutorials-index
+      description: >
+        The AI services tutorials index was a link-only page, removed in 3.8. Its URL lands on
+        the tutorial it pointed at.
+      at: "{version}/docs/tutorials/ai-services/index.html"
+      to: "openvidu-live-captions/"
+      canonical: "{site_url}/latest/docs/tutorials/ai-services/openvidu-live-captions/"
+      body: "Redirecting to the Live Captions tutorial…"
+      versions: ">=3.8"
+
+    - id: renamed-build-your-app
+      description: >
+        developing-your-openvidu-app/ was renamed build-your-app/ in 3.8, after the nav name.
+      at: "{version}/docs/developing-your-openvidu-app/index.html"
+      to: "../build-your-app/"
+      canonical: "{site_url}/latest/docs/build-your-app/"
+      body: "Redirecting to Build your app…"
+      versions: ">=3.8"
+
+    - id: renamed-common-operations
+      description: >
+        how-to.md in that folder was renamed common-operations.md in 3.8, after the nav name.
+      at: "{version}/docs/developing-your-openvidu-app/how-to/index.html"
+      to: "../../build-your-app/common-operations/"
+      canonical: "{site_url}/latest/docs/build-your-app/common-operations/"
+      body: "Redirecting to Common operations…"
+      versions: ">=3.8"
+
   # Rules that generate many redirect pages from one entry, resolved against the published tree
   # under three filters: a candidate that holds a real page is skipped, one whose target is
   # missing is skipped, and a target that is itself a redirect is followed to its destination.

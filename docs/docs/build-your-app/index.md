@@ -1,9 +1,9 @@
 ---
-title: "Developing your OpenVidu application"
-description: "The pieces of an OpenVidu application and the order to build them in: the application server, the client, and the deployment they both talk to."
+title: "Build your app"
+description: "The four steps to an OpenVidu application: launch a deployment, generate access tokens in your server, build the client UI, and deploy both."
 ---
 
-# Developing your OpenVidu application
+# Build your app
 
 Here's a high-level overview of the steps involved in building an OpenVidu application:
 

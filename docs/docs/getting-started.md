@@ -173,7 +173,7 @@ Now look at the [dashboard](http://localhost:7880/dashboard){:target="_blank"}: 
 
     Every operation at a glance — tokens, room management, recording, screen sharing — each one linking to its reference page.
 
-    [:octicons-arrow-right-24: How to develop your OpenVidu app](./developing-your-openvidu-app/how-to.md)
+    [:octicons-arrow-right-24: Common operations](./build-your-app/common-operations.md)
 
 -   **Go to production**
 

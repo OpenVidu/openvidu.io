@@ -175,7 +175,7 @@ From there, **Create Room**, and open the invite link on your phone.
 A few more things worth checking while the server is up:
 
 - **The dashboard**, at `https://<your-server-ip>/dashboard` (credentials in `openvidu.env`). It shows rooms and participants live, which makes the "is this actually working?" question easy to answer.
-- **The OpenVidu Platform API**, based on LiveKit. The `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` values grepped above are what an application uses to create rooms and tokens programmatically, with [any LiveKit SDK](/docs/developing-your-openvidu-app/index.md).
+- **The OpenVidu Platform API**, based on LiveKit. The `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` values grepped above are what an application uses to create rooms and tokens programmatically, with [any LiveKit SDK](/docs/build-your-app/index.md).
 - **The OpenVidu Meet API**, a higher-level [REST API](/meet/embedded/reference/rest-api.md) to manage rooms, recordings and users without touching the LiveKit layer. Generate its API key from the console's **Embedded** section and authenticate requests with the `X-API-KEY` header.
 
 ## Move it to production
@@ -199,6 +199,6 @@ And a single node is only the first of the [deployment types](/docs/self-hosting
 If you would like to explore this further, two good next steps could be:
 
 - Compare the [deployment options](/docs/self-hosting/deployment-types.md) that fit a real workload, from this single node to elastic and HA setups.
-- If what you actually need is video calls inside your own product, look at [embedding OpenVidu Meet](/meet/embedded/intro.md) with your deployment's API key, or build directly on [OpenVidu Platform](/docs/developing-your-openvidu-app/index.md) with the LiveKit SDKs. You already have everything both require.
+- If what you actually need is video calls inside your own product, look at [embedding OpenVidu Meet](/meet/embedded/intro.md) with your deployment's API key, or build directly on [OpenVidu Platform](/docs/build-your-app/index.md) with the LiveKit SDKs. You already have everything both require.
 
 Next up in this series: the same fifteen minutes on other clouds. Same OpenVidu, different consoles.

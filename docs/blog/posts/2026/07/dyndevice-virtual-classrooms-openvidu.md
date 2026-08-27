@@ -90,7 +90,7 @@ One click from the course dashboard into a branded virtual classroom — that's 
 
 > "Looking ahead, the integration of AI is certainly on our radar. We believe AI will help both our team and our users by making the web-conferencing experience smoother, more accessible, and easier to manage and moderate."
 
-That maps to where OpenVidu is heading too — real-time [AI agents](/docs/tutorials/ai-services/index.md) that join rooms to caption, translate, summarize or moderate. We suspect this won't be the last conversation we have with the DynDevice team about it.
+That maps to where OpenVidu is heading too — real-time [AI agents](/docs/ai/overview.md) that join rooms to caption, translate, summarize or moderate. We suspect this won't be the last conversation we have with the DynDevice team about it.
 
 ## Matteo's advice for teams in the same spot
 

@@ -54,7 +54,7 @@ Real-time video in your app takes a few lines with our LiveKit fork's SDKs:
 
 [Get started](./getting-started.md){ .md-button .md-button--primary }
 [Start with a tutorial](./tutorials/application-server/index.md){ .md-button }
-[How to develop your OpenVidu app](./developing-your-openvidu-app/index.md){ .md-button }
+[Build your app](./build-your-app/index.md){ .md-button }
 
 </div>
 
