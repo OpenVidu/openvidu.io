@@ -100,15 +100,7 @@ redirects:
 
     - id: platform-getting-started
       description: >
-        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4. Replaces the hand-written
-        JavaScript stub that used to live in docs/docs/getting-started.md, which was
-        indexable, self-canonical and listed in both sitemap.xml and llms.txt.
-
-        The rule only applies to 3.4–3.7. Either side of that range the path holds a real
-        page and must not redirect: before 3.4 the getting started guide *was* the Platform
-        documentation index, and from 3.8 the path was reclaimed by a written-from-scratch
-        guide (run OpenVidu locally, mint a token, join from the browser) — which is what
-        the URL always promised and what the redirect could only approximate.
+        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4, and back to a real page in 3.8.
       at: "{version}/docs/getting-started/index.html"
       to: "../"
       canonical: "{site_url}/latest/docs/"

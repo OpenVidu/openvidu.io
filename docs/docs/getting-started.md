@@ -33,19 +33,17 @@ That is the whole shape of an OpenVidu application, and it does not change when 
 
 !!! info "Prerequisites"
 
-    [Docker and Docker Compose](https://docs.docker.com/get-started/get-docker/){:target="_blank"}, and [Node.js](https://nodejs.org/){:target="_blank"} for the example server on this page. The [application server tutorials](./tutorials/application-server/index.md) cover eight other languages.
+    [Docker and Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/get-started/get-docker/){:target="_blank"}, and [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/){:target="_blank"} for the example server on this page. The [application server tutorials](./tutorials/application-server/index.md) cover eight other languages.
 
 ## 1. Run OpenVidu locally
 
---8<-- "shared/tutorials/run-openvidu-locally.md"
+--8<-- "tutorials/run-openvidu-locally.md"
 
 Once it is up, open [http://localhost:7880](http://localhost:7880){:target="_blank"}. That page lists every service in the deployment along with its credentials, and it is where you will find:
 
-| | |
-| --- | --- |
-| **OpenVidu API** | `ws://localhost:7880` — the URL your client connects to |
-| **API key / secret** | `devkey` / `secret` in the local deployment |
-| [**OpenVidu Dashboard**](http://localhost:7880/dashboard){:target="_blank"} | Watch rooms, participants and tracks appear as you build |
+- **OpenVidu API** — `ws://localhost:7880`, the URL your client connects to.
+- **API key / secret** — `devkey` / `secret` in the local deployment.
+- [**OpenVidu Dashboard**](http://localhost:7880/dashboard){:target="_blank"} — watch rooms, participants and tracks appear as you build.
 
 Keep the dashboard open in a tab. It is the fastest way to see whether something worked.
 
