@@ -9,7 +9,7 @@ description: "Diagnose recordings that never appear or fail with 503: Egress CPU
 
 This is a guide to help identify and solve common issues related to recordings in OpenVidu.
 
-Recordings are handled by the **Egress service** in OpenVidu, built on top of [LiveKit Egress](../reference/egress.md). There are some general considerations to take into account:
+Recordings are handled by the **Egress service** in OpenVidu, built on top of LiveKit's Egress and documented in the [Egress reference](../reference/egress.md). There are some general considerations to take into account:
 
 - Recordings are **CPU intensive operations**. For recordings to work smoothly, the nodes hosting the Egress service must have sufficient free cores.
 - The first symptom of something going wrong with recordings is usually **missing recordings**: you are expecting recording files to be available in your storage, but they are simply not there. Other common symptom is receiving an **error `503 Service Unavailable`** when starting a new recording [on-demand](#on-demand-vs-automatic-recordings).
@@ -19,13 +19,13 @@ Recordings are handled by the **Egress service** in OpenVidu, built on top of [L
 
 Recordings can be started **on-demand** or **automatically**:
 
-- **On-demand recordings** are started by calling any of the these operations of the [LiveKit Egress API](../reference/egress.md):
+- **On-demand recordings** are started by calling any of these [Egress API](../reference/egress.md#starting-an-egress) operations:
     - `StartRoomCompositeEgress`
     - `StartTrackCompositeEgress`
     - `StartParticipantEgress`
     - `StartTrackEgress`
     - `StartWebEgress`
-- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](../reference/room-service-api.md) method: then the room will be automatically recorded during its lifetime. See [Auto Egress](../reference/egress.md#auto-egress) for more details.
+- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](../reference/room-service-api.md#rooms) method: then the room will be automatically recorded during its lifetime. See [Auto Egress](../reference/egress.md#auto-egress) for more details.
 
 !!! warning
 
@@ -93,7 +93,7 @@ room:
   auto_create: false
 ```
 
-When a room is auto-created on participant join, OpenVidu uses the room settings included in that participant’s token ([`RoomConfiguration`](../reference/room-service-api.md)).
+When a room is auto-created on participant join, OpenVidu uses the room settings included in that participant’s token (the [`roomConfig`](../reference/access-tokens.md#token-claims) claim).
 
 A common problem appears when these chain of events happens:
 
@@ -146,7 +146,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
       auto_create: false
     ```
 
-- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the [`RoomConfiguration`](../reference/room-service-api.md) in both the [`CreateRoom`](../reference/room-service-api.md) request and the [participant's access token](../reference/access-tokens.md#token-claims) (its `roomConfig` claim). In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
+- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the room configuration of both the [`CreateRoom`](../reference/room-service-api.md#rooms) request and the [participant's access token](../reference/access-tokens.md#token-claims) (its `roomConfig` claim). In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
 - Increase the room timeout properties in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#config-files). This can reduce the probability of rooms being cleaned up before a participant tries to join:
 
     ```yaml
@@ -196,7 +196,7 @@ You can also configure external storage programmatically on a per-request basis 
     -rw-r--r-- 1 admin root   2969013 Mar 10 14:16 TrackComposite-RM_JpcnziWBTEdY-TestRoom3-2026-03-10T141625.mp4
     ```
 
-- The [EgressInfo](../reference/egress.md) objects returned by the Egress API or included in the `egress_ended` webhook event contains:
+- The [EgressInfo](../reference/egress.md#egressinfo) objects returned by the Egress API or included in the `egress_ended` webhook event contains:
     - Field `backup_storage_used` with value `true`.
     - Or any other field with the substring `backup_storage` in its value (E.g. `manifestLocation = '/home/egress/backup_storage/EG_f5nHLam4xLb8.json'`{ .nowrap }).
 

@@ -77,7 +77,7 @@ Upon a new Room creation request:
 ### Egress
 
 !!! info
-    Check out the official Egress documentation of LiveKit [here](../../reference/egress.md).
+    Check out the [Egress reference](../../reference/egress.md) for every Egress type, output format and status value.
 
 The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). 
 
@@ -145,7 +145,7 @@ openvidu:
 ### Ingress
 
 !!! info
-    Check out the official Ingress documentation of LiveKit [here](../../reference/ingress.md).
+    Check out the [Ingress reference](../../reference/ingress.md) for every input type, transcoding option and Ingress state.
 
 The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 

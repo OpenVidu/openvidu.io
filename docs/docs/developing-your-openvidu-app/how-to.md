@@ -9,9 +9,7 @@ This page is a collection of the most common operations you may want to perform 
 
 ![OpenVidu app architecture](../../assets/images/platform/getting-started/openvidu-app-architecture.svg){ loading=lazy }
 
-You can use this page as a cheat sheet to know at a glance how to do something, and you have links to the LiveKit reference documentation of each operation for a more detailed explanation.
-
-> All client side operations are exemplified using the [LiveKit JS Client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/modules.html){:target="_blank"}. For other client SDKs, refer to the corresponding LiveKit reference documentation.
+You can use this page as a cheat sheet to know at a glance how to do something: every operation links to the page in the Reference section that documents it in full.
 
 ### Generate access tokens
 

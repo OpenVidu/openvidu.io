@@ -243,4 +243,4 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 You can configure a Participant's token to trigger the dispatch of an agent right at the moment that Participant connects to a Room. This is very useful to dispatch an agent to a specific Room only when a specific Participant joins.
 
-To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. Visit [`roomConfig`](../../reference/access-tokens.md#token-claims) to learn how.
+To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. See the [`roomConfig`](../../reference/access-tokens.md#token-claims) token claim.
