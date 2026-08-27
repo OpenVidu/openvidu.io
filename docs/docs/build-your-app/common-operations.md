@@ -1,6 +1,6 @@
 ---
 title: "Common operations"
-description: "The operations you need most often in an OpenVidu app: create rooms, mint tokens, publish and subscribe to tracks, record, and receive webhooks."
+description: "Every operation an OpenVidu app needs at a glance: tokens, tracks, screen sharing, recording, stream ingestion and webhooks, each with its reference."
 ---
 
 # Common operations

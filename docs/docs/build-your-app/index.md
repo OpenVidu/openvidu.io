@@ -1,6 +1,6 @@
 ---
 title: "Build your app"
-description: "Build your OpenVidu app in the right order: launch a deployment, mint access tokens in your application server, then build the client UI."
+description: "The four steps to an OpenVidu application: launch a deployment, generate access tokens in your server, build the client UI, and deploy both."
 ---
 
 # Build your app
