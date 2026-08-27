@@ -300,20 +300,19 @@ redirects:
       body: "Redirecting to the installation guide…"
       versions: ">=3.8"
       values:
-        edition: [single-node, single-node-pro, elastic, ha]
+        edition: [single-node, elastic, ha]
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
     # The per-provider Single Node upgrade guides became one page per edition in 3.8; Elastic
     # and High Availability keep theirs.
     - id: merged-single-node-upgrade
       kind: cross-product
-      at: "{version}/docs/self-hosting/{edition}/{provider}/upgrade/index.html"
+      at: "{version}/docs/self-hosting/single-node/{provider}/upgrade/index.html"
       to: "../../upgrade/"
-      canonical: "{site_url}/latest/docs/self-hosting/{edition}/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
       body: "Redirecting to the upgrade guide…"
       versions: ">=3.8"
       values:
-        edition: [single-node, single-node-pro]
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
     # Inverse of merged-single-node-upgrade, for the version selector: before 3.8 that URL
@@ -322,15 +321,17 @@ redirects:
       kind: cross-product
       at: "{version}/docs/self-hosting/{edition}/upgrade/index.html"
       to: "../"
-      canonical: "{site_url}/latest/docs/self-hosting/{edition}/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
       body: "Redirecting to the per-provider upgrade guides…"
       versions: "<3.8"
       values:
         edition: [single-node, single-node-pro]
 
-    # single-node-pro/{provider}/install|admin merged into their single-node/ counterpart in
-    # 3.8. A cross-product rather than a tree-rename: a rename would also claim the
-    # install-tutorial path that removed-oracle-install-tutorial-pro owns.
+    # single-node-pro/ merged into single-node/ in 3.8. Cross-products rather than one
+    # tree-rename: a rename would also claim the install-tutorial path that
+    # removed-oracle-install-tutorial-pro owns. Each rule names the merged page itself —
+    # an expansion collapses through a `files` stub or a real page, never through another
+    # expansion's stub, so pointing inside the retired tree would leave a 404.
     - id: single-node-pro-provider-pages-merged
       kind: cross-product
       at: "{version}/docs/self-hosting/single-node-pro/{provider}/{page}/index.html"
@@ -341,6 +342,26 @@ redirects:
       values:
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
         page: [install, admin]
+
+    - id: single-node-pro-provider-index-merged
+      kind: cross-product
+      at: "{version}/docs/self-hosting/single-node-pro/{provider}/index.html"
+      to: "../../single-node/{provider}/install/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/{provider}/install/"
+      body: "Redirecting to the installation guide…"
+      versions: ">=3.8"
+      values:
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+
+    - id: single-node-pro-provider-upgrade-merged
+      kind: cross-product
+      at: "{version}/docs/self-hosting/single-node-pro/{provider}/upgrade/index.html"
+      to: "../../../single-node/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
+      body: "Redirecting to the upgrade guide…"
+      versions: ">=3.8"
+      values:
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
     # Before 3.4 there was no meet/ section: every URL it answers in a newer version lands on
     # the OpenVidu Call docs, so the version selector keeps the reader on the predecessor.
