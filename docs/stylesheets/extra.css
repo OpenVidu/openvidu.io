@@ -281,7 +281,7 @@ div[class*="grid-"]:has(> img) {
   max-width: none;
   margin: 0;
   min-height: calc(100vh - 4.8rem);
-  padding: 3em 15em 5em 15em;
+  padding: 2.5em 15em 5em 15em;
   background: var(--top-home-section-color);
   display: flex;
   flex-direction: column;
@@ -294,7 +294,7 @@ div[class*="grid-"]:has(> img) {
 }
 
 .top-home-img {
-  width: 35%;
+  width: 34%;
 }
 
 .slogan {
@@ -314,7 +314,7 @@ div[class*="grid-"]:has(> img) {
 }
 
 .home-description {
-  font-size: 1rem;
+  font-size: 0.98rem;
   text-align: center;
   max-width: 75rem;
   margin-left: auto;
@@ -378,7 +378,7 @@ div[class*="grid-"]:has(> img) {
 }
 
 .home-badges img {
-  height: 28px;
+  height: 27px;
   vertical-align: middle;
 }
 
