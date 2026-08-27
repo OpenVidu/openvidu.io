@@ -43,6 +43,8 @@ hide:
   - search-bar
   - version-selector
 tags: []
+page_features:
+  - setupwowjs
 ---
 
 # OpenVidu vs LiveKit
@@ -211,4 +213,12 @@ the media-track capacity per server as a result.
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 [Evaluating mediasoup directly instead?](openvidu-vs-mediasoup.md){ .md-button }
 
+</div>
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Planning a migration from LiveKit, or evaluating both at scale?</h2>
+  <p style="margin-bottom: 1.5em">Tell us about your deployment and we will help you size it and plan the switch.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
 </div>

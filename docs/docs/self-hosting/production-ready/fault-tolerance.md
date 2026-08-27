@@ -1,6 +1,8 @@
 ---
 title: "Fault tolerance in OpenVidu deployments"
 description: "How OpenVidu survives losing a node: which services are replicated, what happens to a room in progress, and what Elastic and HA each guarantee."
+page_features:
+  - setupwowjs
 ---
 
 # Fault tolerance :material-shield-refresh:
@@ -74,3 +76,11 @@ In both cases, files are not lost and can be recovered. They will be available i
 If the Media Node hosting an ongoing Egress process crashes, then the Egress process will be immediately interrupted. But as long as the disk of the crashed Media Node is still accessible, you may recover the output files. They will be available in the Media Node at path `/opt/openvidu/egress_data/home/egress/tmp`.
 
 It is possible that if the crashed Egress had **MP4** as [configured output :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/outputs/){:target="_blank"} (which is an option available for [Room Composite :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/composite-recording/#roomcomposite-egress){:target="_blank"} and [Track Composite :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/participant/#trackcomposite-egress){:target="_blank"}) the recovered file may not be directly playable and it may require a repair process.
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Need specific uptime or SLA guarantees?</h2>
+  <p style="margin-bottom: 1.5em">Tell us your availability requirements and we will help you choose between Elastic and High Availability.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>
