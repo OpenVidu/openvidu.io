@@ -1,6 +1,8 @@
 ---
 title: "OpenVidu performance: 2x with mediasoup"
 description: "OpenVidu replaces LiveKit's Pion WebRTC engine with mediasoup, doubling the media tracks one server handles while keeping the LiveKit API."
+page_features:
+  - setupwowjs
 ---
 
 # Performance :material-lightning-bolt:
@@ -106,7 +108,7 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
 
-<div class="second-slogan" style="margin: 6em 0; text-align: center">
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 0.5em">Want a performance estimate for your own workload?</h2>
   <p style="margin-bottom: 1.5em">Tell us your expected load and we will help you benchmark and size it.</p>
   <div class="home-buttons">

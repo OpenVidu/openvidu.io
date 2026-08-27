@@ -36,6 +36,8 @@ hide:
   - search-bar
   - version-selector
 tags: []
+page_features:
+  - setupwowjs
 ---
 
 # OpenVidu vs mediasoup
@@ -147,7 +149,7 @@ all out of scope by design. You would build every one of those yourself.
 
 </div>
 
-<div class="second-slogan" style="margin: 6em 0; text-align: center">
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 0.5em">Weighing a DIY mediasoup build against a ready platform?</h2>
   <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
   <div class="home-buttons">

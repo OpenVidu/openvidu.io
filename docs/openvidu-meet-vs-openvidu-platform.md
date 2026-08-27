@@ -9,6 +9,8 @@ hide:
   - search-bar
   - version-selector
 tags: []
+page_features:
+  - setupwowjs
 ---
 
 # OpenVidu Meet vs OpenVidu Platform
@@ -36,7 +38,7 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 </div>
 
-<div class="second-slogan" style="margin: 6em 0; text-align: center">
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 0.5em">Still not sure which one fits?</h2>
   <p style="margin-bottom: 1.5em">Tell us about your use case and we will help you pick — or size a deployment that uses both.</p>
   <div class="home-buttons">

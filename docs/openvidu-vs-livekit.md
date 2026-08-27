@@ -43,6 +43,8 @@ hide:
   - search-bar
   - version-selector
 tags: []
+page_features:
+  - setupwowjs
 ---
 
 # OpenVidu vs LiveKit
@@ -213,7 +215,7 @@ the media-track capacity per server as a result.
 
 </div>
 
-<div class="second-slogan" style="margin: 6em 0; text-align: center">
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 0.5em">Planning a migration from LiveKit, or evaluating both at scale?</h2>
   <p style="margin-bottom: 1.5em">Tell us about your deployment and we will help you size it and plan the switch.</p>
   <div class="home-buttons">

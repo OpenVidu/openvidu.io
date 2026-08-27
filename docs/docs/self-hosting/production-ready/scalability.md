@@ -1,6 +1,8 @@
 ---
 title: "OpenVidu scalability and autoscaling"
 description: "How OpenVidu scales from a small meeting to a large live stream, with autoscaling Media Nodes and a control plane that keeps up with them."
+page_features:
+  - setupwowjs
 ---
 
 # Scalability :material-chart-timeline-variant-shimmer:
@@ -304,7 +306,7 @@ When deploying an OpenVidu cluster **On Premises** you are responsible for monit
     - [Removing Media Nodes gracefully](../ha/on-premises/admin.md#removing-media-nodes-gracefully)
     - [Removing Media Nodes forcefully](../ha/on-premises/admin.md#removing-media-nodes-forcefully)
 
-<div class="second-slogan" style="margin: 6em 0; text-align: center">
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
   <h2 style="margin-bottom: 0.5em">Planning for a specific scale target?</h2>
   <p style="margin-bottom: 1.5em">Tell us your expected rooms and participants and we will help you size the deployment.</p>
   <div class="home-buttons">
