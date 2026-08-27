@@ -1,5 +1,5 @@
 ---
-title: "Low Latency Live Streaming: WebRTC vs. HLS and DASH"
+title: "Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)"
 draft: true
 date: 2026-08-26
 slug: low-latency-live-streaming
@@ -24,18 +24,20 @@ hide:
     - version-selector
 ---
 
-# Low Latency Live Streaming: WebRTC vs. HLS and DASH
+# Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)
 
 ![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/YYYY/MM/low-latency-live-streaming/poster-light.webp#only-light "Low latency live streaming vs. traditional broadcast delay")
 ![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/YYYY/MM/low-latency-live-streaming/poster-dark.webp#only-dark "Low latency live streaming vs. traditional broadcast delay")
 
-When Spain was playing the World Cup, something annoying happened. We celebrated each of Spain's goals with a "GOOOOOAL", and 15 seconds after our neighbors shouted the goal. Obviously, we ruined their match to a point that they asked us where we were watching the World Cup to avoid the gap. Now picture that same 15-second gap on a live shopping stream where you're typing "does it come in blue?", or in a video call where you keep talking over the other person because their audio hasn't reached you yet. That's the difference between "live" and **low latency live streaming**.
+This is the first of a post series on streaming content through WebRTC and WHIP. This first post settles the fundamentals. A second post will go hands-on building an app to ingest video and audio from sources such as a browser and OBS to a WebRTC platform (we will be using OpenVidu). Finally, a third post will review existing tools that are able to generate WHIP. 
+
+When Spain was playing the World Cup, something annoying happened. We celebrated each of Spain's goals with a "GOOOOOAL", and 15 seconds after, our neighbors shouted the goal. Obviously, we ruined their match to a point that they asked us where we were watching the World Cup to avoid the gap. Now picture that same 15-second gap on a live shopping stream where you're typing "does it come in blue?", or in a video call where you keep talking over the other person because their audio hasn't reached you yet. That's the difference between "live" and **low latency live streaming**.
 
 <!-- more -->
 
 ## What "Low Latency" Actually Means
 
-If you have kids that play online video games, you can be sure they know what a bad latency means. I do have, and my 11 years old blames the ping when he feels that his car should have hit the ball before his opponents when playing Rocket League. Indeed, he keeps an eye on the ping from time to time, while he plays, whenever he feels something is wrong with the timing. 
+If you have kids that play online video games, you can be sure they know what a bad latency means. I do have, and my 11-year-old blames the ping when he feels that his car should have hit the ball before his opponents when playing Rocket League. Indeed, he keeps an eye on the ping from time to time, while he plays, whenever he feels something is wrong with the timing. 
 
 So, what is the formal definition of latency? It is simply the time between a frame being captured at the source and being rendered on a viewer's screen. It is obvious that the lower the latency value, the better. But, what is really a low latency? For instance, a live sports broadcast and a video call are both "real-time," yet one tolerates 20 seconds of delay and the other falls apart after 150 milliseconds. More importantly, how much latency tolerates a given use case?
 
@@ -116,7 +118,7 @@ The low latency line is **whether the interaction loops back to the source in re
 
 ## Building Low Latency Live Streaming Today
 
-If you're building something in that "below the second" category, that is, a stream someone needs to react to, the protocol choice is WebRTC, and you need it end to end, not just for capture.
+If you're building something in that "below the second" category (a stream someone needs to react to) the protocol choice is WebRTC, and you need it end to end, not just for capture.
 
 ![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp)
 
