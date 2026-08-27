@@ -46,7 +46,7 @@ In the end, the industry roughly buckets latency into five tiers:
 | Category | Latency | Typical use cases |
 |---|---|---|
 | High latency | > 45s | Legacy live streaming setups |
-| Typical latency | 10–45s | Most live OTT (Over-the-top) streaming services |
+| Typical latency | 10–45s | Most live OTT (Over-the-top) streaming services, VoD (Video on demand) |
 | Low latency | < 10s | Premium live sports, financial news, eSports |
 | Ultra-low latency | < 1s | Interactive live streaming (live commentary, in-play betting) |
 | Near-real-time | < 100ms | Videoconferencing, cloud gaming |
@@ -60,10 +60,8 @@ Let's have a look at some use cases to understand what actually lands in each la
 
 - **World wide events retransmissions (10-45s).** A world wide event such as the World Cup or the Olympics can tolerate several seconds of latency. 
 - **eSports broadcasts and commentary (< 10s).** These use cases are more latency-tolerant than personalized streaming, but they are still tighter than a typical broadcast, since commentators need to track the live match state closely and viewers routinely cross-check against a second screen.
-- **Financial data feeds (< 1s).** A trading terminal showing prices that are even a few seconds stale is showing a market that no longer exists.
 - **Interactive personalized live streaming (< 1s).** Creator-led streams on platforms like Twitch or YouTube Live are strongly driven by chat. If the streamer is reading a message that's ten seconds stale, the whole back-and-forth that makes the format work falls apart.
 - **Live shopping (< 1s).** A viewer asks "does it come in blue?" mid-stream and expects an answer immediately, not thirty seconds later after the moment — and the sale — has passed. This is a genuinely massive market in parts of Asia and a growing one elsewhere.
-- **In-play betting (< 1s).** Wagers placed against a live game state have to lock before the real-world outcome is visible anywhere else, or the platform is exposed to arbitrage. Here, sub-second latency isn't a nicety — it's a fraud-prevention requirement.
 - **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more — input lag above a few tens of milliseconds is felt directly in your hands.
 - **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely — industrial machinery, a drone, a surgical robot — then the use case needs a genuine real-time control loop, not just real-time-looking video.
 
@@ -79,7 +77,10 @@ HLS packages media into `.ts` segments listed in an `.m3u8` playlist. DASH does 
 
 That segment-and-manifest model is precisely why HLS and DASH scale so well: any commodity HTTP server or CDN edge node can cache and serve a static file, so a single stream can fan out to millions of viewers for the cost of standard web hosting. That makes them brilliant, although they do not favor latency specifically.
 
-**Low-Latency HLS** and **Low-Latency DASH** are optimizations over latency that work by using chunked transfer encoding: segments start streaming to the player before they're fully written, instead of waiting for the whole file. That gets both formats down to latencies of roughly 2–5 seconds. It helps, but it is still far from what use cases such as videoconference and online video games require. Furthermore, neither HLS nor DASH (low-latency or not) is natively decodable by a browser. You need a JavaScript player library (`hls.js`, `dash.js`, or similar) sitting on top just to play the stream back.
+**Low-Latency HLS** (LL-HLS) and **Low-Latency DASH** (LL-DASH) are optimizations over latency that work by using chunked transfer encoding: segments start streaming to the player before they're fully written, instead of waiting for the whole file. That gets both formats down to latencies of roughly 2–5 seconds. It helps, but it is still far from what use cases such as videoconference and cloud games require. Furthermore, neither HLS nor DASH (low-latency or not) is natively supported by a browser. You need a JavaScript player library (`hls.js`, `dash.js`, or similar) sitting on top just to play the stream back.
+
+The following is a table describing different streaming protocols with their lower bound limits on latency, their browser compatibility and their primary use. The last row is the whole story of this post.
+
 
 | Protocol | Typical latency | Browser playback | Primary use |
 |---|---|---|---|
@@ -91,44 +92,42 @@ That segment-and-manifest model is precisely why HLS and DASH scale so well: any
 | SRT | < 1s | Not supported | Ingest |
 | **WebRTC** | **< 1s** | **Native** | **Ingest + delivery** |
 
-That last row is the whole story of this post.
-
 ## Why WebRTC Delivers Sub-Second Latency
 
-WebRTC was designed backwards from HLS and DASH: instead of optimizing for cacheable files, it optimizes for the shortest possible path between a captured frame and a rendered one.
+WebRTC was designed to optimize the path between a captured frame and a rendered one, contrary to the design decisions behind HLS and DASH, which were focused on file caching.
 
 ![An interactive streaming session needs latencies under 1 second](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/game-streaming.webp)
 
-There's no segment, no manifest, no "wait for the file to finish." Media flows continuously as RTP packets over UDP the moment a connection is established, packet by packet, frame by frame. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure — none of it exists to buffer or batch anything.
+In WebRTC media flows continuously as RTP packets over UDP the moment a connection is established. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure, not to buffer or batch anything.
 
-WebRTC's bidirectional nature also means it isn't limited to browser-to-browser calls. **[WHIP](https://datatracker.ietf.org/doc/rfc9725/){:target="_blank"}** (WebRTC-HTTP Ingestion Protocol) standardizes how an encoder — OBS, a hardware unit, a mobile app — pushes a stream into a WebRTC-based platform with a single HTTP request that negotiates the connection. **WHEP** is the mirror image for pulling media back out over WebRTC. Together they turn WebRTC from "the video call protocol" into a legitimate low-latency live streaming transport, end to end.
+WebRTC's bidirectional nature also means it isn't limited to browser-to-browser calls. **[WHIP](https://datatracker.ietf.org/doc/rfc9725/){:target="_blank"}** (WebRTC-HTTP Ingestion Protocol) standardizes how an encoder (OBS, a hardware unit, or a mobile app) pushes a stream into a WebRTC-based platform with a single HTTP request that negotiates the connection. **WHEP** is the mirror image for pulling media back out over WebRTC. Together they turn WebRTC from "the video call protocol" into a legitimate low latency live streaming transport, end to end.
 
-None of this is free, though. The same design that keeps latency low means WebRTC doesn't inherit HTTP's effortless CDN caching — you can't just drop a WebRTC stream at an edge node the way you can an `.ts` file. Sending one publisher's stream out to thousands or millions of WebRTC viewers means chaining or interconnecting media servers intelligently, and that's still a genuinely hard, actively researched engineering problem. That's what HLS/DASH get for free.
+None of this is free, though. The same design that keeps latency low means WebRTC doesn't inherit HTTP's effortless CDN caching: you can't just drop a WebRTC stream at an edge node the way you can an `.ts` file. Sending one publisher's stream out to thousands or millions of WebRTC viewers means chaining or interconnecting media servers intelligently, and that's still a hard, actively researched engineering problem. 
 
 ## But, isn't all live video basically the same problem?
 
 It isn't, and the reason splits cleanly into two cases.
 
-**Netflix isn't part of this conversation at all.** It's video on demand: fully encoded ahead of time, sitting in storage, with no live source and no freshness requirement. There's nothing to be "low latency" about — a viewer can buffer for two seconds or ten and never notice, because the content isn't going stale while they wait. This is exactly the scenario HLS and DASH were built for, and it's why they remain the obvious right choice for on-demand video.
+**Netflix isn't part of this conversation at all.** It's video on demand: fully encoded ahead of time, sitting in storage, with no live source and no freshness requirement. There's nothing to be "low latency" about: a viewer can buffer for two seconds or ten and never notice, because the content isn't going stale while they wait. This is exactly the scenario HLS and DASH were built for, and it's why they remain the obvious right choice for on-demand video.
 
-**A World Cup broadcast is live, but it isn't interactive.** Millions of viewers receive the same one-way feed, and — critically — nothing needs to travel back from any of them to the pitch in real time. A 15–30 second delay is completely invisible to a viewer with no feedback loop into the match itself; the only things that matter are reach and reliability, which is precisely what HLS/DASH plus a global CDN are optimized to deliver. Shaving that delay to under a second would add enormous engineering cost for an experience nobody watching would actually feel.
+**A World Cup broadcast is live, but it isn't interactive.** Millions of viewers receive the same one-way feed, and nothing needs to travel back from any of them to the pitch in real time. A 15–30 seconds delay is completely invisible to a viewer with no feedback loop into the match itself; the only things that matter are reach and reliability, which is precisely what HLS/DASH plus a global CDN are optimized to deliver. 
 
-The dividing line was never "is it live," it's **whether the interaction loops back to the source in real time.** One-way, non-interactive broadcasting tolerates multi-second delay just fine, even at massive scale, because nothing round-trips back to the publisher while it's happening. The moment someone needs to chat with the streamer, place a bet against the live action, ask a question, or steer a joystick, that same multi-second delay breaks the experience entirely — no matter how few viewers there are. That's the real definition of low latency live streaming: not "fast video," but video fast enough to close a live feedback loop.
+The low latency line is **whether the interaction loops back to the source in real time.** Non-interactive broadcasting tolerates multi-second delay just fine, even at massive scale. But the moment someone needs to chat with the streamer, ask a question, or steer a joystick, that multi-second delay breaks the experience entirely. That's the real definition of low latency live streaming. It's not "fast video," but video fast enough to close a live feedback loop.
 
 ## Building Low Latency Live Streaming Today
 
-If you're building something in that second category — a stream someone needs to react to, not just watch — the protocol choice mostly makes itself: you need WebRTC, and you need it end to end, not just for capture.
+If you're building something in that "below the second" category, that is, a stream someone needs to react to, the protocol choice is WebRTC, and you need it end to end, not just for capture.
 
 ![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp)
 
-[OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC — with the option to skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too, so you're never quietly falling back to a multi-second HLS path just because the audience grew. See the [stream ingestion guide](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion) for how to wire a WHIP source into your own app.
+[OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion) for how to wire a WHIP source into your own app.
 
 ## Need more than this?
 
-👉 **[Add WHIP-based low-latency ingest to your app](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion)** — the fastest way to feel the difference is to push a real encoder into a Room and watch the delay disappear.
+👉 **[Add WHIP-based low-latency ingest to your app](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion)**: the fastest way to feel the difference is to push a real encoder into a Room and watch the delay disappear.
 
 To go further:
 
 - [OpenVidu Platform](/docs/index.md) — the low-level SDKs and APIs for building your own interactive streaming experience.
 - [How to scale video conferencing architecture](/blog/posts/2026/06/scalability-in-videoconferencing-systems.md) — what changes once a single low-latency session needs to serve far more than one media server can handle.
-- [Connectivity Resilience and Security in WebRTC Deployments](/blog/posts/2026/06/turn-key-considerations.md) — why the same NAT and firewall problems that affect video calls apply just as much to low-latency ingest.
+- [Connectivity Resilience and Security in WebRTC Deployments](/blog/posts/2026/06/turn-key-considerations.md) — why the same NAT and firewall problems that affect video calls apply just as much to low latency ingest.
