@@ -15,7 +15,7 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 |                                                   | OpenVidu Meet                                          | OpenVidu Platform                                          |
 | ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
 | Self-hosted                                       | Yes                                                    | Yes                                                        |
-| AWS & Azure templates                             | Yes                                                    | Yes                                                        |
+| Cloud deployment templates                        | Yes                                                    | Yes                                                        |
 | HQ real-time video                                | Yes                                                    | Yes                                                        |
 | Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
 | Tutorials available                               | Yes                                                    | Yes                                                        |
@@ -27,3 +27,9 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 | AI agents                                         | In progress                                            | Yes                                                        |
 | Models                                            | Rooms & Meetings                                       | Audio tracks & Video tracks                                |
 | Links                                             | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md) | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
+
+## Still not sure which one fits?
+
+Tell us about your use case and we will help you pick — or size a deployment that uses both.
+
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)

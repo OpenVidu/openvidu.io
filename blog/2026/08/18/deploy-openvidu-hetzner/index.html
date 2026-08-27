@@ -1005,6 +1005,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -1891,7 +1895,7 @@
 <p>A few more things worth checking while the server is up:</p>
 <ul>
 <li><strong>The dashboard</strong>, at <code>https://&lt;your-server-ip&gt;/dashboard</code> (credentials in <code>openvidu.env</code>). It shows rooms and participants live, which makes the "is this actually working?" question easy to answer.</li>
-<li><strong>The OpenVidu Platform API</strong>, based on LiveKit. The <code>LIVEKIT_URL</code>, <code>LIVEKIT_API_KEY</code> and <code>LIVEKIT_API_SECRET</code> values grepped above are what an application uses to create rooms and tokens programmatically, with <a href="/latest/docs/developing-your-openvidu-app/">any LiveKit SDK</a>.</li>
+<li><strong>The OpenVidu Platform API</strong>, based on LiveKit. The <code>LIVEKIT_URL</code>, <code>LIVEKIT_API_KEY</code> and <code>LIVEKIT_API_SECRET</code> values grepped above are what an application uses to create rooms and tokens programmatically, with <a href="/latest/docs/build-your-app/">any LiveKit SDK</a>.</li>
 <li><strong>The OpenVidu Meet API</strong>, a higher-level <a href="/latest/meet/embedded/reference/rest-api/">REST API</a> to manage rooms, recordings and users without touching the LiveKit layer. Generate its API key from the console's <strong>Embedded</strong> section and authenticate requests with the <code>X-API-KEY</code> header.</li>
 </ul>
 <h2 id="move-it-to-production">Move it to production<a class="headerlink" href="#move-it-to-production" title="Anchor link to this section for reference">#</a></h2>
@@ -1909,7 +1913,7 @@
 <p>If you would like to explore this further, two good next steps could be:</p>
 <ul>
 <li>Compare the <a href="/latest/docs/self-hosting/deployment-types/">deployment options</a> that fit a real workload, from this single node to elastic and HA setups.</li>
-<li>If what you actually need is video calls inside your own product, look at <a href="/latest/meet/embedded/intro/">embedding OpenVidu Meet</a> with your deployment's API key, or build directly on <a href="/latest/docs/developing-your-openvidu-app/">OpenVidu Platform</a> with the LiveKit SDKs. You already have everything both require.</li>
+<li>If what you actually need is video calls inside your own product, look at <a href="/latest/meet/embedded/intro/">embedding OpenVidu Meet</a> with your deployment's API key, or build directly on <a href="/latest/docs/build-your-app/">OpenVidu Platform</a> with the LiveKit SDKs. You already have everything both require.</li>
 </ul>
 <p>Next up in this series: the same fifteen minutes on other clouds. Same OpenVidu, different consoles.</p>
 

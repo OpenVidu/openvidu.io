@@ -31,7 +31,7 @@ For developers that need complete freedom to build their real-time application u
 |                                                   | OpenVidu Meet                                          | OpenVidu Platform                                          |
 | ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
 | Self-hosted                                       | Yes                                                    | Yes                                                        |
-| AWS & Azure templates                             | Yes                                                    | Yes                                                        |
+| Cloud deployment templates                        | Yes                                                    | Yes                                                        |
 | HQ real-time video                                | Yes                                                    | Yes                                                        |
 | Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
 | Tutorials available                               | Yes                                                    | Yes                                                        |

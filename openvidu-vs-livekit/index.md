@@ -38,7 +38,7 @@ Any LiveKit tutorial, any third-party LiveKit example, works against an OpenVidu
 | Media engine            | Pion**COMMUNITY** or [**mediasoup**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md) (~2x more efficient)**PRO**                                                   | Pion                                              |
 | Autoscaling             | Yes: [Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/index.md) & [HA](https://openvidu.io/latest/docs/self-hosting/ha/index.md) modes**PRO**                                               | Autoscaling is yours to build and operate         |
 | License                 | Apache 2.0**COMMUNITY** / commercial**PRO**                                                                                                                                                         | Apache 2.0                                        |
-| Egress/Ingress          | [Bundled by default](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md)**COMMUNITY**                                                                                        | Separate services you deploy and operate yourself |
+| Egress/Ingress          | [Bundled by default](https://openvidu.io/latest/docs/reference/egress/index.md)**COMMUNITY**                                                                                                           | Separate services you deploy and operate yourself |
 | AI agents               | [OpenVidu Agents](https://openvidu.io/latest/docs/ai/overview/index.md) (on top of LiveKit's Agent framework), speech-processing agent bundled                                                         | LiveKit's Agent framework, DIY (no agent bundled) |
 | High-level integrations | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md), a ready-to-use videoconferencing application, optionally [embeddable in your own app](https://openvidu.io/latest/meet/embedded/intro/index.md) | None                                              |
 | Dashboard               | [OpenVidu Dashboard](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md)**COMMUNITY**, with detailed per-room and per-participant views**PRO**    | No                                                |
@@ -54,7 +54,7 @@ Deploying LiveKit's Egress and Ingress services yourself means running them as *
 
 OpenVidu **COMMUNITY** ships all of it pre-integrated by default:
 
-- [**Egress and Ingress**](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md) — no separate deployment step.
+- [**Egress**](https://openvidu.io/latest/docs/reference/egress/index.md) and [**Ingress**](https://openvidu.io/latest/docs/reference/ingress/index.md) — no separate deployment step.
 - [**S3-compatible storage for recordings**](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-s3/index.md), pre-configured (MinIO) out of the box.
 - [**An admin dashboard**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) to monitor Room status in real time and historically — participants, published tracks, Egress/Ingress activity.
 - [**A Docker Compose local development environment**](https://openvidu.io/latest/docs/self-hosting/local/index.md) with automatic certificate management, so you can test on real mobile devices on your LAN without extra setup.
@@ -114,3 +114,9 @@ However, OpenVidu does provide production-ready single-node, Elastic and HA depl
 LiveKit's own media engine (Pion) is written in Go, which requires a garbage collector and a relatively heavy runtime — a real cost in a performance-critical media server. OpenVidu supports Pion, but it can replace it with mediasoup, a C++ media engine, while keeping every other part of the LiveKit stack (SDKs, API, token model) unchanged. [OpenVidu's own benchmarks](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md) show roughly double the media-track capacity per server as a result.
 
 [Start with a tutorial](https://openvidu.io/latest/docs/tutorials/application-server/index.md) [Evaluating mediasoup directly instead?](https://openvidu.io/openvidu-vs-mediasoup/index.md)
+
+## Planning a migration from LiveKit, or evaluating both at scale?
+
+Tell us about your deployment and we will help you size it and plan the switch.
+
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)

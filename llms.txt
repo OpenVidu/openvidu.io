@@ -10,6 +10,8 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md): OpenVidu Meet is a finished video conferencing app you deploy; OpenVidu Platform is the SDK layer you build on. Compare both and pick one.
 - [OpenVidu vs LiveKit: A Self-Hosted LiveKit Fork](https://openvidu.io/openvidu-vs-livekit/index.md): OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled in.
 - [OpenVidu vs mediasoup: Platform vs Raw SFU Library](https://openvidu.io/openvidu-vs-mediasoup/index.md): mediasoup is a low-level SFU library, not a platform. See exactly what OpenVidu already built on top of it — signaling, rooms, auth, recording, API.
+- [OpenVidu vs Jitsi: Two Self-Hosted Platforms Compared](https://openvidu.io/openvidu-vs-jitsi/index.md): OpenVidu and Jitsi are both open-source, self-hosted video platforms. Compare architecture, recording, scaling, SDKs and pricing to pick the right one.
+- [OpenVidu vs Janus: Platform vs Raw WebRTC Gateway](https://openvidu.io/openvidu-vs-janus/index.md): Janus is a general-purpose WebRTC gateway, not a platform. See exactly what it leaves for you to build — signaling, rooms, auth, recording, API.
 - [Pricing: Free COMMUNITY & Pay-Per-Core PRO](https://openvidu.io/pricing/index.md): OpenVidu pricing: COMMUNITY edition free forever, PRO from $0.0006 per core per minute. Transparent, pay only for what you use.
 - [OpenVidu support and consultancy](https://openvidu.io/support/index.md): Commercial support and consultancy from the OpenVidu team, plus the community channels where COMMUNITY edition users get help with self-hosting.
 - [About the OpenVidu team](https://openvidu.io/about-us/index.md): The engineers and researchers behind OpenVidu, and the open-source and scientific work the project has grown out of.
@@ -98,10 +100,11 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 ## OpenVidu Platform
 
 - [OpenVidu Platform: Self-Hosted WebRTC SDKs](https://openvidu.io/latest/docs/index.md): Build real-time video, audio and AI applications on infrastructure you control, with LiveKit-compatible SDKs and a self-hosted media server.
-- [OpenVidu vs LiveKit Cloud, SaaS and SFUs](https://openvidu.io/latest/docs/comparing-openvidu/index.md): How OpenVidu compares with LiveKit Cloud, SaaS video APIs and bare SFUs like mediasoup, on cost, data control, features and operational effort.
+- [Get started with OpenVidu Platform](https://openvidu.io/latest/docs/getting-started/index.md): Run OpenVidu on your machine, mint an access token from a server and join a room from the browser, in about ten minutes.
+- [OpenVidu vs LiveKit, Jitsi, SaaS and SFUs](https://openvidu.io/latest/docs/comparing-openvidu/index.md): How OpenVidu compares with LiveKit, Jitsi, SaaS video APIs and bare SFUs like mediasoup and Janus, on cost, data control, features and effort.
 - [OpenVidu Platform release notes](https://openvidu.io/latest/docs/releases/index.md): Release notes for every OpenVidu Platform version, with the new features, changes and fixes each one brings, plus its upgrade notes.
-- [Developing your OpenVidu application](https://openvidu.io/latest/docs/developing-your-openvidu-app/index.md): The pieces of an OpenVidu application and the order to build them in: the application server, the client, and the deployment they both talk to.
-- [OpenVidu how-to quick reference](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md): A quick reference for the operations you need most while building an OpenVidu app, from creating rooms and tokens to publishing and recording tracks.
+- [Build your app](https://openvidu.io/latest/docs/build-your-app/index.md): The four steps to an OpenVidu application: launch a deployment, generate access tokens in your server, build the client UI, and deploy both.
+- [Common operations](https://openvidu.io/latest/docs/build-your-app/common-operations/index.md): Every operation an OpenVidu app needs at a glance: tokens, tracks, screen sharing, recording, stream ingestion and webhooks, each with its reference.
 - [OpenVidu Angular Components](https://openvidu.io/latest/docs/ui-components/angular-components/index.md): A library of ready-made Angular components for video conferencing UIs, customizable enough to match your product and quick to maintain.
 - [React Components for OpenVidu apps](https://openvidu.io/latest/docs/ui-components/react-components/index.md): Build real-time audio and video UIs in React with the LiveKit-compatible React components, hooks and contexts shipped with OpenVidu.
 
@@ -159,8 +162,16 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 
 ## OpenVidu Platform tutorials — AI services
 
-- [OpenVidu AI service tutorials](https://openvidu.io/latest/docs/tutorials/ai-services/index.md): Tutorials that add OpenVidu AI services to an application, starting with real-time live captions in a plain JavaScript video call.
 - [Live captions tutorial for OpenVidu](https://openvidu.io/latest/docs/tutorials/ai-services/openvidu-live-captions/index.md): Transcribe a video call in real time and show the captions in a plain JavaScript frontend, using the OpenVidu Speech Processing agent.
+
+## OpenVidu Platform API reference
+
+- [OpenVidu access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): Every claim and video grant an OpenVidu access token carries, how your application server signs one, and how long it stays valid.
+- [OpenVidu client SDK reference](https://openvidu.io/latest/docs/reference/client-sdk/index.md): How an OpenVidu application client connects to a Room, publishes and subscribes to Tracks, exchanges data, and reacts to every Room event.
+- [OpenVidu Egress reference](https://openvidu.io/latest/docs/reference/egress/index.md): Export media out of an OpenVidu Room with Egress: recording and streaming types, output formats, storage targets and the Egress lifecycle.
+- [OpenVidu Ingress reference](https://openvidu.io/latest/docs/reference/ingress/index.md): Bring external media into an OpenVidu Room with Ingress: input types, transcoding options, encoder configuration and the Ingress lifecycle.
+- [OpenVidu server API reference](https://openvidu.io/latest/docs/reference/room-service-api/index.md): Every room and participant operation your backend can call, the grant each one requires, and how the API is authenticated.
+- [OpenVidu Platform webhooks reference](https://openvidu.io/latest/docs/reference/webhooks/index.md): Every webhook event OpenVidu sends, the JSON payload it carries, and how to verify a request before your backend acts on it.
 
 ## OpenVidu Platform AI services
 
@@ -175,8 +186,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 
 - [OpenVidu deployment types compared](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md): The four OpenVidu deployment types side by side: local for development, Single Node for steady load, Elastic for scale, High Availability for both.
 - [Install OpenVidu locally for development](https://openvidu.io/latest/docs/self-hosting/local/index.md): Run a full OpenVidu deployment on your own machine with Docker Compose, with certificates that let you test from other devices on your network.
-- [OpenVidu Single Node COMMUNITY](https://openvidu.io/latest/docs/self-hosting/single-node/index.md): Every OpenVidu service on one server. Install, upgrade and administer Single Node COMMUNITY on-premises or on AWS, Azure, Google Cloud, Oracle or DigitalOcean.
-- [OpenVidu Single Node PRO](https://openvidu.io/latest/docs/self-hosting/single-node-pro/index.md): One server with 2x media capacity and advanced observability. Install, upgrade and administer Single Node PRO on-premises or on any major cloud.
+- [OpenVidu Single Node](https://openvidu.io/latest/docs/self-hosting/single-node/index.md): Every OpenVidu service on one server. Install, upgrade and administer Single Node on-premises or on AWS, Azure, Google Cloud, Oracle or DigitalOcean.
 - [OpenVidu Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/index.md): A Master Node with autoscaling Media Nodes. Install, upgrade and administer OpenVidu Elastic on-premises or on AWS, Azure, Google Cloud, Oracle or DigitalOcean.
 - [OpenVidu High Availability](https://openvidu.io/latest/docs/self-hosting/ha/index.md): Four Master Nodes with autoscaling Media Nodes. Install, upgrade and administer OpenVidu High Availability on-premises or on any major cloud.
 
@@ -212,37 +222,21 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [TURN server security in OpenVidu](https://openvidu.io/latest/docs/self-hosting/how-to-guides/turn-security/index.md): How OpenVidu's embedded TURN server protects relayed media with a peer IP allowlist, restricted relay ports and disabled TCP relays.
 - [Troubleshoot OpenVidu recordings](https://openvidu.io/latest/docs/troubleshooting/recording/index.md): Diagnose recordings that never appear or fail with 503: Egress CPU limits, on-demand versus automatic recordings, storage and webhook checks.
 
-## OpenVidu Single Node COMMUNITY deployment guides
+## OpenVidu Single Node deployment guides
 
-- [Upgrade OpenVidu Single Node COMMUNITY](https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/index.md): Upgrade an OpenVidu Single Node COMMUNITY deployment to a newer version, in place with the updater or by redeploying your cloud template.
-- [Administer OpenVidu Single Node COMMUNITY on AWS](https://openvidu.io/latest/docs/self-hosting/single-node/aws/admin/index.md): Administer OpenVidu Single Node COMMUNITY on AWS: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node COMMUNITY on AWS](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/index.md): Deploy OpenVidu Single Node COMMUNITY on AWS from a CloudFormation stack, then point your application at the result.
-- [Administer OpenVidu Single Node COMMUNITY on Azure](https://openvidu.io/latest/docs/self-hosting/single-node/azure/admin/index.md): Administer OpenVidu Single Node COMMUNITY on Azure: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node COMMUNITY on Azure](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/index.md): Deploy OpenVidu Single Node COMMUNITY on Azure from an Azure Resource Manager template spec, then point your application at the result.
-- [Administer OpenVidu Single Node COMMUNITY on DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/admin/index.md): Administer OpenVidu Single Node COMMUNITY on DigitalOcean: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node COMMUNITY on DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/install/index.md): Deploy OpenVidu Single Node COMMUNITY on DigitalOcean from the web console or with Terraform, then point your application at the result.
-- [Administer OpenVidu Single Node COMMUNITY on Google Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/admin/index.md): Administer OpenVidu Single Node COMMUNITY on Google Cloud: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node COMMUNITY on Google Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/index.md): Deploy OpenVidu Single Node COMMUNITY on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result.
-- [Administer OpenVidu Single Node COMMUNITY on-premises](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md): Administer OpenVidu Single Node COMMUNITY on your own servers: check the status of every service, and back up and restore its data.
-- [Install OpenVidu Single Node COMMUNITY on-premises](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md): Deploy OpenVidu Single Node COMMUNITY on your own servers with the guided installer, non-interactively or with plain Docker Compose.
-- [Administer OpenVidu Single Node COMMUNITY on Oracle Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/index.md): Administer OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node COMMUNITY on Oracle Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/install/index.md): Deploy OpenVidu Single Node COMMUNITY on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result.
-
-## OpenVidu Single Node PRO deployment guides
-
-- [Upgrade OpenVidu Single Node PRO](https://openvidu.io/latest/docs/self-hosting/single-node-pro/upgrade/index.md): Upgrade an OpenVidu Single Node PRO deployment to a newer version, in place with the updater or by redeploying your cloud template.
-- [Administer OpenVidu Single Node PRO on AWS](https://openvidu.io/latest/docs/self-hosting/single-node-pro/aws/admin/index.md): Administer OpenVidu Single Node PRO on AWS: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node PRO on AWS](https://openvidu.io/latest/docs/self-hosting/single-node-pro/aws/install/index.md): Deploy OpenVidu Single Node PRO on AWS from a CloudFormation stack, then point your application at the result.
-- [Administer OpenVidu Single Node PRO on Azure](https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/admin/index.md): Administer OpenVidu Single Node PRO on Azure: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node PRO on Azure](https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/install/index.md): Deploy OpenVidu Single Node PRO on Azure from an Azure Resource Manager template spec, then point your application at the result.
-- [Administer OpenVidu Single Node PRO on DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node-pro/digitalocean/admin/index.md): Administer OpenVidu Single Node PRO on DigitalOcean: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node PRO on DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node-pro/digitalocean/install/index.md): Deploy OpenVidu Single Node PRO on DigitalOcean from the web console or with Terraform, then point your application at the result.
-- [Administer OpenVidu Single Node PRO on Google Cloud](https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/admin/index.md): Administer OpenVidu Single Node PRO on Google Cloud: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node PRO on Google Cloud](https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/install/index.md): Deploy OpenVidu Single Node PRO on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result.
-- [Administer OpenVidu Single Node PRO on-premises](https://openvidu.io/latest/docs/self-hosting/single-node-pro/on-premises/admin/index.md): Administer OpenVidu Single Node PRO on your own servers: check the status of every service, and back up and restore its data.
-- [Install OpenVidu Single Node PRO on-premises](https://openvidu.io/latest/docs/self-hosting/single-node-pro/on-premises/install/index.md): Deploy OpenVidu Single Node PRO on your own servers with the guided installer, non-interactively or with plain Docker Compose.
-- [Administer OpenVidu Single Node PRO on Oracle Cloud](https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/admin/index.md): Administer OpenVidu Single Node PRO on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data.
-- [Install OpenVidu Single Node PRO on Oracle Cloud](https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/install/index.md): Deploy OpenVidu Single Node PRO on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result.
+- [Upgrade OpenVidu Single Node](https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/index.md): Upgrade an OpenVidu Single Node deployment to a newer version, in place with the updater or by redeploying your cloud template.
+- [Administer OpenVidu Single Node on AWS](https://openvidu.io/latest/docs/self-hosting/single-node/aws/admin/index.md): Administer OpenVidu Single Node on AWS: start and stop it, change its configuration and back up its data.
+- [Install OpenVidu Single Node on AWS](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/index.md): Deploy OpenVidu Single Node COMMUNITY or PRO on AWS from a CloudFormation stack, then point your application at the result.
+- [Administer OpenVidu Single Node on Azure](https://openvidu.io/latest/docs/self-hosting/single-node/azure/admin/index.md): Administer OpenVidu Single Node on Azure: start and stop it, change its configuration and back up its data.
+- [Install OpenVidu Single Node on Azure](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/index.md): Deploy OpenVidu Single Node COMMUNITY or PRO on Azure from an Azure Resource Manager template spec, then point your application at the result.
+- [Administer OpenVidu Single Node on DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/admin/index.md): Administer OpenVidu Single Node on DigitalOcean: start and stop it, change its configuration and back up its data.
+- [Install OpenVidu Single Node on DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/install/index.md): Deploy OpenVidu Single Node COMMUNITY or PRO on DigitalOcean from the web console or with Terraform, then point your application at the result.
+- [Administer OpenVidu Single Node on Google Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/admin/index.md): Administer OpenVidu Single Node on Google Cloud: start and stop it, change its configuration and back up its data.
+- [Install OpenVidu Single Node on Google Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/index.md): Deploy OpenVidu Single Node COMMUNITY or PRO on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result.
+- [Administer OpenVidu Single Node on-premises](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md): Administer OpenVidu Single Node on your own servers: check the status of every service, and back up and restore its data.
+- [Install OpenVidu Single Node on-premises](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md): Deploy OpenVidu Single Node COMMUNITY or PRO on your own servers with the guided installer, non-interactively or with plain Docker Compose.
+- [Administer OpenVidu Single Node on Oracle Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/index.md): Administer OpenVidu Single Node on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data.
+- [Install OpenVidu Single Node on Oracle Cloud](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/install/index.md): Deploy OpenVidu Single Node COMMUNITY or PRO on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result.
 
 ## OpenVidu Elastic deployment guides
 

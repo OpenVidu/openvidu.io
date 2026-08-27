@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://openvidu.io/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/about-us/</loc>
@@ -18,19 +18,27 @@
     </url>
     <url>
          <loc>https://openvidu.io/openvidu-meet-vs-openvidu-platform/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/openvidu-vs-janus/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/openvidu-vs-jitsi/</loc>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/openvidu-vs-livekit/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/openvidu-vs-mediasoup/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/pricing/</loc>
-         <lastmod>2026-08-20</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/research/</loc>
@@ -129,6 +137,10 @@
          <lastmod>2026-08-19</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/latest/docs/getting-started/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/latest/docs/releases/</loc>
          <lastmod>2026-08-25</lastmod>
     </url>
@@ -138,15 +150,15 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/ai/live-captions/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/ai/overview/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-10</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/ai/openvidu-agents/agent-dispatch/</loc>
-         <lastmod>2026-08-05</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/ai/openvidu-agents/overview/</loc>
@@ -157,12 +169,36 @@
          <lastmod>2026-08-17</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/developing-your-openvidu-app/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <loc>https://openvidu.io/latest/docs/build-your-app/</loc>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
-         <loc>https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <loc>https://openvidu.io/latest/docs/build-your-app/common-operations/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/latest/docs/reference/access-tokens/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/latest/docs/reference/client-sdk/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/latest/docs/reference/egress/</loc>
+         <lastmod>2026-08-26</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/latest/docs/reference/ingress/</loc>
+         <lastmod>2026-08-26</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/latest/docs/reference/room-service-api/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://openvidu.io/latest/docs/reference/webhooks/</loc>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/deployment-types/</loc>
@@ -182,7 +218,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/configuration/reference/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/</loc>
@@ -218,7 +254,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/upgrade/</loc>
@@ -254,7 +290,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/oracle/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/oracle/upgrade/</loc>
@@ -294,7 +330,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/upgrade/</loc>
@@ -338,7 +374,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/oracle/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/oracle/upgrade/</loc>
@@ -346,11 +382,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-10</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/backup-and-restore/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/create-configure-AWS-certificate/</loc>
@@ -390,7 +426,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/turn-security/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/</loc>
@@ -398,15 +434,15 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/fault-tolerance/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/performance/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/scalability/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/observability/</loc>
@@ -422,23 +458,23 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/aws/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/azure/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/</loc>
@@ -446,15 +482,15 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/gcp/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/</loc>
@@ -462,79 +498,23 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-21</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/oracle/install/</loc>
-         <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/</loc>
-         <lastmod>2026-07-31</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/upgrade/</loc>
-         <lastmod>2026-08-17</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/aws/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/aws/install/</loc>
-         <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/azure/install/</loc>
-         <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/digitalocean/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/digitalocean/install/</loc>
-         <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/gcp/install/</loc>
-         <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/on-premises/admin/</loc>
-         <lastmod>2026-08-17</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/on-premises/install/</loc>
-         <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/admin/</loc>
-         <lastmod>2026-08-19</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/self-hosting/single-node-pro/oracle/install/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/troubleshooting/recording/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/advanced-features/</loc>
@@ -555,10 +535,6 @@
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-s3/</loc>
          <lastmod>2026-08-25</lastmod>
-    </url>
-    <url>
-         <loc>https://openvidu.io/latest/docs/tutorials/ai-services/</loc>
-         <lastmod>2026-07-31</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/ai-services/openvidu-live-captions/</loc>
@@ -638,19 +614,19 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/android/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/angular/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/electron/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/ionic/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/ios/</loc>
@@ -658,15 +634,15 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/javascript/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/react/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/vue/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-server/</loc>
@@ -714,7 +690,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/getting-started/</loc>
@@ -730,7 +706,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/deployment/basic/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/deployment/local/</loc>
@@ -742,7 +718,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/deploy-your-app/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/intro/</loc>
@@ -766,7 +742,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/webcomponent/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-08-27</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/webhooks/</loc>

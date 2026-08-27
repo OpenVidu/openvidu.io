@@ -28,11 +28,11 @@ OpenVidu runs on mediasoup for exactly the performance reasons you'd choose it y
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | Media engine       | [mediasoup](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md), integrated                                    | The library itself                    |
 | Signaling          | Bundled                                                                                                                                     | Build it yourself                     |
-| Room/session model | [Bundled](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/#manage-rooms)                                                   | Not provided                          |
-| Authentication     | [JWT tokens with grants](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/#generate-access-tokens), bundled                 | Not provided                          |
-| Recording (Egress) | [Bundled](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/#recording) (S3-compatible storage)                              | Manual RTP piping to GStreamer/FFmpeg |
-| Server/REST API    | Full [server API](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/index.md)                                                | None                                  |
-| Webhooks           | Bundled [event set](https://openvidu.io/latest/docs/developing-your-openvidu-app/how-to/#webhooks)                                             | None                                  |
+| Room/session model | [Bundled](https://openvidu.io/latest/docs/reference/room-service-api/#rooms)                                                                   | Not provided                          |
+| Authentication     | [JWT tokens with grants](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants), bundled                                       | Not provided                          |
+| Recording (Egress) | [Bundled](https://openvidu.io/latest/docs/reference/egress/index.md) (S3-compatible storage)                                                   | Manual RTP piping to GStreamer/FFmpeg |
+| Server/REST API    | Full [server API](https://openvidu.io/latest/docs/reference/room-service-api/index.md)                                                         | None                                  |
+| Webhooks           | Bundled [event set](https://openvidu.io/latest/docs/reference/webhooks/#events)                                                                | None                                  |
 | Dashboard          | [OpenVidu Dashboard](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md)                  | None                                  |
 | Client SDKs        | [8 SDKs, including native Android and iOS](https://openvidu.io/latest/docs/tutorials/application-client/index.md)                              | JS + C++ only                         |
 | Clustering         | [One-click automated deployment](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md) with autoscaling on 5 cloud providers | Your own orchestration                |
@@ -58,3 +58,9 @@ Yes. OpenVidu is a fork of LiveKit that can replace LiveKit's default media engi
 Yes, and for some teams with genuinely unusual low-level requirements it's the right call — but go in aware of the scope: mediasoup's own documentation is explicit that signaling, room persistence, authentication, a managed recording API, a REST API, an admin dashboard, and native mobile SDKs are all out of scope by design. You would build every one of those yourself.
 
 [Start with a tutorial](https://openvidu.io/latest/docs/tutorials/application-server/index.md)
+
+## Weighing a DIY mediasoup build against a ready platform?
+
+Tell us what you are building and we will help you scope the tradeoffs.
+
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)
