@@ -65,13 +65,17 @@ def test_legacy_prerelease_versions_fall_in_the_old_band(config):
     assert resolved["version-root"].to == "docs/getting-started/"
 
 
-def test_getting_started_redirect_only_exists_from_3_4(config):
-    ids_new = {item.rule_id for item in resolve_file_redirects(config, "3.8")}
+def test_getting_started_redirect_only_exists_from_3_4_to_3_7(config):
+    ids_mid = {item.rule_id for item in resolve_file_redirects(config, "3.5")}
     ids_old = {item.rule_id for item in resolve_file_redirects(config, "3.2")}
-    assert "platform-getting-started" in ids_new
+    ids_new = {item.rule_id for item in resolve_file_redirects(config, "3.8")}
+    # Before 3.4 the path is a real page (the getting started guide was the docs index),
+    # and from 3.8 it is a real page again (the written-from-scratch guide).
+    assert "platform-getting-started" in ids_mid
     assert "platform-getting-started" not in ids_old
+    assert "platform-getting-started" not in ids_new
     assert "legacy-docs-index" in ids_old
-    assert "legacy-docs-index" not in ids_new
+    assert "legacy-docs-index" not in ids_mid
 
 
 def test_every_real_target_is_relative(config):

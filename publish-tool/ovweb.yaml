@@ -100,7 +100,7 @@ redirects:
 
     - id: platform-getting-started
       description: >
-        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4.
+        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4, and back to a real page in 3.8.
       at: "{version}/docs/getting-started/index.html"
       to: "../"
       canonical: "{site_url}/latest/docs/"
@@ -108,6 +108,9 @@ redirects:
       when:
         # In 3.0–3.3 this is a real page, not a redirect.
         - versions: "<3.4"
+          enabled: false
+        # From 3.8 it is a real page again.
+        - versions: ">=3.8"
           enabled: false
 
     - id: legacy-docs-index

@@ -66,6 +66,7 @@ nav:
       - Releases: meet/releases.md
   - OpenVidu Platform:
       - docs/index.md
+      - Getting started: docs/getting-started.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
       - Developing your OpenVidu app:
           - docs/developing-your-openvidu-app/index.md
@@ -439,6 +440,7 @@ plugins:
 
         OpenVidu Platform:
         - docs/index.md
+        - docs/getting-started.md
         - docs/comparing-openvidu.md
         - docs/releases.md
         - docs/developing-your-openvidu-app/*.md

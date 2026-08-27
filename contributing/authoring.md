@@ -72,12 +72,14 @@ If the new page contains links, follow the site-wide [link rules](link-rules.md)
    Use the following syntax to include the snippet in other snippets or pages:
 
    ```markdown
-   --8<-- "shared/snippet.md"
+   --8<-- "area/snippet.md"
    ```
 
 > [!NOTE]
-> The include path is relative to the root of the repository. Links **inside** a snippet are
-> root-absolute (with one documented exception) — see [link rules](link-rules.md), rule 2.
+> The include path is relative to [`shared`](../shared) itself — `pymdownx.snippets` is
+> configured with `base_path: [!relative $config_dir/shared]`, so the `shared/` prefix must be
+> left out. Links **inside** a snippet are root-absolute (with one documented exception) — see
+> [link rules](link-rules.md), rule 2.
 
 > [!IMPORTANT]
 > A snippet renders inside every page that includes it. **Grep for its `--8<--` usages before
