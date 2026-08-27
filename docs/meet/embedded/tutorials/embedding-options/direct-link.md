@@ -1,8 +1,6 @@
 ---
 title: "Direct link tutorial for OpenVidu Meet"
 description: "Build a video conferencing app that sends users into an OpenVidu Meet room through a direct link, with a Node.js backend and a JavaScript frontend."
-tags:
-    - setupcustomgallery
 ---
 
 # Direct Link Tutorial
@@ -28,7 +26,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to cre
 
 #### 1. Run OpenVidu Meet
 
---8<-- "shared/tutorials/run-openvidu-meet.md"
+--8<-- "tutorials/run-openvidu-meet.md"
 
 ### 2. Download the tutorial code
 
@@ -60,12 +58,16 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/home.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></a></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/direct-link/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room opened through a direct link"/></a>
-<a class="glightbox" href="/assets/images/meet/embedded/tutorials/direct-link/room-light.png" data-type="image" data-desc-position="bottom" data-gallery="gallery1"><img src="/assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light" loading="lazy" class="control-height round-corners" alt="OpenVidu Meet room opened through a direct link"/></a></p></div>
+<div class="grid-50" markdown>
+![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-dark.png#only-dark){ .round-corners loading=lazy }
+![OpenVidu Meet room opened through a direct link](../../../../assets/images/meet/embedded/tutorials/direct-link/room-light.png#only-light){ .round-corners loading=lazy }
+</div>
 
 </div>
 

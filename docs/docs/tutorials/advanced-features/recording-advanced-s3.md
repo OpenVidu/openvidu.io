@@ -1,8 +1,6 @@
 ---
 title: "Advanced recording tutorial with S3"
 description: "Extend the basic S3 recording tutorial with complete recording metadata and real-time recording status notifications pushed to the client."
-tags:
-  - setupcustomgallery
 ---
 
 # Advanced Recording Tutorial S3
@@ -28,7 +26,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 === "Run OpenVidu locally"
 
-    --8<-- "shared/tutorials/run-openvidu-locally.md"
+    --8<-- "tutorials/run-openvidu-locally.md"
 
 === "Deploy OpenVidu"
 
@@ -39,12 +37,12 @@ Recordings are always persisted in some kind of storage system. This type of sto
             Make sure you deploy with at least 4 CPUs in the Virtual Machine of AWS.
 
     2. Point the tutorial to your AWS deployment:
-          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/.env){:target="_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)).   
-          - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/public/app.js#L3) to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
+          - Modify file [`.env` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-advanced-node/.env){:target="_blank"} to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](../../self-hosting/single-node/aws/install.md#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html){:target="_blank"}).   
+          - Modify file [`app.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-advanced-node/public/app.js#L3){:target="_blank"} to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
 
     !!! warning
 
-        If you are using self-signed certificate you will need to add this line in the first line after the imports on the [`index.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/4e90828d801208945fc33aede4cd994abcacdc91/advanced-features/openvidu-recording-advanced-node/src/index.js) ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable TLS verification for local testing```
+        If you are using self-signed certificate you will need to add this line in the first line after the imports on the [`index.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/advanced-features/openvidu-recording-advanced-node/src/index.js){:target="_blank"} ```process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Disable TLS verification for local testing```
 
     !!! info "Configure Webhooks"
 
@@ -80,11 +78,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording1.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording1.png" loading="lazy" alt="Video call room of the recording tutorial app with recording controls"/></a></p></div>
+<div class="grid-50" markdown>
+![Video call room of the recording tutorial app with recording controls](../../../assets/images/platform/tutorials/advanced-features/recording1.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><a class="glightbox" href="/assets/images/platform/tutorials/advanced-features/recording2.png" data-type="image" data-desc-position="bottom"><img src="/assets/images/platform/tutorials/advanced-features/recording2.png" loading="lazy" alt="List of recordings of the room in the recording tutorial app"/></a></p></div>
+<div class="grid-50" markdown>
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+</div>
 
 </div>
 
@@ -92,7 +94,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application with other devices in your local network very easily without worrying about SSL certificates.
 
-    Access your application client through [`https://xxx-yyy-zzz-www.openvidu-local.dev:6443`](https://xxx-yyy-zzz-www.openvidu-local.dev:6443){:target="_blank"}, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){:target="_blank"}.
+    Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network :fontawesome-solid-external-link:{.external-link-icon}](../../self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network){:target="_blank"}.
 
     **Limitation**: Playing recordings with the `S3` strategy from other devices in your local network is not possible due to MinIO not being exposed. To play recordings from other devices, you need to change the environment variable `RECORDING_PLAYBACK_STRATEGY` to `PROXY`.
 

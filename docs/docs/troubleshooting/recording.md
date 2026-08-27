@@ -198,7 +198,7 @@ You can also configure external storage programmatically on a per-request basis 
 
 - The [EgressInfo :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#egressinfo){:target="_blank"} objects returned by the Egress API or included in the `egress_ended` webhook event contains:
     - Field `backup_storage_used` with value `true`.
-    - Or any other field with the substring `backup_storage` in its value (E.g. `manifestLocation = '/home/egress/backup_storage/EG_f5nHLam4xLb8.json'`{ .no-break }).
+    - Or any other field with the substring `backup_storage` in its value (E.g. `manifestLocation = '/home/egress/backup_storage/EG_f5nHLam4xLb8.json'`{ .nowrap }).
 
 **Solutions**
 

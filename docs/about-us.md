@@ -2,21 +2,18 @@
 title: "About the OpenVidu team"
 description: "The engineers and researchers behind OpenVidu, and the open-source and scientific work the project has grown out of."
 hide:
+  - feedback
+  - path
   - navigation
   - toc
   - footer
   - search-bar
   - version-selector
-tags:
+page_features:
   - dropdown
   - setupwowjs
+dropdown_label: Team
 ---
-
-<style>
-  main > div.md-grid {
-    max-width: 61rem;
-  }
-</style>
 
 # About Us
 
@@ -33,21 +30,15 @@ In the private sector, I have also participated in, directed, and collaborated w
 
 My main research activities are related to software engineering, software testing, and real-time communications. I have authored more than 40 papers in important journals and conferences with peer review. Those research works related to WebRTC and real-time communications in general can be found on our [research page](research.md).
 
-<div class="md-social">
-    <a href="https://github.com/micaelgallego" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
-    <a href="https://x.com/micael_gallego" target="_blank" rel="noopener" title="x.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/micaelgallego){ .md-social__link title="github.com" target="_blank" }
+[:simple-x:](https://x.com/micael_gallego){ .md-social__link title="x.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img" src="/assets/images/about-us/authorMG.jpg" alt="Portrait of Micael Gallego"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Micael Gallego](assets/images/about-us/authorMG.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -63,18 +54,14 @@ I've been involved in many projects in the private sector, mainly related to clo
 
 My main research activities are related to software testing and real-time communications, and I've authored more than 30 publications in prestigious peer-reviewed journals and conferences. Some of these research works help push OpenVidu forward in areas such as QoE, load testing, and scaling of real-time communication services. My research works related to real-time communications are listed on our [research page](research.md).
 
-<div class="md-social">
-    <a href="https://github.com/gortazar" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/gortazar){ .md-social__link title="github.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorFG.jpg" alt="Portrait of Francisco Gortázar"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Francisco Gortázar](assets/images/about-us/authorFG.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -88,18 +75,14 @@ I have worked with countless languages, technologies and frameworks throughout m
 
 My academic background consists of a Double Degree in Computer Science and Software Engineering from the University of Rey Juan Carlos in Madrid, Spain, in which I graduated with the best academic records of my year. I also completed a Master's Degree in Engineering of Software Systems. I have worked as assistant professor for a cloud-native application development Master's Degree program for two years, and I have also been a speaker in some technical conferences and meetups. This background has laid a solid foundation for a journey that has been both challenging and rewarding. Looking forward to seeing what the future holds!
 
-<div class="md-social">
-    <a href="https://github.com/pabloFuente" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/pabloFuente){ .md-social__link title="github.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorPF.jpg" alt="Portrait of Pablo Fuente"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Pablo Fuente](assets/images/about-us/authorPF.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -113,18 +96,14 @@ I hold a Software Engineering degree and a Master’s in Cloud Apps: Development
 
 My experience centers on Node.js, TypeScript, and Angular, complemented by strong skills in mobile development, frontend architecture, and microservices. I design resilient, fault-tolerant applications that leverage WebSockets and REST APIs for efficient, real-time communication. My focus on automation, observability, and continuous integration ensures maintainable, high-performance systems ready for production.
 
-<div class="md-social">
-    <a href="https://github.com/CSantosM" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/CSantosM){ .md-social__link title="github.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCS.jpg" alt="Portrait of Carlos Santos"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Carlos Santos](assets/images/about-us/authorCS.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -138,21 +117,15 @@ I hold a Bachelor’s in Computer Science, a Bachelor’s in Software Engineerin
 
 My expertise spans backend development (Java, Node.js, Golang), frontend development (JavaScript, Angular), and Linux and virtualization automation and administration (Bash, Python, Docker, Kubernetes).
 
-<div class="md-social">
-    <a href="https://github.com/cruizba" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
-    <a href="https://x.com/cruizba" target="_blank" rel="noopener" title="x.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/cruizba){ .md-social__link title="github.com" target="_blank" }
+[:simple-x:](https://x.com/cruizba){ .md-social__link title="x.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorCR.jpg" alt="Portrait of Carlos Ruiz"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Carlos Ruiz](assets/images/about-us/authorCR.jpg){ .round-corners .about-us-img loading=lazy width=752 height=1000 }
 </div>
 
 ---
@@ -166,18 +139,14 @@ I hold a Double Degree in Computer Engineering and Software Engineering from Uni
 
 I have professional experience mainly with Node.js, TypeScript, and Angular, as well as with Java, Spring Boot, and Go. I also have solid experience with Docker, Kubernetes, and AWS, focusing on automation and observability across development and deployment processes.
 
-<div class="md-social">
-    <a href="https://github.com/juancarmore" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/juancarmore){ .md-social__link title="github.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorJCM.jpg" alt="Portrait of Juan Carlos Moreno"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Juan Carlos Moreno](assets/images/about-us/authorJCM.jpg){ .round-corners .about-us-img loading=lazy width=750 height=1000 }
 </div>
 
 ---
@@ -191,18 +160,14 @@ I hold a computer engineer degree from Universidad Rey Juan Carlos.
 
 My experience includes working with the most common public clouds and with their Cloud Formation Languages such as Terraform for GCP and Bicep for Azure. 
 
-<div class="md-social">
-    <a href="https://github.com/Piwccle" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-    </a>
+<div class="md-social" markdown="span">
+[:simple-github:](https://github.com/Piwccle){ .md-social__link title="github.com" target="_blank" }
 </div>
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<figure>
-<img class="dark-img svg-img about-us-img"" src="/assets/images/about-us/authorSF.jpg" alt="Portrait of Sergio Fernández"/>
-</figure>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Portrait of Sergio Fernández](assets/images/about-us/authorSF.jpg){ .round-corners .about-us-img loading=lazy width=1200 height=1478 }
 </div>
 
 </div>

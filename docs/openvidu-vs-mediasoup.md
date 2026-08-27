@@ -29,6 +29,7 @@ faq:
       persistence, authentication, a managed recording API, a REST API, an admin dashboard, and
       native mobile SDKs are all out of scope by design. You would build every one of those yourself.
 hide:
+  - feedback
   - navigation
   - toc
   - footer

@@ -21,6 +21,8 @@ dependencies = [
 # Dockerfiles and the installed environment.
 build = [
     "mike==2.2.0",
+    "mkdocs==1.6.1",
+    "pymdown-extensions==11.0.1",
     "mkdocs-material[imaging]==9.7.6",
     "pygments==2.19.2",
     "mkdocs-glightbox==0.5.2",
@@ -29,6 +31,8 @@ build = [
 ]
 # Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
+    "mkdocs==1.6.1",
+    "pymdown-extensions==11.0.1",
     "mkdocs-material==9.7.6",
     "pygments==2.19.2",
     "mkdocs-glightbox==0.5.2",

@@ -1,8 +1,6 @@
 ---
 title: "OpenVidu vs LiveKit, Jitsi, SaaS and SFUs"
 description: "How OpenVidu compares with LiveKit, Jitsi, SaaS video APIs and bare SFUs like mediasoup and Janus, on cost, data control, features and effort."
-tags:
-    - setupcustomgallery
 ---
 
 # How OpenVidu compares to other solutions
@@ -21,14 +19,14 @@ First of all, and perhaps the most obvious question, how does OpenVidu differ fr
 - OpenVidu is a **production-ready self-hosted solution**. It offers an easy deployment process to self-host a high performance, fault-tolerant, scalable and observable cluster. OpenVidu provides an interactive installer that manages all the complexities, so you can quickly host a production deployment that would otherwise require advanced DevOps/SRE expertise.
 - OpenVidu is a **support team** for self-hosted deployments. The OpenVidu team is made up of real-time experts with over a decade of experience in the field. We specialize in customer support and are always ready to help you bring your ideas to life.
 
-<a class="glightbox" href="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" data-type="image" data-desc-position="bottom" data-gallery="gallery5"><img src="/assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg" loading="lazy" class="mkdocs-img" alt="Diagram comparing an OpenVidu deployment with a LiveKit deployment"/></a>
+![Diagram comparing an OpenVidu deployment with a LiveKit deployment](../assets/images/platform/comparing-openvidu/openvidu-vs-livekit.svg){ loading=lazy }
 /// caption
 OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your cluster.
 ///
 
 LiveKit comes in two flavors: [LiveKit Open Source :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit){:target="_blank"} and [LiveKit Cloud :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cloud/){:target="_blank"}.
 
-### OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</span> vs LiveKit Open Source
+### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .8em" } vs LiveKit Open Source
 
 LiveKit Open Source is probably the most advanced and feature-rich open source WebRTC stack available today. It has a simple but very versatile API design, and has a large collection of SDKs to integrate into your application on both the frontend and backend. Regardless of your technology stack, there is sure to be a LiveKit Open Source SDK available for you! This is why OpenVidu is fully compatible with LiveKit protocols. You can use any LiveKit SDK to build your application, and it will work seamlessly with an OpenVidu deployment.
 
@@ -42,11 +40,11 @@ With OpenVidu Community you get a handful of features on top of LiveKit Open Sou
 - **OpenVidu Meet**: a fully-fledged, ready to use videoconference application. [See more](../meet/index.md).
 - **Powerful and easy to use local development environment**: OpenVidu provides a Docker Compose based deployment designed for development and testing devices on your local network. It comes with automatic certificate management that makes it easy to test mobile devices in your LAN. [See more](./self-hosting/local.md#accessing-your-local-deployment-from-other-devices-on-your-network).
 
-### OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</span> vs LiveKit Open Source
+### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .8em" } vs LiveKit Open Source
 
 Deploying LiveKit Open Source in production requires DevOps/SRE experience to operate your own network of media servers, load balance between them, maintain high uptime and monitor the health of your deployment. OpenVidu Pro makes this an easy process, hiding most of the complexities of such an advanced deployment. With OpenVidu Pro you can self-host a fault-tolerant, scalable and observable cluster, while doubling the original LiveKit Open Source performance to handle twice as many media streams with the same hardware.
 
-### OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</span> vs LiveKit Cloud
+### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .8em" } vs LiveKit Cloud
 
 LiveKit Cloud is the official SaaS solution for LiveKit. They manage the infrastructure, with a pricing model based on the total bandwidth consumed by your application. It offers certain advantages over LiveKit Open Source:
 
