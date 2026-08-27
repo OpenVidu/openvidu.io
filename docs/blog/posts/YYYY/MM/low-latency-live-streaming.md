@@ -61,11 +61,11 @@ Let's have a look at some use cases to understand what actually lands in each la
 - **World wide events retransmissions (10-45s).** A world wide event such as the World Cup or the Olympics can tolerate several seconds of latency. 
 - **eSports broadcasts and commentary (< 10s).** These use cases are more latency-tolerant than personalized streaming, but they are still tighter than a typical broadcast, since commentators need to track the live match state closely and viewers routinely cross-check against a second screen.
 - **Interactive personalized live streaming (< 1s).** Creator-led streams on platforms like Twitch or YouTube Live are strongly driven by chat. If the streamer is reading a message that's ten seconds stale, the whole back-and-forth that makes the format work falls apart.
-- **Live shopping (< 1s).** A viewer asks "does it come in blue?" mid-stream and expects an answer immediately, not thirty seconds later after the moment — and the sale — has passed. This is a genuinely massive market in parts of Asia and a growing one elsewhere.
-- **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more — input lag above a few tens of milliseconds is felt directly in your hands.
-- **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely — industrial machinery, a drone, a surgical robot — then the use case needs a genuine real-time control loop, not just real-time-looking video.
+- **Live shopping (< 1s).** A viewer asks "does it come in blue?" mid-stream and expects an answer immediately, not thirty seconds later, after the moment (and the sale) has passed. This is a genuinely massive market in parts of Asia and a growing one elsewhere.
+- **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more: input lag above a few tens of milliseconds is felt directly in your hands.
+- **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely (industrial machinery, a drone, a surgical robot), the use case needs a genuine real-time control loop, not just real-time-looking video.
 
-![World Cup retransmissions work just well with a 20 seconds latency](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/broadcasting-match.webp)
+![World Cup retransmissions work just well with a 20 seconds latency](/assets/images/blog/YYYY/MM/low-latency-live-streaming/broadcasting-match.webp)
 
 So, as I said before: it's never the content itself that sets the latency budget. It's whether someone downstream has to act on what they're seeing before it goes stale.
 
@@ -73,7 +73,7 @@ So, as I said before: it's never the content itself that sets the latency budget
 
 HLS and DASH are the two workhorses behind most of the video you stream today, and they were both designed around the same core idea: chop the video into small files, describe them in an index, and let any standard web server or CDN hand them out over plain HTTP. This means re-using the same infrastructure we already have for web pages and static files, for live content (indeed, it is astonishing how the network protocols designed in the 70's and 80's still remain valid today.) 
 
-HLS packages media into `.ts` segments listed in an `.m3u8` playlist. DASH does the equivalent with fragmented MP4 segments described in an `.mpd` manifest. In both cases, a video segment has to be fully encoded, muxed, and written to disk before a player can even request it — and the player typically buffers two or three segments ahead before it starts playing, so that network fluctuations don't stale the video stal. If the segments are six seconds long, by the time you have two or three of them you've already committed to at least 12–18 seconds of latency before a single video frame is rendered on your screen.
+HLS packages media into `.ts` segments listed in an `.m3u8` playlist. DASH does the equivalent with fragmented MP4 segments described in an `.mpd` manifest. In both cases, a video segment has to be fully encoded, muxed, and written to disk before a player can even request it. The player typically buffers two or three segments ahead before it starts playing, so that network fluctuations don't stall playback. If the segments are six seconds long, by the time you have two or three of them you've already committed to at least 12–18 seconds of latency before a single video frame is rendered on your screen.
 
 That segment-and-manifest model is precisely why HLS and DASH scale so well: any commodity HTTP server or CDN edge node can cache and serve a static file, so a single stream can fan out to millions of viewers for the cost of standard web hosting. That makes them brilliant, although they do not favor latency specifically.
 
@@ -96,7 +96,7 @@ The following is a table describing different streaming protocols with their low
 
 WebRTC was designed to optimize the path between a captured frame and a rendered one, contrary to the design decisions behind HLS and DASH, which were focused on file caching.
 
-![An interactive streaming session needs latencies under 1 second](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/game-streaming.webp)
+![An interactive streaming session needs latencies under 1 second](/assets/images/blog/YYYY/MM/low-latency-live-streaming/game-streaming.webp)
 
 In WebRTC media flows continuously as RTP packets over UDP the moment a connection is established. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure, not to buffer or batch anything.
 
@@ -118,7 +118,7 @@ The low latency line is **whether the interaction loops back to the source in re
 
 If you're building something in that "below the second" category, that is, a stream someone needs to react to, the protocol choice is WebRTC, and you need it end to end, not just for capture.
 
-![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](../../../../assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp)
+![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp)
 
 [OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion) for how to wire a WHIP source into your own app.
 
