@@ -74,7 +74,7 @@ page_features:
   <tr>
     <td class="first-column border-right">Installation instructions</td>
     <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node-pro/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
     <td class="border-right"><a class="md-button" href="../docs/self-hosting/elastic/">Install</a></td>
     <td><a class="md-button" href="../docs/self-hosting/ha/">Install</a></td>
   </tr>

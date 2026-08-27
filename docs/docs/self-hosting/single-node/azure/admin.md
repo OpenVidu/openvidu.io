@@ -1,9 +1,9 @@
 ---
-title: "Administer OpenVidu Single Node COMMUNITY on Azure"
-description: "Administer OpenVidu Single Node COMMUNITY on Azure: start and stop it, change its configuration and back up its data."
+title: "Administer OpenVidu Single Node on Azure"
+description: "Administer OpenVidu Single Node on Azure: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } administration: Azure
+# OpenVidu Single Node administration: Azure
 
 <div class="provider-chip" markdown>
 

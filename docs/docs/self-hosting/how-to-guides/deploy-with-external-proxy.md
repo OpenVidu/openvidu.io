@@ -22,7 +22,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 === "Single Node"
 
     !!! note
-        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 10px" } Deployment](../single-node/on-premises/install.md) and the [Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } Deployment](../single-node-pro/on-premises/install.md), but with some modifications to the installation command and port rules. We recommend reading the installation guides before proceeding with this guide for a better understanding of the deployment.
+        The Single Node deployment with an external proxy is based on the same instructions as the [Single Node Deployment](../single-node/on-premises/install.md) (both the COMMUNITY and PRO editions), but with some modifications to the installation command and port rules. We recommend reading the installation guide before proceeding with this guide for a better understanding of the deployment.
 
     This is what the architecture of the deployment looks like:
 

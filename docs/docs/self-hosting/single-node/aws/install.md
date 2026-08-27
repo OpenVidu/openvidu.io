@@ -1,9 +1,9 @@
 ---
-title: "Install OpenVidu Single Node COMMUNITY on AWS"
-description: "Deploy OpenVidu Single Node COMMUNITY on AWS from a CloudFormation stack, then point your application at the result."
+title: "Install OpenVidu Single Node on AWS"
+description: "Deploy OpenVidu Single Node COMMUNITY or PRO on AWS from a CloudFormation stack, then point your application at the result."
 ---
 
-# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } installation: AWS
+# OpenVidu Single Node installation: AWS
 
 <div class="provider-chip" markdown>
 
@@ -12,25 +12,47 @@ description: "Deploy OpenVidu Single Node COMMUNITY on AWS from a CloudFormation
 </div>
 
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 12px" } deployment on AWS. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on AWS, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+
+--8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
 First, import the template in the AWS CloudFormation console. You can click the following button...
 
-[:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
+    [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
-```
-https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml
-```
-
-!!! info
-
-    If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+    ...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml
     ```
+
+    !!! info
+
+        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+
+        ```
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+        ```
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
+
+    ...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
+
+    ```
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml
+    ```
+
+    !!! info
+
+        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+
+        ```
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+        ```
 
 === "Architecture overview"
 
@@ -43,6 +65,20 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/a
 Depending on your needs, you need to fill the following CloudFormation parameters:
 
 --8<-- "self-hosting/aws/ssl-domain.md"
+
+## OpenVidu Single Node PRO configuration **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 11px" }
+
+If you are deploying the PRO edition, you need to specify some additional properties.
+
+=== "OpenVidu Single Node PRO Configuration"
+
+    Parameters of this section look like this:
+
+    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-pro-config.png){ .round-corners loading=lazy }
+
+    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
+
+    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
 
 --8<-- "self-hosting/aws/meet.md"
 
@@ -95,6 +131,8 @@ Then, click on **Retrieve secret value** to get the JSON with all the informatio
 To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
 
 --8<-- "self-hosting/aws/credentials-general.md"
+
+--8<-- "self-hosting/aws/credentials-v2compatibility.md"
 
 ## Troubleshooting Initial CloudFormation Stack Creation
 

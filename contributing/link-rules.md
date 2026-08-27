@@ -44,7 +44,7 @@ editor-navigable, which is why they are reserved for snippets and blog posts.
 
 **Exception — deployment-type-parametric snippets.** A few `shared/self-hosting/**` snippets are
 included in **parallel deployment-type trees** (e.g. the same snippet is used in both
-`single-node/oracle/` and `single-node-pro/oracle/`) and link to a *sibling* page that must
+`single-node/oracle/` and `elastic/oracle/`) and link to a *sibling* page that must
 differ per tree, such as `[Admin](../on-premises/admin.md)` or `[Admin](./admin.md)`. These are
 intentionally **relative** so they resolve to the correct deployment type at each inclusion
 point — keep them relative. Only links to *fixed* targets (anything under

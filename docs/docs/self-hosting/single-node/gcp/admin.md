@@ -1,9 +1,9 @@
 ---
-title: "Administer OpenVidu Single Node COMMUNITY on Google Cloud"
-description: "Administer OpenVidu Single Node COMMUNITY on Google Cloud: start and stop it, change its configuration and back up its data."
+title: "Administer OpenVidu Single Node on Google Cloud"
+description: "Administer OpenVidu Single Node on Google Cloud: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading } administration: Google Cloud Platform
+# OpenVidu Single Node administration: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -23,7 +23,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 === "Stop OpenVidu Single Node"
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
+    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO). Click on it.
     3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
     ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/gcp/stop-instance.png){ .round-corners loading=lazy }
@@ -31,7 +31,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 === "Start OpenVidu Single Node"
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.  Click on it.
+    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO).  Click on it.
     3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
     ![Start instance](../../../../assets/images/platform/self-hosting/single-node/gcp/start-instance.png){ .round-corners loading=lazy }
@@ -41,7 +41,7 @@ You can start and stop all services as explained in the [On Premises Single Node
 You can change the instance type of the OpenVidu Single Node instance to adapt it to your needs. To do this, follow these steps:
 
 1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
+2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO). Click on it.
 3. Stop the instance if it is not stopped. Wait for it to stop.
 4. Click on _"Edit"_, scroll down and change the **Machine Type**.
 
