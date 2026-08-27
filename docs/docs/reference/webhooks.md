@@ -17,6 +17,8 @@ OpenVidu is API-compatible with LiveKit, so all LiveKit webhook events are suppo
 
 ## Events
 
+<div class="nowrap-first-column" markdown>
+
 | Event | Fires when | Payload that carries |
 | --- | --- | --- |
 | `room_started` | A Room is created, either by the first participant joining or by your backend creating it explicitly | `room` |
@@ -31,6 +33,8 @@ OpenVidu is API-compatible with LiveKit, so all LiveKit webhook events are suppo
 | `egress_ended` | An Egress process finishes, successfully or not | `egressInfo` |
 | `ingress_started` | An Ingress process begins (media imported into a Room) | `ingressInfo` |
 | `ingress_ended` | An Ingress process finishes | `ingressInfo` |
+
+</div>
 
 ## Payload
 
@@ -76,12 +80,16 @@ Only the fields relevant to the event are populated:
 
 ## Delivery
 
-| | |
+<div class="nowrap-first-column" markdown>
+
+| Request | Value |
 | --- | --- |
 | HTTP method | `POST` |
 | `content-type` | `application/webhook+json` |
 | `Authorization` | A JWT signed with your API secret. Use it to [verify the event](#receiving-and-validating-webhook-events) |
 | Body | The [payload](#payload) of the event, in JSON format |
+
+</div>
 
 !!! note
     - Events are always delivered in order: a newer event is sent only after the older ones have been delivered (or abandoned).

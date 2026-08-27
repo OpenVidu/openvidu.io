@@ -36,7 +36,11 @@ The only required attribute is **`room-url`**, which determines the room to acce
 
 Declare attributes in the component to customize the meeting for your user.
 
+<div class="nowrap-first-column" markdown>
+
 --8<-- "meet/webcomponent/attributes.md"
+
+</div>
 
 Example:
 
@@ -54,7 +58,11 @@ Example:
 
 The OpenVidu Meet component exposes a set of commands that allow you to control the room from your application's logic.
 
+<div class="nowrap-first-column" markdown>
+
 --8<-- "meet/webcomponent/commands.md"
+
+</div>
 
 Invoke commands using JavaScript:
 

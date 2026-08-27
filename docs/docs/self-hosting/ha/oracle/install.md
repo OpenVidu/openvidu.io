@@ -63,47 +63,51 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
         ### Mandatory Parameters
 
+        /// html | div.nowrap-first-column
         | Input Value | Description |
         |---|---|
-        | `tenancy_ocid`{ .nowrap } | OCI Tenancy OCID. Required for the Object Storage namespace. |
-        | `compartment_ocid`{ .nowrap } | OCI Compartment OCID where resources will be created. |
-        | `user_ocid`{ .nowrap } | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
-        | `stackName`{ .nowrap } | Stack name for the OpenVidu deployment. |
-        | `openviduLicense`{ .nowrap } | OpenVidu PRO license key. Visit [your OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
-        | `scale_in_function_image`{ .nowrap } | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
+        | `tenancy_ocid` | OCI Tenancy OCID. Required for the Object Storage namespace. |
+        | `compartment_ocid` | OCI Compartment OCID where resources will be created. |
+        | `user_ocid` | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
+        | `stackName` | Stack name for the OpenVidu deployment. |
+        | `openviduLicense` | OpenVidu PRO license key. Visit [your OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
+        | `scale_in_function_image` | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
+        ///
 
         ### Optional Parameters
 
+        /// html | div.nowrap-first-column
         | Input Value | Default Value | Description |
         |---|---|---|
-        | `region`{ .nowrap } | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
-        | `availability_domain`{ .nowrap } | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
-        | `masterNodeShape`{ .nowrap } | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for each OpenVidu Master Node. All 4 Master Nodes use the same shape and size. |
-        | `masterNodeOcpus`{ .nowrap } | `2`{ .nowrap } | Number of OCPUs per Master Node (applies to Flex shapes only). |
-        | `masterNodeMemory`{ .nowrap } | `8`{ .nowrap } | Memory in GB per Master Node (applies to Flex shapes only). |
-        | `masterNodeDiskSize`{ .nowrap } | `100`{ .nowrap } | Boot disk size in GB for each Master Node. |
-        | `mediaNodeShape`{ .nowrap } | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
-        | `mediaNodeOcpus`{ .nowrap } | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
-        | `mediaNodeMemory`{ .nowrap } | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |
-        | `mediaNodeDiskSize`{ .nowrap } | `100`{ .nowrap } | Boot disk size in GB for the Media Nodes. |
-        | `fixedNumberOfMediaNodes`{ .nowrap } | `0`{ .nowrap } | If `> 0`, deploys a fixed number of Media Nodes with no autoscaling and no scale-in OCI Function (`initialNumberOfMediaNodes`, `minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU` and `scale_in_function_image` are ignored). If `0` (default), the deployment is elastic and autoscaling is enabled. |
-        | `initialNumberOfMediaNodes`{ .nowrap } | `1`{ .nowrap } | Initial number of Media Nodes to deploy. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `minNumberOfMediaNodes`{ .nowrap } | `1`{ .nowrap } | Minimum number of Media Nodes the autoscaling Instance Pool will keep running. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `maxNumberOfMediaNodes`{ .nowrap } | `5`{ .nowrap } | Maximum number of Media Nodes the autoscaling Instance Pool can launch. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `scaleTargetCPU`{ .nowrap } | `50`{ .nowrap } | Target CPU percentage that triggers scale-in/scale-out actions. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `certificateType`{ .nowrap } | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
-        | `publicIpAddress`{ .nowrap } | `(none)`{ .nowrap } | A previously created Reserved Public IP OCID to attach to the Network Load Balancer. Leave blank to generate a new public IP. |
-        | `domainName`{ .nowrap } | `(none)`{ .nowrap } | Domain name for the OpenVidu deployment. Optional — if not provided, the NLB public IP is used as the domain name. |
-        | `ownPublicCertificate`{ .nowrap } | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the public certificate in base64 format. |
-        | `ownPrivateCertificate`{ .nowrap } | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the private certificate in base64 format. |
-        | `initialMeetAdminPassword`{ .nowrap } | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
-        | `initialMeetApiKey`{ .nowrap } | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
-        | `bucketAppDataName`{ .nowrap } | `(none)`{ .nowrap } | Name of an existing OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
-        | `bucketClusterDataName`{ .nowrap } | `(none)`{ .nowrap } | Name of an existing OCI Object Storage bucket for cluster-wide shared state (including the generated SSH key). If left empty, a bucket will be created with a default name. |
-        | `rtcEngine`{ .nowrap } | `"pion"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`pion` - Default media engine.</li><li>`mediasoup` - Alternative media engine with different performance characteristics.</li></ul> |
-        | `vault_ocid`{ .nowrap } | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
-        | `key_ocid`{ .nowrap } | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
-        | `additionalInstallFlags`{ .nowrap } | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
+        | `region` | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
+        | `availability_domain` | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
+        | `masterNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for each OpenVidu Master Node. All 4 Master Nodes use the same shape and size. |
+        | `masterNodeOcpus` | `2`{ .nowrap } | Number of OCPUs per Master Node (applies to Flex shapes only). |
+        | `masterNodeMemory` | `8`{ .nowrap } | Memory in GB per Master Node (applies to Flex shapes only). |
+        | `masterNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for each Master Node. |
+        | `mediaNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
+        | `mediaNodeOcpus` | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
+        | `mediaNodeMemory` | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |
+        | `mediaNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for the Media Nodes. |
+        | `fixedNumberOfMediaNodes` | `0`{ .nowrap } | If `> 0`, deploys a fixed number of Media Nodes with no autoscaling and no scale-in OCI Function (`initialNumberOfMediaNodes`, `minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU` and `scale_in_function_image` are ignored). If `0` (default), the deployment is elastic and autoscaling is enabled. |
+        | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Initial number of Media Nodes to deploy. Ignored when `fixedNumberOfMediaNodes > 0`. |
+        | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of Media Nodes the autoscaling Instance Pool will keep running. Ignored when `fixedNumberOfMediaNodes > 0`. |
+        | `maxNumberOfMediaNodes` | `5`{ .nowrap } | Maximum number of Media Nodes the autoscaling Instance Pool can launch. Ignored when `fixedNumberOfMediaNodes > 0`. |
+        | `scaleTargetCPU` | `50`{ .nowrap } | Target CPU percentage that triggers scale-in/scale-out actions. Ignored when `fixedNumberOfMediaNodes > 0`. |
+        | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `publicIpAddress` | `(none)`{ .nowrap } | A previously created Reserved Public IP OCID to attach to the Network Load Balancer. Leave blank to generate a new public IP. |
+        | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu deployment. Optional — if not provided, the NLB public IP is used as the domain name. |
+        | `ownPublicCertificate` | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the public certificate in base64 format. |
+        | `ownPrivateCertificate` | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the private certificate in base64 format. |
+        | `initialMeetAdminPassword` | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
+        | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
+        | `bucketAppDataName` | `(none)`{ .nowrap } | Name of an existing OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
+        | `bucketClusterDataName` | `(none)`{ .nowrap } | Name of an existing OCI Object Storage bucket for cluster-wide shared state (including the generated SSH key). If left empty, a bucket will be created with a default name. |
+        | `rtcEngine` | `"pion"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`pion` - Default media engine.</li><li>`mediasoup` - Alternative media engine with different performance characteristics.</li></ul> |
+        | `vault_ocid` | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
+        | `key_ocid` | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
+        | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
+        ///
 
 3. Deploy with Terraform using the following commands:
 
