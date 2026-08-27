@@ -14,6 +14,10 @@ These are the currently available OpenVidu agents:
 [:octicons-arrow-right-24: List of provided AI services](#speech-processing-agent){.ai-agent-link}
 [:octicons-arrow-right-24: Enable the agent](./openvidu-agents/speech-processing-agent.md){.ai-agent-link}
 
+!!! tip "Tutorials"
+
+    Working examples of these AI services live under **Tutorials → AI Services**, starting with the [Live Captions tutorial](../tutorials/ai-services/openvidu-live-captions.md).
+
 ## Speech Processing agent
 
 <div class="grid cards" markdown>

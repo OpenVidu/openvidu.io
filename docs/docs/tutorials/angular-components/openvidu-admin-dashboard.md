@@ -9,17 +9,15 @@ description: "Add an administration dashboard to a video conference built with O
 
 The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin dashboard to manage the recordings of a videoconference using the OpenVidu Components Angular library.
 
-<div class="grid cards" markdown>
+<div class="grid-container" markdown>
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-admin-login.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Admin Login</figcaption>
-</figure>
+<div class="grid-50" markdown>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-login.svg){ loading=lazy }
+</div>
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-admin-dashboard.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Admin Dashboard</figcaption>
-</figure>
+<div class="grid-50" markdown>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-dashboard.svg){ loading=lazy }
+</div>
 
 </div>
 
@@ -129,7 +127,7 @@ Once the server is up and running, you can test the application by visiting [`ht
         }
       ]);
 
-      constructor() {}
+      constructor() 
 
       onLoginRequested(credentials: { username: string; password: string }) { // (4)!
         console.log(`Login button clicked ${credentials}`);

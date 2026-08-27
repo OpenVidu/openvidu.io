@@ -9,10 +9,7 @@ description: "Change the colours, shapes and logo of a video conference built wi
 
 Creating a unique and intuitive user interface (UI) is essential for ensuring a great user experience. **OpenVidu Components Angular** allows for flexibility in UI customization to fit your application's design requirements.
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-ui.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Custom UI</figcaption>
-</figure>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/ui.svg){ .control-height loading=lazy }
 
 ## Running this tutorial
 

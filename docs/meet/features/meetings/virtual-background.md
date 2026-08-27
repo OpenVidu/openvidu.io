@@ -3,7 +3,6 @@ title: "Virtual background in OpenVidu Meet"
 description: "Blur the background or replace it with an image in one click, so an OpenVidu Meet participant can join from anywhere without showing the room."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Virtual Background
@@ -16,8 +15,8 @@ This feature works both before joining a meeting and while already inside one, g
 
 Virtual backgrounds can be enabled or disabled per room when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing room managers to decide when and where the feature is available.
 
-![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark){ .round-corners loading=lazy }
-![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light){ .round-corners loading=lazy }
+![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 ## Key Benefits
 
@@ -60,7 +59,7 @@ Replace your environment with a ready-to-use image selected to match different m
 2. Select **Virtual Background**
 3. Choose an effect to apply it instantly
 
-<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The background options will be disabled when the camera is turned off.

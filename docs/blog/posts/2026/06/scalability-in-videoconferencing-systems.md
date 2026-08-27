@@ -17,7 +17,7 @@ authors:
 
 # The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System
 
-![WebRTC connectivity paths](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/06/scalability-in-videoconferencing-systems/poster.png){ .round-corners align=left }
 
 ## Introduction: The Success Trap
 
@@ -282,7 +282,7 @@ The roadmap here is straightforward: start with a single node to move fast, add 
 
 You don't have to build all of this yourself.
 
-At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
+At OpenVidu, we've been building elastic and resilient production-ready media platforms for years, and we've battle-tested our deployments with our open source [load testing tool :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}. **OpenVidu** gives you a production-ready path for every phase of this roadmap:
 
 - [**Single Node**](/docs/self-hosting/single-node/index.md) to launch quickly.
 - [**Elastic**](/docs/self-hosting/elastic/index.md) to scale media capacity dynamically.

@@ -3,9 +3,9 @@ title: "OpenVidu Platform: Self-Hosted WebRTC SDKs"
 description: "Build real-time video, audio and AI applications on infrastructure you control, with LiveKit-compatible SDKs and a self-hosted media server."
 ---
 
-<div class="logo-header platform-header">
-<img src="/assets/images/logos/platform_greyfont_transback.png#only-light" class="img-title skip-gallery not-selectable" alt="" loading="lazy">
-<img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" class="img-title skip-gallery not-selectable" alt="" loading="lazy">
+<div class="logo-header platform-header" markdown="span">
+![](../assets/images/logos/platform_greyfont_transback.png#only-light){ .img-title .skip-gallery .not-selectable loading=lazy }
+![](../assets/images/logos/platform_whitefont_transback.png#only-dark){ .img-title .skip-gallery .not-selectable loading=lazy }
 </div>
 
 <h1 class="meetplatform-slogan">
@@ -20,9 +20,11 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 
-  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .mkdocs-img .skip-gallery loading=lazy }
-  ![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .mkdocs-img .skip-gallery loading=lazy }
-  <figcaption style="max-width: 27rem">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</figcaption>
+![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .skip-gallery loading=lazy }
+![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .skip-gallery loading=lazy }
+/// caption
+OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.
+///
 
 ## Your first lines of code
 
@@ -50,8 +52,9 @@ Real-time video in your app takes a few lines with our LiveKit fork's SDKs:
 
 <div style="text-align: center; margin: 2em 0;" markdown>
 
-[Start with a tutorial](./tutorials/application-server/index.md){ .md-button .md-button--primary }
-[How to develop your OpenVidu app](./developing-your-openvidu-app/index.md){ .md-button }
+[Get started](./getting-started.md){ .md-button .md-button--primary }
+[Start with a tutorial](./tutorials/application-server/index.md){ .md-button }
+[Build your app](./build-your-app/index.md){ .md-button }
 
 </div>
 
@@ -63,8 +66,8 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
-<div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu videoconference use case" src="/assets/images/platform/getting-started/videoconference.svg" loading="lazy"/>
+<div class="grid-35 tablet-grid-35" markdown="span">
+![OpenVidu videoconference use case](../assets/images/platform/getting-started/videoconference.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 <div class="grid-65 tablet-grid-65" markdown>
@@ -95,8 +98,8 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 - A **global live auction platform** where the auctioneer can be seen by the bidders in real-time with sub-second latency all around the world.
 </div>
 
-<div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/livestream.svg" loading="lazy"/>
+<div class="grid-35 tablet-grid-35" markdown="span">
+![OpenVidu livestream use case](../assets/images/platform/getting-started/livestream.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 </div>
@@ -105,8 +108,8 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 
 <div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
 
-<div class="grid-40 tablet-grid-40">
-<img class="skip-gallery use-case-img" alt="OpenVidu robotics use case" src="/assets/images/platform/getting-started/ai-agents.svg" loading="lazy"/>
+<div class="grid-40 tablet-grid-40" markdown="span">
+![OpenVidu robotics use case](../assets/images/platform/getting-started/ai-agents.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 <div class="grid-60 tablet-grid-60" markdown>
@@ -133,15 +136,15 @@ The future lies in the integration of cameras and sensors in all kinds of device
 - A **real-time translation app** that uses the latest AI models to provide high-quality translations of spoken language in real time.
 </div>
 
-<div class="grid-35 tablet-grid-35">
-<img class="skip-gallery use-case-img" alt="OpenVidu livestream use case" src="/assets/images/platform/getting-started/robotics.svg" loading="lazy"/>
+<div class="grid-35 tablet-grid-35" markdown="span">
+![OpenVidu livestream use case](../assets/images/platform/getting-started/robotics.svg){ .skip-gallery .use-case-img loading=lazy }
 </div>
 
 </div>
 
 ## OpenVidu application architecture
 
-![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg){ loading=lazy }
+![OpenVidu app architecture](../assets/images/platform/getting-started/openvidu-app-architecture.svg){ .control-height loading=lazy }
 
 Every OpenVidu application consists of 3 main components:
 
@@ -168,15 +171,18 @@ With these three concepts you can build any kind of real-time application you ca
 <div style="display: flex; align-items: start; justify-content: center;" markdown>
 
 <div class="grid-45 tablet-grid-45" markdown>
-  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){.basic-concepts-img-1 loading=lazy }
-  <figcaption style="margin-top: 3em">Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" and "Mic" and is receiving Track "Screen" from "Bob". "Bob" is publishing Track "Screen" and receiving Tracks "Webcam" and "Mic" from "Alice".</figcaption>
+![Basic concepts](../assets/images/platform/getting-started/basic-concepts-1.svg){ .basic-concepts-img-1 loading=lazy }
+/// caption
+    attrs: {class: basic-concepts-caption}
+Room "Daily meeting" has 2 Participants: "Alice" is publishing Track "Webcam" and "Mic" and is receiving Track "Screen" from "Bob". "Bob" is publishing Track "Screen" and receiving Tracks "Webcam" and "Mic" from "Alice".
+///
 </div>
 
 <div class="grid-55 tablet-grid-55" markdown>
-<figure markdown>
-  ![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){.basic-concepts-img-2 loading=lazy }
-   <figcaption>Room "Remote support" has 3 Participants: Participant "Dan" is not publishing any Track, but receiving all Tracks in the Room. Participant "Erin" is only receiving Track "Mic" from Participant "Carol", but not Track "Screen".</figcaption>
-</figure>
+![Basic concepts](../assets/images/platform/getting-started/basic-concepts-2.svg){ .basic-concepts-img-2 loading=lazy }
+/// caption
+Room "Remote support" has 3 Participants: Participant "Dan" is not publishing any Track, but receiving all Tracks in the Room. Participant "Erin" is only receiving Track "Mic" from Participant "Carol", but not Track "Screen".
+///
 </div>
 
 </div>
@@ -193,17 +199,17 @@ Apart from these basic building blocks, there are other concepts that will be ty
 
 OpenVidu is available in two editions:
 
-- **OpenVidu** <a href="/pricing/#openvidu-community"><span class="openvidu-tag openvidu-community-tag" style="font-size: 1em">COMMUNITY</span></a>: free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
-- **OpenVidu** <a href="/pricing/#openvidu-pro"><span class="openvidu-tag openvidu-pro-tag" style="font-size: 1em">PRO</span></a>: OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards. You can start with OpenVidu Community and upgrade to OpenVidu Pro when needed.
+- **OpenVidu** [**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 1em" }](../pricing.md#openvidu-community): free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
+- **OpenVidu** [**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 1em" }](../pricing.md#openvidu-pro): OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards. You can start with OpenVidu Community and upgrade to OpenVidu Pro when needed.
 
 <br>
 
-| Type of deployment        | <strong>OpenVidu<br><span class="no-break">Local (development)</span></strong>         | <div style="width:10em"><strong>OpenVidu<br><span class="no-break">Single Node</span></strong></div> | <strong>OpenVidu<br><span class="no-break">Elastic</span></strong> | <strong>OpenVidu<br><span class="no-break">High Availability</span></strong> |
+| Type of deployment        | **OpenVidu**<br>**Local (development)**{ .nowrap }         | <div style="width:10em">**OpenVidu**<br>**Single Node**{ .nowrap }</div> | **OpenVidu**<br>**Elastic**{ .nowrap } | **OpenVidu**<br>**High Availability**{ .nowrap } |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
-| **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
+| **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
-| **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br><span class="openvidu-tag openvidu-pro-tag">PRO</span> Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
-| **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="no-break">N Media Nodes</span> | 4 Master Nodes +<br><span class="no-break">N Media Nodes</span> |
+| **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br>**PRO**{ .openvidu-tag .openvidu-pro-tag } Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
+| **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="nowrap">N Media Nodes</span> | 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span> |
 | **Installation instructions** | [Install](./self-hosting/local.md){ .md-button } | [Install](./self-hosting/single-node/index.md){ .md-button } | [Install](./self-hosting/elastic/index.md){ .md-button } | [Install](./self-hosting/ha/index.md){ .md-button } |
 
 <div style="text-align: center; margin: 3em 0;" markdown>

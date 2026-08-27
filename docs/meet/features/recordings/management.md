@@ -3,7 +3,6 @@ title: "Recording management in OpenVidu Meet"
 description: "Start and stop recordings, then list, play, share, download and delete them, from the OpenVidu Meet application or the Recordings REST API."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Creation & Management
@@ -12,18 +11,18 @@ page_features:
 
 Recordings are started from the meeting view by a participant with the `canRecord` permission (see [Predefined roles](../rooms/access.md#predefined-roles)). The room must have recording [enabled in its configuration](configuration.md#enabling-recordings).
 
-<a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/start-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/start-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
 
-![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark){ loading=lazy }
-![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-light.png#only-light){ loading=lazy }
+![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark){ .round-corners loading=lazy }
+![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-light.png#only-light){ .round-corners loading=lazy }
 
 To stop the recording, a participant with the `canRecord` permission must simply click the **"Stop recording"** button. The recording is then automatically saved on the OpenVidu Meet server.
 
-![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ loading=lazy }
-![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ loading=lazy }
+![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ .round-corners loading=lazy }
+![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info "Starting and stopping recordings via REST API"
     Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that specific recording.
@@ -64,8 +63,8 @@ When you create a shareable link for a recording, you choose **who can access it
 - **OpenVidu Meet users**: any logged-in OpenVidu Meet user can view the recording — even if they have no recording permissions in that room, or no access to the room at all.
 - **Anyone**: any individual with the link can view it without logging in. This option is available only when the room has [anonymous recording sharing](configuration.md#anonymous-recording-sharing) enabled.
 
-<a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 ## REST API reference { #rest-api-reference }
 

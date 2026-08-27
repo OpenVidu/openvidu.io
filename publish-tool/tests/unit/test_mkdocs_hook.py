@@ -1,4 +1,5 @@
-"""The MkDocs hook's two jobs: llms.txt entries, and the sitemap's `<lastmod>`.
+"""The MkDocs hook's three jobs: llms.txt entries, the sitemap's `<lastmod>`, and what the
+glightbox plugin appends to every page.
 
 `on_page_content` reaches into two private attributes of `llmstxt` — `_sections` for the
 description and `_md_pages` for the title — which is the one thing here a plugin upgrade could
@@ -9,6 +10,9 @@ quietly publishing an llms.txt full of nav labels and no descriptions.
 `on_env` sets `page.update_date`, which MkDocs' sitemap template publishes as `<lastmod>`. What is
 pinned is what has to hold on a real build: a generated page gets no date at all, and anything that
 stops git answering leaves MkDocs' build date in place rather than failing.
+
+`on_post_page` rewrites the glightbox plugin's own output, so its tests pin the two edits and the
+loud failure that a plugin upgrade changing that output must produce.
 
 `_MDPageInfo` is imported from the plugin rather than restated, so the fixture cannot drift from the
 record the plugin writes.
@@ -26,7 +30,7 @@ from mkdocs_llmstxt._internal.plugin import _MDPageInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import mkdocs_hook
-from mkdocs_hook import on_env, on_page_content
+from mkdocs_hook import on_env, on_page_content, on_post_page
 
 NAV_LABEL = "Install"
 BUILD_DATE = "2026-07-31"
@@ -314,3 +318,48 @@ def test_no_blog_plugin_means_no_view_metadata(tmp_path, monkeypatch):
         SimpleNamespace(documentation_pages=lambda: [item]),
     )
     assert item.page.update_date == "", "still no lastmod, which does not depend on the blog plugin"
+
+
+# -- on_post_page: the glightbox plugin's output -------------------------------------------
+
+GLIGHTBOX_LIBRARY = '<script src="../assets/javascripts/glightbox.min.js"></script>'
+GLIGHTBOX_INIT = (
+    '<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, '
+    '"zoomable": true, "openEffect": "zoom"});\n'
+    "document$.subscribe(()=>{ lightbox.reload(); });\n</script>"
+)
+
+
+def rendered(init: str = GLIGHTBOX_INIT, *, library: bool = True) -> str:
+    """A page the way the glightbox plugin leaves it: library in <head>, init at the end."""
+    head = f"<head>{GLIGHTBOX_LIBRARY if library else ''}<title>x</title></head>"
+    return f"<html>{head}<body><p>x</p>{init}</body></html>"
+
+
+def test_the_library_moves_from_the_head_to_just_before_its_init_script():
+    output = on_post_page(rendered(), page("docs/x.md"), {})
+
+    assert "<head>" in output and GLIGHTBOX_LIBRARY not in output.split("<body>")[0]
+    assert output.index(GLIGHTBOX_LIBRARY) < output.index('<script id="init-glightbox">')
+
+
+def test_the_plugins_instance_becomes_the_configuration_our_script_reads():
+    output = on_post_page(rendered(), page("docs/x.md"), {})
+
+    assert (
+        '<script id="init-glightbox">const glightboxOptions = {"touchNavigation": true, '
+        '"zoomable": true, "openEffect": "zoom"};\n</script>' in output
+    )
+    assert "GLightbox(" not in output, "no second instance is built"
+    assert "lightbox.reload" not in output, "nothing revives it either"
+
+
+def test_a_page_without_lightbox_content_is_left_alone():
+    assert on_post_page("<html><body><p>x</p></body></html>", page("docs/x.md"), {}) is None
+
+
+def test_an_init_script_that_changed_shape_fails_the_build():
+    init = '<script id="init-glightbox">const box = new GLightbox({"loop": false});</script>'
+
+    with pytest.raises(PluginError, match="no longer builds its instance"):
+        on_post_page(rendered(init), page("docs/x.md"), {})

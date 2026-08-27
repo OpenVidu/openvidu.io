@@ -100,22 +100,22 @@ def test_a_collapsed_admonition_without_a_space_is_an_error(tmp_path):
 # -- the tags contract -----------------------------------------------------------------------
 
 
-def test_glightbox_html_pulled_in_by_a_snippet_needs_the_tag_on_the_page(tmp_path):
-    write(tmp_path, "shared/tutorials/gallery.md", '<a class="glightbox" href="/x.png">i</a>')
-    write(tmp_path, "docs/docs/tutorial.md", '--8<-- "tutorials/gallery.md"\n')
+def test_video_html_pulled_in_by_a_snippet_needs_the_tag_on_the_page(tmp_path):
+    write(tmp_path, "shared/tutorials/demo.md", '<video class="lazy-video" src="/x.mp4"></video>')
+    write(tmp_path, "docs/docs/tutorial.md", '--8<-- "tutorials/demo.md"\n')
 
     (finding,) = findings_of(tmp_path, "tag-contract")
     assert finding.file == "docs/docs/tutorial.md"
-    assert "setupcustomgallery" in finding.message
+    assert "lazyvideo" in finding.message
     assert finding.severity == "error"
 
 
 def test_the_tag_on_the_page_satisfies_the_contract(tmp_path):
-    write(tmp_path, "shared/tutorials/gallery.md", '<a class="glightbox" href="/x.png">i</a>')
+    write(tmp_path, "shared/tutorials/demo.md", '<video class="lazy-video" src="/x.mp4"></video>')
     write(
         tmp_path,
         "docs/docs/tutorial.md",
-        '---\npage_features:\n  - setupcustomgallery\n---\n--8<-- "tutorials/gallery.md"\n',
+        '---\npage_features:\n  - lazyvideo\n---\n--8<-- "tutorials/demo.md"\n',
     )
 
     assert findings_of(tmp_path, "tag-contract") == []
@@ -141,10 +141,12 @@ def test_the_class_token_must_match_whole_not_substring(tmp_path):
 
 
 def test_the_class_token_matches_among_other_classes(tmp_path):
-    write(tmp_path, "docs/index.md", '<a class="dark-img glightbox" href="/x.png">i</a>')
+    write(
+        tmp_path, "docs/index.md", '<video class="round-corners lazy-video" src="/x.mp4"></video>'
+    )
 
     (finding,) = findings_of(tmp_path, "tag-contract")
-    assert "setupcustomgallery" in finding.message
+    assert "lazyvideo" in finding.message
 
 
 # -- image alt text --------------------------------------------------------------------------
@@ -254,3 +256,69 @@ def test_a_snippet_repeating_its_folder_name_warns(tmp_path):
 
     (finding,) = findings_of(tmp_path, "snippet-name")
     assert finding.file == "shared/aws/aws-troubleshooting.md"
+
+
+# -- external-link icon and new tabs ---------------------------------------------------------
+
+
+def _with_link(link):
+    return f'---\ntitle: "P"\ndescription: "A fine description of the page."\n---\n{link}\n'
+
+
+def test_an_external_link_in_the_same_tab_is_an_error(tmp_path):
+    write(tmp_path, "docs/docs/a.md", _with_link("See [LiveKit](https://livekit.io/)."))
+
+    (finding,) = findings_of(tmp_path, "external-link-target")
+    assert finding.severity == "error"
+    assert finding.message == 'external link to "https://livekit.io/" opens in the same tab'
+
+
+def test_a_new_tab_link_without_the_icon_warns(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link('See [LiveKit](https://livekit.io/){:target="_blank"}.'),
+    )
+
+    (finding,) = findings_of(tmp_path, "external-link-icon")
+    assert finding.severity == "warn"
+
+
+def test_a_marked_external_link_is_clean(tmp_path):
+    icon = ":fontawesome-solid-external-link:{.external-link-icon}"
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link(f'See [LiveKit {icon}](https://livekit.io/){{:target="_blank"}}.'),
+    )
+
+    assert findings_of(tmp_path, "external-link-icon") == []
+    assert findings_of(tmp_path, "external-link-target") == []
+
+
+def test_the_icon_is_not_asked_of_labels_that_are_already_one(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link(
+            '[:simple-github:](https://github.com/x){:target="_blank"}\n'
+            '[![Badge](/assets/images/x/b.png)](https://example.org/deploy){:target="_blank"}\n'
+            '[Deploy](https://console.aws.amazon.com/x){ .md-button target="_blank" }'
+        ),
+    )
+
+    assert findings_of(tmp_path, "external-link-icon") == []
+
+
+def test_the_readers_own_deployment_is_not_an_external_site(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/a.md",
+        _with_link(
+            "Open [http://localhost:5080](http://localhost:5080) or "
+            "[the console](https://openvidu.example.io/dashboard)."
+        ),
+    )
+
+    assert findings_of(tmp_path, "external-link-target") == []
+    assert findings_of(tmp_path, "external-link-icon") == []

@@ -11,10 +11,7 @@ The **openvidu-custom-activities-panel** tutorial demonstrates how to customize 
 
 Replacing the default activities panel is made simple with the **ActivitiesPanelDirective**, which offers a straightforward way to replace and adapt the **ActivitiesPanelComponent** to your needs.
 
-<figure markdown>
-  ![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/openvidu-components-activities-panel.svg){ loading=lazy .svg-img  .mkdocs-img}
-  <figcaption>OpenVidu Components - Custom Activities Panel</figcaption>
-</figure>
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/activities-panel.svg){ .control-height loading=lazy }
 
 ## Running this tutorial
 

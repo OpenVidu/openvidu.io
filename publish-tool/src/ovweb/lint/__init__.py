@@ -36,6 +36,7 @@ def run_lint(root: Path, *, layout: SiteLayout, paths: list[str] | None = None) 
         *conventions.check_tag_contract(corpus),
         *conventions.check_image_alt(corpus),
         *conventions.check_target_blank_form(corpus),
+        *conventions.check_external_link_icon(corpus),
         *conventions.check_asset_placement(corpus),
         *conventions.check_light_dark_pairs(corpus),
         *conventions.check_snippet_names(corpus),

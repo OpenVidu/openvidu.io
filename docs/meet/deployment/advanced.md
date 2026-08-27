@@ -10,17 +10,17 @@ description: "Compare OpenVidu Meet deployment types and choose Elastic or High 
 
 OpenVidu Meet can be easily deployed in a single server (follow the [basic deployment guide](./basic.md)). However, a single server won't be enough for environments that require scalability and high-availability. For such cases, it is necessary a multi-node deployment.
 
-| Type of deployment        | <a href="#openvidu-local-development"><strong>OpenVidu<br><span class="no-break">Local (development)</span></strong></a>         | <div style="width:10em"><a href="#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node</span></strong></a></div> | <a href="#openvidu-elastic"><strong>OpenVidu<br><span class="no-break">Elastic</span></strong></a> | <a href="#openvidu-high-availability"><strong>OpenVidu<br><span class="no-break">High Availability</span></strong></a> |
+| Type of deployment        | [**OpenVidu**<br>**Local (development)**{ .nowrap }](#openvidu-local-development)         | <div style="width:10em">[**OpenVidu**<br>**Single Node**{ .nowrap }](#openvidu-single-node)</div> | [**OpenVidu**<br>**Elastic**{ .nowrap }](#openvidu-elastic) | [**OpenVidu**<br>**High Availability**{ .nowrap }](#openvidu-high-availability) |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
-| **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
+| **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
-| **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br><span class="openvidu-tag openvidu-pro-tag">PRO</span> Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
-| **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="no-break">N Media Nodes</span> | 4 Master Nodes +<br><span class="no-break">N Media Nodes</span> |
+| **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability.<br><br>**PRO**{ .openvidu-tag .openvidu-pro-tag } Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance** |
+| **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="nowrap">N Media Nodes</span> | 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span> |
 | **Installation instructions** | [Try](./local.md){ .md-button } | [Install](./basic.md){ .md-button } | [Install](../../docs/self-hosting/elastic/index.md){ .md-button } | [Install](../../docs/self-hosting/ha/index.md){ .md-button } |
 
 
 !!! info
-    You can learn more about the <span class="no-break"><strong>OpenVidu</strong><span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></span> and <span class="no-break"><strong>OpenVidu</strong><span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span> editions [here](./overview.md#openvidu-meet-editions).
+    You can learn more about the <span class="nowrap"><strong>OpenVidu</strong>**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }</span> and <span class="nowrap"><strong>OpenVidu</strong>**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }</span> editions [here](./overview.md#openvidu-meet-editions).
 
 <br>
 
@@ -30,10 +30,7 @@ OpenVidu Meet can be easily deployed in a single server (follow the [basic deplo
 
 To run OpenVidu in your local machine, this is the quickest option. It is a Docker Compose setup that includes all the necessary services to run OpenVidu in your LAN, including automated SSL certificates that will be valid across all devices in your network.
 
-<figure markdown>
-  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .svg-img .dark-img loading=lazy }
-  <figcaption>OpenVidu Local (development)</figcaption>
-</figure>
+![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ### OpenVidu Single Node
 
@@ -43,10 +40,10 @@ This is the simplest production-ready OpenVidu deployment available. It provides
 
 It is composed of a single OpenVidu Node hosting all the necessary services in a monolithic setup. It comes in two flavors:
 
- - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 14px;">COMMUNITY</span></strong>: all the features you need to build your real-time application.
- - <strong>OpenVidu Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></strong>: for those users that want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
+ - **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 14px;" }: all the features you need to build your real-time application.
+ - **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 14px;" }: for those users that want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
 
-  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
+  ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ### OpenVidu Elastic
 
@@ -59,7 +56,7 @@ It is composed of two different types of nodes, one of them running on a cluster
 - **A cluster of Media Nodes** hosting all the media-related services. Your video rooms scale up and down thanks to this cluster.
 - **A single Master Node** hosting all the support services in a monolithic setup.
 
-  ![OpenVidu Elastic](../../assets/images/platform/self-hosting/deployment-types/openvidu-elastic-architecture.svg){ .svg-img .dark-img loading=lazy }
+  ![OpenVidu Elastic](../../assets/images/platform/self-hosting/deployment-types/openvidu-elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ### OpenVidu High Availability
 
@@ -72,4 +69,4 @@ It is composed of two different types of nodes running on two separate clusters:
 - **A cluster of Media Nodes** hosting all the media-related services. Your video rooms scale up and down thanks to this cluster. The minimum number of nodes in this cluster is **1**, and it is designed to scale up and down dynamically according to workload.
 - **A cluster of Master Nodes** hosting all the support services in their high availability format. Your deployment is fault-tolerant thanks to this cluster. The minimum number of nodes in this cluster is **4**, and it is designed to have a fixed number of nodes at all times.
 
-  ![OpenVidu High Availability cluster](../../assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture.svg){ .svg-img .dark-img loading=lazy }
+  ![OpenVidu High Availability cluster](../../assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture.svg){ .round-corners .dark-img loading=lazy }

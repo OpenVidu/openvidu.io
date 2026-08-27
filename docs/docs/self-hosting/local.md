@@ -28,7 +28,7 @@ The installation consists of cloning a repository and running a script to config
 
 To install OpenVidu locally, follow these steps:
 
-=== "OpenVidu <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     1.  Clone the following repository:
 
@@ -69,7 +69,7 @@ To install OpenVidu locally, follow these steps:
         docker compose up
         ```
 
-=== "OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     1.  Clone the following repository:
 
@@ -118,7 +118,7 @@ To install OpenVidu locally, follow these steps:
         - Maximum 8 Participants across all Rooms
         - Maximum 5 minutes duration per Room
 
-        For a production environment, you need to [create an OpenVidu account](../../account.md){:target="_blank"} to get a license key.
+        For a production environment, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../account.md){:target="_blank"} to get a license key.
         There's a 15 day free trial waiting for you!
 
 The deployment is ready when you see the following message:
@@ -165,7 +165,7 @@ You just need to point your OpenVidu and LiveKit applications to `http://localho
 
 To point your applications to your local OpenVidu Local deployment, check the credentials at [http://localhost:7880](http://localhost:7880){:target="_blank"} or simply check the `.env` file. All access credentials for all services are defined in this file.
 
-=== "OpenVidu <span class='openvidu-tag openvidu-community-tag'>COMMUNITY</span>"
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     Your authentication credentials and URLs to point your applications to are:
 
@@ -173,7 +173,7 @@ To point your applications to your local OpenVidu Local deployment, check the cr
     - **API Key**: The value in `.env` of `LIVEKIT_API_KEY`
     - **API Secret**: The value in `.env` of `LIVEKIT_API_SECRET`
 
-=== "OpenVidu <span class='openvidu-tag openvidu-pro-tag'>PRO</span>"
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     Your authentication credentials and URLs to point your applications to are:
 
@@ -227,16 +227,16 @@ This setup is straightforward, but what if you need to test your app from multip
 1. LiveKit Server open source does not natively support HTTPS. You'll need a reverse proxy to serve LiveKit Server over HTTPS.
 2. Even with HTTPS, your SSL certificate might not be valid for local network addresses. You'll need to accept it in the browser for web apps, and install it on mobile devices.
 
-OpenVidu Local Deployment addresses these issues by providing a magic domain name `openvidu-local.dev` that resolves to any IP specified as a subdomain and provides a valid wildcard certificate for HTTPS. This is similar to services like [nip.io :fontawesome-solid-external-link:{.external-link-icon}](https://nip.io){:target="_blank"}, [traefik.me](https://traefik.me){:target="_blank"}, or [localtls](https://github.com/Corollarium/localtls){:target="_blank"}.
+OpenVidu Local Deployment addresses these issues by providing a magic domain name `openvidu-local.dev` that resolves to any IP specified as a subdomain and provides a valid wildcard certificate for HTTPS. This is similar to services like [nip.io :fontawesome-solid-external-link:{.external-link-icon}](https://nip.io){:target="_blank"}, [traefik.me :fontawesome-solid-external-link:{.external-link-icon}](https://traefik.me){:target="_blank"}, or [localtls :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/Corollarium/localtls){:target="_blank"}.
 
 When using OpenVidu Local Deployment, you can access OpenVidu Server (which is 100% LiveKit compatible) and your app from any device on your local network with a valid HTTPS certificate. The following table shows the URLs to access the deployment and your application locally and from other devices on your network:
 
 |                                   | Local access                                                   | Access from devices in your local network                                                                                      |
 | --------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Usage                             | Access only from the development machine                       | Access from any device connected to your local network. In the URLs below, replace **`xxx-yyy-zzz-www`{.no-break}** with the local IP address of the development machine, replacing the dots (`.`) with dashes (`-`). You can find the configured local IP in the **`.env`** file in the **`LAN_PRIVATE_IP`** variable |
-| Application Client (frontend)     | [http://localhost:5080](http://localhost:5080)                 | [https://xxx-yyy-zzz-www.openvidu-local.dev:5443](https://xxx-yyy-zzz-www.openvidu-local.dev:5443)                            |
-| Application Server (backend)      | [http://localhost:6080](http://localhost:6080)                 | [https://xxx-yyy-zzz-www.openvidu-local.dev:6443](https://xxx-yyy-zzz-www.openvidu-local.dev:6443)                            |
-| OpenVidu (LiveKit Compatible) URL | [http://localhost:7880](http://localhost:7880)                 | [https://xxx-yyy-zzz-www.openvidu-local.dev:7443](https://xxx-yyy-zzz-www.openvidu-local.dev:7443)                            |
+| Usage                             | Access only from the development machine                       | Access from any device connected to your local network. In the URLs below, replace **`xxx-yyy-zzz-www`{.nowrap}** with the local IP address of the development machine, replacing the dots (`.`) with dashes (`-`). You can find the configured local IP in the **`.env`** file in the **`LAN_PRIVATE_IP`** variable |
+| Application Client (frontend)     | [http://localhost:5080](http://localhost:5080){:target="_blank"}                 | `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`                            |
+| Application Server (backend)      | [http://localhost:6080](http://localhost:6080){:target="_blank"}                 | `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`                            |
+| OpenVidu (LiveKit Compatible) URL | [http://localhost:7880](http://localhost:7880){:target="_blank"}                 | `https://xxx-yyy-zzz-www.openvidu-local.dev:7443`                            |
 
 !!! info
     

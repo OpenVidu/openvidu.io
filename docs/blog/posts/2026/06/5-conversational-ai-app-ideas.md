@@ -23,8 +23,8 @@ authors:
 
 # 5 conversational AI app ideas you can build this weekend
 
-![Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/poster-light.webp#only-light "5 conversational AI apps you can build this weekend")
-![Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/poster-dark.webp#only-dark "5 conversational AI apps you can build this weekend")
+![Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/poster-light.webp#only-light "5 conversational AI apps you can build this weekend"){ .round-corners }
+![Conversational AI app ideas for 2026 — real-time voice and vision agents you can build this weekend](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/poster-dark.webp#only-dark "5 conversational AI apps you can build this weekend"){ .round-corners }
 
 AI is moving faster than any of us can comfortably keep up with. Every week brings a new model, a new demo, or a viral thread claiming that everything has changed again. Keeping up feels almost impossible.
 
@@ -46,7 +46,7 @@ The breakout product in this category already has a name: the **AI voice agent**
 
 Today, these systems are answering business phone lines, handling appointment requests, qualifying leads, resolving common questions, and routing callers to the right person when needed.
 
-Thanks to platforms like [Vapi](https://vapi.ai/) and real-time infrastructure providers such as [LiveKit](https://livekit.io/) or [OpenVidu](https://openvidu.io/), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
+Thanks to platforms like [Vapi :fontawesome-solid-external-link:{.external-link-icon}](https://vapi.ai/){:target="_blank"} and real-time infrastructure providers such as [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} or [OpenVidu](/index.md), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
 
 But voice agents aren't interesting because they can talk.
 
@@ -67,8 +67,8 @@ Let's look at a few more ways WebRTC and conversational AI can be combined to cr
 
 ## 1. The AI running coach in your ear
 
-![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-light.webp#only-light "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time"){ loading=lazy }
-![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-dark.webp#only-dark "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time"){ loading=lazy }
+![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-light.webp#only-light "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time"){ .round-corners loading=lazy }
+![The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/runner-coach-dark.webp#only-dark "The AI running coach in your ear — a voice agent that reacts to your pace, heart rate, and breathing in real time"){ .round-corners loading=lazy }
 
 
 **The idea.** Imagine having a running coach who never falls behind.
@@ -93,8 +93,8 @@ Start with a single rule: when heart rate crosses a threshold, generate a spoken
 
 ## 2. The AI tour guide on your smart glasses
 
-![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-light.webp#only-light "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time"){ loading=lazy }
-![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-dark.webp#only-dark "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time"){ loading=lazy }
+![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-light.webp#only-light "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time"){ .round-corners loading=lazy }
+![The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/tour-guide-dark.webp#only-dark "The AI tour guide on your smart glasses — a vision and voice agent that tells you about landmarks in real time"){ .round-corners loading=lazy }
 
 **The idea.** Imagine walking through a city and never wondering what you're looking at.
 
@@ -116,8 +116,8 @@ If you can point the camera at a monument and hear a useful explanation a second
 
 ## 3. The AI chef on your kitchen counter
 
-![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-light.webp#only-light "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time"){ loading=lazy }
-![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-dark.webp#only-dark "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time"){ loading=lazy }
+![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-light.webp#only-light "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time"){ .round-corners loading=lazy }
+![The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/chef-copilot-dark.webp#only-dark "The AI chef on your kitchen counter — a vision and voice agent that guides you through cooking in real time"){ .round-corners loading=lazy }
 
 **The idea.** Prop your phone against the backsplash and start cooking.
 
@@ -146,8 +146,8 @@ If it can reliably tell you when the pan is too hot or when the onions are ready
 
 ## 4. The AI sales copilot on your call
 
-![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-light.webp#only-light "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice"){ loading=lazy }
-![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-dark.webp#only-dark "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice"){ loading=lazy }
+![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-light.webp#only-light "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice"){ .round-corners loading=lazy }
+![The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/ai-sales-copilot-dark.webp#only-dark "The AI sales copilot on your call — a voice agent that listens to a live sales conversation and gives you real-time advice"){ .round-corners loading=lazy }
 
 **The idea.** You're on a live sales or negotiation call.
 
@@ -188,8 +188,8 @@ The goal isn't a perfect copilot.
 
 ## 5. The AI that argues the other side
 
-![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-light.webp#only-light "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time"){ loading=lazy }
-![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-dark.webp#only-dark "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time"){ loading=lazy }
+![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-light.webp#only-light "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time"){ .round-corners loading=lazy }
+![The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/sparring-ai-dark.webp#only-dark "The AI that argues the other side — a voice agent that challenges your arguments and takes the opposing position in real time"){ .round-corners loading=lazy }
 
 **The idea.** Imagine having a sparring partner that never agrees with you too easily.
 
@@ -231,8 +231,8 @@ Technically, all of them share the same pipeline:
 
 **Speech-to-text (STT) → Large language model (LLM) → Text-to-speech (TTS)**
 
-![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-light.webp#only-light "Conversational AI pipeline"){ loading=lazy }
-![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-dark.webp#only-dark "Conversational AI pipeline"){ loading=lazy }
+![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-light.webp#only-light "Conversational AI pipeline"){ .round-corners loading=lazy }
+![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-dark.webp#only-dark "Conversational AI pipeline"){ .round-corners loading=lazy }
 
 The model listens, the model thinks, the model speaks. Add vision or sensor data when the idea calls for it, and the structure barely changes.
 
@@ -242,7 +242,7 @@ The hard part was never the AI. It's making the whole loop happen fast enough to
 
 Start with the smallest possible loop — one sensor reading, one camera frame, one spoken reply — and get it talking back to you in under a second. Once that loop feels alive, everything else is just iteration.
 
-And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](https://openvidu.io/) handles the live audio and video transport, and its [custom AI agents](/docs/ai/custom-agents.md) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
+And when you're ready to make it real-time, you don't have to build the WebRTC layer yourself. [OpenVidu](/index.md) handles the live audio and video transport, and its [custom AI agents](/docs/ai/custom-agents.md) wire the STT → LLM → TTS pipeline straight into your rooms — so you can spend the weekend on your idea instead of the plumbing.
 
 Now go build one of them. We'd love to see what you ship.
 

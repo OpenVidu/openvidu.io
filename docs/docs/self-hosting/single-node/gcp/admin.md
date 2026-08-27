@@ -1,9 +1,9 @@
 ---
-title: "Administer OpenVidu Single Node COMMUNITY on Google Cloud"
-description: "Administer OpenVidu Single Node COMMUNITY on Google Cloud: start and stop it, change its configuration and back up its data."
+title: "Administer OpenVidu Single Node on Google Cloud"
+description: "Administer OpenVidu Single Node on Google Cloud: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: Google Cloud Platform
+# OpenVidu Single Node administration: Google Cloud Platform
 
 <div class="provider-chip" markdown>
 
@@ -23,31 +23,31 @@ You can start and stop all services as explained in the [On Premises Single Node
 === "Stop OpenVidu Single Node"
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
+    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO). Click on it.
     3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
 
-    ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/gcp/stop-instance.png){ .svg-img .dark-img loading=lazy }
+    ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/gcp/stop-instance.png){ .round-corners loading=lazy }
 
 === "Start OpenVidu Single Node"
 
     1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.  Click on it.
+    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO).  Click on it.
     3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
 
-    ![Start instance](../../../../assets/images/platform/self-hosting/single-node/gcp/start-instance.png){ .svg-img .dark-img loading=lazy }
+    ![Start instance](../../../../assets/images/platform/self-hosting/single-node/gcp/start-instance.png){ .round-corners loading=lazy }
 
 ## Change the instance type
 
 You can change the instance type of the OpenVidu Single Node instance to adapt it to your needs. To do this, follow these steps:
 
 1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`. Click on it.
+2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO). Click on it.
 3. Stop the instance if it is not stopped. Wait for it to stop.
 4. Click on _"Edit"_, scroll down and change the **Machine Type**.
 
     === "Change instance type"
 
-        ![Change instance type](../../../../assets/images/platform/self-hosting/single-node/gcp/instance-type.png){ .svg-img .dark-img loading=lazy }
+        ![Change instance type](../../../../assets/images/platform/self-hosting/single-node/gcp/instance-type.png){ .round-corners loading=lazy }
 
 5. Select the new instance type and click on _"Save"_.
 
@@ -63,9 +63,13 @@ In addition to these, a Google Cloud Platform deployment provides the capability
 
     1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
     2. Click on the desired secret you want to change and click on _"New Version"_.
-        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .svg-img .dark-img loading=lazy }
+
+        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .round-corners loading=lazy }
+
     3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
-        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .svg-img .dark-img loading=lazy }
+
+        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .round-corners loading=lazy }
+
     4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
 
     Changes will be applied automatically.

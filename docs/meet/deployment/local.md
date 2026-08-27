@@ -18,15 +18,15 @@ This local deployment is the ideal choice to develop the [embedding of OpenVidu 
 - A computer with **Windows**, **macOS**, or **Linux** installed.
 - 4 CPU cores and 8 GB of RAM (16 GB recommended for better performance).
 - At least 10 GB of free disk space.
-- [Docker Desktop](https://docs.docker.com/desktop/) (see installation instructions below).
+- [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/){:target="_blank"} (see installation instructions below).
 
 ## Installing Docker Desktop
 
-[Docker](https://docs.docker.com/get-started/docker-overview/) is a technology that simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
+[Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/get-started/docker-overview/){:target="_blank"} is a technology that simplifies the installation of applications on **Windows**, **macOS**, and **Linux**. 
 
 In the Docker terminology, an application is downloaded as a one or several **docker images**. When the application is executed, it is composed of one or several **docker containers**.
 
-Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the software needed to execute Docker containers):
+Instructions to install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/){:target="_blank"} (the software needed to execute Docker containers):
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
@@ -47,7 +47,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 1. Open **Docker Desktop** and click on the **"Terminal"** button in the bottom right corner.
 
-    ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local/open-terminal.png){ loading=lazy }
+    ![Docker Desktop - Open Terminal](../../assets/images/meet/deployment/local/open-terminal.png){ .round-corners loading=lazy }
 
 2. Copy and paste the following command into the terminal:
 
@@ -73,7 +73,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
         This is a known Docker Desktop bug that **has not been fixed yet**. Until it is resolved in an upcoming release, use the [Advanced Local Deployment](#advanced-local-deployment), which relies directly on docker compose files instead of OCI artifacts, to deploy OpenVidu Meet locally on Windows.
 
-    ![Docker Desktop - Run Command](../../assets/images/meet/deployment/local/command.png){ loading=lazy }
+    ![Docker Desktop - Run Command](../../assets/images/meet/deployment/local/command.png){ .round-corners loading=lazy }
 
 
 3. After pasting the command, press **Enter** to execute the command.
@@ -119,7 +119,7 @@ Instructions to install [Docker Desktop](https://docs.docker.com/desktop/) (the 
 
 ## Accessing OpenVidu Meet
 
-You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080) in your web browser with credentials:
+You can access **OpenVidu Meet** by opening [http://localhost:9080](http://localhost:9080){:target="_blank"} in your web browser with credentials:
 
 - User ID: `admin`
 - Password: `admin`
@@ -135,7 +135,7 @@ You can change them later from the [OpenVidu Meet app](../features/users/managem
 
 Once installed and executed, **`openvidu-meet`** will appear in **Docker Desktop → Containers** section.
 
-![Docker Desktop - Containers](../../assets/images/meet/deployment/local/containers.png){ loading=lazy }
+![Docker Desktop - Containers](../../assets/images/meet/deployment/local/containers.png){ .round-corners loading=lazy }
 
 You can manage OpenVidu Meet execution interactively:
 
@@ -143,13 +143,13 @@ You can manage OpenVidu Meet execution interactively:
 
     3. Click the **Stop** button.
 
-    ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local/stop.png){ loading=lazy }
+    ![Docker Desktop - Stop Container](../../assets/images/meet/deployment/local/stop.png){ .round-corners loading=lazy }
 
 === "Start"
 
     3. Click the **Start** button.
 
-    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local/start.png){ loading=lazy }
+    ![Docker Desktop - Start Container](../../assets/images/meet/deployment/local/start.png){ .round-corners loading=lazy }
 
 === "Remove"
 
@@ -159,24 +159,24 @@ You can manage OpenVidu Meet execution interactively:
 
     1. Click the **Delete** button.
 
-        ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local/remove.png){ loading=lazy }
+        ![Docker Desktop - Remove Container](../../assets/images/meet/deployment/local/remove.png){ .round-corners loading=lazy }
 
     2. Go to **Docker Desktop → Images**.
     3. Remove the images related to **OpenVidu Meet**.
 
-        ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local/remove-images.png){ loading=lazy }
+        ![Docker Desktop - Remove Images](../../assets/images/meet/deployment/local/remove-images.png){ .round-corners loading=lazy }
 
     4. Go to **Docker Desktop → Volumes**.
     5. Remove the volumes related to **OpenVidu Meet**.
 
-        ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local/remove-volumes.png){ loading=lazy }
+        ![Docker Desktop - Remove Volumes](../../assets/images/meet/deployment/local/remove-volumes.png){ .round-corners loading=lazy }
 
 === "View logs"
 
     2. Click on the container group to open its details. The logs will be shown after clicking on the container group.
 
-    ![Select container group](../../assets/images/meet/deployment/local/select-containers.png){ loading=lazy }
-    ![Check logs](../../assets/images/meet/deployment/local/logs.png){ loading=lazy }
+    ![Select container group](../../assets/images/meet/deployment/local/select-containers.png){ .round-corners loading=lazy }
+    ![Check logs](../../assets/images/meet/deployment/local/logs.png){ .round-corners loading=lazy }
 
 ## Accessing OpenVidu Meet from other computers or phones
 
@@ -223,7 +223,7 @@ Follow these steps:
 
     When OpenVidu Meet is ready to be used the terminal will show the URL where it is accessible.
 
-    For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.no-break}.
+    For example, if your private IP is `192.168.1.100` you have to use the URL `https://192-168-1-100.openvidu-local.dev:9443`{.nowrap}.
 
     You will see the following instructions in the terminal when OpenVidu Meet is ready:
 

@@ -3,9 +3,7 @@ site_url: https://openvidu.io/
 site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 repo_name: openvidu/openvidu
 repo_url: https://github.com/openvidu/openvidu
-# Absolute on purpose: edit links must point at THIS repo and branch, not repo_url.
-# The content.action.edit feature is currently off, so this emits nothing today.
-# A branch cut from another must update it (see contributing/versioning.md).
+# Absolute on purpose: edit links point at this repo, not repo_url. Update the branch on a branch cut.
 edit_uri: https://github.com/OpenVidu/openvidu.io/edit/main/docs/
 
 nav:
@@ -68,10 +66,11 @@ nav:
       - Releases: meet/releases.md
   - OpenVidu Platform:
       - docs/index.md
+      - Getting started: docs/getting-started.md
       - Comparing OpenVidu: docs/comparing-openvidu.md
-      - Developing your OpenVidu app:
-          - docs/developing-your-openvidu-app/index.md
-          - How to: docs/developing-your-openvidu-app/how-to.md
+      - Build your app:
+          - docs/build-your-app/index.md
+          - Common operations: docs/build-your-app/common-operations.md
       - Tutorials:
           - Application Server:
               - docs/tutorials/application-server/index.md
@@ -118,8 +117,14 @@ nav:
               - Admin Dashboard: docs/tutorials/angular-components/openvidu-admin-dashboard.md
               - Demo App: docs/tutorials/angular-components/openvidu-components-demo.md
           - AI Services:
-              - docs/tutorials/ai-services/index.md
               - Live Captions: docs/tutorials/ai-services/openvidu-live-captions.md
+      - Reference:
+          - Access tokens: docs/reference/access-tokens.md
+          - Client SDK: docs/reference/client-sdk.md
+          - Room Service API: docs/reference/room-service-api.md
+          - Webhooks: docs/reference/webhooks.md
+          - Egress: docs/reference/egress.md
+          - Ingress: docs/reference/ingress.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
           - Production ready:
@@ -132,7 +137,7 @@ nav:
                   - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
                   - Grafana Stack: docs/self-hosting/production-ready/observability/grafana-stack.md
           - Local (Development): docs/self-hosting/local.md
-          - <span class="openvidu-tag-nav openvidu-community-tag">COMMUNITY</span> Single Node:
+          - Single Node:
               - docs/self-hosting/single-node/index.md
               - On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
@@ -153,27 +158,6 @@ nav:
                   - Install: docs/self-hosting/single-node/oracle/install.md
                   - Administration: docs/self-hosting/single-node/oracle/admin.md
               - Upgrade: docs/self-hosting/single-node/upgrade.md
-          - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
-              - docs/self-hosting/single-node-pro/index.md
-              - On Premises:
-                  - Install: docs/self-hosting/single-node-pro/on-premises/install.md
-                  - Administration: docs/self-hosting/single-node-pro/on-premises/admin.md
-              - AWS:
-                  - Install: docs/self-hosting/single-node-pro/aws/install.md
-                  - Administration: docs/self-hosting/single-node-pro/aws/admin.md
-              - Azure:
-                  - Install: docs/self-hosting/single-node-pro/azure/install.md
-                  - Administration: docs/self-hosting/single-node-pro/azure/admin.md
-              - GCP:
-                  - Install: docs/self-hosting/single-node-pro/gcp/install.md
-                  - Administration: docs/self-hosting/single-node-pro/gcp/admin.md
-              - DigitalOcean:
-                  - Install: docs/self-hosting/single-node-pro/digitalocean/install.md
-                  - Administration: docs/self-hosting/single-node-pro/digitalocean/admin.md
-              - Oracle:
-                  - Install: docs/self-hosting/single-node-pro/oracle/install.md
-                  - Administration: docs/self-hosting/single-node-pro/oracle/admin.md
-              - Upgrade: docs/self-hosting/single-node-pro/upgrade.md
           - <span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Elastic:
               - docs/self-hosting/elastic/index.md
               - On Premises:
@@ -262,7 +246,7 @@ nav:
   - Blog:
       - blog/index.md
   - Support:
-      - support.md
+      - support/index.md
   - Pricing:
       - pricing.md
   - About Us:
@@ -271,16 +255,17 @@ nav:
       - research.md
 
 
-# Pages intentionally excluded from the nav (reached via direct links, not browsable
-# through the navigation). Listed here so validation.nav.omitted_files can stay at "warn"
-# and still flag genuinely-forgotten pages, while these known ones produce no warning.
+# Pages reached by direct link only, never through the nav.
 not_in_nav: |
   /account.md
   /acknowledgments.md
   /openvidu-meet-vs-openvidu-platform.md
   /openvidu-vs-livekit.md
   /openvidu-vs-mediasoup.md
+  /openvidu-vs-jitsi.md
+  /openvidu-vs-janus.md
   /conditions/
+  /support/thanks.md
 
 validation:
   nav:
@@ -289,19 +274,8 @@ validation:
     absolute_links: warn
   links:
     not_found: warn
-    # Absolute Markdown links (starting with "/") are resolved relative to docs_dir,
-    # validated, and rewritten to relative URLs at build time. This form is what shared
-    # snippets use for their links and images: snippets are included in pages at different
-    # hierarchy levels, so relative paths would break. Regular pages use relative links
-    # (editor-navigable); see contributing/link-rules.md.
     absolute_links: relative_to_docs
     unrecognized_links: warn
-    # Kept at "info" (NOT "warn") on purpose. pymdownx.tabbed generates id anchors for tab
-    # labels via its slugify option, but MkDocs's anchor validator runs before that extension
-    # and cannot see those ids, so every link to a tab anchor is reported as a false-positive
-    # "no such anchor" message. Raising this to "warn" would emit ~110+ false warnings and
-    # break `mkdocs build --strict`. INFO messages do not fail --strict, so real broken
-    # anchors still surface in the log without blocking the build.
     anchors: info
 
 theme:
@@ -316,26 +290,15 @@ theme:
     - navigation.tabs
     - navigation.tracking
     - navigation.footer
-    # Breadcrumbs on meet/** + docs/** only: the sectioned marketing pages and the blog
-    # opt out per page/folder with `hide: - path`.
     - navigation.path
-    # Every page embeds only its own nav branch instead of all ~250 entries.
-    # Incompatible with navigation.expand; navigation.instant must also stay off
-    # (the per-feature inline scripts in main.html would not re-run across
-    # instant navigations).
     - navigation.prune
     - navigation.top
     - navigation.indexes
     - search.suggest
     - search.highlight
     - announce.dismiss
-  # The single font stylesheet is loaded by the header override (Tomorrow + Roboto Mono,
-  # exactly the weights the CSS uses); --md-text-font/--md-code-font live in extra.css.
+  # The header override loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
   font: false
-  # Three-way toggle. The first entry whose `media` matches is the first-visit default,
-  # and the bare (prefers-color-scheme) always matches, so the auto entry goes first and
-  # the OS preference decides. Each entry's toggle activates the NEXT entry:
-  # auto -> light -> dark -> auto.
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -360,13 +323,10 @@ theme:
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
 
-# Sets each page's sitemap <lastmod> from git and feeds the llmstxt plugin every page's own
-# title and description. See publish-tool/mkdocs_hook.py.
+# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
 hooks:
   - publish-tool/mkdocs_hook.py
 
-# `mkdocs serve` only auto-watches docs_dir, the config file and the theme; a snippet or
-# hook edit triggered no rebuild at all before these.
 watch:
   - shared
   - overrides
@@ -399,20 +359,17 @@ plugins:
         - OpenVidu Platform
         - Release
         - AI
-  # The CI env var selects the build profile via three states:
-  #   • unset   -> local `mkdocs serve` / `build`
-  #   • "false" -> lightweight link-validation build (validate-web.yaml sets this)
-  #   • "true"  -> real publish build (GitHub Actions sets CI=true automatically)
-  #
-  # privacy (self-hosts external assets): runs locally AND in publish; skipped only in the
-  # validation build. Default true, so it is on unless CI is explicitly "false".
-  # optimize (image compression, needs the imaging stack): runs ONLY in publish. Default
-  # false, so it is off both locally and in validation, on only when CI is "true".
+  # CI unset = local build, "false" = link-validation build, "true" = publish. So privacy runs
+  # everywhere except validation, and optimize only in publish.
   - privacy:
       enabled: !ENV [CI, true]
   - optimize:
       enabled: !ENV [CI, false]
-      # Never recompress the vendored compodoc bundle (reference docs ship as-is)
+      # The default 60 visibly softens the team portraits.
+      optimize_jpg_quality: 82
+      # pngquant's palette is capped at 256 colours, so search effort is its only quality lever.
+      optimize_png_speed: 1
+      # The vendored compodoc bundle ships as it is.
       optimize_exclude:
         - docs/reference-docs/*
   - glightbox:
@@ -422,10 +379,8 @@ plugins:
       auto_themed: true
       background: none
       shadow: false
-  # Always enabled: Material emits feed <link rel="alternate"> tags on every page as soon
-  # as the plugin is registered, so the feeds must exist in every profile. Only the
-  # git-history walk (updated dates) is publish-only - locally and in the validation
-  # build it would tie the build to the repo-root CWD and warn on shallow clones.
+  # Registered in every profile: Material emits the feed <link> tags as soon as the plugin
+  # exists. Only the git-history walk is publish-only (it needs a full clone at the repo root).
   - rss:
       use_git: !ENV [CI, false]
       match_path: blog/posts/.*
@@ -436,10 +391,6 @@ plugins:
         - categories
         - tags
   - llmstxt:
-      # Emitted as the free-prose paragraph after the blockquote, which the llms.txt spec
-      # reserves for how to interpret the rest of the file. It used to restate the blockquote
-      # in weaker words; what a reader actually needs is which of the two products a question
-      # belongs to, because that decides the whole answer.
       markdown_description: >-
         OpenVidu is self-hosted: it runs on infrastructure you control. Two products share this
         documentation. OpenVidu Meet is a complete video conferencing application, deployed as
@@ -447,40 +398,24 @@ plugins:
         layer you build your own real-time application on. The "Optional" section at the end
         holds legal and acknowledgment pages, and can be skipped when a shorter context is
         needed.
-      # The plugin's own cleaning runs BEFORE the preprocess hook and deletes every <img> and
-      # <svg>, so a hook cannot recover the alt text, the comparison-table icons or the tab
-      # labels. publish-tool/llmstxt_preprocess.py reimplements all of autoclean and keeps those
-      # three, because an assistant cannot see an image — the words describing it are the content.
+      # The plugin's own cleaning drops every <img>/<svg> before the preprocess hook runs, so
+      # llmstxt_preprocess.py reimplements it and keeps alt text, table icons and tab labels.
       autoclean: false
       preprocess: publish-tool/llmstxt_preprocess.py
-      # Paths only: publish-tool/mkdocs_hook.py fills each entry in from the page's own
-      # frontmatter — the `title` as the link text and the `description` after it — so both live
-      # in one place and a glob can select pages that each name and describe themselves. A listed
-      # page missing either one fails the build.
-      #
-      # The title override is not cosmetic: the plugin uses `page.title`, which MkDocs resolves as
-      # the *nav label* first, so a labelled nav entry (`- Install: …/install.md`) produced the
-      # entry `[Install]` — 23 of those, telling an assistant nothing.
-      #
-      # Prefer a glob wherever a whole folder belongs to one section: a page added there is then
-      # picked up without an edit here, and a page nobody adds is the one failure mode worth
-      # avoiding (it would be missing from llms.txt *and* linked as a dead `.md`).
-      #
-      # The plugin matches with `fnmatch`, where `*` CROSSES `/`. That cuts both ways:
-      #   * `meet/features/*.md` covers the whole subtree, subfolders included — which is why
-      #     18 feature pages need one line;
-      #   * `docs/*.md` would NOT mean "the top-level Platform pages", it would swallow every
-      #     page under docs/. Folders whose children belong to different sections are therefore
-      #     listed page by page, and a literal segment is what fences a glob in:
-      #     `single-node/*/*.md` takes the 24 provider guides but not `single-node/index.md`.
+      # Paths only: mkdocs_hook.py fills in each page's own `title` and `description`, and a
+      # listed page missing either fails the build. Matching is fnmatch, where `*` crosses `/`:
+      # `meet/features/*.md` takes that whole subtree, so a folder whose children belong to
+      # different sections is listed page by page, and a literal segment fences a glob in.
       sections:
         Product and pricing:
         - index.md
         - openvidu-meet-vs-openvidu-platform.md
         - openvidu-vs-livekit.md
         - openvidu-vs-mediasoup.md
+        - openvidu-vs-jitsi.md
+        - openvidu-vs-janus.md
         - pricing.md
-        - support.md
+        - support/index.md
         - about-us.md
         - research.md
 
@@ -511,9 +446,10 @@ plugins:
 
         OpenVidu Platform:
         - docs/index.md
+        - docs/getting-started.md
         - docs/comparing-openvidu.md
         - docs/releases.md
-        - docs/developing-your-openvidu-app/*.md
+        - docs/build-your-app/*.md
         - docs/ui-components/*.md
 
         OpenVidu Platform tutorials — application server:
@@ -531,6 +467,9 @@ plugins:
         OpenVidu Platform tutorials — AI services:
         - docs/tutorials/ai-services/*.md
 
+        OpenVidu Platform API reference:
+        - docs/reference/*.md
+
         OpenVidu Platform AI services:
         - docs/ai/*.md
 
@@ -538,7 +477,6 @@ plugins:
         - docs/self-hosting/deployment-types.md
         - docs/self-hosting/local.md
         - docs/self-hosting/single-node/index.md
-        - docs/self-hosting/single-node-pro/index.md
         - docs/self-hosting/elastic/index.md
         - docs/self-hosting/ha/index.md
 
@@ -552,13 +490,9 @@ plugins:
         - docs/self-hosting/how-to-guides/*.md
         - docs/troubleshooting/*.md
 
-        OpenVidu Single Node COMMUNITY deployment guides:
+        OpenVidu Single Node deployment guides:
         - docs/self-hosting/single-node/upgrade.md
         - docs/self-hosting/single-node/*/*.md
-
-        OpenVidu Single Node PRO deployment guides:
-        - docs/self-hosting/single-node-pro/upgrade.md
-        - docs/self-hosting/single-node-pro/*/*.md
 
         OpenVidu Elastic deployment guides:
         - docs/self-hosting/elastic/*/*.md
@@ -589,9 +523,6 @@ markdown_extensions:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
-  # Includes resolve against shared/ only (never the CWD), so `--8<-- "x.md"` means
-  # `<repo>/shared/x.md` from any build directory; check_paths makes a missed path a
-  # hard build error.
   - pymdownx.snippets:
       base_path: [!relative $config_dir/shared]
       check_paths: true
@@ -602,13 +533,15 @@ markdown_extensions:
         custom_icons:
           - overrides/.icons
   - pymdownx.blocks.caption
+  # For the wrappers md_in_html cannot reach: its `markdown` attribute is ignored inside a
+  # nested block (a content tab, an admonition) and ships as literal HTML.
+  - pymdownx.blocks.html
 
 extra:
   analytics:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
-    # Renders only after the visitor accepts the analytics cookie (enforced by the
-    # consent template) - invisible to consent-rejecting visitors by design.
+    # Rendered only after the visitor accepts the analytics cookie.
     feedback:
       title: Was this page helpful?
       ratings:
@@ -622,7 +555,7 @@ extra:
           data: 0
           note: >-
             Thanks for your feedback! Help us improve this page by
-            <a href="https://github.com/OpenVidu/openvidu/issues/new?labels=documentation&amp;title=Docs%20feedback:%20{title}&amp;body=Feedback%20about%20https://openvidu.io{url}%0A%0A(Tell%20us%20what%20you%20were%20looking%20for)" target="_blank" rel="noopener">opening a quick GitHub issue</a>.
+            <a href="https://github.com/OpenVidu/openvidu.io/issues/new?labels=documentation&amp;title=Docs%20feedback:%20{title}&amp;body=Feedback%20about%20https://openvidu.io{url}%0A%0A(Tell%20us%20what%20you%20were%20looking%20for)" target="_blank" rel="noopener">opening a quick GitHub issue</a>.
   version:
     provider: mike
     default: latest

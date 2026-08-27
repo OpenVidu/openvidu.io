@@ -2,8 +2,6 @@
 title: "End-to-end encryption in OpenVidu Meet"
 description: "End-to-end encryption in OpenVidu Meet protects audio, video, chat and participant names so only the people in the meeting can read them, not the server."
 keywords: end-to-end encryption, E2EE, encrypted video meetings, secure video conferencing, private video calls, OpenVidu Meet security, encrypted chat
-page_features:
-  - setupcustomgallery
 ---
 
 # End-to-End Encryption

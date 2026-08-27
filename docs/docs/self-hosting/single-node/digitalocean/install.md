@@ -1,9 +1,9 @@
 ---
-title: "Install OpenVidu Single Node COMMUNITY on DigitalOcean"
-description: "Deploy OpenVidu Single Node COMMUNITY on DigitalOcean from the web console or with Terraform, then point your application at the result."
+title: "Install OpenVidu Single Node on DigitalOcean"
+description: "Deploy OpenVidu Single Node COMMUNITY or PRO on DigitalOcean from the web console or with Terraform, then point your application at the result."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> installation: DigitalOcean
+# OpenVidu Single Node installation: DigitalOcean
 
 <div class="provider-chip" markdown>
 
@@ -11,11 +11,12 @@ description: "Deploy OpenVidu Single Node COMMUNITY on DigitalOcean from the web
 
 </div>
 
-This section describes two ways to install OpenVidu Single Node on DigitalOcean:
+This section describes two ways to install OpenVidu Single Node on DigitalOcean, in either the COMMUNITY or PRO edition:
 
 * [**Web Console**](#web-console): Can be deployed without installing anything on your machine, but it requires more manual steps and has some limitations. For example, recordings are stored on the machine (instead of Digital Ocean Spaces Object Storage). 
 * [**Terraform**](#terraform): More powerful and automated, but it requires installing the Terraform CLI on your machine.
 
+--8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
 ## **Web Console**
 
@@ -29,14 +30,20 @@ This page explains how to create a Droplet (VM) in DigitalOcean, configure netwo
 
 ### 1. Create the Droplet
 
-1. Log in to your [**DigitalOcean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/) account.
+1. Log in to your [**DigitalOcean** :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/){:target="_blank"} account.
 2. Search for **Droplets**, click it, and then click _"Create Droplet"_.
-    ![Create Droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/create-droplet.png){ .svg-img .dark-img loading=lazy }
+
+    ![Create Droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/create-droplet.png){ .round-corners loading=lazy }
+
 3. Choose a region and then change the image to Ubuntu _"24.04 (LTS) x64"_ if it is not selected yet.
-    ![OS Selection](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/os-version-selection.png){ .svg-img .dark-img loading=lazy }
+
+    ![OS Selection](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/os-version-selection.png){ .round-corners loading=lazy }
+
 4. Select the size for your OpenVidu server. We recommend **4 CPUs or more and at least 4 GB of RAM** for OpenVidu to run correctly.
 5. Scroll down to Authentication Method and choose the one you prefer. This will be used to connect to the instance via terminal. If you want to use an SSH key, follow the instructions shown when you click New SSH Key.
-    ![Create New SSH Key](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/new-ssh-key.png){ .svg-img .dark-img loading=lazy }
+
+    ![Create New SSH Key](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/new-ssh-key.png){ .round-corners loading=lazy }
+
 6. Review the configuration and click _"Create Droplet"_, you can change the hostname of the droplet if you want (for example, `openvidu-singlenode`).
 
 ---
@@ -51,15 +58,26 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
     Port `9000` is MinIO's port. This installation runs MinIO as the S3 storage service for recordings, so make sure to open it: you will need it to access the MinIO console (for example, to browse your recordings).
 
 1. Click the droplet, then go to _"Networking"_, scroll down and click on _"Edit"_ in **Firewall** section.
-    ![Edit Firewall Rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .svg-img .dark-img loading=lazy }
+
+    ![Edit Firewall Rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .round-corners loading=lazy }
+
 2. Now click on _"Create Firewall"_ and in **Inbound Rules** add the following rules.
-    ![Inbound rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/inbound-rules.png){ .svg-img .dark-img loading=lazy }
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ![Inbound rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/inbound-rules.png){ .round-corners loading=lazy }
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ![Inbound rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/inbound-rules-pro.png){ .round-corners loading=lazy }
 
     !!! warning
         It is important that you make sure the protocol is the one that is shown in the image.
 
 3. Name the firewall, then scroll to the bottom and search for your Droplet by name. Select it to apply the firewall rules to it.
-    ![Firewall apply to droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/firewall-to-droplet.png){ .svg-img .dark-img loading=lazy }
+
+    ![Firewall apply to droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/firewall-to-droplet.png){ .round-corners loading=lazy }
+
 ---
 
 ### 3. SSH access and OpenVidu installation
@@ -82,7 +100,7 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
 ## **Terraform**
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag" style="font-size: 12px">COMMUNITY</span> deployment on DigitalOcean. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on DigitalOcean, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
 
 !!! info
     Port `9000` is MinIO's port. This deployment stores recordings and application data in DigitalOcean Spaces instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
@@ -96,126 +114,63 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture.svg){ .svg-img .dark-img loading=lazy }
+    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
 ### Deployment details
 
 1. Clone the OpenVidu repository with the terraform files:
-    ```bash
-    git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-    git -C openvidu-digitalocean checkout 3.8.0
-    cd openvidu-digitalocean/community/singlenode
-    ```
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ```bash
+        git clone https://github.com/OpenVidu/openvidu-digitalocean.git
+        git -C openvidu-digitalocean checkout 3.8.0
+        cd openvidu-digitalocean/community/singlenode
+        ```
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        git clone https://github.com/OpenVidu/openvidu-digitalocean.git
+        git -C openvidu-digitalocean checkout 3.8.0
+        cd openvidu-digitalocean/pro/singlenode
+        ```
+
 2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
-  <details>
-    <summary>Information about parameters</summary>
 
-    <h4>Mandatory Parameters</h4>
+    ??? details "Information about parameters"
 
-    <div align="center">
-    <table>
-    <thead>
-    <tr>
-    <th>Input Value</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="nowrap"><code>doToken</code></td>
-    <td>DigitalOcean Personal Access Token for API authentication.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>stackName</code></td>
-    <td>Stack name for OpenVidu deployment.</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+        #### Mandatory Parameters
 
-    <h4>Optional Parameters</h4>
+        /// html | div.nowrap-first-column
+        | Input Value | Description |
+        |---|---|
+        | `doToken` | DigitalOcean Personal Access Token for API authentication. |
+        | `stackName` | Stack name for OpenVidu deployment. |
+        | `openviduLicense` **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } | Only required for the PRO edition. Your OpenVidu License. Get one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} if you don't have one. |
+        ///
 
-    <div align="center">
-    <table>
-    <thead>
-    <tr>
-    <th>Input Value</th>
-    <th>Default Value</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="nowrap"><code>region</code></td>
-    <td class="nowrap"><code>"ams3"</code></td>
-    <td>DigitalOcean region where resources will be created.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>instanceType</code></td>
-    <td class="nowrap"><code>"s-2vcpu-4gb"</code></td>
-    <td>Specifies the DigitalOcean Droplet size for your OpenVidu instance.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>certificateType</code></td>
-    <td class="nowrap"><code>"letsencrypt"</code></td>
-    <td>Certificate type for OpenVidu deployment. Options: <ul><li><code>selfsigned</code> - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li><code>owncert</code> - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li><code>letsencrypt</code> - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a <a href="https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability" target="_blank">Let's Encrypt</a> certificate is issued for it).</li></ul>
-    </td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>domainName</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>ownPublicCertificate</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>ownPrivateCertificate</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>initialMeetAdminPassword</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>initialMeetApiKey</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>spaceName</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>spacesAccessId</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>spacesSecretKey</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>spaceRegion</code></td>
-    <td class="nowrap"><code>"ams3"</code></td>
-    <td>DigitalOcean Spaces region where the bucket will be created.</td>
-    </tr>
-    <tr>
-    <td class="nowrap"><code>additionalInstallFlags</code></td>
-    <td class="nowrap"><code>(none)</code></td>
-    <td>Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary.</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+        #### Optional Parameters
 
-    </details>
+        /// html | div.nowrap-first-column
+        | Input Value | Default Value | Description |
+        |---|---|---|
+        | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
+        | `instanceType` | `"s-2vcpu-4gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your OpenVidu instance. |
+        | `rtcEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } | `"pion"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
+        | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
+        | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
+        | `ownPublicCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
+        | `ownPrivateCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
+        | `initialMeetAdminPassword` | `(none)`{ .nowrap } | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
+        | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
+        | `spaceName` | `(none)`{ .nowrap } | Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name. |
+        | `spacesAccessId` | `(none)`{ .nowrap } | Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty. |
+        | `spacesSecretKey` | `(none)`{ .nowrap } | Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceName is empty. |
+        | `spaceRegion` | `"ams3"`{ .nowrap } | DigitalOcean Spaces region where the bucket will be created. |
+        | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary. |
+        ///
+
     !!! warning
 
         In DigitalOcean, you need [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target="_blank"} to create a bucket. If you leave the **spaceName** variable empty, you must configure these keys with full access so a new bucket can be created. [Here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target="_blank"}.
@@ -225,18 +180,19 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
   terraform init
   terraform apply
   ```
-1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
+1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured (`openvidu_ssh_key_sn.pem` for COMMUNITY, `openvidu_ssh_key_snpro.pem` for PRO).
 
     !!! warning
         After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
-    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/bucket-ssh-key.png){ .svg-img .dark-img loading=lazy }
 
-2. Give the SSH Key the necessary permissions for it to work.
+    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/bucket-ssh-key.png){ .round-corners loading=lazy }
+
+2. Give the SSH Key the necessary permissions for it to work. Replace `<SSH_KEY_FILE>` below with `openvidu_ssh_key_sn.pem` (COMMUNITY) or `openvidu_ssh_key_snpro.pem` (PRO).
 
     === "Linux"
         Command in linux:
         ```
-        chmod 600 <PATH_TO_THE_KEY>/openvidu_ssh_key_sn.pem
+        chmod 600 <PATH_TO_THE_KEY>/<SSH_KEY_FILE>
         ```
     === "Powershell"
         Command in powershell:
@@ -252,13 +208,14 @@ To verify that your OpenVidu deployment works correctly wait for the `secrets.en
 
 === "View OpenVidu credentials in the Web"
     - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
-    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/secrets-env.png){ .svg-img .dark-img loading=lazy }
+
+    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/single-node/digitalocean/secrets-env.png){ .round-corners loading=lazy }
 
 === "View OpenVidu credentials in the instance"
 
-    SSH to the instance by running this command from the directory where your SSH key is located:
+    SSH to the instance by running this command from the directory where your SSH key is located (replace `<SSH_KEY_FILE>` with `openvidu_ssh_key_sn.pem` for COMMUNITY or `openvidu_ssh_key_snpro.pem` for PRO):
     ```
-    ssh -i openvidu_ssh_key_sn.pem root@PUBLIC_DROPLET_IP
+    ssh -i <SSH_KEY_FILE> root@PUBLIC_DROPLET_IP
     ```
 
     Then navigate to /opt/openvidu/ and you will find all credentials needed in the `secrets.env`.
@@ -272,6 +229,8 @@ You may need your DigitalOcean credentials to configure your OpenVidu applicatio
 Your authentication credentials and the URL to point your applications to are:
 
 --8<-- "self-hosting/digitalocean/credentials-general.md"
+
+--8<-- "self-hosting/digitalocean/credentials-v2compatibility.md"
 
 ### Troubleshooting initial DigitalOcean deployment creation
 

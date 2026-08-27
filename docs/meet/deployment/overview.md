@@ -15,13 +15,13 @@ OpenVidu Meet is designed to be **self-hosted**, whether it is on premises or in
 
 OpenVidu Meet is available in two editions:
 
-### OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.9em; vertical-align: top">COMMUNITY</span>
+### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.9em; vertical-align: top" }
 
 It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](../index.md#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
 
-### OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.9em; vertical-align: top">PRO</span>
+### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.9em; vertical-align: top" }
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
@@ -42,9 +42,9 @@ The following documentation pages focus on three different deployments:
 
 The table below summarizes the main characteristics of each deployment type.
 
-| Type of deployment        | <strong><span class="no-break">OpenVidu Meet:</span><br>Local deployment</strong> | <div style="width:10em"><strong>OpenVidu Meet:<br><span class="no-break">Basic deployment</span></strong></div> | <strong>OpenVidu Meet:<br><span class="no-break">Advanced deployment</span></strong> |
+| Type of deployment        | **OpenVidu Meet:**{ .nowrap }<br>**Local deployment** | <div style="width:10em">**OpenVidu Meet:**<br>**Basic deployment**{ .nowrap }</div> | **OpenVidu Meet:**<br>**Advanced deployment**{ .nowrap } |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- |
-| **OpenVidu Edition**          | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> | <span class="openvidu-tag openvidu-community-tag">COMMUNITY</span> | <span class="openvidu-tag openvidu-pro-tag">PRO</span> |
+| **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | Suitable to test and develop | Suitable for production applications with medium user load | Suitable for production applications with dynamic user load and need for high availability |
 | **Features**               | Try out all OpenVidu Meet features in your laptop | All OpenVidu Meet features, ready for production | All OpenVidu Meet features ready for production, plus **2x performance**, **advanced observability**, **scalability** and **fault tolerance** |
 | **Number of servers**         | Your laptop | 1 server | Multiple servers |

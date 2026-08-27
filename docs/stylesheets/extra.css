@@ -42,6 +42,34 @@
   width: 8em;
 }
 
+/* Keep identifiers in a table's first column on one line. Material sets
+   word-break: break-word on all inline code, which splits names like
+   `roomConfig` mid-word in narrow cells.
+
+   Opt a table in by wrapping it (not the table itself) in:
+       <div class="nowrap-first-column" markdown>
+   Material finds tables with "table:not([class])" to apply both its own styling
+   and its horizontal-scroll wrapper, so putting the class on the <table> element
+   would break the table instead of fixing it. Tables too wide to shrink still
+   scroll inside Material's .md-typeset__scrollwrap. */
+.md-typeset .nowrap-first-column th:first-child code,
+.md-typeset .nowrap-first-column td:first-child code {
+  white-space: nowrap;
+}
+
+/* Flow a list of short items into as many columns as the width allows, instead
+   of one tall single-file column. Opt in by wrapping the list in:
+       <div class="column-list" markdown>
+   The column width drives the count, so it collapses to one column on phones. */
+.md-typeset .column-list ul {
+  column-width: 11em;
+  column-gap: 1.5rem;
+}
+
+.md-typeset .column-list li {
+  break-inside: avoid;
+}
+
 .openvidu-community-tag {
   background-color: #868686;
 }
@@ -127,6 +155,13 @@ span:has(> a > .openvidu-tag) {
   max-height: 1.1rem;
 }
 
+/* Icon shortcodes wrap their SVG in a .twemoji span, which sizes it from this variable
+   and aligns itself rather than the SVG */
+.md-social__link .twemoji {
+  --md-icon-size: 1.1rem;
+  vertical-align: -25%;
+}
+
 .footer-grid {
   width: 100%;
   text-align: center;
@@ -202,24 +237,7 @@ span:has(> a > .openvidu-tag) {
   --md-code-font: "Roboto Mono";
 }
 
-@font-face {
-  font-family: "Amazon Ember";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Amazon Ember"),
-    url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-  font-display: swap;
-}
-
-img.mkdocs-img {
-  width: 80%;
-  margin: auto;
-}
-
-img.svg-img {
-  border-radius: 7px;
-}
-
+/* A standalone screenshot that sets its own width and needs no grid to sit centred */
 /* Shared card/image utilities (moved from the retired openvidu-call.css) */
 .ov-call-docs-icon {
   font-size: 1.5em;
@@ -234,7 +252,7 @@ img.svg-img {
   box-shadow: none !important;
 }
 .round-corners {
-  border-radius: 14px;
+  border-radius: 8px;
 }
 .three-cols {
   grid-template-columns: repeat(
@@ -259,7 +277,14 @@ img.svg-img {
   max-width: 1500px;
 }
 
-p:has(> a.glightbox) {
+/* A standalone image is centred whether or not the lightbox wrapped it in an anchor
+   (`skip-gallery` images never get one), and whether its parent is a paragraph or a layout
+   cell: an image written into a `markdown="span"` cell has no paragraph at all, and without
+   the second pair it sits hard against the neighbouring text column. */
+p:has(> a.glightbox),
+p:has(> img),
+div[class*="grid-"]:has(> a.glightbox),
+div[class*="grid-"]:has(> img) {
   text-align: center;
 }
 
@@ -284,7 +309,7 @@ p:has(> a.glightbox) {
   max-width: none;
   margin: 0;
   min-height: calc(100vh - 4.8rem);
-  padding: 3em 15em 5em 15em;
+  padding: 2.5em 15em 5em 15em;
   background: var(--top-home-section-color);
   display: flex;
   flex-direction: column;
@@ -297,7 +322,7 @@ p:has(> a.glightbox) {
 }
 
 .top-home-img {
-  width: 35%;
+  width: 34%;
 }
 
 .slogan {
@@ -317,7 +342,7 @@ p:has(> a.glightbox) {
 }
 
 .home-description {
-  font-size: 1rem;
+  font-size: 0.98rem;
   text-align: center;
   max-width: 75rem;
   margin-left: auto;
@@ -381,7 +406,7 @@ p:has(> a.glightbox) {
 }
 
 .home-badges img {
-  height: 28px;
+  height: 27px;
   vertical-align: middle;
 }
 
@@ -423,10 +448,6 @@ p:has(> a.glightbox) {
 
   .home-description {
     font-size: 0.9rem !important;
-  }
-
-  img.mkdocs-img {
-    width: 100%;
   }
 
   .log-in-div {
@@ -675,6 +696,12 @@ nav .md-tabs__item {
   width: 100%;
 }
 
+/* The left diagram is the narrower of the pair, so its caption has to drop to
+   line up with the caption of the one beside it */
+.basic-concepts-caption figcaption {
+  margin-top: 3em;
+}
+
 hr {
   border-bottom: none !important;
   background-image: linear-gradient(
@@ -686,10 +713,6 @@ hr {
   );
   width: 100%;
   height: 1px;
-}
-
-.no-break {
-  white-space: nowrap;
 }
 
 /* Outdated warning */
@@ -945,15 +968,20 @@ h1.meetplatform-slogan {
   opacity: 1;
 }
 
-/* The toggle is a real <button> (keyboard/touch operable); strip UA styles so
-   it renders like the sibling tab links. */
+/* The toggle is a real <button> (keyboard/touch operable), so it needs the UA chrome
+   stripped - but only that: a `font` or `margin` reset also cancels the font-size and
+   margin-top .md-tabs__link sets, which is what made this tab render smaller and higher
+   than its siblings. Everything the sibling links inherit is inherited here explicitly,
+   since a button inherits none of it by default. */
 button.md-tabs__dropdown-toggle {
+  appearance: none;
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
-  font: inherit;
   color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   cursor: pointer;
 }
 
@@ -1009,8 +1037,13 @@ button.md-tabs__dropdown-toggle {
   opacity: 1;
 }
 
-.about-us-img {
-  max-height: 500px;
+/* Constrains the width, not the height: the portraits carry width/height attributes, so
+   their width is definite, and a max-height would clamp the two axes independently and
+   stretch them. 376px is the intended display width - half the 752px source, so the
+   portraits stay sharp on a 2x display. Needs the `.md-typeset` prefix to outrank the
+   theme's own `.md-typeset img { max-width: 100% }`. */
+.md-typeset .about-us-img {
+  max-width: 376px;
 }
 
 /* Tutorial cards, provider buttons/chips (merged from livekit-tutorials.css) */

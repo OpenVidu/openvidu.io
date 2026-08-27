@@ -26,8 +26,8 @@ page_features:
     <div class="product-card openvidu-meet">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
-          <img src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet"  width="1441" height="345"/>
         </h3>
         <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
       </div>
@@ -50,8 +50,8 @@ page_features:
     <div class="product-card openvidu-platform">
       <div class="product-header">
         <h3 class="product-title">
-          <img src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
-          <img src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
+          <img class="skip-gallery" src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform"  width="1648" height="345"/>
         </h3>
         <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
       </div>
@@ -95,13 +95,13 @@ page_features:
 
     ---
 
-    OpenVidu is designed from the ground up to be [**self-hosted**](docs/self-hosting/production-ready/index.md){.no-break} in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
+    OpenVidu is designed from the ground up to be [**self-hosted**](docs/self-hosting/production-ready/index.md){.nowrap} in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
 
 -   :material-face-agent:{ .feature-icon } __Professional support__{ .feature-name }
 
     ---
 
-    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](support.md) now.
+    We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](support/index.md) now.
 
 -   :material-progress-check:{ .feature-icon .padding-icon } __Easy to deploy__{ .feature-name }
 
@@ -163,7 +163,7 @@ page_features:
 
     ---
 
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit](https://livekit.io/){:target="_blank"} and [mediasoup](https://mediasoup.org/){:target="_blank"}-->
+    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
 
 -   :octicons-shield-check-16:{ .feature-icon .padding-icon } __Security at all levels__{ .feature-name }
 
@@ -171,7 +171,7 @@ page_features:
 
     Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
 
--   <span class="twemoji feature-icon"><img class="skip-gallery custom-svg-icon feature-icon" src="/assets/images/home/multiplatform.svg" loading="lazy" alt=""/></span> __Multiplatform__{ .feature-name }
+-   :custom-multiplatform:{ .feature-icon } __Multiplatform__{ .feature-name }
 
     ---
 
@@ -216,13 +216,13 @@ page_features:
 </div>
 </div>
 
-<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;">
-  <a title="Get started with OpenVidu Meet" class="md-button md-button--primary home-meet-button" href="meet/">Deploy Meet in minutes</a>
-  <a title="Build with OpenVidu Platform SDKs" class="md-button home-platform-button" href="docs/">Start building with the SDKs</a>
+<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown="span">
+[Deploy Meet in minutes](meet/index.md){ .md-button .md-button--primary .home-meet-button title="Get started with OpenVidu Meet" }
+[Start building with the SDKs](docs/index.md){ .md-button .home-platform-button title="Build with OpenVidu Platform SDKs" }
 </div>
-<p class="home-under-cta">
-  Not sure which fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
-</p>
+
+Not sure which fits? [Compare Meet vs Platform](openvidu-meet-vs-openvidu-platform.md)
+{ .home-under-cta }
 
 <hr style="margin: 7em 0 3.5em 0;">
 

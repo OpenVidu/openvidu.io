@@ -1,8 +1,6 @@
 ---
 title: "Users tutorial for OpenVidu Meet"
 description: "Create registered users with the OpenVidu Meet Users API and add them to a room as members, with a Node.js backend and a JavaScript frontend."
-page_features:
-  - setupcustomgallery
 ---
 
 # Users Tutorial
@@ -61,11 +59,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/users/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/users/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/users/members.png" loading="lazy" class="control-height round-corners" alt="Room members page of the tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![Room members page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/users/members.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 

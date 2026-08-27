@@ -1,8 +1,6 @@
 ---
 title: "Identified guests tutorial for OpenVidu Meet"
 description: "Give each guest a fixed name and a personal access link to an OpenVidu Meet room, with a Node.js and Express backend and a JavaScript frontend."
-page_features:
-  - setupcustomgallery
 ---
 
 # Identified Guests Tutorial
@@ -62,11 +60,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/identified-guests/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/identified-guests/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/identified-guests/members.png" loading="lazy" class="control-height round-corners" alt="Room members page of the tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![Room members page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/identified-guests/members.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 

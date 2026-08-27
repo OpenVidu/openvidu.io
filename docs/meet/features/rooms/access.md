@@ -3,7 +3,6 @@ title: "Room access in OpenVidu Meet"
 description: "The four ways into an OpenVidu Meet room: shared anonymous links, registered users and identified guests, each with a Moderator or Speaker role."
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Room Access
@@ -30,8 +29,8 @@ These links can be shared freely with anyone, unless anonymous access for that r
 
 Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
 
-<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 #### From an active meeting
 

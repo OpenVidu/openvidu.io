@@ -1,15 +1,9 @@
-# Layout and redirect configuration for the openvidu.io website.
+# Layout and redirect configuration for the openvidu.io website: what is versioned, what is
+# promoted to the root, and which redirects to generate. Every redirect is a real HTML page with
+# a zero-delay meta refresh: GitHub Pages serves 404.html with a 404 status, so only a 200 page
+# carries a redirect a crawler follows.
 #
-# `ovweb` reads it to know which parts of the built site are versioned, which are promoted to
-# the root, and which redirects to generate. Every redirect on the site is a real HTML page
-# with a zero-delay meta refresh, declared here — there is no client-side router: GitHub Pages
-# serves 404.html with a 404 status, which a crawler acts on before it runs any JavaScript, so
-# only a 200 page can carry a redirect a search engine follows.
-#
-# `ovweb` always reads the copy inside the *installed* package, never the one in the
-# checked-out branch. Publishing an old version checks out its X.Y branch, which carries
-# its own stale copy of this file; reading that would reintroduce exactly the per-branch
-# divergence this file exists to remove.
+# `ovweb` reads the copy inside the *installed* package, never the one on the checked-out branch.
 
 schema: 2
 
@@ -21,8 +15,7 @@ layout:
     - docs
     - meet
 
-  # Built inside the version folder but served once from the site root, always
-  # regenerated from the newest publish: /pricing/, /blog/, ...
+  # Built inside the version folder, served once from the root, regenerated on every publish.
   non_versioned_pages:
     - account
     - pricing
@@ -30,42 +23,33 @@ layout:
     - openvidu-meet-vs-openvidu-platform
     - openvidu-vs-livekit
     - openvidu-vs-mediasoup
+    - openvidu-vs-jitsi
+    - openvidu-vs-janus
     - conditions
     - blog
     - about-us
     - research
     - acknowledgments
 
-  # Asset folders copied (not moved) from the newest version folder to the root. They stay
-  # in the version folder too, which is what makes `pinned_assets` below work.
+  # Copied (not moved) from the newest version folder to the root, which is what makes
+  # `pinned_assets` below work.
   assets:
     - assets
     - javascripts
     - stylesheets
     - search
 
-  # Asset folders whose root-absolute references get pinned to the version folder inside
-  # versioned pages, e.g. src="/assets/x.png" -> src="/3.8/assets/x.png".
-  #
-  # MkDocs does not process raw HTML, so authors write root-absolute asset references there
-  # (a relative path would need a per-page "../" depth, impossible to get right in a shared
-  # snippet). The root /assets/ folder always holds the NEWEST publish's assets, so a
-  # versioned page must reference its own copy instead: its assets may change or disappear
-  # in a later release. Asset links written in Markdown need no pinning — MkDocs already
-  # rewrites those into relative URLs that stay inside the version folder.
-  #
-  # `search` is in `assets` but deliberately NOT here: the search index is not referenced by
-  # URL from page markup, and its own locations are rewritten by a different rule.
+  # Root-absolute references in versioned pages are pinned to the version folder:
+  # src="/assets/x.png" -> src="/3.8/assets/x.png". The root copy always holds the newest
+  # publish, so a versioned page must point at its own. Markdown links need no pinning, and
+  # `search` is excluded on purpose: its locations are rewritten by another rule.
   pinned_assets:
     - assets
     - javascripts
     - stylesheets
 
-  # Individual files moved from the newest version folder to the root. On a past-version
-  # publish these are deleted from the version folder instead — except index.html, which
-  # is replaced by the generated version-root redirect.
-  #
-  # sitemap.xml is deliberately absent: it is copied and rewritten, not moved.
+  # Moved from the newest version folder to the root; deleted from the version folder on a
+  # past-version publish. sitemap.xml is absent on purpose: it is copied and rewritten, not moved.
   root_files:
     - index.html
     - index.md
@@ -91,47 +75,32 @@ redirects:
     robots: "noindex, follow"
     preserve_query_and_hash: true
 
-    # Targets are emitted RELATIVE to the redirect page, and this must stay true for any
-    # rule installed inside a version folder.
-    #
-    # `latest` is a git symlink to the newest version folder, so ONE file answers at both
-    # /3.8/ and /latest/. An absolute target would have to name a version and would leak
-    # "/3.8/" to visitors of the stable /latest/ URL. A relative target is resolved by the
-    # browser against the document URL, so the same bytes send /latest/ to /latest/docs/
-    # and /3.8/ to /3.8/docs/ — with no JavaScript needed.
+    # `latest` is a symlink to the newest version folder, so one file answers at both /3.8/
+    # and /latest/. Only a relative target sends each URL to its own tree; an absolute one
+    # would name a version and leak "/3.8/" to /latest/ visitors.
     relative: true
 
-  # Redirects materialised as HTML files in the published tree, one rule per page.
-  #
-  # `at` is either the named location `version-root` or a path template that may use
-  # {version}. `to` is relative to the directory the redirect page lives in. `canonical`
-  # may use {site_url} and {version}.
-  #
-  # `versions` gates the whole rule; `when` entries override fields for a version range.
-  # At most one `when` entry may match a given version — an ambiguous rule is an error,
-  # not a silent first-match.
+  # One rule per page. `at` is the named location `version-root` or a path template that may
+  # use {version}; `to` is relative to the redirect page's own directory. `versions` gates the
+  # rule, `when` entries override fields for a version range, and at most one may match a
+  # version — an ambiguous rule is an error, not a first-match.
   files:
     - id: version-root
       description: >
-        Installed as <X.Y>/index.html and therefore also served at /latest/ through mike's
-        symlink alias. Sends a visitor who lands on a bare version root into the OpenVidu
-        Platform documentation.
+        A bare version root goes to the Platform documentation.
       at: version-root
       to: "docs/"
       canonical: "{site_url}/latest/docs/"
       body: "Redirecting to the OpenVidu Platform documentation…"
       when:
-        # Versions 3.0–3.3 predate the /docs/ landing page: back then the getting started guide
-        # *was* the documentation index. They also predate the name "OpenVidu Platform", which
-        # arrived in 3.4 with OpenVidu Meet, when the OpenVidu docs became the Platform docs — so
-        # nothing shown to a visitor of those versions should use it.
+        # 3.0-3.3 have no /docs/ landing page, and the name "OpenVidu Platform" arrived in 3.4.
         - versions: "<3.4"
           to: "docs/getting-started/"
           body: "Redirecting to the OpenVidu getting started guide…"
 
     - id: platform-getting-started
       description: >
-        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4.
+        /X.Y/docs/getting-started/ moved to /X.Y/docs/ in 3.4, and back to a real page in 3.8.
       at: "{version}/docs/getting-started/index.html"
       to: "../"
       canonical: "{site_url}/latest/docs/"
@@ -140,11 +109,13 @@ redirects:
         # In 3.0–3.3 this is a real page, not a redirect.
         - versions: "<3.4"
           enabled: false
+        # From 3.8 it is a real page again.
+        - versions: ">=3.8"
+          enabled: false
 
     - id: legacy-docs-index
       description: >
-        /3.0/docs/ … /3.3/docs/ never existed and are hard 404s. Point them at
-        the getting started guide, which was that version's documentation index.
+        /3.0/docs/ … /3.3/docs/ never existed; the getting started guide was that index.
       at: "{version}/docs/index.html"
       to: "getting-started/"
       canonical: "{site_url}/latest/docs/"
@@ -162,9 +133,8 @@ redirects:
 
     - id: removed-oracle-install-tutorial-community
       description: >
-        The Oracle install tutorial was folded into the install guide. Gated at 3.7 because the
-        page was removed as outdated *during* 3.7's life, so a rebuild of 3.7 keeps it deleted
-        and redirects rather than resurrecting instructions that were wrong.
+        Folded into the install guide. Gated at 3.7 because the page was removed *during* 3.7's
+        life, so a rebuild of 3.7 keeps it deleted.
       at: "{version}/docs/self-hosting/single-node/oracle/install-tutorial/index.html"
       to: "../install/"
       canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
@@ -179,11 +149,35 @@ redirects:
       canonical: "{site_url}/latest/docs/self-hosting/single-node-pro/oracle/install/"
       body: "Redirecting to the Oracle Cloud installation guide…"
       versions: ">=3.7"
+      when:
+        # From 3.8 the PRO install page it pointed at is itself a stub, so this one skips
+        # straight to the merged page: `files` rules are not chained the way `expand` ones are.
+        - versions: ">=3.8"
+          to: "../../../single-node/oracle/install/"
+          canonical: "{site_url}/latest/docs/self-hosting/single-node/oracle/install/"
+
+    - id: single-node-pro-index-merged
+      description: >
+        single-node-pro/ merged into single-node/ in 3.8; the per-provider pages are handled by
+        single-node-pro-provider-pages-merged below.
+      at: "{version}/docs/self-hosting/single-node-pro/index.html"
+      to: "../single-node/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/"
+      body: "Redirecting to the Single Node guide…"
+      versions: ">=3.8"
+
+    - id: single-node-pro-upgrade-merged
+      description: >
+        As above, for the merged per-edition upgrade page.
+      at: "{version}/docs/self-hosting/single-node-pro/upgrade/index.html"
+      to: "../../single-node/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
+      body: "Redirecting to the Single Node upgrade guide…"
+      versions: ">=3.8"
 
     - id: removed-self-hosting-faq
       description: >
-        The self-hosting FAQ was removed after 3.4. The how-to guides are the section closest to
-        it in kind — task-shaped answers to specific self-hosting questions.
+        The self-hosting FAQ was removed after 3.4; the how-to guides are its closest successor.
       at: "{version}/docs/self-hosting/faq/index.html"
       to: "../how-to-guides/"
       canonical: "{site_url}/latest/docs/self-hosting/how-to-guides/"
@@ -227,8 +221,8 @@ redirects:
       body: "Redirecting to the OpenVidu Meet direct link tutorial…"
       versions: ">=3.8"
 
-    # The Meet features section was reorganised per feature area in 3.8. 3.7 still ships the old
-    # pages, so these must not be gated any lower — see the note above the group.
+    # The Meet features section was reorganised per feature area in 3.8; 3.7 still ships the
+    # old pages, so these must not be gated any lower.
     - id: moved-meet-features-users
       at: "{version}/meet/features/users-and-permissions/index.html"
       to: "../users/overview/"
@@ -257,10 +251,8 @@ redirects:
       body: "Redirecting to OpenVidu Meet recordings…"
       versions: ">=3.8"
 
-    # OpenVidu Call was the ready-to-use meeting application documented up to 3.3, and OpenVidu
-    # Meet replaced it: these two pages disappear in exactly the release that first ships meet/.
-    # The release notes link to /3.0/docs/openvidu-call/ on purpose — those are version-pinned by
-    # convention and 3.0 is below the gate, so they keep resolving to the page they describe.
+    # OpenVidu Meet replaced OpenVidu Call in 3.4. The release notes link
+    # /3.0/docs/openvidu-call/ on purpose: 3.0 is below the gate, so those keep resolving.
     - id: removed-openvidu-call
       at: "{version}/docs/openvidu-call/index.html"
       to: "../../meet/"
@@ -270,10 +262,8 @@ redirects:
 
     - id: removed-openvidu-call-docs
       description: >
-        The page that documented how to run and customise the OpenVidu Call application. Its
-        closest successor is the components demo tutorial, which is the ready-to-run application
-        built from openvidu-components-angular. That tutorial first exists in 3.5, so 3.4 lands on
-        the Angular components tutorials index instead.
+        Succeeded by the components demo tutorial, which only exists from 3.5, so 3.4 lands on
+        the Angular components tutorials index.
       at: "{version}/docs/openvidu-call/docs/index.html"
       to: "../../tutorials/angular-components/openvidu-components-demo/"
       canonical: "{site_url}/latest/docs/tutorials/angular-components/openvidu-components-demo/"
@@ -285,9 +275,8 @@ redirects:
           canonical: "{site_url}/latest/docs/tutorials/angular-components/"
           body: "Redirecting to the OpenVidu Angular components tutorials…"
 
-    # The two recording tutorials were split per storage backend in 3.2. Both originals used
-    # S3-compatible storage — MinIO in the local deployment — so the S3 variant is the one that
-    # continues them; the Azure variant was new.
+    # The two recording tutorials were split per storage backend in 3.2; both originals used
+    # S3-compatible storage, so the S3 variant continues them.
     - id: split-recording-basic-tutorial
       at: "{version}/docs/tutorials/advanced-features/recording-basic/index.html"
       to: "../recording-basic-s3/"
@@ -302,18 +291,40 @@ redirects:
       body: "Redirecting to the advanced recording tutorial with S3 storage…"
       versions: ">=3.2"
 
-  # Rules that generate many redirect pages from one entry. Every kind resolves against the
-  # published tree at publish time (and via `ovweb redirects apply`), under three filters:
-  # a candidate path already holding a real page is skipped, a candidate whose target does not
-  # exist is skipped, and a target that is itself a redirect is followed to its final
-  # destination. So an expansion can never overwrite content, redirect into a 404, or chain.
+    - id: removed-ai-tutorials-index
+      description: >
+        The AI services tutorials index was a link-only page, removed in 3.8. Its URL lands on
+        the tutorial it pointed at.
+      at: "{version}/docs/tutorials/ai-services/index.html"
+      to: "openvidu-live-captions/"
+      canonical: "{site_url}/latest/docs/tutorials/ai-services/openvidu-live-captions/"
+      body: "Redirecting to the Live Captions tutorial…"
+      versions: ">=3.8"
+
+    - id: renamed-build-your-app
+      description: >
+        developing-your-openvidu-app/ was renamed build-your-app/ in 3.8, after the nav name.
+      at: "{version}/docs/developing-your-openvidu-app/index.html"
+      to: "../build-your-app/"
+      canonical: "{site_url}/latest/docs/build-your-app/"
+      body: "Redirecting to Build your app…"
+      versions: ">=3.8"
+
+    - id: renamed-common-operations
+      description: >
+        how-to.md in that folder was renamed common-operations.md in 3.8, after the nav name.
+      at: "{version}/docs/developing-your-openvidu-app/how-to/index.html"
+      to: "../../build-your-app/common-operations/"
+      canonical: "{site_url}/latest/docs/build-your-app/common-operations/"
+      body: "Redirecting to Common operations…"
+      versions: ">=3.8"
+
+  # Rules that generate many redirect pages from one entry, resolved against the published tree
+  # under three filters: a candidate that holds a real page is skipped, one whose target is
+  # missing is skipped, and a target that is itself a redirect is followed to its destination.
   expand:
-    # Each deployment type used to carry one index page per provider whose whole content was a
-    # list of links to that provider's install, admin and upgrade guides; the deployment type's
-    # own index now links straight to the install guide, and so does this rule.
-    # ha/on-premises/ is still a real page in 3.8 (it resolves the
-    # DNS-load-balancing vs network-load-balancer fork), so the never-shadow filter leaves it
-    # alone with no exclusion to maintain.
+    # The per-provider index pages were link lists into install/admin/upgrade. ha/on-premises/
+    # is still a real page in 3.8, and the never-shadow filter leaves it alone.
     - id: removed-provider-index
       kind: cross-product
       at: "{version}/docs/self-hosting/{edition}/{provider}/index.html"
@@ -322,38 +333,71 @@ redirects:
       body: "Redirecting to the installation guide…"
       versions: ">=3.8"
       values:
-        edition: [single-node, single-node-pro, elastic, ha]
+        edition: [single-node, elastic, ha]
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
-    # The six per-provider Single Node upgrade guides of each edition became one page per
-    # edition in 3.8. Elastic and High Availability keep their per-provider upgrade guides.
+    # The per-provider Single Node upgrade guides became one page per edition in 3.8; Elastic
+    # and High Availability keep theirs.
     - id: merged-single-node-upgrade
       kind: cross-product
-      at: "{version}/docs/self-hosting/{edition}/{provider}/upgrade/index.html"
+      at: "{version}/docs/self-hosting/single-node/{provider}/upgrade/index.html"
       to: "../../upgrade/"
-      canonical: "{site_url}/latest/docs/self-hosting/{edition}/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
       body: "Redirecting to the upgrade guide…"
       versions: ">=3.8"
       values:
-        edition: [single-node, single-node-pro]
         provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 
-    # Inverse of merged-single-node-upgrade, for the version selector: the merged upgrade page
-    # only exists from 3.8 on, so in older versions its URL answers with the edition index,
-    # which links the per-provider upgrade guides.
+    # Inverse of merged-single-node-upgrade, for the version selector: before 3.8 that URL
+    # answers with the edition index.
     - id: split-single-node-upgrade
       kind: cross-product
       at: "{version}/docs/self-hosting/{edition}/upgrade/index.html"
       to: "../"
-      canonical: "{site_url}/latest/docs/self-hosting/{edition}/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
       body: "Redirecting to the per-provider upgrade guides…"
       versions: "<3.8"
       values:
         edition: [single-node, single-node-pro]
 
-    # OpenVidu Meet arrived in 3.4; the versions before it documented OpenVidu Call. Every URL
-    # the meet section answers in any newer version redirects to the Call docs here, so the
-    # version selector lands a reader on the predecessor instead of the version root.
+    # single-node-pro/ merged into single-node/ in 3.8. Cross-products rather than one
+    # tree-rename: a rename would also claim the install-tutorial path that
+    # removed-oracle-install-tutorial-pro owns. Each rule names the merged page itself —
+    # an expansion collapses through a `files` stub or a real page, never through another
+    # expansion's stub, so pointing inside the retired tree would leave a 404.
+    - id: single-node-pro-provider-pages-merged
+      kind: cross-product
+      at: "{version}/docs/self-hosting/single-node-pro/{provider}/{page}/index.html"
+      to: "../../../single-node/{provider}/{page}/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/{provider}/{page}/"
+      body: "Redirecting to the Single Node guide…"
+      versions: ">=3.8"
+      values:
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+        page: [install, admin]
+
+    - id: single-node-pro-provider-index-merged
+      kind: cross-product
+      at: "{version}/docs/self-hosting/single-node-pro/{provider}/index.html"
+      to: "../../single-node/{provider}/install/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/{provider}/install/"
+      body: "Redirecting to the installation guide…"
+      versions: ">=3.8"
+      values:
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+
+    - id: single-node-pro-provider-upgrade-merged
+      kind: cross-product
+      at: "{version}/docs/self-hosting/single-node-pro/{provider}/upgrade/index.html"
+      to: "../../../single-node/upgrade/"
+      canonical: "{site_url}/latest/docs/self-hosting/single-node/upgrade/"
+      body: "Redirecting to the upgrade guide…"
+      versions: ">=3.8"
+      values:
+        provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
+
+    # Before 3.4 there was no meet/ section: every URL it answers in a newer version lands on
+    # the OpenVidu Call docs, so the version selector keeps the reader on the predecessor.
     - id: meet-was-openvidu-call
       kind: section-fallback
       dir: "{version}/meet"
@@ -361,11 +405,9 @@ redirects:
       body: "Redirecting to the OpenVidu Call documentation…"
       versions: "<3.4"
 
-    # Documentation versions used to be published per patch release ("/3.4.1/...",
-    # "/3.0.0-beta2/...") and are now grouped by minor ("/3.4/..."). Google still holds the
-    # per-patch URLs, so each retired folder is rebuilt as a full mirror of its minor: one
-    # redirect page per page of the minor's tree, /3.4.1/docs/x/ -> /3.4/docs/x/. A minor's
-    # alias folders are rebuilt whenever the minor is published.
+    # Versions used to be published per patch release and are now grouped by minor. Google
+    # still holds the per-patch URLs, so each retired folder mirrors its minor page by page.
+    # Rebuilt whenever that minor is published.
     - id: legacy-patch-folders
       kind: version-alias
       folders:
@@ -385,9 +427,8 @@ redirects:
         - 3.8.0
       body: "Redirecting to the documentation of this OpenVidu version…"
 
-    # Every page of the newest version answers at its unversioned URL too:
-    # /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/.
-    # Deleted and rebuilt in full on every latest publish.
+    # Every page of the newest version also answers at its unversioned URL, e.g.
+    # /docs/ai/live-captions/ -> /latest/docs/ai/live-captions/. Rebuilt on every latest publish.
     - id: unversioned-pages
       kind: unversioned-mirror
       for_each: versioned_pages

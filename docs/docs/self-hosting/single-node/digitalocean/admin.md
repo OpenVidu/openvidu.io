@@ -1,9 +1,9 @@
 ---
-title: "Administer OpenVidu Single Node COMMUNITY on DigitalOcean"
-description: "Administer OpenVidu Single Node COMMUNITY on DigitalOcean: start and stop it, change its configuration and back up its data."
+title: "Administer OpenVidu Single Node on DigitalOcean"
+description: "Administer OpenVidu Single Node on DigitalOcean: start and stop it, change its configuration and back up its data."
 ---
 
-# OpenVidu Single Node <span class="openvidu-tag openvidu-community-tag openvidu-tag-heading">COMMUNITY</span> administration: DigitalOcean
+# OpenVidu Single Node administration: DigitalOcean
 
 <div class="provider-chip" markdown>
 
@@ -23,31 +23,47 @@ You can start and stop all services as explained in the [On Premises Single Node
 === "Stop OpenVidu Single Node"
 
     1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
-    2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
+    2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-ce-pro` (PRO).
     3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
 
-    ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet.png){ .svg-img .dark-img loading=lazy }
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet.png){ .round-corners loading=lazy }
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .round-corners loading=lazy }
 
 === "Start OpenVidu Single Node"
 
     1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
-    2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
+    2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-ce-pro` (PRO).
     3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
 
-    ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet.png){ .svg-img .dark-img loading=lazy }
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet.png){ .round-corners loading=lazy }
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .round-corners loading=lazy }
 
 ## Change the droplet size
 
 You can change the droplet size of the OpenVidu Single Node to adapt it to your needs. To do this, follow these steps:
 
 1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
-2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce`.
+2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-ce-pro` (PRO).
 3. [Stop](#stop-openvidu-single-node) the droplet if it is not stopped.
 4. Click on _"Upsize Droplet"_ and change the size, then click on _"Resize"_.
 
-    === "Change droplet size"
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet.png){ .svg-img .dark-img loading=lazy }
+        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet.png){ .round-corners loading=lazy }
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet-pro.png){ .round-corners loading=lazy }
 
 ## Administration and configuration
 

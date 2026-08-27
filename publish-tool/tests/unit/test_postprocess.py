@@ -267,11 +267,16 @@ def test_installs_the_version_root_redirect_after_promotion(latest_tree, config,
     assert '<meta http-equiv="refresh" content="0; url=docs/">' in version_root
 
 
-def test_installs_the_getting_started_redirect(latest_tree, config, report):
+def test_the_getting_started_redirect_is_gated_off_from_3_8(latest_tree, config, report):
+    """From 3.8 the path holds a real page, so no stub may be installed over it."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
-    page = latest_tree / VERSION / "docs" / "getting-started" / "index.html"
-    assert '<meta http-equiv="refresh" content="0; url=../">' in page.read_text()
+    assert not (latest_tree / VERSION / "docs" / "getting-started").exists()
+
+
+def test_installs_the_getting_started_redirect_in_the_gated_band(config):
+    resolved = {item.rule_id: item for item in resolve_file_redirects(config, "3.5")}
+    assert resolved["platform-getting-started"].to == "../"
 
 
 def test_shields_an_author_pinned_link_in_the_blog(latest_tree, config, report):
@@ -469,11 +474,12 @@ def test_mirrors_every_advertised_page_at_its_unversioned_url(latest_tree, confi
 
 
 def test_the_mirror_collapses_a_versioned_stub_to_its_destination(latest_tree, config, report):
-    """/docs/getting-started/ answers with one hop, not through the versioned stub."""
+    """/docs/…/force-443-tls/ answers with one hop, not through the versioned stub."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
-    page = (latest_tree / "docs" / "getting-started" / "index.html").read_text()
-    assert 'content="0; url=/latest/docs/"' in page
+    stub = "docs/self-hosting/how-to-guides/force-443-tls/index.html"
+    page = (latest_tree / stub).read_text()
+    assert 'content="0; url=/latest/docs/self-hosting/how-to-guides/force-single-port/"' in page
 
 
 def test_the_mirror_leaves_the_root_served_pages_out(latest_tree, config, report):

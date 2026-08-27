@@ -1,6 +1,8 @@
 ---
 title: "OpenVidu scalability and autoscaling"
 description: "How OpenVidu scales from a small meeting to a large live stream, with autoscaling Media Nodes and a control plane that keeps up with them."
+page_features:
+  - setupwowjs
 ---
 
 # Scalability :material-chart-timeline-variant-shimmer:
@@ -75,7 +77,7 @@ Upon a new Room creation request:
 ### Egress
 
 !!! info
-    Check out the official Egress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/egress/overview/){:target="_blank"}.
+    Check out the [Egress reference](../../reference/egress.md) for every Egress type, output format and status value.
 
 The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). 
 
@@ -143,7 +145,7 @@ openvidu:
 ### Ingress
 
 !!! info
-    Check out the official Ingress documentation of LiveKit [here :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/ingress/overview/){:target="_blank"}.
+    Check out the [Ingress reference](../../reference/ingress.md) for every input type, transcoding option and Ingress state.
 
 The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 
@@ -303,3 +305,11 @@ When deploying an OpenVidu cluster **On Premises** you are responsible for monit
     - [Adding Media Nodes](../ha/on-premises/admin.md#adding-media-nodes)
     - [Removing Media Nodes gracefully](../ha/on-premises/admin.md#removing-media-nodes-gracefully)
     - [Removing Media Nodes forcefully](../ha/on-premises/admin.md#removing-media-nodes-forcefully)
+
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Planning for a specific scale target?</h2>
+  <p style="margin-bottom: 1.5em">Tell us your expected rooms and participants and we will help you size the deployment.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>

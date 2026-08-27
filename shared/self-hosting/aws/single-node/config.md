@@ -5,11 +5,16 @@ In addition to these, an AWS deployment provides the capability to manage global
     1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
     2. Select the CloudFormation Stack that you used to deploy OpenVidu Single Node.
     3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Single Node deployment.
-        ![Select Secrets Manager](/assets/images/platform/self-hosting/single-node/aws/outputs.png){ .svg-img .dark-img loading=lazy }
+
+        ![Select Secrets Manager](/assets/images/platform/self-hosting/single-node/aws/outputs.png){ .round-corners loading=lazy }
+
     4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
-        ![Retrieve Secret Value](/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ .svg-img .dark-img loading=lazy }
+
+        ![Retrieve Secret Value](/assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
+
     5. Modify the parameter you want to change and click on _"Save"_.
     6. Go to the EC2 Console and click on _"Reboot instance"_ to apply the changes to the Master Node.
-        ![Reboot Instance](/assets/images/platform/self-hosting/single-node/aws/reboot-instance.png){ .svg-img .dark-img loading=lazy }
+
+        ![Reboot Instance](/assets/images/platform/self-hosting/single-node/aws/reboot-instance.png){ .round-corners loading=lazy }
 
     Changes will be applied automatically.

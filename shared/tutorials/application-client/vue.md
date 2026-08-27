@@ -20,12 +20,16 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:5080`](http://localhost:5080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+/// html | div.grid-container
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/join-vue.png" loading="lazy" alt="Join screen of the Vue tutorial app"/></p></div>
+/// html | div.grid-50
+![Join screen of the Vue tutorial app](/assets/images/platform/tutorials/application-client/join-vue.png){ .round-corners loading=lazy }
+///
 
-<div class="grid-50"><p><img src="/assets/images/platform/tutorials/application-client/room-vue.png" loading="lazy" alt="Video call room of the Vue tutorial app"/></p></div>
+/// html | div.grid-50
+![Video call room of the Vue tutorial app](/assets/images/platform/tutorials/application-client/room-vue.png){ .round-corners loading=lazy }
+///
 
-</div>
+///
 
 --8<-- "tutorials/testing-other-devices.md"

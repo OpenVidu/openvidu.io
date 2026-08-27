@@ -4,7 +4,6 @@ description: "Turn on real-time speech-to-text captions in an OpenVidu Meet meet
 keywords: OpenVidu Meet, live captions, speech to text, real-time transcription, video conferencing accessibility, speech processing agent
 page_features:
   - lazyvideo
-  - setupcustomgallery
 ---
 
 # Live Captions
@@ -67,12 +66,12 @@ Apply your changes by restarting OpenVidu. This ensures the system recognizes th
 
 Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Room Features** step of the room configuration wizard, using the **Captions** toggle.
 
-![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .round-corners loading=lazy }
-![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .round-corners loading=lazy }
+![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 ## Using Live Captions in a Meeting
 
 Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.
 
-<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-desc-position="bottom" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-desc-position="bottom" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/live-captions/enable-captions-light.mp4#only-light" preload="none" muted playsinline loop></video></a>

@@ -1,8 +1,6 @@
 ---
 title: "Recordings tutorial for OpenVidu Meet"
 description: "Add recording management to an OpenVidu Meet Web Component application: list recordings, play them back and delete the ones you no longer need."
-page_features:
-  - setupcustomgallery
 ---
 
 # Recordings Tutorial
@@ -53,11 +51,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/recordings/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/recordings/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/recordings/recordings.png" loading="lazy" class="control-height round-corners" alt="Recordings page of the tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![Recordings page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/recordings/recordings.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 

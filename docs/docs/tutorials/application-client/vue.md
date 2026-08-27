@@ -1,8 +1,6 @@
 ---
 title: "Vue video call tutorial"
 description: "Build a Vue video-call app on OpenVidu with the LiveKit-compatible JS SDK: join a room, publish your camera and subscribe to other participants."
-page_features:
-  - setupcustomgallery
 ---
 
 # Vue Tutorial
@@ -193,7 +191,7 @@ The `joinRoom()` function performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html)
+        You can take a look at all the events in the [Room events reference](../../reference/client-sdk.md#room-events)
 
 3.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:
 

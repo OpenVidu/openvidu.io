@@ -30,12 +30,6 @@ page_features:
   - setupwowjs
 ---
 
-<style>
-  main > div.md-grid {
-    max-width: 61rem;
-  }
-</style>
-
 # Pricing
 
 <table id="pricing-table" name="big-pricing-table">
@@ -51,22 +45,22 @@ page_features:
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
-        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="no-break">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
     <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
-    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="no-break">High Availability</span></strong></a></td>
+    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
   </tr>
   <tr>
     <td class="first-column border-right">Suitability</td>
     <td class="border-right">For applications with medium user load</td>
-    <td class="border-right">Enjoy the benefits of OpenVidu PRO in a <span class="no-break">single-node</span> installation</td>
+    <td class="border-right">Enjoy the benefits of OpenVidu PRO in a <span class="nowrap">single-node</span> installation</td>
     <td class="border-right">For applications with dynamic user load that require scalability</td>
     <td>For applications where both scalability and fault tolerance are critical</td>
   </tr>
   <tr>
     <td class="first-column border-right">Features</td>
     <td class="border-right">Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability</td>
-    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong class="nowrap">2x performance</strong> and <strong class="no-break">advanced observability</strong></td>
+    <td class="border-right">Same features as OpenVidu Single Node COMMUNITY plus <strong class="nowrap">2x performance</strong> and <strong class="nowrap">advanced observability</strong></td>
     <td class="border-right">Same benefits as OpenVidu Single Node PRO plus <strong>scalability</strong></td>
     <td>Same benefits as OpenVidu Elastic plus <strong>fault tolerance</strong></td>
   </tr>
@@ -74,26 +68,26 @@ page_features:
     <td class="first-column border-right">Number of servers</td>
     <td class="border-right">1 Node</td>
     <td class="border-right">1 Node</td>
-    <td class="border-right">1 Master Node +<br><span class="no-break">N Media Nodes</span></td>
-    <td> 4 Master Nodes +<br><span class="no-break">N Media Nodes</span></td>
+    <td class="border-right">1 Master Node +<br><span class="nowrap">N Media Nodes</span></td>
+    <td> 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span></td>
   </tr>
   <tr>
     <td class="first-column border-right">Installation instructions</td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node">Install</a></td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node-pro">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
     <td class="border-right"><a class="md-button" href="../docs/self-hosting/elastic/">Install</a></td>
     <td><a class="md-button" href="../docs/self-hosting/ha/">Install</a></td>
   </tr>
 </table>
 
-<div markdown="1" style="font-size: 20px" markdown>
+<div style="font-size: 20px" markdown>
 
 OpenVidu offers two editions:
 
-- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
-- <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+- <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.8rem" }</strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.8rem" }</strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
 
-OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</span></strong> or <strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</span></strong> deployment.
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.8rem" }</strong> or <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.8rem" }</strong> deployment.
 
 </div>
 
@@ -141,6 +135,14 @@ After the free trial period, a **monthly billing cycle** will charge all your ex
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
+  <h2 style="margin-bottom: 0.5em">Not sure which setup fits your scale?</h2>
+  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
+  <div class="home-buttons">
+    <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
+  </div>
+</div>
+
 ## Pricing examples
 
 As explained above, every minute of an OpenVidu Pro cluster is charged according to the number of cores available for the cluster. So let's see some actual examples, first noting the following points:
@@ -165,8 +167,8 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic.svg" alt="Diagram of an OpenVidu Elastic deployment with 12 cores in total" loading="lazy"/>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Diagram of an OpenVidu Elastic deployment with 12 cores in total](assets/images/pricing/elastic.svg){ .round-corners .dark-img loading=lazy }
 </div>
 
 ---
@@ -186,8 +188,8 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic-big.svg" alt="Diagram of an OpenVidu Elastic deployment with 20 cores in total" loading="lazy"/>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Diagram of an OpenVidu Elastic deployment with 20 cores in total](assets/images/pricing/elastic-big.svg){ .round-corners .dark-img loading=lazy }
 </div>
 
 ---
@@ -207,8 +209,8 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img" src="/assets/images/pricing/ha.svg" alt="Diagram of an OpenVidu High Availability deployment with 32 cores in total" loading="lazy"/>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Diagram of an OpenVidu High Availability deployment with 32 cores in total](assets/images/pricing/ha.svg){ .round-corners .dark-img loading=lazy }
 </div>
 
 ---
@@ -224,16 +226,16 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 
 |||
 |---|---|
-| **First 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Video Tracks</th><th markdown>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</th></tr></thead><tbody><tr><td>8x8 Rooms</td><td>15</td></tr><tr><td>Price</td><td markdown>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</td></tr></tbody></table> |
-| **Next 8 hours of the day with high demand**<br>(16 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Price</th><th markdown>$4.61 :material-information-outline:{ title="8 hours * 60 minutes/hour * 16 cores * $0.0006 = $4.61" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td markdown>3000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>45</td></tr></tbody></table> |
-| **Last 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table" markdown><thead markdown><tr markdown><th>Price</th><th markdown>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td markdown>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>15</td></tr></tbody></table>  |
+| **First 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table"><thead><tr><th>Video Tracks</th><th>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</th></tr></thead><tbody><tr><td>8x8 Rooms</td><td>15</td></tr><tr><td>Price</td><td>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</td></tr></tbody></table> |
+| **Next 8 hours of the day with high demand**<br>(16 cores in total) | <table class="inner-table"><thead><tr><th>Price</th><th>$4.61 :material-information-outline:{ title="8 hours * 60 minutes/hour * 16 cores * $0.0006 = $4.61" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td>3000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>45</td></tr></tbody></table> |
+| **Last 8 hours of the day with low demand**<br>(8 cores in total) | <table class="inner-table"><thead><tr><th>Price</th><th>$2.30 :material-information-outline:{ title="8 hours * 60 minutes/hour * 8 cores * $0.0006 = $2.30" }</th></tr></thead><tbody><tr><td>Video Tracks</td><td>1000 :material-information-outline:{ title="640x480 video. Same number of audio Tracks are also transmitted" }</td></tr><tr><td>8x8 Rooms</td><td>15</td></tr></tbody></table>  |
 | **Total for 1 day** | $9.21 |
 | **Total for 1 month** | $276.30 |
 
 </div>
 
-<div class="grid-50 tablet-grid-50">
-<img class="dark-img svg-img" src="/assets/images/pricing/elastic-variable.svg" alt="Diagram of an OpenVidu Elastic deployment with a variable number of cores" loading="lazy"/>
+<div class="grid-50 tablet-grid-50" markdown="span">
+![Diagram of an OpenVidu Elastic deployment with a variable number of cores](assets/images/pricing/elastic-variable.svg){ .round-corners .dark-img loading=lazy }
 </div>
 
 </div>

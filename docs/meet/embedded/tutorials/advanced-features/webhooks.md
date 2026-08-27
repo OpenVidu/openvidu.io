@@ -1,8 +1,6 @@
 ---
 title: "Webhooks tutorial for OpenVidu Meet"
 description: "Keep a video conferencing app up to date in real time with OpenVidu Meet webhooks and Server-Sent Events, on a Node.js and JavaScript stack."
-page_features:
-  - setupcustomgallery
 ---
 
 # Webhooks Tutorial
@@ -55,11 +53,15 @@ npm start
 
 Once the server is up and running, you can test the application by visiting [`http://localhost:6080`](http://localhost:6080){:target="_blank"}. You should see a screen like this:
 
-<div class="grid-container">
+<div class="grid-container" markdown>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/webhooks/home.png" loading="lazy" class="control-height round-corners" alt="Home page of the tutorial app with the list of rooms"/></p></div>
+<div class="grid-50" markdown>
+![Home page of the tutorial app with the list of rooms](../../../../assets/images/meet/embedded/tutorials/webhooks/home.png){ .round-corners loading=lazy }
+</div>
 
-<div class="grid-50"><p><img src="/assets/images/meet/embedded/tutorials/webhooks/recordings.png" loading="lazy" class="control-height round-corners" alt="Recordings page of the tutorial app"/></p></div>
+<div class="grid-50" markdown>
+![Recordings page of the tutorial app](../../../../assets/images/meet/embedded/tutorials/webhooks/recordings.png){ .round-corners loading=lazy }
+</div>
 
 </div>
 
