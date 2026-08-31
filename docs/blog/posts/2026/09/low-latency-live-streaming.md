@@ -1,33 +1,36 @@
 ---
-title: "Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)"
-draft: true
-date: 2026-08-26
+title: 'Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)'
+draft: false
+date: 2026-09-01
 slug: low-latency-live-streaming
-description: "What counts as low latency, why WebRTC hits sub-second delivery where HLS and DASH structurally can't, and where low latency live streaming actually gets used."
+description: >-
+  What counts as low latency, why WebRTC hits sub-second delivery where HLS and
+  DASH structurally can't, and where low latency live streaming actually gets
+  used.
 cover_image: poster-light.webp
 categories:
-    - Comparison
-    - Technology
+  - Comparison
+  - Technology
 tags:
-    - WebRTC
-    - Live Streaming
-    - Low Latency
-    - HLS
-    - DASH
-    - Streaming Protocols
-    - WHIP
+  - WebRTC
+  - Live Streaming
+  - Low Latency
+  - HLS
+  - DASH
+  - Streaming Protocols
+  - WHIP
 authors:
-    - patxi
+  - patxi
 hide:
-    - navigation
-    - search-bar
-    - version-selector
+  - navigation
+  - search-bar
+  - version-selector
 ---
 
 # Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)
 
-![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/YYYY/MM/low-latency-live-streaming/poster-light.webp#only-light "Low latency live streaming vs. traditional broadcast delay")
-![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/YYYY/MM/low-latency-live-streaming/poster-dark.webp#only-dark "Low latency live streaming vs. traditional broadcast delay")
+![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/2026/09/low-latency-live-streaming/poster-light.webp#only-light "Low latency live streaming vs. traditional broadcast delay")
+![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/2026/09/low-latency-live-streaming/poster-dark.webp#only-dark "Low latency live streaming vs. traditional broadcast delay")
 
 When Spain was playing the World Cup, we noticed something annoying. We celebrated each of Spain's scores by shouting "GOOOOOL", 15 seconds before our neighbors saw the goal on their TV. Obviously, we ruined their experience watching the game, so much that they asked us where we were watching it from to avoid the gap. Now picture that same 15-second gap on a live shopping stream where you're typing "does it come in blue?", or in a video call where you keep talking over the other person because their audio hasn't reached you yet. That's the difference between "live" and **low latency live streaming**.
 
@@ -68,7 +71,7 @@ Let's have a look at some use cases to understand what actually lands in each la
 - **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more: input lag above a few tens of milliseconds is felt directly in your hands.
 - **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely (industrial machinery, a drone, a surgical robot), the use case needs a genuine real-time control loop, not just real-time-looking video.
 
-![World Cup retransmissions work just well with a 20 seconds latency](/assets/images/blog/YYYY/MM/low-latency-live-streaming/broadcasting-match.webp){ align=right width=50% }
+![World Cup retransmissions work just well with a 20 seconds latency](/assets/images/blog/2026/09/low-latency-live-streaming/broadcasting-match.webp){ align=right width=50% }
 
 So, as I said before: it's never the content itself that sets the latency budget. It's whether someone downstream has to act on what they're seeing before it goes stale.
 
@@ -99,7 +102,7 @@ The following is a table describing different streaming protocols with their low
 
 WebRTC was designed to optimize the path between a captured frame and a rendered one, contrary to the design decisions behind HLS and DASH, which were focused on file caching.
 
-![An interactive streaming session needs latencies under 1 second](/assets/images/blog/YYYY/MM/low-latency-live-streaming/game-streaming.webp){ width=80% }
+![An interactive streaming session needs latencies under 1 second](/assets/images/blog/2026/09/low-latency-live-streaming/game-streaming.webp){ width=80% }
 
 In WebRTC media flows continuously as RTP packets over UDP the moment a connection is established. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure, not to buffer or batch anything.
 
@@ -121,7 +124,7 @@ The low latency line is **whether the interaction loops back to the source in re
 
 If you're building something in that "below the second" category (a stream someone needs to react to) the protocol choice is WebRTC, and you need it end to end, not just for capture.
 
-![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/assets/images/blog/YYYY/MM/low-latency-live-streaming/videoconference.webp){ width=80% }
+![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/assets/images/blog/2026/09/low-latency-live-streaming/videoconference.webp){ width=80% }
 
 [OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion) for how to wire a WHIP source into your own app.
 
