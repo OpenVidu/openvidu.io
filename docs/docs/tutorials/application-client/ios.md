@@ -165,7 +165,7 @@ Before joining a room, the `ConnectView.swift` defines the view for the connecti
 
 After define the participant and room name, the user can click the `Join` button to connect to the room. This action triggers the `connectToRoom` method asynchronously:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/ConnectView.swift#L93-L122' target='_blank'>ConnectView.swift</a>" linenums="96"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/ConnectView.swift#L93-L122' target='_blank'>ConnectView.swift</a>" linenums="93"
 func connectToRoom() async {
     let livekitUrl = roomCtx.livekitUrl
     let roomName = roomCtx.name
@@ -346,7 +346,7 @@ struct ParticipantView: View {
 
 To leave the room, the user can click the `Leave` button in the `RoomView`. This action triggers the `leaveRoom` method asynchronously:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/RoomView.swift#L49-L108' target='_blank'>RoomView.swift</a>" linenums="111"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/RoomView.swift#L49-L108' target='_blank'>RoomView.swift</a>" linenums="49"
 func content(geometry: GeometryProxy) -> some View {
 
     // ...
