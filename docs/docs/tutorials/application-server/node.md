@@ -12,7 +12,7 @@ This is a minimal server application built for Node.js with [Express :fontawesom
 -   Generating LiveKit tokens on demand for any [application client](../application-client/index.md).
 -   Receiving LiveKit [webhook events](../../reference/webhooks.md).
 
-It internally uses [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js){:target="_blank"}.
+It internally uses [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}.
 
 ## Running this tutorial
 
@@ -114,7 +114,7 @@ app.post("/token", async (req, res) => {
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
 
-If required fields are available, a new JWT token is created. For that we use the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js){:target="_blank"}:
+If required fields are available, a new JWT token is created. For that we use the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}:
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET` and setting the participant's identity.
 2. We set the video grants in the AccessToken. `roomJoin` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](../../reference/access-tokens.md#video-grants).
