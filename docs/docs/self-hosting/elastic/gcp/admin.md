@@ -12,7 +12,7 @@ description: "Administer OpenVidu Elastic on Google Cloud: shut down and start t
 </div>
 
 
-The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target="_blank"}. This group dynamically adjusts the number of instances based on a target average CPU usage.
+The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/instance-groups?hl=en){:target="_blank"}. This group dynamically adjusts the number of instances based on a target average CPU usage.
 
 Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
 
@@ -131,7 +131,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
     !!! info
 
         OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU usage. However, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [Google Cloud Platform
-        MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target="_blank"}.
+        MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target="_blank"}.
 
 ## Fixed Number of Media Nodes
 

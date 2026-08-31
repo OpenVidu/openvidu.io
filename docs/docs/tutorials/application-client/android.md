@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built for **Android**, using **
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-android/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -48,7 +48,7 @@ This Android project has been generated with Android Studio. You may come across
 
 The activity layout files are located in the `app/src/main/res/layout` directory.
 
-To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-android/){:target="_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
+To use LiveKit in an Android application, you need to add the [LiveKit Android Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-android/){:target="_blank"} as a dependency in the `build.gradle.kts` file. This dependecy provides the necessary classes and methods to interact with the LiveKit server:
 
 ```gradle title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-android/app/build.gradle.kts#L43' target='_blank'>build.gradle.kts</a>"
 dependencies {

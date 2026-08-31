@@ -101,7 +101,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
     OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
+This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
 
 <div class="nowrap-first-column" markdown>
 
@@ -219,9 +219,9 @@ OpenVidu comes with other services configured to work in the deployment. These a
 | **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.12.0/config-sample.yaml){:target="_blank"}</li></ul>
 | **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/783a287#config){:target="_blank"} |
 | **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/2ce1b32#config){:target="_blank"} |
-| **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json/){:target="_blank"} |
+| **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json){:target="_blank"} |
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/v12.4/setup-grafana/configure-grafana/){:target="_blank"} |
 | **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.1.x/configure/){:target="_blank"} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.7.x/configure/){:target="_blank"} |
 | **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.12/configuration/configuration/){:target="_blank"} |
-| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/alloy/v1.17/configure/){:target="_blank"} |
+| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://archive.grafana.com/docs/alloy/v1.17/configure/){:target="_blank"} |

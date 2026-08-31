@@ -113,7 +113,7 @@ The `video` claim is where permissions live. Every field is optional; anything y
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    - Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}.
+    - Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}.
     - For a working example run the [Node.js tutorial](../tutorials/application-server/node.md).
 
     ```javascript
@@ -288,7 +288,7 @@ The `video` claim is where permissions live. Every field is optional; anything y
 
 === ":material-api:{.icon .lg-icon .tab-icon} CLI"
 
-    Using the [LiveKit CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}
+    Using the [LiveKit CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}
 
     ```bash
     export LIVEKIT_API_KEY=api-key

@@ -39,7 +39,7 @@ To get you started, here is a list of all available LiveKit Server SDKs and an a
 
     [:octicons-arrow-right-24: Node.js Tutorial](../tutorials/application-server/node.md)
 
-    [:octicons-arrow-right-24: Reference Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    [:octicons-arrow-right-24: Reference Docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 

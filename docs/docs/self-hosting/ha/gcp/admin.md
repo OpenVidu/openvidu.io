@@ -12,7 +12,7 @@ description: "Administer OpenVidu High Availability on Google Cloud: shut down a
 </div>
 
 
-The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups?hl=en){:target="_blank"}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
+The deployment of OpenVidu High Availability on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with 4 Virtual Machine Instances as Master Nodes and any number of Media Nodes managed within a [Managed Instance Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/instance-groups?hl=en){:target="_blank"}. The Managed Instance Group of Media Nodes is configured to scale based on the target average CPU usage.
 
 Internally, the Google Cloud Platform High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
 
@@ -135,7 +135,7 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
     !!! info
 
         OpenVidu High Availability is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU usage. However, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [Google Cloud Platform
-        MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target="_blank"}.
+        MIG documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/autoscaler?hl=en#autoscaling_policy){:target="_blank"}.
 
 ## Fixed Number of Media Nodes
 

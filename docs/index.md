@@ -119,7 +119,7 @@ page_features:
 
     ---
 
-    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
+    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
 
 -   :material-chart-timeline-variant-shimmer:{ .feature-icon .padding-icon } __Scalable__{ .feature-name }
 
@@ -163,7 +163,7 @@ page_features:
 
     ---
 
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
+    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
 
 -   :octicons-shield-check-16:{ .feature-icon .padding-icon } __Security at all levels__{ .feature-name }
 

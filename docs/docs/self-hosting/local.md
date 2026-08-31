@@ -13,11 +13,11 @@ First, make sure you have the following prerequisites:
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/windows-install/){:target="_blank"}
 
 === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/mac-install/){:target="_blank"}
 
 === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 

@@ -21,7 +21,7 @@ OpenVidu is API-compatible with LiveKit, so the LiveKit client SDKs work unchang
 
     <div class="column-list" markdown>
 
-    - [JavaScript :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/index.html){:target="_blank"}
+    - [JavaScript :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/){:target="_blank"}
     - [Swift :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-swift/documentation/livekit/){:target="_blank"}
     - [Android :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-android/index.html){:target="_blank"}
     - [Flutter :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-flutter/livekit_client/){:target="_blank"}

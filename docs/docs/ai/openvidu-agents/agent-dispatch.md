@@ -56,7 +56,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { AgentDispatchClient } from 'livekit-server-sdk';
@@ -222,7 +222,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
         <br>
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         ```bash
         export LIVEKIT_URL=https://my-openvidu-host

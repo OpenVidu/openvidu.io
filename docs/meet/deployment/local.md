@@ -30,15 +30,15 @@ Instructions to install [Docker Desktop :fontawesome-solid-external-link:{.exter
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/windows-install/){:target="_blank"}
 
 === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/mac-install/){:target="_blank"}
 
 === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/linux-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/linux/){:target="_blank"}
 
     !!! info 
         This guide is based on Docker Desktop, but the commands can also be used directly in a linux machine's terminal with [Docker Engine :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/#supported-platforms){:target="_blank"} and [Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/compose/install/linux/){:target="_blank"} installed. Make sure they are recent versions: Docker Engine >= **28.4.0** and Docker Compose >= **2.39.4**

@@ -168,7 +168,7 @@ When everything is ready, you can check the secrets on the [Secret Manager :font
 
     ![Google Cloud Platform gcloud command](../../../../assets/images/platform/self-hosting/elastic/gcp/gcloud-command.png){ .round-corners loading=lazy }
 
-    To install gcloud in your shell follow the official [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install?hl=en#linux){:target="_blank"}.
+    To install gcloud in your shell follow the official [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/sdk/docs/install-sdk?hl=en#linux){:target="_blank"}.
 
 ## Configure your application to use the deployment 
 

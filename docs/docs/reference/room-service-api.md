@@ -17,7 +17,7 @@ Each server SDK exposes the same operations through a RoomService client, built 
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { RoomServiceClient } from 'livekit-server-sdk';
@@ -146,7 +146,7 @@ Each server SDK exposes the same operations through a RoomService client, built 
               }'
         ```
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         ```bash
         export LIVEKIT_URL=https://my-openvidu-host

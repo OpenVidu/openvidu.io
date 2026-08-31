@@ -636,11 +636,11 @@ When you use **managed S3-compatible services or managed MongoDB providers**, re
 - **S3/Object storage providers**
     - AWS S3: [AWS Backup for S3 :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/aws-backup/latest/devguide/s3-backups.html){:target="_blank"}
     - Azure Storage: [Blob storage snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/azure/storage/blobs/snapshots-overview){:target="_blank"}
-    - Google Cloud Storage: implement [Object Versioning and Retention :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/storage/docs/object-versioning){:target="_blank"}
+    - Google Cloud Storage: implement [Object Versioning and Retention :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/storage/docs/object-versioning){:target="_blank"}
 
 - **MongoDB providers**
     - MongoDB Atlas: [Cloud backups and snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://www.mongodb.com/docs/atlas/backup/cloud-backup/snapshot-management/){:target="_blank"}
-    - AWS DocumentDB: [DocumentDB Backups and snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/documentdb/latest/developerguide/backup_restore.html){:target="_blank"}
+    - AWS DocumentDB: [DocumentDB Backups and snapshots :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/documentdb/latest/devguide/backup_restore.html){:target="_blank"}
     - Azure Cosmos DB for MongoDB: [Online backup and on-demand data restore in Azure Cosmos DB :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/cosmos-db/online-backup-and-restore){:target="_blank"}
 
 ## After restore

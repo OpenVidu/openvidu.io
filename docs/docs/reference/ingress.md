@@ -53,7 +53,7 @@ The example below creates an RTMP Ingress that publishes into `"my-room"`:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { IngressClient, IngressInput } from 'livekit-server-sdk';
@@ -250,7 +250,7 @@ The example below creates an RTMP Ingress that publishes into `"my-room"`:
               }'
         ```
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         Create a file at `ingress.json` with the following content:
 

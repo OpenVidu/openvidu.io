@@ -271,7 +271,7 @@ Product teams building collaborative applications that combine **chat, notificat
 ---
 
 
-### **[LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"}**
+### **[LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"}**
 
 ![React video call platforms in 2026 — LiveKit](/assets/images/blog/2026/05/5-react-video-call-platforms/livekit.png "LiveKit"){ .skip-gallery loading=lazy }
 

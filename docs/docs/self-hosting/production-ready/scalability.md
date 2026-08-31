@@ -253,7 +253,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu Elastic in GCP](../elastic/gcp/install.md)
     - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
 
-    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
+    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
     | Input Value | Default Value | Description |
 |---|---|---|
 | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
