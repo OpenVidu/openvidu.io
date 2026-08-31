@@ -126,13 +126,13 @@ If you're building something in that "below the second" category (a stream someo
 
 ![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/assets/images/blog/2026/09/low-latency-live-streaming/videoconference.webp){ width=80% }
 
-[OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion) for how to wire a WHIP source into your own app.
+[OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](/docs/build-your-app/common-operations.md#stream-ingestion) for how to wire a WHIP source into your own app.
 
 ## Need more than this?
 
 In the second post in this series, we will build an app that ingest video and audio from a browser and OBS into a WebRTC platform, so that it can be streamed and watched by people just by subscribing as in any WebRTC app. 
 
-However, if you want to try it by yourself now, we have you covered. This article explains how to ingest video through WHIP in your app 👉 **[Add WHIP-based low-latency ingest to your app](/docs/developing-your-openvidu-app/how-to.md#stream-ingestion)**: the fastest way to feel the difference is to push a real encoder into a Room and watch the delay disappear.
+However, if you want to try it by yourself now, we have you covered. This article explains how to ingest video through WHIP in your app 👉 **[Add WHIP-based low-latency ingest to your app](/docs/build-your-app/common-operations.md#stream-ingestion)**: the fastest way to feel the difference is to push a real encoder into a Room and watch the delay disappear.
 
 To go further:
 
