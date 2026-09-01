@@ -254,7 +254,6 @@ nav:
   - Research:
       - research.md
 
-
 # Pages reached by direct link only, never through the nav.
 not_in_nav: |
   /account.md
@@ -266,6 +265,17 @@ not_in_nav: |
   /openvidu-vs-janus.md
   /conditions/
   /support/thanks.md
+
+# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
+hooks:
+  - publish-tool/mkdocs_hook.py
+
+watch:
+  - shared
+  - overrides
+  - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_preprocess.py
+  - publish-tool/src/ovweb
 
 validation:
   nav:
@@ -283,9 +293,10 @@ theme:
   custom_dir: overrides
   language: en
   features:
+    - announce.dismiss
     - content.code.copy
-    - content.tabs.link
     - content.code.annotate
+    - content.tabs.link
     - content.tooltips
     - navigation.tabs
     - navigation.tracking
@@ -296,7 +307,6 @@ theme:
     - navigation.indexes
     - search.suggest
     - search.highlight
-    - announce.dismiss
   # The header override loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
   font: false
   palette:
@@ -322,17 +332,6 @@ theme:
     repo: fontawesome/brands/github
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
-
-# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
-hooks:
-  - publish-tool/mkdocs_hook.py
-
-watch:
-  - shared
-  - overrides
-  - publish-tool/mkdocs_hook.py
-  - publish-tool/llmstxt_preprocess.py
-  - publish-tool/src/ovweb
 
 plugins:
   - meta
