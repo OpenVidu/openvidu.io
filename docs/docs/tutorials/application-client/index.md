@@ -11,9 +11,6 @@ Every application client below shares the same core functionality:
 - Users may publish their camera, microphone and screen-share.
 - Users automatically subscribe to all media published by other users.
 - Users may leave the room at any time.
-<!-- - Users may mute and unmute their tracks. -->
-<!--- Users may select which camera, microphone or screen they want to publish.-->
-<!--- Users may communicate through a chat.-->
 
 Every application client below is interchangeable with the others, because:
 
@@ -37,10 +34,6 @@ Every application client below is interchangeable with the others, because:
 [:simple-electron:{.icon .lg-icon .tab-icon} **Electron**](./electron.md){ .md-button .md-button--primary .tutorial-link}
 
 [:simple-ionic:{.icon .lg-icon .tab-icon} **Ionic**](./ionic.md){ .md-button .md-button--primary .tutorial-link}
-
-<!-- [:simple-react:{.icon .lg-icon .tab-icon} **React Native**](./react.md){ .md-button .md-button--primary .tutorial-link} -->
-
-<!-- [:simple-flutter:{.icon .lg-icon .tab-icon} **Flutter**](./flutter.md){ .md-button .md-button--primary .tutorial-link} -->
 
 [:simple-android:{.icon .lg-icon .tab-icon} **Android**](./android.md){ .md-button .md-button--primary .tutorial-link}
 
