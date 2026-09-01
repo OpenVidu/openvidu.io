@@ -1,2 +1,10 @@
+# Shared by every page in this folder (the meta plugin merges it into their frontmatter).
 hide:
   - feedback
+  - navigation
+  - footer
+  - toc
+  - search-bar
+  - version-selector
+search:
+  exclude: true

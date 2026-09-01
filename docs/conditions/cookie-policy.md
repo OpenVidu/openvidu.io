@@ -1,12 +1,6 @@
 ---
 title: "Cookie Policy"
 description: "The cookies openvidu.io sets for functionality and analytics, what each one is for, and how to manage or disable them in your browser."
-hide:
-  - navigation
-  - footer
-  - toc
-  - search-bar
-  - version-selector
 ---
 
 ## What are cookies?
