@@ -16,7 +16,7 @@ This tutorial improves the [basic recording tutorial](./recording-basic-s3.md) b
 
 Recordings are always persisted in some kind of storage system. This type of storage depends on your OpenVidu deployment:
 
-- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 Minio bucket**.
+- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 MinIO bucket**.
 - When running OpenVidu in **AWS**, recordings are stored in an **AWS S3 bucket**.
 - When running OpenVidu in **Azure**, recordings are stored in an **Azure Blob Storage container**. If this is your case, follow the [Recording Advanced Azure tutorial](./recording-advanced-azure.md) instead.
 

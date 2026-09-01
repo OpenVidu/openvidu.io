@@ -287,14 +287,14 @@ Let's see now the code of the `video.component.ts` file:
 ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-angular/src/app/video/video.component.ts#L4-L27' target='_blank'>video.component.ts</a>" linenums="3"
 // (1)!
 @Component({
-    selector: "video-component",
+    selector: 'video-component',
     standalone: true,
     imports: [],
-    templateUrl: "./video.component.html",
-    styleUrl: "./video.component.css"
+    templateUrl: './video.component.html',
+    styleUrl: './video.component.css',
 })
 export class VideoComponent implements AfterViewInit, OnDestroy {
-    videoElement = viewChild<ElementRef<HTMLVideoElement>>("videoElement"); // (2)!
+    videoElement = viewChild<ElementRef<HTMLVideoElement>>('videoElement'); // (2)!
 
     track = input.required<LocalVideoTrack | RemoteVideoTrack>(); // (3)!
     participantIdentity = input.required<string>(); // (4)!
@@ -337,14 +337,14 @@ Finally, let's see the code of the `audio.component.ts` file:
 ```typescript title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-angular/src/app/audio/audio.component.ts#L4-L25' target='_blank'>audio.component.ts</a>" linenums="3"
 // (1)!
 @Component({
-    selector: "audio-component",
+    selector: 'audio-component',
     standalone: true,
     imports: [],
-    templateUrl: "./audio.component.html",
-    styleUrl: "./audio.component.css"
+    templateUrl: './audio.component.html',
+    styleUrl: './audio.component.css',
 })
 export class AudioComponent implements AfterViewInit, OnDestroy {
-    audioElement = viewChild<ElementRef<HTMLAudioElement>>("audioElement"); // (2)!
+    audioElement = viewChild<ElementRef<HTMLAudioElement>>('audioElement'); // (2)!
 
     track = input.required<LocalAudioTrack | RemoteAudioTrack>(); // (3)!
 
