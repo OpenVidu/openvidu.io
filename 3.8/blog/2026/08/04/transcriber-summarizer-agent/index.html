@@ -1,0 +1,2374 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch.">
+      
+      
+      
+        <link rel="canonical" href="https://openvidu.io/3.8/blog/2026/08/04/transcriber-summarizer-agent/">
+      
+      
+        <link rel="prev" href="../../../07/28/dyndevice-virtual-classrooms-openvidu/">
+      
+      
+        <link rel="next" href="../../11/control-video-calls-with-gestures-free-ai/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../../../assets/images/logos/logo.png">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
+    
+
+
+<style id="antiClickjack">body{display:none !important;}</style>
+<script>
+  if (self === top) {
+    var antiClickjack = document.getElementById("antiClickjack");
+    antiClickjack.parentNode.removeChild(antiClickjack);
+  } else {
+    top.location = self.location;
+  }
+</script>
+<noscript><style>body{display:block !important;}</style></noscript>
+
+
+    
+      
+        <title>Building an AI agent for transcribing and summarizing audio calls - OpenVidu</title>
+      
+    
+    
+
+<style>
+  @font-face {
+    font-family: "Amazon Ember";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Amazon Ember"),
+      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
+    font-display: swap;
+  }
+</style>
+
+
+
+
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+
+
+
+
+<style>
+  div.md-version {
+    display: none;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+<script>
+  window.setupWowJs = function () {
+    document.documentElement.classList.add("js-reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
+  };
+</script>
+
+
+<script>
+  window.setupCarousel = function () {
+    document.querySelectorAll(".splide").forEach((el) => {
+      new Splide(el, {
+        type: "loop",
+        autoWidth: true,
+        autoHeight: true,
+        focus: "center",
+        gap: "4%",
+      }).mount();
+    });
+  };
+</script>
+
+
+<script>
+  window.openviduCardGlowRetries = 0;
+  window.setupCardGlow = function () {
+    console.debug("starting card glow setup");
+    const cards = document.querySelectorAll(
+      ".feature-cards .grid.cards > ul > li"
+    );
+    const maxRetries = 10;
+    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
+      console.debug("No cards found, retrying in 100ms");
+      window.openviduCardGlowRetries++;
+      setTimeout(() => {
+        window.setupCardGlow();
+      }, 100);
+      return;
+    }
+    function handleMouseMove(e) {
+      const rect = this.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left - rect.width / 2;
+      const mouseY = e.clientY - rect.top - rect.height / 2;
+      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+      angle = (angle + 360) % 360;
+      this.style.setProperty("--start", angle + 60);
+    }
+    cards.forEach((card, index) => {
+      card.addEventListener("mousemove", handleMouseMove);
+    });
+    console.debug("finished card glow setup");
+  };
+</script>
+
+
+      
+    
+
+
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/colors.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/unsemantic-grid.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-VPX0VSKK58"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-VPX0VSKK58",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-VPX0VSKK58",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+
+
+<meta property="og:site_name" content="OpenVidu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building an AI agent for transcribing and summarizing audio calls">
+<meta property="og:description" content="How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch.">
+<meta property="og:url" content="https://openvidu.io/3.8/blog/2026/08/04/transcriber-summarizer-agent/">
+<meta property="og:image" content="https://openvidu.io/assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png">
+<meta property="og:image:alt" content="Building an AI agent for transcribing and summarizing audio calls">
+<meta property="article:published_time" content="2026-08-04">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@openvidu">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+{
+      "@type": "Organization",
+      "@id": "https://openvidu.io/#organization",
+      "name": "OpenVidu",
+      "url": "https://openvidu.io/",
+      "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
+      },
+      "sameAs": [
+        "https://github.com/OpenVidu",
+        "https://x.com/openvidu",
+        "https://openvidu.medium.com/",
+        "https://www.youtube.com/@openvidu"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://openvidu.io/support/"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://openvidu.io/3.8/blog/2026/08/04/transcriber-summarizer-agent/",
+      "mainEntityOfPage": "https://openvidu.io/3.8/blog/2026/08/04/transcriber-summarizer-agent/",
+      "url": "https://openvidu.io/3.8/blog/2026/08/04/transcriber-summarizer-agent/",
+      "headline": "Building an AI agent for transcribing and summarizing audio calls",
+      "description": "How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch.",
+      "image": "https://openvidu.io/assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png",
+      "datePublished": "2026-08-04",
+      "dateModified": "2026-08-04",
+      "inLanguage": "en",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Pablo Fuente",
+          "url": "https://openvidu.io/about-us/#pablo-fuente"
+        }
+      ],
+      "publisher": { "@id": "https://openvidu.io/#organization" }
+    }
+  ]
+}
+</script>
+
+
+  <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: none; }
+            .glightbox-clean .gslide-media { -webkit-box-shadow: none; box-shadow: none; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-an-ai-agent-for-transcribing-and-summarizing-audio-calls" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+<span class="outdated-warning-text" id="outdated-warning-text"><strong>Warning:</strong> You are reading docs for an old version<br></span>
+<a href="#" id="latest-version-link">
+  <strong>GO TO LATEST VERSION</strong>
+</a>
+<script>
+  (function () {
+    const currentPath = window.location.pathname;
+    const version = currentPath.split('/')[1];
+
+    // Point the "go to latest" link at the same page under /latest/
+    const link = document.getElementById('latest-version-link');
+    if (link) {
+      link.href = currentPath.replace(/^\/[^\/]+\//, '/latest/');
+    }
+
+    // Split "/3.4/docs/foo/" into its version segment ("3.4") and the rest ("docs/foo/")
+    const splitVersion = (path) => {
+      const segments = path.replace(/^\//, '').split('/');
+      return { version: segments[0], rest: segments.slice(1).join('/') };
+    };
+
+    // Replace the generic warning only when the visitor got here by following a link that
+    // lives inside ANOTHER version's release notes: that version jump is the one thing that
+    // needs explaining. Everything else keeps the generic "old version" warning, and the two
+    // conditions below are what tell them apart:
+    //
+    //   - A DIFFERENT version segment. The navigation menu, tabs, footer and search links
+    //     never leave the version being browsed, so any click on them lands on the same
+    //     version and is ruled out here — including clicks made from a releases page, and
+    //     links inside the release notes that point at their own version.
+    //   - A DIFFERENT path after the version segment. The version selector DOES change the
+    //     version, but it lands on the same page of another version
+    //     (/latest/docs/releases/ -> /3.4/docs/releases/), so it is ruled out here. Release
+    //     notes never link to the same page of another version: their cross-links between
+    //     the two products always change the product too (docs/releases -> meet/releases).
+    let fromOtherVersionReleaseNotes = false;
+    try {
+      if (document.referrer) {
+        const referrer = new URL(document.referrer);
+        const from = splitVersion(referrer.pathname);
+        const here = splitVersion(currentPath);
+        fromOtherVersionReleaseNotes =
+          referrer.origin === window.location.origin &&
+          /^(meet|docs)\/releases\/?$/.test(from.rest) &&
+          from.version !== here.version &&
+          from.rest !== here.rest;
+      }
+    } catch (e) {}
+
+    const warning = document.getElementById('outdated-warning-text');
+    if (warning && fromOtherVersionReleaseNotes && version && version !== 'latest') {
+      warning.innerHTML =
+        `<strong>Warning:</strong> You are viewing the <strong>${version}</strong> version of the docs<br />` +
+        `because you followed a link from the ${version}.x release notes<br />`;
+    }
+  })();
+</script>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../../../../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+
+
+
+
+
+<link rel="preload" href="../../../../../assets/external/fonts.googleapis.com/css2.73f59626.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link href="../../../../../assets/external/fonts.googleapis.com/css2.73f59626.css" rel="stylesheet" type="text/css">
+</noscript>
+
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+
+    
+    <a href="../../../../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
+      
+      
+        
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+
+      
+    </a>
+
+    
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+
+    
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Building an AI agent for transcribing and summarizing audio calls
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    openvidu/openvidu
+  </div>
+</a>
+      </div>
+    
+
+    
+    <div class="md-typeset log-in-div">
+      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
+    </div>
+
+  </nav>
+
+  
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+
+
+
+
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+
+        
+      
+        
+        
+            
+        
+
+        
+            
+        
+      
+        
+        
+            
+        
+
+        
+            
+        
+      
+
+      
+        
+            
+  
+
+  
+  
+  
+
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+
+  
+  
+    
+  
+
+  
+  Home
+
+      </a>
+    </li>
+  
+
+        
+      
+        
+            
+  
+
+  
+  
+  
+
+  
+  
+    
+
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../meet/" class="md-tabs__link">
+          
+  
+
+  
+  
+    
+  
+
+  
+  OpenVidu Meet
+
+        </a>
+      </li>
+    
+
+  
+  
+
+        
+      
+        
+            
+  
+
+  
+  
+  
+
+  
+  
+    
+
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../docs/" class="md-tabs__link">
+          
+  
+
+  
+  
+    
+  
+
+  
+  OpenVidu Platform
+
+        </a>
+      </li>
+    
+
+  
+  
+
+        
+      
+        
+            
+  
+
+  
+  
+  
+    
+  
+
+  
+  
+    
+
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+
+  
+  
+    
+  
+
+  
+  Blog
+
+        </a>
+      </li>
+    
+
+  
+  
+
+        
+      
+        
+            
+  
+
+  
+  
+  
+
+  
+  
+    
+
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../support/" class="md-tabs__link">
+          
+  
+
+  
+  
+    
+  
+
+  
+  Support
+
+        </a>
+      </li>
+    
+
+  
+  
+
+        
+      
+        
+            
+  
+
+  
+  
+  
+
+  
+  
+    
+
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../pricing/" class="md-tabs__link">
+          
+  
+
+  
+  
+    
+  
+
+  
+  Pricing
+
+        </a>
+      </li>
+    
+
+  
+  
+
+        
+      
+        
+            
+                
+                
+                    
+                
+                    
+                
+                
+                
+                
+                
+                <li class="md-tabs__item md-tabs__item--dropdown">
+                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle" aria-haspopup="true">
+                        Team
+                        <span class="dropdown-caret"></span>
+                    </button>
+                    <div class="md-tabs__dropdown">
+                        
+                            
+  
+  
+    
+  
+  <a href="../../../../../about-us/" class="md-tabs__dropdown-link">
+    
+  
+
+  
+  
+    
+  
+
+  
+  About Us
+
+  </a>
+
+                        
+                            
+  
+  
+    
+  
+  <a href="../../../../../research/" class="md-tabs__dropdown-link">
+    
+  
+
+  
+  
+    
+  
+
+  
+  Research
+
+  </a>
+
+                        
+                    </div>
+                </li>
+            
+        
+      
+        
+            
+        
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden="">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="OpenVidu" class="md-nav__button md-logo" aria-label="OpenVidu" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
+
+    </a>
+    OpenVidu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openvidu/openvidu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    openvidu/openvidu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../../meet/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenVidu Meet
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../../docs/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenVidu Platform
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked="">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../archive/2026/09/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../category/ai/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../../support/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../../pricing/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../../about-us/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Us
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../../../research/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-we-are-building" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we are building
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the demo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-our-agents-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding our agent's code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding our agent's code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-an-agent-that-listens-to-everyone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: An agent that listens to everyone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-writing-the-transcript-to-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Writing the transcript to a file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-catching-latecomers-up-with-an-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Catching latecomers up with an LLM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-key-for-both-halves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One key for both halves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-a-dead-simple-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: A dead-simple frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-go-from-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where to go from here
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://openvidu.io/assets/images/about-us/authorPF.jpg" alt="Pablo Fuente">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          <a href="https://openvidu.io/about-us/#pablo-fuente">Pablo Fuente</a>
+                        
+                      </strong>
+                      <br>
+                      
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"></path></svg>
+                        <time datetime="2026-08-04 00:00:00+00:00" class="md-ellipsis">August 4, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"></path></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/ai/">AI</a>, 
+                              <a href="../../../../category/implementation/">Implementation</a>, 
+                              <a href="../../../../category/livekit/">LiveKit</a>, 
+                              <a href="../../../../category/technology/">Technology</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
+                          <span class="md-ellipsis">
+                            
+                              9 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+  
+  
+
+
+<h1 id="building-an-ai-agent-for-transcribing-and-summarizing-audio-calls">Building an AI agent for transcribing and summarizing audio calls<a class="headerlink" href="#building-an-ai-agent-for-transcribing-and-summarizing-audio-calls" title="Anchor link to this section for reference">#</a></h1>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Header image: a microphone turning into text inside an audio call" class="round-corners" src="../../../../../assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png"></a></p>
+<p>With the world being flooded with all kinds of agents, bots, and AI services, let's keep things grounded and code something tangible in a few simple steps. Let's build an AI agent that helps people in an audio call. Our agent will:</p>
+<ol>
+<li>Store the <strong>full transcript</strong> of the meeting in a text file.</li>
+<li>Send <strong>live captions</strong> to everyone in the call.</li>
+<li>When someone joins late, send them a <strong>private summary</strong> of what they missed.</li>
+</ol>
+<p>We'll be using <strong>OpenVidu</strong> as our media server, and <a href="https://docs.livekit.io/agents/" target="_blank" rel="noopener"><strong>LiveKit Agents</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> Python framework to build our agent. These tools handle all the hard parts of real-time audio transport, so we can focus on our agent features.</p>
+<!-- more -->
+
+<h2 id="what-we-are-building">What we are building<a class="headerlink" href="#what-we-are-building" title="Anchor link to this section for reference">#</a></h2>
+<p>Three moving parts:</p>
+<ul>
+<li><strong>An audio room</strong>: where people and our bot meet. We run it inside a local server, so there is nothing to sign up for.</li>
+<li><strong>The transcriber agent</strong>: a small Python program that joins every room as an invisible participant, turns each person's speech into text, and saves it.</li>
+<li><strong>A tiny app</strong>: a plain web page to join a room, talk, and watch the transcript appear live.</li>
+</ul>
+<p>The data flows like this:</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow.png"></a></p>
+<h2 id="running-the-demo">Running the demo<a class="headerlink" href="#running-the-demo" title="Anchor link to this section for reference">#</a></h2>
+<p>You will need:</p>
+<ul>
+<li><strong>Python 3.10+</strong>.</li>
+<li>An <a href="https://auth.openai.com/create-account" target="_blank" rel="noopener"><strong>OpenAI</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> or <a href="https://signin.aws.amazon.com" target="_blank" rel="noopener"><strong>AWS</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> account for the summary feature. You can still run the demo without one — just leave <code>LLM_PROVIDER</code> empty. Live captions and the saved transcript work regardless; you only lose the catch-up summaries.</li>
+</ul>
+<p>Now simply follow these steps to run the demo locally:</p>
+<ol>
+<li>
+<p>Clone the repository:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/openvidu-labs/transcriber-summarizer-agent.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>transcriber-summarizer-agent
+</code></pre></div>
+</li>
+<li>
+<p>Activate the Python virtual environment and install the dependencies:</p>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div>
+</li>
+<li>
+<p>Configure the app in the <code>.env</code> file. Choose the transcription provider (<code>STT_PROVIDER</code>) and the summarization provider (<code>LLM_PROVIDER</code>):</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a># STT_PROVIDER: openai | aws | vosk (offline)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a># LLM_PROVIDER: openai | aws | (empty for no summarization)
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>STT_PROVIDER=
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>LLM_PROVIDER=
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a># Required when "openai" is selected for STT_PROVIDER or LLM_PROVIDER
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>OPENAI_API_KEY=
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a># Required when "aws" is selected for STT_PROVIDER or LLM_PROVIDER
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>AWS_ACCESS_KEY_ID=
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>AWS_SECRET_ACCESS_KEY=
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>AWS_DEFAULT_REGION=us-east-1
+</code></pre></div>
+</li>
+<li>
+<p>Run the three components in separate terminals:</p>
+<ul>
+<li>
+<p>Terminal 1: install and run OpenVidu locally following the <a href="../../../../../docs/self-hosting/local/">official instructions</a>.</p>
+</li>
+<li>
+<p>Terminal 2: Run the transcriber agent
+      </p><div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>main.py<span class="w"> </span>dev
+</code></pre></div><p></p>
+</li>
+<li>
+<p>Terminal 3: Run the web app
+      </p><div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>app/server.py
+</code></pre></div><p></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Open <a href="http://localhost:8080" target="_blank" rel="noopener"><code>http://localhost:8080</code></a>, type a name, and join. Talk for a bit and watch the transcript fill in. Open the page in a <strong>second tab</strong>, join with a different name, and within a couple of seconds a yellow box appears summarizing what the first tab said. The full timestamped record waits in <code>transcripts/</code>.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Web app screenshot" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/08/transcriber-summarizer-agent/web-app-screenshot.png"></a></p>
+<blockquote>
+<p><strong>NOTE</strong>: If you are using AWS, make sure that your credentials have the necessary policies to access Amazon Transcribe and Amazon Bedrock:
+</p><div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    "Version": "2012-10-17",
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    "Statement": [
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        {
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>            "Sid": "TranscriberSummarizer",
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            "Effect": "Allow",
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            "Action": [
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                "transcribe:StartStreamTranscription",
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>                "bedrock:InvokeModel",
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>                "bedrock:InvokeModelWithResponseStream"
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            ],
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            "Resource": "*"
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        }
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    ]
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>}
+</code></pre></div><p></p>
+</blockquote>
+<h2 id="understanding-our-agents-code">Understanding our agent's code<a class="headerlink" href="#understanding-our-agents-code" title="Anchor link to this section for reference">#</a></h2>
+<h3 id="step-1-an-agent-that-listens-to-everyone">Step 1: An agent that listens to everyone<a class="headerlink" href="#step-1-an-agent-that-listens-to-everyone" title="Anchor link to this section for reference">#</a></h3>
+<p>A LiveKit agent is a function that runs once per room. We register it on an <code>AgentServer</code> and let the CLI do the rest:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">livekit.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgentServer</span><span class="p">,</span> <span class="n">JobContext</span><span class="p">,</span> <span class="n">cli</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">server</span> <span class="o">=</span> <span class="n">AgentServer</span><span class="p">()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nd">@server</span><span class="o">.</span><span class="n">rtc_session</span><span class="p">()</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">entrypoint</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">JobContext</span><span class="p">):</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">room</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">room</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">cli</span><span class="o">.</span><span class="n">run_app</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+</code></pre></div>
+<p>Note the <code>@server.rtc_session()</code> with <strong>no <code>agent_name</code></strong>. Name an agent and LiveKit waits for an explicit dispatch request; leave it out and the agent joins <em>every</em> new room automatically. That's exactly what our transcriber wants.</p>
+<p>Now, how do we turn an audio track into text? Because we want to swap providers, we hide the choice behind one small factory. Every LiveKit STT plugin — Vosk, OpenAI, AWS — exposes the <strong>same</strong> <code>.stream()</code> interface, so this is the <em>only</em> place in the agent that names a provider:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">make_stt</span><span class="p">():</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">if</span> <span class="n">STT_PROVIDER</span> <span class="o">==</span> <span class="s2">"vosk"</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">livekit.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">vosk</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="k">return</span> <span class="n">vosk</span><span class="o">.</span><span class="n">STT</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">VOSK_MODEL_PATH</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">"en-US"</span><span class="p">,</span> <span class="n">partial_results</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">if</span> <span class="n">STT_PROVIDER</span> <span class="o">==</span> <span class="s2">"openai"</span><span class="p">:</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">livekit.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">openai</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="k">return</span> <span class="n">openai</span><span class="o">.</span><span class="n">STT</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4o-mini-transcribe"</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">if</span> <span class="n">STT_PROVIDER</span> <span class="o">==</span> <span class="s2">"aws"</span><span class="p">:</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">livekit.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">aws</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="k">return</span> <span class="n">aws</span><span class="o">.</span><span class="n">STT</span><span class="p">()</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown STT_PROVIDER </span><span class="si">{</span><span class="n">STT_PROVIDER</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<p>The imports live <em>inside</em> each branch, so whoever picks AWS installs only <code>livekit-plugins-aws</code> (the other lines never run). For Vosk, <code>partial_results=False</code> skips the interim guesses it makes mid-word; we only keep finished sentences.</p>
+<p>Now wire it up: build one STT engine, and when <code>ctx.connect()</code> subscribes us to an audio track, start a transcription task for it:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">speech_to_text</span> <span class="o">=</span> <span class="n">make_stt</span><span class="p">()</span>   <span class="c1"># one engine, shared by every speaker</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nd">@room</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"track_subscribed"</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">_on_track_subscribed</span><span class="p">(</span><span class="n">track</span><span class="p">,</span> <span class="n">publication</span><span class="p">,</span> <span class="n">participant</span><span class="p">):</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">if</span> <span class="n">track</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">rtc</span><span class="o">.</span><span class="n">TrackKind</span><span class="o">.</span><span class="n">KIND_AUDIO</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">transcribe_track</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">track</span><span class="p">))</span>
+</code></pre></div>
+<p>Each speaker gets their own audio and STT stream, and we do two things at once: push frames <em>in</em>, read transcripts <em>out</em> (with <code>asyncio.gather</code>). The <code>STT</code> API of LiveKit Agents allows us to do so easily:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">transcribe_track</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">track</span><span class="p">):</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">audio</span> <span class="o">=</span> <span class="n">rtc</span><span class="o">.</span><span class="n">AudioStream</span><span class="p">(</span><span class="n">track</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span> <span class="n">num_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">speech_to_text</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span> <span class="k">as</span> <span class="n">stt_stream</span><span class="p">:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">feed_audio</span><span class="p">():</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>            <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">audio</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>                <span class="n">stt_stream</span><span class="o">.</span><span class="n">push_frame</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>            <span class="n">stt_stream</span><span class="o">.</span><span class="n">end_input</span><span class="p">()</span>       <span class="c1"># no more audio: let the recognizer finish</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">emit_transcripts</span><span class="p">():</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>            <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">stt_stream</span><span class="p">:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>                <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">stt_api</span><span class="o">.</span><span class="n">SpeechEventType</span><span class="o">.</span><span class="n">FINAL_TRANSCRIPT</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">alternatives</span><span class="p">:</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>                    <span class="n">text</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">alternatives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>                    <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>                        <span class="k">await</span> <span class="n">record_line</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">track</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">feed_audio</span><span class="p">(),</span> <span class="n">emit_transcripts</span><span class="p">())</span>
+</code></pre></div>
+<p><code>feed_audio</code> pumps frames into the recognizer; <code>emit_transcripts</code> reads finished sentences out; the <code>async with</code> handles cleanup. We act only on <code>FINAL_TRANSCRIPT</code>, the finished sentence rather than every interim guess. The <code>record_line</code> call is the bridge to the next step: saving the transcript, sending it to the browser, and keeping it in memory for the summary.</p>
+<h3 id="step-2-writing-the-transcript-to-a-file">Step 2: Writing the transcript to a file<a class="headerlink" href="#step-2-writing-the-transcript-to-a-file" title="Anchor link to this section for reference">#</a></h3>
+<p><code>record_line</code> makes a finished utterance permanent: append it to the on-disk file, keep an in-memory copy for the summary, and publish it to the browser.</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">conversation</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># in-memory history, used for the summary</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">record_line</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">track</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">speaker</span> <span class="o">=</span> <span class="n">participant</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="n">participant</span><span class="o">.</span><span class="n">identity</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%H:%M:%S"</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">conversation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">speaker</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">transcript_path</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">speaker</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="c1"># Publish on LiveKit's built-in transcription channel, attributed to the speaker.</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="n">writer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">room</span><span class="o">.</span><span class="n">local_participant</span><span class="o">.</span><span class="n">stream_text</span><span class="p">(</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>        <span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_TRANSCRIPTION</span><span class="p">,</span>                       <span class="c1"># "lk.transcription"</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="n">sender_identity</span><span class="o">=</span><span class="n">participant</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        <span class="n">attributes</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>            <span class="n">ATTRIBUTE_TRANSCRIPTION_FINAL</span><span class="p">:</span> <span class="s2">"true"</span><span class="p">,</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>            <span class="n">ATTRIBUTE_TRANSCRIPTION_TRACK_ID</span><span class="p">:</span> <span class="n">track</span><span class="o">.</span><span class="n">sid</span><span class="p">,</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>            <span class="n">ATTRIBUTE_TRANSCRIPTION_SEGMENT_ID</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">shortuuid</span><span class="p">(</span><span class="s2">"SG_"</span><span class="p">),</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="p">},</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    <span class="p">)</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="k">await</span> <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="k">await</span> <span class="n">writer</span><span class="o">.</span><span class="n">aclose</span><span class="p">()</span>
+</code></pre></div>
+<p>The file reads like a meeting transcript should:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[14:02:11] Alice: should we ship the release today
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>[14:02:15] Bob: yes but let us wait for the tests to pass
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>[14:02:20] Alice: agreed lets do it after lunch
+</code></pre></div>
+<p>That last call is the bridge to the browser. And rather than invent our own channel, we use <strong>LiveKit's built-in transcription feature</strong>: the reserved <code>lk.transcription</code> topic. Setting <code>sender_identity</code> to the speaker means any LiveKit client receives it as a normal, correctly attributed transcription segment.</p>
+<h3 id="step-3-catching-latecomers-up-with-an-llm">Step 3: Catching latecomers up with an LLM<a class="headerlink" href="#step-3-catching-latecomers-up-with-an-llm" title="Anchor link to this section for reference">#</a></h3>
+<p>This is the most exciting feature of this agent: when someone joins a call already in progress, we summarize what they missed and send it <em>only to them</em>. LiveKit fires <code>participant_connected</code> for every new arrival:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@room</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">"participant_connected"</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">_on_participant_connected</span><span class="p">(</span><span class="n">participant</span><span class="p">):</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">summarize_for</span><span class="p">(</span><span class="n">participant</span><span class="p">))</span>
+</code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">summarize_for</span><span class="p">(</span><span class="n">participant</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>          <span class="c1"># let the newcomer's browser get ready</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">conversation</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="k">return</span>                       <span class="c1"># nothing said yet, nothing to summarize</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="n">summary</span> <span class="o">=</span> <span class="k">await</span> <span class="n">summarize</span><span class="p">(</span><span class="n">conversation</span><span class="p">)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="k">await</span> <span class="n">room</span><span class="o">.</span><span class="n">local_participant</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        <span class="n">summary</span><span class="p">,</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        <span class="n">topic</span><span class="o">=</span><span class="s2">"summary"</span><span class="p">,</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        <span class="n">destination_identities</span><span class="o">=</span><span class="p">[</span><span class="n">participant</span><span class="o">.</span><span class="n">identity</span><span class="p">],</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="p">)</span>
+</code></pre></div>
+<p>Like the STT, the LLM hides behind a factory: every LiveKit LLM exposes the same <code>.chat()</code>, so <code>summarize()</code> never branches:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">make_llm</span><span class="p">():</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"SUMMARY_MODEL"</span><span class="p">)</span>   <span class="c1"># optional override; default per provider</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="k">if</span> <span class="n">LLM_PROVIDER</span> <span class="o">==</span> <span class="s2">"openai"</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">livekit.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">openai</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>        <span class="k">return</span> <span class="n">openai</span><span class="o">.</span><span class="n">LLM</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span> <span class="ow">or</span> <span class="s2">"gpt-4.1"</span><span class="p">)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="k">if</span> <span class="n">LLM_PROVIDER</span> <span class="o">==</span> <span class="s2">"aws"</span><span class="p">:</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">livekit.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">aws</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        <span class="k">return</span> <span class="n">aws</span><span class="o">.</span><span class="n">LLM</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span> <span class="ow">or</span> <span class="s2">"us.amazon.nova-2-lite-v1:0"</span><span class="p">)</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown LLM_PROVIDER </span><span class="si">{</span><span class="n">LLM_PROVIDER</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="n">conversation</span><span class="p">):</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    <span class="n">ctx</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">ChatContext</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>    <span class="n">ctx</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">"system"</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">SUMMARY_PROMPT</span><span class="p">)</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="n">ctx</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">"user"</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">"Transcript so far:</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conversation</span><span class="p">))</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">async</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">make_llm</span><span class="p">()</span><span class="o">.</span><span class="n">chat</span><span class="p">(</span><span class="n">chat_ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span><span class="o">.</span><span class="n">to_str_iterable</span><span class="p">()]</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</code></pre></div>
+<p><code>SUMMARY_PROMPT</code> is one friendly line asking for a 3-4 sentence catch-up. <code>.to_str_iterable()</code> turns the streamed reply into text chunks we join: the same code for every provider, no per-vendor SDK.</p>
+<p>Two small things make delivery clean: the <strong>two-second pause</strong> avoids a race where <code>participant_connected</code> fires a hair before the newcomer's browser has registered its handlers, and <strong><code>destination_identities</code></strong> sends the recap to that one person, so nobody already chatting gets spammed.</p>
+<h3 id="one-key-for-both-halves">One key for both halves<a class="headerlink" href="#one-key-for-both-halves" title="Anchor link to this section for reference">#</a></h3>
+<p>The payoff of using LiveKit plugins on both sides: for a vendor, the STT and the LLM come from the <em>same package</em> and read the <em>same credentials</em>. Pick <code>openai</code> and one <code>OPENAI_API_KEY</code> transcribes <strong>and</strong> summarizes; pick <code>aws</code> and one IAM key/secret covers Amazon Transcribe and Bedrock.</p>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Credentials for both STT + LLM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenAI</strong></td>
+<td>one <code>OPENAI_API_KEY</code> (Whisper transcription + chat)</td>
+</tr>
+<tr>
+<td><strong>AWS</strong></td>
+<td>one IAM key/secret — Amazon Transcribe + Bedrock (the IAM policy must allow both)</td>
+</tr>
+</tbody>
+</table>
+<p>Of course, you can always use the <code>vosk</code> offline STT and leave <code>LLM_PROVIDER</code> empty for an offline, free-to-use agent. The transcription will be generated locally by Vosk, and the summary feature will be disabled (simply replaced with a full transcript).</p>
+<h3 id="step-4-a-dead-simple-frontend">Step 4: A dead-simple frontend<a class="headerlink" href="#step-4-a-dead-simple-frontend" title="Anchor link to this section for reference">#</a></h3>
+<p>The frontend is deliberately boring: one HTML file, the LiveKit browser SDK from a CDN, and a bit of JavaScript. No framework, no bundler.</p>
+<p>Browsers cannot mint their own access tokens (that would leak your API secret to every visitor), so we add the smallest possible token server with Python's standard library and <code>livekit-api</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">livekit.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">AccessToken</span><span class="p">,</span> <span class="n">VideoGrants</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">token</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">AccessToken</span><span class="p">(</span><span class="n">API_KEY</span><span class="p">,</span> <span class="n">API_SECRET</span><span class="p">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="o">.</span><span class="n">with_identity</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="o">.</span><span class="n">with_grants</span><span class="p">(</span><span class="n">VideoGrants</span><span class="p">(</span><span class="n">room_join</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">room</span><span class="o">=</span><span class="n">room</span><span class="p">))</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="o">.</span><span class="n">to_jwt</span><span class="p">()</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">)</span>
+</code></pre></div>
+<p>On the page, joining takes three calls: fetch a token, connect, enable the mic:</p>
+<div class="language-javascript highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/token?room=</span><span class="si">${</span><span class="nx">room</span><span class="si">}</span><span class="sb">&amp;identity=</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">&amp;name=</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">)).</span><span class="nx">json</span><span class="p">();</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">LivekitClient</span><span class="p">.</span><span class="nx">Room</span><span class="p">();</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">await</span><span class="w"> </span><span class="nx">room</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">await</span><span class="w"> </span><span class="nx">room</span><span class="p">.</span><span class="nx">localParticipant</span><span class="p">.</span><span class="nx">setMicrophoneEnabled</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+<p>To show the transcript, we register a handler for the built-in <code>lk.transcription</code> topic; the callback's second argument tells us the speaker, and the <code>lk.transcription_final</code> attribute filters out anything unfinished:</p>
+<div class="language-javascript highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nx">room</span><span class="p">.</span><span class="nx">registerTextStreamHandler</span><span class="p">(</span><span class="s2">"lk.transcription"</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">reader</span><span class="p">,</span><span class="w"> </span><span class="nx">participantInfo</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">reader</span><span class="p">.</span><span class="nx">info</span><span class="p">.</span><span class="nx">attributes</span><span class="o">?</span><span class="p">.[</span><span class="s2">"lk.transcription_final"</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">"true"</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">reader</span><span class="p">.</span><span class="nx">readAll</span><span class="p">();</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="nx">addLine</span><span class="p">(</span><span class="nx">nameFor</span><span class="p">(</span><span class="nx">participantInfo</span><span class="o">?</span><span class="p">.</span><span class="nx">identity</span><span class="p">),</span><span class="w"> </span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toLocaleTimeString</span><span class="p">());</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">});</span>
+</code></pre></div>
+<p>Because we used the standard channel, that is exactly the handler any LiveKit client would use. The catch-up summary is our own <code>summary</code> topic: when it fires, we drop the recap into a highlighted box. That is the whole client.</p>
+<h2 id="where-to-go-from-here">Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Anchor link to this section for reference">#</a></h2>
+<p>You now have an agent that scales from a one-on-one to a full meeting: a clean transcript on disk, live captions, and a recap for latecomers. All that in a couple hundred lines. It runs on Vosk, OpenAI or AWS, switchable with one line in <code>.env</code> because both halves sit behind a <code>make_stt()</code> / <code>make_llm()</code> factory. From here you could persist transcripts, translate them live, or turn summaries into action items.</p>
+<p>It stayed short because <strong>you never built the hard part</strong>. That is: the real-time audio transport, the track subscriptions, the AI provider communication layers. LiveKit Agents and its plugins provides all the building blocks necessary to focus on your agent's logic, not the plumbing.</p>
+<p>Taking this idea to production is exactly what OpenVidu is for. It wraps the same LiveKit API compatible core in a battle-tested, self-hosted platform, so the agent you just wrote runs <strong>unchanged</strong> while OpenVidu handles everything that gets hard at scale: autoscaling, high availability, TURN relaying for restrictive networks, recording management, built-in observability... All within your own infrastructure, keeping all data under your control in complete privacy, and with predictable costs avoiding per-minute SaaS bills. Explore the <strong><a href="../../../../../docs/">OpenVidu documentation</a></strong> to self-host the whole stack, from a one-command local install to a production-grade cluster.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+    
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+
+
+<footer class="md-footer">
+
+  
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+
+        
+        
+          
+          <a href="../../../07/28/dyndevice-virtual-classrooms-openvidu/" class="md-footer__link md-footer__link--prev" aria-label="Previous: DynDevice built virtual classrooms with OpenVidu">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                DynDevice built virtual classrooms with OpenVidu
+              </div>
+            </div>
+          </a>
+        
+
+        
+        
+          
+          <a href="../../11/control-video-calls-with-gestures-free-ai/" class="md-footer__link md-footer__link--next" aria-label="Next: Control your video calls with gestures using free AI">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Control your video calls with gestures using free AI
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <div class="grid-container footer-grid">
+
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>SOCIAL</h4>
+          
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/OpenVidu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/openvidu" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://openvidu.medium.com/" target="_blank" rel="noopener" title="openvidu.medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.21 0A4.2 4.2 0 0 0 0 4.21v15.58A4.2 4.2 0 0 0 4.21 24h15.58A4.2 4.2 0 0 0 24 19.79v-1.093a5 5 0 0 1-.422.02c-2.577 0-4.027-2.146-4.09-4.832a8 8 0 0 1 .022-.708c.093-1.186.475-2.241 1.105-3.022a3.9 3.9 0 0 1 1.395-1.1c.468-.237 1.127-.367 1.664-.367h.023q.151 0 .303.01V4.211A4.2 4.2 0 0 0 19.79 0Zm.198 5.583h4.165l3.588 8.435 3.59-8.435h3.864v.146l-.019.004c-.705.16-1.063.397-1.063 1.254h-.003l.003 10.274c.06.676.424.885 1.063 1.03l.02.004v.145h-4.923v-.145l.019-.005c.639-.144.994-.353 1.054-1.03V7.267l-4.745 11.15h-.261L6.15 7.569v9.445c0 .857.358 1.094 1.063 1.253l.02.004v.147H4.405v-.147l.019-.004c.705-.16 1.065-.397 1.065-1.253V6.987c0-.857-.358-1.094-1.064-1.254l-.018-.004zm19.25 3.668c-1.086.023-1.733 1.323-1.813 3.124H24V9.298a1.4 1.4 0 0 0-.342-.047m-1.862 3.632c-.1 1.756.86 3.239 2.204 3.634v-3.634z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@openvidu" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg>
+    </a>
+  
+</div>
+        </div>
+
+        <div class="footer-column grid-25 tablet-grid-50 mobile-grid-100">
+
+          <div class="subscription">
+            <h4>NEWSLETTER</h4>
+            <div class="md-copyright__highlight" style="font-size: .64rem">Keep up with OpenVidu news. Enter your e-mail and subscribe to our newsletter!</div>
+            
+            <div style="width:100%; padding-top: .4rem;">
+                <div id="mc_embed_signup">
+                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                      <div class="form-validation alert"></div>
+                      <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required="" style="flex: 1 1 120px; min-width: 0;">
+                          
+                          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
+                          <div class="md-typeset" style="flex-shrink: 0;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer-column footer-products-gap grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>PRODUCTS</h4>
+          <div class="footer-conditions-list">
+            
+            <a href="/latest/meet/">OpenVidu Meet</a>
+            <a href="/latest/docs/">OpenVidu Platform</a>
+            <a href="../../../../../openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
+          </div>
+        </div>
+
+        <div class="footer-column grid-20 tablet-grid-50 mobile-grid-100">
+          <h4>LEGAL</h4>
+          <div>
+            <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
+              <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2026 © OpenVidu<br> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+            </div>
+            <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
+              <div class="footer-conditions-list">
+                <a href="../../../../../conditions/privacy-policy/">Privacy policy</a>
+                <a href="../../../../../conditions/cookie-policy/">Cookie policy</a>
+                <a href="../../../../../conditions/terms-of-service/">Terms of service</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-column grid-15 tablet-grid-50 mobile-grid-100">
+          <h4>ACKNOWLEDGMENTS</h4>
+          <a href="../../../../../acknowledgments/" style="display: flex; gap: 8px;">
+            <img class="acknowledgments-footer" style="max-width: 260px; width: 100%;" src="../../../../../assets/images/sponsors/acknowledgments.png" alt="Acknowledgments" loading="lazy" width="509" height="154">
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden="">
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+
+<h4>Cookie consent</h4>
+<p>This website uses cookies to ensure you get the best experience on our website. <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
+</p>
+<input class="md-toggle" type="checkbox" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked="">
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked="">
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+      <button type="reset" class="md-button md-button--primary">Reject</button>
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["content.code.copy", "content.tabs.link", "content.code.annotate", "content.tooltips", "navigation.tabs", "navigation.tracking", "navigation.footer", "navigation.path", "navigation.prune", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "announce.dismiss"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
+    
+    
+
+
+<script src="../../../../../javascripts/glightbox-gallery.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+
+
+
+
+  
+<script src="../../../../../assets/javascripts/glightbox.min.js"></script><script id="init-glightbox">document.querySelectorAll('.glightbox').forEach(function(element) {
+    try {
+        var img = element.querySelector('img');
+        if (img && img.src) {
+            element.setAttribute('href', img.src);
+        } else {
+            console.log('No img element with src attribute found');
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+});
+const glightboxOptions = {"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"};
+</script></body></html>
