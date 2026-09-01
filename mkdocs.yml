@@ -307,7 +307,7 @@ theme:
     - navigation.indexes
     - search.suggest
     - search.highlight
-  # The header override loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
+  # main.html loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
   font: false
   palette:
     - media: "(prefers-color-scheme)"
@@ -362,6 +362,11 @@ plugins:
   # everywhere except validation, and optimize only in publish.
   - privacy:
       enabled: !ENV [CI, true]
+      # Material's bundle names the mermaid CDN, so the plugin vendors 3.5 MB of it
+      # into every published version. No superfences mermaid fence is configured and
+      # no page uses one.
+      assets_exclude:
+        - unpkg.com/*
   - optimize:
       enabled: !ENV [CI, false]
       # The default 60 visibly softens the team portraits.

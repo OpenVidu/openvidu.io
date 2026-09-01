@@ -161,6 +161,25 @@
 
 {% block extrahead %}
 {{ super() }}
+
+{# The site's single font stylesheet (theme.font is false): every Tomorrow weight the
+   CSS uses plus the code font. Self-hosted at build time by the privacy plugin. In the
+   head, not the header partial: a preload emitted in the body is discovered late, and
+   the page can paint in the fallback font before the stylesheet arrives. #}
+<link
+    rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet"
+        type="text/css"
+    />
+</noscript>
+
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
 {% if page.meta and page.meta.robots %}
