@@ -1,6 +1,5 @@
 site
 .cache
-.vscode
 
 # Python — the publishing tool in publish-tool/
 .venv
