@@ -85,7 +85,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 </div>
 
 <div class="grid-50" markdown>
-![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ .round-corners loading=lazy }
 </div>
 
 </div>
