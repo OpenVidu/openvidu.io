@@ -244,6 +244,12 @@
       "blogPost": [
         {
           "@type": "BlogPosting",
+          "headline": "Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)",
+          "url": "https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/",
+          "datePublished": "2026-09-01"
+        },
+        {
+          "@type": "BlogPosting",
           "headline": "Debugging WebRTC with an AI agent and Grafana MCP",
           "url": "https://openvidu.io/blog/2026/08/25/debugging-webrtc-with-ai-and-grafana-mcp/",
           "datePublished": "2026-08-25"
@@ -1242,6 +1248,8 @@
       
         
       
+        
+      
     
     
     
@@ -1260,7 +1268,7 @@
   
   
   
-    <a href="archive/2026/08/" class="md-nav__link">
+    <a href="archive/2026/09/" class="md-nav__link">
       
   
   
@@ -1295,6 +1303,8 @@
   
     
     
+      
+        
       
         
       
@@ -1626,6 +1636,58 @@
       <header class="md-typeset">
         <h1 id="blog">Blog<a class="headerlink" href="#blog" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorFG.jpg" alt="Francisco Gortázar">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-09-01 00:00:00+00:00">September 1, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/comparison/" class="md-meta__link">Comparison</a>, 
+              <a href="category/technology/" class="md-meta__link">Technology</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              9 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="low-latency-live-streaming-webrtc-vs-hls-and-dash-part-1"><a class="toclink" href="2026/09/01/low-latency-live-streaming/">Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)</a></h2>
+<p><img alt="A split-screen graphic comparing a near-instant video call with a delayed live broadcast" src="/assets/images/blog/2026/09/low-latency-live-streaming/poster-light.webp#only-light" title="Low latency live streaming vs. traditional broadcast delay">
+<img alt="A split-screen graphic comparing a near-instant video call with a delayed live broadcast" src="/assets/images/blog/2026/09/low-latency-live-streaming/poster-dark.webp#only-dark" title="Low latency live streaming vs. traditional broadcast delay"></p>
+<p>When Spain was playing the World Cup, we noticed something annoying. We celebrated each of Spain's scores by shouting "GOOOOOL", 15 seconds before our neighbors saw the goal on their TV. Obviously, we ruined their experience watching the game, so much that they asked us where we were watching it from to avoid the gap. Now picture that same 15-second gap on a live shopping stream where you're typing "does it come in blue?", or in a video call where you keep talking over the other person because their audio hasn't reached you yet. That's the difference between "live" and <strong>low latency live streaming</strong>.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="2026/09/01/low-latency-live-streaming/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
@@ -2096,59 +2158,6 @@
     
       <nav class="md-post__action">
         <a href="2026/07/07/deploy-and-scale-in-times-across-clouds/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorCR.jpg" alt="Carlos Ruiz">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-06-30 00:00:00+00:00">June 30, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/openvidu-meet/" class="md-meta__link">OpenVidu Meet</a>, 
-              <a href="category/technology/" class="md-meta__link">Technology</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              10 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="host-your-own-secure-video-calls-at-home-a-private-server-for-family-and-friends"><a class="toclink" href="2026/06/30/secure-home-video-conferencing/">Host Your Own Secure Video Calls at Home: A Private Server for Family and Friends</a></h2>
-<p><img align="right" alt="A secure family video call running on your own home server" class="round-corners" src="/assets/images/blog/2026/06/secure-home-video-conferencing/poster.jpg" width="60%"></p>
-<p>We're all used to reaching for a third-party app to call friends and family: Google Meet, Zoom, Microsoft Teams, etc. Almost nobody wants to complicate their life by running their own server, and if you mention "spinning up a WebRTC media server" to an experienced sysadmin, they'll probably put their head in their hands thinking about how complicated it must be.</p>
-<p>In reality, it's much easier than you might think. At OpenVidu we've worked hard to make a self-hosted video conferencing service as easy to install and run as possible, and hosting it yourself comes with some genuine advantages. It's completely free, there are no 40-minute timers or participant limits, your guests join straight from a browser with no account and no app, and every call stays on hardware that lives in your own home.</p>
-<p>With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/meet/" target="_blank">OpenVidu Meet <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="2026/06/30/secure-home-video-conferencing/">
           Continue reading
         </a>
       </nav>

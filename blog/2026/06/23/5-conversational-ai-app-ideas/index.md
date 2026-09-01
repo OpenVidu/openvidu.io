@@ -18,7 +18,7 @@ The breakout product in this category already has a name: the **AI voice agent**
 
 Today, these systems are answering business phone lines, handling appointment requests, qualifying leads, resolving common questions, and routing callers to the right person when needed.
 
-Thanks to platforms like [Vapi](https://vapi.ai/) and real-time infrastructure providers such as [LiveKit](https://livekit.io/) or [OpenVidu](https://openvidu.io/index.md), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
+Thanks to platforms like [Vapi](https://vapi.ai/) and real-time infrastructure providers such as [LiveKit](https://livekit.com/) or [OpenVidu](https://openvidu.io/index.md), building conversational AI products is becoming dramatically easier. Voice is quickly emerging as one of the first AI experiences many people encounter in their daily lives.
 
 But voice agents aren't interesting because they can talk.
 

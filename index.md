@@ -78,7 +78,7 @@ ______________________________________________________________________
 
   ______________________________________________________________________
 
-  OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit**](https://livekit.io/) and [**mediasoup**](https://mediasoup.org/) . By combining the best of both worlds, OpenVidu provides outstanding [**performance**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
+  OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit**](https://livekit.com/) and [**mediasoup**](https://mediasoup.org/) . By combining the best of both worlds, OpenVidu provides outstanding [**performance**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
 
 - **Scalable**
 

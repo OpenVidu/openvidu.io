@@ -25,7 +25,7 @@ Each gesture has to be held steady for a period of time (650 ms) for the action 
 
 ## What MediaPipe is
 
-[MediaPipe](https://developers.google.com/edge/mediapipe) is Google's family of computer vision models, built to run on your own device instead of on a server.
+[MediaPipe](https://developers.google.com/edge/mediapipe/solutions/guide) is Google's family of computer vision models, built to run on your own device instead of on a server.
 
 And no, it's not complex to install and set up:
 

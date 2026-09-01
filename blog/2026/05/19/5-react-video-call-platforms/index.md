@@ -248,7 +248,7 @@ Product teams building collaborative applications that combine **chat, notificat
 
 ______________________________________________________________________
 
-### **[LiveKit](https://livekit.io/)**
+### **[LiveKit](https://livekit.com/)**
 
 React video call platforms in 2026 — LiveKit
 

@@ -36,6 +36,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [Debugging WebRTC with an AI agent and Grafana MCP](https://openvidu.io/blog/2026/08/25/debugging-webrtc-with-ai-and-grafana-mcp/index.md): We give a Claude Code agent nothing but read-only Grafana and a broken OpenVidu deployment, then watch it find each root cause in a reproducible case study.
 - [Deploy OpenVidu on Hetzner Cloud in 15 Minutes](https://openvidu.io/blog/2026/08/18/deploy-openvidu-hetzner/index.md): Deploy a self-hosted OpenVidu video conferencing server on a Hetzner Cloud VM with one command, automatic HTTPS and a test bill measured in cents.
 - [Building an AI agent for transcribing and summarizing audio calls](https://openvidu.io/blog/2026/08/04/transcriber-summarizer-agent/index.md): How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch.
+- [Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)](https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/index.md): What counts as low latency, why WebRTC hits sub-second delivery where HLS and DASH structurally can't, and where low latency live streaming actually gets used.
 
 ## OpenVidu Meet
 
