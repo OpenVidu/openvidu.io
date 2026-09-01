@@ -122,6 +122,20 @@ Whenever any changes are made to the tutorials documentation, these changes must
 reflected in repository [livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs)
 so they end up available in [livekit-tutorials.openvidu.io](https://livekit-tutorials.openvidu.io/).
 
+That site publishes the same tutorials LiveKit-first, for the LiveKit-brand search traffic, while
+these are OpenVidu-first. Everything else is meant to match, and
+[`tools/sync-check.py`](https://github.com/OpenVidu/livekit-tutorials-docs/blob/main/tools/sync-check.py)
+in that repo checks it: run it from a checkout of both repos after touching anything under
+`docs/docs/tutorials/` or `shared/tutorials/`.
+
+```bash
+cd ../livekit-tutorials-docs && tools/sync-check.py --openvidu-io ../openvidu.io
+```
+
+It lists the differences that are intentional (the branch each side links, the link form, the
+framing, step 1, the image markup, the external-link icons, the Azure recording variants) and
+reports anything else as drift. Its README carries the same table.
+
 To apply changes in the web _livekit-tutorials.openvidu.io_:
 
 - In this repository, push the changes to tutorials documentation to the `main` branch and run
