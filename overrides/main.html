@@ -12,12 +12,16 @@
 {{ super() }}
 
 {# Anti-clickjacking frame buster: GitHub Pages cannot send frame-ancestors /
-   X-Frame-Options headers, so this JS guard is the only available defense. #}
-<style id="antiClickjack">body{display:none !important;}</style>
+   X-Frame-Options headers, so this JS guard is the only available defense.
+   The style is gated on an attribute rather than removed: navigation.instant
+   diffs the <head> and re-appends any tag the live head is missing, so a
+   removed style would come back on every instant navigation with nothing to
+   remove it again — hiding the body. This site does not enable that feature,
+   but the safe form costs nothing and keeps the twin sites' overrides equal. #}
+<style id="antiClickjack">html:not([data-unframed]) body{display:none !important;}</style>
 <script>
   if (self === top) {
-    var antiClickjack = document.getElementById("antiClickjack");
-    antiClickjack.parentNode.removeChild(antiClickjack);
+    document.documentElement.setAttribute("data-unframed", "");
   } else {
     top.location = self.location;
   }
