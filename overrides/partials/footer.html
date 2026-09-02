@@ -114,7 +114,12 @@
           <h4>LEGAL</h4>
           <div>
             <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
-              {% include "partials/copyright.html" %}
+              <div class="md-copyright">
+                <div class="md-copyright__highlight">
+                  {{ build_date_utc.strftime("%Y") }} &copy; OpenVidu<br>
+                  <a href="#__consent">Change cookie settings</a>
+                </div>
+              </div>
             </div>
             <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
               <div class="footer-conditions-list">

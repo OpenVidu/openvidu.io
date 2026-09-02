@@ -593,7 +593,3 @@ extra_css:
   - stylesheets/extra.css
   - stylesheets/unsemantic-grid.css
 
-# {year} is replaced with the build year by publish-tool/mkdocs_hook.py
-copyright: >
-  {year} &copy; OpenVidu<br>
-  <a href="#__consent">Change cookie settings</a>
