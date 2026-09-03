@@ -3,6 +3,7 @@ title: 'Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)'
 draft: false
 date: 2026-09-03
 slug: low-latency-whip-ingestion
+cover_image: poster-light.webp
 description: >-
   Push a real stream into an OpenVidu Room over WHIP, from a browser webcam and
   from OBS Studio, and watch it arrive with sub-second delay.
@@ -22,11 +23,8 @@ authors:
 
 # Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)
 
-<!-- IMAGE: poster-light.webp / poster-dark.webp — a browser webcam tile and the OBS interface on
-     the left, both feeding an arrow labelled "WHIP" into an OpenVidu Room on the right, with a
-     viewer's browser coming out of it. Alt: "A browser and OBS Studio pushing video into an
-     OpenVidu Room over WHIP". Place immediately below the H1, light and dark variants, and point
-     cover_image at the light one. -->
+![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/poster-light.webp#only-light "WHIP ingestion into an OpenVidu Room")
+![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/poster-dark.webp#only-dark "WHIP ingestion into an OpenVidu Room")
 
 Part 1 of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
 
@@ -97,20 +95,27 @@ Wait for the `🎉 OpenVidu is ready! 🎉` banner before you carry on — it's 
 first boot pulls a lot of images:
 
 ```bash
-docker compose -f vendor/openvidu-local-deployment/community/docker-compose.yaml logs -f openvidu
+docker compose -f vendor/openvidu-local-deployment/community/docker-compose.yaml logs -f ready-check
 ```
 
 Then open **<http://localhost:3000>**. There are two things to click: *Publish from your webcam* and
 *Watch the stream*. Open them in two tabs and you have the whole loop in front of you.
+
+![The demo app's landing page, with cards for publishing from a webcam, watching the stream, and generating WHIP credentials for OBS](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/app-home.webp){ width=100% }
 
 !!! tip "Watch them side by side"
     Put the publisher tab and the viewer tab next to each other and wave at the camera. What you're
     looking for is that the wave arrives while your hand is still moving. That's the difference this
     series is about, and it's much more convincing than a number.
 
-<!-- IMAGE: screenshot of the two tabs side by side, publisher left, viewer right, both showing the
-     same webcam frame. Alt: "The publisher and viewer pages side by side, showing the same frame".
-     Place right after this tip. -->
+![The publisher and the viewer side by side, both showing the same frame of the same stream, with a running clock burned into it](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/publisher-and-viewer.webp){ width=100% }
+
+Those two tiles are the same stream: the left one is the camera as it is captured, the right one is
+what came back out of the Room after a WHIP publish and a WebRTC subscribe. The clock burned into
+the test pattern is there to be compared.
+
+<!-- IMAGE: screenshot of OBS Settings → Stream with Service set to WHIP and the Server/Bearer Token
+     fields filled in (token redacted), for the OBS section below. -->
 
 ## Publishing from the browser
 
@@ -171,7 +176,7 @@ curl -s -X POST http://localhost:3000/api/ingress \
 {
   "roomName": "demo-room",
   "participantIdentity": "obs",
-  "url": "http://localhost:7885/w",
+  "url": "http://localhost:8085/whip",
   "streamKey": "<a long single-use token>"
 }
 ```
@@ -186,10 +191,6 @@ Then, in **Settings → Stream**:
 
 **Apply**, then **Start Streaming**, then open
 <http://localhost:3000/watch.html>. Your OBS scene is in the Room.
-
-<!-- IMAGE: screenshot of OBS Settings → Stream with Service set to WHIP and the Server/Bearer Token
-     fields filled in (token redacted). Alt: "OBS Settings → Stream with the WHIP service selected".
-     Place right after this table. -->
 
 ### A scene collection to start from
 
