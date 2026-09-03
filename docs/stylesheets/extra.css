@@ -462,11 +462,6 @@ div[class*="grid-"]:has(> img) {
   [dir="ltr"] .md-version__current {
     margin-left: 0.8rem !important;
   }
-  /* The full "3.8 latest" button overflows the narrow mobile title box and
-     collides with the palette toggle; the version number alone fits. */
-  .md-version__alias {
-    display: none;
-  }
   /* Outdated warning */
   .outdated-warning-text {
     display: none;
@@ -484,8 +479,33 @@ div[class*="grid-"]:has(> img) {
 
 /* Mobile extra small */
 @media (max-width: 500px) {
-  nav {
+  /* Only the breadcrumbs may scroll sideways. A bare `nav` selector would catch
+     the header too, and overflow-x: auto makes it a clip container that traps
+     the version dropdown inside the header bar. */
+  .md-path {
     overflow-x: auto;
+  }
+  /* Room for the version button's full "X.Y latest" beside the palette toggle. */
+  [dir="ltr"] .md-version__current {
+    margin-left: 0.2rem !important;
+  }
+  .log-in-div {
+    width: 6rem !important;
+    margin-left: 0.2em !important;
+    margin-right: 0.4em !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .md-header__button.md-icon {
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+  }
+  [dir="ltr"] .md-version__current {
+    margin-left: 0.1rem !important;
+  }
+  .log-in-div {
+    width: 5.2rem !important;
   }
 }
 
