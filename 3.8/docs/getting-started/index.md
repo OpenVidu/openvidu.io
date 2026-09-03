@@ -209,4 +209,4 @@ Nothing appears?
 
   [Deployment types](https://openvidu.io/3.8/docs/self-hosting/deployment-types/index.md)
 
-Prefer a finished video conferencing application over building one? [OpenVidu Meet](https://openvidu.io/3.8/meet/index.md) is ready to deploy and embed, and the [comparison](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md) shows which of the two fits your project.
+Prefer a finished video conferencing application over building one? [OpenVidu Meet](https://openvidu.io/3.8/meet/index.md) is ready to deploy and embed, and the [comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) shows which of the two fits your project.

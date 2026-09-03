@@ -4,7 +4,7 @@ On-premises
 
 Info
 
-OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
 
@@ -156,7 +156,7 @@ A wizard will guide you through the installation process. You will be asked for 
 
 Info
 
-If you don't have a license key for OpenVidu **PRO**, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md) .
+If you don't have a license key for OpenVidu **PRO**, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 
 - **Do you want to use an external load balancer?**: Select ***Yes***. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
@@ -455,7 +455,7 @@ In case you want to deploy a specific version, just replace `latest` with the de
 
 Notes:
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.8/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Replace `openvidu.example.io` with your FQDN.
 - Replace `turn.example.io` with your TURN server FQDN.
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
