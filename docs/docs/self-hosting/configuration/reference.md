@@ -11,7 +11,7 @@ This file defines global configuration parameters used by other services, such a
 
 <div class="nowrap-first-column" markdown>
 
-| <div style="width: 17em;">Parameter</div> | Description |
+| Parameter | Description |
 | --------- | ----------- |
 | **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access OpenVidu APIs and services. |
 | **`LIVEKIT_API_KEY`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
