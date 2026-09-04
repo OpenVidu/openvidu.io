@@ -98,4 +98,4 @@ Tools like [livekit-cli](https://github.com/livekit/livekit-cli) simulate partic
 
 Tell us your expected load and we will help you benchmark and size it.
 
-[Talk to an expert](/support/#talk-to-an-expert)
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)

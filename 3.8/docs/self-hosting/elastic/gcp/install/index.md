@@ -4,7 +4,7 @@ Google Cloud Platform
 
 Info
 
-OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on Google Cloud Platform. The deployed services are identical to those in the [On Premises Elastic installation](https://openvidu.io/3.8/docs/self-hosting/elastic/on-premises/install/index.md), but are provisioned as Google Cloud Platform resources and can be automated through the Google Cloud Console.
 
@@ -102,7 +102,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | --------------- | ------------------------------------------------------------------------------------------------------ |
 | projectId       | GCP project id where the resources will be created.                                                    |
 | stackName       | Stack name for OpenVidu deployment.                                                                    |
-| openviduLicense | Your OpenVidu License. Get one [here](https://openvidu.io/3.8/account/index.md) if you don't have one. |
+| openviduLicense | Your OpenVidu License. Get one [here](https://openvidu.io/account/) if you don't have one. |
 
 ### Optional Parameters
 
