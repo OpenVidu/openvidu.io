@@ -346,7 +346,7 @@ _Minimal example only. Token generation, backend auth, error handling, and produ
 
 ```tsx
 // Load once in your app shell (for example, in index.html)
-// <script src="https://<your-openvidu-domain>/v1/openvidu-meet.js"></script>
+// <script src="https://<your-openvidu-domain>/meet/v1/openvidu-meet.js"></script>
 
 export function Meeting({ roomUrl }: { roomUrl: string }) {
 	return <openvidu-meet room-url={roomUrl} leave-redirect-url="/" />;
