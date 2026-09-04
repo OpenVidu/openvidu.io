@@ -163,11 +163,11 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 #### Customizing the UI
 
-To customize the appearance of OpenVidu Components, simply redefine the necessary CSS variables in your `styles.scss` file. For instance, to change the primary color used throughout your application, you would update the `--ov-primary-color` variable as shown below:
+To customize the appearance of OpenVidu Components, simply redefine the necessary CSS variables in your `styles.scss` file. For instance, to change the primary color of the buttons and other actions, you would update the `--ov-primary-action-color` variable as shown below:
 
 ```css
 :root {
-  --ov-primary-color: #yourNewColor; /* Replace #yourNewColor with your chosen hex color code */
+  --ov-primary-action-color: #yourNewColor; /* Replace #yourNewColor with your chosen hex color code */
 
   /* Others variables ... */
 }
