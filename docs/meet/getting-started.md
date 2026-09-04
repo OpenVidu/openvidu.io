@@ -54,7 +54,7 @@ Easily access, review, and share your recorded meeting with your team or audienc
 
 ## Embed OpenVidu Meet in your app
 
-Integrate a complete, fully-featured video call solution into your web or mobile app with just a few lines of code using <span class="nowrap">**OpenVidu Meet Embedded**</span>. Customize the design, colors, and layout to match your brand seamlessly.
+Integrate a complete, fully-featured video call solution into your web app with just a few lines of code using <span class="nowrap">**OpenVidu Meet Embedded**</span>. Customize its colors to match your brand seamlessly.
 
 [Embed OpenVidu Meet into your app](embedded/intro.md){ .md-button .md-button--primary }
 
