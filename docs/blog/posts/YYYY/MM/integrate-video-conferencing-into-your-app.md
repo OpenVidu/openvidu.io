@@ -22,8 +22,8 @@ authors:
 
 # 3 ways to integrate video conferencing into your app with OpenVidu
 
-![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/YYYY/MM/integrate-video-conferencing-into-your-app/poster-light.webp#only-light "Three ways to integrate video conferencing with OpenVidu")
-![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/YYYY/MM/integrate-video-conferencing-into-your-app/poster-dark.webp#only-dark "Three ways to integrate video conferencing with OpenVidu")
+![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/YYYY/MM/integrate-video-conferencing-into-your-app/poster-light.webp#only-light "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
+![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/YYYY/MM/integrate-video-conferencing-into-your-app/poster-dark.webp#only-dark "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
 
 Most products reach a point where a chat window or a phone number is no longer enough, and people need to see each other. Sooner or later the ticket lands on your board: *"Add video calls to the app"*. The WebRTC part is a solved problem. The question that actually shapes the project is a different one: **how much of the meeting do you want to own?** The buttons, the layout, the media tracks themselves? Or just a `<div>` where a meeting shows up?
 
@@ -33,7 +33,7 @@ There are three ways to integrate video conferencing into your app with OpenVidu
 
 This post walks through the three, with working code for each, so you can choose the level that fits your product rather than the first one you come across.
 
-## One question, three answers
+## The three levels at a glance
 
 Here is the overview before we get into the details. Each level gives you more speed in exchange for less control, and the three build on each other: OpenVidu Meet is built with Angular Components, and Angular Components are built on the same client SDK you would use at the lowest level. Whichever one you pick, the media flows through your own OpenVidu deployment.
 
@@ -159,9 +159,9 @@ export class MeetingComponent {
 
 That is the whole integration. The component emits `joined`, `left` and `closed` events, and exposes `leaveRoom()`, `endMeeting()` and `kickParticipant()` as commands, so your app knows what is going on and can act on it. If you cannot use a Web Component, the iframe accepts the same attributes and supports the same commands and events through `postMessage`. And if you do not need the meeting inside your page at all, the direct link opens the full OpenVidu Meet UI in its own tab, with `leave-redirect-url` to bring the user back.
 
-### What you can customize today, and what is coming
+### What you can customize
 
-Let's be precise here, because this is where expectations matter. Today, OpenVidu Meet Embedded lets you shape the meeting in these ways:
+The meeting UI belongs to OpenVidu Meet, but it is not a black box. Today you can adjust it in these ways:
 
 - **Colors.** Five color slots (main background, main controls, secondary elements, highlights and accents, panels and dialogs) plus a light or dark base. Admins set them from the "Configuration" page, and they apply globally to every room.
 - **Features per room.** Chat, captions, virtual backgrounds, end-to-end encryption and recording, with the recording layout, from the room wizard or the `config` object you saw above. The API additionally exposes the recording encoding. Note that an encrypted room cannot be recorded.
@@ -178,7 +178,9 @@ What you cannot do yet is reshape the meeting UI itself: replace the toolbar, re
 
 The second level is [Angular Components](/docs/ui-components/angular-components.md), the library we use to build OpenVidu Meet itself. It gives you a `<ov-videoconference>` element that renders a complete meeting, and lets you adapt, extend or replace any part of it. You get a working screen in minutes and then work on your customizations from there.
 
-The backend changes at this level. You are no longer talking to OpenVidu Meet but to OpenVidu directly, through the LiveKit-compatible server SDK, and the one thing your server must do is generate [access tokens](/docs/reference/access-tokens.md). This same server also serves Level 3:
+### Generate access tokens in your backend
+
+The backend changes at this level. You are no longer talking to OpenVidu Meet but to OpenVidu directly, through the LiveKit-compatible server SDK, and the one thing your server must do is generate [access tokens](/docs/reference/access-tokens.md). An access token is a JWT signed with your API secret that states who the participant is and which room they may join. This same server also serves Level 3:
 
 ```bash
 npm install express cors livekit-server-sdk
@@ -205,6 +207,8 @@ app.post("/token", async (req, res) => {
 
 app.listen(6080, () => console.log("Token server on http://localhost:6080"));
 ```
+
+`roomJoin` and `room` are the only grants this token needs: publishing and subscribing are allowed unless you turn them off. The API key and secret never leave the server, because anyone holding them can create a token for any identity.
 
 ### Render a meeting
 
@@ -267,7 +271,7 @@ With that you have a prejoin page, a toolbar, a responsive layout, chat, partici
 
 There are three ways to customize it, and you can combine them:
 
-- **CSS variables** for the look. Redefine `--ov-background-color`, `--ov-primary-action-color`, `--ov-accent-action-color`, the border radii and the rest in your global stylesheet, and every component follows.
+- **CSS variables** for the look. Redefine `--ov-background-color`, `--ov-primary-action-color`, `--ov-accent-action-color`, the border radius and the rest in your global stylesheet, and every component follows.
 - **Inputs** for behavior. Attribute directives on `<ov-videoconference>` such as `[prejoin]`, `[participantName]`, `[minimal]` or `[toolbarChatPanelButton]` show, hide and preconfigure parts of the UI.
 - **Structural directives** for structure. Place your own markup inside the component with `*ovToolbar`, `*ovLayout`, `*ovStream`, `*ovPanel`, `*ovChatPanel`, `*ovParticipantsPanel` or `*ovAdditionalPanels`, and it replaces the default piece while the library keeps managing the room for you.
 
@@ -324,7 +328,7 @@ At the bottom of the stack there is no UI at all, just a `Room` and its tracks. 
 npm install livekit-client
 ```
 
-The token server from Level 2 is all the backend you need. Your client asks for a token, connects, publishes camera and microphone, and renders whatever tracks other participants publish. Here is the complete flow in Angular, using signals to hold the state:
+The [token server from Level 2](#generate-access-tokens-in-your-backend) is all the backend you need. Your client asks for a token, connects, publishes camera and microphone, and renders whatever tracks other participants publish. Here is the complete flow in Angular, using signals to hold the state:
 
 ```typescript title="meeting.component.ts"
 import { Component, signal } from "@angular/core";
