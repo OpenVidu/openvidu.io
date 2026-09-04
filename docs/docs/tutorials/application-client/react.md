@@ -43,9 +43,9 @@ This React project has been generated using the Vite. You may come across variou
 -   `App.tsx`: This file defines the main application component. It is responsible for handling tasks such as joining a video call and managing the video calls themselves.
 -   `App.css`: This file contains the styles for the main application component.
 -   `VideoComponent.tsx`: This file defines the `VideoComponent`. This component is responsible for displaying video tracks along with participant's data. Its associated styles are in `VideoComponent.css`.
--   `AudioComponent.vue`: This file defines the `AudioComponent`. This component is responsible for displaying audio tracks.
+-   `AudioComponent.tsx`: This file defines the `AudioComponent`. This component is responsible for displaying audio tracks.
 
-To use the LiveKit JS SDK in a Vue application, you need to install the `livekit-client` package. This package provides the necessary classes and methods to interact with the LiveKit server. You can install it using the following command:
+To use the LiveKit JS SDK in a React application, you need to install the `livekit-client` package. This package provides the necessary classes and methods to interact with the LiveKit server. You can install it using the following command:
 
 ```bash
 npm install livekit-client
