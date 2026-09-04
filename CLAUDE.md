@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Source of https://openvidu.io — MkDocs Material (pinned 9.7.6) + mike, published to `gh-pages`.
+Source of https://openvidu.io — MkDocs Material (pinned 9.7.7) + mike, published to `gh-pages`.
 Two versioned products: **OpenVidu Meet** (`docs/meet/`, served at `/{version}/meet/`) and
 **OpenVidu Platform** (`docs/docs/`, served at `/{version}/docs/`), plus non-versioned root pages
 (landing, pricing, support, blog, …). **Merging to `main` publishes nothing** — the live site only
