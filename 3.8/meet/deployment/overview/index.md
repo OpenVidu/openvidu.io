@@ -57,7 +57,7 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/3.8/pricing/index.md) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing/index.md) for more details.
 
 Info
 

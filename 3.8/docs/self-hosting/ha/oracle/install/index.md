@@ -4,7 +4,7 @@ Oracle Cloud Infrastructure
 
 Info
 
-OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section describes how to deploy a production-ready OpenVidu High Availability cluster on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises High Availability installation](https://openvidu.io/3.8/docs/self-hosting/ha/on-premises/install-nlb/index.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
@@ -153,7 +153,7 @@ Make sure the OCI Function's compartment has the IAM policies needed to pull fro
    | `compartment_ocid`        | OCI Compartment OCID where resources will be created.                                                                                                                                                                                                                                                                                                            |
    | `user_ocid`               | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.                                                                                                                                                                                                                                                                    |
    | `stackName`               | Stack name for the OpenVidu deployment.                                                                                                                                                                                                                                                                                                                          |
-   | `openviduLicense`         | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/3.8/account/index.md) to obtain your license.                                                                                                                                                                                                                                        |
+   | `openviduLicense`         | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/account/) to obtain your license.                                                                                                                                                                                                                                        |
    | `scale_in_function_image` | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
 
    ### Optional Parameters
