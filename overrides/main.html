@@ -166,23 +166,53 @@
 {% block extrahead %}
 {{ super() }}
 
-{# The site's single font stylesheet (theme.font is false): every Tomorrow weight the
-   CSS uses plus the code font. Self-hosted at build time by the privacy plugin. In the
-   head, not the header partial: a preload emitted in the body is discovered late, and
-   the page can paint in the fallback font before the stylesheet arrives. #}
+{# ---------------------------------------------------------------------------------------
+   Fonts. `theme.font` is false, so this is the site's only font stylesheet: every Tomorrow
+   weight the CSS uses plus the code font. The privacy plugin self-hosts it at build time,
+   and it vendors `rel="preload"` hrefs exactly like `rel="stylesheet"` ones, so everything
+   below stays written against the upstream URLs and still resolves in the `CI=false`
+   validation build, where privacy is off and these links stay remote.
+
+   Three things have to hold together, or the page paints its text twice: once in the
+   fallback font, then again in Tomorrow a few hundred ms later.
+
+     1. The stylesheet is render-blocking. It used to load through the `rel="preload"`
+        `as="style"` + `onload="this.rel='stylesheet'"` trick, whose whole purpose is to
+        *un*-block rendering: `as="style"` fetches the file without applying it, so first
+        paint happened before the @font-face rules existed at all.
+     2. `display=block`, not `display=swap`. `swap` gives every face a zero-length block
+        period — it asks the browser to paint the fallback immediately and reflow on
+        arrival, which is the flicker itself.
+     3. The faces the first viewport needs are preloaded. A font file is otherwise only
+        requested once layout proves some text needs it, which is never before first paint,
+        so `display=block` on its own would trade the flicker for invisible text.
+
+   The preload list is every face the first viewport actually asks for, measured across the
+   landing page, pricing, both product homes, the blog index and a docs page: Tomorrow 300,
+   400, 500 and 700, plus 800 because `font-weight: 900` in the pricing tables resolves to
+   it. Preloading fewer than these would reveal the text in waves rather than all at once.
+   Only the `latin` subset of each — the site is English, and the browser still fetches the
+   other subsets on demand if a page needs them. Roboto Mono is here because inline code sits
+   in the first viewport on the reference and self-hosting pages, and its 400, 500 and 700 all
+   resolve to one latin file. The `crossorigin` is what makes each hint match the request the
+   CSS goes on to make: fonts are fetched in CORS mode even same-origin, and a hint without it
+   is a second fetch rather than a head start.
+
+   `ovweb lint` holds points 1 and 2 in place and checks that every weight preloaded here is
+   one the stylesheet actually requests — see `check_font_loading`. #}
+{# Tomorrow 300 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 400 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 500 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 700 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 800 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Roboto Mono #}<link rel="preload" href="https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Arciform carries the header page title (extra.css). Already self-hosted, so this href is
+   the one extra.css uses — a different form would fetch the same file a second time. #}
+<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link
-    rel="preload"
-    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=block"
 />
-<noscript>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
-        rel="stylesheet"
-        type="text/css"
-    />
-</noscript>
 
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
