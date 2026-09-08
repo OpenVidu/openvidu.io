@@ -24,17 +24,7 @@ authors:
 <!-- Hola Patxi, el post está chulo. Yo lo "limpiaría" un poco para hacerlo más directo, pero es sólo mi opinión. Coge las ideas que consideres y descarta las demás:
 
 Comentarios:
-* Pondría capturas de pantalla de las apps y de OBS para que se vea la arquitectura de forma lo más visual posible.
 * Llamaría al proyecto low-latency-webrtc-streaming en vez de low-latency-whip-ingestion
-* No usaría make. Pondría el comando recomendado para desplegar OpenVidu Local Deployment.
-* Quitaría este párrafo: Here's the part that surprises people: OBS needs no plugin for this. WHIP has been a
-built-in output since OBS 30, sitting in the same Service dropdown as Twitch and YouTube.
-Everything you already do in OBS — scenes, overlays, multiple cameras, a green screen —
-arrives in your OpenVidu Room over WebRTC.
-* En la sección "A scene collection to start from" quizás es mejor tener un fichero por sistema operativo para decirle al usuario que seleccione el de su sistema (y quitar los detalles de que la webcam tiene ids diferntes)
-* Quitaría: The collection carries no stream settings on purpose. A WHIP token is single-use and
-yours; it has no business sitting in a file in a git repository.
-* Quitaría el "Virtual background". Mete ruido a este post.
 * Quitaría la sección: Why this path is the low-latency one. Y pondría el comentario de OBS en la sección de Optimización explicando el tradeof de enviar un key-frame cada segundo.
 *-->
 
@@ -172,9 +162,9 @@ cleanly.
 
 ## Publishing from OBS
 
-Here's the part that surprises people: **OBS needs no plugin for this.** WHIP is a built-in
+OBS needs no plugin for this: WHIP is a built-in
 output sitting in the same *Service* dropdown as Twitch and YouTube. Everything you
-already do in OBS — scenes, overlays, multiple cameras, a green screen — arrives in your OpenVidu
+already do in OBS, such as scenes, overlays, multiple cameras, a green screen, among others, arrives in your OpenVidu
 Room over WebRTC.
 
 First, let's generate a set of credentials from the app, either by clicking **Generate WHIP credentials** at
@@ -208,14 +198,10 @@ Click **Apply**, then **Start Streaming**, then open
 
 ### A scene collection to start from
 
-Building the scene by hand every time gets old, so the repo ships one:
-[`obs/openvidu-whip-webcam.json`](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam.json){:target="_blank"}.
-Import it with **Scene Collection → Import** and you get a webcam filling a 720p canvas, a backdrop
-behind it, your default microphone, and a chroma-key filter already wired up.
-
-There are three scenes in it, one per operating system, because a capture source's internal id is
-platform-specific — `v4l2_input` on Linux, `av_capture_input` on macOS, `dshow_input` on Windows.
-Keep the one for your machine and delete the other two.
+Building the scene by hand every time gets old, so the repo ships three scene collections, one for Linux, one for Windows and another one for MacOS. So when importing, choose
+the appropriate one for your OS. For instance, this is the URL for linux:
+[`obs/openvidu-whip-webcam-linux.json`](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json){:target="_blank"}.
+When imported you get a webcam filling a 720p canvas, and your default microphone, already wired up.
 
 You still have to provide the Stream settings, with the WHIP token and URL provided by the app.
 
@@ -240,6 +226,8 @@ await room.connect(livekitUrl, token);
 Whatever is publishing into the Room (the browser page, OBS, both at once) shows up here as a
 participant with tracks. From OpenVidu's point of view a WHIP ingress *is* a participant, which is
 why nothing about the viewer has to know how the media got in.
+
+![OBS streaming and our watch app viewing the stream, side by side](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/obs-whip-and-viewer.webp){ width=100% }
 
 ## Why this path is the low-latency one
 
