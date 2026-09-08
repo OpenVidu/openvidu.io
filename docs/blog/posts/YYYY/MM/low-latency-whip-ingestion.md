@@ -197,7 +197,7 @@ Then, in **Settings → Stream**:
 Building the scene by hand every time gets old, so the repo ships one:
 [`obs/openvidu-whip-webcam.json`](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam.json){:target="_blank"}.
 Import it with **Scene Collection → Import** and you get a webcam filling a 720p canvas, a backdrop
-behind it, your default microphone, and a virtual-background filter already wired up.
+behind it, your default microphone, and a chroma-key filter already wired up.
 
 There are three scenes in it, one per operating system, because a capture source's internal id is
 platform-specific — `v4l2_input` on Linux, `av_capture_input` on macOS, `dshow_input` on Windows.
@@ -206,28 +206,28 @@ Keep the one for your machine and delete the other two.
 The collection carries **no stream settings on purpose**. A WHIP token is single-use and yours; it
 has no business sitting in a file in a git repository.
 
-### The virtual background
+### Replacing the background
 
-The *Virtual background* filter on the camera is
-[obs-backgroundremoval](https://github.com/locaal-ai/obs-backgroundremoval){:target="_blank"}, which
-is a plugin rather than something OBS ships. Without it, the collection still imports and the camera
-still streams — you just get your real background:
+The camera carries a **Chroma key** filter, keyed on green with OBS's own defaults — similarity 400,
+smoothness 80, spill reduction 100. Put a green screen behind you and the backdrop underneath shows
+through. Tune it in **right-click the camera → Filters → Chroma key**: similarity is the dial that
+matters, and you raise it until the green goes and stop before your hair does.
 
-```bash
-# Flatpak OBS on Linux; installers for other platforms are on the plugin's releases page
-flatpak install flathub com.obsproject.Studio.Plugin.BackgroundRemoval
-```
+Two reasons it is chroma key and not a model:
 
-If the filter doesn't appear on the camera after installing it, add it by hand
-(**right-click the camera → Filters → + → Background Removal**) — the filter's internal id has
-changed between plugin releases. And if you'd rather not add a plugin at all, OBS's built-in
-**Chroma Key** does the same job with a green screen for almost no CPU.
+- **It is OBS's own filter**, so there is nothing to install and nothing to go stale. A collection
+  that names a plugin you don't have imports with the filter silently missing, which is a confusing
+  thing to hand someone.
+- **It costs almost nothing per frame.** You are about to run eleven OpenVidu containers, an
+  encoder and a browser on the same machine; segmentation on every frame is the first thing that
+  turns into dropped frames, and dropped frames in a post about latency are a bad look.
 
-!!! note "Segmentation isn't free"
-    Background removal runs an inference model on every frame. On a laptop that is also running
-    eleven OpenVidu containers, that shows up as a stutter — and it is tempting to blame WHIP for
-    it. Drop the camera to 720p, or watch the encoder's frame drops in OBS's stats panel, before you
-    go looking for the delay anywhere else.
+!!! tip "No green screen?"
+    Nothing breaks: with no green in the shot the filter has nothing to key on and the picture goes
+    through as it is. If you want a background without a screen, a model-based one is a plugin away
+    — [obs-backgroundremoval](https://github.com/locaal-ai/obs-backgroundremoval){:target="_blank"},
+    added to the camera by hand after installing it — and it will cost you the CPU or GPU that
+    chroma key doesn't.
 
 ## Watching it
 
