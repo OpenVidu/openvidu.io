@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Every OpenVidu Blog article filed under Technology: 11 posts, on self-hosted video conferencing and WebRTC engineering.">
+        <meta name="description" content="Every OpenVidu Blog article filed under Technology: 12 posts, on self-hosted video conferencing and WebRTC engineering.">
       
       
       
@@ -201,7 +201,7 @@
 <meta property="og:site_name" content="OpenVidu">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Technology">
-<meta property="og:description" content="Every OpenVidu Blog article filed under Technology: 11 posts, on self-hosted video conferencing and WebRTC engineering.">
+<meta property="og:description" content="Every OpenVidu Blog article filed under Technology: 12 posts, on self-hosted video conferencing and WebRTC engineering.">
 <meta property="og:url" content="https://openvidu.io/blog/category/technology/">
 <meta property="og:image" content="https://openvidu.io/assets/images/og/openvidu-card.png">
 <meta property="og:image:width" content="1200">
@@ -1223,6 +1223,8 @@
       
         
       
+        
+      
     
     
     
@@ -1315,6 +1317,36 @@
     
   
     Comparison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-to
   
 
     
@@ -1924,6 +1956,66 @@
     <div class="md-post__meta md-meta">
       <ul class="md-meta__list">
         <li class="md-meta__item">
+          <time datetime="2026-09-08 00:00:00+00:00">September 8, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../how-to/" class="md-meta__link">How-to</a>, 
+              <a href="./" class="md-meta__link">Technology</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              8 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="low-latency-live-streaming-ingest-whip-into-openvidu-part-2"><a class="toclink" href="../../2026/09/08/low-latency-whip-ingestion/">Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)</a></h2>
+<!-- Hola Patxi, el post está chulo. Yo lo "limpiaría" un poco para hacerlo más directo, pero es sólo mi opinión. Coge las ideas que consideres y descarta las demás:
+
+Comentarios:
+* Llamaría al proyecto low-latency-webrtc-streaming en vez de low-latency-whip-ingestion
+* Quitaría la sección: Why this path is the low-latency one. Y pondría el comentario de OBS en la sección de Optimización explicando el tradeof de enviar un key-frame cada segundo.
+*-->
+
+<h2 id="low-latency-live-streaming-ingest-whip-into-openvidu-part-2_1"><a class="toclink" href="../../2026/09/08/low-latency-whip-ingestion/#low-latency-live-streaming-ingest-whip-into-openvidu-part-2_1">Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)</a></h2>
+<p><img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" src="/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light" title="WHIP ingestion into an OpenVidu Room">
+<img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" src="/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark" title="WHIP ingestion into an OpenVidu Room"></p>
+<p><a href="/blog/posts/2026/09/low-latency-live-streaming.md">Part 1</a> of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../2026/09/08/low-latency-whip-ingestion/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorFG.jpg" alt="Francisco Gortázar">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
           <time datetime="2026-09-01 00:00:00+00:00">September 1, 2026</time></li>
         
           <li class="md-meta__item">
@@ -2384,57 +2476,6 @@
     
       <nav class="md-post__action">
         <a href="../../2026/06/02/scalability-in-videoconferencing-systems/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorSF.jpg" alt="Sergio Fernández">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-05-26 00:00:00+00:00">May 26, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="./" class="md-meta__link">Technology</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              10 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="scaling-up-is-easy-the-challenge-is-scaling-down-the-scale-in-problem-in-videoconferences"><a class="toclink" href="../../2026/05/26/scale-in-problem-in-videoconferences/">Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.</a></h2>
-<p>Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.</p>
-<p><img alt="Scale In" class="round-corners dark-img" src="/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down.png"></p>
-<p>This post dives into the <strong>scale-in problem</strong>: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="../../2026/05/26/scale-in-problem-in-videoconferences/">
           Continue reading
         </a>
       </nav>

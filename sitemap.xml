@@ -121,6 +121,10 @@
          <lastmod>2026-09-04</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/09/08/low-latency-whip-ingestion/</loc>
+         <lastmod>2026-09-08</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/conditions/cookie-policy/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
@@ -889,11 +893,15 @@
          
     </url>
     <url>
-         <loc>https://openvidu.io/blog/category/comparison/</loc>
+         <loc>https://openvidu.io/blog/category/how-to/</loc>
          
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/technology/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/comparison/</loc>
          
     </url>
     <url>

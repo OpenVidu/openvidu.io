@@ -37,6 +37,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [Deploy OpenVidu on Hetzner Cloud in 15 Minutes](https://openvidu.io/blog/2026/08/18/deploy-openvidu-hetzner/index.md): Deploy a self-hosted OpenVidu video conferencing server on a Hetzner Cloud VM with one command, automatic HTTPS and a test bill measured in cents.
 - [Building an AI agent for transcribing and summarizing audio calls](https://openvidu.io/blog/2026/08/04/transcriber-summarizer-agent/index.md): How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch.
 - [Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)](https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/index.md): What counts as low latency, why WebRTC hits sub-second delivery where HLS and DASH structurally can't, and where low latency live streaming actually gets used.
+- [Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)](https://openvidu.io/blog/2026/09/08/low-latency-whip-ingestion/index.md): Push a real stream into an OpenVidu Room over WHIP, from a browser webcam and from OBS Studio, and watch it arrive with sub-second delay.
 
 ## OpenVidu Meet
 

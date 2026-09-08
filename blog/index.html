@@ -255,6 +255,12 @@
       "blogPost": [
         {
           "@type": "BlogPosting",
+          "headline": "Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)",
+          "url": "https://openvidu.io/blog/2026/09/08/low-latency-whip-ingestion/",
+          "datePublished": "2026-09-08"
+        },
+        {
+          "@type": "BlogPosting",
           "headline": "Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)",
           "url": "https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/",
           "datePublished": "2026-09-01"
@@ -1333,6 +1339,8 @@
       
         
       
+        
+      
     
     
     
@@ -1641,6 +1649,66 @@
       <header class="md-typeset">
         <h1 id="blog">Blog<a class="headerlink" href="#blog" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorFG.jpg" alt="Francisco Gortázar">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-09-08 00:00:00+00:00">September 8, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/how-to/" class="md-meta__link">How-to</a>, 
+              <a href="category/technology/" class="md-meta__link">Technology</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              8 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="low-latency-live-streaming-ingest-whip-into-openvidu-part-2"><a class="toclink" href="2026/09/08/low-latency-whip-ingestion/">Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)</a></h2>
+<!-- Hola Patxi, el post está chulo. Yo lo "limpiaría" un poco para hacerlo más directo, pero es sólo mi opinión. Coge las ideas que consideres y descarta las demás:
+
+Comentarios:
+* Llamaría al proyecto low-latency-webrtc-streaming en vez de low-latency-whip-ingestion
+* Quitaría la sección: Why this path is the low-latency one. Y pondría el comentario de OBS en la sección de Optimización explicando el tradeof de enviar un key-frame cada segundo.
+*-->
+
+<h2 id="low-latency-live-streaming-ingest-whip-into-openvidu-part-2_1"><a class="toclink" href="2026/09/08/low-latency-whip-ingestion/#low-latency-live-streaming-ingest-whip-into-openvidu-part-2_1">Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)</a></h2>
+<p><img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" src="/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light" title="WHIP ingestion into an OpenVidu Room">
+<img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" src="/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark" title="WHIP ingestion into an OpenVidu Room"></p>
+<p><a href="/blog/posts/2026/09/low-latency-live-streaming.md">Part 1</a> of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="2026/09/08/low-latency-whip-ingestion/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
@@ -2110,59 +2178,6 @@
     
       <nav class="md-post__action">
         <a href="2026/07/09/release-380/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorSF.jpg" alt="Sergio Fernández">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-07-07 00:00:00+00:00">July 7, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/technology/" class="md-meta__link">Technology</a>, 
-              <a href="category/research/" class="md-meta__link">Research</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              10 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="we-deployed-the-same-video-platform-on-five-clouds-and-timed-it-5-minutes-to-20-and-the-slow-ones-are-slow-for-a-reason"><a class="toclink" href="2026/07/07/deploy-and-scale-in-times-across-clouds/">We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason</a></h2>
-<p><img alt="Mean time to a working deployment, by cloud and topology" src="/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-times-light.svg#only-light">
-<img alt="Mean time to a working deployment, by cloud and topology" src="/assets/images/blog/2026/07/deploy-and-scale-in-times-across-clouds/deploy-times-dark.svg#only-dark"></p>
-<p>"How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.</p>
-<p>We built a tool, <strong>ov-cloud-tester</strong>, that deploys the <em>same</em> self-hosted WebRTC video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in three topologies (single node, elastic, and high-availability), tears it down cleanly, and times the whole thing. We ran it many times per cloud and looked at both the averages <em>and</em> every individual run. The headline: standing up a working deployment ranges from about <strong>5 minutes to 20</strong>, DigitalOcean is consistently the fastest and Oracle the heaviest — and the <em>why</em>, plus which clouds are actually <em>predictable</em>, turns out to be more interesting than the ranking.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="2026/07/07/deploy-and-scale-in-times-across-clouds/">
           Continue reading
         </a>
       </nav>

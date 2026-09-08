@@ -4,7 +4,7 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 
 Comparing OpenVidu Meet and OpenVidu Platform instead?
 
-This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md).
+This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ## OpenVidu vs LiveKit
 
@@ -51,13 +51,13 @@ Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims 
 - OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](https://openvidu.io/3.8/docs/self-hosting/production-ready/observability/index.md).
 - We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](https://openvidu.io/3.8/docs/self-hosting/production-ready/scalability/#big-videoconferences-and-massive-live-streams-working-on-it).
 
-**[Read the full OpenVidu vs LiveKit comparison](https://openvidu.io/3.8/openvidu-vs-livekit/index.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
+**[Read the full OpenVidu vs LiveKit comparison](https://openvidu.io/openvidu-vs-livekit/index.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
 
 ## OpenVidu vs Jitsi
 
 [Jitsi](https://jitsi.org/) is the other major open-source, self-hosted video platform, but it shares no codebase with OpenVidu the way LiveKit does — this is a peer comparison, not a compatibility one. Jitsi's architecture splits signaling (Prosody), conference orchestration (Jicofo) and media routing (Jitsi Videobridge) into separate components, whereas OpenVidu ships as one integrated stack. Both are Apache 2.0 licensed; Jitsi's paid option is 8x8's hosted Jitsi as a Service rather than a self-hosted PRO tier.
 
-**[Read the full OpenVidu vs Jitsi comparison](https://openvidu.io/3.8/openvidu-vs-jitsi/index.md)**, covering recording (Egress vs Jibri), scaling (Elastic/HA vs Octo), SDKs and pricing.
+**[Read the full OpenVidu vs Jitsi comparison](https://openvidu.io/openvidu-vs-jitsi/index.md)**, covering recording (Egress vs Jibri), scaling (Elastic/HA vs Octo), SDKs and pricing.
 
 ## OpenVidu vs SaaS solutions
 
@@ -85,13 +85,13 @@ SFUs are generally low-level tools. Using them directly to implement real-time a
 
 OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md).
 
-**[Read the full OpenVidu vs mediasoup comparison](https://openvidu.io/3.8/openvidu-vs-mediasoup/index.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
+**[Read the full OpenVidu vs mediasoup comparison](https://openvidu.io/openvidu-vs-mediasoup/index.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Janus
 
 [Janus](https://janus.conf.meetecho.com/) is a general-purpose, plugin-based [WebRTC SFU](#openvidu-vs-sfus) from Meetecho. Its VideoRoom plugin provides a basic multistream room, but signaling, authentication, managed recording and a REST API are left for the integrating application to build — and it's released under GPL v3, a copyleft license unlike OpenVidu's Apache 2.0.
 
-**[Read the full OpenVidu vs Janus comparison](https://openvidu.io/3.8/openvidu-vs-janus/index.md)**, including exactly what Janus leaves for you to build yourself if you use it directly.
+**[Read the full OpenVidu vs Janus comparison](https://openvidu.io/openvidu-vs-janus/index.md)**, including exactly what Janus leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Microsoft Teams, Google Meet, Zoom
 
