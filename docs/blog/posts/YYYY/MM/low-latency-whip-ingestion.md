@@ -21,32 +21,45 @@ authors:
   - patxi
 ---
 
+<!-- Hola Patxi, el post está chulo. Yo lo "limpiaría" un poco para hacerlo más directo, pero es sólo mi opinión. Coge las ideas que consideres y descarta las demás:
+
+Comentarios:
+* Pondría capturas de pantalla de las apps y de OBS para que se vea la arquitectura de forma lo más visual posible.
+* Llamaría al proyecto low-latency-webrtc-streaming en vez de low-latency-whip-ingestion
+* No usaría make. Pondría el comando recomendado para desplegar OpenVidu Local Deployment.
+* Quitaría este párrafo: Here's the part that surprises people: OBS needs no plugin for this. WHIP has been a
+built-in output since OBS 30, sitting in the same Service dropdown as Twitch and YouTube.
+Everything you already do in OBS — scenes, overlays, multiple cameras, a green screen —
+arrives in your OpenVidu Room over WebRTC.
+* En la sección "A scene collection to start from" quizás es mejor tener un fichero por sistema operativo para decirle al usuario que seleccione el de su sistema (y quitar los detalles de que la webcam tiene ids diferntes)
+* Quitaría: The collection carries no stream settings on purpose. A WHIP token is single-use and
+yours; it has no business sitting in a file in a git repository.
+* Quitaría el "Virtual background". Mete ruido a este post.
+* Quitaría la sección: Why this path is the low-latency one. Y pondría el comentario de OBS en la sección de Optimización explicando el tradeof de enviar un key-frame cada segundo.
+*-->
+
 # Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)
 
 ![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/poster-light.webp#only-light "WHIP ingestion into an OpenVidu Room")
 ![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/YYYY/MM/low-latency-whip-ingestion/poster-dark.webp#only-dark "WHIP ingestion into an OpenVidu Room")
 
-Part 1 of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
+[Part 1](https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/) of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
 
 <!-- more -->
 
-If you haven't read it, [Part 1: WebRTC vs. HLS and DASH](/blog/posts/2026/09/low-latency-live-streaming.md) is where the *why* lives — what counts as low latency, and why a segmented protocol can't reach it. This post is the *how*.
-
 !!! abstract "What you'll build"
-    A local loop you can watch yourself: a small Node app that mints WHIP credentials against
+    A local loop you can watch yourself: a small Node app that gets WHIP credentials against
     OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does
-    the same thing from a real production tool, and a viewer page that subscribes to the Room. All
+    the same thing from a real production tool, and a viewer page that subscribes to any of them. All
     of it runs on your machine with Docker Compose. The code is at
     [openvidu-labs/low-latency-whip-ingestion](https://github.com/openvidu-labs/low-latency-whip-ingestion){:target="_blank"}.
 
 ## WHIP, in one paragraph
 
-WebRTC's reputation for being hard is mostly about signaling: the protocol never said how two peers
-should exchange their session descriptions, so everyone built their own. **[WHIP](https://datatracker.ietf.org/doc/rfc9725/){:target="_blank"}** (WebRTC-HTTP Ingestion Protocol) ends that argument for the
-one-way ingest case, and it is almost comically small. You `POST` your SDP offer to a URL with a
-bearer token. The server answers `201 Created` with the SDP answer in the body. That's it — that is
-the entire handshake. Everything after it is ordinary WebRTC: SRTP over UDP, ICE for connectivity,
-media flowing continuously with nothing batched into segments.
+**[WHIP](https://datatracker.ietf.org/doc/rfc9725/){:target="_blank"}** (WebRTC-HTTP Ingestion Protocol) is based
+on a `POST` of your SDP offer to a URL with a
+bearer token. The server answers `201 Created` with the SDP answer in the body. And that's it — that is
+the entire handshake. Everything after it is ordinary WebRTC.
 
 The reason that matters for this series is what *doesn't* happen. There's no manifest to write, no
 segment duration to pick, no player buffer to tune. The delay you get is the delay of the network
@@ -55,26 +68,24 @@ plus the encoder, which is why this path lands under a second where a chunked on
 ## The demo app
 
 OpenVidu Platform is a self-hosted, [LiveKit](https://livekit.io/){:target="_blank"}-compatible
-server, and its Ingress module exposes a WHIP endpoint. There is no OpenVidu-specific ingestion API
-to learn: the demo talks to it with LiveKit's own server SDK, exactly as
-<a href="/docs/build-your-app/common-operations/#stream-ingestion">OpenVidu's own docs</a> suggest.
+server, and its Ingress module exposes a [WHIP endpoint](/docs/build-your-app/common-operations/#stream-ingestion).
 
 The whole backend is two endpoints:
 
 | Endpoint | What it does |
 |---|---|
-| `POST /api/ingress` | Creates a WHIP ingress on the Room and returns the `url` and `streamKey` an encoder needs |
-| `GET /api/viewer-token` | Mints a **subscribe-only** access token so a browser can watch, but never publish |
+| `POST /api/ingress` | Creates a WHIP ingress on the room and returns the `url` and `streamKey` an encoder needs |
+| `GET /api/viewer-token` | Obtains a **subscribe-only** access token, so a browser can watch, but never publish |
 
 That asymmetry is the interesting part of the design. The publisher side needs no SDK at all — a
-`fetch()` and an `RTCPeerConnection` are enough, which is precisely why OBS can do it too. The
+`fetch()` and a `RTCPeerConnection` are enough, which is precisely why OBS can do it too. The
 viewer side is a normal WebRTC subscriber, so it uses the client SDK like any other participant in
-the Room.
+the room.
 
 ```
-Browser webcam ──┐
-                 ├── WHIP (HTTP + SDP) ──▶ OpenVidu Room ──▶ WebRTC ──▶ viewer's browser
-OBS Studio ──────┘
+Publisher's Browser ─────────┐
+                             ├── WHIP (HTTP + SDP) ──▶ OpenVidu room ──▶ WebRTC ──▶ viewer's browser
+Publisher's OBS Studio ──────┘
 ```
 
 ## Get it running
@@ -119,9 +130,8 @@ the test pattern is there to be compared.
 
 ## Publishing from the browser
 
-The browser publisher is about forty lines, and none of them are OpenVidu-specific. That is the
-point worth taking away from this section: WHIP is small enough to hand-write, so a web app can
-publish into your platform without shipping an SDK at all.
+The browser publisher is about forty lines. That is the
+point worth taking away from this section: WHIP is small enough to hand-write.
 
 ```javascript
 const pc = new RTCPeerConnection({ iceServers: [] });
@@ -131,6 +141,7 @@ for (const track of stream.getTracks()) {
   pc.addTransceiver(track, { direction: 'sendonly', streams: [stream] });
 }
 
+const offer = await this.pc.createOffer();
 await pc.setLocalDescription(await pc.createOffer());
 await waitForIceGatheringComplete(pc);        // non-trickle: send every candidate at once
 
@@ -140,30 +151,33 @@ const response = await fetch(whipUrl, {
   body: pc.localDescription.sdp,
 });
 
-await pc.setRemoteDescription({ type: 'answer', sdp: await response.text() });
+if (!response.ok) {
+  throw new Error(`WHIP POST failed: ${response.status} ${await response.text()}`);
+}
+
+const location = response.headers.get('Location');
+this.resourceUrl = location ? new URL(location, this.url).toString() : null;
+
+const answerSdp = await response.text();
+await this.pc.setRemoteDescription({ type: 'answer', sdp: answerSdp });
 ```
 
-Two details in there are worth a second look.
+Three details in there are worth a second look.
 
-- **`sendonly` transceivers.** An ingest is one-directional, and saying so in the offer keeps the
-  negotiated session honest — the server never has to answer with tracks nobody wants.
-- **Waiting for ICE gathering.** WHIP allows trickle ICE, but a single `POST` that already carries
-  every candidate is simpler and perfectly fine on a LAN. A production publisher on a flaky network
-  would usually trickle instead, to start media sooner.
-
-The `Location` header in the response points at a resource you can `DELETE` to end the session
-cleanly. Browsers can only read that header if the server sends
-`Access-Control-Expose-Headers: Location`; when it doesn't, closing the peer connection ends the
-stream anyway, just less tidily on the server side.
+- **`direction: sendonly`.** An ingest is one-directional.
+- **`waitForIceGatheringComplete`** WHIP allows trickle ICE, but a single `POST` that already carries
+  every candidate is simpler and perfectly fine on a LAN. 
+- The **`Location`** header in the response points at a resource you can `DELETE` to end the session
+cleanly. 
 
 ## Publishing from OBS
 
-Here's the part that surprises people: **OBS needs no plugin for this.** WHIP has been a built-in
-output since OBS 30, sitting in the same *Service* dropdown as Twitch and YouTube. Everything you
+Here's the part that surprises people: **OBS needs no plugin for this.** WHIP is a built-in
+output sitting in the same *Service* dropdown as Twitch and YouTube. Everything you
 already do in OBS — scenes, overlays, multiple cameras, a green screen — arrives in your OpenVidu
 Room over WebRTC.
 
-Generate a set of credentials from the app, either by clicking **Generate WHIP credentials** at
+First, let's generate a set of credentials from the app, either by clicking **Generate WHIP credentials** at
 <http://localhost:3000> or with curl:
 
 ```bash
@@ -181,7 +195,7 @@ curl -s -X POST http://localhost:3000/api/ingress \
 }
 ```
 
-Then, in **Settings → Stream**:
+Then, open OBS and in **Settings → Stream** add the following data to the form:
 
 | Field | Value |
 |---|---|
@@ -189,7 +203,7 @@ Then, in **Settings → Stream**:
 | **Server** | the `url` from the response |
 | **Bearer Token** | the `streamKey` from the response |
 
-**Apply**, then **Start Streaming**, then open
+Click **Apply**, then **Start Streaming**, then open
 <http://localhost:3000/watch.html>. Your OBS scene is in the Room.
 
 ### A scene collection to start from
@@ -203,35 +217,11 @@ There are three scenes in it, one per operating system, because a capture source
 platform-specific — `v4l2_input` on Linux, `av_capture_input` on macOS, `dshow_input` on Windows.
 Keep the one for your machine and delete the other two.
 
-The collection carries **no stream settings on purpose**. A WHIP token is single-use and yours; it
-has no business sitting in a file in a git repository.
-
-### Replacing the background
-
-The camera carries a **Chroma key** filter, keyed on green with OBS's own defaults — similarity 400,
-smoothness 80, spill reduction 100. Put a green screen behind you and the backdrop underneath shows
-through. Tune it in **right-click the camera → Filters → Chroma key**: similarity is the dial that
-matters, and you raise it until the green goes and stop before your hair does.
-
-Two reasons it is chroma key and not a model:
-
-- **It is OBS's own filter**, so there is nothing to install and nothing to go stale. A collection
-  that names a plugin you don't have imports with the filter silently missing, which is a confusing
-  thing to hand someone.
-- **It costs almost nothing per frame.** You are about to run eleven OpenVidu containers, an
-  encoder and a browser on the same machine; segmentation on every frame is the first thing that
-  turns into dropped frames, and dropped frames in a post about latency are a bad look.
-
-!!! tip "No green screen?"
-    Nothing breaks: with no green in the shot the filter has nothing to key on and the picture goes
-    through as it is. If you want a background without a screen, a model-based one is a plugin away
-    — [obs-backgroundremoval](https://github.com/locaal-ai/obs-backgroundremoval){:target="_blank"},
-    added to the camera by hand after installing it — and it will cost you the CPU or GPU that
-    chroma key doesn't.
+You still have to provide the Stream settings, with the WHIP token and URL provided by the app.
 
 ## Watching it
 
-The viewer is a normal WebRTC subscriber. The app mints it a token that can join and subscribe but
+LiveKit does not support WHEP (WebRTC-HTTP Egress Protocol), so the viewer must connect to the room as a normal WebRTC subscriber using the LiveKit SDK. The app provides it a token that can join and subscribe but
 **not** publish, so the page can't accidentally start sending video:
 
 ```javascript
@@ -247,7 +237,7 @@ room.on(RoomEvent.TrackSubscribed, (track) => track.attach(videoElement));
 await room.connect(livekitUrl, token);
 ```
 
-Whatever is publishing into the Room — the browser page, OBS, both at once — shows up here as a
+Whatever is publishing into the Room (the browser page, OBS, both at once) shows up here as a
 participant with tracks. From OpenVidu's point of view a WHIP ingress *is* a participant, which is
 why nothing about the viewer has to know how the media got in.
 
