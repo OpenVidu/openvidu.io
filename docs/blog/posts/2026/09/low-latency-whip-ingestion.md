@@ -87,8 +87,11 @@ how it works in real life too.
 ```bash
 git clone https://github.com/openvidu-labs/low-latency-whip-ingestion
 cd low-latency-whip-ingestion
-make setup                      # clones the OpenVidu Local Deployment, pinned to 3.8.0
-cd vendor/openvidu-local-deployment/community && docker compose up -d && cd -
+git clone -b 3.8.0 https://github.com/OpenVidu/openvidu-local-deployment vendor/openvidu-local-deployment
+cd vendor/openvidu-local-deployment/community
+./configure_lan_private_ip_linux.sh    # macOS: ./configure_lan_private_ip_macos.sh
+docker compose up -d
+cd -
 docker compose up -d --build    # the demo app, on port 3000
 ```
 
