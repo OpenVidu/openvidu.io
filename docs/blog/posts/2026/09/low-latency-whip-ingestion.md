@@ -26,7 +26,7 @@ authors:
 ![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light "WHIP ingestion into an OpenVidu Room")
 ![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark "WHIP ingestion into an OpenVidu Room")
 
-[Part 1](/blog/posts/2026/09/low-latency-live-streaming.md) of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
+<a href="/blog/2026/09/01/low-latency-live-streaming/">Part 1</a> of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
 
 <!-- more -->
 
