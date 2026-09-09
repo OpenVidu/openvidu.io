@@ -21,13 +21,6 @@ authors:
   - patxi
 ---
 
-<!-- Hola Patxi, el post está chulo. Yo lo "limpiaría" un poco para hacerlo más directo, pero es sólo mi opinión. Coge las ideas que consideres y descarta las demás:
-
-Comentarios:
-* Llamaría al proyecto low-latency-webrtc-streaming en vez de low-latency-whip-ingestion
-* Quitaría la sección: Why this path is the low-latency one. Y pondría el comentario de OBS en la sección de Optimización explicando el tradeof de enviar un key-frame cada segundo.
-*-->
-
 # Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)
 
 ![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light "WHIP ingestion into an OpenVidu Room")
