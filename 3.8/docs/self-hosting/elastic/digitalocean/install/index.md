@@ -4,7 +4,7 @@ DigitalOcean
 
 Info
 
-OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on DigitalOcean. The deployed services are identical to those in the [On Premises Elastic installation](https://openvidu.io/3.8/docs/self-hosting/elastic/on-premises/install/index.md), but are provisioned as DigitalOcean resources and can be automated using Terraform CLI.
 
@@ -57,7 +57,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
    | ----------------- | --------------------------------------------------------------------------------------------------------------- |
    | `doToken`         | DigitalOcean Personal Access Token for API authentication.                                                      |
    | `stackName`       | Stack name for OpenVidu deployment.                                                                             |
-   | `openviduLicense` | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/3.8/account/index.md) for more information. |
+   | `openviduLicense` | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account/) for more information. |
 
    ### Optional Parameters
 

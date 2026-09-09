@@ -74,4 +74,4 @@ It is possible that if the crashed Egress had **MP4** as [configured output](htt
 
 Tell us your availability requirements and we will help you choose between Elastic and High Availability.
 
-[Talk to an expert](/support/#talk-to-an-expert)
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)

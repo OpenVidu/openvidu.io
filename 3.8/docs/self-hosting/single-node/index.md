@@ -3,7 +3,7 @@
 OpenVidu Single Node is a production-ready deployment option that provides all the necessary features for running real-time applications with medium user load. It is available in two editions:
 
 - **COMMUNITY**: the open-source edition, free to use.
-- **PRO**: adds [**2x performance**](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md) and [**advanced observability**](https://openvidu.io/3.8/docs/self-hosting/production-ready/observability/index.md) on top of everything COMMUNITY offers. [Create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get a 15-day free trial license key.
+- **PRO**: adds [**2x performance**](https://openvidu.io/3.8/docs/self-hosting/production-ready/performance/index.md) and [**advanced observability**](https://openvidu.io/3.8/docs/self-hosting/production-ready/observability/index.md) on top of everything COMMUNITY offers. [Create an OpenVidu account](https://openvidu.io/account/) to get a 15-day free trial license key.
 
 Info
 
