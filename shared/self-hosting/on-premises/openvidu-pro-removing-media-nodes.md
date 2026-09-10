@@ -5,19 +5,19 @@ To stop a Media Node gracefully, you need to stop the containers `openvidu`, `in
 
 ```bash
 #!/bin/bash
-# Stop OpenVidu, Ingress, and Egress containers gracefully (1)
+# Stop OpenVidu, Ingress, Egress and Agent containers gracefully (1)
 docker container kill --signal=SIGQUIT openvidu || true
 docker container kill --signal=SIGQUIT ingress || true
 docker container kill --signal=SIGQUIT egress || true
 for agent_container in $(docker ps --filter "label=openvidu-agent=true" --format '{{.Names}}'); do
-    docker container kill --signal=SIGQUIT "$agent_container"
+    docker container kill --signal=SIGQUIT "$agent_container" || true
 done
 
 # Wait for the containers to stop (2)
-while [ $(docker ps --filter "label=openvidu-agent=true" -q | wc -l) -gt 0 ] || \
-    [ $(docker inspect -f '{{.State.Running}}' openvidu 2>/dev/null) == "true" ] || \
-    [ $(docker inspect -f '{{.State.Running}}' ingress 2>/dev/null) == "true" ] || \
-    [ $(docker inspect -f '{{.State.Running}}' egress 2>/dev/null) == "true" ]; do
+while [ "$(docker ps --filter "label=openvidu-agent=true" -q | wc -l)" -gt 0 ] || \
+    [ "$(docker inspect -f '{{.State.Running}}' openvidu 2>/dev/null)" == "true" ] || \
+    [ "$(docker inspect -f '{{.State.Running}}' ingress 2>/dev/null)" == "true" ] || \
+    [ "$(docker inspect -f '{{.State.Running}}' egress 2>/dev/null)" == "true" ]; do
     echo "Waiting for containers to stop..."
     sleep 5
 done
