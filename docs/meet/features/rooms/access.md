@@ -34,14 +34,14 @@ Users with permission to manage a room or share access links can copy and share 
 
 #### From an active meeting
 
-Participants with the `canShareAccessLinks` permission can share the room access link from the active meeting view.
+Participants with the `roomShareAccessLinks` permission can share the room access link from the active meeting view.
 
 ![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark){ .round-corners loading=lazy }
 ![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
 
-    Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `canMakeModerator` permission can promote others to `Moderator` during the meeting. See [Role Management](../meetings/role-management.md#promoting-participants-to-moderator).
+    Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `participantPromote` permission can promote others to `Moderator` during the meeting. See [Role Management](../meetings/role-management.md#promoting-participants-to-moderator).
 
 #### From the REST API
 
@@ -69,9 +69,9 @@ Every room member has a role that determines their default set of permissions. T
 
 Grants full meeting permissions by default:
 
-- **Meeting management**: end the meeting for all participants .
-- **Recording control**: start/stop, retrieve and delete recordings.
-- **Participant management**: promote other participants to moderator, share room access links, and kick participants.
+- **Meeting management**: join the meeting, read its live state and end it for all participants.
+- **Recording control**: start and stop recordings, and list, play, download and delete them.
+- **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, kick them, and share room access links.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages, change virtual background.
 
@@ -79,10 +79,11 @@ Grants full meeting permissions by default:
 
 Grants basic participation permissions by default:
 
-- **Recording access**: retrieve (list, play and download) the room's recordings — but not start, stop or delete them.
+- **Meeting access**: join the meeting and read its live state.
+- **Recording access**: list, play and download the room's recordings — but not start, stop or delete them.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages, change virtual background.
 
 !!! info
 
-    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"} schema.
+    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. Every permission is independent: none is implied by another. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"} schema.

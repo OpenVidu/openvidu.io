@@ -9,17 +9,17 @@ page_features:
 
 ## Start / Stop recording
 
-Recordings are started from the meeting view by a participant with the `canRecord` permission (see [Predefined roles](../rooms/access.md#predefined-roles)). The room must have recording [enabled in its configuration](configuration.md#enabling-recordings).
+Recordings are started from the meeting view by a participant with the `recordingControl` permission (see [Predefined roles](../rooms/access.md#predefined-roles)). The room must have recording [enabled in its configuration](configuration.md#enabling-recordings). A room can also be configured to start recording **automatically** when a participant joins: see [Recording trigger](configuration.md#recording-trigger).
 
 <a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/start-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/recordings/management/start-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/start-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
-While the recording is active, all participants in the meeting will see an indicator in the bottom left corner.
+Every participant is notified when the recording starts and when it stops, and while it is active a **REC** indicator with the elapsed time is shown in the status rail above the meeting layout. The **Activities** panel shows the state of the recording and holds its controls.
 
-![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording indicator shown to participants during the meeting](../../../assets/images/meet/recordings/management/recording-indicator-light.png#only-light){ .round-corners loading=lazy }
+![Meeting view while a recording is active, with the REC indicator, the recording notice and the recording panel](../../../assets/images/meet/recordings/management/recording-active-dark.png#only-dark){ .round-corners loading=lazy }
+![Meeting view while a recording is active, with the REC indicator, the recording notice and the recording panel](../../../assets/images/meet/recordings/management/recording-active-light.png#only-light){ .round-corners loading=lazy }
 
-To stop the recording, a participant with the `canRecord` permission must simply click the **"Stop recording"** button. The recording is then automatically saved on the OpenVidu Meet server.
+To stop the recording, a participant with the `recordingControl` permission must simply click the **"Stop recording"** button, in the toolbar or in the recording panel. The recording is then automatically saved on the OpenVidu Meet server. The button is available as soon as the recording has been requested, so a recording that is still starting can be cancelled before it captures anything.
 
 ![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ .round-corners loading=lazy }
 ![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ .round-corners loading=lazy }
@@ -80,4 +80,5 @@ All of these operations can also be performed programmatically with the [OpenVid
 | Get a recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecording){:target="_blank"} |
 | Delete a recording | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRecording){:target="_blank"} |
 | Get recording media | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingMedia){:target="_blank"} |
+| Download a recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/downloadRecording){:target="_blank"} |
 | Get recording URL | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingUrl){:target="_blank"} |

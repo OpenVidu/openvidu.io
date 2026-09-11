@@ -20,6 +20,8 @@ nav:
           - Meetings:
               - Overview: meet/features/meetings/overview.md
               - Meeting lifecycle: meet/features/meetings/lifecycle.md
+              - Meeting configuration: meet/features/meetings/configuration.md
+              - Meeting Moderation: meet/features/meetings/moderation.md
               - Live Captions: meet/features/meetings/live-captions.md
               - Smart Layout: meet/features/meetings/smart-layout.md
               - Role Management: meet/features/meetings/role-management.md

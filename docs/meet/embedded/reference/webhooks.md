@@ -5,28 +5,51 @@ description: "Receive meeting and recording events from OpenVidu Meet in your ba
 
 # Webhooks
 
-OpenVidu Meet sends webhooks to inform about important events happening in a room. You can receive them in your application's backend and react accordingly with your own business logic.
+A **webhook** is an endpoint URL registered in OpenVidu Meet. You can register several, and each one has its own:
+
+- **Events filter**: every event, or only the selected event types.
+- **Room scope**: events of every room, or only of one room.
+- **Status**: active, or paused (the endpoint is kept but receives nothing).
+
+Every active webhook whose filters match an event receives it independently, with the same signature and retry policy.
+
 
 ## Reference
 
-Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){:target="_blank"} reference documentation for a complete list of all available webhook events. They include:
+Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/meetingStartedWebhook){:target="_blank"} reference documentation for a complete list of all available webhook events. They include:
 
 - [`meetingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/meetingStartedWebhook){:target="_blank"}
 - [`meetingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/meetingEndedWebhook){:target="_blank"}
+- [`participantJoined` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantJoinedWebhook){:target="_blank"}
+- [`participantLeft` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantLeftWebhook){:target="_blank"}
 - [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){:target="_blank"}
 - [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingUpdatedWebhook){:target="_blank"}
 - [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingEndedWebhook){:target="_blank"}
 
 ## Configuration
 
-You can configure webhooks in OpenVidu Meet in the **"Embedded"** page. There you can:
 
-- Enable/Disable sending webhooks
-- Set up your webhook endpoint URL
-- Test the current webhook configuration with a fake event
 
-![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .round-corners loading=lazy }
-![Webhook configuration form in the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-light.png#only-light){ .round-corners loading=lazy }
+Webhooks are managed from the **"Embedded"** page of the OpenVidu Meet app, where **admin** users can add, edit, pause, test and delete them. Testing sends a fake `testEvent` to the endpoint and reports whether it answered successfully.
+
+![Webhook list in the Embedded page of the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .round-corners loading=lazy }
+![Webhook list in the Embedded page of the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-light.png#only-light){ .round-corners loading=lazy }
+
+!!! info
+    Webhook events are signed with the [API key](rest-api.md#generate-an-api-key), so deliveries fail until an API key has been generated.
+
+### REST API reference { #rest-api-reference }
+
+Webhooks can also be managed programmatically through the [REST API](rest-api.md), authenticating with the API key or as an admin user. See the [REST API specification :fontawesome-solid-external-link:{.external-link-icon}](api.html){:target="_blank"} for the request bodies and response schemas.
+
+| Operation         | HTTP Method | Reference                                                                                                                       |
+| ----------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Create a webhook  | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](api.html#/operations/webhookCreate){:target="_blank"}      |
+| List webhooks     | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](api.html#/operations/webhookList){:target="_blank"}        |
+| Get a webhook     | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](api.html#/operations/webhookGet){:target="_blank"}         |
+| Update a webhook  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](api.html#/operations/webhookUpdate){:target="_blank"}      |
+| Delete a webhook  | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](api.html#/operations/webhookDelete){:target="_blank"}      |
+| Test a webhook    | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](api.html#/operations/webhookTest){:target="_blank"}        |
 
 ## Validate events
 

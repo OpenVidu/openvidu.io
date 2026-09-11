@@ -25,6 +25,10 @@ This view allows members to tune their microphone and camera before joining the 
 
 The Meeting View is the central interface where all participants can see, hear, and interact with each other in real time. It features a [smart, dynamic layout](smart-layout.md) that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.
 
+A **status rail** above the layout keeps the meeting-wide state in sight: a **REC** indicator with the elapsed time while the meeting is being [recorded](../recordings/management.md), the time remaining when the meeting is about to reach its [duration limit](configuration.md#duration-limit), an **encrypted** badge in [end-to-end encrypted](e2e-encryption.md) rooms, and the number of participants the [layout](smart-layout.md) is not currently showing.
+
+Participants are also told about what they may not notice by themselves: when a recording starts or stops, when they speak while their microphone is off, and when their microphone has been muted by the operating system rather than by OpenVidu Meet.
+
 ![Meeting view with participant videos and the toolbar](../../../assets/images/meet/meetings/lifecycle/meeting-view-dark.png#only-dark){ .round-corners loading=lazy }
 ![Meeting view with participant videos and the toolbar](../../../assets/images/meet/meetings/lifecycle/meeting-view-light.png#only-light){ .round-corners loading=lazy }
 
@@ -41,7 +45,7 @@ This view allows to manage all recordings of the room (from the current or past 
 
 ## End view
 
-This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (a moderator ended it, the participant was kicked from the meeting, etc.).
+This view is shown to a participant when the meeting ends, at least for that participant. It informs about the specific reason why the meeting ended (a moderator ended it, the participant was kicked from the meeting, the meeting reached its [duration limit](configuration.md#duration-limit), etc.).
 
 ![End view shown when the meeting ends for a participant](../../../assets/images/meet/meetings/lifecycle/end-view-dark.png#only-dark){ .round-corners loading=lazy }
 ![End view shown when the meeting ends for a participant](../../../assets/images/meet/meetings/lifecycle/end-view-light.png#only-light){ .round-corners loading=lazy }

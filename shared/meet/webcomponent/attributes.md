@@ -6,6 +6,10 @@
 | `room-url` | The OpenVidu Meet room URL to access to. | Yes (This attribute is required unless `recording-url` is provided.) |
 | `recording-url` | The URL of a recording to view. | Yes (This attribute is required unless `room-url` is provided.) |
 | `participant-name` | Display name for the local participant. | No |
+| `participant-external-id` | Application-defined identifier for the local participant, so the embedding application can correlate the participant with one of its own users. Up to 64 characters (letters, digits, `_` and `-`). Never interpreted by OpenVidu Meet. | No |
+| `participant-metadata` | Opaque application-defined payload attached to the local participant (JSON is recommended). Up to 2048 bytes (UTF-8). Never interpreted by OpenVidu Meet. | No |
+| `initial-audio-active` | Join the meeting with the microphone active. This is the participant's initial state only: they may mute afterwards. Setting it — to either value — **takes precedence over the room's own `config.initialAudioActive`**; leaving it out means "no opinion", so the room's value applies (and `true` when the room has none either). The `mediaPublishAudio` permission is not part of that chain: it is a capability, and a denial always wins. | No |
+| `initial-video-active` | Join the meeting with the camera active. This is the participant's initial state only: they may deactivate it afterwards. Setting it — to either value — **takes precedence over the room's own `config.initialVideoActive`**; leaving it out means "no opinion", so the room's value applies (and `true` when the room has none either). The `mediaPublishVideo` permission is not part of that chain: it is a capability, and a denial always wins. | No |
 | `e2ee-key` | Secret key for end-to-end encryption (E2EE). If provided, the participant will join the meeting using E2EE key. | No |
 | `leave-redirect-url` | URL to redirect to when leaving OpenVidu Meet. Redirection occurs after the **`CLOSED` event** fires. | No |
 | `show-only-recordings` | Whether to show only recordings instead of live meetings. | No |

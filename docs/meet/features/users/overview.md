@@ -15,7 +15,7 @@ Every user has one of the following roles:
 
 | Role | Description | Permissions |
 | --- | --- | --- |
-| **admin** | Administrator | Full control over OpenVidu Meet: create and manage **all** [users](management.md), [rooms](../rooms/overview.md), [room members](../room-members/overview.md) and [recordings](../recordings/overview.md). Can also change the system configuration — [room appearance](../rooms/management.md#room-appearance), [webhook configuration](../../embedded/reference/webhooks.md) and [API key](../../embedded/reference/rest-api.md#generate-an-api-key). |
+| **admin** | Administrator | Full control over OpenVidu Meet: create and manage **all** [users](management.md), [rooms](../rooms/overview.md), [room members](../room-members/overview.md) and [recordings](../recordings/overview.md). Can also change the system configuration — [room appearance](../rooms/management.md#room-appearance), [webhooks](../../embedded/reference/webhooks.md) and [API key](../../embedded/reference/rest-api.md#generate-an-api-key). |
 | **room_manager** | Room manager | Can create and manage **their own** rooms, including their configuration, members and recordings. Can also access rooms — and their recordings, depending on their [member permissions](../room-members/overview.md#permissions) — where they are a member, or that are [open to all users](../rooms/access.md#member-access-links). |
 | **room_member** | Room member | Can only access rooms — and their recordings, depending on their [member permissions](../room-members/overview.md#permissions) — where they are a member, or that are open to all users. Cannot create or manage rooms. |
 

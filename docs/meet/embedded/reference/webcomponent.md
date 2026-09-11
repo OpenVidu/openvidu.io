@@ -48,9 +48,14 @@ Example:
 <openvidu-meet
 	room-url="{{ my-room-url }}"
 	participant-name="John Doe"
+	participant-external-id="user-42"
+	initial-video-active="false"
 	leave-redirect-url="https://meeting.end.url/"
 ></openvidu-meet>
 ```
+
+!!! info "Identify your own users"
+	`participant-external-id` and `participant-metadata` are never interpreted by OpenVidu Meet: they travel untouched as the `externalId` and `metadata` properties of every participant payload, in the `participantJoined` / `participantLeft` events and webhooks and in the [Meetings REST API](rest-api.md), so your backend can correlate a participant with one of its own users.
 
 
 
@@ -68,7 +73,14 @@ Invoke commands using JavaScript:
 
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
-openviduMeet.leaveRoom();
+openviduMeet.meetingLeave();
+```
+
+Commands that take parameters receive them as arguments, in the order listed in the table:
+
+```javascript
+openviduMeet.participantMute('participant-identity', { audioActive: false });
+openviduMeet.mediaToggleVideo(false);
 ```
 
 
@@ -89,7 +101,7 @@ Listen to events using JavaScript event listeners:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.addEventListener('joined', (event) => {
+openviduMeet.addEventListener('meetingJoined', (event) => {
 	console.log('The local participant has joined the meeting', event.detail);
 });
 ```
@@ -99,12 +111,16 @@ You can also use the API `on` | `once` | `off`:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.on('joined', (event) => {
+openviduMeet.on('meetingJoined', (event) => {
 	console.log('The local participant has joined the meeting', event);
 });
 
-openviduMeet.once('left', (event) => {
-	console.log('The local participant has left the meeting', event);
+openviduMeet.on('participantJoined', (event) => {
+	console.log(`${event.participant.participantName} has joined the meeting`, event);
+});
+
+openviduMeet.once('meetingLeft', (event) => {
+	console.log('The local participant has left the meeting', event.reason);
 });
 ```
 

@@ -13,7 +13,7 @@ Recordings are always associated with the [room](../rooms/overview.md) where the
 
 ### Key principles
 
-- Recordings are started during an **active meeting** by a participant with the `canRecord` permission — from the app or the [REST API](management.md#start-stop-recording).
+- Recordings are started during an **active meeting** by a participant with the `recordingControl` permissionfrom the app or the [REST API](management.md#start-stop-recording) or automatically, when the room's [recording trigger](configuration.md#recording-trigger) fires.
 - A room must have recording enabled in its [configuration](configuration.md#enabling-recordings) to allow starting recordings.
 - Recordings persist even after the meeting ends and can be managed independently.
 - Access to a recording (retrieve and delete) is governed by room member permissions.
@@ -22,15 +22,17 @@ Recordings are always associated with the [room](../rooms/overview.md) where the
 
 Who can retrieve and delete a room's recordings is governed by **[room member permissions](../room-members/overview.md#permissions)**, not by a room-wide setting:
 
-- **`canRetrieveRecordings`** — list, play and download the room's recordings.
-- **`canDeleteRecordings`** — delete the room's recordings.
+- **`recordingList`** — list the room's recordings.
+- **`recordingPlay`** — play the room's recordings.
+- **`recordingDownload`** — download the room's recordings, individually or as a ZIP.
+- **`recordingDelete`** — delete the room's recordings.
 
 By default, these permissions are assigned per role as follows:
 
-| Role | Retrieve recordings | Delete recordings |
-|------|:---:|:---:|
-| **Moderator** | ✔ | ✔ |
-| **Speaker** | ✔ | ✘ |
+| Role | List | Play | Download | Delete |
+|------|:---:|:---:|:---:|:---:|
+| **Moderator** | ✔ | ✔ | ✔ | ✔ |
+| **Speaker** | ✔ | ✔ | ✔ | ✘ |
 
 You can change these defaults per room (when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) it) or per member (with [custom permissions](../room-members/management.md#add-a-member)). In addition, **admins** can retrieve and delete the recordings of **any** room, and a **room owner** always has full access to the recordings of their own created rooms.
 

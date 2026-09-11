@@ -7,14 +7,16 @@ page_features:
 
 ## Overview
 
-OpenVidu Meet provides a REST API for managing **rooms**, **room members**, **recordings** and **users** programmatically from your application's backend. As a general rule, any action that is available in the OpenVidu Meet UI for these resources can also be performed using the REST API.
+OpenVidu Meet provides a REST API for managing **rooms**, **room members**, **meetings**, **recordings**, **users** and **webhooks** programmatically from your application's backend. As a general rule, any action that is available in the OpenVidu Meet UI for these resources can also be performed using the REST API.
 
 The available endpoints are:
 
 - `/api/v1/rooms`: manage [rooms](../../features/rooms/overview.md).
 - `/api/v1/rooms/{roomId}/members`: manage [room members](../../features/room-members/overview.md) (users and identified guests of a room).
+- `/api/v1/meetings`: read and moderate the live [meeting](../../features/meetings/overview.md) of a room and its participants.
 - `/api/v1/recordings`: manage [recordings](../../features/recordings/overview.md).
 - `/api/v1/users`: manage [users](../../features/users/overview.md).
+- `/api/v1/webhooks`: manage the [webhooks](webhooks.md) that receive event notifications.
 
 ## Authentication
 
@@ -23,6 +25,11 @@ Any request to the OpenVidu Meet REST API must include a valid API key in the `X
 ```
 X-API-KEY: your-api-key
 ```
+
+A request authenticated with the API key is not subject to any room member permission: it can do anything on any room. Some endpoints also accept the token of a logged-in user or of a room member (see the security schemes of each operation in the [REST API reference :fontawesome-solid-external-link:{.external-link-icon}](api.html){:target="_blank"}); such a request is then limited to what that user or member is allowed to do.
+
+!!! info "Permission names"
+    Every operation on a live meeting and on its recordings is gated by one [room member permission](../../features/room-members/overview.md#permissions), named in the operation's description and listed in the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](api.html#/schemas/MeetPermissions){:target="_blank"} schema.
 
 ### Generate an API key
 

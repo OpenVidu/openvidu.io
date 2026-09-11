@@ -8,6 +8,7 @@ description: "Configure recording per OpenVidu Meet room: enable it, pick the la
 Recording behaviour is configured **per room**, when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) it. The following aspects can be configured:
 
 - [Enabling recordings](#enabling-recordings) in the room.
+- The [recording trigger](#recording-trigger): manual, or automatic when a participant joins.
 - The [recording layout](#recording-layouts).
 - The [recording encoding](#recording-encoding) — only available through the REST API.
 - [Anonymous recording sharing](#anonymous-recording-sharing).
@@ -21,6 +22,24 @@ Recording must be enabled in the room before any meeting in it can be recorded. 
 
 !!! info
     Recording and [end-to-end encryption](../meetings/e2e-encryption.md) are mutually exclusive: a room cannot have both enabled at the same time.
+
+## Recording trigger { #recording-trigger }
+
+By default recordings are started **manually**, by a participant with the `recordingControl` permission or through the REST API. A room can instead start recording **automatically**, choosing when:
+
+- **First participant joins** (`when_first_participant_joins`): the recording starts as soon as the meeting begins.
+- **Second participant joins** (`when_second_participant_joins`): the recording waits until somebody else joins.
+- **A moderator joins** (`when_moderator_joins`): the recording starts as soon as a participant with the moderator role is in the meeting, whether they joined as moderator or were [promoted](../meetings/role-management.md) during the meeting.
+
+An automatically started recording is a regular recording: it can be stopped, and started again, by any participant with the `recordingControl` permission.
+
+The trigger is chosen in the **Recording Trigger** step of the room wizard, or with the `config.recording.autoStart` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference) (`null` for manual recording).
+
+![Recording Trigger step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-trigger-dark.png#only-dark){ .round-corners loading=lazy }
+![Recording Trigger step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-trigger-light.png#only-light){ .round-corners loading=lazy }
+
+!!! info
+    A trigger that waits for a second participant is unreachable in a room whose [participant limit](../meetings/configuration.md#participant-limit) is `1`, so that combination is rejected.
 
 ## Recording layouts { #recording-layouts }
 

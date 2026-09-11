@@ -78,6 +78,10 @@
   background-color: #9c27b0;
 }
 
+.openvidu-deprecated-tag {
+  background-color: #e65100;
+}
+
 .openvidu-tag-nav {
   pointer-events: none;
   display: inline-block;

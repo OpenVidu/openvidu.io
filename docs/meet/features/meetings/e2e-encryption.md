@@ -8,7 +8,7 @@ keywords: end-to-end encryption, E2EE, encrypted video meetings, secure video co
 
 OpenVidu Meet supports **end-to-end encryption (E2EE)**: audio, video, chat messages and participant names are encrypted on each device and can only be decrypted by the other participants. The server only relays encrypted data; it never has access to the meeting content.
 
-E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), from the **Room Features** step of the configuration wizard.
+E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), from the **Meeting Features** step of the configuration wizard. The same step also sets the room's [participant and duration limits](configuration.md), and toggles Live Captions, Chat and [Virtual Background](virtual-background.md).
 
 ![Room creation wizard with the end-to-end encryption option enabled](../../../assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-dark.webp#only-dark){ .round-corners loading=lazy }
 ![Room creation wizard with the end-to-end encryption option enabled](../../../assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-light.webp#only-light){ .round-corners loading=lazy }

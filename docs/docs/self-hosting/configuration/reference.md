@@ -11,7 +11,7 @@ This file defines global configuration parameters used by other services, such a
 
 <div class="nowrap-first-column" markdown>
 
-| <div style="width: 17em;">Parameter</div> | Description |
+| Parameter | Description |
 | --------- | ----------- |
 | **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access OpenVidu APIs and services. |
 | **`LIVEKIT_API_KEY`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
@@ -63,8 +63,9 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_ROOM_MEMBER_TOKEN_EXPIRATION`** | Expiration time for room member tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_PASSWORD_CHANGE_TOKEN_EXPIRATION`** | Expiration time for password change tokens issued by OpenVidu Meet. Default is `15m`. |
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
-| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API. Only used the first time OpenVidu Meet runs. |
+| **`MEET_MODE`** | Which permission names the OpenVidu Meet REST API accepts and serves: `compatibility` (default) accepts both the names introduced in 3.9.0 and the previous `can*` names, and serves both; `3.9.0` accepts and serves only the new names. See the [REST API reference](../../../meet/embedded/reference/api.html). |
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
@@ -97,7 +98,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 ## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
-    
+
     OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -167,7 +168,7 @@ openvidu:
 
 
 !!! info
-    
+
     Before deploying OpenVidu PRO, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 

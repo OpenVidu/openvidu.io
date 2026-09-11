@@ -21,7 +21,7 @@ OpenVidu Meet is organized around a few core concepts. Understanding how they re
 
     ***
 
-    A **Meeting** is the live session that takes place inside a room. It exists only while participants are connected, with features like recording, chat, captions and roles.
+    A **Meeting** is the live session that takes place inside a room. It exists only while participants are connected, with features like recording, chat, captions, roles and moderation.
 
     [:octicons-arrow-right-24: Meetings](meetings/overview.md)
 

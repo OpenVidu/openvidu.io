@@ -28,6 +28,8 @@ The access link for an [identified guest](../room-members/overview.md) is unique
 ## In this section
 
 - [Meeting lifecycle](lifecycle.md) — the series of views a room member moves through, from opening a room access link until the meeting ends: Lobby, Device, Meeting, Recordings and End.
+- [Meeting configuration](configuration.md) — the participant and duration limits of the meetings held in a room, and whether participants join with the microphone and camera on.
+- [Meeting Moderation](moderation.md) — mute a participant's microphone, camera or screen share, or everyone's at once, and remove participants from the meeting.
 - [Live Captions](live-captions.md) — real-time speech-to-text transcription powered by the OpenVidu Speech Processing Agent.
 - [Smart Layout](smart-layout.md) — dynamic layout that adapts automatically to the number of active participants.
 - [Role Management](role-management.md) — promote participants to moderator during a meeting to give them special permissions, or demote them back to their original permissions.

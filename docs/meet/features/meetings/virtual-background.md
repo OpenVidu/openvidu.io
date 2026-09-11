@@ -13,7 +13,7 @@ With a single click, individuals can replace distracting surroundings with a **b
 
 This feature works both before joining a meeting and while already inside one, giving participants full flexibility at any moment.
 
-Virtual backgrounds can be enabled or disabled per room when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing room managers to decide when and where the feature is available.
+Virtual backgrounds can be enabled or disabled per room from the **Meeting Features** step of the room configuration wizard, when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), allowing room managers to decide when and where the feature is available. The same step also sets the room's [participant and duration limits](configuration.md), and toggles [End-to-End Encryption](e2e-encryption.md), Live Captions and Chat.
 
 ![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
 ![Room wizard step enabling virtual backgrounds for the room](../../../assets/images/meet/meetings/virtual-background/room-wizard-virtual-bg-light.webp#only-light){ .control-height .round-corners loading=lazy }

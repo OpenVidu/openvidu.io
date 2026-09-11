@@ -65,7 +65,16 @@ Control the meeting programmatically by sending commands via `postMessage` to th
 ```javascript
 const iframe = document.querySelector('iframe');
 const targetOrigin = '*'; // Replace with your actual OpenVidu deployment domain
-iframe.contentWindow.postMessage({ command: 'leaveRoom' }, targetOrigin);
+iframe.contentWindow.postMessage({ command: 'meetingLeave' }, targetOrigin);
+```
+
+A command that takes parameters carries them in a `payload` object:
+
+```javascript
+iframe.contentWindow.postMessage(
+	{ command: 'participantMute', payload: { participantIdentity: 'participant-identity', media: { audioActive: false } } },
+	targetOrigin
+);
 ```
 
 
@@ -90,5 +99,9 @@ window.addEventListener('message', (event) => {
 	}
 
 	console.log('Received event from iframe:', message.event, message.payload);
+
+	if (message.event === 'meetingJoined') {
+		console.log('The local participant has joined the meeting', message.payload);
+	}
 });
 ```
