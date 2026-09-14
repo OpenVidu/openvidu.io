@@ -47,9 +47,9 @@ Here is the overview before we get into the details. Each level gives you more s
 
 None of this changes what you pay. Both products work in OpenVidu COMMUNITY and OpenVidu PRO, and the [pricing](/pricing.md) depends on the deployment, not on how you integrate.
 
-## Before the code: one deployment, one example app
+## Before the code: one deployment, three example apps
 
-Every snippet below is trimmed to the lines that carry the idea. The complete, runnable version lives in [**openvidu-integration-levels** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}, where each level is an **independent application** with its own backend, frontend and README. Clone it, pick a folder, run two commands. Each section below links to the code it comes from.
+Every snippet below is trimmed to the lines that carry the idea. The complete, runnable version lives in [**openvidu-integration-levels** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}, where each level is an **independent application** with its own backend, frontend and README. Clone it, pick a folder, and run two commands. Each section below links to the code it comes from.
 
 The scenario is the same throughout: a **support desk** where an agent starts a call and a customer joins.
 
@@ -93,36 +93,49 @@ Load the Web Component from your deployment, then use the tag with the link you 
 <openvidu-meet room-url="http://localhost:9080/meet/room/ticket_4821-xyz?secret=abc"></openvidu-meet>
 ```
 
-Inside a framework you build the same element in code, which is what the example does. Note that it sets the attributes *before* putting the element on the page: the Web Component reads `room-url` the moment it enters the DOM, earlier than an Angular template binding would be applied.
+Inside a framework it is the same tag with bindings. In Angular, the room your backend created goes into a signal, and the template renders the element once it is there:
 
-```typescript title="app.ts"
-protected async startCall() {
-  const response = await fetch(`${BACKEND_URL}/meetings`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ roomName: 'Ticket #4821' }),
-  });
-  const meeting = await response.json();
-
-  const meet = document.createElement('openvidu-meet');
-  meet.setAttribute('room-url', meeting.moderatorUrl);
-  meet.setAttribute('participant-name', 'Support agent');
-
-  meet.addEventListener('joined', (event) => console.log(event.detail));
-  meet.addEventListener('closed', () => this.reset());
-
-  this.container().nativeElement.replaceChildren(meet);
-  this.meet = meet;
+```html title="app.html"
+@if (room(); as current) {
+  <openvidu-meet
+    #meet
+    [attr.room-url]="current.moderatorUrl"
+    participant-name="Support agent"
+    (joined)="onJoined($event)"
+    (closed)="onClosed()"
+  ></openvidu-meet>
 }
 ```
 
-From there the element talks to your app in both directions: it emits [events](/meet/embedded/reference/webcomponent.md#events) when participants come and go, and accepts [commands](/meet/embedded/reference/webcomponent.md#commands) so your own buttons can drive the meeting, ending it for everyone or removing a participant.
+From there the element talks to your app in both directions, and you use it like any other element in your template. It emits [events](/meet/embedded/reference/webcomponent.md#events) when participants come and go, which you bind with the usual `(event)` syntax, and it accepts [commands](/meet/embedded/reference/webcomponent.md#commands) so your own buttons can drive the meeting, which you call through a `viewChild` reference:
+
+```typescript title="app.ts"
+export class App {
+  protected readonly room = signal<MeetRoom | null>(null);
+  private readonly meet = viewChild<ElementRef<MeetElement>>('meet');
+
+  protected async createRoom() {
+    const response = await fetch(`${BACKEND_URL}/rooms`, { method: 'POST', /* ... */ });
+    this.room.set(await response.json());
+  }
+
+  protected onJoined(event: Event) {
+    console.log((event as CustomEvent).detail.participantIdentity, 'joined the meeting');
+  }
+
+  protected endMeeting() {
+    this.meet()?.nativeElement.endMeeting();
+  }
+}
+```
+
+The one thing to remember is `schemas: [CUSTOM_ELEMENTS_SCHEMA]` on the component, so that Angular accepts a tag it does not know.
 
 If you cannot use a Web Component, the iframe accepts the same attributes and supports the same commands and events through `postMessage`. And if you do not need the meeting inside your page at all, the direct link opens the full OpenVidu Meet UI in its own tab, with `leave-redirect-url` to bring the user back.
 
 !!! example "See it running"
 
-    [**`1-meet-embedded/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/1-meet-embedded){:target="_blank"} is this level as a standalone app: [`server.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/backend/server.js){:target="_blank"} creates the room, [`app.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/frontend/src/app/app.ts){:target="_blank"} embeds it. Run it, hit **Start call**, and open the customer link in a second tab to see both sides of the meeting.
+    [**`1-meet-embedded/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/1-meet-embedded){:target="_blank"} is this level as a standalone app: [`server.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/backend/server.js){:target="_blank"} creates the room, [`app.html` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/frontend/src/app/app.html){:target="_blank"} and [`app.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/frontend/src/app/app.ts){:target="_blank"} embed it. Run it, hit **Start call**, and open the customer link in a second tab to see both sides of the meeting.
 
 ### What you can customize
 
