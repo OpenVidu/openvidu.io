@@ -49,7 +49,7 @@ None of this changes what you pay. Both products work in OpenVidu COMMUNITY and 
 
 ## Before the code: one deployment, one example app
 
-Every snippet below is trimmed to the lines that carry the idea. The complete, runnable version of all three levels lives in one repository, [**openvidu-integration-levels** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}: one Angular app and one Node.js backend, with a page per level. Each section below links to the file that implements it.
+Every snippet below is trimmed to the lines that carry the idea. The complete, runnable version lives in [**openvidu-integration-levels** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}, where each level is an **independent application** with its own backend, frontend and README. Clone it, pick a folder, run two commands. Each section below links to the code it comes from.
 
 The scenario is the same throughout: a **support desk** where an agent starts a call and a customer joins.
 
@@ -85,7 +85,7 @@ What comes back includes the room's **access links**, and the link you give to e
 
 ### Put the meeting on the page
 
-Load the Web Component from your deployment, then use the tag with the link you just got. That is the whole client-side integration:
+Load the Web Component from your deployment, then use the tag with the link you just got. In plain HTML, that is the whole client-side integration:
 
 ```html
 <script src="http://localhost:9080/meet/v1/openvidu-meet.js"></script>
@@ -93,22 +93,36 @@ Load the Web Component from your deployment, then use the tag with the link you 
 <openvidu-meet room-url="http://localhost:9080/meet/room/ticket_4821-xyz?secret=abc"></openvidu-meet>
 ```
 
-From there the element talks to your app. It emits `joined`, `left` and `closed` events, and takes `endMeeting()`, `leaveRoom()` and `kickParticipant()` as commands:
+Inside a framework you build the same element in code, which is what the example does. Note that it sets the attributes *before* putting the element on the page: the Web Component reads `room-url` the moment it enters the DOM, earlier than an Angular template binding would be applied.
 
-```javascript
-const meet = document.querySelector("openvidu-meet");
+```typescript title="app.ts"
+protected async startCall() {
+  const response = await fetch(`${BACKEND_URL}/meetings`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ roomName: 'Ticket #4821' }),
+  });
+  const meeting = await response.json();
 
-meet.on("joined", ({ participantIdentity }) => console.log(`${participantIdentity} is in`));
-meet.endMeeting();
+  const meet = document.createElement('openvidu-meet');
+  meet.setAttribute('room-url', meeting.moderatorUrl);
+  meet.setAttribute('participant-name', 'Support agent');
+
+  meet.addEventListener('joined', (event) => console.log(event.detail));
+  meet.addEventListener('closed', () => this.reset());
+
+  this.container().nativeElement.replaceChildren(meet);
+  this.meet = meet;
+}
 ```
+
+From there the element talks to your app in both directions: it emits [events](/meet/embedded/reference/webcomponent.md#events) when participants come and go, and accepts [commands](/meet/embedded/reference/webcomponent.md#commands) so your own buttons can drive the meeting, ending it for everyone or removing a participant.
 
 If you cannot use a Web Component, the iframe accepts the same attributes and supports the same commands and events through `postMessage`. And if you do not need the meeting inside your page at all, the direct link opens the full OpenVidu Meet UI in its own tab, with `leave-redirect-url` to bring the user back.
 
 !!! example "See it running"
 
-    [`level-1-meet-embedded.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/level-1-meet-embedded.ts){:target="_blank"} is the complete page, and [`server.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/backend/server.js){:target="_blank"} the endpoint that creates the room. Start the app, hit **Start call**, and open the customer link in a second tab to see both sides of the meeting.
-
-    One detail worth copying if you use Angular: that page creates the element in TypeScript instead of writing the tag in the template, because the Web Component reads `room-url` the moment it enters the DOM, before a template binding would be applied.
+    [**`1-meet-embedded/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/1-meet-embedded){:target="_blank"} is this level as a standalone app: [`server.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/backend/server.js){:target="_blank"} creates the room, [`app.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/1-meet-embedded/frontend/src/app/app.ts){:target="_blank"} embeds it. Run it, hit **Start call**, and open the customer link in a second tab to see both sides of the meeting.
 
 ### What you can customize
 
@@ -120,7 +134,7 @@ The meeting UI belongs to OpenVidu Meet, but it is not a black box. Today you ca
 - **Per-participant attributes.** The display name, an E2EE key, a redirect URL on leave, and a recordings-only view.
 - **Language.** The interface is translated into ten languages and follows the user's browser.
 
-What you cannot do yet is reshape the meeting UI itself: replace the toolbar, restyle one room differently from another, or place your own components inside the meeting view. More branding and customization options are on the [roadmap](/meet/releases.md#future-roadmap-of-openvidu-meet), together with mobile embedding, and it is an area we are actively working on. If you need that level of control today, keep reading: it is exactly what the next level gives you.
+What you cannot do yet is reshape the meeting UI itself: replace the toolbar, restyle one room differently from another, or place your own components inside the meeting view. More branding and customization options are on the roadmap, and it is an area we are actively working on. If you need that level of control today, keep reading: it is exactly what the next level gives you.
 
 !!! tip "Pick this level when"
 
@@ -147,12 +161,32 @@ res.json({ token: await at.toJwt() });
 
 The component asks your app for a token when the participant is ready to join, and takes it from there:
 
-```html
+```html title="app.html"
 <ov-videoconference
   [token]="token()"
   [livekitUrl]="OPENVIDU_URL"
   (onTokenRequested)="onTokenRequested($event)"
 ></ov-videoconference>
+```
+
+The component side of it is just as short. `onTokenRequested` fires with the name the participant typed in the prejoin screen, you ask your backend for a token, and setting it connects the room:
+
+```typescript title="app.ts"
+export class App {
+  protected readonly OPENVIDU_URL = 'ws://localhost:7880';
+  protected readonly token = signal('');
+
+  protected async onTokenRequested(participantName: string) {
+    const response = await fetch(`${BACKEND_URL}/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ roomName: 'support-desk', participantName }),
+    });
+    const { token } = await response.json();
+
+    this.token.set(token);
+  }
+}
 ```
 
 With that one element you have a prejoin page, a toolbar, a responsive layout, chat, participants and activities panels, screen sharing and the recording controls. Only recording needs some backend work: the component emits `onRecordingStartRequested` and `onRecordingStopRequested`, and your server starts and stops the Egress, as the [recording tutorial](/docs/tutorials/advanced-features/recording-basic-s3.md) shows.
@@ -167,7 +201,7 @@ There are three ways to customize it, and you can combine them:
 
 That last one is where your product shows up inside the call. Our support desk wants a button that resolves the ticket without leaving the meeting:
 
-```html
+```html title="app.html"
 <ov-videoconference [token]="token()" [livekitUrl]="OPENVIDU_URL" (onTokenRequested)="onTokenRequested($event)">
   <div *ovToolbarAdditionalButtons>
     <button (click)="resolveTicket()">Resolve ticket</button>
@@ -177,9 +211,11 @@ That last one is where your product shows up inside the call. Our support desk w
 
 `*ovToolbarAdditionalButtons` adds to the default toolbar. Its siblings replace pieces outright: `*ovToolbar` swaps the whole toolbar, `*ovLayout` the video grid, `*ovStream` each tile, `*ovChatPanel` and `*ovParticipantsPanel` the side panels. Everything you do not replace keeps working and keeps receiving improvements with each OpenVidu release.
 
+The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference](/docs/ui-components/angular-components.md) lists every component, directive and CSS variable you can reach.
+
 !!! example "See it running"
 
-    [`level-2-angular-components.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/level-2-angular-components.ts){:target="_blank"} is the page above, in full: the token request, the component and the custom button. The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) then walk through each directive one at a time.
+    [**`2-angular-components/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/2-angular-components){:target="_blank"} is this level as a standalone app, token server included. It stays on Angular 20, the newest version `openvidu-components-angular` 3.8.0 supports.
 
 !!! tip "Pick this level when"
 
@@ -189,17 +225,38 @@ That last one is where your product shows up inside the call. Our support desk w
 
 At the bottom of the stack there is no UI at all, just a `Room` and its tracks. OpenVidu is a fork of LiveKit that keeps 100% API compatibility, so any [LiveKit client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"} works unchanged against your deployment. In the browser, that SDK is `livekit-client`, and the token server from Level 2 is all the backend you need:
 
-```javascript
-const room = new Room();
-const videos = document.getElementById("videos");
+```typescript title="app.ts"
+protected async join() {
+  const room = new Room();
 
-room.on(RoomEvent.TrackSubscribed, (track) => videos.appendChild(track.attach()));
+  // One event per track any other participant publishes.
+  room.on(RoomEvent.TrackSubscribed, (track) => {
+    this.remoteTracks.update((tracks) => [...tracks, track]);
+  });
+  room.on(RoomEvent.TrackUnsubscribed, (track) => {
+    this.remoteTracks.update((tracks) => tracks.filter((t) => t.sid !== track.sid));
+  });
 
-await room.connect(OPENVIDU_URL, token);
-await room.localParticipant.enableCameraAndMicrophone();
+  const token = await this.getToken('support-desk', participantName);
+
+  await room.connect(OPENVIDU_URL, token);
+  await room.localParticipant.enableCameraAndMicrophone();
+}
 ```
 
-That is a working video call: connect with a token, publish your camera and microphone, and attach every track you receive to the page. `TrackSubscribed` fires once per remote track, which is how other participants appear.
+That is a working video call: connect with a token, publish your camera and microphone, and collect every track you receive. `TrackSubscribed` fires once per remote track, which is how other participants appear.
+
+Rendering them is the other half, and it is entirely yours. A track is not a DOM element: you attach it to a `<video>` or an `<audio>` element and detach it when that element goes away.
+
+```typescript title="track-view.ts"
+ngAfterViewInit() {
+  this.track().attach(this.media().nativeElement);
+}
+
+ngOnDestroy() {
+  this.track().detach();
+}
+```
 
 Notice what is *not* there: no prejoin page, no toolbar, no layout, no chat. You decide whether a participant publishes or only subscribes, which tracks to render and where, what a "mute" button does. Every client performs the same four operations: connect with a token, publish tracks, subscribe to tracks and mute them. They work the same way in every SDK, and the [client SDK reference](/docs/reference/client-sdk.md) documents the model they all share.
 
@@ -207,7 +264,7 @@ This level unlocks two things the other two do not. First, **platforms**: the sa
 
 !!! example "See it running"
 
-    [`level-3-low-level-sdk.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/level-3-low-level-sdk.ts){:target="_blank"} wraps those lines in a component, and [`track-view.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/track-view.ts){:target="_blank"} is the other half of the job: attaching a track to a media element and detaching it on the way out.
+    [**`3-low-level-sdk/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/3-low-level-sdk){:target="_blank"} is this level as a standalone app, with the two snippets above in [`app.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/3-low-level-sdk/frontend/src/app/app.ts){:target="_blank"} and [`track-view.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/3-low-level-sdk/frontend/src/app/track-view.ts){:target="_blank"}.
 
 !!! tip "Pick this level when"
 
@@ -233,7 +290,7 @@ You do not have to pick one level for the whole product either. Both products ru
 
 ## Need more than this?
 
-**Clone the example and run the three levels against one deployment.** Everything in this post is in [openvidu-labs/openvidu-integration-levels :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}, with a README that takes you from an empty folder to three working pages. Then go deeper:
+**Clone the examples and run them against one deployment.** Everything in this post is in [openvidu-labs/openvidu-integration-levels :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}: three independent applications, each with a README that takes you from an empty folder to a working meeting. Then go deeper:
 
 - [OpenVidu Meet Embedded step-by-step guide](/meet/embedded/step-by-step-guide.md) and the progressive [Meet tutorials](/meet/embedded/tutorials/index.md), from direct links to webhooks.
 - [Angular Components tutorials](/docs/tutorials/angular-components/index.md), one per customizable piece.
