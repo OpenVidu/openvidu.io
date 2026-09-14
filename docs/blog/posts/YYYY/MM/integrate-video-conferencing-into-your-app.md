@@ -224,7 +224,7 @@ That last one is where your product shows up inside the call. Our support desk w
 
 `*ovToolbarAdditionalButtons` adds to the default toolbar. Its siblings replace pieces outright: `*ovToolbar` swaps the whole toolbar, `*ovLayout` the video grid, `*ovStream` each tile, `*ovChatPanel` and `*ovParticipantsPanel` the side panels. Everything you do not replace keeps working and keeps receiving improvements with each OpenVidu release.
 
-The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference](/docs/reference-docs/openvidu-components-angular/) lists every component, directive and CSS variable you can reach.
+The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference :fontawesome-solid-external-link:{.external-link-icon}](/docs/reference-docs/openvidu-components-angular/index.html){:target="_blank"} lists every component, directive and CSS variable you can reach.
 
 !!! example "See it running"
 
