@@ -47,7 +47,22 @@ Here is the overview before we get into the details. Each level gives you more s
 
 None of this changes what you pay. Both products work in OpenVidu COMMUNITY and OpenVidu PRO, and the [pricing](/pricing.md) depends on the deployment, not on how you integrate.
 
-For the code, we will use one scenario throughout: a **support desk** app where an agent clicks *Start call* and a customer joins. Angular on the front end, Node.js on the back end. We use Angular because it is the framework where OpenVidu supports all three levels out of the box; a section near the end covers other frameworks.
+## Before the code: one deployment, one example app
+
+Every snippet below is trimmed to the lines that carry the idea. The complete, runnable version of all three levels lives in one repository, [**openvidu-integration-levels** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}: one Angular app and one Node.js backend, with a page per level. Each section below links to the file that implements it.
+
+The scenario is the same throughout: a **support desk** where an agent starts a call and a customer joins.
+
+All three levels need an OpenVidu deployment, and one is enough for the three of them. [OpenVidu Local](/docs/self-hosting/local.md) brings up both products with Docker:
+
+```bash
+git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.8.0
+cd openvidu-local-deployment/community
+./configure_lan_private_ip_linux.sh   # configure_lan_private_ip_macos.sh | .bat on Windows
+docker compose up
+```
+
+That gives you **OpenVidu Meet** at `http://localhost:9080`, with API key `meet-api-key`, and the **OpenVidu API** at `ws://localhost:7880`, with API key `devkey` and secret `secret`. Those are the values in the snippets that follow.
 
 ## Level 1: embed OpenVidu Meet
 
@@ -55,123 +70,60 @@ This is the fastest path. OpenVidu Meet is a complete video conferencing applica
 
 ### Create the room from your backend
 
-Rooms are created with one authenticated request. The API key comes from the "Embedded" page of the OpenVidu Meet app, and the [local OpenVidu Meet deployment](/meet/deployment/local.md) ships with `meet-api-key` preconfigured. The `config` object toggles the features of this particular room:
+Rooms are created with one authenticated request, which your backend makes because it holds the API key:
 
-```bash
-npm install express cors
-```
-
-```javascript title="server.js"
-import express from "express";
-import cors from "cors";
-
-const MEET_URL = process.env.OV_MEET_SERVER_URL || "http://localhost:9080/meet";
-const MEET_API_KEY = process.env.OV_MEET_API_KEY || "meet-api-key";
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.post("/meetings", async (req, res) => {
-  const response = await fetch(`${MEET_URL}/api/v1/rooms`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-API-KEY": MEET_API_KEY },
-    body: JSON.stringify({
-      roomName: req.body.roomName,
-      config: {
-        chat: { enabled: true },
-        recording: { enabled: false },
-        virtualBackground: { enabled: true },
-      },
-    }),
-  });
-  const room = await response.json();
-
-  // The moderator link is for your agent; the speaker link goes to the customer
-  res.json({
-    moderatorUrl: room.access.anonymous.moderator.url,
-    speakerUrl: room.access.anonymous.speaker.url,
-  });
+```javascript
+const response = await fetch(`${MEET_URL}/api/v1/rooms`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json", "X-API-KEY": MEET_API_KEY },
+  body: JSON.stringify({ roomName: "Ticket #4821" }),
 });
-
-app.listen(6080, () => console.log("Backend on http://localhost:6080"));
+const room = await response.json();
 ```
 
-Both servers in this post use ES modules, so set `"type": "module"` in your `package.json`.
+What comes back includes the room's **access links**, and the link you give to each person decides their role in the meeting: `room.access.anonymous.moderator.url` for your agent, `room.access.anonymous.speaker.url` for your customer. Registered users and identified guests get their own kind of link, all described in [Room Access](/meet/features/rooms/access.md). We covered how to map that model to your own users in [3 access models for video conferencing apps](/blog/posts/2026/07/video-conferencing-permissions.md).
 
-The response carries the room's **access links**. The link you give to each person decides their role and identity in the meeting: shared anonymous links for moderators and speakers, a login-protected link for OpenVidu Meet users, or a personal link for each identified guest. The [Room Access](/meet/features/rooms/access.md) page has the full model, and we covered how to map it to your own users in [3 access models for video conferencing apps](/blog/posts/2026/07/video-conferencing-permissions.md).
+### Put the meeting on the page
 
-### Drop the meeting into your Angular template
+Load the Web Component from your deployment, then use the tag with the link you just got. That is the whole client-side integration:
 
-Load the Web Component bundle from your deployment once, in `index.html`:
-
-```html title="index.html"
+```html
 <script src="http://localhost:9080/meet/v1/openvidu-meet.js"></script>
+
+<openvidu-meet room-url="http://localhost:9080/meet/room/ticket_4821-xyz?secret=abc"></openvidu-meet>
 ```
 
-Then use `<openvidu-meet>` like any other element. Angular needs `CUSTOM_ELEMENTS_SCHEMA` to accept the unknown tag, and the rest is attribute and event bindings:
+From there the element talks to your app. It emits `joined`, `left` and `closed` events, and takes `endMeeting()`, `leaveRoom()` and `kickParticipant()` as commands:
 
-```typescript title="meeting.component.ts"
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, signal, viewChild } from "@angular/core";
+```javascript
+const meet = document.querySelector("openvidu-meet");
 
-@Component({
-  selector: "app-meeting",
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `
-    @if (roomUrl(); as url) {
-      <openvidu-meet
-        #meet
-        [attr.room-url]="url"
-        participant-name="Alice (support)"
-        (joined)="onJoined($event)"
-        (closed)="roomUrl.set(null)"
-      ></openvidu-meet>
-      <button (click)="endCall()">End call for everyone</button>
-    } @else {
-      <button (click)="startCall()">Start call</button>
-    }
-  `,
-})
-export class MeetingComponent {
-  roomUrl = signal<string | null>(null);
-  meet = viewChild<ElementRef<any>>("meet");
-
-  async startCall() {
-    const res = await fetch("http://localhost:6080/meetings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ roomName: "Ticket #4821" }),
-    });
-    const { moderatorUrl } = await res.json();
-    this.roomUrl.set(moderatorUrl);
-  }
-
-  onJoined(event: Event) {
-    const { roomId, participantIdentity } = (event as CustomEvent).detail;
-    console.log(`${participantIdentity} joined ${roomId}`);
-  }
-
-  endCall() {
-    this.meet()?.nativeElement.endMeeting();
-  }
-}
+meet.on("joined", ({ participantIdentity }) => console.log(`${participantIdentity} is in`));
+meet.endMeeting();
 ```
 
-That is the whole integration. The component emits `joined`, `left` and `closed` events, and exposes `leaveRoom()`, `endMeeting()` and `kickParticipant()` as commands, so your app knows what is going on and can act on it. If you cannot use a Web Component, the iframe accepts the same attributes and supports the same commands and events through `postMessage`. And if you do not need the meeting inside your page at all, the direct link opens the full OpenVidu Meet UI in its own tab, with `leave-redirect-url` to bring the user back.
+If you cannot use a Web Component, the iframe accepts the same attributes and supports the same commands and events through `postMessage`. And if you do not need the meeting inside your page at all, the direct link opens the full OpenVidu Meet UI in its own tab, with `leave-redirect-url` to bring the user back.
+
+!!! example "See it running"
+
+    [`level-1-meet-embedded.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/level-1-meet-embedded.ts){:target="_blank"} is the complete page, and [`server.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/backend/server.js){:target="_blank"} the endpoint that creates the room. Start the app, hit **Start call**, and open the customer link in a second tab to see both sides of the meeting.
+
+    One detail worth copying if you use Angular: that page creates the element in TypeScript instead of writing the tag in the template, because the Web Component reads `room-url` the moment it enters the DOM, before a template binding would be applied.
 
 ### What you can customize
 
 The meeting UI belongs to OpenVidu Meet, but it is not a black box. Today you can adjust it in these ways:
 
 - **Colors.** Five color slots (main background, main controls, secondary elements, highlights and accents, panels and dialogs) plus a light or dark base. Admins set them from the "Configuration" page, and they apply globally to every room.
-- **Features per room.** Chat, captions, virtual backgrounds, end-to-end encryption and recording, with the recording layout, from the room wizard or the `config` object you saw above. The API additionally exposes the recording encoding. Note that an encrypted room cannot be recorded.
+- **Features per room.** Chat, captions, virtual backgrounds, end-to-end encryption and recording, with the recording layout, from the room wizard or the `config` object of the room creation request. The API additionally exposes the recording encoding. Note that an encrypted room cannot be recorded.
 - **Access and permissions.** Anonymous links per role, registered users, identified guests, and per-member permission overrides on top of the `Moderator` and `Speaker` roles.
 - **Per-participant attributes.** The display name, an E2EE key, a redirect URL on leave, and a recordings-only view.
 - **Language.** The interface is translated into ten languages and follows the user's browser.
 
-What you cannot do yet is reshape the meeting UI itself: replace the toolbar, restyle one room differently from another, or place your own components inside the meeting view. More branding and customization options are on the roadmap, and it is an area we are actively working on. If you need that level of control today, keep reading: it is exactly what the next level gives you.
+What you cannot do yet is reshape the meeting UI itself: replace the toolbar, restyle one room differently from another, or place your own components inside the meeting view. More branding and customization options are on the [roadmap](/meet/releases.md#future-roadmap-of-openvidu-meet), together with mobile embedding, and it is an area we are actively working on. If you need that level of control today, keep reading: it is exactly what the next level gives you.
 
 !!! tip "Pick this level when"
+
     Your use case is video conferencing (telehealth, e-learning, customer support, team collaboration), you want recording, chat and screen sharing without building them, and applying your colors to a proven UI is enough for your brand. This is the path we took in [Building a video-enabled CRM with an AI agent](/blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md).
 
 ## Level 2: Angular Components
@@ -180,92 +132,30 @@ The second level is [Angular Components](/docs/ui-components/angular-components.
 
 ### Generate access tokens in your backend
 
-The backend changes at this level. You are no longer talking to OpenVidu Meet but to OpenVidu directly, through the LiveKit-compatible server SDK, and the one thing your server must do is generate [access tokens](/docs/reference/access-tokens.md). An access token is a JWT signed with your API secret that states who the participant is and which room they may join. This same server also serves Level 3:
+The backend changes at this level. You are no longer talking to OpenVidu Meet but to OpenVidu directly, through the LiveKit-compatible server SDK, and the one thing your server must do is generate [access tokens](/docs/reference/access-tokens.md). An access token is a JWT signed with your API secret that states who the participant is and which room they may join:
 
-```bash
-npm install express cors livekit-server-sdk
+```javascript
+const at = new AccessToken(OPENVIDU_API_KEY, OPENVIDU_API_SECRET, { identity: participantName });
+at.addGrant({ roomJoin: true, room: roomName });
+
+res.json({ token: await at.toJwt() });
 ```
 
-```javascript title="server.js"
-import express from "express";
-import cors from "cors";
-import { AccessToken } from "livekit-server-sdk";
+`roomJoin` and `room` are the only grants this token needs: publishing and subscribing are allowed unless you turn them off. The API key and secret never leave the server, because anyone holding them can create a token for any identity. This same endpoint also serves Level 3.
 
-const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || "devkey";
-const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || "secret";
+### Render the meeting
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+The component asks your app for a token when the participant is ready to join, and takes it from there:
 
-app.post("/token", async (req, res) => {
-  const { roomName, participantName } = req.body;
-  const at = new AccessToken(LIVEKIT_API_KEY, LIVEKIT_API_SECRET, { identity: participantName });
-  at.addGrant({ roomJoin: true, room: roomName });
-  res.json({ token: await at.toJwt() });
-});
-
-app.listen(6080, () => console.log("Token server on http://localhost:6080"));
+```html
+<ov-videoconference
+  [token]="token()"
+  [livekitUrl]="OPENVIDU_URL"
+  (onTokenRequested)="onTokenRequested($event)"
+></ov-videoconference>
 ```
 
-`roomJoin` and `room` are the only grants this token needs: publishing and subscribing are allowed unless you turn them off. The API key and secret never leave the server, because anyone holding them can create a token for any identity.
-
-### Render a meeting
-
-Install the library and its Angular Material dependency, then register it at bootstrap:
-
-```bash
-ng add @angular/material
-npm install openvidu-components-angular
-```
-
-```typescript title="main.ts"
-import { bootstrapApplication } from "@angular/platform-browser";
-import { importProvidersFrom } from "@angular/core";
-import { provideAnimations } from "@angular/platform-browser/animations";
-import { OpenViduComponentsModule, OpenViduComponentsConfig } from "openvidu-components-angular";
-import { AppComponent } from "./app/app.component";
-
-const config: OpenViduComponentsConfig = { production: true };
-
-bootstrapApplication(AppComponent, {
-  providers: [importProvidersFrom(OpenViduComponentsModule.forRoot(config)), provideAnimations()],
-});
-```
-
-The component asks you for a token when the participant is ready to join. You fetch it from your server and pass it to the component:
-
-```typescript title="meeting.component.ts"
-import { Component } from "@angular/core";
-import { OpenViduComponentsModule } from "openvidu-components-angular";
-
-@Component({
-  selector: "app-meeting",
-  imports: [OpenViduComponentsModule],
-  template: `
-    <ov-videoconference
-      [token]="token"
-      [livekitUrl]="LIVEKIT_URL"
-      (onTokenRequested)="onTokenRequested($event)"
-    ></ov-videoconference>
-  `,
-})
-export class MeetingComponent {
-  LIVEKIT_URL = "ws://localhost:7880";
-  token!: string;
-
-  async onTokenRequested(participantName: string) {
-    const res = await fetch("http://localhost:6080/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ roomName: "ticket-4821", participantName }),
-    });
-    this.token = (await res.json()).token;
-  }
-}
-```
-
-With that you have a prejoin page, a toolbar, a responsive layout, chat, participants and activities panels, screen sharing and the recording controls. Only recording needs some backend work: the component emits `onRecordingStartRequested` and `onRecordingStopRequested`, and your server starts and stops the Egress, as the [recording tutorial](/docs/tutorials/advanced-features/recording-basic-s3.md) shows. Everything else works out of the box.
+With that one element you have a prejoin page, a toolbar, a responsive layout, chat, participants and activities panels, screen sharing and the recording controls. Only recording needs some backend work: the component emits `onRecordingStartRequested` and `onRecordingStopRequested`, and your server starts and stops the Egress, as the [recording tutorial](/docs/tutorials/advanced-features/recording-basic-s3.md) shows.
 
 ### Make it yours
 
@@ -273,166 +163,61 @@ There are three ways to customize it, and you can combine them:
 
 - **CSS variables** for the look. Redefine `--ov-background-color`, `--ov-primary-action-color`, `--ov-accent-action-color`, the border radius and the rest in your global stylesheet, and every component follows.
 - **Inputs** for behavior. Attribute directives on `<ov-videoconference>` such as `[prejoin]`, `[participantName]`, `[minimal]` or `[toolbarChatPanelButton]` show, hide and preconfigure parts of the UI.
-- **Structural directives** for structure. Place your own markup inside the component with `*ovToolbar`, `*ovLayout`, `*ovStream`, `*ovPanel`, `*ovChatPanel`, `*ovParticipantsPanel` or `*ovAdditionalPanels`, and it replaces the default piece while the library keeps managing the room for you.
+- **Structural directives** for structure. Place your own markup inside the component and it becomes part of the meeting.
 
-Our support desk wants to replace the default toolbar with a minimal one: microphone, camera and a "ticket" button. That is one structural directive and one injected service. If you only want to add a button next to the default controls, `*ovToolbarAdditionalButtons` does that without replacing anything:
+That last one is where your product shows up inside the call. Our support desk wants a button that resolves the ticket without leaving the meeting:
 
-```typescript title="meeting.component.ts"
-import { Component } from "@angular/core";
-import { OpenViduComponentsModule, ParticipantService } from "openvidu-components-angular";
-
-@Component({
-  selector: "app-meeting",
-  imports: [OpenViduComponentsModule],
-  template: `
-    <ov-videoconference
-      [token]="token"
-      [livekitUrl]="LIVEKIT_URL"
-      (onTokenRequested)="onTokenRequested($event)"
-      (onParticipantLeft)="backToTicket()"
-    >
-      <div *ovToolbar class="support-toolbar">
-        <button (click)="toggleMic()">Mic</button>
-        <button (click)="toggleCamera()">Camera</button>
-        <button (click)="openTicket()">Ticket #4821</button>
-      </div>
-    </ov-videoconference>
-  `,
-})
-export class MeetingComponent {
-  constructor(private participants: ParticipantService) {}
-
-  async toggleMic() {
-    await this.participants.setMicrophoneEnabled(!this.participants.isMyMicrophoneEnabled());
-  }
-
-  async toggleCamera() {
-    await this.participants.setCameraEnabled(!this.participants.isMyCameraEnabled());
-  }
-
-  // token, LIVEKIT_URL and onTokenRequested() as in the previous snippet;
-  // openTicket() and backToTicket() navigate within your app
-}
+```html
+<ov-videoconference [token]="token()" [livekitUrl]="OPENVIDU_URL" (onTokenRequested)="onTokenRequested($event)">
+  <div *ovToolbarAdditionalButtons>
+    <button (click)="resolveTicket()">Resolve ticket</button>
+  </div>
+</ov-videoconference>
 ```
 
-Every piece you do not replace keeps working and keeps receiving improvements with each OpenVidu release. The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each directive one at a time: custom toolbar, extra buttons, custom layout, custom stream, custom panels, an admin dashboard and more.
+`*ovToolbarAdditionalButtons` adds to the default toolbar. Its siblings replace pieces outright: `*ovToolbar` swaps the whole toolbar, `*ovLayout` the video grid, `*ovStream` each tile, `*ovChatPanel` and `*ovParticipantsPanel` the side panels. Everything you do not replace keeps working and keeps receiving improvements with each OpenVidu release.
+
+!!! example "See it running"
+
+    [`level-2-angular-components.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/level-2-angular-components.ts){:target="_blank"} is the page above, in full: the token request, the component and the custom button. The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) then walk through each directive one at a time.
 
 !!! tip "Pick this level when"
+
     You want your own meeting screen inside an Angular app, you want it working this week, and you would rather customize a proven UI than write one. It is also the natural next step when Level 1 stops being enough.
 
 ## Level 3: low-level SDKs
 
-At the bottom of the stack there is no UI at all, just a `Room` and its tracks. OpenVidu is a fork of LiveKit that keeps 100% API compatibility, so any [LiveKit client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"} works unchanged against your deployment. In the browser, that SDK is `livekit-client`:
+At the bottom of the stack there is no UI at all, just a `Room` and its tracks. OpenVidu is a fork of LiveKit that keeps 100% API compatibility, so any [LiveKit client SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/){:target="_blank"} works unchanged against your deployment. In the browser, that SDK is `livekit-client`, and the token server from Level 2 is all the backend you need:
 
-```bash
-npm install livekit-client
+```javascript
+const room = new Room();
+const videos = document.getElementById("videos");
+
+room.on(RoomEvent.TrackSubscribed, (track) => videos.appendChild(track.attach()));
+
+await room.connect(OPENVIDU_URL, token);
+await room.localParticipant.enableCameraAndMicrophone();
 ```
 
-The [token server from Level 2](#generate-access-tokens-in-your-backend) is all the backend you need. Your client asks for a token, connects, publishes camera and microphone, and renders whatever tracks other participants publish. Here is the complete flow in Angular, using signals to hold the state:
+That is a working video call: connect with a token, publish your camera and microphone, and attach every track you receive to the page. `TrackSubscribed` fires once per remote track, which is how other participants appear.
 
-```typescript title="meeting.component.ts"
-import { Component, signal } from "@angular/core";
-import { LocalVideoTrack, RemoteTrack, Room, RoomEvent, Track } from "livekit-client";
-import { TrackViewComponent } from "./track-view.component";
-
-@Component({
-  selector: "app-meeting",
-  imports: [TrackViewComponent],
-  template: `
-    @if (localTrack(); as track) {
-      <track-view [track]="track" />
-    }
-    @for (remote of remoteTracks(); track remote.sid) {
-      <track-view [track]="remote" />
-    }
-    <button (click)="join()">Join</button>
-    <button (click)="leave()">Leave</button>
-  `,
-})
-export class MeetingComponent {
-  private room?: Room;
-  localTrack = signal<LocalVideoTrack | undefined>(undefined);
-  remoteTracks = signal<RemoteTrack[]>([]);
-
-  async join() {
-    const room = new Room();
-    this.room = room;
-
-    room.on(RoomEvent.TrackSubscribed, (track) => {
-      this.remoteTracks.update((tracks) => [...tracks, track]);
-    });
-    room.on(RoomEvent.TrackUnsubscribed, (track) => {
-      this.remoteTracks.update((tracks) => tracks.filter((t) => t.sid !== track.sid));
-    });
-
-    const token = await this.getToken("ticket-4821", "Alice");
-    await room.connect("ws://localhost:7880", token);
-    await room.localParticipant.enableCameraAndMicrophone();
-
-    const camera = room.localParticipant.getTrackPublication(Track.Source.Camera);
-    this.localTrack.set(camera?.videoTrack);
-  }
-
-  async leave() {
-    await this.room?.disconnect();
-    this.localTrack.set(undefined);
-    this.remoteTracks.set([]);
-  }
-
-  private async getToken(roomName: string, participantName: string) {
-    const res = await fetch("http://localhost:6080/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ roomName, participantName }),
-    });
-    return (await res.json()).token as string;
-  }
-}
-```
-
-Rendering a track means attaching it to a `<video>` or `<audio>` element. A small component handles both kinds and detaches the track when it is destroyed:
-
-```typescript title="track-view.component.ts"
-import { AfterViewInit, Component, ElementRef, OnDestroy, input, viewChild } from "@angular/core";
-import { Track } from "livekit-client";
-
-@Component({
-  selector: "track-view",
-  template: `
-    @if (track().kind === Track.Kind.Video) {
-      <video #media autoplay playsinline></video>
-    } @else {
-      <audio #media autoplay></audio>
-    }
-  `,
-})
-export class TrackViewComponent implements AfterViewInit, OnDestroy {
-  protected readonly Track = Track;
-  track = input.required<Track>();
-  media = viewChild.required<ElementRef<HTMLMediaElement>>("media");
-
-  ngAfterViewInit() {
-    this.track().attach(this.media().nativeElement);
-  }
-
-  ngOnDestroy() {
-    this.track().detach();
-  }
-}
-```
-
-Notice what is *not* here: no prejoin page, no toolbar, no layout, no chat. You decide whether a participant publishes or only subscribes, which tracks to render and where, what a "mute" button does. Every client performs the same four operations: connect with a token, publish tracks, subscribe to tracks and mute them. They work the same way in every SDK, and the [client SDK reference](/docs/reference/client-sdk.md) documents the model they all share.
+Notice what is *not* there: no prejoin page, no toolbar, no layout, no chat. You decide whether a participant publishes or only subscribes, which tracks to render and where, what a "mute" button does. Every client performs the same four operations: connect with a token, publish tracks, subscribe to tracks and mute them. They work the same way in every SDK, and the [client SDK reference](/docs/reference/client-sdk.md) documents the model they all share.
 
 This level unlocks two things the other two do not. First, **platforms**: the same pattern works in iOS, Android, Flutter, React Native, Unity and even embedded devices, and the [application client tutorials](/docs/tutorials/application-client/index.md) cover eight platforms, from plain JavaScript to Android and iOS. Second, **use cases beyond meetings**: live streaming to thousands of viewers, ingesting IP cameras or RTMP feeds, server-side recording with custom layouts, telephony, and AI agents that join a room as participants. OpenVidu Meet and Angular Components are built around rooms and meetings; the SDKs are built around tracks.
 
+!!! example "See it running"
+
+    [`level-3-low-level-sdk.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/level-3-low-level-sdk.ts){:target="_blank"} wraps those lines in a component, and [`track-view.ts` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/blob/main/frontend/src/app/track-view.ts){:target="_blank"} is the other half of the job: attaching a track to a media element and detaching it on the way out.
+
 !!! tip "Pick this level when"
+
     Your UI is not a meeting grid, you need native mobile or desktop clients, you need control over codecs, bitrates and subscriptions, or video conferencing is only one part of a larger real-time product.
 
 ## Not on Angular?
 
-The three levels are available for other stacks too:
+The example app is Angular, but only the middle level actually requires it:
 
-- **Level 1** is framework-agnostic. `<openvidu-meet>` is a standard custom element, so it works the same way in React, Vue, Svelte or a server-rendered page. In React it is one line: `<openvidu-meet room-url={roomUrl} />`. The iframe and the direct link cover everything else, including apps that cannot load third-party scripts.
+- **Level 1** is framework-agnostic. `<openvidu-meet>` is a standard custom element, so the two lines above work the same in plain HTML, React, Vue or a server-rendered page. In React it is one line: `<openvidu-meet room-url={roomUrl} />`. The iframe and the direct link cover everything else, including apps that cannot load third-party scripts.
 - **Level 2** in React means the [React Components](/docs/ui-components/react-components.md) listed in our docs under UI Components. A `<LiveKitRoom>` with a `<VideoConference>` inside gets you a prebuilt meeting, and its hooks and contexts let you build your own.
 - **Level 3** has tutorials for JavaScript, React, Angular, Vue, Electron, Ionic, Android and iOS on the client, and Node.js, Go, Ruby, Java, Python, Rust, PHP and .NET for the [token server](/docs/tutorials/application-server/index.md). Any client works with any server.
 
@@ -448,7 +233,7 @@ You do not have to pick one level for the whole product either. Both products ru
 
 ## Need more than this?
 
-**Try all three against one OpenVidu Local deployment this afternoon.** [OpenVidu Local](/docs/self-hosting/local.md) is a `git clone` and a `docker compose up`, and it ships both the LiveKit-compatible API on port 7880, with the `devkey` and `secret` credentials the snippets above use, and OpenVidu Meet on port 9080. The developer page at `http://localhost:7880` lists every service with its credentials. Point the three snippets at it and see the difference for yourself. Then go deeper:
+**Clone the example and run the three levels against one deployment.** Everything in this post is in [openvidu-labs/openvidu-integration-levels :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}, with a README that takes you from an empty folder to three working pages. Then go deeper:
 
 - [OpenVidu Meet Embedded step-by-step guide](/meet/embedded/step-by-step-guide.md) and the progressive [Meet tutorials](/meet/embedded/tutorials/index.md), from direct links to webhooks.
 - [Angular Components tutorials](/docs/tutorials/angular-components/index.md), one per customizable piece.
