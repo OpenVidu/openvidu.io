@@ -224,7 +224,7 @@ That last one is where your product shows up inside the call. Our support desk w
 
 `*ovToolbarAdditionalButtons` adds to the default toolbar. Its siblings replace pieces outright: `*ovToolbar` swaps the whole toolbar, `*ovLayout` the video grid, `*ovStream` each tile, `*ovChatPanel` and `*ovParticipantsPanel` the side panels. Everything you do not replace keeps working and keeps receiving improvements with each OpenVidu release.
 
-The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference](/docs/ui-components/angular-components.md) lists every component, directive and CSS variable you can reach.
+The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference](/docs/reference-docs/openvidu-components-angular/) lists every component, directive and CSS variable you can reach.
 
 !!! example "See it running"
 
@@ -285,9 +285,9 @@ This level unlocks two things the other two do not. First, **platforms**: the sa
 
 ## Not on Angular?
 
-The example app is Angular, but only the middle level actually requires it:
+All example apps are built on Angular, but only the middle level actually requires it:
 
-- **Level 1** is framework-agnostic. `<openvidu-meet>` is a standard custom element, so the two lines above work the same in plain HTML, React, Vue or a server-rendered page. In React it is one line: `<openvidu-meet room-url={roomUrl} />`. The iframe and the direct link cover everything else, including apps that cannot load third-party scripts.
+- **Level 1** is framework-agnostic. `<openvidu-meet>` is a standard custom element, so the two lines above work the same in plain HTML, React, Vue or a server-rendered page. The iframe and the direct link cover everything else, including apps that cannot load third-party scripts.
 - **Level 2** in React means the [React Components](/docs/ui-components/react-components.md) listed in our docs under UI Components. A `<LiveKitRoom>` with a `<VideoConference>` inside gets you a prebuilt meeting, and its hooks and contexts let you build your own.
 - **Level 3** has tutorials for JavaScript, React, Angular, Vue, Electron, Ionic, Android and iOS on the client, and Node.js, Go, Ruby, Java, Python, Rust, PHP and .NET for the [token server](/docs/tutorials/application-server/index.md). Any client works with any server.
 
