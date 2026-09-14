@@ -128,6 +128,6 @@ We closed by asking what he'd tell an engineering team struggling to build or sc
 If you're weighing the same build-vs-buy-vs-self-host question Novakid faced, [OpenVidu Platform](/docs/index.md) gives you the LiveKit-compatible SDKs, self-hosted control and AWS-native deployment tooling this story is built on. See the [self-hosting deployment types](/docs/self-hosting/deployment-types.md) to find the topology that matches your own scale.
 
 !!! tip "Thinking about your own success story?"
-    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support.md): we'll do the writing, you get the visibility and the backlinks.
+    We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](/support/index.md): we'll do the writing, you get the visibility and the backlinks.
 
 *Our thanks to Andrei Yakimov and the Novakid team for sharing their experience.*
