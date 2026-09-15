@@ -9,7 +9,7 @@ This section describes two ways to install OpenVidu Single Node on DigitalOcean,
 
 Info
 
-OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ## **Web Console**
 
@@ -137,7 +137,7 @@ OpenVidu Single Node DigitalOcean Architecture
    | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
    | `doToken`                 | DigitalOcean Personal Access Token for API authentication.                                                                                |
    | `stackName`               | Stack name for OpenVidu deployment.                                                                                                       |
-   | `openviduLicense` **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/3.8/account/index.md) if you don't have one. |
+   | `openviduLicense` **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/account/) if you don't have one. |
 
    #### Optional Parameters
 

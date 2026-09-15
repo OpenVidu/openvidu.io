@@ -125,6 +125,10 @@
          <lastmod>2026-09-09</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/</loc>
+         <lastmod>2026-09-14</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/conditions/cookie-policy/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
@@ -282,7 +286,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-09-10</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/</loc>
@@ -362,7 +366,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-09-10</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-dlb/</loc>
@@ -893,6 +897,14 @@
          
     </url>
     <url>
+         <loc>https://openvidu.io/blog/category/success-story/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/vertical/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/category/how-to/</loc>
          
     </url>
@@ -926,14 +938,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/implementation/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/success-story/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/vertical/</loc>
          
     </url>
     <url>
