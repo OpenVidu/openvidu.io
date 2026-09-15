@@ -84,12 +84,15 @@ jobs:
       - name: Publish
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+          # Free text typed into the dispatch form: it reaches the shell as a quoted variable, so
+          # bash never interprets it. ovweb validates the X.Y format on top.
+          VERSION: ${{ inputs.version }}
         # --verbose and --dry-run are global options, so they belong before the subcommand.
         # ovweb also accepts them after it, but keeping the canonical order here keeps the log
         # readable as something you can paste into a terminal.
         run: |
           ovweb --verbose ${{ inputs.dry_run && '--dry-run' || '' }} \
-            publish ${{ inputs.command }} ${{ inputs.version }}
+            publish ${{ inputs.command }} "$VERSION"
 
       - name: Verify the published tree
         if: ${{ !inputs.dry_run }}
