@@ -296,6 +296,11 @@ Where a rule goes:
 - **Anything site-wide** → the matching section of `extra.css`; a responsive rule joins the
   existing `@media` block for its breakpoint.
 
+A utility that sets margins carries the `.md-typeset` prefix (`.md-typeset .cta-section`,
+`.md-typeset .centered-section`, `.md-typeset .my-4em`): a bare class does not outrank Material's
+`.md-typeset > :first-child` / `> :last-child` margin resets, which the inline style it replaces
+did.
+
 Precedence: Material's CSS is unlayered, so `product.css` keeps its `:root:root` selector and
 `!important`s — an `@layer` would put our rules *below* the theme's.
 
