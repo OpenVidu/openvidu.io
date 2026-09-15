@@ -461,12 +461,12 @@ div[data-md-component="outdated"] aside {
   justify-content: center;
 }
 
-.centered-section {
+.md-typeset .centered-section {
   text-align: center;
   margin: 2em 0;
 }
 
-.centered-section-lg {
+.md-typeset .centered-section-lg {
   text-align: center;
   margin: 3em 0;
 }
@@ -783,8 +783,10 @@ span:has(> a > .openvidu-tag) {
   margin-top: 0;
 }
 
-/* Closing call to action: a centred block set off from the content above it */
-.cta-section {
+/* Closing call to action: a centred block set off from the content above it. The
+   .md-typeset prefix outranks Material's `> :last-child { margin-bottom: 0 }` reset, which
+   the block usually is. */
+.md-typeset .cta-section {
   margin: 6em 0;
   text-align: center;
 }
