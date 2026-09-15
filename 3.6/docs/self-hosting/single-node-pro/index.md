@@ -8,14 +8,14 @@ Scalability and fault tolerance require a multi-node setup. If you need them, co
 
 Choose your provider:
 
-[**On-premises**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/on-premises/index.md)
+[**On-premises**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/on-premises/)
 
-[**AWS**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/aws/index.md)
+[**AWS**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/aws/)
 
-[**Azure**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/azure/index.md)
+[**Azure**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/azure/)
 
-[**GCP**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/gcp/index.md)
+[**GCP**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/gcp/)
 
-[**DigitalOcean**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/digitalocean/index.md)
+[**DigitalOcean**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/digitalocean/)
 
-[**OCI**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/oracle/install-tutorial/index.md)
+[**OCI**](https://openvidu.io/3.6/docs/self-hosting/single-node-pro/oracle/install-tutorial/)
