@@ -293,6 +293,10 @@
 <link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
 {% endif %}
 
+{% if page.meta.page_features and "leadform" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/lead-form.css' | url }}" />
+{% endif %}
+
 {% if page.meta.page_features and "openviduregister" in page.meta.page_features %}
 {# Material Symbols is only consumed by the signed-in account chip the register
    bundle injects on this page #}
