@@ -245,17 +245,6 @@
 
 {% block styles %}
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
 {% endif %}
