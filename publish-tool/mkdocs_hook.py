@@ -20,12 +20,16 @@ from pathlib import Path
 
 from mkdocs.exceptions import PluginError
 
-_SRC = Path(__file__).resolve().parent / "src"
-if _SRC.is_dir() and str(_SRC) not in sys.path:
-    sys.path.insert(0, str(_SRC))
+try:
+    import ovweb  # noqa: F401
+except ModuleNotFoundError:
+    # Not installed (a dev checkout serving with docker): import from the checkout's src/.
+    _SRC = Path(__file__).resolve().parent / "src"
+    if _SRC.is_dir() and str(_SRC) not in sys.path:
+        sys.path.insert(0, str(_SRC))
 
-from ovweb.gitrepo import Git, GitError  # noqa: E402
-from ovweb.sources import newest_dates, parse_git_log  # noqa: E402
+from ovweb.gitrepo import Git, GitError
+from ovweb.sources import newest_dates, parse_git_log
 
 
 def _dated_trees(config) -> tuple[str, ...]:

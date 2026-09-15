@@ -18,7 +18,7 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "remove-stray-site",
         "always",
         "Remove a stray site/ folder from checkout builds",
-        "<version>/site/",
+        "site/",
     ),
     (
         "rewrite-versioned",
