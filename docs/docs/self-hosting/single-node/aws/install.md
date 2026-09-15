@@ -66,7 +66,7 @@ Depending on your needs, you need to fill the following CloudFormation parameter
 
 --8<-- "self-hosting/aws/ssl-domain.md"
 
-## OpenVidu Single Node PRO configuration **PRO**{ .openvidu-tag .openvidu-pro-tag }
+## OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag } configuration
 
 If you are deploying the PRO edition, you need to specify some additional properties.
 
