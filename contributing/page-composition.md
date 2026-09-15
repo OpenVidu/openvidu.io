@@ -205,7 +205,7 @@ Two canonical patterns — nothing else. `<video>` never takes `defer`, `async` 
 (those attributes do not exist for videos and silently do nothing).
 
 **Below the fold (the default).** No `autoplay`; the video downloads and plays only when
-scrolled into view. Requires the `lazyvideo` page tag:
+scrolled into view. Requires the `lazyvideo` feature key (`page_features: [lazyvideo]`):
 
 ```html
 <a class="glightbox" href="/assets/videos/x-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/x-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
@@ -267,7 +267,7 @@ Material theme customization lives in [`overrides/`](../overrides) (`custom_dir`
   `styles`, `outdated`...).
 - `home.html` extends `main.html` (the landing page template).
 - `partials/` adds or overrides partials: `header.html`, `footer.html`, `tabs.html`,
-  `json-ld.html`, `og.html`.
+  `tabs-item.html`, `json-ld.html`, `og.html`.
 - `sitemap.xml` is MkDocs' own template (Material ships none) with one added clause: a page
   declaring `robots: noindex` is left out, so the sitemap never submits a URL that then
   refuses indexing. Re-copy it from `mkdocs/templates/sitemap.xml` on a MkDocs bump.
