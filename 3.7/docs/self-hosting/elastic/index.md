@@ -4,14 +4,14 @@ OpenVidu Elastic is part of the PRO edition of OpenVidu. You have the following 
 
 Choose your provider:
 
-[**On-premises**](https://openvidu.io/3.7/docs/self-hosting/elastic/on-premises/index.md)
+[**On-premises**](https://openvidu.io/3.7/docs/self-hosting/elastic/on-premises/)
 
-[**AWS**](https://openvidu.io/3.7/docs/self-hosting/elastic/aws/index.md)
+[**AWS**](https://openvidu.io/3.7/docs/self-hosting/elastic/aws/)
 
-[**Azure**](https://openvidu.io/3.7/docs/self-hosting/elastic/azure/index.md)
+[**Azure**](https://openvidu.io/3.7/docs/self-hosting/elastic/azure/)
 
-[**GCP**](https://openvidu.io/3.7/docs/self-hosting/elastic/gcp/index.md)
+[**GCP**](https://openvidu.io/3.7/docs/self-hosting/elastic/gcp/)
 
-[**DigitalOcean**](https://openvidu.io/3.7/docs/self-hosting/elastic/digitalocean/index.md)
+[**DigitalOcean**](https://openvidu.io/3.7/docs/self-hosting/elastic/digitalocean/)
 
-[**OCI**](https://openvidu.io/3.7/docs/self-hosting/elastic/oracle/index.md)
+[**OCI**](https://openvidu.io/3.7/docs/self-hosting/elastic/oracle/)

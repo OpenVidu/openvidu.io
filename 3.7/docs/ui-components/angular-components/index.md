@@ -82,14 +82,14 @@ Each component in **Angular Components** emits a set of events that you can list
 
 These events are designed to provide you with the flexibility to customize your videoconferencing application according to your requirements.
 
-You can check out all component events in the [Angular Components API Reference](https://openvidu.io/3.7/docs/reference-docs/openvidu-components-angular/index.md).
+You can check out all component events in the [Angular Components API Reference](https://openvidu.io/3.7/docs/reference-docs/openvidu-components-angular/).
 
 ## Applications
 
-The [OpenVidu Components Demo App](https://openvidu.io/3.7/docs/tutorials/angular-components/openvidu-components-demo/index.md) is a hands‑on example that shows how to build a complete videoconferencing UI with Angular Components. The demo walks you through running the app and inspecting how components, directives, events, and styles are composed and customized. It’s ideal for learning practical patterns such as custom toolbars, panel layouts and stream handling.
+The [OpenVidu Components Demo App](https://openvidu.io/3.7/docs/tutorials/angular-components/openvidu-components-demo/) is a hands‑on example that shows how to build a complete videoconferencing UI with Angular Components. The demo walks you through running the app and inspecting how components, directives, events, and styles are composed and customized. It’s ideal for learning practical patterns such as custom toolbars, panel layouts and stream handling.
 
 For a production‑grade reference, explore [**OpenVidu Meet**](https://openvidu.io/3.7/meet/index.md). Built with the same Angular Components. It demonstrates real‑world concerns like theming, scalability, authentication, multi‑room management, and much more.
 
 ## References
 
-- [Angular Components API Reference](https://openvidu.io/3.7/docs/reference-docs/openvidu-components-angular/index.md)
+- [Angular Components API Reference](https://openvidu.io/3.7/docs/reference-docs/openvidu-components-angular/)
