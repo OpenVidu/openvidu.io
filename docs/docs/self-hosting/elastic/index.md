@@ -5,7 +5,7 @@ description: "A Master Node with autoscaling Media Nodes. Install, upgrade and a
 
 # OpenVidu Elastic
 
-OpenVidu Elastic is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> edition of OpenVidu. You have the following deployment options:
+OpenVidu Elastic is part of the **PRO**{ .openvidu-tag .openvidu-pro-tag } edition of OpenVidu. You have the following deployment options:
 
 Choose your provider:
 

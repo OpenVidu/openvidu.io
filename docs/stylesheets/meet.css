@@ -1,10 +1,13 @@
+/* OpenVidu Meet pages: the product's --product-* palette (mapped onto Material by product.css)
+   plus Meet-only components. Brand values come from colors.css. */
+
 :root:root {
-  --product-primary-color: rgb(0, 147, 73) !important;
-  --product-primary-color-rgb: 0, 147, 73 !important;
+  --product-primary-color: var(--ov-meet-primary) !important;
+  --product-primary-color-rgb: var(--ov-meet-primary-rgb) !important;
   --product-primary-dark: rgb(0, 95, 48) !important;
   --product-primary-dark-rgb: 0, 95, 48 !important;
-  --product-primary-color-light: rgb(6, 211, 98) !important;
-  --product-primary-color-light-rgb: 6, 211, 98 !important;
+  --product-primary-color-light: var(--ov-meet-accent) !important;
+  --product-primary-color-light-rgb: var(--ov-meet-accent-rgb) !important;
   --product-body-color-dark: rgb(0, 37, 19) !important;
   --product-body-color-dark-rgb: 0, 37, 19 !important;
   --md-hue: 140deg !important;
@@ -104,15 +107,15 @@
 }
 
 .bare-metal-icon {
-  background-color: #868686;
+  background-color: var(--ov-grey);
 }
 
 .aws-icon {
-  background-color: #ff9900;
+  background-color: var(--ov-aws-orange);
 }
 
 .aws-icon svg {
-  color: #252F3E;
+  color: var(--ov-aws-navy);
 }
 
 .azure-icon {
@@ -140,12 +143,12 @@ body[data-md-color-scheme="default"] {
   }
 }
 
-.ov-call-commercial-feature-cards {
+.ov-meet-commercial-feature-grid {
   padding: 0 25px !important;
   text-align: center !important;
 }
 
-.ov-call-commercial-feature-cards > ul > li {
+.ov-meet-commercial-feature-grid > ul > li {
   display: flex !important;
   justify-content: space-between;
   flex-direction: column;
@@ -154,95 +157,6 @@ body[data-md-color-scheme="default"] {
 .ov-meet-commercial-card-title {
   font-size: 1.3em !important;
   font-weight: 500 !important;
-}
-
-.splide {
-  margin-top: 3em;
-  margin-bottom: 4em;
-}
-
-.splide__slide {
-  width: 85%;
-  transition: opacity 0.4s;
-  opacity: 0.3;
-}
-
-.splide__slide.is-active {
-  opacity: 1;
-}
-
-.carousel-cell-content {
-  padding: 1.5em;
-  padding-bottom: 2em;
-  border-radius: 10px;
-  background-color: rgba(var(--product-primary-color-light-rgb), 0.1) !important;
-  box-shadow: none;
-  transition: box-shadow 0.4s ease;
-}
-
-.splide__slide.is-active .carousel-cell-content {
-  box-shadow: var(--md-shadow-z2);
-  height: 100%;
-}
-
-.splide__slide p {
-  margin-top: 0.5em !important;
-  font-size: 1.1em !important;
-}
-
-.splide__slide .fake-title {
-  font-size: 1.3em !important;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.5;
-  margin: 1.6em 0 0.8em;
-  margin-top: 0 !important;
-}
-
-.splide__track {
-  transition: height 0.2s;
-}
-
-/* transparent, big arrow buttons */
-button.splide__arrow {
-  background: transparent;
-  transition: background-color 0.3s ease !important;
-  width: 60px;
-  height: 60px;
-}
-
-button.splide__arrow svg {
-  fill: var(--md-primary-fg-color--light) !important;
-  width: 2.2em;
-  height: 2.2em;
-}
-
-button.splide__arrow:hover {
-  background: rgba(var(--product-primary-color-rgb), 0.08) !important;
-}
-
-button.splide__arrow:disabled {
-  display: none;
-}
-
-/* dots are lines, below the carousel */
-ul.splide__pagination {
-  bottom: -30px;
-}
-
-.splide__pagination__page {
-  height: 4px;
-  width: 40px;
-  margin: 0 !important;
-  border-radius: 0;
-  background: var(--md-primary-fg-color--light);
-  opacity: 0.25;
-}
-
-.splide__pagination__page.is-active {
-  opacity: 1;
-  transform: none;
-  background: var(--md-primary-fg-color--light);
 }
 
 .grid.cards.use-cases-cards {

@@ -5,7 +5,7 @@ description: "Four Master Nodes with autoscaling Media Nodes. Install, upgrade a
 
 # OpenVidu High Availability
 
-OpenVidu High Availability is part of the <span style="font-size: 12px;" class="openvidu-tag openvidu-pro-tag">PRO</span> edition of OpenVidu. You have the following deployment options:
+OpenVidu High Availability is part of the **PRO**{ .openvidu-tag .openvidu-pro-tag } edition of OpenVidu. You have the following deployment options:
 
 Choose your provider:
 

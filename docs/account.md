@@ -11,11 +11,6 @@ hide:
 page_features:
   - openviduregister
 ---
-<style>
-  .md-typeset h1 {
-    display: none;
-  }
-</style>
 <script>
 window.amplifyActive = true;
 </script>

@@ -140,39 +140,39 @@ OpenVidu Components Demo App offers essential features that make video conferenc
 
 <div class="grid cards" markdown>
 
--   :material-translate-variant:{ .ov-call-docs-icon .middle } __Multilingual__
+-   :material-translate-variant:{ .card-icon .middle } __Multilingual__
 
     ---
 
     Supports for multiple languages, allowing users to select their preferred language for the interface
 
--   :material-microphone:{ .ov-call-docs-icon .middle } :material-video:{ .ov-call-docs-icon .middle } __Device Selection__
+-   :material-microphone:{ .card-icon .middle } :material-video:{ .card-icon .middle } __Device Selection__
 
     ---
 
     Users can choose their preferred audio and video devices before and during the call
 
--   :material-fullscreen:{ .ov-call-docs-icon .middle } __Fullscreen Mode__
+-   :material-fullscreen:{ .card-icon .middle } __Fullscreen Mode__
 
     ---
 
 	Offers a fullscreen mode for users to **focus on the videoconference without any distractions**
 
 
--   :material-monitor-share:{ .ov-call-docs-icon .middle } __Screen Sharing__
+-   :material-monitor-share:{ .card-icon .middle } __Screen Sharing__
 
     ---
 
     Allow users to **share their screen and their camera at the same time** with other participants in the call
 
 
--   :material-view-grid-plus:{ .ov-call-docs-icon  .middle } __Powerful Layout__
+-   :material-view-grid-plus:{ .card-icon  .middle } __Powerful Layout__
 
     ---
 
     Offers a powerful layout where users can **view multiple participants simultaneously** in a **grid layout** or **focus on a single participant**
 
--   :material-chat:{ .ov-call-docs-icon .middle } __Chat Integration__
+-   :material-chat:{ .card-icon .middle } __Chat Integration__
 
     ---
 
@@ -189,32 +189,32 @@ The advanced features of OpenVidu Components Demo App enhance the video conferen
 
 <div class="grid cards" markdown>
 
--   :material-account-voice:{ .ov-call-docs-icon .middle } __Speaker Detection__
+-   :material-account-voice:{ .card-icon .middle } __Speaker Detection__
 
     ---
 
     **Highlights the active speaker automatically**, making it easier for participants to follow the conversation
 
--   :material-connection:{ .ov-call-docs-icon .middle } __Automatic Reconnection__
+-   :material-connection:{ .card-icon .middle } __Automatic Reconnection__
 
     ---
 
     Ensures that **users are automatically reconnected** to the call in case of temporary network issues
 
 
--   :material-record-circle-outline:{ .ov-call-docs-icon .middle } __Recording__
+-   :material-record-circle-outline:{ .card-icon .middle } __Recording__
 
     ---
 
     Supports recording of video conferences for later playback
 
--   :material-broadcast:{ .ov-call-docs-icon .middle } __Broadcasting (Live Streaming)__
+-   :material-broadcast:{ .card-icon .middle } __Broadcasting (Live Streaming)__
 
     ---
 
     Allows **live streaming** of the video conference to platforms like **YouTube**, **Twitch**, and others **for a wider audience**
 
--   :material-blur:{ .ov-call-docs-icon .middle } __Virtual Backgrounds__
+-   :material-blur:{ .card-icon .middle } __Virtual Backgrounds__
 
     ---
 
@@ -228,13 +228,13 @@ An admin dashboard is integrated into OpenVidu Components Demo App to provide ad
 
 <div class="grid cards" markdown>
 
--   :material-lock:{ .ov-call-docs-icon .middle } __Admin Authentication__
+-   :material-lock:{ .card-icon .middle } __Admin Authentication__
 
     ---
 
     Provides admin authentication to ensure that only authorized users can access the admin dashboard
 
--   :material-note-search:{ .ov-call-docs-icon .middle } __Recording Management__
+-   :material-note-search:{ .card-icon .middle } __Recording Management__
 
     ---
 

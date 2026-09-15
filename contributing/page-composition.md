@@ -40,10 +40,13 @@ page_features:
 Each feature key expects a specific HTML structure. **If you copy a visual pattern from another
 page, copy its feature keys too.** These are the keys currently used:
 
-- `setupwowjs`: the page has [wow.js](https://wowjs.uk/) animations (elements with class `wow`):
+- `revealonscroll`: the page has reveal-on-scroll animations
+  ([sal.js](https://github.com/mciastek/sal), vendored as `docs/javascripts/sal.js` and
+  `docs/stylesheets/sal.css`): an element carrying `data-sal="slide-up"` fades in the first time
+  it scrolls into view. In an attribute list write `{ .some-class data-sal="slide-up" }`.
 
   ```html
-  <div class="wow animated animatedFadeInUp fadeInUp">
+  <div class="second-slogan" data-sal="slide-up">
     ...
   </div>
   ```
@@ -58,7 +61,9 @@ page, copy its feature keys too.** These are the keys currently used:
   </div>
   ```
 
-- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/):
+- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/). Loads `splide.min.js`,
+  Splide's `splide.min.css` and [`carousel.css`](../docs/stylesheets/carousel.css), which restyles the
+  arrows and pagination and gives the slides their card look:
 
   ```html
   <div class="splide" markdown>
@@ -85,6 +90,7 @@ page, copy its feature keys too.** These are the keys currently used:
 
 - `leadform`: the page has the enterprise lead form (a `<form class="lead-form">`, only
   [`support/index.md`](../docs/support/index.md)). Loads
+  [`lead-form.css`](../docs/stylesheets/lead-form.css) and
   [`lead-form.js`](../docs/javascripts/lead-form.js), which submits to the leads endpoint and
   redirects to `/support/thanks/`. The field names are the endpoint's contract — changing them
   requires changing the backend too (the `CreateLead` function in
@@ -114,8 +120,8 @@ page, copy its feature keys too.** These are the keys currently used:
   automatically.
 
 The `page_features:`↔HTML contract is checked by `ovweb lint` (a page whose content carries
-glightbox/feature-cards/carousel/lazy-video markup must declare the matching feature key) — see
-[checks.md](checks.md).
+`feature-cards`, `splide`, `lazy-video`, `lead-form` or `data-sal` markup must declare the matching
+feature key) — see [checks.md](checks.md).
 
 ### Images
 
@@ -264,6 +270,50 @@ Site-wide changes go here — follow the "before/after" comment markers inside t
 Comments in these templates use the Jinja form (`{# … #}`): an HTML comment is copied into every
 built page. A partial copied from upstream opens with a Jinja comment naming the file it came
 from, so it can be re-diffed on a theme bump.
+
+## Stylesheets
+
+Every page loads, in this order, [`colors.css`](../docs/stylesheets/colors.css) (the `--ov-*` brand
+tokens, Material's colour variables and the per-scheme overrides),
+[`extra.css`](../docs/stylesheets/extra.css) (everything site-wide, in declared sections: fonts,
+Material overrides, utilities, components, page areas, then one `@media` block per breakpoint) and
+[`unsemantic-grid.css`](../docs/stylesheets/unsemantic-grid.css) (the complete grid build: use any
+of its classes, never edit it). Everything else is loaded by a feature key: `home.css`,
+`meet.css`/`platform.css` over `product.css`, `carousel.css` with Splide's theme, `lead-form.css`,
+`sal.css`.
+
+Where a rule goes:
+
+- **A repeated colour** → a `--ov-*` token in `colors.css`. The product sheets derive their
+  `--product-*` values from the tokens and `product.css` maps those onto Material's variables;
+  only white, black and single-use UI colours stay literal.
+- **A style for one page or feature** → that feature's sheet, or a new sheet behind a new feature
+  key. Pages never carry `<style>` blocks.
+- **A `style=""` attribute** → an existing utility in `extra.css` first (`.text-center`, `.nowrap`,
+  `.w-25`/`.w-50`/`.w-8em`…, `.flex-row-center`, `.centered-section`, `.my-4em`, the
+  `.cta-section` block). A pattern that recurs four times or more earns a class; below that,
+  inline is fine.
+- **Product tags** are written `**PRO**{ .openvidu-tag .openvidu-pro-tag }` /
+  `**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }` and have one size everywhere, 0.8em of
+  the surrounding text: never size one inline. Only inside a raw HTML table (the pricing table)
+  do they stay `<span>`s.
+- **Anything site-wide** → the matching section of `extra.css`; a responsive rule joins the
+  existing `@media` block for its breakpoint.
+
+A utility that sets margins carries the `.md-typeset` prefix (`.md-typeset .cta-section`,
+`.md-typeset .centered-section`, `.md-typeset .my-4em`): a bare class does not outrank Material's
+`.md-typeset > :first-child` / `> :last-child` margin resets, which the inline style it replaces
+did.
+
+Precedence: Material's CSS is unlayered, so `product.css` keeps its `:root:root` selector and
+`!important`s — an `@layer` would put our rules *below* the theme's.
+
+The tutorials mirror ([livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs))
+ships its own `extra.css` and `colors.css` and the same `unsemantic-grid.css`, and its
+`tools/sync-check.py` compares Markdown only. A class used by a synced tutorial page or snippet
+must exist on both sides, and a change to a selector both sheets define (footer, product tags,
+tabbed content, lightbox, newsletter form, `.text-center`, `.nowrap`, `.w-25`, `.w-50`) is made on
+both.
 
 ## HTML-in-Markdown
 

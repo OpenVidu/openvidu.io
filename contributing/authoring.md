@@ -134,7 +134,10 @@ cd ../livekit-tutorials-docs && tools/sync-check.py --openvidu-io ../openvidu.io
 
 It lists the differences that are intentional (the branch each side links, the link form, the
 framing, step 1, the image markup, the external-link icons, the Azure recording variants) and
-reports anything else as drift. Its README carries the same table.
+reports anything else as drift. Its README carries the same table. The check covers Markdown
+only: a class a synced page or snippet uses must exist in both sites' `extra.css`, and
+`unsemantic-grid.css` is the same file on both — see
+[page-composition.md](page-composition.md#stylesheets).
 
 To apply changes in the web _livekit-tutorials.openvidu.io_:
 

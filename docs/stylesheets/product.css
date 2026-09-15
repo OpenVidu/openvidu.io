@@ -1,6 +1,6 @@
-/* Shared product theming, loaded together with meet.css or platform.css.
-   Each product sheet defines the --product-* palette; this block maps it
-   onto Material's variables. */
+/* Product pages: maps the --product-* palette that meet.css or platform.css defines onto
+   Material's variables (see the layering note in colors.css). :root:root outranks
+   colors.css's :root, and the !importants outrank Material's own unlayered declarations. */
 
 :root:root {
   --md-primary-fg-color: var(--product-primary-color) !important;
@@ -9,7 +9,7 @@
   --md-primary-bg-color: rgb(255, 255, 255) !important;
   --md-primary-bg-color--dark: var(--product-primary-color) !important;
   --md-accent-fg-color: rgba(var(--product-primary-color-rgb), 0.8) !important;
-  --md-accent-fg-color--transparent: rgb(129, 129, 129) !important;
+  --md-accent-fg-color--transparent: var(--ov-grey-muted) !important;
   --md-accent-bg-color: rgb(255, 255, 255) !important;
   --md-accent-bg-color--light: rgb(255, 255, 255) !important;
 

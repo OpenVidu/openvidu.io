@@ -1,105 +1,32 @@
-:root:root {
-  --primary-color-of-meet: rgb(0, 147, 73);
-  --primary-color-of-platform: rgb(0, 136, 170);
-  --accent-color-of-meet: rgb(6, 211, 98);
-  --accent-color-of-platform: rgb(0, 200, 247);
+/* Site-wide stylesheet, loaded on every page after colors.css. Sections, in cascade
+   order: fonts, Material overrides, utilities, components, page areas, responsive (one
+   @media block per breakpoint). Page-scoped rules live in the sheets a page_features key
+   loads (home.css, meet.css, platform.css, product.css, lead-form.css, splide.min.css); see
+   contributing/page-composition.md. */
+
+/* ==========================================================================
+   1. Fonts
+   ========================================================================== */
+
+@font-face {
+  font-family: "Arciform";
+  src: url("/assets/fonts/Arciform.woff2") format("woff2"),
+    url("/assets/fonts/Arciform.woff") format("woff");
+  font-display: swap;
 }
 
-.openvidu-tag {
-  pointer-events: none;
-  display: inline-block;
-  margin: 0 3px 0 3px;
-  color: white;
-  font-weight: bold;
-  padding: 0px 5px;
-  border-radius: 3px;
-  font-size: 1em;
-  line-height: 1.8em;
-  font-family: var(--md-text-font-family);
-  font-feature-settings: "kern", "liga";
-  vertical-align: text-bottom;
+/* theme.font is false (main.html loads the one self-hosted Google Fonts stylesheet),
+   so Material's font variables are declared here instead. */
+:root {
+  --md-text-font: "Tomorrow";
+  --md-code-font: "Roboto Mono";
 }
 
-#pricing-table .openvidu-tag {
-  vertical-align: top;
-}
+/* ==========================================================================
+   2. Material overrides
+   ========================================================================== */
 
-/* Product tag inside a heading */
-.openvidu-tag.openvidu-tag-heading {
-  font-size: 0.6em;
-}
-
-/* Layout utilities (replace the recurring inline style="" attributes) */
-.nowrap {
-  white-space: nowrap;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.w-8em {
-  width: 8em;
-}
-
-/* Keep identifiers in a table's first column on one line. Material sets
-   word-break: break-word on all inline code, which splits names like
-   `roomConfig` mid-word in narrow cells.
-
-   Opt a table in by wrapping it (not the table itself) in:
-       <div class="nowrap-first-column" markdown>
-   Material finds tables with "table:not([class])" to apply both its own styling
-   and its horizontal-scroll wrapper, so putting the class on the <table> element
-   would break the table instead of fixing it. Tables too wide to shrink still
-   scroll inside Material's .md-typeset__scrollwrap. */
-.md-typeset .nowrap-first-column th:first-child code,
-.md-typeset .nowrap-first-column td:first-child code {
-  white-space: nowrap;
-}
-
-/* Flow a list of short items into as many columns as the width allows, instead
-   of one tall single-file column. Opt in by wrapping the list in:
-       <div class="column-list" markdown>
-   The column width drives the count, so it collapses to one column on phones. */
-.md-typeset .column-list ul {
-  column-width: 11em;
-  column-gap: 1.5rem;
-}
-
-.md-typeset .column-list li {
-  break-inside: avoid;
-}
-
-.openvidu-community-tag {
-  background-color: #868686;
-}
-
-.openvidu-pro-tag {
-  background-color: #9c27b0;
-}
-
-.openvidu-tag-nav {
-  pointer-events: none;
-  display: inline-block;
-  margin: 0 3px 0 3px;
-  color: white;
-  font-weight: bold;
-  padding: 0px 5px;
-  border-radius: 3px;
-  font-size: 0.6em;
-  line-height: 1.9em;
-  font-family: var(--md-text-font-family);
-  font-feature-settings: "kern", "liga";
-  vertical-align: text-bottom;
-}
-
-span:has(> .openvidu-tag) {
-  display: inline-block;
-}
-
-span:has(> a > .openvidu-tag) {
-  display: inline-block;
-}
+/* Layout */
 
 .md-grid {
   max-width: 70rem;
@@ -109,462 +36,38 @@ span:has(> a > .openvidu-tag) {
   margin-bottom: 3.5rem;
 }
 
+/* Header */
+
+.md-header__title {
+  line-height: 2.6rem;
+}
+
 .md-header__topic .md-ellipsis {
   font-family: Arciform;
   font-weight: 100;
   font-size: 18px;
 }
 
-.md-typeset .md-button:not(.md-button--primary) {
-  color: var(--md-typeset-color);
+.md-header__button.md-logo {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.md-typeset .md-button:hover:not(.md-button--primary) {
-  color: var(--md-accent-bg-color);
-  background-color: var(--md-typeset-color);
-  border-color: var(--md-typeset-color);
+.md-header__button.md-logo:has(> img.custom-logo) {
+  margin-left: 0.6rem !important;
 }
 
-.md-typeset .md-button:focus:not(.md-button--primary) {
-  color: var(--md-accent-bg-color);
-  background-color: var(--md-typeset-color);
-  border-color: var(--md-typeset-color);
+.md-header__button.md-logo > img {
+  height: 1.7rem !important;
 }
 
-.md-typeset figcaption {
-  max-width: 25rem;
-  font-size: 0.74rem;
+.md-header__button.md-logo > img.custom-logo {
+  height: 1.6rem !important;
+  background-color: #ffffff38;
+  border-radius: 5px;
 }
 
-.md-copyright {
-  padding-top: 0.6rem;
-}
-
-.md-social {
-  padding: 0;
-  margin-left: -0.6rem;
-}
-
-.md-social__link {
-  height: 2.2rem;
-  width: 2.2rem;
-  line-height: 2.2;
-}
-
-.md-social__link svg {
-  max-height: 1.1rem;
-}
-
-/* Icon shortcodes wrap their SVG in a .twemoji span, which sizes it from this variable
-   and aligns itself rather than the SVG */
-.md-social__link .twemoji {
-  --md-icon-size: 1.1rem;
-  vertical-align: -25%;
-}
-
-.footer-grid {
-  width: 100%;
-  text-align: center;
-  padding: 0.8rem 0 1rem 0;
-}
-
-.grid-container.footer-grid {
-  max-width: none;
-}
-
-@media (min-width: 1220px) {
-  .grid-20.footer-products-gap {
-    margin-left: 1.2rem;
-    width: calc(20% - 1.2rem);
-  }
-}
-
-.footer-conditions-list {
-  font-size: 0.64rem;
-  display: grid;
-}
-
-.register-container {
-  margin: 0 6vw 0 6vw;
-}
-
-.sign-btn-out-styles {
-  font-size: 14px !important;
-  padding: 8px !important;
-  line-height: 10px !important;
-}
-
-/* Tab background color */
-.tabbed-labels label {
-  text-align: center;
-  font-size: 20px;
-}
-
-.tabbed-content {
-  padding: 0 12px 0 16px;
-  border: 2px solid var(--md-default-fg-color--lightest);
-  border-top: none;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  background-color: var(--md-code-bg-color);
-}
-
-.tabbed-content .tabbed-block code {
-  background-color: var(--md-default-bg-color);
-}
-
-.tabbed-content .tabbed-block .unstyle-tabbed-code code {
-  background-color: inherit;
-}
-
-.tabbed-content .tabbed-block .tabbed-content {
-  padding: 0;
-  border: none;
-  border-radius: 0;
-}
-
-@font-face {
-  font-family: "Arciform";
-  src: url("/assets/fonts/Arciform.woff2") format("woff2"),
-    url("/assets/fonts/Arciform.woff") format("woff");
-  font-display: swap;
-}
-
-/* theme.font is false (the header loads the one self-hosted Google Fonts
-   stylesheet), so Material's font variables are declared here instead. */
-:root {
-  --md-text-font: "Tomorrow";
-  --md-code-font: "Roboto Mono";
-}
-
-/* A standalone screenshot that sets its own width and needs no grid to sit centred */
-/* Shared card/image utilities (moved from the retired openvidu-call.css) */
-.ov-call-docs-icon {
-  font-size: 1.5em;
-}
-
-.no-border,
-.no-border li {
-  border: none !important;
-}
-.no-shadow,
-.no-shadow li {
-  box-shadow: none !important;
-}
-.round-corners {
-  border-radius: 8px;
-}
-.three-cols {
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 12rem), 1fr)
-  ) !important;
-}
-
-.gslide-image img {
-  background: transparent !important;
-}
-
-.glightbox-clean .gslide-video {
-  background: transparent !important;
-}
-
-.glightbox-clean .gslide-video video {
-  background: transparent !important;
-}
-
-.gslide-image {
-  max-width: 1500px;
-}
-
-/* A standalone image is centred whether or not the lightbox wrapped it in an anchor
-   (`skip-gallery` images never get one), and whether its parent is a paragraph or a layout
-   cell: an image written into a `markdown="span"` cell has no paragraph at all, and without
-   the second pair it sits hard against the neighbouring text column. */
-p:has(> a.glightbox),
-p:has(> img),
-div[class*="grid-"]:has(> a.glightbox),
-div[class*="grid-"]:has(> img) {
-  text-align: center;
-}
-
-/* GLightbox animations */
-
-.gzoomIn {
-  animation: gzoomIn 0.4s ease !important;
-}
-
-.gzoomOut {
-  animation: gzoomOut 0.2s ease !important;
-}
-
-.gfadeOut {
-  animation: gfadeOut 0.2s ease !important;
-}
-
-/* Home page */
-
-.top-home-section {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  min-height: calc(100vh - 4.8rem);
-  padding: 2.5em 15em 5em 15em;
-  background: var(--top-home-section-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.center-align {
-  text-align: center;
-}
-
-.top-home-img {
-  width: 34%;
-}
-
-.slogan {
-  margin-bottom: 0.6em !important;
-  font-size: 2.2em !important;
-  text-align: center;
-}
-
-.second-slogan {
-  padding: 0 3em;
-}
-
-.second-slogan h2 {
-  font-size: 2em;
-  text-align: center;
-  margin-top: 0;
-}
-
-.home-description {
-  font-size: 0.98rem;
-  text-align: center;
-  max-width: 75rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.home-buttons {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-}
-
-.home-buttons a {
-  margin: 0.5em 0.25em 0 0.25em;
-  margin-left: 0.25em;
-}
-
-.home-under-cta {
-  text-align: center;
-  font-size: 0.9rem;
-  margin-top: 0.8em;
-}
-
-.home-under-cta a {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.home-under-cta-sep {
-  margin: 0 0.5em;
-}
-
-.home-trust-line {
-  text-align: center;
-  font-size: 0.8rem;
-  margin: 0;
-}
-
-.home-trust-line a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-/* Shields.io badges: license/stars/docker pulls, and below them publications/
-   citations/experience/OSS affiliations. Rendered as plain <img> tags
-   (shields.io computes and caches the values server-side), so no client-side
-   fetch/formatting logic is needed. */
-.home-badges {
-  text-align: center;
-  margin: 0.5em 0 0;
-  line-height: 0;
-}
-
-.home-credentials-badges {
-  margin-top: 0.7em;
-}
-
-.home-badges a {
-  display: inline-block;
-  margin: 4px 5px;
-}
-
-.home-badges img {
-  height: 27px;
-  vertical-align: middle;
-}
-
-.md-header__title {
-  line-height: 2.6rem;
-}
-
-.sign-btn-in-styles {
-  font-size: 14px !important;
-  padding: 8px !important;
-  line-height: 10px !important;
-}
-
-@media (max-width: 1219px) {
-  .top-home-section {
-    min-height: calc(100vh - 2.4rem);
-    padding: 3em 3em 5em 3em;
-  }
-}
-
-/* Tablet */
-
-/* Mobile */
-@media (max-width: 959px) {
-  .top-home-img {
-    width: 85%;
-  }
-  #account-btn .user-name {
-    display: none;
-  }
-
-  .slogan {
-    font-size: 1.5em !important;
-  }
-
-  .second-slogan h2 {
-    font-size: 1.5em !important;
-  }
-
-  .home-description {
-    font-size: 0.9rem !important;
-  }
-
-  .log-in-div {
-    width: 7rem !important;
-    font-size: 0.7rem !important;
-    margin-left: 1em !important;
-    margin-right: 0.7em !important;
-  }
-  [dir="ltr"] .md-header__title {
-    margin-left: 0.7rem !important;
-  }
-  [dir="ltr"] .md-version__current {
-    margin-left: 0.8rem !important;
-  }
-  /* Outdated warning */
-  .outdated-warning-text {
-    display: none;
-  }
-  div[data-md-component="outdated"] {
-    margin-right: 2em !important;
-    margin-bottom: 2em !important;
-  }
-  div[data-md-component="outdated"] aside div.md-banner__inner {
-    margin: 0.3rem auto;
-    padding: 0 0.5rem;
-    font-size: 0.6rem;
-  }
-}
-
-/* Mobile extra small */
-@media (max-width: 500px) {
-  /* Only the breadcrumbs may scroll sideways. A bare `nav` selector would catch
-     the header too, and overflow-x: auto makes it a clip container that traps
-     the version dropdown inside the header bar. */
-  .md-path {
-    overflow-x: auto;
-  }
-  /* Room for the version button's full "X.Y latest" beside the palette toggle. */
-  [dir="ltr"] .md-version__current {
-    margin-left: 0.2rem !important;
-  }
-  .log-in-div {
-    width: 6rem !important;
-    margin-left: 0.2em !important;
-    margin-right: 0.4em !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .md-header__button.md-icon {
-    margin-left: 0.1rem;
-    margin-right: 0.1rem;
-  }
-  [dir="ltr"] .md-version__current {
-    margin-left: 0.1rem !important;
-  }
-  .log-in-div {
-    width: 5.2rem !important;
-  }
-}
-
-/* Reveal-on-scroll. Hiding is gated on html.js-reveal (added only by the
-   reveal script), so with JS off the content simply stays visible. */
-
-@keyframes fadeInUp {
-  from {
-    transform: translate3d(0, 30px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-}
-
-html.js-reveal .wow {
-  visibility: hidden;
-}
-
-html.js-reveal .wow.revealed {
-  visibility: visible;
-}
-
-html.js-reveal .animatedFadeInUp {
-  opacity: 0;
-}
-
-.animated {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-}
-
-.fadeInUp {
-  animation-name: none;
-}
-
-html.js-reveal .revealed.fadeInUp {
-  animation-name: fadeInUp;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html.js-reveal .wow {
-    visibility: visible;
-  }
-
-  html.js-reveal .animatedFadeInUp {
-    opacity: 1;
-  }
-
-  html.js-reveal .revealed.fadeInUp {
-    animation: none;
-  }
-}
-
-video::-internal-media-controls-overlay-cast-button {
-  display: none;
-}
+/* Sign-in / account controls in the header */
 
 .log-in-div {
   margin-left: 2em;
@@ -583,6 +86,13 @@ video::-internal-media-controls-overlay-cast-button {
   line-height: 0.8em;
   min-width: 85px;
   text-align: center;
+}
+
+.sign-btn-in-styles,
+.sign-btn-out-styles {
+  font-size: 14px !important;
+  padding: 8px !important;
+  line-height: 10px !important;
 }
 
 a#account-btn {
@@ -609,350 +119,12 @@ a#account-btn .user-name {
   margin-right: 0.3em;
 }
 
-#pricing-table th,
-#pricing-table td {
-  text-align: center;
-  vertical-align: middle;
-  width: 22%;
-  font-size: 0.7rem;
-}
-
-#pricing-table[name="big-pricing-table"] {
-  width: auto;
-  margin: 2vw 6vw;
-}
-
-#pricing-table th:first-child,
-#pricing-table td:first-child {
-  width: 13%;
-}
-
-#pricing-table .title {
-  font-size: 0.74rem;
-}
-
-#pricing-table .title .openvidu-tag {
-  font-size: 0.7rem;
-}
-
-#pricing-table[name="big-pricing-table"] .title {
-  font-size: 0.85rem;
-}
-
-#pricing-table[name="big-pricing-table"] .title .openvidu-tag {
-  font-size: 0.8rem;
-}
-
-#pricing-table .first-column {
-  font-weight: 700;
-}
-
-#pricing-table .border-right {
-  border-right: 0.05rem solid var(--md-typeset-table-color);
-}
-
-#pricing-table .border-left {
-  border-left: 0.05rem solid var(--md-typeset-table-color);
-}
-
-.price-cell {
-  font-size: 0.9rem !important;
-  font-weight: bold;
-  color: white;
-  margin-left: 10px;
-}
+/* Navigation tabs and the dropdown menu (overrides/partials/tabs.html) */
 
 nav .md-tabs__item {
   font-weight: 500;
 }
 
-.md-banner {
-  background-color: var(--slate-md-default-bg-color);
-}
-
-.md-banner #announce a {
-  font-weight: 500;
-}
-
-.hide {
-  display: none;
-}
-
-.hide-without-display {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  display: inline-block !important;
-}
-
-.hide-without-display * {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  display: inline-block !important;
-}
-
-.large-icon {
-  --md-icon-size: 1.5em !important;
-}
-
-.use-case-img {
-  padding: 1.5em;
-}
-
-.basic-concepts-img-1 {
-  width: 82%;
-}
-
-.basic-concepts-img-2 {
-  width: 100%;
-}
-
-/* The left diagram is the narrower of the pair, so its caption has to drop to
-   line up with the caption of the one beside it */
-.basic-concepts-caption figcaption {
-  margin-top: 3em;
-}
-
-hr {
-  border-bottom: none !important;
-  background-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(77, 77, 77, 1) 25%,
-    rgba(77, 77, 77, 1) 75%,
-    transparent 100%
-  );
-  width: 100%;
-  height: 1px;
-}
-
-/* Outdated warning */
-div[data-md-component="outdated"] {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin-right: 3em;
-  margin-bottom: 3em;
-  text-align: center;
-  z-index: 100000;
-}
-div[data-md-component="outdated"] aside {
-  background-color: #ffcc00;
-  border-radius: 2px;
-}
-
-.md-tooltip2 {
-  font-family: system-ui, Roboto, "Open Sans", "Helvetica Neue", sans-serif !important;
-}
-
-.inner-table th {
-  font-weight: inherit !important;
-}
-
-.deploy-button {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  max-width: fit-content;
-  margin: auto;
-}
-
-.deploy-button.deploy-to-aws-btn {
-  background-color: #ff9900;
-  border: none;
-  border-radius: 5px;
-  color: #252f3e !important;
-  padding: 8px 24px;
-  font-size: 1.2em;
-  font-family: "Amazon Ember", sans-serif;
-  transition: all 0.125s ease;
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
-.deploy-button.deploy-to-aws-btn:hover {
-  background-color: #ff9900 !important;
-  filter: saturate(50%) brightness(130%);
-}
-
-.deploy-to-azure-btn img {
-  min-width: 250px;
-  transition: all 0.125s ease;
-}
-
-.deploy-to-azure-btn img:hover {
-  filter: saturate(50%) brightness(130%);
-}
-
-.ai-service-icon {
-  font-size: 2em;
-  margin-right: 0.3em;
-}
-
-.ai-agent-link {
-  display: block;
-  margin-left: 3em;
-}
-
-.ai-provider-icon {
-  width: 36px;
-  height: 36px;
-}
-
-.not-selectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.logo-header {
-  text-align: center;
-  margin-bottom: 0.6em;
-}
-
-h1.meetplatform-slogan,
-h2.meetplatform-slogan {
-  text-align: center;
-  font-size: 1.6em;
-  margin-top: 0;
-  margin-bottom: 1.6em;
-}
-
-/* Match the h2 slogans' look: Material gives h1 a lighter color by default */
-h1.meetplatform-slogan {
-  color: var(--md-default-fg-color);
-}
-
-.md-header__button.md-logo {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.md-header__button.md-logo:has(> img.custom-logo) {
-  margin-left: 0.6rem !important;
-}
-
-.md-header__button.md-logo > img {
-  height: 1.7rem !important;
-}
-
-.md-header__button.md-logo > img.custom-logo {
-  height: 1.6rem !important;
-  background-color: #ffffff38;
-  border-radius: 5px;
-}
-
-.control-height {
-  max-height: 50vh;
-}
-
-.compare-table-logo {
-  max-height: 60px;
-}
-
-.compare-table-icon-yes {
-  color: rgb(6, 211, 98);
-  --md-icon-size: 1.525em !important;
-}
-
-.compare-table-icon-no {
-  color: rgb(255, 0, 0);
-  --md-icon-size: 1.525em !important;
-}
-
-.compare-table-icon-progress {
-  color: #00a2ca;
-  --md-icon-size: 1.525em !important;
-}
-
-.platform-primary-color {
-  background-color: var(--primary-color-of-platform) !important;
-  border-color: var(--primary-color-of-platform) !important;
-}
-
-.meet-primary-color {
-  background-color: var(--primary-color-of-meet) !important;
-  border-color: var(--primary-color-of-meet) !important;
-}
-
-.meet-link-color {
-  color: var(--accent-color-of-meet) !important;
-}
-
-.platform-link-color {
-  color: var(--accent-color-of-platform) !important;
-}
-
-.accent-code {
-  color: var(--md-accent-bg-color) !important;
-  font-weight: bold;
-  background-color: var(--md-primary-fg-color);
-}
-
-.external-link-icon {
-  font-size: 0.75em;
-}
-
-.md-footer-meta .footer-column {
-  text-align: left;
-}
-
-.md-footer-meta .md-social {
-  flex-wrap: wrap;
-  row-gap: 0.4rem;
-}
-
-.md-footer-meta .footer-column h4 {
-  font-weight: 400;
-  font-size: 0.75rem;
-}
-
-.md-footer-meta .md-copyright {
-  margin-left: 0 !important;
-  padding-top: 0 !important;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#mc-embedded-subscribe {
-  background-color: inherit;
-  color: var(--slate-md-typeset-color);
-  border-color: var(--slate-md-typeset-color);
-}
-
-#mc-embedded-subscribe:hover {
-  color: var(--md-accent-bg-color);
-  background-color: hsla(var(--md-hue), 18%, 86%, 0.82);
-  border-color: hsla(var(--md-hue), 18%, 86%, 0.82);
-}
-
-#mce-EMAIL {
-  padding-left: 10px;
-  background-color: var(--md-footer-fg-color--light);
-  color: black;
-}
-
-#mce-EMAIL::placeholder {
-  color: rgba(0, 0, 0, 0.75);
-}
-
-.acknowledgments-footer {
-  filter: saturate(0.8) contrast(0.92) brightness(0.96);
-}
-
-/* Dropdown Menu */
 .md-tabs,
 .md-tabs__list {
   overflow: visible !important;
@@ -1026,7 +198,6 @@ button.md-tabs__dropdown-toggle {
   font-weight: 700;
 }
 
-/* Adjust caret */
 .md-tabs__link .dropdown-caret {
   margin-left: 5px;
   width: 0.9rem;
@@ -1057,16 +228,302 @@ button.md-tabs__dropdown-toggle {
   opacity: 1;
 }
 
-/* Constrains the width, not the height: the portraits carry width/height attributes, so
-   their width is definite, and a max-height would clamp the two axes independently and
-   stretch them. 376px is the intended display width - half the 752px source, so the
-   portraits stay sharp on a 2x display. Needs the `.md-typeset` prefix to outrank the
-   theme's own `.md-typeset img { max-width: 100% }`. */
-.md-typeset .about-us-img {
-  max-width: 376px;
+/* Typography and content elements */
+
+.md-typeset .md-button:not(.md-button--primary) {
+  color: var(--md-typeset-color);
 }
 
-/* Tutorial cards, provider buttons/chips (merged from livekit-tutorials.css) */
+.md-typeset .md-button:hover:not(.md-button--primary) {
+  color: var(--md-accent-bg-color);
+  background-color: var(--md-typeset-color);
+  border-color: var(--md-typeset-color);
+}
+
+.md-typeset .md-button:focus:not(.md-button--primary) {
+  color: var(--md-accent-bg-color);
+  background-color: var(--md-typeset-color);
+  border-color: var(--md-typeset-color);
+}
+
+.md-typeset figcaption {
+  max-width: 25rem;
+  font-size: 0.74rem;
+}
+
+hr {
+  border-bottom: none !important;
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--ov-nav-grey) 25%,
+    var(--ov-nav-grey) 75%,
+    transparent 100%
+  );
+  width: 100%;
+  height: 1px;
+}
+
+.inner-table th {
+  font-weight: inherit !important;
+}
+
+.md-tooltip2 {
+  font-family: system-ui, Roboto, "Open Sans", "Helvetica Neue", sans-serif !important;
+}
+
+video::-internal-media-controls-overlay-cast-button {
+  display: none;
+}
+
+/* Content tabs (pymdownx.tabbed) */
+
+.tabbed-labels label {
+  text-align: center;
+  font-size: 20px;
+}
+
+.tabbed-content {
+  padding: 0 12px 0 16px;
+  border: 2px solid var(--md-default-fg-color--lightest);
+  border-top: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: var(--md-code-bg-color);
+}
+
+.tabbed-content .tabbed-block code {
+  background-color: var(--md-default-bg-color);
+}
+
+.tabbed-content .tabbed-block .tabbed-content {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Announce banner and the outdated-version warning */
+
+.md-banner {
+  background-color: var(--slate-md-default-bg-color);
+}
+
+.md-banner #announce a {
+  font-weight: 500;
+}
+
+div[data-md-component="outdated"] {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 3em;
+  margin-bottom: 3em;
+  text-align: center;
+  z-index: 100000;
+}
+
+div[data-md-component="outdated"] aside {
+  background-color: #ffcc00;
+  border-radius: 2px;
+}
+
+/* Footer (overrides/partials/footer.html) */
+
+.md-copyright {
+  padding-top: 0.6rem;
+}
+
+.md-social {
+  padding: 0;
+  margin-left: -0.6rem;
+}
+
+.md-social__link {
+  height: 2.2rem;
+  width: 2.2rem;
+  line-height: 2.2;
+}
+
+.md-social__link svg {
+  max-height: 1.1rem;
+}
+
+/* Icon shortcodes wrap their SVG in a .twemoji span, which sizes it from this variable
+   and aligns itself rather than the SVG */
+.md-social__link .twemoji {
+  --md-icon-size: 1.1rem;
+  vertical-align: -25%;
+}
+
+.footer-grid {
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem 0 1rem 0;
+}
+
+.grid-container.footer-grid {
+  max-width: none;
+}
+
+.footer-conditions-list {
+  font-size: 0.64rem;
+  display: grid;
+}
+
+.md-footer-meta .footer-column {
+  text-align: left;
+}
+
+.md-footer-meta .md-social {
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+}
+
+.md-footer-meta .footer-column h4 {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.md-footer-meta .md-copyright {
+  margin-left: 0 !important;
+  padding-top: 0 !important;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#mc-embedded-subscribe {
+  background-color: inherit;
+  color: var(--slate-md-typeset-color);
+  border-color: var(--slate-md-typeset-color);
+}
+
+#mc-embedded-subscribe:hover {
+  color: var(--md-accent-bg-color);
+  background-color: hsla(var(--md-hue), 18%, 86%, 0.82);
+  border-color: hsla(var(--md-hue), 18%, 86%, 0.82);
+}
+
+#mce-EMAIL {
+  padding-left: 10px;
+  background-color: var(--md-footer-fg-color--light);
+  color: black;
+}
+
+#mce-EMAIL::placeholder {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.acknowledgments-footer {
+  filter: saturate(0.8) contrast(0.92) brightness(0.96);
+}
+
+/* ==========================================================================
+   3. Utilities (replace the recurring inline style="" attributes)
+   ========================================================================== */
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.text-center,
+.center-align {
+  text-align: center;
+}
+
+.w-8em {
+  width: 8em;
+}
+
+.w-10em {
+  width: 10em;
+}
+
+.w-15em {
+  width: 15em;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.md-typeset .my-4em {
+  margin: 4em 0;
+}
+
+.flex-row-center {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.md-typeset .centered-section {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.md-typeset .centered-section-lg {
+  text-align: center;
+  margin: 3em 0;
+}
+
+.control-height {
+  max-height: 50vh;
+}
+
+.hide {
+  display: none;
+}
+
+.hide-without-display,
+.hide-without-display * {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  display: inline-block !important;
+}
+
+.not-selectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Grid cards */
+
+.no-border,
+.no-border li {
+  border: none !important;
+}
+
+.no-shadow,
+.no-shadow li {
+  box-shadow: none !important;
+}
+
+.round-corners {
+  border-radius: 8px;
+}
+
+.three-cols {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 12rem), 1fr)
+  ) !important;
+}
+
+/* Icons */
 
 .icon {
   margin: 5px;
@@ -1076,12 +533,316 @@ button.md-tabs__dropdown-toggle {
   font-size: 1.5rem;
 }
 
+.large-icon {
+  --md-icon-size: 1.5em !important;
+}
+
+.card-icon {
+  font-size: 1.5em;
+}
+
 .tab-icon {
   display: block !important;
 }
 
-.tutorials-container,
-.topic-container {
+.external-link-icon {
+  font-size: 0.75em;
+}
+
+/* Product colours on arbitrary elements */
+
+.platform-primary-color {
+  background-color: var(--ov-platform-primary) !important;
+  border-color: var(--ov-platform-primary) !important;
+}
+
+.meet-primary-color {
+  background-color: var(--ov-meet-primary) !important;
+  border-color: var(--ov-meet-primary) !important;
+}
+
+.meet-link-color {
+  color: var(--ov-meet-accent) !important;
+}
+
+.platform-link-color {
+  color: var(--ov-platform-accent) !important;
+}
+
+.accent-code {
+  color: var(--md-accent-bg-color) !important;
+  font-weight: bold;
+  background-color: var(--md-primary-fg-color);
+}
+
+/* Keep identifiers in a table's first column on one line. Material sets
+   word-break: break-word on all inline code, which splits names like
+   `roomConfig` mid-word in narrow cells.
+
+   Opt a table in by wrapping it (not the table itself) in:
+       <div class="nowrap-first-column" markdown>
+   Material finds tables with "table:not([class])" to apply both its own styling
+   and its horizontal-scroll wrapper, so putting the class on the <table> element
+   would break the table instead of fixing it. Tables too wide to shrink still
+   scroll inside Material's .md-typeset__scrollwrap. */
+.md-typeset .nowrap-first-column th:first-child code,
+.md-typeset .nowrap-first-column td:first-child code {
+  white-space: nowrap;
+}
+
+/* Flow a list of short items into as many columns as the width allows, instead
+   of one tall single-file column. Opt in by wrapping the list in:
+       <div class="column-list" markdown>
+   The column width drives the count, so it collapses to one column on phones. */
+.md-typeset .column-list ul {
+  column-width: 11em;
+  column-gap: 1.5rem;
+}
+
+.md-typeset .column-list li {
+  break-inside: avoid;
+}
+
+/* A standalone image is centred whether or not the lightbox wrapped it in an anchor
+   (`skip-gallery` images never get one), and whether its parent is a paragraph or a layout
+   cell: an image written into a `markdown="span"` cell has no paragraph at all, and without
+   the second pair it sits hard against the neighbouring text column. */
+p:has(> a.glightbox),
+p:has(> img),
+div[class*="grid-"]:has(> a.glightbox),
+div[class*="grid-"]:has(> img) {
+  text-align: center;
+}
+
+/* ==========================================================================
+   4. Components
+   ========================================================================== */
+
+/* COMMUNITY / PRO product tags */
+
+/* One size everywhere: 0.8em of the surrounding text, so the badge reads as a badge in a
+   paragraph, a list, a table cell or a heading alike. Never size a tag inline. */
+.openvidu-tag {
+  pointer-events: none;
+  display: inline-block;
+  margin: 0 3px 0 3px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 5px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  line-height: 1.8em;
+  font-family: var(--md-text-font-family);
+  font-feature-settings: "kern", "liga";
+  vertical-align: text-bottom;
+}
+
+.openvidu-community-tag {
+  background-color: var(--ov-grey);
+}
+
+.openvidu-pro-tag {
+  background-color: #9c27b0;
+}
+
+/* The tag inside a nav label (mkdocs.yml `nav:` entries) */
+.openvidu-tag-nav {
+  pointer-events: none;
+  display: inline-block;
+  margin: 0 3px 0 3px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 5px;
+  border-radius: 3px;
+  font-size: 0.6em;
+  line-height: 1.9em;
+  font-family: var(--md-text-font-family);
+  font-feature-settings: "kern", "liga";
+  vertical-align: text-bottom;
+}
+
+span:has(> .openvidu-tag) {
+  display: inline-block;
+}
+
+span:has(> a > .openvidu-tag) {
+  display: inline-block;
+}
+
+/* Pricing table */
+
+#pricing-table th,
+#pricing-table td {
+  text-align: center;
+  vertical-align: middle;
+  width: 22%;
+  font-size: 0.7rem;
+}
+
+#pricing-table[name="big-pricing-table"] {
+  width: auto;
+  margin: 2vw 6vw;
+}
+
+#pricing-table th:first-child,
+#pricing-table td:first-child {
+  width: 13%;
+}
+
+#pricing-table .openvidu-tag {
+  vertical-align: top;
+}
+
+#pricing-table .title {
+  font-size: 0.74rem;
+}
+
+#pricing-table .title .openvidu-tag {
+  font-size: 0.7rem;
+}
+
+#pricing-table[name="big-pricing-table"] .title {
+  font-size: 0.85rem;
+}
+
+#pricing-table[name="big-pricing-table"] .title .openvidu-tag {
+  font-size: 0.8rem;
+}
+
+#pricing-table .first-column {
+  font-weight: 700;
+}
+
+#pricing-table .border-right {
+  border-right: 0.05rem solid var(--md-typeset-table-color);
+}
+
+#pricing-table .border-left {
+  border-left: 0.05rem solid var(--md-typeset-table-color);
+}
+
+.price-cell {
+  font-size: 0.9rem !important;
+  font-weight: bold;
+  color: white;
+  margin-left: 10px;
+}
+
+/* Comparison tables (OpenVidu vs ...) */
+
+.compare-table-logo {
+  max-height: 60px;
+}
+
+.compare-table-icon-yes {
+  color: var(--ov-meet-accent);
+  --md-icon-size: 1.525em !important;
+}
+
+.compare-table-icon-no {
+  color: rgb(255, 0, 0);
+  --md-icon-size: 1.525em !important;
+}
+
+.compare-table-icon-progress {
+  color: #00a2ca;
+  --md-icon-size: 1.525em !important;
+}
+
+/* Section slogans and the closing call to action */
+
+.second-slogan {
+  padding: 0 3em;
+}
+
+.second-slogan h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-top: 0;
+}
+
+/* Closing call to action: a centred block set off from the content above it. The
+   .md-typeset prefix outranks Material's `> :last-child { margin-bottom: 0 }` reset, which
+   the block usually is. */
+.md-typeset .cta-section {
+  margin: 6em 0;
+  text-align: center;
+}
+
+.md-typeset .cta-section h2 {
+  margin-bottom: 1em;
+}
+
+.md-typeset .cta-section .cta-title {
+  margin-bottom: 0.5em;
+}
+
+.md-typeset .cta-section .cta-lead {
+  margin-bottom: 1.5em;
+}
+
+.logo-header {
+  text-align: center;
+  margin-bottom: 0.6em;
+}
+
+h1.meetplatform-slogan,
+h2.meetplatform-slogan {
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 0;
+  margin-bottom: 1.6em;
+}
+
+/* Match the h2 slogans' look: Material gives h1 a lighter color by default */
+h1.meetplatform-slogan {
+  color: var(--md-default-fg-color);
+}
+
+/* Deploy buttons (self-hosting install pages) */
+
+.deploy-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  max-width: fit-content;
+  margin: auto;
+}
+
+.deploy-button.deploy-to-aws-btn {
+  background-color: var(--ov-aws-orange);
+  border: none;
+  border-radius: 5px;
+  color: var(--ov-aws-navy) !important;
+  padding: 8px 24px;
+  font-size: 1.2em;
+  transition: all 0.125s ease;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.deploy-button.deploy-to-aws-btn:hover {
+  background-color: var(--ov-aws-orange) !important;
+  filter: saturate(50%) brightness(130%);
+}
+
+.deploy-button-icon {
+  font-size: 36px;
+  margin-right: 14px;
+}
+
+.deploy-to-azure-btn img {
+  min-width: 250px;
+  transition: all 0.125s ease;
+}
+
+.deploy-to-azure-btn img:hover {
+  filter: saturate(50%) brightness(130%);
+}
+
+/* Tutorial cards, provider buttons and chips */
+
+.tutorials-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -1177,40 +938,373 @@ button.md-tabs__dropdown-toggle {
   vertical-align: middle;
 }
 
-/* intro */
+/* Lightbox (mkdocs-glightbox) */
 
-.card {
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--md-primary-fg-color);
-  margin-right: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
+.gslide-image {
+  max-width: 1500px;
 }
 
-.card-title {
-  font-size: 18px;
+.gslide-image img {
+  background: transparent !important;
+}
+
+.glightbox-clean .gslide-video {
+  background: transparent !important;
+}
+
+.glightbox-clean .gslide-video video {
+  background: transparent !important;
+}
+
+.gzoomIn {
+  animation: gzoomIn 0.4s ease !important;
+}
+
+.gzoomOut {
+  animation: gzoomOut 0.2s ease !important;
+}
+
+.gfadeOut {
+  animation: gfadeOut 0.2s ease !important;
+}
+
+/* Research page: publication badges, the index table and the metadata line */
+
+.pub-badge {
+  display: inline-block;
+  padding: 0.1em 0.65em;
+  border-radius: 1em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
   vertical-align: middle;
-  vertical-align: -webkit-baseline-middle;
 }
 
-/* Styles for mobile devices */
+.pub-phdthesis {
+  background: #ede7f6;
+  color: #4527a0;
+}
+
+.pub-journal {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+
+.pub-conference {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+[data-md-color-scheme="slate"] .pub-phdthesis {
+  background: rgba(124, 77, 255, 0.22);
+  color: #d1c4e9;
+}
+
+[data-md-color-scheme="slate"] .pub-journal {
+  background: rgba(33, 150, 243, 0.22);
+  color: #90caf9;
+}
+
+[data-md-color-scheme="slate"] .pub-conference {
+  background: rgba(76, 175, 80, 0.22);
+  color: #a5d6a7;
+}
+
+.research-index table {
+  font-size: 0.85rem;
+}
+
+.research-index td:first-child,
+.research-index td:nth-child(2) {
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.research-index td:first-child {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.research-index td small {
+  color: var(--md-default-fg-color--light);
+}
+
+.pub-meta {
+  font-size: 0.85rem;
+  margin-top: -0.4rem;
+}
+
+.pub-meta .pub-sep {
+  color: var(--md-default-fg-color--lighter);
+  margin: 0 0.4em;
+}
+
+/* ==========================================================================
+   5. Page areas
+   ========================================================================== */
+
+/* Home hero */
+
+.top-home-section {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: calc(100vh - 4.8rem);
+  padding: 2.5em 15em 5em 15em;
+  background: var(--top-home-section-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.top-home-img {
+  width: 34%;
+}
+
+.slogan {
+  margin-bottom: 0.6em !important;
+  font-size: 2.2em !important;
+  text-align: center;
+}
+
+.home-description {
+  font-size: 0.98rem;
+  text-align: center;
+  max-width: 75rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-buttons {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.home-buttons a {
+  margin: 0.5em 0.25em 0 0.25em;
+  margin-left: 0.25em;
+}
+
+.home-under-cta {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.8em;
+}
+
+.home-under-cta a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.home-under-cta-sep {
+  margin: 0 0.5em;
+}
+
+.home-trust-line {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.home-trust-line a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Shields.io badges: license/stars/docker pulls, and below them publications/
+   citations/experience/OSS affiliations. Rendered as plain <img> tags
+   (shields.io computes and caches the values server-side), so no client-side
+   fetch/formatting logic is needed. */
+.home-badges {
+  text-align: center;
+  margin: 0.5em 0 0;
+  line-height: 0;
+}
+
+.home-credentials-badges {
+  margin-top: 0.7em;
+}
+
+.home-badges a {
+  display: inline-block;
+  margin: 4px 5px;
+}
+
+.home-badges img {
+  height: 27px;
+  vertical-align: middle;
+}
+
+/* About us */
+
+/* Constrains the width, not the height: the portraits carry width/height attributes, so
+   their width is definite, and a max-height would clamp the two axes independently and
+   stretch them. 376px is the intended display width - half the 752px source, so the
+   portraits stay sharp on a 2x display. Needs the `.md-typeset` prefix to outrank the
+   theme's own `.md-typeset img { max-width: 100% }`. */
+.md-typeset .about-us-img {
+  max-width: 376px;
+}
+
+/* Account page */
+
+.register-container {
+  margin: 0 6vw 0 6vw;
+}
+
+/* Platform docs: use cases, basic concepts, AI services */
+
+.use-case-img {
+  padding: 1.5em;
+}
+
+.basic-concepts-img-1 {
+  width: 82%;
+}
+
+.basic-concepts-img-2 {
+  width: 100%;
+}
+
+/* The left diagram is the narrower of the pair, so its caption has to drop to
+   line up with the caption of the one beside it */
+.basic-concepts-caption figcaption {
+  margin-top: 3em;
+}
+
+.ai-service-icon {
+  font-size: 2em;
+  margin-right: 0.3em;
+}
+
+.ai-agent-link {
+  display: block;
+  margin-left: 3em;
+}
+
+.ai-provider-icon {
+  width: 36px;
+  height: 36px;
+}
+
+/* ==========================================================================
+   6. Responsive: one block per breakpoint, widest first
+   ========================================================================== */
+
+@media (min-width: 1220px) {
+  .grid-20.footer-products-gap {
+    margin-left: 1.2rem;
+    width: calc(20% - 1.2rem);
+  }
+}
+
+@media (max-width: 1219px) {
+  .top-home-section {
+    min-height: calc(100vh - 2.4rem);
+    padding: 3em 3em 5em 3em;
+  }
+}
+
+@media (max-width: 959px) {
+  .top-home-img {
+    width: 85%;
+  }
+
+  #account-btn .user-name {
+    display: none;
+  }
+
+  .slogan {
+    font-size: 1.5em !important;
+  }
+
+  .second-slogan h2 {
+    font-size: 1.5em !important;
+  }
+
+  .home-description {
+    font-size: 0.9rem !important;
+  }
+
+  .log-in-div {
+    width: 7rem !important;
+    font-size: 0.7rem !important;
+    margin-left: 1em !important;
+    margin-right: 0.7em !important;
+  }
+
+  [dir="ltr"] .md-header__title {
+    margin-left: 0.7rem !important;
+  }
+
+  [dir="ltr"] .md-version__current {
+    margin-left: 0.8rem !important;
+  }
+
+  /* Outdated warning */
+  .outdated-warning-text {
+    display: none;
+  }
+
+  div[data-md-component="outdated"] {
+    margin-right: 2em !important;
+    margin-bottom: 2em !important;
+  }
+
+  div[data-md-component="outdated"] aside div.md-banner__inner {
+    margin: 0.3rem auto;
+    padding: 0 0.5rem;
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .provider-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  /* Only the breadcrumbs may scroll sideways. A bare `nav` selector would catch
+     the header too, and overflow-x: auto makes it a clip container that traps
+     the version dropdown inside the header bar. */
+  .md-path {
+    overflow-x: auto;
+  }
+
+  /* Room for the version button's full "X.Y latest" beside the palette toggle. */
+  [dir="ltr"] .md-version__current {
+    margin-left: 0.2rem !important;
+  }
+
+  .log-in-div {
+    width: 6rem !important;
+    margin-left: 0.2em !important;
+    margin-right: 0.4em !important;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .provider-buttons {
     grid-template-columns: 1fr;
   }
 }
 
-/* Styles for tablets in portrait orientation */
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .provider-buttons {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 400px) {
+  .md-header__button.md-icon {
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
   }
 
-}
-
-@media screen and (min-width: 769px) {
-  .provider-buttons {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  [dir="ltr"] .md-version__current {
+    margin-left: 0.1rem !important;
   }
 
+  .log-in-div {
+    width: 5.2rem !important;
+  }
 }

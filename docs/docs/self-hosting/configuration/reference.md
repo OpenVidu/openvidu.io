@@ -98,7 +98,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 
 !!! info
     
-    OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.

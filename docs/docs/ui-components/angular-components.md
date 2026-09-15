@@ -18,20 +18,20 @@ The primary goal of the OpenVidu team is to minimize the developer's effort when
 
 <div class="grid cards three-cols" markdown>
 
--   :material-rocket-launch:{ .openvidu-call-feature-icon .middle } __Rapid Development__
+-   :material-rocket-launch:{ .middle } __Rapid Development__
 
     ---
 
     Abstracts the complexity of videoconferencing applications, allowing you to focus on customizations
 
--   :material-brush:{ .openvidu-call-feature-icon .middle } __Flexible Customization__
+-   :material-brush:{ .middle } __Flexible Customization__
 
     ---
 
     Offers maximum customization flexibility, allowing you to adapt, extend, and replace any component
 
 
--   :material-cog:{ .openvidu-call-feature-icon .middle } __Easy Maintenance__
+-   :material-cog:{ .middle } __Easy Maintenance__
 
     ---
 

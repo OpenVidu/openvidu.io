@@ -20,7 +20,7 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
+    [:fontawesome-brands-aws:{.deploy-button-icon} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
     ...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
 
@@ -38,7 +38,7 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    [:fontawesome-brands-aws:{style="font-size:36px; margin-right: 14px"} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
+    [:fontawesome-brands-aws:{.deploy-button-icon} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
 
     ...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
 
@@ -66,7 +66,7 @@ Depending on your needs, you need to fill the following CloudFormation parameter
 
 --8<-- "self-hosting/aws/ssl-domain.md"
 
-## OpenVidu Single Node PRO configuration **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 11px" }
+## OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag } configuration
 
 If you are deploying the PRO edition, you need to specify some additional properties.
 

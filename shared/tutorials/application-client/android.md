@@ -6,7 +6,7 @@ To run the client application tutorial, you need [Android Studio :fontawesome-so
 
 The application will initiate as a native Android program. Once the application is opened, you should see a screen like this:
 
-![URL configuration of the Android tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-android.png){ loading=lazy style="width: 25%" }
+![URL configuration of the Android tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-android.png){ .w-25 loading=lazy }
 
 This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 
@@ -19,11 +19,11 @@ Once you have configured the URLs, you can join a video call room by providing a
 /// html | div.grid-container
 
 /// html | div.grid-50.text-center
-![Join screen of the Android tutorial app](/assets/images/platform/tutorials/application-client/join-android.png){ loading=lazy style="width: 50%" }
+![Join screen of the Android tutorial app](/assets/images/platform/tutorials/application-client/join-android.png){ .w-50 loading=lazy }
 ///
 
 /// html | div.grid-50.text-center
-![Video call room of the Android tutorial app](/assets/images/platform/tutorials/application-client/room-android.png){ loading=lazy style="width: 50%" }
+![Video call room of the Android tutorial app](/assets/images/platform/tutorials/application-client/room-android.png){ .w-50 loading=lazy }
 ///
 
 ///

@@ -32,26 +32,6 @@
 
 {% block libs %}
 
-{# Reveal-on-scroll (in-house wow.js replacement). Hiding is gated on the
-   html.js-reveal class this function adds, so JS-off visitors see content. #}
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
-
 {# Use-cases carousel (Splide) #}
 <script>
   window.setupCarousel = function () {
@@ -166,40 +146,18 @@
 {% block extrahead %}
 {{ super() }}
 
-{# ---------------------------------------------------------------------------------------
-   Fonts. `theme.font` is false, so this is the site's only font stylesheet: every Tomorrow
-   weight the CSS uses plus the code font. The privacy plugin self-hosts it at build time,
-   and it vendors `rel="preload"` hrefs exactly like `rel="stylesheet"` ones, so everything
-   below stays written against the upstream URLs and still resolves in the `CI=false`
-   validation build, where privacy is off and these links stay remote.
-
-   Three things have to hold together, or the page paints its text twice: once in the
-   fallback font, then again in Tomorrow a few hundred ms later.
-
-     1. The stylesheet is render-blocking. It used to load through the `rel="preload"`
-        `as="style"` + `onload="this.rel='stylesheet'"` trick, whose whole purpose is to
-        *un*-block rendering: `as="style"` fetches the file without applying it, so first
-        paint happened before the @font-face rules existed at all.
-     2. `display=block`, not `display=swap`. `swap` gives every face a zero-length block
-        period — it asks the browser to paint the fallback immediately and reflow on
-        arrival, which is the flicker itself.
-     3. The faces the first viewport needs are preloaded. A font file is otherwise only
-        requested once layout proves some text needs it, which is never before first paint,
-        so `display=block` on its own would trade the flicker for invisible text.
-
-   The preload list is every face the first viewport actually asks for, measured across the
-   landing page, pricing, both product homes, the blog index and a docs page: Tomorrow 300,
-   400, 500 and 700, plus 800 because `font-weight: 900` in the pricing tables resolves to
-   it. Preloading fewer than these would reveal the text in waves rather than all at once.
-   Only the `latin` subset of each — the site is English, and the browser still fetches the
-   other subsets on demand if a page needs them. Roboto Mono is here because inline code sits
-   in the first viewport on the reference and self-hosting pages, and its 400, 500 and 700 all
-   resolve to one latin file. The `crossorigin` is what makes each hint match the request the
-   CSS goes on to make: fonts are fetched in CORS mode even same-origin, and a hint without it
-   is a second fetch rather than a head start.
-
-   `ovweb lint` holds points 1 and 2 in place and checks that every weight preloaded here is
-   one the stylesheet actually requests — see `check_font_loading`. #}
+{# Fonts. `theme.font` is false, so this is the site's only font stylesheet. The privacy
+   plugin vendors every URL below at build time, preload hrefs included; in the `CI=false`
+   validation build they stay remote.
+   No-flicker contract: break any one and text paints twice (fallback, then Tomorrow).
+     1. A render-blocking `rel="stylesheet"`, never the preload-as-style + onload trick.
+     2. `display=block`, not `swap` (swap paints the fallback first by design).
+     3. Preload every face the first viewport needs, or `block` shows invisible text instead:
+        Tomorrow 300 (Material h1), 400, 500, 700 and 800 (`bolder` in the pricing tables),
+        Roboto Mono (one latin file serves 400/500/700), Arciform (header title, same href as
+        extra.css). Latin subset only; `crossorigin` must match the CSS's CORS fetch or the
+        hint becomes a second download.
+   `ovweb lint` checks 1 and 2 and that every preloaded weight is in the URL. #}
 {# Tomorrow 300 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 {# Tomorrow 400 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 {# Tomorrow 500 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -211,7 +169,7 @@
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=block"
+    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=block"
 />
 
 {% include "partials/og.html" %}
@@ -226,9 +184,12 @@
 {# Owns the lightbox on every page: one gallery per page, theme-aware #}
 <script src="{{ 'javascripts/glightbox-gallery.js' | url }}"></script>
 
-{% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
+{% if page.meta and page.meta.page_features and "revealonscroll" in page.meta.page_features %}
+{# Reveal-on-scroll (sal.js): elements carrying data-sal="slide-up" fade in once, the first
+   time they enter the viewport. Reduced-motion users get the content static. #}
+<script src="{{ 'javascripts/sal.js' | url }}"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 {% endif %}
 
@@ -266,17 +227,6 @@
 {% endblock %}
 
 {% block styles %}
-
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
 
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
@@ -322,8 +272,45 @@
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
+{% if page.meta.page_features and "setupcarousel" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/carousel.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "revealonscroll" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/sal.css' | url }}" />
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+{# sal.css hides the elements until the script reveals them: without JS, show them. #}
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+{% endif %}
+
 {% if page.meta.page_features and "homestyles" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "leadform" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/lead-form.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "openviduregister" in page.meta.page_features %}
@@ -335,6 +322,12 @@
 />
 <link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
 <link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
+<style>
+  /* The account app renders its own heading */
+  .md-typeset h1 {
+    display: none;
+  }
+</style>
 {% endif %}
 
 {% endif %}

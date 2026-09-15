@@ -4,7 +4,7 @@ description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet
 page_features:
   - homestyles
   - lazyvideo
-  - setupwowjs
+  - revealonscroll
   - setupcardglow
   - setupcarousel
 ---
@@ -24,7 +24,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
     <a class="glightbox" href="/assets/videos/meet/home/demo.mp4" data-type="video"><video class="round-corners" src="/assets/videos/meet/home/demo-preview.mp4" poster="/assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
 [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
@@ -32,7 +32,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 </div>
 
 <div class="feature-cards" markdown>
-<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0" markdown>
+<div class="grid cards two-columns" data-sal="slide-up" style="margin: 5em 0 0 0" markdown>
 
 -   :material-video-box:{ .more-padding-icon .ov-meet-commercial-icon } __Feature-rich for videoconferencing__{ .feature-name }
 
@@ -48,7 +48,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
 </div>
 
-<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
+<div class="grid cards two-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
 -   :material-server:{ .more-padding-icon .ov-meet-commercial-icon } __Secure, self-hosted deployments__{ .feature-name }
 
@@ -65,7 +65,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 </div>
 </div>
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0">
+<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0">
 Built for all purposes.<br>
 Customizable for your particular use case.
 </h2>
@@ -74,16 +74,16 @@ Customizable for your particular use case.
 
 <div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
 
-__Multi-Party smart layout__{ .ov-meet-commercial-card-title .wow .animated .animatedFadeInUp .fadeInUp }
+__Multi-Party smart layout__{ .ov-meet-commercial-card-title data-sal="slide-up" }
 
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
-{.wow .animated .animatedFadeInUp .fadeInUp}
+{data-sal="slide-up"}
 
 ![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-light.png#only-light){ .round-corners loading=lazy width=1920 height=1080 }
 ![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-dark.png#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
 </div>
 
-<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
 
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
@@ -103,19 +103,19 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 <div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
 
-__Record and share__{ .ov-meet-commercial-card-title .wow .animated .animatedFadeInUp .fadeInUp }
+__Record and share__{ .ov-meet-commercial-card-title data-sal="slide-up" }
 
 OpenVidu Meet offers high-quality recordings and greatly simplifies their storage and access control.
-{.wow .animated .animatedFadeInUp .fadeInUp}
+{data-sal="slide-up"}
 
-<div class="wow animated animatedFadeInUp fadeInUp">
+<div data-sal="slide-up">
     <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 </div>
 
 </div>
 
-<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
 
 - __Pre-configure your rooms__{ .ov-meet-commercial-card-title }
 
@@ -135,12 +135,12 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 
 ---
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
+<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0 3em 0">
 With all the features you need to fine-tune your perfect video calling service.
 </h2>
 
 <div class="feature-cards" markdown>
-<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em; margin-bottom: 0" markdown>
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 3em; margin-bottom: 0" markdown>
 
 -   :material-cursor-default-click:{ .feature-icon .padding-icon } __One-click video calls__{ .feature-name }
 
@@ -162,7 +162,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
-<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards three-columns" data-sal="slide-up" markdown>
 
 -   :material-record-rec:{ .feature-icon } __Recording__{ .feature-name }
 
@@ -184,7 +184,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
-<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
 -   :material-chat-outline:{ .feature-icon .padding-icon } __Chat__{ .feature-name }
 
@@ -207,7 +207,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
-<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0;" markdown>
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
 
 -   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
@@ -232,20 +232,20 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
 [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
 
 </div>
 
-<hr style="margin: 4em 0">
+<hr class="my-4em">
 
 ## Integrations
 
 OpenVidu Meet can be easily integrated with your existing applications and workflows:
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards" data-sal="slide-up" markdown>
 
 __Pre-built web component__{ .ov-meet-commercial-card-title }
 
@@ -257,7 +257,7 @@ Embed the OpenVidu Meet UI right into your app.
 
 </div>
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards wow animated animatedFadeInUp fadeInUp commercial-code-blocks" markdown>
+<div class="cards no-border no-shadow ov-meet-commercial-feature-cards commercial-code-blocks" data-sal="slide-up" markdown>
 
 __REST API and webhooks__{ .ov-meet-commercial-card-title }
 
@@ -274,18 +274,18 @@ curl --request POST \
 
 </div>
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0">
+<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0">
 Explore <a href="./embedded/intro"><strong>OpenVidu Meet Embedded</strong></a> to integrate video calls into your application.
 </h2>
 
-<hr style="margin: 4em 0">
+<hr class="my-4em">
 
 ## Deployments
 
 Self-host OpenVidu Meet on your own infrastructure for maximum security and cost-effectiveness. It is easy to deploy, protect, maintain, and scale. No advanced DevOps skills are required to run it in production.
 
 <div class="feature-cards" markdown>
-<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin: 5em 0 0 0" markdown>
+<div class="grid cards two-columns" data-sal="slide-up" style="margin: 5em 0 0 0" markdown>
 
 -   :material-server:{ .more-padding-icon .ov-meet-commercial-icon .bare-metal-icon } __On Premises__{ .feature-name }
 
@@ -326,15 +326,15 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 </div>
 </div>
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 3em 0 3em 0">
+<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0 3em 0">
 Check out the <a href="./deployment/overview"><strong>deployment documentation</strong></a>.
 </h2>
 
-<hr style="margin: 4em 0">
+<hr class="my-4em">
 
 ## Use cases
 
-<div class="splide wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="splide" data-sal="slide-up" markdown>
 <div class="splide__track" markdown>
 <div class="splide__list" markdown>
 <div class="splide__slide" markdown>
@@ -353,7 +353,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __Collaboration tools__{ .feature-name }
 
@@ -392,7 +392,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __High quality media__{ .feature-name }
 
@@ -431,7 +431,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __Security and privacy__{ .feature-name }
 
@@ -470,7 +470,7 @@ Build trust with instant, reliable support through embedded video calls that per
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __Ease of access__{ .feature-name }
 
@@ -498,7 +498,7 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 </div>
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
 [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
@@ -511,25 +511,25 @@ Build trust with instant, reliable support through embedded video calls that per
 
 OpenVidu Meet is available in two editions:
 
-### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.9em; vertical-align: top" }
+### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }
 
 It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
 
-### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.9em; vertical-align: top" }
+### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
 OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](../pricing.md) for more details.
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 2em 0 4em 0">
+<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 2em 0 4em 0">
 You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview/">deploying OpenVidu Meet</a>.
 </h2>
 
 <hr style="margin: 5em 0 2em 0">
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
+<h2 class="meetplatform-slogan my-4em" data-sal="slide-up">
 Need total control and advanced SDKs to build your custom real-time application?
 Check out <a href="../docs/"><strong>OpenVidu Platform</strong></a>.<br>
 Not sure which one fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>.
