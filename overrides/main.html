@@ -30,59 +30,6 @@
 
 {% endblock %}
 
-{% block libs %}
-
-{# Use-cases carousel (Splide) #}
-<script>
-  window.setupCarousel = function () {
-    document.querySelectorAll(".splide").forEach((el) => {
-      new Splide(el, {
-        type: "loop",
-        autoWidth: true,
-        autoHeight: true,
-        focus: "center",
-        gap: "4%",
-      }).mount();
-    });
-  };
-</script>
-
-{# Card glow effect #}
-<script>
-  window.openviduCardGlowRetries = 0;
-  window.setupCardGlow = function () {
-    console.debug("starting card glow setup");
-    const cards = document.querySelectorAll(
-      ".feature-cards .grid.cards > ul > li"
-    );
-    const maxRetries = 10;
-    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
-      console.debug("No cards found, retrying in 100ms");
-      window.openviduCardGlowRetries++;
-      setTimeout(() => {
-        window.setupCardGlow();
-      }, 100);
-      return;
-    }
-    function handleMouseMove(e) {
-      const rect = this.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left - rect.width / 2;
-      const mouseY = e.clientY - rect.top - rect.height / 2;
-      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
-      angle = (angle + 360) % 360;
-      this.style.setProperty("--start", angle + 60);
-    }
-    cards.forEach((card, index) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
-    console.debug("finished card glow setup");
-  };
-</script>
-
-{{ super() }}
-
-{% endblock %}
-
 {% block outdated %}
 <span class="outdated-warning-text" id="outdated-warning-text"><strong>Warning:</strong> You are reading docs for an old version<br /></span>
 <a href="#" id="latest-version-link">
@@ -194,16 +141,14 @@
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "setupcardglow" in page.meta.page_features %}
-<script>
-  window.setupCardGlow();
-</script>
+{# Feature cards follow the pointer through the --start angle home.css draws the glow from #}
+<script src="{{ 'javascripts/card-glow.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
+{# Splide carousels: the library, then the script that mounts one per .splide #}
 <script src="{{ 'javascripts/splide.min.js' | url }}"></script>
-<script>
-  window.setupCarousel();
-</script>
+<script src="{{ 'javascripts/carousel.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "lazyvideo" in page.meta.page_features %}

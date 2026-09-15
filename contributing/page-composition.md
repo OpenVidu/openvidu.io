@@ -51,7 +51,10 @@ page, copy its feature keys too.** These are the keys currently used:
   </div>
   ```
 
-- `setupcardglow`: the page has cards with glow effect. The HTML structure must comply with:
+- `setupcardglow`: the page has feature cards with the pointer-tracking glow. Loads
+  [`card-glow.js`](../docs/javascripts/card-glow.js), which sets the `--start` angle that
+  [`home.css`](../docs/stylesheets/home.css) draws the glow from; the card styles live there, so
+  the page needs `homestyles` too. The HTML structure must comply with:
 
   ```html
   <div class="feature-cards">
@@ -61,9 +64,10 @@ page, copy its feature keys too.** These are the keys currently used:
   </div>
   ```
 
-- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/). Loads `splide.min.js`,
-  Splide's `splide.min.css` and [`carousel.css`](../docs/stylesheets/carousel.css), which restyles the
-  arrows and pagination and gives the slides their card look:
+- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/). Loads `splide.min.js`
+  and [`carousel.js`](../docs/javascripts/carousel.js), which mounts a looping Splide on every
+  `.splide`, plus Splide's `splide.min.css` and [`carousel.css`](../docs/stylesheets/carousel.css),
+  which restyles the arrows and pagination and gives the slides their card look:
 
   ```html
   <div class="splide" markdown>
