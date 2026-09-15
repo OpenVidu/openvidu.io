@@ -75,11 +75,11 @@ sudo systemctl stop openvidu
 sudo systemctl restart openvidu
 ```
 
-OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refer to the [OpenVidu Platform Single Node administration guide](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/admin/index.md) for more advanced management tasks, including:
+OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refer to the [OpenVidu Platform Single Node administration guide](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/admin/) for more advanced management tasks, including:
 
 - [Check the status of services](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services)
 - [Check logs](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/admin/#checking-logs)
-- [Upgrade OpenVidu Meet to a newer version](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/upgrade/index.md)
+- [Upgrade OpenVidu Meet to a newer version](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/upgrade/)
 - [Uninstall OpenVidu Meet](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/admin/#uninstalling-openvidu)
 
 ## Other deployment options
@@ -88,10 +88,10 @@ This guide has covered the manual installation of OpenVidu Meet as a single-node
 
 - **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](https://openvidu.io/3.5/docs/self-hosting/single-node/on-premises/install/#non-interactive-installation) guide for OpenVidu Platform.
 
-- **Deploy OpenVidu Meet single-node in AWS**: using our CloudFormation template, you can deploy OpenVidu Meet using native AWS resources. Follow the [AWS deployment](https://openvidu.io/3.5/docs/self-hosting/single-node/aws/install/index.md) guide for OpenVidu Platform.
+- **Deploy OpenVidu Meet single-node in AWS**: using our CloudFormation template, you can deploy OpenVidu Meet using native AWS resources. Follow the [AWS deployment](https://openvidu.io/3.5/docs/self-hosting/single-node/aws/install/) guide for OpenVidu Platform.
 
-- **Deploy OpenVidu Meet single-node in Azure**: using our ARM template, you can deploy OpenVidu Meet using native Azure resources. Follow the [Azure deployment](https://openvidu.io/3.5/docs/self-hosting/single-node/azure/install/index.md) guide for OpenVidu Platform.
+- **Deploy OpenVidu Meet single-node in Azure**: using our ARM template, you can deploy OpenVidu Meet using native Azure resources. Follow the [Azure deployment](https://openvidu.io/3.5/docs/self-hosting/single-node/azure/install/) guide for OpenVidu Platform.
 
-- **Deploy OpenVidu Meet single-node in GCP**: using our Terraform template, you can deploy OpenVidu Meet using native GCP resources. Follow the [GCP deployment](https://openvidu.io/3.5/docs/self-hosting/single-node/gcp/install/index.md) guide for OpenVidu Platform.
+- **Deploy OpenVidu Meet single-node in GCP**: using our Terraform template, you can deploy OpenVidu Meet using native GCP resources. Follow the [GCP deployment](https://openvidu.io/3.5/docs/self-hosting/single-node/gcp/install/) guide for OpenVidu Platform.
 
 - **Deploy OpenVidu Meet in a multi-node architecture**: there are multi-node deployment options available to make your OpenVidu Meet installation scalable and fault-tolerant. Check out the [Advanced deployments](https://openvidu.io/3.5/meet/deployment/advanced/index.md) section for more information.
