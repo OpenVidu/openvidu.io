@@ -643,6 +643,22 @@ div[class*="grid-"]:has(> img) {
   background-color: #9c27b0;
 }
 
+/* The tag inside a nav label (mkdocs.yml `nav:` entries) */
+.openvidu-tag-nav {
+  pointer-events: none;
+  display: inline-block;
+  margin: 0 3px 0 3px;
+  color: white;
+  font-weight: bold;
+  padding: 0px 5px;
+  border-radius: 3px;
+  font-size: 0.6em;
+  line-height: 1.9em;
+  font-family: var(--md-text-font-family);
+  font-feature-settings: "kern", "liga";
+  vertical-align: text-bottom;
+}
+
 /* Tag sizes for the contexts the 1em default is too large for: comparison-table
    cells, prose, list items, headings. */
 .openvidu-tag-07em {
