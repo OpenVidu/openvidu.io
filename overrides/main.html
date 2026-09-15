@@ -289,6 +289,10 @@
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
+{% if page.meta.page_features and "setupcarousel" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/carousel.css' | url }}" />
+{% endif %}
+
 {% if page.meta.page_features and "homestyles" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
 {% endif %}
