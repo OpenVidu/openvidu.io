@@ -112,7 +112,9 @@ page, copy its feature keys too.** These are the keys currently used:
   page (or the first child of a nav group).
 
 - `homestyles`: loads [`home.css`](../docs/stylesheets/home.css) (the landing and Meet landing
-  pages only).
+  pages only): the hero, the products section and the `.feature-cards` component with its
+  `two-columns` / `three-columns` layouts. It is linked before the product sheets, so `meet.css`
+  restyles those cards on the Meet landing by cascade order alone.
 
 - `Meet` / `Platform`: load [`meet.css`](../docs/stylesheets/meet.css) /
   [`platform.css`](../docs/stylesheets/platform.css) (each on top of the shared
@@ -282,9 +284,11 @@ tokens, Material's colour variables and the per-scheme overrides),
 [`extra.css`](../docs/stylesheets/extra.css) (everything site-wide, in declared sections: fonts,
 Material overrides, utilities, components, page areas, then one `@media` block per breakpoint) and
 [`unsemantic-grid.css`](../docs/stylesheets/unsemantic-grid.css) (the complete grid build: use any
-of its classes, never edit it). Everything else is loaded by a feature key: `home.css`,
-`meet.css`/`platform.css` over `product.css`, `carousel.css` with Splide's theme, `lead-form.css`,
-`sal.css`.
+of its classes, never edit it). Everything else is linked by a feature key from `main.html`'s
+`styles` block, which MkDocs emits *before* those three, in this order: `home.css`, `product.css`
+with `meet.css`/`platform.css` on top, `carousel.css`, `sal.css`, `lead-form.css` and the account
+page's bundle styles (Splide's own `splide.min.css` alone precedes even Material's stylesheet). So at
+equal specificity a feature sheet loses to `extra.css`, and `meet.css` beats `home.css`.
 
 Where a rule goes:
 
@@ -310,7 +314,9 @@ A utility that sets margins carries the `.md-typeset` prefix (`.md-typeset .cta-
 did.
 
 Precedence: Material's CSS is unlayered, so `product.css` keeps its `:root:root` selector and
-`!important`s — an `@layer` would put our rules *below* the theme's.
+`!important`s — an `@layer` would put our rules *below* the theme's. Between our own sheets, order
+does the work: `home.css` defines the landing components and `meet.css`, linked after it, overrides
+them at equal specificity, so neither side needs `!important`.
 
 The tutorials mirror ([livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs))
 ships its own `extra.css` and `colors.css` and the same `unsemantic-grid.css`, and its

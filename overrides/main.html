@@ -205,6 +205,12 @@
 {% endif %}
 {% endif %}
 
+{# home.css owns the landing components (.feature-cards). It comes before the product sheets
+   so meet.css can restyle them on the Meet landing by cascade order, without !important. #}
+{% if page.meta.page_features and "homestyles" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
+{% endif %}
+
 {% if page.meta.page_features and ("Meet" in page.meta.page_features or "Platform" in page.meta.page_features) %}
 <link rel="stylesheet" href="{{ 'stylesheets/product.css' | url }}" />
 {% endif %}
@@ -248,10 +254,6 @@
     }
   </style>
 </noscript>
-{% endif %}
-
-{% if page.meta.page_features and "homestyles" in page.meta.page_features %}
-<link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "leadform" in page.meta.page_features %}
