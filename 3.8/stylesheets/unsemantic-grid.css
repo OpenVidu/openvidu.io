@@ -1,0 +1,149 @@
+/* Float-based column grid: an in-place replacement for the unsemantic-grid
+   subset this site actually uses (the container plus 24 cell classes; the
+   ~300 unused selectors of the original are gone). Same contract:
+   mobile <960px (mobile-grid-*), tablet 960-1219px (tablet-grid-*),
+   desktop >=1220px (grid-*); cells not matched at a breakpoint flow at
+   full width. */
+
+.grid-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flow-root;
+}
+
+.grid-15, .grid-20, .grid-25, .grid-33, .grid-35, .grid-40, .grid-45,
+.grid-50, .grid-55, .grid-60, .grid-65, .grid-90, .grid-100,
+.tablet-grid-35, .tablet-grid-40, .tablet-grid-45, .tablet-grid-50,
+.tablet-grid-55, .tablet-grid-60, .tablet-grid-65, .tablet-grid-90,
+.mobile-grid-50, .mobile-grid-100 {
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* Each cell is its own formatting context, like the original's clearfix
+     pseudo-elements: child margins stay inside the cell at every breakpoint. */
+  display: flow-root;
+}
+
+@media (max-width: 959px) {
+  .mobile-grid-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .mobile-grid-100 {
+    float: left;
+    width: 100%;
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1219px) {
+  .tablet-grid-35 {
+    float: left;
+    width: 35%;
+  }
+
+  .tablet-grid-40 {
+    float: left;
+    width: 40%;
+  }
+
+  .tablet-grid-45 {
+    float: left;
+    width: 45%;
+  }
+
+  .tablet-grid-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .tablet-grid-55 {
+    float: left;
+    width: 55%;
+  }
+
+  .tablet-grid-60 {
+    float: left;
+    width: 60%;
+  }
+
+  .tablet-grid-65 {
+    float: left;
+    width: 65%;
+  }
+
+  .tablet-grid-90 {
+    float: left;
+    width: 90%;
+  }
+}
+
+@media (min-width: 1220px) {
+  .grid-15 {
+    float: left;
+    width: 15%;
+  }
+
+  .grid-20 {
+    float: left;
+    width: 20%;
+  }
+
+  .grid-25 {
+    float: left;
+    width: 25%;
+  }
+
+  .grid-33 {
+    float: left;
+    width: 33.3333%;
+  }
+
+  .grid-35 {
+    float: left;
+    width: 35%;
+  }
+
+  .grid-40 {
+    float: left;
+    width: 40%;
+  }
+
+  .grid-45 {
+    float: left;
+    width: 45%;
+  }
+
+  .grid-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .grid-55 {
+    float: left;
+    width: 55%;
+  }
+
+  .grid-60 {
+    float: left;
+    width: 60%;
+  }
+
+  .grid-65 {
+    float: left;
+    width: 65%;
+  }
+
+  .grid-90 {
+    float: left;
+    width: 90%;
+  }
+
+  .grid-100 {
+    float: left;
+    width: 100%;
+  }
+}
