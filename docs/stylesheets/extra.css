@@ -1213,3 +1213,31 @@ button.md-tabs__dropdown-toggle {
   }
 
 }
+
+/* Research page: publication badges, the index table and the per-publication metadata line */
+.pub-badge {
+  display: inline-block;
+  padding: 0.1em 0.65em;
+  border-radius: 1em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.pub-phdthesis     { background: #ede7f6; color: #4527a0; }
+.pub-journal    { background: #e3f2fd; color: #0d47a1; }
+.pub-conference { background: #e8f5e9; color: #1b5e20; }
+
+[data-md-color-scheme="slate"] .pub-phdthesis     { background: rgba(124, 77, 255, 0.22); color: #d1c4e9; }
+[data-md-color-scheme="slate"] .pub-journal    { background: rgba(33, 150, 243, 0.22); color: #90caf9; }
+[data-md-color-scheme="slate"] .pub-conference { background: rgba(76, 175, 80, 0.22);  color: #a5d6a7; }
+
+.research-index table { font-size: 0.85rem; }
+.research-index td:first-child,
+.research-index td:nth-child(2) { white-space: nowrap; text-align: center; vertical-align: middle; }
+.research-index td:first-child { font-variant-numeric: tabular-nums; font-weight: 600; }
+.research-index td small { color: var(--md-default-fg-color--light); }
+
+.pub-meta { font-size: 0.85rem; margin-top: -0.4rem; }
+.pub-meta .pub-sep { color: var(--md-default-fg-color--lighter); margin: 0 0.4em; }

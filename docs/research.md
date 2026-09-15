@@ -387,38 +387,6 @@ publications:
       WebRTC server infrastructures are useful for creating rich real-time communication (RTC) applications. Developers commonly use them for accessing capabilities such as group communications, archiving, and transcoding. Details on how to implement and use such infrastructures securely are of increasing interest to the engineering community. Kurento is an open source project that provides a WebRTC media server and a platform as a service cloud built on top of it. The authors present the Kurento API and analyze different security models for it, investigating the suitability of using simple access control lists (ACLs) and capability-based security schemes to provide authorization. Using minimal implementation, they discuss the advantages and drawbacks of each scheme and conclude that, for the proposed schemes, ACLs are less scalable but provide more granularity.
 ---
 
-<style>
-  /* Publication type badges */
-  .pub-badge {
-    display: inline-block;
-    padding: 0.1em 0.65em;
-    border-radius: 1em;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  .pub-phdthesis     { background: #ede7f6; color: #4527a0; }
-  .pub-journal    { background: #e3f2fd; color: #0d47a1; }
-  .pub-conference { background: #e8f5e9; color: #1b5e20; }
-
-  [data-md-color-scheme="slate"] .pub-phdthesis     { background: rgba(124, 77, 255, 0.22); color: #d1c4e9; }
-  [data-md-color-scheme="slate"] .pub-journal    { background: rgba(33, 150, 243, 0.22); color: #90caf9; }
-  [data-md-color-scheme="slate"] .pub-conference { background: rgba(76, 175, 80, 0.22);  color: #a5d6a7; }
-
-  /* Index table */
-  .research-index table { font-size: 0.85rem; }
-  .research-index td:first-child,
-  .research-index td:nth-child(2) { white-space: nowrap; text-align: center; vertical-align: middle; }
-  .research-index td:first-child { font-variant-numeric: tabular-nums; font-weight: 600; }
-  .research-index td small { color: var(--md-default-fg-color--light); }
-
-  /* Per-publication metadata line */
-  .pub-meta { font-size: 0.85rem; margin-top: -0.4rem; }
-  .pub-meta .pub-sep { color: var(--md-default-fg-color--lighter); margin: 0 0.4em; }
-</style>
-
 # OpenVidu research publications
 
 The technology behind OpenVidu is grounded in more than a decade of peer-reviewed research on real-time communications, WebRTC media servers, and the automated testing and Quality of Experience (QoE) assessment of WebRTC applications. This line of work began within the Kurento project and continues today in OpenVidu, led by researchers at [Universidad Rey Juan Carlos :fontawesome-solid-external-link:{.external-link-icon}](https://www.urjc.es/){:target="_blank"} together with collaborating institutions.
