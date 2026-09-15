@@ -14,7 +14,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 ## Run OpenVidu Components Demo App
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 === "Run OpenVidu locally"
 
@@ -29,13 +29,13 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
         OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server :fontawesome-solid-external-link:{.external-link-icon}](../../self-hosting/how-to-guides/enable-webhooks.md#send-webhooks-to-a-local-application-server){:target="_blank"} section for more information.
 
 
-#### 2. Download the demo code
+### 2. Download the demo code
 
 ```bash
 git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 ```
 
-#### 3. Run the Components Demo App backend
+### 3. Run the Components Demo App backend
 
 
 1. Navigate to the `backend` directory:
@@ -56,7 +56,7 @@ git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
     npm run dev:start
     ```
 
-#### 4. Run the Components Demo App frontend
+### 4. Run the Components Demo App frontend
 
 Launching another terminal, under the `openvidu-tutorials/openvidu-components-angular/openvidu-demo-app` directory:
 

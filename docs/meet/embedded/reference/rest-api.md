@@ -5,6 +5,8 @@ page_features:
   - lazyvideo
 ---
 
+# OpenVidu Meet REST API reference
+
 ## Overview
 
 OpenVidu Meet provides a REST API for managing **rooms**, **room members**, **recordings** and **users** programmatically from your application's backend. As a general rule, any action that is available in the OpenVidu Meet UI for these resources can also be performed using the REST API.

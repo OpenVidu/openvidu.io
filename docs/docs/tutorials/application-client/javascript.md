@@ -18,7 +18,7 @@ It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-ico
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "tutorials/run-openvidu-server.md"
 

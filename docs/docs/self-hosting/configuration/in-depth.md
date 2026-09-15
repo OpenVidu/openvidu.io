@@ -7,7 +7,7 @@ description: "How OpenVidu configuration works: the global file, per-service fil
 
 OpenVidu utilizes a powerful and flexible system for configuring services by expanding global parameters defined in the configuration files. This mechanism ensures consistency and simplifies management by allowing global settings to be referenced across multiple service configurations. The variable expansion follows the same interpolation rules as Docker Compose, providing a familiar syntax for those accustomed to Docker.
 
-### How Variable Interpolation Works
+## How Variable Interpolation Works
 
 To understand how variable interpolation works in OpenVidu, it is important to consider two main types of configuration files: global configuration files and service configuration files.
 
@@ -44,7 +44,7 @@ To understand how variable interpolation works in OpenVidu, it is important to c
 
     To use a variable from the `media_node.env` file, write it as `${media_node.ENV_VAR}`. Similarly, to use a variable from the `openvidu.env` or `master_node.env` file, write it as `${openvidu.ENV_VAR}` or `${master_node.ENV_VAR}` respectively.
 
-### Config Files Replication
+## Config Files Replication
 
 In Elastic and High Availability deployments, the configuration files are replicated across all the Master Nodes in the cluster.
 

@@ -13,22 +13,22 @@ Creating a unique and intuitive user interface (UI) is essential for ensuring a 
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "tutorials/run-openvidu-server.md"
 
-#### 2. Download the tutorial code
+### 2. Download the tutorial code
 
 ```bash
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 ```
 
-#### 3. Run a server application
+### 3. Run a server application
 
 --8<-- "tutorials/application-server/tabs.md"
 
-#### 4. Run the openvidu-custom-ui tutorial
+### 4. Run the openvidu-custom-ui tutorial
 
 To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 
@@ -161,7 +161,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
     --8<-- "tutorials/openvidu-components/styles.md"
 
-#### Customizing the UI
+### Customizing the UI
 
 To customize the appearance of OpenVidu Components, simply redefine the necessary CSS variables in your `styles.scss` file. For instance, to change the primary color of the buttons and other actions, you would update the `--ov-primary-action-color` variable as shown below:
 
@@ -177,6 +177,6 @@ Once you redefine a variable, the new style will automatically apply to all comp
 
 The library also allows you to customize **shape of buttons, panels and videos customization**, the **background color personalization** of panels, buttons and videoconference and also you can **change the text color**.
 
-#### Replacing the branding logo
+### Replacing the branding logo
 
 You can replace the branding logo with your own. Just modify the `src/assets/images/logos/logo.png` file with your own logo.
