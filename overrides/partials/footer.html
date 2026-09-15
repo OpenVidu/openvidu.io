@@ -32,7 +32,7 @@
                 {{ direction }}
               </span>
               <div class="md-ellipsis">
-                {{ page.previous_page.title }}
+                {{ page.previous_page.title | e }}
               </div>
             </div>
           </a>
@@ -51,7 +51,7 @@
                 {{ direction }}
               </span>
               <div class="md-ellipsis">
-                {{ page.next_page.title }}
+                {{ page.next_page.title | e }}
               </div>
             </div>
             <div class="md-footer__button md-icon">

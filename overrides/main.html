@@ -175,7 +175,7 @@
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
 {% if page.meta and page.meta.robots %}
-<meta name="robots" content="{{ page.meta.robots }}" />
+<meta name="robots" content="{{ page.meta.robots | e }}" />
 {% endif %}
 {% endblock %}
 
