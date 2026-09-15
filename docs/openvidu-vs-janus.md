@@ -99,7 +99,7 @@ That said, Janus ships more out of the box than a bare media engine:
 
 | | **OpenVidu** | **Janus** |
 | --- | --- | --- |
-| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | GPL v3 (commercial license available) |
+| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag } | GPL v3 (commercial license available) |
 | Room/session model | [Bundled](docs/reference/room-service-api.md#rooms) | Basic, via the VideoRoom plugin only |
 | Authentication | [JWT tokens with grants](docs/reference/access-tokens.md#video-grants), bundled | Not provided for application rooms |
 | Recording (Egress) | [Bundled](docs/reference/egress.md), S3-compatible storage | Raw `.mjr` dumps, manual post-processing |
@@ -141,7 +141,7 @@ is an independent project from Meetecho with its own plugin architecture.
 
 Janus is released under the GNU GPL v3, with a commercial license available from Meetecho for teams
 that don't want GPL's copyleft obligations. This is a real practical difference from OpenVidu
-**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08em }'s Apache 2.0 license, worth checking against your own project's licensing requirements
+**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }'s Apache 2.0 license, worth checking against your own project's licensing requirements
 before you build on it.
 
 ### Can I use Janus directly instead of a platform?

@@ -15,13 +15,13 @@ OpenVidu Meet is designed to be **self-hosted**, whether it is on premises or in
 
 OpenVidu Meet is available in two editions:
 
-### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading }
+### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }
 
 It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](../index.md#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
 
-### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading }
+### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 

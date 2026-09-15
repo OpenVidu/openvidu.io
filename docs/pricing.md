@@ -45,8 +45,8 @@ page_features:
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
-        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag openvidu-tag-14px">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag">PRO</span></span></strong></a></td>
     <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
     <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
   </tr>
@@ -84,10 +84,10 @@ page_features:
 
 OpenVidu offers two editions:
 
-- <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08rem }</strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
-- <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-08rem }</strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+- <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }</strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }</strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
 
-OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08rem }</strong> or <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-08rem }</strong> deployment.
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }</strong> or <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }</strong> deployment.
 
 </div>
 
@@ -98,7 +98,7 @@ OpenVidu Pro follows a simple pricing model based on the number of cores used by
 <div class="pricing-text" style="text-align: center; font-size: 1.5em">
 <div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
 per core per minute available<br>
-for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8em; vertical-align: middle">PRO</span> cluster
+for your OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } cluster
 </div>
 
 Taking into account the following points:

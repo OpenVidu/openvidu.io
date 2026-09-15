@@ -20,7 +20,7 @@ OpenVidu Meet can be easily deployed in a single server (follow the [basic deplo
 
 
 !!! info
-    You can learn more about the <span class="nowrap"><strong>OpenVidu</strong>**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-14px }</span> and <span class="nowrap"><strong>OpenVidu</strong>**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-14px }</span> editions [here](./overview.md#openvidu-meet-editions).
+    You can learn more about the <span class="nowrap"><strong>OpenVidu</strong>**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }</span> and <span class="nowrap"><strong>OpenVidu</strong>**PRO**{ .openvidu-tag .openvidu-pro-tag }</span> editions [here](./overview.md#openvidu-meet-editions).
 
 <br>
 
@@ -40,8 +40,8 @@ This is the simplest production-ready OpenVidu deployment available. It provides
 
 It is composed of a single OpenVidu Node hosting all the necessary services in a monolithic setup. It comes in two flavors:
 
- - **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-14px }: all the features you need to build your real-time application.
- - **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-14px }: for those users that want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
+ - **OpenVidu Single Node** **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }: all the features you need to build your real-time application.
+ - **OpenVidu Single Node** **PRO**{ .openvidu-tag .openvidu-pro-tag }: for those users that want the benefits of OpenVidu PRO in a single-node setup. It includes **2x performance** and **advanced observability** features.
 
   ![OpenVidu Single Node](../../assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 

@@ -33,7 +33,7 @@ All services are deployed on a single machine, which includes:
 - **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates.
 - **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
-- **OpenVidu V2 Compatibility (v2compatibility module)** **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-11px } is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
+- **OpenVidu V2 Compatibility (v2compatibility module)** **PRO**{ .openvidu-tag .openvidu-pro-tag } is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
 
 ## Prerequisites
 
@@ -59,7 +59,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
 | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
 | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
-| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-11px } Needed for WebRTC media traffic over TCP when using the Mediasoup engine. |
+| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | **PRO**{ .openvidu-tag .openvidu-pro-tag } Needed for WebRTC media traffic over TCP when using the Mediasoup engine. |
 
 ??? warning "Make sure the proper ports are opened in the internal Linux firewall!"
 
@@ -608,7 +608,7 @@ Once you have OpenVidu deployed, you can check the [Administration](./admin.md) 
 
 ## Plain Docker Compose installation
 
-!!! warning "This installation method is targeted to advanced users, and is only available for the **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-11px } edition"
+!!! warning "This installation method is targeted to advanced users, and is only available for the **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } edition"
 
 This installation mechanism is more friendly with GitOps procedures, because all the configuration and deployment is managed through plain text files.
 

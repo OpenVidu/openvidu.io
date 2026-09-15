@@ -61,18 +61,18 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 
 | | **OpenVidu** | **Jitsi** |
 | --- | --- | --- |
-| Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } and [OpenVidu Meet](meet/index.md) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
-| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Apache 2.0 |
+| Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine**PRO**{ .openvidu-tag .openvidu-pro-tag } and [OpenVidu Meet](meet/index.md) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
+| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag } | Apache 2.0 |
 | Recording/streaming | [Egress bundled by default](docs/reference/egress.md), no extra hardware sizing | Jibri, can be deployed as an additional bundle |
-| Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em }, one product to configure & one-click deploy for 5 cloud providers | Octo relays media across an existing pool of Videobridges; actually growing that pool needs a separate `jitsi-autoscaler` service, supporting only Oracle OCI, DigitalOcean or a custom provider you implement |
-| Admin dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em }, per-room and per-participant views**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | None bundled |
+| Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)**PRO**{ .openvidu-tag .openvidu-pro-tag }, one product to configure & one-click deploy for 5 cloud providers | Octo relays media across an existing pool of Videobridges; actually growing that pool needs a separate `jitsi-autoscaler` service, supporting only Oracle OCI, DigitalOcean or a custom provider you implement |
+| Admin dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, per-room and per-participant views**PRO**{ .openvidu-tag .openvidu-pro-tag } | None bundled |
 | Ready-to-use app | [OpenVidu Meet](meet/index.md), embeddable via [iframe](meet/embedded/step-by-step-guide.md#use-an-iframe) or [web component](meet/embedded/step-by-step-guide.md#use-the-web-component) | Jitsi Meet, embeddable via iframe, lib-jitsi-meet, or native SDKs |
 | Hosted/cloud option | None — [self-hosted](docs/self-hosting/deployment-types.md) only, on your own infrastructure. One-click deploy for [5 cloud providers](docs/self-hosting/single-node/index.md) | [Jitsi as a Service :fontawesome-solid-external-link:{.external-link-icon}](https://jaas.8x8.vc/){:target="_blank"} (8x8), MAU-priced |
-| Pricing | Free**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em }, flat **$0.0006/core/minute****PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Free self-hosted; JaaS from **$0.35/MAU** (decreasing with volume), recording is a separate $0.01/min add-on |
+| Pricing | Free**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, flat **$0.0006/core/minute****PRO**{ .openvidu-tag .openvidu-pro-tag } | Free self-hosted; JaaS from **$0.35/MAU** (decreasing with volume), recording is a separate $0.01/min add-on |
 
 ## Recording: bundled Egress vs Jibri
 
-This is the sharpest operational difference between the two projects. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08em } ships
+This is the sharpest operational difference between the two projects. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } ships
 [Egress](docs/reference/egress.md) wired up by default, writing to
 S3-compatible storage out of the box. Jitsi's Jibri is the service responsible for recordings, but
 storing and serving the resulting files is left to you.
@@ -118,7 +118,7 @@ for iOS and Android.
 ## Pricing
 
 Both projects are free to self-host under Apache 2.0. The difference shows up if you want a hosted
-option or paid support: OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-08em } is a flat **$0.0006 per core per minute** for
+option or paid support: OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } is a flat **$0.0006 per core per minute** for
 self-hosted Elastic/HA deployments in your own infrastructure, while 8x8's JaaS is a *hosted*
 Monthly-Active-User model starting at $0.35/MAU (with a 25-MAU free developer tier), and charges
 recording separately at $0.01/minute. See [worked examples](pricing.md) for OpenVidu's concrete
@@ -129,7 +129,7 @@ monthly costs at several cluster sizes.
 ### Is Jitsi free to self-host?
 
 Yes. Jitsi Meet, Jicofo and Jitsi Videobridge are all Apache 2.0, the same license as OpenVidu
-**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08em }. The paid option is 8x8's hosted Jitsi as a Service (JaaS), not a self-hosted PRO
+**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }. The paid option is 8x8's hosted Jitsi as a Service (JaaS), not a self-hosted PRO
 tier — Jitsi itself has no self-hosted paid edition the way OpenVidu does.
 
 ### Does Jitsi have a recording feature?

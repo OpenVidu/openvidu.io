@@ -620,6 +620,8 @@ div[class*="grid-"]:has(> img) {
 
 /* COMMUNITY / PRO product tags */
 
+/* One size everywhere: 0.8em of the surrounding text, so the badge reads as a badge in a
+   paragraph, a list, a table cell or a heading alike. Never size a tag inline. */
 .openvidu-tag {
   pointer-events: none;
   display: inline-block;
@@ -628,7 +630,7 @@ div[class*="grid-"]:has(> img) {
   font-weight: bold;
   padding: 0px 5px;
   border-radius: 3px;
-  font-size: 1em;
+  font-size: 0.8em;
   line-height: 1.8em;
   font-family: var(--md-text-font-family);
   font-feature-settings: "kern", "liga";
@@ -657,46 +659,6 @@ div[class*="grid-"]:has(> img) {
   font-family: var(--md-text-font-family);
   font-feature-settings: "kern", "liga";
   vertical-align: text-bottom;
-}
-
-/* Tag sizes for the contexts the 1em default is too large for: comparison-table
-   cells, prose, list items, headings. */
-.openvidu-tag-07em {
-  font-size: 0.7em;
-}
-
-.openvidu-tag-08em {
-  font-size: 0.8em;
-}
-
-.openvidu-tag-08rem {
-  font-size: 0.8rem;
-}
-
-.openvidu-tag-10px {
-  font-size: 10px;
-}
-
-.openvidu-tag-11px {
-  font-size: 11px;
-}
-
-.openvidu-tag-12px {
-  font-size: 12px;
-}
-
-.openvidu-tag-12px-top {
-  font-size: 12px;
-  vertical-align: top;
-}
-
-.openvidu-tag-14px {
-  font-size: 14px;
-}
-
-.openvidu-tag-heading {
-  font-size: 0.9em;
-  vertical-align: top;
 }
 
 span:has(> .openvidu-tag) {

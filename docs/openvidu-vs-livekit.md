@@ -95,16 +95,16 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.
 | | **OpenVidu** | **LiveKit** (self-hosted) |
 | --- | --- | --- |
 | Identity | Fork of LiveKit, 100% API/SDK-compatible | The upstream open-source project |
-| Media engine | Pion**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } or [**mediasoup**](docs/self-hosting/production-ready/performance.md) (~2x more efficient)**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Pion |
-| Autoscaling | Yes: [Elastic](docs/self-hosting/elastic/index.md) & [HA](docs/self-hosting/ha/index.md) modes**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Autoscaling is yours to build and operate |
-| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Apache 2.0 |
-| Egress/Ingress | [Bundled by default](docs/reference/egress.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } | Separate services you deploy and operate yourself |
+| Media engine | Pion**COMMUNITY**{ .openvidu-tag .openvidu-community-tag } or [**mediasoup**](docs/self-hosting/production-ready/performance.md) (~2x more efficient)**PRO**{ .openvidu-tag .openvidu-pro-tag } | Pion |
+| Autoscaling | Yes: [Elastic](docs/self-hosting/elastic/index.md) & [HA](docs/self-hosting/ha/index.md) modes**PRO**{ .openvidu-tag .openvidu-pro-tag } | Autoscaling is yours to build and operate |
+| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag } | Apache 2.0 |
+| Egress/Ingress | [Bundled by default](docs/reference/egress.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | Separate services you deploy and operate yourself |
 | AI agents | [OpenVidu Agents](docs/ai/overview.md) (on top of LiveKit's Agent framework), speech-processing agent bundled | LiveKit's Agent framework, DIY (no agent bundled) |
 | High-level integrations | [OpenVidu Meet](meet/index.md), a ready-to-use videoconferencing application, optionally [embeddable in your own app](meet/embedded/intro.md) | None |
-| Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em }, with detailed per-room and per-participant views**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | No |
-| Observability | Bundled [Grafana dashboards](docs/self-hosting/production-ready/observability/grafana-stack.md)**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Prometheus metrics exposed; dashboards are DIY |
+| Dashboard | [OpenVidu Dashboard](docs/self-hosting/production-ready/observability/openvidu-dashboard.md)**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, with detailed per-room and per-participant views**PRO**{ .openvidu-tag .openvidu-pro-tag } | No |
+| Observability | Bundled [Grafana dashboards](docs/self-hosting/production-ready/observability/grafana-stack.md)**PRO**{ .openvidu-tag .openvidu-pro-tag } | Prometheus metrics exposed; dashboards are DIY |
 | Cloud automation | [One-click automated deployments](docs/self-hosting/deployment-types.md) on AWS, Azure, GCP, DigitalOcean and OCI | None — Helm chart or manual VM setup |
-| Pricing | Free**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em }, flat **$0.0006/core/minute****PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | Free |
+| Pricing | Free**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, flat **$0.0006/core/minute****PRO**{ .openvidu-tag .openvidu-pro-tag } | Free |
 
 LiveKit Cloud, LiveKit's managed SaaS, is out of scope for this table — see
 [Where LiveKit still has the edge](#where-livekit-still-has-the-edge) for what it does better than
@@ -117,7 +117,7 @@ processes**, each with its own API keys and sizing (LiveKit's own docs recommend
 4GB RAM per instance). None of that is optional plumbing you can skip — recording and streaming
 simply don't work until it's wired up.
 
-OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08em } ships all of it pre-integrated by default:
+OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } ships all of it pre-integrated by default:
 
 - [**Egress**](docs/reference/egress.md) and [**Ingress**](docs/reference/ingress.md) — no separate deployment step.
 - [**S3-compatible storage for recordings**](docs/tutorials/advanced-features/recording-basic-s3.md), pre-configured (MinIO) out of the box.
@@ -153,11 +153,11 @@ mediasoup is the right call.
 
 ## Pricing
 
-OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } is free, forever, and so is self-hosted LiveKit. The difference is at
+OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } is free, forever, and so is self-hosted LiveKit. The difference is at
 the top end: OpenVidu offers first-class, production-ready Elastic and HA self-hosted deployments on
 a pay-per-core basis, which self-hosted LiveKit does not.
 
-OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-08em }'s pricing is a single number: **$0.0006 per core per minute**, billed while
+OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }'s pricing is a single number: **$0.0006 per core per minute**, billed while
 your cluster is running. See our [worked examples](pricing.md) for concrete monthly costs at several
 cluster sizes.
 
@@ -191,7 +191,7 @@ unmodified against OpenVidu.
 
 ### Does OpenVidu have a hosted or cloud option?
 
-No. OpenVidu is self-hosted only, in both its free **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08em } edition and its paid **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-08em } edition.
+No. OpenVidu is self-hosted only, in both its free **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } edition and its paid **PRO**{ .openvidu-tag .openvidu-pro-tag } edition.
 There is no OpenVidu-hosted SaaS equivalent to LiveKit Cloud — every OpenVidu deployment runs on
 your own infrastructure or cloud account.
 

@@ -291,8 +291,12 @@ Where a rule goes:
   key. Pages never carry `<style>` blocks.
 - **A `style=""` attribute** → an existing utility in `extra.css` first (`.text-center`, `.nowrap`,
   `.w-25`/`.w-50`/`.w-8em`…, `.flex-row-center`, `.centered-section`, `.my-4em`, the
-  `.openvidu-tag-*` size modifiers, the `.cta-section` block). A pattern that recurs four times
-  or more earns a class; below that, inline is fine.
+  `.cta-section` block). A pattern that recurs four times or more earns a class; below that,
+  inline is fine.
+- **Product tags** are written `**PRO**{ .openvidu-tag .openvidu-pro-tag }` /
+  `**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }` and have one size everywhere, 0.8em of
+  the surrounding text: never size one inline. Only inside a raw HTML table (the pricing table)
+  do they stay `<span>`s.
 - **Anything site-wide** → the matching section of `extra.css`; a responsive rule joins the
   existing `@media` block for its breakpoint.
 
