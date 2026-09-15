@@ -1,7 +1,7 @@
 # Keep the tag in step with the mkdocs-material pin in publish-tool/pyproject.toml.
 # `ovweb doctor --pins` fails when they disagree: a different theme version builds different
 # markup, and the release-notes splice matches on that markup.
-FROM squidfunk/mkdocs-material:9.7.7
-RUN pip install mkdocs==1.6.1 pymdown-extensions==11.0.1 mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 mkdocs-rss-plugin==1.19.0 pygments==2.20.0
+FROM squidfunk/mkdocs-material:9.7.7@sha256:51b87149d227691486b5f08993d28c65ca7e4990010664b697265b8e6fcd5287
+RUN pip install mkdocs==1.6.1 pymdown-extensions==11.0.1 mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 mkdocs-rss-plugin==1.19.0 pygments==2.20.0 gitpython==3.1.59
 ENTRYPOINT ["/sbin/tini", "--", "mkdocs"]
 CMD ["serve", "--dev-addr=0.0.0.0:8000", "--livereload", "--dirty"]

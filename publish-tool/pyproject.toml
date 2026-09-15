@@ -28,6 +28,7 @@ build = [
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
+    "gitpython==3.1.59",
 ]
 # Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
@@ -38,6 +39,7 @@ validate = [
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
+    "gitpython==3.1.59",
 ]
 dev = [
     "pytest>=8",
