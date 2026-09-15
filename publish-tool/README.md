@@ -248,6 +248,22 @@ with two extras: `build` (the real publish, including `mkdocs-material[imaging]`
 --pins` fails when the three disagree. A different theme version builds different markup, and the
 release-notes splice matches on that markup.
 
+The publish workflow does not install from the extra directly. It installs
+[`requirements-publish.txt`](requirements-publish.txt) with `pip install --require-hashes`: the
+`build` extra fully resolved, every transitive dependency pinned and every file hash listed, so a
+job holding a write token never installs a release that differs from the one recorded here. The
+tool itself is then installed with `--no-deps --no-build-isolation`, which is why `hatchling` is
+part of the `build` extra. After changing a pin in `pyproject.toml`, regenerate the lock and
+commit both:
+
+```bash
+uv pip compile pyproject.toml --extra build --universal --generate-hashes \
+  --python-version 3.10 --no-header -o requirements-publish.txt
+```
+
+`--universal` keeps the environment markers, so the same file installs on the 3.10 floor and on
+the 3.14 the workflow runs. Dependabot watches both files (`.github/dependabot.yml`).
+
 ## Caveats and observations
 
 - **Clean working tree required.** `mike` builds the site from the working tree, so a publish
