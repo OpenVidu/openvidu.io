@@ -42,7 +42,7 @@ hide:
   - version-selector
 tags: []
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # OpenVidu vs Janus
@@ -158,7 +158,7 @@ mobile SDKs yourself.
 
 </div>
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Weighing a DIY Janus build against a ready platform?</h2>
   <p class="cta-lead">Tell us what you are building and we will help you scope the tradeoffs.</p>
   <div class="home-buttons">

@@ -34,7 +34,7 @@ hide:
   - version-selector
 tags: []
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # OpenVidu vs Jitsi
@@ -152,7 +152,7 @@ Platform.
 
 </div>
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Weighing OpenVidu against Jitsi for your deployment?</h2>
   <p class="cta-lead">Tell us about your use case and we will help you size it and compare the tradeoffs.</p>
   <div class="home-buttons">

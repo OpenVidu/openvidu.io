@@ -40,10 +40,13 @@ page_features:
 Each feature key expects a specific HTML structure. **If you copy a visual pattern from another
 page, copy its feature keys too.** These are the keys currently used:
 
-- `setupwowjs`: the page has [wow.js](https://wowjs.uk/) animations (elements with class `wow`):
+- `revealonscroll`: the page has reveal-on-scroll animations
+  ([sal.js](https://github.com/mciastek/sal), vendored as `docs/javascripts/sal.js` and
+  `docs/stylesheets/sal.css`): an element carrying `data-sal="slide-up"` fades in the first time
+  it scrolls into view. In an attribute list write `{ .some-class data-sal="slide-up" }`.
 
   ```html
-  <div class="wow animated animatedFadeInUp fadeInUp">
+  <div class="second-slogan" data-sal="slide-up">
     ...
   </div>
   ```
@@ -114,8 +117,8 @@ page, copy its feature keys too.** These are the keys currently used:
   automatically.
 
 The `page_features:`↔HTML contract is checked by `ovweb lint` (a page whose content carries
-glightbox/feature-cards/carousel/lazy-video markup must declare the matching feature key) — see
-[checks.md](checks.md).
+`feature-cards`, `splide`, `lazy-video`, `lead-form` or `data-sal` markup must declare the matching
+feature key) — see [checks.md](checks.md).
 
 ### Images
 

@@ -11,7 +11,7 @@ hide:
   - version-selector
 page_features:
   - dropdown
-  - setupwowjs
+  - revealonscroll
 dropdown_label: Team
 ---
 
@@ -174,7 +174,7 @@ My experience includes working with the most common public clouds and with their
 
 ---
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2>Some of us are researchers, and push OpenVidu forward by advancing the state-of-the-art on the field with our passion for science and technology!</h2>
   <div class="home-buttons">
     <a href="/research" class="md-button home-secondary-button">Have a look at our research works</a>

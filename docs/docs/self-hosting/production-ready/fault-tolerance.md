@@ -2,7 +2,7 @@
 title: "Fault tolerance in OpenVidu deployments"
 description: "How OpenVidu survives losing a node: which services are replicated, what happens to a room in progress, and what Elastic and HA each guarantee."
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # Fault tolerance :material-shield-refresh:
@@ -77,7 +77,7 @@ If the Media Node hosting an ongoing Egress process crashes, then the Egress pro
 
 It is possible that if the crashed Egress had **MP4** as [configured output](../../reference/egress.md#outputs) (which is an option available for [Room Composite](../../reference/egress.md#egress-types) and [Track Composite](../../reference/egress.md#egress-types)) the recovered file may not be directly playable and it may require a repair process.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Need specific uptime or SLA guarantees?</h2>
   <p class="cta-lead">Tell us your availability requirements and we will help you choose between Elastic and High Availability.</p>
   <div class="home-buttons">

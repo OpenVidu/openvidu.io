@@ -32,26 +32,6 @@
 
 {% block libs %}
 
-{# Reveal-on-scroll (in-house wow.js replacement). Hiding is gated on the
-   html.js-reveal class this function adds, so JS-off visitors see content. #}
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
-
 {# Use-cases carousel (Splide) #}
 <script>
   window.setupCarousel = function () {
@@ -204,9 +184,12 @@
 {# Owns the lightbox on every page: one gallery per page, theme-aware #}
 <script src="{{ 'javascripts/glightbox-gallery.js' | url }}"></script>
 
-{% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
+{% if page.meta and page.meta.page_features and "revealonscroll" in page.meta.page_features %}
+{# Reveal-on-scroll (sal.js): elements carrying data-sal="slide-up" fade in once, the first
+   time they enter the viewport. Reduced-motion users get the content static. #}
+<script src="{{ 'javascripts/sal.js' | url }}"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 {% endif %}
 
@@ -291,6 +274,35 @@
 
 {% if page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/carousel.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "revealonscroll" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/sal.css' | url }}" />
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+{# sal.css hides the elements until the script reveals them: without JS, show them. #}
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
 {% endif %}
 
 {% if page.meta.page_features and "homestyles" in page.meta.page_features %}

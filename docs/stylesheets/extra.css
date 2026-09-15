@@ -988,59 +988,6 @@ h1.meetplatform-slogan {
   animation: gfadeOut 0.2s ease !important;
 }
 
-/* Reveal-on-scroll. Hiding is gated on html.js-reveal (added only by the
-   reveal script), so with JS off the content simply stays visible. */
-
-@keyframes fadeInUp {
-  from {
-    transform: translate3d(0, 30px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-}
-
-html.js-reveal .wow {
-  visibility: hidden;
-}
-
-html.js-reveal .wow.revealed {
-  visibility: visible;
-}
-
-html.js-reveal .animatedFadeInUp {
-  opacity: 0;
-}
-
-.animated {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-}
-
-.fadeInUp {
-  animation-name: none;
-}
-
-html.js-reveal .revealed.fadeInUp {
-  animation-name: fadeInUp;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html.js-reveal .wow {
-    visibility: visible;
-  }
-
-  html.js-reveal .animatedFadeInUp {
-    opacity: 1;
-  }
-
-  html.js-reveal .revealed.fadeInUp {
-    animation: none;
-  }
-}
-
 /* Research page: publication badges, the index table and the metadata line */
 
 .pub-badge {

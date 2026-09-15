@@ -29,10 +29,11 @@ def _class_token(token: str) -> re.Pattern[str]:
 #: HTML class names that only work when the page carries the matching functional tag, which
 #: loads the JS behind them (see contributing/page-composition.md).
 TAG_CONTRACT = (
-    (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
-    (_class_token("splide"), "splide", "setupcarousel"),
-    (_class_token("lazy-video"), "lazy-video", "lazyvideo"),
-    (_class_token("lead-form"), "lead-form", "leadform"),
+    (_class_token("feature-cards"), 'class="feature-cards"', "setupcardglow"),
+    (_class_token("splide"), 'class="splide"', "setupcarousel"),
+    (_class_token("lazy-video"), 'class="lazy-video"', "lazyvideo"),
+    (_class_token("lead-form"), 'class="lead-form"', "leadform"),
+    (re.compile(r'\bdata-sal="'), 'data-sal="..."', "revealonscroll"),
 )
 
 
@@ -79,8 +80,7 @@ def check_tag_contract(corpus: Corpus) -> list[Finding]:
                         ERROR,
                         path,
                         1,
-                        f'page renders `class="{token}"` content but lacks '
-                        f"`page_features: [{feature}]`",
+                        f"page renders `{token}` content but lacks `page_features: [{feature}]`",
                         "the feature key loads the JS behind that markup (possibly pulled in "
                         "by a snippet); without it the element falls back to default "
                         "behaviour or renders inert",

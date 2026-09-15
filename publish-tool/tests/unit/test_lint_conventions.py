@@ -149,6 +149,13 @@ def test_the_class_token_matches_among_other_classes(tmp_path):
     assert "lazyvideo" in finding.message
 
 
+def test_reveal_markup_needs_revealonscroll(tmp_path):
+    write(tmp_path, "docs/pricing.md", '<div class="second-slogan" data-sal="slide-up">x</div>')
+
+    (finding,) = findings_of(tmp_path, "tag-contract")
+    assert "revealonscroll" in finding.message
+
+
 # -- image alt text --------------------------------------------------------------------------
 
 

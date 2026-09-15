@@ -10,7 +10,7 @@ hide:
   - version-selector
 tags: []
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # OpenVidu Meet vs OpenVidu Platform
@@ -38,7 +38,7 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 </div>
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Still not sure which one fits?</h2>
   <p class="cta-lead">Tell us about your use case and we will help you pick — or size a deployment that uses both.</p>
   <div class="home-buttons">

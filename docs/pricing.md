@@ -27,7 +27,7 @@ hide:
   - search-bar
   - version-selector
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # Pricing
@@ -107,7 +107,7 @@ Taking into account the following points:
 - You pay for every available core at any given time: if you cluster grows for one hour, that hour you will pay more. If your cluster decreases the next hour, next hour will be cheaper. Master Nodes and Media Nodes have the same core per minute price.
 - Your OpenVidu Pro cluster(s) need to allow outbound traffic to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2>There is a 15-day free trial period waiting for you!</h2>
   <div class="home-buttons">
     <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
@@ -135,7 +135,7 @@ After the free trial period, a **monthly billing cycle** will charge all your ex
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Not sure which setup fits your scale?</h2>
   <p class="cta-lead">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
   <div class="home-buttons">
@@ -242,7 +242,7 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 
 ---
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+<div class="second-slogan cta-section" data-sal="slide-up">
   <h2>There is a 15-day free trial period waiting for you!</h2>
   <div class="home-buttons">
     <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
