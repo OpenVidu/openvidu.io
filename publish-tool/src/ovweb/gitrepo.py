@@ -124,6 +124,16 @@ class Git:
     def prune_worktrees(self) -> None:
         self._run(("worktree", "prune"), check=False, mutating=True)
 
+    def worktree_holding(self, branch: str) -> Path | None:
+        """The worktree that has `branch` checked out, or None."""
+        path: Path | None = None
+        for line in self.read("worktree", "list", "--porcelain").splitlines():
+            if line.startswith("worktree "):
+                path = Path(line[len("worktree ") :])
+            elif line == f"branch refs/heads/{branch}":
+                return path
+        return None
+
     # -- branch and remote operations --------------------------------------------------
 
     def switch(self, branch: str) -> None:

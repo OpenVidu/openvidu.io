@@ -1,7 +1,7 @@
 """Turn mike's raw output for one version into the published site layout.
 
-Takes the tree to work on as an argument and touches git only in the final step, which makes
-`ovweb postprocess --tree <copy> --no-commit` a deterministic unit.
+Takes the tree to work on as an argument and never touches git — the commit belongs to
+:mod:`.publish` — which makes `ovweb postprocess --tree <copy>` a deterministic unit.
 
 The steps fall into three groups, and the order matters:
 
@@ -218,7 +218,7 @@ def _rewrite_promoted_pages(
         changed += int(
             fsops.rewrite_single(
                 version_dir / feed,
-                lambda text: rewrite_feed(text, version=version),
+                lambda text: rewrite_feed(text, version=version, layout=layout),
                 required=False,
             )
         )

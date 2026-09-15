@@ -19,7 +19,7 @@ Dashboards can be found in the **OpenVidu** folder at `https://your.domain/grafa
 
   ![Grafana dashboards folder](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/dashboards_folder.png){ .round-corners loading=lazy }
 
-### Services
+## Services
 
 The **Grafana stack** that comes with OpenVidu is composed of the following services:
 
@@ -29,9 +29,9 @@ The **Grafana stack** that comes with OpenVidu is composed of the following serv
 - **Promtail**: Agent that ships the contents of **local logs** to a **Loki** instance. In OpenVidu, it is used to collect logs from all **services** in your **cluster** and send them to **Loki**.
 - **Loki**: **Horizontally-scalable**, **highly-available**, **multi-tenant** **log aggregation** system inspired by **Prometheus**. In OpenVidu, it is used to store logs collected by **Promtail**.
 
-### Dashboards
+## Dashboards
 
-#### OpenVidu Server Metrics
+### OpenVidu Server Metrics
 
 This dashboard provides **metrics** about **OpenVidu Server**. It includes charts about **active rooms**, **active participants**, **published tracks**, **subscribed tracks**, **send/receive bytes**, **packet loss percentage** and **quality score**.
 
@@ -49,7 +49,7 @@ In case you are using **OpenVidu** [**PRO**{ .openvidu-tag .openvidu-pro-tag }](
 
 </div>
 
-#### OpenVidu Media Nodes Server Metrics
+### OpenVidu Media Nodes Server Metrics
 
 !!! info "This dashboard is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
@@ -65,7 +65,7 @@ You can select the **Media Node** you want to see metrics from in the **media_no
 
   ![Media Node metrics](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_metrics1.png){ .round-corners loading=lazy }
 
-#### OpenVidu Logs
+### OpenVidu Logs
 
 In case you are using **OpenVidu** [**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }](../../../../pricing.md#openvidu-community), this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
 
@@ -97,7 +97,7 @@ You can also filter logs containing a specific **text** by using the **filter se
 
   ![Single Node filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/single_node_logs5.png){ .round-corners loading=lazy }
 
-#### OpenVidu Cluster Nodes Logs
+### OpenVidu Cluster Nodes Logs
 
 !!! info "This dashboard is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
@@ -153,7 +153,7 @@ You can also filter logs containing a specific **text** by using the **filter se
 
   ![Cluter filter logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/nodes_logs8.png){ .round-corners loading=lazy }
 
-#### OpenVidu Cluster Services Logs
+### OpenVidu Cluster Services Logs
 
 !!! info "This dashboard is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
@@ -179,7 +179,7 @@ Then, there is a row for each selected **service**, containing **all logs**, **w
 
   ![Cluster service logs](../../../../assets/images/platform/self-hosting/production-ready/observability/grafana-stack/services_logs2.png){ .round-corners loading=lazy }
 
-### Limitations
+## Limitations
 
 For now, in [**OpenVidu High Availability deployments**](../../deployment-types.md#openvidu-high-availability), we have decided to **not** implement Grafana in High Availability (HA) mode. This decision is based on the fact that Grafana needs a configured HA MySQL or PostgreSQL database to work in HA mode, and we want to keep the deployment as simple as possible.
 

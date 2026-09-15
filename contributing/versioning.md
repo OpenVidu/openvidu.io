@@ -60,7 +60,7 @@ navigation, links and outdated-version banner):
   top-level `## X.Y.0` section (e.g. `## 3.4.0`); the notes for later patches of that minor go
   **below it**, under a `### Patch releases` heading as `#### 3.4.1`, `#### 3.4.2`, ... — never
   in a new top-level section. The auto-scroll (`releases-scroll-to-version.js`, enabled by the
-  `scrolltoversion` frontmatter tag) jumps to the `## X.Y.0` heading, so viewing
+  `scrolltoversion` key in the page's `page_features:`) jumps to the `## X.Y.0` heading, so viewing
   `/3.4/docs/releases/` lands on the 3.4 notes with every 3.4.x patch below.
 - **Links are always absolute and pinned to their own version.** Every link inside a
   release-notes section must be an absolute URL pointing to **the version that section

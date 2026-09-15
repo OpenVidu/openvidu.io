@@ -17,7 +17,11 @@
    diffs the <head> and re-appends any tag the live head is missing, so a
    removed style would come back on every instant navigation with nothing to
    remove it again — hiding the body. This site does not enable that feature,
-   but the safe form costs nothing and keeps the twin sites' overrides equal. #}
+   but the safe form costs nothing and keeps the twin sites' overrides equal.
+   Known limit: the <noscript> fallback below shows the body again when scripts
+   are off, which includes a framer using <iframe sandbox> without allow-scripts.
+   That is accepted so JS-off visitors still get a page; the content is public
+   and nothing here acts on the visitor's behalf. #}
 <style id="antiClickjack">html:not([data-unframed]) body{display:none !important;}</style>
 <script>
   if (self === top) {
@@ -27,59 +31,6 @@
   }
 </script>
 <noscript><style>body{display:block !important;}</style></noscript>
-
-{% endblock %}
-
-{% block libs %}
-
-{# Use-cases carousel (Splide) #}
-<script>
-  window.setupCarousel = function () {
-    document.querySelectorAll(".splide").forEach((el) => {
-      new Splide(el, {
-        type: "loop",
-        autoWidth: true,
-        autoHeight: true,
-        focus: "center",
-        gap: "4%",
-      }).mount();
-    });
-  };
-</script>
-
-{# Card glow effect #}
-<script>
-  window.openviduCardGlowRetries = 0;
-  window.setupCardGlow = function () {
-    console.debug("starting card glow setup");
-    const cards = document.querySelectorAll(
-      ".feature-cards .grid.cards > ul > li"
-    );
-    const maxRetries = 10;
-    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
-      console.debug("No cards found, retrying in 100ms");
-      window.openviduCardGlowRetries++;
-      setTimeout(() => {
-        window.setupCardGlow();
-      }, 100);
-      return;
-    }
-    function handleMouseMove(e) {
-      const rect = this.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left - rect.width / 2;
-      const mouseY = e.clientY - rect.top - rect.height / 2;
-      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
-      angle = (angle + 360) % 360;
-      this.style.setProperty("--start", angle + 60);
-    }
-    cards.forEach((card, index) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
-    console.debug("finished card glow setup");
-  };
-</script>
-
-{{ super() }}
 
 {% endblock %}
 
@@ -174,8 +125,11 @@
 
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
+{# Pages cannot send a Referrer-Policy header; the meta form is the browsers' default made
+   explicit: full URL to same-origin, origin only to other sites, nothing on downgrade. #}
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 {% if page.meta and page.meta.robots %}
-<meta name="robots" content="{{ page.meta.robots }}" />
+<meta name="robots" content="{{ page.meta.robots | e }}" />
 {% endif %}
 {% endblock %}
 
@@ -194,16 +148,14 @@
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "setupcardglow" in page.meta.page_features %}
-<script>
-  window.setupCardGlow();
-</script>
+{# Feature cards follow the pointer through the --start angle home.css draws the glow from #}
+<script src="{{ 'javascripts/card-glow.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
+{# Splide carousels: the library, then the script that mounts one per .splide #}
 <script src="{{ 'javascripts/splide.min.js' | url }}"></script>
-<script>
-  window.setupCarousel();
-</script>
+<script src="{{ 'javascripts/carousel.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "lazyvideo" in page.meta.page_features %}
@@ -260,6 +212,12 @@
 {% endif %}
 {% endif %}
 
+{# home.css owns the landing components (.feature-cards). It comes before the product sheets
+   so meet.css can restyle them on the Meet landing by cascade order, without !important. #}
+{% if page.meta.page_features and "homestyles" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
+{% endif %}
+
 {% if page.meta.page_features and ("Meet" in page.meta.page_features or "Platform" in page.meta.page_features) %}
 <link rel="stylesheet" href="{{ 'stylesheets/product.css' | url }}" />
 {% endif %}
@@ -303,10 +261,6 @@
     }
   </style>
 </noscript>
-{% endif %}
-
-{% if page.meta.page_features and "homestyles" in page.meta.page_features %}
-<link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "leadform" in page.meta.page_features %}

@@ -103,7 +103,7 @@ Finally the application enables CORS support and the port where the application 
 
 ---
 
-#### Create token
+### Create token
 
 The endpoint `/token` accepts `POST` requests with a payload of type `application/json`, containing the following fields:
 
@@ -158,7 +158,7 @@ Finally, the returned token is sent back to the client.
 
 ---
 
-#### Receive webhook
+### Receive webhook
 
 The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](../../reference/webhooks.md#events).
 

@@ -89,7 +89,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | Protocol | <div class="w-8em">Ports</div>      | <div class="w-15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 80          | 0.0.0.0/0, ::/0           | Redirect HTTP to HTTPS and Let's Encrypt validation.                                              |
-| TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
+| TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
 | TCP      | 1935        | 0.0.0.0/0, ::/0           | Needed if you want to ingest RTMP streams using Ingress service.                                      |
 | TCP      | 9000        | 0.0.0.0/0, ::/0           | Needed if you want to expose MinIO publicly.                                                              |
 | TCP      | 3000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana.                         |

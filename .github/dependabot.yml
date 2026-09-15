@@ -4,3 +4,24 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+
+  # The publishing tool and the build stack it pins (mkdocs-material, mike, plugins).
+  - package-ecosystem: "pip"
+    directory: "/publish-tool"
+    schedule:
+      interval: "weekly"
+    groups:
+      mkdocs-stack:
+        patterns:
+          - "mkdocs*"
+          - "mike"
+          - "pymdown-extensions"
+          - "pygments"
+          - "gitpython"
+
+  # The two dev images track the same mkdocs-material tag; ovweb doctor --pins checks they agree.
+  - package-ecosystem: "docker"
+    directories:
+      - "/"
+    schedule:
+      interval: "weekly"
