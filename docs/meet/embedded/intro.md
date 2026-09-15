@@ -19,7 +19,7 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
 
 </div>
 
-<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards commercial-code-blocks" markdown>
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid commercial-code-blocks" markdown>
 
 - __Create rooms through REST API__{ .ov-meet-commercial-card-title }
 

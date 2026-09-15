@@ -140,12 +140,12 @@ body[data-md-color-scheme="default"] {
   }
 }
 
-.ov-call-commercial-feature-cards {
+.ov-meet-commercial-feature-grid {
   padding: 0 25px !important;
   text-align: center !important;
 }
 
-.ov-call-commercial-feature-cards > ul > li {
+.ov-meet-commercial-feature-grid > ul > li {
   display: flex !important;
   justify-content: space-between;
   flex-direction: column;

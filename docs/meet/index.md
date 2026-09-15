@@ -83,7 +83,7 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 ![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-dark.png#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
 </div>
 
-<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid wow animated animatedFadeInUp fadeInUp" markdown>
 
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
@@ -115,7 +115,7 @@ OpenVidu Meet offers high-quality recordings and greatly simplifies their storag
 
 </div>
 
-<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards wow animated animatedFadeInUp fadeInUp" markdown>
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid wow animated animatedFadeInUp fadeInUp" markdown>
 
 - __Pre-configure your rooms__{ .ov-meet-commercial-card-title }
 
