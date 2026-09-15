@@ -322,3 +322,72 @@ def test_the_readers_own_deployment_is_not_an_external_site(tmp_path):
 
     assert findings_of(tmp_path, "external-link-target") == []
     assert findings_of(tmp_path, "external-link-icon") == []
+
+
+# -- font loading ----------------------------------------------------------------------------
+
+FONT_URL = (
+    "https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,300;0,400;0,700;1,400"
+    "&family=Roboto+Mono:ital,wght@0,400;0,700&display=block"
+)
+PRELOAD = (
+    '{{# {label} #}}<link rel="preload" href="https://fonts.gstatic.com/s/x/v1/x.woff2" '
+    'as="font" type="font/woff2" {crossorigin}/>'
+)
+
+
+def preload(label="Tomorrow 400", crossorigin='crossorigin="anonymous" '):
+    return PRELOAD.format(label=label, crossorigin=crossorigin)
+
+
+def font_block(url=FONT_URL, preloads=None, link=None):
+    preloads = preloads if preloads is not None else (preload(),)
+    link = link or f'<link rel="stylesheet" href="{url}" />'
+    return "\n".join(preloads) + "\n" + link + "\n"
+
+
+def test_a_font_block_that_keeps_the_contract_is_silent(tmp_path):
+    write(tmp_path, "overrides/main.html", font_block(preloads=(preload(), preload("Roboto Mono"))))
+
+    assert findings_of(tmp_path, "font-loading") == []
+
+
+def test_a_preload_as_style_font_link_is_an_error(tmp_path):
+    link = f'<link rel="preload" as="style" href="{FONT_URL}" onload="this.rel=\'stylesheet\'" />'
+    write(tmp_path, "overrides/main.html", font_block(link=link))
+
+    (finding,) = findings_of(tmp_path, "font-loading")
+    assert 'rel="preload"' in finding.message
+    assert finding.severity == "error"
+
+
+def test_display_swap_is_an_error(tmp_path):
+    url = FONT_URL.replace("display=block", "display=swap")
+    write(tmp_path, "overrides/main.html", font_block(url=url))
+
+    (finding,) = findings_of(tmp_path, "font-loading")
+    assert "display=block" in finding.message
+
+
+def test_preloading_a_weight_the_url_does_not_request_is_an_error(tmp_path):
+    write(tmp_path, "overrides/main.html", font_block(preloads=(preload("Tomorrow 800"),)))
+
+    (finding,) = findings_of(tmp_path, "font-loading")
+    assert "Tomorrow 800" in finding.message
+
+
+def test_a_font_preload_without_crossorigin_is_an_error(tmp_path):
+    write(tmp_path, "overrides/main.html", font_block(preloads=(preload(crossorigin=""),)))
+
+    (finding,) = findings_of(tmp_path, "font-loading")
+    assert "crossorigin" in finding.message
+
+
+def test_the_register_pages_icon_font_is_not_held_to_the_contract(tmp_path):
+    icon = (
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
+        'family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />'
+    )
+    write(tmp_path, "overrides/main.html", font_block() + icon)
+
+    assert findings_of(tmp_path, "font-loading") == []

@@ -37,6 +37,9 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
   markup should declare the matching tag); `<img>` elements without `alt` text; files at the
   `assets/images|videos/` root; unpaired `#only-light`/`#only-dark`; blog posts referencing
   another post's asset folder; snippet filenames repeating their folder.
+- **Font loading**: `overrides/main.html` loads the font stylesheet render-blocking with
+  `display=block`, and every `{# Family NNN #}` preload hint names a weight the URL requests
+  and carries `crossorigin` — the no-flicker contract the template's own comment describes.
 - **Commented-out dead links** (info): janitorial, since MkDocs skips comments too.
 
 Findings live in code fences, inline code and HTML comments are excluded before matching, so a
