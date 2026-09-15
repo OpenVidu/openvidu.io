@@ -17,7 +17,11 @@
    diffs the <head> and re-appends any tag the live head is missing, so a
    removed style would come back on every instant navigation with nothing to
    remove it again — hiding the body. This site does not enable that feature,
-   but the safe form costs nothing and keeps the twin sites' overrides equal. #}
+   but the safe form costs nothing and keeps the twin sites' overrides equal.
+   Known limit: the <noscript> fallback below shows the body again when scripts
+   are off, which includes a framer using <iframe sandbox> without allow-scripts.
+   That is accepted so JS-off visitors still get a page; the content is public
+   and nothing here acts on the visitor's behalf. #}
 <style id="antiClickjack">html:not([data-unframed]) body{display:none !important;}</style>
 <script>
   if (self === top) {
@@ -121,6 +125,9 @@
 
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
+{# Pages cannot send a Referrer-Policy header; the meta form is the browsers' default made
+   explicit: full URL to same-origin, origin only to other sites, nothing on downgrade. #}
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 {% if page.meta and page.meta.robots %}
 <meta name="robots" content="{{ page.meta.robots | e }}" />
 {% endif %}
