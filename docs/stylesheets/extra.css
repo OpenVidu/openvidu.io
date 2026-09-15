@@ -1,10 +1,3 @@
-:root:root {
-  --primary-color-of-meet: rgb(0, 147, 73);
-  --primary-color-of-platform: rgb(0, 136, 170);
-  --accent-color-of-meet: rgb(6, 211, 98);
-  --accent-color-of-platform: rgb(0, 200, 247);
-}
-
 .openvidu-tag {
   pointer-events: none;
   display: inline-block;
@@ -143,7 +136,7 @@
 }
 
 .openvidu-community-tag {
-  background-color: #868686;
+  background-color: var(--ov-grey);
 }
 
 .openvidu-pro-tag {
@@ -817,8 +810,8 @@ hr {
   background-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(77, 77, 77, 1) 25%,
-    rgba(77, 77, 77, 1) 75%,
+    var(--ov-nav-grey) 25%,
+    var(--ov-nav-grey) 75%,
     transparent 100%
   );
   width: 100%;
@@ -857,10 +850,10 @@ div[data-md-component="outdated"] aside {
 }
 
 .deploy-button.deploy-to-aws-btn {
-  background-color: #ff9900;
+  background-color: var(--ov-aws-orange);
   border: none;
   border-radius: 5px;
-  color: #252f3e !important;
+  color: var(--ov-aws-navy) !important;
   padding: 8px 24px;
   font-size: 1.2em;
   transition: all 0.125s ease;
@@ -869,7 +862,7 @@ div[data-md-component="outdated"] aside {
 }
 
 .deploy-button.deploy-to-aws-btn:hover {
-  background-color: #ff9900 !important;
+  background-color: var(--ov-aws-orange) !important;
   filter: saturate(50%) brightness(130%);
 }
 
@@ -957,7 +950,7 @@ h1.meetplatform-slogan {
 }
 
 .compare-table-icon-yes {
-  color: rgb(6, 211, 98);
+  color: var(--ov-meet-accent);
   --md-icon-size: 1.525em !important;
 }
 
@@ -972,21 +965,21 @@ h1.meetplatform-slogan {
 }
 
 .platform-primary-color {
-  background-color: var(--primary-color-of-platform) !important;
-  border-color: var(--primary-color-of-platform) !important;
+  background-color: var(--ov-platform-primary) !important;
+  border-color: var(--ov-platform-primary) !important;
 }
 
 .meet-primary-color {
-  background-color: var(--primary-color-of-meet) !important;
-  border-color: var(--primary-color-of-meet) !important;
+  background-color: var(--ov-meet-primary) !important;
+  border-color: var(--ov-meet-primary) !important;
 }
 
 .meet-link-color {
-  color: var(--accent-color-of-meet) !important;
+  color: var(--ov-meet-accent) !important;
 }
 
 .platform-link-color {
-  color: var(--accent-color-of-platform) !important;
+  color: var(--ov-platform-accent) !important;
 }
 
 .accent-code {

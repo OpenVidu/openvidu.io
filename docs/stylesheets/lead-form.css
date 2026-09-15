@@ -17,7 +17,7 @@
   border-radius: 7px;
   box-shadow: 0 8px 16px 0 var(--lead-form-shadow);
   /* The accent bar is what makes the block read as the page's call to action */
-  border-top: 4px solid var(--primary-color-of-platform);
+  border-top: 4px solid var(--ov-platform-primary);
 }
 
 [data-md-color-scheme="slate"] .lead-form {
@@ -75,8 +75,8 @@
 .lead-form select:focus,
 .lead-form textarea:focus {
   outline: none;
-  border-color: var(--primary-color-of-platform);
-  box-shadow: 0 0 0 3px rgba(0, 136, 170, 0.18);
+  border-color: var(--ov-platform-primary);
+  box-shadow: 0 0 0 3px rgba(var(--ov-platform-primary-rgb), 0.18);
 }
 
 .lead-form [aria-invalid="true"] {
@@ -124,15 +124,15 @@
   padding: 0.5em 1.8em;
   font-weight: 700;
   color: #ffffff;
-  background-color: #0088aa;
-  border-color: #0088aa;
+  background-color: var(--ov-platform-primary);
+  border-color: var(--ov-platform-primary);
 }
 
 .md-typeset .lead-form .lead-form-submit:hover,
 .md-typeset .lead-form .lead-form-submit:focus {
   color: #ffffff;
-  background-color: #007394;
-  border-color: #007394;
+  background-color: var(--ov-platform-primary-hover);
+  border-color: var(--ov-platform-primary-hover);
 }
 
 /* Disabled until every required field is valid, so the button itself shows

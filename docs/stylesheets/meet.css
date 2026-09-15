@@ -1,10 +1,13 @@
+/* OpenVidu Meet pages: the product's --product-* palette (mapped onto Material by product.css)
+   plus Meet-only components. Brand values come from colors.css. */
+
 :root:root {
-  --product-primary-color: rgb(0, 147, 73) !important;
-  --product-primary-color-rgb: 0, 147, 73 !important;
+  --product-primary-color: var(--ov-meet-primary) !important;
+  --product-primary-color-rgb: var(--ov-meet-primary-rgb) !important;
   --product-primary-dark: rgb(0, 95, 48) !important;
   --product-primary-dark-rgb: 0, 95, 48 !important;
-  --product-primary-color-light: rgb(6, 211, 98) !important;
-  --product-primary-color-light-rgb: 6, 211, 98 !important;
+  --product-primary-color-light: var(--ov-meet-accent) !important;
+  --product-primary-color-light-rgb: var(--ov-meet-accent-rgb) !important;
   --product-body-color-dark: rgb(0, 37, 19) !important;
   --product-body-color-dark-rgb: 0, 37, 19 !important;
   --md-hue: 140deg !important;
@@ -104,15 +107,15 @@
 }
 
 .bare-metal-icon {
-  background-color: #868686;
+  background-color: var(--ov-grey);
 }
 
 .aws-icon {
-  background-color: #ff9900;
+  background-color: var(--ov-aws-orange);
 }
 
 .aws-icon svg {
-  color: #252F3E;
+  color: var(--ov-aws-navy);
 }
 
 .azure-icon {
