@@ -50,7 +50,7 @@ When choosing mediasoup as the WebRTC engine, these are the only differences wit
 
 ## Benchmarking
 
-Numerous load tests have been performed to determine the true capabilities of OpenVidu on different hardware. To do so we have developed the tool [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}: an in development project that aims to improve the precision of load and performance tests in WebRTC systems.
+Numerous load tests have been performed to determine the true capabilities of OpenVidu on different hardware. To do so we have developed the tool [OpenVidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"}: an in development project that aims to improve the precision of load and performance tests in WebRTC systems.
 
 We have compared OpenVidu using the original **Pion** WebRTC engine (this is the default LiveKit Open Source implementation) and using **mediasoup** as WebRTC engine. We tested the performance for both cases in the scenario below.
 
@@ -106,7 +106,7 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 ### About OpenVidu LoadTest
 
-Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
+Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [OpenVidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with OpenVidu LoadTest are more expensive, as they require real instances to host the browsers.
 
 <div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Want a performance estimate for your own workload?</h2>

@@ -34,7 +34,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
 
 === "app"
 
-    You need to configure the Livekit configuration to send webhooks to the OpenVidu V2 Compatibility service.
+    You need to configure the LiveKit configuration to send webhooks to the OpenVidu V2 Compatibility service.
 
     === "Single Node"
 
@@ -77,7 +77,7 @@ If you've installed OpenVidu with all modules enabled, you may not need to chang
 
 === "v2compatibility"
 
-    You need to configure the Livekit configuration to send webhooks to the OpenVidu V2 Compatibility service.
+    You need to configure the LiveKit configuration to send webhooks to the OpenVidu V2 Compatibility service.
 
     === "Elastic"
 
