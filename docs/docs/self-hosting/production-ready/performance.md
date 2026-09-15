@@ -74,7 +74,7 @@ The X axis reflects the point of time in seconds. For each Participant there is 
 
 CPU load of the server is also shown with a black marked plot (from 0 to 1, representing 0% to 100% CPU load).
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 <div class="grid-50 tablet-grid-50" markdown>
 ![Pion connection progression](../../../assets/images/platform/self-hosting/production-ready/performance/connection-progression-pion.png){ .control-height .round-corners loading=lazy }
 /// caption
@@ -108,9 +108,9 @@ The test stops when it determines that no more users can be added to a room. Thi
 
 Tools like [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit-cli){:target="_blank"} simulate participants directly using WebRTC SDKs, but we found out that **real browsers add significantly more load** than these kinds of systems. This makes [Openvidu LoadTest :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-loadtest){:target="_blank"} give results that are closer to real-world scenarios. Using real browsers also allows for the collection of useful data related to connections, events and WebRTC statistics. On the other hand, tests performed with Openvidu LoadTest are more expensive, as they require real instances to host the browsers.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Want a performance estimate for your own workload?</h2>
-  <p style="margin-bottom: 1.5em">Tell us your expected load and we will help you benchmark and size it.</p>
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+  <h2 class="cta-title">Want a performance estimate for your own workload?</h2>
+  <p class="cta-lead">Tell us your expected load and we will help you benchmark and size it.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

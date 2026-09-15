@@ -49,7 +49,7 @@ internally as its media engine, replacing Pion, the engine used by upstream Live
 mediasoup leaves for you to build yourself, and what OpenVidu already built on that same
 foundation.
 
-<div style="text-align: center; margin: 2em 0;" markdown>
+<div class="centered-section" markdown>
 
 [Get started with Platform](docs/index.md){ .md-button .md-button--primary }
 [Compare with LiveKit instead](openvidu-vs-livekit.md){ .md-button }
@@ -143,15 +143,15 @@ in aware of the scope: mediasoup's own documentation is explicit that signaling,
 authentication, a managed recording API, a REST API, an admin dashboard, and native mobile SDKs are
 all out of scope by design. You would build every one of those yourself.
 
-<div style="text-align: center; margin: 2em 0;" markdown>
+<div class="centered-section" markdown>
 
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 
 </div>
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Weighing a DIY mediasoup build against a ready platform?</h2>
-  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+  <h2 class="cta-title">Weighing a DIY mediasoup build against a ready platform?</h2>
+  <p class="cta-lead">Tell us what you are building and we will help you scope the tradeoffs.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

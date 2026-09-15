@@ -14,7 +14,7 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers, 
 
 !!! info
 
-    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-12px-top }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
@@ -89,7 +89,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol | <div class="w-8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
+| Protocol | <div class="w-8em">Ports</div>      | <div class="w-15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 1945        | Load Balancer             | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP      | 5349        | Load Balancer             | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |

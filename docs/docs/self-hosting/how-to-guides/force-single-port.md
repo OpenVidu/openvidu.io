@@ -89,7 +89,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div class="w-8em">Ports</div> | <div style="width:15em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-15em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
@@ -218,7 +218,7 @@ To enforce this configuration, your inbound port rules should look like this:
 
         **Inbound port rules**:
 
-        | Protocol | <div class="w-8em">Ports</div> | <div style="width:15em">Source</div> | Description |
+        | Protocol | <div class="w-8em">Ports</div> | <div class="w-15em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |

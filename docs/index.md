@@ -74,7 +74,7 @@ page_features:
   </div>
 </div>
 
-<div class="wow animated animatedFadeInUp fadeInUp" style="text-align: center" markdown>
+<div class="wow animated animatedFadeInUp fadeInUp text-center" markdown>
 --8<-- "meet-vs-platform-table.md"
 
 *[Learn more about OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)*
@@ -226,8 +226,8 @@ Not sure which fits? [Compare Meet vs Platform](openvidu-meet-vs-openvidu-platfo
 
 <hr style="margin: 7em 0 3.5em 0;">
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+  <h2>Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
   <div class="home-buttons">
     <a href="/support/" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

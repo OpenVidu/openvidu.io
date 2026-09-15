@@ -14,7 +14,7 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers, 
 
 !!! info
     
-    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-12px-top }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing DNS for load balancing traffic. DNS allows multiple records, even of the same kind, to be registered, enabling the listing of multiple hosts under the same domain name. Such a mechanism allows for the distribution of traffic among the Master Nodes, offering an alternative to Network Load Balancers.
@@ -86,7 +86,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 
 **Inbound port rules**:
 
-| Protocol | <div class="w-8em">Ports</div>      | <div style="width:15em">Source</div>         | Description                                         |
+| Protocol | <div class="w-8em">Ports</div>      | <div class="w-15em">Source</div>         | Description                                         |
 |----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
 | TCP      | 80          | 0.0.0.0/0, ::/0           | Redirect HTTP to HTTPS and Let's Encrypt validation.                                              |
 | TCP      | 443         | 0.0.0.0/0, ::/0           | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |

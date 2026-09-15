@@ -32,15 +32,15 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 <br>
 
-<div style="text-align: center" markdown>
+<div class="text-center" markdown>
 
 --8<-- "meet-vs-platform-table.md"
 
 </div>
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Still not sure which one fits?</h2>
-  <p style="margin-bottom: 1.5em">Tell us about your use case and we will help you pick — or size a deployment that uses both.</p>
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+  <h2 class="cta-title">Still not sure which one fits?</h2>
+  <p class="cta-lead">Tell us about your use case and we will help you pick — or size a deployment that uses both.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

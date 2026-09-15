@@ -44,7 +44,7 @@ To deploy the template, you need to fill in the following parameters.
 
 --8<-- "self-hosting/azure/ssl-domain.md"
 
-## OpenVidu Single Node PRO configuration **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 11px" }
+## OpenVidu Single Node PRO configuration **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-11px }
 
 If you are deploying the PRO edition, you need to specify some additional properties.
 

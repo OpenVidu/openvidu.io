@@ -395,7 +395,7 @@ The table below lists our publications from newest to oldest. Select any title t
 
 ## Index
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 <div class="research-index" markdown>
 
 | Year | Type | Publication |
@@ -425,7 +425,7 @@ The table below lists our publications from newest to oldest. Select any title t
 
 ---
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 
 <div class="grid-90 tablet-grid-90" markdown>
 ## [Scalability and Quality of Experience of WebRTC media servers for Large-Scale, Low-Latency Streaming :fontawesome-solid-external-link:{.external-link-icon}](https://dialnet.unirioja.es/servlet/tesis?codigo=402576){:target="_blank"}

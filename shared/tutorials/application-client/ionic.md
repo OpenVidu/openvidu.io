@@ -84,7 +84,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 
         Once the mobile device has been selected, the script will launch the application on the device and you will see a screen like this:
 
-        ![URL configuration of the Ionic tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ loading=lazy style="width: 25%" }
+        ![URL configuration of the Ionic tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ .w-25 loading=lazy }
 
         This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 
@@ -93,11 +93,11 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
         /// html | div.grid-container
 
         /// html | div.grid-50.text-center
-        ![Join screen of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/join-ionic-device.png){ loading=lazy style="width: 50%" }
+        ![Join screen of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/join-ionic-device.png){ .w-50 loading=lazy }
         ///
 
         /// html | div.grid-50.text-center
-        ![Video call room of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/room-ionic-device.png){ loading=lazy style="width: 50%" }
+        ![Video call room of the Ionic tutorial app on a mobile device](/assets/images/platform/tutorials/application-client/room-ionic-device.png){ .w-50 loading=lazy }
         ///
 
         ///

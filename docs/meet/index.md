@@ -24,7 +24,7 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
     <a class="glightbox" href="/assets/videos/meet/home/demo.mp4" data-type="video"><video class="round-corners" src="/assets/videos/meet/home/demo-preview.mp4" poster="/assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
 [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
@@ -162,7 +162,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
-<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards three-columns wow animated animatedFadeInUp fadeInUp" markdown>
 
 -   :material-record-rec:{ .feature-icon } __Recording__{ .feature-name }
 
@@ -232,14 +232,14 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
 [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
 
 </div>
 
-<hr style="margin: 4em 0">
+<hr class="my-4em">
 
 ## Integrations
 
@@ -278,7 +278,7 @@ curl --request POST \
 Explore <a href="./embedded/intro"><strong>OpenVidu Meet Embedded</strong></a> to integrate video calls into your application.
 </h2>
 
-<hr style="margin: 4em 0">
+<hr class="my-4em">
 
 ## Deployments
 
@@ -330,7 +330,7 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 Check out the <a href="./deployment/overview"><strong>deployment documentation</strong></a>.
 </h2>
 
-<hr style="margin: 4em 0">
+<hr class="my-4em">
 
 ## Use cases
 
@@ -353,7 +353,7 @@ Empower collaboration across your organization with customizable, secure, high-q
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __Collaboration tools__{ .feature-name }
 
@@ -392,7 +392,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __High quality media__{ .feature-name }
 
@@ -431,7 +431,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __Security and privacy__{ .feature-name }
 
@@ -470,7 +470,7 @@ Build trust with instant, reliable support through embedded video calls that per
 
 </div>
 
-<div class="grid cards use-cases-cards three-columns" style="margin-top: 0; margin-bottom: 0" markdown>
+<div class="grid cards use-cases-cards three-columns" markdown>
 
 -   __Ease of access__{ .feature-name }
 
@@ -498,7 +498,7 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 </div>
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
 [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
@@ -511,13 +511,13 @@ Build trust with instant, reliable support through embedded video calls that per
 
 OpenVidu Meet is available in two editions:
 
-### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.9em; vertical-align: top" }
+### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-heading }
 
 It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
 
-### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.9em; vertical-align: top" }
+### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-heading }
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
@@ -529,7 +529,7 @@ You can choose the OpenVidu edition that best fits your needs when <a href="./de
 
 <hr style="margin: 5em 0 2em 0">
 
-<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 4em 0">
+<h2 class="meetplatform-slogan wow animated animatedFadeInUp fadeInUp my-4em">
 Need total control and advanced SDKs to build your custom real-time application?
 Check out <a href="../docs/"><strong>OpenVidu Platform</strong></a>.<br>
 Not sure which one fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>.

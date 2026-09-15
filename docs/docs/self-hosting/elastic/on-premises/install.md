@@ -14,7 +14,7 @@ description: "Deploy OpenVidu Elastic on your own servers with the guided or non
 
 !!! info
     
-    OpenVidu Elastic is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
+    OpenVidu Elastic is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-12px-top }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to workload.

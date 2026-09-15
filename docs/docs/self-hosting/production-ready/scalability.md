@@ -309,9 +309,9 @@ When deploying an OpenVidu cluster **On Premises** you are responsible for monit
     - [Removing Media Nodes gracefully](../ha/on-premises/admin.md#removing-media-nodes-gracefully)
     - [Removing Media Nodes forcefully](../ha/on-premises/admin.md#removing-media-nodes-forcefully)
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Planning for a specific scale target?</h2>
-  <p style="margin-bottom: 1.5em">Tell us your expected rooms and participants and we will help you size the deployment.</p>
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+  <h2 class="cta-title">Planning for a specific scale target?</h2>
+  <p class="cta-lead">Tell us your expected rooms and participants and we will help you size the deployment.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

@@ -53,7 +53,7 @@ plugins cover conferencing, SIP gateways, streaming and more, not conferencing r
 you're evaluating "build directly on Janus" against "use OpenVidu," here's exactly what Janus
 leaves for you to build yourself, and what OpenVidu already built on its own stack.
 
-<div style="text-align: center; margin: 2em 0;" markdown>
+<div class="centered-section" markdown>
 
 [Get started with Platform](docs/index.md){ .md-button .md-button--primary }
 [Compare with a full platform instead](openvidu-vs-jitsi.md){ .md-button }
@@ -99,7 +99,7 @@ That said, Janus ships more out of the box than a bare media engine:
 
 | | **OpenVidu** | **Janus** |
 | --- | --- | --- |
-| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .7em" } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: .7em" } | GPL v3 (commercial license available) |
+| License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-07em } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag .openvidu-tag-07em } | GPL v3 (commercial license available) |
 | Room/session model | [Bundled](docs/reference/room-service-api.md#rooms) | Basic, via the VideoRoom plugin only |
 | Authentication | [JWT tokens with grants](docs/reference/access-tokens.md#video-grants), bundled | Not provided for application rooms |
 | Recording (Egress) | [Bundled](docs/reference/egress.md), S3-compatible storage | Raw `.mjr` dumps, manual post-processing |
@@ -141,7 +141,7 @@ is an independent project from Meetecho with its own plugin architecture.
 
 Janus is released under the GNU GPL v3, with a commercial license available from Meetecho for teams
 that don't want GPL's copyleft obligations. This is a real practical difference from OpenVidu
-**COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: .8em" }'s Apache 2.0 license, worth checking against your own project's licensing requirements
+**COMMUNITY**{ .openvidu-tag .openvidu-community-tag .openvidu-tag-08em }'s Apache 2.0 license, worth checking against your own project's licensing requirements
 before you build on it.
 
 ### Can I use Janus directly instead of a platform?
@@ -152,15 +152,15 @@ it can be the right call. Go in aware of the scope: you're also taking on authen
 persistence beyond VideoRoom's basics, managed recording, a REST API, a dashboard, and native
 mobile SDKs yourself.
 
-<div style="text-align: center; margin: 2em 0;" markdown>
+<div class="centered-section" markdown>
 
 [Start with a tutorial](docs/tutorials/application-server/index.md){ .md-button .md-button--primary }
 
 </div>
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Weighing a DIY Janus build against a ready platform?</h2>
-  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
+<div class="second-slogan wow animated animatedFadeInUp fadeInUp cta-section">
+  <h2 class="cta-title">Weighing a DIY Janus build against a ready platform?</h2>
+  <p class="cta-lead">Tell us what you are building and we will help you scope the tradeoffs.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>
