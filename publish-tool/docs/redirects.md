@@ -74,9 +74,10 @@ Five kinds ship:
   at: "{version}/docs/self-hosting/{edition}/{provider}/index.html"
   to: "install/"
   canonical: "{site_url}/latest/docs/self-hosting/{edition}/{provider}/install/"
+  body: "Redirecting to the installation guide…"
   versions: ">=3.8"           # the release the consolidation belongs to
   values:
-    edition:  [single-node, single-node-pro, elastic, ha]
+    edition:  [single-node, elastic, ha]
     provider: [on-premises, aws, azure, gcp, digitalocean, oracle]
 ```
 

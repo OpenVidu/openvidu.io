@@ -89,7 +89,7 @@ not use it in copy targeting older versions.
 | Serve with live reload | `docker run --name=mkdocs --rm -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material` |
 | Strict build (what CI runs) | `CI=false GOOGLE_ANALYTICS_KEY=G-XXXXXXXX mkdocs build --strict -d /tmp/site` (needs `pip install "./publish-tool[validate]"`) |
 | publish-tool tests | `cd publish-tool && pytest && ruff check . && ruff format --check .` |
-| Environment/pins check | `ovweb doctor` (`--pins` for the pin agreement only) |
+| Environment/pins check | `ovweb doctor` (`--pins` for the pin agreement only; needs a non-editable `pip install "./publish-tool[build]"` — the `[validate]` extra has no mike, so doctor reports it missing) |
 | Convention lint (what `--strict` can't see: raw-HTML links, link form, version pins, SEO budgets) | `ovweb lint` — or the `/check-web` command |
 | Redirect rules check | `ovweb redirects check` |
 | Published-tree invariants | `ovweb verify` |

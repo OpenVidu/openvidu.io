@@ -32,9 +32,11 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
 - **SEO budgets** (warn): `title` over 57 characters (70 for posts), `description` over 160 or
   not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
   `mkdocs_hook.py` — a missing field must kill CI, but a long one must not kill `mkdocs serve`.
-- **Page composition**: `!!!warning`-without-space admonitions; the functional `tags:` contract
+- **Page composition**: `!!!warning`-without-space admonitions; the `page_features:` contract
   (a page whose content — snippets included — carries `feature-cards`, `splide`, `lazy-video`,
-  `lead-form` or `data-sal` markup should declare the matching feature key); `<img>` elements without `alt` text; files at the
+  `lead-form` or `data-sal` markup must list the matching feature key — `setupcardglow`,
+  `setupcarousel`, `lazyvideo`, `leadform` or `revealonscroll` — in its `page_features:`
+  frontmatter; `tags:` is blog taxonomy and does not count); `<img>` elements without `alt` text; files at the
   `assets/images|videos/` root; unpaired `#only-light`/`#only-dark`; blog posts referencing
   another post's asset folder; snippet filenames repeating their folder.
 - **Font loading**: `overrides/main.html` loads the font stylesheet render-blocking with

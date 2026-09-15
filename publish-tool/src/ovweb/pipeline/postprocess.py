@@ -1,7 +1,7 @@
 """Turn mike's raw output for one version into the published site layout.
 
-Takes the tree to work on as an argument and touches git only in the final step, which makes
-`ovweb postprocess --tree <copy> --no-commit` a deterministic unit.
+Takes the tree to work on as an argument and never touches git — the commit belongs to
+:mod:`.publish` — which makes `ovweb postprocess --tree <copy>` a deterministic unit.
 
 The steps fall into three groups, and the order matters:
 

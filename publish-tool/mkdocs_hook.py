@@ -1,10 +1,13 @@
-"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Two jobs:
+"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Three jobs:
 
 * `on_env` sets every page's `update_date`, so `sitemap.xml` carries a real per-page `<lastmod>`
   rather than the build date on every URL, and gives the blog views the plugin generates a title
   and description, which they have no source file to carry.
 * `on_page_content` gives the `llmstxt` plugin each page's own `title` and `description`
   frontmatter, so its llms.txt entry is the name and the sentence written on the page.
+* `on_post_page` moves the glightbox library script out of `<head>` to the end of `<body>` and
+  turns the instance the plugin builds into plain configuration (`glightboxOptions`) for
+  `javascripts/glightbox-gallery.js`.
 
 The import shim keeps a plain `mkdocs serve` working in a checkout where the package is not
 installed, including inside the Docker images, which mount the repository rather than installing
