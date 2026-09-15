@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built with **Ionic**, using **A
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -180,7 +180,7 @@ In case you are [running OpenVidu locally](#run-openvidu-locally) and launching 
 
 If you leave them empty and app is launched in a mobile device, the user will be prompted to enter the URLs when the application starts:
 
-![URL configuration of the Ionic tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ loading=lazy style="width: 25%" }
+![URL configuration of the Ionic tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ionic.png){ .w-25 loading=lazy }
 
 ---
 

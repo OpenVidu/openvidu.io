@@ -37,7 +37,7 @@ To run the client application tutorial, you need [Node.js :fontawesome-solid-ext
 1.  Navigate into the application client directory:
 
     ```bash
-      cd openvidu-tutorials/openvidu-components/openvidu-custom-toolbar
+      cd openvidu-tutorials/openvidu-components-angular/openvidu-custom-toolbar
     ```
 
 2.  Install the required dependencies:

@@ -147,7 +147,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         |---|---|
         | `doToken` | DigitalOcean Personal Access Token for API authentication. |
         | `stackName` | Stack name for OpenVidu deployment. |
-        | `openviduLicense` **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } | Only required for the PRO edition. Your OpenVidu License. Get one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} if you don't have one. |
+        | `openviduLicense` **PRO**{ .openvidu-tag .openvidu-pro-tag } | Only required for the PRO edition. Your OpenVidu License. Get one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} if you don't have one. |
         ///
 
         #### Optional Parameters
@@ -157,7 +157,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         |---|---|---|
         | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
         | `instanceType` | `"s-2vcpu-4gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your OpenVidu instance. |
-        | `rtcEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 10px" } | `"pion"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
+        | `rtcEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag } | `"pion"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
         | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
         | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
         | `ownPublicCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |

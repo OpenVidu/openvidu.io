@@ -91,7 +91,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { IngressClient, IngressInfo, IngressInput } from 'livekit-server-sdk';
@@ -279,7 +279,7 @@ With OpenVidu you can ingest **RTSP** streams into your Rooms. To do so, simply 
 
     1. Consume the Ingress API directly: [:octicons-arrow-right-24: Reference Docs](../reference/ingress.md)
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         Create a file at `ingress.json` with the following content:
 

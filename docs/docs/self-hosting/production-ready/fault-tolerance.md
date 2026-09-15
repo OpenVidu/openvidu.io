@@ -2,7 +2,7 @@
 title: "Fault tolerance in OpenVidu deployments"
 description: "How OpenVidu survives losing a node: which services are replicated, what happens to a room in progress, and what Elastic and HA each guarantee."
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # Fault tolerance :material-shield-refresh:
@@ -27,7 +27,7 @@ You can have any number of Media Nodes in an OpenVidu Elastic deployment. Media 
 
 In the event of a Media Node failure, there are [3 services](../deployment-types.md#media-node-services) affected with the following behaviors:
 
-- Active [Rooms :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/api-primitives/){:target="_blank"} hosted by the failed Media Node will suffer a temporary interruption of about 5 seconds (this is the time the clients take to realize the Media Node has crashed). After that time has elapsed, the Room will be automatically reconstructed in a healthy Media Node. Every participant and track will be recreated and the Room will be fully operational again.
+- Active [Rooms :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/rooms-participants-tracks/){:target="_blank"} hosted by the failed Media Node will suffer a temporary interruption of about 5 seconds (this is the time the clients take to realize the Media Node has crashed). After that time has elapsed, the Room will be automatically reconstructed in a healthy Media Node. Every participant and track will be recreated and the Room will be fully operational again.
 - Active [Egress](../../reference/egress.md) hosted by the failed Media Node will be interrupted. If the node's disk is still accessible, egress output files can still be recovered. See [Recovering Egress from node failures](#recovering-egress-from-node-failures).
 - Active [Ingress](../../reference/ingress.md) hosted by the failed Media Node will be interrupted. The participants of the Room will receive the proper [events](../../reference/client-sdk.md#room-events) indicating the Ingress participant has left the Room: `TrackUnpublished` and `ParticipantDisconnected`. Some popular tools for streaming such as OBS Studio will automatically try to reconnect the stream when they detect a connection loss, so in this case interruption will be minimal and the Ingress tracks will be restored on their own on a healthy Media Node.
 
@@ -77,9 +77,9 @@ If the Media Node hosting an ongoing Egress process crashes, then the Egress pro
 
 It is possible that if the crashed Egress had **MP4** as [configured output](../../reference/egress.md#outputs) (which is an option available for [Room Composite](../../reference/egress.md#egress-types) and [Track Composite](../../reference/egress.md#egress-types)) the recovered file may not be directly playable and it may require a repair process.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Need specific uptime or SLA guarantees?</h2>
-  <p style="margin-bottom: 1.5em">Tell us your availability requirements and we will help you choose between Elastic and High Availability.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Need specific uptime or SLA guarantees?</h2>
+  <p class="cta-lead">Tell us your availability requirements and we will help you choose between Elastic and High Availability.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

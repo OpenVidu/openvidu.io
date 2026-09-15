@@ -19,7 +19,7 @@ __Add video calling capabilities to your app with a single line of HTML__{ .ov-m
 
 </div>
 
-<div class="grid cards no-border no-shadow ov-call-commercial-feature-cards commercial-code-blocks" markdown>
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid commercial-code-blocks" markdown>
 
 - __Create rooms through REST API__{ .ov-meet-commercial-card-title }
 
@@ -53,7 +53,7 @@ __Integrate OpenVidu Meet into your own UI and business logic__{ .ov-meet-commer
 
 </div>
 
-<hr style="margin: 4em 0" />
+<hr class="my-4em" />
 
 <h2 class="meetplatform-slogan">
 Where to start? We recommend following the <a href="../step-by-step-guide"><strong>step by step guide</strong></a> or exploring one of our <a href="../tutorials"><strong>tutorials</strong></a>.

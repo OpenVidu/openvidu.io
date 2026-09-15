@@ -13,11 +13,11 @@ First, make sure you have the following prerequisites:
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/windows-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/windows-install/){:target="_blank"}
 
 === ":simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
-    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/install/mac-install/){:target="_blank"}
+    - Install [Docker Desktop :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/desktop/setup/install/mac-install/){:target="_blank"}
 
 === ":simple-linux:{.icon .lg-icon .tab-icon} Linux"
 
@@ -152,7 +152,7 @@ The deployment is ready when you see the following message:
 
 By visiting [http://localhost:7880](http://localhost:7880){:target="_blank"} you have the OpenVidu Developer UI available, with a summary of the deployed services and passwords. You can access the following services:
 
-- **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in <th colspan="2" class="title"><strong class="nowrap">OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span></strong></th>.
+- **OpenVidu API (LiveKit compatible)** ([http://localhost:7880](http://localhost:7880){:target="_blank"}): the main API endpoint for your OpenVidu and LiveKit applications. OpenVidu v2 compatibility API is only available in OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }.
 - **OpenVidu Dashboard** ([http://localhost:7880/dashboard](http://localhost:7880/dashboard){:target="_blank"}): a web application interface to visualize your Rooms, Ingress and Egress services.
 - **MinIO** ([http://localhost:7880/minio-console](http://localhost:7880/minio-console){:target="_blank"}): an S3 storage service for recordings.
 - **OpenVidu Meet** ([http://localhost:9080](http://localhost:9080){:target="_blank"}): a high-quality video calling service based on OpenVidu.

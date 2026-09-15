@@ -63,9 +63,8 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_ROOM_MEMBER_TOKEN_EXPIRATION`** | Expiration time for room member tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_PASSWORD_CHANGE_TOKEN_EXPIRATION`** | Expiration time for password change tokens issued by OpenVidu Meet. Default is `15m`. |
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
-| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API. Only used the first time OpenVidu Meet runs. |
-| **`MEET_MODE`** | Which permission names the OpenVidu Meet REST API accepts and serves: `compatibility` (default) accepts both the names introduced in 3.9.0 and the previous `can*` names, and serves both; `3.9.0` accepts and serves only the new names. See the [REST API reference](../../../meet/embedded/reference/api.html). |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. Only used the first time OpenVidu Meet runs. |
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
@@ -98,11 +97,11 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 ## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
-
-    OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 12px; vertical-align: top;" }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
+    
+    OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
-This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/latest/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
+This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
 
 <div class="nowrap-first-column" markdown>
 
@@ -168,7 +167,7 @@ openvidu:
 
 
 !!! info
-
+    
     Before deploying OpenVidu PRO, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -220,9 +219,9 @@ OpenVidu comes with other services configured to work in the deployment. These a
 | **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.12.0/config-sample.yaml){:target="_blank"}</li></ul>
 | **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/783a287#config){:target="_blank"} |
 | **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/2ce1b32#config){:target="_blank"} |
-| **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json/){:target="_blank"} |
+| **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json){:target="_blank"} |
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/v12.4/setup-grafana/configure-grafana/){:target="_blank"} |
 | **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.1.x/configure/){:target="_blank"} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.7.x/configure/){:target="_blank"} |
 | **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.12/configuration/configuration/){:target="_blank"} |
-| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/alloy/v1.17/configure/){:target="_blank"} |
+| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://archive.grafana.com/docs/alloy/v1.17/configure/){:target="_blank"} |

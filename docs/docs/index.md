@@ -50,7 +50,7 @@ Real-time video in your app takes a few lines with our LiveKit fork's SDKs:
     return await token.toJwt();
     ```
 
-<div style="text-align: center; margin: 2em 0;" markdown>
+<div class="centered-section" markdown>
 
 [Get started](./getting-started.md){ .md-button .md-button--primary }
 [Start with a tutorial](./tutorials/application-server/index.md){ .md-button }
@@ -64,7 +64,7 @@ OpenVidu is a super versatile platform that can be used to build just about any 
 
 ### Video conferencing
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 
 <div class="grid-35 tablet-grid-35" markdown="span">
 ![OpenVidu videoconference use case](../assets/images/platform/getting-started/videoconference.svg){ .skip-gallery .use-case-img loading=lazy }
@@ -86,7 +86,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 ### Live-streaming
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 
 <div class="grid-65 tablet-grid-65" markdown>
 Live streaming applications allow one publisher to broadcast video to many viewers. It can be a single video feed, multiple video feeds (webcam and screen share) or there could be even multiple publishers. The general rule is that the ratio of viewers to publishers is very high, in the order of thousands.
@@ -106,7 +106,7 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 
 ### AI Agents
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 
 <div class="grid-40 tablet-grid-40" markdown="span">
 ![OpenVidu robotics use case](../assets/images/platform/getting-started/ai-agents.svg){ .skip-gallery .use-case-img loading=lazy }
@@ -126,7 +126,7 @@ AI has changed the world, forever. OpenVidu can be used to integrate any kind of
 
 ### Robotics and embedded systems
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 
 <div class="grid-65 tablet-grid-65" markdown>
 The future lies in the integration of cameras and sensors in all kinds of devices, everywhere: industry, homes, public spaces, emergency services... OpenVidu can be used to receive and process video and audio streams from these devices, and doing so in real-time. For example:
@@ -204,7 +204,7 @@ OpenVidu is available in two editions:
 
 <br>
 
-| Type of deployment        | **OpenVidu**<br>**Local (development)**{ .nowrap }         | <div style="width:10em">**OpenVidu**<br>**Single Node**{ .nowrap }</div> | **OpenVidu**<br>**Elastic**{ .nowrap } | **OpenVidu**<br>**High Availability**{ .nowrap } |
+| Type of deployment        | **OpenVidu**<br>**Local (development)**{ .nowrap }         | <div class="w-10em">**OpenVidu**<br>**Single Node**{ .nowrap }</div> | **OpenVidu**<br>**Elastic**{ .nowrap } | **OpenVidu**<br>**High Availability**{ .nowrap } |
 | ------------------------- | ------------------------------------ | -------------------- | ---------------- | -------------------------- |
 | **OpenVidu Edition**          | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } | **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | **Suitability**               | For local development in your laptop | For applications with medium user load | For applications with dynamic user load that require scalability | For applications where both scalability and fault tolerance are critical |
@@ -212,7 +212,7 @@ OpenVidu is available in two editions:
 | **Number of servers**         | Your laptop | 1 Node | 1 Master Node +<br><span class="nowrap">N Media Nodes</span> | 4 Master Nodes +<br><span class="nowrap">N Media Nodes</span> |
 | **Installation instructions** | [Install](./self-hosting/local.md){ .md-button } | [Install](./self-hosting/single-node/index.md){ .md-button } | [Install](./self-hosting/elastic/index.md){ .md-button } | [Install](./self-hosting/ha/index.md){ .md-button } |
 
-<div style="text-align: center; margin: 3em 0;" markdown>
+<div class="centered-section-lg" markdown>
 
 [Build your first app — tutorials in 8 languages](./tutorials/application-server/index.md){ .md-button .md-button--primary }
 [Run OpenVidu locally](./self-hosting/local.md){ .md-button }

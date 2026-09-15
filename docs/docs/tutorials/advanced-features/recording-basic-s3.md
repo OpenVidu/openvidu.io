@@ -17,7 +17,7 @@ This tutorial is a simple video-call application, built upon [Node.js server](..
 
 Recordings are always persisted in some kind of storage system. This type of storage depends on your OpenVidu deployment:
 
-- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 Minio bucket**.
+- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 MinIO bucket**.
 - When running OpenVidu in **AWS**, recordings are stored in an **AWS S3 bucket**.
 - When running OpenVidu in **Azure**, recordings are stored in an **Azure Blob Storage container**. If this is your case, follow the [Recording Basic Azure tutorial](./recording-basic-azure.md) instead.
 
@@ -86,7 +86,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 </div>
 
 <div class="grid-50" markdown>
-![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ .round-corners loading=lazy }
 </div>
 
 </div>
@@ -249,7 +249,7 @@ app.post("/recordings/start", async (req, res) => {
 2. If there is already an active recording for the room, the server returns a `409 Conflict` status code.
 3. Use the `EncodedFileOutput` class to export the recording to an external file.
 4. Define the file type as `MP4`.
-5. Define the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](../../reference/egress.md#outputs).
+5. Define the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](../../reference/egress.md#filenames).
 6. Start a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with the `roomName` and `fileOutput` as parameters.
 7. Extract the recording name from the `fileResults` array.
 8. Return the recording metadata to the client.
@@ -275,7 +275,7 @@ This endpoint does the following:
     };
     ```
 
-3.  Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](../../reference/egress.md#outputs).
+3.  Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](../../reference/egress.md#filenames).
 4.  Starts a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with `roomName` and `fileOutput` as parameters.
 5.  Extracts the recording name from the `fileResults` array.
 6.  Returns the recording metadata to the client.
@@ -523,7 +523,7 @@ const S3_ENDPOINT = process.env.S3_ENDPOINT || "http://localhost:9000"; // (1)!
 const S3_ACCESS_KEY = process.env.S3_ACCESS_KEY || "minioadmin"; // (2)!
 const S3_SECRET_KEY = process.env.S3_SECRET_KEY || "minioadmin"; // (3)!
 const AWS_REGION = process.env.AWS_REGION || "us-east-1"; // (4)!
-const S3_BUCKET = process.env.S3_BUCKET || "openvidu"; // (5)!
+const S3_BUCKET = process.env.S3_BUCKET || "openvidu-appdata"; // (5)!
 
 export class S3Service {
   static instance;
@@ -806,7 +806,7 @@ The `recordings.html` file defines the HTML for the general recording page. This
 </div>
 
 <div class="grid-50" markdown>
-![Recording playback in the general recording page](../../../assets/images/platform/tutorials/advanced-features/recording4.png){ loading=lazy }
+![Recording playback in the general recording page](../../../assets/images/platform/tutorials/advanced-features/recording4.png){ .round-corners loading=lazy }
 </div>
 
 </div>

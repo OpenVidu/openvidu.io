@@ -32,13 +32,24 @@ exclude = [
     "^https?://(www\\.)?(twitter|x)\\.com",
     "^https?://(www\\.)?linkedin\\.com",
     "^https?://(www\\.)?npmjs\\.com",
-    "^https?://(www\\.)?medium\\.com",
+    # Every publication is a subdomain, so match those too (openvidu.medium.com).
+    "^https?://([^/]*\\.)?medium\\.com",
     "^https?://doi\\.org",
     "^https?://dl\\.acm\\.org",
+    # Stalls the first request and then serves in under a second: 0 bytes in 30s, then
+    # 200 in 0.8s. Retries do not help, and the PDFs it hosts are stable once published.
+    "^https?://dl\\.ifip\\.org",
     "^https?://auth\\.openai\\.com",
     "^https?://(www\\.)?isocpp\\.org",
     "^https?://dialnet\\.unirioja\\.es",
     "^https?://docs\\.spitch\\.app",
     # Our own demo app filters the GitHub runner IPs; it answers 200 from browsers.
     "^https?://meet-demo-app\\.openvidu\\.io",
+    # Our own unversioned URLs: every page's canonical, og:url and JSON-LD point at
+    # openvidu.io, so a validation build hands lychee ~1300 self-references. They are
+    # `ovweb verify`'s and `ovweb lint --site`'s job, and they necessarily lag until the
+    # next publish, so a new or renamed page would report a false 404 here. Version-pinned
+    # links (the releases pages and Release posts, ~170 of them) start with a digit and
+    # stay checked.
+    "^https?://openvidu\\.io/([a-z]|$)",
 ]

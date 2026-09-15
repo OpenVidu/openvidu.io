@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built for **iOS**, using **Swif
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-swift/documentation/livekit/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit Swift SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-swift/documentation/livekit/){:target="_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -131,7 +131,7 @@ You should configure these URLs according to your deployment settings. If you ar
 
 If these URLs are left empty, the user will be prompted to enter them when the application starts. This configuration is managed in the `ConfigureUrlsView.swift` file:
 
-![URL configuration of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ios.png){ loading=lazy style="width: 25%" }
+![URL configuration of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/configure-urls-ios.png){ .w-25 loading=lazy }
 
 When the user clicks the `Save` button, the `LKButton` action triggers the validation and saves the URLs into the `AppContext` and `RoomContext`. The `ConfigureUrlsView` handles this logic:
 
@@ -161,11 +161,11 @@ In this code snippet, the `isValidURL` function checks the validity of the URLs.
 
 Before joining a room, the `ConnectView.swift` defines the view for the connection screen. It includes a logo, text fields for participant name and room name, and buttons for joining the room and resetting URLs.
 
-![Join screen of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/join-ios.png){ loading=lazy style="width: 25%" }
+![Join screen of the iOS tutorial app](../../../assets/images/platform/tutorials/application-client/join-ios.png){ .w-25 loading=lazy }
 
 After define the participant and room name, the user can click the `Join` button to connect to the room. This action triggers the `connectToRoom` method asynchronously:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/ConnectView.swift#L93-L122' target='_blank'>ConnectView.swift</a>" linenums="96"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/ConnectView.swift#L93-L122' target='_blank'>ConnectView.swift</a>" linenums="93"
 func connectToRoom() async {
     let livekitUrl = roomCtx.livekitUrl
     let roomName = roomCtx.name
@@ -346,7 +346,7 @@ struct ParticipantView: View {
 
 To leave the room, the user can click the `Leave` button in the `RoomView`. This action triggers the `leaveRoom` method asynchronously:
 
-```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/RoomView.swift#L49-L108' target='_blank'>RoomView.swift</a>" linenums="111"
+```swift title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-client/openvidu-ios/Shared/Views/RoomView.swift#L49-L108' target='_blank'>RoomView.swift</a>" linenums="49"
 func content(geometry: GeometryProxy) -> some View {
 
     // ...

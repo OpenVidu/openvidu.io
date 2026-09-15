@@ -11,17 +11,17 @@ hide:
   - version-selector
 page_features:
   - homestyles
-  - setupwowjs
+  - revealonscroll
   - setupcardglow
 ---
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp">
+<div class="second-slogan" data-sal="slide-up">
   <h2 id="get-started">
     Choose the ideal OpenVidu solution for your real-time needs
   </h2>
 </div>
 
-<div class="products-section wow animated animatedFadeInUp fadeInUp">
+<div class="products-section" data-sal="slide-up">
   <div class="products-container">
     <div class="product-card openvidu-meet">
       <div class="product-header">
@@ -74,7 +74,7 @@ page_features:
   </div>
 </div>
 
-<div class="wow animated animatedFadeInUp fadeInUp" style="text-align: center" markdown>
+<div class="text-center" data-sal="slide-up" markdown>
 --8<-- "meet-vs-platform-table.md"
 
 *[Learn more about OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)*
@@ -82,14 +82,14 @@ page_features:
 
 <hr style="margin: 7em 0;">
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp">
+<div class="second-slogan" data-sal="slide-up">
   <h2 id="self-host-platform">
     Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
   </h2>
 </div>
 
 <div class="feature-cards" markdown>
-<div class="grid cards two-columns wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown>
+<div class="grid cards two-columns" data-sal="slide-up" style="margin-top: 3em;" markdown>
 
 -   :material-server:{ .feature-icon .padding-icon } __Self-hosted__{ .feature-name }
 
@@ -119,7 +119,7 @@ page_features:
 
     ---
 
-    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
+    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit** :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [**mediasoup** :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding [**performance**](docs/self-hosting/production-ready/performance.md).
 
 -   :material-chart-timeline-variant-shimmer:{ .feature-icon .padding-icon } __Scalable__{ .feature-name }
 
@@ -144,14 +144,14 @@ page_features:
 
 <hr style="margin: 7em 0;">
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp">
+<div class="second-slogan" data-sal="slide-up">
   <h2 id="all-features">
     All the features you need to quickly build your perfect real-time application
   </h2>
 </div>
 
 <div class="feature-cards" markdown>
-<div class="grid cards wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown>
+<div class="grid cards" data-sal="slide-up" style="margin-top: 3em;" markdown>
 
 -   :material-webrtc:{ .feature-icon } __WebRTC__{ .feature-name }
 
@@ -163,7 +163,7 @@ page_features:
 
     ---
 
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
+    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
 
 -   :octicons-shield-check-16:{ .feature-icon .padding-icon } __Security at all levels__{ .feature-name }
 
@@ -216,7 +216,7 @@ page_features:
 </div>
 </div>
 
-<div class="home-buttons wow animated animatedFadeInUp fadeInUp" style="margin-top: 3em;" markdown="span">
+<div class="home-buttons" data-sal="slide-up" style="margin-top: 3em;" markdown="span">
 [Deploy Meet in minutes](meet/index.md){ .md-button .md-button--primary .home-meet-button title="Get started with OpenVidu Meet" }
 [Start building with the SDKs](docs/index.md){ .md-button .home-platform-button title="Build with OpenVidu Platform SDKs" }
 </div>
@@ -226,8 +226,8 @@ Not sure which fits? [Compare Meet vs Platform](openvidu-meet-vs-openvidu-platfo
 
 <hr style="margin: 7em 0 3.5em 0;">
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2>Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
   <div class="home-buttons">
     <a href="/support/" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

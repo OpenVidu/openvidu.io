@@ -43,7 +43,7 @@ The application is a simple Go app with a single file `main.go` that exports two
 
 Let's see the code of the `main.go` file:
 
-```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/go/main.go/#L15-L17' target='_blank'>main.go</a>" linenums="15"
+```go title="<a href='https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.8.0/application-server/go/main.go#L15-L17' target='_blank'>main.go</a>" linenums="15"
 var SERVER_PORT string // (1)!
 var LIVEKIT_API_KEY string // (2)!
 var LIVEKIT_API_SECRET string // (3)!

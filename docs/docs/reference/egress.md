@@ -35,7 +35,7 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { EgressClient, EncodedFileOutput, EncodedFileType } from 'livekit-server-sdk';
@@ -218,7 +218,7 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
               }'
         ```
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         Create a file at `egress.json` with the following content:
 
@@ -330,7 +330,7 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { EgressClient, EncodedFileOutput, EncodedFileType, EncodingOptionsPreset } from 'livekit-server-sdk';
@@ -548,7 +548,7 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
               }'
         ```
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         Create a file at `egress.json` with the following content:
 
@@ -595,7 +595,7 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
     import { EgressClient, EncodedFileOutput, EncodedFileType, AzureBlobUpload } from 'livekit-server-sdk';
@@ -830,7 +830,7 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
               }'
         ```
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){:target="_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
 
         Create a file at `egress.json` with the following content:
 

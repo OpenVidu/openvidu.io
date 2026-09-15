@@ -12,12 +12,16 @@
 {{ super() }}
 
 {# Anti-clickjacking frame buster: GitHub Pages cannot send frame-ancestors /
-   X-Frame-Options headers, so this JS guard is the only available defense. #}
-<style id="antiClickjack">body{display:none !important;}</style>
+   X-Frame-Options headers, so this JS guard is the only available defense.
+   The style is gated on an attribute rather than removed: navigation.instant
+   diffs the <head> and re-appends any tag the live head is missing, so a
+   removed style would come back on every instant navigation with nothing to
+   remove it again — hiding the body. This site does not enable that feature,
+   but the safe form costs nothing and keeps the twin sites' overrides equal. #}
+<style id="antiClickjack">html:not([data-unframed]) body{display:none !important;}</style>
 <script>
   if (self === top) {
-    var antiClickjack = document.getElementById("antiClickjack");
-    antiClickjack.parentNode.removeChild(antiClickjack);
+    document.documentElement.setAttribute("data-unframed", "");
   } else {
     top.location = self.location;
   }
@@ -27,26 +31,6 @@
 {% endblock %}
 
 {% block libs %}
-
-{# Reveal-on-scroll (in-house wow.js replacement). Hiding is gated on the
-   html.js-reveal class this function adds, so JS-off visitors see content. #}
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 {# Use-cases carousel (Splide) #}
 <script>
@@ -161,6 +145,33 @@
 
 {% block extrahead %}
 {{ super() }}
+
+{# Fonts. `theme.font` is false, so this is the site's only font stylesheet. The privacy
+   plugin vendors every URL below at build time, preload hrefs included; in the `CI=false`
+   validation build they stay remote.
+   No-flicker contract: break any one and text paints twice (fallback, then Tomorrow).
+     1. A render-blocking `rel="stylesheet"`, never the preload-as-style + onload trick.
+     2. `display=block`, not `swap` (swap paints the fallback first by design).
+     3. Preload every face the first viewport needs, or `block` shows invisible text instead:
+        Tomorrow 300 (Material h1), 400, 500, 700 and 800 (`bolder` in the pricing tables),
+        Roboto Mono (one latin file serves 400/500/700), Arciform (header title, same href as
+        extra.css). Latin subset only; `crossorigin` must match the CSS's CORS fetch or the
+        hint becomes a second download.
+   `ovweb lint` checks 1 and 2 and that every preloaded weight is in the URL. #}
+{# Tomorrow 300 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 400 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 500 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 700 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Tomorrow 800 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Roboto Mono #}<link rel="preload" href="https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Arciform carries the header page title (extra.css). Already self-hosted, so this href is
+   the one extra.css uses — a different form would fetch the same file a second time. #}
+<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=block"
+/>
+
 {% include "partials/og.html" %}
 {% include "partials/json-ld.html" %}
 {% if page.meta and page.meta.robots %}
@@ -173,9 +184,12 @@
 {# Owns the lightbox on every page: one gallery per page, theme-aware #}
 <script src="{{ 'javascripts/glightbox-gallery.js' | url }}"></script>
 
-{% if page.meta and page.meta.page_features and "setupwowjs" in page.meta.page_features %}
+{% if page.meta and page.meta.page_features and "revealonscroll" in page.meta.page_features %}
+{# Reveal-on-scroll (sal.js): elements carrying data-sal="slide-up" fade in once, the first
+   time they enter the viewport. Reduced-motion users get the content static. #}
+<script src="{{ 'javascripts/sal.js' | url }}"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 {% endif %}
 
@@ -213,17 +227,6 @@
 {% endblock %}
 
 {% block styles %}
-
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
 
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />
@@ -269,8 +272,45 @@
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
 {% endif %}
 
+{% if page.meta.page_features and "setupcarousel" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/carousel.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "revealonscroll" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/sal.css' | url }}" />
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+{# sal.css hides the elements until the script reveals them: without JS, show them. #}
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+{% endif %}
+
 {% if page.meta.page_features and "homestyles" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "leadform" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/lead-form.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "openviduregister" in page.meta.page_features %}
@@ -282,6 +322,12 @@
 />
 <link rel="stylesheet" href="{{ 'stylesheets/amplify.css' | url }}" />
 <link rel="stylesheet" href="{{ 'javascripts/openvidu-register/openvidu-register.css' | url }}" />
+<style>
+  /* The account app renders its own heading */
+  .md-typeset h1 {
+    display: none;
+  }
+</style>
 {% endif %}
 
 {% endif %}

@@ -12,7 +12,7 @@ If you encounter code signing issues, make sure you change the **Team** and **bu
 
 The application will initiate as a native iOS application. Once the app is opened, you should see a screen like this:
 
-![URL configuration of the iOS tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ios.png){ loading=lazy style="width: 25%" }
+![URL configuration of the iOS tutorial app](/assets/images/platform/tutorials/application-client/configure-urls-ios.png){ .w-25 loading=lazy }
 
 This screen allows you to configure the URLs of the application server and the LiveKit server. You need to set them up for requesting tokens to your application server and connecting to the LiveKit server.
 
@@ -25,11 +25,11 @@ Once you have configured the URLs, you can join a video call room by providing a
 /// html | div.grid-container
 
 /// html | div.grid-50.text-center
-![Join screen of the iOS tutorial app](/assets/images/platform/tutorials/application-client/join-ios.png){ loading=lazy style="width: 50%" }
+![Join screen of the iOS tutorial app](/assets/images/platform/tutorials/application-client/join-ios.png){ .w-50 loading=lazy }
 ///
 
 /// html | div.grid-50.text-center
-![Video call room of the iOS tutorial app](/assets/images/platform/tutorials/application-client/room-ios.png){ loading=lazy style="width: 50%" }
+![Video call room of the iOS tutorial app](/assets/images/platform/tutorials/application-client/room-ios.png){ .w-50 loading=lazy }
 ///
 
 ///

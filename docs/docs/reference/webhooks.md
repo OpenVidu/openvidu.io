@@ -108,7 +108,7 @@ The LiveKit server SDKs do both for you:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    - Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){:target="_blank"}.
+    - Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}.
     - For a working example run the [Node.js tutorial](../tutorials/application-server/node.md).
 
     ```javascript

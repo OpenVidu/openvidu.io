@@ -27,7 +27,7 @@ hide:
   - search-bar
   - version-selector
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # Pricing
@@ -45,8 +45,8 @@ page_features:
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
-        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag">PRO</span></span></strong></a></td>
     <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
     <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
   </tr>
@@ -84,10 +84,10 @@ page_features:
 
 OpenVidu offers two editions:
 
-- <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.8rem" }</strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
-- <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.8rem" }</strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
+- <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }</strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.
+- <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }</strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.
 
-OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag style="font-size: 0.8rem" }</strong> or <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag style="font-size: 0.8rem" }</strong> deployment.
+OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They target different use cases (see [OpenVidu Meet vs OpenVidu Platform](./openvidu-meet-vs-openvidu-platform.md)), but they **do not affect pricing**: you can have either solution in an <strong class="nowrap">OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }</strong> or <strong class="nowrap">OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }</strong> deployment.
 
 </div>
 
@@ -98,7 +98,7 @@ OpenVidu Pro follows a simple pricing model based on the number of cores used by
 <div class="pricing-text" style="text-align: center; font-size: 1.5em">
 <div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
 per core per minute available<br>
-for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8em; vertical-align: middle">PRO</span> cluster
+for your OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } cluster
 </div>
 
 Taking into account the following points:
@@ -107,8 +107,8 @@ Taking into account the following points:
 - You pay for every available core at any given time: if you cluster grows for one hour, that hour you will pay more. If your cluster decreases the next hour, next hour will be cheaper. Master Nodes and Media Nodes have the same core per minute price.
 - Your OpenVidu Pro cluster(s) need to allow outbound traffic to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">There is a 15-day free trial period waiting for you!</h2>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2>There is a 15-day free trial period waiting for you!</h2>
   <div class="home-buttons">
     <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
   </div>
@@ -135,9 +135,9 @@ After the free trial period, a **monthly billing cycle** will charge all your ex
 
 OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain **`accounts.openvidu.io`** port **`443`**. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Not sure which setup fits your scale?</h2>
-  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Not sure which setup fits your scale?</h2>
+  <p class="cta-lead">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>
@@ -150,7 +150,7 @@ As explained above, every minute of an OpenVidu Pro cluster is charged according
 - The examples represent a **continuous usage of the cluster**, but remember that you can shut it down whenever you are not using it and that you can drop nodes to save resources.
 - Each example shows in a table the price for **8 hours, 1 day and 1 month** of continuous usage, as well as the approximated amount of video Tracks and Rooms of 8 participants the cluster would support. This is done to provide a basic insight into the capacity of each cluster. These **8-to-8 Rooms** assume 64 video Tracks (640x480) and 64 audio Tracks in them (2 tracks published and 14 tracks subscribed per Participant), with no Egress, Ingress or other additional features.
 
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;" markdown>
+<div class="flex-row-center" markdown>
 
 <div class="grid-50 tablet-grid-50" markdown>
 ### OpenVidu Elastic with 12 cores in total
@@ -242,8 +242,8 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 
 ---
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">There is a 15-day free trial period waiting for you!</h2>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2>There is a 15-day free trial period waiting for you!</h2>
   <div class="home-buttons">
     <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
   </div>

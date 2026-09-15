@@ -43,7 +43,7 @@ A quick level-set before the story. An **AI coding agent** is more than a chat w
 
 There is a healthy ecosystem to choose from:
 
-- [**Claude Code** :fontawesome-solid-external-link:{.external-link-icon}](https://claude.com/claude-code){:target="_blank"} (Anthropic) — the terminal-based agent we used for this experiment.
+- [**Claude Code** :fontawesome-solid-external-link:{.external-link-icon}](https://claude.com/product/claude-code){:target="_blank"} (Anthropic) — the terminal-based agent we used for this experiment.
 - [**OpenAI Codex** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openai/codex){:target="_blank"} — OpenAI's take on the same idea.
 - [**Antigravity** :fontawesome-solid-external-link:{.external-link-icon}](https://antigravity.google/){:target="_blank"} (Google) — Google's agentic development platform, formerly known as Gemini CLI.
 - [**Cursor** :fontawesome-solid-external-link:{.external-link-icon}](https://cursor.com){:target="_blank"} — a full IDE with agentic capabilities built in.

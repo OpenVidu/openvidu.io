@@ -2,7 +2,7 @@
 title: "OpenVidu scalability and autoscaling"
 description: "How OpenVidu scales from a small meeting to a large live stream, with autoscaling Media Nodes and a control plane that keeps up with them."
 page_features:
-  - setupwowjs
+  - revealonscroll
 ---
 
 # Scalability :material-chart-timeline-variant-shimmer:
@@ -253,13 +253,14 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu Elastic in GCP](../elastic/gcp/install.md)
     - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
 
-    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
+    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
+
     | Input Value | Default Value | Description |
-|---|---|---|
-| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
-| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-| scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
+    |---|---|---|
+    | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+    | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+    | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+    | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
 
 === ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
 
@@ -269,13 +270,14 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
 
     The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+
     | Input Value | Default Value | Description |
-|---|---|---|
-| initialNumberOfMediaNodes | 1 | Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes > 0. |
-| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-| scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
-| fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
+    |---|---|---|
+    | initialNumberOfMediaNodes | 1 | Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes > 0. |
+    | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+    | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+    | scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
+    | fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
 
 === ":custom-oracle-cloud-infrastructure:{.icon .lg-icon .tab-icon} OCI"
 
@@ -285,13 +287,14 @@ When deploying in a supported **cloud provider** using our official templates, O
     - [OpenVidu High Availability in Oracle Cloud Infrastructure](../ha/oracle/install.md)
 
     The cluster scales automatically thanks to an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} for scale-out, combined with an [OCI Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm){:target="_blank"} that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](../elastic/oracle/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+
     | Input Value | Default Value | Description |
-|---|---|---|
-| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
-| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-| scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
-| fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
+    |---|---|---|
+    | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+    | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
+    | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
+    | scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
+    | fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
 
 ### Autoscaling On Premises
 
@@ -306,9 +309,9 @@ When deploying an OpenVidu cluster **On Premises** you are responsible for monit
     - [Removing Media Nodes gracefully](../ha/on-premises/admin.md#removing-media-nodes-gracefully)
     - [Removing Media Nodes forcefully](../ha/on-premises/admin.md#removing-media-nodes-forcefully)
 
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Planning for a specific scale target?</h2>
-  <p style="margin-bottom: 1.5em">Tell us your expected rooms and participants and we will help you size the deployment.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Planning for a specific scale target?</h2>
+  <p class="cta-lead">Tell us your expected rooms and participants and we will help you size the deployment.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>

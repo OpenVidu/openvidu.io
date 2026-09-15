@@ -256,7 +256,6 @@ nav:
   - Research:
       - research.md
 
-
 # Pages reached by direct link only, never through the nav.
 not_in_nav: |
   /account.md
@@ -268,6 +267,17 @@ not_in_nav: |
   /openvidu-vs-janus.md
   /conditions/
   /support/thanks.md
+
+# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
+hooks:
+  - publish-tool/mkdocs_hook.py
+
+watch:
+  - shared
+  - overrides
+  - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_preprocess.py
+  - publish-tool/src/ovweb
 
 validation:
   nav:
@@ -285,9 +295,10 @@ theme:
   custom_dir: overrides
   language: en
   features:
+    - announce.dismiss
     - content.code.copy
-    - content.tabs.link
     - content.code.annotate
+    - content.tabs.link
     - content.tooltips
     - navigation.tabs
     - navigation.tracking
@@ -298,8 +309,7 @@ theme:
     - navigation.indexes
     - search.suggest
     - search.highlight
-    - announce.dismiss
-  # The header override loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
+  # main.html loads the one font stylesheet; --md-text-font/--md-code-font are in extra.css.
   font: false
   palette:
     - media: "(prefers-color-scheme)"
@@ -324,17 +334,6 @@ theme:
     repo: fontawesome/brands/github
   favicon: assets/images/logos/logo.png
   logo: assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
-
-# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
-hooks:
-  - publish-tool/mkdocs_hook.py
-
-watch:
-  - shared
-  - overrides
-  - publish-tool/mkdocs_hook.py
-  - publish-tool/llmstxt_preprocess.py
-  - publish-tool/src/ovweb
 
 plugins:
   - meta
@@ -365,6 +364,11 @@ plugins:
   # everywhere except validation, and optimize only in publish.
   - privacy:
       enabled: !ENV [CI, true]
+      # Material's bundle names the mermaid CDN, so the plugin vendors 3.5 MB of it
+      # into every published version. No superfences mermaid fence is configured and
+      # no page uses one.
+      assets_exclude:
+        - unpkg.com/*
   - optimize:
       enabled: !ENV [CI, false]
       # The default 60 visibly softens the team portraits.
@@ -591,7 +595,3 @@ extra_css:
   - stylesheets/extra.css
   - stylesheets/unsemantic-grid.css
 
-# {year} is replaced with the build year by publish-tool/mkdocs_hook.py
-copyright: >
-  {year} &copy; OpenVidu<br>
-  <a href="#__consent">Change cookie settings</a>

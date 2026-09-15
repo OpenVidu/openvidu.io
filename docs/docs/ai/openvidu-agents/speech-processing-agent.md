@@ -204,7 +204,7 @@ live_captions:
   openai:
     # API key for OpenAI. See https://platform.openai.com/api-keys
     api_key:
-    # The OpenAI model to use for transcription. See https://platform.openai.com/docs/guides/speech-to-text
+    # The OpenAI model to use for transcription. See https://developers.openai.com/api/docs/guides/speech-to-text
     model:
     # The language of the input audio. Supplying the input language in ISO-639-1 format
     # (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) will improve accuracy and latency.
@@ -357,9 +357,9 @@ live_captions:
   sarvam:
     # API key for Sarvam. See https://dashboard.sarvam.ai/key-management
     api_key:
-    # BCP-47 language code for supported Indian languages. See https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe#request.body.language_code.language_code
+    # BCP-47 language code for supported Indian languages. See https://docs.sarvam.ai/api-reference/speech-to-text/transcribe#request.body.language_code.language_code
     language:
-    # The Sarvam STT model to use. See https://docs.sarvam.ai/api-reference-docs/speech-to-text/transcribe#request.body.model.model
+    # The Sarvam STT model to use. See https://docs.sarvam.ai/api-reference/speech-to-text/transcribe#request.body.model.model
     model:
 
   mistralai:

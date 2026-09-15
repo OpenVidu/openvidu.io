@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Source of https://openvidu.io — MkDocs Material (pinned 9.7.6) + mike, published to `gh-pages`.
+Source of https://openvidu.io — MkDocs Material (pinned 9.7.7) + mike, published to `gh-pages`.
 Two versioned products: **OpenVidu Meet** (`docs/meet/`, served at `/{version}/meet/`) and
 **OpenVidu Platform** (`docs/docs/`, served at `/{version}/docs/`), plus non-versioned root pages
 (landing, pricing, support, blog, …). **Merging to `main` publishes nothing** — the live site only
@@ -68,6 +68,10 @@ nearly every page.
 - The `page_features:` frontmatter loads per-page JS/CSS
   ([`contributing/page-composition.md`](contributing/page-composition.md)). Copying a visual
   pattern from another page → copy its feature keys too. `tags:` is blog taxonomy only.
+- Tutorials are published twice: every edit under `docs/docs/tutorials/` or `shared/tutorials/`
+  must be mirrored in `livekit-tutorials-docs` (LiveKit-first framing), whose
+  `tools/sync-check.py` verifies the two stay in step —
+  [`contributing/authoring.md`](contributing/authoring.md).
 - The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
   `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
 

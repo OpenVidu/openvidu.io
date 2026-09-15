@@ -98,7 +98,7 @@ ip -4 -oneline route get 1 | grep -Po 'src \K([\d.]+)'
 
 Then, in your router's admin page, find **Port forwarding** (usually under *Advanced > NAT*, *Security > Firewall*, or *Network > WAN*) and forward these ports to **that IP address**:
 
-<div style="text-align: center" markdown>
+<div class="text-center" markdown>
 
 | Port | Protocol | Forward to | What it's for |
 | ---- | -------- | ---------- | ------------- |

@@ -29,10 +29,11 @@ def _class_token(token: str) -> re.Pattern[str]:
 #: HTML class names that only work when the page carries the matching functional tag, which
 #: loads the JS behind them (see contributing/page-composition.md).
 TAG_CONTRACT = (
-    (_class_token("feature-cards"), "feature-cards", "setupcardglow"),
-    (_class_token("splide"), "splide", "setupcarousel"),
-    (_class_token("lazy-video"), "lazy-video", "lazyvideo"),
-    (_class_token("lead-form"), "lead-form", "leadform"),
+    (_class_token("feature-cards"), 'class="feature-cards"', "setupcardglow"),
+    (_class_token("splide"), 'class="splide"', "setupcarousel"),
+    (_class_token("lazy-video"), 'class="lazy-video"', "lazyvideo"),
+    (_class_token("lead-form"), 'class="lead-form"', "leadform"),
+    (re.compile(r'\bdata-sal="'), 'data-sal="..."', "revealonscroll"),
 )
 
 
@@ -79,13 +80,113 @@ def check_tag_contract(corpus: Corpus) -> list[Finding]:
                         ERROR,
                         path,
                         1,
-                        f'page renders `class="{token}"` content but lacks '
-                        f"`page_features: [{feature}]`",
+                        f"page renders `{token}` content but lacks `page_features: [{feature}]`",
                         "the feature key loads the JS behind that markup (possibly pulled in "
                         "by a snippet); without it the element falls back to default "
                         "behaviour or renders inert",
                     )
                 )
+    return findings
+
+
+#: The site's font stylesheet and the preload hints that go with it (overrides/main.html).
+FONT_LINK = re.compile(r"<link\b[^>]*fonts\.googleapis\.com/css2\?[^>]*>", re.DOTALL)
+FONT_PRELOAD = re.compile(
+    r"\{#\s*(?P<family>Tomorrow|Roboto Mono)(?:\s+(?P<weight>\d{3}))?\s*#\}\s*"
+    r"<link\b(?P<attrs>[^>]*)>",
+    re.DOTALL,
+)
+FONT_FAMILY_AXES = re.compile(r"family=([^:&]+):ital,wght@([^&]+)")
+
+
+def _attr(tag: str, name: str) -> str:
+    match = re.search(rf'\b{name}="([^"]*)"', tag)
+    return match.group(1) if match else ""
+
+
+def _requested_weights(url: str) -> dict[str, set[str]]:
+    """Family -> upright weights a Google Fonts css2 URL requests."""
+    families: dict[str, set[str]] = {}
+    for family, axes in FONT_FAMILY_AXES.findall(url):
+        pairs = (pair.split(",") for pair in axes.split(";"))
+        families[family.replace("+", " ")] = {w for ital, w in pairs if ital == "0"}
+    return families
+
+
+def check_font_loading(corpus: Corpus) -> list[Finding]:
+    """The font stylesheet keeps the no-flicker contract its comment in main.html describes.
+
+    A render-blocking `rel="stylesheet"` with `display=block`, and every `{# Family NNN #}`
+    preload hint names a weight the URL requests and carries `crossorigin`.
+    """
+    path = "overrides/main.html"
+    text = corpus.overrides.get(path)
+    if text is None:
+        return []
+    findings = []
+    requested: dict[str, set[str]] = {}
+    for match in FONT_LINK.finditer(text):
+        tag = match.group(0)
+        href = _attr(tag, "href")
+        # Icon font of the register page: no text to flicker.
+        if "Material+Symbols" in href:
+            continue
+        line = text.count("\n", 0, match.start()) + 1
+        rel = _attr(tag, "rel")
+        if rel != "stylesheet":
+            findings.append(
+                Finding(
+                    "font-loading",
+                    ERROR,
+                    path,
+                    line,
+                    f'font stylesheet loaded with rel="{rel}"',
+                    'load it with rel="stylesheet": the preload-as-style trick paints the page '
+                    "before the @font-face rules exist",
+                )
+            )
+        if "display=block" not in href:
+            findings.append(
+                Finding(
+                    "font-loading",
+                    ERROR,
+                    path,
+                    line,
+                    "font stylesheet URL without display=block",
+                    "display=swap paints the fallback font first, which is the flicker",
+                )
+            )
+        requested.update(_requested_weights(href))
+    for match in FONT_PRELOAD.finditer(text):
+        attrs = match.group("attrs")
+        if 'as="font"' not in attrs:
+            continue
+        family, weight = match.group("family"), match.group("weight")
+        line = text.count("\n", 0, match.start()) + 1
+        if weight and weight not in requested.get(family, set()):
+            findings.append(
+                Finding(
+                    "font-loading",
+                    ERROR,
+                    path,
+                    line,
+                    f"preloads {family} {weight}, which the stylesheet URL does not request",
+                    "a hint for a face the CSS never asks for is a wasted download: add the "
+                    "weight to the URL or drop the preload",
+                )
+            )
+        if "crossorigin" not in attrs:
+            findings.append(
+                Finding(
+                    "font-loading",
+                    ERROR,
+                    path,
+                    line,
+                    f"{family} preload without crossorigin",
+                    "fonts are fetched in CORS mode; a hint without crossorigin does not match "
+                    "the request and the file downloads twice",
+                )
+            )
     return findings
 
 

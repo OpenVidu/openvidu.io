@@ -33,10 +33,13 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
   not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
   `mkdocs_hook.py` — a missing field must kill CI, but a long one must not kill `mkdocs serve`.
 - **Page composition**: `!!!warning`-without-space admonitions; the functional `tags:` contract
-  (a page whose content — snippets included — carries `glightbox`/`feature-cards`/`carousel`
-  markup should declare the matching tag); `<img>` elements without `alt` text; files at the
+  (a page whose content — snippets included — carries `feature-cards`, `splide`, `lazy-video`,
+  `lead-form` or `data-sal` markup should declare the matching feature key); `<img>` elements without `alt` text; files at the
   `assets/images|videos/` root; unpaired `#only-light`/`#only-dark`; blog posts referencing
   another post's asset folder; snippet filenames repeating their folder.
+- **Font loading**: `overrides/main.html` loads the font stylesheet render-blocking with
+  `display=block`, and every `{# Family NNN #}` preload hint names a weight the URL requests
+  and carries `crossorigin` — the no-flicker contract the template's own comment describes.
 - **Commented-out dead links** (info): janitorial, since MkDocs skips comments too.
 
 Findings live in code fences, inline code and HTML comments are excluded before matching, so a

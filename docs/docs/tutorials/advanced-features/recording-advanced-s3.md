@@ -16,7 +16,7 @@ This tutorial improves the [basic recording tutorial](./recording-basic-s3.md) b
 
 Recordings are always persisted in some kind of storage system. This type of storage depends on your OpenVidu deployment:
 
-- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 Minio bucket**.
+- When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 MinIO bucket**.
 - When running OpenVidu in **AWS**, recordings are stored in an **AWS S3 bucket**.
 - When running OpenVidu in **Azure**, recordings are stored in an **Azure Blob Storage container**. If this is your case, follow the [Recording Advanced Azure tutorial](./recording-advanced-azure.md) instead.
 
@@ -85,7 +85,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 </div>
 
 <div class="grid-50" markdown>
-![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ loading=lazy }
+![List of recordings of the room in the recording tutorial app](../../../assets/images/platform/tutorials/advanced-features/recording2.png){ .round-corners loading=lazy }
 </div>
 
 </div>
@@ -134,7 +134,7 @@ The backend has been refactored to prevent code duplication and improve readabil
     export const S3_ACCESS_KEY = process.env.S3_ACCESS_KEY || "minioadmin";
     export const S3_SECRET_KEY = process.env.S3_SECRET_KEY || "minioadmin";
     export const AWS_REGION = process.env.AWS_REGION || "us-east-1";
-    export const S3_BUCKET = process.env.S3_BUCKET || "openvidu";
+    export const S3_BUCKET = process.env.S3_BUCKET || "openvidu-appdata";
 
     export const RECORDINGS_PATH = process.env.RECORDINGS_PATH ?? "recordings/";
     export const RECORDINGS_METADATA_PATH = ".metadata/";

@@ -7,15 +7,15 @@ One of OpenVidu's main goals is offering a self-hosted, production-ready live-vi
 
 <div class="grid cards" markdown>
 
--   :material-lightning-bolt:{ .openvidu-call-feature-icon .middle } __Performance__
+-   :material-lightning-bolt:{ .middle } __Performance__
 
     ---
 
-    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding performance.
+    OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}. By combining the best of both worlds, OpenVidu provides outstanding performance.
 
     [:octicons-arrow-right-24: Learn more about performance](/docs/self-hosting/production-ready/performance.md)
 
--   :material-chart-timeline-variant-shimmer:{ .openvidu-call-feature-icon .middle } __Scalability__
+-   :material-chart-timeline-variant-shimmer:{ .middle } __Scalability__
 
     ---
 
@@ -23,7 +23,7 @@ One of OpenVidu's main goals is offering a self-hosted, production-ready live-vi
 
     [:octicons-arrow-right-24: Learn more about scalability](/docs/self-hosting/production-ready/scalability.md)
 
--   :material-shield-refresh:{ .openvidu-call-feature-icon .middle } __Fault Tolerance__
+-   :material-shield-refresh:{ .middle } __Fault Tolerance__
 
     ---
 
@@ -31,7 +31,7 @@ One of OpenVidu's main goals is offering a self-hosted, production-ready live-vi
 
     [:octicons-arrow-right-24: Learn more about fault tolerance](/docs/self-hosting/production-ready/fault-tolerance.md)
 
--   :material-microscope:{ .openvidu-call-feature-icon .middle } __Observability__
+-   :material-microscope:{ .middle } __Observability__
 
     ---
 

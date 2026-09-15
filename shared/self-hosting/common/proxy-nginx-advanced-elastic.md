@@ -1,4 +1,4 @@
-We will use [Nginx :fontawesome-solid-external-link:{.external-link-icon}](https://www.nginx.com/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers.
+We will use [Nginx :fontawesome-solid-external-link:{.external-link-icon}](https://nginx.org/){:target="_blank"} as the proxy server, but the configuration can be adapted to other proxy servers.
 
 In this configuration, the proxy uses **SNI-based Layer 4 routing** to separate API and TURN traffic on port `443`. The API domain is routed to a local HTTP reverse-proxy server on port `7880`, which then forwards requests to the OpenVidu node. The TURN domain is forwarded directly to port `5349` on the OpenVidu node. This gives you an `http` block where you can add custom routing, rate limiting, access control, or additional headers.
 
