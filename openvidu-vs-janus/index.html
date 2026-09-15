@@ -42,17 +42,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -94,29 +83,43 @@
 
 
 
+<link rel="stylesheet" href="../stylesheets/sal.css">
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+
+
+
+
+
+
+
 
 
 
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -207,7 +210,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1537,7 +1540,7 @@ Meetecho, comparable in spirit to <a href="../openvidu-vs-mediasoup/">mediasoup<
 plugins cover conferencing, SIP gateways, streaming and more, not conferencing rooms alone. If
 you're evaluating "build directly on Janus" against "use OpenVidu," here's exactly what Janus
 leaves for you to build yourself, and what OpenVidu already built on its own stack.</p>
-<div style="text-align: center; margin: 2em 0;">
+<div class="centered-section">
 <p><a class="md-button md-button--primary" href="/latest/docs/">Get started with Platform</a>
 <a class="md-button" href="../openvidu-vs-jitsi/">Compare with a full platform instead</a></p>
 </div>
@@ -1586,7 +1589,7 @@ set up a WebRTC media communication."</em></p>
 <tbody>
 <tr>
 <td>License</td>
-<td>Apache 2.0<strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong> / commercial<strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td>Apache 2.0<strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> / commercial<strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>GPL v3 (commercial license available)</td>
 </tr>
 <tr>
@@ -1654,7 +1657,7 @@ is an independent project from Meetecho with its own plugin architecture.</p>
 <h3 id="what-license-is-janus-released-under">What license is Janus released under?<a class="headerlink" href="#what-license-is-janus-released-under" title="Anchor link to this section for reference">#</a></h3>
 <p>Janus is released under the GNU GPL v3, with a commercial license available from Meetecho for teams
 that don't want GPL's copyleft obligations. This is a real practical difference from OpenVidu
-<strong class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</strong>'s Apache 2.0 license, worth checking against your own project's licensing requirements
+<strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong>'s Apache 2.0 license, worth checking against your own project's licensing requirements
 before you build on it.</p>
 <h3 id="can-i-use-janus-directly-instead-of-a-platform">Can I use Janus directly instead of a platform?<a class="headerlink" href="#can-i-use-janus-directly-instead-of-a-platform" title="Anchor link to this section for reference">#</a></h3>
 <p>Yes, and for teams building something beyond a standard video-conferencing room — a custom SIP
@@ -1662,12 +1665,12 @@ gateway, a broadcast/streaming topology, or another use case covered by Janus's 
 it can be the right call. Go in aware of the scope: you're also taking on authentication, room
 persistence beyond VideoRoom's basics, managed recording, a REST API, a dashboard, and native
 mobile SDKs yourself.</p>
-<div style="text-align: center; margin: 2em 0;">
+<div class="centered-section">
 <p><a class="md-button md-button--primary" href="/latest/docs/tutorials/application-server/">Start with a tutorial</a></p>
 </div>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Weighing a DIY Janus build against a ready platform?</h2>
-  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Weighing a DIY Janus build against a ready platform?</h2>
+  <p class="cta-lead">Tell us what you are building and we will help you scope the tradeoffs.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>
@@ -1945,8 +1948,10 @@ mobile SDKs yourself.</p>
 <script src="../javascripts/glightbox-gallery.js"></script>
 
 
+
+<script src="../javascripts/sal.js"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 
 

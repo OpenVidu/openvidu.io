@@ -23,7 +23,7 @@ OpenVidu Pro follows a simple pricing model based on the number of cores used by
 $0.0006
 
 per core per minute available\
-for your OpenVidu PRO cluster
+for your OpenVidu \*\*PRO\*\*{ .openvidu-tag .openvidu-pro-tag } cluster
 
 Taking into account the following points:
 

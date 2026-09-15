@@ -2,7 +2,7 @@
 
 Novakid and OpenVidu customer success story
 
-Running a live video product where the users are seven years old is a challenge. Adults may tolerate a frozen frame or a reconnect spinner, but a seven-year-old just gives up, and the parent doesn't book a second lesson. That's what [Novakid](https://www.novakidschool.com/), an online English school for kids aged 4–12, has been doing since 2017. Over a million students, 50+ countries, more than 30 million lessons delivered, and up to 2,300 lessons running at once at peak.
+Running a live video product where the users are seven years old is a challenge. Adults may tolerate a frozen frame or a reconnect spinner, but a seven-year-old just gives up, and the parent doesn't book a second lesson. That's what [Novakid](https://www.novakidschool.com/) , an online English school for kids aged 4–12, has been doing since 2017. Over a million students, 50+ countries, more than 30 million lessons delivered, and up to 2,300 lessons running at once at peak.
 
 We talked to **Andrei Iakimov**, DevOps Lead at Novakid, Inc., about moving their live classroom off a self-managed Kurento deployment and onto OpenVidu: why they migrated, why they didn't take the SaaS path, what that migration actually looked like, how they built scheduled autoscaling on top of it, what broke (and got fixed) along the way, and what they value most of.
 

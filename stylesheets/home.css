@@ -109,7 +109,7 @@
 }
 
 .feature-cards .two-columns li:hover {
-  background-color: rgba(0, 136, 170, 0.04);
+  background-color: rgba(var(--ov-platform-primary-rgb), 0.04);
 }
 
 /* Products Section Styles */
@@ -255,94 +255,94 @@ ul.product-features li:before {
 
 /* Special styling for different products */
 .product-card.openvidu-meet {
-  background: linear-gradient(135deg, rgba(6, 211, 98, 0.08) 0%, rgba(6, 211, 98, 0.04) 100%);
-  border-color: rgba(6, 211, 98, 0.3);
+  background: linear-gradient(135deg, rgba(var(--ov-meet-accent-rgb), 0.08) 0%, rgba(var(--ov-meet-accent-rgb), 0.04) 100%);
+  border-color: rgba(var(--ov-meet-accent-rgb), 0.3);
 }
 
 .product-card.openvidu-meet::before {
-  background: #06d362;
+  background: var(--ov-meet-accent);
 }
 
 .product-card.openvidu-meet:hover {
-  border-color: #06d362;
-  box-shadow: 0 8px 25px rgba(6, 211, 98, 0.25);
+  border-color: var(--ov-meet-accent);
+  box-shadow: 0 8px 25px rgba(var(--ov-meet-accent-rgb), 0.25);
 }
 
 .product-card.openvidu-meet .product-button.primary {
-  background: #06d362;
-  border-color: #06d362;
+  background: var(--ov-meet-accent);
+  border-color: var(--ov-meet-accent);
   color: white;
 }
 
 .product-card.openvidu-meet .product-button.primary:hover {
-  background: #05b855;
-  border-color: #05b855;
+  background: var(--ov-meet-accent-hover);
+  border-color: var(--ov-meet-accent-hover);
 }
 
 .product-card.openvidu-meet .product-button.secondary {
-  color: #06d362;
-  border-color: #06d362;
+  color: var(--ov-meet-accent);
+  border-color: var(--ov-meet-accent);
 }
 
 .product-card.openvidu-meet .product-button.secondary:hover {
-  background: #06d362;
+  background: var(--ov-meet-accent);
   color: white;
 }
 
 .product-card.openvidu-platform {
-  background: linear-gradient(135deg, rgba(0, 136, 170, 0.08) 0%, rgba(0, 136, 170, 0.04) 100%);
-  border-color: rgba(0, 136, 170, 0.3);
+  background: linear-gradient(135deg, rgba(var(--ov-platform-primary-rgb), 0.08) 0%, rgba(var(--ov-platform-primary-rgb), 0.04) 100%);
+  border-color: rgba(var(--ov-platform-primary-rgb), 0.3);
 }
 
 .product-card.openvidu-platform::before {
-  background: #0088aa;
+  background: var(--ov-platform-primary);
 }
 
 .product-card.openvidu-platform:hover {
-  border-color: #0088aa;
-  box-shadow: 0 8px 25px rgba(0, 136, 170, 0.25);
+  border-color: var(--ov-platform-primary);
+  box-shadow: 0 8px 25px rgba(var(--ov-platform-primary-rgb), 0.25);
 }
 
 .product-card.openvidu-platform .product-button.primary {
-  background: #0088aa;
-  border-color: #0088aa;
+  background: var(--ov-platform-primary);
+  border-color: var(--ov-platform-primary);
   color: white;
 }
 
 .product-card.openvidu-platform .product-button.primary:hover {
-  background: #007394;
-  border-color: #007394;
+  background: var(--ov-platform-primary-hover);
+  border-color: var(--ov-platform-primary-hover);
 }
 
 .product-card.openvidu-platform .product-button.secondary {
-  color: #0088aa;
-  border-color: #0088aa;
+  color: var(--ov-platform-primary);
+  border-color: var(--ov-platform-primary);
 }
 
 .product-card.openvidu-platform .product-button.secondary:hover {
-  background: #0088aa;
+  background: var(--ov-platform-primary);
   color: white;
 }
 
 /* Dark theme adjustments */
 [data-md-color-scheme="slate"] .product-card.openvidu-meet {
-  background: linear-gradient(135deg, rgba(6, 211, 98, 0.12) 0%, rgba(6, 211, 98, 0.06) 100%);
-  border-color: rgba(6, 211, 98, 0.4);
+  background: linear-gradient(135deg, rgba(var(--ov-meet-accent-rgb), 0.12) 0%, rgba(var(--ov-meet-accent-rgb), 0.06) 100%);
+  border-color: rgba(var(--ov-meet-accent-rgb), 0.4);
 }
 
 [data-md-color-scheme="slate"] .product-card.openvidu-meet:hover {
-  border-color: #06d362;
-  box-shadow: 0 8px 25px rgba(6, 211, 98, 0.3);
+  border-color: var(--ov-meet-accent);
+  box-shadow: 0 8px 25px rgba(var(--ov-meet-accent-rgb), 0.3);
 }
 
 [data-md-color-scheme="slate"] .product-card.openvidu-platform {
-  background: linear-gradient(135deg, rgba(0, 136, 170, 0.12) 0%, rgba(0, 136, 170, 0.06) 100%);
-  border-color: rgba(0, 136, 170, 0.4);
+  background: linear-gradient(135deg, rgba(var(--ov-platform-primary-rgb), 0.12) 0%, rgba(var(--ov-platform-primary-rgb), 0.06) 100%);
+  border-color: rgba(var(--ov-platform-primary-rgb), 0.4);
 }
 
 [data-md-color-scheme="slate"] .product-card.openvidu-platform:hover {
-  border-color: #0088aa;
-  box-shadow: 0 8px 25px rgba(0, 136, 170, 0.3);
+  border-color: var(--ov-platform-primary);
+  box-shadow: 0 8px 25px rgba(var(--ov-platform-primary-rgb), 0.3);
 }
 
 /* Responsive Design */

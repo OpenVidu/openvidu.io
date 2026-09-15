@@ -46,17 +46,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -98,29 +87,43 @@
 
 
 
+<link rel="stylesheet" href="../stylesheets/sal.css">
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+
+
+
+
+
+
+
 
 
 
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -211,7 +214,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1644,7 +1647,7 @@
 
 
 <h1 id="about-us">About Us<a class="headerlink" href="#about-us" title="Anchor link to this section for reference">#</a></h1>
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;">
+<div class="flex-row-center">
 <div class="grid-50 tablet-grid-50">
 <h2 id="micael-gallego">Micael Gallego<a class="headerlink" href="#micael-gallego" title="Anchor link to this section for reference">#</a></h2>
 <p><strong>I'm a founder of OpenVidu, and technical lead of the OpenVidu team. During 10 years I've been leading this project.</strong></p>
@@ -1741,8 +1744,8 @@
 </div>
 </div>
 <hr>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">Some of us are researchers, and push OpenVidu forward by advancing the state-of-the-art on the field with our passion for science and technology!</h2>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2>Some of us are researchers, and push OpenVidu forward by advancing the state-of-the-art on the field with our passion for science and technology!</h2>
   <div class="home-buttons">
     <a href="/research" class="md-button home-secondary-button">Have a look at our research works</a>
   </div>
@@ -2064,8 +2067,10 @@
 <script src="../javascripts/glightbox-gallery.js"></script>
 
 
+
+<script src="../javascripts/sal.js"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 
 

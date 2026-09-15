@@ -42,17 +42,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -94,29 +83,43 @@
 
 
 
+<link rel="stylesheet" href="../stylesheets/sal.css">
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+
+
+
+
+
+
+
 
 
 
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -207,7 +210,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1571,7 +1574,7 @@ against OpenVidu unchanged. It supports both LiveKit's Pion media engine and <st
 efficient than Pion), and it bundles what self-hosted LiveKit otherwise leaves for you to assemble
 yourself: Egress, Ingress, S3-compatible storage, observability, and an admin dashboard, all wired
 up by default.</p>
-<div style="text-align: center; margin: 2em 0;">
+<div class="centered-section">
 <p><a class="md-button md-button--primary" href="/latest/docs/">Get started with Platform</a>
 <a class="md-button" href="../openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a></p>
 </div>
@@ -1616,22 +1619,22 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.</p>
 </tr>
 <tr>
 <td>Media engine</td>
-<td>Pion<strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong> or <a href="/latest/docs/self-hosting/production-ready/performance/"><strong>mediasoup</strong></a> (~2x more efficient)<strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td>Pion<strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> or <a href="/latest/docs/self-hosting/production-ready/performance/"><strong>mediasoup</strong></a> (~2x more efficient)<strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>Pion</td>
 </tr>
 <tr>
 <td>Autoscaling</td>
-<td>Yes: <a href="/latest/docs/self-hosting/elastic/">Elastic</a> &amp; <a href="/latest/docs/self-hosting/ha/">HA</a> modes<strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td>Yes: <a href="/latest/docs/self-hosting/elastic/">Elastic</a> &amp; <a href="/latest/docs/self-hosting/ha/">HA</a> modes<strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>Autoscaling is yours to build and operate</td>
 </tr>
 <tr>
 <td>License</td>
-<td>Apache 2.0<strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong> / commercial<strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td>Apache 2.0<strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> / commercial<strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>Apache 2.0</td>
 </tr>
 <tr>
 <td>Egress/Ingress</td>
-<td><a href="/latest/docs/reference/egress/">Bundled by default</a><strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong></td>
+<td><a href="/latest/docs/reference/egress/">Bundled by default</a><strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong></td>
 <td>Separate services you deploy and operate yourself</td>
 </tr>
 <tr>
@@ -1646,12 +1649,12 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.</p>
 </tr>
 <tr>
 <td>Dashboard</td>
-<td><a href="/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/">OpenVidu Dashboard</a><strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong>, with detailed per-room and per-participant views<strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td><a href="/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/">OpenVidu Dashboard</a><strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong>, with detailed per-room and per-participant views<strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>No</td>
 </tr>
 <tr>
 <td>Observability</td>
-<td>Bundled <a href="/latest/docs/self-hosting/production-ready/observability/grafana-stack/">Grafana dashboards</a><strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td>Bundled <a href="/latest/docs/self-hosting/production-ready/observability/grafana-stack/">Grafana dashboards</a><strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>Prometheus metrics exposed; dashboards are DIY</td>
 </tr>
 <tr>
@@ -1661,7 +1664,7 @@ only the server URL changed — there's no OpenVidu-specific SDK to learn.</p>
 </tr>
 <tr>
 <td>Pricing</td>
-<td>Free<strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong>, flat <strong>$0.0006/core/minute</strong><strong class="openvidu-tag openvidu-pro-tag" style="font-size: .7em">PRO</strong></td>
+<td>Free<strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong>, flat <strong>$0.0006/core/minute</strong><strong class="openvidu-tag openvidu-pro-tag">PRO</strong></td>
 <td>Free</td>
 </tr>
 </tbody>
@@ -1674,7 +1677,7 @@ any self-hosted option, OpenVidu included.</p>
 processes</strong>, each with its own API keys and sizing (LiveKit's own docs recommend at least 4 CPUs /
 4GB RAM per instance). None of that is optional plumbing you can skip — recording and streaming
 simply don't work until it's wired up.</p>
-<p>OpenVidu <strong class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</strong> ships all of it pre-integrated by default:</p>
+<p>OpenVidu <strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> ships all of it pre-integrated by default:</p>
 <ul>
 <li><a href="/latest/docs/reference/egress/"><strong>Egress</strong></a> and <a href="/latest/docs/reference/ingress/"><strong>Ingress</strong></a> — no separate deployment step.</li>
 <li><a href="/latest/docs/tutorials/advanced-features/recording-basic-s3/"><strong>S3-compatible storage for recordings</strong></a>, pre-configured (MinIO) out of the box.</li>
@@ -1704,10 +1707,10 @@ handle per room; that mesh capability is exclusive to LiveKit's paid, hosted pro
 <a href="../openvidu-vs-mediasoup/">OpenVidu vs mediasoup</a> for the equivalent honest account of when raw
 mediasoup is the right call.</p>
 <h2 id="pricing">Pricing<a class="headerlink" href="#pricing" title="Anchor link to this section for reference">#</a></h2>
-<p>OpenVidu <strong class="openvidu-tag openvidu-community-tag" style="font-size: .7em">COMMUNITY</strong> is free, forever, and so is self-hosted LiveKit. The difference is at
+<p>OpenVidu <strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> is free, forever, and so is self-hosted LiveKit. The difference is at
 the top end: OpenVidu offers first-class, production-ready Elastic and HA self-hosted deployments on
 a pay-per-core basis, which self-hosted LiveKit does not.</p>
-<p>OpenVidu <strong class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</strong>'s pricing is a single number: <strong>$0.0006 per core per minute</strong>, billed while
+<p>OpenVidu <strong class="openvidu-tag openvidu-pro-tag">PRO</strong>'s pricing is a single number: <strong>$0.0006 per core per minute</strong>, billed while
 your cluster is running. See our <a href="../pricing/">worked examples</a> for concrete monthly costs at several
 cluster sizes.</p>
 <p>Combined with the mediasoup engine, that pricing gives OpenVidu a hard-to-match price/performance
@@ -1732,7 +1735,7 @@ for LiveKit work seamlessly in OpenVidu.</p>
 and server code, and any third-party LiveKit tutorials or examples you've already integrated, run
 unmodified against OpenVidu.</p>
 <h3 id="does-openvidu-have-a-hosted-or-cloud-option">Does OpenVidu have a hosted or cloud option?<a class="headerlink" href="#does-openvidu-have-a-hosted-or-cloud-option" title="Anchor link to this section for reference">#</a></h3>
-<p>No. OpenVidu is self-hosted only, in both its free <strong class="openvidu-tag openvidu-community-tag" style="font-size: .8em">COMMUNITY</strong> edition and its paid <strong class="openvidu-tag openvidu-pro-tag" style="font-size: .8em">PRO</strong> edition.
+<p>No. OpenVidu is self-hosted only, in both its free <strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> edition and its paid <strong class="openvidu-tag openvidu-pro-tag">PRO</strong> edition.
 There is no OpenVidu-hosted SaaS equivalent to LiveKit Cloud — every OpenVidu deployment runs on
 your own infrastructure or cloud account.</p>
 <p>However, OpenVidu does provide production-ready single-node, Elastic and HA deployments for the five
@@ -1745,13 +1748,13 @@ Pion, but it can replace it with mediasoup, a C++ media engine, while keeping ev
 LiveKit stack (SDKs, API, token model) unchanged.
 <a href="/latest/docs/self-hosting/production-ready/performance/">OpenVidu's own benchmarks</a> show roughly double
 the media-track capacity per server as a result.</p>
-<div style="text-align: center; margin: 2em 0;">
+<div class="centered-section">
 <p><a class="md-button md-button--primary" href="/latest/docs/tutorials/application-server/">Start with a tutorial</a>
 <a class="md-button" href="../openvidu-vs-mediasoup/">Evaluating mediasoup directly instead?</a></p>
 </div>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Planning a migration from LiveKit, or evaluating both at scale?</h2>
-  <p style="margin-bottom: 1.5em">Tell us about your deployment and we will help you size it and plan the switch.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Planning a migration from LiveKit, or evaluating both at scale?</h2>
+  <p class="cta-lead">Tell us about your deployment and we will help you size it and plan the switch.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>
@@ -2029,8 +2032,10 @@ the media-track capacity per server as a result.</p>
 <script src="../javascripts/glightbox-gallery.js"></script>
 
 
+
+<script src="../javascripts/sal.js"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 
 

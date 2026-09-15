@@ -44,17 +44,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -99,26 +88,13 @@
 
 
 
+
+
+
+
+
+
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -209,7 +185,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -2889,43 +2865,11 @@
   
 
 
-<style>
-  /* Publication type badges */
-  .pub-badge {
-    display: inline-block;
-    padding: 0.1em 0.65em;
-    border-radius: 1em;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-  .pub-phdthesis     { background: #ede7f6; color: #4527a0; }
-  .pub-journal    { background: #e3f2fd; color: #0d47a1; }
-  .pub-conference { background: #e8f5e9; color: #1b5e20; }
-
-  [data-md-color-scheme="slate"] .pub-phdthesis     { background: rgba(124, 77, 255, 0.22); color: #d1c4e9; }
-  [data-md-color-scheme="slate"] .pub-journal    { background: rgba(33, 150, 243, 0.22); color: #90caf9; }
-  [data-md-color-scheme="slate"] .pub-conference { background: rgba(76, 175, 80, 0.22);  color: #a5d6a7; }
-
-  /* Index table */
-  .research-index table { font-size: 0.85rem; }
-  .research-index td:first-child,
-  .research-index td:nth-child(2) { white-space: nowrap; text-align: center; vertical-align: middle; }
-  .research-index td:first-child { font-variant-numeric: tabular-nums; font-weight: 600; }
-  .research-index td small { color: var(--md-default-fg-color--light); }
-
-  /* Per-publication metadata line */
-  .pub-meta { font-size: 0.85rem; margin-top: -0.4rem; }
-  .pub-meta .pub-sep { color: var(--md-default-fg-color--lighter); margin: 0 0.4em; }
-</style>
-
 <h1 id="openvidu-research-publications">OpenVidu research publications<a class="headerlink" href="#openvidu-research-publications" title="Anchor link to this section for reference">#</a></h1>
 <p>The technology behind OpenVidu is grounded in more than a decade of peer-reviewed research on real-time communications, WebRTC media servers, and the automated testing and Quality of Experience (QoE) assessment of WebRTC applications. This line of work began within the Kurento project and continues today in OpenVidu, led by researchers at <a href="https://www.urjc.es/" target="_blank" rel="noopener">Universidad Rey Juan Carlos <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> together with collaborating institutions.</p>
 <p>The table below lists our publications from newest to oldest. Select any title to jump to its full details, abstract, and citation.</p>
 <h2 id="index">Index<a class="headerlink" href="#index" title="Anchor link to this section for reference">#</a></h2>
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;">
+<div class="flex-row-center">
 <div class="research-index">
 <table>
 <thead>
@@ -3036,7 +2980,7 @@
 </div>
 </div>
 <hr>
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;">
+<div class="flex-row-center">
 <div class="grid-90 tablet-grid-90">
 <h2 id="scalability-and-quality-of-experience-of-webrtc-media-servers-for-large-scale-low-latency-streaming"><a href="https://dialnet.unirioja.es/servlet/tesis?codigo=402576" target="_blank" rel="noopener">Scalability and Quality of Experience of WebRTC media servers for Large-Scale, Low-Latency Streaming <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a><a class="headerlink" href="#scalability-and-quality-of-experience-of-webrtc-media-servers-for-large-scale-low-latency-streaming" title="Anchor link to this section for reference">#</a></h2>
 <p>Iván Chicano-Capelo<a aria-label="View ORCID record - 0000-0003-1857-9615" href="https://orcid.org/0000-0003-1857-9615" target="_blank" rel="noopener"> <img alt="ORCID iD" height="16" loading="lazy" src="../assets/images/research/ORCID-iD_icon_16x16.png" width="16"></a> (Author), Francisco Gortázar<a aria-label="View ORCID record - 0000-0002-2183-0869" href="https://orcid.org/0000-0002-2183-0869" target="_blank" rel="noopener"> <img alt="ORCID iD" height="16" loading="lazy" src="../assets/images/research/ORCID-iD_icon_16x16.png" width="16"></a> (Supervisor), Micael Gallego<a aria-label="View ORCID record - 0000-0002-2875-7342" href="https://orcid.org/0000-0002-2875-7342" target="_blank" rel="noopener"> <img alt="ORCID iD" height="16" loading="lazy" src="../assets/images/research/ORCID-iD_icon_16x16.png" width="16"></a> (Supervisor)</p>

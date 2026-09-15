@@ -42,17 +42,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -94,29 +83,43 @@
 
 
 
+<link rel="stylesheet" href="../stylesheets/sal.css">
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+
+
+
+
+
+
+
 
 
 
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -207,7 +210,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1518,7 +1521,7 @@ internally as its media engine, replacing Pion, the engine used by upstream Live
 "build directly on mediasoup" against "use OpenVidu," this page is for you: here's exactly what
 mediasoup leaves for you to build yourself, and what OpenVidu already built on that same
 foundation.</p>
-<div style="text-align: center; margin: 2em 0;">
+<div class="centered-section">
 <p><a class="md-button md-button--primary" href="/latest/docs/">Get started with Platform</a>
 <a class="md-button" href="../openvidu-vs-livekit/">Compare with LiveKit instead</a></p>
 </div>
@@ -1642,12 +1645,12 @@ shipped ready to use.</p>
 in aware of the scope: mediasoup's own documentation is explicit that signaling, room persistence,
 authentication, a managed recording API, a REST API, an admin dashboard, and native mobile SDKs are
 all out of scope by design. You would build every one of those yourself.</p>
-<div style="text-align: center; margin: 2em 0;">
+<div class="centered-section">
 <p><a class="md-button md-button--primary" href="/latest/docs/tutorials/application-server/">Start with a tutorial</a></p>
 </div>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Weighing a DIY mediasoup build against a ready platform?</h2>
-  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you scope the tradeoffs.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Weighing a DIY mediasoup build against a ready platform?</h2>
+  <p class="cta-lead">Tell us what you are building and we will help you scope the tradeoffs.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>
@@ -1925,8 +1928,10 @@ all out of scope by design. You would build every one of those yourself.</p>
 <script src="../javascripts/glightbox-gallery.js"></script>
 
 
+
+<script src="../javascripts/sal.js"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 
 

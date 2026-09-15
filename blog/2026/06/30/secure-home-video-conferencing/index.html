@@ -46,17 +46,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 
 
@@ -93,26 +82,13 @@
 
 
 
+
+
+
+
+
+
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -203,7 +179,7 @@
 <link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1872,7 +1848,7 @@
 <div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip<span class="w"> </span>-4<span class="w"> </span>-oneline<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-Po<span class="w"> </span><span class="s1">'src \K([\d.]+)'</span>
 </code></pre></div>
 <p>Then, in your router's admin page, find <strong>Port forwarding</strong> (usually under <em>Advanced &gt; NAT</em>, <em>Security &gt; Firewall</em>, or <em>Network &gt; WAN</em>) and forward these ports to <strong>that IP address</strong>:</p>
-<div style="text-align: center">
+<div class="text-center">
 <table>
 <thead>
 <tr>

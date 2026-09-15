@@ -42,17 +42,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -95,33 +84,26 @@
 
 
 
+
+
+
+
+
+
 <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css">
 <link rel="stylesheet" href="../stylesheets/amplify.css">
 <link rel="stylesheet" href="../javascripts/openvidu-register/openvidu-register.css">
+<style>
+  /* The account app renders its own heading */
+  .md-typeset h1 {
+    display: none;
+  }
+</style>
 
 
 
 
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -212,7 +194,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1347,11 +1329,6 @@
 
   <h1>OpenVidu account: sign up or log in</h1>
 
-<style>
-  .md-typeset h1 {
-    display: none;
-  }
-</style>
 <script>
 window.amplifyActive = true;
 </script>

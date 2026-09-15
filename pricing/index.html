@@ -46,17 +46,6 @@
     
     
 
-<style>
-  @font-face {
-    font-family: "Amazon Ember";
-    font-style: normal;
-    font-weight: 400;
-    src: local("Amazon Ember"),
-      url("https://fonts.cdnfonts.com/s/67521/Amazon%20Ember.woff") format("woff");
-    font-display: swap;
-  }
-</style>
-
 
 <style>
   main > div.md-grid {
@@ -98,29 +87,43 @@
 
 
 
+<link rel="stylesheet" href="../stylesheets/sal.css">
+<style>
+  :root {
+    --sal-duration: 0.5s;
+  }
+  /* sal's slide-up travels 20% of the element's height, a long way for a tall block */
+  [data-sal="slide-up"] {
+    transform: translateY(30px);
+  }
+</style>
+
+<noscript>
+  <style>
+    [data-sal|="fade"] {
+      opacity: 1;
+    }
+    [data-sal|="slide"],
+    [data-sal|="zoom"] {
+      opacity: 1;
+      transform: none;
+    }
+    [data-sal|="flip"] {
+      transform: none;
+    }
+  </style>
+</noscript>
+
+
+
+
+
+
+
 
 
 
     
-
-
-<script>
-  window.setupWowJs = function () {
-    document.documentElement.classList.add("js-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".wow").forEach((el) => observer.observe(el));
-  };
-</script>
 
 
 <script>
@@ -211,7 +214,7 @@
 <link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
 <link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.219387fe.css">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -1753,8 +1756,8 @@
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="/latest/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="font-size: 14px; padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
-        <td class="border-right"><a href="/latest/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag" style="font-size: 14px;">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="/latest/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="/latest/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag">PRO</span></span></strong></a></td>
     <td class="border-right"><a href="/latest/docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
     <td><a href="/latest/docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
   </tr>
@@ -1791,17 +1794,17 @@
 <div style="font-size: 20px">
 <p>OpenVidu offers two editions:</p>
 <ul>
-<li><strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</strong></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.</li>
-<li><strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</strong></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.</li>
+<li><strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong></strong>, completely open-source and free to use. Offers a single node deployment suitable for medium user load.</li>
+<li><strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-pro-tag">PRO</strong></strong>, which is proprietary and with a simple pay-per-use pricing model. Offers advanced multi-node deployments suitable for applications that require improved performance, scalability, fault tolerance, and observability.</li>
 </ul>
-<p>OpenVidu offers two solutions: <strong>OpenVidu Meet</strong> and <strong>OpenVidu Platform</strong>. They target different use cases (see <a href="../openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a>), but they <strong>do not affect pricing</strong>: you can have either solution in an <strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-community-tag" style="font-size: 0.8rem">COMMUNITY</strong></strong> or <strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8rem">PRO</strong></strong> deployment.</p>
+<p>OpenVidu offers two solutions: <strong>OpenVidu Meet</strong> and <strong>OpenVidu Platform</strong>. They target different use cases (see <a href="../openvidu-meet-vs-openvidu-platform/">OpenVidu Meet vs OpenVidu Platform</a>), but they <strong>do not affect pricing</strong>: you can have either solution in an <strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong></strong> or <strong class="nowrap">OpenVidu <strong class="openvidu-tag openvidu-pro-tag">PRO</strong></strong> deployment.</p>
 </div>
 <h2 id="how-is-openvidu-pro-priced">How is OpenVidu Pro priced?<a class="headerlink" href="#how-is-openvidu-pro-priced" title="Anchor link to this section for reference">#</a></h2>
 <p>OpenVidu Pro follows a simple pricing model based on the number of cores used by the OpenVidu Pro cluster:</p>
 <div class="pricing-text" style="text-align: center; font-size: 1.5em">
 <div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
 per core per minute available<br>
-for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 0.8em; vertical-align: middle">PRO</span> cluster
+for your OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } cluster
 </div>
 
 <p>Taking into account the following points:</p>
@@ -1810,8 +1813,8 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 <li>You pay for every available core at any given time: if you cluster grows for one hour, that hour you will pay more. If your cluster decreases the next hour, next hour will be cheaper. Master Nodes and Media Nodes have the same core per minute price.</li>
 <li>Your OpenVidu Pro cluster(s) need to allow outbound traffic to domain <strong><code>accounts.openvidu.io</code></strong> port <strong><code>443</code></strong>. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through <a href="mailto:commercial@openvidu.io" target="_blank">commercial@openvidu.io</a>.</li>
 </ul>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">There is a 15-day free trial period waiting for you!</h2>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2>There is a 15-day free trial period waiting for you!</h2>
   <div class="home-buttons">
     <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
   </div>
@@ -1831,9 +1834,9 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 <p>When purchasing an OpenVidu License, you will have to indicate your billing address and a credit card. You will receive a <strong>15-day free trial period</strong> during which you will not be charged at all.</p>
 <p>After the free trial period, a <strong>monthly billing cycle</strong> will charge all your expenses to your credit card. Therefore, you will receive an invoice each month. You can review your upcoming expenses and your past invoices in your <a href="../account/">OpenVidu account</a> page. And don't worry: we don't store any credit card data. The entire billing process is securely done via <a href="https://stripe.com/" target="_blank" rel="noopener">Stripe <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</p>
 <p>OpenVidu Pro clusters will automatically report their usage on a recurring basis. That's why they need outbound access to domain <strong><code>accounts.openvidu.io</code></strong> port <strong><code>443</code></strong>. If you are behind a very restrictive corporate firewall that doesn't allow this, please contact us through <a href="mailto:commercial@openvidu.io" target="_blank">commercial@openvidu.io</a>.</p>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 0.5em">Not sure which setup fits your scale?</h2>
-  <p style="margin-bottom: 1.5em">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2 class="cta-title">Not sure which setup fits your scale?</h2>
+  <p class="cta-lead">Tell us what you are building and we will help you size your deployment and estimate what it will cost.</p>
   <div class="home-buttons">
     <a href="/support/#talk-to-an-expert" class="md-button home-secondary-button">Talk to an expert</a>
   </div>
@@ -1845,7 +1848,7 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 <li>The examples represent a <strong>continuous usage of the cluster</strong>, but remember that you can shut it down whenever you are not using it and that you can drop nodes to save resources.</li>
 <li>Each example shows in a table the price for <strong>8 hours, 1 day and 1 month</strong> of continuous usage, as well as the approximated amount of video Tracks and Rooms of 8 participants the cluster would support. This is done to provide a basic insight into the capacity of each cluster. These <strong>8-to-8 Rooms</strong> assume 64 video Tracks (640x480) and 64 audio Tracks in them (2 tracks published and 14 tracks subscribed per Participant), with no Egress, Ingress or other additional features.</li>
 </ul>
-<div style="display: flex; align-items: center; flex-flow: row wrap; justify-content: center;">
+<div class="flex-row-center">
 <div class="grid-50 tablet-grid-50">
 <h3 id="openvidu-elastic-with-12-cores-in-total">OpenVidu Elastic with 12 cores in total<a class="headerlink" href="#openvidu-elastic-with-12-cores-in-total" title="Anchor link to this section for reference">#</a></h3>
 <p>This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes of 4 cores each.</p>
@@ -2004,8 +2007,8 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 </div>
 </div>
 <hr>
-<div class="second-slogan wow animated animatedFadeInUp fadeInUp" style="margin: 6em 0; text-align: center">
-  <h2 style="margin-bottom: 1em">There is a 15-day free trial period waiting for you!</h2>
+<div class="second-slogan cta-section" data-sal="slide-up">
+  <h2>There is a 15-day free trial period waiting for you!</h2>
   <div class="home-buttons">
     <a href="/account/" class="md-button home-secondary-button">Get an OpenVidu License</a>
   </div>
@@ -2327,8 +2330,10 @@ for your OpenVidu <span class="openvidu-tag openvidu-pro-tag" style="font-size: 
 <script src="../javascripts/glightbox-gallery.js"></script>
 
 
+
+<script src="../javascripts/sal.js"></script>
 <script>
-  window.setupWowJs();
+  sal({ threshold: 0.1, disabled: matchMedia("(prefers-reduced-motion: reduce)").matches });
 </script>
 
 
