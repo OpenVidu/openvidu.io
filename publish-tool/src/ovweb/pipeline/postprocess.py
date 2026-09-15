@@ -218,7 +218,7 @@ def _rewrite_promoted_pages(
         changed += int(
             fsops.rewrite_single(
                 version_dir / feed,
-                lambda text: rewrite_feed(text, version=version),
+                lambda text: rewrite_feed(text, version=version, layout=layout),
                 required=False,
             )
         )
