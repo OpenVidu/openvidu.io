@@ -61,7 +61,9 @@ page, copy its feature keys too.** These are the keys currently used:
   </div>
   ```
 
-- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/):
+- `setupcarousel`: the page has [Splide carousels](https://splidejs.com/). Loads `splide.min.js`,
+  Splide's `splide.min.css` and [`carousel.css`](../docs/stylesheets/carousel.css), which restyles the
+  arrows and pagination and gives the slides their card look:
 
   ```html
   <div class="splide" markdown>
@@ -88,6 +90,7 @@ page, copy its feature keys too.** These are the keys currently used:
 
 - `leadform`: the page has the enterprise lead form (a `<form class="lead-form">`, only
   [`support/index.md`](../docs/support/index.md)). Loads
+  [`lead-form.css`](../docs/stylesheets/lead-form.css) and
   [`lead-form.js`](../docs/javascripts/lead-form.js), which submits to the leads endpoint and
   redirects to `/support/thanks/`. The field names are the endpoint's contract — changing them
   requires changing the backend too (the `CreateLead` function in
@@ -267,6 +270,41 @@ Site-wide changes go here — follow the "before/after" comment markers inside t
 Comments in these templates use the Jinja form (`{# … #}`): an HTML comment is copied into every
 built page. A partial copied from upstream opens with a Jinja comment naming the file it came
 from, so it can be re-diffed on a theme bump.
+
+## Stylesheets
+
+Every page loads, in this order, [`colors.css`](../docs/stylesheets/colors.css) (the `--ov-*` brand
+tokens, Material's colour variables and the per-scheme overrides),
+[`extra.css`](../docs/stylesheets/extra.css) (everything site-wide, in declared sections: fonts,
+Material overrides, utilities, components, page areas, then one `@media` block per breakpoint) and
+[`unsemantic-grid.css`](../docs/stylesheets/unsemantic-grid.css) (the complete grid build: use any
+of its classes, never edit it). Everything else is loaded by a feature key: `home.css`,
+`meet.css`/`platform.css` over `product.css`, `carousel.css` with Splide's theme, `lead-form.css`,
+`sal.css`.
+
+Where a rule goes:
+
+- **A repeated colour** → a `--ov-*` token in `colors.css`. The product sheets derive their
+  `--product-*` values from the tokens and `product.css` maps those onto Material's variables;
+  only white, black and single-use UI colours stay literal.
+- **A style for one page or feature** → that feature's sheet, or a new sheet behind a new feature
+  key. Pages never carry `<style>` blocks.
+- **A `style=""` attribute** → an existing utility in `extra.css` first (`.text-center`, `.nowrap`,
+  `.w-25`/`.w-50`/`.w-8em`…, `.flex-row-center`, `.centered-section`, `.my-4em`, the
+  `.openvidu-tag-*` size modifiers, the `.cta-section` block). A pattern that recurs four times
+  or more earns a class; below that, inline is fine.
+- **Anything site-wide** → the matching section of `extra.css`; a responsive rule joins the
+  existing `@media` block for its breakpoint.
+
+Precedence: Material's CSS is unlayered, so `product.css` keeps its `:root:root` selector and
+`!important`s — an `@layer` would put our rules *below* the theme's.
+
+The tutorials mirror ([livekit-tutorials-docs](https://github.com/OpenVidu/livekit-tutorials-docs))
+ships its own `extra.css` and `colors.css` and the same `unsemantic-grid.css`, and its
+`tools/sync-check.py` compares Markdown only. A class used by a synced tutorial page or snippet
+must exist on both sides, and a change to a selector both sheets define (footer, product tags,
+tabbed content, lightbox, newsletter form, `.text-center`, `.nowrap`, `.w-25`, `.w-50`) is made on
+both.
 
 ## HTML-in-Markdown
 
