@@ -25,6 +25,8 @@ layout:
     - openvidu-vs-mediasoup
     - openvidu-vs-jitsi
     - openvidu-vs-janus
+    - openvidu-vs-twilio-video
+    - openvidu-vs-agora
     - conditions
     - blog
     - about-us
