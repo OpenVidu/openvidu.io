@@ -427,7 +427,7 @@ The most secure videoconference platform is the one you host on your own servers
 
 ![Use case Telehealth](../assets/images/meet/embedded/use-cases/telehealth.png){ .round-corners loading=lazy width=1920 height=1080 }
 
--	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption.
+-	OpenVidu Meet is the ideal solution for telehealth services. **Practitioners** can conduct remote consultations, share medical documents, and ensure **patient** privacy with end-to-end encryption. See [self-hosted telehealth video](../self-hosted-telehealth-video.md) for data residency, recordings and audit trails.
 
 </div>
 

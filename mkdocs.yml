@@ -263,6 +263,8 @@ not_in_nav: |
   /openvidu-vs-mediasoup.md
   /openvidu-vs-jitsi.md
   /openvidu-vs-janus.md
+  /self-hosted-telehealth-video.md
+  /webrtc-live-streaming.md
   /conditions/
   /support/thanks.md
 
@@ -422,6 +424,10 @@ plugins:
         - support/index.md
         - about-us.md
         - research.md
+
+        Use cases:
+        - self-hosted-telehealth-video.md
+        - webrtc-live-streaming.md
 
         Blog:
         - blog/posts/*/*/*.md

@@ -25,6 +25,8 @@ layout:
     - openvidu-vs-mediasoup
     - openvidu-vs-jitsi
     - openvidu-vs-janus
+    - self-hosted-telehealth-video
+    - webrtc-live-streaming
     - conditions
     - blog
     - about-us
