@@ -96,6 +96,8 @@ Ultra-low latency live-streaming (below 300ms) allows for actual real-time inter
 - A **TEDx-like application**, where a speaker can give a talk to a massive audience of thousands of viewers, who may communicate through a chat. Real time subtitles and translations can be added to the stream.
 - An application to **stream sport events**, where viewers can switch between different cameras to watch the game from different angles to increase fan engagement.
 - A **global live auction platform** where the auctioneer can be seen by the bidders in real-time with sub-second latency all around the world.
+
+For the trade-offs behind these — WebRTC against HLS and DASH, the WHIP ingest path, how far a single Room scales and what it costs — see [WebRTC live streaming](../webrtc-live-streaming.md).
 </div>
 
 <div class="grid-35 tablet-grid-35" markdown="span">
