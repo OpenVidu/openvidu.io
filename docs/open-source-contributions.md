@@ -55,9 +55,11 @@ The SFU, the protocol and the SDKs OpenVidu 3 builds on.
 | [track-processors-js#127 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/127){:target="_blank"} | Background processing froze in hidden browser tabs |
 | [track-processors-js#114 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/114){:target="_blank"} | The new `switchTo` API was unreachable because a wrapper was not exported |
 | [track-processors-js#20 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/20){:target="_blank"} | The background-blur processor loaded the wrong WebAssembly path |
-
-Plus five more in `client-sdk-js`, `agents` and `track-processors-js` covering API documentation and
-package metadata.
+| [client-sdk-js#900 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/900){:target="_blank"} | A wrong parameter type in the published API documentation for `TrackSubscriptionPermissionChanged` |
+| [agents#4702 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/pull/4702){:target="_blank"} | A wrong `timestamp` parameter in the Spitch speech-to-text plugin |
+| [track-processors-js#86 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/86){:target="_blank"} | Consumers had to add the `dom-mediacapture-transform` types themselves |
+| [track-processors-js#83 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/83){:target="_blank"} | A malformed repository field in the published package metadata |
+| [livekit#4840 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/4840){:target="_blank"} | Our own revert of #4838, once the maintainers pointed at a cleaner fix |
 
 ### mediasoup
 
@@ -72,6 +74,7 @@ The other media engine OpenVidu builds on, and the Go client our integration use
 | [mediasoup-go#83 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/83){:target="_blank"} | Two data races in the library's worker-close and transport-connect paths |
 | [mediasoup-go#26 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/26){:target="_blank"} | H.264 packetization-mode 0 was indistinguishable from "unset" |
 | [mediasoup-go#25 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/25){:target="_blank"} | A pointer was compared instead of its value, so profile matching was wrong |
+| [mediasoup-go#27 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/27){:target="_blank"} | A payload type of 0 was emitted where the field should have been omitted |
 | [mediasoup-go#78 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/78){:target="_blank"} | De-flaked the asynchronous router tests |
 
 ### pion
@@ -141,9 +144,13 @@ the projects above.
 
 ## Build on a stack we help maintain
 
-OpenVidu Platform gives you the SDKs and the low-level control, on media servers whose bugs we fix
-rather than work around.
+Whichever product you pick, it runs on media servers whose bugs we fix rather than work around.
+**OpenVidu Meet** is the finished application you deploy and brand. **OpenVidu Platform** gives you
+the SDKs and the low-level control.
 
-[Get started with OpenVidu Platform](docs/index.md){ .md-button .md-button--primary .home-secondary-button }
+[Deploy Meet in minutes](meet/index.md){ .md-button .md-button--primary .home-meet-button title="Get started with OpenVidu Meet" }
+[Start building with the SDKs](docs/index.md){ .md-button .home-platform-button title="Build with OpenVidu Platform SDKs" }
+
+Not sure which fits? [Compare Meet vs Platform](openvidu-meet-vs-openvidu-platform.md)
 
 </div>
