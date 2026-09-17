@@ -32,51 +32,57 @@ That is not a claim you have to take on trust. It is a commit record, and you ca
 
 ## Where the fixes landed
 
-All 37 merged pull requests, grouped by the project they landed in. **LiveKit** is the SFU, the
+All 37 merged pull requests, grouped by the repository they landed in. **LiveKit** is the SFU, the
 protocol and the SDKs OpenVidu 3 builds on. **mediasoup** is the other media engine we build on,
 plus the Go client our integration uses. **pion** is the Go WebRTC stack underneath LiveKit, two
 layers below our own code. **coturn** and the Caddy Redis storage module ship with every
-deployment.
+deployment. The dates are the ones GitHub records, so you can check for yourself that this is a
+current record and not a 2019 story: twelve of these were merged the same day they were opened, and
+half of them within two days.
 
-| Project | Pull request | What it fixed |
-|---|---|---|
-| LiveKit | [livekit#2401 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/2401){:target="_blank"} | A race condition in `Participant.updateState`, in the SFU participant path |
-| LiveKit | [livekit#3735 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/3735){:target="_blank"} | The server was overwriting the sender identity on data packets from hidden participants |
-| LiveKit | [livekit#4838 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/4838){:target="_blank"} | Participants subscribing late never received a connection-quality update |
-| LiveKit | [livekit#3382 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/3382){:target="_blank"} | Boolean settings passed as environment variables were silently ignored |
-| LiveKit | [livekit#1815 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/1815){:target="_blank"} | `--bind` now applies to the RTC ports, not only the HTTP listener |
-| LiveKit | [protocol#1371 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/protocol/pull/1371){:target="_blank"} | Unblocked C# and Ruby code generation from the protocol definitions |
-| LiveKit | [client-sdk-js#1872 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1872){:target="_blank"} | A race between the `LocalTrackSubscribed` signal and `publishTrack` completion |
-| LiveKit | [client-sdk-js#1720 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1720){:target="_blank"} | A memory leak in end-to-end encrypted rooms from unthrottled decryption errors |
-| LiveKit | [client-sdk-js#1723 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1723){:target="_blank"} | `EncryptionError` now tells you which participant failed |
-| LiveKit | [client-sdk-js#1729 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1729){:target="_blank"} | Encryption worker errors were being swallowed instead of rejecting their promises |
-| LiveKit | [client-sdk-js#901 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/901){:target="_blank"} | `livekit-client` 1.14.0 would not build in Angular applications |
-| LiveKit | [egress#550 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/pull/550){:target="_blank"} | Recording backups failed when the output path contained subdirectories |
-| LiveKit | [agents#4111 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/pull/4111){:target="_blank"} | Migrated the AWS speech-to-text plugin off an unmaintained SDK |
-| LiveKit | [server-sdk-kotlin#108 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin/pull/108){:target="_blank"} | `updateIngress` was wiping the participant identity |
-| LiveKit | [track-processors-js#127 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/127){:target="_blank"} | Background processing froze in hidden browser tabs |
-| LiveKit | [track-processors-js#114 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/114){:target="_blank"} | The new `switchTo` API was unreachable because a wrapper was not exported |
-| LiveKit | [track-processors-js#20 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/20){:target="_blank"} | The background-blur processor loaded the wrong WebAssembly path |
-| LiveKit | [client-sdk-js#900 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/900){:target="_blank"} | A wrong parameter type in the published API documentation for `TrackSubscriptionPermissionChanged` |
-| LiveKit | [agents#4702 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/pull/4702){:target="_blank"} | A wrong `timestamp` parameter in the Spitch speech-to-text plugin |
-| LiveKit | [track-processors-js#86 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/86){:target="_blank"} | Consumers had to add the `dom-mediacapture-transform` types themselves |
-| LiveKit | [track-processors-js#83 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/83){:target="_blank"} | A malformed repository field in the published package metadata |
-| LiveKit | [livekit#4840 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/4840){:target="_blank"} | Our own revert of #4838, once the maintainers pointed at a cleaner fix |
-| mediasoup | [mediasoup#695 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/pull/695){:target="_blank"} | Installing a prebuilt worker no longer requires Make and Python |
-| mediasoup | [mediasoup#750 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/pull/750){:target="_blank"} | Worker error messages were printed unreadably |
-| mediasoup | [mediasoup#688 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/pull/688){:target="_blank"} | Silenced a misleading worker log line for RTX RTCP packets |
-| mediasoup | [mediasoup-website#6 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup-website/pull/6){:target="_blank"} | Corrected the FFmpeg example in the official documentation |
-| mediasoup | [mediasoup-go#83 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/83){:target="_blank"} | Two data races in the library's worker-close and transport-connect paths |
-| mediasoup | [mediasoup-go#26 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/26){:target="_blank"} | H.264 packetization-mode 0 was indistinguishable from "unset" |
-| mediasoup | [mediasoup-go#25 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/25){:target="_blank"} | A pointer was compared instead of its value, so profile matching was wrong |
-| mediasoup | [mediasoup-go#27 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/27){:target="_blank"} | A payload type of 0 was emitted where the field should have been omitted |
-| mediasoup | [mediasoup-go#78 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/78){:target="_blank"} | De-flaked the asynchronous router tests |
-| pion | [webrtc#3009 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc/pull/3009){:target="_blank"} | A deadlock in `DataChannel.DetachWithDeadline` caused by a missing mutex unlock |
-| pion | [webrtc#2840 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc/pull/2840){:target="_blank"} | Simulcast stream order was non-deterministic because SDP parsing iterated a map |
-| pion | [webrtc#3473 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc/pull/3473){:target="_blank"} | A flaky test that panicked after completion |
-| coturn | [coturn#1839 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/coturn/coturn/pull/1839){:target="_blank"} | Restored RFC 3489 STUN compatibility, broken in every coturn since 4.7.0 |
-| coturn | [coturn#753 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/coturn/coturn/pull/753){:target="_blank"} | Replaced a flaky HTTP lookup for external IP discovery with DNS |
-| Caddy | [caddy-storage-redis#26 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pberkel/caddy-storage-redis/pull/26){:target="_blank"} | Redis Sentinel deployments can now authenticate |
+<div class="nowrap-except-last-column" markdown>
+
+| Project | Pull request | Opened | Merged | What it fixed |
+|---|---|---|---|---|
+| LiveKit | [livekit#2401 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/2401){:target="_blank"} | 2024-01-22 | 2024-01-23 | A race condition in `Participant.updateState`, in the SFU participant path |
+| LiveKit | [livekit#3735 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/3735){:target="_blank"} | 2025-06-16 | 2025-06-20 | The server was overwriting the sender identity on data packets from hidden participants |
+| LiveKit | [livekit#4838 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/4838){:target="_blank"} | 2026-09-04 | 2026-09-04 | Participants subscribing late never received a connection-quality update |
+| LiveKit | [livekit#3382 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/3382){:target="_blank"} | 2025-01-30 | 2025-02-07 | Boolean settings passed as environment variables were silently ignored |
+| LiveKit | [livekit#1815 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/1815){:target="_blank"} | 2023-06-21 | 2023-06-28 | `--bind` now applies to the RTC ports, not only the HTTP listener |
+| LiveKit | [livekit#4840 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/pull/4840){:target="_blank"} | 2026-09-04 | 2026-09-04 | Our own revert of #4838, once the maintainers pointed at a cleaner fix |
+| LiveKit | [protocol#1371 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/protocol/pull/1371){:target="_blank"} | 2026-01-17 | 2026-01-18 | Unblocked C# and Ruby code generation from the protocol definitions |
+| LiveKit | [client-sdk-js#1872 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1872){:target="_blank"} | 2026-04-06 | 2026-04-17 | A race between the `LocalTrackSubscribed` signal and `publishTrack` completion |
+| LiveKit | [client-sdk-js#1720 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1720){:target="_blank"} | 2025-11-01 | 2025-11-10 | A memory leak in end-to-end encrypted rooms from unthrottled decryption errors |
+| LiveKit | [client-sdk-js#1723 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1723){:target="_blank"} | 2025-11-03 | 2025-11-05 | `EncryptionError` now tells you which participant failed |
+| LiveKit | [client-sdk-js#1729 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/1729){:target="_blank"} | 2025-11-06 | 2025-11-07 | Encryption worker errors were being swallowed instead of rejecting their promises |
+| LiveKit | [client-sdk-js#901 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/901){:target="_blank"} | 2023-10-25 | 2023-10-26 | `livekit-client` 1.14.0 would not build in Angular applications |
+| LiveKit | [client-sdk-js#900 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/client-sdk-js/pull/900){:target="_blank"} | 2023-10-25 | 2023-10-25 | A wrong parameter type in the published API documentation for `TrackSubscriptionPermissionChanged` |
+| LiveKit | [egress#550 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/pull/550){:target="_blank"} | 2023-12-01 | 2023-12-04 | Recording backups failed when the output path contained subdirectories |
+| LiveKit | [agents#4111 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/pull/4111){:target="_blank"} | 2025-11-27 | 2025-11-28 | Migrated the AWS speech-to-text plugin off an unmaintained SDK |
+| LiveKit | [agents#4702 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/pull/4702){:target="_blank"} | 2026-02-03 | 2026-02-03 | A wrong `timestamp` parameter in the Spitch speech-to-text plugin |
+| LiveKit | [server-sdk-kotlin#108 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin/pull/108){:target="_blank"} | 2025-02-24 | 2025-02-24 | `updateIngress` was wiping the participant identity |
+| LiveKit | [track-processors-js#127 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/127){:target="_blank"} | 2026-09-01 | 2026-09-16 | Background processing froze in hidden browser tabs |
+| LiveKit | [track-processors-js#114 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/114){:target="_blank"} | 2025-12-05 | 2025-12-10 | The new `switchTo` API was unreachable because a wrapper was not exported |
+| LiveKit | [track-processors-js#20 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/20){:target="_blank"} | 2023-10-11 | 2023-10-16 | The background-blur processor loaded the wrong WebAssembly path |
+| LiveKit | [track-processors-js#86 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/86){:target="_blank"} | 2025-05-05 | 2025-05-22 | Consumers had to add the `dom-mediacapture-transform` types themselves |
+| LiveKit | [track-processors-js#83 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/track-processors-js/pull/83){:target="_blank"} | 2025-04-29 | 2025-04-29 | A malformed repository field in the published package metadata |
+| mediasoup | [mediasoup#695 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/pull/695){:target="_blank"} | 2021-10-27 | 2021-10-27 | Installing a prebuilt worker no longer requires Make and Python |
+| mediasoup | [mediasoup#750 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/pull/750){:target="_blank"} | 2022-01-07 | 2022-01-10 | Worker error messages were printed unreadably |
+| mediasoup | [mediasoup#688 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/pull/688){:target="_blank"} | 2021-10-22 | 2021-10-22 | Silenced a misleading worker log line for RTX RTCP packets |
+| mediasoup | [mediasoup-go#83 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/83){:target="_blank"} | 2026-07-11 | 2026-08-30 | Two data races in the library's worker-close and transport-connect paths |
+| mediasoup | [mediasoup-go#26 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/26){:target="_blank"} | 2023-12-26 | 2024-01-02 | H.264 packetization-mode 0 was indistinguishable from "unset" |
+| mediasoup | [mediasoup-go#25 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/25){:target="_blank"} | 2023-12-26 | 2024-01-02 | A pointer was compared instead of its value, so profile matching was wrong |
+| mediasoup | [mediasoup-go#27 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/27){:target="_blank"} | 2023-12-26 | 2024-01-02 | A payload type of 0 was emitted where the field should have been omitted |
+| mediasoup | [mediasoup-go#78 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jiyeyuran/mediasoup-go/pull/78){:target="_blank"} | 2026-03-18 | 2026-03-22 | De-flaked the asynchronous router tests |
+| mediasoup | [mediasoup-website#6 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup-website/pull/6){:target="_blank"} | 2019-08-19 | 2019-08-19 | Corrected the FFmpeg example in the official documentation |
+| pion | [webrtc#3009 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc/pull/3009){:target="_blank"} | 2025-01-16 | 2025-01-16 | A deadlock in `DataChannel.DetachWithDeadline` caused by a missing mutex unlock |
+| pion | [webrtc#2840 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc/pull/2840){:target="_blank"} | 2024-08-01 | 2024-08-01 | Simulcast stream order was non-deterministic because SDP parsing iterated a map |
+| pion | [webrtc#3473 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pion/webrtc/pull/3473){:target="_blank"} | 2026-07-11 | 2026-07-11 | A flaky test that panicked after completion |
+| coturn | [coturn#1839 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/coturn/coturn/pull/1839){:target="_blank"} | 2026-03-25 | 2026-03-26 | Restored RFC 3489 STUN compatibility, broken in every coturn since 4.7.0 |
+| coturn | [coturn#753 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/coturn/coturn/pull/753){:target="_blank"} | 2021-04-19 | 2021-06-03 | Replaced a flaky HTTP lookup for external IP discovery with DNS |
+| Caddy | [caddy-storage-redis#26 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pberkel/caddy-storage-redis/pull/26){:target="_blank"} | 2025-11-14 | 2025-12-03 | Redis Sentinel deployments can now authenticate |
+
+</div>
 
 ## We report bugs, then fix them
 

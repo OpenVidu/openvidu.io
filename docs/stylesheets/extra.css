@@ -590,6 +590,24 @@ div[data-md-component="outdated"] aside {
   white-space: nowrap;
 }
 
+/* Let only a table's last column wrap. For records whose leading columns are
+   short and atomic — an identifier, a link, a date — and whose final column is
+   prose: without this, a cell like 2026-09-04 breaks after a hyphen and the row
+   grows to two lines.
+
+   Opt a table in by wrapping it (not the table itself) in:
+       <div class="nowrap-except-last-column" markdown>
+   The wrapper is required for the same reason as nowrap-first-column above. */
+.md-typeset .nowrap-except-last-column th,
+.md-typeset .nowrap-except-last-column td {
+  white-space: nowrap;
+}
+
+.md-typeset .nowrap-except-last-column th:last-child,
+.md-typeset .nowrap-except-last-column td:last-child {
+  white-space: normal;
+}
+
 /* Flow a list of short items into as many columns as the width allows, instead
    of one tall single-file column. Opt in by wrapping the list in:
        <div class="column-list" markdown>
