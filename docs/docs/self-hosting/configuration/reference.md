@@ -55,16 +55,16 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created. |
+| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Registered on start when the service has no API key. |
 | **`MEET_ACCESS_TOKEN_EXPIRATION`** | Expiration time for access tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_REFRESH_TOKEN_EXPIRATION`** | Expiration time for refresh tokens issued by OpenVidu Meet. Default is `1d`. |
 | **`MEET_ROOM_MEMBER_TOKEN_EXPIRATION`** | Expiration time for room member tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_PASSWORD_CHANGE_TOKEN_EXPIRATION`** | Expiration time for password change tokens issued by OpenVidu Meet. Default is `15m`. |
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
-| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered. |
+| **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.|
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
@@ -97,7 +97,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 ## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
-    
+
     OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -167,7 +167,7 @@ openvidu:
 
 
 !!! info
-    
+
     Before deploying OpenVidu PRO, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
