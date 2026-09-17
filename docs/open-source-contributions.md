@@ -148,9 +148,12 @@ Whichever product you pick, it runs on media servers whose bugs we fix rather th
 **OpenVidu Meet** is the finished application you deploy and brand. **OpenVidu Platform** gives you
 the SDKs and the low-level control.
 
+<div class="home-buttons" markdown="span">
 [Deploy Meet in minutes](meet/index.md){ .md-button .md-button--primary .home-meet-button title="Get started with OpenVidu Meet" }
 [Start building with the SDKs](docs/index.md){ .md-button .home-platform-button title="Build with OpenVidu Platform SDKs" }
+</div>
 
 Not sure which fits? [Compare Meet vs Platform](openvidu-meet-vs-openvidu-platform.md)
+{ .home-under-cta }
 
 </div>
