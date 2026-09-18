@@ -80,60 +80,10 @@
 
 
 
+
     
-
-
-<script>
-  window.setupCarousel = function () {
-    document.querySelectorAll(".splide").forEach((el) => {
-      new Splide(el, {
-        type: "loop",
-        autoWidth: true,
-        autoHeight: true,
-        focus: "center",
-        gap: "4%",
-      }).mount();
-    });
-  };
-</script>
-
-
-<script>
-  window.openviduCardGlowRetries = 0;
-  window.setupCardGlow = function () {
-    console.debug("starting card glow setup");
-    const cards = document.querySelectorAll(
-      ".feature-cards .grid.cards > ul > li"
-    );
-    const maxRetries = 10;
-    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
-      console.debug("No cards found, retrying in 100ms");
-      window.openviduCardGlowRetries++;
-      setTimeout(() => {
-        window.setupCardGlow();
-      }, 100);
-      return;
-    }
-    function handleMouseMove(e) {
-      const rect = this.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left - rect.width / 2;
-      const mouseY = e.clientY - rect.top - rect.height / 2;
-      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
-      angle = (angle + 360) % 360;
-      this.style.setProperty("--start", angle + 60);
-    }
-    cards.forEach((card, index) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
-    console.debug("finished card glow setup");
-  };
-</script>
-
-
       
     
-
-
     
       
     
@@ -186,6 +136,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@openvidu">
 
+
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
 
   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><style id="glightbox-style">
@@ -454,7 +406,7 @@
 
     
     <div class="md-typeset log-in-div">
-      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
+      <a href="/account/" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
     </div>
 
   </nav>
@@ -752,7 +704,7 @@
                 
                 
                 <li class="md-tabs__item md-tabs__item--dropdown">
-                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle" aria-haspopup="true">
+                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle">
                         Team
                         <span class="dropdown-caret"></span>
                     </button>
@@ -1970,10 +1922,9 @@
             
             <div style="width:100%; padding-top: .4rem;">
                 <div id="mc_embed_signup">
-                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-                      <div class="form-validation alert"></div>
+                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
                       <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required="" style="flex: 1 1 120px; min-width: 0;">
+                          <input type="email" value="" name="EMAIL" class="footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" aria-label="Email address" required="" style="flex: 1 1 120px; min-width: 0;">
                           
                           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
                           <div class="md-typeset" style="flex-shrink: 0;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>

@@ -337,4 +337,4 @@ When deploying an OpenVidu cluster **On Premises** you are responsible for monit
 
 Tell us your expected rooms and participants and we will help you size the deployment.
 
-[Talk to an expert](/support/#talk-to-an-expert)
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)

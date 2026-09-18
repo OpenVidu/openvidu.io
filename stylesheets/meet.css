@@ -32,59 +32,34 @@
   margin: 3em 0 !important;
 }
 
-.feature-cards .grid.cards.three-columns {
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, 32%), 1fr)
-  ) !important;
-}
-
-@media (max-width: 959px) {
-  .feature-cards .grid.cards.three-columns {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(100%, 16rem), 1fr)
-    ) !important;
-  }
-}
-
 .feature-cards .grid.cards.two-columns > ul > li p {
   font-size: 0.85rem !important;
 }
 
+/* Meet's take on the landing feature cards home.css defines: smaller icons and names, hover
+   tint in the product colour. home.css is linked first, so these win by order alone. */
 .feature-cards .grid.cards > ul > li .feature-name {
-  font-size: 1.2em !important;
-  margin-left: 14px !important;
-  font-weight: 500 !important;
+  font-size: 1.2em;
+  margin-left: 14px;
+  font-weight: 500;
 }
 
 .feature-cards .grid.cards > ul > li .feature-icon {
-  font-size: 3em !important;
+  font-size: 3em;
 }
 
-.feature-cards .grid.cards.three-columns > ul > li {
-  border: solid transparent !important;
-  margin: 0.3rem 0.9rem !important;
-  padding: 0.6rem !important;
+.feature-cards .two-columns li:hover {
+  background-color: rgba(var(--product-primary-color-rgb), 0.04);
 }
 
-.feature-cards .grid.cards.three-columns > ul > li .feature-name {
-  font-size: 1.05em !important;
-  margin-left: 14px !important;
-  font-weight: 500 !important;
+/* Outranks the card's own border-color transition in home.css, so the tint fades in */
+.feature-cards .grid.cards.two-columns > ul > li {
+  transition: background-color 0.4s ease;
 }
 
 .meet-header .img-title {
   width: 100% !important;
   max-width: 750px !important;
-}
-
-.feature-cards .two-columns li {
-  transition: background-color 0.4s ease !important;
-}
-
-.feature-cards .two-columns li:hover {
-  background-color: rgba(var(--product-primary-color-rgb), 0.04) !important;
 }
 
 .ov-meet-commercial-feature-cards {
@@ -139,7 +114,7 @@
 /* Light mode */
 body[data-md-color-scheme="default"] {
   .feature-cards .two-columns li:hover {
-    background-color: rgba(var(--product-primary-color-rgb), 0.08) !important;
+    background-color: rgba(var(--product-primary-color-rgb), 0.08);
   }
 }
 

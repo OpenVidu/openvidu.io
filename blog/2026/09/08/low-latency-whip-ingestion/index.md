@@ -6,7 +6,7 @@ A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a vi
 
 What you'll build
 
-A local loop you can watch yourself: a small Node app that gets WHIP credentials against OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does the same thing from a real production tool, and a viewer page that subscribes to any of them. All of it runs on your machine with Docker Compose. The code is at [openvidu-labs/low-latency-whip-ingestion](https://github.com/openvidu-labs/low-latency-whip-ingestion).
+A local loop you can watch yourself: a small Node app that gets WHIP credentials against OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does the same thing from a real production tool, and a viewer page that subscribes to any of them. All of it runs on your machine with Docker Compose. The code is at [openvidu-labs/low-latency-whip-ingestion](https://github.com/openvidu-labs/low-latency-whip-ingestion) .
 
 ## WHIP, in one paragraph
 
@@ -16,7 +16,7 @@ The reason that matters for this series is what *doesn't* happen. There's no man
 
 ## The demo app
 
-OpenVidu Platform is a self-hosted, [LiveKit](https://livekit.io/)-compatible server, and its Ingress module exposes a [WHIP endpoint](https://openvidu.io/latest/docs/build-your-app/common-operations/#stream-ingestion).
+OpenVidu Platform is a self-hosted, [LiveKit](https://livekit.io/) -compatible server, and its Ingress module exposes a [WHIP endpoint](https://openvidu.io/latest/docs/build-your-app/common-operations/#stream-ingestion).
 
 The whole backend is two endpoints:
 
@@ -138,7 +138,7 @@ Click **Apply**, then **Start Streaming**, then open <http://localhost:3000/watc
 
 ### A scene collection to start from
 
-Building the scene by hand every time gets old, so the repo ships three scene collections, one for Linux, one for Windows and another one for MacOS. So when importing, choose the appropriate one for your OS. For instance, this is the URL for linux: [`obs/openvidu-whip-webcam-linux.json`](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json). When imported you get a webcam filling a 720p canvas, and your default microphone, already wired up.
+Building the scene by hand every time gets old, so the repo ships three scene collections, one for Linux, one for Windows and another one for MacOS. So when importing, choose the appropriate one for your OS. For instance, this is the URL for linux: [`obs/openvidu-whip-webcam-linux.json`](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json) . When imported you get a webcam filling a 720p canvas, and your default microphone, already wired up.
 
 You still have to provide the Stream settings, with the WHIP token and URL provided by the app.
 

@@ -122,7 +122,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/2026/09/08/low-latency-whip-ingestion/</loc>
-         <lastmod>2026-09-09</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/</loc>
@@ -186,7 +186,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/build-your-app/common-operations/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/reference/access-tokens/</loc>
@@ -226,7 +226,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/configuration/in-depth/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/configuration/reference/</loc>
@@ -410,11 +410,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/deploy-with-external-proxy/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-disable-modules/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-disable-mongodb/</loc>
@@ -462,11 +462,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/</loc>
-         <lastmod>2026-08-25</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/</loc>
@@ -534,19 +534,19 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/advanced-features/recording-advanced-azure/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/advanced-features/recording-advanced-s3/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-azure/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-s3/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/ai-services/openvidu-live-captions/</loc>
@@ -558,11 +558,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-additional-panels/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-admin-dashboard/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-components-demo/</loc>
@@ -570,55 +570,55 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-activities-panel/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-chat-panel/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-layout/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-panels/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-participant-panel-item/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-participants-panel/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-stream/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-toolbar/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-custom-ui/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-toggle-hand/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-toolbar-buttons/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/angular-components/openvidu-toolbar-panel-buttons/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/</loc>
@@ -630,11 +630,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/angular/</loc>
-         <lastmod>2026-09-01</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/electron/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/ionic/</loc>
@@ -646,15 +646,15 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/javascript/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/react/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-client/vue/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/tutorials/application-server/</loc>
@@ -706,11 +706,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/getting-started/</loc>
-         <lastmod>2026-09-04</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/releases/</loc>
-         <lastmod>2026-08-17</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/deployment/advanced/</loc>
@@ -718,7 +718,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/deployment/basic/</loc>
-         <lastmod>2026-08-27</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/deployment/local/</loc>
@@ -738,7 +738,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/step-by-step-guide/</loc>
-         <lastmod>2026-08-31</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/direct-link/</loc>
@@ -750,7 +750,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/rest-api/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-09-15</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/webcomponent/</loc>

@@ -9,7 +9,7 @@ This section describes two ways to install OpenVidu Single Node on Oracle Cloud 
 
 Info
 
-OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.8/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ## Web Console
 
@@ -220,7 +220,7 @@ OpenVidu Single Node Oracle Cloud Infrastructure Architecture
    | `compartment_ocid`        | OCI Compartment OCID where resources will be created.                                                                                     |
    | `user_ocid`               | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.                                             |
    | `stackName`               | Stack name for the OpenVidu deployment.                                                                                                   |
-   | `openviduLicense` **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/3.8/account/index.md) if you don't have one. |
+   | `openviduLicense` **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/account/) if you don't have one. |
 
    #### Optional Parameters
 

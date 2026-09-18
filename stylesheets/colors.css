@@ -95,9 +95,6 @@
       transparent 100%
     );
   }
-  svg.home-icon {
-    filter: brightness(33%);
-  }
   #sign-in-button {
     color: var(--slate-md-typeset-color);
   }

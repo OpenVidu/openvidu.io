@@ -88,60 +88,10 @@
 
 
 
+
     
-
-
-<script>
-  window.setupCarousel = function () {
-    document.querySelectorAll(".splide").forEach((el) => {
-      new Splide(el, {
-        type: "loop",
-        autoWidth: true,
-        autoHeight: true,
-        focus: "center",
-        gap: "4%",
-      }).mount();
-    });
-  };
-</script>
-
-
-<script>
-  window.openviduCardGlowRetries = 0;
-  window.setupCardGlow = function () {
-    console.debug("starting card glow setup");
-    const cards = document.querySelectorAll(
-      ".feature-cards .grid.cards > ul > li"
-    );
-    const maxRetries = 10;
-    if (cards.length === 0 && window.openviduCardGlowRetries < maxRetries) {
-      console.debug("No cards found, retrying in 100ms");
-      window.openviduCardGlowRetries++;
-      setTimeout(() => {
-        window.setupCardGlow();
-      }, 100);
-      return;
-    }
-    function handleMouseMove(e) {
-      const rect = this.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left - rect.width / 2;
-      const mouseY = e.clientY - rect.top - rect.height / 2;
-      let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
-      angle = (angle + 360) % 360;
-      this.style.setProperty("--start", angle + 60);
-    }
-    cards.forEach((card, index) => {
-      card.addEventListener("mousemove", handleMouseMove);
-    });
-    console.debug("finished card glow setup");
-  };
-</script>
-
-
       
     
-
-
     
       
     
@@ -242,6 +192,8 @@
   ]
 }
 </script>
+
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
 
   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><style id="glightbox-style">
@@ -464,7 +416,7 @@
 
     
     <div class="md-typeset log-in-div">
-      <a href="/account" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
+      <a href="/account/" class="md-button sign-btn-out-styles" id="sign-in-button">OpenVidu Pro account</a>
     </div>
 
   </nav>
@@ -762,7 +714,7 @@
                 
                 
                 <li class="md-tabs__item md-tabs__item--dropdown">
-                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle" aria-haspopup="true">
+                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle">
                         Team
                         <span class="dropdown-caret"></span>
                     </button>
@@ -1747,10 +1699,10 @@
 OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does
 the same thing from a real production tool, and a viewer page that subscribes to any of them. All
 of it runs on your machine with Docker Compose. The code is at
-<a href="https://github.com/openvidu-labs/low-latency-whip-ingestion" target="_blank" rel="noopener">openvidu-labs/low-latency-whip-ingestion</a>.</p>
+<a href="https://github.com/openvidu-labs/low-latency-whip-ingestion" target="_blank" rel="noopener">openvidu-labs/low-latency-whip-ingestion <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</p>
 </div>
 <h2 id="whip-in-one-paragraph">WHIP, in one paragraph<a class="headerlink" href="#whip-in-one-paragraph" title="Anchor link to this section for reference">#</a></h2>
-<p><strong><a href="https://datatracker.ietf.org/doc/rfc9725/" target="_blank" rel="noopener">WHIP</a></strong> (WebRTC-HTTP Ingestion Protocol) is based
+<p><strong><a href="https://datatracker.ietf.org/doc/rfc9725/" target="_blank" rel="noopener">WHIP <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a></strong> (WebRTC-HTTP Ingestion Protocol) is based
 on a <code>POST</code> of your SDP offer to a URL with a
 bearer token. The server answers <code>201 Created</code> with the SDP answer in the body. And that's it — that is
 the entire handshake. Everything after it is ordinary WebRTC.</p>
@@ -1758,7 +1710,7 @@ the entire handshake. Everything after it is ordinary WebRTC.</p>
 segment duration to pick, no player buffer to tune. The delay you get is the delay of the network
 plus the encoder, which is why this path lands under a second where a chunked one starts at several.</p>
 <h2 id="the-demo-app">The demo app<a class="headerlink" href="#the-demo-app" title="Anchor link to this section for reference">#</a></h2>
-<p>OpenVidu Platform is a self-hosted, <a href="https://livekit.io/" target="_blank" rel="noopener">LiveKit</a>-compatible
+<p>OpenVidu Platform is a self-hosted, <a href="https://livekit.io/" target="_blank" rel="noopener">LiveKit <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>-compatible
 server, and its Ingress module exposes a <a href="/latest/docs/build-your-app/common-operations/#stream-ingestion">WHIP endpoint</a>.</p>
 <p>The whole backend is two endpoints:</p>
 <table>
@@ -1904,7 +1856,7 @@ Room over WebRTC.</p>
 <h3 id="a-scene-collection-to-start-from">A scene collection to start from<a class="headerlink" href="#a-scene-collection-to-start-from" title="Anchor link to this section for reference">#</a></h3>
 <p>Building the scene by hand every time gets old, so the repo ships three scene collections, one for Linux, one for Windows and another one for MacOS. So when importing, choose
 the appropriate one for your OS. For instance, this is the URL for linux:
-<a href="https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json" target="_blank" rel="noopener"><code>obs/openvidu-whip-webcam-linux.json</code></a>.
+<a href="https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json" target="_blank" rel="noopener"><code>obs/openvidu-whip-webcam-linux.json</code> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.
 When imported you get a webcam filling a 720p canvas, and your default microphone, already wired up.</p>
 <p>You still have to provide the Stream settings, with the WHIP token and URL provided by the app.</p>
 <h2 id="watching-it">Watching it<a class="headerlink" href="#watching-it" title="Anchor link to this section for reference">#</a></h2>
@@ -1948,7 +1900,7 @@ interval shows up as a slow join, not as ongoing delay.</p>
   <code>http://openvidu:7880</code>. Check that <code>docker network inspect openvidu-community</code> lists both the app
   and the OpenVidu containers.</li>
 <li><strong>OBS has no <code>WHIP</code> under Service.</strong> You're on OBS &lt; 30, or on the Ubuntu 24.04 PPA build, which
-  ships without the WebRTC output. The <a href="https://flathub.org/apps/com.obsproject.Studio" target="_blank" rel="noopener">Flatpak build</a>
+  ships without the WebRTC output. The <a href="https://flathub.org/apps/com.obsproject.Studio" target="_blank" rel="noopener">Flatpak build <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>
   has it.</li>
 <li><strong>The second stream never appears.</strong> Each set of credentials is one ingress. Stop streaming,
   generate a fresh set, start again — the old one isn't reused.</li>
@@ -2128,10 +2080,9 @@ can't.</p>
             
             <div style="width:100%; padding-top: .4rem;">
                 <div id="mc_embed_signup">
-                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-                      <div class="form-validation alert"></div>
+                    <form action="//openvidu.us16.list-manage.com/subscribe/post?u=5cccadc0d9ef9bab689a3c70f&amp;id=43f63ba2f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
                       <div id="mc_embed_signup_scroll" class="form-group subscribe-form-input" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                          <input type="email" value="" name="EMAIL" class="email footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" required="" style="flex: 1 1 120px; min-width: 0;">
+                          <input type="email" value="" name="EMAIL" class="footer-subscribe-input" id="mce-EMAIL" placeholder="Email Address" aria-label="Email address" required="" style="flex: 1 1 120px; min-width: 0;">
                           
                           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5cccadc0d9ef9bab689a3c70f_43f63ba2f8" tabindex="-1" value=""></div>
                           <div class="md-typeset" style="flex-shrink: 0;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="md-button"></div>
