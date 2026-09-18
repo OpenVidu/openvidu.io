@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built with plain **JavaScript**
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -40,7 +40,7 @@ git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.7.0
 
 This application is designed to be beginner-friendly and consists of only three essential files that are located in the `src` directory:
 
--   `app.js`: This is the main JavaScript file for the sample application. It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+-   `app.js`: This is the main JavaScript file for the sample application. It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 -   `index.html`: This HTML file is responsible for creating the user interface. It contains the form to connect to a video call and the video call layout.
 -   `styles.css`: This file contains CSS classes that are used to style the `index.html` page.
 
@@ -230,7 +230,7 @@ The `joinRoom()` function performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html)
+        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/reference/client-sdk-js/enums/RoomEvent.html)
 
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` function:

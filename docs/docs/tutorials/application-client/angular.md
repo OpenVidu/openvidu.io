@@ -14,7 +14,7 @@ This tutorial is a simple video-call application built with **Angular** that all
 -   Subscribing to all other participants' video and audio tracks automatically.
 -   Leaving the video call room at any time.
 
-It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/client-sdk-js){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
+It uses the [LiveKit JS SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/){:target="\_blank"} to connect to the LiveKit server and interact with the video call room.
 
 ## Running this tutorial
 
@@ -212,7 +212,7 @@ The `joinRoom()` method performs the following actions:
 
     !!! info "Take a look at all events"
 
-        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/client-sdk-js/enums/RoomEvent.html)
+        You can take a look at all the events in the [Livekit Documentation](https://docs.livekit.io/reference/client-sdk-js/enums/RoomEvent.html)
 
 3.  It retrieves the room name and participant name from the form.
 4.  It requests a token from the application server using the room name and participant name. This is done by calling the `getToken()` method:

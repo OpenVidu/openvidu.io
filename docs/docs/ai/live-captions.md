@@ -42,7 +42,7 @@ Learn more about [Automatic vs Manual processing](./openvidu-agents/agent-dispat
 
 ## How to receive Live Captions in your frontend application
 
-Live Captions are received in your frontend application using the [Text Stream API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/client/data/text-streams/#handling-incoming-streams){:target="\_blank"} of LiveKit client SDKs. You must specifically subscribe to the Room topic **`lk.transcription`** to automatically receive transcription events. For example, in JavaScript:
+Live Captions are received in your frontend application using the [Text Stream API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/data/text-streams/#handling-incoming-streams){:target="\_blank"} of LiveKit client SDKs. You must specifically subscribe to the Room topic **`lk.transcription`** to automatically receive transcription events. For example, in JavaScript:
 
 ```javascript {#live-captions-js}
 room.registerTextStreamHandler("lk.transcription", async (reader, participantInfo) => {
@@ -60,7 +60,7 @@ room.registerTextStreamHandler("lk.transcription", async (reader, participantInf
 
 !!! info
 
-    Refer to [LiveKit documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/voice-agent/transcriptions/#frontend-integration){:target="\_blank"} to see how to handle transcription events in other frontend platforms.
+    Refer to [LiveKit documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/multimodality/text/#frontend-rendering){:target="\_blank"} to see how to handle transcription events in other frontend platforms.
 
 - From the `participantInfo` object of the text stream handler you can get the participant's `identity` that originated the transcription event.
 - From the `reader.info.attributes` you can get the following properties:
