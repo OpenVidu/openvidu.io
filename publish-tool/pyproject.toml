@@ -24,13 +24,13 @@ dependencies = [
 build = [
     "mike==2.2.0",
     "mkdocs==1.6.1",
-    "pymdown-extensions==11.0.1",
+    "pymdown-extensions==12.0",
     "mkdocs-material[imaging]==9.7.7",
-    "pygments==2.20.0",
+    "pygments==2.21.0",
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.59",
+    "gitpython==3.1.62",
     # The build backend, so the publish workflow can install this package with
     # --no-build-isolation from the hash-locked requirements-publish.txt.
     "hatchling==1.32.0",
@@ -38,13 +38,13 @@ build = [
 # Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
     "mkdocs==1.6.1",
-    "pymdown-extensions==11.0.1",
+    "pymdown-extensions==12.0",
     "mkdocs-material==9.7.7",
-    "pygments==2.20.0",
+    "pygments==2.21.0",
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.59",
+    "gitpython==3.1.62",
 ]
 dev = [
     "pytest>=8",
