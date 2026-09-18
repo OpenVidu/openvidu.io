@@ -51,7 +51,7 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/server-sdk-js/){target="\_blank"}
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){target="\_blank"}
 
     ```javascript
     import { AgentDispatchClient } from 'livekit-server-sdk';
@@ -213,11 +213,11 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
              -d '{"agent_name": "AGENT_NAME", "room": "my-room"}'
         ```
 
-        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. Visit LiveKit docs: [Creating a token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#creating-a-token){target="\_blank"}
+        > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. Visit LiveKit docs: [Creating a token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/frontends/build/authentication/#alternative-manual-token-generation){target="\_blank"}
 
         <br>
 
-    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/cli/cli-setup/){target="\_blank"}:
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){target="\_blank"}:
 
         ```bash
         export LIVEKIT_URL=https://my-openvidu-host
@@ -238,4 +238,4 @@ There are 2 different ways to explicitly dispatch an agent to a specific Room:
 
 You can configure a Participant's token to trigger the dispatch of an agent right at the moment that Participant connects to a Room. This is very useful to dispatch an agent to a specific Room only when a specific Participant joins.
 
-To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. Visit [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/home/get-started/authentication/#room-configuration){target="\_blank"} to learn how.
+To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. Visit [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/frontends/reference/tokens-grants/#room-configuration){target="\_blank"} to learn how.
