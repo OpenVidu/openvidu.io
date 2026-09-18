@@ -13,9 +13,9 @@ tags:
 ### Known limitations
 
 - When using [mediasoup](self-hosting/production-ready/performance.md):
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
-    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
-    - Limitted [ingress](https://docs.livekit.io/home/ingress/overview/){target="\_blank"} support: non-simulcast video tracks are not supported. Firefox may experience issues when subscribing to ingress video.
+    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#sdk-events){target="\_blank"}).
+    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#sdk-events){target="\_blank"}).
+    - Limitted [ingress](https://docs.livekit.io/transport/media/ingress-egress/ingress/){target="\_blank"} support: non-simulcast video tracks are not supported. Firefox may experience issues when subscribing to ingress video.
 
 ### Version table
 
@@ -40,11 +40,11 @@ tags:
 
 - Centralized configuration: OpenVidu now automatically manages and synchronizes the configuration of all its components. This means that updating any configuration parameter in multi-node deployments ([OpenVidu Elastic](self-hosting/deployment-types.md#openvidu-elastic) and [OpenVidu High Availability](self-hosting/deployment-types.md#openvidu-high-availability)) is as simple as updating the required file in a single node. OpenVidu handles the distribution and restart of the affected services across all nodes. See how easily you can change the configuration [here](self-hosting/configuration/changing-config.md).
 - [mediasoup](self-hosting/production-ready/performance.md) support:
-    - Dynacast is now supported ([LiveKit reference](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){target="\_blank"}).
-    - Adaptive Streaming is now supported ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){target="\_blank"}).
-    - Speaker Detection events ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){target="\_blank"}).
-    - Server API method `MutePublishTrack` ([LiveKit reference](https://docs.livekit.io/reference/server/server-apis/#MutePublishedTrack){target="\_blank"}).
-    - Client API method `RemoteTrackPublication.setEnabled` ([LiveKit JS reference](https://docs.livekit.io/client-sdk-js/classes/RemoteTrackPublication.html#setEnabled){target="\_blank"}).
+    - Dynacast is now supported ([LiveKit reference](https://docs.livekit.io/transport/media/advanced/#dynacast){target="\_blank"}).
+    - Adaptive Streaming is now supported ([LiveKit reference](https://docs.livekit.io/transport/media/subscribe/#Adaptive-stream){target="\_blank"}).
+    - Speaker Detection events ([LiveKit reference](https://docs.livekit.io/transport/media/subscribe/#active-speaker-identification){target="\_blank"}).
+    - Server API method `MutePublishTrack` ([LiveKit reference](https://docs.livekit.io/reference/other/roomservice-api/#MutePublishedTrack){target="\_blank"}).
+    - Client API method `RemoteTrackPublication.setEnabled` ([LiveKit JS reference](https://docs.livekit.io/reference/client-sdk-js/classes/RemoteTrackPublication.html#setEnabled){target="\_blank"}).
 - [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally):
     - When using it against an [OpenVidu Local Deployment](self-hosting/local.md), recordings couldn't be accessed from the application's frontend. This is now fixed and OpenVidu Call is able to access recordings.
     - There was an error when applying Virtual Backgrounds ("No camera tracks found. Cannot apply background"). This is now fixed.
@@ -59,8 +59,8 @@ tags:
 ### Known limitations
 
 - When using [mediasoup](self-hosting/production-ready/performance.md):
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
-    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#sdk-events){target="\_blank"}).
+    - No `TrackStreamStateChanged` event ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#sdk-events){target="\_blank"}).
 
 ### Version table
 
@@ -84,11 +84,11 @@ tags:
 ### Changelog
 
 - Improved [mediasoup](self-hosting/production-ready/performance.md) support:
-    - Data messages work ([LiveKit reference](https://docs.livekit.io/home/client/data/#Data-messages){:target="\_blank"}).
-    - Ingress supported ([LiveKit reference](https://docs.livekit.io/home/ingress/overview/){:target="\_blank"}).
+    - Data messages work ([LiveKit reference](https://docs.livekit.io/transport/data/){:target="\_blank"}).
+    - Ingress supported ([LiveKit reference](https://docs.livekit.io/transport/media/ingress-egress/ingress/){:target="\_blank"}).
 - Improved [OpenVidu Local Deployment](self-hosting/local.md):
-    - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/home/egress/room-composite/){:target="\_blank"}) support when using mediasoup.
-    - WebHooks ([LiveKit reference](https://docs.livekit.io/home/server/webhooks/){:target="\_blank"}) supported against a local [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally).
+    - Fixed Room Composite Egress ([LiveKit reference](https://docs.livekit.io/transport/media/ingress-egress/egress/composite-recording/){:target="\_blank"}) support when using mediasoup.
+    - WebHooks ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/){:target="\_blank"}) supported against a local [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally).
 - Production deployments have a better private IP discovery process when there are multiple valid private IPs in the same host. This will make work more deployments out-of-the-box without the need of manual intervention.
 - [OpenVidu PRO Evaluation Mode](self-hosting/local.md#openvidu-pro) improved. Before a maximum a 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
 - Minor bug fixes related to [OpenVidu Call](openvidu-call/index.md).
@@ -96,10 +96,10 @@ tags:
 ### Known limitations
 
 - When using [mediasoup](self-hosting/production-ready/performance.md):
-    - No support for Speaker Detection events ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Speaker-detection){target="\_blank"}).
-    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/home/client/events/#Events){target="\_blank"}).
-    - No support for Dynacast ([LiveKit reference](https://docs.livekit.io/home/client/tracks/publish/#Dynamic-broadcasting){target="\_blank"}).
-    - No support for Adaptive Streaming ([LiveKit reference](https://docs.livekit.io/home/client/tracks/subscribe/#Adaptive-stream){target="\_blank"}).
+    - No support for Speaker Detection events ([LiveKit reference](https://docs.livekit.io/transport/media/subscribe/#active-speaker-identification){target="\_blank"}).
+    - No `ConnectionQualityChanged` event ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/#sdk-events){target="\_blank"}).
+    - No support for Dynacast ([LiveKit reference](https://docs.livekit.io/transport/media/advanced/#dynacast){target="\_blank"}).
+    - No support for Adaptive Streaming ([LiveKit reference](https://docs.livekit.io/transport/media/subscribe/#Adaptive-stream){target="\_blank"}).
 - When using [OpenVidu Call](openvidu-call/docs.md#run-openvidu-locally) against an [OpenVidu Local Deployment](self-hosting/local.md), recordings cannot be accessed.
 
 ### Version table
