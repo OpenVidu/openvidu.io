@@ -15,13 +15,26 @@ class RewriteError(Exception):
     """A file cannot be rewritten safely."""
 
 
+def strip_own_version_segment(text: str, *, version: str, site_url: str) -> str:
+    """Drop `/<version>/` from the site's own URLs and leave every other URL alone.
+
+    Own URLs are the absolute ones under `site_url` (canonical, `og:url`, JSON-LD, feed links)
+    and root-relative paths. A third-party URL that happens to carry the same segment, such as
+    `github.com/OpenVidu/openvidu/tree/3.8/`, is not touched: the segment there is preceded by
+    a host or path character, never by a quote, a delimiter or whitespace.
+    """
+    site = site_url.rstrip("/")
+    text = text.replace(f"{site}/{version}/", f"{site}/")
+    return re.sub(rf"(?<![\w./:-])/{re.escape(version)}/", "/", text)
+
+
 def rewrite_404(text: str, *, version: str, layout: SiteLayout) -> str:
     """Strip the version from the 404 page, then send its versioned links to `latest`.
 
     The 404 page is served for every unmatched URL at the site root, so nothing in it may carry a
     version — except links into versioned sections, which must resolve to the newest release.
     """
-    text = text.replace(f"/{version}/", "/")
+    text = strip_own_version_segment(text, version=version, site_url=layout.site_url)
     text = text.replace(f'"/{version}"', '"/"')
     for page in layout.versioned_pages:
         text = text.replace(f'href="/{page}/', f'href="/latest/{page}/')
@@ -69,10 +82,10 @@ def _strip_version_from_self_urls(text: str, *, version: str, layout: SiteLayout
 
     for page in layout.versioned_pages:
         text = text.replace(f"/{version}/{page}/", f"/{KEEPVERSION_SENTINEL}/{page}/")
-    text = text.replace(f"/{version}/", "/")
+    text = strip_own_version_segment(text, version=version, site_url=layout.site_url)
     return text.replace(f"/{KEEPVERSION_SENTINEL}/", f"/{version}/")
 
 
-def rewrite_feed(text: str, *, version: str) -> str:
+def rewrite_feed(text: str, *, version: str, layout: SiteLayout) -> str:
     """Strip the version from an RSS/JSON feed: they are only served from the root."""
-    return text.replace(f"/{version}/", "/")
+    return strip_own_version_segment(text, version=version, site_url=layout.site_url)

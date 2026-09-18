@@ -14,6 +14,7 @@ build = [
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
+    "gitpython==3.1.59",
 ]
 validate = [
     "mkdocs==1.6.1",
@@ -23,6 +24,7 @@ validate = [
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
+    "gitpython==3.1.59",
 ]
 """
 
@@ -30,7 +32,7 @@ DOCKERFILE = (
     "FROM squidfunk/mkdocs-material:9.7.6\n"
     "RUN pip install mkdocs==1.6.1 pymdown-extensions==11.0.1 "
     "mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 "
-    "mkdocs-rss-plugin==1.19.0 pygments==2.19.2\n"
+    "mkdocs-rss-plugin==1.19.0 pygments==2.19.2 gitpython==3.1.59\n"
 )
 
 
@@ -54,6 +56,7 @@ INSTALLED = {
     "mkdocs-llmstxt": "0.5.0",
     "mkdocs-rss-plugin": "1.19.0",
     "pygments": "2.19.2",
+    "gitpython": "3.1.59",
 }
 
 
@@ -124,3 +127,37 @@ def test_a_distribution_missing_from_pyproject_fails(tmp_path):
 
     assert not result["mike"].ok
     assert "not pinned" in result["mike"].detail
+
+
+def test_a_digest_pinned_base_image_still_names_its_tag(tmp_path):
+    digest = "@sha256:" + "0" * 64
+    write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":9.7.6\n", f":9.7.6{digest}\n"))
+
+    result = by_distribution(pins_of(tmp_path))
+
+    assert result["mkdocs-material"].ok
+
+
+def test_run_checks_outside_a_repository_is_fatal():
+    from ovweb.doctor import run_checks
+
+    checks = run_checks(repo=None, repo_root=None, pins_only=True)
+
+    assert [check.ok for check in checks] == [False]
+    assert checks[0].fatal
+    assert "not inside a git repository" in checks[0].detail
+
+
+def test_site_url_agreement_reads_mkdocs_yml_from_the_checkout(tmp_path, config):
+    from ovweb.doctor import _check_site_url_agreement
+
+    (tmp_path / "mkdocs.yml").write_text("site_url: https://example.invalid\n", encoding="utf-8")
+    drifted = _check_site_url_agreement(config, repo_root=tmp_path)
+    assert drifted is not None and not drifted.ok
+
+    (tmp_path / "mkdocs.yml").write_text(f"site_url: {config.layout.site_url}\n", encoding="utf-8")
+    agreeing = _check_site_url_agreement(config, repo_root=tmp_path)
+    assert agreeing is not None and agreeing.ok
+
+    missing = _check_site_url_agreement(config, repo_root=tmp_path / "elsewhere")
+    assert missing is not None and not missing.ok

@@ -39,7 +39,7 @@
                 {% set drop_meta = first_drop.meta or (first_drop.children and first_drop.children[0].meta) or {} %}
                 {% set drop_label = drop_meta.dropdown_label or first_drop.title %}
                 <li class="md-tabs__item md-tabs__item--dropdown{% if ns.dropdown_active %} md-tabs__item--active{% endif %}">
-                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle{% if ns.dropdown_active %} md-tabs__link--active{% endif %}" aria-haspopup="true">
+                    <button type="button" class="md-tabs__link md-tabs__dropdown-toggle{% if ns.dropdown_active %} md-tabs__link--active{% endif %}">
                         {{ drop_label }}
                         <span class="dropdown-caret"></span>
                     </button>

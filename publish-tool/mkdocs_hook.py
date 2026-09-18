@@ -1,10 +1,13 @@
-"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Two jobs:
+"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Three jobs:
 
 * `on_env` sets every page's `update_date`, so `sitemap.xml` carries a real per-page `<lastmod>`
   rather than the build date on every URL, and gives the blog views the plugin generates a title
   and description, which they have no source file to carry.
 * `on_page_content` gives the `llmstxt` plugin each page's own `title` and `description`
   frontmatter, so its llms.txt entry is the name and the sentence written on the page.
+* `on_post_page` moves the glightbox library script out of `<head>` to the end of `<body>` and
+  turns the instance the plugin builds into plain configuration (`glightboxOptions`) for
+  `javascripts/glightbox-gallery.js`.
 
 The import shim keeps a plain `mkdocs serve` working in a checkout where the package is not
 installed, including inside the Docker images, which mount the repository rather than installing
@@ -20,12 +23,16 @@ from pathlib import Path
 
 from mkdocs.exceptions import PluginError
 
-_SRC = Path(__file__).resolve().parent / "src"
-if _SRC.is_dir() and str(_SRC) not in sys.path:
-    sys.path.insert(0, str(_SRC))
+try:
+    import ovweb  # noqa: F401
+except ModuleNotFoundError:
+    # Not installed (a dev checkout serving with docker): import from the checkout's src/.
+    _SRC = Path(__file__).resolve().parent / "src"
+    if _SRC.is_dir() and str(_SRC) not in sys.path:
+        sys.path.insert(0, str(_SRC))
 
-from ovweb.gitrepo import Git, GitError  # noqa: E402
-from ovweb.sources import newest_dates, parse_git_log  # noqa: E402
+from ovweb.gitrepo import Git, GitError
+from ovweb.sources import newest_dates, parse_git_log
 
 
 def _dated_trees(config) -> tuple[str, ...]:
@@ -285,9 +292,30 @@ def _hand_the_glightbox_config_over(output: str) -> str:
     return updated
 
 
-def on_page_content(html, page, config, **kwargs):
-    """Use the page's own `title` and `description` frontmatter for its llms.txt entry.
+#: Pygments 2.20.0 (CVE-2026-73295 / ReDoS hardening, bumped in 1634cfc1d) started HTML-escaping
+#: the superfences `title=` option, which this repo's tutorials rely on to link a code block's
+#: filename to its GitHub source (`title="<a href='...' target='_blank'>name</a>"`, ~230 fences).
+#: Escaping that value is the correct fix for arbitrary titles, so it stays on; this restores just
+#: the one first-party shape our own fences emit. The quote becomes a literal `'` for a top-level
+#: fence but `&#x27;` for one nested in a content tab (`pymdownx.tabbed` re-escapes it first), so
+#: both are matched.
+_ESCAPED_FILENAME_LINK = re.compile(
+    r"""class="filename">&lt;a href=(?:'|&\#x27;)([^'&]+)(?:'|&\#x27;) """
+    r"""target=(?:'|&\#x27;)_blank(?:'|&\#x27;)&gt;([^<]+)&lt;/a&gt;"""
+)
 
+
+def _unescape_filename_links(html: str) -> str:
+    return _ESCAPED_FILENAME_LINK.sub(
+        r'class="filename"><a href="\1" target="_blank" rel="noopener">\2</a>', html
+    )
+
+
+def on_page_content(html, page, config, **kwargs):
+    """Restore linked code-block filenames, then use the page's own frontmatter for llms.txt.
+
+    **The filename links** are `_unescape_filename_links` above. Everything below is the
+    llms.txt half: it uses the page's own `title` and `description` frontmatter for its entry.
     Both halves stop llms.txt taking its text from somewhere other than the page:
 
     * **The description** would be the value written beside the path in mkdocs.yml, maintaining the
@@ -306,9 +334,11 @@ def on_page_content(html, page, config, **kwargs):
     collection, so a hook's handler for an event always runs after the plugins'. That is what lets
     this overwrite `_md_pages`, which the plugin fills in during its own `on_page_content`.
     """
+    html = _unescape_filename_links(html)
+
     plugin = config["plugins"].get("llmstxt")
     if plugin is None:
-        return None
+        return html
 
     # Both are private, and both are read in the plugin's `on_post_build`:
     #   `_sections`  {section title: {src_uri: description}}, built in its `on_files`
@@ -327,7 +357,7 @@ def on_page_content(html, page, config, **kwargs):
     src_uri = page.file.src_uri
     listed = [pages for pages in sections.values() if src_uri in pages]
     if not listed:
-        return None
+        return html
 
     meta = page.meta or {}
     title = _required(meta, "title", src_uri)
@@ -343,4 +373,4 @@ def on_page_content(html, page, config, **kwargs):
             "would keep the nav label. Update publish-tool/mkdocs_hook.py to the new API."
         )
     exported[src_uri] = info._replace(title=title)
-    return None
+    return html

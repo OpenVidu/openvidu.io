@@ -85,10 +85,10 @@ Every page belongs to one of two groups, declared under the `layout:` key of
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `layout.site_url`            | `https://openvidu.io`                                                                                                                 | The production origin every absolute URL is built against.                                                    |
 | `layout.versioned_pages`     | `docs`, `meet`                                                                                                                        | Documentation tied to a release. Served under `/latest/docs/`, `/latest/meet/`, and `/X.Y/docs/`, etc.         |
-| `layout.non_versioned_pages` | `account`, `pricing`, `support`, `openvidu-meet-vs-openvidu-platform`, `openvidu-vs-livekit`, `openvidu-vs-mediasoup`, `conditions`, `blog`, `about-us`, `research`, `acknowledgments` | Global pages shared across all versions. Served **once** at the site root (e.g. `/pricing/`).                 |
+| `layout.non_versioned_pages` | `account`, `pricing`, `support`, `openvidu-meet-vs-openvidu-platform`, `openvidu-vs-livekit`, `openvidu-vs-mediasoup`, `openvidu-vs-jitsi`, `openvidu-vs-janus`, `conditions`, `blog`, `about-us`, `research`, `acknowledgments` | Global pages shared across all versions. Served **once** at the site root (e.g. `/pricing/`).                 |
 | `layout.assets`              | `assets`, `javascripts`, `stylesheets`, `search`                                                                                       | Static asset folders that also live at the root.                                                              |
 | `layout.pinned_assets`       | `assets`, `javascripts`, `stylesheets`                                                                                                 | Of those, the ones whose root-absolute references inside versioned pages get pinned to the version folder.     |
-| `layout.root_files`          | `index.html`, `index.md`, `404.html`, `robots.txt`, `llms.txt`, the four RSS/JSON feeds, `rss.xsl`                                     | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
+| `layout.root_files`          | `index.html`, `index.md`, `404.html`, `llms.txt`, the four RSS/JSON feeds, `rss.xsl`                                                   | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
 | `layout.feeds`               | the four RSS/JSON feed files                                                                                                          | Rewritten wholesale (every `/X.Y/` occurrence) when promoted to the root.                                     |
 
 `ovweb.yaml` is the single source of truth for publishing: the layout above, and every redirect
@@ -145,7 +145,8 @@ nor useful. Everything else in the table below belongs to a specific command.
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dry-run`                 | Resolve and print the plan — ordered steps, the redirects that would be installed, the git operations — and touch nothing. Implies `--no-push`.             |
 | `--no-push`                 | Build and commit locally, push nothing. The everyday "let me look at it first" mode.                                                                        |
-| `--tree PATH`, `--no-commit` | `postprocess` and `verify` only: work on a directory instead of a worktree, and leave it dirty.                                                             |
+| `--tree PATH`               | `postprocess` (required) and `verify` (optional): work on a directory instead of a gh-pages worktree.                                                      |
+| `--no-commit`               | `deploy` only: post-process the worktree and leave it dirty, with no commit — and therefore no push.                                                        |
 | `--keep-worktree`           | Leave the gh-pages worktree behind for inspection.                                                                                                          |
 | `--force`                   | Post-process a tree that has already been post-processed. See the idempotence note in [Caveats](#caveats-and-observations).                                  |
 | `-v` / `-vv`                | `-vv` logs the argv of every git and mike call.                                                                                                              |
@@ -171,7 +172,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 
 | Step                   | When   | What                                                                                                                  |
 | ---------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| `remove-overrides`     | always | Delete the version's `overrides/` theme folder, which is source, not output.                                          |
+| `remove-stray-site`    | always | Delete a `site/` folder at the root of the gh-pages tree, present only when the tree came from a checkout rather than a fresh worktree. Tolerant of its absence. |
 | `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns. |
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
 | `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds, and the AI-facing channel: the Markdown exports and `llms.txt`. |
@@ -189,7 +190,9 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
 Everything before `commit` touches no git at all, which is what makes
-`ovweb postprocess --tree <copy> --no-commit` a deterministic unit.
+`ovweb postprocess --tree <copy>` a deterministic unit: that command runs every step except
+`commit`. `--no-commit` belongs to `ovweb deploy`, where it stops the real pipeline at the same
+point.
 
 ### Nothing is pushed until the tree is correct
 
@@ -247,6 +250,22 @@ with two extras: `build` (the real publish, including `mkdocs-material[imaging]`
 [`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), and `ovweb doctor
 --pins` fails when the three disagree. A different theme version builds different markup, and the
 release-notes splice matches on that markup.
+
+The publish workflow does not install from the extra directly. It installs
+[`requirements-publish.txt`](requirements-publish.txt) with `pip install --require-hashes`: the
+`build` extra fully resolved, every transitive dependency pinned and every file hash listed, so a
+job holding a write token never installs a release that differs from the one recorded here. The
+tool itself is then installed with `--no-deps --no-build-isolation`, which is why `hatchling` is
+part of the `build` extra. After changing a pin in `pyproject.toml`, regenerate the lock and
+commit both:
+
+```bash
+uv pip compile pyproject.toml --extra build --universal --generate-hashes \
+  --python-version 3.10 --no-header -o requirements-publish.txt
+```
+
+`--universal` keeps the environment markers, so the same file installs on the 3.10 floor and on
+the 3.14 the workflow runs. Dependabot watches both files (`.github/dependabot.yml`).
 
 ## Caveats and observations
 

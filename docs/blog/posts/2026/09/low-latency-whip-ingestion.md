@@ -35,11 +35,11 @@ authors:
     OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does
     the same thing from a real production tool, and a viewer page that subscribes to any of them. All
     of it runs on your machine with Docker Compose. The code is at
-    [openvidu-labs/low-latency-whip-ingestion](https://github.com/openvidu-labs/low-latency-whip-ingestion){:target="_blank"}.
+    [openvidu-labs/low-latency-whip-ingestion :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/low-latency-whip-ingestion){:target="_blank"}.
 
 ## WHIP, in one paragraph
 
-**[WHIP](https://datatracker.ietf.org/doc/rfc9725/){:target="_blank"}** (WebRTC-HTTP Ingestion Protocol) is based
+**[WHIP :fontawesome-solid-external-link:{.external-link-icon}](https://datatracker.ietf.org/doc/rfc9725/){:target="_blank"}** (WebRTC-HTTP Ingestion Protocol) is based
 on a `POST` of your SDP offer to a URL with a
 bearer token. The server answers `201 Created` with the SDP answer in the body. And that's it — that is
 the entire handshake. Everything after it is ordinary WebRTC.
@@ -50,7 +50,7 @@ plus the encoder, which is why this path lands under a second where a chunked on
 
 ## The demo app
 
-OpenVidu Platform is a self-hosted, [LiveKit](https://livekit.io/){:target="_blank"}-compatible
+OpenVidu Platform is a self-hosted, [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"}-compatible
 server, and its Ingress module exposes a [WHIP endpoint](/docs/build-your-app/common-operations.md#stream-ingestion).
 
 The whole backend is two endpoints:
@@ -196,7 +196,7 @@ Click **Apply**, then **Start Streaming**, then open
 
 Building the scene by hand every time gets old, so the repo ships three scene collections, one for Linux, one for Windows and another one for MacOS. So when importing, choose
 the appropriate one for your OS. For instance, this is the URL for linux:
-[`obs/openvidu-whip-webcam-linux.json`](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json){:target="_blank"}.
+[`obs/openvidu-whip-webcam-linux.json` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/low-latency-whip-ingestion/blob/main/obs/openvidu-whip-webcam-linux.json){:target="_blank"}.
 When imported you get a webcam filling a 720p canvas, and your default microphone, already wired up.
 
 You still have to provide the Stream settings, with the WHIP token and URL provided by the app.
@@ -259,7 +259,7 @@ Three things account for most of it:
   `http://openvidu:7880`. Check that `docker network inspect openvidu-community` lists both the app
   and the OpenVidu containers.
 - **OBS has no `WHIP` under Service.** You're on OBS < 30, or on the Ubuntu 24.04 PPA build, which
-  ships without the WebRTC output. The [Flatpak build](https://flathub.org/apps/com.obsproject.Studio){:target="_blank"}
+  ships without the WebRTC output. The [Flatpak build :fontawesome-solid-external-link:{.external-link-icon}](https://flathub.org/apps/com.obsproject.Studio){:target="_blank"}
   has it.
 - **The second stream never appears.** Each set of credentials is one ingress. Stop streaming,
   generate a fresh set, start again — the old one isn't reused.

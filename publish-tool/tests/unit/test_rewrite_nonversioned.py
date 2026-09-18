@@ -112,4 +112,39 @@ def test_404_handles_a_version_link_without_a_trailing_slash(layout):
 
 def test_feed_strips_the_version(layout):
     text = "<link>https://openvidu.io/3.8/blog/a-post/</link>"
-    assert rewrite_feed(text, version=VERSION) == "<link>https://openvidu.io/blog/a-post/</link>"
+    assert (
+        rewrite_feed(text, version=VERSION, layout=layout)
+        == "<link>https://openvidu.io/blog/a-post/</link>"
+    )
+
+
+# -- URLs that merely contain the version segment -----------------------------------------
+
+THIRD_PARTY = "https://github.com/OpenVidu/openvidu/tree/3.8/openvidu-server"
+
+
+def test_promotion_leaves_third_party_urls_carrying_the_segment_alone(layout):
+    text = (
+        '<link rel="canonical" href="https://openvidu.io/3.8/pricing/">'
+        f'<a href="{THIRD_PARTY}">source</a>'
+        '<img src="/3.8/assets/x.png" srcset="/3.8/assets/x.png 1x, /3.8/assets/x@2x.png 2x">'
+    )
+    assert promote(text, layout) == (
+        '<link rel="canonical" href="https://openvidu.io/pricing/">'
+        f'<a href="{THIRD_PARTY}">source</a>'
+        '<img src="/assets/x.png" srcset="/assets/x.png 1x, /assets/x@2x.png 2x">'
+    )
+
+
+def test_404_leaves_third_party_urls_carrying_the_segment_alone(layout):
+    text = f'<a href="/3.8/pricing/">pricing</a><a href="{THIRD_PARTY}">source</a>'
+    assert rewrite_404(text, version=VERSION, layout=layout) == (
+        f'<a href="/pricing/">pricing</a><a href="{THIRD_PARTY}">source</a>'
+    )
+
+
+def test_feed_leaves_third_party_urls_carrying_the_segment_alone(layout):
+    text = f"<link>https://openvidu.io/3.8/blog/p/</link><p>See {THIRD_PARTY}</p>"
+    assert rewrite_feed(text, version=VERSION, layout=layout) == (
+        f"<link>https://openvidu.io/blog/p/</link><p>See {THIRD_PARTY}</p>"
+    )
