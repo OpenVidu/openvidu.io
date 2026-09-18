@@ -9,8 +9,10 @@ keep.
 from __future__ import annotations
 
 from contextlib import contextmanager
+from pathlib import Path
 
 from ..config import SiteConfig
+from ..discovery import published_versions
 from ..gitrepo import Git, GitError
 from ..mikewrap import Mike
 from ..model import PublishPlan
@@ -57,31 +59,35 @@ def publish(
     try:
         created_branch = _prepare_branches(repo, plan=plan, gh_branch=gh_branch, report=report)
 
-        # Everything from here to the gh-pages push is local and reversible.
-        with _rollback_on_failure(repo, branch=gh_branch, report=report):
-            if plan.delete_first:
-                report.step("mike-delete", f"Remove the published {plan.version} before rebuilding")
-                mike.delete(plan.version)
+        try:
+            # Everything from here to the gh-pages push is local and reversible.
+            with _rollback_on_failure(repo, branch=gh_branch, report=report):
+                if plan.delete_first:
+                    _delete_published(repo, mike, plan=plan, gh_branch=gh_branch, report=report)
 
-            report.step("mike-deploy", f"Build {plan.version} with mike")
-            mike.deploy(plan.version, alias=LATEST_ALIAS if plan.update_latest else None)
+                report.step("mike-deploy", f"Build {plan.version} with mike")
+                mike.deploy(plan.version, alias=LATEST_ALIAS if plan.update_latest else None)
 
-            published = _post_process_gh_pages(
-                repo,
-                config=config,
-                plan=plan,
-                report=report,
-                gh_branch=gh_branch,
-                keep_worktree=keep_worktree,
-                commit=commit,
-                force=force,
-            )
+                published = _post_process_gh_pages(
+                    repo,
+                    config=config,
+                    plan=plan,
+                    report=report,
+                    gh_branch=gh_branch,
+                    keep_worktree=keep_worktree,
+                    commit=commit,
+                    force=force,
+                )
 
-            if published and plan.push:
-                report.step("push", f"Push {gh_branch}")
-                repo.push(gh_branch)
-            elif published:
-                report.info(f"{gh_branch} committed locally; not pushed (--no-push).")
+                if published and plan.push:
+                    report.step("push", f"Push {gh_branch}")
+                    repo.push(gh_branch)
+                elif published:
+                    report.info(f"{gh_branch} committed locally; not pushed (--no-push).")
+        except BaseException:
+            if created_branch:
+                _discard_created_branch(repo, plan=plan, report=report)
+            raise
 
         # Past this point the site is published. What remains is branch bookkeeping: a
         # failure there is reported, but gh-pages is left alone.
@@ -133,6 +139,35 @@ def _rollback_on_failure(repo: Git, *, branch: str, report: Reporter):
                 f"{before or '<previous sha>'}"
             )
         raise
+
+
+def _delete_published(
+    repo: Git, mike: Mike, *, plan: PublishPlan, gh_branch: str, report: Reporter
+) -> None:
+    """Remove the published copy of the version, if there is one, before rebuilding it."""
+    if plan.version not in published_versions(repo, gh_branch=gh_branch):
+        report.info(f"{plan.version} is not published yet; nothing to delete.")
+        return
+    report.step("mike-delete", f"Remove the published {plan.version} before rebuilding")
+    mike.delete(plan.version)
+
+
+def _discard_created_branch(repo: Git, *, plan: PublishPlan, report: Reporter) -> None:
+    """Drop the version branch this run created, so a retry can create it again.
+
+    It was never pushed (that happens after the site is published), so deleting the local
+    branch loses nothing.
+    """
+    try:
+        if repo.current_branch() == plan.version:
+            repo.switch(plan.source_branch)
+        repo.delete_local_branch(plan.version)
+        report.info(f"Deleted local '{plan.version}' (created by this run, never pushed).")
+    except GitError as error:
+        report.error(
+            f"could not delete local '{plan.version}': {error}\n"
+            f"Delete it by hand with: git branch -D {plan.version}"
+        )
 
 
 def _require_clean(repo: Git, *, report: Reporter) -> None:
@@ -217,8 +252,16 @@ def _fast_forward_local(repo: Git, branch: str, *, report: Reporter) -> None:
     """Update the local branch from the remote without checking it out.
 
     A refspec fetch updates the ref in place, and fails rather than merging when the branches have
-    diverged.
+    diverged. It also refuses a branch checked out in another worktree, which is what a run kept
+    with `--keep-worktree` leaves behind; that case gets its own message.
     """
+    held = repo.worktree_holding(branch)
+    if held is not None and held.resolve() != Path(repo.root).resolve():
+        raise PublishError(
+            f"'{branch}' is checked out in the worktree {held}, probably kept by an earlier run "
+            f"with --keep-worktree. Remove it with `git worktree remove --force {held}` and "
+            "retry."
+        )
     try:
         repo.do("fetch", repo.remote, f"{branch}:{branch}")
     except GitError as error:

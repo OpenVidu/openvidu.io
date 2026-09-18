@@ -22,7 +22,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 === "Run OpenVidu locally"
 

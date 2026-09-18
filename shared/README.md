@@ -28,6 +28,16 @@ shared/
 │   ├── on-premises/        → on-premises-specific content
 │   └── oracle/             → OCI-specific content
 └── tutorials/          → tutorial pages of both products
+    ├── run-openvidu-locally.md, run-openvidu-locally-azure.md,
+    │   run-openvidu-locally-speech-agent.md
+    │                       → the "run OpenVidu locally" steps of the Platform tutorials
+    ├── run-openvidu-server.md, run-openvidu-server-speech-agent.md
+    │                       → the "Run OpenVidu locally" / "Deploy OpenVidu" tab pair around them
+    ├── run-openvidu-meet.md, connect-tutorial-to-production-deployment.md,
+    │   access-tutorial-from-other-devices.md
+    │                       → the same steps for the OpenVidu Meet embedded tutorials
+    ├── configure-urls.md, testing-other-devices.md, webhook-local-server.md
+    │                       → admonitions shared by the Platform tutorials
     ├── application-client/ → per-platform client tutorial sections + the tabs aggregator
     ├── application-server/ → per-language server tutorial sections + the tabs aggregator
     └── openvidu-components/→ OpenVidu Components Angular tutorial sections

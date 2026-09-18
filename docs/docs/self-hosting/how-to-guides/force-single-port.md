@@ -42,7 +42,7 @@ To enforce this configuration, your inbound port rules should look like this:
         | Protocol | <div class="w-8em">Ports</div> | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
-        | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
+        | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
         | TCP | 1935 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP | 9000 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to expose MinIO publicly. |
         | TCP | 4443 | Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
@@ -93,7 +93,7 @@ To enforce this configuration, your inbound port rules should look like this:
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
-        | TCP | 7880 | Load Balancer | Allows access to the following to the Load Balancer: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP | 7880 | Load Balancer | Allows access to the following to the Load Balancer: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP | 3000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana. |
         | TCP | 5000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard. |
         | TCP | 9101 | Master Nodes | Needed to load balance requests to MinIO Console. |
@@ -173,7 +173,7 @@ To enforce this configuration, your inbound port rules should look like this:
         | Protocol | Ports | <div class="w-8em">Source</div> | Description |
         | -------- | ----- | ------ | ----------- |
         | TCP | 80 | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
-        | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
+        | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
         | TCP | 1935 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP | 9000 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to expose MinIO publicly. |
         | TCP | 4443 | Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
@@ -222,7 +222,7 @@ To enforce this configuration, your inbound port rules should look like this:
         | -------- | ----- | ------ | ----------- |
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
-        | TCP | 7880 | Load Balancer | Allows access to the following to the Load Balancer: <ul><li>Livekit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP | 7880 | Load Balancer | Allows access to the following to the Load Balancer: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP | 3000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana. |
         | TCP | 5000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard. |
         | TCP | 9101 | Master Nodes | Needed to load balance requests to MinIO Console. |

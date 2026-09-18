@@ -11,9 +11,9 @@ To access **OpenVidu Dashboard**, go to `https://your.domain/dashboard/` and **l
 
   ![OpenVidu Dashboard login](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login.png){ .round-corners loading=lazy }
 
-### Views
+## Views
 
-#### Analytics
+### Analytics
 
 Display **graphical analytics** for client SDKs, connection types, bandwidth usage, unique participants, rooms and egresses created over different **time periods** (last 24 hours, last 7 days, last 28 days or current month).
 
@@ -41,13 +41,13 @@ Display **graphical analytics** for client SDKs, connection types, bandwidth usa
 
 </div>
 
-#### Rooms
+### Rooms
 
 Review the total count of **active rooms** and **active participants**, along with a roster of currently active rooms and a history of **closed rooms** within the last 28 days. Detailed information on each room is accessible by clicking on the respective row.
 
   ![OpenVidu Dashboard rooms](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms.png){ .round-corners loading=lazy }
 
-#### Room Details
+### Room Details
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
@@ -69,7 +69,7 @@ Retrieve in-depth information about a specific **room**, including its duration,
 
 </div>
 
-#### Participant Details
+### Participant Details
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
@@ -91,13 +91,13 @@ A participant may **connect** and **disconnect** from a room multiple times whil
 
   ![OpenVidu Dashboard participant sessions](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participant3.png){ .round-corners loading=lazy }
 
-#### Egress-Ingress
+### Egress-Ingress
 
 Review an overview of all **egresses** and **ingresses**, including their duration and status. Detailed information for each egress or ingress can be accessed by clicking on the respective row.
 
   ![OpenVidu Dashboard egress-ingress](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-ingress.png){ .round-corners loading=lazy }
 
-#### Egress Details
+### Egress Details
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
@@ -115,7 +115,7 @@ Access comprehensive details about a specific **egress**, including its duration
 
 </div>
 
-#### Ingress Details
+### Ingress Details
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
