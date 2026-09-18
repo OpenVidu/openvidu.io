@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b6cf0"/>
+    </marker>
+  </defs>
+
+  <!-- Browser box (top left) -->
+  <rect x="30" y="30" width="330" height="190" rx="14" fill="#f1ecfd" stroke="#a78bfa" stroke-width="2"/>
+  <text x="195" y="62" text-anchor="middle" font-size="17" font-weight="700" fill="#241d3d">Browser — your app's UI</text>
+  <rect x="60" y="85" width="270" height="105" rx="10" fill="#8b6cf0"/>
+  <text x="195" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">&lt;openvidu-meet&gt;</text>
+  <text x="195" y="155" text-anchor="middle" font-size="13.5" fill="#e8e2fb">webcomponent · room-url =</text>
+  <text x="195" y="173" text-anchor="middle" font-size="13.5" fill="#e8e2fb">the member's personal link</text>
+
+  <!-- OpenVidu Meet box (top right) -->
+  <rect x="520" y="30" width="330" height="190" rx="14" fill="#241d3d"/>
+  <text x="685" y="66" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">OpenVidu Meet</text>
+  <text x="685" y="88" text-anchor="middle" font-size="13.5" fill="#c9b8f5">self-hosted deployment</text>
+  <rect x="550" y="108" width="130" height="40" rx="8" fill="#3a3159"/>
+  <text x="615" y="133" text-anchor="middle" font-size="13" fill="#e8e2fb">Rooms</text>
+  <rect x="690" y="108" width="130" height="40" rx="8" fill="#3a3159"/>
+  <text x="755" y="133" text-anchor="middle" font-size="13" fill="#e8e2fb">Members</text>
+  <rect x="550" y="156" width="130" height="40" rx="8" fill="#3a3159"/>
+  <text x="615" y="181" text-anchor="middle" font-size="13" fill="#e8e2fb">Meetings</text>
+  <rect x="690" y="156" width="130" height="40" rx="8" fill="#3a3159"/>
+  <text x="755" y="181" text-anchor="middle" font-size="13" fill="#e8e2fb">Recordings</text>
+
+  <!-- CRM server box (bottom center) -->
+  <rect x="215" y="360" width="450" height="80" rx="14" fill="#f1ecfd" stroke="#a78bfa" stroke-width="2"/>
+  <text x="440" y="394" text-anchor="middle" font-size="17" font-weight="700" fill="#241d3d">Your app's server (the CRM)</text>
+  <text x="440" y="419" text-anchor="middle" font-size="13.5" fill="#55506b">one room per client · one invited guest per person</text>
+
+  <!-- Browser <-> Meet: webcomponent + WebRTC -->
+  <line x1="360" y1="125" x2="520" y2="125" stroke="#8b6cf0" stroke-width="2.5" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  <rect x="368" y="83" width="144" height="30" rx="15" fill="#8b6cf0"/>
+  <text x="440" y="103" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff">meeting UI + WebRTC</text>
+
+  <!-- CRM server -> Meet: REST API -->
+  <line x1="640" y1="360" x2="740" y2="220" stroke="#8b6cf0" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="618" y="272" width="196" height="30" rx="15" fill="#8b6cf0"/>
+  <text x="716" y="292" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff">REST API · X-API-KEY</text>
+
+  <!-- CRM server -> Browser: member link -->
+  <line x1="240" y1="360" x2="150" y2="220" stroke="#8b6cf0" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="68" y="272" width="220" height="30" rx="15" fill="#8b6cf0"/>
+  <text x="178" y="292" text-anchor="middle" font-size="12.5" font-weight="600" fill="#ffffff">member's personal room link</text>
+</svg>
