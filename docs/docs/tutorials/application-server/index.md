@@ -8,7 +8,7 @@ description: Learn how to build an application server that generates LiveKit tok
 Every application server below has two specific purposes: 
 
 - Generate LiveKit tokens on demand for any [application client](../application-client/index.md).
-- Receive LiveKit [webhook events](https://docs.livekit.io/home/server/webhooks/){target=\_blank}.
+- Receive LiveKit [webhook events](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/){target=\_blank}.
 
 To do so they all define two REST endpoints:
 
