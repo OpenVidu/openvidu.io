@@ -94,6 +94,8 @@ You need to specify some properties for the EC2 instances that will be created.
 
     By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
+    Besides SSH with **KeyName**, the Master and Media Nodes register with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html), so you can open a shell on any node from the AWS console with Session Manager. This needs no public IP and no open SSH port, which is what lets you run the Master Nodes in private subnets (see [VPC Configuration](#vpc-configuration)).
+
 ### Media Nodes Autoscaling Group Configuration
 
 The number of Media Nodes can scale up or down based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up or down.
@@ -131,10 +133,13 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The **OpenViduMediaNodeSubnets** specifies the subnets where the Media Nodes will be deployed. There is no limit on the number of subnets you can specify.
 
+    The optional **LoadBalancerSubnets** parameter specifies the public subnets where the internet-facing Load Balancer is placed. Leave it empty to place the Load Balancer in the **OpenViduMasterNodeSubnets** (the default behavior). Set it to dedicated public subnets when you want to run the Master Nodes in private subnets: the Load Balancer stays public and reachable while the Master Nodes reach the internet through a NAT gateway.
+
     !!! warning
 
         - It is recommended to deploy in a region with at least 4 availability zones and deploy the Master Nodes in 4 subnets, one in each availability zone. This is to ensure high availability.
-        - You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
+        - By default, use public subnets for the Master Nodes and Media Nodes with the auto-assign public IP option enabled.
+        - To keep the Master Nodes in private subnets, set **LoadBalancerSubnets** to public subnets for the Load Balancer and give the private subnets a NAT gateway for outbound traffic. Access the Master Nodes with Session Manager (see [EC2 Instance Configuration](#ec2-instance-configuration)) instead of SSH. The Media Nodes still need public subnets, since they receive WebRTC media directly from clients.
 
 ## Volumes Configuration
 
