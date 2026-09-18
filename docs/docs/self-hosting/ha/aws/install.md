@@ -94,7 +94,7 @@ You need to specify some properties for the EC2 instances that will be created.
 
     By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
 
-    Besides SSH with **KeyName**, the Master and Media Nodes register with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html), so you can open a shell on any node from the AWS console with Session Manager. This needs no public IP and no open SSH port, which is what lets you run the Master Nodes in private subnets (see [VPC Configuration](#vpc-configuration)).
+    Besides SSH with **KeyName**, the Master and Media Nodes register with [AWS Systems Manager :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html){:target="_blank"}, so you can open a shell on any node from the AWS console with Session Manager. This needs no public IP and no open SSH port, which is what lets you run the Master Nodes in private subnets (see [VPC Configuration](#vpc-configuration)).
 
 ### Media Nodes Autoscaling Group Configuration
 
