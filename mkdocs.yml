@@ -253,6 +253,8 @@ nav:
       - about-us.md
   - Research:
       - research.md
+  - Open source:
+      - open-source-contributions.md
 
 # Pages reached by direct link only, never through the nav.
 not_in_nav: |
@@ -422,6 +424,7 @@ plugins:
         - support/index.md
         - about-us.md
         - research.md
+        - open-source-contributions.md
 
         Blog:
         - blog/posts/*/*/*.md
