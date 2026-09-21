@@ -166,16 +166,16 @@ def check_branch_files(
         if not local.is_file():
             checks.append(Check("branch-files", False, f"{path} is missing from this checkout"))
             continue
-        expected = local.read_text(encoding="utf-8")
+        expected = repo.read("hash-object", str(local))
 
         same, differs, missing = [], [], []
         for version in past:
             if parse(version) < parse(since):
                 continue
-            text = _branch_file(repo, version, path)
-            if text is None:
+            blob = _branch_blob(repo, version, path)
+            if blob is None:
                 missing.append(version)
-            elif text == expected:
+            elif blob == expected:
                 same.append(version)
             else:
                 differs.append(version)
@@ -207,11 +207,13 @@ def check_branch_files(
     return checks
 
 
-def _branch_file(repo: Git, version: str, path: str) -> str | None:
-    """The file as the branch holds it: the remote-tracking ref when fetched, else the local one."""
+def _branch_blob(repo: Git, version: str, path: str) -> str | None:
+    """The blob id of the file as the branch holds it: the remote-tracking ref when fetched, else
+    the local one. Ids rather than text, so the comparison is byte for byte.
+    """
     for ref in (f"{repo.remote}/{version}", version):
         try:
-            return repo.show(ref, path)
+            return repo.read("rev-parse", "--verify", "--quiet", f"{ref}:{path}")
         except GitError:
             continue
     return None

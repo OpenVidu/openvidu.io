@@ -4,6 +4,9 @@ version, and the version branches' copies of the files MkDocs loads by path from
 
 from __future__ import annotations
 
+import hashlib
+from pathlib import Path
+
 from ovweb.doctor import PINNED_DISTRIBUTIONS, check_branch_files, check_pins
 from ovweb.gitrepo import GitError
 
@@ -173,8 +176,16 @@ HOOK = "publish-tool/pygments_fence_title_hook.py"
 PREPROCESS = "publish-tool/llmstxt_preprocess.py"
 
 
+def blob(text: str) -> str:
+    return hashlib.sha1(text.encode()).hexdigest()
+
+
 class BranchRepo:
-    """Version branches holding whatever `files` says ({branch: {path: text}}), read offline."""
+    """Version branches holding whatever `files` says ({branch: {path: text}}), read offline.
+
+    Answers `hash-object` for the checkout's file and `rev-parse ref:path` for a branch's, both as
+    blob ids of the text, which is all the check compares.
+    """
 
     remote = "origin"
 
@@ -185,14 +196,15 @@ class BranchRepo:
         return [*self.files, "main"]
 
     def read(self, *args):
+        if args[0] == "hash-object":
+            return blob(Path(args[1]).read_text(encoding="utf-8"))
+        if args[0] == "rev-parse":
+            ref, path = args[-1].split(":", 1)
+            try:
+                return blob(self.files[ref.removeprefix("origin/")][path])
+            except KeyError:
+                raise GitError(f"{args[-1]} does not exist") from None
         raise GitError("offline")
-
-    def show(self, ref, path):
-        branch = ref.removeprefix("origin/")
-        try:
-            return self.files[branch][path]
-        except KeyError:
-            raise GitError(f"{ref}:{path} does not exist") from None
 
 
 def checkout(root, *, hook="hook v2", preprocess="preprocess v2"):
