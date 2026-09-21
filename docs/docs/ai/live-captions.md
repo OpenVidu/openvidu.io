@@ -1,3 +1,8 @@
+---
+title: "Live Captions: real-time speech to text"
+description: "Transcribe room audio in real time and display live captions in your frontend, with either cloud or fully self-hosted speech-to-text providers."
+---
+
 # :material-subtitles-outline:{ .ai-service-icon .middle } Live Captions
 
 Transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.

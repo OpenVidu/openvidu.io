@@ -1,5 +1,6 @@
 ---
 description: Learn how to enable webhooks in OpenVidu to integrate with other services and receive event notifications from your deployment.
+title: "Enable OpenVidu webhooks"
 ---
 
 # Enable Webhooks

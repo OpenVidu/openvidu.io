@@ -1,3 +1,8 @@
+---
+title: "Scalable and fault-tolerant Meet deployments"
+description: "Compare OpenVidu Meet deployment types and choose Elastic or High Availability when a single server is no longer enough for your user load."
+---
+
 !!! warning
     OpenVidu Meet is currently considered in **BETA**. There may be bugs and its APIs are subject to change.
 
