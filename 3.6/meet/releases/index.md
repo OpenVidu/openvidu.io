@@ -83,7 +83,7 @@ Visitors to the OpenVidu website will notice that there are now two distinct pro
 
 By separating the product lines, we keep the developer‑first power of OpenVidu Platform while offering a refined, ready‑to‑use solution for common videoconferencing use cases (e‑learning, telehealth, collaboration, customer support...). This clarity helps teams choose low‑level control with OpenVidu Platform, or the fastest path to value-off‑the‑shelf with OpenVidu Meet. In short, many use cases that fall under the category of "video conferencing applications" can be satisfied with OpenVidu Meet, saving development time and resources.
 
-You can read more about the differences between both OpenVidu products here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.6/openvidu-meet-vs-openvidu-platform/index.md).
+You can read more about the differences between both OpenVidu products here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ### Am I the right fit for OpenVidu Meet?
 
@@ -105,7 +105,7 @@ If your use case requires a high degree of customization, or if you need to buil
 
 If you want to learn more about OpenVidu Meet, check out the following resources:
 
-- Compare OpenVidu Meet vs OpenVidu Platform: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.6/openvidu-meet-vs-openvidu-platform/index.md)
+- Compare OpenVidu Meet vs OpenVidu Platform: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)
 - Launch OpenVidu Meet locally in a couple of minutes: [Try OpenVidu Meet locally](https://openvidu.io/3.6/meet/deployment/local/index.md)
 - Embed OpenVidu Meet into your web app: [OpenVidu Meet Embedded](https://openvidu.io/3.6/meet/embedded/intro/index.md)
 

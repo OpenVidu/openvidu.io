@@ -22,7 +22,7 @@ The **Grafana stack** that comes with OpenVidu is composed of the following serv
 
 This dashboard provides **metrics** about **OpenVidu Server**. It includes charts about **active rooms**, **active participants**, **published tracks**, **subscribed tracks**, **send/receive bytes**, **packet loss percentage** and **quality score**.
 
-In case you are using **OpenVidu** [PRO](/pricing/#openvidu-pro) and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
+In case you are using **OpenVidu** [PRO](https://openvidu.io/pricing/#openvidu-pro) and you have more than one **Media Node** deployed, you will see all metrics from all nodes combined in the same chart.
 
 #### OpenVidu Media Nodes Server Metrics
 
@@ -38,7 +38,7 @@ You can select the **Media Node** you want to see metrics from in the **media_no
 
 #### OpenVidu Logs
 
-In case you are using **OpenVidu** [COMMUNITY](/pricing/#openvidu-community), this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
+In case you are using **OpenVidu** [COMMUNITY](https://openvidu.io/pricing/#openvidu-community), this dashboard provides different visualizations for **logs** from your **OpenVidu Single Node deployment**.
 
 There is a panel showing **all containers** logs,
 
@@ -52,7 +52,7 @@ You can also filter logs containing a specific **text** by using the **filter se
 
 > **This dashboard is part of OpenVidu PRO edition.**
 
-In case you are using **OpenVidu** [PRO](/pricing/#openvidu-pro), this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
+In case you are using **OpenVidu** [PRO](https://openvidu.io/pricing/#openvidu-pro), this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **node**.
 
 First of all, there is a panel showing **all containers** logs from all nodes.
 
@@ -68,7 +68,7 @@ You can also filter logs containing a specific **text** by using the **filter se
 
 > **This dashboard is part of OpenVidu PRO edition.**
 
-In case you are using **OpenVidu** [PRO](/pricing/#openvidu-pro), this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
+In case you are using **OpenVidu** [PRO](https://openvidu.io/pricing/#openvidu-pro), this dashboard provides different visualizations for **logs** from your **OpenVidu Elastic** or **OpenVidu High Availability** cluster, grouped by **service**.
 
 First of all, there is a panel to **filter** logs by **room_id** and **participant_id**.
 
