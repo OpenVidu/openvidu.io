@@ -14,6 +14,10 @@ name: Publish Web
 #
 # Run with dry_run first if you want to see the plan — it resolves everything, prints the
 # ordered steps and the redirects it would install, and touches nothing.
+#
+# After a real publish, the `deploy-docs-mcp` job asks OpenVidu/openvidu-docs-mcp to rebuild its
+# index from the live site and waits for that deploy. A red job there means the site is live but
+# the docs MCP server still serves the previous documentation; its log says what to do.
 
 on:
   workflow_dispatch:
@@ -102,3 +106,92 @@ jobs:
       - name: Verify the published tree
         if: ${{ !inputs.dry_run }}
         run: ovweb verify
+
+  deploy-docs-mcp:
+    # The docs MCP server indexes the live site, so a publish has to redeploy it. The dispatch
+    # API returns no run id: the deploy workflow puts our run id in its title and we find it by
+    # that, then wait. Failing here never touches the site, which is already live.
+    needs: deploy
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      REPO: OpenVidu/openvidu-docs-mcp
+      # Fine-grained PAT on that repository: Contents write (to dispatch) and Actions read (to follow).
+      GH_TOKEN: ${{ secrets.DOCS_MCP_DISPATCH_TOKEN }}
+    steps:
+      - name: Redeploy the docs MCP server and wait for it
+        env:
+          COMMAND: ${{ inputs.command }}
+          VERSION: ${{ inputs.version }}
+          SOURCE_RUN: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          ACTIONS_URL="https://github.com/$REPO/actions/workflows/deploy.yml"
+
+          jq -cn --arg c "$COMMAND" --arg v "$VERSION" --arg r "$SOURCE_RUN" \
+            '{event_type: "openvidu-docs-published", client_payload: {command: $c, version: $v, source_run: $r}}' \
+            | gh api "repos/$REPO/dispatches" --input -
+          echo "Dispatched openvidu-docs-published ($COMMAND $VERSION, source run $SOURCE_RUN)"
+
+          # The run appears a few seconds after the dispatch, titled with our run id.
+          RUN_ID=""
+          for _ in $(seq 1 36); do
+            if ! RUN_ID=$(gh run list -R "$REPO" --workflow deploy.yml --event repository_dispatch \
+                  --limit 20 --json databaseId,displayTitle \
+                  --jq "first(.[] | select(.displayTitle | contains(\"publish $SOURCE_RUN (\")) | .databaseId) // empty"); then
+              echo "::error::Cannot list the runs of $REPO. The dispatch was sent, but following it needs the DOCS_MCP_DISPATCH_TOKEN secret to have 'Actions: Read' on that repository ('Contents: Write' only allows the dispatch). Check the deploy by hand: $ACTIONS_URL"
+              exit 1
+            fi
+            if [ -n "$RUN_ID" ]; then break; fi
+            sleep 5
+          done
+          if [ -z "$RUN_ID" ]; then
+            echo "::error::The dispatch was accepted but no run titled 'Deploy after openvidu.io publish $SOURCE_RUN' appeared in $REPO within 3 minutes. Look at $ACTIONS_URL: if there is no new run, deploy.yml on its main branch no longer listens to repository_dispatch; if there is one under another title, its run-name changed."
+            exit 1
+          fi
+          RUN_URL="https://github.com/$REPO/actions/runs/$RUN_ID"
+          echo "Following $RUN_URL"
+          echo "Docs MCP deploy: $RUN_URL" >> "$GITHUB_STEP_SUMMARY"
+
+          # gh run watch redraws its progress; the final state is read separately.
+          set +e
+          timeout 40m gh run watch "$RUN_ID" -R "$REPO" --exit-status --interval 20 > /dev/null 2>&1
+          WATCH=$?
+          set -e
+          if [ "$WATCH" -eq 124 ]; then
+            echo "::error::The docs MCP deploy is still running after 40 minutes: $RUN_URL. The site is published; the MCP server keeps serving the previous index until that run finishes. Follow it there."
+            exit 1
+          fi
+
+          CONCLUSION=$(gh run view "$RUN_ID" -R "$REPO" --json conclusion --jq '.conclusion')
+          case "$CONCLUSION" in
+            success)
+              echo "Docs MCP server redeployed: $RUN_URL"
+              echo "The docs MCP server now serves the published documentation." >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            cancelled)
+              echo "::error::The docs MCP deploy was cancelled: $RUN_URL. Only one deploy waits per stack, so a newer one usually replaced it: check that the newest Deploy run at $ACTIONS_URL is green, and re-run it if not."
+              exit 1
+              ;;
+            *)
+              FAILED=$(gh run view "$RUN_ID" -R "$REPO" --json jobs \
+                --jq '[.jobs[].steps[] | select(.conclusion == "failure") | .name] | join(", ")')
+              echo "::error::The docs MCP deploy failed at: ${FAILED:-an unknown step}. $RUN_URL"
+              cat <<EOF
+
+          The site IS published. The docs MCP server was NOT updated and keeps serving the previous index.
+
+          What to do:
+            1. Open $RUN_URL and read the failed step.
+            2. "Build" failing on the documentation itself (a page without a .md export, a version whose
+               llms.txt lists pages that do not exist) is fixed in this repository: correct the pages on the
+               version's branch and publish again.
+            3. Anything else (tests, sam build, sam deploy, the smoke test) is fixed in $REPO. Once the fix is
+               on its main branch it redeploys by itself; or run the workflow by hand:
+                 gh workflow run deploy.yml -R $REPO
+          EOF
+              exit 1
+              ;;
+          esac

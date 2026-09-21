@@ -4,7 +4,8 @@ Source of https://openvidu.io — MkDocs Material (pinned 9.7.7) + mike, publish
 Two versioned products: **OpenVidu Meet** (`docs/meet/`, served at `/{version}/meet/`) and
 **OpenVidu Platform** (`docs/docs/`, served at `/{version}/docs/`), plus non-versioned root pages
 (landing, pricing, support, blog, …). **Merging to `main` publishes nothing** — the live site only
-changes when the manual [Publish Web workflow](.github/workflows/publish-web.yaml) runs.
+changes when the manual [Publish Web workflow](.github/workflows/publish-web.yaml) runs, which
+then redeploys the docs MCP server (`OpenVidu/openvidu-docs-mcp`) and waits for it.
 
 Authoritative references — read the relevant one before working:
 

@@ -99,6 +99,13 @@ anywhere before that rolls the local branch back and leaves the remote untouched
 backup branch and no force-push recovery path to remember. The workflow runs `ovweb verify`
 afterwards to assert the published layout.
 
+**Publishing also redeploys the docs MCP server.** The `deploy-docs-mcp` job that follows the
+publish tells [`openvidu-docs-mcp`](https://github.com/OpenVidu/openvidu-docs-mcp) to rebuild its
+index from the live site, waits for that deploy and fails if it fails. The site is live either
+way: a red `deploy-docs-mcp` means agents still get the previous documentation, and the job's log
+names the failed step and the remedy (documentation problems are fixed here and republished;
+anything else in that repository). `dry_run` skips it.
+
 The release-day sequence (releases pages, Release blog post, dispatch, verification) is packaged
 in the `release-version` skill — see the [README](../README.md).
 
