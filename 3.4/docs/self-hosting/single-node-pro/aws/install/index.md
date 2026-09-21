@@ -80,7 +80,7 @@ In this section, you need to specify some properties needed for the OpenVidu Sin
 
 Parameters of this section look like this:
 
-Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](/account/).
+Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/).
 
 For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](https://openvidu.io/3.4/docs/self-hosting/production-ready/performance/index.md).
 

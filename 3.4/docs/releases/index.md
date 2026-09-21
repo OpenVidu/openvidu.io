@@ -263,7 +263,7 @@
   - WebHooks ([LiveKit reference](https://docs.livekit.io/intro/basics/rooms-participants-tracks/webhooks-events/)) supported against a local [OpenVidu Call](https://openvidu.io/3.4/docs/releases/openvidu-call/docs.md#run-openvidu-locally).
 - Production deployments have a better private IP discovery process when there are multiple valid private IPs in the same host. This will make more deployments work out-of-the-box without the need of manual intervention.
 - [OpenVidu PRO Evaluation Mode](https://openvidu.io/3.4/docs/self-hosting/local/#openvidu-pro) improved. Before, a maximum of 2 Rooms of 8 Participants each could be created. Now the upper limit of Participants still apply, but the number of Rooms is unlimited. For example, you can have 4 Rooms of 2 Participants each, or 1 Room of 8 Participants.
-- Minor bug fixes related to [OpenVidu Call](https://openvidu.io/3.4/docs/releases/openvidu-call/index.md).
+- Minor bug fixes related to [OpenVidu Call](https://openvidu.io/3.4/docs/releases/openvidu-call/).
 
 ### Known limitations
 

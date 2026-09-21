@@ -2,7 +2,7 @@
 
 > **Info**
 >
-> OpenVidu Elastic is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](/account/) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Elastic is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu Elastic deployment in Azure. Deployed services are the same as the [On Premises Elastic installation](https://openvidu.io/3.4/docs/self-hosting/elastic/on-premises/install/index.md) but they will be resources in Azure and you can automate the process with the Template Spec of ARM.
 
@@ -107,7 +107,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
 Parameters of this section look like this:
 
-Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](/account/).
+Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/).
 
 For the **RTC Engine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](https://openvidu.io/3.4/docs/self-hosting/production-ready/performance/index.md).
 

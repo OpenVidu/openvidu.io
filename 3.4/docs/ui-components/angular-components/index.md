@@ -82,7 +82,7 @@ Each component in **Angular Components** emits a set of events that you can list
 
 These events are designed to provide you with the flexibility to customize your videoconferencing application according to your requirements.
 
-You can check out all component events in the [Angular Components API Reference](https://openvidu.io/3.4/docs/reference-docs/openvidu-components-angular/index.md).
+You can check out all component events in the [Angular Components API Reference](https://openvidu.io/3.4/docs/reference-docs/openvidu-components-angular/).
 
 ## Applications
 
@@ -90,4 +90,4 @@ A practical example showcases the potential of Angular Components is our product
 
 ## References
 
-- [Angular Components API Reference](https://openvidu.io/3.4/docs/reference-docs/openvidu-components-angular/index.md)
+- [Angular Components API Reference](https://openvidu.io/3.4/docs/reference-docs/openvidu-components-angular/)

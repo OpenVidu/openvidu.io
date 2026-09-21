@@ -197,7 +197,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.4.1`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **Self-signed certificates**
@@ -231,7 +231,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.4.1`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **With Domain Name**
@@ -269,7 +269,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.4.1`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **Self-signed certificates**
@@ -305,7 +305,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.4.1`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 
 **Custom certificates**
@@ -353,7 +353,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.4.1`.
 
 - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](/account/).
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/).
 - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
 - `--turn-owncert-private-key` and `--turn-owncert-public-key` are optional. You only need to pass them if you want to enable TURN with TLS.
 
