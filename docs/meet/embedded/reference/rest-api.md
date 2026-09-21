@@ -1,3 +1,8 @@
+---
+title: "OpenVidu Meet REST API reference"
+description: "Manage rooms and recordings from your backend with the OpenVidu Meet REST API, with API key authentication and ready-made code snippets."
+---
+
 ## Overview
 
 OpenVidu Meet provides a REST API for managing **rooms** and **recordings** programmatically from your application's backend. As a general rule, any action that is available in OpenVidu Meet UI for rooms and recordings can also be performed using the REST API.

@@ -2,6 +2,7 @@
 title: Rooms and meetings
 tags:
   - setupcustomgallery
+description: "Rooms and meetings in OpenVidu Meet: how a room hosts meetings, what a room link does, and how to create, configure and auto-delete rooms."
 ---
 
 ## Room vs meeting

@@ -1,5 +1,6 @@
 ---
 description: Frequently Asked Questions about installing, configuring and using OpenVidu.
+title: "OpenVidu installation FAQs"
 ---
 
 # Installation FAQs

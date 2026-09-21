@@ -1,5 +1,6 @@
 ---
 description: OpenVidu Angular Components simplify the creation of videoconferencing apps, offering customizable and powerful components for rapid development and easy maintenance.
+title: "OpenVidu Angular Components"
 ---
 
 # Angular Components

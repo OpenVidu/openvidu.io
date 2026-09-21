@@ -2,6 +2,7 @@
 title: Recordings
 tags:
   - setupcustomgallery
+description: "Record OpenVidu Meet meetings as a moderator, then view, share by link and manage the recordings of each room, with per-room recording settings."
 ---
 
 # Recordings

@@ -2,6 +2,7 @@
 title: Getting started with OpenVidu Meet
 tags:
   - setupcustomgallery
+description: "First steps with OpenVidu Meet: run it locally, log in, create a room, hold and record a meeting, and see how to embed Meet in your app."
 ---
 
 OpenVidu Meet is a fully fledged video call solution built on top of OpenVidu. You can use it out of the box, or you can embed it in your own application.

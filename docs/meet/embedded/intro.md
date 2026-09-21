@@ -2,6 +2,7 @@
 title: OpenVidu Meet Embedded
 tags:
   - setupcustomgallery
+description: "Add video calls to your own application with a single line of HTML, as a URL, an iframe or the OpenVidu Meet Web Component, plus a REST API and webhooks."
 ---
 
 With **OpenVidu Meet Embedded**, you can integrate the best video calling experience directly into your own application:

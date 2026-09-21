@@ -1,3 +1,8 @@
+---
+title: "Deploy OpenVidu Meet on a single server"
+description: "Production deployment of OpenVidu Meet on one Linux server: prerequisites, networking, the installer command and day-to-day administration."
+---
+
 !!! warning
     OpenVidu Meet is currently considered in **BETA**. There may be bugs and its APIs are subject to change.
 
