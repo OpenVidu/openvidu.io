@@ -1,5 +1,5 @@
 ---
-title: 3 ways to integrate video conferencing into your app
+title: 3 ways to integrate video conferencing into your app with OpenVidu
 draft: false
 date: 2026-09-22
 slug: integrate-video-conferencing-into-your-app
