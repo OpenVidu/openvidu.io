@@ -1,3 +1,8 @@
+---
+title: "OpenVidu Meet webhooks reference"
+description: "Receive meeting and recording events from OpenVidu Meet in your backend, and verify webhook signatures before acting on them."
+---
+
 # Webhooks
 
 OpenVidu Meet sends webhooks to inform about important events happening in a room. You can receive them in your application's backend and react accordingly with your own business logic.

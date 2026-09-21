@@ -2,6 +2,7 @@
 title: Users and permissions
 tags:
   - setupcustomgallery
+description: "Participant roles in an OpenVidu Meet room, how moderators change them during a meeting, and the administrator login that protects Meet."
 ---
 
 # Users and permissions

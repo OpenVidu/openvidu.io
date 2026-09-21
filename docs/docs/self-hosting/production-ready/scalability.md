@@ -1,5 +1,6 @@
 ---
 description: Scale effortlessly with OpenVidu's elastic deployments, handling small meetings to massive live streams, with autoscaling and high availability support.
+title: "OpenVidu scalability and autoscaling"
 ---
 
 # Scalability :material-chart-timeline-variant-shimmer:

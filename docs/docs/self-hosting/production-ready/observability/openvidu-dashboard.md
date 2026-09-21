@@ -1,5 +1,6 @@
 ---
 description: Access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses.
+title: "OpenVidu Dashboard: live room monitoring"
 ---
 
 # OpenVidu Dashboard
