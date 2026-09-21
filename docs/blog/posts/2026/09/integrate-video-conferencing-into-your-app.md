@@ -1,9 +1,11 @@
 ---
-title: "3 ways to integrate video conferencing into your app"
+title: 3 ways to integrate video conferencing into your app
 draft: false
-date: 2026-09-04
+date: 2026-09-22
 slug: integrate-video-conferencing-into-your-app
-description: "Three ways to add video conferencing to your app with OpenVidu, from embedding OpenVidu Meet to Angular Components and low-level SDKs, with code for each."
+description: >-
+  Three ways to add video conferencing to your app with OpenVidu, from embedding
+  OpenVidu Meet to Angular Components and low-level SDKs, with code for each.
 cover_image: poster-light.webp
 categories:
   - OpenVidu Meet
@@ -22,8 +24,8 @@ authors:
 
 # 3 ways to integrate video conferencing into your app with OpenVidu
 
-![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/YYYY/MM/integrate-video-conferencing-into-your-app/poster-light.webp#only-light "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
-![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/YYYY/MM/integrate-video-conferencing-into-your-app/poster-dark.webp#only-dark "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
+![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/2026/09/integrate-video-conferencing-into-your-app/poster-light.webp#only-light "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
+![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/2026/09/integrate-video-conferencing-into-your-app/poster-dark.webp#only-dark "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
 
 Most products reach a point where a chat window or a phone number is no longer enough, and people need to see each other. Sooner or later the ticket lands on your board: *"Add video calls to the app"*. The WebRTC part is a solved problem. The question that actually shapes the project is a different one: **how much of the meeting do you want to own?** The buttons, the layout, the media tracks themselves? Or just a `<div>` where a meeting shows up?
 
