@@ -1,8 +1,11 @@
-"""The pin-agreement check: every place naming a build input must name the same version."""
+"""Two preflight checks: the pins, where every place naming a build input must name the same
+version, and the version branches' copies of the files MkDocs loads by path from the checkout.
+"""
 
 from __future__ import annotations
 
-from ovweb.doctor import PINNED_DISTRIBUTIONS, check_pins
+from ovweb.doctor import PINNED_DISTRIBUTIONS, check_branch_files, check_pins
+from ovweb.gitrepo import GitError
 
 PYPROJECT = """
 build = [
@@ -161,3 +164,121 @@ def test_site_url_agreement_reads_mkdocs_yml_from_the_checkout(tmp_path, config)
 
     missing = _check_site_url_agreement(config, repo_root=tmp_path / "elsewhere")
     assert missing is not None and not missing.ok
+
+
+# -- the version branches' copies of the build inputs ---------------------------------------
+
+
+HOOK = "publish-tool/pygments_fence_title_hook.py"
+PREPROCESS = "publish-tool/llmstxt_preprocess.py"
+
+
+class BranchRepo:
+    """Version branches holding whatever `files` says ({branch: {path: text}}), read offline."""
+
+    remote = "origin"
+
+    def __init__(self, files):
+        self.files = files
+
+    def local_branches(self):
+        return [*self.files, "main"]
+
+    def read(self, *args):
+        raise GitError("offline")
+
+    def show(self, ref, path):
+        branch = ref.removeprefix("origin/")
+        try:
+            return self.files[branch][path]
+        except KeyError:
+            raise GitError(f"{ref}:{path} does not exist") from None
+
+
+def checkout(root, *, hook="hook v2", preprocess="preprocess v2"):
+    (root / "publish-tool").mkdir(exist_ok=True)
+    (root / HOOK).write_text(hook, encoding="utf-8")
+    (root / PREPROCESS).write_text(preprocess, encoding="utf-8")
+    return root
+
+
+def by_file(checks):
+    return {check.detail.split(" ")[0]: check for check in checks}
+
+
+def test_matching_copies_pass_and_name_the_branches_compared(tmp_path):
+    repo = BranchRepo(
+        {
+            "3.8": {HOOK: "stale", PREPROCESS: "stale"},
+            "3.7": {HOOK: "hook v2", PREPROCESS: "preprocess v2"},
+            "3.4": {HOOK: "hook v2", PREPROCESS: "preprocess v2"},
+            "3.0": {HOOK: "hook v2"},
+        }
+    )
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+
+    assert result[HOOK].ok and result[HOOK].detail.endswith("3.7, 3.4, 3.0")
+    assert result[PREPROCESS].ok and result[PREPROCESS].detail.endswith("3.7, 3.4")
+
+
+def test_the_newest_version_branch_is_not_compared(tmp_path):
+    """`publish latest` rebases it onto main, so its copy is replaced on every publish."""
+    repo = BranchRepo(
+        {"3.8": {HOOK: "stale"}, "3.7": {HOOK: "hook v2", PREPROCESS: "preprocess v2"}}
+    )
+
+    assert all(check.ok for check in check_branch_files(repo, checkout(tmp_path)))
+
+
+def test_a_branch_whose_copy_differs_fails_that_file_only(tmp_path):
+    repo = BranchRepo(
+        {
+            "3.8": {},
+            "3.5": {HOOK: "hook v1", PREPROCESS: "preprocess v2"},
+            "3.4": {HOOK: "hook v2", PREPROCESS: "preprocess v2"},
+        }
+    )
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+
+    assert not result[HOOK].ok
+    assert "differs on 3.5" in result[HOOK].detail
+    assert result[HOOK].fatal
+    assert result[PREPROCESS].ok
+
+
+def test_a_branch_missing_the_file_fails_it(tmp_path):
+    repo = BranchRepo(
+        {"3.8": {}, "3.6": {HOOK: "hook v2"}, "3.5": {HOOK: "hook v2", PREPROCESS: "x"}}
+    )
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+
+    assert not result[PREPROCESS].ok
+    assert "differs on 3.5" in result[PREPROCESS].detail
+    assert "missing on 3.6" in result[PREPROCESS].detail
+
+
+def test_branches_older_than_a_file_are_not_asked_for_it(tmp_path):
+    """3.0–3.3 have no llmstxt plugin, so the preprocess is not theirs to carry."""
+    repo = BranchRepo({"3.8": {}, "3.3": {HOOK: "hook v2"}, "3.0": {HOOK: "hook v2"}})
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+
+    assert result[HOOK].ok
+    assert result[PREPROCESS].ok and not result[PREPROCESS].fatal
+
+
+def test_a_file_missing_from_the_checkout_is_fatal(tmp_path):
+    repo = BranchRepo({"3.8": {}, "3.7": {HOOK: "hook v2"}})
+
+    result = by_file(check_branch_files(repo, tmp_path))
+
+    assert not result[HOOK].ok and "missing from this checkout" in result[HOOK].detail
+
+
+def test_no_past_version_branch_is_not_an_error(tmp_path):
+    (check,) = check_branch_files(BranchRepo({"3.8": {}}), checkout(tmp_path))
+
+    assert check.ok and not check.fatal

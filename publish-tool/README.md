@@ -132,7 +132,7 @@ ovweb redirects render|check|apply
 ovweb lint [PATHS...] [--site DIR] [--against REF]   Authoring conventions the strict build cannot see
 ovweb verify               Assert the invariants of a published tree
 ovweb versions list        What is published, and which version branches exist
-ovweb doctor [--pins]      Dependencies, pins, configuration and git state
+ovweb doctor [--pins]      Dependencies, pins, configuration, git state, the branches' hook copies
 ```
 
 Useful flags. `--dry-run`, `--verbose`/`-v`, `--json`, `--color`/`--no-color`, `--repo`, `--layout`

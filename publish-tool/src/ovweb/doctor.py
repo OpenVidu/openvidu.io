@@ -10,11 +10,12 @@ from importlib import metadata
 from pathlib import Path
 
 from .config import ConfigError, SiteConfig, load_site_config
-from .discovery import known_versions
+from .discovery import known_versions, version_branches
 from .expand import mirror_rule
 from .gitrepo import Git, GitError
 from .mikewrap import Mike
 from .redirects import RedirectError, resolve_file_redirects
+from .versions import parse
 
 #: Every distribution that is a build input, pinned from the freeze of a known-good publish
 #: run. Each is named both in pyproject.toml and in the Dockerfiles (mkdocs-material as the
@@ -30,6 +31,15 @@ PINNED_DISTRIBUTIONS = (
     "pygments",
     # Pulled in by mkdocs-rss-plugin; pinned because it has had security releases of its own.
     "gitpython",
+)
+
+#: Build inputs every past version branch carries as a verbatim copy of this checkout's, each with
+#: the first version whose branch needs it. MkDocs loads them by path from the checked-out branch,
+#: so a past version is built with its branch's copy, never main's.
+BRANCH_FILES = (
+    ("publish-tool/pygments_fence_title_hook.py", "3.0"),
+    # The llmstxt plugin, and with it the export preprocess, arrived in 3.4.
+    ("publish-tool/llmstxt_preprocess.py", "3.4"),
 )
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
@@ -68,6 +78,7 @@ def run_checks(
     checks += _check_config(repo, repo_root=repo_root)
     if repo is not None:
         checks += _check_git(repo)
+        checks += check_branch_files(repo, repo_root)
     return checks
 
 
@@ -135,6 +146,75 @@ def check_pins(
         rendered = ", ".join(f"{where}={version}" for where, version in sorted(found.items()))
         checks.append(Check("pins", False, f"{distribution} versions disagree: {rendered}"))
     return checks
+
+
+def check_branch_files(
+    repo: Git, repo_root: Path, *, files: tuple[tuple[str, str], ...] = BRANCH_FILES
+) -> list[Check]:
+    """Every past version branch must hold the same copy of each file as this checkout.
+
+    The newest version branch is skipped: `publish latest` builds it from `main` and rebases it
+    onto `main`, so its copy is replaced on every publish. Every older branch is built from itself.
+    """
+    past = version_branches(repo)[1:]
+    if not past:
+        return [Check("branch-files", True, "no past version branches to compare", fatal=False)]
+
+    checks = []
+    for path, since in files:
+        local = repo_root / path
+        if not local.is_file():
+            checks.append(Check("branch-files", False, f"{path} is missing from this checkout"))
+            continue
+        expected = local.read_text(encoding="utf-8")
+
+        same, differs, missing = [], [], []
+        for version in past:
+            if parse(version) < parse(since):
+                continue
+            text = _branch_file(repo, version, path)
+            if text is None:
+                missing.append(version)
+            elif text == expected:
+                same.append(version)
+            else:
+                differs.append(version)
+
+        if differs or missing:
+            problems = [f"differs on {', '.join(differs)}"] if differs else []
+            problems += [f"missing on {', '.join(missing)}"] if missing else []
+            checks.append(
+                Check(
+                    "branch-files",
+                    False,
+                    f"{path} {'; '.join(problems)} — copy this checkout's file onto each branch "
+                    "(contributing/versioning.md, Branches)",
+                )
+            )
+        elif same:
+            checks.append(
+                Check("branch-files", True, f"{path} matches this checkout on {', '.join(same)}")
+            )
+        else:
+            checks.append(
+                Check(
+                    "branch-files",
+                    True,
+                    f"{path} is needed from {since}; no past branch that new to compare",
+                    fatal=False,
+                )
+            )
+    return checks
+
+
+def _branch_file(repo: Git, version: str, path: str) -> str | None:
+    """The file as the branch holds it: the remote-tracking ref when fetched, else the local one."""
+    for ref in (f"{repo.remote}/{version}", version):
+        try:
+            return repo.show(ref, path)
+        except GitError:
+            continue
+    return None
 
 
 def _distribution_version(name: str) -> str | None:

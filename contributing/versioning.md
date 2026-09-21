@@ -14,6 +14,21 @@ reference for what a publish does step by step and how redirects are configured.
 - `main` — fixes to published content and non-versioned pages.
 - `X.Y` — past versions; fixes to an old minor are committed there, never to `main`.
 
+### What every version branch carries
+
+Two build inputs live on every past version branch as **verbatim copies of `main`'s**: MkDocs
+loads them by path from the checked-out branch, and a past version is built from its own branch.
+
+| File | Branches | Declared in `mkdocs.yml` |
+| --- | --- | --- |
+| `publish-tool/pygments_fence_title_hook.py` | all | `hooks:` |
+| `publish-tool/llmstxt_preprocess.py` | from 3.4 (where the `llmstxt` plugin arrived) | `plugins: llmstxt: preprocess:`, with `autoclean: false` |
+
+Edit either file on `main` only, then copy it byte for byte onto each branch — the current minor's
+branch is rebased onto `main` by `publish latest`, so it needs no copy. `ovweb doctor` compares
+every past branch's copy with the checkout's and fails on a difference or a missing file. The same
+two files are also mirrored in `livekit-tutorials-docs/hooks/`, checked by its `tools/sync-check.py`.
+
 ## Minor-grouped versioning (`X.Y`)
 
 Documentation versions are grouped by **minor** release and named `X.Y` (e.g. `3.8`): one git

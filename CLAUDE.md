@@ -75,6 +75,11 @@ nearly every page.
   [`contributing/authoring.md`](contributing/authoring.md).
 - The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
   `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
+- `publish-tool/pygments_fence_title_hook.py` and `publish-tool/llmstxt_preprocess.py` live on
+  every past `X.Y` branch (the preprocess from 3.4) and in `livekit-tutorials-docs/hooks/` as
+  verbatim copies of `main`'s — MkDocs loads them by path from the checked-out branch. Edit on
+  `main`, re-copy; `ovweb doctor` reports a copy that differs
+  ([`contributing/versioning.md`](contributing/versioning.md)).
 
 ## Versioning
 
