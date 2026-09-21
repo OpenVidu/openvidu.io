@@ -217,6 +217,10 @@ theme:
   favicon: assets/images/logo.png
   logo: assets/images/openvidu_globe_bg_transp_cropped.png
 
+# Restores the linked code-block filenames Pygments escapes: a verbatim copy of main's hook.
+hooks:
+  - publish-tool/pygments_fence_title_hook.py
+
 plugins:
   - search
   - glightbox:
