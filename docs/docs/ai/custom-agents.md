@@ -1,3 +1,8 @@
+---
+title: "Build a custom AI agent for OpenVidu"
+description: "Write, dockerize and deploy your own AI agent into OpenVidu rooms with the LiveKit Agents framework, in Python or Node."
+---
+
 # Custom agents
 
 OpenVidu provides a [set of built-in agents](./openvidu-agents/overview.md#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/agents/){target="\_blank"}.

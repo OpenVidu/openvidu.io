@@ -1,5 +1,6 @@
 ---
 description: Monitor OpenVidu Server metrics and cluster logs with Grafana's powerful dashboards, integrating Prometheus, Mimir and Loki for complete observability.
+title: "Grafana stack for OpenVidu metrics and logs"
 ---
 
 # Grafana Stack

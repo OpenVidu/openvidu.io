@@ -1,3 +1,8 @@
+---
+title: "OpenVidu agents overview"
+description: "How OpenVidu agents work: pre-configured AI modules that run as Docker containers on your own nodes and are enabled declaratively with a YAML file."
+---
+
 # OpenVidu agents: overview
 
 ## Basic concepts

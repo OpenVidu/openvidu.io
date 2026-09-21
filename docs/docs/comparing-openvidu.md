@@ -2,6 +2,7 @@
 description: Compare OpenVidu with LiveKit, SaaS solutions, SFUs and more to understand its advantages, unique features and benefits over other video conferencing tools.
 tags:
     - setupcustomgallery
+title: "OpenVidu vs LiveKit, Jitsi, SaaS and SFUs"
 ---
 
 This section compares OpenVidu to other videoconference/streaming solutions, to better understand what it is, what it is not, and what advantages and disadvantages it may have over them.

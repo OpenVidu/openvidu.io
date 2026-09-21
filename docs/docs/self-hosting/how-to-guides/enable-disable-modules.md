@@ -1,5 +1,6 @@
 ---
 description: Learn how to enable or disable OpenVidu modules to customize your deployment configuration.
+title: "Enable and disable OpenVidu modules"
 ---
 
 # Enable and disable modules

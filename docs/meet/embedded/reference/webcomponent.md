@@ -1,3 +1,8 @@
+---
+title: "OpenVidu Meet Web Component reference"
+description: "Embed the OpenVidu Meet interface with the openvidu-meet Web Component, and drive it from your app with its attributes, commands and events."
+---
+
 # Web Component
 
 OpenVidu Meet's Web Component allows embedding the refined, well-crafted OpenVidu Meet interface directly into your application. It offers **attributes** to customize the videoconferencing experience, exposes **commands** for programmatic control, and emits **events** for integration with your own application's logic.

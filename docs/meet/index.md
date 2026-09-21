@@ -5,6 +5,7 @@ tags:
   - setupcardglow
   - setupcarousel
   - setupcustomgallery
+description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your servers in minutes, record meetings and embed video calls in any app."
 ---
 
 ## Intro { .hide-without-display }

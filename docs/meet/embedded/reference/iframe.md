@@ -1,3 +1,8 @@
+---
+title: "Embed OpenVidu Meet in an iframe"
+description: "Embed OpenVidu Meet with a standard HTML iframe, including the permissions the browser needs for camera, microphone and screen sharing."
+---
+
 # Iframe
 
 Embed OpenVidu Meet directly into your application using a traditional HTML iframe. This approach is perfect for applications that cannot use [OpenVidu Meet Web Component](./webcomponent.md) or need a simple integration method.
