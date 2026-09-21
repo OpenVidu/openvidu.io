@@ -38,7 +38,8 @@ PINNED_DISTRIBUTIONS = (
 #: so a past version is built with its branch's copy, never main's.
 BRANCH_FILES = (
     ("publish-tool/pygments_fence_title_hook.py", "3.0"),
-    # The llmstxt plugin, and with it the export preprocess, arrived in 3.4.
+    # The llmstxt plugin, and with it the two files that shape its output, arrived in 3.4.
+    ("publish-tool/llmstxt_entries_hook.py", "3.4"),
     ("publish-tool/llmstxt_preprocess.py", "3.4"),
 )
 

@@ -16,7 +16,7 @@
    ```
 
    Both keys are **required on every page** — the build fails on any llmstxt-selected page
-   missing either ([`publish-tool/mkdocs_hook.py`](../publish-tool/mkdocs_hook.py)), and the
+   missing either ([`publish-tool/llmstxt_entries_hook.py`](../publish-tool/llmstxt_entries_hook.py)), and the
    globs select nearly every page. Both must be **unique site-wide**, and both are double-quoted.
    `ovweb lint` enforces the length budgets and the uniqueness — see [checks.md](checks.md).
 
@@ -34,7 +34,7 @@
      new folder.
 
      When you do add one, add **the path only.**
-     [`publish-tool/mkdocs_hook.py`](../publish-tool/mkdocs_hook.py) fills each entry in from the
+     [`publish-tool/llmstxt_entries_hook.py`](../publish-tool/llmstxt_entries_hook.py) fills each entry in from the
      page's own frontmatter — the `title` as the link text and the `description` after it — so
      both are written once; a listed page missing either fails the build, and a page in no
      section at all is missing from `llms.txt` *and* linked as a dead `.md`.

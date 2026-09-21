@@ -54,7 +54,7 @@ rationale: [`contributing/link-rules.md`](contributing/link-rules.md).
 
 Every page requires `title` (≤57 chars — Material appends `" - OpenVidu"`) and `description`
 (100–160 chars, ending in a full stop), both unique site-wide. The build fails on any
-llmstxt-selected page missing either (`publish-tool/mkdocs_hook.py`), and the globs select
+llmstxt-selected page missing either (`publish-tool/llmstxt_entries_hook.py`), and the globs select
 nearly every page.
 
 ## Structural invariants
@@ -75,9 +75,10 @@ nearly every page.
   [`contributing/authoring.md`](contributing/authoring.md).
 - The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
   `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
-- `publish-tool/pygments_fence_title_hook.py` and `publish-tool/llmstxt_preprocess.py` live on
-  every past `X.Y` branch (the preprocess from 3.4) and in `livekit-tutorials-docs/hooks/` as
-  verbatim copies of `main`'s — MkDocs loads them by path from the checked-out branch. Edit on
+- `publish-tool/pygments_fence_title_hook.py`, `publish-tool/llmstxt_entries_hook.py` and
+  `publish-tool/llmstxt_preprocess.py` live on every past `X.Y` branch (the llmstxt pair from
+  3.4) and in `livekit-tutorials-docs/hooks/` as verbatim copies of `main`'s — MkDocs loads them
+  by path from the checked-out branch. Edit on
   `main`, re-copy; `ovweb doctor` reports a copy that differs
   ([`contributing/versioning.md`](contributing/versioning.md)).
 

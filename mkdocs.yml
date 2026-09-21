@@ -266,16 +266,19 @@ not_in_nav: |
   /conditions/
   /support/thanks.md
 
-# Sitemap <lastmod> from git, and every page's own title and description for llmstxt; then the
-# linked code-block filenames Pygments escapes (every version branch carries a copy of that hook).
+# Sitemap <lastmod> from git and the glightbox fixes; then every page's own title and description
+# for llmstxt, and the linked code-block filenames Pygments escapes (the version branches carry
+# copies of those two).
 hooks:
   - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_entries_hook.py
   - publish-tool/pygments_fence_title_hook.py
 
 watch:
   - shared
   - overrides
   - publish-tool/mkdocs_hook.py
+  - publish-tool/llmstxt_entries_hook.py
   - publish-tool/pygments_fence_title_hook.py
   - publish-tool/llmstxt_preprocess.py
   - publish-tool/src/ovweb
@@ -410,7 +413,7 @@ plugins:
       # admonitions as blockquotes and restores the code blocks' linked filenames.
       autoclean: false
       preprocess: publish-tool/llmstxt_preprocess.py
-      # Paths only: mkdocs_hook.py fills in each page's own `title` and `description`, and a
+      # Paths only: llmstxt_entries_hook.py fills in each page's own `title` and `description`, and a
       # listed page missing either fails the build. Matching is fnmatch, where `*` crosses `/`:
       # `meet/features/*.md` takes that whole subtree, so a folder whose children belong to
       # different sections is listed page by page, and a literal segment fences a glob in.

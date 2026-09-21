@@ -174,6 +174,8 @@ def test_site_url_agreement_reads_mkdocs_yml_from_the_checkout(tmp_path, config)
 
 HOOK = "publish-tool/pygments_fence_title_hook.py"
 PREPROCESS = "publish-tool/llmstxt_preprocess.py"
+#: Two of the production entries, so the tests describe the mechanism rather than the list.
+FILES = ((HOOK, "3.0"), (PREPROCESS, "3.4"))
 
 
 def blob(text: str) -> str:
@@ -228,7 +230,7 @@ def test_matching_copies_pass_and_name_the_branches_compared(tmp_path):
         }
     )
 
-    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
 
     assert result[HOOK].ok and result[HOOK].detail.endswith("3.7, 3.4, 3.0")
     assert result[PREPROCESS].ok and result[PREPROCESS].detail.endswith("3.7, 3.4")
@@ -240,7 +242,7 @@ def test_the_newest_version_branch_is_not_compared(tmp_path):
         {"3.8": {HOOK: "stale"}, "3.7": {HOOK: "hook v2", PREPROCESS: "preprocess v2"}}
     )
 
-    assert all(check.ok for check in check_branch_files(repo, checkout(tmp_path)))
+    assert all(check.ok for check in check_branch_files(repo, checkout(tmp_path), files=FILES))
 
 
 def test_a_branch_whose_copy_differs_fails_that_file_only(tmp_path):
@@ -252,7 +254,7 @@ def test_a_branch_whose_copy_differs_fails_that_file_only(tmp_path):
         }
     )
 
-    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
 
     assert not result[HOOK].ok
     assert "differs on 3.5" in result[HOOK].detail
@@ -265,7 +267,7 @@ def test_a_branch_missing_the_file_fails_it(tmp_path):
         {"3.8": {}, "3.6": {HOOK: "hook v2"}, "3.5": {HOOK: "hook v2", PREPROCESS: "x"}}
     )
 
-    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
 
     assert not result[PREPROCESS].ok
     assert "differs on 3.5" in result[PREPROCESS].detail
@@ -276,7 +278,7 @@ def test_branches_older_than_a_file_are_not_asked_for_it(tmp_path):
     """3.0–3.3 have no llmstxt plugin, so the preprocess is not theirs to carry."""
     repo = BranchRepo({"3.8": {}, "3.3": {HOOK: "hook v2"}, "3.0": {HOOK: "hook v2"}})
 
-    result = by_file(check_branch_files(repo, checkout(tmp_path)))
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
 
     assert result[HOOK].ok
     assert result[PREPROCESS].ok and not result[PREPROCESS].fatal
@@ -285,12 +287,12 @@ def test_branches_older_than_a_file_are_not_asked_for_it(tmp_path):
 def test_a_file_missing_from_the_checkout_is_fatal(tmp_path):
     repo = BranchRepo({"3.8": {}, "3.7": {HOOK: "hook v2"}})
 
-    result = by_file(check_branch_files(repo, tmp_path))
+    result = by_file(check_branch_files(repo, tmp_path, files=FILES))
 
     assert not result[HOOK].ok and "missing from this checkout" in result[HOOK].detail
 
 
 def test_no_past_version_branch_is_not_an_error(tmp_path):
-    (check,) = check_branch_files(BranchRepo({"3.8": {}}), checkout(tmp_path))
+    (check,) = check_branch_files(BranchRepo({"3.8": {}}), checkout(tmp_path), files=FILES)
 
     assert check.ok and not check.fatal

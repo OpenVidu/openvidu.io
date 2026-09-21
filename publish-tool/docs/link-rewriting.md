@@ -38,8 +38,9 @@ Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice
 `index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports, and together they
 are the site's AI-facing channel.
 
-Neither half of an `llms.txt` entry comes from `mkdocs.yml`. The `on_page_content` half of
-[`mkdocs_hook.py`](../mkdocs_hook.py) replaces both with the page's own frontmatter:
+Neither half of an `llms.txt` entry comes from `mkdocs.yml`.
+[`llmstxt_entries_hook.py`](../llmstxt_entries_hook.py) replaces both with the page's own
+frontmatter:
 
 * the **description**, which the plugin would otherwise take from the value beside the path in
   `mkdocs.yml`. That is what lets a `sections` entry be a glob — the plugin's own behaviour is to

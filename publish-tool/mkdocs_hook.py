@@ -1,10 +1,8 @@
-"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Three jobs:
+"""MkDocs hook, wired up through `hooks:` in mkdocs.yml. Two jobs:
 
 * `on_env` sets every page's `update_date`, so `sitemap.xml` carries a real per-page `<lastmod>`
   rather than the build date on every URL, and gives the blog views the plugin generates a title
   and description, which they have no source file to carry.
-* `on_page_content` gives the `llmstxt` plugin each page's own `title` and `description`
-  frontmatter, so its llms.txt entry is the name and the sentence written on the page.
 * `on_post_page` moves the glightbox library script out of `<head>` to the end of `<body>` and
   turns the instance the plugin builds into plain configuration (`glightboxOptions`) for
   `javascripts/glightbox-gallery.js`.
@@ -224,22 +222,6 @@ def on_env(env, config, files, **kwargs):
     return env
 
 
-def _one_line(value) -> str:
-    """A frontmatter value as a single line, so it cannot break llms.txt's one-entry-per-line."""
-    return " ".join(str(value).split())
-
-
-def _required(meta, key: str, src_uri: str) -> str:
-    value = meta.get(key)
-    if not value or not str(value).strip():
-        raise PluginError(
-            f"'{src_uri}' is listed in the llmstxt sections but has no `{key}` in its "
-            f"frontmatter. Every exported page needs a `title` and a `description`: together "
-            f"they are the line that tells an assistant whether to read the page."
-        )
-    return _one_line(value)
-
-
 _GLIGHTBOX_JS = re.compile(r'<script src="([^"]*glightbox\.min\.js)"></script>')
 _GLIGHTBOX_INIT = '<script id="init-glightbox">'
 _GLIGHTBOX_INSTANCE = re.compile(
@@ -290,64 +272,3 @@ def _hand_the_glightbox_config_over(output: str) -> str:
             "upgrade and update the pattern here."
         )
     return updated
-
-
-def on_page_content(html, page, config, **kwargs):
-    """Use the page's own `title` and `description` frontmatter for its llms.txt entry.
-
-    Both halves stop llms.txt taking its text from somewhere other than the page:
-
-    * **The description** would be the value written beside the path in mkdocs.yml, maintaining the
-      same sentence twice — and a glob entry can only carry *one* description for every page it
-      matches, so every page a glob covers would claim to be the same page.
-    * **The title** would be `page.title`, which MkDocs resolves as the *nav label* first, falling
-      back to the frontmatter `title` and then the first H1. Most of this site's nav entries are
-      labelled, so entries rendered as `[Install]`, `[Overview]` or `[Releases]` — clear beside
-      their parent in a sidebar, useless in a flat list.
-
-    A hook rather than a change to `plugin.config.sections` in `on_config`, because by the time
-    pages are rendered the plugin has expanded its globs, and `page.meta` is the frontmatter as
-    MkDocs parsed it, including anything the `meta` plugin injected from a directory `.meta.yml`.
-
-    Ordering is guaranteed: `hooks` is validated after `plugins` and appended to the same
-    collection, so a hook's handler for an event always runs after the plugins'. That is what lets
-    this overwrite `_md_pages`, which the plugin fills in during its own `on_page_content`.
-    """
-    plugin = config["plugins"].get("llmstxt")
-    if plugin is None:
-        return None
-
-    # Both are private, and both are read in the plugin's `on_post_build`:
-    #   `_sections`  {section title: {src_uri: description}}, built in its `on_files`
-    #   `_md_pages`  {src_uri: _MDPageInfo(title, path_md, md_url, content)}, built in its
-    #                `on_page_content`
-    # Their shape is asserted rather than skipped quietly, so a plugin upgrade that renames either
-    # fails the build instead of publishing an llms.txt full of nav labels and no descriptions.
-    sections = getattr(plugin, "_sections", None)
-    exported = getattr(plugin, "_md_pages", None)
-    if not isinstance(sections, dict) or not isinstance(exported, dict):
-        raise PluginError(
-            "mkdocs-llmstxt no longer exposes `_sections` and `_md_pages`, so llms.txt entries "
-            "cannot be taken from the pages. Update publish-tool/mkdocs_hook.py to the new API."
-        )
-
-    src_uri = page.file.src_uri
-    listed = [pages for pages in sections.values() if src_uri in pages]
-    if not listed:
-        return None
-
-    meta = page.meta or {}
-    title = _required(meta, "title", src_uri)
-    description = _required(meta, "description", src_uri)
-
-    for pages in listed:
-        pages[src_uri] = description
-
-    info = exported.get(src_uri)
-    if info is None:  # pragma: no cover - the plugin records every page it selected
-        raise PluginError(
-            f"mkdocs-llmstxt selected '{src_uri}' but did not record it, so its llms.txt title "
-            "would keep the nav label. Update publish-tool/mkdocs_hook.py to the new API."
-        )
-    exported[src_uri] = info._replace(title=title)
-    return None

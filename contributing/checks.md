@@ -31,7 +31,8 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
   refuses it — lint catches it at PR time instead).
 - **SEO budgets** (warn): `title` over 57 characters (70 for posts), `description` over 160 or
   not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
-  `mkdocs_hook.py` — a missing field must kill CI, but a long one must not kill `mkdocs serve`.
+  `llmstxt_entries_hook.py` — a missing field must kill CI, but a long one must not kill
+  `mkdocs serve`.
 - **Page composition**: `!!!warning`-without-space admonitions; the `page_features:` contract
   (a page whose content — snippets included — carries `feature-cards`, `splide`, `lazy-video`,
   `lead-form` or `data-sal` markup must list the matching feature key — `setupcardglow`,
