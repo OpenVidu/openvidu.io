@@ -77,7 +77,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
 | **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_AZURE_SUBCONATAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
 | **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. |
 | **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |

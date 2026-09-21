@@ -13,7 +13,7 @@ Recordings are always associated with the [room](../rooms/overview.md) where the
 
 ### Key principles
 
-- Recordings are started during an **active meeting** by a participant with the `recordingControl` permissionfrom the app or the [REST API](management.md#start-stop-recording) or automatically, when the room's [recording trigger](configuration.md#recording-trigger) fires.
+- Recordings are started during an **active meeting** by a participant with the `recordingControl` permission, from the app or the [REST API](management.md#start-stop-recording), or automatically when the room's [recording trigger](configuration.md#recording-trigger) fires.
 - A room must have recording enabled in its [configuration](configuration.md#enabling-recordings) to allow starting recordings.
 - Recordings persist even after the meeting ends and can be managed independently.
 - Access to a recording (retrieve and delete) is governed by room member permissions.

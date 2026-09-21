@@ -443,5 +443,5 @@ This will show the player for the specified recording:
 
 Up to this point everything has been focused on the client-side integration of OpenVidu Meet. To integrate OpenVidu Meet into your application's backend you have available:
 
-- [REST API](reference/rest-api.md): manage rooms, room members, recordings, users and live meetings programmatically,
+- [REST API](reference/rest-api.md): manage rooms, room members, recordings, users and live meetings programmatically.
 - [Webhooks](./reference/webhooks.md): listen to meeting, participant and recording events happening in real time.
