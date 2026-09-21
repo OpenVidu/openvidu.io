@@ -2,7 +2,7 @@
 
 Two halves, and the split is the point. The first runs the module and the plugin's own `autoclean`
 over the same markup and requires **identical** output, which is the promise that turning
-`autoclean: false` changed nothing except on purpose. The second covers the four deviations, each of
+`autoclean: false` changed nothing except on purpose. The second covers the deviations, each of
 which the first half excludes.
 
 The README describes the differential build that proves the same thing over the real site.
@@ -21,7 +21,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from llmstxt_preprocess import preprocess
 
 #: Markup where the module must agree with `autoclean` exactly. Anything involving an image, a
-#: comparison icon, a tab label or a media link belongs in the deviation tests instead.
+#: comparison icon, a tab label, a media link or a code block's filename belongs in the deviation
+#: tests instead.
 AGREES = {
     "svg": '<p>text <svg viewBox="0 0 1 1"><path d="M0 0"></path></svg> more</p>',
     "permalink": '<h2>Title<a class="headerlink" href="#title" title="Permanent link">¶</a></h2>',
@@ -39,6 +40,9 @@ AGREES = {
     "plain-prose": "<p>Nothing to clean here at all.</p>",
     "table": "<table><thead><tr><th>A</th></tr></thead><tbody><tr><td>1</td></tr></tbody></table>",
     "code-fence": '<div class="highlight"><pre><code>docker run x</code></pre></div>',
+    "plain-filename": (
+        '<div class="highlight"><span class="filename">app.js</span><pre><code>x</code></pre></div>'
+    ),
     "anchor-with-text": '<p><a href="/pricing/">Pricing</a></p>',
     "nested-lists": "<ul><li>one<ul><li>two</li></ul></li></ul>",
 }
@@ -75,7 +79,7 @@ def test_an_image_without_alt_text_is_removed_exactly_as_autoclean_would():
         assert clean(markup, with_autoclean=False) == clean(markup, with_autoclean=True)
 
 
-# -- half two: the four deviations, each one deliberate ----------------------------------
+# -- half two: the deviations, each one deliberate ---------------------------------------
 
 
 def test_an_image_becomes_its_alt_text():
@@ -184,3 +188,50 @@ def test_more_labels_than_blocks_does_not_raise():
 def test_a_label_bar_with_no_content_sibling_does_not_raise():
     markup = '<div class="tabbed-labels"><label for="a">Orphan</label></div>'
     assert clean(markup, with_autoclean=False) == ""
+
+
+# -- a code block's linked filename -------------------------------------------------------
+
+#: What Pygments 2.20.0 makes of `title="<a href='…' target='_blank'>app.js</a>"`.
+ESCAPED_TITLE = (
+    "&lt;a href='https://github.com/x/y/blob/main/app.js#L1-L9' target='_blank'&gt;app.js&lt;/a&gt;"
+)
+RESTORED_TITLE = (
+    '<a href="https://github.com/x/y/blob/main/app.js#L1-L9" target="_blank">app.js</a>'
+)
+
+
+def test_an_escaped_filename_link_becomes_a_real_link():
+    markup = (
+        f'<div class="highlight"><span class="filename">{ESCAPED_TITLE}</span>'
+        "<pre><code>x</code></pre></div>"
+    )
+    cleaned = clean(markup, with_autoclean=False)
+    assert RESTORED_TITLE in cleaned
+    assert "&lt;a" not in cleaned
+    # autoclean leaves the text alone, and markdownify prints it as raw HTML.
+    assert "&lt;a" in clean(markup, with_autoclean=True)
+
+
+def test_a_filename_link_pygments_did_not_escape_is_left_alone():
+    markup = (
+        f'<div class="highlight"><span class="filename">{RESTORED_TITLE}</span>'
+        "<pre><code>x</code></pre></div>"
+    )
+    assert clean(markup, with_autoclean=False) == markup
+
+
+def test_a_line_numbered_block_keeps_its_filename_where_autoclean_drops_it():
+    markup = (
+        '<div class="language-js highlight"><table class="highlighttable"><tbody>'
+        '<tr><th class="filename" colspan="2">'
+        f'<span class="filename">{ESCAPED_TITLE}</span></th></tr>'
+        '<tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td>'
+        '<td class="code"><div class="highlight"><pre><code>x = 1\n</code></pre></div></td></tr>'
+        "</tbody></table></div>"
+    )
+    assert clean(markup, with_autoclean=False) == (
+        f'<div class="language-js highlight"><span class="filename">{RESTORED_TITLE}</span>'
+        "<pre>x = 1\n</pre></div>"
+    )
+    assert "app.js" not in clean(markup, with_autoclean=True)

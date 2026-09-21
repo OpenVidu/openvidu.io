@@ -33,8 +33,8 @@ because the plugin runs `autoclean` **before** the `preprocess` hook and `autocl
 `<img>` and `<svg>` — so by the time a hook sees the page, the alt text, the comparison-table icons
 and the tab labels are already gone.
 
-Everything `autoclean` did is reimplemented, and four things deliberately differ. They share one
-premise: an assistant cannot see an image or watch a video, so the asset URL is worthless to it
+Everything `autoclean` did is reimplemented, and the things below deliberately differ. They share
+one premise: an assistant cannot see an image or watch a video, so the asset URL is worthless to it
 while the words describing the asset are not.
 
 | Deviation | Why |
@@ -43,6 +43,7 @@ while the words describing the asset are not.
 | A comparison-table icon becomes `Yes` / `No` / `In progress` | The markup already says which — `class="twemoji compare-table-icon-yes"` — so the table exports as data with no change to the content. |
 | A link whose only content is an image or video becomes that asset's alt text, unlinked | `autoclean` removes an `<a>` around an `<img>` but not around a `<video>`, so markdownify writes an empty link. |
 | Tab labels are kept, as a bold line before each tab's block | Without them a tabbed block is a run of code blocks with nothing saying which is Linux, Windows or macOS — silently ambiguous rather than visibly missing. |
+| A code block keeps its linked filename | Pygments 2.20.0 escapes the `<a>` our fences put in `title=`, so the export would print raw HTML; `pygments_fence_title_hook.py` does the same for the page's HTML. A line-numbered block's filename header is kept too, where `autoclean` drops it with the numbers. |
 
 Two layers of checking, because "identical to `autoclean` except on purpose" is the whole promise:
 
@@ -51,7 +52,7 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
   every rule that is not a deviation, individually and all at once.
 - A **differential build** proves it over the real site. Build once as configured, once with
   `autoclean: true` and the `preprocess` line removed, then diff the exports: every difference must
-  be one of the four above.
+  be one of those above.
 
   ```bash
   mkdocs build --strict -d /tmp/withhook

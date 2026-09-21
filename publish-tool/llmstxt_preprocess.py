@@ -9,7 +9,7 @@ it is turned off — which `mkdocs.yml` does, because the plugin runs `autoclean
 
 `autoclean` deletes every `<img>` and `<svg>` outright, so by the time a hook sees the soup the
 alt text, comparison-table icons and tab labels are already gone. This module therefore
-reimplements everything `autoclean` does, and deviates in four places.
+reimplements everything `autoclean` does, and deviates in the places listed below.
 `tests/unit/test_llmstxt_preprocess.py` runs both over the same markup and requires identical
 output everywhere else.
 
@@ -30,6 +30,16 @@ URL is worthless to it while the words describing the asset are not.
 4. Tab labels are kept, as a bold line before each tab's content. Without them a tabbed block is a
    run of consecutive code blocks with nothing saying which is Linux, Windows or macOS — silently
    ambiguous rather than visibly missing.
+
+5. A code block keeps its linked filename. Pygments 2.20.0 escapes the `<a>` our fences put in
+   `title=`, so the soup holds it as text and the export would print raw HTML
+   (`pygments_fence_title_hook.py` restores the same link in the page's HTML, which the plugin has
+   converted by the time any hook runs). A line-numbered block's filename header is kept too,
+   where `autoclean` drops it along with the numbers.
+
+This file is copied verbatim onto the `X.Y` version branches from 3.4 and into
+livekit-tutorials-docs (`hooks/`): the plugin loads it by path from the checked-out branch. Edit it
+here, then re-copy it; `ovweb doctor` reports a copy that differs.
 """
 
 from __future__ import annotations
@@ -73,6 +83,7 @@ def preprocess(soup: BeautifulSoup, output: str) -> None:
     _replace_images_with_alt(soup)
     _remove_decoration(soup)
     _unwrap_mkdocstrings(soup)
+    _restore_fence_title_links(soup)
     _flatten_code_tables(soup)
 
 
@@ -145,6 +156,15 @@ def _alt_text(media: Tag) -> list[NavigableString]:
     return [NavigableString(alt)]
 
 
+def _restore_fence_title_links(soup: BeautifulSoup) -> None:
+    """`<span class="filename">&lt;a href='…'&gt;app.js&lt;/a&gt;</span>` -> a real `<a>`."""
+    for span in soup.find_all("span", attrs={"class": "filename"}):
+        text = span.get_text().strip()
+        if span.find("a") is None and text.startswith("<a ") and text.endswith("</a>"):
+            span.clear()
+            span.extend(list(BeautifulSoup(text, "html.parser").contents))
+
+
 # -- everything below reproduces the plugin's own `autoclean` -----------------------------
 
 
@@ -177,11 +197,11 @@ def _unwrap_mkdocstrings(soup: BeautifulSoup) -> None:
 
 
 def _flatten_code_tables(soup: BeautifulSoup) -> None:
-    """A line-numbered code block is a table; keep the code and drop the numbers."""
+    """A line-numbered code block is a table; keep the filename and the code, drop the numbers."""
     for table in soup.find_all("table", attrs={"class": "highlighttable"}):
         code = table.find("code")
         if code is None:  # pragma: no cover - not a shape MkDocs produces
             continue
-        table.replace_with(
-            BeautifulSoup(f"<pre>{html.escape(code.get_text())}</pre>", "html.parser")
-        )
+        pre = BeautifulSoup(f"<pre>{html.escape(code.get_text())}</pre>", "html.parser")
+        filename = table.find("span", attrs={"class": "filename"})
+        table.replace_with(*([filename.extract()] if filename else []), pre)
