@@ -1,0 +1,213 @@
+# OpenVidu
+
+> From ready-to-use video conferencing apps<br>to custom-made WebRTC solutions.<br>Self-hosted. Performant. Scalable. Fault tolerant. Observable.
+
+Self-hosted videoconference solution and SDK
+
+## OpenVidu Meet
+
+- [Getting started with OpenVidu Meet](https://openvidu.io/3.4/meet/getting-started/index.md): First steps with OpenVidu Meet: run it locally, log in, create a room, hold and record a meeting, and see how to embed Meet in your app.
+- [OpenVidu Meet](https://openvidu.io/3.4/meet/index.md): Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your servers in minutes, record meetings and embed video calls in any app.
+- [OpenVidu Meet release notes](https://openvidu.io/3.4/meet/releases/index.md): Release notes for every OpenVidu Meet version, with the changelog of new features, breaking changes and upgrade notes.
+
+## OpenVidu Meet features
+
+- [Recordings](https://openvidu.io/3.4/meet/features/recordings/index.md): Record OpenVidu Meet meetings as a moderator, then view, share by link and manage the recordings of each room, with per-room recording settings.
+- [Rooms and meetings](https://openvidu.io/3.4/meet/features/rooms-and-meetings/index.md): Rooms and meetings in OpenVidu Meet: how a room hosts meetings, what a room link does, and how to create, configure and auto-delete rooms.
+- [Users and permissions](https://openvidu.io/3.4/meet/features/users-and-permissions/index.md): Participant roles in an OpenVidu Meet room, how moderators change them during a meeting, and the administrator login that protects Meet.
+
+## OpenVidu Meet deployment
+
+- [Scalable and fault-tolerant Meet deployments](https://openvidu.io/3.4/meet/deployment/advanced/index.md): Compare OpenVidu Meet deployment types and choose Elastic or High Availability when a single server is no longer enough for your user load.
+- [Deploy OpenVidu Meet on a single server](https://openvidu.io/3.4/meet/deployment/basic/index.md): Production deployment of OpenVidu Meet on one Linux server: prerequisites, networking, the installer command and day-to-day administration.
+- [Try OpenVidu Meet locally](https://openvidu.io/3.4/meet/deployment/local/index.md): Deploy OpenVidu Meet on your local machine for development and testing purposes using Docker Desktop.
+- [OpenVidu Meet deployment overview](https://openvidu.io/3.4/meet/deployment/overview/index.md): OpenVidu offers a self-hosted, production-ready live-video platform with advanced capabilities, including performance, scalability, fault tolerance and observability.
+
+## OpenVidu Meet embedding
+
+- [OpenVidu Meet Embedded](https://openvidu.io/3.4/meet/embedded/intro/index.md): Add video calls to your own application with a single line of HTML, as a URL, an iframe or the OpenVidu Meet Web Component, plus a REST API and webhooks.
+- [Step by step guide](https://openvidu.io/3.4/meet/embedded/step-by-step-guide/index.md): Embed OpenVidu Meet in your web app step by step: run the server, create a room, choose an embedding option and deploy your application.
+
+## OpenVidu Meet embedding tutorials
+
+- [OpenVidu Meet Tutorials](https://openvidu.io/3.4/meet/embedded/tutorials/index.md): Learn how to build a video conferencing application by easily integrating OpenVidu Meet into your web application.
+- [OpenVidu Meet Direct Link Tutorial](https://openvidu.io/3.4/meet/embedded/tutorials/direct-link/index.md): Learn how to build a video conferencing application using Node.js and JavaScript by easily using a direct link to OpenVidu Meet.
+- [OpenVidu Meet Recordings Tutorial](https://openvidu.io/3.4/meet/embedded/tutorials/recordings/index.md): Learn how to manage recordings in a video conferencing application using Node.js and JavaScript by extending the advanced OpenVidu Meet WebComponent tutorial.
+- [OpenVidu Meet WebComponent Commands & Events Tutorial](https://openvidu.io/3.4/meet/embedded/tutorials/webcomponent-advanced/index.md): Learn how to build a video conferencing application using Node.js and JavaScript by integrating OpenVidu Meet WebComponent with advanced commands and event handling.
+- [OpenVidu Meet WebComponent Tutorial](https://openvidu.io/3.4/meet/embedded/tutorials/webcomponent/index.md): Learn how to build a video conferencing application using Node.js and JavaScript by easily integrating OpenVidu Meet WebComponent.
+- [OpenVidu Meet Webhooks Tutorial](https://openvidu.io/3.4/meet/embedded/tutorials/webhooks/index.md): Learn how to build a real-time video conferencing application using Node.js and JavaScript with live updates through webhooks and Server-Sent Events.
+
+## OpenVidu Meet API reference
+
+- [Embed OpenVidu Meet with a direct link](https://openvidu.io/3.4/meet/embedded/reference/direct-link/index.md): Send participants to an OpenVidu Meet room with a plain HTML link, and fetch room access URLs from your backend with the REST API.
+- [Embed OpenVidu Meet in an iframe](https://openvidu.io/3.4/meet/embedded/reference/iframe/index.md): Embed OpenVidu Meet with a standard HTML iframe, including the permissions the browser needs for camera, microphone and screen sharing.
+- [OpenVidu Meet REST API reference](https://openvidu.io/3.4/meet/embedded/reference/rest-api/index.md): Manage rooms and recordings from your backend with the OpenVidu Meet REST API, with API key authentication and ready-made code snippets.
+- [OpenVidu Meet Web Component reference](https://openvidu.io/3.4/meet/embedded/reference/webcomponent/index.md): Embed the OpenVidu Meet interface with the openvidu-meet Web Component, and drive it from your app with its attributes, commands and events.
+- [OpenVidu Meet webhooks reference](https://openvidu.io/3.4/meet/embedded/reference/webhooks/index.md): Receive meeting and recording events from OpenVidu Meet in your backend, and verify webhook signatures before acting on them.
+
+## OpenVidu Platform
+
+- [OpenVidu vs LiveKit, Jitsi, SaaS and SFUs](https://openvidu.io/3.4/docs/comparing-openvidu/index.md): Compare OpenVidu with LiveKit, SaaS solutions, SFUs and more to understand its advantages, unique features and benefits over other video conferencing tools.
+- [Developing your OpenVidu app](https://openvidu.io/3.4/docs/developing-your-openvidu-app/index.md): Learn how to build and deploy your OpenVidu application.
+- [How to develop your OpenVidu app](https://openvidu.io/3.4/docs/developing-your-openvidu-app/how-to/index.md): Explore common OpenVidu operations for developing your application, from managing rooms to publishing tracks.
+- [OpenVidu Platform](https://openvidu.io/3.4/docs/index.md): Learn how to get started with OpenVidu, a powerful platform for building real-time applications, including video conferencing, AI, live streaming and robotics.
+- [OpenVidu Platform release notes](https://openvidu.io/3.4/docs/releases/index.md): Explore the latest OpenVidu releases, including new features, updates and bug fixes for each version of the platform.
+- [OpenVidu Angular Components](https://openvidu.io/3.4/docs/ui-components/angular-components/index.md): OpenVidu Angular Components simplify the creation of videoconferencing apps, offering customizable and powerful components for rapid development and easy maintenance.
+- [React Components for OpenVidu apps](https://openvidu.io/3.4/docs/ui-components/react-components/index.md): LiveKit React Components simplify real-time audio/video app development with ready-to-use components, hooks and contexts for seamless integration.
+
+## OpenVidu Platform tutorials — application server
+
+- [Application Server Tutorials](https://openvidu.io/3.4/docs/tutorials/application-server/index.md): Learn how to build an application server that generates LiveKit tokens and receives webhook events.
+- [.NET Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/dotnet/index.md): Learn how to build a minimal .NET application server with ASP.NET to generate LiveKit tokens and receive webhook events using the LiveKit .NET SDK.
+- [Go Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/go/index.md): Learn how to build a minimal Go application server with Gin to generate LiveKit tokens and receive webhook events using the LiveKit Go SDK.
+- [Java Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/java/index.md): Learn how to build a minimal Java application server with Spring Boot to generate LiveKit tokens and receive webhook events using the LiveKit Kotlin SDK.
+- [Node.js Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/node/index.md): Learn how to build a minimal Node.js server with Express to generate LiveKit tokens and receive webhook events using the LiveKit JS SDK.
+- [PHP Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/php/index.md): Learn how to build a minimal PHP server to generate LiveKit tokens and receive webhook events using the LiveKit PHP SDK.
+- [Python Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/python/index.md): Learn how to build a minimal Python application server with Flask to generate LiveKit tokens and receive webhook events using the LiveKit Python SDK.
+- [Ruby Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/ruby/index.md): Learn how to build a minimal Ruby application server with Sinatra to generate LiveKit tokens and receive webhook events using the LiveKit Ruby SDK.
+- [Rust Server Tutorial](https://openvidu.io/3.4/docs/tutorials/application-server/rust/index.md): Learn how to build a minimal Rust application server with Axum to generate LiveKit tokens and receive webhook events using the LiveKit Rust SDK.
+
+## OpenVidu Platform tutorials — application client
+
+- [Application Client Tutorials](https://openvidu.io/3.4/docs/tutorials/application-client/index.md): Learn how to build a LiveKit application client to connect to a room, publish media and subscribe to media from other participants.
+- [Android Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/android/index.md): Learn how to build a simple video-call app for Android using Kotlin with LiveKit Android Kotlin SDK. Allow users to join a room, publish and subscribe to media.
+- [Angular Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/angular/index.md): Learn how to build a simple video-call app using Angular with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+- [Electron Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/electron/index.md): Learn how to build a simple video-call app using Electron with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+- [Ionic Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/ionic/index.md): Learn how to build a simple video-call app using Ionic and Angular with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+- [iOS Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/ios/index.md): Learn how to build a simple video-call app for iOS using Swift with LiveKit Swift SDK. Allow users to join a room, publish and subscribe to media.
+- [JavaScript Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/javascript/index.md): Learn how to build a simple video-call app using plain JavaScript, HTML and CSS with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+- [React Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/react/index.md): Learn how to build a simple video-call app using React with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+- [Vue Tutorial](https://openvidu.io/3.4/docs/tutorials/application-client/vue/index.md): Learn how to build a simple video-call app using Vue with LiveKit JS SDK. Allow users to join a room, publish and subscribe to media.
+
+## OpenVidu Platform tutorials — Angular Components
+
+- [Angular Components Tutorials](https://openvidu.io/3.4/docs/tutorials/angular-components/index.md): Learn how to customize your application UI with Angular Components tutorials. Custom layouts, toolbars, panels, chat and more.
+- [Additional panels using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-additional-panels/index.md): Learn how to add a new extra panel besides the default ones using OpenVidu Angular Components.
+- [Create admin dashboard using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-admin-dashboard/index.md): Learn how to add an admin dashboard to the videoconference using OpenVidu Angular Components.
+- [Custom activities panel using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-activities-panel/index.md): Learn how to replace the default activities panel with your own using OpenVidu Angular Components.
+- [Custom chat panel using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-chat-panel/index.md): Learn how to replace the default chat panel with your own using OpenVidu Angular Components.
+- [Custom layout using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-layout/index.md): Learn how to replace the default layout with your own using OpenVidu Angular Components.
+- [Custom panels using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-panels/index.md): Learn how to replace the default panels with your own using OpenVidu Angular Components.
+- [Custom participants panel item element using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-participant-panel-item-element/index.md): Learn how to replace the default participants panel item element with your own using OpenVidu Angular Components.
+- [Custom participants panel item using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-participant-panel-item/index.md): Learn how to replace the default participants panel item with your own using OpenVidu Angular Components.
+- [Custom participants panel using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-participants-panel/index.md): Learn how to replace the default participants panel with your own using OpenVidu Angular Components.
+- [Custom stream using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-stream/index.md): Learn how to replace the default stream with your own using OpenVidu Angular Components.
+- [Custom toolbar using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-toolbar/index.md): Learn how to replace the default toolbar with your own using OpenVidu Angular Components.
+- [Custom UI using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-custom-ui/index.md): Learn how to customize the UI, changing colors, shapes and add your branding logo using OpenVidu Angular Components.
+- [Add toggle hand feature using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-toggle-hand/index.md): Learn how to add extra features, such as toggle hand, to the videoconference using OpenVidu Angular Components.
+- [Add toolbar buttons using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-toolbar-buttons/index.md): Learn how to add custom buttons to the toolbar using OpenVidu Angular Components.
+- [Add toolbar panel buttons using Angular Components](https://openvidu.io/3.4/docs/tutorials/angular-components/openvidu-toolbar-panel-buttons/index.md): Learn how to add custom panel buttons to the toolbar using OpenVidu Angular Components.
+
+## OpenVidu Platform tutorials — advanced features
+
+- [Advanced Features Tutorials](https://openvidu.io/3.4/docs/tutorials/advanced-features/index.md): Explore more advanced features of LiveKit with our tutorials on recording and more.
+- [Advanced Recording Tutorial Azure](https://openvidu.io/3.4/docs/tutorials/advanced-features/recording-advanced-azure/index.md): Learn how to improve the basic recording tutorial by adding complete recording metadata, real time recording status notification and more.
+- [Advanced Recording Tutorial S3](https://openvidu.io/3.4/docs/tutorials/advanced-features/recording-advanced-s3/index.md): Learn how to improve the basic recording tutorial by adding complete recording metadata, real time recording status notification and more.
+- [Basic Recording Tutorial Azure](https://openvidu.io/3.4/docs/tutorials/advanced-features/recording-basic-azure/index.md): Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
+- [Basic Recording Tutorial S3](https://openvidu.io/3.4/docs/tutorials/advanced-features/recording-basic-s3/index.md): Learn how to record a room and manage recordings by extending a simple video-call application built upon Node.js server and JavaScript client.
+
+## OpenVidu Platform tutorials — AI services
+
+- [AI Services Tutorials](https://openvidu.io/3.4/docs/tutorials/ai-services/index.md): Learn how to integrate AI services in your OpenVidu applications.
+- [OpenVidu Live Captions tutorial](https://openvidu.io/3.4/docs/tutorials/ai-services/openvidu-live-captions/index.md): Learn how to transcribe in real time a simple JavaScript video-call application.
+
+## OpenVidu Platform AI services
+
+- [Build a custom AI agent for OpenVidu](https://openvidu.io/3.4/docs/ai/custom-agents/index.md): Write, dockerize and deploy your own AI agent into OpenVidu rooms with the LiveKit Agents framework, in Python or Node.
+- [Live Captions: real-time speech to text](https://openvidu.io/3.4/docs/ai/live-captions/index.md): Transcribe room audio in real time and display live captions in your frontend, with the speech-to-text provider you configure for your deployment.
+- [AI services for OpenVidu rooms](https://openvidu.io/3.4/docs/ai/overview/index.md): Catalog of ready-to-use AI services for OpenVidu rooms, from live captions to transcription and translation, provided by pre-configured OpenVidu agents.
+- [OpenVidu agents dispatch](https://openvidu.io/3.4/docs/ai/openvidu-agents/agent-dispatch/index.md): Control which rooms an OpenVidu agent joins: automatic dispatch into every new room, or explicit dispatch driven by your own application.
+- [OpenVidu agents overview](https://openvidu.io/3.4/docs/ai/openvidu-agents/overview/index.md): How OpenVidu agents work: pre-configured AI modules that run as Docker containers on your own nodes and are enabled declaratively with a YAML file.
+- [Speech Processing agent](https://openvidu.io/3.4/docs/ai/openvidu-agents/speech-processing-agent/index.md): Enable and configure the Speech Processing agent to turn room speech into text, and choose the transcription provider for your deployment.
+
+## OpenVidu Platform self-hosting
+
+- [OpenVidu deployment types compared](https://openvidu.io/3.4/docs/self-hosting/deployment-types/index.md): Discover OpenVidu deployment options. Local setup for development, single node for medium load, elastic scalability and high availability clusters.
+- [OpenVidu Elastic](https://openvidu.io/3.4/docs/self-hosting/elastic/index.md): Learn how to install OpenVidu Elastic on-premises or on AWS, with configuration and management guides for each deployment option.
+- [OpenVidu installation FAQs](https://openvidu.io/3.4/docs/self-hosting/faq/index.md): Frequently Asked Questions about installing, configuring and using OpenVidu.
+- [OpenVidu High Availability](https://openvidu.io/3.4/docs/self-hosting/ha/index.md): Learn how to install OpenVidu High Availability on-premises or on AWS, with configuration and management guides for each deployment option.
+- [OpenVidu Local installation](https://openvidu.io/3.4/docs/self-hosting/local/index.md): Learn how to install OpenVidu locally for development with Docker Compose. Quickly set up a secure environment to test and build your applications.
+- [OpenVidu Single Node Pro](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/index.md): Learn how to install, configure and administer OpenVidu Single Node Pro On Premises, AWS or Azure.
+- [OpenVidu Single Node Community](https://openvidu.io/3.4/docs/self-hosting/single-node/index.md): Learn how to install, configure and administer OpenVidu Single Node Community On Premises, AWS or Azure.
+
+## OpenVidu Platform production readiness
+
+- [Production ready](https://openvidu.io/3.4/docs/self-hosting/production-ready/index.md): OpenVidu offers a self-hosted, production-ready live-video platform with advanced capabilities, including performance, scalability, fault tolerance and observability.
+- [Fault tolerance in OpenVidu deployments](https://openvidu.io/3.4/docs/self-hosting/production-ready/fault-tolerance/index.md): Ensure seamless real-time media experiences with OpenVidu's fault tolerance. Handle node failures effortlessly with Elastic and High Availability deployments.
+- [OpenVidu performance: 2x with mediasoup](https://openvidu.io/3.4/docs/self-hosting/production-ready/performance/index.md): Discover how OpenVidu boosts performance with mediasoup, doubling media track capacity per server while maintaining seamless LiveKit compatibility.
+- [OpenVidu scalability and autoscaling](https://openvidu.io/3.4/docs/self-hosting/production-ready/scalability/index.md): Scale effortlessly with OpenVidu's elastic deployments, handling small meetings to massive live streams, with autoscaling and high availability support.
+- [Observability](https://openvidu.io/3.4/docs/self-hosting/production-ready/observability/index.md): OpenVidu provides all the tools you need to monitor and analyze your deployment in real-time using OpenVidu Dashboard and a Grafana stack.
+- [Grafana stack for OpenVidu metrics and logs](https://openvidu.io/3.4/docs/self-hosting/production-ready/observability/grafana-stack/index.md): Monitor OpenVidu Server metrics and cluster logs with Grafana's powerful dashboards, integrating Prometheus, Mimir and Loki for complete observability.
+- [OpenVidu Dashboard: live room monitoring](https://openvidu.io/3.4/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md): Access real-time video room statistics and monitoring with OpenVidu Dashboard. Track rooms, participants, egresses and ingresses.
+
+## OpenVidu Platform configuration
+
+- [Changing configuration](https://openvidu.io/3.4/docs/self-hosting/configuration/changing-config/index.md): Learn how to modify OpenVidu configuration files across different deployment types, including single node, elastic and high availability setups.
+- [Configuration system in depth](https://openvidu.io/3.4/docs/self-hosting/configuration/in-depth/index.md): Explore OpenVidu's flexible configuration system, including global and service file settings, variable interpolation, and how to manage clusters efficiently.
+- [Configuration reference](https://openvidu.io/3.4/docs/self-hosting/configuration/reference/index.md): Reference for the configuration files used in all different OpenVidu deployments.
+
+## OpenVidu Platform how-to guides and troubleshooting
+
+- [How To Guides](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/index.md): Explore step-by-step guides to customize your OpenVidu deployment for specific use cases
+- [Create AWS certificate for HA deployment](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/create-configure-AWS-certificate/index.md): Learn how to create an AWS certificate for OpenVidu HA deployment, including domain setup, CNAME record creation and Load Balancer configuration
+- [Deploy OpenVidu behind an external proxy](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md): Run OpenVidu behind a reverse proxy you already operate instead of its bundled Caddy server, on Single Node, Elastic and High Availability.
+- [Enable and disable OpenVidu modules](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/enable-disable-modules/index.md): Learn how to enable or disable OpenVidu modules to customize your deployment configuration.
+- [Enable OpenVidu webhooks](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/enable-webhooks/index.md): Learn how to enable webhooks in OpenVidu to integrate with other services and receive event notifications from your deployment.
+- [Configuring external S3 for OpenVidu recordings](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/external-s3/index.md): Learn how to configure OpenVidu with an external S3 provider for recording storage.
+- [Force traffic through 443 with TLS](https://openvidu.io/3.4/docs/self-hosting/how-to-guides/force-443-tls/index.md): Learn how to force all OpenVidu traffic, including WebRTC, through port 443 with TLS for enhanced security and compatibility with restrictive networks.
+
+## OpenVidu Single Node deployment guides
+
+- [OpenVidu Single Node administration on AWS](https://openvidu.io/3.4/docs/self-hosting/single-node/aws/admin/index.md): Learn how to perform administrative tasks on an AWS OpenVidu Single Node deployment
+- [OpenVidu Single Node installation on AWS](https://openvidu.io/3.4/docs/self-hosting/single-node/aws/install/index.md): Learn how to deploy OpenVidu Single Node on AWS using CloudFormation
+- [Upgrade OpenVidu Single Node COMMUNITY - AWS](https://openvidu.io/3.4/docs/self-hosting/single-node/aws/upgrade/index.md): How to upgrade OpenVidu Single Node COMMUNITY in AWS.
+- [OpenVidu Single Node administration on Azure](https://openvidu.io/3.4/docs/self-hosting/single-node/azure/admin/index.md): Learn how to perform administrative tasks on an Azure OpenVidu Single Node deployment
+- [OpenVidu Single Node installation on Azure](https://openvidu.io/3.4/docs/self-hosting/single-node/azure/install/index.md): Learn how to deploy OpenVidu Single Node on Azure using Template specs of Azure Resource Manager
+- [Upgrade OpenVidu Single Node COMMUNITY - Azure](https://openvidu.io/3.4/docs/self-hosting/single-node/azure/upgrade/index.md): How to upgrade OpenVidu Single Node COMMUNITY in Azure.
+- [OpenVidu Single Node administration on Google Cloud Platform](https://openvidu.io/3.4/docs/self-hosting/single-node/gcp/admin/index.md): Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Single Node deployment
+- [OpenVidu Single Node installation on Google Cloud Platform](https://openvidu.io/3.4/docs/self-hosting/single-node/gcp/install/index.md): Learn how to deploy OpenVidu Single Node on Google Cloud Platform using Google Cloud Platform Console
+- [Upgrade OpenVidu Single Node COMMUNITY - Google Cloud Platform](https://openvidu.io/3.4/docs/self-hosting/single-node/gcp/upgrade/index.md): How to upgrade OpenVidu Single Node COMMUNITY in Google Cloud Platform.
+- [OpenVidu Single Node administration on-premises](https://openvidu.io/3.4/docs/self-hosting/single-node/on-premises/admin/index.md): Learn how to perform administrative tasks on an on-premises OpenVidu Single Node deployment
+- [OpenVidu Single Node installation on-premises](https://openvidu.io/3.4/docs/self-hosting/single-node/on-premises/install/index.md): Learn how to deploy OpenVidu Single Node on-premises
+- [Upgrade OpenVidu Single Node COMMUNITY - On Premises](https://openvidu.io/3.4/docs/self-hosting/single-node/on-premises/upgrade/index.md): How to upgrade OpenVidu Single Node COMMUNITY deployments on-premises.
+
+## OpenVidu Single Node PRO deployment guides
+
+- [OpenVidu Single Node PRO administration on AWS](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/aws/admin/index.md): Learn how to perform administrative tasks on an AWS OpenVidu Single Node PRO deployment
+- [OpenVidu Single Node installation on AWS](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/aws/install/index.md): Learn how to deploy OpenVidu Single Node PRO on AWS using CloudFormation
+- [Upgrade OpenVidu Single Node PRO - AWS](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/aws/upgrade/index.md): How to upgrade OpenVidu Single Node PRO in AWS.
+- [OpenVidu Single Node PRO administration on Azure](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/azure/admin/index.md): Learn how to perform administrative tasks on an Azure OpenVidu Single Node PRO deployment
+- [OpenVidu Single Node installation on Azure](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/azure/install/index.md): Learn how to deploy OpenVidu Single Node PRO on Azure using Template specs of Azure Resource Manager
+- [Upgrade OpenVidu Single Node PRO - Azure](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/azure/upgrade/index.md): How to upgrade OpenVidu Single Node PRO in Azure.
+- [OpenVidu Single Node administration on Google Cloud Platform](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/gcp/admin/index.md): Learn how to perform administrative tasks on an Google Cloud Platform OpenVidu Single Node deployment
+- [OpenVidu Single Node installation on Google Cloud Platform](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/gcp/install/index.md): Learn how to deploy OpenVidu Single Node on Google Cloud Platform using Google Cloud Platform Console
+- [Upgrade OpenVidu Single Node PRO - Google Cloud Platform](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/gcp/upgrade/index.md): How to upgrade OpenVidu Single Node PRO in Google Cloud Platform.
+- [OpenVidu Single Node administration on-premises](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/on-premises/admin/index.md): Learn how to perform administrative tasks on an on-premises OpenVidu Single Node PRO deployment
+- [OpenVidu Single Node PRO installation on-premises](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/on-premises/install/index.md): Learn how to deploy OpenVidu Single Node PRO on-premises
+- [Upgrade OpenVidu Single Node](https://openvidu.io/3.4/docs/self-hosting/single-node-pro/on-premises/upgrade/index.md): How to upgrade OpenVidu Single Node PRO deployments
+
+## OpenVidu Elastic deployment guides
+
+- [OpenVidu Elastic administration on AWS](https://openvidu.io/3.4/docs/self-hosting/elastic/aws/admin/index.md): Learn how to perform administrative tasks on an AWS OpenVidu Elastic deployment
+- [OpenVidu Elastic installation on AWS](https://openvidu.io/3.4/docs/self-hosting/elastic/aws/install/index.md): Learn how to deploy OpenVidu Elastic on AWS using CloudFormation
+- [Upgrade OpenVidu Elastic - AWS](https://openvidu.io/3.4/docs/self-hosting/elastic/aws/upgrade/index.md): How to upgrade OpenVidu Elastic on AWS deployments
+- [OpenVidu Elastic administration on Azure](https://openvidu.io/3.4/docs/self-hosting/elastic/azure/admin/index.md): Learn how to perform administrative tasks on an Azure OpenVidu Elastic deployment
+- [OpenVidu Elastic installation on Azure](https://openvidu.io/3.4/docs/self-hosting/elastic/azure/install/index.md): Learn how to deploy OpenVidu Elastic on Azure using Template specs of Azure Resource Manager
+- [Upgrade OpenVidu Elastic - Azure](https://openvidu.io/3.4/docs/self-hosting/elastic/azure/upgrade/index.md): How to upgrade OpenVidu Elastic on Azure deployments
+- [OpenVidu Elastic administration on-premises](https://openvidu.io/3.4/docs/self-hosting/elastic/on-premises/admin/index.md): Learn how to perform administrative tasks on an on-premises OpenVidu Elastic deployment
+- [OpenVidu Elastic installation on-premises](https://openvidu.io/3.4/docs/self-hosting/elastic/on-premises/install/index.md): Learn how to deploy OpenVidu Elastic on-premises
+- [Upgrade OpenVidu Elastic - On premises](https://openvidu.io/3.4/docs/self-hosting/elastic/on-premises/upgrade/index.md): How to upgrade OpenVidu Elastic on premises deployments
+
+## OpenVidu High Availability deployment guides
+
+- [OpenVidu High Availability administration on AWS](https://openvidu.io/3.4/docs/self-hosting/ha/aws/admin/index.md): Learn how to perform administrative tasks on an AWS OpenVidu High Availability deployment
+- [OpenVidu High Availability installation on AWS](https://openvidu.io/3.4/docs/self-hosting/ha/aws/install/index.md): Learn how to deploy OpenVidu High Availability on AWS using CloudFormation
+- [Upgrade OpenVidu High Availability - AWS](https://openvidu.io/3.4/docs/self-hosting/ha/aws/upgrade/index.md): How to upgrade OpenVidu High Availability on AWS deployments
+- [OpenVidu High Availability administration on Azure](https://openvidu.io/3.4/docs/self-hosting/ha/azure/admin/index.md): Learn how to perform administrative tasks on an Azure OpenVidu High Availability deployment
+- [OpenVidu High Availability installation on Azure](https://openvidu.io/3.4/docs/self-hosting/ha/azure/install/index.md): Learn how to deploy OpenVidu High Availability on Azure using Template specs of Azure Resource Manager
+- [Upgrade OpenVidu High Availability - Azure](https://openvidu.io/3.4/docs/self-hosting/ha/azure/upgrade/index.md): How to upgrade OpenVidu High Availability on Azure deployments.
+- [OpenVidu High Availability administration on-premises](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/admin/index.md): Learn how to perform administrative tasks on an on-premises OpenVidu High Availability deployment
+- [OpenVidu Elastic installation on-premises with DNS Load Balancing](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/install-dlb/index.md): Learn how to deploy OpenVidu Elastic on-premises with DNS Load Balancing
+- [OpenVidu Elastic installation on-premises with Network Load Balancer](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/install-nlb/index.md): Learn how to deploy OpenVidu Elastic on-premises with Network Load Balancer
+- [Upgrade OpenVidu High Availability - On premises](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/upgrade/index.md): How to upgrade OpenVidu High Availability on premises deployments
+
