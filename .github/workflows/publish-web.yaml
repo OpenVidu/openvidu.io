@@ -108,9 +108,10 @@ jobs:
         run: ovweb verify
 
   deploy-docs-mcp:
-    # The docs MCP server indexes the live site, so a publish has to redeploy it. The dispatch
-    # API returns no run id: the deploy workflow puts our run id in its title and we find it by
-    # that, then wait. Failing here never touches the site, which is already live.
+    # The docs MCP server indexes the live site, so a publish has to redeploy it, once the site
+    # actually serves the new tree. The dispatch API returns no run id: the deploy workflow puts
+    # our run id in its title and we find it by that, then wait. Failing here never touches the
+    # site, which is already live.
     needs: deploy
     if: ${{ !inputs.dry_run }}
     runs-on: ubuntu-latest
@@ -121,6 +122,42 @@ jobs:
       # Fine-grained PAT on that repository: Contents write (to dispatch) and Actions read (to follow).
       GH_TOKEN: ${{ secrets.DOCS_MCP_DISPATCH_TOKEN }}
     steps:
+      # What was just pushed to gh-pages, to know when the live site serves it.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+          sparse-checkout: |
+            sitemap.xml
+            ${{ inputs.version }}/sitemap.xml
+          sparse-checkout-cone-mode: false
+
+      - name: Wait until the live site serves the published tree
+        # GitHub Pages builds the pushed commit and then purges its CDN, which takes a few
+        # minutes. The docs MCP server indexes the LIVE site, so dispatching earlier would have
+        # it index the previous tree and see nothing to rebuild. A query string does not bypass
+        # the Pages CDN, so this compares exactly what the MCP build will fetch.
+        env:
+          COMMAND: ${{ inputs.command }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          FILES="$VERSION/sitemap.xml"
+          [ "$COMMAND" = "past" ] || FILES="$FILES sitemap.xml"
+          for i in $(seq 1 45); do   # 15 minutes
+            live=0
+            for f in $FILES; do
+              if curl -sf "https://openvidu.io/$f" | cmp -s - "$f"; then live=$((live + 1)); fi
+            done
+            if [ "$live" -eq $(echo $FILES | wc -w) ]; then
+              echo "The live site serves the published tree ($FILES) after $((i * 20 - 20)) s."
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::15 minutes after the publish, https://openvidu.io still serves the previous tree ($FILES differ from gh-pages). The docs MCP server was NOT redeployed. Check https://github.com/${{ github.repository }}/actions/workflows/pages/pages-build-deployment; once the site is current, run the deploy by hand: gh workflow run deploy.yml -R $REPO"
+          exit 1
+
       - name: Redeploy the docs MCP server and wait for it
         env:
           COMMAND: ${{ inputs.command }}
