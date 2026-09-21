@@ -266,14 +266,17 @@ not_in_nav: |
   /conditions/
   /support/thanks.md
 
-# Sitemap <lastmod> from git, and every page's own title and description for llmstxt.
+# Sitemap <lastmod> from git, and every page's own title and description for llmstxt; then the
+# linked code-block filenames Pygments escapes (every version branch carries a copy of that hook).
 hooks:
   - publish-tool/mkdocs_hook.py
+  - publish-tool/pygments_fence_title_hook.py
 
 watch:
   - shared
   - overrides
   - publish-tool/mkdocs_hook.py
+  - publish-tool/pygments_fence_title_hook.py
   - publish-tool/llmstxt_preprocess.py
   - publish-tool/src/ovweb
 

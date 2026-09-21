@@ -30,3 +30,4 @@ lives in the pure layer, which is why that is where the tests are.
 | [`lint/`](../src/ovweb/lint)                                  | –     | Authoring conventions over the sources — see [`contributing/checks.md`](../../contributing/checks.md). |
 | [`doctor.py`](../src/ovweb/doctor.py)                         | –     | Preflight checks, including the pin agreement.                                    |
 | [`mkdocs_hook.py`](../mkdocs_hook.py)                         | –     | Set each page's `<lastmod>` from git; feed llms.txt the pages' own frontmatter; move the glightbox library to the end of `<body>` and hand its config to `glightbox-gallery.js`. |
+| [`pygments_fence_title_hook.py`](../pygments_fence_title_hook.py) | ✔ | Restore the `<a>` Pygments escapes out of a linked code-block filename. Copied verbatim onto every version branch and into livekit-tutorials-docs. |

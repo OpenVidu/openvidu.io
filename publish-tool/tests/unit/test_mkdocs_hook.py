@@ -1,13 +1,11 @@
-"""The MkDocs hook's four jobs: linked code-block filenames, llms.txt entries, the sitemap's
-`<lastmod>`, and what the glightbox plugin appends to every page.
+"""The MkDocs hook's three jobs: llms.txt entries, the sitemap's `<lastmod>`, and what the
+glightbox plugin appends to every page.
 
-`on_page_content` first restores the `<a>` that Pygments 2.20.0 now HTML-escapes out of a
-superfences `title=`, in either quoting shape our own fences produce, and leaves anything else
-alone. It then reaches into two private attributes of `llmstxt` — `_sections` for the description
-and `_md_pages` for the title — which is the one thing here a plugin upgrade could break. Those
-tests pin that both values come from the page, that a listed page missing either fails the build,
-and that a plugin no longer exposing those attributes fails the build too rather than quietly
-publishing an llms.txt full of nav labels and no descriptions.
+`on_page_content` reaches into two private attributes of `llmstxt` — `_sections` for the
+description and `_md_pages` for the title — which is the one thing here a plugin upgrade could
+break. Those tests pin that both values come from the page, that a listed page missing either fails
+the build, and that a plugin no longer exposing those attributes fails the build too rather than
+quietly publishing an llms.txt full of nav labels and no descriptions.
 
 `on_env` sets `page.update_date`, which MkDocs' sitemap template publishes as `<lastmod>`. What is
 pinned is what has to hold on a real build: a generated page gets no date at all, and anything that
@@ -60,39 +58,6 @@ def config(sections, md_pages=None, *, plugin: bool = True):
         return {"plugins": {}}
     llmstxt = SimpleNamespace(_sections=sections, _md_pages={} if md_pages is None else md_pages)
     return {"plugins": {"llmstxt": llmstxt}}
-
-
-# -- linked code-block filenames: undoing Pygments' escape of our own fence syntax --------
-
-
-def test_a_top_level_fences_escaped_link_is_restored():
-    """The quote survives as a literal `'` for a fence that is not inside a content tab."""
-    escaped = (
-        "class=\"filename\">&lt;a href='https://github.com/x/y/blob/main/z.yaml' "
-        "target='_blank'&gt;z.yaml&lt;/a&gt;</span>"
-    )
-    restored = on_page_content(escaped, page("docs/index.md"), config(None, plugin=False))
-    assert restored == (
-        'class="filename"><a href="https://github.com/x/y/blob/main/z.yaml" '
-        'target="_blank" rel="noopener">z.yaml</a></span>'
-    )
-
-
-def test_a_tabbed_fences_escaped_link_is_restored():
-    """`pymdownx.tabbed` re-escapes the quote to `&#x27;` for a fence nested in a content tab."""
-    escaped = (
-        'class="filename">&lt;a href=&#x27;#&#x27; target=&#x27;_blank&#x27;&gt;'
-        "main.ts&lt;/a&gt;</span>"
-    )
-    restored = on_page_content(escaped, page("docs/index.md"), config(None, plugin=False))
-    assert restored == (
-        'class="filename"><a href="#" target="_blank" rel="noopener">main.ts</a></span>'
-    )
-
-
-def test_html_with_no_escaped_filename_link_is_left_alone():
-    html = "<p>Nothing to see here.</p>"
-    assert on_page_content(html, page("docs/index.md"), config(None, plugin=False)) == html
 
 
 # -- the description ---------------------------------------------------------------------
@@ -191,8 +156,7 @@ def test_a_plugin_that_changed_shape_fails_loudly(renamed):
 
 def test_no_llmstxt_plugin_is_not_an_error():
     """`mkdocs serve` in a checkout with the plugin disabled must still work."""
-    html = "<p/>"
-    assert on_page_content(html, page("docs/index.md"), config(None, plugin=False)) == html
+    assert on_page_content("<p/>", page("docs/index.md"), config(None, plugin=False)) is None
 
 
 # -- on_env: the sitemap's <lastmod> ------------------------------------------------------
