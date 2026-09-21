@@ -1,14 +1,12 @@
 # Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)
 
-A split-screen graphic comparing a near-instant video call with a delayed live broadcast
-
 When Spain was playing the World Cup, we noticed something annoying. We celebrated each of Spain's scores by shouting "GOOOOOL", 15 seconds before our neighbors saw the goal on their TV. Obviously, we ruined their experience watching the game, so much that they asked us where we were watching it from to avoid the gap. Now picture that same 15-second gap on a live shopping stream where you're typing "does it come in blue?", or in a video call where you keep talking over the other person because their audio hasn't reached you yet. That's the difference between "live" and **low latency live streaming**.
 
 ## What "low latency" actually means?
 
-Note
-
-This is the first of a post series on streaming content through WebRTC and WHIP. This first post settles the fundamentals. A second post will go hands-on building an app to ingest video and audio from sources such as a browser and OBS to a WebRTC platform (we will be using OpenVidu). Finally, a third post will review existing tools that are able to generate WHIP.
+> **Note**
+>
+> This is the first of a post series on streaming content through WebRTC and WHIP. This first post settles the fundamentals. A second post will go hands-on building an app to ingest video and audio from sources such as a browser and OBS to a WebRTC platform (we will be using OpenVidu). Finally, a third post will review existing tools that are able to generate WHIP.
 
 If you have kids that play online video games, you can be sure they know what a bad latency means. I do have, and my 11-year-old blames the ping when he feels that his car should have hit the ball before his opponents when playing Rocket League. Indeed, he keeps an eye on the ping from time to time, while he plays, whenever he feels something is wrong with the timing.
 
@@ -26,9 +24,9 @@ In the end, the industry roughly buckets latency into five tiers:
 | Ultra-low latency | < 1s    | Interactive live streaming (live commentary, in-play betting)          |
 | Near-real-time    | < 100ms | Videoconferencing, cloud gaming                                        |
 
-The low latency confusion
-
-You can find many tools and use cases that claims low latency, and that's the problem: low latency is interchangeably used to mean from 10 seconds to a fraction of a second. So it is important to understand where each use case sits, and be explicit about actual requirements. Low latency is a thing, and ultra-low latency or near-real-time latency are completely different concepts built on different technologies.
+> **The low latency confusion**
+>
+> You can find many tools and use cases that claims low latency, and that's the problem: low latency is interchangeably used to mean from 10 seconds to a fraction of a second. So it is important to understand where each use case sits, and be explicit about actual requirements. Low latency is a thing, and ultra-low latency or near-real-time latency are completely different concepts built on different technologies.
 
 The thing to remember here is that the number you actually need has nothing to do with whether the content is "important" or "high quality." It has everything to do with whether a human, or another system, needs to act on what they're seeing before it is too late.
 
@@ -40,8 +38,6 @@ Let's have a look at some use cases to understand what actually lands in each la
 - **Live shopping (< 1s).** A viewer asks "does it come in blue?" mid-stream and expects an answer immediately, not thirty seconds later, after the moment (and the sale) has passed. This is a genuinely massive market in parts of Asia and a growing one elsewhere.
 - **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more: input lag above a few tens of milliseconds is felt directly in your hands.
 - **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely (industrial machinery, a drone, a surgical robot), the use case needs a genuine real-time control loop, not just real-time-looking video.
-
-World Cup retransmissions work just well with a 20 seconds latency
 
 So, as I said before: it's never the content itself that sets the latency budget. It's whether someone downstream has to act on what they're seeing before it goes stale.
 
@@ -71,8 +67,6 @@ The following is a table describing different streaming protocols with their low
 
 WebRTC was designed to optimize the path between a captured frame and a rendered one, contrary to the design decisions behind HLS and DASH, which were focused on file caching.
 
-An interactive streaming session needs latencies under 1 second
-
 In WebRTC media flows continuously as RTP packets over UDP the moment a connection is established. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure, not to buffer or batch anything.
 
 WebRTC's bidirectional nature also means it isn't limited to browser-to-browser calls. [**WHIP**](https://datatracker.ietf.org/doc/rfc9725/) (WebRTC-HTTP Ingestion Protocol) standardizes how an encoder (OBS, a hardware unit, or a mobile app) pushes a stream into a WebRTC-based platform with a single HTTP request that negotiates the connection. **WHEP** is the mirror image for pulling media back out over WebRTC. Together they turn WebRTC from "the video call protocol" into a legitimate low latency live streaming transport, end to end.
@@ -92,8 +86,6 @@ The low latency line is **whether the interaction loops back to the source in re
 ## Building low latency live streaming today
 
 If you're building something in that "below the second" category (a stream someone needs to react to) the protocol choice is WebRTC, and you need it end to end, not just for capture.
-
-Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency
 
 [OpenVidu Platform](https://openvidu.io/latest/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](https://openvidu.io/latest/docs/build-your-app/common-operations/#stream-ingestion) for how to wire a WHIP source into your own app.
 

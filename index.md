@@ -1,6 +1,6 @@
 ## Choose the ideal OpenVidu solution for your real-time needs
 
-### OpenVidu Meet
+### 
 
 Ready-to-use videoconferencing solution
 
@@ -14,7 +14,7 @@ For teams, businesses and organizations that need a reliable and secure video co
 
 [Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md)
 
-### OpenVidu Platform
+### 
 
 Developer-oriented SDKs for custom apps
 

@@ -1,7 +1,5 @@
 # How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform
 
-WebRTC connectivity paths
-
 Real-time video applications seem fairly simple at first glance. A user clicks "Join", video and audio start flowing, and everyone can see and hear each other.
 
 But under the hood, WebRTC is making a series of complex networking decisions that determine **how media actually travels across the internet**. Which ultimately impacts both the final users and your server infrastructure. Including:
@@ -33,17 +31,17 @@ TCP is a reliable, ordered, and connection-oriented protocol. Which in principle
 
 UDP, on the other hand, doesn't look back. It just sends packets without waiting for acknowledgments. If one is lost, it's gone — but the rest of the stream continues without interruption. The result is smoother, more natural communication, even on imperfect networks.
 
-TLDR 1
-
-WebRTC prefers UDP over TCP because a UDP packet loss produces brief, barely-perceptible glitches. TCP packet loss produces freezing, stuttering, and audio-video desynchronization.
+> **TLDR 1**
+>
+> WebRTC prefers UDP over TCP because a UDP packet loss produces brief, barely-perceptible glitches. TCP packet loss produces freezing, stuttering, and audio-video desynchronization.
 
 ### Why a wide range of ports?
 
 Simply because establishing a direct, dedicated connection between each client and the media server will always be the optimal path for WebRTC. Forcing a single port introduces (always) multiplexing and (sometimes) relay intermediaries.
 
-TLDR 2
-
-The optimal WebRTC connection will always be a direct UDP connection between the client and the media server, over a dedicated random port. This usually means opening a wide range of UDP ports (50000–60000) on the media server's and client's firewalls.
+> **TLDR 2**
+>
+> The optimal WebRTC connection will always be a direct UDP connection between the client and the media server, over a dedicated random port. This usually means opening a wide range of UDP ports (50000–60000) on the media server's and client's firewalls.
 
 ## The Reality: Most Users Are Behind Restrictive Firewalls
 
@@ -70,15 +68,15 @@ To gather those candidates, ICE uses two additional protocols to work:
 
 - **STUN** is a protocol that helps a client discover its own public IP address and port, as seen from the internet. It's a lightweight, one-time lookup — no media ever flows through it.
 
-  Note
-
-  In our scenario where clients connect to a known media server, STUN can help keeping the client's port open to allow direct connections (**UDP hole punching**).
+  > **Note**
+  >
+  > In our scenario where clients connect to a known media server, STUN can help keeping the client's port open to allow direct connections (**UDP hole punching**).
 
 - **TURN** is a protocol that acts as a relay. It was first designed to relay media directly between two peers, coming into play when a direct connection is impossible due to client firewalls.
 
-  Note
-
-  In our scenario where clients connect to a known media server, TURN is still necessary to support the most restrictive client networks ([**TURN relay over TLS**](#4-turn-relay-over-tls-last-resort)).
+  > **Note**
+  >
+  > In our scenario where clients connect to a known media server, TURN is still necessary to support the most restrictive client networks ([**TURN relay over TLS**](#4-turn-relay-over-tls-last-resort)).
 
 The end result of ICE, STUN and TURN is one of four possible connection types, each representing a different trade-off between quality and network permissiveness.
 
@@ -120,14 +118,14 @@ The final fallback is TURN over TLS — media relayed through the TURN server, a
 
 **Requirements:** The client network must allow outgoing TCP to port 443. Universally available: any network that allows general internet access will allow this.
 
-How OpenVidu facilitates all of this
-
-If you use OpenVidu as your WebRTC platform, everything is optimized out-of-the-box to allow all kind of client connections, and to automatically select the best possible path for each user. OpenVidu implements ICE, STUN and TURN and optimizes the port configuration for the best results:
-
-1. For direct connection over UDP: OpenVidu nodes support direct UDP connections on the high port range (50000–60000).
-1. For TURN relay over UDP: OpenVidu relays TURN over UDP on port 443.
-1. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/#about-mediasoup-integration).
-1. For TURN relay over TLS: OpenVidu relays TURN over TLS on port 443.
+> **How OpenVidu facilitates all of this**
+>
+> If you use OpenVidu as your WebRTC platform, everything is optimized out-of-the-box to allow all kind of client connections, and to automatically select the best possible path for each user. OpenVidu implements ICE, STUN and TURN and optimizes the port configuration for the best results:
+>
+> 1. For direct connection over UDP: OpenVidu nodes support direct UDP connections on the high port range (50000–60000).
+> 1. For TURN relay over UDP: OpenVidu relays TURN over UDP on port 443.
+> 1. For direct connection over TCP: OpenVidu nodes support direct TCP connections on port 7881 (when using Pion as the internal WebRTC engine) or in the range 50000–60000 (when using mediasoup as the internal WebRTC engine). See [About mediasoup integration](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/#about-mediasoup-integration).
+> 1. For TURN relay over TLS: OpenVidu relays TURN over TLS on port 443.
 
 ______________________________________________________________________
 

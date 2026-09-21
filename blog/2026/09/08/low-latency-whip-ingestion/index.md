@@ -1,12 +1,10 @@
 # Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)
 
-A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it
-
 [Part 1](https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/) of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted [OpenVidu Platform](https://openvidu.io/docs/) Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
 
-What you'll build
-
-A local loop you can watch yourself: a small Node app that gets WHIP credentials against OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does the same thing from a real production tool, and a viewer page that subscribes to any of them. All of it runs on your machine with Docker Compose. The code is at [openvidu-labs/low-latency-whip-ingestion](https://github.com/openvidu-labs/low-latency-whip-ingestion) .
+> **What you'll build**
+>
+> A local loop you can watch yourself: a small Node app that gets WHIP credentials against OpenVidu, a browser page that publishes your camera straight over WHIP, an OBS scene that does the same thing from a real production tool, and a viewer page that subscribes to any of them. All of it runs on your machine with Docker Compose. The code is at [openvidu-labs/low-latency-whip-ingestion](https://github.com/openvidu-labs/low-latency-whip-ingestion) .
 
 ## WHIP, in one paragraph
 
@@ -56,13 +54,9 @@ docker compose -f vendor/openvidu-local-deployment/community/docker-compose.yaml
 
 Then open **<http://localhost:3000>**. There are two things to click: *Publish from your webcam* and *Watch the stream*. Open them in two tabs and you have the whole loop in front of you.
 
-The demo app's landing page, with cards for publishing from a webcam, watching the stream, and generating WHIP credentials for OBS
-
-Watch them side by side
-
-Put the publisher tab and the viewer tab next to each other and wave at the camera. What you're looking for is that the wave arrives while your hand is still moving. That's the difference this series is about, and it's much more convincing than a number.
-
-The publisher and the viewer side by side, both showing the same frame of the same stream, with a running clock burned into it
+> **Watch them side by side**
+>
+> Put the publisher tab and the viewer tab next to each other and wave at the camera. What you're looking for is that the wave arrives while your hand is still moving. That's the difference this series is about, and it's much more convincing than a number.
 
 Those two tiles are the same stream: the left one is the camera as it is captured, the right one is what came back out of the Room after a WHIP publish and a WebRTC subscribe. The clock burned into the test pattern is there to be compared.
 
@@ -160,8 +154,6 @@ await room.connect(livekitUrl, token);
 ```
 
 Whatever is publishing into the Room (the browser page, OBS, both at once) shows up here as a participant with tracks. From OpenVidu's point of view a WHIP ingress *is* a participant, which is why nothing about the viewer has to know how the media got in.
-
-OBS streaming and our watch app viewing the stream, side by side
 
 ## Why this path is the low-latency one
 

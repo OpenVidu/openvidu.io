@@ -28,9 +28,9 @@ Prefer email? Write to us directly at [commercial@openvidu.io](mailto:commercial
 
 Let's work together and build something great!
 
-Info
-
-Do you need help [**updating from OpenVidu 2 to OpenVidu 3**](https://docs.openvidu.io/en/stable/openvidu3/) ? Write us to [pro.support.v2apps@openvidu.io](mailto:pro.support.v2apps@openvidu.io) and we will be happy to guide you through the process.
+> **Info**
+>
+> Do you need help [**updating from OpenVidu 2 to OpenVidu 3**](https://docs.openvidu.io/en/stable/openvidu3/) ? Write us to [pro.support.v2apps@openvidu.io](mailto:pro.support.v2apps@openvidu.io) and we will be happy to guide you through the process.
 
 ## Community support
 

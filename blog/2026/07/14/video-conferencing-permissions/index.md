@@ -1,7 +1,5 @@
 # Managing Permissions in Video Conferencing Apps: 3 Access Models
 
-Three access models for video conferencing permissions
-
 Everyone benchmarks video conferencing on the things you can see: resolution, latency, how many people fit in a grid. But the failures that actually hurt in production are rarely about a dropped frame — they're about the wrong person joining a room they shouldn't be in, or a private recording ending up somewhere public. **Permissions are the invisible half of a video app**, and they're the half most teams underestimate until something goes wrong.
 
 Here's the uncomfortable part. At the media layer that low-level WebRTC SDKs expose, the *only* permissions you get are "can this token publish audio, video or screen." There's no notion of *who* a person is, whether they belong in the room at all, or who's allowed to watch the recording afterwards. That's a media grant, not an access-control system. You either build the missing layer yourself or embed a product that already has it.
@@ -39,9 +37,9 @@ Every product names these ideas a little differently. Throughout this post we'll
 
 - **Participant.** Anyone actually present in a meeting, whatever route they took to get there.
 - **Room member.** Any individual granted access to a specific room. There are three kinds, distinguished by *how* they prove who they are.
-  - User icon **User.** A room member with a **registered account** in the system. They log in to get in.
-  - Identified guest icon **Identified guest.** A room member *without* an account, added ahead of time under a fixed name. They receive their own private link and never log in.
-  - Anonymous guest icon **Anonymous guest.** Someone without an account who accesses through a shared link and just types a display name before joining.
+  - **User.** A room member with a **registered account** in the system. They log in to get in.
+  - **Identified guest.** A room member *without* an account, added ahead of time under a fixed name. They receive their own private link and never log in.
+  - **Anonymous guest.** Someone without an account who accesses through a shared link and just types a display name before joining.
 - **Role and permissions.** A **role** (like *Moderator* or *Speaker*) is a named bundle of **permissions** — the individual capabilities that decide what someone can do once inside.
 
 With that shared vocabulary in place, here are the three models. One thing to keep in mind up front: they aren't mutually exclusive — a single room can use all three at once, each person joining through their own kind of link. Most real apps end up mixing them rather than picking just one.
@@ -64,14 +62,14 @@ The lowest-friction model there is. You define a fixed set of roles — say **Mo
 
 **Use it when:** webinars, open community calls, quick ad-hoc meetings, or any low-sensitivity "just click to join" experience.
 
-How OpenVidu Meet implements it
-
-Every room exposes two shared anonymous links — one per predefined role — and, new in 3.8.0, you can **enable or disable each role's link per room** (allow anonymous speakers, say, but require an identity to moderate). Each anonymous guest picks a name before joining.
-
-- **In the app:** copy either link from the **"Rooms"** or **"Room Details"** page — or from inside a live meeting if you hold the `canShareAccessLinks` permission — and toggle each role's anonymous access in the room creation/edit wizard.
-- **Over the REST API:** the links come back on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom) , at `access.anonymous.moderator.url` and `access.anonymous.speaker.url`; enable or disable each role with [`PUT /rooms/{roomId}/access`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomAccess) .
-
-See [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for the full picture.
+> **How OpenVidu Meet implements it**
+>
+> Every room exposes two shared anonymous links — one per predefined role — and, new in 3.8.0, you can **enable or disable each role's link per room** (allow anonymous speakers, say, but require an identity to moderate). Each anonymous guest picks a name before joining.
+>
+> - **In the app:** copy either link from the **"Rooms"** or **"Room Details"** page — or from inside a live meeting if you hold the `canShareAccessLinks` permission — and toggle each role's anonymous access in the room creation/edit wizard.
+> - **Over the REST API:** the links come back on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom) , at `access.anonymous.moderator.url` and `access.anonymous.speaker.url`; enable or disable each role with [`PUT /rooms/{roomId}/access`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomAccess) .
+>
+> See [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for the full picture.
 
 ## Model 2: Identified guests + custom permissions
 
@@ -93,14 +91,14 @@ The mental model shifts from "here's a link for the role" to "here's a link for 
 
 **Use it when:** telehealth (invite one specific patient to one specific consultation), 1:1 interviews, onboarding an external client or partner — anywhere you invite named people who won't have accounts.
 
-How OpenVidu Meet implements it
-
-You add a member of type `identified_guest` with a display name and a base role (`Moderator` or `Speaker`), optionally overriding individual permissions. Meet generates a unique personal link for them; removing the member **instantly** invalidates it and expels them if they're mid-meeting.
-
-- **In the app:** open the room's **"Room Members"** tab, click **"Add Member"**, choose **Identified guest**, then grab their link later with the **copy access link** button in the member list.
-- **Over the REST API:** create them with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) — the response carries the personal link in the member's `accessUrl` (also retrievable via [`GET /rooms/{roomId}/members/{memberId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoomMember) ).
-
-See [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md).
+> **How OpenVidu Meet implements it**
+>
+> You add a member of type `identified_guest` with a display name and a base role (`Moderator` or `Speaker`), optionally overriding individual permissions. Meet generates a unique personal link for them; removing the member **instantly** invalidates it and expels them if they're mid-meeting.
+>
+> - **In the app:** open the room's **"Room Members"** tab, click **"Add Member"**, choose **Identified guest**, then grab their link later with the **copy access link** button in the member list.
+> - **Over the REST API:** create them with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) — the response carries the personal link in the member's `accessUrl` (also retrievable via [`GET /rooms/{roomId}/members/{memberId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoomMember) ).
+>
+> See [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md).
 
 ## Model 3: Users + custom permissions
 
@@ -129,18 +127,16 @@ On top of per-room membership, this model unlocks **organization-wide rules**:
 
 **Use it when:** internal tools, enterprise apps, e-learning platforms with enrolled students, or anything with a known, recurring user base and compliance requirements.
 
-How OpenVidu Meet implements it
-
-Meet ships a built-in user system with three account roles — `admin` (full control), `room_manager` (manages their own rooms) and `room_member` (accesses rooms they belong to). Everyone joins through the same shared **user access link**, which renders a login form and carries no secret, so your app never handles passwords. Admins and room owners are implicit full-access members, and a room can be opened to all users (who then join as `Speaker`).
-
-- **In the app:** create accounts on the **"Users"** page (**"Create User"**, admins only), then add one to a room from its **"Room Members"** tab → **"Add Member"** → **User**. Copy the shared link from that member's row in the member list (all users share one link — they log in to prove who they are).
-- **Over the REST API:** create accounts with [`POST /users`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createUser) , add a user as a member with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) , and read the shared link at `access.user.url` on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom) .
-
-See [Users](https://openvidu.io/latest/meet/features/users/overview/index.md).
+> **How OpenVidu Meet implements it**
+>
+> Meet ships a built-in user system with three account roles — `admin` (full control), `room_manager` (manages their own rooms) and `room_member` (accesses rooms they belong to). Everyone joins through the same shared **user access link**, which renders a login form and carries no secret, so your app never handles passwords. Admins and room owners are implicit full-access members, and a room can be opened to all users (who then join as `Speaker`).
+>
+> - **In the app:** create accounts on the **"Users"** page (**"Create User"**, admins only), then add one to a room from its **"Room Members"** tab → **"Add Member"** → **User**. Copy the shared link from that member's row in the member list (all users share one link — they log in to prove who they are).
+> - **Over the REST API:** create accounts with [`POST /users`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createUser) , add a user as a member with [`POST /rooms/{roomId}/members`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) , and read the shared link at `access.user.url` on the room object from [`GET /rooms/{roomId}`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom) .
+>
+> See [Users](https://openvidu.io/latest/meet/features/users/overview/index.md).
 
 That completes the three models. Here they are side by side — three member types, each entering through its own kind of access link, all landing in the same room:
-
-The three access-link types — one shared anonymous link for anonymous guests, a unique link per identified guest, and a shared user link with login for users — all joining the same OpenVidu Meet room
 
 ## Beyond access: fine-grained, per-person permissions
 
@@ -156,8 +152,6 @@ OpenVidu Meet 3.8.0 introduced 14 boolean permissions for exactly this. Grouped 
 - **Recording:** `canRecord`, `canRetrieveRecordings`, `canDeleteRecordings`
 
 Each role — `Moderator` and `Speaker` — ships with sensible defaults, and you can flip any individual permission for any member. The highlighted cells below show two such overrides: a Speaker granted `canRecord`, and a Moderator whose `canDeleteRecordings` was turned off.
-
-Permissions matrix: the 14 OpenVidu Meet permissions grouped into Media, Communication, Meeting management and Recording, with on/off toggles for the Moderator and Speaker roles and two cells customized from their role defaults
 
 A member's effective permissions start from their base role and get overridden individually:
 

@@ -4,9 +4,9 @@ OpenVidu and Jitsi are both **open-source, self-hosted video platforms** — but
 
 [Get started with Platform](https://openvidu.io/latest/docs/index.md) [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)
 
-Jitsi spans both Meet and Platform
-
-Jitsi Meet works both as a ready-to-use application and, via its SDKs, as a building block for a custom app — the two audiences OpenVidu splits into **OpenVidu Meet** and **OpenVidu Platform**.
+> **Jitsi spans both Meet and Platform**
+>
+> Jitsi Meet works both as a ready-to-use application and, via its SDKs, as a building block for a custom app — the two audiences OpenVidu splits into **OpenVidu Meet** and **OpenVidu Platform**.
 
 ## Architecture at a glance
 

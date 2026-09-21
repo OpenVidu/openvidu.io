@@ -1,20 +1,18 @@
 # We deployed the same video platform on five clouds and timed it: 5 minutes to 20, and the slow ones are slow for a reason
 
-Mean time to a working deployment, by cloud and topology
-
 "How long does it take to deploy?" sounds like a trivia question until you're the one watching a progress bar, wondering whether it's stuck. So we stopped guessing and measured it.
 
 We built a tool, **ov-cloud-tester**, that deploys the *same* self-hosted WebRTC video stack on all five major clouds — AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean — in three topologies (single node, elastic, and high-availability), tears it down cleanly, and times the whole thing. We ran it many times per cloud and looked at both the averages *and* every individual run. The headline: standing up a working deployment ranges from about **5 minutes to 20**, DigitalOcean is consistently the fastest and Oracle the heaviest — and the *why*, plus which clouds are actually *predictable*, turns out to be more interesting than the ranking.
 
-TL;DR
-
-- **A single node is ready in ~5–10 minutes on every cloud.** DigitalOcean is quickest (~5.5 min), Oracle slowest (~10 min).
-- **DigitalOcean wins because it builds almost nothing first** — a stock droplet, a firewall, an IP. No VPC, IAM, DNS zones or TLS certificates to provision before your server can exist.
-- **Oracle does the most** — its elastic and HA deployments stand up a real autoscaler, a load balancer, and a coordinated multi-node cluster before anything is ready. That's a feature, not a bug; it just costs setup time.
-- **HA is where clouds diverge hard:** GCP and DigitalOcean are ready in ~6 min, Azure and Oracle in ~11, and AWS averages ~18.
-- **But the average lies — look at every run.** AWS HA isn't "18 minutes": it's *either* ~12–13 min *or* ~27, with nothing in between. GCP, by contrast, lands within seconds of itself every time. Predictability is its own metric.
-- **"Time to ready" is not "time to provision."** The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.
-- **Scaling back *down* is the hard direction** — a single node can't do it at all, and elastic/HA have to gracefully *drain* nodes, not kill them. More on why at the end.
+> **TL;DR**
+>
+> - **A single node is ready in ~5–10 minutes on every cloud.** DigitalOcean is quickest (~5.5 min), Oracle slowest (~10 min).
+> - **DigitalOcean wins because it builds almost nothing first** — a stock droplet, a firewall, an IP. No VPC, IAM, DNS zones or TLS certificates to provision before your server can exist.
+> - **Oracle does the most** — its elastic and HA deployments stand up a real autoscaler, a load balancer, and a coordinated multi-node cluster before anything is ready. That's a feature, not a bug; it just costs setup time.
+> - **HA is where clouds diverge hard:** GCP and DigitalOcean are ready in ~6 min, Azure and Oracle in ~11, and AWS averages ~18.
+> - **But the average lies — look at every run.** AWS HA isn't "18 minutes": it's *either* ~12–13 min *or* ~27, with nothing in between. GCP, by contrast, lands within seconds of itself every time. Predictability is its own metric.
+> - **"Time to ready" is not "time to provision."** The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.
+> - **Scaling back *down* is the hard direction** — a single node can't do it at all, and elastic/HA have to gracefully *drain* nodes, not kill them. More on why at the end.
 
 ## What we measured, and how
 
@@ -50,8 +48,6 @@ But before the "why," there's a "how reliably" — and it matters just as much.
 
 Averages are comforting and occasionally dishonest. Here's every individual run:
 
-Every individual deployment run, by cloud and topology, showing spread around the mean
-
 Three things this shows that the table can't:
 
 - **AWS HA is bimodal, and its average is a lie.** It isn't "18 minutes" — it's *either* ~12–13 minutes *or* ~27, in two tight clusters with nothing between them. The mean (that vertical tick) lands in the empty gap where **no run actually happened**. If you provision AWS HA, you'll likely get one of two very different experiences, and the headline number predicts neither.
@@ -72,9 +68,9 @@ Three details do the heavy lifting:
 
 Even the bigger topologies stay lean: elastic scales with a small serverless function instead of a managed autoscaling group, and HA uses a plain layer-4 network load balancer that just forwards packets — so there's no certificate for the balancer to validate before traffic can flow.
 
-The honest caveat
-
-DigitalOcean doesn't make the actual OpenVidu install any faster — pulling the Docker images takes the same time on every cloud. What it does is minimize *everything around* the install: the provisioning, the networking, the DNS, the certificates. That's the whole trick.
+> **The honest caveat**
+>
+> DigitalOcean doesn't make the actual OpenVidu install any faster — pulling the Docker images takes the same time on every cloud. What it does is minimize *everything around* the install: the provisioning, the networking, the DNS, the certificates. That's the whole trick.
 
 ## Why Oracle does the most
 
@@ -94,9 +90,9 @@ HA is the only topology with more than one master, and AWS brings its four maste
 
 That serial chain explains both halves of AWS HA's behaviour. It's slow, because four full installs in a row simply take a while. And it's *unpredictable*, because a chain is only as fast as its slowest link — if any single master drags on its install, every master behind it waits. That's the ~12-or-~27 split from the chart above: a clean run threads all four masters in about 12–13 minutes, and a run where one of them stalls pulls the whole line out toward 27.
 
-The transferable lesson
-
-"Time to ready" is not "time to provision." On DigitalOcean the VM exists in seconds and the wait is the software install; on Oracle single node the VM is instant but the vault plumbing is slow; on AWS HA the masters install one after another instead of together. If you only benchmark "how fast does the VM launch," you'll be surprised by your own deploys — measure the whole thing, several times.
+> **The transferable lesson**
+>
+> "Time to ready" is not "time to provision." On DigitalOcean the VM exists in seconds and the wait is the software install; on Oracle single node the VM is instant but the vault plumbing is slow; on AWS HA the masters install one after another instead of together. If you only benchmark "how fast does the VM launch," you'll be surprised by your own deploys — measure the whole thing, several times.
 
 ## What about scaling back *down*?
 

@@ -1,7 +1,5 @@
 # Control your video calls with hand gestures, thanks to a free AI from Google
 
-Hand gesture recognition in a video call, processed in the browser with free AI
-
 If you're tired of reaching for the cursor to hit the camera icon every time you want to disappear from the meeting, you're in luck. At **OpenVidu** we've built an open-source prototype that lets you control your video call's features with gestures, like an actual tech shaman.
 
 ## What this demo does
@@ -9,8 +7,6 @@ If you're tired of reaching for the cursor to hit the camera icon every time you
 This open-source demo lets you control your own video call with four hand gestures, without touching the keyboard or the mouse.
 
 I'll confess it: you'll feel like Harry Potter on his first day of class...
-
-OpenVidu gesture control
 
 but no, it's not magic. These gestures are recognized in real time with [MediaPipe Gesture Recognizer](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer) , a **free** AI model that runs in the browser itself and lets you detect gestures without sending video to the cloud. We can pair these gestures with real actions in the video call, like turning off the camera, muting the microphone, and so on.
 
@@ -96,8 +92,6 @@ at.addGrant({ roomJoin: true, room: roomName, canUpdateOwnMetadata: true });
 The first time I tried the prototype, I did exactly what anyone would do: I closed my fist to turn off the camera.
 
 Brilliant, I thought. The model recognized the gesture perfectly and turned off the camera... What I didn't think about is that by turning off the camera, the model stopped seeing my hand and recognizing any gesture at all.
-
-Confused robot gif representing the model losing hand tracking
 
 What the model thought when I tried this
 

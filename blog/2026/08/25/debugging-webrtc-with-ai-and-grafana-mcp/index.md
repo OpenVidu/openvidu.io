@@ -1,7 +1,5 @@
 # Debugging WebRTC with an AI agent and Grafana MCP
 
-Debugging WebRTC with an AI agent and Grafana MCP: read-only Grafana, a broken deployment, and an agent that works through the metrics to find each root cause
-
 What if you gave an AI agent nothing but **read-only access to your Grafana**, pointed it at a WebRTC deployment it had never seen, and asked what was broken? No shell, no source code, no config files, nothing but the dashboards and logs any on-call engineer would stare at. Could it actually find the root cause?
 
 That is the experiment we ran at OpenVidu. We took a real OpenVidu deployment, broke it on purpose in five different ways, and handed a blind Claude Code session a single vague complaint and a link to Grafana. This post walks through what it found, where it shone and where it fell flat, and it ships with a companion repo so you can reproduce every bit of it yourself.
@@ -14,9 +12,9 @@ We know that pain, which is why every OpenVidu deployment ships with a full [obs
 
 So we tried handing that job to an AI agent. This is known as AIOps, using AI to operate and troubleshoot running systems. We ran a small, informal test to see what an agent can do.
 
-An important note on privacy
-
-When you hand an agent your metrics and logs, that data leaves for the model provider. If your observability carries sensitive information (room IDs, IPs, user data), make sure you use a provider with a solid privacy policy and a no-training-on-your-data commitment. And if you'd rather nothing leaves your network at all, you can always run the agent harness with a local model: same workflow, same MCPs, without a single log going out.
+> **An important note on privacy**
+>
+> When you hand an agent your metrics and logs, that data leaves for the model provider. If your observability carries sensitive information (room IDs, IPs, user data), make sure you use a provider with a solid privacy policy and a no-training-on-your-data commitment. And if you'd rather nothing leaves your network at all, you can always run the agent harness with a local model: same workflow, same MCPs, without a single log going out.
 
 ## How we ran it
 
@@ -48,8 +46,6 @@ For each fault you'll see three things: **what we broke**, **the exact prompt** 
 
 But **neither session could see the firewall rule itself** (a dropped packet logs no reason), so both pinned the cause on the *nearest visible thing*, the SFU advertising Docker-internal IPs (`10.5.0.3`, `172.17.0.1`) as ICE candidates, and recommended fixing that config so it advertised a reachable IP, plus opening the media ports. They pointed at the right area, which is exactly as far as observability reaches: it localizes the effect but not a cause that leaves no trace.
 
-Grafana Loki logs showing the SFU flooding ICE and DTLS timeout errors
-
 Loki, the instant media breaks: the SFU floods ICE/DTLS timeouts. People joined the room, but no media path could form.
 
 ### Fault 2: Network congestion (choppy calls)
@@ -61,8 +57,6 @@ Loki, the instant media breaks: the SFU floods ICE/DTLS timeouts. People joined 
 **What it found:** the skilled session answered the operator's real question, *"us or them?"*, correctly: **it's us.** It split the quality metrics by direction and saw a clean, one-directional story: 0% loss on the uplink, **12→23% loss on the downlink** with jitter and a burst of NACK/PLI retransmits, all at ~7 Mbps and ~4% CPU, so *not* capacity, and not the callers' networks (a client problem wouldn't be systematic across every subscriber).
 
 That's where the skill mattered. The skilled session correctly identified it as a server-side problem, not the callers. The bare session was unreliable: in repeated runs it often pinned the blame on the users' own networks, the confidently wrong answer that would have sent you chasing your customers instead of your server.
-
-Grafana chart showing average packet loss jumping from zero to ten percent
 
 Metrics (Prometheus): average packet loss jumps from ~0 to ~10% the moment the link degrades. All of it is on the downlink; the uplink stays at 0, which is why the per-direction breakdown in the text reaches 23%. The calls connect fine, they just fall apart.
 
@@ -76,8 +70,6 @@ Metrics (Prometheus): average packet loss jumps from ~0 to ~10% the moment the l
 
 Both reached the same right answer.
 
-Grafana Loki logs showing every service logging connection refused on port 7000
-
 Loki: every service floods "connection refused" on 127.0.0.1:7000 the instant Redis dies. An active reject, not a timeout: the process is down, not the network.
 
 ### Fault 4: Ingress RTMP with a bad stream key
@@ -87,8 +79,6 @@ Loki: every service floods "connection refused" on 127.0.0.1:7000 the instant Re
 > *"We're trying to bring an RTMP stream into a room and it just won't come through, the room stays empty. Grafana: https://10-5-0-3.openvidu-local.dev/grafana/. Can you see why the ingest is failing?"*
 
 **What it found:** both solved it, fast and clean. The RTMP connection reaches the server but the publish is rejected with `ingress does not exist` for stream key `BADKEY123`. Both correctly called it a **client-side** problem, the encoder is using a key that was never issued; create the ingress via the API first, then point the encoder at the returned key, and confirmed the server pipeline (ingress, Redis, RTMP) is healthy. Here the signal, though logs-only, is **explicit**, so even the bare model reads it easily.
-
-Grafana Loki logs showing the ingress rejecting a publish with a bad stream key
 
 Loki: the ingress rejects the publish with "ingress does not exist" for stream key BADKEY123. A client-side misconfiguration, stated explicitly in the logs.
 
@@ -105,8 +95,6 @@ It's the kind of mistyped config value that produces a real, scary-looking sympt
 Instead of concluding "add more CPU," the skilled session spotted the clue: the log says the job *requires 100 CPUs while 16 are available*, a nonsensical demand on an almost-idle host. It correctly diagnosed a **bad `cpu_cost` config value** (spotting the exact restart where the node came up with `max cost: 100` instead of the healthy `2`), and explicitly warned *not* to scale the hardware: *"the config value is what's wrong, not the hardware."* The bare session took the error at face value and recommended adding CPU, the expensive wrong fix.
 
 A reassuring result: handed a loud, misleading error, the skilled session reasoned past it to the real cause.
-
-Grafana Loki logs showing egress refusing recordings with a not enough CPU error
 
 Loki: egress refuses every recording with "not enough CPU". Note "required: 100" against "available: 16", a nonsensical config value, not a real shortage.
 

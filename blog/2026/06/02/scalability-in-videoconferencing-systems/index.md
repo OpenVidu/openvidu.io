@@ -1,7 +1,5 @@
 # The Architecture of Scale: How to Scale Video Conferencing from a Single Server to a High-Availability System
 
-WebRTC connectivity paths
-
 ## Introduction: The Success Trap
 
 Launch week often feels perfect. You ship an MVP, users join calls quickly, and early feedback is strong. Then growth arrives faster than expected.
@@ -21,8 +19,6 @@ Along the way, you'll also learn how to build an autoscaling loop that reacts be
 ## Phase 1: The Single Node (The Monolith Stage)
 
 Most successful platforms start with a single machine. In a single-node deployment, one server runs signaling, media processing, persistence, and API logic together. For many teams, that's the right call — it maximizes speed of learning and minimizes operational overhead while you figure out whether the product has legs.
-
-Single-node architecture
 
 ### Why the Single Node Works Early
 
@@ -71,8 +67,6 @@ When these signals appear consistently, throwing a bigger machine at the problem
 ## Phase 2: Horizontal Scalability and Elasticity (The Media Plane)
 
 At this point, larger machines cost more and help less. What you actually need is a role-based architecture where media execution and orchestration scale independently.
-
-Elastic media plane architecture
 
 The split looks like this:
 
@@ -126,9 +120,9 @@ A robust autoscaling loop looks something like this:
 1. Register new workers in routing tables so they start receiving traffic immediately.
 1. Direct new rooms to the healthiest nodes with the most headroom.
 
-The key insight on elasticity
-
-React before you're full, not after. By the time your metrics show saturation, users are already experiencing degraded quality. Proactive scaling — triggered at 65–70% capacity — keeps you ahead of demand.
+> **The key insight on elasticity**
+>
+> React before you're full, not after. By the time your metrics show saturation, users are already experiencing degraded quality. Proactive scaling — triggered at 65–70% capacity — keeps you ahead of demand.
 
 ### Admission Control Matters More Than Raw Node Count
 
@@ -142,9 +136,9 @@ Practical admission rules to put in place:
 - Soft thresholds that leave headroom for burst without triggering scale-out for every spike.
 - Region and latency affinity for room placement, so participants are routed to the geographically closest node.
 
-The key insight on admission control
-
-Node count protects you from running out of infrastructure. Admission rules protect call quality within the infrastructure you have. You need both.
+> **The key insight on admission control**
+>
+> Node count protects you from running out of infrastructure. Admission rules protect call quality within the infrastructure you have. You need both.
 
 ### The Hidden Hard Part: Scale-In
 
@@ -168,8 +162,6 @@ With Phase 2 in place, you have elastic media capacity. But there's still one ma
 You can run 100 media nodes and still fail like a prototype if your orchestration layer is a single instance.
 
 When orchestration goes down, new joins fail, placement stops, and recovery becomes a manual process. Phase 2 hardened the media plane. Phase 3 is about making sure the rest of the system can survive a failure too — because HA at this stage means hardening the support cluster, not adding more media nodes.
-
-High-availability architecture
 
 ### Remove Single Points of Failure
 

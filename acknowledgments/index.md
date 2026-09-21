@@ -2,8 +2,4 @@ OpenVidu has been supported under project LERNIM (RTC-2016-4674-7), co-funded by
 
 OpenVidu has been supported under project project EDGEDATA-CM (P2018/TCS-4499) cofunded by the Regional Government of Madrid (Spain) (CM) through and FSE & FEDER.
 
-Sponsor Ministry of Economy Sponsor European Union Sponsor Comunidad de Madrid
-
 OpenVidu has been supported under project "CPP2021-008720 NewGenVidu: An elastic, user-friendly and privacy-friendly videoconferencing platform", funded by MCIN/AEI/10.13039/501100011033 and by the European Union-NextGenerationEU/PRTR.
-
-Sponsor NewGenVidu

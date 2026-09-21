@@ -1,7 +1,5 @@
 # How DynDevice Built Virtual Classrooms Into Its LMS with OpenVidu
 
-DynDevice and OpenVidu customer success story
-
 What do you do when your product depends on video meetings that happen somewhere else? For years, the trainers using [DynDevice](https://www.dyndevice.com/) , the corporate eLearning platform built by [Mega Italia Media](https://www.megaitaliamedia.com/) , had to send their learners out of the LMS and into Zoom, Meet, Teams, WebEx or GoToWebinar links to run a live class. It worked — and it fragmented the learning experience every single day.
 
 This post kicks off our series on how engineering teams solve real WebRTC and infrastructure challenges. We interviewed **Matteo Resconi**, IT & Development Area Manager at Mega Italia Media, about the journey from juggling five external meeting tools to one-click virtual classrooms built into their own platform: what they evaluated, why they didn't build on raw WebRTC, and what changed for their team and their users.
@@ -88,8 +86,8 @@ If DynDevice's "before" picture looked uncomfortably familiar, the fastest way o
 
 Need lower-level control instead — custom UIs, media pipelines, your own SDK-driven architecture? That's [OpenVidu Platform](https://openvidu.io/latest/docs/index.md). Not sure which fits your case? The [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) settles it in five minutes.
 
-Thinking about your own success story?
-
-We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](https://openvidu.io/support/index.md) — we'll do the writing, you get the visibility and the backlinks.
+> **Thinking about your own success story?**
+>
+> We're always happy to talk to teams building real-time features. If you're an OpenVidu user with a story like this one, [get in touch](https://openvidu.io/support/index.md) — we'll do the writing, you get the visibility and the backlinks.
 
 *Our thanks to Matteo Resconi and the Mega Italia Media team for sharing their experience.*
