@@ -313,6 +313,10 @@ theme:
   favicon: assets/images/logo.png
   logo: assets/images/openvidu_vert_white_bg_trans_cropped2.png
 
+# Restores the linked code-block filenames Pygments escapes: a verbatim copy of main's hook.
+hooks:
+  - publish-tool/pygments_fence_title_hook.py
+
 plugins:
   - search
   - blog
@@ -336,6 +340,10 @@ plugins:
       background: none
       shadow: false
   - llmstxt:
+      # A verbatim copy of main's preprocess: keeps the tab labels and comparison icons the
+      # plugin's own cleaning drops, quotes admonitions and restores linked code-block filenames.
+      autoclean: false
+      preprocess: publish-tool/llmstxt_preprocess.py
       markdown_description: Self-hosted videoconference solution and SDK
       sections:
         OpenVidu:
