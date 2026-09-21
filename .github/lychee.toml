@@ -32,6 +32,7 @@ exclude = [
     "^https?://(www\\.)?(twitter|x)\\.com",
     "^https?://(www\\.)?linkedin\\.com",
     "^https?://(www\\.)?npmjs\\.com",
+    "^https?://(www\\.)?whatismyip\\.com",
     # Every publication is a subdomain, so match those too (openvidu.medium.com).
     "^https?://([^/]*\\.)?medium\\.com",
     "^https?://doi\\.org",
