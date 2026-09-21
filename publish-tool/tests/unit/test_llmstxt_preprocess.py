@@ -21,8 +21,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from llmstxt_preprocess import preprocess
 
 #: Markup where the module must agree with `autoclean` exactly. Anything involving an image, a
-#: comparison icon, a tab label, a media link or a code block's filename belongs in the deviation
-#: tests instead.
+#: comparison icon, a tab label, a media link, a code block's filename or a callout belongs in the
+#: deviation tests instead.
 AGREES = {
     "svg": '<p>text <svg viewBox="0 0 1 1"><path d="M0 0"></path></svg> more</p>',
     "permalink": '<h2>Title<a class="headerlink" href="#title" title="Permanent link">¶</a></h2>',
@@ -44,6 +44,7 @@ AGREES = {
         '<div class="highlight"><span class="filename">app.js</span><pre><code>x</code></pre></div>'
     ),
     "anchor-with-text": '<p><a href="/pricing/">Pricing</a></p>',
+    "plain-div": '<div class="grid cards"><p>Not a callout.</p></div>',
     "nested-lists": "<ul><li>one<ul><li>two</li></ul></li></ul>",
 }
 
@@ -235,3 +236,45 @@ def test_a_line_numbered_block_keeps_its_filename_where_autoclean_drops_it():
         "<pre>x = 1\n</pre></div>"
     )
     assert "app.js" not in clean(markup, with_autoclean=True)
+
+
+# -- admonitions and collapsible blocks ---------------------------------------------------
+
+
+def test_an_admonition_becomes_a_blockquote_led_by_its_bold_title():
+    markup = (
+        '<div class="admonition warning"><p class="admonition-title">Warning</p>'
+        "<p>Back up first.</p><ul><li>one</li></ul></div>"
+    )
+    assert clean(markup, with_autoclean=False) == (
+        "<blockquote><p><strong>Warning</strong></p>"
+        "<p>Back up first.</p><ul><li>one</li></ul></blockquote>"
+    )
+    # autoclean keeps the div, and markdownify prints its title as a stray paragraph.
+    assert clean(markup, with_autoclean=True) == markup
+
+
+def test_an_admonition_without_a_title_is_still_quoted():
+    markup = '<div class="admonition note"><p>Just this.</p></div>'
+    assert clean(markup, with_autoclean=False) == "<blockquote><p>Just this.</p></blockquote>"
+
+
+def test_a_collapsible_block_is_quoted_with_its_summary_as_the_title():
+    markup = (
+        '<details class="question"><summary>Nothing appears?</summary>'
+        "<p>Check the console.</p></details>"
+    )
+    assert clean(markup, with_autoclean=False) == (
+        "<blockquote><p><strong>Nothing appears?</strong></p><p>Check the console.</p></blockquote>"
+    )
+
+
+def test_a_nested_admonition_is_quoted_inside_its_parent():
+    markup = (
+        '<div class="admonition info"><p class="admonition-title">Info</p>'
+        '<div class="admonition tip"><p class="admonition-title">Tip</p><p>x</p></div></div>'
+    )
+    assert clean(markup, with_autoclean=False) == (
+        "<blockquote><p><strong>Info</strong></p>"
+        "<blockquote><p><strong>Tip</strong></p><p>x</p></blockquote></blockquote>"
+    )

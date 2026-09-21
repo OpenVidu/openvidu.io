@@ -44,6 +44,7 @@ while the words describing the asset are not.
 | A link whose only content is an image or video becomes that asset's alt text, unlinked | `autoclean` removes an `<a>` around an `<img>` but not around a `<video>`, so markdownify writes an empty link. |
 | Tab labels are kept, as a bold line before each tab's block | Without them a tabbed block is a run of code blocks with nothing saying which is Linux, Windows or macOS — silently ambiguous rather than visibly missing. |
 | A code block keeps its linked filename | Pygments 2.20.0 escapes the `<a>` our fences put in `title=`, so the export would print raw HTML; `pygments_fence_title_hook.py` does the same for the page's HTML. A line-numbered block's filename header is kept too, where `autoclean` drops it with the numbers. |
+| An admonition or a collapsible block becomes a blockquote, its title a bold first line | As plain paragraphs the title reads as a stray word and nothing marks where the callout ends and the page resumes — and 3.8 has 668 of them. |
 
 Two layers of checking, because "identical to `autoclean` except on purpose" is the whole promise:
 

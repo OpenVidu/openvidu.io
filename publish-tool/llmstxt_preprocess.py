@@ -37,6 +37,10 @@ URL is worthless to it while the words describing the asset are not.
    converted by the time any hook runs). A line-numbered block's filename header is kept too,
    where `autoclean` drops it along with the numbers.
 
+6. An admonition or a collapsible block becomes a blockquote, its title a bold first line. As the
+   plain paragraphs markdownify would make of the `<div>`, the title reads as a stray word and
+   nothing marks where the callout ends and the page resumes.
+
 This file is copied verbatim onto the `X.Y` version branches from 3.4 and into
 livekit-tutorials-docs (`hooks/`): the plugin loads it by path from the checked-out branch. Edit it
 here, then re-copy it; `ovweb doctor` reports a copy that differs.
@@ -82,6 +86,7 @@ def preprocess(soup: BeautifulSoup, output: str) -> None:
     _replace_media_links(soup)
     _replace_images_with_alt(soup)
     _remove_decoration(soup)
+    _quote_callouts(soup)
     _unwrap_mkdocstrings(soup)
     _restore_fence_title_links(soup)
     _flatten_code_tables(soup)
@@ -163,6 +168,32 @@ def _restore_fence_title_links(soup: BeautifulSoup) -> None:
         if span.find("a") is None and text.startswith("<a ") and text.endswith("</a>"):
             span.clear()
             span.extend(list(BeautifulSoup(text, "html.parser").contents))
+
+
+def _quote_callouts(soup: BeautifulSoup) -> None:
+    """`div.admonition` and `<details>` -> `<blockquote>`, led by the title (or summary) in bold.
+
+    Document order, so a nested callout is quoted inside its parent's quote.
+    """
+    for box in soup.find_all(["div", "details"]):
+        if box.name == "div" and "admonition" not in (box.get("class") or ()):
+            continue
+        title = (
+            box.find("summary", recursive=False)
+            if box.name == "details"
+            else box.find("p", attrs={"class": "admonition-title"}, recursive=False)
+        )
+        quote = soup.new_tag("blockquote")
+        if title is not None:
+            heading = soup.new_tag("p")
+            strong = soup.new_tag("strong")
+            strong.string = title.get_text().strip()
+            heading.append(strong)
+            title.decompose()
+            quote.append(heading)
+        for child in list(box.children):
+            quote.append(child.extract())
+        box.replace_with(quote)
 
 
 # -- everything below reproduces the plugin's own `autoclean` -----------------------------
