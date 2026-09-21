@@ -2,7 +2,7 @@
 
 > **Info**
 >
-> OpenVidu High Availability is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](/account/) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu High Availability is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains the instructions to deploy a production-ready OpenVidu High Availability deployment in Google Cloud Platform. Deployed services are the same as the [On Premises High Availability installation](https://openvidu.io/3.5/docs/self-hosting/ha/gcp/on-premises/install.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
