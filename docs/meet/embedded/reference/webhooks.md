@@ -28,8 +28,6 @@ Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-i
 
 ## Configuration
 
-
-
 Webhooks are managed from the **"Embedded"** page of the OpenVidu Meet app, where **admin** users can add, edit, pause, test and delete them. Testing sends a fake `testEvent` to the endpoint and reports whether it answered successfully.
 
 ![Webhook list in the Embedded page of the OpenVidu Meet console](../../../assets/images/meet/embedded/reference/webhook-dark.png#only-dark){ .round-corners loading=lazy }
@@ -64,7 +62,7 @@ The steps to validate a webhook event in your backend are the following, given t
 
 1. Get the `x-signature` and `x-timestamp` headers from the request.
 2. Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-3. Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+3. Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
 4. Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
 5. Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparison to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -80,7 +78,9 @@ Below there are code snippets in different languages, showing the exact implemen
     const OPENVIDU_MEET_API_KEY = "YOUR_API_KEY";
     const MAX_WEBHOOK_AGE = 120 * 1000; // 2 minutes in milliseconds
 
-    function isWebhookEventValid(body, headers) {
+    // `rawBody` is the request body as received. With Express, keep it with
+    // express.json({ verify: (req, _res, buf) => { req.rawBody = buf.toString("utf8"); } })
+    function isWebhookEventValid(rawBody, headers) {
         const signature = headers["x-signature"]; // (1)!
         const timestamp = parseInt(headers["x-timestamp"], 10);
 
@@ -95,7 +95,7 @@ Below there are code snippets in different languages, showing the exact implemen
             return false;
         }
 
-        const signedPayload = `${timestamp}.${JSON.stringify(body)}`; // (3)!
+        const signedPayload = `${timestamp}.${rawBody}`; // (3)!
         const expectedSignature = crypto // (4)!
             .createHmac("sha256", OPENVIDU_MEET_API_KEY)
             .update(signedPayload, "utf8")
@@ -110,7 +110,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -130,7 +130,9 @@ Below there are code snippets in different languages, showing the exact implemen
         private static final long MAX_WEBHOOK_AGE = 120 * 1000; // 2 minutes in milliseconds
         private static final String OPENVIDU_MEET_API_KEY = "YOUR_API_KEY";
 
-        public static boolean isWebhookEventValid(Object body, Map<String, String> headers) {
+        // Declare the controller parameter as `@RequestBody String rawBody` so Spring hands over
+        // the body as received instead of a parsed object.
+        public static boolean isWebhookEventValid(String rawBody, Map<String, String> headers) {
             String signature = headers.get("x-signature"); // (1)!
             String ts = headers.get("x-timestamp");
             if (signature == null || ts == null) return false;
@@ -149,7 +151,7 @@ Below there are code snippets in different languages, showing the exact implemen
                 return false;
             }
 
-            String signedPayload = timestamp + "." + body.toString(); // (3)!
+            String signedPayload = timestamp + "." + rawBody; // (3)!
 
             try {
                 Mac mac = Mac.getInstance("HmacSHA256");
@@ -193,7 +195,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -256,7 +258,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -267,13 +269,13 @@ Below there are code snippets in different languages, showing the exact implemen
     ```python
     import hmac
     import hashlib
-    import json
     import time
 
     MAX_WEBHOOK_AGE = 120 * 1000  # 2 minutes in milliseconds
     OPENVIDU_MEET_API_KEY = "YOUR_API_KEY"
 
-    def is_webhook_event_valid(body, headers):
+    # `raw_body` is the request body as received: with Flask, `request.get_data(as_text=True)`.
+    def is_webhook_event_valid(raw_body, headers):
         signature = headers.get("x-signature")  # (1)!
         timestamp_str = headers.get("x-timestamp")
         if not signature or not timestamp_str:
@@ -289,8 +291,7 @@ Below there are code snippets in different languages, showing the exact implemen
         if diff_time >= MAX_WEBHOOK_AGE:  # (2)!
             return False
 
-        json_body = json.dumps(body, separators=(",", ":"))
-        signed_payload = str(timestamp) + "." + json_body  # (3)!
+        signed_payload = str(timestamp) + "." + raw_body  # (3)!
 
         expected = hmac.new(  # (4)!
             OPENVIDU_MEET_API_KEY.encode('utf-8'),
@@ -303,7 +304,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -317,7 +318,8 @@ Below there are code snippets in different languages, showing the exact implemen
     const MAX_WEBHOOK_AGE = 120 * 1000; // 2 minutes in milliseconds
     const OPENVIDU_MEET_API_KEY = "YOUR_API_KEY";
 
-    function isWebhookEventValid($body, $headers)
+    // `$rawBody` is the request body as received: `file_get_contents('php://input')`.
+    function isWebhookEventValid($rawBody, $headers)
     {
         $signature = $headers['x-signature'] ?? null; // (1)!
         $timestampStr = $headers['x-timestamp'] ?? null;
@@ -336,7 +338,7 @@ Below there are code snippets in different languages, showing the exact implemen
             return false;
         }
 
-        $signedPayload = $timestamp . '.' . json_encode($body, JSON_UNESCAPED_SLASHES); // (3)!
+        $signedPayload = $timestamp . '.' . $rawBody; // (3)!
 
         $expected = hash_hmac('sha256', $signedPayload, OPENVIDU_MEET_API_KEY); // (4)!
 
@@ -348,7 +350,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -401,7 +403,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -416,7 +418,8 @@ Below there are code snippets in different languages, showing the exact implemen
     MAX_WEBHOOK_AGE = 120 * 1000 # 2 minutes in milliseconds
     OPENVIDU_MEET_API_KEY = "YOUR_API_KEY"
 
-    def webhook_event_valid?(body, headers)
+    # `raw_body` is the request body as received: with Sinatra, `request.body.read`.
+    def webhook_event_valid?(raw_body, headers)
         signature = headers['x-signature'] # (1)!
         timestamp_str = headers['x-timestamp']
         return false if signature.nil? || timestamp_str.nil?
@@ -431,7 +434,7 @@ Below there are code snippets in different languages, showing the exact implemen
         diff_time = current - timestamp
         return false if diff_time >= MAX_WEBHOOK_AGE # (2)!
 
-        signed_payload = "#{timestamp}.#{body.to_json}" # (3)!
+        signed_payload = "#{timestamp}.#{raw_body}" # (3)!
 
         expected = OpenSSL::HMAC.hexdigest('SHA256', OPENVIDU_MEET_API_KEY, signed_payload) # (4)!
 
@@ -441,7 +444,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
@@ -508,7 +511,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
     1.  1) Get the `x-signature` and `x-timestamp` headers from the request.
     2.  2) Compare the `x-timestamp` header value with the current Unix timestamp. If the difference is greater than a predefined threshold (e.g., 2 minutes), reject it to prevent [replay attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Replay_attack){:target="_blank"}.
-    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the JSON request body.
+    3.  3) Concatenate in a single string the `x-timestamp` header value + character `.` + the request body **exactly as received, before parsing it**. Signing a re-serialized copy of the parsed body is not guaranteed to reproduce the bytes that were signed, and fails outright in languages whose JSON encoder escapes non-ASCII characters.
     4.  4) Create a HMAC SHA256 hash of the string of point 3) using your OpenVidu Meet API key as the key.
     5.  5) Compare the computed hash of point 4) with the `x-signature` header value. Do a time safe comparisson to avoid [timing attacks :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/Timing_attack){:target="_blank"}. If they match, the request is valid.
 
