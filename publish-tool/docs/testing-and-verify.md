@@ -30,18 +30,17 @@ Three of them are worth knowing about, because they are what keeps the rest hone
 [`llmstxt_preprocess.py`](../llmstxt_preprocess.py) replaces the `mkdocs-llmstxt` plugin's own
 `autoclean`, which `mkdocs.yml` turns off. It has to be a replacement rather than an addition,
 because the plugin runs `autoclean` **before** the `preprocess` hook and `autoclean` deletes every
-`<img>` and `<svg>` — so by the time a hook sees the page, the alt text, the comparison-table icons
+`twemoji` and the tab label bar — so by the time a hook sees the page, the comparison-table icons
 and the tab labels are already gone.
 
-Everything `autoclean` did is reimplemented, and the things below deliberately differ. They share
-one premise: an assistant cannot see an image or watch a video, so the asset URL is worthless to it
-while the words describing the asset are not.
+Everything `autoclean` did is reimplemented, and the things below deliberately differ. They serve
+one reader, an assistant that cannot see the page: what it gets must read as the page does, and
+nothing it cannot use may pass for prose.
 
 | Deviation | Why |
 | --- | --- |
-| An `<img>` becomes its `alt` text | Most of the site's images carry informative alt text, all of which `autoclean` discards. Images with no usable alt are still removed, and only one of a Material light/dark pair contributes, or the text appears twice. |
-| A comparison-table icon becomes `Yes` / `No` / `In progress` | The markup already says which — `class="twemoji compare-table-icon-yes"` — so the table exports as data with no change to the content. |
-| A link whose only content is an image or video becomes that asset's alt text, unlinked | `autoclean` removes an `<a>` around an `<img>` but not around a `<video>`, so markdownify writes an empty link. |
+| A comparison-table icon becomes `Yes` / `No` / `In progress`, and the product logos heading the table become their `alt` text | The markup already says which — `class="twemoji compare-table-icon-yes"` — so the table exports as data with no change to the content. Every other image is removed as `autoclean` does: the site's alt texts are caption-length labels, which on a line of their own read as sentences of the page. |
+| A link whose only content is an image or video is dropped whole; one with words of its own keeps them and its URL | `autoclean` removes an `<a>` around an `<img>` but not around a `<video>`, so markdownify writes an empty link — and it drops a link with real text in it along with the image. |
 | Tab labels are kept, as a bold line before each tab's block | Without them a tabbed block is a run of code blocks with nothing saying which is Linux, Windows or macOS — silently ambiguous rather than visibly missing. |
 | A code block keeps its linked filename | Pygments 2.20.0 escapes the `<a>` our fences put in `title=`, so the export would print raw HTML; `pygments_fence_title_hook.py` does the same for the page's HTML. A line-numbered block's filename header is kept too, where `autoclean` drops it with the numbers. |
 | An admonition or a collapsible block becomes a blockquote, its title a bold first line | As plain paragraphs the title reads as a stray word and nothing marks where the callout ends and the page resumes — and 3.8 has 668 of them. |

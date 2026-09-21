@@ -405,8 +405,9 @@ plugins:
         layer you build your own real-time application on. The "Optional" section at the end
         holds legal and acknowledgment pages, and can be skipped when a shorter context is
         needed.
-      # The plugin's own cleaning drops every <img>/<svg> before the preprocess hook runs, so
-      # llmstxt_preprocess.py reimplements it and keeps alt text, table icons and tab labels.
+      # The plugin's own cleaning runs before the preprocess hook and drops the tab labels and
+      # comparison icons, so llmstxt_preprocess.py reimplements it: it keeps those, exports
+      # admonitions as blockquotes and restores the code blocks' linked filenames.
       autoclean: false
       preprocess: publish-tool/llmstxt_preprocess.py
       # Paths only: mkdocs_hook.py fills in each page's own `title` and `description`, and a

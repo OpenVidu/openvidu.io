@@ -20,11 +20,21 @@ from mkdocs_llmstxt._internal.preprocess import autoclean
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from llmstxt_preprocess import preprocess
 
-#: Markup where the module must agree with `autoclean` exactly. Anything involving an image, a
-#: comparison icon, a tab label, a media link, a code block's filename or a callout belongs in the
+#: Markup where the module must agree with `autoclean` exactly. Anything involving a comparison
+#: icon or logo, a tab label, a media link, a code block's filename or a callout belongs in the
 #: deviation tests instead.
 AGREES = {
     "svg": '<p>text <svg viewBox="0 0 1 1"><path d="M0 0"></path></svg> more</p>',
+    "image": '<p>a<img alt="A room with three participants" src="/assets/x.png">b</p>',
+    "image-without-alt": '<p>a<img src="x.png">b</p>',
+    "image-with-empty-alt": '<p>a<img src="x.png" alt="">b</p>',
+    "light-dark-pair": (
+        '<p><img alt="The dashboard" src="/a.png#only-light">'
+        '<img alt="The dashboard" src="/a.png#only-dark"></p>'
+    ),
+    "image-link": (
+        '<p><a href="/full.png"><img alt="Room settings dialog" src="/thumb.png"></a></p>'
+    ),
     "permalink": '<h2>Title<a class="headerlink" href="#title" title="Permanent link">¶</a></h2>',
     "twemoji": '<p>ok <span class="twemoji"><svg><path d="M0"></path></svg></span></p>',
     "twemoji-with-other-classes": '<p><span class="twemoji icon lg-icon">x</span>y</p>',
@@ -74,28 +84,7 @@ def test_matches_autoclean_on_all_of_them_at_once():
     assert clean(markup, with_autoclean=False) == clean(markup, with_autoclean=True)
 
 
-def test_an_image_without_alt_text_is_removed_exactly_as_autoclean_would():
-    """The deviation is about *keeping the words*, so an image with no words is not a deviation."""
-    for markup in ('<p>a<img src="x.png">b</p>', '<p>a<img src="x.png" alt="">b</p>'):
-        assert clean(markup, with_autoclean=False) == clean(markup, with_autoclean=True)
-
-
 # -- half two: the deviations, each one deliberate ---------------------------------------
-
-
-def test_an_image_becomes_its_alt_text():
-    markup = '<p><img alt="A room with three participants" src="/assets/x.png"></p>'
-    assert "A room with three participants" in clean(markup, with_autoclean=False)
-    assert "A room with three participants" not in clean(markup, with_autoclean=True)
-
-
-def test_only_one_of_a_light_dark_pair_contributes_its_text():
-    """Material renders the pair as two images with the same alt; both would read as a stutter."""
-    markup = (
-        '<p><img alt="The dashboard" src="/a.png#only-light">'
-        '<img alt="The dashboard" src="/a.png#only-dark"></p>'
-    )
-    assert clean(markup, with_autoclean=False).count("The dashboard") == 1
 
 
 @pytest.mark.parametrize(
@@ -115,37 +104,32 @@ def test_the_comparison_table_header_recovers_the_product_names():
     """The header row is product logos, which is why the table exported with no header at all."""
     markup = '<tr><th></th><th><img alt="OpenVidu Meet" class="compare-table-logo"></th></tr>'
     assert clean(markup, with_autoclean=False) == "<tr><th></th><th>OpenVidu Meet</th></tr>"
+    assert clean(markup, with_autoclean=True) == "<tr><th></th><th></th></tr>"
 
 
-def test_a_link_wrapping_a_video_becomes_its_alt_text_not_an_empty_link():
+def test_only_one_logo_of_a_light_dark_pair_names_the_product():
+    markup = (
+        '<th><img alt="OpenVidu Meet" class="compare-table-logo" src="/m.png#only-dark">'
+        '<img alt="OpenVidu Meet" class="compare-table-logo" src="/m.png#only-light"></th>'
+    )
+    assert clean(markup, with_autoclean=False) == "<th>OpenVidu Meet</th>"
+
+
+def test_a_link_wrapping_a_video_is_dropped_rather_than_left_as_an_empty_link():
     """`autoclean` leaves this anchor alone, so markdownify writes an empty `[](…mp4)` link."""
     markup = (
         '<p><a class="glightbox" href="/assets/videos/demo.mp4">'
         '<video src="/assets/videos/demo-preview.mp4" poster="/p.jpg"></video></a></p>'
     )
-    cleaned = clean(markup, with_autoclean=False)
-    assert "demo.mp4" not in cleaned
-    assert "<a" not in cleaned
-
-
-def test_a_link_wrapping_an_image_keeps_the_words_and_drops_the_url():
-    markup = '<p><a href="/full.png"><img alt="Room settings dialog" src="/thumb.png"></a></p>'
-    cleaned = clean(markup, with_autoclean=False)
-    assert "Room settings dialog" in cleaned
-    assert "full.png" not in cleaned
-
-
-def test_a_media_link_with_nothing_to_say_is_dropped_entirely():
-    markup = '<p><a href="/v.mp4"><video src="/v.mp4"></video></a></p>'
     assert clean(markup, with_autoclean=False) == "<p></p>"
+    assert "demo.mp4" in clean(markup, with_autoclean=True)
 
 
 def test_a_link_that_has_real_text_as_well_as_an_image_survives():
-    """Only *purely* decorative anchors lose their URL."""
+    """Only *purely* decorative anchors go; `autoclean` would drop this one whole."""
     markup = '<p><a href="/docs/"><img alt="icon" src="/i.png">Read the docs</a></p>'
-    cleaned = clean(markup, with_autoclean=False)
-    assert 'href="/docs/"' in cleaned
-    assert "Read the docs" in cleaned
+    assert clean(markup, with_autoclean=False) == '<p><a href="/docs/">Read the docs</a></p>'
+    assert "Read the docs" not in clean(markup, with_autoclean=True)
 
 
 def test_tab_labels_are_kept_against_their_own_block():
