@@ -50,7 +50,8 @@
      The plugin matches with `fnmatch`, where **`*` crosses `/`** — so `meet/features/*.md`
      covers the whole subtree, but `docs/*.md` would swallow every page under `docs/` rather than
      just the top-level ones. A literal segment is what fences a glob in: `single-node/*/*.md`
-     takes the 24 provider guides but not `single-node/index.md`.
+     takes the 12 provider guides (six providers × `install.md` + `admin.md`) but not
+     `single-node/index.md`.
 
 4. **Update the site layout (if needed)**: if the new page starts a **new area**, add its folder
    to the `layout` section of [`publish-tool/ovweb.yaml`](../publish-tool/ovweb.yaml) — to
@@ -94,8 +95,9 @@ page uses it. **Never leave files directly at the `images/` or `videos/` root** 
 asset in the folder matching its page:
 
 - **Versioned docs** mirror the docs tree under a product folder: an image for
-  `docs/meet/meetings/live-captions.md` goes in `images/meet/meetings/live-captions/`, and one
-  for `docs/docs/self-hosting/production-ready/performance.md` goes in
+  `docs/meet/features/meetings/live-captions.md` goes in `images/meet/meetings/live-captions/`
+  (Meet's `features/` level is flattened away), and one for
+  `docs/docs/self-hosting/production-ready/performance.md` goes in
   `images/platform/self-hosting/production-ready/performance/` (`docs/docs/**` ↔
   `images/platform/**`).
 - **Non-versioned root pages** get a top-level folder named after the page: `images/home/`

@@ -67,21 +67,14 @@ class Mike:
             args.append(alias)
         self._run(args)
 
-    def delete(self, version: str) -> bool:
-        """Remove `version` from the local gh-pages. Returns whether it was there.
+    def delete(self, version: str) -> None:
+        """Remove `version` from the local gh-pages.
 
-        A missing version is tolerated: the first publish of a version under a new name has
-        nothing to delete yet.
+        The caller decides whether the version is published (`discovery.published_versions`);
+        here any failure is a failure, so a broken delete cannot be followed by a deploy on top
+        of the stale folder.
         """
-        try:
-            self._run(["delete", version])
-            return True
-        except MikeError:
-            if self._log is not None:
-                self._log.info(  # type: ignore[attr-defined]
-                    f"Version {version} is not published yet; nothing to delete."
-                )
-            return False
+        self._run(["delete", version])
 
     @staticmethod
     def version() -> str | None:

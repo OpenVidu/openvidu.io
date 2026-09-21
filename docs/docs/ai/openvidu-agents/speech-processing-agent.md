@@ -75,7 +75,7 @@ enabled: false
 # Maximum CPU load threshold for the agent to accept new jobs. Value between 0 and 1.
 load_threshold: 0.7
 
-# Log level for the agent [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+# Log level for the agent [DEBUG, INFO, WARN, ERROR, CRITICAL]
 log_level: INFO
 
 live_captions:
@@ -302,18 +302,14 @@ live_captions:
     api_key:
     # ISO 639-1 language code. All languages are global and can understand different dialects/accents. To see the list of all supported languages, see https://docs.speechmatics.com/speech-to-text/languages#transcription-languages
     language:
-    # Operating point to use for the transcription per required accuracy & complexity. To learn more, see https://docs.speechmatics.com/speech-to-text/languages#operating-points
-    operating_point:
+    # Transcription model, e.g. "linden-1". See https://docs.livekit.io/agents/models/stt/speechmatics/
+    model:
     # Partial transcripts allow you to receive preliminary transcriptions and update as more context is available until the higher-accuracy final transcript is returned. Partials are returned faster but without any post-processing such as formatting. See https://docs.speechmatics.com/speech-to-text/realtime/output#partial-transcripts
     enable_partials:
     # Enable speaker diarization. When enabled, the STT engine will determine and attribute words to unique speakers. The speaker_sensitivity parameter can be used to adjust the sensitivity of diarization
     enable_diarization:
     # RFC-5646 language code to make spelling rules more consistent in the transcription output. See https://docs.speechmatics.com/features/word-tagging#output-locale
     output_locale:
-    # The delay in seconds between the end of a spoken word and returning the final transcript results. See https://docs.speechmatics.com/features/realtime-latency#configuration-example
-    max_delay:
-    # See https://docs.speechmatics.com/features/realtime-latency#configuration-example
-    max_delay_mode:
     # Configuration for speaker diarization. See https://docs.speechmatics.com/features/diarization
     speaker_diarization_config:
       # See https://docs.speechmatics.com/features/diarization#max-speakers
@@ -322,11 +318,9 @@ live_captions:
       speaker_sensitivity:
       # See https://docs.speechmatics.com/features/diarization#prefer-current-speaker
       prefer_current_speaker:
-    # Permitted punctuation marks for advanced punctuation. See https://docs.speechmatics.com/features/punctuation-settings
-    # Commented is an example of punctuation settings
-    punctuation_overrides:
-      # permitted_marks: [ ".", "," ]
-      # sensitivity: 0.4
+    # Formatter for speaker identification in the transcript, with the {speaker_id} and {text}
+    # placeholders, e.g. "{speaker_id}: {text}". Unset leaves the transcript unformatted.
+    speaker_format:
     # See https://docs.speechmatics.com/features/custom-dictionary
     # Commented below is an example of a custom dictionary
     additional_vocab:
@@ -381,6 +375,8 @@ live_captions:
   soniox:
     # API key for Soniox. See https://console.soniox.com/
     api_key:
+    # The Soniox STT model to use. Defaults to "stt-rt-v5". See https://soniox.com/docs/stt/models
+    model:
     # Set language hints when possible to significantly improve accuracy. See: https://soniox.com/docs/stt/concepts/language-hints
     language_hints:
       # - "en"
@@ -413,7 +409,7 @@ live_captions:
   spitch:
     # API key for Spitch. See https://docs.spitch.app/keys
     api_key:
-    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/features/transcription#parameters
     language:
 
   elevenlabs:

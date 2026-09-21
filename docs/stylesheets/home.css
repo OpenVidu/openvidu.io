@@ -10,26 +10,21 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 49%), 1fr));
 }
 
-@media (max-width: 959px) {
-  .feature-cards .grid.cards.two-columns {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  }
-}
-
 .feature-cards .grid.cards.three-columns {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 49%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 32%), 1fr));
 }
 
 @media (max-width: 959px) {
+  .feature-cards .grid.cards.two-columns,
   .feature-cards .grid.cards.three-columns {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   }
 }
 
 .feature-cards .grid.cards > ul > li {
-  border: solid transparent !important;
-  margin: 0.5rem 0.9rem !important;
-  padding: 0.9rem !important;
+  border: solid transparent;
+  margin: 0.5rem 0.9rem;
+  padding: 0.9rem;
 }
 
 .feature-cards .grid.cards > ul > li:hover {
@@ -54,6 +49,18 @@
   font-size: 1.5em;
   margin-left: 16px;
   font-weight: 600;
+}
+
+/* Three per row: tighter cards, smaller names */
+.feature-cards .grid.cards.three-columns > ul > li {
+  margin: 0.3rem 0.9rem;
+  padding: 0.6rem;
+}
+
+.feature-cards .grid.cards.three-columns > ul > li .feature-name {
+  font-size: 1.05em;
+  margin-left: 14px;
+  font-weight: 500;
 }
 
 .padding-icon {
@@ -102,10 +109,6 @@
 
 .feature-cards .grid.cards > ul > li:hover::before {
   opacity: 0.6;
-}
-
-.feature-cards .two-columns li {
-  transition: background-color 0.4s ease;
 }
 
 .feature-cards .two-columns li:hover {

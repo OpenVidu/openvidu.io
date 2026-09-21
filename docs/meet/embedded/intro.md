@@ -3,6 +3,8 @@ description: "Add video calls to your own application with a single line of HTML
 title: "Embed OpenVidu Meet in your application"
 ---
 
+# Embed OpenVidu Meet in your application
+
 With **OpenVidu Meet Embedded**, you can integrate the best video calling experience directly into your own application:
 
 - Quick setup using a **URL**, an **iframe** or a **Web Component**.

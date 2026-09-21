@@ -7,7 +7,9 @@ name = "ovweb"
 version = "1.0.0"
 description = "Build, version and publish the openvidu.io website"
 readme = "README.md"
-requires-python = ">=3.10"
+# The Python in squidfunk/mkdocs-material 9.7.7, the oldest interpreter this code runs on:
+# the mkdocs hook imports this package inside that image when the site is served locally.
+requires-python = ">=3.11"
 dependencies = [
     "typer>=0.12",
     "PyYAML>=6",
@@ -28,6 +30,10 @@ build = [
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
+    "gitpython==3.1.59",
+    # The build backend, so the publish workflow can install this package with
+    # --no-build-isolation from the hash-locked requirements-publish.txt.
+    "hatchling==1.32.0",
 ]
 # Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
@@ -38,6 +44,7 @@ validate = [
     "mkdocs-glightbox==0.5.2",
     "mkdocs-llmstxt==0.5.0",
     "mkdocs-rss-plugin==1.19.0",
+    "gitpython==3.1.59",
 ]
 dev = [
     "pytest>=8",
@@ -65,7 +72,7 @@ packages = ["src/ovweb"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 src = ["src", "tests"]
 
 [tool.ruff.lint]

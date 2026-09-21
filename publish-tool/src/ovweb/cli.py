@@ -67,6 +67,8 @@ app.add_typer(versions_app, name="versions")
 
 # Errors that are the user's problem, not a bug: report the message, not a traceback.
 EXPECTED_ERRORS = (
+    # A built file the post-processing reads is missing or unreadable: reported, not a traceback.
+    OSError,
     ConfigError,
     GitError,
     MikeError,
@@ -655,7 +657,7 @@ def lint_command(
 
     Covers raw-HTML links and images, link form in the files that move at publish,
     version-pin discipline, SEO field lengths and uniqueness, admonition syntax, the
-    functional `tags:` contract, and asset placement — over the source tree, in seconds,
+    `page_features:` contract, and asset placement — over the source tree, in seconds,
     with no build. With `--site DIR` (a `mkdocs build` output), it additionally resolves
     every internal link and anchor against the built HTML, where the tab anchors MkDocs's
     own validator cannot see really exist. With `--against REF`, every page that existed

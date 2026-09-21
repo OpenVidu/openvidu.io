@@ -67,10 +67,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
           sudo apt-get install -y --fix-missing pngquant
-          # Installed NON-editable on purpose: publishing a past version checks out that
-          # version's branch, which does not contain this package. From site-packages the tool
-          # and its configuration survive every branch switch.
-          pip install "./publish-tool[build]"
+          # Every dependency comes from the hash-locked requirements-publish.txt (generated
+          # from the [build] extra; see publish-tool/README.md, "Dependency pins"), so a
+          # tampered or substituted release cannot reach a job that holds a write token.
+          pip install --require-hashes -r publish-tool/requirements-publish.txt
+          # The tool itself, installed NON-editable on purpose: publishing a past version checks
+          # out that version's branch, which does not contain this package. From site-packages
+          # the tool and its configuration survive every branch switch. Its build backend is in
+          # the lock, hence no build isolation.
+          pip install --no-deps --no-build-isolation ./publish-tool
 
       - name: Configure Git Credentials
         run: |
@@ -84,12 +89,15 @@ jobs:
       - name: Publish
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+          # Free text typed into the dispatch form: it reaches the shell as a quoted variable, so
+          # bash never interprets it. ovweb validates the X.Y format on top.
+          VERSION: ${{ inputs.version }}
         # --verbose and --dry-run are global options, so they belong before the subcommand.
         # ovweb also accepts them after it, but keeping the canonical order here keeps the log
         # readable as something you can paste into a terminal.
         run: |
           ovweb --verbose ${{ inputs.dry_run && '--dry-run' || '' }} \
-            publish ${{ inputs.command }} ${{ inputs.version }}
+            publish ${{ inputs.command }} "$VERSION"
 
       - name: Verify the published tree
         if: ${{ !inputs.dry_run }}

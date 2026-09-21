@@ -23,22 +23,22 @@ The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin da
 
 ## Running this tutorial
 
-#### 1. Run OpenVidu Server
+### 1. Run OpenVidu Server
 
 --8<-- "tutorials/run-openvidu-server.md"
 
-#### 2. Download the tutorial code
+### 2. Download the tutorial code
 
 ```bash
 git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
 git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
 ```
 
-#### 3. Run a server application
+### 3. Run a server application
 
 --8<-- "tutorials/application-server/tabs.md"
 
-#### 4. Run the openvidu-admin-dashboard tutorial
+### 4. Run the openvidu-admin-dashboard tutorial
 
 To run the client application tutorial, you need [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/en/download){:target="_blank"} installed on your development computer.
 

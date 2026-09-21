@@ -13,7 +13,9 @@ Run from the repo root:
 ovweb lint
 ```
 
-(If `ovweb` is not installed: `pip install -e "./publish-tool[validate]"` first.)
+(If `ovweb` is not installed: `pip install -e "./publish-tool[validate]"` first — enough for lint
+and the strict build. `ovweb doctor` is not part of this command; it needs the non-editable
+`pip install "./publish-tool[build]"`.)
 
 It reports `[check] file:line: message — hint` lines at three severities. Act on them:
 

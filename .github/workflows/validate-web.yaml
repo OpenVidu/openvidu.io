@@ -82,10 +82,13 @@ jobs:
         # on the build. On PRs, additionally: every page the PR removes or renames must be
         # claimed by a redirect rule in ovweb.yaml — retiring a published URL silently is the
         # 404 class that only surfaces months later in Search Console.
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            git fetch --no-tags --depth=1 origin "+refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
-            ovweb lint --against "origin/${{ github.base_ref }}"
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+            ovweb lint --against "origin/$BASE_REF"
           else
             ovweb lint
           fi

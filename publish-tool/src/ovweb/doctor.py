@@ -28,10 +28,13 @@ PINNED_DISTRIBUTIONS = (
     "mkdocs-llmstxt",
     "mkdocs-rss-plugin",
     "pygments",
+    # Pulled in by mkdocs-rss-plugin; pinned because it has had security releases of its own.
+    "gitpython",
 )
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
-DOCKER_TAG = re.compile(r"^FROM\s+squidfunk/mkdocs-material:(\S+)", re.MULTILINE)
+#: The tag may carry a digest (`9.7.7@sha256:…`); the version is the part before it.
+DOCKER_TAG = re.compile(r"^FROM\s+squidfunk/mkdocs-material:([^@\s]+)", re.MULTILINE)
 
 
 @dataclass
@@ -48,13 +51,21 @@ def run_checks(
     """Run the preflight checks and return them in reporting order."""
     checks: list[Check] = []
 
-    if repo_root is not None:
-        checks += check_pins(repo_root)
+    if repo_root is None:
+        # Every remaining check reads the checkout; without one there is nothing to certify.
+        checks.append(
+            Check(
+                "repo", False, "not inside a git repository; run from the checkout or pass --repo"
+            )
+        )
+        return checks
+
+    checks += check_pins(repo_root)
     if pins_only:
         return checks
 
     checks += _check_dependencies()
-    checks += _check_config(repo)
+    checks += _check_config(repo, repo_root=repo_root)
     if repo is not None:
         checks += _check_git(repo)
     return checks
@@ -150,7 +161,7 @@ def _check_dependencies() -> list[Check]:
     ]
 
 
-def _check_config(repo: Git | None) -> list[Check]:
+def _check_config(repo: Git | None, *, repo_root: Path | None = None) -> list[Check]:
     try:
         config = load_site_config()
     except ConfigError as error:
@@ -166,20 +177,28 @@ def _check_config(repo: Git | None) -> list[Check]:
         )
     ]
     checks.append(_check_redirects_resolve(config, repo))
-    site_url_check = _check_site_url_agreement(config)
+    site_url_check = _check_site_url_agreement(config, repo_root=repo_root)
     if site_url_check is not None:
         checks.append(site_url_check)
     return checks
 
 
-def _check_site_url_agreement(config: SiteConfig) -> Check | None:
-    """mkdocs.yml and ovweb.yaml both name the site URL; a drift breaks every rewrite."""
-    source = Path(config.source)
-    if not source.is_file():  # config parsed from memory (tests)
-        return None
-    mkdocs_yml = source.resolve().parent.parent / "mkdocs.yml"
+def _check_site_url_agreement(config: SiteConfig, *, repo_root: Path | None = None) -> Check | None:
+    """mkdocs.yml and ovweb.yaml both name the site URL; a drift breaks every rewrite.
+
+    `mkdocs.yml` is looked up in the checkout, not next to the config file: the installed
+    package ships its own copy of ovweb.yaml, so the config's location says nothing about
+    where the site sources are.
+    """
+    if repo_root is not None:
+        mkdocs_yml = repo_root / "mkdocs.yml"
+    else:
+        source = Path(config.source)
+        if not source.is_file():  # config parsed from memory (tests)
+            return None
+        mkdocs_yml = source.resolve().parent.parent / "mkdocs.yml"
     if not mkdocs_yml.is_file():
-        return None
+        return Check("config", False, f"{mkdocs_yml} not found; cannot compare site_url")
     match = re.search(r"^site_url:\s*(\S+)", mkdocs_yml.read_text(encoding="utf-8"), re.MULTILINE)
     if match is None:
         return Check("config", False, "mkdocs.yml has no site_url")
