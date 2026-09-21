@@ -262,7 +262,7 @@ commit both:
 
 ```bash
 uv pip compile pyproject.toml --extra build --universal --generate-hashes \
-  --python-version 3.10 --no-header -o requirements-publish.txt
+  --python-version 3.11 --no-header -o requirements-publish.txt
 ```
 
 `--universal` keeps the environment markers, so the same file installs on the 3.10 floor and on
