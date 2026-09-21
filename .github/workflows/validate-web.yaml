@@ -19,7 +19,7 @@ on:
       - "shared/**"
       - "mkdocs.yml"
       # The build reads publish-tool/ovweb.yaml through mkdocs_hook.py, and the pin check
-      # below reads pyproject.toml and both Dockerfiles.
+      # below reads pyproject.toml, requirements-publish.txt and both Dockerfiles.
       - "publish-tool/**"
       - "Dockerfile"
       - "Dockerfile.mike"
@@ -65,9 +65,9 @@ jobs:
 
       - name: Check that the pinned versions agree
         # mkdocs-material is pinned in pyproject.toml and named again as the base-image tag of
-        # both Dockerfiles. They had drifted to three different values before this check
-        # existed, and a different theme version builds different markup — which the
-        # release-notes splice matches on.
+        # both Dockerfiles, and every pin recurs in requirements-publish.txt. They had drifted
+        # to three different values before this check existed, and a different theme version
+        # builds different markup — which the release-notes splice matches on.
         run: ovweb doctor --pins
 
       - name: Validate the redirect configuration

@@ -18,8 +18,9 @@ from .redirects import RedirectError, resolve_file_redirects
 from .versions import parse
 
 #: Every distribution that is a build input, pinned from the freeze of a known-good publish
-#: run. Each is named both in pyproject.toml and in the Dockerfiles (mkdocs-material as the
-#: base-image tag, the rest in the pip install lines), so all the places must agree.
+#: run. Each is named in pyproject.toml, in the Dockerfiles (mkdocs-material as the base-image
+#: tag, the rest in the pip install lines) and in the lock compiled from pyproject.toml, so all
+#: the places must agree.
 PINNED_DISTRIBUTIONS = (
     "mkdocs",
     "pymdown-extensions",
@@ -44,6 +45,8 @@ BRANCH_FILES = (
 )
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
+#: The hash-locked resolution of the `build` extra that the publish workflow installs from.
+LOCKFILE = "publish-tool/requirements-publish.txt"
 #: The tag may carry a digest (`9.7.7@sha256:…`); the version is the part before it.
 DOCKER_TAG = re.compile(r"^FROM\s+squidfunk/mkdocs-material:([^@\s]+)", re.MULTILINE)
 
@@ -89,12 +92,15 @@ def check_pins(
     """Assert that every place naming a pinned distribution names the same version.
 
     The pyproject pins, the Dockerfiles (base-image tag for mkdocs-material, pip install lines
-    for the rest) and the installed environment. A different theme or plugin version builds
-    different markup — which the release-notes splice matches on — so drift is an error, not
-    a warning.
+    for the rest), the lock compiled from pyproject and the installed environment. A different
+    theme or plugin version builds different markup — which the release-notes splice matches
+    on — so drift is an error, not a warning. A lock that lags pyproject is the same drift one
+    step later: the publish workflow installs from the lock, not from pyproject.
     """
     pyproject = repo_root / "publish-tool" / "pyproject.toml"
     pyproject_text = pyproject.read_text(encoding="utf-8") if pyproject.is_file() else ""
+    lockfile = repo_root / LOCKFILE
+    lock_text = lockfile.read_text(encoding="utf-8") if lockfile.is_file() else ""
     dockerfiles = {
         name: (repo_root / name).read_text(encoding="utf-8")
         for name in DOCKERFILES
@@ -132,6 +138,13 @@ def check_pins(
             )
             if match:
                 found[name] = match.group(1)
+
+        if lock_text:
+            match = pin.search(lock_text)
+            if not match:
+                checks.append(Check("pins", False, f"{distribution} is not in {LOCKFILE}"))
+                continue
+            found[LOCKFILE] = match.group(1)
 
         installed = (installed_version or _distribution_version)(distribution)
         if installed:

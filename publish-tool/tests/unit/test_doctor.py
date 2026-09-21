@@ -1,5 +1,6 @@
-"""Two preflight checks: the pins, where every place naming a build input must name the same
-version, and the version branches' copies of the files MkDocs loads by path from the checkout.
+"""Two preflight checks: the pins, where every place naming a build input — pyproject, the
+Dockerfiles, the lock compiled from pyproject, the environment — must name the same version, and
+the version branches' copies of the files MkDocs loads by path from the checkout.
 """
 
 from __future__ import annotations
@@ -41,10 +42,30 @@ DOCKERFILE = (
     "mkdocs-rss-plugin==1.19.0 pygments==2.19.2 gitpython==3.1.59\n"
 )
 
+#: The shape `uv pip compile --generate-hashes` writes: the pin, its hashes, then who needs it.
+LOCK = "".join(
+    f"{name}=={version} \\\n    --hash=sha256:{'0' * 64}\n    # via ovweb (pyproject.toml)\n"
+    for name, version in (
+        ("gitpython", "3.1.59"),
+        ("mike", "2.2.0"),
+        ("mkdocs", "1.6.1"),
+        ("mkdocs-glightbox", "0.5.2"),
+        ("mkdocs-llmstxt", "0.5.0"),
+        ("mkdocs-material", "9.7.6"),
+        ("mkdocs-rss-plugin", "1.19.0"),
+        ("pygments", "2.19.2"),
+        ("pymdown-extensions", "11.0.1"),
+    )
+)
 
-def write_repo(root, *, pyproject=PYPROJECT, dockerfile=DOCKERFILE, mike_dockerfile=None):
+
+def write_repo(
+    root, *, pyproject=PYPROJECT, dockerfile=DOCKERFILE, mike_dockerfile=None, lock=LOCK
+):
     (root / "publish-tool").mkdir()
     (root / "publish-tool" / "pyproject.toml").write_text(pyproject, encoding="utf-8")
+    if lock is not None:
+        (root / "publish-tool" / "requirements-publish.txt").write_text(lock, encoding="utf-8")
     (root / "Dockerfile").write_text(dockerfile, encoding="utf-8")
     if mike_dockerfile is None:
         mike_dockerfile = dockerfile + "RUN pip install mike==2.2.0\n"
@@ -133,6 +154,35 @@ def test_a_distribution_missing_from_pyproject_fails(tmp_path):
 
     assert not result["mike"].ok
     assert "not pinned" in result["mike"].detail
+
+
+def test_a_lock_lagging_a_pyproject_pin_fails_that_distribution_only(tmp_path):
+    write_repo(
+        tmp_path,
+        pyproject=PYPROJECT.replace("gitpython==3.1.59", "gitpython==3.1.62"),
+        dockerfile=DOCKERFILE.replace("gitpython==3.1.59", "gitpython==3.1.62"),
+    )
+
+    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "gitpython": "3.1.62"}))
+
+    assert not result["gitpython"].ok
+    assert "publish-tool/requirements-publish.txt=3.1.59" in result["gitpython"].detail
+    assert result["pygments"].ok
+
+
+def test_a_distribution_missing_from_the_lock_fails(tmp_path):
+    write_repo(tmp_path, lock=LOCK.replace("mike==2.2.0", "requests==1.0"))
+
+    result = by_distribution(pins_of(tmp_path))
+
+    assert not result["mike"].ok
+    assert "not in publish-tool/requirements-publish.txt" in result["mike"].detail
+
+
+def test_no_lock_file_is_not_compared(tmp_path):
+    write_repo(tmp_path, lock=None)
+
+    assert [check.detail for check in pins_of(tmp_path) if not check.ok] == []
 
 
 def test_a_digest_pinned_base_image_still_names_its_tag(tmp_path):

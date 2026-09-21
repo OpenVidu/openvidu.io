@@ -248,8 +248,9 @@ tests) are documented in [`contributing/checks.md`](../contributing/checks.md).
 [`pyproject.toml`](pyproject.toml) is the single place the publishing dependencies are declared,
 with two extras: `build` (the real publish, including `mkdocs-material[imaging]`) and `validate`
 (the same minus the imaging stack). `mkdocs-material` is also named as the base-image tag of
-[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), and `ovweb doctor
---pins` fails when the three disagree. A different theme version builds different markup, and the
+[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), the rest of the pins
+in their `pip install` lines, and every pin again in the lock below; `ovweb doctor --pins` fails
+when any of those places disagrees. A different theme version builds different markup, and the
 release-notes splice matches on that markup.
 
 The publish workflow does not install from the extra directly. It installs
@@ -265,8 +266,15 @@ uv pip compile pyproject.toml --extra build --universal --generate-hashes \
   --python-version 3.11 --no-header -o requirements-publish.txt
 ```
 
-`--universal` keeps the environment markers, so the same file installs on the 3.10 floor and on
-the 3.14 the workflow runs. Dependabot watches both files (`.github/dependabot.yml`).
+`--universal` keeps the environment markers, so the same file installs on the 3.11 floor and on
+the 3.14 the workflow runs. `test-tools.yaml` resolves the lock with `--require-hashes` on every
+change under `publish-tool/`, so a lock pip cannot satisfy fails there rather than in the publish.
+
+Dependabot (`.github/dependabot.yml`) proposes updates only for the pins named in
+`pyproject.toml`. Without a `requirements.in` it reads the lock as a plain manifest, so left to
+itself it would bump transitive lines one at a time — which is how a lock stops resolving. Its
+pull requests are notices, not merges: apply the bump in `pyproject.toml` and both Dockerfiles,
+regenerate the lock, and close the pull request.
 
 ## Caveats and observations
 

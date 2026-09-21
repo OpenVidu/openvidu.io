@@ -85,7 +85,7 @@ same turn. It degrades silently when `ovweb` is not installed.
 | [`validate-web.yaml`](../.github/workflows/validate-web.yaml) | every PR | `ovweb doctor --pins` → `ovweb redirects check` → `ovweb lint` (PRs also `--against` the base branch) → `mkdocs build --strict` → `ovweb lint --site` over that build |
 | [`publish-web.yaml`](../.github/workflows/publish-web.yaml) | manual (`workflow_dispatch`) | the publish: `ovweb publish <command> <version>`, then `ovweb verify`; then `deploy-docs-mcp` triggers the docs MCP server's redeploy and waits for it. Inputs: `command` (`new`/`latest`/`past`), `version`, `dry_run` |
 | [`check-external-links.yaml`](../.github/workflows/check-external-links.yaml) | weekly + manual | external URLs with lychee — never on PRs, since third-party outages must not block merges; reports through a single self-updating `broken-links` issue |
-| [`test-tools.yaml`](../.github/workflows/test-tools.yaml) | changes under `publish-tool/` | `pytest` and `ruff` |
+| [`test-tools.yaml`](../.github/workflows/test-tools.yaml) | changes under `publish-tool/` | a hash-verified dry-run resolution of `requirements-publish.txt`, then `pytest` and `ruff` |
 
 `publish-web.yaml` installs the tool **non-editable** — publishing a past version checks out that
 version's branch, where the package does not exist, so it has to live in `site-packages`.

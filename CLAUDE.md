@@ -73,8 +73,10 @@ nearly every page.
   must be mirrored in `livekit-tutorials-docs` (LiveKit-first framing), whose
   `tools/sync-check.py` verifies the two stay in step —
   [`contributing/authoring.md`](contributing/authoring.md).
-- The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
-  `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
+- The mkdocs-material pin is named in four places (`publish-tool/pyproject.toml`, `Dockerfile`,
+  `Dockerfile.mike`, `publish-tool/requirements-publish.txt`) and must agree — `ovweb doctor
+  --pins` checks it. After changing a pin, regenerate the lock
+  ([`publish-tool/README.md`](publish-tool/README.md), "Dependency pins").
 - `publish-tool/pygments_fence_title_hook.py`, `publish-tool/llmstxt_entries_hook.py` and
   `publish-tool/llmstxt_preprocess.py` live on every past `X.Y` branch (the llmstxt pair from
   3.4) and in `livekit-tutorials-docs/hooks/` as verbatim copies of `main`'s — MkDocs loads them
