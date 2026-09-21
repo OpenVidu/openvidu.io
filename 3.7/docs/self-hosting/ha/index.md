@@ -14,4 +14,4 @@ Choose your provider:
 
 [**DigitalOcean**](https://openvidu.io/3.7/docs/self-hosting/ha/digitalocean/index.md)
 
-[**OCI**](https://openvidu.io/3.7/docs/self-hosting/ha/oracle/index.md)
+[**OCI**](https://openvidu.io/3.7/docs/self-hosting/ha/oracle/)
