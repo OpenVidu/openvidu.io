@@ -28,9 +28,16 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     ),
     ("rewrite-search-index", "always", "Absolutise the search index locations", ""),
     (
+        "publish-llms-txt",
+        "always",
+        "Write the version's own llms.txt and, for the newest version, the root's",
+        "the version's lists only the pages served under it, pinned to it; the root's points "
+        "versioned pages at /latest/",
+    ),
+    (
         "rewrite-non-versioned",
         "latest",
-        "Rewrite links in pages promoted to the root, plus llms.txt",
+        "Rewrite links in pages promoted to the root",
         "point versioned links at /latest/, strip the version from self URLs",
     ),
     (

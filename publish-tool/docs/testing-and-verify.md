@@ -67,7 +67,8 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
 
 `ovweb verify` asserts the invariants of a published tree: every version folder has a redirect at
 its root with a relative target, no promoted page claims a versioned URL as its own, every version
-folder carries a correctly pruned and stub-synced sitemap, every search location is absolute,
+folder carries a correctly pruned and stub-synced sitemap, a version's own `llms.txt` lists only
+pages served under it and every one of them has its export, every search location is absolute,
 nothing served from the root pins the version `latest` points at, no versioned export links to a
 root-served page under its version, no export links to another export that does not exist, every
 `<lastmod>` in the root sitemap is a real date that is not in the future, the root sitemap lists

@@ -49,12 +49,12 @@ layout:
     - stylesheets
 
   # Moved from the newest version folder to the root; deleted from the version folder on a
-  # past-version publish. sitemap.xml is absent on purpose: it is copied and rewritten, not moved.
+  # past-version publish. sitemap.xml and llms.txt are absent on purpose: every version keeps its
+  # own, pruned to the pages it serves, and the root's are derived from the newest version's.
   root_files:
     - index.html
     - index.md
     - 404.html
-    - llms.txt
     - feed_rss_created.xml
     - feed_rss_updated.xml
     - feed_json_created.json

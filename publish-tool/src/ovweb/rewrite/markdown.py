@@ -11,8 +11,11 @@ which one applies depends on where the export is served from:
 
 * :func:`rewrite_versioned_markdown` — the export of a versioned page. Links into the same version
   stay pinned; anything served from the root loses the version.
-* :func:`rewrite_promoted_markdown` — the export of a page promoted to the root, and `llms.txt`.
-  Neither has a version of its own, so links into versioned documentation go to `/latest/`.
+* :func:`rewrite_promoted_markdown` — the export of a page promoted to the root, and the root
+  `llms.txt`. Neither has a version of its own, so links into versioned documentation go to
+  `/latest/`.
+* :func:`prune_version_llms` — the version's own `llms.txt`, cut down to the pages served under
+  it; the versioned rules then apply to it like to any versioned export.
 
 Two more rules apply to every export wherever it is served from, because they are about the *form*
 of a link rather than its target: :func:`absolutise_root_relative_targets` and
@@ -36,6 +39,15 @@ _EXPORT_TARGET = r"\]\({base}(?P<page>(?:[^)\s#]*/)?)index\.md(?P<frag>#[^)\s]*)
 
 #: The suffix of the exports. Used by the pipeline to pick between these rules and the HTML ones.
 SUFFIX = ".md"
+
+#: An llms.txt entry: `- [Title](url): description`.
+LLMS_ENTRY = re.compile(r"^\s*-\s*\[[^\]]*\]\((?P<url>[^)\s]+)\)", re.MULTILINE)
+
+#: What a version's own llms.txt says about the pages it does not list.
+VERSION_LLMS_NOTE = (
+    "> The pages that are not tied to a version — pricing, support, the product comparisons and "
+    "the blog — are listed in {base}/llms.txt."
+)
 
 
 def rewrite_versioned_markdown(text: str, *, version: str, layout: SiteLayout) -> str:
@@ -67,6 +79,45 @@ def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) ->
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
     text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
     return absolutise_root_relative_targets(text, layout=layout)
+
+
+def prune_version_llms(text: str, *, version: str, layout: SiteLayout) -> str:
+    """Keep only this version's own pages in its `llms.txt`, and say where the rest are.
+
+    The plugin writes one index for the whole build, root-served pages included; served under
+    `/X.Y/` that index would advertise `/X.Y/pricing/`, a URL that never exists. Every entry
+    outside the version's versioned-page folders goes, a section left without entries goes with
+    its heading, and a note before the first section points at the root index for the rest.
+    """
+    prefixes = tuple(f"{layout.base_url}/{version}/{page}/" for page in layout.versioned_pages)
+    note = [VERSION_LLMS_NOTE.format(base=layout.base_url), ""]
+
+    kept: list[str] = []
+    section: list[str] = []
+    in_sections = False
+
+    def flush() -> None:
+        if any(LLMS_ENTRY.match(line) for line in section):
+            kept.extend(section)
+        section.clear()
+
+    for line in text.splitlines():
+        if line.startswith("## "):
+            if not in_sections:
+                kept.extend(note)
+                in_sections = True
+            flush()
+            section.append(line)
+        elif not in_sections:
+            kept.append(line)
+        else:
+            entry = LLMS_ENTRY.match(line)
+            if entry is None or entry.group("url").startswith(prefixes):
+                section.append(line)
+    flush()
+    if not in_sections:
+        kept.extend(note)
+    return "\n".join(kept).rstrip("\n") + "\n"
 
 
 def _drop_version_from_page_urls(text: str, *, version: str, pages: tuple[str, ...]) -> str:

@@ -22,6 +22,8 @@ from ovweb.report import Reporter
 
 VERSION = "3.9"
 OLD_VERSION = "3.2"
+#: An older version whose branch already carries the llmstxt plugin.
+PAST_VERSION = "3.7"
 
 
 class RecordingReporter(Reporter):
@@ -127,6 +129,7 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
     (base / "meet" / "index.html").write_text(
         f'<link rel="canonical" href="https://openvidu.io/{version}/meet/">', encoding="utf-8"
     )
+    (base / "meet" / "index.md").write_text("# Meet\n", encoding="utf-8")
     (base / "docs" / "releases" / "index.html").write_text(
         releases_page(f"{version}.0 notes", version), encoding="utf-8"
     )
@@ -172,10 +175,16 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
     )
 
     if modern:
+        # The plugin's index of the whole build: a section of root pages, and the versioned ones.
         (base / "llms.txt").write_text(
-            f"- [Docs](https://openvidu.io/{version}/docs/): d\n"
-            f"- [Getting started](https://openvidu.io/{version}/docs/getting-started/): gs\n"
-            f"- [Pricing](https://openvidu.io/{version}/pricing/): p\n",
+            "# OpenVidu\n\n> Summary.\n\n## Product and pricing\n\n"
+            f"- [Home](https://openvidu.io/{version}/index.md): h\n"
+            f"- [Pricing](https://openvidu.io/{version}/pricing/index.md): p\n\n"
+            "## OpenVidu Platform\n\n"
+            f"- [Docs](https://openvidu.io/{version}/docs/index.md): d\n"
+            f"- [Releases](https://openvidu.io/{version}/docs/releases/index.md): r\n\n"
+            "## OpenVidu Meet\n\n"
+            f"- [Meet](https://openvidu.io/{version}/meet/index.md): m\n",
             encoding="utf-8",
         )
         for feed in (
@@ -304,6 +313,47 @@ def test_rewrites_llms_txt_three_ways(latest_tree, config, report):
     assert "/latest/docs/" in llms
     assert "/pricing/" in llms
     assert f"/{VERSION}/" not in llms
+
+
+def test_the_version_keeps_its_own_llms_txt_pruned_to_its_pages(latest_tree, config, report):
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    own = (latest_tree / VERSION / "llms.txt").read_text()
+    assert f"https://openvidu.io/{VERSION}/docs/index.md" in own
+    assert f"https://openvidu.io/{VERSION}/meet/index.md" in own
+    assert f"/{VERSION}/pricing/" not in own and "/latest/" not in own
+    assert "## Product and pricing" not in own
+    assert "are listed in https://openvidu.io/llms.txt" in own
+    # The root keeps the full index.
+    assert "/pricing/index.md" in (latest_tree / "llms.txt").read_text()
+
+
+@pytest.fixture
+def modern_past_tree(tmp_path, layout, config):
+    """The newest version plus an older one whose branch already builds an llms.txt."""
+    build_tree(tmp_path, layout, version=VERSION, config=config)
+    build_tree(tmp_path, layout, version=PAST_VERSION, config=config)
+    (tmp_path / "versions.json").write_text(
+        json.dumps(
+            [{"version": VERSION, "aliases": ["latest"]}, {"version": PAST_VERSION, "aliases": []}]
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "latest").symlink_to(VERSION)
+    return tmp_path
+
+
+def test_a_past_version_keeps_its_own_llms_txt_and_leaves_the_root_alone(
+    modern_past_tree, config, report
+):
+    postprocess(
+        modern_past_tree, config=config, version=PAST_VERSION, update_latest=False, report=report
+    )
+
+    own = (modern_past_tree / PAST_VERSION / "llms.txt").read_text()
+    assert f"https://openvidu.io/{PAST_VERSION}/docs/index.md" in own
+    assert f"/{PAST_VERSION}/pricing/" not in own
+    assert not (modern_past_tree / "llms.txt").exists()
 
 
 def test_rewrites_the_home_page_markdown_export(latest_tree, config, report):

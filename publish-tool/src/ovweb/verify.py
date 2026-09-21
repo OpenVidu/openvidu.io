@@ -22,6 +22,7 @@ from .redirects import (
     RedirectError,
     is_generated_redirect,
 )
+from .rewrite.markdown import LLMS_ENTRY
 from .rewrite.markdown import SUFFIX as MARKDOWN
 from .rewrite.sitemap import stub_loc
 
@@ -51,6 +52,7 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
             continue
         findings += _check_version_root_is_redirect(version_dir, version)
         findings += _check_version_sitemap(tree, version, config)
+        findings += _check_version_llms_txt(tree, version, config)
         findings += _check_versioned_pages_reach_root_files(tree, version, config)
         findings += _check_exports_reach_root_pages(tree, version, config)
     findings += _check_root_pages_have_no_version(tree, config, published)
@@ -193,6 +195,41 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
                 "version number to visitors of /latest/",
             )
         )
+    return findings
+
+
+def _check_version_llms_txt(tree: Path, version: str, config: SiteConfig) -> list[Finding]:
+    """A version's own llms.txt lists the pages served under it, each with its export beside it.
+
+    The docs MCP server indexes a version from this file, so an entry outside the version — a
+    root page, another version, `latest` — sends it to a URL that never exists or to the wrong
+    version, and an entry without an export to a 404. A missing file is not a finding: the
+    branches before 3.4 never built one, and an older folder keeps whatever its last publish
+    produced until that version is published again.
+    """
+    path = tree / version / LLMS_TXT
+    if not path.is_file():
+        return []
+
+    base = config.layout.base_url
+    prefixes = tuple(f"{base}/{version}/{page}/" for page in config.layout.versioned_pages)
+    where = f"{version}/{LLMS_TXT}"
+    findings = []
+    for match in LLMS_ENTRY.finditer(fsops.read_text(path)):
+        url = match.group("url")
+        if not url.startswith(prefixes):
+            findings.append(
+                Finding(
+                    "version-llms-txt",
+                    where,
+                    f"lists {url}, which is not served under /{version}/: a version's index "
+                    "holds its own pages only",
+                )
+            )
+        elif not (tree / url[len(base) + 1 :]).is_file():
+            findings.append(
+                Finding("version-llms-txt", where, f"lists {url}, but that export does not exist")
+            )
     return findings
 
 

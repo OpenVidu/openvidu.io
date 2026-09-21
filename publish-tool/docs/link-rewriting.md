@@ -28,7 +28,8 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 | Versioned export → home (`index.md`)   | `…/3.9/index.md`  | `…/index.md`                    |
 | Promoted export → versioned page       | `…/3.9/docs/…`    | `…/latest/docs/…`               |
 | Promoted export → non-versioned page   | `…/3.9/pricing/`  | `…/pricing/`                    |
-| `llms.txt`                             | as promoted       | as promoted                     |
+| Root `llms.txt`                        | as promoted       | as promoted                     |
+| `/X.Y/llms.txt`                        | every page of the build | the pages under `/X.Y/` only, pinned to it |
 | Any export → a root-relative target    | `](/pricing/)`    | `](https://openvidu.io/pricing/)` |
 | Any export → an export that does not exist | `](…/account/index.md)` | `](…/account/)`            |
 
@@ -37,6 +38,13 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice: as
 `index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports, and together they
 are the site's AI-facing channel.
+
+There are two indexes. The plugin writes one for the whole build, root pages included, and the
+publish derives both from it: the **root** `llms.txt` is that index with the promoted rules
+applied, rebuilt on every latest publish; the **version's own** `/X.Y/llms.txt` keeps only the
+entries for pages served under `/X.Y/`, pinned to the version like its exports, with a note
+pointing at the root index for the rest. Every version from 3.4 has one, which is what the docs
+MCP server indexes a version from; `ovweb verify` checks that each entry has its export.
 
 Neither half of an `llms.txt` entry comes from `mkdocs.yml`.
 [`llmstxt_entries_hook.py`](../llmstxt_entries_hook.py) replaces both with the page's own

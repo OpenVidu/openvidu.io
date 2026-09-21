@@ -53,12 +53,13 @@ from ..rewrite import (
     sync_version_sitemap,
 )
 from ..rewrite.markdown import SUFFIX as MARKDOWN
+from ..rewrite.markdown import prune_version_llms
 
 SITEMAP = "sitemap.xml"
 SEARCH_INDEX = "search/search_index.json"
 
-#: The index of every page's Markdown export. Served only from the site root, and a Markdown
-#: file itself, so the promoted rules apply to it unchanged.
+#: The index of the Markdown exports. Every version folder keeps its own, pruned to the pages
+#: served under it; the root's is the newest version's full index, rewritten like a promoted page.
 LLMS_TXT = "llms.txt"
 
 
@@ -127,6 +128,9 @@ def postprocess(
     result.counts["rewrite-search-index"] = changed
     report.result("rewrite-search-index", files_changed=changed)
 
+    # 4. llms.txt: the version keeps its own; the root gets the full index on a latest publish.
+    _publish_llms_txt(tree, version=version, config=config, report=report, result=result)
+
     # Group 2: build the site root from this version, or strip the root-served content out of it.
     if update_latest:
         _rewrite_promoted_pages(tree, version=version, config=config, report=report, result=result)
@@ -179,6 +183,44 @@ def _guard(version_dir: Path, *, force: bool) -> None:
         )
 
 
+def _publish_llms_txt(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """Write this version's own llms.txt and, when the root is being rebuilt, the root's.
+
+    The plugin writes one index for the whole build. The version folder keeps a copy pruned to the
+    pages served under it, pinned to the version like its exports; the root gets the full index,
+    rewritten like a promoted export, on a latest publish. A branch without the plugin never built
+    the file, so a past publish of one has nothing to write.
+    """
+    layout = config.layout
+    report.step("publish-llms-txt", "Write the version's llms.txt, and the root's for the newest")
+
+    source = tree / version / LLMS_TXT
+    if not source.is_file():
+        if result.update_latest:
+            raise PostprocessError(
+                f"the build produced no {version}/{LLMS_TXT}, which the site root's is derived "
+                "from. Is the llmstxt plugin enabled in mkdocs.yml?"
+            )
+        result.counts["publish-llms-txt"] = 0
+        report.result("publish-llms-txt", written=0)
+        return
+
+    original = fsops.read_text(source)
+    written = 0
+    if result.update_latest:
+        root_index = rewrite_promoted_markdown(original, version=version, layout=layout)
+        fsops.write_text(tree / LLMS_TXT, root_index)
+        written += 1
+    own = prune_version_llms(original, version=version, layout=layout)
+    fsops.write_text(source, rewrite_versioned_markdown(own, version=version, layout=layout))
+    written += 1
+
+    result.counts["publish-llms-txt"] = written
+    report.result("publish-llms-txt", written=written)
+
+
 def _rewrite_promoted_pages(
     tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
 ) -> None:
@@ -210,9 +252,6 @@ def _rewrite_promoted_pages(
     # of it.
     changed += int(fsops.rewrite_single(version_dir / "index.html", promote_html))
     changed += int(fsops.rewrite_single(version_dir / "index.md", promote_markdown, required=False))
-
-    # llms.txt is a root-served Markdown file, so the promoted rules are exactly right for it.
-    changed += int(fsops.rewrite_single(version_dir / LLMS_TXT, promote_markdown, required=False))
 
     for feed in layout.feeds:
         changed += int(
