@@ -58,7 +58,7 @@ Customize the **participant name** and meeting redirect by adding attributes as 
 ### Commands
 
 !!! info
-	The iframe accepts the same **commands** as the OpenVidu Meet Web Component. See [Web Component Commands](./webcomponent.md#commands) for the full list and descriptions.
+	The iframe accepts the same **commands** as the OpenVidu Meet Web Component. See [Web Component Commands](./webcomponent.md#commands) for the full list, the permission each one needs and their descriptions. The `command` string is the method name without its parentheses, and the parameters listed there travel in `payload`.
 
 Control the meeting programmatically by sending commands via `postMessage` to the iframe's content window:
 
