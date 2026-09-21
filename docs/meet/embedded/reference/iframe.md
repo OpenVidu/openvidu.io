@@ -41,7 +41,7 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
 
 
 !!! info
-    The iframe accepts the same **attributes** as the OpenVidu Meet Web Component. See [Web Component Attributes](./webcomponent.md#attributes) for the full list and descriptions.
+    The iframe accepts the same **attributes** as the OpenVidu Meet Web Component, except `room-url` and `recording-url`: the iframe's `src` plays that role instead. See [Web Component Attributes](./webcomponent.md#attributes) for the full list and descriptions.
 
 
 Customize the **participant name** and meeting redirect by adding attributes as query parameters in the iframe src URL.

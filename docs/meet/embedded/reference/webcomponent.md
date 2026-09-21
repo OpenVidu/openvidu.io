@@ -23,7 +23,7 @@ Add the `<openvidu-meet>` tag to your HTML. This will embed OpenVidu Meet interf
 <openvidu-meet room-url="{{ my-room-url }}"></openvidu-meet>
 ```
 
-The only required attribute is **`room-url`**, which determines the room to access. Different instances of the web component using the same room URL will join the same meeting.
+One of **`room-url`** or **`recording-url`** is required: the former determines the room to access, the latter the recording to display. Different instances of the web component using the same room URL will join the same meeting.
 
 !!! info "A room URL is a room access link"
 	The **room URL** is simply a [room access link](../../features/rooms/access.md): the URL an individual opens to access a room. The role and identity a participant gets depend on **which** access link you use. This guide and most examples use the **anonymous** moderator/speaker links for simplicity, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for the full picture.
