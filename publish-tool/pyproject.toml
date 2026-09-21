@@ -33,7 +33,7 @@ build = [
     "gitpython==3.1.62",
     # The build backend, so the publish workflow can install this package with
     # --no-build-isolation from the hash-locked requirements-publish.txt.
-    "hatchling==1.32.0",
+    "hatchling==1.32.3",
 ]
 # Same, minus mike and the imaging extra: the lightweight link-validation build.
 validate = [
