@@ -80,6 +80,7 @@ def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) ->
         text = text.replace(f"/{version}/{page}/", f"/latest/{page}/")
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
     text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
+    text = _point_root_relative_targets_at_latest(text, layout=layout)
     return absolutise_root_relative_targets(text, layout=layout)
 
 
@@ -166,6 +167,23 @@ def _drop_version_from_file_urls(text: str, *, version: str, files: tuple[str, .
     """
     for name in files:
         text = text.replace(f"/{version}/{name}", f"/{name}")
+    return text
+
+
+def _point_root_relative_targets_at_latest(text: str, *, layout: SiteLayout) -> str:
+    """`](/docs/self-hosting/)` -> `](/latest/docs/self-hosting/)`.
+
+    The export's counterpart to
+    :func:`ovweb.rewrite.nonversioned.point_root_absolute_links_at_latest`. A root-relative target
+    is what the plugin leaves behind when the source wrote a raw-HTML anchor, which a blog excerpt
+    must: absolutising it as it stands would advertise the unversioned URL, which only the
+    redirect stub answers.
+
+    Anchored to Markdown link syntax like the absolutiser it runs before, so a root-relative path
+    in prose or a code sample is left alone.
+    """
+    for page in layout.versioned_pages:
+        text = text.replace(f"](/{page}/", f"](/latest/{page}/")
     return text
 
 

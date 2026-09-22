@@ -83,19 +83,23 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
         (base / asset).mkdir()
     for page in layout.non_versioned_pages:
         (base / page).mkdir()
-        # Every promoted page carries its own canonical URL and a link into the docs, which is
-        # what the promotion rewrite has to fix.
+        # Every promoted page carries its own canonical URL and two links into versioned
+        # sections, which is what the promotion rewrite has to fix: the relative one MkDocs
+        # resolves a Markdown link to, and the root-absolute one raw HTML has to use.
         (base / page / "index.html").write_text(
             f'<link rel="canonical" href="https://openvidu.io/{version}/{page}/">'
-            f'<a href="../docs/">Docs</a>',
+            f'<a href="../docs/">Docs</a>'
+            f'<a href="/meet/">Meet</a>',
             encoding="utf-8",
         )
-        # ...and the Markdown export the llmstxt plugin writes beside it, where the same two
-        # links are already absolute — and therefore version-pinned by the build.
+        # ...and the Markdown export the llmstxt plugin writes beside it, where the same links
+        # are already absolute — and therefore version-pinned by the build — except the
+        # root-relative one, which is what the plugin leaves a raw-HTML anchor as.
         (base / page / "index.md").write_text(
             f"[Docs](https://openvidu.io/{version}/docs/index.md)\n"
             f"[Support](https://openvidu.io/{version}/support/index.md)\n"
-            f"[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n",
+            f"[Self-hosting](https://openvidu.io/{version}/docs/self-hosting/index.md)\n"
+            f"[Meet](/meet/)\n",
             encoding="utf-8",
         )
 
@@ -294,6 +298,20 @@ def test_shields_an_author_pinned_link_in_the_blog(latest_tree, config, report):
     blog = (latest_tree / "blog" / "index.html").read_text()
     assert 'href="https://openvidu.io/3.4/docs/releases/"' in blog
     assert 'href="https://openvidu.io/blog/"' in blog
+
+
+def test_points_a_raw_html_root_absolute_link_at_latest(latest_tree, config, report):
+    """The form a blog excerpt has to use, which only the 404 page used to get right."""
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert '<a href="/latest/meet/">' in (latest_tree / "pricing" / "index.html").read_text()
+
+
+def test_points_a_root_relative_export_target_at_latest(latest_tree, config, report):
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    export = (latest_tree / "pricing" / "index.md").read_text()
+    assert "[Meet](https://openvidu.io/latest/meet/)" in export
 
 
 def test_rewrites_the_404_page(latest_tree, config, report):

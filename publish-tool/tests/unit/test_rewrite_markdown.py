@@ -107,6 +107,28 @@ def test_promoted_export_does_not_shield_a_pin_to_the_published_version(layout):
     )
 
 
+@pytest.mark.parametrize("page", ["docs", "meet"])
+def test_promoted_export_points_a_root_relative_target_at_latest(layout, page):
+    """What the plugin leaves behind for a raw-HTML anchor, which a blog excerpt must use.
+
+    Absolutising it as written would advertise the unversioned URL, which only the redirect
+    stub answers.
+    """
+    text = f"[x](/{page}/embedded/intro/)"
+    assert promoted(text, layout) == f"[x](https://openvidu.io/latest/{page}/embedded/intro/)"
+
+
+def test_promoted_export_leaves_a_root_relative_non_versioned_target_alone(layout):
+    text = "[pricing](/pricing/)"
+    assert promoted(text, layout) == "[pricing](https://openvidu.io/pricing/)"
+
+
+def test_promoted_export_leaves_a_versioned_path_in_prose_alone(layout):
+    """Anchored to link syntax, like the absolutiser it runs before."""
+    text = "Serve it at `/docs/` and it answers."
+    assert promoted(text, layout) == text
+
+
 # -- llms.txt ----------------------------------------------------------
 
 

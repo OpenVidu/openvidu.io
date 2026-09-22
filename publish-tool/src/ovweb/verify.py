@@ -59,6 +59,7 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
     findings += _check_search_index_absolute(tree, config)
     findings += _check_root_search_index_uses_latest(tree, config, published)
     findings += _check_root_exports_use_latest(tree, config, latest)
+    findings += _check_root_pages_reach_versioned_via_latest(tree, config)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
     findings += _check_root_sitemap_stub_free(tree)
@@ -607,6 +608,46 @@ def _check_owned_scope(
                 "redirect into a 404. " + rebuild,
             )
         )
+    return findings
+
+
+def _check_root_pages_reach_versioned_via_latest(tree: Path, config: SiteConfig) -> list[Finding]:
+    """A page served from the root must reach versioned documentation through `/latest/`.
+
+    The root-absolute form (`href="/docs/…"`) is what raw HTML is written in, because it is the
+    only one that resolves on the dev server and the only one `ovweb lint` can check — and the
+    publish repoints it (`point_root_absolute_links_at_latest`). One left behind still answers,
+    through the unversioned-mirror stub, so this never shows up as a broken link: it shows up as
+    an extra redirect on every click and a ranking signal handed to a `noindex` stub. That makes
+    it exactly the kind of regression only an invariant catches.
+    """
+    layout = config.layout
+    candidates = [tree / "404.html", tree / "index.html", tree / f"index{MARKDOWN}"]
+    for page in layout.non_versioned_pages:
+        root = tree / page
+        if root.is_dir():
+            candidates += sorted(root.rglob("*.html")) + sorted(root.rglob(f"*{MARKDOWN}"))
+
+    needles = {}
+    for section in layout.versioned_pages:
+        needles[f'href="/{section}/'] = section
+        needles[f"]({layout.base_url}/{section}/"] = section
+
+    findings = []
+    for path in candidates:
+        if not path.is_file():
+            continue
+        text = fsops.read_text(path)
+        for needle, section in needles.items():
+            if needle in text:
+                findings.append(
+                    Finding(
+                        "root-page-unversioned-link",
+                        str(path.relative_to(tree)),
+                        f"holds {needle!r}; a page served from the root must link into "
+                        f"/latest/{section}/, not through the unversioned redirect stub",
+                    )
+                )
     return findings
 
 

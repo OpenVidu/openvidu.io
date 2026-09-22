@@ -99,6 +99,31 @@ def test_reports_a_promoted_export_that_pins_the_current_version(published, conf
     assert findings_by_check(published, config)["root-export-version-pin"] == ["pricing/index.md"]
 
 
+@pytest.mark.parametrize(
+    ("name", "content"),
+    [
+        ("index.html", '<a href="/docs/self-hosting/">docs</a>'),
+        ("index.md", "[docs](https://openvidu.io/docs/self-hosting/)"),
+    ],
+)
+def test_reports_a_root_page_linking_into_a_versioned_section_unversioned(
+    published, config, name, content
+):
+    """Never a broken link — the unversioned-mirror stub answers it — so nothing else would
+    catch it. It costs every reader a redirect and hands the ranking signal to a noindex stub."""
+    (published / "blog" / name).write_text(content, encoding="utf-8")
+
+    assert findings_by_check(published, config)["root-page-unversioned-link"] == [f"blog/{name}"]
+
+
+def test_a_root_page_may_link_into_a_versioned_section_through_latest(published, config):
+    (published / "blog" / "index.html").write_text(
+        '<a href="/latest/docs/self-hosting/">docs</a>', encoding="utf-8"
+    )
+
+    assert "root-page-unversioned-link" not in findings_by_check(published, config)
+
+
 def test_a_root_file_may_pin_a_different_version(published, config):
     """That is how a release-notes page links back to the release before it."""
     (published / "llms.txt").write_text(

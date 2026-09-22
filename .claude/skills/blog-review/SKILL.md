@@ -55,6 +55,8 @@ the link forms, the excerpt rule, and the asset mirroring; trust its errors). Se
 - **Links** follow the conventions' link rules — including the **excerpt exception** (no `.md`
   Markdown links before `<!-- more -->`; raw-HTML URL form there) and the **Release-post
   exception** (version-pinned domain-qualified URLs, flag `latest` or `.md` links there).
+- **No hand-written `/latest/`** in an excerpt's raw-HTML links → Medium: the unversioned form
+  (`/docs/…`, `/meet/…`) is what resolves locally, and the publish repoints it.
 - **Admonition syntax** — `!!! tip "..."` with a space and 4-space-indented bodies.
 
 ## Editorial rubric

@@ -129,6 +129,11 @@ renders but never opens. One `<a>` per line (there are strange behaviors when it
   every listing. In the excerpt, write internal links as raw HTML with the URL form:
   `<a href="/meet/embedded/intro/">OpenVidu Meet</a>`. `ovweb lint` enforces this
   (`md-link-in-excerpt`).
+- **A versioned target in the excerpt still uses the unversioned form** — `/docs/…`, `/meet/…`,
+  never `/latest/docs/…`. That is the form that resolves locally and the only one `ovweb lint`
+  can check; the publish repoints it at `/latest/` in the HTML and in the Markdown export
+  (`point_root_absolute_links_at_latest`). A hand-written `/latest/` would survive the rewrite
+  and break the dev server.
 - **Cross-post links** → `/blog/posts/YYYY/MM/<slug>.md` (the published location of the target).
 - **Assets** → root-absolute, in Markdown and in raw-HTML `src`/`href` alike. `YYYY/MM` stays
   literal on drafts.

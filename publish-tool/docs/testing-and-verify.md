@@ -69,12 +69,21 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
 its root with a relative target, no promoted page claims a versioned URL as its own, every version
 folder carries a correctly pruned and stub-synced sitemap, a version's own `llms.txt` lists at
 least one page, lists only pages served under it and has the export of every one of them, every search location is absolute,
-nothing served from the root pins the version `latest` points at, no versioned export links to a
+nothing served from the root pins the version `latest` points at, every page served from the root
+reaches versioned documentation through `/latest/` rather than the unversioned redirect stub, no
+versioned export links to a
 root-served page under its version, no export links to another export that does not exist, every
 `<lastmod>` in the root sitemap is a real date that is not in the future, the root sitemap lists
 no URL a redirect stub serves, the unversioned mirror and every alias folder are exactly the sets
 their rules generate, no generated redirect points at a page that does not exist or at another
 redirect, and `versions.json` agrees with the folders on disk.
+
+The `root-page-unversioned-link` check guards the one rewrite whose failure is invisible: a raw-HTML
+`href="/docs/…"` left unrewritten still answers, because the unversioned mirror redirects it, so no
+link checker ever reports it. What it costs is a redirect on every click and a link whose ranking
+signal lands on a `noindex` stub. Sources keep writing the unversioned form on purpose — it is the
+only one that resolves on the dev server and the only one `ovweb lint` can check — so the invariant
+belongs on the published tree, not on the sources.
 
 The redirect-target check earns its place: a redirect into a 404 costs the visitor a second hop to
 reach nothing and tells a crawler the content moved somewhere it did not. The chain half matters
