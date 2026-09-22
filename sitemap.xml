@@ -117,6 +117,10 @@
          <lastmod>2026-08-25</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/09/22/integrate-video-conferencing-into-your-app/</loc>
+         <lastmod>2026-09-21</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/</loc>
          <lastmod>2026-09-04</lastmod>
     </url>
@@ -897,6 +901,14 @@
          
     </url>
     <url>
+         <loc>https://openvidu.io/blog/category/openvidu-meet/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/openvidu-platform/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/category/success-story/</loc>
          
     </url>
@@ -925,10 +937,6 @@
          
     </url>
     <url>
-         <loc>https://openvidu.io/blog/category/openvidu-platform/</loc>
-         
-    </url>
-    <url>
          <loc>https://openvidu.io/blog/category/openvidu-how-to/</loc>
          
     </url>
@@ -941,15 +949,15 @@
          
     </url>
     <url>
-         <loc>https://openvidu.io/blog/category/openvidu-meet/</loc>
-         
-    </url>
-    <url>
          <loc>https://openvidu.io/blog/category/release/</loc>
          
     </url>
     <url>
          <loc>https://openvidu.io/blog/page/2/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/page/3/</loc>
          
     </url>
     <url>
