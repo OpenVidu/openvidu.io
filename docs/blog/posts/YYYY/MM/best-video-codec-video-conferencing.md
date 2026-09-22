@@ -6,7 +6,7 @@ slug: best-video-codec-video-conferencing
 description: >-
   Why AV1, VP9, H.264 and VP8 each win in different rooms, and how to pick a
   WebRTC video codec from your users' devices and the network they are on.
-cover_image: poster-light.webp
+cover_image: poster.webp
 categories:
   - Technology
   - Research
@@ -24,6 +24,7 @@ authors:
 
 # How to choose a video codec for video conferencing
 
+![How to choose a video codec for video conferencing: AV1, VP9, H.264 and VP8 each win in a different room, and the right pick depends on your users' devices and network](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/poster.webp){ .round-corners width=100% }
 
 Picking the codec that compresses best and eats the least bandwidth looks, at first glance, like the obvious call when you build a video conferencing application. And yet **the codec that saves the most bandwidth can be the one that performs worst for your users**.
 
