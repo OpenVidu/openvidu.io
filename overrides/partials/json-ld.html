@@ -5,8 +5,14 @@
     - Homepage (index.md): Organization + WebSite + the two products (@graph)
     - OpenVidu Meet product page (meet/index.md): SoftwareApplication
     - OpenVidu Platform product page (docs/index.md): SoftwareApplication
-    - Any page with a `faq:` list in its frontmatter (pricing.md): FAQPage
-      with one Question/Answer per entry
+    - Any page with a `faq:` list in its frontmatter (pricing.md, the
+      openvidu-vs-* comparison pages, openvidu-meet-vs-openvidu-platform.md):
+      FAQPage with one Question/Answer per entry. A page that also sets
+      `faq_about_products: true` adds both product SoftwareApplication nodes
+      to the graph and points the FAQPage's `about` at them
+    - Support page (support/index.md): ContactPage whose mainEntity is the
+      Organization, emitted with the extended contactPoint list (the contact
+      routes the page actually offers)
     - Any page with a `publications:` list in its frontmatter (research.md):
       one ScholarlyArticle/Thesis per publication, with authors (ORCID),
       venue, DOI, images and abstract
@@ -22,7 +28,12 @@
   strips the version segment from their HTML.
 -#}
 
-{%- macro organization() -%}
+{#- The shared Organization node. `contact_points=true` is used only by the
+    support page, which is the page those routes live on: everywhere else the
+    node is emitted unchanged, with the single "customer support" contactPoint
+    that points at https://openvidu.io/support/. Keep the expanded list in sync
+    with docs/support/index.md. -#}
+{%- macro organization(contact_points=false) -%}
     {
       "@type": "Organization",
       "@id": "https://openvidu.io/#organization",
@@ -48,11 +59,43 @@
         "https://www.linkedin.com/company/openvidu-webrtc/",
         "https://openvidu.discourse.group/"
       ],
+      {%- if contact_points %}
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "url": "https://openvidu.io/support/"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "commercial@openvidu.io",
+          "url": "https://openvidu.io/support/#talk-to-an-expert",
+          "description": "Consultancy, prioritized bug fixes and new features, custom app development, and help sizing and operating a self-hosted OpenVidu deployment.",
+          "availableLanguage": "en"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "technical support",
+          "email": "pro.support.v2apps@openvidu.io",
+          "description": "Help updating an application from OpenVidu 2 to OpenVidu 3.",
+          "availableLanguage": "en"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "community support",
+          "url": "https://openvidu.discourse.group/",
+          "description": "Public community forum, the place to ask questions that do not involve private information.",
+          "availableLanguage": "en"
+        }
+      ]
+      {%- else %}
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
         "url": "https://openvidu.io/support/"
       }
+      {%- endif %}
     }
 {%- endmacro -%}
 
@@ -141,15 +184,47 @@
   ]
 }
 </script>
+{%- elif page and page.file and page.file.src_uri == "support/index.md" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+{{ organization(contact_points=true) }},
+    {
+      "@type": "ContactPage",
+      "@id": {{ (page.canonical_url ~ "#contactpage") | tojson }},
+      "url": {{ page.canonical_url | tojson }},
+      "name": {{ page.title | string | tojson }},
+      {%- if page.meta.description %}
+      "description": {{ page.meta.description | tojson }},
+      {%- endif %}
+      "inLanguage": "en",
+      "about": { "@id": "https://openvidu.io/#organization" },
+      "mainEntity": { "@id": "https://openvidu.io/#organization" },
+      "publisher": { "@id": "https://openvidu.io/#organization" }
+    }
+  ]
+}
+</script>
 {%- elif page and page.meta and page.meta.faq %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
 {{ organization() }},
+    {%- if page.meta.faq_about_products %}
+{{ meet_app() }},
+{{ platform_app() }},
+    {%- endif %}
     {
       "@type": "FAQPage",
       "@id": {{ (page.canonical_url ~ "#faq") | tojson }},
+      {%- if page.meta.faq_about_products %}
+      "about": [
+        { "@id": "https://openvidu.io/latest/meet/#software" },
+        { "@id": "https://openvidu.io/latest/docs/#software" }
+      ],
+      {%- endif %}
       "mainEntity": [
         {%- for item in page.meta.faq %}
         {
