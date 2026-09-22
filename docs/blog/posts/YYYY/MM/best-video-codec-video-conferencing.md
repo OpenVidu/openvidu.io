@@ -16,7 +16,8 @@ tags:
   - Codecs
   - AV1
   - VP9
-  - SVC
+  - H.264
+  - VP8
 authors:
   - csantosm
 ---
@@ -30,14 +31,14 @@ Picking the codec that compresses best and eats the least bandwidth looks, at fi
 
 The reason is that compression efficiency is only part of the problem. Choosing a codec also depends on **device compatibility, hardware encoding support, available CPU, battery drain and the quality you end up with**. And most importantly: **no codec wins on all of those fronts**.
 
-A codec can halve the data you need to transmit, but if a device cannot encode it in hardware, those savings can turn into more CPU, more battery and more latency. And when your users are on devices with very different capabilities, what runs perfectly on one can become a bottleneck on another.
-
-So the question is not simply **which codec compresses best**, but **which one offers the best balance between quality, bandwidth, device capability and infrastructure cost**.
-
 <!-- more -->
 
 !!! tip "TL;DR"
     There is no best video codec for video conferencing. You have to pick the one that offers the best balance between **compatibility, efficiency, computational cost and quality on the devices your users actually have** — and the only way to know which one that is, is to measure it on the worst device you have to support. The rest of this post is how to do that.
+
+A codec can halve the data you need to transmit, but if a device cannot encode it in hardware, those savings can turn into more CPU, more battery and more latency. And when your users are on devices with very different capabilities, what runs perfectly on one can become a bottleneck on another.
+
+So the question is not simply **which codec compresses best**, but **which one offers the best balance between quality, bandwidth, device capability and infrastructure cost**.
 
 Before going further, one thing worth settling about the audio codec: **that choice is pretty much already made**. In WebRTC, `Opus` is the reference codec and it adapts to network conditions at a very low cost for the device.
 
@@ -51,13 +52,15 @@ When we say a codec is **30% more efficient** than another, we mean it needs 30%
 
 Taking `H.264` and `VP8` as the baseline, these are the figures you will usually see:
 
-| Codec             | Standardised | Approximate data reduction |
+| Codec             |   Released   | Approximate data reduction |
 | ----------------- | :----------: | -------------------------: |
-| `H.264` / `VP8`   |  2003 / 2008 |                   Baseline |
+| `H.264` / `VP8`   |  2003 / 2010 |                   Baseline |
 | `H.265` / `HEVC`  |         2013 |                     40–60% |
 | `VP9`             |         2013 |                     23–50% |
 | `AV1`             |         2018 |                     24–52% |
-
+/// caption
+Figures commonly quoted for each codec, compiled from [different published comparisons :fontawesome-solid-external-link:{.external-link-icon}](https://streaminglearningcenter.com/codecs/bandwidth-savings-vp9-hevc-av1.html){:target="_blank"} — which is exactly why they are so wide and overlap.
+///
 
 Those ranges overlap, and that is the first thing worth understanding about them: **they do not come from a single experiment**. Each one is measured on different content, at different resolutions and with different encoder settings, so the table cannot be read as a ranking. `H.265` looking better than `AV1` here is an artefact of that, not a property of the codecs.
 
@@ -172,3 +175,12 @@ The process comes down to:
 **test → measure → compare → adjust.**
 
 That way, choosing a codec stops being a decision based on benchmarks alone and starts being based on how your application actually behaves.
+
+## What to do next
+
+Every metric this post asks you to look at — `encoderImplementation`, the quality limitation reason, the frame rate under load — comes from WebRTC statistics you can already read in your own application. What you need is somewhere to run the tests:
+
+- **To get an environment to measure in**, [install OpenVidu on a single machine](/docs/self-hosting/single-node/on-premises/install.md). You get the SFU, the observability stack and the client SDK in one deployment, and you can switch codecs from the publishing options
+- **If what you need is video calls inside your product** rather than infrastructure to experiment with, look at [embedding OpenVidu Meet](/meet/embedded/intro.md), which handles the codec negotiation for you
+
+Whichever route you take, run the test on the worst device you have to support. That is the one that decides.
