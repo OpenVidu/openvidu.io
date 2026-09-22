@@ -23,11 +23,11 @@ authors:
 ![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-dark.png#only-dark){ .round-corners }
 ![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-light.png#only-light){ .round-corners }
 
-OpenVidu records media from its rooms and distributes the load across multiple Media Nodes. Distributing the load is already hard enough, and recording on top adds one more problem. In systems as complex as WebRTC, it's easy to overlook second-order effects: components that work on their own but, when combined, break in ways you never anticipated.
+OpenVidu records media from its rooms with a service called Egress, and spreads that work across multiple Media Nodes, each one running an Egress of its own. Our Egress is built on LiveKit's, but the algorithm that decides which node takes each recording is our own implementation. LiveKit does not choose by CPU: it weights each recording by type to decide which nodes can take it at all, then hands the job to one that is already recording, picking at random when every candidate is idle. We added a CPU-aware strategy on top and made it the default, so a new recording lands on the node with the most headroom rather than on the busiest one.
 
-What we didn't expect was that this distribution policy, combined with a disk limit nobody had accounted for, could break the recording capability of an entire cluster. That was the bug we ran into.
+We did that to keep the load even across the cluster and get more out of every Media Node. But in systems as complex as WebRTC it is easy to miss second-order effects: parts that behave perfectly on their own and break once you put them together. Ours broke when it met a disk limit nobody had accounted for, and it took the recording capability of the whole cluster with it.
 
-This post describes how this policy, intended to prevent cluster overload, actually fulfilled its purpose while inadvertently breaking the recording service.
+The metrics never pointed at it. What they measure is whether a cluster is healthy, and this one was. The failure was somewhere else, in the logs, and that is where we traced it, node by node, until we found what to fix.
 
 <!-- more -->
 
@@ -51,20 +51,20 @@ The webhook tells you that a recording failed and why, but it doesn't specify wh
 
 All failures originated from a single source: one Media Node with a full disk, where Egress processes repeatedly died while attempting to write to the filesystem. The rest of the Media Nodes had plenty of space, and recordings weren't even reaching the healthy ones.
 
-In other words, it wasn't a cluster-wide issue; **it was a single Media Node running out of disk**, yet almost every recording in the cluster kept getting routed to it, only to fail there. This only makes sense if the Egress dispatcher was actively routing work to the one Media Node that couldn't record.
+In other words, it wasn't a cluster-wide issue; **it was a single Media Node running out of disk**, yet almost every recording in the cluster kept getting routed to it, only to fail there. This only makes sense if the placement algorithm was actively routing work to the one Media Node that couldn't record.
 
 ## The root cause: the emptiest node was the broken one
 
-So, why would the distribution algorithm pick that specific Media Node? This is where it gets counterintuitive.
+So, why would the algorithm pick that specific Media Node? This is where it gets counterintuitive.
 
-When a Track, participant, or Room needs recording, OpenVidu decides which Media Node's Egress will execute it. The default strategy is `cpuload`: each Egress instance scores itself based on its available CPU, and the request is routed to the highest scorer, which is the least loaded node. On paper, distributing by CPU is entirely reasonable.
+When a Track, participant, or Room needs recording, OpenVidu decides which Media Node's Egress will execute it. The default is `cpuload`, the CPU-aware strategy we added: each Egress instance scores itself based on its available CPU, and the request is routed to the highest scorer, which is the least loaded node. LiveKit's original behaviour is still available as `binpack`, which fills up nodes that are already recording before assigning work to new ones. On paper, distributing by CPU is entirely reasonable.
 
 However, a full disk completely subverts this logic:
 
 1. The Media Node with the full disk cannot start any recording: every Egress assigned to it dies almost instantly the moment it touches the disk.
 2. Because it never maintains a running recording, it always reports zero active Egresses.
 3. A Media Node with zero active Egresses reports maximum free CPU, giving it the highest possible `cpuload` score.
-4. The dispatcher, doing exactly what it was told, sees the Media Node as the most available and sends it the next recording. It fails, leaving the Media Node idle once more, and the cycle continues as it wins the next assignment too...
+4. The algorithm, doing exactly what it was told, sees the Media Node as the most available and sends it the next recording. It fails, leaving the Media Node idle once more, and the cycle continues as it wins the next assignment too...
 
 ![The loop that makes the node with the full disk win all the recordings](/assets/images/blog/YYYY/MM/black-hole-node/bug-cycle-dark.png#only-dark){ .round-corners loading=lazy }
 ![The loop that makes the node with the full disk win all the recordings](/assets/images/blog/YYYY/MM/black-hole-node/bug-cycle-light.png#only-light){ .round-corners loading=lazy }
@@ -87,7 +87,7 @@ WARN egress  can not accept request
     "canAccept": false, "reason": "disk", "error": "not enough disk space" }
 ```
 
-Because the full node steps aside, the dispatcher routes the recordings to the healthy Media Nodes, where they complete without issue.
+Because the full node steps aside, the algorithm routes the recordings to the healthy Media Nodes, where they complete without issue.
 
 The following diagram illustrates the entire lifecycle: from how the bug dragged almost all recordings toward the full Media Node, to how that same Media Node behaves now with the fix in place.
 
@@ -100,7 +100,7 @@ Two takeaways, one for each half of the story.
 
 First: recording WebRTC involves many moving parts, and a full disk was just one of them. **The real failure wasn't the disk itself, but how three components that worked fine on their own fit together**: real-time recording, the temporary storage directory, and load-based distribution.
 
-Second: **data is only as good as your ability to interpret it**. The metrics said the cluster was healthy, and they were right, but they weren't telling the whole truth. The cause was hidden in the logs, on a single Media Node, repeating itself. This is why observability is a core part of the platform: so that when an unforeseen failure occurs, you have the tools to trace it all the way back to its source.
+Second: **data is only as good as your ability to interpret it**. The metrics said the cluster was healthy and that much was true, but a healthy cluster and a working one turned out to be different things. The cause was hidden in the logs, on a single Media Node, repeating itself. This is why observability is a core part of the platform: so that when an unforeseen failure occurs, you have the tools to trace it all the way back to its source.
 
 This bug was fixed in [OpenVidu 3.6.0](/docs/releases.md). If you are on that version or later, you won't run into it, and if a full upgrade is not an option right now, the fix lives entirely in the Egress service: updating the Egress version on your Media Nodes is enough to get it. We are sharing this because it is exactly the kind of second-order failure you learn the most from: invisible in metrics, capable of taking down an entire cluster's recording capability, and only revealing itself when you know where to look.
 
