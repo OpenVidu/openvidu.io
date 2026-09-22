@@ -1,9 +1,9 @@
 ---
-title: "Bug stories #1: The Black Hole Node"
+title: "The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)"
 draft: false
 date: 2026-09-21
 slug: black-hole-node
-description: How a single full disk turned OpenVidu's CPU-based egress placement into a black hole that swallowed every recording, traced with the platform's built-in observability.
+description: How a single full disk turned OpenVidu's CPU-based egress placement into a black hole that swallowed every recording in the cluster, and how we traced it.
 cover_image: poster-dark.png
 categories:
   - OpenVidu Platform
@@ -18,10 +18,10 @@ authors:
   - carlosRuiz
 ---
 
-# Bug stories #1: The Black Hole Node
+# The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)
 
-![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-dark.png#only-dark){ .round-corners loading=lazy }
-![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-light.png#only-light){ .round-corners loading=lazy }
+![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-dark.png#only-dark){ .round-corners }
+![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-light.png#only-light){ .round-corners }
 
 OpenVidu records media from its rooms and distributes the load across multiple Media Nodes. Distributing the load is already hard enough, and recording on top adds one more problem. In systems as complex as WebRTC, it's easy to overlook second-order effects: components that work on their own but, when combined, break in ways you never anticipated.
 
@@ -75,7 +75,7 @@ The underlying problem is the signal used for load balancing. Free CPU indicates
 
 ## The fix
 
-The fix addresses this directly: checking disk availability before accepting a task. The Egress monitor now checks the recording directory; if free space falls below `min_disk_space_mb` (512 MB by default), it rejects the request with a clear reason instead of accepting it and dying mid-pipeline. A Media Node that cannot record now steps aside instead of swallowing the work.
+The fix addresses this directly: checking disk availability before accepting a task. The Egress monitor now checks the recording directory; if free space falls below `openvidu.min_disk_space_mb` in `egress.yaml` (512 MB by default), it rejects the request with a clear reason instead of accepting it and dying mid-pipeline. A Media Node that cannot record now steps aside instead of swallowing the work.
 
 With the fix applied to the same cluster, and the disk still full, the affected Media Node now rejects each request and explains why:
 
@@ -102,10 +102,12 @@ First: recording WebRTC involves many moving parts, and a full disk was just one
 
 Second: **data is only as good as your ability to interpret it**. The metrics said the cluster was healthy, and they were right, but they weren't telling the whole truth. The cause was hidden in the logs, on a single Media Node, repeating itself. This is why observability is a core part of the platform: so that when an unforeseen failure occurs, you have the tools to trace it all the way back to its source.
 
-This bug was fixed in OpenVidu 3.6.0. If you are on that version or later, you won't run into it. We are sharing this because it is exactly the kind of second-order failure you learn the most from: invisible in metrics, capable of taking down an entire cluster's recording capability, and only revealing itself when you know where to look.
+This bug was fixed in [OpenVidu 3.6.0](/docs/releases.md). If you are on that version or later, you won't run into it, and if a full upgrade is not an option right now, the fix lives entirely in the Egress service: updating the Egress version on your Media Nodes is enough to get it. We are sharing this because it is exactly the kind of second-order failure you learn the most from: invisible in metrics, capable of taking down an entire cluster's recording capability, and only revealing itself when you know where to look.
+
+And if you are not running OpenVidu yet, all of this comes with it: every deployment ships with the Dashboard and the Grafana stack we used to trace this bug, from the very first node. [Deploy OpenVidu](/docs/self-hosting/deployment-types.md) to get the same tooling on your own cluster.
 
 ## Learn more
 
 - [Observability in OpenVidu](/docs/self-hosting/production-ready/observability/index.md): the Dashboard and Grafana stack every deployment ships with, and the logs and metrics we followed to trace this.
-- [How Egress is balanced across Media Nodes](/docs/self-hosting/production-ready/scalability.md#load-balancing-strategies-across-media-nodes): the `cpuload` and `binpack` allocation strategies, and the eligibility check every new Egress request goes through.
+- [How Egress is balanced across Media Nodes](/docs/self-hosting/production-ready/scalability.md#load-balancing-strategies-across-media-nodes): the `cpuload` and `binpack` allocation strategies, and the eligibility check every new Egress request goes through, disk space included.
 - [Troubleshooting recordings](/docs/troubleshooting/recording.md): recordings that fail or return a 503, including the [no disk space free](/docs/troubleshooting/recording.md#no-disk-space-free) case behind this story.
