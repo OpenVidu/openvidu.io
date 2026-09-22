@@ -101,6 +101,7 @@ Upon a new Egress request:
 1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Egress request if:
       1. Its **CPU load is below a certain threshold** (by default 80%).
       2. It has enough **free CPUs** to handle the new Egress. The amount of free CPUs required depends on the type of Egress (room composite egress, web egress, participant egress, track composite egress, track egress). 
+      3. It has enough **free disk space** in the directory where recordings are temporarily stored (by default, at least 512 MB). This criterion complements the CPU ones instead of replacing them: the allocation strategy keeps working exactly as described below, but a Media Node that cannot write a recording is never eligible, so it is never chosen. See [No disk space free](../../troubleshooting/recording.md#no-disk-space-free) for the symptoms of a Media Node running out of space.
 
     Sane defaults are provided by OpenVidu, but you can configure both the CPU load threshold and the amount of free CPUs required for each type of Egress in the `cpu_cost`:
 
@@ -114,6 +115,13 @@ Upon a new Egress request:
         participant_cpu_cost: 1.0
         track_composite_cpu_cost: 1.0
         track_cpu_cost: 0.5
+    ```
+
+    The minimum free disk space required is configured with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). Set it to a negative value to disable the disk check altogether:
+
+    ```yaml title="egress.yaml"
+    openvidu:
+        min_disk_space_mb: 512
     ```
 
 2. Then, OpenVidu chooses from the pool of eligible nodes the best one according to property `openvidu.allocation_strategy`:
