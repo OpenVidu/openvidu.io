@@ -25,7 +25,7 @@ authors:
 
 OpenVidu records media from its rooms with a service called Egress, and spreads that work across multiple Media Nodes, each one running an Egress of its own. Our Egress is built on LiveKit's, but the algorithm that decides which node takes each recording is our own implementation. LiveKit does not choose by CPU: it weights each recording by type to decide which nodes can take it at all, then hands the job to one that is already recording, picking at random when every candidate is idle. We added a CPU-aware strategy on top and made it the default, so a new recording lands on the node with the most headroom rather than on the busiest one.
 
-We did that to keep the load even across the cluster and get more out of every Media Node. But in systems as complex as WebRTC it is easy to miss second-order effects: parts that behave perfectly on their own and break once you put them together. Ours broke when it met a disk limit nobody had accounted for, and it took the recording capability of the whole cluster with it.
+We did that to keep the load even across the cluster and get more out of every Media Node. But in systems as complex as WebRTC it is easy to miss second-order effects: parts that behave perfectly on their own and break once you put them together. Our strategy broke when it met a disk limit nobody had accounted for, and it took the recording capability of a whole cluster with it.
 
 The metrics never pointed at it. What they measure is whether a cluster is healthy, and this one was. The failure was somewhere else, in the logs, and that is where we traced it, node by node, until we found what to fix.
 
@@ -33,7 +33,7 @@ The metrics never pointed at it. What they measure is whether a cluster is healt
 
 ## Recordings failing for no apparent reason
 
-In an OpenVidu cluster, we observed that, at a certain point, a huge share of Egress recordings (close to 100%) began failing. Your first instinct might be a spike in demand, but the metrics suggested otherwise: CPU usage was stable, and Media Nodes had plenty of headroom.
+A customer came to us with a problem in their production cluster: at a certain point, a huge share of Egress recordings (close to 100%) had begun failing. Your first instinct might be a spike in demand, but the metrics suggested otherwise: CPU usage was stable, and Media Nodes had plenty of headroom.
 
 When CPU metrics don't indicate an overload, it's time to dig into the logs. OpenVidu deploys Grafana alongside the cluster, with container logs streamed into Loki, segmented by Media Node and service. Since the failures were specific to Egress recordings, we filtered for that service to inspect the failed attempts.
 
