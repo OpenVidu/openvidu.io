@@ -274,9 +274,7 @@ def test_version_llms_drops_a_preamble_sentence_naming_a_pruned_section(layout):
 
 
 def test_version_llms_keeps_a_sentence_naming_a_section_it_still_has(layout):
-    text = LLMS.replace(
-        "Some words about the site.", 'The "OpenVidu Meet" section covers the app.'
-    )
+    text = LLMS.replace("Some words about the site.", 'The "OpenVidu Meet" section covers the app.')
     assert 'The "OpenVidu Meet" section covers the app.' in prune_version_llms(
         text, version="3.8", layout=layout
     )
@@ -304,7 +302,8 @@ def test_an_llms_entry_description_may_contain_a_link(layout):
     entry = "- [Docs](https://openvidu.io/3.8/docs/index.md): see [pricing](https://x.test/p)"
     assert entry in prune_version_llms(
         LLMS.replace("- [Docs](https://openvidu.io/3.8/docs/index.md): d", entry),
-        version="3.8", layout=layout,
+        version="3.8",
+        layout=layout,
     )
 
 

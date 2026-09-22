@@ -104,7 +104,7 @@ def prune_version_llms(text: str, *, version: str, layout: SiteLayout) -> str:
         if any(LLMS_ENTRY.match(line) for line in section):
             kept.extend(section)
         elif section:
-            dropped.append(section[0][len("## "):].strip())
+            dropped.append(section[0][len("## ") :].strip())
         section.clear()
 
     for line in text.splitlines():
