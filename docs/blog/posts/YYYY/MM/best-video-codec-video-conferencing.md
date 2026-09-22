@@ -135,6 +135,9 @@ The choice should start from the devices you have to support and the real cost e
 
 6. **Instrument and review.** Do not settle for lab tests alone. WebRTC metrics can help you spot when a device is limiting performance, and why.
 
+![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/codec-selection-process-light.webp#only-light "The six steps to choose a video codec"){ .round-corners loading=lazy }
+![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/codec-selection-process-dark.webp#only-dark "The six steps to choose a video codec"){ .round-corners loading=lazy }
+
 From there, some decisions can be reasonable:
 
 * **Consumer application with mixed devices and browsers:** `H.264` is usually the conservative pick, thanks to its broad compatibility and hardware acceleration.
@@ -170,11 +173,7 @@ On top of that, OpenVidu ships mechanisms like [**Simulcast and SVC**](/docs/ref
 
 And the [observability](/docs/self-hosting/production-ready/observability/index.md) tools together with [**LoadTest**](/docs/self-hosting/production-ready/performance.md#about-openvidu-loadtest) let you analyse WebRTC metrics and test the behaviour across different devices and conditions.
 
-The process comes down to:
-
-**test → measure → compare → adjust.**
-
-That way, choosing a codec stops being a decision based on benchmarks alone and starts being based on how your application actually behaves.
+That way, choosing a codec stops being a single benchmark decision: it becomes testing, measuring, comparing and adjusting based on how your application actually behaves.
 
 ## What to do next
 
