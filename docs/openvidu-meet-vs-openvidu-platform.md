@@ -13,10 +13,11 @@ faq:
   - anchor: should-i-choose-openvidu-meet-or-openvidu-platform
     question: "Should I choose OpenVidu Meet or OpenVidu Platform?"
     answer: >-
-      Choose OpenVidu Meet if your use case falls under the category of "video conferencing
-      application" — e-learning, telehealth, team collaboration, customer support — and you want a
-      complete, ready-to-use video calling service running on your own servers, with screen sharing,
-      recording, chat, virtual backgrounds, E2E encryption and branding customizations out of the box.
+      Choose OpenVidu Meet if your use case falls under the category of "video
+      conferencing application" — e-learning, telehealth, team collaboration, customer support — and you
+      want a complete, ready-to-use video calling service running on your own servers. OpenVidu Meet can be embedded into an existing application 
+      through a web component or an iframe, and comes with moderation controls, fine-grained customizable permission roles, live captions, recording management, 
+      virtual backgrounds, E2E encryption and branding customizations out of the box. 
       Choose OpenVidu Platform if you need total control and flexibility to build your own custom
       real-time application, from scratch or inside an existing app: it provides low-level WebRTC SDKs
       for any language and full control over audio, video and data streaming, media ingestion,
@@ -86,9 +87,9 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 
 Choose [**OpenVidu Meet**](meet/index.md) if your use case falls under the category of "video
 conferencing application" — e-learning, telehealth, team collaboration, customer support — and you
-want a complete, ready-to-use video calling service running on your own servers, with screen
-sharing, recording, chat, virtual backgrounds, E2E encryption and branding customizations out of the
-box.
+want a complete, ready-to-use video calling service running on your own servers. OpenVidu Meet can be embedded into an existing application 
+through a web component or an iframe, and comes with moderation controls, fine-grained customizable permission roles, live captions, recording management, 
+virtual backgrounds, E2E encryption and branding customizations out of the box. 
 
 Choose [**OpenVidu Platform**](docs/index.md) if you need total control and flexibility to build
 your own custom real-time application, from scratch or inside an existing app: it provides low-level
