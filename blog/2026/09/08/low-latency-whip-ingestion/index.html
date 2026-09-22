@@ -1692,9 +1692,9 @@
 
 
 <h1 id="low-latency-live-streaming-ingest-whip-into-openvidu-part-2">Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)<a class="headerlink" href="#low-latency-live-streaming-ingest-whip-into-openvidu-part-2" title="Anchor link to this section for reference">#</a></h1>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light" title="WHIP ingestion into an OpenVidu Room"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark" title="WHIP ingestion into an OpenVidu Room"></a></p>
-<p><a href="https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/">Part 1</a> of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" class="round-corners" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light" title="WHIP ingestion into an OpenVidu Room"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it" class="round-corners" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark" title="WHIP ingestion into an OpenVidu Room"></a></p>
+<p><a href="https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/">Part 1</a> of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/latest/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.</p>
 <!-- more -->
 
 <div class="admonition abstract">
@@ -1762,14 +1762,14 @@ first boot pulls a lot of images:</p>
 </code></pre></div>
 <p>Then open <strong><a href="http://localhost:3000">http://localhost:3000</a></strong>. There are two things to click: <em>Publish from your webcam</em> and
 <em>Watch the stream</em>. Open them in two tabs and you have the whole loop in front of you.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The demo app's landing page, with cards for publishing from a webcam, watching the stream, and generating WHIP credentials for OBS" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/app-home.webp" width="100%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The demo app's landing page, with cards for publishing from a webcam, watching the stream, and generating WHIP credentials for OBS" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/app-home.webp" width="100%"></a></p>
 <div class="admonition tip">
 <p class="admonition-title">Watch them side by side</p>
 <p>Put the publisher tab and the viewer tab next to each other and wave at the camera. What you're
 looking for is that the wave arrives while your hand is still moving. That's the difference this
 series is about, and it's much more convincing than a number.</p>
 </div>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The publisher and the viewer side by side, both showing the same frame of the same stream, with a running clock burned into it" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/publisher-and-viewer.webp" width="100%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="The publisher and the viewer side by side, both showing the same frame of the same stream, with a running clock burned into it" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/publisher-and-viewer.webp" width="100%"></a></p>
 <p>Those two tiles are the same stream: the left one is the camera as it is captured, the right one is
 what came back out of the Room after a WHIP publish and a WebRTC subscribe. The clock burned into
 the test pattern is there to be compared.</p>
@@ -1877,7 +1877,7 @@ When imported you get a webcam filling a 720p canvas, and your default microphon
 <p>Whatever is publishing into the Room (the browser page, OBS, both at once) shows up here as a
 participant with tracks. From OpenVidu's point of view a WHIP ingress <em>is</em> a participant, which is
 why nothing about the viewer has to know how the media got in.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OBS streaming and our watch app viewing the stream, side by side" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/obs-whip-and-viewer.webp" width="100%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OBS streaming and our watch app viewing the stream, side by side" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/obs-whip-and-viewer.webp" width="100%"></a></p>
 <h2 id="why-this-path-is-the-low-latency-one">Why this path is the low-latency one<a class="headerlink" href="#why-this-path-is-the-low-latency-one" title="Anchor link to this section for reference">#</a></h2>
 <p>One line in the app does more for latency than everything else put together:</p>
 <div class="language-javascript highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">await</span><span class="w"> </span><span class="nx">ingressClient</span><span class="p">.</span><span class="nx">createIngress</span><span class="p">(</span><span class="nx">IngressInput</span><span class="p">.</span><span class="nx">WHIP_INPUT</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>

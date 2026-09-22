@@ -2,7 +2,7 @@
 
 Most products reach a point where a chat window or a phone number is no longer enough, and people need to see each other. Sooner or later the ticket lands on your board: *"Add video calls to the app"*. The WebRTC part is a solved problem. The question that actually shapes the project is a different one: **how much of the meeting do you want to own?** The buttons, the layout, the media tracks themselves? Or just a `<div>` where a meeting shows up?
 
-There are three ways to integrate video conferencing into your app with OpenVidu, and all of them run on the same self-hosted deployment. You can embed [OpenVidu Meet](https://openvidu.io/meet/embedded/intro/), a finished meeting UI, with one HTML tag. You can assemble your own meeting screen from [Angular Components](https://openvidu.io/docs/ui-components/angular-components/). Or you can go down to the [OpenVidu Platform](https://openvidu.io/docs/) SDKs and handle every audio and video track yourself.
+There are three ways to integrate video conferencing into your app with OpenVidu, and all of them run on the same self-hosted deployment. You can embed [OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/), a finished meeting UI, with one HTML tag. You can assemble your own meeting screen from [Angular Components](https://openvidu.io/latest/docs/ui-components/angular-components/). Or you can go down to the [OpenVidu Platform](https://openvidu.io/latest/docs/) SDKs and handle every audio and video track yourself.
 
 This post walks through the three, with working code for each, so you can choose the level that fits your product rather than the first one you come across.
 

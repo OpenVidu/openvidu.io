@@ -1,6 +1,6 @@
 # Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)
 
-[Part 1](https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/) of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted [OpenVidu Platform](https://openvidu.io/docs/) Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
+[Part 1](https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/) of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted [OpenVidu Platform](https://openvidu.io/latest/docs/) Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
 
 > **What you'll build**
 >
