@@ -12,7 +12,8 @@ convention is edited once.
 - **Asset folder:** `docs/assets/images/blog/<year>/<month>/<slug>/` — mirrors the post's own
   location. All of the post's images live there, referenced root-absolute:
   `/assets/images/blog/<year>/<month>/<slug>/<file>`. The `og:image`/JSON-LD partials resolve a
-  bare `cover_image` filename against this mirrored path.
+  bare `cover_image` filename against this mirrored path. A post's videos mirror the same
+  `<year>/<month>/<slug>` path under `docs/assets/videos/blog/`.
 - **Draft (not yet published):** identical layout, with the **literal placeholder `YYYY/MM`** as
   the year/month segments — backed by real directories named `YYYY/MM` — so draft branches build
   zero-warning. `date:` holds a **temporary real date** (the draft's creation day); a literal
@@ -27,7 +28,8 @@ convention is edited once.
 2. Replace the string `YYYY/MM/` with the real `<year>/<month>/` everywhere it appears in the
    post body's asset references — a pure string replacement by design.
 3. `git mv` the post to `docs/blog/posts/<year>/<month>/<slug>.md` and the asset folder to
-   `docs/assets/images/blog/<year>/<month>/<slug>/`.
+   `docs/assets/images/blog/<year>/<month>/<slug>/` — plus
+   `docs/assets/videos/blog/<year>/<month>/<slug>/` when the post embeds a video.
 
 Nothing else inside the post changes. Merging to `main` publishes nothing; the post goes live
 with the next Publish Web workflow run.
@@ -48,12 +50,14 @@ tags:
     - WebRTC                # free-form, 4-8 technical tags — taxonomy only, NEVER a page_features key
 authors:
     - carlosRuiz            # keys must exist in docs/blog/.authors.yml
+page_features:
+    - lazyvideo             # only when the post embeds a video — see Media below. Omit otherwise
 ---
 ```
 
-Do **not** add a `hide:` block: posts inherit `hide: [navigation, search-bar,
-version-selector]` from `docs/blog/posts/.meta.yml` (plus `path`/`feedback` from
-`docs/blog/.meta.yml`).
+Do **not** add a `hide:` block: posts inherit the whole of `hide: [path, feedback, navigation,
+search-bar, version-selector]` from `docs/blog/posts/.meta.yml`. Repeating any of it in a post
+is dead frontmatter.
 
 Tag rules:
 
@@ -67,6 +71,51 @@ Tag rules:
 
 `<!-- more -->` on its own line right after the intro is **mandatory** (`post_excerpt:
 required` — a missing tag breaks the build). Exactly one.
+
+## Media — images and videos
+
+Posts follow the site-wide rules in `contributing/page-composition.md` ("Images", "Videos", "The
+lightbox") with no exceptions. The parts a post always touches:
+
+### Images
+
+Plain Markdown, **never** a hand-written `<a class="glightbox">` wrapper — the mkdocs-glightbox
+plugin adds the lightbox anchor, and `auto_themed` assigns the dark/light gallery from the
+`#only-*` suffix.
+
+```markdown
+![Alt text](/assets/images/blog/YYYY/MM/<slug>/screenshot.png){ .round-corners loading=lazy }
+```
+
+- **`.round-corners`** on every screen capture, photo, poster and GIF — the one rounding class.
+  Logos, icons, transparent art and SVG diagrams stay square: a transparent image has no corner
+  to round.
+- **`loading=lazy`** on every image below the first viewport — in a post that is everything
+  except the poster right after the H1.
+- **`.skip-gallery`** on logos, product marks and inline icons: nothing to enlarge.
+- Theme variants always come **in pairs**, `#only-light` / `#only-dark` on the path.
+
+### Videos
+
+One canonical pattern for a post: a lazy `<video>` wrapped in a **glightbox anchor**, so the
+video joins the page gallery like every other page on the site. A bare `<video>` is a bug — it
+renders but never opens. One `<a>` per line (there are strange behaviors when it is not), no
+`width`, no inline `style`.
+
+```html
+<a class="glightbox" href="/assets/videos/blog/YYYY/MM/<slug>/demo.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/<slug>/demo.mp4" preload="none" muted playsinline loop></video></a>
+```
+
+- Video assets live in `docs/assets/videos/blog/<year>/<month>/<slug>/`, mirroring the image
+  folder, and `/publish-post` rewrites their `YYYY/MM` like any other asset path.
+- `lazy-video` **requires `page_features: [lazyvideo]`** in the frontmatter — `ovweb lint` fails
+  the post without it.
+- A themed pair carries the `#only-dark` / `#only-light` suffix in the `<video src>`, **never**
+  in the `<a href>`, plus `data-gallery="dark"` / `data-gallery="light"`. A single video needs
+  neither.
+- No `autoplay` in a post (that pattern is for above-the-fold showcase heroes only), and
+  `<video>` never takes `defer`, `async` or `loading` — those attributes do not exist for
+  videos and silently do nothing.
 
 ## Link rules
 

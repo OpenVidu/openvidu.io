@@ -40,6 +40,18 @@ the link forms, the excerpt rule, and the asset mirroring; trust its errors). Se
 - **`<!-- more -->`** — exactly one, right after the intro; missing breaks the build → High.
 - **Poster image** follows the H1; `#only-light`/`#only-dark` paired if used. Every referenced
   image exists on disk.
+- **Media attributes** (conventions' *Media* section) → Medium severity each: a screen capture,
+  photo, poster or GIF without `.round-corners` (and the inverse — a logo, transparent image or
+  SVG diagram that carries it); any image below the poster without `loading=lazy`; a logo or
+  inline icon without `.skip-gallery`; a hand-written `<a class="glightbox">` around an *image*
+  (the plugin does that).
+- **Videos** → High severity: a `<video>` that is not wrapped in an `<a class="glightbox"
+  … data-type="video">` never opens in the page gallery. Also flag a missing
+  `page_features: [lazyvideo]` (lint failure), a `#only-*` suffix on the `<a href>` instead of
+  the `<video src>`, a themed pair without `data-gallery`, `autoplay` in a post, and `width=` or
+  inline `style` on the video.
+- **No dead `hide:` frontmatter** — `docs/blog/posts/.meta.yml` already hides `path`, `feedback`,
+  `navigation`, `search-bar` and `version-selector`; a post repeating any of them is noise → Low.
 - **Links** follow the conventions' link rules — including the **excerpt exception** (no `.md`
   Markdown links before `<!-- more -->`; raw-HTML URL form there) and the **Release-post
   exception** (version-pinned domain-qualified URLs, flag `latest` or `.md` links there).

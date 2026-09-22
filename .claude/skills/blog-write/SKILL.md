@@ -28,10 +28,10 @@ formatting.
 1. **H1 title** (`# ...`) — matches the outline's title.
 2. **Poster image** immediately after the H1, using **root-absolute** asset paths (`YYYY/MM` stays literal while the post is a draft). Use light/dark variants when available:
    ```markdown
-   ![Descriptive alt text](/assets/images/blog/YYYY/MM/<slug>/poster-light.webp#only-light "title")
-   ![Descriptive alt text](/assets/images/blog/YYYY/MM/<slug>/poster-dark.webp#only-dark "title")
+   ![Descriptive alt text](/assets/images/blog/YYYY/MM/<slug>/poster-light.webp#only-light "title"){ .round-corners }
+   ![Descriptive alt text](/assets/images/blog/YYYY/MM/<slug>/poster-dark.webp#only-dark "title"){ .round-corners }
    ```
-   A single image can use `{ align=right width=60% }` sizing attributes. Point `cover_image` at this poster too (a raster `-light` variant).
+   A single image can use `{ align=right width=60% }` sizing attributes. Point `cover_image` at this poster too (a raster `-light` variant). The poster is the one image that does **not** take `loading=lazy`; every later image does — with `.round-corners`, `.skip-gallery` and the video pattern per the **Media** section of the conventions.
 3. **Intro** — first paragraph opens with a **hook** (a question or a clear benefit). It may run a little longer than body paragraphs.
 4. **`<!-- more -->`** on its own line immediately after the intro. This is **mandatory** — the blog plugin sets `post_excerpt: required`, so a missing tag breaks the build.
 5. **H2/H3 sections** following the outline, fundamentals → advanced.
@@ -90,3 +90,4 @@ Then add a short **Final checks** note confirming:
 - Frontmatter has a `title` and a `description` (both required — the build fails without them); `cover_image` set when a raster poster exists in the asset folder.
 - Naming agrees: filename is `<slug>.md` (= frontmatter `slug`); asset folder is `docs/assets/images/blog/YYYY/MM/<slug>/` mirroring the post location; published posts sit in `posts/<year>/<month>/` matching the frontmatter `date`, drafts sit in the literal `posts/YYYY/MM/` placeholder folders with a temporary creation date.
 - Links follow the rules above (root-absolute internal/assets with the `.md`/file extension; `{:target="_blank"}` external; absolute version-pinned for release posts).
+- Media follows the conventions' **Media** section: `.round-corners` on captures/photos/posters/GIFs (not on logos, transparent art or SVG diagrams), `loading=lazy` on every image but the poster, and videos wrapped in a `glightbox` anchor with `page_features: [lazyvideo]` declared.
