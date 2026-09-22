@@ -33,7 +33,7 @@ We recently ran this experiment: build a small CRM — clients, support issues, 
 
 <!-- more -->
 
-<video class="round-corners lazy-video" src="/assets/videos/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" preload="none" muted playsinline loop width="100%" style="margin: 0.5em 0 1em 0;"></video>
+<a class="glightbox" href="/assets/videos/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/crm-meet-demo.mp4" preload="none" muted playsinline loop></video></a>
 
 *The result in 10 seconds: sign in, open the client's issue, hit **Join** — and the meeting happens right inside the CRM. Real capture of the running app (participant video is stock footage).*
 
