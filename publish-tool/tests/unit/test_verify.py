@@ -72,6 +72,15 @@ def test_reports_a_version_llms_entry_outside_the_version(published, config):
     assert findings_by_check(published, config)["version-llms-txt"] == [f"{VERSION}/llms.txt"] * 2
 
 
+def test_reports_a_version_llms_that_lists_nothing(published, config):
+    """An index with no entries is a silent hole: nothing would index that version, and every
+    per-entry check passes vacuously."""
+    path = published / VERSION / "llms.txt"
+    path.write_text("# OpenVidu\n\n> Summary.\n", encoding="utf-8")
+
+    assert findings_by_check(published, config)["version-llms-txt"] == [f"{VERSION}/llms.txt"]
+
+
 def test_reports_a_version_llms_entry_without_an_export(published, config):
     path = published / VERSION / "llms.txt"
     path.write_text(

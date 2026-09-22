@@ -261,5 +261,52 @@ def test_version_llms_leaves_the_preamble_alone(layout):
     assert pruned(layout).startswith("# OpenVidu\n\n> Summary.\n\nSome words about the site.\n")
 
 
+def test_version_llms_drops_a_preamble_sentence_naming_a_pruned_section(layout):
+    """The description is the root index's: it describes sections a version does not carry."""
+    text = LLMS.replace(
+        "Some words about the site.",
+        'Two products share this. The "Product and pricing" section holds plans. Read on.',
+    )
+    out = prune_version_llms(text, version="3.8", layout=layout)
+    assert "## Product and pricing" not in out, "the fixture's section is pruned"
+    assert "Two products share this. Read on." in out
+    assert "Product and pricing" not in out
+
+
+def test_version_llms_keeps_a_sentence_naming_a_section_it_still_has(layout):
+    text = LLMS.replace(
+        "Some words about the site.", 'The "OpenVidu Meet" section covers the app.'
+    )
+    assert 'The "OpenVidu Meet" section covers the app.' in prune_version_llms(
+        text, version="3.8", layout=layout
+    )
+
+
+def test_version_llms_keeps_prose_that_merely_uses_the_words(layout):
+    """Only a quoted section name goes: pruning must not eat ordinary prose."""
+    text = LLMS.replace("Some words about the site.", "Product and pricing details live online.")
+    assert "Product and pricing details live online." in prune_version_llms(
+        text, version="3.8", layout=layout
+    )
+
+
+def test_an_llms_entry_title_may_contain_a_bracket(layout):
+    """A `]` in a title used to cut the match short, so the entry was read as prose and kept."""
+    text = LLMS.replace(
+        "- [Home](https://openvidu.io/3.8/index.md): h",
+        "- [Home [beta]](https://openvidu.io/3.8/index.md): h",
+    )
+    assert "3.8/index.md" not in prune_version_llms(text, version="3.8", layout=layout)
+
+
+def test_an_llms_entry_description_may_contain_a_link(layout):
+    """Matching lazily stops at the entry's own `](`, not at one further along the line."""
+    entry = "- [Docs](https://openvidu.io/3.8/docs/index.md): see [pricing](https://x.test/p)"
+    assert entry in prune_version_llms(
+        LLMS.replace("- [Docs](https://openvidu.io/3.8/docs/index.md): d", entry),
+        version="3.8", layout=layout,
+    )
+
+
 def test_version_llms_without_sections_still_gets_the_note(layout):
     assert "llms.txt" in prune_version_llms("# X\n", version="3.8", layout=layout)

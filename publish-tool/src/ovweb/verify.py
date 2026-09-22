@@ -215,7 +215,18 @@ def _check_version_llms_txt(tree: Path, version: str, config: SiteConfig) -> lis
     prefixes = tuple(f"{base}/{version}/{page}/" for page in config.layout.versioned_pages)
     where = f"{version}/{LLMS_TXT}"
     findings = []
-    for match in LLMS_ENTRY.finditer(fsops.read_text(path)):
+    entries = list(LLMS_ENTRY.finditer(fsops.read_text(path)))
+    if not entries:
+        return [
+            Finding(
+                "version-llms-txt",
+                where,
+                "lists no page at all, so nothing indexes this version. Pruning keeps the "
+                f"entries under /{version}/{{{','.join(config.layout.versioned_pages)}}}/: "
+                "either the build wrote none, or they were written against a different site_url",
+            )
+        ]
+    for match in entries:
         url = match.group("url")
         if not url.startswith(prefixes):
             findings.append(

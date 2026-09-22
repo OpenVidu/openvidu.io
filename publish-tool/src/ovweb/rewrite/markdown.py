@@ -40,8 +40,10 @@ _EXPORT_TARGET = r"\]\({base}(?P<page>(?:[^)\s#]*/)?)index\.md(?P<frag>#[^)\s]*)
 #: The suffix of the exports. Used by the pipeline to pick between these rules and the HTML ones.
 SUFFIX = ".md"
 
-#: An llms.txt entry: `- [Title](url): description`.
-LLMS_ENTRY = re.compile(r"^\s*-\s*\[[^\]]*\]\((?P<url>[^)\s]+)\)", re.MULTILINE)
+#: An llms.txt entry: `- [Title](url): description`. The title is matched lazily rather than as
+#: "anything but a bracket", so a title carrying its own `]` is read whole; stopping at the first
+#: `](` is also what keeps a Markdown link *in the description* from being taken for the URL.
+LLMS_ENTRY = re.compile(r"^\s*-\s*\[.*?\]\((?P<url>[^)\s]+)\)", re.MULTILINE)
 
 #: What a version's own llms.txt says about the pages it does not list.
 VERSION_LLMS_NOTE = (
@@ -92,32 +94,56 @@ def prune_version_llms(text: str, *, version: str, layout: SiteLayout) -> str:
     prefixes = tuple(f"{layout.base_url}/{version}/{page}/" for page in layout.versioned_pages)
     note = [VERSION_LLMS_NOTE.format(base=layout.base_url), ""]
 
+    preamble: list[str] = []
     kept: list[str] = []
     section: list[str] = []
+    dropped: list[str] = []
     in_sections = False
 
     def flush() -> None:
         if any(LLMS_ENTRY.match(line) for line in section):
             kept.extend(section)
+        elif section:
+            dropped.append(section[0][len("## "):].strip())
         section.clear()
 
     for line in text.splitlines():
         if line.startswith("## "):
-            if not in_sections:
-                kept.extend(note)
-                in_sections = True
+            in_sections = True
             flush()
             section.append(line)
         elif not in_sections:
-            kept.append(line)
+            preamble.append(line)
         else:
             entry = LLMS_ENTRY.match(line)
             if entry is None or entry.group("url").startswith(prefixes):
                 section.append(line)
     flush()
-    if not in_sections:
-        kept.extend(note)
-    return "\n".join(kept).rstrip("\n") + "\n"
+    body = _drop_sentences_naming(preamble, dropped) + note + kept
+    return "\n".join(body).rstrip("\n") + "\n"
+
+
+def _drop_sentences_naming(preamble: list[str], sections: list[str]) -> list[str]:
+    """Drop preamble sentences that name a section this file no longer carries.
+
+    The description above the sections is written for the root index, which lists every one of
+    them; a version's index keeps only its own. Left as written it would tell a reader — a
+    documentation MCP server, mostly — to look for a section that pruning just removed, as the
+    sentence about the "Optional" section did. Only a sentence naming a dropped section in quotes
+    goes: prose that merely happens to use the same word is left alone.
+    """
+    quoted = [q for name in sections for q in (f'"{name}"', f"\u201c{name}\u201d")]
+    if not quoted:
+        return preamble
+    out = []
+    for line in preamble:
+        if any(q in line for q in quoted):
+            sentences = re.split(r"(?<=[.!?])\s+", line)
+            line = " ".join(s for s in sentences if not any(q in s for q in quoted))
+            if not line.strip():
+                continue
+        out.append(line)
+    return out
 
 
 def _drop_version_from_page_urls(text: str, *, version: str, pages: tuple[str, ...]) -> str:
