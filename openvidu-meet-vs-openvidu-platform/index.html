@@ -175,6 +175,121 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@openvidu">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+{
+      "@type": "Organization",
+      "@id": "https://openvidu.io/#organization",
+      "name": "OpenVidu",
+      "url": "https://openvidu.io/",
+      "description": "Self-hosted videoconferencing and custom WebRTC solutions: OpenVidu Meet, a ready-to-use video calling solution, and OpenVidu Platform, SDKs to build custom real-time applications. Self-hosted, performant, scalable and fault tolerant.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png"
+      },
+      "sameAs": [
+        "https://github.com/OpenVidu",
+        "https://hub.docker.com/u/openvidu",
+        "https://www.npmjs.com/~openvidu",
+        "https://x.com/openvidu",
+        "https://openvidu.medium.com/",
+        "https://www.youtube.com/@openvidu",
+        "https://www.linkedin.com/company/openvidu-webrtc/",
+        "https://openvidu.discourse.group/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://openvidu.io/support/"
+      }
+    },
+{
+      "@type": "SoftwareApplication",
+      "@id": "https://openvidu.io/latest/meet/#software",
+      "name": "OpenVidu Meet",
+      "url": "https://openvidu.io/latest/meet/",
+      "description": "OpenVidu Meet is an open-source, self-hosted video conferencing application: a ready-to-use alternative to Zoom, Google Meet or Jitsi Meet that runs on your own servers and needs no code to deploy. Create rooms, record meetings and embed high-quality video calls into any website or application through a web component, REST API and webhooks.",
+      "applicationCategory": "CommunicationApplication",
+      "operatingSystem": "Linux (self-hosted server), any modern web browser (client)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "description": "OpenVidu COMMUNITY edition is open source and free to self-host. OpenVidu PRO adds scalability, fault tolerance and advanced features.",
+        "url": "https://openvidu.io/pricing/"
+      },
+      "author": { "@id": "https://openvidu.io/#organization" },
+      "publisher": { "@id": "https://openvidu.io/#organization" }
+    },
+{
+      "@type": "SoftwareApplication",
+      "@id": "https://openvidu.io/latest/docs/#software",
+      "name": "OpenVidu Platform",
+      "url": "https://openvidu.io/latest/docs/",
+      "description": "Programmable platform with client and server SDKs to build custom, self-hosted WebRTC applications: videoconferencing, live streaming and AI-powered real-time media with low latency, scalability and fault tolerance.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Linux (self-hosted server); client SDKs for browsers, Android and iOS",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "description": "OpenVidu COMMUNITY edition is open source and free to self-host. OpenVidu PRO adds scalability, fault tolerance and advanced features.",
+        "url": "https://openvidu.io/pricing/"
+      },
+      "author": { "@id": "https://openvidu.io/#organization" },
+      "publisher": { "@id": "https://openvidu.io/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://openvidu.io/openvidu-meet-vs-openvidu-platform/#faq",
+      "about": [
+        { "@id": "https://openvidu.io/latest/meet/#software" },
+        { "@id": "https://openvidu.io/latest/docs/#software" }
+      ],
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Should I choose OpenVidu Meet or OpenVidu Platform?",
+          "url": "https://openvidu.io/openvidu-meet-vs-openvidu-platform/#should-i-choose-openvidu-meet-or-openvidu-platform",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose OpenVidu Meet if your use case falls under the category of \"video conferencing application\" \u2014 e-learning, telehealth, team collaboration, customer support \u2014 and you want a complete, ready-to-use video calling service running on your own servers. OpenVidu Meet can be embedded into an existing application  through a web component or an iframe, and comes with moderation controls, fine-grained customizable permission roles, live captions, recording management,  virtual backgrounds, E2E encryption and branding customizations out of the box.  Choose OpenVidu Platform if you need total control and flexibility to build your own custom real-time application, from scratch or inside an existing app: it provides low-level WebRTC SDKs for any language and full control over audio, video and data streaming, media ingestion, telephony and AI integrations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use OpenVidu Meet and OpenVidu Platform together?",
+          "url": "https://openvidu.io/openvidu-meet-vs-openvidu-platform/#can-i-use-openvidu-meet-and-openvidu-platform-together",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. OpenVidu Meet runs as one of the services of an OpenVidu deployment, so the same self-hosted deployment can serve OpenVidu Meet rooms and the OpenVidu Platform SDKs at the same time. OpenVidu Meet can also be embedded into an existing application through a web component or an iframe, which is often enough without dropping down to the low-level SDKs. If you are not sure, the OpenVidu team can help you size a deployment that uses both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do both products offer the same self-hosting, performance and scalability?",
+          "url": "https://openvidu.io/openvidu-meet-vs-openvidu-platform/#do-both-products-offer-the-same-self-hosting-performance-and-scalability",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. OpenVidu Meet and OpenVidu Platform are both self-hosted, both provide production-grade performance, scalability, fault tolerance and observability, and both come with cloud deployment templates, tutorials and customer support. The differences are in what you build with: OpenVidu Meet is a ready-to-use application with no-code and low-code options, and OpenVidu Platform is a set of low-level SDKs with high control over real-time features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does choosing OpenVidu Meet or OpenVidu Platform affect pricing?",
+          "url": "https://openvidu.io/openvidu-meet-vs-openvidu-platform/#does-choosing-openvidu-meet-or-openvidu-platform-affect-pricing",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Pricing depends on the OpenVidu edition and the deployment you run, not on which product you build with. OpenVidu COMMUNITY is open source and free to self-host for both, and OpenVidu PRO is billed the same way for both: per core per minute of the cluster you run."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -1272,6 +1387,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#frequently-asked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frequently asked questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frequently asked questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#should-i-choose-openvidu-meet-or-openvidu-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Should I choose OpenVidu Meet or OpenVidu Platform?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-i-use-openvidu-meet-and-openvidu-platform-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can I use OpenVidu Meet and OpenVidu Platform together?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-both-products-offer-the-same-self-hosting-performance-and-scalability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do both products offer the same self-hosting, performance and scalability?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#does-choosing-openvidu-meet-or-openvidu-platform-affect-pricing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does choosing OpenVidu Meet or OpenVidu Platform affect pricing?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1397,6 +1581,34 @@
 </tbody>
 </table>
 </div>
+<h2 id="frequently-asked-questions">Frequently asked questions<a class="headerlink" href="#frequently-asked-questions" title="Anchor link to this section for reference">#</a></h2>
+<h3 id="should-i-choose-openvidu-meet-or-openvidu-platform">Should I choose OpenVidu Meet or OpenVidu Platform?<a class="headerlink" href="#should-i-choose-openvidu-meet-or-openvidu-platform" title="Anchor link to this section for reference">#</a></h3>
+<p>Choose <a href="/latest/meet/"><strong>OpenVidu Meet</strong></a> if your use case falls under the category of "video
+conferencing application" — e-learning, telehealth, team collaboration, customer support — and you
+want a complete, ready-to-use video calling service running on your own servers. OpenVidu Meet can be embedded into an existing application 
+through a web component or an iframe, and comes with moderation controls, fine-grained customizable permission roles, live captions, recording management, 
+virtual backgrounds, E2E encryption and branding customizations out of the box. </p>
+<p>Choose <a href="/latest/docs/"><strong>OpenVidu Platform</strong></a> if you need total control and flexibility to build
+your own custom real-time application, from scratch or inside an existing app: it provides low-level
+WebRTC SDKs for any language and full control over audio, video and data streaming, media ingestion,
+telephony and AI integrations.</p>
+<h3 id="can-i-use-openvidu-meet-and-openvidu-platform-together">Can I use OpenVidu Meet and OpenVidu Platform together?<a class="headerlink" href="#can-i-use-openvidu-meet-and-openvidu-platform-together" title="Anchor link to this section for reference">#</a></h3>
+<p>Yes. OpenVidu Meet runs as one of the <a href="/latest/docs/self-hosting/deployment-types/#node-services">services of an OpenVidu deployment</a>,
+so the same self-hosted deployment can serve OpenVidu Meet rooms and the OpenVidu Platform SDKs at
+the same time. OpenVidu Meet can also be embedded into an existing application through a web
+component or an iframe, which is often enough without dropping down to the low-level SDKs. If you
+are not sure, the OpenVidu team can help you size a deployment that uses both.</p>
+<h3 id="do-both-products-offer-the-same-self-hosting-performance-and-scalability">Do both products offer the same self-hosting, performance and scalability?<a class="headerlink" href="#do-both-products-offer-the-same-self-hosting-performance-and-scalability" title="Anchor link to this section for reference">#</a></h3>
+<p>Yes. OpenVidu Meet and OpenVidu Platform are both self-hosted, both provide production-grade
+performance, scalability, fault tolerance and observability, and both come with cloud deployment
+templates, tutorials and customer support. The differences are in what you build with: OpenVidu Meet
+is a ready-to-use application with no-code and low-code options, and OpenVidu Platform is a set of
+low-level SDKs with high control over real-time features.</p>
+<h3 id="does-choosing-openvidu-meet-or-openvidu-platform-affect-pricing">Does choosing OpenVidu Meet or OpenVidu Platform affect pricing?<a class="headerlink" href="#does-choosing-openvidu-meet-or-openvidu-platform-affect-pricing" title="Anchor link to this section for reference">#</a></h3>
+<p>No. <a href="../pricing/">Pricing</a> depends on the OpenVidu edition and the deployment you run, not on which
+product you build with. OpenVidu <strong class="openvidu-tag openvidu-community-tag">COMMUNITY</strong> is open
+source and free to self-host for both, and OpenVidu <strong class="openvidu-tag openvidu-pro-tag">PRO</strong> is
+billed the same way for both: per core per minute of the cluster you run.</p>
 <div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Still not sure which one fits?</h2>
   <p class="cta-lead">Tell us about your use case and we will help you pick — or size a deployment that uses both.</p>

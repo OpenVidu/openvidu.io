@@ -4,41 +4,7 @@
 
 OpenVidu is self-hosted: it runs on infrastructure you control. Two products share this documentation. OpenVidu Meet is a complete video conferencing application, deployed as it is or embedded in your own app; OpenVidu Platform is the LiveKit-compatible SDK layer you build your own real-time application on. The "Optional" section at the end holds legal and acknowledgment pages, and can be skipped when a shorter context is needed.
 
-## Product and pricing
-
-- [Self-hosted video conferencing & custom WebRTC](https://openvidu.io/3.8/index.md): Run video conferencing on your own servers. Deploy the ready-made OpenVidu Meet app, or build your own real-time video product with OpenVidu Platform.
-- [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.8/openvidu-meet-vs-openvidu-platform/index.md): OpenVidu Meet is a finished video conferencing app you deploy; OpenVidu Platform is the SDK layer you build on. Compare both and pick one.
-- [OpenVidu vs LiveKit: A Self-Hosted LiveKit Fork](https://openvidu.io/3.8/openvidu-vs-livekit/index.md): OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled in.
-- [OpenVidu vs mediasoup: Platform vs Raw SFU Library](https://openvidu.io/3.8/openvidu-vs-mediasoup/index.md): mediasoup is a low-level SFU library, not a platform. See exactly what OpenVidu already built on top of it — signaling, rooms, auth, recording, API.
-- [OpenVidu vs Jitsi: Two Self-Hosted Platforms Compared](https://openvidu.io/3.8/openvidu-vs-jitsi/index.md): OpenVidu and Jitsi are both open-source, self-hosted video platforms. Compare architecture, recording, scaling, SDKs and pricing to pick the right one.
-- [OpenVidu vs Janus: Platform vs Raw WebRTC Gateway](https://openvidu.io/3.8/openvidu-vs-janus/index.md): Janus is a general-purpose WebRTC gateway, not a platform. See exactly what it leaves for you to build — signaling, rooms, auth, recording, API.
-- [Pricing: Free COMMUNITY & Pay-Per-Core PRO](https://openvidu.io/3.8/pricing/index.md): OpenVidu pricing: COMMUNITY edition free forever, PRO from $0.0006 per core per minute. Transparent, pay only for what you use.
-- [OpenVidu support and consultancy](https://openvidu.io/3.8/support/index.md): Commercial support and consultancy from the OpenVidu team, plus the community channels where COMMUNITY edition users get help with self-hosting.
-- [About the OpenVidu team](https://openvidu.io/3.8/about-us/index.md): The engineers and researchers behind OpenVidu, and the open-source and scientific work the project has grown out of.
-- [OpenVidu research publications](https://openvidu.io/3.8/research/index.md): Peer-reviewed papers and PhD theses on WebRTC media server scalability and quality of experience under load, published by the OpenVidu team.
-
-## Blog
-
-- [How client networks affect WebRTC quality and cost](https://openvidu.io/3.8/blog/2026/04/30/how-client-networks-affect-qoe-and-costs/index.md): How modern WebRTC connectivity works, and why your clients' networks drive both their user experience and the cost of the servers behind them.
-- [5 React video call platforms compared in 2026](https://openvidu.io/3.8/blog/2026/05/19/5-react-video-call-platforms/index.md): A 2026 comparison of five React video call platforms, Agora, Zoom, Stream, LiveKit and OpenVidu, weighing SaaS convenience against cost and lock-in.
-- [The scale-in problem in video conferencing](https://openvidu.io/3.8/blog/2026/05/26/scale-in-problem-in-videoconferences/index.md): Why you cannot just terminate a media server with meetings running: the scale-in problem, how node draining works, and how OpenVidu solves it.
-- [5 conversational AI app ideas for a weekend build](https://openvidu.io/3.8/blog/2026/06/23/5-conversational-ai-app-ideas/index.md): Five conversational AI app ideas you can build this weekend: real-time voice and vision experiments, and the STT-LLM-TTS pipeline behind them.
-- [OpenVidu Meet vs OpenVidu Platform in 2026](https://openvidu.io/3.8/blog/2026/06/16/meet-vs-platform/index.md): Choosing the right level of abstraction for self-hosted WebRTC in 2026: how OpenVidu Meet and OpenVidu Platform compare, and which one fits your case.
-- [How to scale video conferencing architecture](https://openvidu.io/3.8/blog/2026/06/02/scalability-in-videoconferencing-systems/index.md): An architecture roadmap for scaling video conferencing from one server to a high-availability system: elastic media plane, HA control plane, autoscaling.
-- [Host your own private video calls at home](https://openvidu.io/3.8/blog/2026/06/30/secure-home-video-conferencing/index.md): Host a private, free video conferencing server at home on a Raspberry Pi, an old laptop or a mini-PC, with no accounts and no time limits, in three steps.
-- [TURN in production WebRTC: resilience and security](https://openvidu.io/3.8/blog/2026/06/09/turn-key-considerations/index.md): Why TURN is what separates a WebRTC demo from a production deployment: connectivity resilience and security behind NATs, firewalls and mobile gateways.
-- [Building a video-enabled CRM with an AI agent](https://openvidu.io/3.8/blog/2026/07/21/building-a-video-enabled-crm-with-an-ai-agent/index.md): How a complete CRM with embedded video meetings was built with an AI coding agent and OpenVidu Meet, from a single prompt to per-guest room permissions.
-- [Deployment times for WebRTC on five clouds](https://openvidu.io/3.8/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/index.md): We deployed the same self-hosted WebRTC platform on AWS, Azure, GCP, Oracle and DigitalOcean, in three architectures each, and timed every single run.
-- [DynDevice built virtual classrooms with OpenVidu](https://openvidu.io/3.8/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/index.md): How DynDevice, the eLearning platform by Mega Italia Media, replaced third-party meeting tools with virtual classrooms built into its LMS using OpenVidu.
-- [OpenVidu 3.8.0 release notes](https://openvidu.io/3.8/blog/2026/07/09/release-380/index.md): OpenVidu 3.8.0 is out: user accounts, role-based access and fine-grained room members in Meet, plus a mediasoup overhaul and tighter TURN security.
-- [3 access models for video conferencing apps](https://openvidu.io/3.8/blog/2026/07/14/video-conferencing-permissions/index.md): The three access models for video conferencing apps compared, anonymous role links, identified guests and registered users, and when to use each.
-- [Control your video calls with gestures using free AI](https://openvidu.io/3.8/blog/2026/08/11/control-video-calls-with-gestures-free-ai/index.md): Control your camera, microphone and hand-raise requests with hand gestures, using MediaPipe in the browser, at no cost and without sending video to the cloud.
-- [Debugging WebRTC with an AI agent and Grafana MCP](https://openvidu.io/3.8/blog/2026/08/25/debugging-webrtc-with-ai-and-grafana-mcp/index.md): We give a Claude Code agent nothing but read-only Grafana and a broken OpenVidu deployment, then watch it find each root cause in a reproducible case study.
-- [Deploy OpenVidu on Hetzner Cloud in 15 Minutes](https://openvidu.io/3.8/blog/2026/08/18/deploy-openvidu-hetzner/index.md): Deploy a self-hosted OpenVidu video conferencing server on a Hetzner Cloud VM with one command, automatic HTTPS and a test bill measured in cents.
-- [Building an AI agent for transcribing and summarizing audio calls](https://openvidu.io/3.8/blog/2026/08/04/transcriber-summarizer-agent/index.md): How to build an AI agent that transcribes and summarizes audio calls for your OpenVidu deployment from scratch.
-- [Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)](https://openvidu.io/3.8/blog/2026/09/01/low-latency-live-streaming/index.md): What counts as low latency, why WebRTC hits sub-second delivery where HLS and DASH structurally can't, and where low latency live streaming actually gets used.
-- [Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)](https://openvidu.io/3.8/blog/2026/09/08/low-latency-whip-ingestion/index.md): Push a real stream into an OpenVidu Room over WHIP, from a browser webcam and from OBS Studio, and watch it arrive with sub-second delay.
-- [How Novakid runs 30 million live English lessons on OpenVidu](https://openvidu.io/3.8/blog/2026/09/15/novakid-live-english-lessons/index.md): How Novakid migrated from raw Kurento to OpenVidu to power live English lessons for over a million kids, and what changed for their engineering team.
+> The pages that are not tied to a version — pricing, support, the product comparisons and the blog — are listed in https://openvidu.io/llms.txt.
 
 ## OpenVidu Meet
 
@@ -284,11 +250,3 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [Administer OpenVidu High Availability on Oracle Cloud](https://openvidu.io/3.8/docs/self-hosting/ha/oracle/admin/index.md): Administer OpenVidu High Availability on Oracle Cloud Infrastructure: shut down and start the cluster, resize instances and tune Media Node autoscaling.
 - [Install OpenVidu High Availability on Oracle Cloud](https://openvidu.io/3.8/docs/self-hosting/ha/oracle/install/index.md): Deploy OpenVidu High Availability on Oracle Cloud Infrastructure with Terraform, then point your application at the result.
 - [Upgrade OpenVidu High Availability on Oracle Cloud](https://openvidu.io/3.8/docs/self-hosting/ha/oracle/upgrade/index.md): Upgrade an existing OpenVidu High Availability deployment on Oracle Cloud Infrastructure to a newer OpenVidu version, keeping its configuration and data.
-
-## Optional
-
-- [Cookie Policy](https://openvidu.io/3.8/conditions/cookie-policy/index.md): The cookies openvidu.io sets for functionality and analytics, what each one is for, and how to manage or disable them in your browser.
-- [Privacy Policy](https://openvidu.io/3.8/conditions/privacy-policy/index.md): How TIKAL TECHNOLOGIES SL collects, stores and processes personal data on openvidu.io, and your rights under EU data protection law.
-- [Terms of Service](https://openvidu.io/3.8/conditions/terms-of-service/index.md): The terms governing use of the openvidu.io website and the OpenVidu services, including your rights, your obligations and the applicable law.
-- [Acknowledgments and public funding](https://openvidu.io/3.8/acknowledgments/index.md): The Spanish and European research projects, LERNIM, EDGEDATA-CM and NewGenVidu, whose public funding has supported OpenVidu's development.
-
