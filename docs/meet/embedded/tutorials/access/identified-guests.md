@@ -399,7 +399,7 @@ function accessRoom(roomUrl, returnViewId) {
 
 	// Add event listener for when the OpenVidu Meet component is closed
 	const meet = document.querySelector('openvidu-meet');
-	meet.once('meetingClosed', () => {
+	meet.once('viewClosed', () => {
 		// (2)!
 		console.log('OpenVidu Meet component closed');
 
@@ -413,7 +413,7 @@ function accessRoom(roomUrl, returnViewId) {
 ```
 
 1. Inject the OpenVidu Meet WebComponent with the `room-url` attribute set to the given URL. For an identified guest this is their unique `accessUrl`, which already carries the member's secret, so the participant enters the meeting directly with the fixed name and no login.
-2. Add a listener for the `meetingClosed` event so that, when the component is closed, the meeting is cleared and the previous view is shown again (`returnViewId` is `#home` for anonymous access or `#members` for an identified guest).
+2. Add a listener for the `viewClosed` event so that, when the component is closed, the meeting is cleared and the previous view is shown again (`returnViewId` is `#home` for anonymous access or `#members` for an identified guest).
 
 !!! info "Embedding vs. sharing the link"
 
