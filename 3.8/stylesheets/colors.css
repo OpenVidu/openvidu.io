@@ -1,0 +1,156 @@
+/* Site palette. Layering: this sheet defines the brand tokens (--ov-*) and Material's
+   variables for the site-wide look plus the per-scheme overrides; meet.css and platform.css
+   set the --product-* values of their product, and product.css maps --product-* onto
+   Material's variables on product pages. Every repeated colour lives here as a token; only
+   white, black and single-use UI colours stay literal in the other sheets. */
+
+:root {
+  --ov-meet-primary: rgb(0, 147, 73);
+  --ov-meet-primary-rgb: 0, 147, 73;
+  --ov-meet-accent: #06d362;
+  --ov-meet-accent-rgb: 6, 211, 98;
+  --ov-meet-accent-hover: #05b855;
+  --ov-platform-primary: #0088aa;
+  --ov-platform-primary-rgb: 0, 136, 170;
+  --ov-platform-primary-hover: #007394;
+  --ov-platform-accent: #00c8f7;
+  --ov-nav-grey: #4d4d4d;
+  --ov-grey: #868686;
+  --ov-grey-muted: #818181;
+  --ov-aws-orange: #ff9900;
+  --ov-aws-navy: #252f3e;
+
+  --md-primary-fg-color: var(--ov-nav-grey);
+  --md-primary-fg-color--light: var(--ov-platform-accent);
+  --md-primary-fg-color--dark: var(--ov-platform-primary);
+  --md-primary-bg-color: #fff;
+  --md-primary-bg-color--dark: var(--ov-platform-primary);
+  --md-accent-fg-color: var(--ov-platform-primary);
+  --md-accent-fg-color--transparent: var(--ov-grey-muted);
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: #ffffff;
+  --md-hue: 190deg;
+  color-scheme: dark;
+  --plyr-video-background: transparent;
+  --top-home-section-color: linear-gradient(
+    0deg,
+    rgb(30, 39, 41) 0%,
+    rgb(30, 39, 41) 39%,
+    var(--ov-nav-grey) 100%
+  );
+
+  --slate-md-typeset-color: hsla(var(--md-hue), 15%, 90%, 0.82);
+  --slate-md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
+  --slate-md-default-fg-color--light: hsla(var(--md-hue), 15%, 90%, 0.56);
+
+  --gradient: conic-gradient(
+    from 60deg at 50% 50%,
+    var(--ov-platform-primary) 0%,
+    var(--ov-platform-primary) 13%,
+    var(--ov-platform-primary) 61%,
+    var(--ov-platform-primary) 99%
+  );
+}
+
+/* Custom colors for dark mode */
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: var(--md-primary-fg-color--light);
+  --card-glow-intensity: 0.6;
+
+  video[src$="#only-light"] {
+    display: none;
+  }
+}
+
+/* Custom colors for light mode */
+[data-md-color-scheme="default"] {
+
+  video[src$="#only-dark"] {
+    display: none;
+  }
+
+  --md-typeset-a-color: var(--md-primary-fg-color--dark);
+  --card-glow-intensity: 0.25;
+  /* Light-mode hero gradient: the TOP stop stays at the nav-bar gray
+     (--md-primary-fg-color, --ov-nav-grey) so it blends seamlessly with the header
+     (no hard boundary), and it lightens toward the bottom — a lighter version
+     of the dark-mode gradient. Kept dark enough for the light slogan and
+     description text to stay readable (the hero stays dark on purpose). */
+  --top-home-section-color: linear-gradient(
+    0deg,
+    rgb(80, 90, 94) 0%,
+    rgb(80, 90, 94) 39%,
+    var(--ov-nav-grey) 100%
+  );
+  .md-button--primary {
+    background-color: var(--md-accent-fg-color--transparent);
+    border-color: var(--md-accent-fg-color--transparent);
+  }
+  hr {
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(202, 202, 202) 25%,
+      rgba(202, 202, 202) 75%,
+      transparent 100%
+    );
+  }
+  #sign-in-button {
+    color: var(--slate-md-typeset-color);
+  }
+  #sign-in-button:hover {
+    color: #ffffff;
+    background-color: var(--slate-md-typeset-color);
+    border-color: var(--slate-md-typeset-color);
+  }
+  img.dark-img {
+    background-color: var(--slate-md-default-bg-color);
+  }
+  /* Fully opaque white for the hero text so it stays maximally readable over
+     the light-mode gradient (WCAG AAA, >=7:1, even at the lightest bottom). */
+  .slogan {
+    color: #ffffff;
+  }
+  .home-description {
+    color: #ffffff;
+  }
+  .top-home-section .home-under-cta,
+  .top-home-section .home-under-cta a,
+  .top-home-section .home-trust-line {
+    color: #ffffff;
+  }
+  a#account-btn {
+    color: var(--slate-md-typeset-color);
+  }
+  .price-cell {
+    color: black;
+  }
+  .ai-provider-icon {
+    filter: brightness(0.4);
+  }
+}
+
+/* Audience-routed CTA buttons (hero and end of features grid): each product's
+   identity color (same as its product card's Get Started button) in both
+   themes, so green=Meet / blue=Platform routing is consistent page-wide. */
+.md-typeset .home-buttons .md-button.home-meet-button {
+  background-color: var(--ov-meet-accent);
+  border-color: var(--ov-meet-accent);
+  color: #ffffff;
+}
+.md-typeset .home-buttons .md-button.home-meet-button:hover {
+  background-color: var(--ov-meet-accent-hover);
+  border-color: var(--ov-meet-accent-hover);
+  color: #ffffff;
+}
+
+.md-typeset .home-buttons .md-button.home-platform-button {
+  background-color: var(--ov-platform-primary);
+  border-color: var(--ov-platform-primary);
+  color: #ffffff;
+}
+.md-typeset .home-buttons .md-button.home-platform-button:hover {
+  background-color: var(--ov-platform-primary-hover);
+  border-color: var(--ov-platform-primary-hover);
+  color: #ffffff;
+}
