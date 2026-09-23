@@ -29,6 +29,7 @@ layout:
     - blog
     - about-us
     - research
+    - open-source-contributions
     - acknowledgments
 
   # Copied (not moved) from the newest version folder to the root, which is what makes
