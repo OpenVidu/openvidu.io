@@ -101,7 +101,7 @@ Inside a framework it is the same tag with bindings. In Angular, the room your b
 @if (room(); as current) {
   <openvidu-meet
     #meet
-    [attr.room-url]="current.moderatorUrl"
+    [attr.room-url]="current.access.anonymous.moderator.url"
     participant-name="Support agent"
     (joined)="onJoined($event)"
     (closed)="onClosed()"
