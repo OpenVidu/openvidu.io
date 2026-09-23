@@ -45,9 +45,9 @@ The status was identical across the board: `EGRESS_FAILED`, and every `egress_en
 
 At first glance, it seemed as if all Media Nodes had run out of disk space simultaneously. However, that would be a massive coincidence. Before assuming the worst, we needed to pinpoint exactly where this was happening: in how many Media Nodes, and in which ones.
 
-The webhook tells you that a recording failed and why, but it doesn't specify which Media Node hosted the Egress. In an OpenVidu cluster, that could be any of them. We pivoted from the Room logs to the Egress containers themselves, grouped by Media Node. The results were unexpected:
+The webhook tells you that a recording failed and why, but it doesn't specify which Media Node hosted the Egress. In an OpenVidu cluster, that could be any of them. We pivoted from the Room logs to the logs of every container in the cluster, filtered for failed Egresses, and looked at the node label on each line. The results were unexpected:
 
-![The failing Egresses all run on the same Media Node](/assets/images/blog/YYYY/MM/black-hole-node/discover-node.png){ .round-corners loading=lazy }
+![Every egress_failed line in the cluster carries the same node_id label](/assets/images/blog/YYYY/MM/black-hole-node/discover-node.png){ .round-corners loading=lazy }
 
 All failures originated from a single source: one Media Node with a full disk, where Egress processes repeatedly died while attempting to write to the filesystem. The rest of the Media Nodes had plenty of space, and recordings weren't even reaching the healthy ones.
 
@@ -71,15 +71,15 @@ However, a full disk completely subverts this logic:
 
 The broken Media Node had become a black hole: **the more it failed, the more idle it appeared, and the more work it attracted**. The healthy Media Nodes, fully capable of recording, sat there doing nothing.
 
-The underlying problem is the signal used for load balancing. Free CPU indicates if a Media Node is idle, not if it is capable of recording. A Media Node that fails instantly consumes almost no CPU: the more broken it is, the more available it appears. By looking only at CPU, a Media Node without disk space always wins exactly when it is the worst possible candidate. We needed to look at something else.
+The underlying problem is the signal used for load balancing. Free CPU indicates if a Media Node is idle, not if it is capable of recording. A Media Node that fails instantly consumes almost no CPU: the more broken it is, the more available it appears. By looking only at CPU, a Media Node without disk space always wins exactly when it is the worst possible candidate. We needed to make our Egress placement algorithm smarter.
 
 ## The fix
 
 The fix addresses this directly: checking disk availability before accepting a task. The Egress monitor now checks the recording directory; if free space falls below `openvidu.min_disk_space_mb` in `egress.yaml` (512 MB by default), it rejects the request with a clear reason instead of accepting it and dying mid-pipeline. A Media Node that cannot record now steps aside instead of swallowing the work.
 
-With the fix applied to the same cluster, and the disk still full, the affected Media Node now rejects each request and explains why:
+With the fix applied to the same cluster, and the disk still full, the affected Media Node now rejects each request and explains why, while a healthy Media Node picks up the recording:
 
-![The full Media Node rejecting recordings with reason: disk](/assets/images/blog/YYYY/MM/black-hole-node/after-node1-rejects.png){ .round-corners loading=lazy }
+![The full Media Node rejecting recordings with reason: disk while a healthy node starts them](/assets/images/blog/YYYY/MM/black-hole-node/after-node1-rejects.png){ .round-corners loading=lazy }
 
 ```
 WARN egress  can not accept request
@@ -109,5 +109,6 @@ And if you are not running OpenVidu yet, all of this comes with it: every deploy
 ## Learn more
 
 - [Observability in OpenVidu](/docs/self-hosting/production-ready/observability/index.md): the Dashboard and Grafana stack every deployment ships with, and the logs and metrics we followed to trace this.
+- [Debugging WebRTC with an AI agent and Grafana MCP](/blog/posts/2026/08/debugging-webrtc-with-ai-and-grafana-mcp.md): the same Grafana stack, handed to an AI agent that traces each root cause on its own.
 - [How Egress is balanced across Media Nodes](/docs/self-hosting/production-ready/scalability.md#load-balancing-strategies-across-media-nodes): the `cpuload` and `binpack` allocation strategies, and the eligibility check every new Egress request goes through, disk space included.
 - [Troubleshooting recordings](/docs/troubleshooting/recording.md): recordings that fail or return a 503, including the [no disk space free](/docs/troubleshooting/recording.md#no-disk-space-free) case behind this story.
