@@ -252,7 +252,7 @@ Sherpa offers multiple advantages compared to Vosk:
 
 - It offers a wider, more modern, more maintained selection of pre-trained language models. You can fine-tune the sherpa agent with the exact model that best fit your use case.
 - It offers superior performance, allowing for more concurrent transcriptions with the same hardware resources.
-- It offers [GPU acceleration support](#gpu-acceleration-with-nemotron). On nodes with an NVIDIA GPU, the Nemotron 3.5 model transcribes 40 languages with the highest accuracy at a fraction of the CPU cost (see the [capacity estimate](#capacity-estimate-of-live-captions-models)).
+- It offers [GPU acceleration support](#gpu-acceleration-with-nemotron). On nodes with an NVIDIA GPU, the Nemotron 3.5 model transcribes 40 languages with the highest accuracy at a fraction of the CPU cost (see the [capacity estimate](#capacity-estimate-of-local-provider-models)).
 
 ##### Enabling Sherpa provider
 
