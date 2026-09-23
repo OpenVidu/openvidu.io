@@ -12,7 +12,7 @@ This tutorial extends the [basic WebComponent tutorial](webcomponent.md) to add 
 The application includes all the features from the basic WebComponent tutorial, plus:
 
 - **WebComponent commands**: Control the meeting programmatically (e.g., end meeting for moderators).
-- **Event handling**: Listen to and respond to WebComponent events (joined, left, closed).
+- **Event handling**: Listen to and respond to WebComponent events (`meetingJoined`, `meetingLeft`, `viewClosed`).
 - **Role-based UI**: Display different interface elements based on user role (moderator/speaker).
 - **Meeting header**: Show room information and controls above the WebComponent.
 - **Enhanced room management**: In-memory room tracking with unique names per room.
