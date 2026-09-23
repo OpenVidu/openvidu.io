@@ -55,10 +55,10 @@ When E2EE is active, everything participants share is encrypted on their device 
 
 Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device and never sent to the server.
 
-When a member accesses a E2E-encrypted room, the [Lobby view](lifecycle.md#lobby-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
+When a member accesses a E2E-encrypted room, the [Join view](lifecycle.md#join-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 
-![Lobby view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/lobby-e2ee-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
-![Lobby view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/lobby-e2ee-light.webp#only-light){ .control-height .round-corners loading=lazy }
+![Join view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/join-e2ee-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Join view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/join-e2ee-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 !!! warning "Share the passphrase through a trusted channel"
 

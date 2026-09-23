@@ -46,7 +46,7 @@ A saved recording can be **listed**, **played**, **shared**, **downloaded** and 
 ![Recordings tab of a room's detail page](../../../assets/images/meet/rooms/management/room-details-dark.png#only-dark){ .round-corners loading=lazy }
 ![Recordings tab of a room's detail page](../../../assets/images/meet/rooms/management/room-details-light.png#only-light){ .round-corners loading=lazy }
 
-- The [**room recordings view**](../meetings/lifecycle.md#recordings-view), reachable from within a meeting (and from the lobby view before joining).
+- The [**room recordings view**](../meetings/lifecycle.md#recordings-view), reachable from within a meeting (and from the Join view).
 
 ![Recordings view listing the recordings of the room](../../../assets/images/meet/recordings/management/room-recordings-dark.png#only-dark){ .round-corners loading=lazy }
 ![Recordings view listing the recordings of the room](../../../assets/images/meet/recordings/management/room-recordings-light.png#only-light){ .round-corners loading=lazy }

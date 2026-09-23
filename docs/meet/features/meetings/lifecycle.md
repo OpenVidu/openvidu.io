@@ -7,12 +7,12 @@ description: "The views a participant moves through during an OpenVidu Meet meet
 
 Meetings consist of different views, shown to room members in sequence from the moment they open a room access link until the meeting ends.
 
-## Lobby view
+## Join view
 
 This is the first view members see when accessing a room. It allows setting a nickname before joining the meeting. If the member has the required permissions, they can also access the [Recordings view](#recordings-view) of this room from here.
 
-![Lobby view where a member sets a nickname before joining](../../../assets/images/meet/meetings/lifecycle/lobby-view-dark.png#only-dark){ .round-corners loading=lazy }
-![Lobby view where a member sets a nickname before joining](../../../assets/images/meet/meetings/lifecycle/lobby-view-light.png#only-light){ .round-corners loading=lazy }
+![Join view where a member sets a nickname before joining](../../../assets/images/meet/meetings/lifecycle/join-view-dark.png#only-dark){ .round-corners loading=lazy }
+![Join view where a member sets a nickname before joining](../../../assets/images/meet/meetings/lifecycle/join-view-light.png#only-light){ .round-corners loading=lazy }
 
 ## Device view
 
