@@ -14,8 +14,8 @@ faq:
       Zoom or Google Meet for teams that need meetings, recordings and chat without sending media
       to a third-party SaaS. It installs with a single command and the COMMUNITY edition is free
       under Apache 2.0.
-  - anchor: can-i-embed-openvidu-meet-in-my-saas-like-the-jitsi-iframe-api
-    question: "Can I embed OpenVidu Meet in my SaaS like the Jitsi iframe API?"
+  - anchor: can-i-embed-openvidu-meet-in-my-application-like-the-jitsi-iframe-api
+    question: "Can I embed OpenVidu Meet in my application like the Jitsi iframe API?"
     answer: >-
       Yes. An <openvidu-meet> web component or an iframe put OpenVidu Meet inside your own page,
       and a direct link opens it on its own. A REST API creates and manages rooms and recordings
@@ -27,13 +27,11 @@ faq:
     question: "Is Jitsi free to self-host?"
     answer: >-
       Yes. Jitsi Meet, Jicofo and Jitsi Videobridge are all Apache 2.0, the same license as OpenVidu
-      COMMUNITY. The paid option is 8x8's hosted Jitsi as a Service (JaaS), not a self-hosted PRO
-      tier — Jitsi itself has no self-hosted paid edition the way OpenVidu does.
+      COMMUNITY. Jitsi itself has no self-hosted paid edition the way OpenVidu does.
   - anchor: does-jitsi-have-a-recording-feature
     question: "Does Jitsi have a recording feature?"
     answer: >-
-      Yes, via Jibri, a component that drives a headless browser and ffmpeg to capture exactly what
-      a participant sees — the same mechanism OpenVidu's Egress uses. A per-participant recording
+      Yes, via Jibri. A per-participant recording
       permission in the JWT decides who may start one. The difference is afterwards: Jibri writes
       the file to a directory and runs your finalize script, so storing it, serving it and
       controlling who may watch or delete it are your application's job, whereas OpenVidu Meet keeps
@@ -88,7 +86,7 @@ The rest of this page compares the platforms underneath; this section compares t
 | --- | --- | --- |
 | Deployment | A single installer command on one Ubuntu server, [Docker Compose for local development](meet/deployment/local.md), or [ready-made templates](meet/deployment/overview.md) for AWS, Azure, Google Cloud, DigitalOcean and Oracle Cloud | Self-hosting documented as a Debian/Ubuntu `apt` [quick install :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/){:target="_blank"}, a [Docker Compose release archive :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker/){:target="_blank"} or openSUSE packages, installing Prosody, Jicofo, Videobridge and the web frontend |
 | Embedding in your app | An [`<openvidu-meet>` web component](meet/embedded/reference/webcomponent.md) or an [iframe](meet/embedded/reference/iframe.md) put Meet inside your own page, and a [direct link](meet/embedded/reference/direct-link.md) opens it on its own instead. Your backend drives it through a [REST API](meet/embedded/reference/rest-api.md) for rooms and recordings, and receives [webhooks](meet/embedded/reference/webhooks.md) for meeting and recording events | The [IFrame API :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe/){:target="_blank"} (`external_api.js`, `new JitsiMeetExternalAPI(...)`), a [React SDK :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-react-sdk/){:target="_blank"} built on it, and the lower-level `lib-jitsi-meet`. Rooms are created when the first participant opens the meeting URL; the documented backend hook is the [Reservation System :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/devops-guide/reservation/){:target="_blank"}, which Jitsi *queries* on an external service you implement. Self-hosted Jitsi sends no webhooks |
-| Recording | [Built in](meet/features/recordings/overview.md) to OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }. A participant with the `canRecord` permission starts it from the app or the [REST API](meet/embedded/reference/rest-api.md), and the recording then lives in the app as something you manage: [listed, played in a built-in player, shared, downloaded and deleted](meet/features/recordings/management.md), each action governed by room member permissions | [Jibri :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jibri){:target="_blank"} records the same way OpenVidu does, a packaged browser capturing the meeting page, and a per-participant `recording` permission in the [JWT your backend signs :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jitsi-meet/blob/stable/jitsi-meet_11248/react/features/base/jwt/constants.ts){:target="_blank"} decides who may start one. The difference is what happens next: Jibri writes the file to its [recording directory and hands it to a finalize script :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jibri/blob/master/src/main/resources/reference.conf){:target="_blank"}, so storing it, serving it and deciding who may watch or delete it are your application's job |
+| Recording | [Built in](meet/features/recordings/overview.md) to OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }. A participant with the `canRecord` permission starts it from the app or the [REST API](meet/embedded/reference/rest-api.md), and the recording then lives in the app as something you manage: [listed, played in a built-in player, shared, downloaded and deleted](meet/features/recordings/management.md), each action governed by room member permissions | [Jibri :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jibri){:target="_blank"} supports recording the same way OpenVidu does, with a per-participant `recording` permission in the [JWT your backend signs :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jitsi-meet/blob/stable/jitsi-meet_11248/react/features/base/jwt/constants.ts){:target="_blank"} that decides who may start one. The difference is what happens next: Jibri writes the file to its [recording directory and hands it to a finalize script :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jibri/blob/master/src/main/resources/reference.conf){:target="_blank"}, so storing it, serving it and deciding who may watch or delete it are your application's job |
 | Roles and permissions | A [room is persistent](meet/features/rooms/overview.md) and hosts as many meetings as you need over time, keeping its links and settings. [Moderator and Speaker roles](meet/features/rooms/access.md#predefined-roles) come predefined, can be changed per room and refined per member down to individual permissions — including who may retrieve or delete that room's recordings — and moderators can be [promoted or demoted mid-meeting](meet/features/meetings/role-management.md) | A moderator role, plus per-participant feature flags such as `recording`, `livestreaming`, `transcription`, `lobby`, `moderation`, `screen-sharing`, `send-groupchat` and `create-polls`, carried in the [JWT your backend signs :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jitsi-meet/blob/stable/jitsi-meet_11248/react/features/base/jwt/constants.ts){:target="_blank"}. They are decided when the token is issued rather than in an admin screen, and they cover what someone may do during the meeting, not access to the recordings afterwards |
 | Branding | An admin sets the meeting view's [colour scheme](meet/features/rooms/management.md#room-appearance) from the app's "Configuration" page, and OpenVidu Meet runs on your own domain | App name, welcome-page logo, watermarks and provider name are set in the [`interface_config.js` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/jitsi/jitsi-meet/blob/stable/jitsi-meet_11248/interface_config.js){:target="_blank"} and [`config.js` :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-configuration/){:target="_blank"} files on the server, and applied by redeploying the web frontend |
 | Autoscaling | [Elastic and HA deployments](docs/self-hosting/production-ready/scalability.md)**PRO**{ .openvidu-tag .openvidu-pro-tag }: one product to configure, with one-click deploy for 5 cloud providers | Videobridges [scale horizontally :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-scalable/){:target="_blank"}, and the handbook notes "Building a scalable infrastructure is not a task for beginning Jitsi Administrators", recommending Ansible or Puppet; growing the pool automatically needs the separate `jitsi-autoscaler` service, which deploys instances as a Nomad batch job, in Oracle Cloud, in DigitalOcean or through a custom model you implement (detailed below) |
@@ -127,11 +125,8 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 
 ## Recording: what happens to the file
 
-The two projects record a meeting the same way — a packaged browser renders the meeting page and
-the result is encoded — so the mechanism is not the difference, and neither is the cost: recording
-is expensive on both, and capacity for it has to be planned either way.
-
-The difference is what you are given afterwards. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } ships
+The two projects record a meeting the same way, but they differ in what you are given afterwards.
+OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } ships
 [Egress](docs/reference/egress.md) wired up by default and writes to S3-compatible storage, and
 OpenVidu Meet then treats each recording as part of the product: a
 [recordings view](meet/features/recordings/management.md) lists them, a built-in player plays them
@@ -215,7 +210,7 @@ alternative to Zoom or Google Meet for teams that need meetings, recordings and 
 sending media to a third-party SaaS. It installs with a single command and the
 **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } edition is free under Apache 2.0.
 
-### Can I embed OpenVidu Meet in my SaaS like the Jitsi iframe API?
+### Can I embed OpenVidu Meet in my application like the Jitsi iframe API?
 
 Yes. An [`<openvidu-meet>` web component](meet/embedded/reference/webcomponent.md) or an
 [iframe](meet/embedded/reference/iframe.md) put OpenVidu Meet inside your own page, and a
@@ -229,13 +224,11 @@ participant opens the meeting URL; self-hosted Jitsi sends no webhooks.
 ### Is Jitsi free to self-host?
 
 Yes. Jitsi Meet, Jicofo and Jitsi Videobridge are all Apache 2.0, the same license as OpenVidu
-**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }. The paid option is 8x8's hosted Jitsi as a Service (JaaS), not a self-hosted PRO
-tier — Jitsi itself has no self-hosted paid edition the way OpenVidu does.
+**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }. Jitsi itself has no self-hosted paid edition the way OpenVidu does.
 
 ### Does Jitsi have a recording feature?
 
-Yes, via Jibri, a component that drives a headless browser and ffmpeg to capture exactly what a
-participant sees — the same mechanism OpenVidu's Egress uses. A per-participant recording permission
+Yes, via Jibri. A per-participant recording permission
 in the JWT decides who may start one. The difference is afterwards: Jibri writes the file to a
 directory and runs your finalize script, so storing it, serving it and controlling who may watch or
 delete it are your application's job, whereas OpenVidu Meet keeps each recording in the app with a
