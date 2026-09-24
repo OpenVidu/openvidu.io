@@ -377,7 +377,7 @@ The `accessRoom()` function embeds the OpenVidu Meet WebComponent for a given ro
 
 ```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/public/js/app.js#L323-L355' target='_blank'>app.js</a>" linenums="323"
 // Embed the OpenVidu Meet component for the given room URL.
-// 'returnViewId' is the view to show again when the meeting is closed
+// 'returnViewId' is the view to show again when the participant asks to close OpenVidu Meet
 // (the home screen for anonymous access, the members screen for an identified guest).
 function accessRoom(roomUrl, returnViewId) {
 	// Hide the home and members screens and show the room screen
@@ -397,9 +397,9 @@ function accessRoom(roomUrl, returnViewId) {
         </openvidu-meet>
     `; // (1)!
 
-	// Add event listener for when the OpenVidu Meet component is closed
+	// Add event listener for when the participant asks to close OpenVidu Meet
 	const meet = document.querySelector('openvidu-meet');
-	meet.once('viewClosed', () => {
+	meet.once('embeddedCloseRequested', () => {
 		// (2)!
 		console.log('OpenVidu Meet component closed');
 
@@ -413,7 +413,7 @@ function accessRoom(roomUrl, returnViewId) {
 ```
 
 1. Inject the OpenVidu Meet WebComponent with the `room-url` attribute set to the given URL. For an identified guest this is their unique `accessUrl`, which already carries the member's secret, so the participant enters the meeting directly with the fixed name and no login.
-2. Add a listener for the `viewClosed` event so that, when the component is closed, the meeting is cleared and the previous view is shown again (`returnViewId` is `#home` for anonymous access or `#members` for an identified guest).
+2. Add a listener for the `embeddedCloseRequested` event so that, when the participant asks to close OpenVidu Meet, the component is removed and the previous view is shown again (`returnViewId` is `#home` for anonymous access or `#members` for an identified guest).
 
 !!! info "Embedding vs. sharing the link"
 

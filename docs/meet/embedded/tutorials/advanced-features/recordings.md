@@ -430,9 +430,9 @@ async function displayRecording(recordingId) {
         </openvidu-meet>
     `; // (4)!
 
-	// Add event listener for when the OpenVidu Meet component is closed
+	// Add event listener for when the participant asks to close OpenVidu Meet
 	const meet = document.querySelector('openvidu-meet');
-	meet.once('viewClosed', () => {
+	meet.once('embeddedCloseRequested', () => {
 		// (5)!
 		// Clear the OpenVidu Meet component and go back to the recordings screen
 		displayRecordingScreen.innerHTML = '';
@@ -456,10 +456,10 @@ async function getRecordingUrl(recordingId) {
 2. Show the recording playback screen.
 3. Fetch the recording URL from the backend using the `getRecordingUrl()` function.
 4. Inject the OpenVidu Meet WebComponent with the `recording-url` attribute for playback.
-5. Add an event listener for the `viewClosed` event, which is triggered when the recording playback view is closed. It hides the playback screen and shows the recordings list screen again.
+5. Add an event listener for the `embeddedCloseRequested` event, which is triggered when the user asks to close the recording playback. It hides the playback screen and shows the recordings list screen again.
 6. Make a `GET` request to the `/recordings/:recordingId/url` endpoint to retrieve the recording URL.
 
-The `displayRecording()` function handles the playback of a specific recording by first hiding the recordings list screen and showing the display recording screen. It then fetches the recording URL from the backend using the `getRecordingUrl()` helper function, which makes a `GET` request to the `/recordings/:recordingId/url` endpoint. Next, it injects the OpenVidu Meet WebComponent into the display container with the `recording-url` attribute set to the fetched URL, enabling the recording to be played directly in the browser. Finally, it registers a listener for the `viewClosed` event of the WebComponent, so that when the user closes the recording playback view the playback screen is hidden and the recordings list screen is shown again. If an error occurs during URL fetching, it logs the error to the console and returns null.
+The `displayRecording()` function handles the playback of a specific recording by first hiding the recordings list screen and showing the display recording screen. It then fetches the recording URL from the backend using the `getRecordingUrl()` helper function, which makes a `GET` request to the `/recordings/:recordingId/url` endpoint. Next, it injects the OpenVidu Meet WebComponent into the display container with the `recording-url` attribute set to the fetched URL, enabling the recording to be played directly in the browser. Finally, it registers a listener for the `embeddedCloseRequested` event of the WebComponent, so that when the user asks to close the recording playback the playback screen is hidden and the recordings list screen is shown again. If an error occurs during URL fetching, it logs the error to the console and returns null.
 
 ---
 

@@ -12,7 +12,7 @@ This tutorial extends the [basic WebComponent tutorial](webcomponent.md) to add 
 The application includes all the features from the basic WebComponent tutorial, plus:
 
 - **WebComponent commands**: Control the meeting programmatically (e.g., end meeting for moderators).
-- **Event handling**: Listen to and respond to WebComponent events (`meetingJoined`, `meetingLeft`, `viewClosed`).
+- **Event handling**: Listen to and respond to WebComponent events (`meetingJoined`, `meetingLeft`, `embeddedCloseRequested`).
 - **Role-based UI**: Display different interface elements based on user role (moderator/speaker).
 - **Meeting header**: Show room information and controls above the WebComponent.
 - **Enhanced room management**: In-memory room tracking with unique names per room.
@@ -205,8 +205,8 @@ function accessRoom(roomName, roomUrl, role) {
 		roomHeader.hidden = true;
 	});
 
-	// Event listener for when the OpenVidu Meet component is closed
-	meet.once('viewClosed', () => {
+	// Event listener for when the participant asks to close OpenVidu Meet
+	meet.once('embeddedCloseRequested', () => {
 		// (11)!
 		console.log('OpenVidu Meet component closed');
 
@@ -228,7 +228,7 @@ function accessRoom(roomName, roomUrl, role) {
 8. Show the `End meeting` button only when the user is a moderator.
 9. Wire the `End meeting` button to the `meetingEnd()` method of the OpenVidu Meet WebComponent (only for moderators). This method disconnects all participants and ends the meeting for everyone.
 10. Add an event listener for the `meetingLeft` event, which is triggered when the local participant leaves the room.
-11. Add an event listener for the `viewClosed` event, which is triggered when the OpenVidu Meet component is closed.
+11. Add an event listener for the `embeddedCloseRequested` event, which is triggered when the participant asks to close OpenVidu Meet.
 
 The enhanced `accessRoom()` function now performs the following actions:
 
@@ -238,7 +238,7 @@ The enhanced `accessRoom()` function now performs the following actions:
 4. Configures event listeners for the OpenVidu Meet WebComponent to handle different events:
     - **`meetingJoined`**: This event is triggered when the local participant joins the meeting. It shows the room header with the room name and a badge indicating the participant's role. It also displays the `End meeting` button only for moderators and wires it to the `meetingEnd()` method of the OpenVidu Meet WebComponent. This method disconnects all participants and ends the meeting for everyone.
     - **`meetingLeft`**: This event is triggered when the local participant leaves the room. It hides the room header.
-    - **`viewClosed`**: This event is triggered when the OpenVidu Meet component is closed. It removes the component from the DOM (by clearing the container's inner HTML) and shows the home screen again.
+    - **`embeddedCloseRequested`**: This event is triggered when the participant asks to close OpenVidu Meet. It removes the component from the DOM (by clearing the container's inner HTML) and shows the home screen again.
 
 ## Accessing this tutorial from other computers or phones
 
