@@ -11,8 +11,8 @@ This tutorial extends the [basic WebComponent tutorial](webcomponent.md) to add 
 
 The application includes all the features from the basic WebComponent tutorial, plus:
 
-- **WebComponent commands**: Control the meeting programmatically (e.g., end meeting for moderators).
-- **Event handling**: Listen to and respond to WebComponent events (`meetingJoined`, `meetingLeft`, `embeddedCloseRequested`).
+- **WebComponent commands**: Control the meeting from your application, such as ending it for everyone when the participant is a moderator (see the [commands reference](../../reference/webcomponent.md#commands)).
+- **Event handling**: React when the participant joins or leaves the meeting and when they ask to close OpenVidu Meet (see the [events reference](../../reference/webcomponent.md#events)).
 - **Role-based UI**: Display different interface elements based on user role (moderator/speaker).
 - **Meeting header**: Show room information and controls above the WebComponent.
 - **Enhanced room management**: In-memory room tracking with unique names per room.
