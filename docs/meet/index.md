@@ -34,6 +34,19 @@ OpenVidu Meet: self-hosted video conferencing, ready in minutes
 
 </div>
 
+<div class="deploy-one-liner" markdown>
+
+Or run it right now. Docker is the only requirement, and there is nothing to clone or configure:
+
+```bash
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+```
+
+Then open <http://localhost:9080>. That gives you a working OpenVidu Meet on your machine; the [local deployment guide](deployment/local.md) covers joining from other devices and Windows notes, and the [deployment overview](deployment/overview.md) has the production options for your own server or cloud.
+{ .deploy-one-liner-note }
+
+</div>
+
 <div class="feature-cards" markdown>
 <div class="grid cards two-columns" data-sal="slide-up" style="margin: 5em 0 0 0" markdown>
 

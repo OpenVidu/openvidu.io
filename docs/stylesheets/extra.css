@@ -801,6 +801,31 @@ h1.meetplatform-slogan {
 
 /* Lead paragraph under a product slogan: the one-sentence definition of the
    product, above the feature cards (Meet landing page). */
+/* The deploy one-liner under the Meet landing's hero buttons: the command the
+   "Deploy Meet in minutes" button promises, shown where the promise is made
+   instead of three clicks away. Width-constrained so the code block does not
+   span the whole hero; the note under it is small and centred like the intro. */
+.md-typeset .deploy-one-liner {
+  max-width: 46em;
+  margin: -1.6em auto 3.5em;
+  text-align: center;
+}
+
+.md-typeset .deploy-one-liner > p:first-child {
+  font-size: 0.85rem;
+  margin: 0 0 0.6em;
+}
+
+.md-typeset .deploy-one-liner .highlight {
+  text-align: left;
+}
+
+.md-typeset .deploy-one-liner p.deploy-one-liner-note {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  margin: 0.6em 0 0;
+}
+
 .md-typeset p.meetplatform-intro {
   text-align: center;
   max-width: 44em;
