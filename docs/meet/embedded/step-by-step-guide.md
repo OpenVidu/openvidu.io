@@ -334,7 +334,7 @@ After clicking on the element, the individual will be redirected to the OpenVidu
 <a class="glightbox" href="/assets/videos/meet/embedded/embed-url.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/meet/embedded/embed-url.mp4" preload="none" muted playsinline loop></video></a>
 
 !!! info
-    You can customize the room by simply appending query parameters to the room URL. For example, you can redirect back to your application after a participant leaves the meeting by appending this query param: <code class="nowrap">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
+    You can customize the room by simply appending query parameters to the room URL. For example, you can send participants back to your application when they close the [End view](../features/meetings/lifecycle.md#end-view) after the meeting by appending this query param: <code class="nowrap">https://{{ your-room-url }}<strong class="accent-code">&leave-redirect-url=https://myapp.com</strong></code>
 
     See [Passing attributes to a direct link](./reference/direct-link.md#attributes) for more information.
 

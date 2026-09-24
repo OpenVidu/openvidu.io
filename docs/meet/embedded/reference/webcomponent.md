@@ -130,4 +130,14 @@ openviduMeet.once('meetingLeft', (event) => {
 	- With the native **`addEventListener`** method, the callback receives a standard [`CustomEvent` :fontawesome-solid-external-link:{.external-link-icon}](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent){:target="_blank"}, so the payload is available in its **`detail`** property (e.g. `event.detail`).
 	- With the **`on`** | **`once`** | **`off`** API, the callback receives the payload **directly** as its argument (e.g. `event`), without needing to access any `detail` property.
 
+When the participant asks to close OpenVidu Meet, the component emits `embeddedCloseRequested`: that is the moment to remove it or show one of your own screens. Leaving the meeting does not emit it: `meetingLeft` fires and OpenVidu Meet shows its [End view](../../features/meetings/lifecycle.md#end-view), and `embeddedCloseRequested` follows when the participant closes that view. The meeting may still be running for everyone else.
+
+```javascript
+const openviduMeet = document.querySelector('openvidu-meet');
+
+openviduMeet.once('embeddedCloseRequested', () => {
+	openviduMeet.remove();
+});
+```
+
 

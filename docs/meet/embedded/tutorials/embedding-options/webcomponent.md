@@ -178,7 +178,7 @@ function accessRoom(roomUrl) {
 2. Show the room screen where the WebComponent will be embedded.
 3. Inject the OpenVidu Meet WebComponent into the meeting container with the specified room URL and a leave redirect URL.
 
-The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen when they leave the meeting.
+The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen once they close the [End view](../../../features/meetings/lifecycle.md#end-view) after the meeting.
 
 This approach provides a seamless user experience by keeping users within the same application while providing full video conferencing functionality through the embedded WebComponent.
 
