@@ -43,8 +43,19 @@ This is what the deployment architecture looks like.
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
+    - Optionally, a dedicated TURN Load Balancer relays that traffic to Media Nodes placed in private subnets (see the next tab).
     - 4 fixed EC2 Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
+
+=== "With a dedicated TURN Load Balancer"
+
+    ![OpenVidu High Availability AWS Architecture with a dedicated TURN Load Balancer](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture-turn-lb.svg){ .round-corners .dark-img loading=lazy }
+
+    This is the layout when the Media Nodes run in private subnets and you set **TurnDomainName** and **TurnCertificateARN** (see [Domain and Load Balancer configuration](#domain-and-load-balancer-configuration)):
+
+    - The Load Balancer distributes HTTPS traffic to the Master Nodes and RTMP traffic to the Media Nodes, as in the default layout.
+    - Clients cannot reach the Media Nodes directly, so they relay WebRTC media with TURN over TLS through a dedicated TURN Load Balancer, which forwards it to the Media Nodes.
+    - The Master Nodes are not in the media path.
 
 ## CloudFormation Parameters
 
@@ -52,7 +63,7 @@ Depending on your needs, you need to fill the following CloudFormation parameter
 
 ### Domain and Load Balancer configuration
 
-In this section, you need to specify the domain name and the SSL certificate to use from AWS Certificate Manager.
+In this section, you need to specify the domain name and the SSL certificate to use from AWS Certificate Manager. Optionally, you can also configure a dedicated TURN Load Balancer.
 
 === "Domain and Load Balancer configuration"
 
@@ -63,6 +74,8 @@ In this section, you need to specify the domain name and the SSL certificate to 
     Set the **DomainName** parameter to the domain name you intend to use for your OpenVidu deployment. Ensure this domain is not currently pointing to any other service; you can temporarily point it elsewhere.
 
     For the **OpenViduCertificateARN** parameter, specify the ARN of the SSL certificate you wish to use. This certificate should be created in the AWS Certificate Manager and configured for the domain specified in **DomainName**.
+
+    The optional **TurnDomainName** and **TurnCertificateARN** parameters create a dedicated TURN Load Balancer in front of the Media Nodes. Use them when the Media Nodes run in private subnets (see [VPC Configuration](#vpc-configuration)): clients that cannot reach the Media Nodes directly then relay their media with TURN over TLS through this Load Balancer straight to the Media Nodes, instead of through the Master Nodes. Set **TurnDomainName** to a domain different from **DomainName** (for example `turn.example.io`) and **TurnCertificateARN** to the ARN of an AWS Certificate Manager certificate valid for it. Once the stack is created, point **TurnDomainName** to the `TurnLoadBalancerDNS` output. Leave both empty if you don't need it.
 
 ### OpenVidu HA Configuration
 
@@ -133,13 +146,13 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The **OpenViduMediaNodeSubnets** specifies the subnets where the Media Nodes will be deployed. There is no limit on the number of subnets you can specify.
 
-    The optional **LoadBalancerSubnets** parameter specifies the public subnets where the internet-facing Load Balancer is placed. Leave it empty to place the Load Balancer in the **OpenViduMasterNodeSubnets** (the default behavior). Set it to dedicated public subnets when you want to run the Master Nodes in private subnets: the Load Balancer stays public and reachable while the Master Nodes reach the internet through a NAT gateway.
+    The optional **LoadBalancerSubnets** parameter specifies the public subnets where the internet-facing Load Balancer is placed. Leave it empty to place the Load Balancer in the **OpenViduMasterNodeSubnets** (the default behavior). Set it to dedicated public subnets when you want to run the Master Nodes in private subnets: the Load Balancer stays public and reachable while the Master Nodes reach the internet through a NAT gateway. If you configure a dedicated TURN Load Balancer, it is placed in these subnets too.
 
     !!! warning
 
         - It is recommended to deploy in a region with at least 4 availability zones and deploy the Master Nodes in 4 subnets, one in each availability zone. This is to ensure high availability.
         - By default, use public subnets for the Master Nodes and Media Nodes with the auto-assign public IP option enabled.
-        - To keep the Master Nodes in private subnets, set **LoadBalancerSubnets** to public subnets for the Load Balancer and give the private subnets a NAT gateway for outbound traffic. Access the Master Nodes with Session Manager (see [EC2 Instance Configuration](#ec2-instance-configuration)) instead of SSH. The Media Nodes still need public subnets, since they receive WebRTC media directly from clients.
+        - To keep the Master Nodes in private subnets, set **LoadBalancerSubnets** to public subnets for the Load Balancer and give the private subnets a NAT gateway for outbound traffic. Access the Master Nodes with Session Manager (see [EC2 Instance Configuration](#ec2-instance-configuration)) instead of SSH. The Media Nodes can stay in public subnets, so clients send WebRTC media to them directly (the best option for media quality), or they can also run in private subnets. In that case clients relay all media with TURN over TLS: through the Master Nodes by default, or through a dedicated TURN Load Balancer if you set **TurnDomainName** (see [Domain and Load Balancer configuration](#domain-and-load-balancer-configuration)).
 
 ## Volumes Configuration
 
@@ -164,6 +177,8 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
 === "CloudFormation Outputs"
 
     ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/ha/aws/outputs.png){ .round-corners loading=lazy }
+
+    If you configured a dedicated TURN Load Balancer, the Outputs also include **TurnLoadBalancerDNS**. Point **TurnDomainName** to it, for example with a CNAME or an alias record.
 
 ## Configure your application to use the deployment
 
