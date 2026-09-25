@@ -5,7 +5,7 @@ description: "Configure recording per OpenVidu Meet room: enable it, pick the la
 
 # Recording configuration
 
-Recording behaviour is configured **per room**, when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) it. The following aspects can be configured:
+Recording behaviour is configured **per room**, in the **Recording** step of the room wizard when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) it. The following aspects can be configured:
 
 - [Enabling recordings](#enabling-recordings) in the room.
 - The [recording trigger](#recording-trigger): manual, or automatic when a participant joins.
@@ -15,10 +15,10 @@ Recording behaviour is configured **per room**, when [creating](../rooms/managem
 
 ## Enabling recordings { #enabling-recordings }
 
-Recording must be enabled in the room before any meeting in it can be recorded. It is enabled in the **Recording Settings** step of the room wizard, or with the `config.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
+Recording must be enabled in the room before any meeting in it can be recorded. It is enabled in the **Recording** step of the room wizard, or with the `config.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
 
-![Recording Settings step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording Settings step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-light.png#only-light){ .round-corners loading=lazy }
+![Recording step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-dark.png#only-dark){ .round-corners loading=lazy }
+![Recording step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
     Recording and [end-to-end encryption](../meetings/e2e-encryption.md) are mutually exclusive: a room cannot have both enabled at the same time.
@@ -33,10 +33,10 @@ By default recordings are started **manually**, by a participant with the `recor
 
 An automatically started recording is a regular recording: it can be stopped, and started again, by any participant with the `recordingControl` permission.
 
-The trigger is chosen in the **Recording Trigger** step of the room wizard, or with the `config.recording.autoStart` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference) (`null` for manual recording).
+The trigger is chosen in the **Trigger** section of the **Recording** step of the room wizard, or with the `config.recording.autoStart` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference) (`null` for manual recording).
 
-![Recording Trigger step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-trigger-dark.png#only-dark){ .round-corners loading=lazy }
-![Recording Trigger step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-trigger-light.png#only-light){ .round-corners loading=lazy }
+![Trigger section of the Recording step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-trigger-dark.png#only-dark){ .round-corners loading=lazy }
+![Trigger section of the Recording step of the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-trigger-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
     A trigger that waits for a second participant is unreachable in a room whose [participant limit](../meetings/configuration.md#participant-limit) is `1`, so that combination is rejected.
@@ -55,6 +55,8 @@ OpenVidu Meet provides multiple **recording layout options**. These layouts dete
 
 * **Single Speaker layout** (`single-speaker`)
   Records only the active speaker, hiding all other participants. This layout is best suited for presentations, lectures, or interviews where the focus should remain entirely on the speaker.
+
+The layout is chosen in the **Layout** section of the **Recording** step of the room wizard, or with the `config.recording.layout` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
 
 ![Recording layout options in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-layouts-dark.png#only-dark){ .round-corners loading=lazy }
 ![Recording layout options in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-layouts-light.png#only-light){ .round-corners loading=lazy }
@@ -95,7 +97,7 @@ A recording's [shareable link](management.md#sharing-recordings) can be created 
 - **OpenVidu Meet users**: any logged-in OpenVidu Meet user can access the recording through the link — even if they have no recording permissions in that room, or no access to the room at all.
 - **Anyone**: any individual with the link can view the recording without logging in.
 
-Anonymous recording sharing is **enabled by default**, so both scopes are available. You can disable it per room to restrict sharing to OpenVidu Meet users only — the "anyone" scope is then no longer offered. It is configured in the **Recording Settings** step of the room wizard ("Anonymous Recording Access"), or with the `access.anonymous.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
+Anonymous recording sharing is **enabled by default**, so both scopes are available. You can disable it per room to restrict sharing to OpenVidu Meet users only — the "anyone" scope is then no longer offered. It is configured in the **Sharing** section of the **Recording** step of the room wizard ("Anonymous Recording Access"), or with the `access.anonymous.recording.enabled` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference).
 
 ![Anonymous recording sharing setting in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-dark.png#only-dark){ .round-corners loading=lazy }
 ![Anonymous recording sharing setting in the room configuration wizard](../../../assets/images/meet/recordings/configuration/room-wizard-recording-anonymous-light.png#only-light){ .round-corners loading=lazy }

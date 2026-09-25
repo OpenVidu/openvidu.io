@@ -5,17 +5,17 @@ description: "Cap how many participants a meeting admits and how long it lasts, 
 
 # Meeting configuration
 
-A few settings of a [room](../rooms/overview.md) shape every meeting held in it. They are configured in the **Meeting Features** step of the room wizard when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) the room, or through the `config` object of the room via the [REST API](../rooms/management.md#rest-api-reference):
+A few settings of a [room](../rooms/overview.md) shape every meeting held in it. They are configured in the **Configuration** section of the **Meeting** step of the room wizard when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) the room, or through the `config` object of the room via the [REST API](../rooms/management.md#rest-api-reference):
 
 - A [participant limit](#participant-limit).
 - A [duration limit](#duration-limit).
 - The [initial state of the microphone and the camera](#initial-device-state) of every participant.
 
-![Meeting Features step of the room configuration wizard](../../../assets/images/meet/meetings/configuration/room-wizard-meeting-features-dark.png#only-dark){ .round-corners loading=lazy }
-![Meeting Features step of the room configuration wizard](../../../assets/images/meet/meetings/configuration/room-wizard-meeting-features-light.png#only-light){ .round-corners loading=lazy }
+![Meeting step of the room configuration wizard](../../../assets/images/meet/meetings/configuration/room-wizard-meeting-dark.png#only-dark){ .round-corners loading=lazy }
+![Meeting step of the room configuration wizard](../../../assets/images/meet/meetings/configuration/room-wizard-meeting-light.png#only-light){ .round-corners loading=lazy }
 
 !!! info
-    The same step toggles the in-meeting features that have their own page: [End-to-End Encryption](e2e-encryption.md), [Live Captions](live-captions.md), chat and [Virtual Backgrounds](virtual-background.md).
+    The **Features** section of the same step toggles the in-meeting features that have their own page: [End-to-End Encryption](e2e-encryption.md), [Live Captions](live-captions.md), chat and [Virtual Backgrounds](virtual-background.md).
 
 ## Participant limit { #participant-limit }
 
@@ -27,7 +27,10 @@ Via the REST API it is the `config.maxParticipants` property of the room configu
 
 The **duration limit** ends the meeting automatically after the given number of minutes, from 1 to 1440 (one day), exactly as if a moderator had ended it for everyone. Leave it empty for unlimited meetings.
 
-As the end approaches, participants see the time remaining in the status rail of the [Meeting view](lifecycle.md#meeting-view) and are warned that the meeting is about to end. When the meeting ends, the [End view](lifecycle.md#end-view) tells them the meeting reached its maximum duration.
+During the last five minutes, participants see the time remaining in the status rail of the [Meeting view](lifecycle.md#meeting-view) and are warned that the meeting is about to end. When the meeting ends, the [End view](lifecycle.md#end-view) tells them the meeting reached its maximum duration.
+
+![Meeting view counting down the last minutes of a duration-limited meeting](../../../assets/images/meet/meetings/configuration/meeting-ending-soon-dark.png#only-dark){ .round-corners loading=lazy }
+![Meeting view counting down the last minutes of a duration-limited meeting](../../../assets/images/meet/meetings/configuration/meeting-ending-soon-light.png#only-light){ .round-corners loading=lazy }
 
 Via the REST API it is the `config.maxDurationMinutes` property of the room configuration; `null` lifts the limit. The end time is fixed when the meeting starts and can be read with the [Meetings REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/meetingGet){:target="_blank"}. An integration can tell the two kinds of end apart: the [`meetingEnded` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/meetingEndedWebhook){:target="_blank"} carries `reason: max_duration_reached`, and the `meetingLeft` [event](../../embedded/reference/webcomponent.md#events) of an embedded meeting carries `reason: meeting_ended_by_duration_limit`.
 
