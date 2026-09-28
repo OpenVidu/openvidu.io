@@ -92,8 +92,6 @@
 
 
 <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.8e8c6e8f.css">
-<link rel="stylesheet" href="../stylesheets/amplify.css">
-<link rel="stylesheet" href="../javascripts/openvidu-register/openvidu-register.css">
 <style>
   /* The account app renders its own heading */
   .md-typeset h1 {
@@ -1281,17 +1279,9 @@
 
   <h1>OpenVidu account: sign up or log in</h1>
 
-<script>
-window.amplifyActive = true;
-</script>
-
-<section>
-    <div class="container">
-        <div class="register-container col-md-12">
-      <openvidu-register></openvidu-register>
-        </div>
-    </div>
-</section>
+<div class="register-container">
+  <openvidu-register></openvidu-register>
+</div>
 
 
 
@@ -1581,7 +1571,7 @@ window.amplifyActive = true;
     
 
 
-<script src="../javascripts/openvidu-register/openvidu-register.js"></script>
+<script type="module" src="../javascripts/openvidu-register.js"></script>
 
 
 
