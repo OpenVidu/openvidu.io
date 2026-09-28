@@ -1222,6 +1222,10 @@ h1.meetplatform-slogan {
     width: 85%;
   }
 
+  .register-container {
+    margin: 0;
+  }
+
   #account-btn .user-name {
     display: none;
   }
