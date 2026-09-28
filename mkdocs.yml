@@ -373,6 +373,9 @@ plugins:
       # no page uses one.
       assets_exclude:
         - unpkg.com/*
+        # The account component loads Stripe Checkout, which must come from Stripe's own
+        # domain and not from a copy frozen at publish time.
+        - checkout.stripe.com/*
   - optimize:
       enabled: !ENV [CI, false]
       # The default 60 visibly softens the team portraits.
