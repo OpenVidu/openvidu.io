@@ -6,10 +6,21 @@ updates:
       interval: "weekly"
 
   # The publishing tool and the build stack it pins (mkdocs-material, mike, plugins).
+  # requirements-publish.txt is compiled from pyproject.toml, but without a requirements.in
+  # Dependabot reads it as a plain manifest and would bump its transitive lines one at a time,
+  # producing a lock pip cannot resolve. Only the deliberate pins get pull requests; the rest
+  # of the lock moves when it is regenerated (publish-tool/README.md, "Dependency pins").
   - package-ecosystem: "pip"
     directory: "/publish-tool"
     schedule:
       interval: "weekly"
+    allow:
+      - dependency-name: "mkdocs*"
+      - dependency-name: "mike"
+      - dependency-name: "pymdown-extensions"
+      - dependency-name: "pygments"
+      - dependency-name: "gitpython"
+      - dependency-name: "hatchling"
     groups:
       mkdocs-stack:
         patterns:

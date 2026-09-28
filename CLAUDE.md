@@ -4,7 +4,8 @@ Source of https://openvidu.io — MkDocs Material (pinned 9.7.7) + mike, publish
 Two versioned products: **OpenVidu Meet** (`docs/meet/`, served at `/{version}/meet/`) and
 **OpenVidu Platform** (`docs/docs/`, served at `/{version}/docs/`), plus non-versioned root pages
 (landing, pricing, support, blog, …). **Merging to `main` publishes nothing** — the live site only
-changes when the manual [Publish Web workflow](.github/workflows/publish-web.yaml) runs.
+changes when the manual [Publish Web workflow](.github/workflows/publish-web.yaml) runs, which
+then redeploys the docs MCP server (`OpenVidu/openvidu-docs-mcp`) and waits for it.
 
 Authoritative references — read the relevant one before working:
 
@@ -53,7 +54,7 @@ rationale: [`contributing/link-rules.md`](contributing/link-rules.md).
 
 Every page requires `title` (≤57 chars — Material appends `" - OpenVidu"`) and `description`
 (100–160 chars, ending in a full stop), both unique site-wide. The build fails on any
-llmstxt-selected page missing either (`publish-tool/mkdocs_hook.py`), and the globs select
+llmstxt-selected page missing either (`publish-tool/llmstxt_entries_hook.py`), and the globs select
 nearly every page.
 
 ## Structural invariants
@@ -72,8 +73,16 @@ nearly every page.
   must be mirrored in `livekit-tutorials-docs` (LiveKit-first framing), whose
   `tools/sync-check.py` verifies the two stay in step —
   [`contributing/authoring.md`](contributing/authoring.md).
-- The mkdocs-material pin is named in three places (`publish-tool/pyproject.toml`, `Dockerfile`,
-  `Dockerfile.mike`) and must agree — `ovweb doctor --pins` checks it.
+- The mkdocs-material pin is named in four places (`publish-tool/pyproject.toml`, `Dockerfile`,
+  `Dockerfile.mike`, `publish-tool/requirements-publish.txt`) and must agree — `ovweb doctor
+  --pins` checks it. After changing a pin, regenerate the lock
+  ([`publish-tool/README.md`](publish-tool/README.md), "Dependency pins").
+- `publish-tool/pygments_fence_title_hook.py`, `publish-tool/llmstxt_entries_hook.py` and
+  `publish-tool/llmstxt_preprocess.py` live on every past `X.Y` branch (the llmstxt pair from
+  3.4) and in `livekit-tutorials-docs/hooks/` as verbatim copies of `main`'s — MkDocs loads them
+  by path from the checked-out branch. Edit on
+  `main`, re-copy; `ovweb doctor` reports a copy that differs
+  ([`contributing/versioning.md`](contributing/versioning.md)).
 
 ## Versioning
 

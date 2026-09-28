@@ -803,6 +803,14 @@ h1.meetplatform-slogan {
   color: var(--md-default-fg-color);
 }
 
+/* Lead paragraph under a product slogan: the one-sentence definition of the
+   product, above the feature cards (Meet landing page). */
+.md-typeset p.meetplatform-intro {
+  text-align: center;
+  max-width: 44em;
+  margin: -0.8em auto 2.2em;
+}
+
 /* Deploy buttons (self-hosting install pages) */
 
 .deploy-button {
@@ -1216,6 +1224,10 @@ h1.meetplatform-slogan {
 @media (max-width: 959px) {
   .top-home-img {
     width: 85%;
+  }
+
+  .register-container {
+    margin: 0;
   }
 
   #account-btn .user-name {

@@ -57,6 +57,9 @@ links are version-pinned domain-qualified URLs to the announced version.
 - The workflow ends with `ovweb verify`. Findings name their remedy; in particular,
   `[version-alias]` findings after a `latest` publish mean alias folders of **other** minors
   need `ovweb redirects apply` on a gh-pages worktree — expected, not a rollback.
+- The run's last job, `deploy-docs-mcp`, redeploys the docs MCP server and waits for it. Red
+  there means the site is live but agents still see the previous documentation; its log names
+  the failed step and the remedy.
 - After the publish, spot-check live: the new version in the selector, `/latest/` serving it,
   the releases page anchors, and the root sitemap.
 

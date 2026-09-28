@@ -14,7 +14,9 @@ transition defined in `.claude/skills/blog-write/references/conventions.md`.
    asset references and nothing else, by design.
 5. `git mv docs/blog/posts/YYYY/MM/<slug>.md docs/blog/posts/<year>/<month>/<slug>.md` and
    `git mv docs/assets/images/blog/YYYY/MM/<slug> docs/assets/images/blog/<year>/<month>/<slug>`
-   (create the year/month directories if this is the first post of the month).
+   (create the year/month directories if this is the first post of the month). If the post
+   embeds a video, `docs/assets/videos/blog/YYYY/MM/<slug>` moves the same way — check for it,
+   it only exists for posts that have one.
 6. Verify nothing else remained in the placeholder folders; remove them if now empty.
 7. Run `ovweb lint docs/blog/posts/<year>/<month>/<slug>.md` and fix any error it reports.
 8. Remind the user: merging this to `main` does **not** put the post online — it goes live with

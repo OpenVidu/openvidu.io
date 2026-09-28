@@ -62,7 +62,11 @@ def test_index_html_is_not_deleted_from_a_past_version(config):
     removed = config.layout.files_removed_from_past_version
     assert "index.html" not in removed
     assert "index.md" in removed
-    assert "llms.txt" in removed
+
+
+def test_llms_txt_is_not_a_root_file(config):
+    """Every version keeps its own; the root's is derived, so neither is moved nor deleted."""
+    assert "llms.txt" not in config.layout.root_files
 
 
 def test_base_url_has_no_trailing_slash():

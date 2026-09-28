@@ -11,14 +11,6 @@ hide:
 page_features:
   - openviduregister
 ---
-<script>
-window.amplifyActive = true;
-</script>
-
-<section>
-	<div class="container">
-		<div class="register-container col-md-12">
-      <openvidu-register></openvidu-register>
-		</div>
-	</div>
-</section>
+<div class="register-container">
+  <openvidu-register></openvidu-register>
+</div>

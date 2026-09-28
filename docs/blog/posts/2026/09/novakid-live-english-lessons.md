@@ -19,16 +19,12 @@ tags:
   - Migration
 authors:
   - patxi
-hide:
-  - navigation
-  - search-bar
-  - version-selector
 ---
 
 # How Novakid runs 30 million live English lessons on OpenVidu
 
-![Novakid and OpenVidu customer success story](/assets/images/blog/2026/09/novakid-live-english-lessons/poster-light.webp#only-light "Novakid + OpenVidu")
-![Novakid and OpenVidu customer success story](/assets/images/blog/2026/09/novakid-live-english-lessons/poster-dark.webp#only-dark "Novakid + OpenVidu")
+![Novakid and OpenVidu customer success story](/assets/images/blog/2026/09/novakid-live-english-lessons/poster-light.webp#only-light "Novakid + OpenVidu"){ .round-corners }
+![Novakid and OpenVidu customer success story](/assets/images/blog/2026/09/novakid-live-english-lessons/poster-dark.webp#only-dark "Novakid + OpenVidu"){ .round-corners }
 
 Running a live video product where the users are seven years old is a challenge. Adults may tolerate a frozen frame or a reconnect spinner, but a seven-year-old just gives up, and the parent doesn't book a second lesson. That's what [Novakid :fontawesome-solid-external-link:{.external-link-icon}](https://www.novakidschool.com/){:target="_blank"}, an online English school for kids aged 4–12, has been doing since 2017. Over a million students, 50+ countries, more than 30 million lessons delivered, and up to 2,300 lessons running at once at peak.
 

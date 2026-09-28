@@ -1,8 +1,15 @@
-"""The pin-agreement check: every place naming a build input must name the same version."""
+"""Two preflight checks: the pins, where every place naming a build input — pyproject, the
+Dockerfiles, the lock compiled from pyproject, the environment — must name the same version, and
+the version branches' copies of the files MkDocs loads by path from the checkout.
+"""
 
 from __future__ import annotations
 
-from ovweb.doctor import PINNED_DISTRIBUTIONS, check_pins
+import hashlib
+from pathlib import Path
+
+from ovweb.doctor import PINNED_DISTRIBUTIONS, check_branch_files, check_pins
+from ovweb.gitrepo import GitError
 
 PYPROJECT = """
 build = [
@@ -35,10 +42,30 @@ DOCKERFILE = (
     "mkdocs-rss-plugin==1.19.0 pygments==2.19.2 gitpython==3.1.59\n"
 )
 
+#: The shape `uv pip compile --generate-hashes` writes: the pin, its hashes, then who needs it.
+LOCK = "".join(
+    f"{name}=={version} \\\n    --hash=sha256:{'0' * 64}\n    # via ovweb (pyproject.toml)\n"
+    for name, version in (
+        ("gitpython", "3.1.59"),
+        ("mike", "2.2.0"),
+        ("mkdocs", "1.6.1"),
+        ("mkdocs-glightbox", "0.5.2"),
+        ("mkdocs-llmstxt", "0.5.0"),
+        ("mkdocs-material", "9.7.6"),
+        ("mkdocs-rss-plugin", "1.19.0"),
+        ("pygments", "2.19.2"),
+        ("pymdown-extensions", "11.0.1"),
+    )
+)
 
-def write_repo(root, *, pyproject=PYPROJECT, dockerfile=DOCKERFILE, mike_dockerfile=None):
+
+def write_repo(
+    root, *, pyproject=PYPROJECT, dockerfile=DOCKERFILE, mike_dockerfile=None, lock=LOCK
+):
     (root / "publish-tool").mkdir()
     (root / "publish-tool" / "pyproject.toml").write_text(pyproject, encoding="utf-8")
+    if lock is not None:
+        (root / "publish-tool" / "requirements-publish.txt").write_text(lock, encoding="utf-8")
     (root / "Dockerfile").write_text(dockerfile, encoding="utf-8")
     if mike_dockerfile is None:
         mike_dockerfile = dockerfile + "RUN pip install mike==2.2.0\n"
@@ -129,6 +156,35 @@ def test_a_distribution_missing_from_pyproject_fails(tmp_path):
     assert "not pinned" in result["mike"].detail
 
 
+def test_a_lock_lagging_a_pyproject_pin_fails_that_distribution_only(tmp_path):
+    write_repo(
+        tmp_path,
+        pyproject=PYPROJECT.replace("gitpython==3.1.59", "gitpython==3.1.62"),
+        dockerfile=DOCKERFILE.replace("gitpython==3.1.59", "gitpython==3.1.62"),
+    )
+
+    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "gitpython": "3.1.62"}))
+
+    assert not result["gitpython"].ok
+    assert "publish-tool/requirements-publish.txt=3.1.59" in result["gitpython"].detail
+    assert result["pygments"].ok
+
+
+def test_a_distribution_missing_from_the_lock_fails(tmp_path):
+    write_repo(tmp_path, lock=LOCK.replace("mike==2.2.0", "requests==1.0"))
+
+    result = by_distribution(pins_of(tmp_path))
+
+    assert not result["mike"].ok
+    assert "not in publish-tool/requirements-publish.txt" in result["mike"].detail
+
+
+def test_no_lock_file_is_not_compared(tmp_path):
+    write_repo(tmp_path, lock=None)
+
+    assert [check.detail for check in pins_of(tmp_path) if not check.ok] == []
+
+
 def test_a_digest_pinned_base_image_still_names_its_tag(tmp_path):
     digest = "@sha256:" + "0" * 64
     write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":9.7.6\n", f":9.7.6{digest}\n"))
@@ -161,3 +217,132 @@ def test_site_url_agreement_reads_mkdocs_yml_from_the_checkout(tmp_path, config)
 
     missing = _check_site_url_agreement(config, repo_root=tmp_path / "elsewhere")
     assert missing is not None and not missing.ok
+
+
+# -- the version branches' copies of the build inputs ---------------------------------------
+
+
+HOOK = "publish-tool/pygments_fence_title_hook.py"
+PREPROCESS = "publish-tool/llmstxt_preprocess.py"
+#: Two of the production entries, so the tests describe the mechanism rather than the list.
+FILES = ((HOOK, "3.0"), (PREPROCESS, "3.4"))
+
+
+def blob(text: str) -> str:
+    return hashlib.sha1(text.encode()).hexdigest()
+
+
+class BranchRepo:
+    """Version branches holding whatever `files` says ({branch: {path: text}}), read offline.
+
+    Answers `hash-object` for the checkout's file and `rev-parse ref:path` for a branch's, both as
+    blob ids of the text, which is all the check compares.
+    """
+
+    remote = "origin"
+
+    def __init__(self, files):
+        self.files = files
+
+    def local_branches(self):
+        return [*self.files, "main"]
+
+    def read(self, *args):
+        if args[0] == "hash-object":
+            return blob(Path(args[1]).read_text(encoding="utf-8"))
+        if args[0] == "rev-parse":
+            ref, path = args[-1].split(":", 1)
+            try:
+                return blob(self.files[ref.removeprefix("origin/")][path])
+            except KeyError:
+                raise GitError(f"{args[-1]} does not exist") from None
+        raise GitError("offline")
+
+
+def checkout(root, *, hook="hook v2", preprocess="preprocess v2"):
+    (root / "publish-tool").mkdir(exist_ok=True)
+    (root / HOOK).write_text(hook, encoding="utf-8")
+    (root / PREPROCESS).write_text(preprocess, encoding="utf-8")
+    return root
+
+
+def by_file(checks):
+    return {check.detail.split(" ")[0]: check for check in checks}
+
+
+def test_matching_copies_pass_and_name_the_branches_compared(tmp_path):
+    repo = BranchRepo(
+        {
+            "3.8": {HOOK: "stale", PREPROCESS: "stale"},
+            "3.7": {HOOK: "hook v2", PREPROCESS: "preprocess v2"},
+            "3.4": {HOOK: "hook v2", PREPROCESS: "preprocess v2"},
+            "3.0": {HOOK: "hook v2"},
+        }
+    )
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
+
+    assert result[HOOK].ok and result[HOOK].detail.endswith("3.7, 3.4, 3.0")
+    assert result[PREPROCESS].ok and result[PREPROCESS].detail.endswith("3.7, 3.4")
+
+
+def test_the_newest_version_branch_is_not_compared(tmp_path):
+    """`publish latest` rebases it onto main, so its copy is replaced on every publish."""
+    repo = BranchRepo(
+        {"3.8": {HOOK: "stale"}, "3.7": {HOOK: "hook v2", PREPROCESS: "preprocess v2"}}
+    )
+
+    assert all(check.ok for check in check_branch_files(repo, checkout(tmp_path), files=FILES))
+
+
+def test_a_branch_whose_copy_differs_fails_that_file_only(tmp_path):
+    repo = BranchRepo(
+        {
+            "3.8": {},
+            "3.5": {HOOK: "hook v1", PREPROCESS: "preprocess v2"},
+            "3.4": {HOOK: "hook v2", PREPROCESS: "preprocess v2"},
+        }
+    )
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
+
+    assert not result[HOOK].ok
+    assert "differs on 3.5" in result[HOOK].detail
+    assert result[HOOK].fatal
+    assert result[PREPROCESS].ok
+
+
+def test_a_branch_missing_the_file_fails_it(tmp_path):
+    repo = BranchRepo(
+        {"3.8": {}, "3.6": {HOOK: "hook v2"}, "3.5": {HOOK: "hook v2", PREPROCESS: "x"}}
+    )
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
+
+    assert not result[PREPROCESS].ok
+    assert "differs on 3.5" in result[PREPROCESS].detail
+    assert "missing on 3.6" in result[PREPROCESS].detail
+
+
+def test_branches_older_than_a_file_are_not_asked_for_it(tmp_path):
+    """3.0–3.3 have no llmstxt plugin, so the preprocess is not theirs to carry."""
+    repo = BranchRepo({"3.8": {}, "3.3": {HOOK: "hook v2"}, "3.0": {HOOK: "hook v2"}})
+
+    result = by_file(check_branch_files(repo, checkout(tmp_path), files=FILES))
+
+    assert result[HOOK].ok
+    assert result[PREPROCESS].ok and not result[PREPROCESS].fatal
+
+
+def test_a_file_missing_from_the_checkout_is_fatal(tmp_path):
+    repo = BranchRepo({"3.8": {}, "3.7": {HOOK: "hook v2"}})
+
+    result = by_file(check_branch_files(repo, tmp_path, files=FILES))
+
+    assert not result[HOOK].ok and "missing from this checkout" in result[HOOK].detail
+
+
+def test_no_past_version_branch_is_not_an_error(tmp_path):
+    (check,) = check_branch_files(BranchRepo({"3.8": {}}), checkout(tmp_path), files=FILES)
+
+    assert check.ok and not check.fatal

@@ -88,7 +88,7 @@ Every page belongs to one of two groups, declared under the `layout:` key of
 | `layout.non_versioned_pages` | `account`, `pricing`, `support`, `openvidu-meet-vs-openvidu-platform`, `openvidu-vs-livekit`, `openvidu-vs-mediasoup`, `openvidu-vs-jitsi`, `openvidu-vs-janus`, `conditions`, `blog`, `about-us`, `research`, `acknowledgments` | Global pages shared across all versions. Served **once** at the site root (e.g. `/pricing/`).                 |
 | `layout.assets`              | `assets`, `javascripts`, `stylesheets`, `search`                                                                                       | Static asset folders that also live at the root.                                                              |
 | `layout.pinned_assets`       | `assets`, `javascripts`, `stylesheets`                                                                                                 | Of those, the ones whose root-absolute references inside versioned pages get pinned to the version folder.     |
-| `layout.root_files`          | `index.html`, `index.md`, `404.html`, `llms.txt`, the four RSS/JSON feeds, `rss.xsl`                                                   | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
+| `layout.root_files`          | `index.html`, `index.md`, `404.html`, the four RSS/JSON feeds, `rss.xsl`                                                               | Individual files promoted to the root. `sitemap.xml` is absent on purpose: it is copied and rewritten, not moved. |
 | `layout.feeds`               | the four RSS/JSON feed files                                                                                                          | Rewritten wholesale (every `/X.Y/` occurrence) when promoted to the root.                                     |
 
 `ovweb.yaml` is the single source of truth for publishing: the layout above, and every redirect
@@ -132,7 +132,7 @@ ovweb redirects render|check|apply
 ovweb lint [PATHS...] [--site DIR] [--against REF]   Authoring conventions the strict build cannot see
 ovweb verify               Assert the invariants of a published tree
 ovweb versions list        What is published, and which version branches exist
-ovweb doctor [--pins]      Dependencies, pins, configuration and git state
+ovweb doctor [--pins]      Dependencies, pins, configuration, git state, the branches' hook copies
 ```
 
 Useful flags. `--dry-run`, `--verbose`/`-v`, `--json`, `--color`/`--no-color`, `--repo`, `--layout`
@@ -175,7 +175,8 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `remove-stray-site`    | always | Delete a `site/` folder at the root of the gh-pages tree, present only when the tree came from a checkout rather than a fresh worktree. Tolerant of its absence. |
 | `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns. |
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
-| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds, and the AI-facing channel: the Markdown exports and `llms.txt`. |
+| `publish-llms-txt`     | always | Keep the version's own `llms.txt`, pruned to the pages served under it and pinned to it; on a latest publish, also derive the root's full index from it, rewritten like a promoted export. |
+| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds and the promoted pages' Markdown exports. |
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see [docs/sitemaps-and-search.md](docs/sitemaps-and-search.md). |
@@ -247,8 +248,9 @@ tests) are documented in [`contributing/checks.md`](../contributing/checks.md).
 [`pyproject.toml`](pyproject.toml) is the single place the publishing dependencies are declared,
 with two extras: `build` (the real publish, including `mkdocs-material[imaging]`) and `validate`
 (the same minus the imaging stack). `mkdocs-material` is also named as the base-image tag of
-[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), and `ovweb doctor
---pins` fails when the three disagree. A different theme version builds different markup, and the
+[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), the rest of the pins
+in their `pip install` lines, and every pin again in the lock below; `ovweb doctor --pins` fails
+when any of those places disagrees. A different theme version builds different markup, and the
 release-notes splice matches on that markup.
 
 The publish workflow does not install from the extra directly. It installs
@@ -261,11 +263,18 @@ commit both:
 
 ```bash
 uv pip compile pyproject.toml --extra build --universal --generate-hashes \
-  --python-version 3.10 --no-header -o requirements-publish.txt
+  --python-version 3.11 --no-header -o requirements-publish.txt
 ```
 
-`--universal` keeps the environment markers, so the same file installs on the 3.10 floor and on
-the 3.14 the workflow runs. Dependabot watches both files (`.github/dependabot.yml`).
+`--universal` keeps the environment markers, so the same file installs on the 3.11 floor and on
+the 3.14 the workflow runs. `test-tools.yaml` resolves the lock with `--require-hashes` on every
+change under `publish-tool/`, so a lock pip cannot satisfy fails there rather than in the publish.
+
+Dependabot (`.github/dependabot.yml`) proposes updates only for the pins named in
+`pyproject.toml`. Without a `requirements.in` it reads the lock as a plain manifest, so left to
+itself it would bump transitive lines one at a time — which is how a lock stops resolving. Its
+pull requests are notices, not merges: apply the bump in `pyproject.toml` and both Dockerfiles,
+regenerate the lock, and close the pull request.
 
 ## Caveats and observations
 
@@ -287,7 +296,8 @@ the 3.14 the workflow runs. Dependabot watches both files (`.github/dependabot.y
   `index.html`, but each version's `search/search_index.json` still holds that version's original
   releases text. The page a visitor sees is current; in-version search results for the releases
   page may lag until that version is rebuilt.
-- **Old branches do not generate `llms.txt` or the RSS feeds.** Their `mkdocs.yml` predates those
-  plugins, so the past-version cleanup is tolerant of every root file it removes.
+- **The branches before 3.4 do not generate `llms.txt` or the RSS feeds.** Their `mkdocs.yml`
+  predates those plugins, so the past-version cleanup is tolerant of every root file it removes,
+  and a past publish of one writes no version `llms.txt`.
 - **A version can be published without a branch.** `ovweb versions list` flags it; such a version
   cannot be re-published, because the branch is the source of truth for its content.

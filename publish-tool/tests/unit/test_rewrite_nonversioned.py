@@ -29,6 +29,30 @@ def test_points_versioned_links_at_latest(layout, depth, page):
     assert promote(text, layout) == f'<a href="/latest/{page}/self-hosting/">x</a>'
 
 
+@pytest.mark.parametrize("page", ["docs", "meet"])
+def test_points_root_absolute_links_at_latest(layout, page):
+    """The form raw HTML has to use, and the one a blog excerpt is written in."""
+    text = f'<a href="/{page}/self-hosting/">x</a>'
+    assert promote(text, layout) == f'<a href="/latest/{page}/self-hosting/">x</a>'
+
+
+def test_leaves_a_root_absolute_link_that_already_names_latest_alone(layout):
+    text = '<a href="/latest/docs/self-hosting/">x</a>'
+    assert promote(text, layout) == text
+
+
+def test_leaves_a_root_absolute_link_to_a_non_versioned_page_alone(layout):
+    """Only the versioned sections move; `/pricing/` is served from the root as written."""
+    text = '<a href="/pricing/">pricing</a><img src="/assets/x.png">'
+    assert promote(text, layout) == text
+
+
+def test_shields_a_pinned_root_absolute_link_from_the_latest_rewrite(layout):
+    """A release note's `/3.4/docs/…` must keep its version, not become `/latest/`."""
+    text = '<a href="/3.4/docs/releases/">notes</a>'
+    assert promote(text, layout) == text
+
+
 # -- the page's own URL ------------------------------------------------------------------
 
 
@@ -98,6 +122,14 @@ def test_404_strips_the_version_and_sends_versioned_links_to_latest(layout):
         '<link rel="canonical" href="https://openvidu.io/404.html">'
         '<a href="/pricing/">pricing</a>'
         '<a href="/latest/docs/">docs</a>'
+    )
+
+
+def test_404_points_a_root_absolute_versioned_link_at_latest(layout):
+    """Same helper as the promoted pages; the 404 is served from the root like they are."""
+    text = '<a href="/meet/embedded/intro/">meet</a>'
+    assert rewrite_404(text, version=VERSION, layout=layout) == (
+        '<a href="/latest/meet/embedded/intro/">meet</a>'
     )
 
 

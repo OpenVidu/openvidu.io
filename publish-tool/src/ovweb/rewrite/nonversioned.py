@@ -36,18 +36,18 @@ def rewrite_404(text: str, *, version: str, layout: SiteLayout) -> str:
     """
     text = strip_own_version_segment(text, version=version, site_url=layout.site_url)
     text = text.replace(f'"/{version}"', '"/"')
-    for page in layout.versioned_pages:
-        text = text.replace(f'href="/{page}/', f'href="/latest/{page}/')
-    return text
+    return point_root_absolute_links_at_latest(text, layout=layout)
 
 
 def rewrite_non_versioned_file(text: str, *, version: str, layout: SiteLayout) -> str:
     """Rewrite one built page that will be promoted to the site root.
 
-    Two steps: relative links into versioned sections become `/latest/…`, then the page's
-    own URL loses the version segment.
+    Three steps: links into versioned sections become `/latest/…` — relative ones, which is what
+    MkDocs resolves a Markdown link to, and root-absolute ones, which is how raw HTML has to write
+    them — then the page's own URL loses the version segment.
     """
     text = _point_versioned_links_at_latest(text, layout=layout)
+    text = point_root_absolute_links_at_latest(text, layout=layout)
     return _strip_version_from_self_urls(text, version=version, layout=layout)
 
 
@@ -59,6 +59,27 @@ def _point_versioned_links_at_latest(text: str, *, layout: SiteLayout) -> str:
             f'href="/latest/{page}/',
             text,
         )
+    return text
+
+
+def point_root_absolute_links_at_latest(text: str, *, layout: SiteLayout) -> str:
+    """`href="/docs/self-hosting/"` -> `href="/latest/docs/self-hosting/"`.
+
+    The form raw HTML has to use for a versioned section: MkDocs neither validates nor rewrites
+    links inside HTML, and a relative path would need a per-page `../` depth that is impossible to
+    get right in a shared snippet or a blog excerpt — which moves between the post page, the
+    listings and the archive. `/docs/…` is also the only form that resolves on the dev server,
+    where nothing is versioned.
+
+    Served from the root that URL answers only through the `unversioned-mirror` redirect stub, so
+    pointing it at `latest` here saves the reader a hop and hands the link's ranking signal
+    straight to the page. The stub stays for URLs typed or shared from outside.
+
+    Anchored on the quote, so a version-pinned link (`href="/3.4/docs/…"`, what a release note
+    uses) does not match and keeps its version.
+    """
+    for page in layout.versioned_pages:
+        text = text.replace(f'href="/{page}/', f'href="/latest/{page}/')
     return text
 
 

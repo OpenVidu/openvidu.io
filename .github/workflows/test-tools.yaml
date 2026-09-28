@@ -48,6 +48,15 @@ jobs:
         # and read the real ovweb.yaml, and nothing switches branches.
         run: pip install -e "./publish-tool[dev]"
 
+      - name: Resolve the publish lock
+        # publish-web.yaml is the only job that installs requirements-publish.txt, with
+        # --require-hashes and a write token in hand. A lock pip cannot satisfy — one
+        # transitive line bumped on its own, a hash that no longer matches — must fail here
+        # instead. --dry-run resolves and verifies every hash without installing anything.
+        run: >-
+          pip install --dry-run --ignore-installed --require-hashes
+          -r publish-tool/requirements-publish.txt
+
       - name: Lint
         working-directory: ./publish-tool
         run: |

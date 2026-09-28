@@ -82,10 +82,26 @@ latest publish's — correct for them). Locally the dev server serves assets at 
 `/assets/...` just works. `ovweb lint` resolves every raw-HTML target against the source tree —
 see [checks.md](checks.md).
 
-Links from HTML to **versioned** pages (rare) still use relative-to-built-folder paths: a page
-`performance.md` builds to `performance/index.html`, so add one extra `../` compared to the
-Markdown path (unless linking from an `index.md`). This works only **within one version**, where
-source and target share the version folder.
+Links from HTML to **versioned** pages depend on where the linking page is served from:
+
+- **From another versioned page**, use relative-to-built-folder paths: a page `performance.md`
+  builds to `performance/index.html`, so add one extra `../` compared to the Markdown path
+  (unless linking from an `index.md`). This works only **within one version**, where source and
+  target share the version folder.
+- **From a page served from the root** (`non_versioned_pages` — the landing, pricing, the
+  comparisons, and every blog page including a post's excerpt), use the root-absolute form
+  `/docs/…`, `/meet/…`. No relative path is right for a blog excerpt, which is copied verbatim
+  into the post page, the listings and the archive, each at its own depth; and `/docs/…` is the
+  only form that resolves on the dev server, where nothing is versioned. **`ovweb` repoints these
+  at `/latest/` at publish time** (`point_root_absolute_links_at_latest`), in the HTML and in the
+  Markdown export alike, so never write `/latest/` by hand: it resolves neither locally nor in
+  `ovweb lint`, which checks raw-HTML targets against the source tree.
+
+> [!NOTE]
+> The unversioned URL is not broken without that rewrite — the `unversioned-mirror` rule in
+> `ovweb.yaml` answers every `/docs/…` and `/meet/…` with a redirect stub to `/latest/…`. The
+> rewrite is what keeps our own pages from taking that hop, and hands the link's ranking signal
+> straight to the target. The stub stays for URLs typed or shared from outside.
 
 > [!WARNING]
 > **A link to `/latest/…` must be absolute — never relative, never `{{ base_url }}`-based.**

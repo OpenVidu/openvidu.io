@@ -60,12 +60,68 @@ def test_reports_a_root_file_that_pins_the_current_version(published, config, na
     assert findings_by_check(published, config)["root-export-version-pin"] == [name]
 
 
+def test_reports_a_version_llms_entry_outside_the_version(published, config):
+    """A root page or another version in a version's own index is a URL that never exists."""
+    path = published / VERSION / "llms.txt"
+    path.write_text(
+        path.read_text() + f"- [Pricing](https://openvidu.io/{VERSION}/pricing/index.md): p\n"
+        "- [Docs](https://openvidu.io/latest/docs/index.md): d\n",
+        encoding="utf-8",
+    )
+
+    assert findings_by_check(published, config)["version-llms-txt"] == [f"{VERSION}/llms.txt"] * 2
+
+
+def test_reports_a_version_llms_that_lists_nothing(published, config):
+    """An index with no entries is a silent hole: nothing would index that version, and every
+    per-entry check passes vacuously."""
+    path = published / VERSION / "llms.txt"
+    path.write_text("# OpenVidu\n\n> Summary.\n", encoding="utf-8")
+
+    assert findings_by_check(published, config)["version-llms-txt"] == [f"{VERSION}/llms.txt"]
+
+
+def test_reports_a_version_llms_entry_without_an_export(published, config):
+    path = published / VERSION / "llms.txt"
+    path.write_text(
+        path.read_text() + f"- [Gone](https://openvidu.io/{VERSION}/docs/gone/index.md): g\n",
+        encoding="utf-8",
+    )
+
+    assert findings_by_check(published, config)["version-llms-txt"] == [f"{VERSION}/llms.txt"]
+
+
 def test_reports_a_promoted_export_that_pins_the_current_version(published, config):
     (published / "pricing" / "index.md").write_text(
         f"[docs](https://openvidu.io/{VERSION}/docs/)\n", encoding="utf-8"
     )
 
     assert findings_by_check(published, config)["root-export-version-pin"] == ["pricing/index.md"]
+
+
+@pytest.mark.parametrize(
+    ("name", "content"),
+    [
+        ("index.html", '<a href="/docs/self-hosting/">docs</a>'),
+        ("index.md", "[docs](https://openvidu.io/docs/self-hosting/)"),
+    ],
+)
+def test_reports_a_root_page_linking_into_a_versioned_section_unversioned(
+    published, config, name, content
+):
+    """Never a broken link — the unversioned-mirror stub answers it — so nothing else would
+    catch it. It costs every reader a redirect and hands the ranking signal to a noindex stub."""
+    (published / "blog" / name).write_text(content, encoding="utf-8")
+
+    assert findings_by_check(published, config)["root-page-unversioned-link"] == [f"blog/{name}"]
+
+
+def test_a_root_page_may_link_into_a_versioned_section_through_latest(published, config):
+    (published / "blog" / "index.html").write_text(
+        '<a href="/latest/docs/self-hosting/">docs</a>', encoding="utf-8"
+    )
+
+    assert "root-page-unversioned-link" not in findings_by_check(published, config)
 
 
 def test_a_root_file_may_pin_a_different_version(published, config):

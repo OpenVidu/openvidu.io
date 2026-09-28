@@ -11,6 +11,7 @@ from __future__ import annotations
 import pytest
 
 from ovweb.rewrite.markdown import (
+    prune_version_llms,
     repair_export_links,
     rewrite_promoted_markdown,
     rewrite_versioned_markdown,
@@ -104,6 +105,28 @@ def test_promoted_export_does_not_shield_a_pin_to_the_published_version(layout):
     assert promoted(text, layout) == (
         "[observability](https://openvidu.io/latest/docs/self-hosting/observability/)"
     )
+
+
+@pytest.mark.parametrize("page", ["docs", "meet"])
+def test_promoted_export_points_a_root_relative_target_at_latest(layout, page):
+    """What the plugin leaves behind for a raw-HTML anchor, which a blog excerpt must use.
+
+    Absolutising it as written would advertise the unversioned URL, which only the redirect
+    stub answers.
+    """
+    text = f"[x](/{page}/embedded/intro/)"
+    assert promoted(text, layout) == f"[x](https://openvidu.io/latest/{page}/embedded/intro/)"
+
+
+def test_promoted_export_leaves_a_root_relative_non_versioned_target_alone(layout):
+    text = "[pricing](/pricing/)"
+    assert promoted(text, layout) == "[pricing](https://openvidu.io/pricing/)"
+
+
+def test_promoted_export_leaves_a_versioned_path_in_prose_alone(layout):
+    """Anchored to link syntax, like the absolutiser it runs before."""
+    text = "Serve it at `/docs/` and it answers."
+    assert promoted(text, layout) == text
 
 
 # -- llms.txt ----------------------------------------------------------
@@ -206,3 +229,105 @@ def test_repair_ignores_a_non_export_markdown_link(layout):
     """Only the `<directory>/index.md` shape the plugin emits is a candidate."""
     text = "[readme](https://openvidu.io/CONTRIBUTING.md)"
     assert repair(text, layout) == text
+
+
+# -- a version's own llms.txt -------------------------------------------------------------
+
+LLMS = """# OpenVidu
+
+> Summary.
+
+Some words about the site.
+
+## Product and pricing
+
+- [Home](https://openvidu.io/3.8/index.md): h
+- [Pricing](https://openvidu.io/3.8/pricing/index.md): p
+
+## OpenVidu Platform
+
+- [Docs](https://openvidu.io/3.8/docs/index.md): d
+- [Pricing again](https://openvidu.io/3.8/pricing/index.md): p
+
+## OpenVidu Meet
+
+- [Meet](https://openvidu.io/3.8/meet/index.md): m
+"""
+
+
+def pruned(layout):
+    return prune_version_llms(LLMS, version="3.8", layout=layout)
+
+
+def test_version_llms_keeps_only_the_pages_served_under_the_version(layout):
+    text = pruned(layout)
+    assert "https://openvidu.io/3.8/docs/index.md" in text
+    assert "https://openvidu.io/3.8/meet/index.md" in text
+    assert "3.8/pricing/" not in text and "3.8/index.md" not in text
+
+
+def test_version_llms_drops_a_section_left_without_entries(layout):
+    text = pruned(layout)
+    assert "## Product and pricing" not in text
+    assert "## OpenVidu Platform" in text and "## OpenVidu Meet" in text
+
+
+def test_version_llms_points_at_the_root_index_for_the_rest(layout):
+    text = pruned(layout)
+    note = text.index("are listed in https://openvidu.io/llms.txt")
+    assert text.index("Some words") < note < text.index("## OpenVidu Platform")
+    assert text.count("> The pages that are not tied to a version") == 1
+
+
+def test_version_llms_leaves_the_preamble_alone(layout):
+    assert pruned(layout).startswith("# OpenVidu\n\n> Summary.\n\nSome words about the site.\n")
+
+
+def test_version_llms_drops_a_preamble_sentence_naming_a_pruned_section(layout):
+    """The description is the root index's: it describes sections a version does not carry."""
+    text = LLMS.replace(
+        "Some words about the site.",
+        'Two products share this. The "Product and pricing" section holds plans. Read on.',
+    )
+    out = prune_version_llms(text, version="3.8", layout=layout)
+    assert "## Product and pricing" not in out, "the fixture's section is pruned"
+    assert "Two products share this. Read on." in out
+    assert "Product and pricing" not in out
+
+
+def test_version_llms_keeps_a_sentence_naming_a_section_it_still_has(layout):
+    text = LLMS.replace("Some words about the site.", 'The "OpenVidu Meet" section covers the app.')
+    assert 'The "OpenVidu Meet" section covers the app.' in prune_version_llms(
+        text, version="3.8", layout=layout
+    )
+
+
+def test_version_llms_keeps_prose_that_merely_uses_the_words(layout):
+    """Only a quoted section name goes: pruning must not eat ordinary prose."""
+    text = LLMS.replace("Some words about the site.", "Product and pricing details live online.")
+    assert "Product and pricing details live online." in prune_version_llms(
+        text, version="3.8", layout=layout
+    )
+
+
+def test_an_llms_entry_title_may_contain_a_bracket(layout):
+    """A `]` in a title used to cut the match short, so the entry was read as prose and kept."""
+    text = LLMS.replace(
+        "- [Home](https://openvidu.io/3.8/index.md): h",
+        "- [Home [beta]](https://openvidu.io/3.8/index.md): h",
+    )
+    assert "3.8/index.md" not in prune_version_llms(text, version="3.8", layout=layout)
+
+
+def test_an_llms_entry_description_may_contain_a_link(layout):
+    """Matching lazily stops at the entry's own `](`, not at one further along the line."""
+    entry = "- [Docs](https://openvidu.io/3.8/docs/index.md): see [pricing](https://x.test/p)"
+    assert entry in prune_version_llms(
+        LLMS.replace("- [Docs](https://openvidu.io/3.8/docs/index.md): d", entry),
+        version="3.8",
+        layout=layout,
+    )
+
+
+def test_version_llms_without_sections_still_gets_the_note(layout):
+    assert "llms.txt" in prune_version_llms("# X\n", version="3.8", layout=layout)

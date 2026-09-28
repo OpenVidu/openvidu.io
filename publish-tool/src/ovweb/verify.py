@@ -22,6 +22,7 @@ from .redirects import (
     RedirectError,
     is_generated_redirect,
 )
+from .rewrite.markdown import LLMS_ENTRY
 from .rewrite.markdown import SUFFIX as MARKDOWN
 from .rewrite.sitemap import stub_loc
 
@@ -51,12 +52,14 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
             continue
         findings += _check_version_root_is_redirect(version_dir, version)
         findings += _check_version_sitemap(tree, version, config)
+        findings += _check_version_llms_txt(tree, version, config)
         findings += _check_versioned_pages_reach_root_files(tree, version, config)
         findings += _check_exports_reach_root_pages(tree, version, config)
     findings += _check_root_pages_have_no_version(tree, config, published)
     findings += _check_search_index_absolute(tree, config)
     findings += _check_root_search_index_uses_latest(tree, config, published)
     findings += _check_root_exports_use_latest(tree, config, latest)
+    findings += _check_root_pages_reach_versioned_via_latest(tree, config)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
     findings += _check_root_sitemap_stub_free(tree)
@@ -193,6 +196,52 @@ def _check_version_root_is_redirect(version_dir: Path, version: str) -> list[Fin
                 "version number to visitors of /latest/",
             )
         )
+    return findings
+
+
+def _check_version_llms_txt(tree: Path, version: str, config: SiteConfig) -> list[Finding]:
+    """A version's own llms.txt lists the pages served under it, each with its export beside it.
+
+    The docs MCP server indexes a version from this file, so an entry outside the version — a
+    root page, another version, `latest` — sends it to a URL that never exists or to the wrong
+    version, and an entry without an export to a 404. A missing file is not a finding: the
+    branches before 3.4 never built one, and an older folder keeps whatever its last publish
+    produced until that version is published again.
+    """
+    path = tree / version / LLMS_TXT
+    if not path.is_file():
+        return []
+
+    base = config.layout.base_url
+    prefixes = tuple(f"{base}/{version}/{page}/" for page in config.layout.versioned_pages)
+    where = f"{version}/{LLMS_TXT}"
+    findings = []
+    entries = list(LLMS_ENTRY.finditer(fsops.read_text(path)))
+    if not entries:
+        return [
+            Finding(
+                "version-llms-txt",
+                where,
+                "lists no page at all, so nothing indexes this version. Pruning keeps the "
+                f"entries under /{version}/{{{','.join(config.layout.versioned_pages)}}}/: "
+                "either the build wrote none, or they were written against a different site_url",
+            )
+        ]
+    for match in entries:
+        url = match.group("url")
+        if not url.startswith(prefixes):
+            findings.append(
+                Finding(
+                    "version-llms-txt",
+                    where,
+                    f"lists {url}, which is not served under /{version}/: a version's index "
+                    "holds its own pages only",
+                )
+            )
+        elif not (tree / url[len(base) + 1 :]).is_file():
+            findings.append(
+                Finding("version-llms-txt", where, f"lists {url}, but that export does not exist")
+            )
     return findings
 
 
@@ -559,6 +608,46 @@ def _check_owned_scope(
                 "redirect into a 404. " + rebuild,
             )
         )
+    return findings
+
+
+def _check_root_pages_reach_versioned_via_latest(tree: Path, config: SiteConfig) -> list[Finding]:
+    """A page served from the root must reach versioned documentation through `/latest/`.
+
+    The root-absolute form (`href="/docs/…"`) is what raw HTML is written in, because it is the
+    only one that resolves on the dev server and the only one `ovweb lint` can check — and the
+    publish repoints it (`point_root_absolute_links_at_latest`). One left behind still answers,
+    through the unversioned-mirror stub, so this never shows up as a broken link: it shows up as
+    an extra redirect on every click and a ranking signal handed to a `noindex` stub. That makes
+    it exactly the kind of regression only an invariant catches.
+    """
+    layout = config.layout
+    candidates = [tree / "404.html", tree / "index.html", tree / f"index{MARKDOWN}"]
+    for page in layout.non_versioned_pages:
+        root = tree / page
+        if root.is_dir():
+            candidates += sorted(root.rglob("*.html")) + sorted(root.rglob(f"*{MARKDOWN}"))
+
+    needles = {}
+    for section in layout.versioned_pages:
+        needles[f'href="/{section}/'] = section
+        needles[f"]({layout.base_url}/{section}/"] = section
+
+    findings = []
+    for path in candidates:
+        if not path.is_file():
+            continue
+        text = fsops.read_text(path)
+        for needle, section in needles.items():
+            if needle in text:
+                findings.append(
+                    Finding(
+                        "root-page-unversioned-link",
+                        str(path.relative_to(tree)),
+                        f"holds {needle!r}; a page served from the root must link into "
+                        f"/latest/{section}/, not through the unversioned redirect stub",
+                    )
+                )
     return findings
 
 
