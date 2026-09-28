@@ -102,7 +102,7 @@ page, copy its feature keys too.** These are the keys currently used:
 
 - `openviduregister`: the page embeds the `<openvidu-register>` web component — sign-in, sign-up
   and the account dashboard (only [`account.md`](../docs/account.md)). Loads
-  [`openvidu-register.js`](../docs/javascripts/openvidu-register.js), a ~1.1 MB ES module with
+  [`openvidu-register.js`](../docs/javascripts/openvidu-register.js), a ~1.2 MB ES module with
   its styles inside a shadow root, and the Material Symbols font of its icons — never load these
   site-wide. The bundle is built in
   [openvidu-register](https://github.com/OpenVidu/openvidu-register)
