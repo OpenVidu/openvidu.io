@@ -100,9 +100,13 @@ page, copy its feature keys too.** These are the keys currently used:
   requires changing the backend too (the `CreateLead` function in
   [openvidu-deployments-manager](https://github.com/OpenVidu/openvidu-deployments-manager)).
 
-- `openviduregister`: the page embeds the `<openvidu-register>` Amplify sign-in web component
-  (only [`account.md`](../docs/account.md)). Loads the ~4.4 MB `openvidu-register.js` bundle plus
-  `openvidu-register.css` and `amplify.css` — never load these site-wide. On every other page the
+- `openviduregister`: the page embeds the `<openvidu-register>` web component — sign-in, sign-up
+  and the account dashboard (only [`account.md`](../docs/account.md)). Loads
+  [`openvidu-register.js`](../docs/javascripts/openvidu-register.js), a ~1.1 MB ES module with
+  its styles inside a shadow root, and the Material Symbols font of its icons — never load these
+  site-wide. The bundle is built in
+  [openvidu-register](https://github.com/OpenVidu/openvidu-register)
+  (`npm run build && npm run copy-to-openvidu-io`); never edit it here. On every other page the
   header account button is a static "OpenVidu Pro account" link to `/account/`
   ([`partials/header.html`](../overrides/partials/header.html)); only the account page
   itself, where the bundle runs, relabels it.
