@@ -141,6 +141,13 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
     firewall-cmd --permanent --add-port=50000-60000/udp
     ```
 
+    PRO only, optional: to allow WebRTC media over TCP with the Mediasoup engine:
+
+    ```bash
+    firewall-cmd --add-port=50000-60000/tcp
+    firewall-cmd --permanent --add-port=50000-60000/tcp
+    ```
+
 5. Apply the rules and verify they are correctly configured:
 
     ```bash

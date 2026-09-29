@@ -55,7 +55,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
         | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
         | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
         | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
         | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
         | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
@@ -206,7 +206,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
+        | TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
         | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
         | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
         | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |

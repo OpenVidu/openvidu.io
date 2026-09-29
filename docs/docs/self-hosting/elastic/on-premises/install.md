@@ -98,7 +98,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
 | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
 | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
+| TCP         | 7881           | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
 | UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
 | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over UDP. |
 | TCP         | 50000-60000    | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
