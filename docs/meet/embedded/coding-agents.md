@@ -31,4 +31,4 @@ For a complete application built this way, see [Building a video-enabled CRM wit
 The same plugin covers OpenVidu Meet and OpenVidu Platform, so it is documented once, in the OpenVidu Platform section:
 
 - [OpenVidu Agent Plugin](../../docs/coding-agents/agent-plugin.md): what it contains, how to install it in each coding agent and how to keep it updated.
-- [Manual setup](../../docs/coding-agents/manual-setup.md): the same MCP server and skills configured by hand, for clients that don't load plugins.
+- [Manual setup](../../docs/coding-agents/manual-setup.md): the same MCP server and skill configured by hand, for clients that don't load plugins.

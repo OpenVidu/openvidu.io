@@ -1,26 +1,17 @@
 ---
-title: "Set up the OpenVidu docs MCP and skills by hand"
-description: "Configure the OpenVidu documentation MCP server and the agent skills by hand in any MCP client, and keep that setup current without the plugin."
+title: "Set up the OpenVidu docs MCP and skill by hand"
+description: "Configure the OpenVidu documentation MCP server and the agent skill by hand in any MCP client, and keep that setup current without the plugin."
 ---
 
 # Manual setup
 
 Everything the [OpenVidu Agent Plugin](./agent-plugin.md) installs can be configured by hand instead. Use this page when your client doesn't load plugins yet, or when you would rather not install one.
 
-The two kinds of component are independent here: the **MCP servers**, where the documentation comes from, and the **skills**, instructions the agent follows. Set up either, or both.
+The two kinds of component are independent here: the **MCP server**, where the documentation comes from, and the **skills**, instructions the agent follows. Set up either, or both.
 
-## MCP servers
+## MCP server
 
-| Name | Endpoint | Operated by |
-| --- | --- | --- |
-| `openvidu-docs` | `https://docs-mcp.openvidu.io/mcp` | OpenVidu |
-| `livekit-docs` | `https://docs.livekit.io/mcp` | LiveKit |
-
-Neither needs an account or an API key, and both speak Streamable HTTP. The examples below add `openvidu-docs`; to add `livekit-docs` too, repeat them with its name and URL.
-
-!!! warning "Adding `livekit-docs`? Add the `openvidu-livekit-sdk-docs` skill too"
-
-    It is what stops your agent answering deployment, configuration, edition or pricing questions from LiveKit's documentation, which is wrong about all of them for a self-hosted OpenVidu. Both servers have a `get_pricing_info` tool, and LiveKit's returns LiveKit Cloud plans. See [Why LiveKit's documentation is in the package](./agent-plugin.md#skills).
+The server is `openvidu-docs`, at `https://docs-mcp.openvidu.io/mcp`. It needs no account or API key, and speaks Streamable HTTP. The guidance on when to read [LiveKit's documentation](./agent-plugin.md#livekits-documentation) comes with it, so a server added by hand gets it too.
 
 === ":simple-claude:{.icon .lg-icon .tab-icon} Claude Code"
 
@@ -205,7 +196,7 @@ A skill is only instructions, so you can do by hand what it would have done. For
 
 ## Keep a manual setup current
 
-- **The MCP servers** need nothing from you. The endpoints are stable, and the documentation behind `openvidu-docs` is versioned per OpenVidu release, so there is no local copy to refresh.
+- **The MCP server** needs nothing from you. The endpoint is stable, and the documentation behind `openvidu-docs` is versioned per OpenVidu release, so there is no local copy to refresh.
 - **The skills** are copies, and nothing tells you when the originals change. Run `npx skills update` if you installed them with the skills CLI, or repeat the copy. Or [install the plugin](./agent-plugin.md#install), and let your client keep them current.
 
 ## Markdown and llms.txt

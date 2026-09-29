@@ -15,17 +15,17 @@ A coding agent writes OpenVidu code from whatever it memorised during training: 
 
     This documentation, for every OpenVidu release from 3.4, searched and read page by page through an MCP server.
 
--   :material-code-braces:{ .lg .middle } **LiveKit SDK reference**
+-   :material-code-braces:{ .lg .middle } **LiveKit's docs, where they apply**
 
     ---
 
-    LiveKit's own documentation server, for the depth of the client and server SDKs an OpenVidu Platform app imports.
+    When a question needs SDK detail these pages don't cover, your agent is sent to LiveKit's own documentation, and told what never to take from it.
 
--   :material-script-text-outline:{ .lg .middle } **Skills**
+-   :material-script-text-outline:{ .lg .middle } **A skill**
 
     ---
 
-    Procedures your agent follows: find out which OpenVidu you run before answering, and know which documentation to trust for what.
+    A procedure your agent follows: find out which OpenVidu you run when the answer depends on it, and write it down once.
 
 </div>
 
@@ -37,14 +37,9 @@ An agent plugin is a package that a coding agent installs in one step, bundling 
 
 ## What's inside
 
-### MCP servers
+### MCP server
 
-| Server | Endpoint | What it serves |
-| --- | --- | --- |
-| `openvidu-docs` | `https://docs-mcp.openvidu.io/mcp` | The OpenVidu Meet and OpenVidu Platform documentation, for every release from 3.4. Operated by OpenVidu. |
-| `livekit-docs` | `https://docs.livekit.io/mcp` | LiveKit's documentation: the SDK reference, the Agents framework, SIP. Operated by LiveKit. |
-
-Both speak Streamable HTTP and need no account or API key. You don't call their tools yourself: your agent does, when the conversation needs them. `openvidu-docs` has seven:
+The plugin configures one MCP server, `openvidu-docs`, at `https://docs-mcp.openvidu.io/mcp`: the OpenVidu Meet and OpenVidu Platform documentation, for every release from 3.4. It speaks Streamable HTTP and needs no account or API key. You don't call its tools yourself: your agent does, when the conversation needs them. It has seven:
 
 | Tool | What it does |
 | --- | --- |
@@ -58,23 +53,23 @@ Both speak Streamable HTTP and need no account or API key. You don't call their 
 
 Every tool takes an optional `version`. Documentation is published per minor release, so the version your deployment reports (`3.8.1`) is answered from that minor's documentation (`3.8`), and the answer says so; without a version, the server uses the newest it carries. A version it doesn't carry is an error that lists the ones it does, never a quiet answer for a different release.
 
-### Skills
+### Skill
 
 | Skill | What it does |
 | --- | --- |
-| `openvidu-version-edition-product` | Establishes which OpenVidu the project targets (version, edition and product) and writes it into `AGENTS.md` or `CLAUDE.md`, so it is settled once instead of every session. See [Tell your agent which OpenVidu you run](#tell-your-agent-which-openvidu-you-run). |
-| `openvidu-livekit-sdk-docs` | Decides which server answers a question: LiveKit's for SDK surface, OpenVidu's for everything else, from deployment and configuration to editions, OpenVidu Meet and pricing. |
+| `openvidu-version-edition-product` | Establishes which OpenVidu the project targets (version, edition and product) when an answer depends on it, and writes it into `AGENTS.md` or `CLAUDE.md`, so it is settled once instead of every session. See [Tell your agent which OpenVidu you run](#tell-your-agent-which-openvidu-you-run). |
 
-??? info "Why LiveKit's documentation is in the package"
+### LiveKit's documentation
 
-    OpenVidu Platform is a fork of LiveKit, and your application imports the LiveKit client and server SDKs directly. LiveKit's documentation covers that SDK surface in far more depth than this one: the full API reference, the Agents framework, the WebRTC transport details. So the plugin configures **LiveKit's own public MCP server**, the same one LiveKit documents in [Coding agent support :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/coding-agents/){:target="_blank"}. Your agent talks to LiveKit directly: nothing of LiveKit's is copied or served by OpenVidu, and the server's availability and terms are LiveKit's.
+OpenVidu Platform applications use LiveKit's client and server SDKs, and LiveKit documents them in more depth than these pages do. When a question needs that detail (the SDK reference, the LiveKit Agents framework, telephony and SIP, the `lk` CLI, the React components), the server tells your agent to read [LiveKit's documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io){:target="_blank"} with its own tool for fetching web pages, which most coding agents have. `search_docs` names the LiveKit page when it finds one. No LiveKit server is configured.
 
-    Two caveats, both enforced by the `openvidu-livekit-sdk-docs` skill:
+LiveKit's documentation describes LiveKit's latest release and LiveKit Cloud, so the same instructions set its limits:
 
-    - **OpenVidu's documentation wins on anything that is not SDK surface.** Deployment, configuration, editions, OpenVidu Meet, recording as OpenVidu ships it, observability and pricing come from `openvidu-docs`. Both servers have a `get_pricing_info` tool, and LiveKit's returns LiveKit Cloud plans, which have nothing to do with a self-hosted OpenVidu.
-    - **LiveKit's documentation is not versioned.** It describes LiveKit's latest release, while your deployment runs the LiveKit version its OpenVidu release bundles. Client SDK surface generally applies as written; server behaviour, such as new configuration flags or webhook fields, may not exist in your version yet.
+- Deployment, configuration, editions, pricing and recording operations come from this documentation, never from LiveKit's.
+- Your agent doesn't recommend LiveKit Cloud services (Cloud projects, LiveKit Inference, deploying agents with `lk agent deploy`, phone numbers bought from LiveKit) or LiveKit's guides to deploying its media server.
+- It says when part of an answer comes from LiveKit's documentation, and links the page.
 
-    If you would rather not use it, remove `livekit-docs` from your client's MCP configuration. Nothing else in the plugin depends on it.
+OpenVidu ships no SIP service: telephony means running LiveKit's self-hostable SIP server next to your deployment, and LiveKit's documentation is where that is described.
 
 ## Install
 
@@ -140,7 +135,7 @@ Every tool takes an optional `version`. Documentation is published per minor rel
     codex plugin add openvidu@openvidu
     ```
 
-    Or find it with `/plugins` inside a session. The Codex IDE extension doesn't load plugins: there, [configure the server by hand](./manual-setup.md#mcp-servers).
+    Or find it with `/plugins` inside a session. The Codex IDE extension doesn't load plugins: there, [configure the server by hand](./manual-setup.md#mcp-server).
 
     **Updates.** `codex plugin marketplace upgrade openvidu` fetches the latest version and reinstalls the plugin.
 
@@ -160,7 +155,7 @@ Every tool takes an optional `version`. Documentation is published per minor rel
 
     **Updates.** Use the client's own update command, or pull the repository again and reload the client.
 
-Your client isn't here, or you would rather not install a plugin? The same MCP servers and skills can be [configured by hand](./manual-setup.md).
+Your client isn't here, or you would rather not install a plugin? The same MCP server and skill can be [configured by hand](./manual-setup.md).
 
 ## Tell your agent which OpenVidu you run
 
@@ -190,6 +185,7 @@ The same lines work in `CLAUDE.md`, and without the skill installed you can writ
 - "What does the OpenVidu documentation say about deploying with fault tolerance? We're on 3.8.0."
 - "Check the OpenVidu docs before answering: does the Egress service need S3 credentials, and how are they configured?"
 - "Work out which OpenVidu version, edition and product this project uses, and write them into AGENTS.md."
+- "How do I send a data message to a single participant with livekit-client? Check the docs first."
 - "Our LiveKit server reports 1.9.8. Which OpenVidu version is that?"
 
 To check that the documentation server answers, ask your agent to list the OpenVidu documentation versions, or call it yourself. You should get the seven tools above:
@@ -204,7 +200,7 @@ curl -s -X POST https://docs-mcp.openvidu.io/mcp \
 
 ??? question "The plugin installed, but no OpenVidu tools appear"
 
-    Reload or restart the client, and check that the plugin is enabled. In Claude Code, `/plugin` lists it, and its **Errors** tab shows a failed MCP connection. If your client is up to date and still shows no tools, [add the server by hand](./manual-setup.md#mcp-servers).
+    Reload or restart the client, and check that the plugin is enabled. In Claude Code, `/plugin` lists it, and its **Errors** tab shows a failed MCP connection. If your client is up to date and still shows no tools, [add the server by hand](./manual-setup.md#mcp-server).
 
 ??? question "A skill never activates"
 

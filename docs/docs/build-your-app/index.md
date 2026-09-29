@@ -14,7 +14,7 @@ Here's a high-level overview of the steps involved in building an OpenVidu appli
 
 !!! tip "Building with a coding agent?"
 
-    The [OpenVidu Agent Plugin](../coding-agents/agent-plugin.md) gives it the OpenVidu documentation for your deployment's version, edition and product, and LiveKit's SDK reference alongside, with the rules for when each one applies.
+    The [OpenVidu Agent Plugin](../coding-agents/agent-plugin.md) gives it the OpenVidu documentation for your deployment's version, edition and product, and tells it when LiveKit's own SDK documentation is the better source.
 
 ## 1. Launch an OpenVidu deployment
 
