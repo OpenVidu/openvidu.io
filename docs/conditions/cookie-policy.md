@@ -14,6 +14,22 @@ TIKAL TECHNOLOGIES SL web page uses cookies for the following purposes
 * **Functional cookies**: they are used to improve the visitor's navigation through the website, making it more user-friendly. It is important to understand that cookies do not contain any kind of specific personal information, and most of them are deleted from the hard disk at the end of the browser session.
 * **Analytical Cookies**: TIKAL TECHNOLOGIES SL website uses cookies from Google Analytics, to analyze how visitors use the page. This way, TIKAL TECHNOLOGIES SL can offer improvements in the usability of the webpage. Google Analytics only collects and processes anonymous data through the TIKAL TECHNOLOGIES SL website. There is further information about the management of Google Analytics' web analysis services at www.google.com/analytics.
 
+## Which cookies and similar technologies does this website use?
+
+Nothing optional is used until you choose it in the cookie consent banner. You can change your choice at any time with "Change cookie settings" at the bottom of every page.
+
+| Name | Provider | Purpose | Duration | When |
+| --- | --- | --- | --- | --- |
+| `_ga` | Google Analytics | Used to distinguish users | 2 years | Only if you accept analytics |
+| `_ga_<container-id>` | Google Analytics | Used to persist session state | 2 years | Only if you accept analytics |
+| `__consent` (browser local storage, not a cookie) | openvidu.io | Remembers your cookie consent choice | Until you clear your browser data | Always, once you make a choice |
+
+The site also keeps display preferences, such as the color scheme you pick, in your browser's local storage; they are not sent anywhere.
+
+The durations of the Google Analytics cookies are Google's defaults, as described in [Google's documentation](https://support.google.com/analytics/answer/11397207){:target="_blank"}.
+
+**GitHub repository statistics**: if you accept the GitHub option, your browser requests the star and fork counts of the OpenVidu repository from GitHub (`api.github.com`) to show them in the page header. This website does not set any cookie for it, but GitHub receives the request, including your IP address. See the [GitHub General Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement){:target="_blank"}.
+
 ## How are users able to change the cookies configuration in their browsers?
 
 Any browser allows you to make adjustments on the actions to perform whenever a website asks you to store a cookie. You can:

@@ -584,19 +584,23 @@ extra:
       link: https://openvidu.medium.com/
     - icon: simple/youtube
       link: https://www.youtube.com/@openvidu
+  # Rendered by overrides/partials/consent.html: options start unticked (pre-ticked boxes are
+  # not valid consent under the GDPR), with "Accept all", "Reject all" and "Save choices".
+  # `checked` and `actions` are ignored by that override.
   consent:
     title: Cookie consent
     description: >
-      This website uses cookies to ensure you get the best experience on our website.
+      With your permission, we use <strong>Google Analytics</strong> (by Google) to count
+      visits and see which pages are useful, and we load the <strong>GitHub</strong>
+      repository's star and fork counts from GitHub, which receives your IP address.
+      Both are optional and off until you choose. You can change your choice at any time
+      with "Change cookie settings" at the bottom of every page.
       <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
     cookies:
       analytics:
-        name: Google Analytics
-        checked: true
-    actions:
-      - accept
-      - reject
-      - manage
+        name: "Analytics: Google Analytics measures visits to improve the site"
+      github:
+        name: "GitHub: show the repository's star and fork counts"
 
 extra_css:
   - stylesheets/colors.css
