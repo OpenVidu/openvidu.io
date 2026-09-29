@@ -361,7 +361,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.8.
 
 ##### GPU acceleration with Nemotron
 
-Sherpa provider supports GPU acceleration for faster, more efficient transcriptions.
+Sherpa provider supports GPU acceleration for faster, more efficient transcriptions using Nemotron models.
 
 **Prerequisites**
 
@@ -435,19 +435,20 @@ How many participants one Speech Processing agent can transcribe at the same tim
 | Sherpa Nemotron 3.5 int8 (`sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-int8-2026-06-11`) | `agent-speech-processing-sherpa` | 40 locales in one model, automatic language detection | Best (WER 0.00) |  ~6 | ~1.3 vCPU |
 | Sherpa Nemotron 3.5 float32 (`sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-2026-06-11`) | `agent-speech-processing-sherpa-cuda12` + NVIDIA GPU | 40 locales in one model, automatic language detection | Best (WER 0.00) | ~15 with one NVIDIA T4 | ~0.25 vCPU, plus GPU time |
 
-For smaller models without multilingual support you can configure property `job_executor` in [`agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#configuration-reference) depending on your hardware and your needs:
-
-- `job_executor: thread` (default value): transcribe all Rooms under the same process using threads. That saves memory, but can hit a limit of about 20 concurrent audio tracks per agent container.
-- `job_executor: process`: transcribe each Room in its own process. Each process has to load the transcription model in memory, so memory consumption can grow fast. But this allows the agent container to scale with the CPUs of the server.
-
-Configuring `job_executor: process` only makes sense in smaller, mono-lingual models (`vosk-model-small-*`, `sherpa-onnx-streaming-zipformer-*`) because loading them into memory once per Room won't starve the node's memory that fast. Also, they are the only ones light enough to hit the upper 20-track limit per process.
-
 !!! info "TLDR;"
 
     - Use **Vosk** for CPU transcription at a low cost if you are on OpenVidu Community, or if you need one of its languages that Kroko does not cover (Chinese, Hindi, Italian, Japanese, Dutch, Portuguese, Russian). Expect lower accuracy and no punctuation.
     - Use **Sherpa with small Kroko models** for the best quality per CPU core in English, Spanish, German or French: about 0.2 vCPU per track, up to 27 tracks per 8 vCPUs, with punctuation and casing. It is the default choice for CPU-only nodes.
     - Use **Sherpa with Nemotron and GPU acceleration** in nodes with NVIDIA graphics if you need the highest accuracy, or 40 languages with automatic language detection, at scale.
-    - Choose between [`thread`,`process`] in `job_executor` in [`agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#configuration-reference) when using small, light models to balance memory usage vs CPU utilization.
+
+##### Increasing capacity with smaller models
+
+For smaller models without multilingual support you can configure property `job_executor` in [`agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#configuration-reference) depending on your hardware and your needs:
+
+- `job_executor: thread` (default value): transcribe all Rooms under the same process using threads. That saves memory, but can hit a limit of about 20 concurrent audio tracks per agent container.
+- `job_executor: process`: transcribe each Room in its own process. Each process has to load the transcription model in memory, so memory consumption can grow fast. But this allows the agent container to scale with the CPUs of the server.
+
+Configuring **`job_executor: process`** only makes sense in smaller, mono-lingual models (`vosk-model-small-*`, `sherpa-onnx-streaming-zipformer-{en,es,de,fr}-*`) because loading them into memory once per Room won't starve the node's memory that fast. Also, they are the only ones light enough to hit the upper 20-track limit per process.
 
 ## Tutorial
 
