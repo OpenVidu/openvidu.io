@@ -12,6 +12,10 @@ Here's a high-level overview of the steps involved in building an OpenVidu appli
 3. **Build the UI of your client application**
 4. **Deploy OpenVidu and your application**
 
+!!! tip "Building with a coding agent?"
+
+    The [OpenVidu Agent Plugin](../coding-agents/agent-plugin.md) gives it the OpenVidu documentation for your deployment's version, edition and product, and LiveKit's SDK reference alongside, with the rules for when each one applies.
+
 ## 1. Launch an OpenVidu deployment
 
 The quickest way is to use [OpenVidu local deployment](../self-hosting/local.md).
