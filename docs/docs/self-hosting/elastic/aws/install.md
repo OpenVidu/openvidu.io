@@ -63,7 +63,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
-    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
+    For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
 
 --8<-- "self-hosting/aws/meet.md"
 

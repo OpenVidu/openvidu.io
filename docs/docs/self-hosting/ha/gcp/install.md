@@ -127,7 +127,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
 | GCSAppDataBucketName | (none) | Name of the GCS bucket to store application data and recordings. If empty, a bucket will be created |
 | GCSClusterDataBucketName | (none) | Name of the GCS bucket to store cluster data. If empty, a bucket will be created |
-| rtcEngine | "pion" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
+| rtcEngine | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
 For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.8.0/openvidu-deployment/pro/ha/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   

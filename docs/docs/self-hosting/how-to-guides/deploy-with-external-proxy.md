@@ -58,7 +58,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
         | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
         | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
-        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
+        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
 
         **Outbound Rules**
 
@@ -113,7 +113,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
             --enabled-modules='observability,openviduMeet,v2compatibility' \
-            --rtc-engine='pion' \
+            --rtc-engine='mediasoup' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -138,7 +138,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     - Replace `openvidu.example.io` with your FQDN.
     - Replace `turn.example.io` with your TURN server FQDN.
     - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
-    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
     **4. Configure the external proxy**
 
@@ -209,7 +209,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Pion. |
         | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
         | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
-        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with Mediasoup. |
+        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
         | TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
         | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
@@ -243,7 +243,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='pion' \
+            --rtc-engine='mediasoup' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -270,7 +270,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         - Replace `openvidu.example.io` with your FQDN.
         - Replace `turn.example.io` with your TURN server FQDN.
         - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
     === "Install Media Nodes"
 

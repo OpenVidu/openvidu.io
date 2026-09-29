@@ -76,7 +76,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
         | `maxNumberOfMediaNodes` | `5`{ .nowrap } | Maximum number of media nodes. The autoscaler never scales above this value. |
         | `scaleTargetCPU` | `50`{ .nowrap } | Target CPU percentage to scale up or down. |
         | `fixedNumberOfMediaNodes` | `0`{ .nowrap } | Fixed number of media nodes to create (0 = use autoscaling). |
-        | `rtcEngine` | `"pion"`{ .nowrap } | Media Engine. Available options: `pion`, `mediasoup`. |
+        | `rtcEngine` | `"mediasoup"`{ .nowrap } | Media Engine. Available options: `mediasoup`, `pion`. |
         | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
         | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
         | `ownPublicCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |

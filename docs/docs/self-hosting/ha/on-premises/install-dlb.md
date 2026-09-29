@@ -122,7 +122,7 @@ Ensure all these rules are configured in your firewall, security group, or any k
 | TCP         | 7881           | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Pion. |
 | UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
 | UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over UDP. |
-| TCP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over TCP with Mediasoup. |
+| TCP         | 50000-60000    | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
 | TCP         | 1935           | Master Nodes      | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
 | TCP         | 5349           | Master Nodes     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS. (TURNS)  |
 | TCP         | 7880           | Master Nodes     | LiveKit API. Master Nodes need access to load balance LiveKit API and expose it through HTTPS. |
@@ -164,7 +164,7 @@ A wizard will guide you through the installation process. You will be asked for 
         If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** or **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](../../production-ready/performance.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
     - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
     - _Observability_: Grafana stack, which includes logs and monitoring stats.
@@ -281,7 +281,7 @@ Each installation command for each type of node looks like this:
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='pion' \
+            --rtc-engine='mediasoup' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -304,7 +304,7 @@ Each installation command for each type of node looks like this:
         Notes:
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
     === "Self-signed certificates"
@@ -319,7 +319,7 @@ Each installation command for each type of node looks like this:
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='pion' \
+            --rtc-engine='mediasoup' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -340,7 +340,7 @@ Each installation command for each type of node looks like this:
         --8<-- "self-hosting/common/install-version.md"
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
     === "Custom certificates"
@@ -358,7 +358,7 @@ Each installation command for each type of node looks like this:
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
             --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='pion' \
+            --rtc-engine='mediasoup' \
             --livekit-api-key='xxxxx' \
             --livekit-api-secret='xxxxx' \
             --dashboard-admin-user='xxxxx' \
@@ -382,7 +382,7 @@ Each installation command for each type of node looks like this:
 
         - Note that you just need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
         - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change and Media Nodes should be able to reach all Master Nodes using these IPs.
 
 === "Media Node"
