@@ -35,7 +35,7 @@ This file defines global configuration parameters used by other services, such a
 | **`GRAFANA_ADMIN_USERNAME`** | Admin username for Grafana |
 | **`GRAFANA_ADMIN_PASSWORD`** | Admin password for Grafana |
 | **`OPENVIDU_PRO_LICENSE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Pro license key. Get an OpenVidu Pro License [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. |
-| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `mediasoup` (the default in new deployments) or `pion`. |
+| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `mediasoup` (default) or `pion`. |
 | **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
 </div>
@@ -195,7 +195,7 @@ openvidu:
 5. Time interval to send analytics data to MongoDB.
 6. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
 7. MongoDB URL. This is the connection string to the MongoDB database where the analytics data will be stored.
-8. The `rtc.engine` parameter is set to `mediasoup` by default in new deployments. This is the WebRTC engine used by OpenVidu. Depending on your requirements, you can use:
+8. The `rtc.engine` parameter is set to `mediasoup` by default. This is the WebRTC engine used by OpenVidu. Depending on your requirements, you can use:
     - `mediasoup`
     - `pion`
 9. Global toggle to enable debugging logs from Mediasoup. In most debugging cases, using just an asterisk ("*") here is enough, but this can be fine-tuned for specific log levels. [More info :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/documentation/v3/mediasoup/debugging/){:target="_blank"}.

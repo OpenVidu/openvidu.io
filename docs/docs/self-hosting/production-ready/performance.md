@@ -15,7 +15,7 @@ The key points of how this works are:
 
 - On the surface, OpenVidu is the same as LiveKit, and for the most part features work the same way, such as connection establishment, participant management, and SDK support.
 - Internally however, **mediasoup** is used to replace the original WebRTC engine implementation of LiveKit. _mediasoup_ is built with the most efficient technologies and has outstanding low-level optimizations, which translates in a **2x** improvement with respect to the original LiveKit Open Source performance.
-- **mediasoup** is the default WebRTC engine of new OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } deployments. The original Pion engine of LiveKit is still available: select it with the `OPENVIDU_RTC_ENGINE` parameter (see the [configuration reference](../configuration/reference.md)). OpenVidu Community uses Pion.
+- **mediasoup** is the default WebRTC engine of OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }. The Pion engine of LiveKit Open Source is also available: select it with the `OPENVIDU_RTC_ENGINE` parameter (see the [configuration reference](../configuration/reference.md)). OpenVidu Community uses Pion.
 
 ## About mediasoup integration
 
