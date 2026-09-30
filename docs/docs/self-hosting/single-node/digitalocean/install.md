@@ -54,6 +54,9 @@ OpenVidu and WebRTC require specific inbound rules on the Firewall network secur
 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the Firewall rules.
 
+!!! info
+    Port `9000` is MinIO's port. This installation runs MinIO as the S3 storage service for recordings, so make sure to open it: you will need it to access the MinIO console (for example, to browse your recordings).
+
 1. Click the droplet, then go to _"Networking"_, scroll down and click on _"Edit"_ in **Firewall** section.
 
     ![Edit Firewall Rules](../../../../assets/images/platform/self-hosting/single-node/digitalocean/install-tutorial/edit-firewall.png){ .round-corners loading=lazy }
@@ -98,6 +101,9 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 ## **Terraform**
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on DigitalOcean, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
+
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in DigitalOcean Spaces instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
 
 ### Prerequisites
 * You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target="_blank"}.
@@ -151,7 +157,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         |---|---|---|
         | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
         | `instanceType` | `"s-2vcpu-4gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your OpenVidu instance. |
-        | `rtcEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag } | `"pion"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
+        | `rtcEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag } | `"mediasoup"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
         | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
         | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
         | `ownPublicCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |

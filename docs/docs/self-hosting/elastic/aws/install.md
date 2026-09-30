@@ -63,7 +63,7 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
-    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
+    For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
 
 --8<-- "self-hosting/aws/meet.md"
 
@@ -109,7 +109,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
 ## Deploying the stack
 
-When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.
+When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_. The stack will take about 6 to 8 minutes to create all resources.
 
 When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation:
 
@@ -148,4 +148,4 @@ To use your OpenVidu deployment, check the values of the JSON secret. All access
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Elastic deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Elastic deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status (about 6 to 8 minutes), your OpenVidu Elastic deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Elastic deployment.

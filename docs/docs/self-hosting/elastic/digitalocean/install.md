@@ -19,6 +19,9 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 - DigitalOcean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings.
 - Media Node scalability is managed via an **automated process (DigitalOcean Functions)** that scales the number of Media Nodes based on system load, although you can use a fixed number of media nodes.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in DigitalOcean Spaces instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 ## Prerequisites
 
 * You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target="_blank"}.
@@ -34,7 +37,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load.
+    - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load. The initial Media Node(s) are provisioned right after the Master Node is ready (a bootstrap invocation avoids waiting for the first scheduled tick). A full deployment is typically ready in **5 to 8 minutes**.
 
 --8<-- "self-hosting/digitalocean/custom-scale-in.md"
 
@@ -68,12 +71,12 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
         | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
         | `masterNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Node. |
         | `mediaNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Media Nodes. |
-        | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Number of initial media nodes to deploy. |
-        | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of media nodes to deploy (for reference, manual scaling required). |
-        | `maxNumberOfMediaNodes` | `5`{ .nowrap } | Maximum number of media nodes to deploy (for reference, manual scaling required). |
+        | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Number of Media Nodes to create at initial deployment. On its first run the autoscaler brings the cluster straight to `max(minNumberOfMediaNodes, initialNumberOfMediaNodes)` Media Nodes; afterwards the number stays between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` based on CPU load. Ignored when `fixedNumberOfMediaNodes` > 0. |
+        | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of media nodes. The autoscaler never scales below this value. |
+        | `maxNumberOfMediaNodes` | `5`{ .nowrap } | Maximum number of media nodes. The autoscaler never scales above this value. |
         | `scaleTargetCPU` | `50`{ .nowrap } | Target CPU percentage to scale up or down. |
         | `fixedNumberOfMediaNodes` | `0`{ .nowrap } | Fixed number of media nodes to create (0 = use autoscaling). |
-        | `rtcEngine` | `"pion"`{ .nowrap } | Media Engine. Available options: `pion`, `mediasoup`. |
+        | `rtcEngine` | `"mediasoup"`{ .nowrap } | Media Engine. Available options: `mediasoup`, `pion`. |
         | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
         | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
         | `ownPublicCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
@@ -120,7 +123,7 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
 ### Access OpenVidu
 
-To verify that your OpenVidu deployment works correctly wait for the `secrets.env` to appear in the bucket that you've configured and open it to view the credentials of OpenVidu.
+Wait for the `secrets.env` file to appear in the bucket that you've configured and open it to view the credentials of OpenVidu. This file is uploaded as soon as the Master Node has generated the secrets, before the installation finishes, so the credentials become available a while before the deployment is actually reachable: **OPENVIDU_URL** responding is the signal that everything is up and running.
 
 === "View OpenVidu credentials in the Web"
     Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.

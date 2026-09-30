@@ -116,14 +116,14 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | ownPrivateCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
 | initialMeetAdminPassword | (none) | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
 | initialMeetApiKey | (none) | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
-| masterNodeInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Master Node. |
-| mediaNodeInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
+| masterNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Master Node. |
+| mediaNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
 | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
 | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
 | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
 | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
 | bucketName | (none) | Name of the GCS bucket to store data and recordings. If empty, a bucket will be created. |
-| rtcEngine | "pion" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
+| rtcEngine | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
 For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.8.0/openvidu-deployment/pro/elastic/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
@@ -135,7 +135,7 @@ For more details, you can check the [variables.tf :fontawesome-solid-external-li
 
 ## Deploying the stack
 
-When you are satisfied with your input values, click _"Continue"_ and then _"Create deployment"_. The deployment will be validated and all resources will be created. Wait around 7 to 12 minutes for the nodes to install OpenVidu.
+When you are satisfied with your input values, click _"Continue"_ and then _"Create deployment"_. The deployment will be validated and all resources will be created. Wait around 4 to 7 minutes for the nodes to install OpenVidu.
 
 !!! warning
 
@@ -187,4 +187,4 @@ Your authentication credentials and the URL to point your applications to are:
 
 ## Configuration and administration
 
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait about 7 to 12 minutes for the instances to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait about 4 to 7 minutes for the instances to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.

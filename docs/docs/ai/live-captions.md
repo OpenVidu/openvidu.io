@@ -252,7 +252,7 @@ Sherpa offers multiple advantages compared to Vosk:
 
 - It offers a wider, more modern, more maintained selection of pre-trained language models. You can fine-tune the sherpa agent with the exact model that best fit your use case.
 - It offers superior performance, allowing for more concurrent transcriptions with the same hardware resources.
-- It offers [GPU acceleration support](#gpu-acceleration-for-sherpa-provider). For nodes with NVIDIA GPUs, it will further improve performance and reduce latency.
+- It offers [GPU acceleration support](#gpu-acceleration-with-nemotron). On nodes with an NVIDIA GPU, the Nemotron 3.5 model transcribes 40 languages with the highest accuracy at a fraction of the CPU cost (see the [capacity estimate](#capacity-estimate-of-local-provider-models)).
 
 ##### Enabling Sherpa provider
 
@@ -278,11 +278,15 @@ To enable Live Captions service using Sherpa:
         # - sherpa-onnx-streaming-zipformer-de-kroko-2025-08-06 (German)
         # - sherpa-onnx-streaming-zipformer-fr-kroko-2025-08-06 (French)
         # - sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10 (Multilingual: Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese, Chinese)
+        # - sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-int8-2026-06-11 (Multilingual: NVIDIA Nemotron 3.5, 40 locales in one model, int8).
+        #   Only in the CPU image "docker.io/openvidu/agent-speech-processing-sherpa".
+        # - sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-2026-06-11 (The same Nemotron 3.5 model in float32).
+        #   Only in the GPU image "docker.io/openvidu/agent-speech-processing-sherpa-cuda12": int8 graphs cannot run on the CUDA provider.
         model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06
         # Language code for reference. Auto-detected from model name if not set.
         language:
         # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
-        # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+        # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-with-nemotron
         provider:
         # Audio sample rate in Hz. Default is 16000.
         sample_rate:
@@ -311,7 +315,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.8.
 
     !!! info
 
-        To build a custom Sherpa image [with GPU acceleration](#gpu-acceleration-for-sherpa-provider), just change the FROM line to:
+        To build a custom Sherpa image [with GPU acceleration](#gpu-acceleration-with-nemotron), just change the FROM line to:
         
           - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.8.0`
 
@@ -355,9 +359,9 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.8.
         model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 # Or any other model you added in your custom image
     ```
 
-##### GPU acceleration for Sherpa provider
+##### GPU acceleration with Nemotron
 
-Sherpa provider supports GPU acceleration for faster, more efficient transcriptions.
+Sherpa provider supports GPU acceleration for faster, more efficient transcriptions using Nemotron models.
 
 **Prerequisites**
 
@@ -384,14 +388,15 @@ docker_options: #(3)!
 live_captions:
   provider: sherpa
   sherpa:
-    model: sherpa-onnx-streaming-zipformer-en-kroko-2025-08-06 # Or any other model you want to use
-    provider: cuda  #(4)!
+    model: sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-2026-06-11 #(4)!
+    provider: cuda  #(5)!
 ```
 
 1. **agent-speech-processing-sherpa-cuda12** image is compatible with NVIDIA GPUs whose driver supports CUDA 12.0 or higher (driver >= 525).
 2. This property is necessary for the agent container to launch.
 3. These Docker options are necessary to enable GPU access for the agent container.
-4. This property is necessary to tell the agent to use the GPU-enabled runtime of Sherpa ONNX instead of CPU.
+4. The float32 Nemotron 3.5 model, the pre-installed model that runs on the GPU. Int8-only models such as the Kroko ones always run on the CPU, even if you set `provider: cuda`.
+5. This property is necessary to tell the agent to use the GPU-enabled runtime of Sherpa ONNX instead of CPU.
 
 After setting those YAML properties restart your OpenVidu deployment:
 
@@ -416,6 +421,34 @@ INFO:openvidu_unified.sherpa:sherpa-onnx CUDA generation matches container: cuda
 INFO:openvidu_unified.sherpa:All GPU readiness checks passed ✓
 ...
 ```
+
+#### Capacity estimate of local provider models
+
+How many participants one Speech Processing agent can transcribe at the same time depends on the transcription model. The table is a rough estimate for every model pre-installed in the agent images, measured on 8-vCPU hosts (AWS `m6i.2xlarge`, and `g4dn` with one NVIDIA T4 for the GPU) with participants **speaking continuously** (which is the worst case: real meetings where people take turns leave more headroom).
+
+| Model | Image | Languages | Quality | Transcribed tracks in 8 vCPUs | CPUs per transcribed audio track | 
+| --- | --- | --- | --- | --- | --- |
+| Vosk small models (`vosk-model-small-*`) | `agent-speech-processing-vosk` | One per model (cn, de, en-in, es, fr, hi, it, ja, nl, pt, ru) | Below the large models. No punctuation | ~40 | ~0.15 vCPU |
+| Vosk `vosk-model-en-us-0.22-lgraph` | `agent-speech-processing-vosk` | English | Fair (WER 0.07). No punctuation | ~15 | ~0.35 vCPU |
+| Sherpa Kroko (`sherpa-onnx-streaming-zipformer-{en,es,de,fr}-kroko-2025-08-06`) | `agent-speech-processing-sherpa` | One per model (en, es, de, fr) | Good (WER 0.05). Punctuation and casing | ~25 | ~0.2 vCPU |
+| Sherpa multilingual zipformer (`sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10`) | `agent-speech-processing-sherpa` | 8 (ar, en, id, ja, ru, th, vi, zh) | Fair (WER 0.07). Uppercase, no punctuation | ~15 | ~0.45 vCPU |
+| Sherpa Nemotron 3.5 int8 (`sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-int8-2026-06-11`) | `agent-speech-processing-sherpa` | 40 locales in one model, automatic language detection | Best (WER 0.00) |  ~6 | ~1.3 vCPU |
+| Sherpa Nemotron 3.5 float32 (`sherpa-onnx-nemotron-3.5-asr-streaming-0.6b-320ms-2026-06-11`) | `agent-speech-processing-sherpa-cuda12` + NVIDIA GPU | 40 locales in one model, automatic language detection | Best (WER 0.00) | ~15 with one NVIDIA T4 | ~0.25 vCPU, plus GPU time |
+
+!!! info "TLDR;"
+
+    - Use **Vosk** for CPU transcription at a low cost if you are on OpenVidu Community, or if you need one of its languages that Kroko does not cover (Chinese, Hindi, Italian, Japanese, Dutch, Portuguese, Russian). Expect lower accuracy and no punctuation.
+    - Use **Sherpa with small Kroko models** for the best quality per CPU core in English, Spanish, German or French: about 0.2 vCPU per track, up to 27 tracks per 8 vCPUs, with punctuation and casing. It is the default choice for CPU-only nodes.
+    - Use **Sherpa with Nemotron and GPU acceleration** in nodes with NVIDIA graphics if you need the highest accuracy, or 40 languages with automatic language detection, at scale.
+
+##### Increasing capacity with smaller models
+
+For smaller models without multilingual support you can configure property `job_executor` in [`agent-speech-processing.yaml`](./openvidu-agents/speech-processing-agent.md#configuration-reference) depending on your hardware and your needs:
+
+- `job_executor: thread` (default value): transcribe all Rooms under the same process using threads. That saves memory, but can hit a limit of about 20 concurrent audio tracks per agent container.
+- `job_executor: process`: transcribe each Room in its own process. Each process has to load the transcription model in memory, so memory consumption can grow fast. But this allows the agent container to scale with the CPUs of the server.
+
+Configuring **`job_executor: process`** only makes sense in smaller, mono-lingual models (`vosk-model-small-*`, `sherpa-onnx-streaming-zipformer-{en,es,de,fr}-*`) because loading them into memory once per Room won't starve the node's memory that fast. Also, they are the only ones light enough to hit the upper 20-track limit per process.
 
 ## Tutorial
 
@@ -653,18 +686,14 @@ live_captions:
     api_key:
     # ISO 639-1 language code. All languages are global and can understand different dialects/accents. To see the list of all supported languages, see https://docs.speechmatics.com/speech-to-text/languages#transcription-languages
     language:
-    # Operating point to use for the transcription per required accuracy & complexity. To learn more, see https://docs.speechmatics.com/speech-to-text/languages#operating-points
-    operating_point:
+    # Transcription model, e.g. "linden-1". See https://docs.livekit.io/agents/models/stt/speechmatics/
+    model:
     # Partial transcripts allow you to receive preliminary transcriptions and update as more context is available until the higher-accuracy final transcript is returned. Partials are returned faster but without any post-processing such as formatting. See https://docs.speechmatics.com/speech-to-text/realtime/output#partial-transcripts
     enable_partials:
     # Enable speaker diarization. When enabled, the STT engine will determine and attribute words to unique speakers. The speaker_sensitivity parameter can be used to adjust the sensitivity of diarization
     enable_diarization:
     # RFC-5646 language code to make spelling rules more consistent in the transcription output. See https://docs.speechmatics.com/features/word-tagging#output-locale
     output_locale:
-    # The delay in seconds between the end of a spoken word and returning the final transcript results. See https://docs.speechmatics.com/features/realtime-latency#configuration-example
-    max_delay:
-    # See https://docs.speechmatics.com/features/realtime-latency#configuration-example
-    max_delay_mode:
     # Configuration for speaker diarization. See https://docs.speechmatics.com/features/diarization
     speaker_diarization_config:
       # See https://docs.speechmatics.com/features/diarization#max-speakers
@@ -673,11 +702,9 @@ live_captions:
       speaker_sensitivity:
       # See https://docs.speechmatics.com/features/diarization#prefer-current-speaker
       prefer_current_speaker:
-    # Permitted punctuation marks for advanced punctuation. See https://docs.speechmatics.com/features/punctuation-settings
-    # Commented is an example of punctuation settings
-    punctuation_overrides:
-      # permitted_marks: [ ".", "," ]
-      # sensitivity: 0.4
+    # Formatter for speaker identification in the transcript, with the {speaker_id} and {text}
+    # placeholders, e.g. "{speaker_id}: {text}". Unset leaves the transcript unformatted.
+    speaker_format:
     # See https://docs.speechmatics.com/features/custom-dictionary
     # Commented below is an example of a custom dictionary
     additional_vocab:
@@ -732,6 +759,8 @@ live_captions:
   soniox:
     # API key for Soniox. See https://console.soniox.com/
     api_key:
+    # The Soniox STT model to use. Defaults to "stt-rt-v5". See https://soniox.com/docs/stt/models
+    model:
     # Set language hints when possible to significantly improve accuracy. See: https://soniox.com/docs/stt/concepts/language-hints
     language_hints:
       # - "en"
@@ -764,7 +793,7 @@ live_captions:
   spitch:
     # API key for Spitch. See https://docs.spitch.app/keys
     api_key:
-    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/
+    # Language short code for the generated speech. For supported values, see https://docs.spitch.app/features/transcription#parameters
     language:
 
   elevenlabs:
@@ -840,7 +869,7 @@ live_captions:
     # Language code for reference. Auto-detected from model name if not set.
     language:
     # Runtime provider for sherpa-onnx. Supported values: "cpu" or "cuda". Default is "cpu".
-    # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-for-sherpa-provider
+    # Learn about GPU acceleration at https://openvidu.io/docs/ai/live-captions/#gpu-acceleration-with-nemotron
     provider:
     # Audio sample rate in Hz. Default is 16000.
     sample_rate:

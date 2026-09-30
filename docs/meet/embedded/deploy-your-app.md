@@ -177,12 +177,12 @@ The relevant parameters are:
 | Parameter | Description |
 | --------- | ----------- |
 | **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. Used by applications developed with OpenVidu Meet. |
-| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the webhook registered from `MEET_INITIAL_WEBHOOK_URL` starts active. It also requires `MEET_INITIAL_API_KEY`, which signs the deliveries; otherwise the webhook starts paused. |
 | **`MEET_INITIAL_WEBHOOK_URL`** | The URL where the OpenVidu Meet webhooks will be sent. |
 
 </div>
 
 !!! warning
-    The `MEET_INITIAL_*` parameters are only used the first time OpenVidu Meet runs. After that first run, use the OpenVidu Meet app to modify their values.
+    Each `MEET_INITIAL_*` parameter is applied on start only while the deployment does not have that item yet.  Changing the parameter has no effect on it and its value is managed from the OpenVidu Meet app or the REST API.
 
 See the [Configuration Reference](../../docs/self-hosting/configuration/reference.md#meetenv) for all available `meet.env` parameters and the [Changing Configuration](../../docs/self-hosting/configuration/changing-config.md) section for more details on how to modify configuration files.

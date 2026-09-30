@@ -33,6 +33,9 @@ This page explains how to create a Compute instance in Oracle Cloud Infrastructu
 
 This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 --8<-- "self-hosting/oracle/single-node/terraform-architecture.md"
 
 ### Deployment details
@@ -79,7 +82,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
         | `region` | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
         | `availability_domain` | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
         | `instanceType` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu instance. |
-        | `RTCEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag } | `"pion"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
+        | `RTCEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag } | `"mediasoup"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
         | `instanceOCPUs` | `4`{ .nowrap } | Number of OCPUs for the instance (applies to Flex shapes only). |
         | `instanceMemory` | `4`{ .nowrap } | Memory in GB for the instance (applies to Flex shapes only). |
         | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |

@@ -645,6 +645,10 @@ div[class*="grid-"]:has(> img) {
   background-color: #9c27b0;
 }
 
+.openvidu-deprecated-tag {
+  background-color: #e65100;
+}
+
 /* The tag inside a nav label (mkdocs.yml `nav:` entries) */
 .openvidu-tag-nav {
   pointer-events: none;

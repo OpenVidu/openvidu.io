@@ -16,6 +16,9 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 - **OCI Vault** is used to securely store deployment secrets.
 - Media Node scale-out is handled automatically by the **OCI Instance Pool autoscaling configuration** based on system load, and scale-in is delegated to an **OCI Function** that performs a graceful drain before terminating the instance. You can also use a fixed number of Media Nodes.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 ## Prerequisites
 
 * An Oracle Cloud Infrastructure account with permissions to create Compute instances, VCNs, Object Storage buckets, Vaults, Functions and IAM resources.
@@ -98,7 +101,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
         | `initialMeetAdminPassword` | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
         | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
         | `bucketName` | `(none)`{ .nowrap } | Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
-        | `rtcEngine` | `"pion"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`pion` - Default media engine.</li><li>`mediasoup` - Alternative media engine with different performance characteristics.</li></ul> |
+        | `rtcEngine` | `"mediasoup"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`mediasoup` - Default media engine, with a boost in performance.</li><li>`pion` - The engine of LiveKit Open Source.</li></ul> |
         | `vault_ocid` | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
         | `key_ocid` | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
         | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
@@ -112,6 +115,9 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
     ```
 
 4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured bucket.
+
+    !!! note
+        A full Elastic deployment (Master Node + the initial Media Nodes joining the cluster) typically completes in about **6 to 9 minutes**.
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the Master Node — if exposed, unauthorized users could gain access.
@@ -165,6 +171,13 @@ Your authentication credentials and the URL to point your applications to are:
 --8<-- "self-hosting/oracle/troubleshooting.md"
 
 3. If everything appears to be in order, check the [status](../on-premises/admin.md#checking-the-status-of-services) and [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services on the Master Node and Media Nodes.
+
+!!! info "Startup errors to look for in `cloud-init-output.log`"
+
+    Every wait performed while a node boots is bounded, so a stuck deployment ends with a terminal error message instead of hanging indefinitely. Two of them are worth grepping for:
+
+    - `Timeout waiting for ALL_SECRETS_GENERATED=<token> after 30 min` on a Media Node — it never received the secrets published by the Master Node for this deployment. Check the Master Node's own log first.
+    - `[check_app_ready] OpenVidu health endpoint not ready after 20 min` on the Master Node — the node booted and installed OpenVidu, but the service never became healthy.
 
 ### Configuration and administration
 

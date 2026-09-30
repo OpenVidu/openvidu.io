@@ -55,11 +55,11 @@ Ensure all these rules are configured in your firewall, security group, or any n
 | TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
 | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
 | TCP         | 1935           | 0.0.0.0/0, ::/0 | Needed if you want to ingest RTMP streams using Ingress service. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over TCP with the Pion engine. |
+| TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with the Pion engine. |
 | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
 | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
 | UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
-| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | **PRO**{ .openvidu-tag .openvidu-pro-tag } Needed for WebRTC media traffic over TCP when using the Mediasoup engine. |
+| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | **PRO**{ .openvidu-tag .openvidu-pro-tag } (Optional) Needed for WebRTC media traffic over TCP with the Mediasoup engine. Without it, clients that cannot use UDP relay their media through TURN. |
 
 ??? warning "Make sure the proper ports are opened in the internal Linux firewall!"
 
@@ -120,7 +120,7 @@ Ensure all these rules are configured in your firewall, security group, or any n
 
     ```
 
-    PRO only, if you plan to use the Mediasoup engine:
+    PRO only, optional: to allow WebRTC media over TCP with the Mediasoup engine:
     ```
     firewall-cmd --add-port=50000-60000/tcp
     firewall-cmd --permanent --add-port=50000-60000/tcp
@@ -207,7 +207,7 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
         - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
         - _Observability_: Grafana stack, which includes logs and monitoring stats.
         - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
-    - **Select which RTC engine to use**: Select the WebRTC engine you want to use. You can choose between **Pion (the default engine used by LiveKit)** and **Mediasoup (with a boost in performance)**. Learn more about the differences [here](../../production-ready/performance.md).
+    - **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](../../production-ready/performance.md).
 
     The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
 
@@ -425,7 +425,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --no-tty --install \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='pion' \
+                --rtc-engine='mediasoup' \
                 --livekit-api-key='xxxxx' \
                 --livekit-api-secret='xxxxx' \
                 --dashboard-admin-user='xxxxx' \
@@ -446,7 +446,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
         === "Self-signed certificates"
 
@@ -457,7 +457,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --no-tty --install \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='pion' \
+                --rtc-engine='mediasoup' \
                 --livekit-api-key='xxxxx' \
                 --livekit-api-secret='xxxxx' \
                 --dashboard-admin-user='xxxxx' \
@@ -478,7 +478,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
     === "With Domain Name"
 
@@ -492,7 +492,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --domain-name='openvidu.example.io' \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='pion' \
+                --rtc-engine='mediasoup' \
                 --livekit-api-key='xxxxx' \
                 --livekit-api-secret='xxxxx' \
                 --dashboard-admin-user='xxxxx' \
@@ -513,7 +513,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
         === "Self-signed certificates"
 
@@ -525,7 +525,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --domain-name='openvidu.example.io' \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='pion' \
+                --rtc-engine='mediasoup' \
                 --livekit-api-key='xxxxx' \
                 --livekit-api-secret='xxxxx' \
                 --dashboard-admin-user='xxxxx' \
@@ -546,7 +546,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
         === "Custom certificates"
 
@@ -561,7 +561,7 @@ This is going to generate a command like this, but it may vary depending on the 
                 --domain-name='openvidu.example.io' \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='pion' \
+                --rtc-engine='mediasoup' \
                 --livekit-api-key='xxxxx' \
                 --livekit-api-secret='xxxxx' \
                 --dashboard-admin-user='xxxxx' \
@@ -584,7 +584,7 @@ This is going to generate a command like this, but it may vary depending on the 
             --8<-- "self-hosting/common/install-version.md"
 
             - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `pion` or `mediasoup`.
+            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
             - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
 
 You can run that command in a CI/CD pipeline or in a script to automate the installation process.

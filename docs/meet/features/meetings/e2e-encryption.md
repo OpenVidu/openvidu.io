@@ -8,7 +8,7 @@ keywords: end-to-end encryption, E2EE, encrypted video meetings, secure video co
 
 OpenVidu Meet supports **end-to-end encryption (E2EE)**: audio, video, chat messages and participant names are encrypted on each device and can only be decrypted by the other participants. The server only relays encrypted data; it never has access to the meeting content.
 
-E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), from the **Room Features** step of the configuration wizard.
+E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/management.md#create-rooms) or [editing a room](../rooms/management.md#edit-rooms), from the **Features** section of the **Meeting** step of the configuration wizard. The same step also sets the room's [participant and duration limits](configuration.md), and toggles Live Captions, Chat and [Virtual Background](virtual-background.md).
 
 ![Room creation wizard with the end-to-end encryption option enabled](../../../assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-dark.webp#only-dark){ .round-corners loading=lazy }
 ![Room creation wizard with the end-to-end encryption option enabled](../../../assets/images/meet/meetings/e2e-encryption/room-wizard-e2ee-light.webp#only-light){ .round-corners loading=lazy }
@@ -55,10 +55,10 @@ When E2EE is active, everything participants share is encrypted on their device 
 
 Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device and never sent to the server.
 
-When a member accesses a E2E-encrypted room, the [Lobby view](lifecycle.md#lobby-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
+When a member accesses a E2E-encrypted room, the [Join view](lifecycle.md#join-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 
-![Lobby view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/lobby-e2ee-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
-![Lobby view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/lobby-e2ee-light.webp#only-light){ .control-height .round-corners loading=lazy }
+![Join view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/join-e2ee-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Join view with the end-to-end encrypted badge and passphrase field](../../../assets/images/meet/meetings/e2e-encryption/join-e2ee-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 !!! warning "Share the passphrase through a trusted channel"
 

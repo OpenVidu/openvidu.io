@@ -61,7 +61,7 @@ The biggest practical difference isn't a feature — it's what you have to deplo
 
 | | **OpenVidu** | **Jitsi** |
 | --- | --- | --- |
-| Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), optionally with mediasoup as the media engine**PRO**{ .openvidu-tag .openvidu-pro-tag } and [OpenVidu Meet](meet/index.md) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
+| Components to operate | A [fork of LiveKit](openvidu-vs-livekit.md), with mediasoup as the default media engine**PRO**{ .openvidu-tag .openvidu-pro-tag } and [OpenVidu Meet](meet/index.md) as a web frontend — one integrated stack | Prosody (XMPP signaling), Jicofo (conference focus), Jitsi Videobridge (SFU, Java), and the Jitsi Meet web frontend — four separately-versioned components, a single bundle|
 | License | Apache 2.0**COMMUNITY**{ .openvidu-tag .openvidu-community-tag } / commercial**PRO**{ .openvidu-tag .openvidu-pro-tag } | Apache 2.0 |
 | Recording/streaming | [Egress bundled by default](docs/reference/egress.md), no extra hardware sizing | Jibri, can be deployed as an additional bundle |
 | Horizontal scaling | [Elastic & HA modes](docs/self-hosting/production-ready/scalability.md)**PRO**{ .openvidu-tag .openvidu-pro-tag }, one product to configure & one-click deploy for 5 cloud providers | Octo relays media across an existing pool of Videobridges; actually growing that pool needs a separate `jitsi-autoscaler` service, supporting only Oracle OCI, DigitalOcean or a custom provider you implement |

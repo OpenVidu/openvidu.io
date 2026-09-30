@@ -446,7 +446,7 @@ function accessAsUser() {
 }
 ```
 
-`accessRoom()` is unchanged from the Identified Guests tutorial: it embeds the OpenVidu Meet WebComponent for the given URL and returns to the members view when the meeting is closed.
+`accessRoom()` is unchanged from the Identified Guests tutorial: it embeds the OpenVidu Meet WebComponent for the given URL and returns to the members view when the participant asks to close OpenVidu Meet.
 
 !!! info "User members log in inside the meeting"
 

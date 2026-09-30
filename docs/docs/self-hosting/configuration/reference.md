@@ -35,7 +35,7 @@ This file defines global configuration parameters used by other services, such a
 | **`GRAFANA_ADMIN_USERNAME`** | Admin username for Grafana |
 | **`GRAFANA_ADMIN_PASSWORD`** | Admin password for Grafana |
 | **`OPENVIDU_PRO_LICENSE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Pro license key. Get an OpenVidu Pro License [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. |
-| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `pion` or `mediasoup`. |
+| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `mediasoup` (default) or `pion`. |
 | **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
 </div>
@@ -55,16 +55,16 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created. |
+| **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Registered on start when the service has no API key. |
 | **`MEET_ACCESS_TOKEN_EXPIRATION`** | Expiration time for access tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_REFRESH_TOKEN_EXPIRATION`** | Expiration time for refresh tokens issued by OpenVidu Meet. Default is `1d`. |
 | **`MEET_ROOM_MEMBER_TOKEN_EXPIRATION`** | Expiration time for room member tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_PASSWORD_CHANGE_TOKEN_EXPIRATION`** | Expiration time for password change tokens issued by OpenVidu Meet. Default is `15m`. |
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
-| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the OpenVidu Meet service will send webhooks to the configured webhook endpoint. Only used the first time OpenVidu Meet runs. |
-| **`MEET_INITIAL_WEBHOOK_URL`** | Webhook URL for the OpenVidu Meet service. This is the URL where the webhooks will be sent. Only used the first time OpenVidu Meet runs. |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered. |
+| **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.|
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
@@ -77,7 +77,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
 | **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_AZURE_SUBCONATAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
 | **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. |
 | **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |
@@ -97,7 +97,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 ## **PRO**{ .openvidu-tag .openvidu-pro-tag } `v2compatibility.env`
 
 !!! info
-    
+
     OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -167,7 +167,7 @@ openvidu:
 
 
 !!! info
-    
+
     Before deploying OpenVidu PRO, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} to get your license key.
     There's a 15-day free trial waiting for you!
 
@@ -181,7 +181,7 @@ openvidu:
         expiration: 768h # (6)
         mongo_url: <MONGO_URL> # (7)
     rtc:
-        engine: pion # (8)
+        engine: mediasoup # (8)
     mediasoup:
         debug: "" # (9)
         log_level: error # (10)
@@ -195,9 +195,9 @@ openvidu:
 5. Time interval to send analytics data to MongoDB.
 6. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
 7. MongoDB URL. This is the connection string to the MongoDB database where the analytics data will be stored.
-8. The `rtc.engine` parameter is set to `pion` by default. This is the WebRTC engine used by OpenVidu. Depending on your requirements, you can use:
-    - `pion`
+8. The `rtc.engine` parameter is set to `mediasoup` by default. This is the WebRTC engine used by OpenVidu. Depending on your requirements, you can use:
     - `mediasoup`
+    - `pion`
 9. Global toggle to enable debugging logs from Mediasoup. In most debugging cases, using just an asterisk ("*") here is enough, but this can be fine-tuned for specific log levels. [More info :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/documentation/v3/mediasoup/debugging/){:target="_blank"}.
     - Default is an empty string.
 10. Logging level for logs generated by Mediasoup. [More info :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/documentation/v3/mediasoup/debugging/){:target="_blank"}.
@@ -216,12 +216,12 @@ OpenVidu comes with other services configured to work in the deployment. These a
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
-| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.12.0/config-sample.yaml){:target="_blank"}</li></ul>
-| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/783a287#config){:target="_blank"} |
-| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/2ce1b32#config){:target="_blank"} |
+| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.13.7/config-sample.yaml){:target="_blank"}</li></ul>
+| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/e9330a4#config){:target="_blank"} |
+| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/a9d870c#config){:target="_blank"} |
 | **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json){:target="_blank"} |
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/v12.4/setup-grafana/configure-grafana/){:target="_blank"} |
-| **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.1.x/configure/){:target="_blank"} |
+| **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.2.x/configure/){:target="_blank"} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.7.x/configure/){:target="_blank"} |
-| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.12/configuration/configuration/){:target="_blank"} |
-| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://archive.grafana.com/docs/alloy/v1.17/configure/){:target="_blank"} |
+| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.14/configuration/configuration/){:target="_blank"} |
+| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://archive.grafana.com/docs/alloy/v1.19/configure/){:target="_blank"} |
