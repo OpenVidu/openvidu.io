@@ -103,8 +103,8 @@ Inside a framework it is the same tag with bindings. In Angular, the room your b
     #meet
     [attr.room-url]="current.moderatorUrl"
     participant-name="Support agent"
-    (joined)="onJoined($event)"
-    (closed)="onClosed()"
+    (meetingJoined)="onJoined($event)"
+    (embeddedCloseRequested)="onClosed()"
   ></openvidu-meet>
 }
 ```
@@ -126,7 +126,7 @@ export class App {
   }
 
   protected endMeeting() {
-    this.meet()?.nativeElement.endMeeting();
+    this.meet()?.nativeElement.meetingEnd();
   }
 }
 ```
