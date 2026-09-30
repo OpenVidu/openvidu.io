@@ -43,8 +43,8 @@ The plugin configures one MCP server, `openvidu-docs`, at `https://docs-mcp.open
 
 | Tool | What it does |
 | --- | --- |
-| `search_docs` | Searches the documentation. Handles word variants (*record* finds *recording*) and OpenVidu vocabulary (*auth* finds *authentication*). Up to five searches in one call, with results page by page. |
-| `get_doc_page` | Returns the full content of a page, or of up to ten pages in one call. |
+| `search_docs` | Searches the documentation. Handles word variants (*record* finds *recording*) and OpenVidu vocabulary (*auth* finds *authentication*). Up to five searches in one call, with results page by page. Each result links to the section of the page that matched. |
+| `get_doc_page` | Returns a page, or up to ten pages in one call. A long page can be read one section at a time. |
 | `list_doc_sections` | The table of contents: an overview of the sections and how many pages each holds, then the pages of the one asked for. |
 | `list_versions` | The documentation versions the server carries, and the one it uses by default. |
 | `resolve_openvidu_version_edition_product` | How to find out which deployment a project talks to: version, edition and product. Also maps a LiveKit Server version to OpenVidu versions. |
