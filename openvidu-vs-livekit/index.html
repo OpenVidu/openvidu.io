@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled in.">
+        <meta name="description" content="OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with the mediasoup engine for 2x performance and Egress/Ingress bundled in.">
       
       
       
@@ -166,7 +166,7 @@
 <meta property="og:site_name" content="OpenVidu">
 <meta property="og:type" content="website">
 <meta property="og:title" content="OpenVidu vs LiveKit: A Self-Hosted LiveKit Fork">
-<meta property="og:description" content="OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with an optional mediasoup engine for 2x performance and Egress/Ingress bundled in.">
+<meta property="og:description" content="OpenVidu is a fork of LiveKit — 100% API-compatible, self-hosted only, with the mediasoup engine for 2x performance and Egress/Ingress bundled in.">
 <meta property="og:url" content="https://openvidu.io/openvidu-vs-livekit/">
 <meta property="og:image" content="https://openvidu.io/assets/images/og/openvidu-card.png">
 <meta property="og:image:width" content="1200">
@@ -242,7 +242,7 @@
           "url": "https://openvidu.io/openvidu-vs-livekit/#why-does-openvidu-use-mediasoup-instead-of-livekits-own-engine",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "LiveKit\u0027s own media engine (Pion) is written in Go, which requires a garbage collector and a relatively heavy runtime \u2014 a real cost in a performance-critical media server. OpenVidu supports Pion, but it can replace it with mediasoup, a C++ media engine, while keeping every other part of the LiveKit stack (SDKs, API, token model) unchanged. OpenVidu\u0027s own benchmarks show roughly double the media-track capacity per server as a result."
+            "text": "LiveKit\u0027s own media engine (Pion) is written in Go, which requires a garbage collector and a relatively heavy runtime \u2014 a real cost in a performance-critical media server. OpenVidu PRO uses mediasoup, a C++ media engine, by default (Pion is also available), while keeping every other part of the LiveKit stack (SDKs, API, token model) unchanged. OpenVidu\u0027s own benchmarks show roughly double the media-track capacity per server as a result."
           }
         }
       ]
@@ -1699,9 +1699,9 @@ major cloud providers, which you run in your own cloud account. See the
 <a href="/latest/docs/self-hosting/deployment-types/">deployment types page</a> for details.</p>
 <h3 id="why-does-openvidu-use-mediasoup-instead-of-livekits-own-engine">Why does OpenVidu use mediasoup instead of LiveKit's own engine?<a class="headerlink" href="#why-does-openvidu-use-mediasoup-instead-of-livekits-own-engine" title="Anchor link to this section for reference">#</a></h3>
 <p>LiveKit's own media engine (Pion) is written in Go, which requires a garbage collector and a
-relatively heavy runtime — a real cost in a performance-critical media server. OpenVidu supports
-Pion, but it can replace it with mediasoup, a C++ media engine, while keeping every other part of the
-LiveKit stack (SDKs, API, token model) unchanged.
+relatively heavy runtime — a real cost in a performance-critical media server. OpenVidu PRO uses
+mediasoup, a C++ media engine, by default (Pion is also available), while keeping every other part
+of the LiveKit stack (SDKs, API, token model) unchanged.
 <a href="/latest/docs/self-hosting/production-ready/performance/">OpenVidu's own benchmarks</a> show roughly double
 the media-track capacity per server as a result.</p>
 <div class="centered-section">

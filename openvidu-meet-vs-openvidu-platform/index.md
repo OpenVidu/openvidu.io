@@ -13,8 +13,9 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 |                                                   | OpenVidu Meet                                          | OpenVidu Platform                                          |
 | ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
 | Self-hosted                                       | Yes                                                    | Yes                                                        |
-| Cloud deployment templates                        | Yes                                                    | Yes                                                        |
-| HQ real-time video                                | Yes                                                    | Yes                                                        |
+| Cloud templates for AWS, Azure, GCP, DO, OCI      | Yes                                                    | Yes                                                        |
+| HQ real-time video and crisp audio                | Yes                                                    | Yes                                                        |
+| Recording                                         | Yes                                                    | Yes                                                        |
 | Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
 | Tutorials available                               | Yes                                                    | Yes                                                        |
 | Customer support                                  | Yes                                                    | Yes                                                        |
