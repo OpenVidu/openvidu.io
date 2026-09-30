@@ -65,8 +65,6 @@ The same power is now available inside the meeting. The Participants panel shows
 <a class="glightbox" href="/assets/videos/blog/2026/09/release-390/mute-participants-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/mute-participants-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/blog/2026/09/release-390/mute-participants-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/mute-participants-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
-*Participant video is stock footage.*
-
 !!! note "Existing rooms need the new permission"
     Muting requires the new `participantMute` permission. The `Moderator` role of rooms created from 3.9.0 on has it by default, but rooms and members created before need it granted explicitly. See [Muting participants](https://openvidu.io/3.9/meet/features/meetings/moderation/#muting-participants).
 
@@ -90,8 +88,6 @@ Rooms get a set of new settings that shape every meeting held in them. All of th
 
 <a class="glightbox" href="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
-
-*Participant video is stock footage.*
 
 The details are in [Meeting configuration](https://openvidu.io/3.9/meet/features/meetings/configuration/) and [Recording trigger](https://openvidu.io/3.9/meet/features/recordings/configuration/#recording-trigger).
 
