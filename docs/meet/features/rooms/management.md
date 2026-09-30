@@ -68,7 +68,7 @@ Managers can **close** or **reopen** a room at any time from the **"Rooms"** pag
 The **"Rooms"** page lists every room available to you, with its owner, status, creation date and auto-deletion date. From here you can:
 
 - **Search and filter** rooms by name, status, owner, membership or whether they are open to all OpenVidu Meet users.
-- **Copy the room id**, the identifier the [REST API](#rest-api-reference) and the webhooks refer to the room by.
+- **Copy the room ID**, the identifier the [REST API](#rest-api-reference) and the webhooks refer to the room by.
 - **Access** a room, to join the meeting.
 - Open the [room details page](#room-details).
 - [Edit a room](#edit-rooms) (if no meeting is active) or [change its status](#room-status).

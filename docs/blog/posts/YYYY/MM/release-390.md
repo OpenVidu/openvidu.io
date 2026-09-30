@@ -24,7 +24,7 @@ page_features:
 
 <!-- POSTER: add poster-light.webp and poster-dark.webp to docs/assets/images/blog/YYYY/MM/release-390/, reference them here as a #only-light/#only-dark pair with { .round-corners } (no loading=lazy), and set "cover_image: poster-light.webp" in the frontmatter. -->
 
-OpenVidu 3.9.0 is a comprehensive collection of improvements, bug fixes, and stability enhancements. A renovated OpenVidu Meet with programmatic control over live meetings, and a better OpenVidu Platform with a more predictable behavior in production under network changes, high load and node restarts.
+OpenVidu 3.9.0 is a comprehensive collection of improvements, bug fixes, and stability enhancements. It brings a renovated OpenVidu Meet with programmatic control over live meetings, and a better OpenVidu Platform that behaves more predictably in production under network changes, high load and node restarts.
 
 On the **OpenVidu Meet** side, the new `Meetings REST API` lets your backend read and moderate live meetings, and moderators can mute participants from the meeting itself. Webhooks can now be filtered per event and per room, and each room can set participant and duration limits, automatic recording and the initial state of microphones and cameras. Improved UI and a set of bug fixes complete this release.
 
@@ -191,7 +191,7 @@ Release 3.8.0 brought [mediasoup](https://openvidu.io/3.9/docs/self-hosting/prod
 - **Faster High Availability installations**: roughly 50% faster on AWS, Oracle and GCP, and 20% on Azure. Installers also fail fast with a clear error instead of hanging.
 - **Ingresses survive restarts**: Single Node and Elastic deployments now persist Redis data, so active RTMP and WHIP Ingresses are kept across graceful restarts.
 - **Steadier clusters**: rare silent freezes, crash loops and connection leaks in Elastic and High Availability deployments are gone.
-- **Cloud improvements**: Media Node auto-healing on GCP, user-assigned managed identities on Azure, and a DigitalOcean scale-in that never deletes a Media Node with active Rooms.
+- **Cloud improvements**: [Media Node auto-healing](https://openvidu.io/3.9/docs/self-hosting/elastic/gcp/install/#media-node-auto-healing) in Elastic deployments on GCP, user-assigned managed identities on Azure, and a DigitalOcean scale-in that never deletes a Media Node with active Rooms.
 
 ### Private by default
 
@@ -203,7 +203,7 @@ Along the same lines, IP camera passwords are no longer written to the Ingress l
 
 - **Ingress**: more reliable RTSP cameras (ONVIF metadata, backchannel audio...), audio-only SRT streams that actually start, and multi-track endpoints that ingest all their tracks.
 - **OpenVidu 2 compatibility**: 11 fixes in the v2 compatibility module for recordings, broadcasts and IP cameras.
-- **Fresh dependencies**: LiveKit v1.13.7, mediasoup 3.26.0, Egress v1.14.1, Agents 1.8.2, and new versions of MongoDB, Redis, MinIO and the whole observability stack.
+- **Fresh dependencies**: LiveKit v1.13.7, mediasoup 3.26.0, Egress v1.14.1, Agents v1.8.2, and new versions of MongoDB, Redis, MinIO and the whole observability stack.
 
 ## Read the full Release Notes of OpenVidu 3.9.0
 
