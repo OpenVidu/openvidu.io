@@ -183,6 +183,6 @@ The relevant parameters are:
 </div>
 
 !!! warning
-    Each `MEET_INITIAL_*` parameter is applied on start only while the deployment does not have that item yet.  Changing the parameter has no effect on it and its value is managed from the OpenVidu Meet app or the REST API.
+    Each `MEET_INITIAL_*` parameter is applied on start only while the deployment does not have that item yet. Once the item exists, changing the parameter has no effect: manage the item from the OpenVidu Meet app or the REST API.
 
 See the [Configuration Reference](../../docs/self-hosting/configuration/reference.md#meetenv) for all available `meet.env` parameters and the [Changing Configuration](../../docs/self-hosting/configuration/changing-config.md) section for more details on how to modify configuration files.
