@@ -5,7 +5,7 @@ description: "Keep a video conferencing app up to date in real time with OpenVid
 
 # Webhooks Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/advanced-features/meet-webhooks){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/advanced-features/meet-webhooks){ .md-button target="_blank" }
 
 This tutorial extends the [recordings tutorial](recordings.md) to add **real-time updates** through webhooks and Server-Sent Events (SSE). It demonstrates how to receive and process OpenVidu Meet webhooks to provide live status updates for rooms and recordings.
 
@@ -26,7 +26,7 @@ The application includes all the features from the recordings tutorial, plus:
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.9.0
 ```
 
 ### 3. Run the application
@@ -79,7 +79,7 @@ The main backend changes involve implementing webhook processing, SSE communicat
 
 The backend now includes SSE support for real-time client notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/src/index.js#L1-L27' target='_blank'>index.js</a>" linenums="1" hl_lines="5 26-27"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/src/index.js#L1-L27' target='_blank'>index.js</a>" linenums="1" hl_lines="5 26-27"
 import cors from 'cors';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
@@ -120,7 +120,7 @@ This code sets up the backend to support Server-Sent Events (SSE), enabling the 
 
 A new endpoint allows clients to subscribe to real-time notifications:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/src/index.js#L128-L129' target='_blank'>index.js</a>" linenums="128"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/src/index.js#L128-L129' target='_blank'>index.js</a>" linenums="128"
 // SSE endpoint for real-time notifications
 app.get('/events', sse.init); // (1)!
 ```
@@ -135,7 +135,7 @@ This endpoint enables clients to establish a persistent connection for receiving
 
 A new endpoint handles incoming webhooks from OpenVidu Meet:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/src/index.js#L131-L147' target='_blank'>index.js</a>" linenums="131"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/src/index.js#L131-L147' target='_blank'>index.js</a>" linenums="131"
 // Webhook endpoint to receive events from OpenVidu Meet
 app.post('/webhook', (req, res) => {
 	const body = req.body;
@@ -167,7 +167,7 @@ This endpoint receives webhook events from OpenVidu Meet, validates their authen
 
 A security function validates webhook authenticity:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/src/index.js#L186-L213' target='_blank'>index.js</a>" linenums="186"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/src/index.js#L186-L213' target='_blank'>index.js</a>" linenums="186"
 // Helper function to validate the signature of a webhook event.
 // OpenVidu Meet signs every webhook so the receiver can verify it is genuine and was not tampered with.
 // Each request carries two headers: 'x-signature' (the signature) and 'x-timestamp' (when it was sent).
@@ -222,7 +222,7 @@ The frontend has been enhanced with real-time update capabilities and improved v
 
 The application now establishes an SSE connection on page load:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/public/js/app.js#L4-L8' target='_blank'>app.js</a>" linenums="4" hl_lines="4"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/public/js/app.js#L4-L8' target='_blank'>app.js</a>" linenums="4" hl_lines="4"
 document.addEventListener('DOMContentLoaded', async () => {
 	await fetchRooms();
 	// Start listening for webhook notifications
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 A new function establishes and manages the SSE connection:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/public/js/app.js#L389-L410' target='_blank'>app.js</a>" linenums="389"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/public/js/app.js#L389-L410' target='_blank'>app.js</a>" linenums="389"
 // Function to start listening for webhook events via Server-Sent Events
 function startWebhookNotifications() {
 	const eventSource = new EventSource('/events'); // (1)!
@@ -277,7 +277,7 @@ This function creates a persistent connection to receive real-time webhook notif
 
 A new function processes incoming webhook notifications and updates the UI accordingly:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/public/js/app.js#L412-L433' target='_blank'>app.js</a>" linenums="412"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/public/js/app.js#L412-L433' target='_blank'>app.js</a>" linenums="412"
 // Function to handle webhook notifications and update UI
 function handleWebhookNotification(webhookData) {
 	const { event, data } = webhookData; // (1)!
@@ -317,7 +317,7 @@ The `prependToMap()` helper used here adds an entry to the start of a `Map` so n
 
 The `recordingEnded` case relies on a helper that checks the current screen context:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/public/js/app.js#L488-L499' target='_blank'>app.js</a>" linenums="488"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/public/js/app.js#L488-L499' target='_blank'>app.js</a>" linenums="488"
 // Helper to detect whether the recordings view is currently shown
 function isOnRecordingsScreen(roomName) {
 	const recordingsScreen = document.querySelector('#recordings');
@@ -343,7 +343,7 @@ This helper ensures that UI updates are only applied when the recordings view is
 
 The room template has been updated to include visual status indicators:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-webhooks/public/js/app.js#L53-L121' target='_blank'>app.js</a>" linenums="53" hl_lines="2-13 17-20"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-webhooks/public/js/app.js#L53-L121' target='_blank'>app.js</a>" linenums="53" hl_lines="2-13 17-20"
 function getRoomListItemTemplate(room) {
 	// Map each room status to its label, badge color and icon
 	const STATUS = {

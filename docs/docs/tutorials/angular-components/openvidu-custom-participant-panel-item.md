@@ -5,7 +5,7 @@ description: "Replace each row of the participants panel with a component of you
 
 # Custom participants panel item using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-custom-participant-panel-item){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-custom-participant-panel-item){ .md-button target="_blank" }
 
 The **openvidu-custom-participant-panel-item** tutorial demonstrates how to replace the default participant item inside of the participants panel with a custom one, providing a more tailored user experience.
 
@@ -22,8 +22,8 @@ Replacing the default participant item is made simple with the **ParticipantsPan
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
 ```
 
 ### 3. Run a server application

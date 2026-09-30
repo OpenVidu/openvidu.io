@@ -89,7 +89,7 @@ Once you click the button, you will see this window.
 * For the **Git ref**, use the version you want to deploy:
 
     ```
-    v3.8.0
+    v3.9.0
     ```
 
 Finally, click Continue.
@@ -124,7 +124,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | rtcEngine **PRO**{ .openvidu-tag .openvidu-pro-tag } | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
-For more details, you can check the variables.tf file to see additional information about the inputs: [COMMUNITY :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.8.0/openvidu-deployment/community/singlenode/gcp/variables.tf){:target="_blank"} / [PRO :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.8.0/openvidu-deployment/pro/singlenode/gcp/variables.tf){:target="_blank"}.
+For more details, you can check the variables.tf file to see additional information about the inputs: [COMMUNITY :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.9.0/openvidu-deployment/community/singlenode/gcp/variables.tf){:target="_blank"} / [PRO :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.9.0/openvidu-deployment/pro/singlenode/gcp/variables.tf){:target="_blank"}.
 
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.

@@ -5,7 +5,7 @@ description: "Add buttons that open your own panels from the meeting toolbar, us
 
 # Add toolbar panel buttons using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.8.0/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-toolbar-panel-buttons){ .md-button target="_blank" }
 
 The **openvidu-toolbar-panel-buttons** tutorial demonstrates how to add custom buttons to the right part of the default toolbar in the OpenVidu Components Angular library.
 
@@ -22,8 +22,8 @@ Adding toolbar buttons is made simple with the **ToolbarAdditionalPanelButtonsDi
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.8.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
 ```
 
 ### 3. Run a server application
