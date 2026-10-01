@@ -49,13 +49,13 @@ For the Master Node, the following services are configured:
 - **Caddy** as an internal reverse proxy for all services.
 - **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
 - **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
-- **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
+- **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 For the Media Nodes, the following services are configured:
 
 - **OpenVidu Server PRO (LiveKit compatible).**
 - **Ingress** and **Egress** services.
-- **Prometheus, Promtail, and Loki (Observability module)**. Used to send metrics and logs to the observability stack.
+- **Prometheus and Alloy (Observability module)**. Used to send metrics and logs to the observability stack.
 
 ## Prerequisites
 
