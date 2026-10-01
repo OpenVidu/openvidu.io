@@ -39,8 +39,6 @@ Replace `<your-openvidu-domain>` with the domain of your deployment, `<room-id>`
 
 The same power is now available inside the meeting. The Participants panel shows the microphone, camera and screen share state of everyone in the meeting, and moderators can mute one device of one participant, or turn it off for everyone at once. The affected participant is told that a moderator turned their device off.
 
-*Participant video is stock footage.*
-
 > **Existing rooms need the new permission**
 >
 > Muting requires the new `participantMute` permission. The `Moderator` role of rooms created from 3.9.0 on has it by default, but rooms and members created before need it granted explicitly. See [Muting participants](https://openvidu.io/latest/meet/features/meetings/moderation/#muting-participants).
@@ -59,8 +57,6 @@ Rooms get a set of new settings that shape every meeting held in them. All of th
 - **Duration limit**: end meetings automatically after a set time, up to one day. Participants see a countdown before the end, and the `meetingEnded` webhook tells your application why the meeting ended.
 - **Automatic recording**: start recording when the first participant joins, when the second one joins, or when a moderator joins. Nobody has to remember to press the button.
 - **Initial microphone and camera state**: have participants join with their microphone or camera off, which is perfect for classes and webinars. Embedded apps can override it per participant.
-
-*Participant video is stock footage.*
 
 The details are in [Meeting configuration](https://openvidu.io/latest/meet/features/meetings/configuration/) and [Recording trigger](https://openvidu.io/latest/meet/features/recordings/configuration/#recording-trigger).
 

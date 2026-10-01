@@ -298,7 +298,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/</loc>
-         <lastmod>2026-09-30</lastmod>
+         <lastmod>2026-10-01</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/upgrade/</loc>
@@ -378,11 +378,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-dlb/</loc>
-         <lastmod>2026-09-30</lastmod>
+         <lastmod>2026-10-01</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-nlb/</loc>
-         <lastmod>2026-09-30</lastmod>
+         <lastmod>2026-10-01</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/ha/on-premises/upgrade/</loc>
@@ -422,7 +422,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-disable-modules/</loc>
-         <lastmod>2026-09-15</lastmod>
+         <lastmod>2026-10-01</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-disable-mongodb/</loc>
@@ -470,7 +470,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/</loc>
-         <lastmod>2026-09-15</lastmod>
+         <lastmod>2026-10-01</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/</loc>
@@ -522,7 +522,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/</loc>
-         <lastmod>2026-09-30</lastmod>
+         <lastmod>2026-10-01</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/</loc>
