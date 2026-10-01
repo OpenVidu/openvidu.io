@@ -8,7 +8,7 @@ description: "Turn individual OpenVidu modules on or off so a deployment runs on
 OpenVidu allows you to enable or disable modules to customize your deployment. These modules are:
 
 - **`openviduMeet`**: The OpenVidu Meet service.
-- **`observability`**: Grafana, Loki, Mimir, and Promtail observability services.
+- **`observability`**: Grafana, Loki, Mimir, and Alloy observability services.
 - **`v2compatibility`**: OpenVidu V2 Compatibility. (Only available in OpenVidu Pro)
 
 These modules are configured in the parameter `ENABLED_MODULES`.
