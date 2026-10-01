@@ -32,7 +32,7 @@ All services are deployed on a single machine, which includes:
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates.
 - **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
-- **Grafana, Mimir, Promtail, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
+- **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 - **OpenVidu V2 Compatibility (v2compatibility module)** **PRO**{ .openvidu-tag .openvidu-pro-tag } is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
 
 ## Prerequisites
