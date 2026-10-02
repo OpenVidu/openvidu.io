@@ -200,7 +200,7 @@ curl -s -X POST https://docs-mcp.openvidu.io/mcp \
 
 ## Privacy
 
-Each request your coding agent makes to `docs-mcp.openvidu.io` is logged as one line: the tool it called, what it asked for (for a search, the search terms), the documentation version, whether it worked, how long it took, and the agent's name and version when it sends them. Your conversation, your prompts and your code are never sent to us or stored.
+Each request your coding agent makes to `docs-mcp.openvidu.io` is logged as one line: the tool it called, what it asked for (for a search, the search terms), the documentation version, whether it worked, how long it took, and the agent's name and version when it sends them. What was asked is kept to learn what developers look for and what the documentation is missing. Your conversation, your prompts and your code are never sent to us or stored.
 
 Your IP address is used only to group one client's requests into a visit, and is discarded before anything is written to storage: visits are labelled with a random identifier that cannot be traced back to an address or linked to a later visit. Request logs are deleted after 7 days. The archive, which contains no addresses, is deleted after 395 days so a year-over-year comparison is possible. Aggregate counts are kept. Nothing is shared with third parties.
 
