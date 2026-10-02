@@ -1,6 +1,8 @@
 ---
 name: blog-review
 description: Review an OpenVidu blog draft (full post or a section) for readability, SEO, technical accuracy, CTA strength, structure, formatting, and repo-specific validity (frontmatter, categories, authors, the `<!-- more -->` tag, links, image assets). Returns a scorecard, findings by severity, and prioritized edits. Use when a draft exists and needs auditing before publish. Trigger phrases like "review this post", "is this blog ready to publish", "audit the draft", "check my article".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Content Reviewer

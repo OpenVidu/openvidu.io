@@ -1,6 +1,8 @@
 ---
 name: release-version
 description: Publish an OpenVidu documentation version end to end — update the releases pages with their strict heading and link contract, write the version-pinned Release blog post, choose and dispatch the right Publish Web command (new/latest/past), and interpret the post-publish verification. Use for any release-day docs work or when re-publishing a version. Trigger phrases like "publish version X.Y", "release 3.9 docs", "update the releases pages", "re-publish the site".
+metadata:
+  internal: true
 ---
 
 # Releasing a documentation version

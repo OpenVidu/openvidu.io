@@ -9,6 +9,8 @@ description: >
   marketing/demo footage of an embedded-meeting flow. Triggers: "record a demo
   video", "fake the camera feeds", "two people in the meeting", "loop video for
   the blog post".
+metadata:
+  internal: true
 ---
 
 # Recording an embedded-meeting demo with injected camera feeds

@@ -1,6 +1,8 @@
 ---
 name: blog-write
 description: Write an OpenVidu technical blog post in English from a structured outline — full post or a single section — following the repo's conversational style, MkDocs frontmatter, intro hook + `<!-- more -->` tag, scannable formatting, and copy-pasteable commands. Use after an outline exists (from blog-plan) and it's time to draft. Trigger phrases like "write the post", "draft this blog", "write section X", "turn this outline into a post".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Content Writer
