@@ -230,7 +230,7 @@ The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) 
 
 !!! example "See it running"
 
-    [**`2-angular-components/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/2-angular-components){:target="_blank"} is this level as a standalone app, token server included. It stays on Angular 20, the newest version `openvidu-components-angular` 3.8.0 supports.
+    [**`2-angular-components/`** :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/2-angular-components){:target="_blank"} is this level as a standalone app, token server included. It stays on Angular 20, the newest version `openvidu-components-angular` 3.9.0 supports.
 
 !!! tip "Pick this level when"
 
