@@ -89,7 +89,7 @@ DigitalOcean wins by asking the cloud to do almost nothing before your server ex
 Three details do the heavy lifting:
 
 - **Stock droplets boot in seconds.** Every node is a plain Ubuntu image with the install driven by cloud-init — no custom image-baking pipeline to wait on.
-- **It names itself, so there's no DNS to wait for.** With no custom domain, the box derives its own hostname from its public IP via [sslip.io :fontawesome-solid-external-link:{.external-link-icon}](https://sslip.io){:target="_blank"} — which resolves instantly, so there's no DNS-propagation delay before the endpoint answers.
+- **It names itself, so there's no DNS to wait for.** With no custom domain, the box uses its public IP directly as its address — no hostname to resolve at all, so there's no DNS-propagation delay before the endpoint answers.
 - **Terraform doesn't sit and wait.** The DigitalOcean config has no blocking "wait for the app to finish installing" gate, so provisioning returns as soon as the droplets are booted. (AWS CloudFormation, by contrast, literally pauses the stack on a *wait condition* until the instance signals it's ready — and the HA template has four of them.)
 
 Even the bigger topologies stay lean: elastic scales with a small serverless function instead of a managed autoscaling group, and HA uses a plain layer-4 network load balancer that just forwards packets — so there's no certificate for the balancer to validate before traffic can flow.
