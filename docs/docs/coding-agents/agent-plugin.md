@@ -71,6 +71,8 @@ LiveKit's documentation describes LiveKit's latest release and LiveKit Cloud, so
 
 OpenVidu ships no SIP service: telephony means running LiveKit's self-hostable SIP server next to your deployment, and LiveKit's documentation is where that is described.
 
+LiveKit is a trademark of its owner. OpenVidu is not affiliated with or endorsed by LiveKit, and LiveKit's documentation is read directly from docs.livekit.io.
+
 ## Install
 
 !!! info "Update your client first"
@@ -195,6 +197,14 @@ curl -s -X POST https://docs-mcp.openvidu.io/mcp \
   -H 'content-type: application/json' \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
+
+## Privacy
+
+Each request your coding agent makes to `docs-mcp.openvidu.io` is logged as one line: the tool it called, what it asked for (for a search, the search terms), the documentation version, whether it worked, how long it took, and the agent's name and version when it sends them. Your conversation, your prompts and your code are never sent to us or stored.
+
+Your IP address is used only to group one client's requests into a visit, and is discarded before anything is written to storage: visits are labelled with a random identifier that cannot be traced back to an address or linked to a later visit. Request logs are deleted after 7 days. The archive, which contains no addresses, is deleted after 395 days so a year-over-year comparison is possible. Aggregate counts are kept. Nothing is shared with third parties.
+
+When your agent reads LiveKit's documentation, it fetches those pages from docs.livekit.io itself: that request never passes through OpenVidu, and LiveKit's own policies apply to it. The rest of what openvidu.io collects is in the [privacy policy](../../conditions/privacy-policy.md).
 
 ## Troubleshooting
 
