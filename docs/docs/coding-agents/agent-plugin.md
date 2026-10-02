@@ -51,7 +51,7 @@ The plugin configures one MCP server, `openvidu-docs`, at `https://docs-mcp.open
 | `get_changelog` | The release notes of a version, for OpenVidu Meet, OpenVidu Platform or both. |
 | `get_pricing_info` | The [pricing](../../pricing.md) page: editions, plans and the cost model. |
 
-Every tool takes an optional `version`. Documentation is published per minor release, so the version your deployment reports (`3.8.1`) is answered from that minor's documentation (`3.8`), and the answer says so; without a version, the server uses the newest it carries. A version it doesn't carry is an error that lists the ones it does, never a quiet answer for a different release.
+Every tool takes an optional `version`. Documentation is published per minor release, so the version your deployment reports (`3.9.1`) is answered from that minor's documentation (`3.9`), and the answer says so; without a version, the server uses the newest it carries. A version it doesn't carry is an error that lists the ones it does, never a quiet answer for a different release.
 
 ### Skill
 
@@ -168,8 +168,8 @@ Every answer depends on three facts that nothing outside your project can see:
 Ask your agent to work them out. The `openvidu-version-edition-product` skill follows the procedure the documentation server gives it: read them from the deployment itself, ask you before contacting a remote host, and never read a credential's value. Then it offers to write them down, so no later session repeats the work:
 
 ```markdown title="AGENTS.md"
-This project connects to an OpenVidu 3.8.0 PRO deployment, using OpenVidu Meet.
-When querying the OpenVidu documentation MCP, always pass version="3.8.0",
+This project connects to an OpenVidu 3.9.0 pro deployment, using OpenVidu Meet.
+When querying the OpenVidu documentation MCP, always pass version="3.9.0",
 and read the answers for that edition and product.
 ```
 
@@ -182,7 +182,7 @@ The same lines work in `CLAUDE.md`, and without the skill installed you can writ
 ## Try it
 
 - "Using the OpenVidu docs, how do I record a room with individual tracks?"
-- "What does the OpenVidu documentation say about deploying with fault tolerance? We're on 3.8.0."
+- "What does the OpenVidu documentation say about deploying with fault tolerance? We're on 3.9.0."
 - "Check the OpenVidu docs before answering: does the Egress service need S3 credentials, and how are they configured?"
 - "Work out which OpenVidu version, edition and product this project uses, and write them into AGENTS.md."
 - "How do I send a data message to a single participant with livekit-client? Check the docs first."
