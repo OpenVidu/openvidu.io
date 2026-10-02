@@ -51,7 +51,7 @@ The plugin configures one MCP server, `openvidu-docs`, at `https://docs-mcp.open
 | `get_changelog` | The release notes of a version, for OpenVidu Meet, OpenVidu Platform or both. |
 | `get_pricing_info` | The [pricing](../../pricing.md) page: editions, plans and the cost model. |
 
-Every tool takes an optional `version`. Documentation is published per minor release, so the version your deployment reports (`3.9.1`) is answered from that minor's documentation (`3.9`), and the answer says so; without a version, the server uses the newest it carries. A version it doesn't carry is an error that lists the ones it does, never a quiet answer for a different release.
+The tools that read the documentation (`search_docs`, `get_doc_page`, `list_doc_sections` and `get_changelog`) take an optional `version`. Documentation is published per minor release, so the version your deployment reports (`3.9.1`) is answered from that minor's documentation (`3.9`), and the answer says so; without a version, the server uses the newest it carries. A version it doesn't carry is an error that lists the ones it does, never a quiet answer for a different release.
 
 ### Skill
 
