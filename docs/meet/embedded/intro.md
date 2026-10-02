@@ -63,6 +63,6 @@ Where to start? We recommend following the <a href="../step-by-step-guide"><stro
 
 <div class="centered-section" markdown>
 
-Building with a coding agent? Give it the OpenVidu Meet documentation for your own deployment with the [OpenVidu Agent Plugin](coding-agents.md).
+Building with an AI coding agent? Give it the OpenVidu Meet documentation for your own deployment with the [OpenVidu Agent Plugin](building-with-ai.md).
 
 </div>

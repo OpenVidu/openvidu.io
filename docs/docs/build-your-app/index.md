@@ -12,9 +12,9 @@ Here's a high-level overview of the steps involved in building an OpenVidu appli
 3. **Build the UI of your client application**
 4. **Deploy OpenVidu and your application**
 
-!!! tip "Building with a coding agent?"
+!!! tip "Building with an AI coding agent?"
 
-    The [OpenVidu Agent Plugin](../coding-agents/agent-plugin.md) gives it the OpenVidu documentation for your deployment's version, edition and product, and tells it when LiveKit's own SDK documentation is the better source.
+    The [OpenVidu Agent Plugin](../building-with-ai/agent-plugin.md) gives it the OpenVidu documentation for your deployment's version, edition and product, so the code it writes is up to date and accurate.
 
 ## 1. Launch an OpenVidu deployment
 

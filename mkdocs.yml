@@ -45,7 +45,7 @@ nav:
       - Embedded:
           - Introduction: meet/embedded/intro.md
           - Step by step guide: meet/embedded/step-by-step-guide.md
-          - AI coding agents: meet/embedded/coding-agents.md
+          - Building with AI: meet/embedded/building-with-ai.md
           - Tutorials:
               - meet/embedded/tutorials/index.md
               - Embedding Options:
@@ -74,9 +74,10 @@ nav:
       - Build your app:
           - docs/build-your-app/index.md
           - Common operations: docs/build-your-app/common-operations.md
-      - AI coding agents:
-          - Agent Plugin: docs/coding-agents/agent-plugin.md
-          - Manual setup: docs/coding-agents/manual-setup.md
+      - Building with AI:
+          - OpenVidu Agent Plugin: docs/building-with-ai/agent-plugin.md
+          - OpenVidu MCP servers: docs/building-with-ai/mcp-servers.md
+          - OpenVidu skills: docs/building-with-ai/skills.md
       - Tutorials:
           - Application Server:
               - docs/tutorials/application-server/index.md
@@ -456,7 +457,7 @@ plugins:
         OpenVidu Meet embedding:
         - meet/embedded/intro.md
         - meet/embedded/step-by-step-guide.md
-        - meet/embedded/coding-agents.md
+        - meet/embedded/building-with-ai.md
         - meet/embedded/deploy-your-app.md
 
         OpenVidu Meet embedding tutorials:
@@ -471,7 +472,7 @@ plugins:
         - docs/comparing-openvidu.md
         - docs/releases.md
         - docs/build-your-app/*.md
-        - docs/coding-agents/*.md
+        - docs/building-with-ai/*.md
         - docs/ui-components/*.md
 
         OpenVidu Platform tutorials — application server:

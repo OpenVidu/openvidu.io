@@ -10,9 +10,9 @@ page_features:
 This step-by-step guide explains how to embed OpenVidu Meet into your web application, covering setup, room creation, embedding options, and deployment best practices.
 
 
-!!! tip "Following this guide with a coding agent?"
+!!! tip "Following this guide with an AI coding agent?"
 
-    Install the [OpenVidu Agent Plugin](coding-agents.md) and let it follow along: it reads the REST API, web component and webhook references for your OpenVidu version and edition instead of guessing them.
+    Install the [OpenVidu Agent Plugin](building-with-ai.md) and let it follow along: it reads the REST API, web component and webhook references for your OpenVidu version and edition.
 
 ## 1. Run OpenVidu Meet
 
