@@ -4,7 +4,7 @@ AWS
 
 > **Info**
 >
-> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains instructions for deploying a production-ready OpenVidu High Availability deployment on AWS. The deployed services are the same as in the [On Premises High Availability installation](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/install-nlb/index.md), but the process is automated through AWS CloudFormation.
 
@@ -47,7 +47,7 @@ For this default deployment, these are the only parameters you need to fill in. 
 | ----------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | **DomainName**                | `openvidu.example.com`                                                                | Your domain                                                                  |
 | **OpenViduCertificateARN**    | `arn:aws:acm:us-east-1:123456789012:certificate/1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d` | Your AWS Certificate Manager certificate for **DomainName**                  |
-| **OpenViduLicense**           | `<your OpenVidu license>`                                                             | [Request one](https://openvidu.io/3.9/account/index.md) if you don't have it |
+| **OpenViduLicense**           | `<your OpenVidu license>`                                                             | [Request one](https://openvidu.io/account/) if you don't have it |
 | **KeyName**                   | `my-key-pair`                                                                         | An existing EC2 key pair of your account                                     |
 | **OpenViduVPC**               | `vpc-0a1b2c3d4e5f67890`                                                               | Your VPC                                                                     |
 | **OpenViduMasterNodeSubnets** | `subnet-0aa11111,subnet-0aa22222,subnet-0aa33333,subnet-0aa44444`                     | Your public subnets, one per availability zone                               |
@@ -89,7 +89,7 @@ In this section, you need to specify some properties needed for the OpenVidu HA 
 
 Parameters of this section look like this:
 
-Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/3.9/account/index.md) .
+Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/) .
 
 For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
 
