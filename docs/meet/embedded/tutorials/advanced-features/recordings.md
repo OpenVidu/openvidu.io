@@ -5,7 +5,7 @@ description: "Add recording management to an OpenVidu Meet Web Component applica
 
 # Recordings Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/advanced-features/meet-recordings){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/advanced-features/meet-recordings){ .md-button target="_blank" }
 
 This tutorial extends the [advanced OpenVidu Meet WebComponent tutorial](../embedding-options/webcomponent-advanced.md) to add **recording management capabilities**. It demonstrates how to list, view, and delete recordings from your OpenVidu Meet meetings.
 
@@ -24,7 +24,7 @@ The application includes all the features from the basic tutorial, plus:
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.9.0
 ```
 
 ### 3. Run the application
@@ -85,7 +85,7 @@ Let's see the code of each new endpoint:
 
 The `GET /recordings` endpoint retrieves the list of recordings, with optional room filtering:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/src/index.js#L74-L92' target='_blank'>index.js</a>" linenums="74"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/src/index.js#L74-L92' target='_blank'>index.js</a>" linenums="74"
 // List all recordings
 app.get('/recordings', async (req, res) => {
 	// Create the base path for recordings: list up to 100 recordings, filtered to completed ones only.
@@ -126,7 +126,7 @@ This endpoint does the following:
 
 The `DELETE /recordings/:recordingId` endpoint deletes the specified recording:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/src/index.js#L94-L105' target='_blank'>index.js</a>" linenums="94"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/src/index.js#L94-L105' target='_blank'>index.js</a>" linenums="94"
 // Delete a recording
 app.delete('/recordings/:recordingId', async (req, res) => {
 	const { recordingId } = req.params; // (1)!
@@ -153,7 +153,7 @@ This endpoint simply deletes the specified recording using the OpenVidu Meet API
 
 A new `GET /recordings/:recordingId/url` endpoint retrieves the recording URL for playback:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/src/index.js#L107-L118' target='_blank'>index.js</a>" linenums="107"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/src/index.js#L107-L118' target='_blank'>index.js</a>" linenums="107"
 // Get recording URL
 app.get('/recordings/:recordingId/url', async (req, res) => {
 	const { recordingId } = req.params; // (1)!
@@ -184,7 +184,7 @@ The frontend has been enhanced to include recording management functionality. Th
 
 A new `Map` is created to store recordings indexed by their recording ID:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L1-L2' target='_blank'>app.js</a>" linenums="1" hl_lines="2"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L1-L2' target='_blank'>app.js</a>" linenums="1" hl_lines="2"
 const rooms = new Map();
 const recordings = new Map(); // (1)!
 ```
@@ -197,7 +197,7 @@ const recordings = new Map(); // (1)!
 
 The room list template is updated to include a `View Recordings` button for each room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L51-L101' target='_blank'>app.js</a>" linenums="51" hl_lines="32-39"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L51-L101' target='_blank'>app.js</a>" linenums="51" hl_lines="32-39"
 function getRoomListItemTemplate(room) {
 	return `
         <li class="ov-list-item">
@@ -253,7 +253,7 @@ function getRoomListItemTemplate(room) {
 
 The highlighted `View Recordings` button calls the `listRecordingsByRoom()` function when clicked, passing the room name as an argument. This allows you to view recordings for that specific room.
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L216-L228' target='_blank'>app.js</a>" linenums="216"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L216-L228' target='_blank'>app.js</a>" linenums="216"
 async function listRecordingsByRoom(roomName) {
 	// Hide the home screen and show the recordings screen
 	const homeScreen = document.querySelector('#home');
@@ -282,7 +282,7 @@ This function sets up the recordings view by hiding the home screen, showing the
 
 The `listRecordings()` function fetches and displays recordings, optionally filtering by room name:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L238-L265' target='_blank'>app.js</a>" linenums="238"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L238-L265' target='_blank'>app.js</a>" linenums="238"
 async function listRecordings(e) {
 	if (e) {
 		// Prevent the default form submission
@@ -331,7 +331,7 @@ The listRecordings() function performs the following actions:
 
 The `renderRecordings()` function is responsible for updating the UI with the list of recordings:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L267-L287' target='_blank'>app.js</a>" linenums="267"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L267-L287' target='_blank'>app.js</a>" linenums="267"
 function renderRecordings() {
 	// Clear the previous list of recordings
 	const recordingsList = document.querySelector('#recordings-list ul'); // (1)!
@@ -367,7 +367,7 @@ The `renderRecordings()` function performs the following actions:
 
 The `getRecordingListItemTemplate()` function generates the HTML template for each recording list item:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L289-L315' target='_blank'>app.js</a>" linenums="289"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L289-L315' target='_blank'>app.js</a>" linenums="289"
 function getRecordingListItemTemplate(recording) {
 	const recordingId = recording.recordingId; // (1)!
 	const roomName = recording.roomName; // (2)!
@@ -411,7 +411,7 @@ This function creates an HTML list item containing the recording's metadata, inc
 
 When the user clicks the play button for a recording, the `displayRecording()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L317-L353' target='_blank'>app.js</a>" linenums="317"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L317-L353' target='_blank'>app.js</a>" linenums="317"
 async function displayRecording(recordingId) {
 	// Hide the recordings screen and show the display recording screen
 	const recordingsScreen = document.querySelector('#recordings');
@@ -430,9 +430,9 @@ async function displayRecording(recordingId) {
         </openvidu-meet>
     `; // (4)!
 
-	// Add event listener for when the OpenVidu Meet component is closed
+	// Add event listener for when the participant asks to close OpenVidu Meet
 	const meet = document.querySelector('openvidu-meet');
-	meet.once('closed', () => {
+	meet.once('embeddedCloseRequested', () => {
 		// (5)!
 		// Clear the OpenVidu Meet component and go back to the recordings screen
 		displayRecordingScreen.innerHTML = '';
@@ -456,10 +456,10 @@ async function getRecordingUrl(recordingId) {
 2. Show the recording playback screen.
 3. Fetch the recording URL from the backend using the `getRecordingUrl()` function.
 4. Inject the OpenVidu Meet WebComponent with the `recording-url` attribute for playback.
-5. Add an event listener for the `closed` event, which is triggered when the recording playback view is closed. It hides the playback screen and shows the recordings list screen again.
+5. Add an event listener for the `embeddedCloseRequested` event, which is triggered when the user asks to close the recording playback. It hides the playback screen and shows the recordings list screen again.
 6. Make a `GET` request to the `/recordings/:recordingId/url` endpoint to retrieve the recording URL.
 
-The `displayRecording()` function handles the playback of a specific recording by first hiding the recordings list screen and showing the display recording screen. It then fetches the recording URL from the backend using the `getRecordingUrl()` helper function, which makes a `GET` request to the `/recordings/:recordingId/url` endpoint. Next, it injects the OpenVidu Meet WebComponent into the display container with the `recording-url` attribute set to the fetched URL, enabling the recording to be played directly in the browser. Finally, it registers a listener for the `closed` event of the WebComponent, so that when the user closes the recording playback view the playback screen is hidden and the recordings list screen is shown again. If an error occurs during URL fetching, it logs the error to the console and returns null.
+The `displayRecording()` function handles the playback of a specific recording by first hiding the recordings list screen and showing the display recording screen. It then fetches the recording URL from the backend using the `getRecordingUrl()` helper function, which makes a `GET` request to the `/recordings/:recordingId/url` endpoint. Next, it injects the OpenVidu Meet WebComponent into the display container with the `recording-url` attribute set to the fetched URL, enabling the recording to be played directly in the browser. Finally, it registers a listener for the `embeddedCloseRequested` event of the WebComponent, so that when the user asks to close the recording playback the playback screen is hidden and the recordings list screen is shown again. If an error occurs during URL fetching, it logs the error to the console and returns null.
 
 ---
 
@@ -467,7 +467,7 @@ The `displayRecording()` function handles the playback of a specific recording b
 
 When the user clicks the delete recording button, the `deleteRecording()` function is called:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/advanced-features/meet-recordings/public/js/app.js#L355-L365' target='_blank'>app.js</a>" linenums="355"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/advanced-features/meet-recordings/public/js/app.js#L355-L365' target='_blank'>app.js</a>" linenums="355"
 async function deleteRecording(recordingId) {
 	try {
 		await httpRequest('DELETE', `/recordings/${recordingId}`); // (1)!

@@ -17,6 +17,9 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 - **OCI Vault** is used to securely store deployment secrets shared across the cluster.
 - Media Node scalability is managed through an **OCI Function** that handles scale-in actions, while the OCI Instance Pool itself takes care of scale-out based on system load.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 ## Prerequisites
 
 * An Oracle Cloud Infrastructure account with permissions to create Compute instances, VCNs, Network Load Balancers, Object Storage buckets, Vaults, Functions and IAM resources.
@@ -53,7 +56,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
     ```bash
     git clone https://github.com/OpenVidu/openvidu-oracle.git
-    git -C openvidu-oracle checkout 3.8.0
+    git -C openvidu-oracle checkout 3.9.0
     cd openvidu-oracle/pro/ha
     ```
 
@@ -103,7 +106,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
         | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
         | `bucketAppDataName` | `(none)`{ .nowrap } | Name of an existing OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
         | `bucketClusterDataName` | `(none)`{ .nowrap } | Name of an existing OCI Object Storage bucket for cluster-wide shared state (including the generated SSH key). If left empty, a bucket will be created with a default name. |
-        | `rtcEngine` | `"pion"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`pion` - Default media engine.</li><li>`mediasoup` - Alternative media engine with different performance characteristics.</li></ul> |
+        | `rtcEngine` | `"mediasoup"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`mediasoup` - Default media engine, with a boost in performance.</li><li>`pion` - The engine of LiveKit Open Source.</li></ul> |
         | `vault_ocid` | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
         | `key_ocid` | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
         | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
@@ -117,6 +120,9 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
     ```
 
 4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured cluster-data bucket.
+
+    !!! note
+        A full HA deployment (4 Master Nodes + the Media Node pool forming the cluster) typically completes in about **8 to 10 minutes**.
 
     !!! warning
         After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access all 4 Master Nodes — if exposed, unauthorized users could gain access.

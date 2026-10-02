@@ -61,7 +61,7 @@ If you would prefer not to redeploy, an in-place upgrade is also possible. The s
         Any missing images will be pulled automatically when you run `systemctl start openvidu`.
 
 
-5. After the final intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the DigitalOcean web console, navigate to the Droplets tab, select your Media Node instances, and terminate them. The DigitalOcean Function will provision new Media Nodes automatically, or the Fixed Autoscale Pool will do so if you have configured fixed Media Nodes.
+5. After the final intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to the DigitalOcean web console, navigate to the Droplets tab, select your Media Node instances, and terminate them. In an autoscaling deployment the DigitalOcean Function provisions new Media Nodes on its next scheduled run (within about four minutes). If you configured a fixed number of Media Nodes (`fixedNumberOfMediaNodes` greater than 0), run `terraform apply` to recreate them.
 6. Once the Media Nodes are up and running, restart OpenVidu Elastic by running the following command on the Master Node:
 
     ```bash
@@ -92,7 +92,7 @@ cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
 
 Note the `store_secret.sh` command at the end. This is required to update the `OPENVIDU_VERSION` secret in the DigitalOcean `secret.env` file, which the DigitalOcean deployment uses to determine which version of OpenVidu should be running on the Media Nodes. This only needs to be run on the Master Node.
 
-Remember to **terminate the Media Nodes** after rolling back so that the Autoscale Pool can launch new Media Nodes with the restored configuration. You can do this from the DigitalOcean web console by navigating to the Droplets tab, selecting the Media Node instances, and terminating them.
+Remember to **terminate the Media Nodes** after rolling back so that new Media Nodes are launched with the restored configuration. You can do this from the DigitalOcean web console by navigating to the Droplets tab, selecting the Media Node instances, and terminating them. As in step 5, the DigitalOcean Function replaces them automatically, or you need to run `terraform apply` if you configured a fixed number of Media Nodes.
 
 ## Recommendations
 

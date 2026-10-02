@@ -25,13 +25,12 @@ Create a new room from the **"Rooms"** page with the **"Create Room"** button. T
 
 The advanced wizard guides you through the following steps:
 
-| Step                   | What you configure                                                                                                                                                                                           |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Room Details**       | The room **name** and an optional [auto-deletion date](#room-auto-deletion).                                                                                                                                 |
-| **Room Features**      | Toggle in-meeting features: **End-to-End Encryption**, **Captions**, **Chat** and **Virtual Backgrounds**.                                                                                                   |
-| **Room Access**        | Enable/disable **anonymous** access per role (Moderator / Speaker), allow **all users** to join, and customize the default permissions of the `Moderator` and `Speaker` [roles](access.md#predefined-roles). |
-| **Recording Settings** | Enable recording and choose whether to enable anonymous access to individual recordings.                                                                                                                     |
-| **Recording Layout**   | The visual [layout](../recordings/configuration.md#recording-layouts) of the recordings.                                                                                                                     |
+| Step             | What you configure                                                                                                                                                                                                |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Room Details** | The room **name** and an optional [auto-deletion date](#room-auto-deletion).                                                                                                                                     |
+| **Meeting**      | The [meeting configuration](../meetings/configuration.md) (a **participant limit**, a **duration limit** and whether participants join with the **microphone** and **camera** on) and the in-meeting features: **End-to-End Encryption**, **Live Captions**, **Chat** and **Virtual Backgrounds**. |
+| **Recording**    | Whether meetings can be [recorded](../recordings/configuration.md#enabling-recordings) and, if so, the [trigger](../recordings/configuration.md#recording-trigger) that starts the recording, its [layout](../recordings/configuration.md#recording-layouts) and [anonymous recording sharing](../recordings/configuration.md#anonymous-recording-sharing). |
+| **Room Access**  | Enable/disable **anonymous** access per role (Moderator / Speaker), allow **all users** to join, customize the default permissions of the `Moderator` and `Speaker` [roles](access.md#predefined-roles), and add [room members](../room-members/management.md). |
 
 <a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
@@ -42,7 +41,7 @@ The advanced wizard guides you through the following steps:
 
 ## Edit a room { #edit-rooms }
 
-Reopen the configuration wizard for an existing room from the **"Rooms"** page or the [room details page](#room-details) to change its **features**, **access** settings and **recording** options, as long as no meeting is currently active.
+Reopen the configuration wizard for an existing room from the **"Rooms"** page or the [room details page](#room-details) to change its **meeting**, **recording** and **access** settings, as long as no meeting is currently active.
 
 ![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-dark.png#only-dark){ .round-corners loading=lazy }
 ![Room configuration wizard editing an existing room](../../../assets/images/meet/rooms/management/edit-room-light.png#only-light){ .round-corners loading=lazy }
@@ -69,6 +68,7 @@ Managers can **close** or **reopen** a room at any time from the **"Rooms"** pag
 The **"Rooms"** page lists every room available to you, with its owner, status, creation date and auto-deletion date. From here you can:
 
 - **Search and filter** rooms by name, status, owner, membership or whether they are open to all OpenVidu Meet users.
+- **Copy the room ID**, the identifier the [REST API](#rest-api-reference) and the webhooks refer to the room by.
 - **Access** a room, to join the meeting.
 - Open the [room details page](#room-details).
 - [Edit a room](#edit-rooms) (if no meeting is active) or [change its status](#room-status).
