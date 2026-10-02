@@ -24,8 +24,13 @@ To stop the recording, a participant with the `recordingControl` permission must
 ![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ .round-corners loading=lazy }
 ![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ .round-corners loading=lazy }
 
-!!! info "Starting and stopping recordings via REST API"
-    Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that specific recording.
+!!! info "Starting and stopping recordings from outside the meeting view"
+    Recordings can also be started and stopped, in an **active meeting** only (starting one in a room with no ongoing meeting returns an error), through:
+
+    - The [REST API](#rest-api-reference), which can also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that recording.
+    - The `recordingStart` and `recordingStop` [commands](../../embedded/reference/webcomponent.md#commands) of an [embedded](../../embedded/intro.md) application, which require the local participant to hold the `recordingControl` permission. The status of the recording is reported by the `recordingStatusChanged` event.
+
+    As in the app, the start is refused in a room with recording disabled or with an automatic [recording trigger](configuration.md#recording-trigger).
 
 ## Managing recordings { #managing-recordings }
 

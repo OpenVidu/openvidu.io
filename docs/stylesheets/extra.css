@@ -590,6 +590,14 @@ div[data-md-component="outdated"] aside {
   white-space: nowrap;
 }
 
+/* For a table whose third column holds identifiers, such as the permissions of the embedded commands
+   table, so they stay whole instead of being split mid-word. Opt in with:
+       <div class="nowrap-third-column" markdown> */
+.md-typeset .nowrap-third-column th:nth-child(3) code,
+.md-typeset .nowrap-third-column td:nth-child(3) code {
+  white-space: nowrap;
+}
+
 /* Flow a list of short items into as many columns as the width allows, instead
    of one tall single-file column. Opt in by wrapping the list in:
        <div class="column-list" markdown>
