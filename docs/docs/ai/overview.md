@@ -18,6 +18,8 @@ These are the currently available OpenVidu agents:
 
     Working examples of these AI services live under **Tutorials → AI Services**, starting with the [Live Captions tutorial](../tutorials/ai-services/openvidu-live-captions.md).
 
+Looking for an AI coding agent to help you write OpenVidu code instead? See the [OpenVidu Agent Plugin](../building-with-ai/agent-plugin.md).
+
 ## Speech Processing agent
 
 <div class="grid cards" markdown>

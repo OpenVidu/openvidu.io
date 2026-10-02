@@ -151,19 +151,13 @@ page_features:
 </div>
 
 <div class="feature-cards" markdown>
-<div class="grid cards" data-sal="slide-up" style="margin-top: 3em;" markdown>
+<div class="grid cards center-last" data-sal="slide-up" style="margin-top: 3em;" markdown>
 
 -   :material-webrtc:{ .feature-icon } __WebRTC__{ .feature-name }
 
     ---
 
     Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC :fontawesome-solid-external-link:{.external-link-icon}](https://webrtc.org/){:target="_blank"}.
-
-<!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
-
-    ---
-
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
 
 -   :octicons-shield-check-16:{ .feature-icon .padding-icon } __Security at all levels__{ .feature-name }
 
@@ -212,6 +206,18 @@ page_features:
     ---
 
     For the most advanced use cases: you can add pipelines to process video and audio streams in real time in your servers.
+
+-   :material-robot-outline:{ .feature-icon .padding-icon } __AI-assisted development__{ .feature-name }
+
+    ---
+
+    Build with Claude Code, Cursor, VS Code or Codex: the [**OpenVidu Agent Plugin**](docs/building-with-ai/agent-plugin.md) gives your coding agent the official OpenVidu documentation, so the code it writes is up to date and accurate.
+
+<!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
+
+    ---
+
+    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
 
 </div>
 </div>

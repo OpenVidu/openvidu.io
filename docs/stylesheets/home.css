@@ -63,6 +63,17 @@
   font-weight: 500;
 }
 
+/* Three per row on wide screens, with a lone card in the last row centered */
+@media (min-width: 960px) {
+  .feature-cards .grid.cards.center-last {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .feature-cards .grid.cards.center-last > ul > li:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
+
 .padding-icon {
   padding: 6px 0;
 }
