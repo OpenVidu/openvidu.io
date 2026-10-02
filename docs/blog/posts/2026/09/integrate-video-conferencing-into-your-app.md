@@ -58,7 +58,7 @@ The scenario is the same throughout: a **support desk** where an agent starts a 
 All three levels need an OpenVidu deployment, and one is enough for the three of them. [OpenVidu Local](/docs/self-hosting/local.md) brings up both products with Docker:
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.9.0
 cd openvidu-local-deployment/community
 ./configure_lan_private_ip_linux.sh   # configure_lan_private_ip_macos.sh | .bat on Windows
 docker compose up
