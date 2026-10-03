@@ -265,6 +265,8 @@ not_in_nav: |
   /openvidu-vs-mediasoup.md
   /openvidu-vs-jitsi.md
   /openvidu-vs-janus.md
+  /openvidu-vs-twilio-video.md
+  /openvidu-vs-agora.md
   /conditions/
   /support/thanks.md
 
@@ -430,6 +432,8 @@ plugins:
         - openvidu-vs-mediasoup.md
         - openvidu-vs-jitsi.md
         - openvidu-vs-janus.md
+        - openvidu-vs-twilio-video.md
+        - openvidu-vs-agora.md
         - pricing.md
         - support/index.md
         - about-us.md
