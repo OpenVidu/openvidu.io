@@ -64,6 +64,21 @@ def test_a_directory_page_url_resolves_via_its_index(tmp_path):
     assert findings_of(tmp_path, "html-target") == []
 
 
+def test_a_blog_post_url_resolves_via_its_date_and_slug(tmp_path):
+    write(tmp_path, "docs/blog/posts/2026/10/post.md", "---\ndate: 2026-10-06\nslug: post\n---\n")
+    write(tmp_path, "overrides/main.html", '<a href="/blog/2026/10/06/post/">x</a>')
+
+    assert findings_of(tmp_path, "html-target") == []
+
+
+def test_a_blog_post_url_with_the_wrong_date_is_an_error(tmp_path):
+    write(tmp_path, "docs/blog/posts/2026/10/post.md", "---\ndate: 2026-10-06\nslug: post\n---\n")
+    write(tmp_path, "overrides/main.html", '<a href="/blog/2026/10/07/post/">x</a>')
+
+    (finding,) = findings_of(tmp_path, "html-target")
+    assert "/blog/2026/10/07/post/" in finding.message
+
+
 def test_a_source_path_in_html_is_an_error(tmp_path):
     write(tmp_path, "docs/pricing.md")
     write(tmp_path, "docs/index.md", '<a href="/pricing.md">x</a>')
