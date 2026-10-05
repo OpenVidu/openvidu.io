@@ -6,7 +6,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
 > **Info**
 >
-> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 First, import the template in the AWS CloudFormation console. You can click the following button...
 
@@ -107,7 +107,7 @@ If you are deploying the PRO edition, you need to specify some additional proper
 
 Parameters of this section look like this:
 
-Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/3.9/account/index.md) .
+Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/) .
 
 For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
 
