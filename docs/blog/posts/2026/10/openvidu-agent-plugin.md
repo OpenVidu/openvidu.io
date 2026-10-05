@@ -24,30 +24,32 @@ authors:
 ![The OpenVidu Agent Plugin: the OpenVidu documentation server and the version, edition and product skill, installed in one step in Claude Code, VS Code, GitHub Copilot, Codex, Cursor and Kiro](/assets/images/blog/2026/10/openvidu-agent-plugin/poster-light.webp#only-light "The OpenVidu Agent Plugin"){ .round-corners }
 ![The OpenVidu Agent Plugin: the OpenVidu documentation server and the version, edition and product skill, installed in one step in Claude Code, VS Code, GitHub Copilot, Codex, Cursor and Kiro](/assets/images/blog/2026/10/openvidu-agent-plugin/poster-dark.webp#only-dark "The OpenVidu Agent Plugin"){ .round-corners }
 
-Is your coding agent writing the code that creates your OpenVidu Meet rooms, generates your access tokens or configures your deployment? Then it should read the same documentation you would. Today we're releasing the **OpenVidu Agent Plugin**: install it once in Claude Code, VS Code, GitHub Copilot, Codex, Cursor or Kiro, and your agent reads the official OpenVidu documentation for the version you run, so the code it writes is up to date and accurate.
+Many developers already let a coding agent write the code that connects their application to OpenVidu, like the backend that creates the rooms or the page where the meeting is embedded. To get that code right, it needs to know how OpenVidu works in the version you're running. That's why today we're releasing the **OpenVidu Agent Plugin**. Install it once in Claude Code, VS Code, GitHub Copilot, Codex, Cursor or Kiro, and your agent will read the official OpenVidu documentation for your version whenever a task needs it, so the code it writes is up to date and accurate.
 
-The plugin bundles a documentation server with the <a href="/meet/">OpenVidu Meet</a> and <a href="/docs/">OpenVidu Platform</a> docs of every release from 3.4, and a skill that works out which OpenVidu your project uses. The <a href="/docs/building-with-ai/agent-plugin/">OpenVidu Agent Plugin</a> page has the whole story. This post is the short tour, plus how well it answers.
+The plugin bundles two components: a documentation server with the <a href="/meet/">OpenVidu Meet</a> and <a href="/docs/">OpenVidu Platform</a> docs of every release from 3.4, and a skill that finds out the version, edition and product of the OpenVidu deployment your project uses. In this post we explain how they work together, how to install the plugin, and how much it improved the answers in our tests.
 
 <!-- more -->
 
 ## What's in the OpenVidu Agent Plugin
 
-An agent plugin is a package your coding agent installs in one step, bundling MCP servers and skills. Its format is the open [Agent Plugins specification :fontawesome-solid-external-link:{.external-link-icon}](https://agent-plugins.org/specification){:target="_blank"}, implemented by VS Code, Cursor, GitHub Copilot, Codex, Kiro and other clients. Claude Code has a format of its own, and the OpenVidu Agent Plugin ships in both.
+An agent plugin is a package that bundles MCP servers and skills, so a coding agent can install them all in one step. Its format is an open standard, the [Agent Plugins specification :fontawesome-solid-external-link:{.external-link-icon}](https://agent-plugins.org/specification){:target="_blank"}, which VS Code, Cursor, GitHub Copilot, Codex, Kiro and other clients already implement. Claude Code uses a format of its own, so we ship the OpenVidu Agent Plugin in both.
 
-Inside, there are two pieces:
+The first component is the **OpenVidu documentation server**, an MCP server that searches and reads the OpenVidu Meet and OpenVidu Platform documentation of every release from 3.4, including the release notes and pricing. When your agent needs something only LiveKit documents, such as the client SDK references, the server points it to LiveKit's documentation. Using it doesn't require an account or an API key. You can see the tools it offers in [OpenVidu MCP servers](/docs/building-with-ai/mcp-servers.md).
 
-- **The OpenVidu documentation server.** An MCP server that searches and reads the OpenVidu Meet and OpenVidu Platform documentation of every release from 3.4, along with its release notes and pricing. When your agent needs more, such as the client SDK references, the server points it to LiveKit's documentation. No account, no API key: [OpenVidu MCP servers](/docs/building-with-ai/mcp-servers.md) lists its tools.
-- **The `openvidu-version-edition-product` skill.** A procedure your agent follows when an answer depends on which OpenVidu you run. More on it below, and in [OpenVidu skills](/docs/building-with-ai/skills.md).
+The second one is the **`openvidu-version-edition-product` skill**, a set of instructions your agent follows when an answer depends on the version, edition or product of your OpenVidu deployment. We explain how it works in the next section, and you can read more about it in [OpenVidu skills](/docs/building-with-ai/skills.md).
 
-The plugin helps you build *with* OpenVidu. If what you're after is AI agents inside your rooms, that's [AI Services](/docs/ai/overview.md).
+One clarification to avoid confusion: the plugin helps you build *with* OpenVidu. If you're looking to add AI agents to your rooms, that's what [AI Services](/docs/ai/overview.md) are for.
 
-## Answers for the OpenVidu you run
+## The right documentation for your deployment
 
-OpenVidu publishes one documentation set per release, and the APIs grow from one to the next: the OpenVidu Meet room members API, for instance, arrived in 3.8. The documentation server answers from the documentation of the version your deployment reports, so `3.9.1` gets the 3.9 docs. A version it doesn't carry is an error, never an answer for another release. Without a version, it uses the latest.
+OpenVidu publishes a documentation set for each version, and the APIs keep growing from one version to the next. The OpenVidu Meet room members API, for instance, arrived in 3.8. That's why the documentation server answers from the documentation of the version your deployment reports. If it doesn't have the version you ask for, it returns an error instead of answering for a different one, and if you don't give it a version, it uses the latest one.
 
-Many answers also depend on the **edition**, COMMUNITY or PRO, and on the **product** your app uses, OpenVidu Meet or OpenVidu Platform. Your dependencies don't give the version away: `livekit-client`, `livekit-server-sdk` and the OpenVidu Meet web component are versioned independently of OpenVidu. So when an answer needs these facts, the skill has your agent find them out from the project and the deployment itself. It asks before contacting a remote host, never reads a credential, and offers to write what it found into `AGENTS.md`, so later sessions start from there.
+!!! note "One documentation set per minor version"
+    OpenVidu publishes its documentation per minor version, and each set covers all the patch releases of that version. So when your deployment reports version 3.9.0, the server reads the 3.9 documentation, and it would read the same documentation for a future 3.9.1.
 
-You can also write them yourself, in `AGENTS.md` or `CLAUDE.md`:
+The version isn't the only thing that matters, though. Many answers also depend on the **edition**, COMMUNITY or PRO, and on the **product** your app uses, OpenVidu Meet or OpenVidu Platform. And the version can't be taken from your dependencies, because `livekit-client`, `livekit-server-sdk` and the OpenVidu Meet web component are versioned independently of OpenVidu.
+
+This is where the skill comes in. When an answer depends on these details, it guides your agent to find them out from your project and your deployment, always asking before contacting a remote host and never reading a credential. Once it has them, it offers to write them into `AGENTS.md`, so later sessions don't have to work them out again. If you already know them, you can write them there yourself, or in `CLAUDE.md`:
 
 ```markdown title="AGENTS.md"
 This project connects to an OpenVidu 3.9.0 pro deployment, using OpenVidu Meet.
@@ -55,30 +57,30 @@ When querying the OpenVidu documentation MCP, always pass version="3.9.0",
 and read the answers for that edition and product.
 ```
 
-[Tell your agent which OpenVidu you run](/docs/building-with-ai/agent-plugin.md#tell-your-agent-which-openvidu-you-run) has the details.
+You'll find more details about this in the [plugin documentation](/docs/building-with-ai/agent-plugin.md#tell-your-agent-which-openvidu-you-run).
 
-## Install it
+## How to install it
 
-In Claude Code, it takes two commands:
+In Claude Code, installing the plugin takes two commands:
 
 ```text
 /plugin marketplace add OpenVidu/openvidu-agent-plugin
 /plugin install openvidu@openvidu
 ```
 
-VS Code, GitHub Copilot CLI, Codex, Cursor and Kiro install it from the same repository, [OpenVidu/openvidu-agent-plugin :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-agent-plugin){:target="_blank"}. The [Install](/docs/building-with-ai/agent-plugin.md#install) section has the steps for each client, and how to keep the plugin updated.
+In VS Code, GitHub Copilot CLI, Codex, Cursor and Kiro, you install it from the same repository, [OpenVidu/openvidu-agent-plugin :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-agent-plugin){:target="_blank"}. The [Install](/docs/building-with-ai/agent-plugin.md#install) section of the documentation has the steps for each client, and explains how to keep the plugin up to date.
 
-Your client doesn't load plugins? Add the [documentation server](/docs/building-with-ai/mcp-servers.md#add-it-to-your-client) and the [skills](/docs/building-with-ai/skills.md#install) on their own. The server works in any MCP client with its URL alone, `https://docs-mcp.openvidu.io/mcp`, and `npx skills add OpenVidu/openvidu-agent-plugin` copies the skill to the coding agents it finds on your machine. You'll also find the server in the official MCP Registry, as `io.openvidu/docs`, and the skill on [skills.sh :fontawesome-solid-external-link:{.external-link-icon}](https://skills.sh/){:target="_blank"}.
+If your client doesn't support plugins, you can still add the [documentation server](/docs/building-with-ai/mcp-servers.md#add-it-to-your-client) and the [skills](/docs/building-with-ai/skills.md#install) separately. The server works in any MCP client with just its URL, `https://docs-mcp.openvidu.io/mcp`, and `npx skills add OpenVidu/openvidu-agent-plugin` copies the skill to the coding agents it finds on your machine. The server is also listed in the official MCP Registry as `io.openvidu/docs`, and the skill is available on [skills.sh :fontawesome-solid-external-link:{.external-link-icon}](https://skills.sh/){:target="_blank"}.
 
-Then ask as you would about any other code, and your agent reads the documentation when the task needs it:
+Once it's installed, just ask your agent as you would about any other code, and it will read the documentation when the task needs it. For example:
 
 - "How do I record a room with individual tracks in OpenVidu?"
 - "We're on OpenVidu 3.9.0. How do I deploy it with fault tolerance?"
 - "Work out which OpenVidu version, edition and product this project uses, and write them into AGENTS.md."
 
-## How well does it answer?
+## How well does it work?
 
-We measured it before the launch. We wrote 47 questions about OpenVidu, had Claude Code answer each one three times from memory, with web search, and with web search plus the plugin, and had Claude Opus grade every answer against the published documentation. An answer counts as correct when it covers at least three quarters of the facts the question calls for and makes no false claim.
+Before the launch, we wanted to measure how much the plugin really helps. We wrote 47 questions about OpenVidu and had Claude Code answer each of them three times in three setups: from memory, with web search, and with web search plus the plugin. Then Claude Opus graded every answer against the published documentation. We counted an answer as correct when it covered at least three quarters of the facts we expected and made no false claim.
 
 | | From memory | With web search | With the plugin |
 |---|---|---|---|
@@ -87,32 +89,30 @@ We measured it before the launch. We wrote 47 questions about OpenVidu, had Clau
 | Answers with a false claim, Claude Sonnet 5.5 | 20% | 5% | **1%** |
 | Answers with a false claim, Claude Haiku 4.5 | 43% | 26% | **6%** |
 
-Web search is the configuration to compare with, since it's what a coding agent reaches for on its own; answering from memory is there as a reference. The plugin makes the most difference on the questions the OpenVidu documentation answers, about how to do something: with it, Claude Sonnet 5.5 answered all of them correctly, against 83% with web search, and Claude Haiku 4.5 went from 37% to 83%, with no false claims at all. And 99% of Sonnet's answers linked the documentation page that answers the question, so you can check them.
-
-On cost, with Haiku the plugin came out cheaper per question than searching the web ($0.041 against $0.052). With Sonnet it cost a little more ($0.127 against $0.112).
+The fairest comparison is with web search, since that's what a coding agent already does when it doesn't know something. Answering from memory is only there as a reference. Where the plugin stands out most is in the questions about how to do something with OpenVidu, the kind the documentation answers. On those, Claude Sonnet 5.5 got every answer right with the plugin, compared with 83% using web search. Claude Haiku 4.5 went from 37% to 83%, and none of its answers with the plugin contained a false claim. On top of that, 99% of Sonnet's answers with the plugin linked the documentation page that answers the question, so you can easily check them.
 
 ## Embedding OpenVidu Meet with an agent
 
-If you embed OpenVidu Meet in your app, start from [Embed OpenVidu Meet with an AI coding agent](/meet/embedded/building-with-ai.md). The plugin gives your agent the REST API, web component and webhooks references for the version and edition you run, and the page has prompts to try.
+If you're embedding OpenVidu Meet in your app, the best place to start is [Embed OpenVidu Meet with an AI coding agent](/meet/embedded/building-with-ai.md). With the plugin, your agent gets the REST API, web component and webhooks references for your version and edition, and the page includes some prompts you can try.
 
-We've built a whole application with an agent before. In [Building a video-enabled CRM with an AI agent](/blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md), an agent went from an empty folder to a CRM with embedded OpenVidu Meet meetings in seven prompts, and we pointed it at three documentation pages by hand. With the plugin, your agent finds the pages it needs on its own, for your version.
+We've already built a complete application with a coding agent. In [Building a video-enabled CRM with an AI agent](/blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md), an agent went from an empty folder to a CRM with OpenVidu Meet meetings embedded in it in just seven prompts. Back then, we had to point it to three documentation pages by hand. With the plugin, your agent finds the pages it needs on its own, and for your version.
 
 ## Privacy
 
-The plugin itself collects nothing. The documentation server logs each request your agent makes, with details such as the tool it called, what it searched for and the documentation version, but never your code, your prompts or your conversation. Your IP address is used only to group requests into a visit and is never stored. The [privacy section](/docs/building-with-ai/mcp-servers.md#privacy) has what is recorded and for how long.
+The plugin itself doesn't collect anything. The documentation server logs each request your agent makes, with details such as the tool it called, what it searched for and the documentation version, but it never receives your code, your prompts or your conversation. Your IP address is only used to group requests into visits, and it's never stored. You can check exactly what is recorded, and for how long, in the [privacy section](/docs/building-with-ai/mcp-servers.md#privacy) of the documentation.
 
 ## What we're working on next
 
-Coding agents are becoming part of how applications get built, so this is only the first step. On the way:
+Coding agents are becoming a big part of how applications get built, so this plugin is only our first step in this area. These are some of the things we're working on:
 
-- **A Grafana and observability skill.** In [Debugging WebRTC with an AI agent and Grafana MCP](/blog/posts/2026/08/debugging-webrtc-with-ai-and-grafana-mcp.md), an agent with nothing but read-only Grafana tracked down what was wrong with a broken OpenVidu deployment, and we said we were preparing MCPs and skills so coding agents can manage and operate OpenVidu stacks. The plugin is the first of them, and this skill is the next.
-- **Skills to migrate from OpenVidu 2 to OpenVidu 3**, for applications still on the previous generation.
-- **Skills to migrate to OpenVidu Meet from other technologies**, for apps that run their video calls on something else today.
+- **A Grafana and observability skill.** In [Debugging WebRTC with an AI agent and Grafana MCP](/blog/posts/2026/08/debugging-webrtc-with-ai-and-grafana-mcp.md), an agent with nothing but read-only access to Grafana tracked down what was wrong with a broken OpenVidu deployment. At the end of that post, we said we were preparing MCPs and skills so coding agents could manage and operate OpenVidu stacks. The plugin is the first of them, and this skill will be the next.
+- **Skills to migrate from OpenVidu 2 to OpenVidu 3**, to help you move applications that are still built on the previous version.
+- **Skills to migrate to OpenVidu Meet from other technologies**, for apps whose video calls run on a different solution today.
 
 ## Try it and tell us what you think
 
-Install the plugin, ask your agent about the OpenVidu you run, and see what comes back.
+The best way to see what the plugin can do is to install it and ask your agent about your own project.
 
 [Install the OpenVidu Agent Plugin :fontawesome-solid-arrow-right:](/docs/building-with-ai/agent-plugin.md#install){ .md-button .md-button--primary }
 
-Then tell us how it went: a wrong answer, a page it couldn't find, a client where it doesn't install. Open an issue in [OpenVidu/openvidu-agent-plugin :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-agent-plugin/issues){:target="_blank"}. Every question your agent can't answer tells us what to improve, in the plugin or in the documentation itself.
+And please tell us how it goes. If your agent gives a wrong answer, can't find a page, or the plugin doesn't install in your client, open an issue in [OpenVidu/openvidu-agent-plugin :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-agent-plugin/issues){:target="_blank"}. Every report helps us improve both the plugin and the documentation itself.
