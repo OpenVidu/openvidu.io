@@ -1,5 +1,101 @@
 # OpenVidu Platform release notes
 
+## 3.9.0
+
+> **For the Release Notes of OpenVidu Meet 3.9.0, please visit here: OpenVidu Meet 3.9.0**
+
+OpenVidu Platform 3.9.0 emphasizes stability and high-load performance, focusing on production deployments where networks change, load peaks and nodes restart. It brings a new high-accuracy transcription model for Live Captions and over 40 fixes and improvements that make OpenVidu faster, safer and more stable. Many of these address rare edge cases that, while infrequent, can be critical when they occur. The highlights:
+
+- **Nemotron for Live Captions**: the most accurate local model OpenVidu supports, with 40 languages in a single model and GPU acceleration. Transcription runs on your own servers, so no audio leaves your deployment.
+- **A more robust mediasoup integration**: the previous release put mediasoup on par with Pion in features, with the 2x performance boost. This release makes it hold up even better under real-world conditions: smoother VP9 and AV1 video with SVC, no more freezes in Firefox, video optimizations that save valuable bandwidth, and connections that survive network changes or UDP-blocked networks.
+- **Faster, steadier deployments**: graceful restarts take half the time, High Availability installations in cloud providers are up to 50% faster, and rare failures in Elastic and High Availability clusters (silent freezes, crash loops, connection leaks) are fixed.
+- **No background calls to third parties**: services such as Grafana, MongoDB and MinIO no longer send anonymous telemetry or check for updates. The only outbound connections left are license validation (PRO) and STUN. IP camera passwords are also gone from the logs.
+- **Smoother migration from OpenVidu 2**: 11 fixes in the v2 compatibility module, covering recordings, broadcasts and IP cameras.
+- **Up to date with upstream dependencies**: OpenVidu is now based on the latest stable versions of LiveKit, mediasoup, Egress, Ingress, Agents and all its internal services (Caddy, MongoDB, Redis, MinIO, Grafana, Alloy).
+
+If you run OpenVidu in production, the full changelog is worth a read: many of these fixes target rare issues that only show up under heavy load, network changes or node restarts.
+
+### Changelog
+
+- **mediasoup**:
+  - **Fixed SVC layer switching for VP9 and AV1**: multi-layer video tracks were switching layers incorrectly, sometimes choosing the highest quality layer when the lowest one was required, and vice versa.
+  - **VP9 and AV1 video with SVC no longer stutters when a subscriber moves to a lower spatial layer**: before this fix, every layer downgrade dropped frames until the next picture in temporal layer 0 arrived, causing noticeable freezes. The layer switch now completes seamlessly on the same picture, with no dropped frames.
+  - **VP9 and AV1 video with SVC no longer freezes when the publisher stops sending a layer**: video froze for about 3 seconds when the publisher's network or CPU forced it to stop sending the quality a subscriber was receiving.
+  - **Firefox subscribers no longer freeze when mediasoup probes the available bandwidth**: mediasoup was sending probation packets on a stream unknown to the Firefox video receiver, which made the browser rebuild the receive stream and freeze for several seconds while waiting for a keyframe. mediasoup now sends probation packets as RTX padding, which Firefox properly counts and discards without rebuilding the stream.
+  - **The openvidu-server-pro container no longer crashes under heavy load**: on rare occasions, the openvidu-server-pro Docker container could crash with a nil pointer dereference panic, caused by incorrect packet padding when sending bandwidth estimates with mediasoup.
+  - **A publisher's outage no longer marks its subscribers as lost**: when a publisher triggered a `ConnectionQuality.Lost` event due to poor network conditions, the same event could spread to its subscribers. Now only the publisher reports `ConnectionQuality.Lost`. This bug was harmless until [`livekit-client 2.22.0`](https://github.com/livekit/client-sdk-js/releases/tag/v2.22.0) , which introduced automatic reconnection upon a `ConnectionQuality.Lost` event. From that version on, the bug triggered unwanted automatic reconnections of healthy participants.
+  - **A participant that restarts ICE to recover its connection is no longer dropped halfway**: when using mediasoup, the server was flagging participants restarting ICE as failed too quickly. This happened, for example, to participants switching from Wi-Fi to a cellular network. mediasoup now behaves the same as Pion in this regard.
+  - **Clients with blocked UDP can connect over ICE-TCP**: due to a misconfiguration, mediasoup transports only offered UDP candidates. Clients can now also connect over TCP when UDP traffic is not allowed.
+  - **Paused simulcast layers stay paused after a renegotiation**: a publisher's intentionally paused layers were forced to resume whenever the server processed any SDP answer, which wasted valuable upload bandwidth. This is an upstream fix that applies to both Pion and mediasoup (see [livekit/livekit#4907](https://github.com/livekit/livekit/pull/4907) ).
+- **Live Captions**:
+  - **New Nemotron local models**: the Sherpa provider now includes the NVIDIA Nemotron 3.5 models. They offer the highest accuracy of all local models, transcribe 40 languages with a single model and are designed to run on GPUs. See their accuracy and capacity in [Capacity estimate of local provider models](https://openvidu.io/3.9/docs/ai/live-captions/#capacity-estimate-of-local-provider-models).
+  - **The Speech Processing agent can run each Room in its own process**: the new `job_executor` property chooses between running all Rooms in one process (`thread`, the default) or each Room in its own process (`process`). A single process saves memory, but can hit an upper limit of about 20 concurrently transcribed tracks because one CPU core becomes saturated. One process per Room loads the models once per Room, which increases memory usage, but scales transcriptions across all the CPUs of the node. This option makes sense for smaller models. See [Increasing capacity with smaller models](https://openvidu.io/3.9/docs/ai/live-captions/#increasing-capacity-with-smaller-models).
+  - **The Speech Processing agent no longer hangs during a graceful stop**: an agent running the Live Captions service could get stuck when performing a graceful stop (for example, in a scale-in operation of an Elastic or High Availability deployment). The agent process could hang after completing its active jobs due to a bug in the LiveKit Agents framework (reported and fixed upstream in [livekit/agents#7225](https://github.com/livekit/agents/pull/7225) ).
+  - **CUDA 11 support deprecated**: CUDA 11 is deprecated for [GPU-accelerated Live Captions](https://openvidu.io/3.9/docs/ai/live-captions/#gpu-acceleration-with-nemotron), which use the Nemotron models of the Sherpa provider. Use CUDA 12 compatible servers.
+- **Ingress**:
+  - **Multi-track endpoints ingest all their tracks**: fixed a race condition in which a multi-track endpoint could end up ingesting only a single track into the Room (see [#857415f](https://github.com/OpenVidu/ingress/commit/857415f079e09606063cd79e2445c41db4fc4cc1) ).
+  - **More reliable ingestion of RTSP cameras with extra streams**: RTSP cameras announcing streams other than one audio and one video track (ONVIF metadata, backchannel audio, etc.) are now ingested more reliably (see [#72c9ff7](https://github.com/OpenVidu/ingress/commit/72c9ff785b77ca7b97d553c9ce6b4f76a0ff2e92) ).
+  - **IP camera passwords are no longer logged**: Ingress was writing the passwords of IP cameras to its logs (see [#72c9ff7](https://github.com/OpenVidu/ingress/commit/72c9ff785b77ca7b97d553c9ce6b4f76a0ff2e92) ).
+  - **Fixed SRT ingestion of audio-only streams**: when an SRT stream carried a single Opus audio track, the ingestion never started and no track reached the Room (see [#af8ca0a](https://github.com/OpenVidu/ingress/commit/af8ca0a803265ef3b64725f05d6210686ef51ff9) ).
+- **Deployment fixes and improvements**:
+  - **Faster graceful restarts**: graceful restarts of all OpenVidu deployments are 50% quicker (from ~50s to ~25s).
+  - **Media Nodes tolerate a slow Redis**: they are no longer declared dead when Redis answers late (see [#13](https://github.com/OpenVidu/openvidu-livekit/pull/13) ).
+  - **Egress and Ingress listings no longer block Redis**: the hashes are now scanned in chunks instead of being read in one go (see [#13](https://github.com/OpenVidu/openvidu-livekit/pull/13) and [#14](https://github.com/OpenVidu/openvidu-livekit/pull/14) ).
+  - **Stale Egresses and Ingresses are cleaned up automatically**: Egresses and Ingresses left behind by a crash or an abrupt restart no longer stay listed as active forever. OpenVidu now reconciles them automatically, so API calls no longer return outdated objects.
+  - **TURN-only clients keep getting relays after a network change**: the default per-participant TURN allocation quota is raised from 12 to 32.
+  - **Services no longer call third-party addresses**: the Egress, MongoDB, Grafana, Loki, Mimir and MinIO services made background requests to external addresses by default (for anonymous telemetry, update checks, plugin downloads and other purposes). These requests are now disabled. The only outbound connections left are the ones OpenVidu needs to work: license validation (PRO) and STUN for public IP discovery.
+  - **Redis data persists across restarts**: in Single Node and Elastic deployments, Redis data now survives restarts, so active RTMP and WHIP Ingresses are kept between graceful restarts of the deployment.
+  - **Media Node reconciliation no longer freezes**: in Elastic and High Availability deployments, a blocked internal call could, on rare occasions, silently freeze the reconciliation of Media Nodes. This left a Master Node routing to an outdated list of Media Nodes, causing a growing number of 503 errors on signaling and TURN failures until it was restarted. These calls are now time-bounded, and Caddy recovers automatically in under a minute.
+  - **Fixed a Redis Sentinel connection leak**: in High Availability deployments, every internal configuration reload leaked a connection to Redis Sentinel. The Redis client is now reused across reloads.
+  - **Master Nodes no longer crash-loop when another Master Node restarts**: in High Availability deployments, restarting one Master Node could make the other Master Nodes crash-loop. The brief Sentinel failover was mistaken for a fresh cluster, so configuration updates stopped reaching them until they were manually restarted.
+- **Cloud deployments**:
+  - **Faster High Availability installations**: installation times are cut by roughly 50% on AWS, Oracle and GCP, and by 20% on Azure.
+  - **Deployments fail fast instead of hanging**: installers retry transient network errors, and every wait has a timeout with a clear error message.
+  - **Port 9000 (MinIO) closed in all cloud templates**: cloud deployments use the provider's object storage, so MinIO does not run there.
+  - **Media Node auto-healing on GCP**: in OpenVidu Elastic deployments, unresponsive Media Nodes are recreated automatically.
+  - **User-assigned managed identities on Azure**: all Azure deployments now use user-assigned managed identities, which means fewer role assignments and a Key Vault that is ready from the start. The Azure CLI is updated to 2.90.0.
+  - **Oracle redeployments with the same stack name no longer break**: redeploying no longer fails when the Vault of the previous deployment is still being recycled.
+  - **Scoped Spaces access key on DigitalOcean**: the Spaces access key was a full-access key that could touch every bucket in the account. It is now a read/write key scoped to the deployment's own buckets.
+  - **DigitalOcean scale-in no longer deletes Media Nodes with active Rooms**: a Media Node undergoing a scale-in could lose its Media Node tag before being marked as draining, so it could be deleted while still hosting active Rooms. The draining tag is now applied first, and the node always waits for its Rooms to finish before deleting itself.
+  - **Fixed `initialNumberOfMediaNodes` on DigitalOcean**: the deployment now creates the number of Media Nodes set in this parameter.
+- **v2compatibility module**:
+  - **Recordings can be read while their status changes**: reading a recording while its status was changing could return an HTTP 500 error.
+  - **Concurrent calls start only one broadcast**: concurrent calls to `POST /openvidu/api/broadcast/start` could start two broadcasts instead of one.
+  - **IP cameras with a late video track play correctly**: an IP camera whose video track arrived late did not play.
+  - **Re-subscribing to a stream restores its audio**: after unsubscribing from a stream and subscribing to it again, the stream had no audio.
+  - **`Publisher.mediaOptions.filter` is back on WEBRTC publishers**: the property was missing and is present again.
+  - **`Recording.url` follows the documented contract**: it is absent while the recording is starting, and present for both ready and failed recordings.
+  - **Stopping a recording no longer waits 10 seconds**: `POST /openvidu/api/recordings/stop/{id}` now answers immediately instead of always waiting 10 seconds.
+  - **REST calls on a recording no longer wait for webhook delivery**: while a `recordingStatusChanged` webhook was being retried against an unreachable receiver (up to 15 seconds), every REST operation on that recording was blocked.
+  - **`CUSTOM` recording layouts are reported correctly**: a recording with `recordingLayout: CUSTOM` was reported back as `BEST_FIT`, and its `customLayout` name was dropped when its URL carried query parameters. Both values are now preserved.
+  - **Missing recording files return 404**: requesting a recording file that does not exist returns HTTP 404 instead of HTTP 500.
+  - **`videoElementCreated` is emitted once per video element**: a Subscriber created with a `targetElement` was emitting the event twice for the same element.
+- **Dependency upgrades**:
+  - **LiveKit Server**: updated from v1.12.0 to v1.13.7 (see [changes](https://github.com/livekit/livekit/compare/v1.12.0...v1.13.7) ).
+  - **mediasoup**: updated from 3.19.21 to 3.26.0 (see [changes](https://github.com/versatica/mediasoup/compare/3.19.21...3.26.0) ).
+  - **Egress**: updated from v1.12.0 to v1.14.1 (see [changes](https://github.com/livekit/egress/compare/v1.12.0...v1.14.1) ).
+  - **Ingress**: updated from v1.5.0-2ce1b32 to v1.5.0-a9d870c (see [changes](https://github.com/livekit/ingress/compare/2ce1b32...a9d870c) ).
+  - **Agents**: updated from 1.6.4 to 1.8.2 (see [changes](https://github.com/livekit/agents/compare/livekit-agents%401.6.4...livekit-agents%401.8.2) ).
+
+### Version table
+
+| Artifact               | Version                                                                        | Info | Link |
+| ---------------------- | ------------------------------------------------------------------------------ | ---- | ---- |
+| livekit/livekit-server | v1.13.7                                                                        |      |      |
+| mediasoup              | 3.26.0                                                                         |      |      |
+| livekit/egress         | v1.14.1 (commit [#e9330a4](https://github.com/livekit/egress/commit/e9330a4) ) |      |      |
+| livekit/ingress        | v1.5.0 (commit [#a9d870c](https://github.com/livekit/ingress/commit/a9d870c) ) |      |      |
+| livekit/agents         | v1.8.2                                                                         |      |      |
+| MinIO                  | 2026-09-22T19-25-18Z                                                           |      |      |
+| Caddy                  | 2.11.4                                                                         |      |      |
+| MongoDB                | 8.0.29                                                                         |      |      |
+| Redis                  | 8.10.1                                                                         |      |      |
+| Grafana                | 12.4.10                                                                        |      |      |
+| Prometheus             | 3.14.0                                                                         |      |      |
+| Mimir                  | 3.2.0                                                                          |      |      |
+| Alloy                  | 1.19.2                                                                         |      |      |
+| Loki                   | 3.7.7                                                                          |      |      |
+
 ## 3.8.0
 
 > **For the Release Notes of OpenVidu Meet 3.8.0, please visit here: OpenVidu Meet 3.8.0**

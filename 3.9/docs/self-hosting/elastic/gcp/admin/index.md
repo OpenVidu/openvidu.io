@@ -4,7 +4,7 @@ Google Cloud Platform
 
 The deployment of OpenVidu Elastic on Google Cloud Platform is automated using Infrastructure Manager in Google Cloud Console, with Media Nodes managed within a [Managed Instance Group](https://docs.cloud.google.com/compute/docs/instance-groups?hl=en) . This group dynamically adjusts the number of instances based on a target average CPU usage.
 
-Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/index.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
+Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises Elastic deployment, allowing you to follow the same administration and configuration guidelines of the [On Premises Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/index.md) documentation. However, there are specific considerations unique to the Google Cloud Platform environment that are worth keeping in mind:
 
 ## Cluster shutdown and startup
 
@@ -104,9 +104,9 @@ If you want a fixed number of Media Nodes you probably want to deactivate the Cl
 
 ## Administration and configuration
 
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises Elastic Administration](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/index.md).
+Regarding the administration of your deployment, you can follow the instructions in section [On Premises Elastic Administration](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/index.md).
 
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/index.md). Additionally, the [How to Guides](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md). Additionally, the [How to Guides](https://openvidu.io/latest/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
 In addition to these, a Google Cloud Platform deployment provides the capability to manage global configurations via the Google Cloud Platform Console using Secrets Manager created during the deployment:
 
@@ -121,4 +121,4 @@ Changes will be applied automatically.
 
 ## Backup and Restore
 
-Review the [Backup and restore OpenVidu deployments](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.
+Review the [Backup and restore OpenVidu deployments](https://openvidu.io/latest/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.

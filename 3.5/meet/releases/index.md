@@ -1,3 +1,156 @@
+# OpenVidu Meet release notes
+
+## 3.9.0
+
+> **For the Release Notes of OpenVidu Platform 3.9.0, please visit here: OpenVidu Platform 3.9.0**
+
+OpenVidu Meet 3.9.0 gives you much more control over your meetings. Your application can moderate live meetings from your backend using the `Meetings REST API` and monitor them through filtered webhooks, and moderators can mute participants right from the meeting. Each room can also set its own rules and limits: how many participants can join, how long meetings last, when recording starts and whether participants join with their microphone and camera on. On top of that, participants get a clearer view of what is happening in the meeting, and the UI has been optimized. A solid set of bug fixes rounds out this release.
+
+### Changelog
+
+- **Meetings REST API**: control live meetings from your backend. Read a meeting's state, end it, list its participants, and kick, mute or promote any of them. Requests authenticate with the API key, or with a room member token limited by that member's permissions (reading requires the new `meetingRead` permission). See [Meeting moderation](https://openvidu.io/3.9/meet/features/meetings/moderation/#rest-api-reference).
+- **Mute participants**: moderators can turn off another participant's microphone, camera or screen share, or everyone's at once, from the Participants panel, the Meetings REST API or the embedded `participantMute` and `participantMuteAll` commands. The participant is notified and can turn the device back on, and moderators cannot be muted. Muting requires the new `participantMute` permission, granted by default to the `Moderator` role of rooms created from 3.9.0 on. Rooms and members created before need it granted explicitly. See [Muting participants](https://openvidu.io/3.9/meet/features/meetings/moderation/#muting-participants).
+- **Multiple webhooks**: register as many webhook endpoints as you need, each with its own event filter and room scope. Add, edit, pause, test and delete them from the **Embedded** page of the OpenVidu Meet app or with the new `/api/v1/webhooks` REST API. This replaces the single global webhook of previous versions. See [Webhooks](https://openvidu.io/3.9/meet/embedded/reference/webhooks/).
+- **Participant join and leave webhooks**: the new [`participantJoined`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/participantJoinedWebhook) and [`participantLeft`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/participantLeftWebhook) webhooks report every participant arriving and leaving. `participantLeft` includes the leave date, the time spent in the meeting and the reason for leaving. Embedded applications get the same notifications for remote participants through the [events](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#events) of the same names.
+- **Meeting limits**: cap how many participants a meeting admits (1 to 30) and how long it lasts (up to one day). Participants see a countdown before the meeting ends, and your application can tell a meeting ended by its duration limit from the `meetingEnded` webhook and the embedded `meetingLeft` event. Set the limits in the room wizard or with `config.maxParticipants` and `config.maxDurationMinutes`. See [Meeting configuration](https://openvidu.io/3.9/meet/features/meetings/configuration/).
+- **Automatic recording**: a room can start recording on its own when the first participant joins, when the second one joins, or when a moderator joins. Choose the trigger in the room wizard or with `config.recording.autoStart`. See [Recording trigger](https://openvidu.io/3.9/meet/features/recordings/configuration/#recording-trigger).
+- **Initial microphone and camera state**: decide whether participants join with their microphone and camera on or off, per room (`config.initialAudioActive` and `config.initialVideoActive`) or per embedded participant (`initial-audio-active` and `initial-video-active` attributes, which take precedence over the room). See [Initial device state](https://openvidu.io/3.9/meet/features/meetings/configuration/#initial-device-state).
+- **Separate permission to download recordings**: downloading recordings is now a permission of its own, `recordingDownload`, independent from playing them (`recordingPlay`), with its own endpoint: [`GET /api/v1/recordings/{recordingId}/download`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/downloadRecording) . See [Recording permissions](https://openvidu.io/3.9/meet/features/recordings/overview/#recording-permissions).
+- **More control for embedded applications**:
+  - **Control the local participant's media**: the new [commands](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#commands) `mediaToggleAudio`, `mediaToggleVideo` and `mediaToggleScreenShare` turn the local microphone, camera and screen share on or off. The `mediaAudioStatusChanged`, `mediaVideoStatusChanged` and `mediaScreenShareStatusChanged` events report every change, and whether it came from the participant, a moderator or the system.
+  - **Link participants to your own users**: the new [attributes](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#attributes) `participant-external-id` and `participant-metadata` attach your own identifier and data to a participant. OpenVidu Meet never interprets them, and returns them as `externalId` and `metadata` in participant payloads.
+- **Meeting experience improvements**:
+  - **Status rail**: a bar above the meeting layout shows the recording indicator with its elapsed time, the time left before the duration limit, an encryption badge in end-to-end encrypted rooms, and how many participants the layout is not showing. Participants are also notified when a recording starts and stops. See [Meeting view](https://openvidu.io/3.9/meet/features/meetings/lifecycle/#meeting-view).
+  - **Muted microphone warnings**: participants who speak with their microphone off are told so, and so are participants whose microphone is muted by the operating system rather than by OpenVidu Meet.
+  - **Media state of every participant**: the Participants panel shows the microphone, camera and screen share state of everyone in the meeting, with per-device mute controls next to **Promote** and **Kick**.
+  - **Pinch to zoom screen shares**: shared screens can be zoomed with two fingers on touch devices.
+  - **Single permission prompt**: the browser asks for camera and microphone access in one prompt.
+  - **Remembered local video position**: whether the local video tile floats or is docked is remembered per browser.
+  - **Faster meeting layout**: performance improvements in the layout of the meeting.
+  - **Room wizard improvements**: the room wizard includes the new meeting limits and initial device state, and room IDs can now be copied.
+- **Stronger permission enforcement**:
+  - **Roles and permissions decided by the server**: a participant could grant themselves moderator permissions by modifying their own role and identity data. Roles and permissions are now decided by the server alone.
+  - **Chat permission enforced by the media server**: the `chatWrite` permission was only enforced in the interface. It is now enforced by the media server, both when joining and when permissions change during the meeting.
+  - **Revoked media permissions reach the media server**: revoking a member's media permissions during a meeting did not reach the media server, so the participant kept publishing.
+- **Server and deployment improvements**:
+  - **Faster REST API**: requests are validated with precompiled schemas, reducing response times.
+  - **40% smaller Docker image**: the `openvidu/openvidu-meet` image is 40% smaller and installs the exact dependency versions of its lockfile. It no longer contains pnpm, bash or `meet.sh`.
+  - **Higher rate limits**: the rate limits for token issuance, API requests and static assets are raised.
+  - **Initial items seeded on every start**: `MEET_INITIAL_ADMIN_USER`, `MEET_INITIAL_API_KEY` and `MEET_INITIAL_WEBHOOK_URL` now create their item on any start while the deployment has none, not only on the first start.
+  - **Fixed a connection leak with webhooks**: unanswered webhooks made the number of active connections grow continuously. Every webhook is now answered.
+- **Bug fixes**:
+  - **Ended meetings no longer stay marked as running**: this blocked duration limits and room configuration changes from taking effect.
+  - **Closed rooms stay closed**: a stale reconnection could reopen a closed room.
+  - **Accurate recording start date**: a recording's [`startDate`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/schemas/MeetRecording) is now the moment it starts recording media, not the moment it was requested.
+  - **Starting a recording answers immediately**: [`POST /api/v1/recordings`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/startRecording) waited up to 20 seconds for a participant to publish media. It now answers as soon as the media server accepts the recording, which stays in `starting` status until the first track reaches it.
+  - **Recording deletion fixed**: deleting a recording could fail on an error payload with missing fields.
+  - **Re-entering a meeting keeps its attributes**: re-entering a meeting in the same Web Component instance wiped or froze the attributes it was entered with.
+  - **Out-of-range auto-deletion dates rejected**: a room's `autoDeletionDate` could be set so far in the future that it was never honored, leaving the room stuck forever. It now has an upper limit.
+  - **Bulk room deletion limited to 100 rooms**: `DELETE /api/v1/rooms` reset the connection instead of answering when `roomIds` was too long for the server's header size limit. It now accepts up to 100 room IDs per request.
+  - **Rooms with an empty name**: [`POST /api/v1/rooms`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createRoom) failed when `roomName` was empty. Empty, blank or `null` names now default to `Room`.
+  - **Local video stays in the layout**: the local video disappeared from the layout when the last remote participant left.
+  - **Layout settings saved only when changed**: the first meeting a browser opened saved its layout and number of visible participants as the participant's own choice. They are now saved only when the participant changes them in the settings panel.
+  - **Virtual backgrounds no longer freeze in Firefox and Safari**: a virtual background or blur froze for the other participants when the sender's window was minimized or covered.
+  - **Room wizard state fixed**: an abandoned wizard leaked its state into the next room, and a failed save reset the form.
+
+### Deprecations
+
+This release has no breaking changes. It renames several permissions, embedded commands and embedded events to a new, consistent naming scheme. The old names keep working until **3.12.0**, when they are removed: requests accept either name, and responses and webhooks carry both. Update your integration to the new names before upgrading to 3.12.0.
+
+| Deprecated permission        | Replacement                                           |
+| ---------------------------- | ----------------------------------------------------- |
+| `canRecord`                  | `recordingControl`                                    |
+| `canRetrieveRecordings`      | `recordingList`, `recordingPlay`, `recordingDownload` |
+| `canDeleteRecordings`        | `recordingDelete`                                     |
+| `canJoinMeeting`             | `meetingJoin`                                         |
+| `canEndMeeting`              | `meetingEnd`                                          |
+| `canMakeModerator`           | `participantPromote`                                  |
+| `canKickParticipants`        | `participantKick`                                     |
+| `canPublishAudio`            | `mediaPublishAudio`                                   |
+| `canPublishVideo`            | `mediaPublishVideo`                                   |
+| `canShareScreen`             | `mediaShareScreen`                                    |
+| `canChangeVirtualBackground` | `mediaChangeVirtualBackground`                        |
+| `canReadChat`                | `chatRead`                                            |
+| `canWriteChat`               | `chatWrite`                                           |
+| `canShareAccessLinks`        | `roomShareAccessLinks`                                |
+
+| Deprecated embedded command or event | Replacement              | Kind    |
+| ------------------------------------ | ------------------------ | ------- |
+| `endMeeting`                         | `meetingEnd`             | Command |
+| `leaveRoom`                          | `meetingLeave`           | Command |
+| `kickParticipant`                    | `participantKick`        | Command |
+| `joined`                             | `meetingJoined`          | Event   |
+| `left`                               | `meetingLeft`            | Event   |
+| `closed`                             | `embeddedCloseRequested` | Event   |
+
+Every event is emitted under both its old and its new name, so a listener registered on both receives it twice. Listen to one name only.
+
+## 3.8.0
+
+> **For the Release Notes of OpenVidu Platform 3.8.0, please visit here: OpenVidu Platform 3.8.0**
+
+OpenVidu Meet 3.8.0 is considered the first General Availability (GA) release of the product, leaving the beta stage and entering a stable production-ready state.
+
+### Changelog
+
+- **Users and role-based accounts**: OpenVidu Meet now lets you register multiple users and assign each one a role that controls what they can do in the application. There are three roles — `admin` (full control over all users, rooms, members, recordings and system configuration), `room_manager` (can create and manage their own rooms) and `room_member` (can only access rooms where they are a member). Learn more in the [Users](https://openvidu.io/3.8/meet/features/users/overview/) feature.
+- **Room members with fine-grained access**: you can now grant access to a room to specific individuals — either registered [users](https://openvidu.io/3.8/meet/features/users/overview/) or [identified guests](https://openvidu.io/3.8/meet/features/room-members/overview/) (people without an account who each receive a unique personal access link). Every member is added with a base role (`Moderator` or `Speaker`) whose default permissions can be customized individually, per member. See the [Room Members](https://openvidu.io/3.8/meet/features/room-members/overview/) feature for the complete picture.
+- **Customizable default role permissions per room**: the default permissions of the `Moderator` and `Speaker` roles can now be customized when [creating](https://openvidu.io/3.8/meet/features/rooms/management/#create-rooms) or [editing](https://openvidu.io/3.8/meet/features/rooms/management/#edit-rooms) a room, letting you tailor what each role can do on a per-room basis.
+- **Per-room anonymous access control**: anonymous access can now be disabled per role for individual rooms. You can independently enable or disable the `Moderator` and `Speaker` [shared anonymous access links](https://openvidu.io/3.8/meet/features/rooms/access/#anonymous-access) when creating or editing a room.
+- **Improved room creation wizard**: the room wizard has been redesigned to guide you through the full room setup, including access configuration, role permissions and room members, all in one place.
+- **Redesigned OpenVidu Meet app**: the application has been expanded with new pages and forms to manage everything from the UI — a user list, a user profile page, a room details page (showing the room's recordings and members), a recording details page, and dedicated forms for creating users and adding members.
+- **Full internationalization (i18n)**: OpenVidu Meet is now fully translated, with support for 10 languages: Chinese, English, German, Spanish, French, Hindi, Italian, Japanese, Dutch and Portuguese. The interface automatically adapts to the user's language.
+- **New filters for rooms and recordings**: additional filtering options have been added to the rooms and recordings lists, making it easier to find what you are looking for.
+- **New `show-recording` WebComponent attribute**: the [OpenVidu Meet WebComponent](https://openvidu.io/3.8/meet/embedded/reference/webcomponent/) now accepts a `show-recording` attribute to embed the recording playback view. Unlike the existing `recording-url` attribute, `show-recording` takes a recording identifier alongside the room `room-url` and inherits the permissions from the room URL, offering a simpler alternative to display a specific recording.
+- **Meeting experience improvements**: several enhancements to the in-meeting experience:
+  - **Network quality indicator**: a network quality indicator is now displayed for each participant, both on the participant's video tile and in the Participants panel, giving a clear view of individual connection quality at a glance.
+  - **New status indicators in the Participants panel**: the Participants panel now shows a set of per-participant status indicators — a **speaking** indicator that highlights who is currently talking, plus indicators for participants who have their **microphone muted**, their **camera turned off**, or are **sharing their screen**.
+  - **Flexible self-view**: the self-view video (your own camera preview) can now be resized independently to better fit your preferences, and it stays independent from the meeting layout as more participants join, so it no longer gets rearranged with everyone else.
+  - **Manual zoom for screen sharing**: when viewing a shared screen, participants can now manually zoom in and out to customize the view and focus on the details that matter to them.
+  - **Categorized virtual backgrounds**: the [virtual backgrounds](https://openvidu.io/3.8/meet/features/meetings/virtual-background/) have been updated and are now organized into categories (such as *Professional*, *Home Office* and *Creative*), making it easier to browse and pick the right background.
+  - **Improved live captions performance**: the live captions agent has been optimized, delivering faster and more reliable real-time captions during meetings. Learn more about [Live captions](https://openvidu.io/3.8/meet/features/meetings/live-captions/).
+
+### Breaking changes
+
+All breaking changes in this release are related to the [REST API](https://openvidu.io/3.8/meet/embedded/reference/rest-api/):
+
+- **Anonymous access links moved in the room object**: the `moderatorUrl` and `speakerUrl` properties of the room response have been moved to `access.anonymous.moderator.url` and `access.anonymous.speaker.url` respectively. Update any integration that reads the anonymous access links from the [MeetRoom](https://openvidu.io/3.8/meet/embedded/reference/api.html#/schemas/MeetRoom) object accordingly.
+- **Recording access replaced by per-member permissions**: the room configuration property `config.recording.allowAccessTo` has been removed. Access to a room's recordings is now governed by fine-grained [room member permissions](https://openvidu.io/3.8/meet/features/recordings/overview/#recording-permissions): `canRetrieveRecordings` (list, play and download recordings) and `canDeleteRecordings` (delete recordings). **Admins** always retain full access to any recording (retrieve and delete), regardless of these permissions. By default, the `Moderator` role has both permissions and the `Speaker` role has only `canRetrieveRecordings`. To reproduce the behavior of the removed property, adjust the default permissions of the `Moderator` and `Speaker` roles when [creating](https://openvidu.io/3.8/meet/features/rooms/management/#create-rooms) or [editing](https://openvidu.io/3.8/meet/features/rooms/management/#edit-rooms) the room:
+  - **`admin`** (previously only admins could retrieve and delete recordings): disable both `canRetrieveRecordings` and `canDeleteRecordings` for the `Moderator` and `Speaker` roles. Admins keep full access regardless.
+  - **`admin_moderator`** (previously only admins and moderators could retrieve and delete recordings): keep `canRetrieveRecordings` and `canDeleteRecordings` enabled for `Moderator`, and disable both for `Speaker`.
+  - **`admin_moderator_speaker`** (previously everyone could retrieve recordings, but only admins and moderators could delete them): this is exactly the new default, so no change is needed — `Moderator` keeps both permissions and `Speaker` keeps only `canRetrieveRecordings`.
+- **Rooms API no longer returns `config` by default**: endpoints that return a room object (or an array of rooms) no longer include the `config` property in the response by default. To include it, request it explicitly using the `extraFields=config` query parameter or the `X-ExtraFields` HTTP header.
+
+## 3.7.0
+
+Nothing was added in this release in OpenVidu Meet. You can learn more about the core internal improvements introduced by the OpenVidu Platform here: [OpenVidu Platform 3.7.0](https://openvidu.io/3.7/docs/releases/#370)
+
+## 3.6.0
+
+> **For the Release Notes of OpenVidu Platform 3.6.0, please visit here: OpenVidu Platform 3.6.0**
+
+### Changelog
+
+- **Live captions in meetings**: Live captions are now available to make conversations easier to follow in real time. Participants can read what is being said as it happens, improving understanding in noisy environments, supporting people with hearing difficulties, and making meetings more accessible and inclusive. This is also the first step towards more advanced AI-powered features such as meeting transcriptions, summaries, action items extraction, and more.
+- **Recording layout selection**: you can now choose how your meeting recordings are rendered to better match your use case:
+  - **Grid view** to see all participants at once.
+  - **Speaker view** to focus on the active speaker.
+  - **Single speaker view** for more focused presentations and one-person sessions.
+- **Advanced recording video settings**: recording configuration now supports video resolution, frame rate and codec selection.
+- **Recording configuration via UI or API**: recording options can now be configured either from the setup wizard/Room configuration UI or through the REST API.
+- **Firefox performance improvements**: improved video reception in Firefox when the meeting tab is not in focus, delivering a more stable experience for the rest of participants.
+- **Role-change UX improvements**: participants are now clearly informed when someone’s role changes during a session through both a visual notification and a sound alert.
+
+### Breaking changes
+
+- **OpenVidu Meet default path changed**: when deploying OpenVidu, the default path for OpenVidu Meet is now `/meet` (previously `/`). This facilitates the coexistence of OpenVidu Meet and a custom application on the same server. You can change this path to whatever you want (including the previous default `/`) following [these instructions](https://openvidu.io/3.6/docs/self-hosting/how-to-guides/customize-meet-base-path/).
+
+### Patch releases
+
+#### 3.6.1
+
+- Optimized lock management by significantly reducing the number of Redis keys, minimizing read and write operations, lowering memory usage, improving TTLs for key deletion, and simplifying the overall system design.
+
 ## 3.5.0
 
 > **For the Release Notes of OpenVidu Platform 3.5.0, please visit here: OpenVidu Platform 3.5.0**
@@ -57,7 +210,7 @@ Visitors to the OpenVidu website will notice that there are now two distinct pro
 
 By separating the product lines, we keep the developer‑first power of OpenVidu Platform while offering a refined, ready‑to‑use solution for common videoconferencing use cases (e‑learning, telehealth, collaboration, customer support...). This clarity helps teams choose low‑level control with OpenVidu Platform, or the fastest path to value-off‑the‑shelf with OpenVidu Meet. In short, many use cases that fall under the category of "video conferencing applications" can be satisfied with OpenVidu Meet, saving development time and resources.
 
-You can read more about the differences between both OpenVidu products here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
+You can read more about the differences between both OpenVidu products here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/).
 
 ### Am I the right fit for OpenVidu Meet?
 
@@ -72,8 +225,6 @@ If your use case requires a high degree of customization, or if you need to buil
 - Mobile platforms embedding (iOS and Android).
 - More branding and customization options.
 - Locked rooms.
-- E2E encryption.
-- Live captions.
 - AI meeting summaries.
 - And much more...
 
@@ -81,12 +232,12 @@ If your use case requires a high degree of customization, or if you need to buil
 
 If you want to learn more about OpenVidu Meet, check out the following resources:
 
-- Compare OpenVidu Meet vs OpenVidu Platform: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)
-- Launch OpenVidu Meet locally in a couple of minutes: [Try OpenVidu Meet locally](https://openvidu.io/3.5/meet/deployment/local/index.md)
-- Embed OpenVidu Meet into your web app: [OpenVidu Meet Embedded](https://openvidu.io/3.5/meet/embedded/intro/index.md)
+- Compare OpenVidu Meet vs OpenVidu Platform: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/)
+- Launch OpenVidu Meet locally in a couple of minutes: [Try OpenVidu Meet locally](https://openvidu.io/3.4/meet/deployment/local/)
+- Embed OpenVidu Meet into your web app: [OpenVidu Meet Embedded](https://openvidu.io/3.4/meet/embedded/intro/)
 
 ### Patch releases
 
 #### 3.4.1
 
-- **Update authentication methods to use header-based tokens instead of cookies**: when [embedding OpenVidu Meet](https://openvidu.io/3.5/meet/embedded/intro/index.md), the strategy (`SameSite=Strict`) was causing issues when loading the application and the embedable component from different domains. Using the most permissive cookie policy available (`SameSite=None`) still caused issues in some browsers that block third-party cookies by default. Now OpenVidu Meet avoids cookies and instead uses header-based tokens for authentication, which is more reliable and secure. See [commit 4e80b5a](https://github.com/OpenVidu/openvidu-meet/commit/4e80b5a060c1ae0f8942527dbdc6ee221992caab) .
+- **Update authentication methods to use header-based tokens instead of cookies**: when [embedding OpenVidu Meet](https://openvidu.io/3.4/meet/embedded/intro/), the strategy (`SameSite=Strict`) was causing issues when loading the application and the embedable component from different domains. Using the most permissive cookie policy available (`SameSite=None`) still caused issues in some browsers that block third-party cookies by default. Now OpenVidu Meet avoids cookies and instead uses header-based tokens for authentication, which is more reliable and secure. See [commit 4e80b5a](https://github.com/OpenVidu/openvidu-meet/commit/4e80b5a060c1ae0f8942527dbdc6ee221992caab) .

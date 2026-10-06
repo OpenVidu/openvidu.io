@@ -15,7 +15,7 @@ At the end of this tutorial, you will have a fully functional simple video-call 
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
-The application uses the [OpenVidu Meet API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
+The application uses the [OpenVidu Meet API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) to create and delete rooms, and direct links to the **OpenVidu Meet interface** to access the video call functionality.
 
 ## Running this tutorial
 
@@ -31,7 +31,7 @@ docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.9.0 up -y openvid
 
 > **Info**
 >
-> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.9/meet/deployment/local/index.md) .
+> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md) .
 
 ### 2. Download the tutorial code
 
@@ -178,7 +178,7 @@ This endpoint does the following:
 
    > **Info**
    >
-   > You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createRoom) .
+   > You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createRoom) .
 
    To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 
@@ -583,7 +583,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 1. **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
 
-1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/3.9/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
+1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/latest/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
 
 1. **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
 
@@ -602,7 +602,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
-If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/3.9/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/latest/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
 
 1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
 
@@ -611,7 +611,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com
    ```
 
-1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
+1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
 
    ```text
    OV_MEET_API_KEY=your-production-api-key

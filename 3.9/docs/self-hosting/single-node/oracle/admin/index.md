@@ -2,13 +2,13 @@
 
 Oracle Cloud Infrastructure
 
-Oracle Cloud Infrastructure OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/index.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
+Oracle Cloud Infrastructure OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
 
 However, there are certain things worth mentioning:
 
 ## Start and stop OpenVidu through the OCI Console
 
-You can start and stop all services as explained in the [On Premises Single Node](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Compute instance directly from the OCI Console. This will stop all services running in the instance and reduce Oracle Cloud Infrastructure costs.
+You can start and stop all services as explained in the [On Premises Single Node](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Compute instance directly from the OCI Console. This will stop all services running in the instance and reduce Oracle Cloud Infrastructure costs.
 
 **Stop OpenVidu Single Node**
 
@@ -50,9 +50,9 @@ You can change the shape (instance type) of the OpenVidu Single Node instance to
 
 ## Administration and configuration
 
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/index.md).
+Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node Administration](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md).
 
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/index.md). Additionally, the [How to Guides](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md). Additionally, the [How to Guides](https://openvidu.io/latest/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
 In addition to these, an Oracle Cloud Infrastructure deployment provides the capability to manage global configurations via the OCI Console using the Secrets via Secret Manager:
 
@@ -80,4 +80,4 @@ Changes will be applied automatically.
 
 ## Backup and Restore
 
-Review the [Backup and restore OpenVidu deployments](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.
+Review the [Backup and restore OpenVidu deployments](https://openvidu.io/latest/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.

@@ -36,4 +36,4 @@ With **OpenVidu Meet Embedded**, you can integrate the best video calling experi
 
 ______________________________________________________________________
 
-## Where to start? We recommend following the [**step by step guide**](https://openvidu.io/3.9/meet/embedded/step-by-step-guide) or exploring one of our [**tutorials**](https://openvidu.io/3.9/meet/embedded/tutorials).
+## Where to start? We recommend following the [**step by step guide**](https://openvidu.io/latest/meet/embedded/step-by-step-guide) or exploring one of our [**tutorials**](https://openvidu.io/latest/meet/embedded/tutorials).

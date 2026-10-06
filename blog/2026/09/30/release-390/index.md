@@ -18,7 +18,7 @@ Here are the highlights.
 
 ### Moderate live meetings from your backend
 
-Until now, your backend could manage rooms, members and recordings, but a live meeting was out of its reach. The new [Meetings REST API](https://openvidu.io/latest/meet/features/meetings/moderation/#rest-api-reference) changes that. From your server you can:
+Until now, your backend could manage rooms, members and recordings, but a live meeting was out of its reach. The new [Meetings REST API](https://openvidu.io/3.9/meet/features/meetings/moderation/#rest-api-reference) changes that. From your server you can:
 
 - **Read** a meeting's live state and list its participants, with their role and media state.
 - **End** the meeting for everyone.
@@ -33,7 +33,7 @@ curl -X PUT "https://<your-openvidu-domain>/meet/api/v1/meetings/<room-id>/parti
   -d '{"audioActive": false}'
 ```
 
-Replace `<your-openvidu-domain>` with the domain of your deployment, `<room-id>` with the ID of the room and `<your-api-key>` with an [OpenVidu Meet API key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key). Moderation is one-way by design: you can turn a device off, never on. Moderators are never muted, and everyone else can turn their device back on.
+Replace `<your-openvidu-domain>` with the domain of your deployment, `<room-id>` with the ID of the room and `<your-api-key>` with an [OpenVidu Meet API key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key). Moderation is one-way by design: you can turn a device off, never on. Moderators are never muted, and everyone else can turn their device back on.
 
 ### Mute participants from the meeting
 
@@ -41,24 +41,24 @@ The same power is now available inside the meeting. The Participants panel shows
 
 > **Existing rooms need the new permission**
 >
-> Muting requires the new `participantMute` permission. The `Moderator` role of rooms created from 3.9.0 on has it by default, but rooms and members created before need it granted explicitly. See [Muting participants](https://openvidu.io/latest/meet/features/meetings/moderation/#muting-participants).
+> Muting requires the new `participantMute` permission. The `Moderator` role of rooms created from 3.9.0 on has it by default, but rooms and members created before need it granted explicitly. See [Muting participants](https://openvidu.io/3.9/meet/features/meetings/moderation/#muting-participants).
 
 ### Configure multiple webhooks
 
-A single webhook endpoint works fine... until your billing service, your analytics pipeline and your CRM all want different events. OpenVidu Meet now supports [multiple webhooks](https://openvidu.io/latest/meet/embedded/reference/webhooks/), each with its own event filter and room scope. Add, edit, pause and test them from the **Embedded** page of the OpenVidu Meet app, or manage them with the new `/api/v1/webhooks` REST API.
+A single webhook endpoint works fine... until your billing service, your analytics pipeline and your CRM all want different events. OpenVidu Meet now supports [multiple webhooks](https://openvidu.io/3.9/meet/embedded/reference/webhooks/), each with its own event filter and room scope. Add, edit, pause and test them from the **Embedded** page of the OpenVidu Meet app, or manage them with the new `/api/v1/webhooks` REST API.
 
 There are also two new events worth subscribing to: `participantJoined` and `participantLeft`. The second one carries the leave date, the time the participant spent in the meeting and the reason they left. Attendance reports and per-minute billing are now just a webhook away.
 
 ### Custom rules and limits per room
 
-Rooms get a set of new settings that shape every meeting held in them. All of them are available in the room wizard and in the [room `config`](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoomConfig) of the REST API:
+Rooms get a set of new settings that shape every meeting held in them. All of them are available in the room wizard and in the [room `config`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/schemas/MeetRoomConfig) of the REST API:
 
 - **Participant limit**: cap a meeting at anywhere from 1 to 30 participants. Anyone else trying to join is told the meeting is full.
 - **Duration limit**: end meetings automatically after a set time, up to one day. Participants see a countdown before the end, and the `meetingEnded` webhook tells your application why the meeting ended.
 - **Automatic recording**: start recording when the first participant joins, when the second one joins, or when a moderator joins. Nobody has to remember to press the button.
 - **Initial microphone and camera state**: have participants join with their microphone or camera off, which is perfect for classes and webinars. Embedded apps can override it per participant.
 
-The details are in [Meeting configuration](https://openvidu.io/latest/meet/features/meetings/configuration/) and [Recording trigger](https://openvidu.io/latest/meet/features/recordings/configuration/#recording-trigger).
+The details are in [Meeting configuration](https://openvidu.io/3.9/meet/features/meetings/configuration/) and [Recording trigger](https://openvidu.io/3.9/meet/features/recordings/configuration/#recording-trigger).
 
 ### More control for embedded applications
 
@@ -91,7 +91,7 @@ meet.on('mediaAudioStatusChanged', (event) => {
 });
 ```
 
-`<your-room-url>` is any [room access link](https://openvidu.io/latest/meet/features/rooms/access/). The complete list of attributes, commands and events is in the [Web Component reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/).
+`<your-room-url>` is any [room access link](https://openvidu.io/3.9/meet/features/rooms/access/). The complete list of attributes, commands and events is in the [Web Component reference](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/).
 
 ### A clearer meeting for everyone
 
@@ -114,7 +114,7 @@ This one is invisible to participants, but it matters most. Three fixes close ga
 
 3.9.0 renames several permissions, embedded commands and events to a consistent naming scheme: `canRecord` becomes `recordingControl`, `joined` becomes `meetingJoined`, and so on. The old names keep working until **3.12.0**. Requests accept both, and responses and webhooks carry both, so you can migrate at your own pace.
 
-One tip: every renamed event is emitted under both names, so listen to only one of them or your handler runs twice. The complete list is in the [deprecations of the OpenVidu Meet release notes](https://openvidu.io/latest/meet/releases/#deprecations).
+One tip: every renamed event is emitted under both names, so listen to only one of them or your handler runs twice. The complete list is in the [deprecations of the OpenVidu Meet release notes](https://openvidu.io/3.9/meet/releases/#deprecations).
 
 ### Bug fixes
 
@@ -128,11 +128,11 @@ On top of the fixes, the `openvidu/openvidu-meet` Docker image is now 40% smalle
 
 ### Nemotron, the most accurate Live Captions yet
 
-[Live Captions](https://openvidu.io/latest/docs/ai/live-captions/) get a new local model: NVIDIA **Nemotron 3.5**, available with the Sherpa provider. It is the most accurate local model OpenVidu supports, it transcribes 40 languages with a single model and automatic language detection, and it is designed to run on GPUs. A node with one NVIDIA T4 handles about 15 transcribed tracks, at a fraction of the CPU cost.
+[Live Captions](https://openvidu.io/3.9/docs/ai/live-captions/) get a new local model: NVIDIA **Nemotron 3.5**, available with the Sherpa provider. It is the most accurate local model OpenVidu supports, it transcribes 40 languages with a single model and automatic language detection, and it is designed to run on GPUs. A node with one NVIDIA T4 handles about 15 transcribed tracks, at a fraction of the CPU cost.
 
-And because it runs on your own servers, no audio ever leaves your deployment. You get accurate, multilingual captions without a cloud provider in the loop. The [capacity estimate](https://openvidu.io/latest/docs/ai/live-captions/#capacity-estimate-of-local-provider-models) compares it with every other local model, on CPU and on GPU.
+And because it runs on your own servers, no audio ever leaves your deployment. You get accurate, multilingual captions without a cloud provider in the loop. The [capacity estimate](https://openvidu.io/3.9/docs/ai/live-captions/#capacity-estimate-of-local-provider-models) compares it with every other local model, on CPU and on GPU.
 
-Running smaller, single-language models instead? The Speech Processing agent can now run each Room in its own process and scale transcriptions across all the CPUs of the node. See [Increasing capacity with smaller models](https://openvidu.io/latest/docs/ai/live-captions/#increasing-capacity-with-smaller-models).
+Running smaller, single-language models instead? The Speech Processing agent can now run each Room in its own process and scale transcriptions across all the CPUs of the node. See [Increasing capacity with smaller models](https://openvidu.io/3.9/docs/ai/live-captions/#increasing-capacity-with-smaller-models).
 
 > **Sherpa is part of OpenVidu PRO**
 >
@@ -140,7 +140,7 @@ Running smaller, single-language models instead? The Speech Processing agent can
 
 ### mediasoup, from feature parity to battle-tested
 
-Release 3.8.0 brought [mediasoup](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/) on par with Pion in features, while keeping its 2x performance. Release 3.9.0 is about how it behaves when things get messy:
+Release 3.8.0 brought [mediasoup](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/) on par with Pion in features, while keeping its 2x performance. Release 3.9.0 is about how it behaves when things get messy:
 
 - **Smoother SVC video**: VP9 and AV1 with SVC now switch layers correctly, and no longer stutter or freeze when a subscriber drops to a lower quality or the publisher stops sending one.
 - **No more Firefox freezes** every time mediasoup probed the available bandwidth.
@@ -173,5 +173,5 @@ Along the same lines, IP camera passwords are no longer written to the Ingress l
 
 This post only scratches the surface: the full release notes list more than 80 fixes and improvements across both products. If you run OpenVidu in production, we recommend reading them carefully to learn about all the benefits of upgrading:
 
-- [**Release Notes of OpenVidu Platform 3.9.0**](https://openvidu.io/latest/docs/releases/#390)
-- [**Release Notes of OpenVidu Meet 3.9.0**](https://openvidu.io/latest/meet/releases/#390)
+- [**Release Notes of OpenVidu Platform 3.9.0**](https://openvidu.io/3.9/docs/releases/#390)
+- [**Release Notes of OpenVidu Meet 3.9.0**](https://openvidu.io/3.9/meet/releases/#390)

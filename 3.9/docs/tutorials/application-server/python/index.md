@@ -4,8 +4,8 @@
 
 This is a minimal server application built for Python with [Flask](https://flask.palletsprojects.com/en/stable/) that allows:
 
-- Generating LiveKit tokens on demand for any [application client](https://openvidu.io/3.9/docs/tutorials/application-client/index.md).
-- Receiving LiveKit [webhook events](https://openvidu.io/3.9/docs/reference/webhooks/index.md).
+- Generating LiveKit tokens on demand for any [application client](https://openvidu.io/latest/docs/tutorials/application-client/index.md).
+- Receiving LiveKit [webhook events](https://openvidu.io/latest/docs/reference/webhooks/index.md).
 
 It internally uses [LiveKit Python SDK](https://github.com/livekit/python-sdks) .
 
@@ -52,11 +52,11 @@ It internally uses [LiveKit Python SDK](https://github.com/livekit/python-sdks) 
 
 **Deploy OpenVidu**
 
-To use a production-ready OpenVidu deployment, visit the official [deployment guide](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md).
+To use a production-ready OpenVidu deployment, visit the official [deployment guide](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
 
 > **Configure Webhooks**
 >
-> All [application servers](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
+> All [application servers](https://openvidu.io/latest/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
@@ -140,9 +140,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
-For more information, check the [JavaScript tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/javascript/index.md) .
+For more information, check the [JavaScript tutorial](https://openvidu.io/latest/docs/tutorials/application-client/javascript/index.md) .
 
 **React**
 
@@ -172,9 +172,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
-For more information, check the [React tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/react/index.md) .
+For more information, check the [React tutorial](https://openvidu.io/latest/docs/tutorials/application-client/react/index.md) .
 
 **Angular**
 
@@ -204,9 +204,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
-For more information, check the [Angular tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/angular/index.md) .
+For more information, check the [Angular tutorial](https://openvidu.io/latest/docs/tutorials/application-client/angular/index.md) .
 
 **Vue**
 
@@ -236,9 +236,9 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
-For more information, check the [Vue tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/vue/index.md) .
+For more information, check the [Vue tutorial](https://openvidu.io/latest/docs/tutorials/application-client/vue/index.md) .
 
 **Electron**
 
@@ -266,9 +266,9 @@ The application will seamlessly initiate as a native desktop program, adapting i
 
 > **Running your application client from other devices in your local network**
 >
-> One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
+> One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
 
-For more information, check the [Electron tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/electron/index.md) .
+For more information, check the [Electron tutorial](https://openvidu.io/latest/docs/tutorials/application-client/electron/index.md) .
 
 **Ionic**
 
@@ -308,7 +308,7 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
    >
    > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates.
    >
-   > Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+   > Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
    **Mobile**
 
@@ -326,7 +326,7 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
 
       The WebRTC API demands a secure connection for functionality outside of localhost, necessitating the serving of the application over HTTPS.
 
-   If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
+   If you run [OpenVidu locally](#run-openvidu-locally) you don't need to worry about this. OpenVidu will handle all of the above requirements for you. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
 
    Now, let's explore how to run the application on a mobile device:
 
@@ -358,7 +358,7 @@ To run the client application tutorial, you need [Node.js](https://nodejs.org/en
 
    Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
 
-For more information, check the [Ionic tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/ionic/index.md) .
+For more information, check the [Ionic tutorial](https://openvidu.io/latest/docs/tutorials/application-client/ionic/index.md) .
 
 **Android**
 
@@ -373,11 +373,11 @@ This screen allows you to configure the URLs of the application server and the L
 
 > **Connecting real Android device to application server running in you local network**
 >
-> One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client in a real Android device and be able to reach the application server very easily without worrying about SSL certificates if they are both running in the same local network. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
+> One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client in a real Android device and be able to reach the application server very easily without worrying about SSL certificates if they are both running in the same local network. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
 
 Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
 
-For more information, check the [Android tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/android/index.md) .
+For more information, check the [Android tutorial](https://openvidu.io/latest/docs/tutorials/application-client/android/index.md) .
 
 **iOS**
 
@@ -398,11 +398,11 @@ This screen allows you to configure the URLs of the application server and the L
 
 > **Connecting real iOS device to application server running in you local network**
 >
-> One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client in a real iOS device and be able to reach the application server very easily without worrying about SSL certificates if they are both running in the same local network. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
+> One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client in a real iOS device and be able to reach the application server very easily without worrying about SSL certificates if they are both running in the same local network. For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
 
 Once you have configured the URLs, you can join a video call room by providing a room name and a user name. After joining the room, you will be able to see your own video and audio tracks, as well as the video and audio tracks of the other participants in the room.
 
-For more information, check the [iOS tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/ios/index.md) .
+For more information, check the [iOS tutorial](https://openvidu.io/latest/docs/tutorials/application-client/ios/index.md) .
 
 ## Understanding the code
 
@@ -479,7 +479,7 @@ def create_token():
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 1. We set participant's identity in the AccessToken.
-1. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants).
+1. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants).
 1. Finally, we convert the AccessToken to a JWT token and send it back to the client.
 
 The endpoint first obtains the `roomName` and `participantName` parameters from the request body. If they are not available, it returns a `400` error.
@@ -488,14 +488,14 @@ If required fields are available, a new JWT token is created. For that we use th
 
 1. A new `AccessToken` is created providing the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
 1. We set participant's identity in the AccessToken.
-1. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants).
+1. We set the video grants in the AccessToken. `room_join` allows the user to join a room and `room` determines the specific room. Check out all [Video Grants](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants).
 1. Finally, we convert the AccessToken to a JWT token and send it back to the client.
 
 ______________________________________________________________________
 
 ### Receive webhook
 
-The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://openvidu.io/3.9/docs/reference/webhooks/#events).
+The endpoint `/livekit/webhook` accepts `POST` requests with a payload of type `application/webhook+json`. This is the endpoint where LiveKit Server will send [webhook events](https://openvidu.io/latest/docs/reference/webhooks/#events).
 
 [app.py](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/application-server/python/app.py#L34-L51)
 
@@ -521,7 +521,7 @@ def receive_webhook():
 ```
 
 1. Initialize a `TokenVerifier` using the `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.
-1. Initialize a `WebhookReceiver` using the `TokenVerifier`. It will help validating and decoding incoming [webhook events](https://openvidu.io/3.9/docs/reference/webhooks/index.md).
+1. Initialize a `WebhookReceiver` using the `TokenVerifier`. It will help validating and decoding incoming [webhook events](https://openvidu.io/latest/docs/reference/webhooks/index.md).
 1. Get the 'Authorization' header from the HTTP request.
 1. Obtain the webhook event using the `WebhookReceiver#receive` method. It expects the raw body of the request and the 'Authorization' header.
 1. Consume the event as you whish.
@@ -536,4 +536,4 @@ Inside the `receive_webhook` handler we:
 
 > **Configure Webhooks**
 >
-> If you are using a [production deployment](#deploy-openvidu), remember to configure the webhook URL to point to your local application server as explained in the [Send Webhooks to a Local Application Server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section.
+> If you are using a [production deployment](#deploy-openvidu), remember to configure the webhook URL to point to your local application server as explained in the [Send Webhooks to a Local Application Server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section.
