@@ -3,6 +3,7 @@ title: Debugging WebRTC with an AI agent and Grafana MCP
 draft: false
 date:
   created: 2026-08-25
+  updated: 2026-10-06
 slug: debugging-webrtc-with-ai-and-grafana-mcp
 description: >-
   We give a Claude Code agent nothing but read-only Grafana and a broken
