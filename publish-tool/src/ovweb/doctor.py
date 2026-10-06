@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import shutil
 from collections.abc import Callable
@@ -18,37 +19,34 @@ from .redirects import RedirectError, resolve_file_redirects
 from .versions import parse
 
 #: Every distribution that is a build input, pinned from the freeze of a known-good publish
-#: run. Each is named in pyproject.toml, in the Dockerfiles (mkdocs-material as the base-image
-#: tag, the rest in the pip install lines) and in the lock compiled from pyproject.toml, so all
-#: the places must agree.
+#: run. Each is named in pyproject.toml, in the Dockerfiles (zensical as the base-image tag, the
+#: rest in any pip install line) and in the lock compiled from pyproject.toml, so all the places
+#: must agree. Zensical leaves the three packages that render the Markdown open, and a different
+#: version of any of them builds different markup.
 PINNED_DISTRIBUTIONS = (
-    "mkdocs",
+    "zensical",
+    "markdown",
     "pymdown-extensions",
-    "mkdocs-material",
-    "mike",
-    "mkdocs-glightbox",
-    "mkdocs-llmstxt",
-    "mkdocs-rss-plugin",
     "pygments",
-    # Pulled in by mkdocs-rss-plugin; pinned because it has had security releases of its own.
-    "gitpython",
 )
 
+#: The Zensical fork of mike is installed from git, so its pin is a commit rather than a version:
+#: `mike @ git+https://github.com/squidfunk/mike.git@<commit>` in pyproject.toml, the same URL in
+#: Dockerfile.mike, and the commit pip recorded for the installed distribution. The lock leaves it
+#: out: pip cannot hash a git checkout, so the publish workflow installs it separately.
+MIKE_FORK = re.compile(r"squidfunk/mike(?:\.git)?@([0-9a-f]{7,40})")
+
 #: Build inputs every past version branch carries as a verbatim copy of this checkout's, each with
-#: the first version whose branch needs it. MkDocs loads them by path from the checked-out branch,
-#: so a past version is built with its branch's copy, never main's.
-BRANCH_FILES = (
-    ("publish-tool/pygments_fence_title_hook.py", "3.0"),
-    # The llmstxt plugin, and with it the two files that shape its output, arrived in 3.4.
-    ("publish-tool/llmstxt_entries_hook.py", "3.4"),
-    ("publish-tool/llmstxt_preprocess.py", "3.4"),
-)
+#: the first version whose branch needs it. Empty since the move to Zensical: the past branches
+#: still build with MkDocs and keep the hooks their own mkdocs.yml names, and nothing on main is
+#: loaded by path from another branch any more.
+BRANCH_FILES: tuple[tuple[str, str], ...] = ()
 
 DOCKERFILES = ("Dockerfile", "Dockerfile.mike")
 #: The hash-locked resolution of the `build` extra that the publish workflow installs from.
 LOCKFILE = "publish-tool/requirements-publish.txt"
-#: The tag may carry a digest (`9.7.7@sha256:…`); the version is the part before it.
-DOCKER_TAG = re.compile(r"^FROM\s+squidfunk/mkdocs-material:([^@\s]+)", re.MULTILINE)
+#: The tag may carry a digest (`0.0.68@sha256:…`); the version is the part before it.
+DOCKER_TAG = re.compile(r"^FROM\s+zensical/zensical:([^@\s]+)", re.MULTILINE)
 
 
 @dataclass
@@ -75,6 +73,7 @@ def run_checks(
         return checks
 
     checks += check_pins(repo_root)
+    checks += check_mike_fork(repo_root)
     if pins_only:
         return checks
 
@@ -91,11 +90,11 @@ def check_pins(
 ) -> list[Check]:
     """Assert that every place naming a pinned distribution names the same version.
 
-    The pyproject pins, the Dockerfiles (base-image tag for mkdocs-material, pip install lines
-    for the rest), the lock compiled from pyproject and the installed environment. A different
-    theme or plugin version builds different markup — which the release-notes splice matches
-    on — so drift is an error, not a warning. A lock that lags pyproject is the same drift one
-    step later: the publish workflow installs from the lock, not from pyproject.
+    The pyproject pins, the Dockerfiles (base-image tag for zensical, pip install lines for
+    anything else they name), the lock compiled from pyproject and the installed environment. A
+    different theme or plugin version builds different markup — which the release-notes splice
+    matches on — so drift is an error, not a warning. A lock that lags pyproject is the same
+    drift one step later: the publish workflow installs from the lock, not from pyproject.
     """
     pyproject = repo_root / "publish-tool" / "pyproject.toml"
     pyproject_text = pyproject.read_text(encoding="utf-8") if pyproject.is_file() else ""
@@ -133,9 +132,7 @@ def check_pins(
             found["publish-tool/pyproject.toml"] = declared.pop()
 
         for name, text in dockerfiles.items():
-            match = (
-                DOCKER_TAG.search(text) if distribution == "mkdocs-material" else pin.search(text)
-            )
+            match = DOCKER_TAG.search(text) if distribution == "zensical" else pin.search(text)
             if match:
                 found[name] = match.group(1)
 
@@ -160,6 +157,66 @@ def check_pins(
         rendered = ", ".join(f"{where}={version}" for where, version in sorted(found.items()))
         checks.append(Check("pins", False, f"{distribution} versions disagree: {rendered}"))
     return checks
+
+
+def check_mike_fork(
+    repo_root: Path, *, installed_commit: Callable[[], str | None] | None = None
+) -> list[Check]:
+    """Every place naming the mike fork must name the same commit.
+
+    pyproject.toml is the source of truth; Dockerfile.mike and the installed distribution agree
+    with it. An environment without mike (the validation extra) is not compared.
+    """
+    pyproject = repo_root / "publish-tool" / "pyproject.toml"
+    text = pyproject.read_text(encoding="utf-8") if pyproject.is_file() else ""
+    declared = MIKE_FORK.search(text)
+    if declared is None:
+        return [
+            Check(
+                "pins",
+                False,
+                "mike is not pinned to a commit of the Zensical fork in "
+                "publish-tool/pyproject.toml",
+            )
+        ]
+    found = {"publish-tool/pyproject.toml": declared.group(1)}
+
+    # Named only when the Dockerfile installs the fork directly; one that installs the `build`
+    # extra takes the commit from pyproject and has nothing of its own to compare.
+    dockerfile = repo_root / "Dockerfile.mike"
+    if dockerfile.is_file():
+        match = MIKE_FORK.search(dockerfile.read_text(encoding="utf-8"))
+        if match:
+            found["Dockerfile.mike"] = match.group(1)
+
+    installed = (installed_commit or _installed_mike_commit)()
+    if installed:
+        found["installed"] = installed
+
+    reference = found["publish-tool/pyproject.toml"]
+    disagreeing = {
+        where: commit
+        for where, commit in found.items()
+        if not (commit.startswith(reference) or reference.startswith(commit))
+    }
+    if disagreeing:
+        rendered = ", ".join(f"{where}={commit}" for where, commit in sorted(found.items()))
+        return [Check("pins", False, f"mike fork commits disagree: {rendered}")]
+    return [Check("pins", True, f"mike fork at {reference[:12]} everywhere")]
+
+
+def _installed_mike_commit() -> str | None:
+    """The commit pip recorded for the installed mike, or None when it is not a git install."""
+    try:
+        recorded = metadata.distribution("mike").read_text("direct_url.json")
+    except metadata.PackageNotFoundError:
+        return None
+    if not recorded:
+        return None
+    try:
+        return json.loads(recorded).get("vcs_info", {}).get("commit_id")
+    except (ValueError, AttributeError):
+        return None
 
 
 def check_branch_files(
@@ -242,12 +299,22 @@ def _distribution_version(name: str) -> str | None:
 
 def _check_dependencies() -> list[Check]:
     missing_hint = 'not found — `pip install "./publish-tool[build]"`'
+    mike_version = Mike.version()
+    # The fork's version string carries its name (`2.2.0+zensical-0.1.0`); the original mike
+    # would build with MkDocs, which is not installed any more.
+    mike_ok = Mike.is_available() and "zensical" in (mike_version or "")
     return [
-        Check("mike", Mike.is_available(), Mike.version() or missing_hint),
         Check(
-            "mkdocs",
-            _distribution_version("mkdocs") is not None,
-            _distribution_version("mkdocs") or missing_hint,
+            "mike",
+            mike_ok,
+            mike_version + (" — not the Zensical fork; " + missing_hint if not mike_ok else "")
+            if mike_version
+            else missing_hint,
+        ),
+        Check(
+            "zensical",
+            _distribution_version("zensical") is not None,
+            _distribution_version("zensical") or missing_hint,
         ),
         Check(
             "git",

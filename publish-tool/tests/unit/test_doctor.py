@@ -1,6 +1,7 @@
-"""Two preflight checks: the pins, where every place naming a build input — pyproject, the
-Dockerfiles, the lock compiled from pyproject, the environment — must name the same version, and
-the version branches' copies of the files MkDocs loads by path from the checkout.
+"""Three preflight checks: the pins, where every place naming a build input — pyproject, the
+Dockerfiles, the lock compiled from pyproject, the environment — must name the same version; the
+commit of the mike fork; and the version branches' copies of files loaded by path from the
+checkout (none since the move to Zensical, so the tests pass their own list).
 """
 
 from __future__ import annotations
@@ -8,53 +9,40 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 
-from ovweb.doctor import PINNED_DISTRIBUTIONS, check_branch_files, check_pins
+from ovweb.doctor import PINNED_DISTRIBUTIONS, check_branch_files, check_mike_fork, check_pins
 from ovweb.gitrepo import GitError
 
 PYPROJECT = """
 build = [
-    "mike==2.2.0",
-    "mkdocs==1.6.1",
-    "pymdown-extensions==11.0.1",
-    "mkdocs-material[imaging]==9.7.6",
-    "pygments==2.19.2",
-    "mkdocs-glightbox==0.5.2",
-    "mkdocs-llmstxt==0.5.0",
-    "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.59",
+    "zensical==0.0.67",
+    "mike @ git+https://github.com/squidfunk/mike.git@2d4ad799442f4592db8ad53b179bfb33db8c69ac",
+    "markdown==3.11",
+    "pymdown-extensions==12.1",
+    "pygments==2.21.0",
 ]
 validate = [
-    "mkdocs==1.6.1",
-    "pymdown-extensions==11.0.1",
-    "mkdocs-material==9.7.6",
-    "pygments==2.19.2",
-    "mkdocs-glightbox==0.5.2",
-    "mkdocs-llmstxt==0.5.0",
-    "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.59",
+    "zensical==0.0.67",
+    "markdown==3.11",
+    "pymdown-extensions==12.1",
+    "pygments==2.21.0",
 ]
 """
 
 DOCKERFILE = (
-    "FROM squidfunk/mkdocs-material:9.7.6\n"
-    "RUN pip install mkdocs==1.6.1 pymdown-extensions==11.0.1 "
-    "mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 "
-    "mkdocs-rss-plugin==1.19.0 pygments==2.19.2 gitpython==3.1.59\n"
+    "FROM zensical/zensical:0.0.67\nRUN pip install pymdown-extensions==12.1 pygments==2.21.0\n"
 )
+
+MIKE_COMMIT = "2d4ad799442f4592db8ad53b179bfb33db8c69ac"
+MIKE_INSTALL = f"RUN pip install git+https://github.com/squidfunk/mike.git@{MIKE_COMMIT}\n"
 
 #: The shape `uv pip compile --generate-hashes` writes: the pin, its hashes, then who needs it.
 LOCK = "".join(
     f"{name}=={version} \\\n    --hash=sha256:{'0' * 64}\n    # via ovweb (pyproject.toml)\n"
     for name, version in (
-        ("gitpython", "3.1.59"),
-        ("mike", "2.2.0"),
-        ("mkdocs", "1.6.1"),
-        ("mkdocs-glightbox", "0.5.2"),
-        ("mkdocs-llmstxt", "0.5.0"),
-        ("mkdocs-material", "9.7.6"),
-        ("mkdocs-rss-plugin", "1.19.0"),
-        ("pygments", "2.19.2"),
-        ("pymdown-extensions", "11.0.1"),
+        ("markdown", "3.11"),
+        ("pygments", "2.21.0"),
+        ("pymdown-extensions", "12.1"),
+        ("zensical", "0.0.67"),
     )
 )
 
@@ -68,22 +56,17 @@ def write_repo(
         (root / "publish-tool" / "requirements-publish.txt").write_text(lock, encoding="utf-8")
     (root / "Dockerfile").write_text(dockerfile, encoding="utf-8")
     if mike_dockerfile is None:
-        mike_dockerfile = dockerfile + "RUN pip install mike==2.2.0\n"
+        mike_dockerfile = dockerfile + MIKE_INSTALL
     (root / "Dockerfile.mike").write_text(mike_dockerfile, encoding="utf-8")
 
 
 #: Deterministic stand-in for the running environment, matching the fixture's declared pins.
 #: The real lookup would make the tests depend on whatever this environment has installed.
 INSTALLED = {
-    "mkdocs": "1.6.1",
-    "pymdown-extensions": "11.0.1",
-    "mkdocs-material": "9.7.6",
-    "mike": "2.2.0",
-    "mkdocs-glightbox": "0.5.2",
-    "mkdocs-llmstxt": "0.5.0",
-    "mkdocs-rss-plugin": "1.19.0",
-    "pygments": "2.19.2",
-    "gitpython": "3.1.59",
+    "zensical": "0.0.67",
+    "markdown": "3.11",
+    "pymdown-extensions": "12.1",
+    "pygments": "2.21.0",
 }
 
 
@@ -107,35 +90,35 @@ def test_agreeing_pins_pass_for_every_distribution(tmp_path):
 def test_a_drifted_installed_distribution_fails(tmp_path):
     write_repo(tmp_path)
 
-    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "pygments": "2.21.0"}))
+    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "pygments": "2.22.0"}))
 
     assert not result["pygments"].ok
-    assert "installed=2.21.0" in result["pygments"].detail
+    assert "installed=2.22.0" in result["pygments"].detail
 
 
 def test_a_drifted_dockerfile_pin_fails_that_distribution_only(tmp_path):
-    drifted = DOCKERFILE.replace("mkdocs-glightbox==0.5.2", "mkdocs-glightbox==0.6.0")
+    drifted = DOCKERFILE.replace("pygments==2.21.0", "pygments==2.22.0")
     write_repo(tmp_path, dockerfile=drifted)
 
     result = by_distribution(pins_of(tmp_path))
 
-    assert not result["mkdocs-glightbox"].ok
-    assert "disagree" in result["mkdocs-glightbox"].detail
-    assert result["mkdocs-llmstxt"].ok
+    assert not result["pygments"].ok
+    assert "disagree" in result["pygments"].detail
+    assert result["pymdown-extensions"].ok
 
 
-def test_a_drifted_base_image_tag_fails_mkdocs_material(tmp_path):
-    write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":9.7.6", ":9.9.9"))
+def test_a_drifted_base_image_tag_fails_zensical(tmp_path):
+    write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":0.0.67", ":9.9.9"))
 
     result = by_distribution(pins_of(tmp_path))
 
-    assert not result["mkdocs-material"].ok
+    assert not result["zensical"].ok
 
 
 def test_pyproject_disagreeing_with_itself_fails(tmp_path):
     write_repo(
         tmp_path,
-        pyproject=PYPROJECT.replace('"pygments==2.19.2",', '"pygments==2.18.0",', 1),
+        pyproject=PYPROJECT.replace('"pygments==2.21.0",', '"pygments==2.20.0",', 1),
     )
 
     result = by_distribution(pins_of(tmp_path))
@@ -146,37 +129,37 @@ def test_pyproject_disagreeing_with_itself_fails(tmp_path):
 def test_a_distribution_missing_from_pyproject_fails(tmp_path):
     write_repo(
         tmp_path,
-        pyproject=PYPROJECT.replace("mike==2.2.0", "requests==1.0"),
-        mike_dockerfile=DOCKERFILE,
+        pyproject=PYPROJECT.replace('"pygments==2.21.0",', ""),
+        dockerfile="FROM zensical/zensical:0.0.67\n",
     )
 
     result = by_distribution(pins_of(tmp_path))
 
-    assert not result["mike"].ok
-    assert "not pinned" in result["mike"].detail
+    assert not result["pygments"].ok
+    assert "not pinned" in result["pygments"].detail
 
 
 def test_a_lock_lagging_a_pyproject_pin_fails_that_distribution_only(tmp_path):
     write_repo(
         tmp_path,
-        pyproject=PYPROJECT.replace("gitpython==3.1.59", "gitpython==3.1.62"),
-        dockerfile=DOCKERFILE.replace("gitpython==3.1.59", "gitpython==3.1.62"),
+        pyproject=PYPROJECT.replace("pymdown-extensions==12.1", "pymdown-extensions==12.2"),
+        dockerfile=DOCKERFILE.replace("pymdown-extensions==12.1", "pymdown-extensions==12.2"),
     )
 
-    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "gitpython": "3.1.62"}))
+    result = by_distribution(pins_of(tmp_path, {**INSTALLED, "pymdown-extensions": "12.2"}))
 
-    assert not result["gitpython"].ok
-    assert "publish-tool/requirements-publish.txt=3.1.59" in result["gitpython"].detail
+    assert not result["pymdown-extensions"].ok
+    assert "publish-tool/requirements-publish.txt=12.1" in result["pymdown-extensions"].detail
     assert result["pygments"].ok
 
 
 def test_a_distribution_missing_from_the_lock_fails(tmp_path):
-    write_repo(tmp_path, lock=LOCK.replace("mike==2.2.0", "requests==1.0"))
+    write_repo(tmp_path, lock=LOCK.replace("zensical==0.0.67", "requests==1.0"))
 
     result = by_distribution(pins_of(tmp_path))
 
-    assert not result["mike"].ok
-    assert "not in publish-tool/requirements-publish.txt" in result["mike"].detail
+    assert not result["zensical"].ok
+    assert "not in publish-tool/requirements-publish.txt" in result["zensical"].detail
 
 
 def test_no_lock_file_is_not_compared(tmp_path):
@@ -187,11 +170,59 @@ def test_no_lock_file_is_not_compared(tmp_path):
 
 def test_a_digest_pinned_base_image_still_names_its_tag(tmp_path):
     digest = "@sha256:" + "0" * 64
-    write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":9.7.6\n", f":9.7.6{digest}\n"))
+    write_repo(tmp_path, dockerfile=DOCKERFILE.replace(":0.0.67\n", f":0.0.67{digest}\n"))
 
     result = by_distribution(pins_of(tmp_path))
 
-    assert result["mkdocs-material"].ok
+    assert result["zensical"].ok
+
+
+# -- the mike fork, pinned to a commit --------------------------------------------------------
+
+
+def test_an_agreeing_mike_fork_commit_passes(tmp_path):
+    write_repo(tmp_path)
+
+    (check,) = check_mike_fork(tmp_path, installed_commit=lambda: MIKE_COMMIT)
+
+    assert check.ok and MIKE_COMMIT[:12] in check.detail
+
+
+def test_an_environment_without_mike_is_not_compared(tmp_path):
+    write_repo(tmp_path)
+
+    (check,) = check_mike_fork(tmp_path, installed_commit=lambda: None)
+
+    assert check.ok
+
+
+def test_a_mike_dockerfile_on_another_commit_fails(tmp_path):
+    write_repo(tmp_path, mike_dockerfile=DOCKERFILE + MIKE_INSTALL.replace("2d4ad79", "abcdef0"))
+
+    (check,) = check_mike_fork(tmp_path, installed_commit=lambda: MIKE_COMMIT)
+
+    assert not check.ok and "Dockerfile.mike=abcdef0" in check.detail
+
+
+def test_an_installed_mike_on_another_commit_fails(tmp_path):
+    write_repo(tmp_path)
+
+    (check,) = check_mike_fork(tmp_path, installed_commit=lambda: "0123456789ab")
+
+    assert not check.ok and "installed=0123456789ab" in check.detail
+
+
+def test_a_pyproject_without_the_fork_fails(tmp_path):
+    original = PYPROJECT.replace(
+        f'    "mike @ git+https://github.com/squidfunk/mike.git@{MIKE_COMMIT}",\n',
+        '    "mike==2.2.0",\n',
+    )
+    assert "squidfunk" not in original
+    write_repo(tmp_path, pyproject=original)
+
+    (check,) = check_mike_fork(tmp_path, installed_commit=lambda: None)
+
+    assert not check.ok and "not pinned" in check.detail
 
 
 def test_run_checks_outside_a_repository_is_fatal():

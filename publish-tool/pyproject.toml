@@ -7,52 +7,52 @@ name = "ovweb"
 version = "1.0.0"
 description = "Build, version and publish the openvidu.io website"
 readme = "README.md"
-# The Python in squidfunk/mkdocs-material 9.7.7, the oldest interpreter this code runs on:
-# the mkdocs hook imports this package inside that image when the site is served locally.
+# Zensical's floor; the Docker image (zensical/zensical) runs 3.14, as do the workflows.
 requires-python = ">=3.11"
 dependencies = [
     "typer>=0.12",
     "PyYAML>=6",
     "Jinja2>=3.1",
     "packaging>=23",
+    # The Markdown extensions in ovweb.mdx, which the Zensical build loads by name.
+    "Markdown>=3.6",
 ]
 
 [project.optional-dependencies]
 # Everything needed for a real publish build. Every build input is pinned, from the freeze of
 # a known-good publish run; `ovweb doctor --pins` asserts these versions agree with the two
-# Dockerfiles and the installed environment.
+# Dockerfiles and the installed environment. Zensical leaves the three packages that render the
+# Markdown open (`markdown>=3.7`, `pymdown-extensions>=11.0`, `pygments>=2.20`), so they are
+# pinned here: a different version of any of them builds different markup.
 build = [
-    "mike==2.2.0",
-    "mkdocs==1.6.1",
+    "zensical==0.0.68",
+    # The Zensical fork of mike (zensical.org/docs/compatibility/mkdocs/mike/): the same `mike`
+    # command, building with `zensical build`. Pinned to a commit, which is as exact as a hash;
+    # `ovweb doctor --pins` checks that Dockerfile.mike names the same one. The publish lock
+    # leaves it out, because pip cannot hash a git checkout (publish-tool/README.md, "Dependency
+    # pins").
+    "mike @ git+https://github.com/squidfunk/mike.git@2d4ad799442f4592db8ad53b179bfb33db8c69ac",
+    "markdown==3.11",
     "pymdown-extensions==12.1",
-    "mkdocs-material[imaging]==9.7.7",
     "pygments==2.21.0",
-    "mkdocs-glightbox==0.5.2",
-    "mkdocs-llmstxt==0.5.0",
-    "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.62",
     # The build backend, so the publish workflow can install this package with
     # --no-build-isolation from the hash-locked requirements-publish.txt.
     "hatchling==1.32.4",
 ]
-# Same, minus mike and the imaging extra: the lightweight link-validation build.
+# Same, minus mike: the lightweight link-validation build.
 validate = [
-    "mkdocs==1.6.1",
+    "zensical==0.0.68",
+    "markdown==3.11",
     "pymdown-extensions==12.1",
-    "mkdocs-material==9.7.7",
     "pygments==2.21.0",
-    "mkdocs-glightbox==0.5.2",
-    "mkdocs-llmstxt==0.5.0",
-    "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.62",
 ]
 dev = [
     "pytest>=8",
     "ruff>=0.6",
-    # The tests for llmstxt_preprocess.py compare it against the plugin's own `autoclean`, imported
-    # for real so the comparison cannot drift, which needs the soup library and the plugin itself.
-    # `mkdocs` is listed because mkdocs-llmstxt does not declare it, yet its package __init__
-    # imports mkdocs.config.
+    # The tests for llmstxt_preprocess.py compare it against the mkdocs-llmstxt plugin's own
+    # `autoclean`, imported for real so the comparison cannot drift, which needs the soup library
+    # and the plugin itself. `mkdocs` is listed because mkdocs-llmstxt does not declare it, yet
+    # its package __init__ imports mkdocs.config.
     "beautifulsoup4",
     "mkdocs",
     "mkdocs-llmstxt",
@@ -60,6 +60,11 @@ dev = [
 
 [project.scripts]
 ovweb = "ovweb.cli:main"
+
+# The mike fork is a direct (git) reference, which hatchling refuses to put in the metadata unless
+# told so; the published wheel of this tool goes nowhere PyPI's rule against them would matter.
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ovweb"]
