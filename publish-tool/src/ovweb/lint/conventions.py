@@ -1,4 +1,5 @@
-"""Page-composition conventions: admonitions, the `page_features:` contract, assets and snippets.
+"""Page-composition conventions: admonitions, the `page_features:` contract, assets, snippets
+and blog post dates.
 
 The `page_features:` contract is include-aware: a page's snippets are inlined before
 checking, because the HTML that requires a feature key usually lives in a snippet while
@@ -8,6 +9,7 @@ the key must sit on the page.
 from __future__ import annotations
 
 import re
+from datetime import date, datetime
 
 from ..sources import sources_of
 from .corpus import Corpus, Source
@@ -406,6 +408,54 @@ def check_blog_asset_mirroring(corpus: Corpus) -> list[Finding]:
                         f"references assets of {match.group(1)}, but this post's folder "
                         f"is {expected}",
                         "a post's assets mirror its own year/month/slug path",
+                    )
+                )
+    return findings
+
+
+def _day(value: object) -> date | None:
+    if isinstance(value, datetime):
+        return value.date()
+    return value if isinstance(value, date) else None
+
+
+def check_blog_dates(corpus: Corpus) -> list[Finding]:
+    """A post's `date` is a mapping: `created`, plus `updated` once a published post is edited.
+
+    The RSS plugin reads `date.created` and `date.updated` by key, so a scalar `date` would date
+    the post's feed entry from git or the build instead of its frontmatter.
+    """
+    findings = []
+    for path, page in corpus.docs.items():
+        if not path.startswith("docs/blog/posts/"):
+            continue
+        dates = page.meta.get("date")
+        created = _day(dates.get("created")) if isinstance(dates, dict) else None
+        if created is None:
+            findings.append(
+                Finding(
+                    "blog-date",
+                    ERROR,
+                    path,
+                    1,
+                    "`date` is not a mapping with a `created` date",
+                    "write `date:` with `created: YYYY-MM-DD` under it; the RSS feeds read "
+                    "date.created and date.updated",
+                )
+            )
+            continue
+        if "updated" in dates:
+            updated = _day(dates["updated"])
+            if updated is None or updated < created:
+                findings.append(
+                    Finding(
+                        "blog-date",
+                        ERROR,
+                        path,
+                        1,
+                        f"`date.updated` ({dates['updated']}) is not a date on or after "
+                        f"`date.created` ({created})",
+                        "set it to the day the edit goes live",
                     )
                 )
     return findings

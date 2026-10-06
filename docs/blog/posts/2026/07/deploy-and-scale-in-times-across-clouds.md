@@ -1,7 +1,8 @@
 ---
 title: "Deployment times for WebRTC on five clouds"
 draft: false
-date: 2026-07-07
+date:
+  created: 2026-07-07
 slug: deploy-and-scale-in-times-across-clouds
 description: "We deployed the same self-hosted WebRTC platform on AWS, Azure, GCP, Oracle and DigitalOcean, in three architectures each, and timed every single run."
 categories:

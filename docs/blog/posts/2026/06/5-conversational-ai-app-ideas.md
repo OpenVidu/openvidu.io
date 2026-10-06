@@ -1,7 +1,8 @@
 ---
 title: "5 conversational AI app ideas for a weekend build"
 draft: false
-date: 2026-06-23
+date:
+  created: 2026-06-23
 slug: 5-conversational-ai-app-ideas
 description: "Five conversational AI app ideas you can build this weekend: real-time voice and vision experiments, and the STT-LLM-TTS pipeline behind them."
 cover_image: poster-light.webp

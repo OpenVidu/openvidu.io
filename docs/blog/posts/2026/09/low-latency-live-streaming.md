@@ -1,7 +1,8 @@
 ---
 title: 'Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)'
 draft: false
-date: 2026-09-01
+date:
+  created: 2026-09-01
 slug: low-latency-live-streaming
 description: >-
   What counts as low latency, why WebRTC hits sub-second delivery where HLS and

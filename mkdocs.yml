@@ -400,7 +400,8 @@ plugins:
       use_git: !ENV [CI, false]
       match_path: blog/posts/.*
       date_from_meta:
-        as_creation: date
+        as_creation: date.created
+        as_update: date.updated
       image: https://openvidu.io/assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png
       categories:
         - categories
