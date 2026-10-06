@@ -26,7 +26,7 @@ authors:
 
 # Control your video calls with hand gestures, thanks to a free AI from Google
 
-![Hand gesture recognition in a video call, processed in the browser with free AI](/assets/images/blog/2026/08/control-video-calls-with-gestures-free-ai/cover.webp "Control your video call with gestures"){ .round-corners }
+![Hand gesture recognition in a video call, processed in the browser with free AI](../../../../assets/images/blog/2026/08/control-video-calls-with-gestures-free-ai/cover.webp "Control your video call with gestures"){ .round-corners }
 
 If you're tired of reaching for the cursor to hit the camera icon every time you want to disappear from the meeting, you're in luck. At **OpenVidu** we've built an open-source prototype that lets you control your video call's features with gestures, like an actual tech shaman.
 
@@ -174,4 +174,4 @@ Open [`http://localhost:5094`](http://localhost:5094){:target="_blank"} and star
 
 Everything in this demo runs on your own machine: the gesture model reads your camera locally and never uploads a video frame anywhere, and the OpenVidu Local deployment you just spun up runs the call itself on your own infrastructure too. That combination (local gesture recognition plus a self-hosted video platform) means your video and call metadata stay on infrastructure you control, with no per-minute SaaS bill. It doesn't mean *zero* data leaves the browser, or that you're off the hook on consent: see the previous section.
 
-If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](/docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a quick local Docker Compose install to a highly available cluster. The [self-hosting docs](/docs/self-hosting/local.md) are the natural next step.
+If gesture control isn't what you need but self-hosting your own video infrastructure is, that's exactly what **[OpenVidu](../../../../docs/index.md)** is for: the same LiveKit-compatible core you just used, wrapped in a production-ready platform you can run anywhere, from a quick local Docker Compose install to a highly available cluster. The [self-hosting docs](../../../../docs/self-hosting/local.md) are the natural next step.

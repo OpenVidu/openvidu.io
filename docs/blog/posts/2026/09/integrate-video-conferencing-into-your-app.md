@@ -26,8 +26,8 @@ authors:
 
 # 3 ways to integrate video conferencing into your app with OpenVidu
 
-![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/2026/09/integrate-video-conferencing-into-your-app/poster-light.webp#only-light "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
-![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](/assets/images/blog/2026/09/integrate-video-conferencing-into-your-app/poster-dark.webp#only-dark "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
+![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](../../../../assets/images/blog/2026/09/integrate-video-conferencing-into-your-app/poster-light.webp#only-light "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
+![Three stacked integration levels, from embedding OpenVidu Meet to Angular Components to low-level SDKs, all running on one self-hosted OpenVidu deployment](../../../../assets/images/blog/2026/09/integrate-video-conferencing-into-your-app/poster-dark.webp#only-dark "Three ways to integrate video conferencing with OpenVidu"){ .round-corners }
 
 Most products reach a point where a chat window or a phone number is no longer enough, and people need to see each other. Sooner or later the ticket lands on your board: *"Add video calls to the app"*. The WebRTC part is a solved problem. The question that actually shapes the project is a different one: **how much of the meeting do you want to own?** The buttons, the layout, the media tracks themselves? Or just a `<div>` where a meeting shows up?
 
@@ -47,9 +47,9 @@ Here is the overview before we get into the details. Each level gives you more s
 | **What you get** | The complete OpenVidu Meet UI: chat, recording, screen share, virtual backgrounds, captions, E2EE | A working meeting screen you adapt, extend or replace piece by piece | A Room object and its tracks |
 | **Customization** | Colors, per-room features, permissions | Any component: toolbar, layout, streams, panels, CSS variables | Unlimited |
 | **Platforms** | Web | Angular web apps | Browsers, iOS, Android, Flutter, React Native, Unity... |
-| **Product** | [OpenVidu Meet](/meet/index.md) | [OpenVidu Platform](/docs/index.md) | [OpenVidu Platform](/docs/index.md) |
+| **Product** | [OpenVidu Meet](../../../../meet/index.md) | [OpenVidu Platform](../../../../docs/index.md) | [OpenVidu Platform](../../../../docs/index.md) |
 
-None of this changes what you pay. Both products work in OpenVidu COMMUNITY and OpenVidu PRO, and the [pricing](/pricing.md) depends on the deployment, not on how you integrate.
+None of this changes what you pay. Both products work in OpenVidu COMMUNITY and OpenVidu PRO, and the [pricing](../../../../pricing.md) depends on the deployment, not on how you integrate.
 
 ## Before the code: one deployment, three example apps
 
@@ -57,7 +57,7 @@ Every snippet below is trimmed to the lines that carry the idea. The complete, r
 
 The scenario is the same throughout: a **support desk** where an agent starts a call and a customer joins.
 
-All three levels need an OpenVidu deployment, and one is enough for the three of them. [OpenVidu Local](/docs/self-hosting/local.md) brings up both products with Docker:
+All three levels need an OpenVidu deployment, and one is enough for the three of them. [OpenVidu Local](../../../../docs/self-hosting/local.md) brings up both products with Docker:
 
 ```bash
 git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.9.0
@@ -70,7 +70,7 @@ That gives you **OpenVidu Meet** at `http://localhost:9080`, with API key `meet-
 
 ## Level 1: embed OpenVidu Meet
 
-This is the fastest path. OpenVidu Meet is a complete video conferencing application, and [OpenVidu Meet Embedded](/meet/embedded/intro.md) puts that application inside yours. On the client you have three ways to show a room: a [direct link](/meet/embedded/reference/direct-link.md), an [iframe](/meet/embedded/reference/iframe.md) or the [`<openvidu-meet>` Web Component](/meet/embedded/reference/webcomponent.md). On the server you have a [REST API](/meet/embedded/reference/rest-api.md) to manage rooms, members, recordings and users, and [webhooks](/meet/embedded/reference/webhooks.md) to react to what happens in them.
+This is the fastest path. OpenVidu Meet is a complete video conferencing application, and [OpenVidu Meet Embedded](../../../../meet/embedded/intro.md) puts that application inside yours. On the client you have three ways to show a room: a [direct link](../../../../meet/embedded/reference/direct-link.md), an [iframe](../../../../meet/embedded/reference/iframe.md) or the [`<openvidu-meet>` Web Component](../../../../meet/embedded/reference/webcomponent.md). On the server you have a [REST API](../../../../meet/embedded/reference/rest-api.md) to manage rooms, members, recordings and users, and [webhooks](../../../../meet/embedded/reference/webhooks.md) to react to what happens in them.
 
 ### Create the room from your backend
 
@@ -85,7 +85,7 @@ const response = await fetch(`${MEET_URL}/api/v1/rooms`, {
 const room = await response.json();
 ```
 
-What comes back includes the room's **access links**, and the link you give to each person decides their role in the meeting: `room.access.anonymous.moderator.url` for your agent, `room.access.anonymous.speaker.url` for your customer. Registered users and identified guests get their own kind of link, all described in [Room Access](/meet/features/rooms/access.md). We covered how to map that model to your own users in [3 access models for video conferencing apps](/blog/posts/2026/07/video-conferencing-permissions.md).
+What comes back includes the room's **access links**, and the link you give to each person decides their role in the meeting: `room.access.anonymous.moderator.url` for your agent, `room.access.anonymous.speaker.url` for your customer. Registered users and identified guests get their own kind of link, all described in [Room Access](../../../../meet/features/rooms/access.md). We covered how to map that model to your own users in [3 access models for video conferencing apps](../../../../blog/posts/2026/07/video-conferencing-permissions.md).
 
 ### Put the meeting on the page
 
@@ -111,7 +111,7 @@ Inside a framework it is the same tag with bindings. In Angular, the room your b
 }
 ```
 
-From there the element talks to your app in both directions, and you use it like any other element in your template. It emits [events](/meet/embedded/reference/webcomponent.md#events) when participants come and go, which you bind with the usual `(event)` syntax, and it accepts [commands](/meet/embedded/reference/webcomponent.md#commands) so your own buttons can drive the meeting, which you call through a `viewChild` reference:
+From there the element talks to your app in both directions, and you use it like any other element in your template. It emits [events](../../../../meet/embedded/reference/webcomponent.md#events) when participants come and go, which you bind with the usual `(event)` syntax, and it accepts [commands](../../../../meet/embedded/reference/webcomponent.md#commands) so your own buttons can drive the meeting, which you call through a `viewChild` reference:
 
 ```typescript title="app.ts"
 export class App {
@@ -155,15 +155,15 @@ What you cannot do yet is reshape the meeting UI itself: replace the toolbar, re
 
 !!! tip "Pick this level when"
 
-    Your use case is video conferencing (telehealth, e-learning, customer support, team collaboration), you want recording, chat and screen sharing without building them, and applying your colors to a proven UI is enough for your brand. This is the path we took in [Building a video-enabled CRM with an AI agent](/blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md).
+    Your use case is video conferencing (telehealth, e-learning, customer support, team collaboration), you want recording, chat and screen sharing without building them, and applying your colors to a proven UI is enough for your brand. This is the path we took in [Building a video-enabled CRM with an AI agent](../../../../blog/posts/2026/07/building-a-video-enabled-crm-with-an-ai-agent.md).
 
 ## Level 2: Angular Components
 
-The second level is [Angular Components](/docs/ui-components/angular-components.md), the library we use to build OpenVidu Meet itself. It gives you a `<ov-videoconference>` element that renders a complete meeting, and lets you adapt, extend or replace any part of it. You get a working screen in minutes and then work on your customizations from there.
+The second level is [Angular Components](../../../../docs/ui-components/angular-components.md), the library we use to build OpenVidu Meet itself. It gives you a `<ov-videoconference>` element that renders a complete meeting, and lets you adapt, extend or replace any part of it. You get a working screen in minutes and then work on your customizations from there.
 
 ### Generate access tokens in your backend
 
-The backend changes at this level. You are no longer talking to OpenVidu Meet but to OpenVidu directly, through the LiveKit-compatible server SDK, and the one thing your server must do is generate [access tokens](/docs/reference/access-tokens.md). An access token is a JWT signed with your API secret that states who the participant is and which room they may join:
+The backend changes at this level. You are no longer talking to OpenVidu Meet but to OpenVidu directly, through the LiveKit-compatible server SDK, and the one thing your server must do is generate [access tokens](../../../../docs/reference/access-tokens.md). An access token is a JWT signed with your API secret that states who the participant is and which room they may join:
 
 ```javascript
 const at = new AccessToken(OPENVIDU_API_KEY, OPENVIDU_API_SECRET, { identity: participantName });
@@ -206,7 +206,7 @@ export class App {
 }
 ```
 
-With that one element you have a prejoin page, a toolbar, a responsive layout, chat, participants and activities panels, screen sharing and the recording controls. Only recording needs some backend work: the component emits `onRecordingStartRequested` and `onRecordingStopRequested`, and your server starts and stops the Egress, as the [recording tutorial](/docs/tutorials/advanced-features/recording-basic-s3.md) shows.
+With that one element you have a prejoin page, a toolbar, a responsive layout, chat, participants and activities panels, screen sharing and the recording controls. Only recording needs some backend work: the component emits `onRecordingStartRequested` and `onRecordingStopRequested`, and your server starts and stops the Egress, as the [recording tutorial](../../../../docs/tutorials/advanced-features/recording-basic-s3.md) shows.
 
 ### Make it yours
 
@@ -228,7 +228,7 @@ That last one is where your product shows up inside the call. Our support desk w
 
 `*ovToolbarAdditionalButtons` adds to the default toolbar. Its siblings replace pieces outright: `*ovToolbar` swaps the whole toolbar, `*ovLayout` the video grid, `*ovStream` each tile, `*ovChatPanel` and `*ovParticipantsPanel` the side panels. Everything you do not replace keeps working and keeps receiving improvements with each OpenVidu release.
 
-The [Angular Components tutorials](/docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference :fontawesome-solid-external-link:{.external-link-icon}](/docs/reference-docs/openvidu-components-angular/index.html){:target="_blank"} lists every component, directive and CSS variable you can reach.
+The [Angular Components tutorials](../../../../docs/tutorials/angular-components/index.md) walk through each one of them separately, from a custom toolbar to a custom layout, custom streams, custom panels and an admin dashboard, and the [reference :fontawesome-solid-external-link:{.external-link-icon}](../../../../docs/reference-docs/openvidu-components-angular/index.html){:target="_blank"} lists every component, directive and CSS variable you can reach.
 
 !!! example "See it running"
 
@@ -275,9 +275,9 @@ ngOnDestroy() {
 }
 ```
 
-Notice what is *not* there: no prejoin page, no toolbar, no layout, no chat. You decide whether a participant publishes or only subscribes, which tracks to render and where, what a "mute" button does. Every client performs the same four operations: connect with a token, publish tracks, subscribe to tracks and mute them. They work the same way in every SDK, and the [client SDK reference](/docs/reference/client-sdk.md) documents the model they all share.
+Notice what is *not* there: no prejoin page, no toolbar, no layout, no chat. You decide whether a participant publishes or only subscribes, which tracks to render and where, what a "mute" button does. Every client performs the same four operations: connect with a token, publish tracks, subscribe to tracks and mute them. They work the same way in every SDK, and the [client SDK reference](../../../../docs/reference/client-sdk.md) documents the model they all share.
 
-This level unlocks two things the other two do not. First, **platforms**: the same pattern works in iOS, Android, Flutter, React Native, Unity and even embedded devices, and the [application client tutorials](/docs/tutorials/application-client/index.md) cover eight platforms, from plain JavaScript to Android and iOS. Second, **use cases beyond meetings**: live streaming to thousands of viewers, ingesting IP cameras or RTMP feeds, server-side recording with custom layouts, telephony, and AI agents that join a room as participants. OpenVidu Meet and Angular Components are built around rooms and meetings; the SDKs are built around tracks.
+This level unlocks two things the other two do not. First, **platforms**: the same pattern works in iOS, Android, Flutter, React Native, Unity and even embedded devices, and the [application client tutorials](../../../../docs/tutorials/application-client/index.md) cover eight platforms, from plain JavaScript to Android and iOS. Second, **use cases beyond meetings**: live streaming to thousands of viewers, ingesting IP cameras or RTMP feeds, server-side recording with custom layouts, telephony, and AI agents that join a room as participants. OpenVidu Meet and Angular Components are built around rooms and meetings; the SDKs are built around tracks.
 
 !!! example "See it running"
 
@@ -292,8 +292,8 @@ This level unlocks two things the other two do not. First, **platforms**: the sa
 All example apps are built on Angular, but only the middle level actually requires it:
 
 - **Level 1** is framework-agnostic. `<openvidu-meet>` is a standard custom element, so the two lines above work the same in plain HTML, React, Vue or a server-rendered page. The iframe and the direct link cover everything else, including apps that cannot load third-party scripts.
-- **Level 2** in React means the [React Components](/docs/ui-components/react-components.md) listed in our docs under UI Components. A `<LiveKitRoom>` with a `<VideoConference>` inside gets you a prebuilt meeting, and its hooks and contexts let you build your own.
-- **Level 3** has tutorials for JavaScript, React, Angular, Vue, Electron, Ionic, Android and iOS on the client, and Node.js, Go, Ruby, Java, Python, Rust, PHP and .NET for the [token server](/docs/tutorials/application-server/index.md). Any client works with any server.
+- **Level 2** in React means the [React Components](../../../../docs/ui-components/react-components.md) listed in our docs under UI Components. A `<LiveKitRoom>` with a `<VideoConference>` inside gets you a prebuilt meeting, and its hooks and contexts let you build your own.
+- **Level 3** has tutorials for JavaScript, React, Angular, Vue, Electron, Ionic, Android and iOS on the client, and Node.js, Go, Ruby, Java, Python, Rust, PHP and .NET for the [token server](../../../../docs/tutorials/application-server/index.md). Any client works with any server.
 
 ## Which level should you pick?
 
@@ -303,13 +303,13 @@ If you are still not sure how to integrate video conferencing into your app, her
 - **Move down a level when the UI is the problem, not the media.** The moment you need a toolbar button that does not exist or a layout Meet does not have, Level 2 gives you exactly that without touching a single track.
 - **Go to the bottom when the product is not a meeting.** Live streaming, robotics, AI pipelines and native apps are Level 3 by definition, and there the flexibility of the SDKs is exactly what you need.
 
-You do not have to pick one level for the whole product either. Both products run on the same deployment, so a telehealth platform can embed OpenVidu Meet for consultations and use the SDKs for a one-way waiting-room stream. The [Meet vs Platform comparison](/openvidu-meet-vs-openvidu-platform.md) has the side-by-side table, and [OpenVidu Meet vs OpenVidu Platform in 2026](/blog/posts/2026/06/meet-vs-platform.md) goes deeper into why we split the two products in the first place.
+You do not have to pick one level for the whole product either. Both products run on the same deployment, so a telehealth platform can embed OpenVidu Meet for consultations and use the SDKs for a one-way waiting-room stream. The [Meet vs Platform comparison](../../../../openvidu-meet-vs-openvidu-platform.md) has the side-by-side table, and [OpenVidu Meet vs OpenVidu Platform in 2026](../../../../blog/posts/2026/06/meet-vs-platform.md) goes deeper into why we split the two products in the first place.
 
 ## Need more than this?
 
 **Clone the examples and run them against one deployment.** Everything in this post is in [openvidu-labs/openvidu-integration-levels :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-integration-levels){:target="_blank"}: three independent applications, each with a README that takes you from an empty folder to a working meeting. Then go deeper:
 
-- [OpenVidu Meet Embedded step-by-step guide](/meet/embedded/step-by-step-guide.md) and the progressive [Meet tutorials](/meet/embedded/tutorials/index.md), from direct links to webhooks.
-- [Angular Components tutorials](/docs/tutorials/angular-components/index.md), one per customizable piece.
-- [Build your app](/docs/build-your-app/index.md) and the [Getting started](/docs/getting-started.md) page for the SDK path.
-- [Deployment types](/docs/self-hosting/deployment-types.md) when you are ready to leave `localhost`: Single Node, Elastic or High Availability, on your servers or any major cloud.
+- [OpenVidu Meet Embedded step-by-step guide](../../../../meet/embedded/step-by-step-guide.md) and the progressive [Meet tutorials](../../../../meet/embedded/tutorials/index.md), from direct links to webhooks.
+- [Angular Components tutorials](../../../../docs/tutorials/angular-components/index.md), one per customizable piece.
+- [Build your app](../../../../docs/build-your-app/index.md) and the [Getting started](../../../../docs/getting-started.md) page for the SDK path.
+- [Deployment types](../../../../docs/self-hosting/deployment-types.md) when you are ready to leave `localhost`: Single Node, Elastic or High Availability, on your servers or any major cloud.

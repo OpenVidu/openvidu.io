@@ -19,7 +19,7 @@ authors:
 
 # 5 React video call platforms in 2026: Is SaaS still the right choice?
 
-![React video call platforms in 2026 — SaaS vs Self-hosted](/assets/images/blog/2026/05/5-react-video-call-platforms/poster.png "React video call platforms in 2026"){ .round-corners }
+![React video call platforms in 2026 — SaaS vs Self-hosted](../../../../assets/images/blog/2026/05/5-react-video-call-platforms/poster.png "React video call platforms in 2026"){ .round-corners }
 
 
 ## 1. Introduction
@@ -83,7 +83,7 @@ Here are five solutions developers commonly evaluate in 2026.
 
 ### **[Agora.io :fontawesome-solid-external-link:{.external-link-icon}](https://www.agora.io/en/){:target="_blank"}**
 
-![React video call platforms in 2026 — Agora.io](/assets/images/blog/2026/05/5-react-video-call-platforms/agora.png "Agora.io"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — Agora.io](../../../../assets/images/blog/2026/05/5-react-video-call-platforms/agora.png "Agora.io"){ .skip-gallery loading=lazy }
 
 Cloud-based video API with a globally distributed low-latency network and advanced real-time engagement features.
 
@@ -145,7 +145,7 @@ Product teams that want a fully managed, globally distributed video layer and ar
 
 ### **[Zoom :fontawesome-solid-external-link:{.external-link-icon}](https://www.zoom.com/){:target="_blank"}**
 
-![React video call platforms in 2026 — Zoom](/assets/images/blog/2026/05/5-react-video-call-platforms/zoom.png "Zoom"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — Zoom](../../../../assets/images/blog/2026/05/5-react-video-call-platforms/zoom.png "Zoom"){ .skip-gallery loading=lazy }
 
 Zoom’s Video SDK allows developers to build custom video applications using Zoom’s underlying infrastructure, but with full control over the user interface and experience.
 
@@ -214,8 +214,8 @@ Enterprise or B2B apps that want Zoom-grade reliability and compliance while emb
 
 ### **[Stream :fontawesome-solid-external-link:{.external-link-icon}](https://getstream.io/video/){:target="_blank"}**
 
-![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-light.png#only-dark "Stream"){ .skip-gallery loading=lazy }
-![React video call platforms in 2026 — Stream](/assets/images/blog/2026/05/5-react-video-call-platforms/stream-dark.png#only-light "Stream"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — Stream](../../../../assets/images/blog/2026/05/5-react-video-call-platforms/stream-light.png#only-dark "Stream"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — Stream](../../../../assets/images/blog/2026/05/5-react-video-call-platforms/stream-dark.png#only-light "Stream"){ .skip-gallery loading=lazy }
 
 Developer-focused video API designed to integrate real-time video and collaboration features directly into modern web and mobile applications.
 
@@ -274,7 +274,7 @@ Product teams building collaborative applications that combine **chat, notificat
 
 ### **[LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"}**
 
-![React video call platforms in 2026 — LiveKit](/assets/images/blog/2026/05/5-react-video-call-platforms/livekit.png "LiveKit"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — LiveKit](../../../../assets/images/blog/2026/05/5-react-video-call-platforms/livekit.png "LiveKit"){ .skip-gallery loading=lazy }
 
 Open source WebRTC stack with self-host or cloud options for highly customizable real-time video applications.
 
@@ -324,10 +324,10 @@ Engineering-heavy teams that want ownership and deep customization of real-time 
 
 ---
 
-### **[OpenVidu Meet](/index.md)**
+### **[OpenVidu Meet](../../../../index.md)**
 
-![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet"){ .skip-gallery loading=lazy }
-![React video call platforms in 2026 — OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — OpenVidu Meet](../../../../assets/images/logos/meet_whitefont_transback.png#only-dark "OpenVidu Meet"){ .skip-gallery loading=lazy }
+![React video call platforms in 2026 — OpenVidu Meet](../../../../assets/images/logos/meet_greyfont_transback.png#only-light "OpenVidu Meet"){ .skip-gallery loading=lazy }
 
 
 
@@ -337,8 +337,8 @@ Open source video platform built on top of LiveKit, increasing performance, redu
 
 **Docs**:
 
-- [OpenVidu Meet Embedded](/meet/embedded/intro.md)
-- [Web Component Reference](/meet/embedded/reference/webcomponent.md)
+- [OpenVidu Meet Embedded](../../../../meet/embedded/intro.md)
+- [Web Component Reference](../../../../meet/embedded/reference/webcomponent.md)
 - [GitHub :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu){:target="_blank"}
 
 **Quick React integration (minimal example)**
@@ -392,5 +392,5 @@ There is no universal winner. If your top priority is shipping fast with minimal
 If video is becoming a core capability in your product, self-hosted alternatives are now practical enough to consider early, especially when cost predictability, data ownership, and long-term control matter.
 
 The best decision is not only about how fast you can launch, but how well your architecture and pricing model will hold up when your usage grows.
-If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](/meet/embedded/intro.md) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
+If you’re concerned about scaling costs, data control, or vendor lock-in, [OpenVidu Meet](../../../../meet/embedded/intro.md) offers a unique middle ground: the simplicity of a SaaS experience combined with the ownership and flexibility of self-hosting.
 ---

@@ -26,8 +26,8 @@ authors:
 
 # Low Latency Live Streaming: WebRTC vs. HLS and DASH (Part 1)
 
-![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/2026/09/low-latency-live-streaming/poster-light.webp#only-light "Low latency live streaming vs. traditional broadcast delay"){ .round-corners }
-![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](/assets/images/blog/2026/09/low-latency-live-streaming/poster-dark.webp#only-dark "Low latency live streaming vs. traditional broadcast delay"){ .round-corners }
+![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](../../../../assets/images/blog/2026/09/low-latency-live-streaming/poster-light.webp#only-light "Low latency live streaming vs. traditional broadcast delay"){ .round-corners }
+![A split-screen graphic comparing a near-instant video call with a delayed live broadcast](../../../../assets/images/blog/2026/09/low-latency-live-streaming/poster-dark.webp#only-dark "Low latency live streaming vs. traditional broadcast delay"){ .round-corners }
 
 When Spain was playing the World Cup, we noticed something annoying. We celebrated each of Spain's scores by shouting "GOOOOOL", 15 seconds before our neighbors saw the goal on their TV. Obviously, we ruined their experience watching the game, so much that they asked us where we were watching it from to avoid the gap. Now picture that same 15-second gap on a live shopping stream where you're typing "does it come in blue?", or in a video call where you keep talking over the other person because their audio hasn't reached you yet. That's the difference between "live" and **low latency live streaming**.
 
@@ -68,7 +68,7 @@ Let's have a look at some use cases to understand what actually lands in each la
 - **Videoconferencing and cloud gaming (< 100ms).** A conversation with more than ~150ms of delay starts producing interruptions and talking over each other. Cloud gaming suffers even more: input lag above a few tens of milliseconds is felt directly in your hands.
 - **Telehealth and remote operation (< 100ms).** A doctor-patient consultation needs the same conversational latency as any video call. If there's an operator controlling physical equipment remotely (industrial machinery, a drone, a surgical robot), the use case needs a genuine real-time control loop, not just real-time-looking video.
 
-![World Cup retransmissions work just well with a 20 seconds latency](/assets/images/blog/2026/09/low-latency-live-streaming/broadcasting-match.webp){ .round-corners align=right width=50% loading=lazy }
+![World Cup retransmissions work just well with a 20 seconds latency](../../../../assets/images/blog/2026/09/low-latency-live-streaming/broadcasting-match.webp){ .round-corners align=right width=50% loading=lazy }
 
 So, as I said before: it's never the content itself that sets the latency budget. It's whether someone downstream has to act on what they're seeing before it goes stale.
 
@@ -98,7 +98,7 @@ The following is a table describing different streaming protocols with their low
 
 WebRTC was designed to optimize the path between a captured frame and a rendered one, contrary to the design decisions behind HLS and DASH, which were focused on file caching.
 
-![An interactive streaming session needs latencies under 1 second](/assets/images/blog/2026/09/low-latency-live-streaming/game-streaming.webp){ .round-corners width=80% loading=lazy }
+![An interactive streaming session needs latencies under 1 second](../../../../assets/images/blog/2026/09/low-latency-live-streaming/game-streaming.webp){ .round-corners width=80% loading=lazy }
 
 In WebRTC media flows continuously as RTP packets over UDP the moment a connection is established. Connectivity between peers (or a peer and a media server) is negotiated live via ICE, with STUN and TURN as fallbacks for traversing NATs and firewalls, and every media packet is encrypted in transit with SRTP. All of that machinery exists to keep the path open and secure, not to buffer or batch anything.
 
@@ -120,18 +120,18 @@ The low latency line is **whether the interaction loops back to the source in re
 
 If you're building something in that "below the second" category (a stream someone needs to react to) the protocol choice is WebRTC, and you need it end to end, not just for capture.
 
-![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](/assets/images/blog/2026/09/low-latency-live-streaming/videoconference.webp){ .round-corners width=80% loading=lazy }
+![Videoconference is probably what most people think of when we talk about low latency, but it's really ultra-low latency](../../../../assets/images/blog/2026/09/low-latency-live-streaming/videoconference.webp){ .round-corners width=80% loading=lazy }
 
-[OpenVidu Platform](/docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](/docs/build-your-app/common-operations.md#stream-ingestion) for how to wire a WHIP source into your own app.
+[OpenVidu Platform](../../../../docs/index.md)'s Ingress module exposes a WHIP endpoint out of the box, so an encoder can push straight into a Room over WebRTC. You can even skip transcoding entirely when you want to shave off every extra millisecond. From there, every participant in the Room receives that stream over native WebRTC too. See the [stream ingestion guide](../../../../docs/build-your-app/common-operations.md#stream-ingestion) for how to wire a WHIP source into your own app.
 
 ## Need more than this?
 
 In the second post in this series, we will build an app that ingest video and audio from a browser and OBS into a WebRTC platform, so that it can be streamed and watched by people just by subscribing as in any WebRTC app.
 
-However, if you want to try it by yourself now, we have you covered. This article explains how to ingest video through WHIP in your app 👉 **[Add WHIP-based low-latency ingest to your app](/docs/build-your-app/common-operations.md#stream-ingestion)**: the fastest way to feel the difference is to push a real encoder into a Room and watch the delay disappear.
+However, if you want to try it by yourself now, we have you covered. This article explains how to ingest video through WHIP in your app 👉 **[Add WHIP-based low-latency ingest to your app](../../../../docs/build-your-app/common-operations.md#stream-ingestion)**: the fastest way to feel the difference is to push a real encoder into a Room and watch the delay disappear.
 
 To go further:
 
-- [OpenVidu Platform](/docs/index.md) — the low-level SDKs and APIs for building your own interactive streaming experience.
-- [How to scale video conferencing architecture](/blog/posts/2026/06/scalability-in-videoconferencing-systems.md) — what changes once a single low-latency session needs to serve far more than one media server can handle.
-- [Connectivity Resilience and Security in WebRTC Deployments](/blog/posts/2026/06/turn-key-considerations.md) — why the same NAT and firewall problems that affect video calls apply just as much to low latency ingest.
+- [OpenVidu Platform](../../../../docs/index.md) — the low-level SDKs and APIs for building your own interactive streaming experience.
+- [How to scale video conferencing architecture](../../../../blog/posts/2026/06/scalability-in-videoconferencing-systems.md) — what changes once a single low-latency session needs to serve far more than one media server can handle.
+- [Connectivity Resilience and Security in WebRTC Deployments](../../../../blog/posts/2026/06/turn-key-considerations.md) — why the same NAT and firewall problems that affect video calls apply just as much to low latency ingest.

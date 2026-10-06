@@ -18,7 +18,7 @@ authors:
 
 # Choosing the right level of abstraction in self-hosted WebRTC solutions in 2026: OpenVidu Meet vs OpenVidu Platform
 
-![OpenVidu Meet vs OpenVidu Platform](/assets/images/blog/2026/06/meet-vs-platform/meet-vs-platform.png)
+![OpenVidu Meet vs OpenVidu Platform](../../../../assets/images/blog/2026/06/meet-vs-platform/meet-vs-platform.png)
 
 In this blog post we explore how different levels of abstraction are needed in the WebRTC arena, and which choices do you have when using the OpenVidu WebRTC ecosystem. 
 
@@ -44,7 +44,7 @@ On the other hand, a broadcaster or a live-event producer operates at a much dee
 
 Choosing the right level of abstraction is a delicate balancing act. If the abstraction is too high, you lose the granular control essential for innovation, but you make your life easier by hiding the complexity of the system. If it’s too low, you risk spending months reinventing the wheel—building infrastructure instead of delivering value, but you are in full control of what happens under-the-hood. 
 
-At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu. If you'd rather skip the narrative and go straight to a side-by-side table, our [Meet vs Platform comparison](/openvidu-meet-vs-openvidu-platform.md) has it.
+At OpenVidu, we are aware of this dilemma, and we’ve evolved. We are splitting the ecosystem into two distinct products, OpenVidu Meet and OpenVidu Platform, both maintaining the production-ready quality and reliability our community expects from OpenVidu. If you'd rather skip the narrative and go straight to a side-by-side table, our [Meet vs Platform comparison](../../../../openvidu-meet-vs-openvidu-platform.md) has it.
 
 ### OpenVidu Meet: The Power of Integration
 
@@ -56,7 +56,7 @@ While it works out of the box, it remains highly flexible on the outside, allowi
 * **Privacy & Tech**: Virtual backgrounds and End-to-End Encryption (E2EE).
 * **Identity**: Full UI white-labeling and branding.
 
-![OpenVidu Meet screenshot](/assets/images/blog/2026/06/meet-vs-platform/webcomponent-meeting.png){ .round-corners loading=lazy }
+![OpenVidu Meet screenshot](../../../../assets/images/blog/2026/06/meet-vs-platform/webcomponent-meeting.png){ .round-corners loading=lazy }
 
 ### OpenVidu Platform: The Developer’s Canvas
 
@@ -68,7 +68,7 @@ Rather than being limited by "rooms", the Platform gives you the building blocks
 * **Advanced Routing**: Total control over media ingestion and telephony (PSTN/SIP) integration.
 * **AI-Ready**: Direct hooks for real-time AI processing and media analysis.
 
-![OpenVidu Platform screenshot](/assets/images/blog/2026/06/meet-vs-platform/ov-platform.png){ loading=lazy }
+![OpenVidu Platform screenshot](../../../../assets/images/blog/2026/06/meet-vs-platform/ov-platform.png){ loading=lazy }
 
 **The Key Difference** > **OpenVidu Meet** is built around the concepts of **Rooms & Meetings**, whereas **OpenVidu Platform** is built around the fundamental concepts of **Audio & Video Tracks**.
 
@@ -84,4 +84,4 @@ At the end of the day, abstraction is about **freedom**: the freedom to choose h
 
 The best way to understand these levels of abstraction is to see them in action. Whether you are ready to embed a full-featured meeting room or you want to start routing raw media tracks, our documentation has everything you need to get started.
 
-👉 Still not sure? [Compare Meet vs Platform side-by-side](/openvidu-meet-vs-openvidu-platform.md) — or jump straight to [Get Started with Meet](/meet/index.md) / [Get Started with Platform](/docs/index.md).
+👉 Still not sure? [Compare Meet vs Platform side-by-side](../../../../openvidu-meet-vs-openvidu-platform.md) — or jump straight to [Get Started with Meet](../../../../meet/index.md) / [Get Started with Platform](../../../../docs/index.md).

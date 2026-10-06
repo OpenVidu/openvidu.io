@@ -25,8 +25,8 @@ authors:
 
 # Building a video-enabled CRM with an AI agent and OpenVidu Meet
 
-![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png#only-light "A video meeting, right inside the CRM"){ .round-corners }
-![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-dark.png#only-dark "A video meeting, right inside the CRM"){ .round-corners }
+![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-light.png#only-light "A video meeting, right inside the CRM"){ .round-corners }
+![OpenVidu Meet embedded in an AI-generated CRM — a real meeting with the participants panel open, inside the CRM](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/poster-dark.png#only-dark "A video meeting, right inside the CRM"){ .round-corners }
 
 What does it take today to go from an empty folder to a working business app with **video meetings embedded in it**? As it turns out: one AI coding agent, one OpenVidu Meet deployment, and **seven prompts**.
 
@@ -64,9 +64,9 @@ Note two things. First, we asked for **tests first** — that gives the agent a 
 
 A few minutes later we had a working app: Express backend, in-memory store, session auth with self-registration, and a clean single-page UI with the requested light-purple branding — 27 passing tests, runnable with a single `npm start`.
 
-![The clients page of the generated CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/clients.png "Clients as cards in a grid"){ .round-corners loading=lazy }
+![The clients page of the generated CRM](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/clients.png "Clients as cards in a grid"){ .round-corners loading=lazy }
 
-![The meetings calendar of the generated CRM](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/calendar.png "Meetings shown as a monthly calendar"){ .round-corners loading=lazy }
+![The meetings calendar of the generated CRM](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/calendar.png "Meetings shown as a monthly calendar"){ .round-corners loading=lazy }
 
 ## Prompt 2: "make meetings happen inside the app"
 
@@ -74,9 +74,9 @@ Then came the interesting part. Could the agent integrate a videoconferencing se
 
 > Your mission is to integrate OpenVidu 3 into this CRM application, using webcomponents. Read the OpenVidu docs in its entirety, and prepare a branch with: a) OpenVidu Meet embedded into the CRM app so that meetings happen inside the app, and not in an external tool; b) a deploy folder containing scripts to prepare a Docker image with the app and a docker compose deploying both OpenVidu and the app. […] When a meeting is scheduled, the app should create a room for this client, if it does not exist yet, adding the user and client as room members.
 
-We pointed it at three documentation pages: the [WebComponent reference](/meet/embedded/reference/webcomponent.md), the [embedded tutorials](/meet/embedded/tutorials/index.md) and the [local deployment guide](/meet/deployment/local.md). The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
+We pointed it at three documentation pages: the [WebComponent reference](../../../../meet/embedded/reference/webcomponent.md), the [embedded tutorials](../../../../meet/embedded/tutorials/index.md) and the [local deployment guide](../../../../meet/deployment/local.md). The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
 
-- **Server side**: a small service calling the [OpenVidu Meet REST API](/meet/embedded/reference/rest-api.md) — one room per client, created lazily on the first scheduled meeting and reused afterwards.
+- **Server side**: a small service calling the [OpenVidu Meet REST API](../../../../meet/embedded/reference/rest-api.md) — one room per client, created lazily on the first scheduled meeting and reused afterwards.
 - **Client side**: the `<openvidu-meet>` webcomponent embedded in the CRM's right panel. This is the entire frontend footprint of a video meeting:
 
 ```html
@@ -89,9 +89,9 @@ We pointed it at three documentation pages: the [WebComponent reference](/meet/e
 
 This is how the three pieces fit together — your app server drives the Meet REST API, and the webcomponent turns each member's personal link into the meeting UI:
 
-![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture.svg "How the CRM, the browser and OpenVidu Meet fit together"){ loading=lazy }
+![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture.svg "How the CRM, the browser and OpenVidu Meet fit together"){ loading=lazy }
 
-![An issue with its planned and past meetings](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png "Each issue tracks its meetings — with a Join button that opens the meeting in-app"){ .round-corners loading=lazy }
+![An issue with its planned and past meetings](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png "Each issue tracks its meetings — with a Join button that opens the meeting in-app"){ .round-corners loading=lazy }
 
 ### Where reality pushed back
 
@@ -101,19 +101,19 @@ The lesson is one every developer will recognize: **documentation tells you what
 
 ## Prompt 6: upgrading to OpenVidu Meet 3.8.0 fine-grained permissions
 
-The missing members API shipped days later in [OpenVidu Meet 3.8.0](/blog/posts/2026/07/release-380.md), turning the "share a link" model into a complete access control system. One more prompt brought the CRM up to date:
+The missing members API shipped days later in [OpenVidu Meet 3.8.0](../../../../blog/posts/2026/07/release-380.md), turning the "share a link" model into a complete access control system. One more prompt brought the CRM up to date:
 
 > OpenVidu 3.8.0 has been released, with a more advanced support for user permissions. […] the users of our CRM app should be able to add the client as an invited guest, initially with speaker permissions, but the user should be able to specify more fine-grained permissions in the UI. The user must be itself an invited guest with moderator role, created under the hood when the room for the client is created.
 
-The agent extracted the exact contract from the 3.8.0 sources and rebuilt the integration on the [room members API](/meet/features/room-members/overview.md):
+The agent extracted the exact contract from the 3.8.0 sources and rebuilt the integration on the [room members API](../../../../meet/features/room-members/overview.md):
 
 - Every CRM user who joins a meeting becomes an **invited guest with moderator role** — created under the hood, each with a personal access link.
 - The client contact is added as an **invited guest with speaker permissions** and a personal, private link the CRM user can copy and send.
 - A new panel on the client page edits the guest's base role plus OpenVidu Meet's **14 fine-grained permissions** — camera, microphone, screen share, chat, recording, kick and end-meeting rights — pushed to the Meet API on save.
 
-![The client page showing meeting room access](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/client-meet-access.png "The client's guest membership, managed from the CRM"){ .round-corners loading=lazy }
+![The client page showing meeting room access](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/client-meet-access.png "The client's guest membership, managed from the CRM"){ .round-corners loading=lazy }
 
-![The fine-grained permissions editor](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/permissions-editor.png "Base role plus 14 per-member permissions, straight from the CRM UI"){ .round-corners loading=lazy }
+![The fine-grained permissions editor](../../../../assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/permissions-editor.png "Base role plus 14 per-member permissions, straight from the CRM UI"){ .round-corners loading=lazy }
 
 Once more, the final prompt was to run the full stack and verify live — which surfaced one last real-world nugget (a member's `effectivePermissions` must be requested explicitly via `extraFields`), fixed and covered by the test suite: 44 tests by the end.
 
@@ -122,7 +122,7 @@ Once more, the final prompt was to run the full stack and verify live — which 
 Three takeaways stand out:
 
 1. **AI agents make integrations dramatically cheaper** — but only as cheap as the platform allows. The whole OpenVidu Meet integration is a couple hundred lines of server code plus a webcomponent tag. There is very little for the agent (or a human) to get wrong.
-2. **A runnable local deployment is worth a thousand docs pages.** The agent could docker-compose the [entire OpenVidu stack locally](/meet/deployment/local.md) in one command and verify every assumption against it. That feedback loop caught issues no amount of doc-reading would.
+2. **A runnable local deployment is worth a thousand docs pages.** The agent could docker-compose the [entire OpenVidu stack locally](../../../../meet/deployment/local.md) in one command and verify every assumption against it. That feedback loop caught issues no amount of doc-reading would.
 3. **Prompts are documentation.** The repository keeps every prompt in [`PROMPTS.md` :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/videoconference-based-crm/blob/main/PROMPTS.md){:target="_blank"} — a seven-entry build log of the whole application, more faithful than most design documents.
 
 The complete application — CRM, integration, tests, deployment scripts and prompts — is open source: [openvidu-labs/videoconference-based-crm :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/videoconference-based-crm){:target="_blank"}.
@@ -133,6 +133,6 @@ If there is one thing this experiment proves, it is that **embedding real videoc
 
 Ready to add meetings to *your* app this afternoon?
 
-[**Get started with OpenVidu Meet Embedded** :fontawesome-solid-arrow-right:](/meet/embedded/intro.md){ .md-button .md-button--primary }
+[**Get started with OpenVidu Meet Embedded** :fontawesome-solid-arrow-right:](../../../../meet/embedded/intro.md){ .md-button .md-button--primary }
 
 *And one more thing: we are working on agentic AI support for OpenVidu — stay tuned!*

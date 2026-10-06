@@ -1,9 +1,9 @@
 """Link checks over the source tree.
 
-MkDocs validates Markdown link targets, so those resolution checks are not repeated here. What
-it never sees: anything inside raw HTML, the *form* conventions (a relative link in a file that
-moves at publish, a version-pinned URL outside the releases pages), and content hidden in HTML
-comments.
+The build validates Markdown link targets, so those resolution checks are not repeated here. What
+it never sees: anything inside raw HTML, the *form* conventions (a root-absolute link in a blog
+post, a relative link in a snippet, a version-pinned URL outside the releases pages), and content
+hidden in HTML comments.
 """
 
 from __future__ import annotations
@@ -111,30 +111,40 @@ def check_html_targets(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
                         path,
                         line,
                         f'raw HTML references "{target}", which no source file serves',
-                        "MkDocs does not validate HTML; fix the path or restore the target",
+                        "the build does not validate HTML; fix the path or restore the target",
                     )
                 )
     return findings
 
 
 def check_markdown_form(corpus: Corpus) -> list[Finding]:
-    """Link form in the files that move at publish, and the stray-slash anchor defect."""
-    findings = []
-    movable = [
-        (source, ERROR, "a blog post moves at publish; a relative link breaks then")
-        for path, source in corpus.docs.items()
-        if path.startswith("docs/blog/posts/")
-    ]
-    movable += [
-        (
-            source,
-            WARN,
-            "snippets render at many depths; only the documented sibling links stay relative",
-        )
-        for source in corpus.snippets.values()
-    ]
+    """Link form in the files whose rendered location varies, and the stray-slash anchor defect.
 
-    for source, severity, hint in movable:
+    A snippet renders at many depths, so its links are root-absolute (resolved against docs/ by
+    `ovweb.mdx.root_links`). A blog post is the opposite case: Zensical validates a post's links
+    from its source, where a root-absolute path resolves to nothing and fails the strict build,
+    so posts link relatively — every post sits four folders deep (`blog/posts/YYYY/MM/`), the
+    draft placeholders included, so the move at publish keeps every relative link valid.
+    """
+    findings = []
+    for path, source in corpus.docs.items():
+        if not path.startswith("docs/blog/posts/"):
+            continue
+        for offset, target in _md_targets(source.visible):
+            if target.startswith("/") and not target.startswith("//"):
+                findings.append(
+                    Finding(
+                        "md-root-absolute-in-post",
+                        ERROR,
+                        source.path,
+                        source.line_of(offset),
+                        f'root-absolute link "{target}" in a blog post',
+                        "Zensical cannot validate it from the post's source; write it relative "
+                        "to the post (../../../../docs/…), which the strict build checks",
+                    )
+                )
+
+    for source in corpus.snippets.values():
         for offset, target in _md_targets(source.visible):
             if target.startswith(("/", "#", *SKIP_SCHEMES)):
                 continue
@@ -143,11 +153,12 @@ def check_markdown_form(corpus: Corpus) -> list[Finding]:
             findings.append(
                 Finding(
                     "md-relative-in-movable",
-                    severity,
+                    WARN,
                     source.path,
                     source.line_of(offset),
                     f'relative link "{target}" in a file whose rendered location varies',
-                    hint,
+                    "snippets render at many depths; only the documented sibling links stay "
+                    "relative",
                 )
             )
 

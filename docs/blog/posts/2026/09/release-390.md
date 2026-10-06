@@ -75,8 +75,8 @@ A single webhook endpoint works fine... until your billing service, your analyti
 
 There are also two new events worth subscribing to: `participantJoined` and `participantLeft`. The second one carries the leave date, the time the participant spent in the meeting and the reason they left. Attendance reports and per-minute billing are now just a webhook away.
 
-![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](/assets/images/blog/2026/09/release-390/webhooks-light.png#only-light){ .round-corners loading=lazy }
-![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](/assets/images/blog/2026/09/release-390/webhooks-dark.png#only-dark){ .round-corners loading=lazy }
+![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](../../../../assets/images/blog/2026/09/release-390/webhooks-light.png#only-light){ .round-corners loading=lazy }
+![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](../../../../assets/images/blog/2026/09/release-390/webhooks-dark.png#only-dark){ .round-corners loading=lazy }
 
 ### Custom rules and limits per room
 
@@ -167,7 +167,7 @@ And because it runs on your own servers, no audio ever leaves your deployment. Y
 Running smaller, single-language models instead? The Speech Processing agent can now run each Room in its own process and scale transcriptions across all the CPUs of the node. See [Increasing capacity with smaller models](https://openvidu.io/3.9/docs/ai/live-captions/#increasing-capacity-with-smaller-models).
 
 !!! info "Sherpa is part of OpenVidu PRO"
-    The Sherpa provider, and with it Nemotron, is part of OpenVidu PRO. You can try it with a 15-day free trial by [creating an OpenVidu account](/account.md). Heads up for GPU users: CUDA 11 is deprecated, so use CUDA 12 compatible nodes.
+    The Sherpa provider, and with it Nemotron, is part of OpenVidu PRO. You can try it with a 15-day free trial by [creating an OpenVidu account](../../../../account.md). Heads up for GPU users: CUDA 11 is deprecated, so use CUDA 12 compatible nodes.
 
 ### mediasoup, from feature parity to battle-tested
 

@@ -95,11 +95,19 @@ def test_a_snippet_html_reference_is_checked_too(tmp_path):
 # -- Markdown link form ----------------------------------------------------------------------
 
 
-def test_a_relative_link_in_a_blog_post_is_an_error(tmp_path):
-    write(tmp_path, "docs/blog/posts/2026/08/post.md", "[guide](../../guide.md)")
+def test_a_root_absolute_link_in_a_blog_post_is_an_error(tmp_path):
+    """Zensical validates a post from its source, where a root-absolute path resolves to nothing."""
+    write(tmp_path, "docs/blog/posts/2026/08/post.md", "[guide](/docs/guide.md)")
 
-    (finding,) = findings_of(tmp_path, "md-relative-in-movable")
+    (finding,) = findings_of(tmp_path, "md-root-absolute-in-post")
     assert finding.severity == "error"
+
+
+def test_a_relative_link_in_a_blog_post_is_fine(tmp_path):
+    write(tmp_path, "docs/blog/posts/2026/08/post.md", "[guide](../../../../docs/guide.md)")
+
+    assert findings_of(tmp_path, "md-root-absolute-in-post") == []
+    assert findings_of(tmp_path, "md-relative-in-movable") == []
 
 
 def test_a_relative_link_in_a_snippet_is_a_warning(tmp_path):
@@ -120,14 +128,24 @@ def test_the_documented_snippet_exceptions_stay_silent(tmp_path):
     assert findings_of(tmp_path, "md-relative-in-movable") == []
 
 
-def test_root_absolute_and_external_links_in_movable_files_are_fine(tmp_path):
+def test_root_absolute_and_external_links_in_snippets_are_fine(tmp_path):
     write(
         tmp_path,
-        "docs/blog/posts/2026/08/post.md",
+        "shared/tutorials/intro.md",
         "[a](/meet/index.md) [b](https://example.com) [c](#anchor)",
     )
 
     assert findings_of(tmp_path, "md-relative-in-movable") == []
+
+
+def test_external_and_protocol_relative_links_in_posts_are_fine(tmp_path):
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/08/post.md",
+        "[b](https://example.com) [c](#anchor) [d](//cdn.example.com/x)",
+    )
+
+    assert findings_of(tmp_path, "md-root-absolute-in-post") == []
 
 
 def test_an_md_link_in_a_post_excerpt_is_an_error(tmp_path):

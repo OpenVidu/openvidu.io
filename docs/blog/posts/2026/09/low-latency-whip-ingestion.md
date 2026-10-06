@@ -24,8 +24,8 @@ authors:
 
 # Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)
 
-![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light "WHIP ingestion into an OpenVidu Room"){ .round-corners }
-![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](/assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark "WHIP ingestion into an OpenVidu Room"){ .round-corners }
+![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/poster-light.webp#only-light "WHIP ingestion into an OpenVidu Room"){ .round-corners }
+![A browser and OBS Studio pushing video into an OpenVidu Room over WHIP, and a viewer subscribing to it](../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/poster-dark.webp#only-dark "WHIP ingestion into an OpenVidu Room"){ .round-corners }
 
 <a href="https://openvidu.io/blog/2026/09/01/low-latency-live-streaming/">Part 1</a> of this series argued that if your video has to close a feedback loop with the person watching it, HLS and DASH structurally can't get you there and WebRTC can. That's the theory, and theory is cheap. So let's do the thing itself: take a webcam, push it into a self-hosted <a href="/docs/">OpenVidu Platform</a> Room over WHIP, and watch it come out the other side fast enough to have a conversation through. Then do it again from OBS Studio, which has spoken WHIP natively since version 30 and needs no plugin, no SDK and no code at all.
 
@@ -52,7 +52,7 @@ plus the encoder, which is why this path lands under a second where a chunked on
 ## The demo app
 
 OpenVidu Platform is a self-hosted, [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.io/){:target="_blank"}-compatible
-server, and its Ingress module exposes a [WHIP endpoint](/docs/build-your-app/common-operations.md#stream-ingestion).
+server, and its Ingress module exposes a [WHIP endpoint](../../../../docs/build-your-app/common-operations.md#stream-ingestion).
 
 The whole backend is two endpoints:
 
@@ -99,14 +99,14 @@ docker compose -f vendor/openvidu-local-deployment/community/docker-compose.yaml
 Then open **<http://localhost:3000>**. There are two things to click: *Publish from your webcam* and
 *Watch the stream*. Open them in two tabs and you have the whole loop in front of you.
 
-![The demo app's landing page, with cards for publishing from a webcam, watching the stream, and generating WHIP credentials for OBS](/assets/images/blog/2026/09/low-latency-whip-ingestion/app-home.webp){ .round-corners width=100% loading=lazy }
+![The demo app's landing page, with cards for publishing from a webcam, watching the stream, and generating WHIP credentials for OBS](../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/app-home.webp){ .round-corners width=100% loading=lazy }
 
 !!! tip "Watch them side by side"
     Put the publisher tab and the viewer tab next to each other and wave at the camera. What you're
     looking for is that the wave arrives while your hand is still moving. That's the difference this
     series is about, and it's much more convincing than a number.
 
-![The publisher and the viewer side by side, both showing the same frame of the same stream, with a running clock burned into it](/assets/images/blog/2026/09/low-latency-whip-ingestion/publisher-and-viewer.webp){ .round-corners width=100% loading=lazy }
+![The publisher and the viewer side by side, both showing the same frame of the same stream, with a running clock burned into it](../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/publisher-and-viewer.webp){ .round-corners width=100% loading=lazy }
 
 Those two tiles are the same stream: the left one is the camera as it is captured, the right one is
 what came back out of the Room after a WHIP publish and a WebRTC subscribe. The clock burned into
@@ -224,7 +224,7 @@ Whatever is publishing into the Room (the browser page, OBS, both at once) shows
 participant with tracks. From OpenVidu's point of view a WHIP ingress *is* a participant, which is
 why nothing about the viewer has to know how the media got in.
 
-![OBS streaming and our watch app viewing the stream, side by side](/assets/images/blog/2026/09/low-latency-whip-ingestion/obs-whip-and-viewer.webp){ .round-corners width=100% loading=lazy }
+![OBS streaming and our watch app viewing the stream, side by side](../../../../assets/images/blog/2026/09/low-latency-whip-ingestion/obs-whip-and-viewer.webp){ .round-corners width=100% loading=lazy }
 
 ## Why this path is the low-latency one
 
@@ -275,10 +275,10 @@ can't.
 
 To go further:
 
-- [Part 1: WebRTC vs. HLS and DASH](/blog/posts/2026/09/low-latency-live-streaming.md) — why this
+- [Part 1: WebRTC vs. HLS and DASH](../../../../blog/posts/2026/09/low-latency-live-streaming.md) — why this
   works, if you jumped straight to the code.
-- [Stream ingestion](/docs/build-your-app/common-operations.md#stream-ingestion) — WHIP ingest in
+- [Stream ingestion](../../../../docs/build-your-app/common-operations.md#stream-ingestion) — WHIP ingest in
   your own app, beyond the demo.
-- [OpenVidu Local Deployment](/docs/self-hosting/local.md) — the stack this post runs on, and how to
+- [OpenVidu Local Deployment](../../../../docs/self-hosting/local.md) — the stack this post runs on, and how to
   take it somewhere that isn't your laptop.
-- [OpenVidu Platform](/docs/index.md) — the SDKs and APIs underneath all of it.
+- [OpenVidu Platform](../../../../docs/index.md) — the SDKs and APIs underneath all of it.
