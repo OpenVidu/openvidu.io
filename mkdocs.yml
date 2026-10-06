@@ -256,48 +256,33 @@ nav:
   - Research:
       - research.md
 
-# Pages reached by direct link only, never through the nav.
-not_in_nav: |
-  /account.md
-  /acknowledgments.md
-  /openvidu-meet-vs-openvidu-platform.md
-  /openvidu-vs-livekit.md
-  /openvidu-vs-mediasoup.md
-  /openvidu-vs-jitsi.md
-  /openvidu-vs-janus.md
-  /conditions/
-  /support/thanks.md
+# Pages reached by direct link only, never through the nav. MkDocs checked this list against
+# the nav (`not_in_nav`); Zensical has no such check, so it is kept here as documentation:
+#   account.md, acknowledgments.md, openvidu-meet-vs-openvidu-platform.md,
+#   openvidu-vs-livekit.md, openvidu-vs-mediasoup.md, openvidu-vs-jitsi.md, openvidu-vs-janus.md,
+#   conditions/*, support/thanks.md
 
-# Sitemap <lastmod> from git and the glightbox fixes; then every page's own title and description
-# for llmstxt, and the linked code-block filenames Pygments escapes (the version branches carry
-# copies of those two).
-hooks:
-  - publish-tool/mkdocs_hook.py
-  - publish-tool/llmstxt_entries_hook.py
-  - publish-tool/pygments_fence_title_hook.py
+# Zensical has no `hooks:`. What the three MkDocs hooks did now lives in `ovweb`: the two Markdown
+# extensions listed under `markdown_extensions` run at render time, and the sitemap dates come
+# from the publish (publish-tool/README.md). See contributing/zensical-migration.md.
 
+# `zensical serve` already watches the config file and the theme directories (`custom_dir`
+# included): listing `overrides` here makes the build silently write no pages at all — see
+# contributing/zensical-migration.md.
 watch:
   - shared
-  - overrides
-  - publish-tool/mkdocs_hook.py
-  - publish-tool/llmstxt_entries_hook.py
-  - publish-tool/pygments_fence_title_hook.py
-  - publish-tool/llmstxt_preprocess.py
-  - publish-tool/src/ovweb
 
+# Zensical's own keys. Anchor validation is kept off: it reports every link to a content-tab
+# label (~110 false positives, the same ones MkDocs logged at INFO), and `ovweb lint --site`
+# is the authoritative anchor check over the built HTML.
 validation:
-  nav:
-    omitted_files: warn
-    not_found: warn
-    absolute_links: warn
-  links:
-    not_found: warn
-    absolute_links: relative_to_docs
-    unrecognized_links: warn
-    anchors: info
+  invalid_links: true
+  invalid_link_anchors: false
 
 theme:
   name: material
+  # Material's look; Zensical's default is its own `modern` variant.
+  variant: classic
   custom_dir: overrides
   language: en
   features:
@@ -366,34 +351,15 @@ plugins:
         - OpenVidu Platform
         - Release
         - AI
-  # CI unset = local build, "false" = link-validation build, "true" = publish. So privacy runs
-  # everywhere except validation, and optimize only in publish.
-  - privacy:
-      enabled: !ENV [CI, true]
-      # Material's bundle names the mermaid CDN, so the plugin vendors 3.5 MB of it
-      # into every published version. No superfences mermaid fence is configured and
-      # no page uses one.
-      assets_exclude:
-        - unpkg.com/*
-        # The account component loads Stripe Checkout, which must come from Stripe's own
-        # domain and not from a copy frozen at publish time.
-        - checkout.stripe.com/*
-  - optimize:
-      enabled: !ENV [CI, false]
-      # The default 60 visibly softens the team portraits.
-      optimize_jpg_quality: 82
-      # pngquant's palette is capped at 256 colours, so search effort is its only quality lever.
-      optimize_png_speed: 1
-      # The vendored compodoc bundle ships as it is.
-      optimize_exclude:
-        - docs/reference-docs/*
+  # Material's `privacy` (self-hosting of external assets) and `optimize` (image compression)
+  # plugins have no Zensical counterpart yet — see contributing/zensical-migration.md.
   - glightbox:
       width: 100%
       skip_classes:
         - skip-gallery
       auto_themed: true
-      background: none
-      shadow: false
+      # `background`/`shadow` are not options of Zensical's glightbox; javascripts/glightbox-gallery.js
+      # sets them on the instance it builds.
   # Registered in every profile: Material emits the feed <link> tags as soon as the plugin
   # exists. Only the git-history walk is publish-only (it needs a full clone at the repo root).
   - rss:
@@ -414,15 +380,12 @@ plugins:
         layer you build your own real-time application on. The "Optional" section at the end
         holds legal and acknowledgment pages, and can be skipped when a shorter context is
         needed.
-      # The plugin's own cleaning runs before the preprocess hook and drops the tab labels and
-      # comparison icons, so llmstxt_preprocess.py reimplements it: it keeps those, exports
-      # admonitions as blockquotes and restores the code blocks' linked filenames.
-      autoclean: false
-      preprocess: publish-tool/llmstxt_preprocess.py
-      # Paths only: llmstxt_entries_hook.py fills in each page's own `title` and `description`, and a
-      # listed page missing either fails the build. Matching is fnmatch, where `*` crosses `/`:
-      # `meet/features/*.md` takes that whole subtree, so a folder whose children belong to
-      # different sections is listed page by page, and a literal segment fences a glob in.
+      # Zensical's native exporter has no `preprocess` hook (the MkDocs plugin's was
+      # publish-tool/llmstxt_preprocess.py); its own cleaning runs instead.
+      autoclean: true
+      # Paths only. Matching is fnmatch, where `*` crosses `/`: `meet/features/*.md` takes that
+      # whole subtree, so a folder whose children belong to different sections is listed page by
+      # page, and a literal segment fences a glob in.
       sections:
         Product and pricing:
         - index.md
@@ -541,11 +504,13 @@ markdown_extensions:
         kwds:
           case: lower
   - pymdownx.snippets:
-      base_path: [!relative $config_dir/shared]
+      # Relative to the working directory (Zensical has no `!relative` tag): build and serve
+      # from the repository root.
+      base_path: [shared]
       check_paths: true
   - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:zensical.extensions.emoji.twemoji
+      emoji_generator: !!python/name:zensical.extensions.emoji.to_svg
       options:
         custom_icons:
           - overrides/.icons
@@ -553,6 +518,11 @@ markdown_extensions:
   # For the wrappers md_in_html cannot reach: its `markdown` attribute is ignored inside a
   # nested block (a content tab, an admonition) and ships as literal HTML.
   - pymdownx.blocks.html
+  # ovweb's extensions (publish-tool/src/ovweb/mdx/), which need the package importable
+  # (`pip install ./publish-tool`): root-absolute `.md` links resolved against docs/, as MkDocs'
+  # `absolute_links: relative_to_docs` did, and the linked code-block filenames Pygments escapes.
+  - ovweb.mdx.root_links
+  - ovweb.mdx.fence_title
 
 extra:
   analytics:
