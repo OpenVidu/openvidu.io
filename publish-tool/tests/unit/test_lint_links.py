@@ -194,6 +194,23 @@ def test_a_non_release_post_may_not_pin_versions(tmp_path):
     assert finding.severity == "error"
 
 
+def test_a_latest_link_in_a_versioned_page_or_snippet_is_an_error(tmp_path):
+    write(tmp_path, "docs/meet/guide.md", "[x](https://openvidu.io/latest/meet/embed/)")
+    write(tmp_path, "shared/tip.md", '<a href="/latest/docs/">x</a>')
+
+    findings = findings_of(tmp_path, "latest-in-versioned-page")
+    assert [(f.file, f.severity) for f in findings] == [
+        ("docs/meet/guide.md", "error"),
+        ("shared/tip.md", "error"),
+    ]
+
+
+def test_a_root_page_may_link_to_latest(tmp_path):
+    write(tmp_path, "docs/index.md", '<a href="/latest/docs/getting-started/">x</a>')
+
+    assert findings_of(tmp_path, "latest-in-versioned-page") == []
+
+
 def test_a_latest_link_on_a_releases_page_is_an_error(tmp_path):
     write(tmp_path, "docs/docs/releases.md", "[x](https://openvidu.io/latest/docs/guide/)")
 

@@ -201,7 +201,8 @@ def _is_release_post(source: Source) -> bool:
 
 
 def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
-    """Version-pinned links live only on the releases pages and in Release blog posts."""
+    """Version-pinned links live only on the releases pages and in Release blog posts, and no
+    versioned page or snippet links to `latest` by hand."""
     findings = []
     releases = _release_files(layout)
     for collection in (corpus.docs, corpus.snippets):
@@ -220,6 +221,27 @@ def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
                         "pin versions only on the releases pages and in Release blog posts",
                     )
                 )
+
+    # Nor does a versioned page reach `latest` by hand: the publish points the newest version's
+    # exports at /latest/ and pins them back when it is superseded, rewriting every such link.
+    sections = tuple(f"docs/{section}/" for section in layout.versioned_pages)
+    versioned = [
+        source
+        for source in corpus.docs.values()
+        if source.path.startswith(sections) and source.path not in releases
+    ]
+    for source in (*versioned, *corpus.snippets.values()):
+        for match in LATEST_LINK.finditer(source.visible):
+            findings.append(
+                Finding(
+                    "latest-in-versioned-page",
+                    ERROR,
+                    source.path,
+                    source.line_of(match.start()),
+                    "versioned page links to `latest` by hand",
+                    "link relatively inside the version; the publish decides where /latest/ goes",
+                )
+            )
 
     # The inverse rule: the releases pages must never point at `latest` — the publish fails on it.
     for path in releases:

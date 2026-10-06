@@ -28,7 +28,9 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
   recognized), and the `page.md/#anchor` stray-slash form.
 - **Version-pin discipline**: `/X.Y/` links are allowed only on the two releases pages and in
   `Release` blog posts; the releases pages themselves must never link `latest` (the publish
-  refuses it — lint catches it at PR time instead).
+  refuses it — lint catches it at PR time instead), and neither may any other versioned page or
+  shared snippet: the publish decides where `/latest/` goes in the Markdown exports
+  ([`link-rewriting.md`](../publish-tool/docs/link-rewriting.md)).
 - **SEO budgets** (warn): `title` over 57 characters (70 for posts), `description` over 160 or
   not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
   `llmstxt_entries_hook.py` — a missing field must kill CI, but a long one must not kill
