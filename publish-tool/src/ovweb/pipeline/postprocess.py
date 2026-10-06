@@ -36,7 +36,7 @@ from ..expand import (
     wipe_owned,
 )
 from ..redirects import is_generated_redirect, render_redirect
-from ..releases import DestinationRegionError, splice_releases
+from ..releases import DestinationRegionError, check_releases_export, splice_releases
 from ..report import Reporter
 from ..rewrite import (
     promote_root_sitemap,
@@ -52,13 +52,14 @@ from ..rewrite import (
     rewrite_versioned_markdown,
     sync_version_sitemap,
 )
-from ..rewrite.markdown import SUFFIX as MARKDOWN
 from ..rewrite.markdown import (
+    RELEASES_EXPORT,
     is_releases_export,
     pin_versioned_markdown,
     point_versioned_markdown_at_latest,
     prune_version_llms,
 )
+from ..rewrite.markdown import SUFFIX as MARKDOWN
 
 SITEMAP = "sitemap.xml"
 SEARCH_INDEX = "search/search_index.json"
@@ -613,7 +614,8 @@ def _sync_releases(
 
     Publishing the newest version pushes its notes out to every other version folder;
     re-publishing an older version pulls the current newest notes back in, so a rebuild does
-    not regress it to the notes that version shipped with.
+    not regress it to the notes that version shipped with. The Markdown exports travel with the
+    HTML, since the docs MCP server indexes every version's.
     """
     report.step("sync-releases", "Splice the newest release notes across versions")
 
@@ -627,7 +629,7 @@ def _sync_releases(
             report.warn(message)
         pairs = [] if newest is None else [(newest, version)]
 
-    spliced = 0
+    spliced = copied = 0
     for source, destination in pairs:
         if source == destination:
             continue
@@ -639,9 +641,13 @@ def _sync_releases(
             report=report,
             result=result,
         )
+        copied += _copy_releases_exports(
+            tree, source=source, destination=destination, config=config, report=report
+        )
 
     result.counts["sync-releases"] = spliced
-    report.result("sync-releases", pages_spliced=spliced)
+    result.counts["sync-releases-exports"] = copied
+    report.result("sync-releases", pages_spliced=spliced, exports_copied=copied)
 
 
 def _splice_pair(
@@ -680,3 +686,22 @@ def _splice_pair(
         )
         spliced += 1
     return spliced
+
+
+def _copy_releases_exports(
+    tree: Path, *, source: str, destination: str, config: SiteConfig, report: Reporter
+) -> int:
+    """Copy the source version's releases exports over the destination's, whole.
+
+    Only where the destination has one: the versions before 3.4 build no exports.
+    """
+    copied = 0
+    for page in config.layout.versioned_pages:
+        source_file = tree / source / page / RELEASES_EXPORT
+        destination_file = tree / destination / page / RELEASES_EXPORT
+        if not source_file.is_file() or not destination_file.is_file():
+            continue
+        fsops.write_text(destination_file, check_releases_export(fsops.read_text(source_file)))
+        report.detail(f"{source}/{page} -> {destination}/{page}: Markdown export")
+        copied += 1
+    return copied

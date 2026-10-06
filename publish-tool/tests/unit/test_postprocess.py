@@ -17,7 +17,7 @@ import pytest
 from ovweb.pipeline.postprocess import PostprocessError, postprocess
 from ovweb.plan import build_plan
 from ovweb.redirects import RedirectError, is_generated_redirect, resolve_file_redirects
-from ovweb.releases import ARTICLE_MARKER, TOC_MARKER
+from ovweb.releases import ARTICLE_MARKER, TOC_MARKER, SourceRegionError
 from ovweb.report import Reporter
 
 VERSION = "3.9"
@@ -737,6 +737,53 @@ def test_latest_version_pushes_its_release_notes_out(mixed_tree, config, report)
     page = (mixed_tree / OLD_VERSION / "docs" / "releases" / "index.html").read_text()
     assert f"{VERSION}.0 notes" in page
     assert f'<a class="chrome" href="/{OLD_VERSION}/assets/logo.png">{OLD_VERSION}</a>' in page
+
+
+def releases_exports(tree: Path, notes: str) -> tuple[Path, Path]:
+    """The two versions' docs releases exports, the newest one holding `notes`."""
+    newest = tree / VERSION / "docs" / "releases" / "index.md"
+    newest.write_text(notes, encoding="utf-8")
+    return newest, tree / OLD_VERSION / "docs" / "releases" / "index.md"
+
+
+NOTES_EXPORT = (
+    f"# Releases\n\n## {VERSION}.0\n\n[Guide](https://openvidu.io/{VERSION}/docs/index.md)\n\n"
+    "## 3.2.0\n\n[Guide](https://openvidu.io/3.2/docs/index.md) · [3.2.0](#320)\n"
+)
+
+
+def test_latest_version_pushes_its_release_notes_export_out(mixed_tree, config, report):
+    """The docs MCP server indexes every version's export, so it carries the same notes as the
+    HTML beside it."""
+    _, old = releases_exports(mixed_tree, NOTES_EXPORT)
+    postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert old.read_text() == NOTES_EXPORT
+
+
+def test_past_version_pulls_the_newest_release_notes_export_in(mixed_tree, config, report):
+    _, old = releases_exports(mixed_tree, NOTES_EXPORT)
+    postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
+
+    assert old.read_text() == NOTES_EXPORT
+
+
+def test_a_version_without_a_releases_export_gets_none(mixed_tree, config, report):
+    """The versions before 3.4 build no exports at all."""
+    _, old = releases_exports(mixed_tree, NOTES_EXPORT)
+    old.unlink()
+    postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert not old.exists()
+
+
+def test_a_relocatable_link_in_the_newest_releases_export_fails_the_publish(
+    mixed_tree, config, report
+):
+    releases_exports(mixed_tree, "## 3.9.0\n\n[Guide](../getting-started/)\n")
+
+    with pytest.raises(SourceRegionError, match="relative to the version folder"):
+        postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
 
 
 def test_prunes_only_the_published_version_sitemap(mixed_tree, config, report):

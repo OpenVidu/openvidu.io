@@ -188,7 +188,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see [docs/sitemaps-and-search.md](docs/sitemaps-and-search.md). |
 | `sync-version-sitemap` | always | List the version's generated redirects in that same sitemap, so the selector resolves a moved page through its stub.   |
 | `pin-superseded-exports` | latest | Point every other version's Markdown exports back at their own version: the one that held `latest` linked them to `/latest/`, which now leads to this one. |
-| `sync-releases`        | always | Splice the newest release notes across versions — see [docs/releases-splice.md](docs/releases-splice.md).              |
+| `sync-releases`        | always | Splice the newest release notes across versions, and copy their Markdown exports — see [docs/releases-splice.md](docs/releases-splice.md).              |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
 Everything before `commit` touches no git at all, which is what makes
