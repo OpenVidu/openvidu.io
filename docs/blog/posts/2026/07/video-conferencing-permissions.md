@@ -1,7 +1,9 @@
 ---
 title: "3 access models for video conferencing apps"
 draft: false
-date: 2026-07-14
+date:
+  created: 2026-07-14
+  updated: 2026-10-06
 slug: video-conferencing-permissions
 description: "The three access models for video conferencing apps compared, anonymous role links, identified guests and registered users, and when to use each."
 cover_image: poster.png

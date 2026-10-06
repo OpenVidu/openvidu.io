@@ -1,7 +1,8 @@
 ---
 title: "OpenVidu 3.9.0 release notes"
 draft: false
-date: 2026-09-30
+date:
+  created: 2026-09-30
 slug: release-390
 description: "OpenVidu 3.9.0 is out with a Meetings API, participant muting and meeting limits in Meet, plus Nemotron live captions and a sturdier mediasoup."
 categories:

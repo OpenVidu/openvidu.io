@@ -70,7 +70,7 @@ Everything else — full builds, validating like CI, previewing the versioned la
 | Serving/building locally | [`contributing/local-testing.md`](contributing/local-testing.md) |
 | Understanding the checks: `ovweb lint`, the hook, the CI workflows | [`contributing/checks.md`](contributing/checks.md) |
 | Placing a snippet in the right `shared/` folder | [`shared/README.md`](shared/README.md) |
-| Blog conventions (naming, drafts, frontmatter, publishing) | [`.claude/skills/blog-write/references/conventions.md`](.claude/skills/blog-write/references/conventions.md) |
+| Blog conventions (naming, drafts, frontmatter, publishing, editing a published post) | [`.claude/skills/blog-write/references/conventions.md`](.claude/skills/blog-write/references/conventions.md) |
 | Using `ovweb` (commands, what a publish does) | [`publish-tool/README.md`](publish-tool/README.md) |
 | The publishing design internals (redirects, rewriting, sitemaps, splice, verify) | [`publish-tool/docs/`](publish-tool/docs/) — indexed in the tool README |
 | The always-on invariants an AI session starts from | [`CLAUDE.md`](CLAUDE.md) |

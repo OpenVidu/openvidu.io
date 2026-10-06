@@ -1,7 +1,9 @@
 ---
 title: 3 ways to integrate video conferencing into your app with OpenVidu
 draft: false
-date: 2026-09-22
+date:
+  created: 2026-09-22
+  updated: 2026-10-06
 slug: integrate-video-conferencing-into-your-app
 description: >-
   Three ways to add video conferencing to your app with OpenVidu, from embedding
@@ -101,7 +103,7 @@ Inside a framework it is the same tag with bindings. In Angular, the room your b
 @if (room(); as current) {
   <openvidu-meet
     #meet
-    [attr.room-url]="current.moderatorUrl"
+    [attr.room-url]="current.access.anonymous.moderator.url"
     participant-name="Support agent"
     (meetingJoined)="onJoined($event)"
     (embeddedCloseRequested)="onClosed()"
