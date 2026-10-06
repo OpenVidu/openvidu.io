@@ -1,8 +1,10 @@
-"""SEO frontmatter checks: field lengths and site-wide uniqueness.
+"""SEO frontmatter checks: presence of `title` and `description`, field lengths, uniqueness.
 
-Presence of `title` and `description` is already a hard build error (the llmstxt hook), so it is
-not repeated here. Lengths and uniqueness are conventions: violating them costs ranking, not the
-build, so they warn instead of failing CI.
+Presence is an error: both fields are what an llms.txt entry is made of (the publish reads them
+off the page), what the `<title>` and the search snippet show, and what the social cards carry.
+Under MkDocs a missing one failed the build, through a hook Zensical has no equivalent of, so the
+lint is where CI catches it now. Lengths and uniqueness are conventions: violating them costs
+ranking, not the build, so they warn instead of failing CI.
 """
 
 from __future__ import annotations
@@ -10,7 +12,7 @@ from __future__ import annotations
 from collections import defaultdict
 
 from .corpus import Corpus
-from .findings import WARN, Finding
+from .findings import ERROR, WARN, Finding
 
 #: Material appends " - OpenVidu" to the <title>, which is what the ~57-character budget is for.
 TITLE_LIMIT = 57
@@ -29,6 +31,20 @@ def check_seo_fields(corpus: Corpus) -> list[Finding]:
         title = source.meta.get("title")
         description = source.meta.get("description")
         is_post = path.startswith("docs/blog/posts/")
+
+        for key, value in (("title", title), ("description", description)):
+            if not isinstance(value, str) or not value.strip():
+                findings.append(
+                    Finding(
+                        f"missing-{key}",
+                        ERROR,
+                        path,
+                        1,
+                        f"no `{key}` in the frontmatter",
+                        "every page needs a title and a description: together they are its "
+                        "llms.txt entry, its <title> and its search snippet",
+                    )
+                )
 
         if isinstance(title, str):
             by_title[title].append(path)

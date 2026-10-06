@@ -33,6 +33,17 @@ def page(title="A page", description="A fine description of the page."):
 # -- SEO fields ------------------------------------------------------------------------------
 
 
+def test_a_page_without_a_title_or_a_description_is_an_error(tmp_path):
+    """Both fields make the page's llms.txt entry, which the publish reads off the page."""
+    write(tmp_path, "docs/a.md", '---\ntitle: "A"\n---\n')
+    write(tmp_path, "docs/b.md", '---\ndescription: "B."\n---\n')
+
+    (missing_description,) = findings_of(tmp_path, "missing-description")
+    (missing_title,) = findings_of(tmp_path, "missing-title")
+    assert missing_description.file == "docs/a.md" and missing_description.severity == "error"
+    assert missing_title.file == "docs/b.md"
+
+
 def test_a_long_docs_title_warns_but_a_blog_title_gets_more_room(tmp_path):
     long_title = "A title that runs well past the fifty-seven character budget"
     write(tmp_path, "docs/docs/guide.md", page(title=long_title))
