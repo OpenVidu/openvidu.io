@@ -1,5 +1,12 @@
 """HTML pre-processing for the Markdown exports, hooked into `mkdocs-llmstxt`.
 
+NOT USED BY THE ZENSICAL BUILD. Zensical's native llmstxt plugin has no `preprocess` hook, so
+since the move to Zensical the exports are cleaned by its own `autoclean` port — which drops the
+tab labels and every link whose label carries an icon (contributing/zensical-migration.md). The
+version branches built with MkDocs still load their copies of this file, and the module is kept on
+main, with its tests, as the reference for regenerating the exports from the built HTML at publish
+time, the follow-up that migration note describes.
+
 The plugin converts each page's rendered HTML to Markdown, running its own `autoclean` first unless
 it is turned off — which `mkdocs.yml` does, because the plugin runs `autoclean` **before** the
 `preprocess` hook:
