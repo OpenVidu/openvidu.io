@@ -31,9 +31,10 @@ the link forms, the excerpt rule, and the asset mirroring; trust its errors). Se
   the documented draft mechanism. DO flag: a published post whose `date.created` doesn't match
   its folders, a draft mixing placeholder and real year/month paths, a date-prefixed filename
   (old convention), or a literal `created: YYYY-MM-DD` string (aborts the build).
-- **Edits to a published post** (the diff changes the body of a post already on `main`) →
+- **Edits to a published post** (the diff changes what a post already on `main` says) →
   `date.updated` must be set to the day the change merges (conventions' *Editing a published
-  post*); missing or stale → High. A new post carries no `updated`.
+  post*); missing or stale → High. Frontmatter-only changes (`description`, `tags`…) and new
+  posts carry no new `updated`.
 - **Frontmatter complete** (all keys of the template). `title` and `description` missing →
   High (build failure). `cover_image` recommended: raster (not svg) and actually present in the
   post's asset folder — flag a missing or broken value.

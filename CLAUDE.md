@@ -57,8 +57,9 @@ Every page requires `title` (≤57 chars — Material appends `" - OpenVidu"`) a
 llmstxt-selected page missing either (`publish-tool/llmstxt_entries_hook.py`), and the globs select
 nearly every page.
 
-Blog posts date themselves with a `date:` mapping, `created` plus `updated`: **any edit to a
-published post sets `date.updated` to the day it merges** — automated release-review PRs included.
+Blog posts date themselves with a `date:` mapping, `created` plus `updated`: **a change to what a
+published post says sets `date.updated` to the day it merges** — automated release-review PRs
+included; frontmatter-only changes do not.
 
 ## Structural invariants
 
