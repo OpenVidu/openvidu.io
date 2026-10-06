@@ -50,6 +50,7 @@ Example:
 	participant-name="John Doe"
 	participant-external-id="user-42"
 	initial-video-active="false"
+	language="es"
 	leave-redirect-url="https://meeting.end.url/"
 ></openvidu-meet>
 ```
