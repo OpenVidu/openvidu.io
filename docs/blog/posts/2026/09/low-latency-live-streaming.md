@@ -5,9 +5,8 @@ date:
   created: 2026-09-01
 slug: low-latency-live-streaming
 description: >-
-  What counts as low latency, why WebRTC hits sub-second delivery where HLS and
-  DASH structurally can't, and where low latency live streaming actually gets
-  used.
+  What counts as low latency, why WebRTC beats HLS and DASH at sub-second
+  delivery, and when to stream to thousands of concurrent viewers with it.
 cover_image: poster-light.webp
 categories:
   - Comparison
