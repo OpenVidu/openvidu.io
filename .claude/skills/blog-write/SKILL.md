@@ -1,6 +1,8 @@
 ---
 name: blog-write
 description: Write an OpenVidu technical blog post in English from a structured outline — full post or a single section — following the repo's conversational style, MkDocs frontmatter, intro hook + `<!-- more -->` tag, scannable formatting, and copy-pasteable commands. Use after an outline exists (from blog-plan) and it's time to draft. Trigger phrases like "write the post", "draft this blog", "write section X", "turn this outline into a post".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Content Writer
@@ -88,6 +90,7 @@ Then add a short **Final checks** note confirming:
 - Active/conversational voice held throughout.
 - All commands copy-pasteable; all image placements annotated.
 - Frontmatter has a `title` and a `description` (both required — the build fails without them); `cover_image` set when a raster poster exists in the asset folder.
-- Naming agrees: filename is `<slug>.md` (= frontmatter `slug`); asset folder is `docs/assets/images/blog/YYYY/MM/<slug>/` mirroring the post location; published posts sit in `posts/<year>/<month>/` matching the frontmatter `date`, drafts sit in the literal `posts/YYYY/MM/` placeholder folders with a temporary creation date.
+- Naming agrees: filename is `<slug>.md` (= frontmatter `slug`); asset folder is `docs/assets/images/blog/YYYY/MM/<slug>/` mirroring the post location; published posts sit in `posts/<year>/<month>/` matching the frontmatter `date.created`, drafts sit in the literal `posts/YYYY/MM/` placeholder folders with a temporary creation date.
+- Editing an already-published post (a section, a note, a fixed command): `date.updated` set to the day the change merges, per the conventions' *Editing a published post*.
 - Links follow the rules above (root-absolute internal/assets with the `.md`/file extension; `{:target="_blank"}` external; absolute version-pinned for release posts).
 - Media follows the conventions' **Media** section: `.round-corners` on captures/photos/posters/GIFs (not on logos, transparent art or SVG diagrams), `loading=lazy` on every image but the poster, and videos wrapped in a `glightbox` anchor with `page_features: [lazyvideo]` declared.

@@ -17,6 +17,7 @@ on:
     paths:
       - "docs/**"
       - "shared/**"
+      - "overrides/**"
       - "mkdocs.yml"
       # The build reads publish-tool/ovweb.yaml through mkdocs_hook.py, and the pin check
       # below reads pyproject.toml, requirements-publish.txt and both Dockerfiles.
@@ -31,6 +32,7 @@ on:
     paths:
       - "docs/**"
       - "shared/**"
+      - "overrides/**"
       - "mkdocs.yml"
       - "publish-tool/**"
       - "Dockerfile"

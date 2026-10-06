@@ -1,7 +1,8 @@
 ---
 title: "How client networks affect WebRTC quality and cost"
 draft: false
-date: 2026-04-30
+date:
+  created: 2026-04-30
 slug: how-client-networks-affect-qoe-and-costs
 description: "How modern WebRTC connectivity works, and why your clients' networks drive both their user experience and the cost of the servers behind them."
 cover_image: webrtc-network-paths-light.png

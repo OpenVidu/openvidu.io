@@ -42,6 +42,7 @@ def run_lint(root: Path, *, layout: SiteLayout, paths: list[str] | None = None) 
         *conventions.check_light_dark_pairs(corpus),
         *conventions.check_snippet_names(corpus),
         *conventions.check_blog_asset_mirroring(corpus),
+        *conventions.check_blog_dates(corpus),
     ]
     if paths is not None:
         wanted = {path.replace("\\", "/").lstrip("./") for path in paths}

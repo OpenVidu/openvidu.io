@@ -1,7 +1,8 @@
 ---
 title: "How to scale video conferencing architecture"
 draft: false
-date: 2026-06-02
+date:
+  created: 2026-06-02
 slug: scalability-in-videoconferencing-systems
 description: "An architecture roadmap for scaling video conferencing from one server to a high-availability system: elastic media plane, HA control plane, autoscaling."
 cover_image: poster.png
