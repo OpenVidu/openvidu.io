@@ -29,6 +29,7 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 | Versioned export → non-versioned page  | `…/3.9/pricing/`  | `…/pricing/`                    |
 | Versioned export → home (`index.md`)   | `…/3.9/index.md`  | `…/index.md`                    |
 | Promoted export → versioned page       | `…/3.9/docs/…`    | `…/latest/docs/…`               |
+| Release post export → versioned page   | `…/3.9/docs/…`    | `…/3.9/docs/…` (kept)           |
 | Promoted export → non-versioned page   | `…/3.9/pricing/`  | `…/pricing/`                    |
 | Root `llms.txt`                        | as promoted       | as promoted                     |
 | `/X.Y/llms.txt`                        | every page of the build | the pages under `/X.Y/` only, pinned to it |
@@ -89,13 +90,17 @@ its target — and both exist because the plugin is inconsistent in ways only th
   shell like `/account/` would export as a bare heading. The repair reads the real set of exports
   off the tree, so it needs no list to keep in step.
 
-And one deliberate difference from the HTML:
+And one place where the HTML's shield has to be applied per page:
 
-- **A promoted export does not shield an author's pin to the version being published.** The HTML
-  does (see [sitemaps-and-search.md](sitemaps-and-search.md)), but in Markdown a hand-written pin
-  and the plugin's absolutised link are the same bytes, and the plugin wrote almost all of them. A
-  pin to a *different* version — the form a deliberately archival link takes, as when release
-  notes link back to the release before — is untouched either way.
+- **A Release post's export keeps its pins.** The HTML of a promoted page shields an author's
+  pin to the version being published (see [sitemaps-and-search.md](sitemaps-and-search.md)), but
+  in Markdown a hand-written pin and the plugin's absolutised link are the same bytes, so no rule
+  can tell them apart link by link. Release posts are the one promoted page that pins versions on
+  purpose, and the only one `ovweb lint` lets pin them (`release-post-unpinned-link` requires it),
+  so the publish reads them off the blog's own `blog/category/release/` listing and leaves their
+  exports' links into versioned documentation pinned. Every other promoted export points them at
+  `/latest/`. A pin to a *different* version is untouched either way. `ovweb verify` reports a
+  Release post linking through `/latest/` (`release-post-latest-link`).
 
 ## The newest version's exports follow `latest`
 

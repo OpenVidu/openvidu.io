@@ -60,6 +60,24 @@ def test_reports_a_root_file_that_pins_the_current_version(published, config, na
     assert findings_by_check(published, config)["root-export-version-pin"] == [name]
 
 
+RELEASE_POST = "blog/2026/09/30/release-390/index.md"
+
+
+def test_a_release_post_may_pin_the_current_version(published, config):
+    assert f"https://openvidu.io/{VERSION}/docs/" in (published / RELEASE_POST).read_text()
+
+    assert "root-export-version-pin" not in findings_by_check(published, config)
+
+
+def test_reports_a_release_post_linking_through_latest(published, config):
+    """What the promoted rewrite does to a post it does not know is a Release post."""
+    (published / RELEASE_POST).write_text(
+        "[docs](https://openvidu.io/latest/docs/index.md)\n", encoding="utf-8"
+    )
+
+    assert findings_by_check(published, config)["release-post-latest-link"] == [RELEASE_POST]
+
+
 def test_reports_a_version_llms_entry_outside_the_version(published, config):
     """A root page or another version in a version's own index is a URL that never exists."""
     path = published / VERSION / "llms.txt"

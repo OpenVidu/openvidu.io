@@ -26,7 +26,7 @@ from pathlib import Path
 
 from .. import fsops
 from ..config import SiteConfig
-from ..discovery import latest_in_tree, versions_in_tree
+from ..discovery import latest_in_tree, release_post_exports, versions_in_tree
 from ..expand import (
     alias_redirects,
     mirror_redirects,
@@ -254,11 +254,18 @@ def _rewrite_promoted_pages(
     def promote_html(text: str) -> str:
         return rewrite_non_versioned_file(text, version=version, layout=layout)
 
-    def promote_markdown(text: str) -> str:
-        return rewrite_promoted_markdown(text, version=version, layout=layout)
+    def promote_markdown(text: str, *, release_post: bool = False) -> str:
+        return rewrite_promoted_markdown(
+            text, version=version, layout=layout, keep_version_pins=release_post
+        )
+
+    # Read off the category listing before the walk below rewrites its HTML.
+    release_posts = release_post_exports(version_dir)
 
     def promote(path: Path, text: str) -> str:
-        return promote_markdown(text) if path.suffix == MARKDOWN else promote_html(text)
+        if path.suffix != MARKDOWN:
+            return promote_html(text)
+        return promote_markdown(text, release_post=path in release_posts)
 
     for directory in layout.non_versioned_pages:
         changed += fsops.rewrite_tree_per_file(version_dir / directory, promote)

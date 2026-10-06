@@ -13,7 +13,12 @@ from pathlib import Path
 
 from . import fsops
 from .config import SiteConfig
-from .discovery import latest_in_tree, version_folders, versions_in_tree
+from .discovery import (
+    latest_in_tree,
+    release_post_exports,
+    version_folders,
+    versions_in_tree,
+)
 from .expand import alias_entries, expand_alias, mirror_redirects, mirror_rule, scan_tree
 from .pipeline.postprocess import LLMS_TXT
 from .redirects import (
@@ -60,6 +65,7 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
     findings += _check_root_search_index_uses_latest(tree, config, published)
     findings += _check_root_exports_use_latest(tree, config, latest)
     findings += _check_exports_follow_the_alias(tree, config, published, latest)
+    findings += _check_release_posts_keep_their_pins(tree, config)
     findings += _check_root_pages_reach_versioned_via_latest(tree, config)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
@@ -442,10 +448,11 @@ def _check_root_exports_use_latest(
     is stale the moment the next one ships.
 
     A pin to some *other* version is left alone: that is how a release-notes page links back to
-    the release before it.
+    the release before it. So are the Release posts, which pin versions on purpose.
     """
     if latest is None:
         return []
+    release_posts = release_post_exports(tree)
 
     candidates = [tree / LLMS_TXT]
     candidates.append(tree / f"index{MARKDOWN}")
@@ -457,7 +464,7 @@ def _check_root_exports_use_latest(
     needle = f"/{latest}/"
     findings = []
     for path in candidates:
-        if not path.is_file():
+        if not path.is_file() or path in release_posts:
             continue
         if needle in fsops.read_text(path):
             findings.append(
@@ -466,6 +473,27 @@ def _check_root_exports_use_latest(
                     str(path.relative_to(tree)),
                     f"holds {needle!r}; a file served from the root reaches versioned "
                     "documentation at /latest/, and a root page at its own unversioned URL",
+                )
+            )
+    return findings
+
+
+def _check_release_posts_keep_their_pins(tree: Path, config: SiteConfig) -> list[Finding]:
+    """A Release post's export links to the versions it announces, never to `/latest/`.
+
+    The promoted rewrite points every other root export at `/latest/`, and in Markdown it cannot
+    tell a post's pins from the links the plugin absolutised, so it has to know the post.
+    """
+    needles = [f"{config.layout.base_url}/latest/{page}/" for page in config.layout.versioned_pages]
+    findings = []
+    for path in sorted(release_post_exports(tree)):
+        found = next((n for n in needles if n in fsops.read_text(path)), None)
+        if found:
+            findings.append(
+                Finding(
+                    "release-post-latest-link",
+                    str(path.relative_to(tree)),
+                    f"links to {found}; a Release post pins the version it announces",
                 )
             )
     return findings

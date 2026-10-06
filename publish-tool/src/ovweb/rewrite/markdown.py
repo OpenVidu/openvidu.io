@@ -104,20 +104,24 @@ def is_releases_export(path: Path, *, version_dir: Path, layout: SiteLayout) -> 
     return any(path == version_dir / page / RELEASES_EXPORT for page in layout.versioned_pages)
 
 
-def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) -> str:
+def rewrite_promoted_markdown(
+    text: str, *, version: str, layout: SiteLayout, keep_version_pins: bool = False
+) -> str:
     """Rewrite the Markdown export of a page promoted to the site root.
 
     Mirrors :func:`ovweb.rewrite.nonversioned.rewrite_non_versioned_file`: the page is served from
     the root, so it carries no version of its own and its links into versioned documentation point
     at `/latest/`.
 
-    Unlike the HTML, this does *not* shield an author-pinned link to the version being published:
-    in Markdown a hand-written pin and the plugin's absolutised link are the same bytes, and the
-    plugin wrote almost all of them. A pin to a *different* version — what an archival link to a
-    previous release looks like — is untouched either way.
+    In Markdown a hand-written pin and the plugin's absolutised link are the same bytes, so the
+    HTML's shield for author-pinned links cannot be applied link by link. `keep_version_pins` is
+    for a Release post, the one promoted page whose links pin versions on purpose (`ovweb lint`,
+    `release-post-unpinned-link`), and leaves every link into versioned documentation pinned. A
+    pin to a *different* version is untouched either way.
     """
-    for page in layout.versioned_pages:
-        text = text.replace(f"/{version}/{page}/", f"/latest/{page}/")
+    if not keep_version_pins:
+        for page in layout.versioned_pages:
+            text = text.replace(f"/{version}/{page}/", f"/latest/{page}/")
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
     text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
     text = _point_root_relative_targets_at_latest(text, layout=layout)

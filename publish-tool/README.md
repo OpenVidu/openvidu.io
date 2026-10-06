@@ -176,7 +176,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns; for the version `latest` points at, the exports' links into it go to `/latest/` — see [docs/link-rewriting.md](docs/link-rewriting.md). |
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
 | `publish-llms-txt`     | always | Keep the version's own `llms.txt`, pruned to the pages served under it and pinned to it; on a latest publish, also derive the root's full index from it, rewritten like a promoted export. |
-| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds and the promoted pages' Markdown exports. |
+| `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds and the promoted pages' Markdown exports, where a Release post keeps its version pins. |
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
 | `promote-search-index` | latest | Point the root index's versioned hits at `/latest/`. The version's own index keeps its version — see [docs/sitemaps-and-search.md](docs/sitemaps-and-search.md). |

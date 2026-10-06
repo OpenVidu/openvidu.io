@@ -158,6 +158,20 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
         f'<a href="https://openvidu.io/3.4/docs/releases/">3.4 notes</a>',
         encoding="utf-8",
     )
+    # A Release post, whose links pin the version it announces on purpose, and the blog's listing
+    # of that category, which is how the publish tells it from any other post.
+    post = base / "blog" / "2026" / "09" / "30" / "release-390"
+    post.mkdir(parents=True)
+    (post / "index.html").write_text(
+        f'<a href="https://openvidu.io/{version}/docs/">Docs</a>', encoding="utf-8"
+    )
+    (post / "index.md").write_text(
+        f"[Docs](https://openvidu.io/{version}/docs/index.md)\n", encoding="utf-8"
+    )
+    (base / "blog" / "category" / "release").mkdir(parents=True)
+    (base / "blog" / "category" / "release" / "index.html").write_text(
+        '<a href="../../2026/09/30/release-390/">OpenVidu 3.9.0</a>', encoding="utf-8"
+    )
     (base / "search" / "search_index.json").write_text(
         json.dumps(
             {"docs": [{"location": ""}, {"location": "docs/"}, {"location": "pricing/"}]},
@@ -458,6 +472,22 @@ def test_rewrites_the_exports_of_promoted_pages(latest_tree, config, report):
     assert "https://openvidu.io/latest/docs/index.md" in export
     assert "https://openvidu.io/support/index.md" in export
     assert f"/{VERSION}/" not in export
+
+
+def test_a_release_posts_export_keeps_the_version_it_announces(latest_tree, config, report):
+    """Its HTML keeps the author's pins, and in Markdown they are the plugin's bytes too, so the
+    post is known by the blog's Release listing; any other post points at /latest/."""
+    other = latest_tree / VERSION / "blog" / "2026" / "09" / "29" / "howto"
+    other.mkdir(parents=True)
+    (other / "index.md").write_text(
+        f"[Docs](https://openvidu.io/{VERSION}/docs/index.md)\n", encoding="utf-8"
+    )
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    release = (latest_tree / "blog" / "2026" / "09" / "30" / "release-390" / "index.md").read_text()
+    assert release == f"[Docs](https://openvidu.io/{VERSION}/docs/index.md)\n"
+    howto = (latest_tree / "blog" / "2026" / "09" / "29" / "howto" / "index.md").read_text()
+    assert howto == "[Docs](https://openvidu.io/latest/docs/index.md)\n"
 
 
 def test_the_newest_versions_export_links_through_latest_but_not_to_root_pages(
