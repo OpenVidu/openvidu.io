@@ -958,7 +958,44 @@ h1.meetplatform-slogan {
   vertical-align: middle;
 }
 
-/* Lightbox (mkdocs-glightbox) */
+/* Lightbox (GLightbox, vendored in javascripts/glightbox.min.js). The first rules are the ones
+   the mkdocs-glightbox plugin used to inject for `background: none` and `shadow: false`. */
+
+html.glightbox-open {
+  overflow: initial;
+  height: 100%;
+}
+
+.gslide-title {
+  margin-top: 0;
+  user-select: text;
+}
+
+.gslide-desc {
+  color: #666;
+  user-select: text;
+}
+
+.glightbox-clean .gslide-media {
+  box-shadow: none;
+}
+
+.gscrollbar-fixer {
+  padding-right: 15px;
+}
+
+.gdesc-inner {
+  font-size: 0.75rem;
+}
+
+body[data-md-color-scheme="slate"] .gdesc-inner {
+  background: var(--md-default-bg-color);
+}
+
+body[data-md-color-scheme="slate"] .gslide-title,
+body[data-md-color-scheme="slate"] .gslide-desc {
+  color: var(--md-default-fg-color);
+}
 
 .gslide-image {
   max-width: 1500px;

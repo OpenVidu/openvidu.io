@@ -135,7 +135,10 @@
 
 {% block scripts %}
 
-{# Owns the lightbox on every page: one gallery per page, theme-aware #}
+{# The lightbox library (vendored from mkdocs-glightbox 0.5.2: GLightbox 3.6.1, MIT), loaded
+   before Zensical's bundle so the bundle neither fetches it from a CDN nor takes the anchors over;
+   then the script that owns the lightbox on every page: one gallery per page, theme-aware. #}
+<script src="{{ 'javascripts/glightbox.min.js' | url }}"></script>
 <script src="{{ 'javascripts/glightbox-gallery.js' | url }}"></script>
 
 {% if page.meta and page.meta.page_features and "revealonscroll" in page.meta.page_features %}
@@ -179,6 +182,9 @@
 {% endblock %}
 
 {% block styles %}
+
+{# The lightbox library's own stylesheet; the site's tweaks to it are in extra.css. #}
+<link rel="stylesheet" href="{{ 'stylesheets/glightbox.min.css' | url }}" />
 
 {% if page.meta and page.meta.page_features and "setupcarousel" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/splide.min.css' | url }}" />

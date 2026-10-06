@@ -1,8 +1,12 @@
 // Owns the page's GLightbox instance.
 //
-// It is the only instance on the page: the plugin hands its mkdocs.yml configuration over as
-// `glightboxOptions` instead of building an instance of its own (see mkdocs_hook.py), and this
-// script adds the video player options that configuration cannot express.
+// It is the only instance on the page. Zensical's glightbox support wraps every image in an
+// `a.glightbox` anchor at build time and its UI bundle would then build an instance of its own
+// — loading the library from a CDN unless `GLightbox` is already defined, and merging a global
+// `GLightboxOptions` into it. So the library is vendored and loaded before this script
+// (javascripts/glightbox.min.js, stylesheets/glightbox.min.css), and `GLightboxOptions` points
+// the bundle's instance at a selector nothing matches, which leaves every anchor to the
+// instance built here.
 //
 // It also merges the galleries. `auto_themed` puts every themed image in a `dark` or a
 // `light` gallery, so a page mixing themed and plain assets ends up with several disjoint
@@ -11,6 +15,9 @@
 // gallery per page — once, however many times the page repeats it — and the variant the current
 // palette hides is kept out of the instance, so the lightbox holds exactly what the page shows.
 // Rebuilt on a palette change.
+// Read by Zensical's UI bundle when it builds its instance: see the note above.
+window.GLightboxOptions = { selector: "a.glightbox-owned-by-the-bundle" };
+
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof GLightbox === "undefined") return;
 
@@ -39,9 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  // What the mkdocs-glightbox plugin computed from the `glightbox:` block in mkdocs.yml, handed
-  // over by the hook (publish-tool/mkdocs_hook.py) in place of the instance it would build itself.
-  const pluginOptions = typeof glightboxOptions === "undefined" ? {} : glightboxOptions;
+  // The image slides' options. Their size comes per anchor from the `glightbox:` block in
+  // mkdocs.yml (`data-width`); the rest are the library's defaults, spelled out because nothing
+  // hands them over any more.
+  const pluginOptions = {
+    touchNavigation: true,
+    loop: false,
+    zoomable: true,
+    draggable: true,
+    openEffect: "zoom",
+    closeEffect: "zoom",
+    slideEffect: "slide",
+  };
 
   // The URL identifies the picture: the same asset used twice on a page, and the slides Splide
   // clones to loop a carousel, are the same picture and belong in the gallery once.
