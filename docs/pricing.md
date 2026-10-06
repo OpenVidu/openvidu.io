@@ -45,10 +45,10 @@ page_features:
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
-        <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag">PRO</span></span></strong></a></td>
-    <td class="border-right"><a href="../docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
-    <td><a href="../docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
+    <td class="border-right"><a href="/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node<span class="openvidu-tag openvidu-community-tag" style="padding-left: 1em; padding-right: 1em;">COMMUNITY</span></span></strong></a></td>
+        <td class="border-right"><a href="/docs/self-hosting/deployment-types/#openvidu-single-node"><strong>OpenVidu<br><span class="nowrap">Single Node <span class="openvidu-tag openvidu-pro-tag">PRO</span></span></strong></a></td>
+    <td class="border-right"><a href="/docs/self-hosting/deployment-types/#openvidu-elastic"><strong>OpenVidu<br>Elastic</strong></a></td>
+    <td><a href="/docs/self-hosting/deployment-types/#openvidu-high-availability"><strong>OpenVidu<br><span class="nowrap">High Availability</span></strong></a></td>
   </tr>
   <tr>
     <td class="first-column border-right">Suitability</td>
@@ -73,10 +73,10 @@ page_features:
   </tr>
   <tr>
     <td class="first-column border-right">Installation instructions</td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/single-node/">Install</a></td>
-    <td class="border-right"><a class="md-button" href="../docs/self-hosting/elastic/">Install</a></td>
-    <td><a class="md-button" href="../docs/self-hosting/ha/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="/docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="/docs/self-hosting/single-node/">Install</a></td>
+    <td class="border-right"><a class="md-button" href="/docs/self-hosting/elastic/">Install</a></td>
+    <td><a class="md-button" href="/docs/self-hosting/ha/">Install</a></td>
   </tr>
 </table>
 
