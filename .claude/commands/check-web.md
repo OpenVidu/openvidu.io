@@ -14,8 +14,8 @@ ovweb lint
 ```
 
 (If `ovweb` is not installed: `pip install -e "./publish-tool[validate]"` first — enough for lint
-and the strict build. `ovweb doctor` is not part of this command; it needs the non-editable
-`pip install "./publish-tool[build]"`.)
+and the strict build, since the extra carries Zensical. `ovweb doctor` is not part of this
+command; it needs the non-editable `pip install "./publish-tool[build]"`.)
 
 It reports `[check] file:line: message — hint` lines at three severities. Act on them:
 
@@ -34,16 +34,18 @@ enforces is documented in `contributing/checks.md`.
 After the fast check passes, also run what CI runs:
 
 ```bash
-CI=false GOOGLE_ANALYTICS_KEY=G-XXXXXXXX mkdocs build --strict --site-dir /tmp/mkdocs-strict-validation
-ovweb lint --site /tmp/mkdocs-strict-validation
+CI=false GOOGLE_ANALYTICS_KEY=G-XXXXXXXX zensical build --strict
+ovweb lint --site site
 ```
 
-- The build must end with **zero WARNINGs** — any WARNING is a failure to fix.
-- Anchor `INFO` lines in the build log are expected noise (~110 `pymdownx.tabbed` false
-  positives) — `ovweb lint --site` is the authoritative anchor check, since it resolves every
-  fragment against the ids actually present in the built HTML.
-- If `mkdocs` is not installed locally, use the Docker image instead:
-  `docker run --rm -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX squidfunk/mkdocs-material build --strict -d /tmp/site`.
+- Run from the repo root (snippet paths resolve against the working directory). The build
+  writes to `site/` (gitignored; Zensical has no `--site-dir`) and must end with
+  **"No issues found"** — any warning is a failure to fix.
+- Anchor validation is off in `mkdocs.yml` (Zensical cannot see the `pymdownx.tabbed` anchors) —
+  `ovweb lint --site` is the authoritative anchor check, since it resolves every fragment
+  against the ids actually present in the built HTML.
+- If `zensical` is not installed locally, use the Docker image instead:
+  `docker run --rm -v ${PWD}:/docs -e GOOGLE_ANALYTICS_KEY=G-XXXXXXXX openvidu-io build --strict`.
 
 If redirect rules or `publish-tool/ovweb.yaml` were touched this session, also run
 `ovweb redirects check`. If any page was deleted or renamed this session, also run

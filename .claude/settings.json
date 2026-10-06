@@ -3,8 +3,8 @@
     "allow": [
       "Bash(docker build:*)",
       "Bash(docker run:*)",
-      "Bash(mkdocs build:*)",
-      "Bash(mkdocs serve:*)",
+      "Bash(zensical build:*)",
+      "Bash(zensical serve:*)",
       "Bash(mike serve:*)",
       "Bash(pytest:*)",
       "Bash(ruff:*)",

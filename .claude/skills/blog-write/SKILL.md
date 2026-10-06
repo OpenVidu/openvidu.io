@@ -28,10 +28,10 @@ formatting.
 ## Post body structure
 
 1. **H1 title** (`# ...`) — matches the outline's title.
-2. **Poster image** immediately after the H1, using **root-absolute** asset paths (`YYYY/MM` stays literal while the post is a draft). Use light/dark variants when available:
+2. **Poster image** immediately after the H1, using asset paths **relative to the post** (four `../`; `YYYY/MM` stays literal while the post is a draft). Use light/dark variants when available:
    ```markdown
-   ![Descriptive alt text](/assets/images/blog/YYYY/MM/<slug>/poster-light.webp#only-light "title"){ .round-corners }
-   ![Descriptive alt text](/assets/images/blog/YYYY/MM/<slug>/poster-dark.webp#only-dark "title"){ .round-corners }
+   ![Descriptive alt text](../../../../assets/images/blog/YYYY/MM/<slug>/poster-light.webp#only-light "title"){ .round-corners }
+   ![Descriptive alt text](../../../../assets/images/blog/YYYY/MM/<slug>/poster-dark.webp#only-dark "title"){ .round-corners }
    ```
    A single image can use `{ align=right width=60% }` sizing attributes. Point `cover_image` at this poster too (a raster `-light` variant). The poster is the one image that does **not** take `loading=lazy`; every later image does — with `.round-corners`, `.skip-gallery` and the video pattern per the **Media** section of the conventions.
 3. **Intro** — first paragraph opens with a **hook** (a question or a clear benefit). It may run a little longer than body paragraphs.
@@ -60,13 +60,12 @@ formatting.
   ```
   Common ones here: `!!! tip`, `!!! abstract "What you'll build"`, `!!! note`.
 
-**Links** (the build runs `mkdocs build --strict`, and `ovweb lint` checks the form — a bad
+**Links** (the build runs `zensical build --strict`, and `ovweb lint` checks the form — a bad
 link fails CI): follow the link rules in
 [`references/conventions.md`](references/conventions.md). The two most-missed ones: internal
-links are root-absolute **with the `.md` extension**, and in the **excerpt** (before
-`<!-- more -->`) internal links must instead be raw HTML in URL form
-(`<a href="/meet/">…</a>`), because the blog listing pages copy the excerpt without rewriting
-Markdown links.
+links are relative to the post (four `../`) **with the `.md` extension**, never root-absolute,
+and in the **excerpt** (before `<!-- more -->`) internal links must instead be raw HTML in URL
+form (`<a href="/meet/">…</a>`), because the blog listing pages copy the excerpt.
 
 **Technical content**
 - Every command must be **copy-pasteable** and correct.
@@ -92,5 +91,5 @@ Then add a short **Final checks** note confirming:
 - Frontmatter has a `title` and a `description` (both required — the build fails without them); `cover_image` set when a raster poster exists in the asset folder.
 - Naming agrees: filename is `<slug>.md` (= frontmatter `slug`); asset folder is `docs/assets/images/blog/YYYY/MM/<slug>/` mirroring the post location; published posts sit in `posts/<year>/<month>/` matching the frontmatter `date.created`, drafts sit in the literal `posts/YYYY/MM/` placeholder folders with a temporary creation date.
 - Editing an already-published post (a section, a note, a fixed command): `date.updated` set to the day the change merges, per the conventions' *Editing a published post*.
-- Links follow the rules above (root-absolute internal/assets with the `.md`/file extension; `{:target="_blank"}` external; absolute version-pinned for release posts).
+- Links follow the rules above (relative internal/assets with the `.md`/file extension, four `../` from the post; `{:target="_blank"}` external; absolute version-pinned for release posts).
 - Media follows the conventions' **Media** section: `.round-corners` on captures/photos/posters/GIFs (not on logos, transparent art or SVG diagrams), `loading=lazy` on every image but the poster, and videos wrapped in a `glightbox` anchor with `page_features: [lazyvideo]` declared.

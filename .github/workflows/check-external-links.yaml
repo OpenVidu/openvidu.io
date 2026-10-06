@@ -39,9 +39,9 @@ jobs:
       - name: Build documentation
         env:
           GOOGLE_ANALYTICS_KEY: G-XXXXXXXX
-          # Fast validation build; the production-only plugins are not needed to enumerate links.
           CI: "false"
-        run: mkdocs build --strict --site-dir /tmp/site
+        # Zensical has no --site-dir; the output goes to site/ (gitignored).
+        run: zensical build --strict
 
       - name: Restore the lychee cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -57,7 +57,7 @@ jobs:
           # Authenticated GitHub checks: dissolves rate limiting on the ~640 github.com links.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: --config .github/lychee.toml --no-progress --root-dir /tmp/site '/tmp/site/**/*.html'
+          args: --config .github/lychee.toml --no-progress --root-dir site 'site/**/*.html'
           output: /tmp/lychee-report.md
           fail: false
 

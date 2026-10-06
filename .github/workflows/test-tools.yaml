@@ -2,9 +2,8 @@ name: Test Publishing Tool
 
 # Unit tests and lint for `ovweb` (publish-tool/), the tool that publishes the website.
 #
-# What this does NOT cover is the differential build that checks llmstxt_preprocess.py against the
-# plugin's own `autoclean` over the real site: that needs a full MkDocs build and is run by hand
-# after a plugin upgrade or a change to that module. See publish-tool/docs/testing-and-verify.md.
+# What this does NOT cover is a real build of the site, which validate-web.yaml runs on every
+# pull request that touches the sources.
 
 on:
   pull_request:
@@ -32,12 +31,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          # The Python inside squidfunk/mkdocs-material, which is where this code has to keep
-          # working: `docker run … squidfunk/mkdocs-material` (the documented way to serve the
-          # site locally) runs mkdocs_hook.py on it, and the hook imports ovweb from the
-          # checkout. Nothing else exercises that interpreter, while 3.14 — what the publish and
-          # validate workflows use — is exercised by validate-web on every pull request.
-          # Keep in step with the base image in Dockerfile and with requires-python.
+          # The floor of requires-python (Zensical's own), which nothing else exercises: the
+          # Docker image and the publish and validate workflows all run 3.14, and validate-web
+          # exercises that on every pull request.
           python-version: "3.11"
 
       - name: Install safe-chain

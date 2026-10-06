@@ -19,11 +19,13 @@ for the caller.
    `.claude/skills/blog-write/references/conventions.md`. For redirect/publish-tool changes
    read `publish-tool/docs/redirects.md` (or the relevant `publish-tool/README.md` section).
 3. Verify against the conventions, in this order of importance:
-   - **Link form by context**: relative-with-`.md` in regular pages; root-absolute-with-`.md`
-     in snippets and posts (raw-HTML URL form in post excerpts); absolute URL form in raw
-     HTML; version-pinned only on releases pages and Release posts.
+   - **Link form by context**: relative-with-`.md` in regular pages and in blog posts (four
+     `../` from a post; raw-HTML URL form in post excerpts); root-absolute-with-`.md` in
+     snippets; absolute URL form in raw HTML (a relative one is rewritten like Markdown, from
+     the source file); version-pinned only on releases pages and Release posts.
    - **New/renamed/deleted pages**: `title` + `description` frontmatter (budgets: ≤57 chars /
-     100–160 chars ending in a full stop, unique site-wide); nav entry or `not_in_nav`;
+     100–160 chars ending in a full stop, unique site-wide); nav entry, or the comment above
+     `nav` for a page reached by direct link only;
      renamed or deleted published URLs must gain a redirect rule in `publish-tool/ovweb.yaml`.
    - **Releases pages**: the `## X.Y.0` / `### Patch releases` / `#### X.Y.Z` heading
      contract; every link pinned to its own version.
@@ -37,7 +39,7 @@ for the caller.
    `git fetch origin pull/<number>/head` and `git diff`/`git show` against FETCH_HEAD), run
    `ovweb lint` on the changed files from FETCH_HEAD content only when it can be done without
    touching the working tree; otherwise apply the checks manually from the diff.
-5. Do not flag: the ~110 pymdownx.tabbed anchor INFOs, the `YYYY/MM` placeholder folders or
+5. Do not flag: the `YYYY/MM` placeholder folders or
    temporary dates on blog drafts, deliberate relative sibling links in
    `shared/self-hosting/` snippets, or pre-existing issues in untouched lines (mention those
    separately as observations at most).

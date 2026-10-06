@@ -70,14 +70,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # System libraries for mkdocs-material[imaging] (the optimize and privacy plugins).
-          sudo apt-get update
-          sudo apt-get install --fix-missing libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
-          sudo apt-get install -y --fix-missing pngquant
           # Every dependency comes from the hash-locked requirements-publish.txt (generated
           # from the [build] extra; see publish-tool/README.md, "Dependency pins"), so a
           # tampered or substituted release cannot reach a job that holds a write token.
           pip install --require-hashes -r publish-tool/requirements-publish.txt
+          # The one dependency the lock cannot carry: the Zensical fork of mike is installed
+          # from git, which pip cannot hash, so it is pinned to a commit instead — read from
+          # pyproject.toml, the single place that names it. Its own dependencies are in the lock.
+          MIKE=$(grep -oE 'git\+https://github\.com/squidfunk/mike\.git@[0-9a-f]+' publish-tool/pyproject.toml)
+          pip install --no-deps "mike @ $MIKE"
           # The tool itself, installed NON-editable on purpose: publishing a past version checks
           # out that version's branch, which does not contain this package. From site-packages
           # the tool and its configuration survive every branch switch. Its build backend is in

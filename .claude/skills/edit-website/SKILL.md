@@ -52,11 +52,12 @@ versions — details in [`contributing/versioning.md`](../../../contributing/ver
    content).
 2. Page renders correctly locally (both light and dark themes if you touched styling or
    theme-dependent images).
-3. **Zero `WARNING`s** in the mkdocs console (`mkdocs build --strict` must pass — CI enforces
-   it). Anchor `INFO`s are expected (tab-anchor false positives).
+3. **No issues** in the Zensical console (`zensical build --strict` must pass — CI enforces
+   it). Anchor validation is off in `mkdocs.yml` (tab-anchor false positives); `ovweb lint
+   --site site` over the build is the anchor check.
 4. New pages: `nav` updated, `title` + `description` frontmatter present and within budget,
    `llmstxt` section line only if no glob covers the folder, `publish-tool/ovweb.yaml` updated
-   if a new area was created, intentionally-non-nav pages in `not_in_nav`.
+   if a new area was created, intentionally-non-nav pages in the comment above `nav` (Zensical has no `not_in_nav` check).
 5. Links follow [`contributing/link-rules.md`](../../../contributing/link-rules.md); no pinned
    versions outside the releases pages.
 6. If you touched a section backed by frontmatter data (`faq`, `publications`) or a shared

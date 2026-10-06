@@ -10,9 +10,10 @@ convention is edited once.
   `<slug>.md`, equal to the frontmatter `slug`. The rendered URL (`/blog/YYYY/MM/DD/<slug>/`)
   comes from `date.created` + `slug`, never from the file path.
 - **Asset folder:** `docs/assets/images/blog/<year>/<month>/<slug>/` — mirrors the post's own
-  location. All of the post's images live there, referenced root-absolute:
-  `/assets/images/blog/<year>/<month>/<slug>/<file>`. The `og:image`/JSON-LD partials resolve a
-  bare `cover_image` filename against this mirrored path. A post's videos mirror the same
+  location. All of the post's images live there, referenced relative to the post:
+  `../../../../assets/images/blog/<year>/<month>/<slug>/<file>` (four `../`: every post sits in
+  `blog/posts/<year>/<month>/`). The `og:image`/JSON-LD partials resolve a bare `cover_image`
+  filename against this mirrored path. A post's videos mirror the same
   `<year>/<month>/<slug>` path under `docs/assets/videos/blog/`.
 - **Draft (not yet published):** identical layout, with the **literal placeholder `YYYY/MM`** as
   the year/month segments — backed by real directories named `YYYY/MM` — so draft branches build
@@ -92,9 +93,9 @@ lightbox") with no exceptions. The parts a post always touches:
 
 ### Images
 
-Plain Markdown, **never** a hand-written `<a class="glightbox">` wrapper — the mkdocs-glightbox
-plugin adds the lightbox anchor, and `auto_themed` assigns the dark/light gallery from the
-`#only-*` suffix.
+Plain Markdown, **never** a hand-written `<a class="glightbox">` wrapper — Zensical's glightbox
+support adds the lightbox anchor at build time, and `auto_themed` assigns the dark/light gallery
+from the `#only-*` suffix.
 
 ```markdown
 ![Alt text](/assets/images/blog/YYYY/MM/<slug>/screenshot.png){ .round-corners loading=lazy }
@@ -132,28 +133,31 @@ renders but never opens. One `<a>` per line (there are strange behaviors when it
 
 ## Link rules
 
-- **Internal links → root-absolute including the `.md` extension**: `[x](/meet/index.md)`,
-  `[x](/pricing.md)`. Validated and rewritten at build time
-  (`validation.links.absolute_links: relative_to_docs`). Never relative (the post moves at
-  publish) and never a bare pretty-URL in Markdown (`/meet/` — MkDocs can't validate it).
+- **Internal links → relative to the post, including the `.md` extension**:
+  `[x](../../../../meet/index.md)`, `[x](../../../../pricing.md)` — always four `../`, because
+  every post sits in `blog/posts/<year>/<month>/`, the draft placeholders included, so the move
+  at publish keeps the links valid. Validated and rewritten at build time. Never root-absolute
+  (`/meet/index.md` — Zensical validates a post from its source, where that resolves to nothing
+  and fails the strict build; `ovweb lint` reports it as `md-root-absolute-in-post`) and never a
+  bare pretty-URL in Markdown (`/meet/` — the build can't validate it).
 - **Excerpt exception (before `<!-- more -->`): no `.md` Markdown links.** The blog listing
-  pages (`/blog/`, categories, archive) copy the excerpt **without rewriting resolved links**,
-  so a `.md` target that renders fine on the post page leaks as a literal dead `/x.md` href on
-  every listing. In the excerpt, write internal links as raw HTML with the URL form:
-  `<a href="/meet/embedded/intro/">OpenVidu Meet</a>`. `ovweb lint` enforces this
-  (`md-link-in-excerpt`).
+  pages (`/blog/`, categories, archive) copy the excerpt, so in the excerpt write internal links
+  as raw HTML with the URL form: `<a href="/meet/embedded/intro/">OpenVidu Meet</a>`.
+  `ovweb lint` enforces this (`md-link-in-excerpt`).
 - **A versioned target in the excerpt still uses the unversioned form** — `/docs/…`, `/meet/…`,
   never `/latest/docs/…`. That is the form that resolves locally and the only one `ovweb lint`
   can check; the publish repoints it at `/latest/` in the HTML and in the Markdown export
   (`point_root_absolute_links_at_latest`). A hand-written `/latest/` would survive the rewrite
   and break the dev server.
-- **Cross-post links** → `/blog/posts/YYYY/MM/<slug>.md` (the published location of the target).
-- **Assets** → root-absolute, in Markdown and in raw-HTML `src`/`href` alike. `YYYY/MM` stays
-  literal on drafts.
+- **Cross-post links** → `../../YYYY/MM/<slug>.md` (the published location of the target,
+  relative to this post's folder).
+- **Assets** → relative in Markdown (`../../../../assets/images/blog/YYYY/MM/<slug>/x.png`),
+  root-absolute in raw-HTML `src`/`href` (`/assets/videos/blog/YYYY/MM/<slug>/demo.mp4`).
+  `YYYY/MM` stays literal on drafts.
 - **External links** → append `{:target="_blank"}`.
 - **Release posts** (`Release` category) are the exception for versioned docs: absolute,
   version-pinned, domain-qualified URLs (`https://openvidu.io/X.Y/docs/...`) for the announced
-  version — never `latest`, never root-absolute `.md`. A release note keeps pointing at that
+  version — never `latest`, never a `.md` path. A release note keeps pointing at that
   release's docs forever.
 
 ## Registration
