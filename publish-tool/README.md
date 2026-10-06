@@ -173,7 +173,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | Step                   | When   | What                                                                                                                  |
 | ---------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | `remove-stray-site`    | always | Delete a `site/` folder at the root of the gh-pages tree, present only when the tree came from a checkout rather than a fresh worktree. Tolerant of its absence. |
-| `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns. |
+| `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns; for the version `latest` points at, the exports' links into it go to `/latest/` — see [docs/link-rewriting.md](docs/link-rewriting.md). |
 | `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
 | `publish-llms-txt`     | always | Keep the version's own `llms.txt`, pruned to the pages served under it and pinned to it; on a latest publish, also derive the root's full index from it, rewritten like a promoted export. |
 | `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds and the promoted pages' Markdown exports. |
@@ -187,6 +187,7 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | `alias-versions`       | always | Rebuild the legacy patch-version folders that alias the published minor as mirrors of its tree.                        |
 | `prune-version-sitemap`| always | Drop the root-served pages from this version's sitemap and regenerate its `.gz`. The theme's version selector fetches this file — see [docs/sitemaps-and-search.md](docs/sitemaps-and-search.md). |
 | `sync-version-sitemap` | always | List the version's generated redirects in that same sitemap, so the selector resolves a moved page through its stub.   |
+| `pin-superseded-exports` | latest | Point every other version's Markdown exports back at their own version: the one that held `latest` linked them to `/latest/`, which now leads to this one. |
 | `sync-releases`        | always | Splice the newest release notes across versions — see [docs/releases-splice.md](docs/releases-splice.md).              |
 | `commit`               | always | `git add --all` and commit — **locally**. The push happens afterwards, once the tree is known to be correct. |
 
@@ -284,9 +285,10 @@ regenerate the lock, and close the pull request.
   author-pinned links (the shield is single-shot) and fail on the already-moved directories.
   `ovweb` refuses to run on a tree whose version root is already a generated redirect; `--force`
   overrides it.
-- **A publish only touches the version being published.** The one exception is the release-notes
-  splice, which reaches into every other version folder. So a change to the rewriting rules
-  reaches an old version only when that version is re-published.
+- **A publish only touches the version being published.** Two exceptions reach into every other
+  version folder: the release-notes splice, and `pin-superseded-exports`, which rewrites only the
+  `/latest/` links of their Markdown exports. So a change to the rewriting rules reaches an old
+  version only when that version is re-published.
 - **The releases-content splice is coupled to two Material markup strings.** A theme upgrade that
   renames the `md-content__inner` article or the `md-nav--secondary` table-of-contents
   `aria-label` breaks it. It fails loudly rather than silently — a source-side failure aborts the

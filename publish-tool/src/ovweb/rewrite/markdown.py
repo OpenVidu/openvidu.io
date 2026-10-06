@@ -11,6 +11,9 @@ which one applies depends on where the export is served from:
 
 * :func:`rewrite_versioned_markdown` — the export of a versioned page. Links into the same version
   stay pinned; anything served from the root loses the version.
+* :func:`point_versioned_markdown_at_latest` — on top of that, for the version `latest` points at:
+  its links into the version go to `/latest/`, and :func:`pin_versioned_markdown` pins them back
+  once another version takes the alias.
 * :func:`rewrite_promoted_markdown` — the export of a page promoted to the root, and the root
   `llms.txt`. Neither has a version of its own, so links into versioned documentation go to
   `/latest/`.
@@ -25,6 +28,7 @@ of a link rather than its target: :func:`absolutise_root_relative_targets` and
 from __future__ import annotations
 
 import re
+from pathlib import Path
 
 from ..model import SiteLayout
 
@@ -39,6 +43,9 @@ _EXPORT_TARGET = r"\]\({base}(?P<page>(?:[^)\s#]*/)?)index\.md(?P<frag>#[^)\s]*)
 
 #: The suffix of the exports. Used by the pipeline to pick between these rules and the HTML ones.
 SUFFIX = ".md"
+
+#: A releases page's export, relative to its versioned section.
+RELEASES_EXPORT = f"releases/index{SUFFIX}"
 
 #: An llms.txt entry: `- [Title](url): description`. The title is matched lazily rather than as
 #: "anything but a bracket", so a title carrying its own `]` is read whole; stopping at the first
@@ -62,6 +69,39 @@ def rewrite_versioned_markdown(text: str, *, version: str, layout: SiteLayout) -
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
     text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
     return absolutise_root_relative_targets(text, layout=layout)
+
+
+def point_versioned_markdown_at_latest(text: str, *, version: str, layout: SiteLayout) -> str:
+    """`https://openvidu.io/3.9/docs/…` -> `https://openvidu.io/latest/docs/…`.
+
+    For the exports of the version `latest` points at, after :func:`rewrite_versioned_markdown`.
+    `latest` is a symlink to that version's folder, so one file answers at both URLs, and the
+    root `llms.txt` hands assistants the `/latest/` one: a pinned link in it is a URL they keep
+    citing after the next release. The version's own `llms.txt` is not passed through here, since
+    it is what the docs MCP server indexes the version from and has to list the version's URLs.
+    """
+    base = layout.base_url
+    for page in layout.versioned_pages:
+        text = text.replace(f"{base}/{version}/{page}/", f"{base}/latest/{page}/")
+    return text
+
+
+def pin_versioned_markdown(text: str, *, version: str, layout: SiteLayout) -> str:
+    """`https://openvidu.io/latest/docs/…` -> `https://openvidu.io/3.9/docs/…`.
+
+    The inverse of :func:`point_versioned_markdown_at_latest`, for an export whose version no
+    longer holds the alias: a link to `/latest/` would now lead to another version. Exact because
+    the sources never link to `/latest/` themselves (`ovweb lint`, `latest-in-versioned-page`).
+    """
+    base = layout.base_url
+    for page in layout.versioned_pages:
+        text = text.replace(f"{base}/latest/{page}/", f"{base}/{version}/{page}/")
+    return text
+
+
+def is_releases_export(path: Path, *, version_dir: Path, layout: SiteLayout) -> bool:
+    """True for the export of a releases page, whose links pin versions on purpose."""
+    return any(path == version_dir / page / RELEASES_EXPORT for page in layout.versioned_pages)
 
 
 def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) -> str:

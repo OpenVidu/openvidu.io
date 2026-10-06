@@ -69,7 +69,9 @@ Two layers of checking, because "identical to `autoclean` except on purpose" is 
 its root with a relative target, no promoted page claims a versioned URL as its own, every version
 folder carries a correctly pruned and stub-synced sitemap, a version's own `llms.txt` lists at
 least one page, lists only pages served under it and has the export of every one of them, every search location is absolute,
-nothing served from the root pins the version `latest` points at, every page served from the root
+nothing served from the root pins the version `latest` points at, a versioned export links into
+its version through `/latest/` exactly while `latest` points at it (the releases exports pin
+always), every page served from the root
 reaches versioned documentation through `/latest/` rather than the unversioned redirect stub, no
 versioned export links to a
 root-served page under its version, no export links to another export that does not exist, every

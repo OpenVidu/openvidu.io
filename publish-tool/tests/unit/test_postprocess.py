@@ -374,6 +374,73 @@ def test_a_past_version_keeps_its_own_llms_txt_and_leaves_the_root_alone(
     assert not (modern_past_tree / "llms.txt").exists()
 
 
+def versioned_exports(tree: Path, version: str) -> dict[str, str]:
+    return {
+        path.relative_to(tree).as_posix(): path.read_text()
+        for page in ("docs", "meet")
+        for path in sorted((tree / version / page).rglob("*.md"))
+    }
+
+
+def test_a_past_publish_pins_its_exports_and_leaves_the_newest_alone(
+    modern_past_tree, config, report
+):
+    newest = versioned_exports(modern_past_tree, VERSION)
+    postprocess(
+        modern_past_tree, config=config, version=PAST_VERSION, update_latest=False, report=report
+    )
+
+    export = (modern_past_tree / PAST_VERSION / "docs" / "index.md").read_text()
+    assert f"https://openvidu.io/{PAST_VERSION}/docs/releases/index.md" in export
+    assert "/latest/" not in export
+    assert versioned_exports(modern_past_tree, VERSION) == newest
+
+
+def test_a_past_publish_of_the_version_latest_points_at_links_through_latest(
+    modern_past_tree, config, report
+):
+    """`past` rebuilds from the version branch and leaves the alias where it is, which may be on
+    the version being rebuilt."""
+    postprocess(
+        modern_past_tree, config=config, version=VERSION, update_latest=False, report=report
+    )
+
+    export = (modern_past_tree / VERSION / "docs" / "index.md").read_text()
+    assert "https://openvidu.io/latest/docs/releases/index.md" in export
+
+
+def test_moving_latest_pins_the_previous_versions_exports_again(tmp_path, layout, config, report):
+    """A `new` publish takes the alias from a version whose exports link to /latest/, which now
+    leads to the new one. They end exactly as a `past` publish of their own version leaves them."""
+    build_tree(tmp_path, layout, version=PAST_VERSION, config=config)
+    (tmp_path / "versions.json").write_text(
+        json.dumps([{"version": PAST_VERSION, "aliases": ["latest"]}]), encoding="utf-8"
+    )
+    postprocess(tmp_path, config=config, version=PAST_VERSION, update_latest=True, report=report)
+    assert "/latest/docs/" in (tmp_path / PAST_VERSION / "docs" / "index.md").read_text()
+
+    build_tree(tmp_path, layout, version=VERSION, config=config)
+    (tmp_path / "versions.json").write_text(
+        json.dumps(
+            [{"version": VERSION, "aliases": ["latest"]}, {"version": PAST_VERSION, "aliases": []}]
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "latest").symlink_to(VERSION)
+    postprocess(tmp_path, config=config, version=VERSION, update_latest=True, report=report)
+
+    reference = tmp_path / "reference"
+    build_tree(reference, layout, version=VERSION, config=config)
+    build_tree(reference, layout, version=PAST_VERSION, config=config)
+    (reference / "versions.json").write_text((tmp_path / "versions.json").read_text())
+    postprocess(reference, config=config, version=VERSION, update_latest=True, report=report)
+    (reference / "latest").symlink_to(VERSION)
+    postprocess(reference, config=config, version=PAST_VERSION, update_latest=False, report=report)
+
+    assert versioned_exports(tmp_path, PAST_VERSION) == versioned_exports(reference, PAST_VERSION)
+    assert "/latest/docs/" in (tmp_path / VERSION / "docs" / "index.md").read_text()
+
+
 def test_rewrites_the_home_page_markdown_export(latest_tree, config, report):
     """`index.md` is a root file, so the walk over the promoted page folders misses it."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
@@ -393,17 +460,30 @@ def test_rewrites_the_exports_of_promoted_pages(latest_tree, config, report):
     assert f"/{VERSION}/" not in export
 
 
-def test_versioned_export_keeps_its_version_but_not_for_root_pages(latest_tree, config, report):
-    """The same asymmetry as the search index: an in-version reader keeps reading that version,
-    while a link to a root-served page has no versioned URL to keep."""
+def test_the_newest_versions_export_links_through_latest_but_not_to_root_pages(
+    latest_tree, config, report
+):
+    """One file answers at /3.9/ and /latest/, and the root llms.txt hands assistants the
+    /latest/ URL, so its links into the version follow the alias. A root-served page has no
+    versioned URL at all."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
     export = (latest_tree / VERSION / "docs" / "index.md").read_text()
-    assert f"https://openvidu.io/{VERSION}/docs/releases/index.md" in export
+    assert "https://openvidu.io/latest/docs/releases/index.md" in export
+    assert f"/{VERSION}/" not in export
     assert "https://openvidu.io/pricing/index.md" in export
     assert "https://openvidu.io/index.md" in export
     # Root-relative targets are made absolute in every export, not just the llms files.
     assert "[PRO](https://openvidu.io/pricing/#openvidu-pro)" in export
+
+
+def test_the_releases_exports_keep_their_pins(latest_tree, config, report):
+    """Release notes link to the version they describe on purpose, in the HTML and the export."""
+    notes = f"[{VERSION}.0 guide](https://openvidu.io/{VERSION}/docs/index.md)\n"
+    (latest_tree / VERSION / "docs" / "releases" / "index.md").write_text(notes, encoding="utf-8")
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert (latest_tree / VERSION / "docs" / "releases" / "index.md").read_text() == notes
 
 
 def test_repairs_links_to_exports_that_do_not_exist(latest_tree, config, report):
@@ -415,10 +495,10 @@ def test_repairs_links_to_exports_that_do_not_exist(latest_tree, config, report)
 
     export = (latest_tree / VERSION / "docs" / "index.md").read_text()
     # This tree exports no docs/self-hosting page, so the link goes to the page itself.
-    assert f"https://openvidu.io/{VERSION}/docs/self-hosting/)" in export
+    assert "https://openvidu.io/latest/docs/self-hosting/)" in export
     assert "self-hosting/index.md" not in export
     # ...while an export that does exist is left alone.
-    assert f"https://openvidu.io/{VERSION}/docs/releases/index.md" in export
+    assert "https://openvidu.io/latest/docs/releases/index.md" in export
 
 
 def test_repair_reaches_the_promoted_exports_too(latest_tree, config, report):

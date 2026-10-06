@@ -23,6 +23,7 @@ LATEST_STEPS = [
     "alias-versions",
     "prune-version-sitemap",
     "sync-version-sitemap",
+    "pin-superseded-exports",
     "sync-releases",
     "commit",
 ]

@@ -22,7 +22,7 @@ from .redirects import (
     RedirectError,
     is_generated_redirect,
 )
-from .rewrite.markdown import LLMS_ENTRY
+from .rewrite.markdown import LLMS_ENTRY, is_releases_export
 from .rewrite.markdown import SUFFIX as MARKDOWN
 from .rewrite.sitemap import stub_loc
 
@@ -59,6 +59,7 @@ def verify(tree: Path, *, config: SiteConfig) -> list[Finding]:
     findings += _check_search_index_absolute(tree, config)
     findings += _check_root_search_index_uses_latest(tree, config, published)
     findings += _check_root_exports_use_latest(tree, config, latest)
+    findings += _check_exports_follow_the_alias(tree, config, published, latest)
     findings += _check_root_pages_reach_versioned_via_latest(tree, config)
     findings += _check_export_links_resolve(tree, config, latest)
     findings += _check_root_sitemap_lastmod(tree)
@@ -467,6 +468,50 @@ def _check_root_exports_use_latest(
                     "documentation at /latest/, and a root page at its own unversioned URL",
                 )
             )
+    return findings
+
+
+def _check_exports_follow_the_alias(
+    tree: Path, config: SiteConfig, published: list[str], latest: str | None
+) -> list[Finding]:
+    """A versioned export links into its version through `/latest/` exactly while it holds it.
+
+    The newest version's exports also answer at `/latest/`, the URL the root `llms.txt` hands
+    assistants, so a link pinned to that version is one they keep citing once it is superseded.
+    Any other version's exports must name their version: `/latest/` leads elsewhere, and the docs
+    MCP server reads the version off those URLs. The releases exports pin versions on purpose.
+    """
+    if latest is None:
+        return []
+
+    layout = config.layout
+    findings = []
+    for version in published:
+        version_dir = tree / version
+        if not version_dir.is_dir():
+            continue
+        if version == latest:
+            check, target = "export-pins-latest-version", version
+            fix = (
+                "the exports of the version `latest` points at reach it through /latest/; "
+                f"republish {version} with `latest`"
+            )
+        else:
+            check, target = "export-links-latest", "latest"
+            fix = f"/latest/ now leads to {latest}; republish {version} with `past`"
+        for page in layout.versioned_pages:
+            root = version_dir / page
+            if not root.is_dir():
+                continue
+            needle = f"{layout.base_url}/{target}/{page}/"
+            for path in sorted(root.rglob(f"*{MARKDOWN}")):
+                if is_releases_export(path, version_dir=version_dir, layout=layout):
+                    continue
+                if needle in fsops.read_text(path):
+                    findings.append(
+                        Finding(check, str(path.relative_to(tree)), f"links to {needle}; {fix}")
+                    )
+                    break  # one report per versioned section is enough to act on
     return findings
 
 
