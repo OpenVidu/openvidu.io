@@ -37,6 +37,9 @@ We built a tool, **ov-cloud-tester**, that deploys the *same* self-hosted WebRTC
     - **"Time to ready" is not "time to provision."** The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.
     - **Scaling back *down* is the hard direction** — a single node can't do it at all, and elastic/HA have to gracefully *drain* nodes, not kill them. More on why at the end.
 
+!!! note "Measured before OpenVidu 3.9.0"
+    These timings were taken before OpenVidu 3.9.0, which cut High Availability installation times by roughly 50% on AWS, Oracle and GCP and by 20% on Azure. Expect the HA figures below to be lower on a current release.
+
 ## What we measured, and how
 
 Each test is one full **deploy → wait-ready → destroy** cycle, and we time each phase separately from the tool's own logs, so these are wall-clock numbers an operator actually experiences:
