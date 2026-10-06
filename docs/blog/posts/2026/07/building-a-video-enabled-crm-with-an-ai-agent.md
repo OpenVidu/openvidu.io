@@ -3,7 +3,7 @@ title: "Building a video-enabled CRM with an AI agent"
 draft: false
 date:
   created: 2026-07-21
-  updated: 2026-10-06
+  updated: 2026-10-07
 slug: building-a-video-enabled-crm-with-an-ai-agent
 description: "How a complete CRM with embedded video meetings was built with an AI coding agent and OpenVidu Meet, from a single prompt to per-guest room permissions."
 cover_image: poster-light.png
