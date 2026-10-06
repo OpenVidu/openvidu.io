@@ -41,13 +41,14 @@ def _md_targets(text: str):
 
 
 def _serves_blog_post(path: str, corpus: Corpus) -> bool:
-    """Whether a post's frontmatter `date` and `slug` produce this URL path."""
+    """Whether a post's frontmatter `date.created` and `slug` produce this URL path."""
     match = BLOG_POST_URL.fullmatch(path)
     if not match:
         return False
     year, month, day, slug = match.groups()
     return any(
-        str(source.meta.get("date", ""))[:10] == f"{year}-{month}-{day}"
+        isinstance(dates := source.meta.get("date"), dict)
+        and str(dates.get("created", ""))[:10] == f"{year}-{month}-{day}"
         and source.meta.get("slug") == slug
         for relpath, source in corpus.docs.items()
         if relpath.startswith("docs/blog/posts/")

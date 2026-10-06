@@ -1,7 +1,8 @@
 ---
 title: Introducing the OpenVidu Agent Plugin for coding agents
 draft: false
-date: 2026-10-06
+date:
+  created: 2026-10-06
 slug: openvidu-agent-plugin
 description: Meet the OpenVidu Agent Plugin, which gives your coding agent the official OpenVidu documentation for the version, edition and product you run.
 cover_image: poster-light.webp
