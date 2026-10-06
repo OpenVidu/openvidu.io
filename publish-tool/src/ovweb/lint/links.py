@@ -201,8 +201,9 @@ def _is_release_post(source: Source) -> bool:
 
 
 def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
-    """Version-pinned links live only on the releases pages and in Release blog posts, and no
-    versioned page or snippet links to `latest` by hand."""
+    """Version-pinned links live only on the releases pages and in Release blog posts, no
+    versioned page or snippet links to `latest` by hand, and a Release post's links into the
+    documentation are pinned."""
     findings = []
     releases = _release_files(layout)
     for collection in (corpus.docs, corpus.snippets):
@@ -240,6 +241,27 @@ def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
                     source.line_of(match.start()),
                     "versioned page links to `latest` by hand",
                     "link relatively inside the version; the publish decides where /latest/ goes",
+                )
+            )
+
+    # And a Release post reaches the documentation pinned to the version it announces: its HTML
+    # keeps those pins, and so does its Markdown export, where the publish keeps them whole.
+    sections_pattern = "|".join(re.escape(section) for section in layout.versioned_pages)
+    unpinned = re.compile(
+        rf"(?:\]\(|(?:href|src)=\")(?:https://openvidu\.io)?/(?:latest/)?(?:{sections_pattern})/"
+    )
+    for source in corpus.docs.values():
+        if not _is_release_post(source):
+            continue
+        for match in unpinned.finditer(source.visible):
+            findings.append(
+                Finding(
+                    "release-post-unpinned-link",
+                    ERROR,
+                    source.path,
+                    source.line_of(match.start()),
+                    "Release post links into the documentation without pinning a version",
+                    "write https://openvidu.io/X.Y/docs/… with the version the post announces",
                 )
             )
 
