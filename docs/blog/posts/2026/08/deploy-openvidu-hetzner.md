@@ -1,7 +1,8 @@
 ---
 title: Deploy OpenVidu on Hetzner Cloud in 15 Minutes
 draft: false
-date: 2026-08-18
+date:
+  created: 2026-08-18
 slug: deploy-openvidu-hetzner
 description: >-
   Deploy a self-hosted OpenVidu video conferencing server on a Hetzner Cloud VM

@@ -1,7 +1,9 @@
 ---
 title: "3 access models for video conferencing apps"
 draft: false
-date: 2026-07-14
+date:
+  created: 2026-07-14
+  updated: 2026-10-06
 slug: video-conferencing-permissions
 description: "The three access models for video conferencing apps compared, anonymous role links, identified guests and registered users, and when to use each."
 cover_image: poster.png
@@ -177,6 +179,9 @@ OpenVidu Meet 3.8.0 introduced 14 boolean permissions for exactly this. Grouped 
 - **Communication:** `canReadChat`, `canWriteChat`, `canChangeVirtualBackground`
 - **Meeting management:** `canJoinMeeting`, `canEndMeeting`, `canKickParticipants`, `canMakeModerator`, `canShareAccessLinks`
 - **Recording:** `canRecord`, `canRetrieveRecordings`, `canDeleteRecordings`
+
+!!! note "Renamed in 3.9.0"
+    OpenVidu Meet 3.9.0 renamed these permissions to a consistent scheme, and the names above are now deprecated. They keep working until 3.12.0, and requests accept either name. The new names are `recordingControl` (`canRecord`), `recordingList`, `recordingPlay` and `recordingDownload` (together replacing `canRetrieveRecordings`), `recordingDelete` (`canDeleteRecordings`), `meetingJoin` (`canJoinMeeting`), `meetingEnd` (`canEndMeeting`), `participantPromote` (`canMakeModerator`), `participantKick` (`canKickParticipants`), `mediaPublishAudio` (`canPublishAudio`), `mediaPublishVideo` (`canPublishVideo`), `mediaShareScreen` (`canShareScreen`), `mediaChangeVirtualBackground` (`canChangeVirtualBackground`), `chatRead` (`canReadChat`), `chatWrite` (`canWriteChat`) and `roomShareAccessLinks` (`canShareAccessLinks`). See the [OpenVidu Meet release notes](/meet/releases.md).
 
 Each role — `Moderator` and `Speaker` — ships with sensible defaults, and you can flip any individual permission for any member. The highlighted cells below show two such overrides: a Speaker granted `canRecord`, and a Moderator whose `canDeleteRecordings` was turned off.
 

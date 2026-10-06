@@ -1,7 +1,8 @@
 ---
 title: How Novakid runs 30 million live English lessons on OpenVidu
 draft: false
-date: 2026-09-15
+date:
+  created: 2026-09-15
 slug: novakid-live-english-lessons
 description: >-
   How Novakid migrated from raw Kurento to OpenVidu to power live English

@@ -31,7 +31,7 @@ By default recordings are started **manually**, by a participant with the `recor
 - **Second participant joins** (`when_second_participant_joins`): the recording waits until somebody else joins.
 - **A moderator joins** (`when_moderator_joins`): the recording starts as soon as a participant with the moderator role is in the meeting, whether they joined as moderator or were [promoted](../meetings/role-management.md) during the meeting.
 
-An automatically started recording is a regular recording: it can be stopped, and started again, by any participant with the `recordingControl` permission.
+An automatically started recording is a regular recording that any participant with the `recordingControl` permission can stop. A room with a trigger refuses an on-demand start, from the app and the REST API alike, and stopping its recording turns the trigger off for the rest of that meeting.
 
 The trigger is chosen in the **Trigger** section of the **Recording** step of the room wizard, or with the `config.recording.autoStart` property of the room configuration via the [REST API](../rooms/management.md#rest-api-reference) (`null` for manual recording).
 

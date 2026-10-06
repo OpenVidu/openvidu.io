@@ -1,7 +1,8 @@
 ---
 title: "The scale-in problem in video conferencing"
 draft: false
-date: 2026-05-26
+date:
+  created: 2026-05-26
 slug: scale-in-problem-in-videoconferences
 description: "Why you cannot just terminate a media server with meetings running: the scale-in problem, how node draining works, and how OpenVidu solves it."
 cover_image: scale-down.png

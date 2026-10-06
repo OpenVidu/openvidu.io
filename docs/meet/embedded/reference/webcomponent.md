@@ -63,7 +63,7 @@ Example:
 
 The OpenVidu Meet component exposes a set of commands that allow you to control the room from your application's logic.
 
-<div class="nowrap-first-column" markdown>
+<div class="nowrap-third-column" markdown>
 
 --8<-- "meet/webcomponent/commands.md"
 

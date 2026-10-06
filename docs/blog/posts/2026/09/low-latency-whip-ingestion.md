@@ -1,7 +1,8 @@
 ---
 title: 'Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)'
 draft: false
-date: 2026-09-08
+date:
+  created: 2026-09-08
 slug: low-latency-whip-ingestion
 cover_image: poster-light.webp
 description: >-
