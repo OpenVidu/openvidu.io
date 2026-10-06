@@ -14,6 +14,10 @@ We built a tool, **ov-cloud-tester**, that deploys the *same* self-hosted WebRTC
 > - **"Time to ready" is not "time to provision."** The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.
 > - **Scaling back *down* is the hard direction** — a single node can't do it at all, and elastic/HA have to gracefully *drain* nodes, not kill them. More on why at the end.
 
+> **Measured before OpenVidu 3.9.0**
+>
+> These timings were taken before OpenVidu 3.9.0, which cut High Availability installation times by roughly 50% on AWS, Oracle and GCP and by 20% on Azure. Expect the HA figures below to be lower on a current release.
+
 ## What we measured, and how
 
 Each test is one full **deploy → wait-ready → destroy** cycle, and we time each phase separately from the tool's own logs, so these are wall-clock numbers an operator actually experiences:
@@ -63,7 +67,7 @@ DigitalOcean wins by asking the cloud to do almost nothing before your server ex
 Three details do the heavy lifting:
 
 - **Stock droplets boot in seconds.** Every node is a plain Ubuntu image with the install driven by cloud-init — no custom image-baking pipeline to wait on.
-- **It names itself, so there's no DNS to wait for.** With no custom domain, the box derives its own hostname from its public IP via [sslip.io](https://sslip.io) — which resolves instantly, so there's no DNS-propagation delay before the endpoint answers.
+- **It names itself, so there's no DNS to wait for.** With no custom domain, the box uses its public IP directly as its address — no hostname to resolve at all, so there's no DNS-propagation delay before the endpoint answers.
 - **Terraform doesn't sit and wait.** The DigitalOcean config has no blocking "wait for the app to finish installing" gate, so provisioning returns as soon as the droplets are booted. (AWS CloudFormation, by contrast, literally pauses the stack on a *wait condition* until the instance signals it's ready — and the HA template has four of them.)
 
 Even the bigger topologies stay lean: elastic scales with a small serverless function instead of a managed autoscaling group, and HA uses a plain layer-4 network load balancer that just forwards packets — so there's no certificate for the balancer to validate before traffic can flow.

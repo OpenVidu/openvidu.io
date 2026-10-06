@@ -183,7 +183,7 @@
       "headline": "Deployment times for WebRTC on five clouds",
       "description": "We deployed the same self-hosted WebRTC platform on AWS, Azure, GCP, Oracle and DigitalOcean, in three architectures each, and timed every single run.",
       "datePublished": "2026-07-07",
-      "dateModified": "2026-07-07",
+      "dateModified": "2026-10-06",
       "inLanguage": "en",
       "author": [
         {
@@ -1618,6 +1618,13 @@
                       </div>
                     </li>
                     
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85"></path></svg>
+                          <time datetime="2026-10-06 00:00:00+00:00" class="md-ellipsis">October 6, 2026</time>
+                        </div>
+                      </li>
+                    
                     
                       <li class="md-nav__item">
                         <div class="md-nav__link">
@@ -1637,7 +1644,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
                           <span class="md-ellipsis">
                             
-                              10 min read
+                              11 min read
                             
                           </span>
                         </div>
@@ -1682,6 +1689,10 @@
 <li><strong>"Time to ready" is not "time to provision."</strong> The minutes hide in software boot, DNS, certificates and cluster formation — and that split varies more by cloud than raw VM launch does.</li>
 <li><strong>Scaling back <em>down</em> is the hard direction</strong> — a single node can't do it at all, and elastic/HA have to gracefully <em>drain</em> nodes, not kill them. More on why at the end.</li>
 </ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Measured before OpenVidu 3.9.0</p>
+<p>These timings were taken before OpenVidu 3.9.0, which cut High Availability installation times by roughly 50% on AWS, Oracle and GCP and by 20% on Azure. Expect the HA figures below to be lower on a current release.</p>
 </div>
 <h2 id="what-we-measured-and-how">What we measured, and how<a class="headerlink" href="#what-we-measured-and-how" title="Anchor link to this section for reference">#</a></h2>
 <p>Each test is one full <strong>deploy → wait-ready → destroy</strong> cycle, and we time each phase separately from the tool's own logs, so these are wall-clock numbers an operator actually experiences:</p>
@@ -1752,7 +1763,7 @@
 <p>Three details do the heavy lifting:</p>
 <ul>
 <li><strong>Stock droplets boot in seconds.</strong> Every node is a plain Ubuntu image with the install driven by cloud-init — no custom image-baking pipeline to wait on.</li>
-<li><strong>It names itself, so there's no DNS to wait for.</strong> With no custom domain, the box derives its own hostname from its public IP via <a href="https://sslip.io" target="_blank" rel="noopener">sslip.io <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> — which resolves instantly, so there's no DNS-propagation delay before the endpoint answers.</li>
+<li><strong>It names itself, so there's no DNS to wait for.</strong> With no custom domain, the box uses its public IP directly as its address — no hostname to resolve at all, so there's no DNS-propagation delay before the endpoint answers.</li>
 <li><strong>Terraform doesn't sit and wait.</strong> The DigitalOcean config has no blocking "wait for the app to finish installing" gate, so provisioning returns as soon as the droplets are booted. (AWS CloudFormation, by contrast, literally pauses the stack on a <em>wait condition</em> until the instance signals it's ready — and the HA template has four of them.)</li>
 </ul>
 <p>Even the bigger topologies stay lean: elastic scales with a small serverless function instead of a managed autoscaling group, and HA uses a plain layer-4 network load balancer that just forwards packets — so there's no certificate for the balancer to validate before traffic can flow.</p>

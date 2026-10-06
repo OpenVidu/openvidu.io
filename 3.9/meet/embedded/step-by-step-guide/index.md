@@ -14,7 +14,7 @@ docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.9.0 up -y openvid
 
 > **Info**
 >
-> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.9/meet/deployment/local/index.md) .
+> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md) .
 
 ## 2. Create a room
 
@@ -22,9 +22,9 @@ You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
 ### Automating room creation
 
-You can automate the room creation process by using the [OpenVidu Meet REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md). This allows you to create rooms programmatically from your application's backend, without manual intervention.
+You can automate the room creation process by using the [OpenVidu Meet REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md). This allows you to create rooms programmatically from your application's backend, without manual intervention.
 
-Check out the [API reference for creating rooms](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createRoom) . Below you have copy-paste snippets for most common languages.
+Check out the [API reference for creating rooms](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createRoom) . Below you have copy-paste snippets for most common languages.
 
 > **Info**
 >
@@ -299,19 +299,19 @@ The response to this request will be a JSON object as below. The properties need
 
 ## 3. Get the room URL
 
-To embed a room into your application's frontend you need a **room URL**, which is simply a [room access link](https://openvidu.io/3.9/meet/features/rooms/access/index.md): the URL an individual opens to access the room. You can copy the room URL from the "Rooms" page in OpenVidu Meet app:
+To embed a room into your application's frontend you need a **room URL**, which is simply a [room access link](https://openvidu.io/latest/meet/features/rooms/access/index.md): the URL an individual opens to access the room. You can copy the room URL from the "Rooms" page in OpenVidu Meet app:
 
 > **Which room access link should I use?**
 >
-> This guide uses the room's **anonymous** moderator and speaker links, which let anyone access without logging in. A room also offers **user** and **identified-guest** access links for controlled, per-person access. See [Room Access](https://openvidu.io/3.9/meet/features/rooms/access/index.md) to learn about all of them and choose the right one for your use case.
+> This guide uses the room's **anonymous** moderator and speaker links, which let anyone access without logging in. A room also offers **user** and **identified-guest** access links for controlled, per-person access. See [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) to learn about all of them and choose the right one for your use case.
 
 ### Automating room URL retrieval
 
-You can get the room URLs programmatically using the [OpenVidu Meet REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md). The anonymous links are available in properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` — and the user access link in `access.user.url` — of object [MeetRoom](https://openvidu.io/3.9/meet/embedded/reference/api.html#/schemas/MeetRoom) . This object is returned as a JSON response from methods:
+You can get the room URLs programmatically using the [OpenVidu Meet REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md). The anonymous links are available in properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` — and the user access link in `access.user.url` — of object [MeetRoom](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoom) . This object is returned as a JSON response from methods:
 
-- [Create a room](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createRoom)
-- [Get a room](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getRoom)
-- [Get all rooms](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getRooms)
+- [Create a room](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createRoom)
+- [Get a room](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom)
+- [Get all rooms](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRooms)
 
 ## 4. Embed the room into your application
 
@@ -331,9 +331,9 @@ After clicking on the element, the individual will be redirected to the OpenVidu
 
 > **Info**
 >
-> You can customize the room by simply appending query parameters to the room URL. For example, you can send participants back to your application when they close the [End view](https://openvidu.io/3.9/meet/features/meetings/lifecycle/#end-view) after the meeting by appending this query param: `https://{{ your-room-url }}&leave-redirect-url=https://myapp.com`
+> You can customize the room by simply appending query parameters to the room URL. For example, you can send participants back to your application when they close the [End view](https://openvidu.io/latest/meet/features/meetings/lifecycle/#end-view) after the meeting by appending this query param: `https://{{ your-room-url }}&leave-redirect-url=https://myapp.com`
 >
-> See [Passing attributes to a direct link](https://openvidu.io/3.9/meet/embedded/reference/direct-link/#attributes) for more information.
+> See [Passing attributes to a direct link](https://openvidu.io/latest/meet/embedded/reference/direct-link/#attributes) for more information.
 
 ### Use the Web Component
 
@@ -343,7 +343,7 @@ Include a `<script>` tag to load the OpenVidu Meet Web Component definition from
 
 > **Info**
 >
-> Check out the [Web Component reference](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md) for the complete list of attributes, commands and events offered by it.
+> Check out the [Web Component reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md) for the complete list of attributes, commands and events offered by it.
 
 ```html
 <html>
@@ -395,9 +395,9 @@ The required iframe attributes are:
 >
 > The same **attributes**, **commands** and **events** available for the Web Component may also be used in an iframe. Check out these sections to learn how:
 >
-> - [Pass attributes to an OpenVidu Meet iframe](https://openvidu.io/3.9/meet/embedded/reference/iframe/#attributes)
-> - [Send commands to an OpenVidu Meet iframe](https://openvidu.io/3.9/meet/embedded/reference/iframe/#commands)
-> - [Receive events from an OpenVidu Meet iframe](https://openvidu.io/3.9/meet/embedded/reference/iframe/#events)
+> - [Pass attributes to an OpenVidu Meet iframe](https://openvidu.io/latest/meet/embedded/reference/iframe/#attributes)
+> - [Send commands to an OpenVidu Meet iframe](https://openvidu.io/latest/meet/embedded/reference/iframe/#commands)
+> - [Receive events from an OpenVidu Meet iframe](https://openvidu.io/latest/meet/embedded/reference/iframe/#events)
 
 ## 5. Embed recordings into your application
 
@@ -413,7 +413,7 @@ To show the list of recordings of a room, declare attribute **`show-only-recordi
 
 > **Info**
 >
-> Checkout the Web Component's [attributes](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#attributes) section for more information.
+> Checkout the Web Component's [attributes](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#attributes) section for more information.
 
 This will show the list of recordings for the specified room:
 
@@ -421,8 +421,8 @@ This will show the list of recordings for the specified room:
 
 To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
 
-- [OpenVidu Meet app](https://openvidu.io/3.9/meet/features/recordings/management/#sharing-recordings)
-- [Programmatically via REST API](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getRecordingUrl)
+- [OpenVidu Meet app](https://openvidu.io/latest/meet/features/recordings/management/#sharing-recordings)
+- [Programmatically via REST API](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRecordingUrl)
 
 ```html
 <openvidu-meet recording-url="{{ your-recording-url }}"></openvidu-meet>
@@ -430,7 +430,7 @@ To show the player for a specific recording, replace attribute `room-url` with *
 
 > **Info**
 >
-> Checkout the Web Component's [attributes](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#attributes) section for more information.
+> Checkout the Web Component's [attributes](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#attributes) section for more information.
 
 This will show the player for the specified recording:
 
@@ -438,5 +438,5 @@ This will show the player for the specified recording:
 
 Up to this point everything has been focused on the client-side integration of OpenVidu Meet. To integrate OpenVidu Meet into your application's backend you have available:
 
-- [REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md): manage rooms, room members, recordings, users and live meetings programmatically.
-- [Webhooks](https://openvidu.io/3.9/meet/embedded/reference/webhooks/index.md): listen to meeting, participant and recording events happening in real time.
+- [REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md): manage rooms, room members, recordings, users and live meetings programmatically.
+- [Webhooks](https://openvidu.io/latest/meet/embedded/reference/webhooks/index.md): listen to meeting, participant and recording events happening in real time.

@@ -29,7 +29,7 @@ The scenario is the same throughout: a **support desk** where an agent starts a 
 All three levels need an OpenVidu deployment, and one is enough for the three of them. [OpenVidu Local](https://openvidu.io/latest/docs/self-hosting/local/index.md) brings up both products with Docker:
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.9.0
 cd openvidu-local-deployment/community
 ./configure_lan_private_ip_linux.sh   # configure_lan_private_ip_macos.sh | .bat on Windows
 docker compose up
@@ -74,10 +74,10 @@ app.html
 @if (room(); as current) {
   <openvidu-meet
     #meet
-    [attr.room-url]="current.moderatorUrl"
+    [attr.room-url]="current.access.anonymous.moderator.url"
     participant-name="Support agent"
-    (joined)="onJoined($event)"
-    (closed)="onClosed()"
+    (meetingJoined)="onJoined($event)"
+    (embeddedCloseRequested)="onClosed()"
   ></openvidu-meet>
 }
 ```
@@ -101,7 +101,7 @@ export class App {
   }
 
   protected endMeeting() {
-    this.meet()?.nativeElement.endMeeting();
+    this.meet()?.nativeElement.meetingEnd();
   }
 }
 ```
@@ -211,7 +211,7 @@ The [Angular Components tutorials](https://openvidu.io/latest/docs/tutorials/ang
 
 > **See it running**
 >
-> [**`2-angular-components/`**](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/2-angular-components) is this level as a standalone app, token server included. It stays on Angular 20, the newest version `openvidu-components-angular` 3.8.0 supports.
+> [**`2-angular-components/`**](https://github.com/openvidu-labs/openvidu-integration-levels/tree/main/2-angular-components) is this level as a standalone app, token server included. It stays on Angular 20, the newest version `openvidu-components-angular` 3.9.0 supports.
 
 > **Pick this level when**
 >

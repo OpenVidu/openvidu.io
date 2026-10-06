@@ -182,7 +182,7 @@
       "description": "The three access models for video conferencing apps compared, anonymous role links, identified guests and registered users, and when to use each.",
       "image": "https://openvidu.io/assets/images/blog/2026/07/video-conferencing-permissions/poster.png",
       "datePublished": "2026-07-14",
-      "dateModified": "2026-07-14",
+      "dateModified": "2026-10-06",
       "inLanguage": "en",
       "author": [
         {
@@ -1639,6 +1639,13 @@
                       </div>
                     </li>
                     
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85"></path></svg>
+                          <time datetime="2026-10-06 00:00:00+00:00" class="md-ellipsis">October 6, 2026</time>
+                        </div>
+                      </li>
+                    
                     
                       <li class="md-nav__item">
                         <div class="md-nav__link">
@@ -1817,6 +1824,10 @@
 <li><strong>Meeting management:</strong> <code>canJoinMeeting</code>, <code>canEndMeeting</code>, <code>canKickParticipants</code>, <code>canMakeModerator</code>, <code>canShareAccessLinks</code></li>
 <li><strong>Recording:</strong> <code>canRecord</code>, <code>canRetrieveRecordings</code>, <code>canDeleteRecordings</code></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Renamed in 3.9.0</p>
+<p>OpenVidu Meet 3.9.0 renamed these permissions to a consistent scheme, and the names above are now deprecated. They keep working until 3.12.0, and requests accept either name. The new names are <code>recordingControl</code> (<code>canRecord</code>), <code>recordingList</code>, <code>recordingPlay</code> and <code>recordingDownload</code> (together replacing <code>canRetrieveRecordings</code>), <code>recordingDelete</code> (<code>canDeleteRecordings</code>), <code>meetingJoin</code> (<code>canJoinMeeting</code>), <code>meetingEnd</code> (<code>canEndMeeting</code>), <code>participantPromote</code> (<code>canMakeModerator</code>), <code>participantKick</code> (<code>canKickParticipants</code>), <code>mediaPublishAudio</code> (<code>canPublishAudio</code>), <code>mediaPublishVideo</code> (<code>canPublishVideo</code>), <code>mediaShareScreen</code> (<code>canShareScreen</code>), <code>mediaChangeVirtualBackground</code> (<code>canChangeVirtualBackground</code>), <code>chatRead</code> (<code>canReadChat</code>), <code>chatWrite</code> (<code>canWriteChat</code>) and <code>roomShareAccessLinks</code> (<code>canShareAccessLinks</code>). See the <a href="/latest/meet/releases/">OpenVidu Meet release notes</a>.</p>
+</div>
 <p>Each role — <code>Moderator</code> and <code>Speaker</code> — ships with sensible defaults, and you can flip any individual permission for any member. The highlighted cells below show two such overrides: a Speaker granted <code>canRecord</code>, and a Moderator whose <code>canDeleteRecordings</code> was turned off.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Permissions matrix: the 14 OpenVidu Meet permissions grouped into Media, Communication, Meeting management and Recording, with on/off toggles for the Moderator and Speaker roles and two cells customized from their role defaults" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/07/video-conferencing-permissions/fine-grained-permissions.png" title="Start from a role, tune it per person"></a></p>
 <p>A member's effective permissions start from their base role and get overridden individually:</p>

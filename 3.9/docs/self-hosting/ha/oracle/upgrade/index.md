@@ -2,7 +2,7 @@
 
 Oracle Cloud Infrastructure
 
-For Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying the [OpenVidu High Availability Oracle Cloud Infrastructure](https://openvidu.io/3.9/docs/self-hosting/ha/oracle/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, since Oracle Cloud Infrastructure Terraform files and related configurations may differ between releases. Redeploying guarantees that all necessary changes are properly applied.
+For Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying the [OpenVidu High Availability Oracle Cloud Infrastructure](https://openvidu.io/latest/docs/self-hosting/ha/oracle/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, since Oracle Cloud Infrastructure Terraform files and related configurations may differ between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 If you would prefer not to redeploy, an in-place upgrade is also possible. The steps below describe how to perform an in-place upgrade of your OpenVidu High Availability deployment on Oracle Cloud Infrastructure.
 

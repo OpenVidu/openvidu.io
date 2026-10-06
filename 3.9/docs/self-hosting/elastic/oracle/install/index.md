@@ -4,9 +4,9 @@ Oracle Cloud Infrastructure
 
 > **Info**
 >
-> OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu Elastic instance on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises Elastic installation](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/index.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
+This section describes how to deploy a production-ready OpenVidu Elastic instance on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises Elastic installation](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/index.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
 - **OCI Object Storage** (S3-compatible via Customer Secret Keys) is used for storing application data and recordings.
 - **OCI Vault** is used to securely store deployment secrets.
@@ -152,7 +152,7 @@ Build the scale-in function image yourself from the OpenVidu sources and push it
    > | `compartment_ocid`        | OCI Compartment OCID where resources will be created.                                                                                                                                                                                                                                                                                                            |
    > | `user_ocid`               | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.                                                                                                                                                                                                                                                                    |
    > | `stackName`               | Stack name for the OpenVidu deployment.                                                                                                                                                                                                                                                                                                                          |
-   > | `openviduLicense`         | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/3.9/account/index.md) to obtain your license.                                                                                                                                                                                                                                        |
+   > | `openviduLicense`         | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/account/) to obtain your license.                                                                                                                                                                                                                                        |
    > | `scale_in_function_image` | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
    >
    > ### Optional Parameters
@@ -289,7 +289,7 @@ If something goes wrong during the initial Oracle Cloud Infrastructure deploymen
 
    These logs contain detailed information about the Oracle Cloud Infrastructure deployment process.
 
-1. If everything appears to be in order, check the [status](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#checking-the-status-of-services) and [logs](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#checking-logs) of the installed OpenVidu services on the Master Node and Media Nodes.
+1. If everything appears to be in order, check the [status](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#checking-the-status-of-services) and [logs](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#checking-logs) of the installed OpenVidu services on the Master Node and Media Nodes.
 
 > **Startup errors to look for in cloud-init-output.log**
 >
@@ -300,4 +300,4 @@ If something goes wrong during the initial Oracle Cloud Infrastructure deploymen
 
 ### Configuration and administration
 
-Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](https://openvidu.io/3.9/docs/self-hosting/elastic/oracle/admin/index.md) section to learn how to manage your OpenVidu Elastic deployment.
+Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](https://openvidu.io/latest/docs/self-hosting/elastic/oracle/admin/index.md) section to learn how to manage your OpenVidu Elastic deployment.

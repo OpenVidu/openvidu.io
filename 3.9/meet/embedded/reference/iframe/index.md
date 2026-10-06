@@ -1,6 +1,6 @@
 # Iframe
 
-Embed OpenVidu Meet directly into your application using a traditional HTML iframe. This approach is perfect for applications that cannot use [OpenVidu Meet Web Component](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md) or need a simple integration method.
+Embed OpenVidu Meet directly into your application using a traditional HTML iframe. This approach is perfect for applications that cannot use [OpenVidu Meet Web Component](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md) or need a simple integration method.
 
 ## Usage
 
@@ -27,9 +27,9 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
 
 > **A room URL is a room access link**
 >
-> The room URL is a [room access link](https://openvidu.io/3.9/meet/features/rooms/access/index.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](https://openvidu.io/3.9/meet/features/rooms/access/index.md) for all of them.
+> The room URL is a [room access link](https://openvidu.io/latest/meet/features/rooms/access/index.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for all of them.
 >
-> You can get them programmatically from your backend with the [REST API](https://openvidu.io/3.9/meet/embedded/reference/api.html#/schemas/MeetRoom) : the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
+> You can get them programmatically from your backend with the [REST API](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoom) : the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 
@@ -37,7 +37,7 @@ Embed OpenVidu Meet by adding an iframe to your HTML with the room URL and requi
 
 > **Info**
 >
-> The iframe accepts the same **attributes** as the OpenVidu Meet Web Component, except `room-url` and `recording-url`: the iframe's `src` plays that role instead. See [Web Component Attributes](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#attributes) for the full list and descriptions.
+> The iframe accepts the same **attributes** as the OpenVidu Meet Web Component, except `room-url` and `recording-url`: the iframe's `src` plays that role instead. See [Web Component Attributes](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#attributes) for the full list and descriptions.
 
 Customize the **participant name** and meeting redirect by adding attributes as query parameters in the iframe src URL.
 
@@ -53,7 +53,7 @@ Customize the **participant name** and meeting redirect by adding attributes as 
 
 > **Info**
 >
-> The iframe accepts the same **commands** as the OpenVidu Meet Web Component. See [Web Component Commands](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#commands) for the full list, the permission each one needs and their descriptions. The `command` string is the method name without its parentheses, and the parameters listed there travel in `payload`.
+> The iframe accepts the same **commands** as the OpenVidu Meet Web Component. See [Web Component Commands](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#commands) for the full list, the permission each one needs and their descriptions. The `command` string is the method name without its parentheses, and the parameters listed there travel in `payload`.
 
 Control the meeting programmatically by sending commands via `postMessage` to the iframe's content window:
 
@@ -76,7 +76,7 @@ iframe.contentWindow.postMessage(
 
 > **Info**
 >
-> The iframe emits the same **events** as the OpenVidu Meet Web Component. See [Web Component Events](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#events) for the full list and descriptions.
+> The iframe emits the same **events** as the OpenVidu Meet Web Component. See [Web Component Events](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#events) for the full list and descriptions.
 
 Listen to meeting events by monitoring messages from the iframe:
 

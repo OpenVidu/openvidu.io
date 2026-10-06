@@ -151,6 +151,10 @@ OpenVidu Meet 3.8.0 introduced 14 boolean permissions for exactly this. Grouped 
 - **Meeting management:** `canJoinMeeting`, `canEndMeeting`, `canKickParticipants`, `canMakeModerator`, `canShareAccessLinks`
 - **Recording:** `canRecord`, `canRetrieveRecordings`, `canDeleteRecordings`
 
+> **Renamed in 3.9.0**
+>
+> OpenVidu Meet 3.9.0 renamed these permissions to a consistent scheme, and the names above are now deprecated. They keep working until 3.12.0, and requests accept either name. The new names are `recordingControl` (`canRecord`), `recordingList`, `recordingPlay` and `recordingDownload` (together replacing `canRetrieveRecordings`), `recordingDelete` (`canDeleteRecordings`), `meetingJoin` (`canJoinMeeting`), `meetingEnd` (`canEndMeeting`), `participantPromote` (`canMakeModerator`), `participantKick` (`canKickParticipants`), `mediaPublishAudio` (`canPublishAudio`), `mediaPublishVideo` (`canPublishVideo`), `mediaShareScreen` (`canShareScreen`), `mediaChangeVirtualBackground` (`canChangeVirtualBackground`), `chatRead` (`canReadChat`), `chatWrite` (`canWriteChat`) and `roomShareAccessLinks` (`canShareAccessLinks`). See the [OpenVidu Meet release notes](https://openvidu.io/latest/meet/releases/index.md).
+
 Each role — `Moderator` and `Speaker` — ships with sensible defaults, and you can flip any individual permission for any member. The highlighted cells below show two such overrides: a Speaker granted `canRecord`, and a Moderator whose `canDeleteRecordings` was turned off.
 
 A member's effective permissions start from their base role and get overridden individually:
