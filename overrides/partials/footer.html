@@ -1,4 +1,4 @@
-{# https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/footer.html #}
+{# https://github.com/zensical/zensical/blob/master/zensical/templates/partials/footer.html #}
 
 {# Footer #}
 <footer class="md-footer">
@@ -115,7 +115,9 @@
             <div class="grid-100 tablet-grid-50 mobile-grid-50" style="padding-left: 0; padding-right: 0;">
               <div class="md-copyright">
                 <div class="md-copyright__highlight">
-                  {{ build_date_utc.strftime("%Y") }} &copy; OpenVidu<br>
+                  {#- MiniJinja has no build date; the year is the visitor's, with the
+                      publish year as the no-JavaScript fallback. -#}
+                  <span id="copyright-year">2026</span> &copy; OpenVidu<br>
                   <a href="#__consent">Change cookie settings</a>
                 </div>
               </div>
@@ -142,3 +144,4 @@
     </div>
   </div>
 </footer>
+<script>document.getElementById("copyright-year").textContent = new Date().getFullYear();</script>

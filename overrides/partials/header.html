@@ -1,4 +1,4 @@
-{# https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/header.html #}
+{# https://github.com/zensical/zensical/blob/master/zensical/templates/partials/header.html #}
 
 {# Determine classes #}
 {% set class = "md-header" %}
@@ -15,7 +15,8 @@
     aria-label="{{ lang.t('header') }}"
   >
 
-    {# Link to home #}
+    {# Link to home. The product logo follows the page's URL, which mirrors its source folder
+       for the two versioned sections. #}
     <a
       href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
       title="{{ config.site_name | e }}"
@@ -23,10 +24,10 @@
       aria-label="{{ config.site_name }}"
       data-md-component="logo"
     >
-      {% set page_path = page.file.src_path if page.file else "" %}
-      {% if page_path.startswith("meet/") %}
+      {% set page_url = page.url or "" %}
+      {% if page_url is startingwith "meet/" %}
         <img src="{{ base_url }}/assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo"/>
-      {% elif page_path.startswith("docs/") %}
+      {% elif page_url is startingwith "docs/" %}
         <img src="{{ base_url }}/assets/images/logos/platform_whiteallfont_transback_cropped.png" alt="OpenVidu Platform" class="custom-logo"/>
       {% else %}
         {% include "partials/logo.html" %}
@@ -34,7 +35,7 @@
     </a>
 
     {# Button to open drawer #}
-    <label class="md-header__button md-icon" for="__drawer">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="{{ lang.t('nav') }}">
       {% set icon = config.theme.icon.menu or "material/menu" %}
       {% include ".icons/" ~ icon ~ ".svg" %}
     </label>
@@ -78,12 +79,12 @@
     {% endif %}
 
     {# Button to open search modal. `hide: search-bar` skips the whole search UI #}
-    {% if "material/search" in config.plugins and not (page.meta and page.meta.hide and "search-bar" in page.meta.hide) %}
-      {% set search = config.plugins["material/search"] | attr("config") %}
+    {% if "search" in config.plugins and not (page.meta and page.meta.hide and "search-bar" in page.meta.hide) %}
+      {% set search = config.plugins["search"] | attr("config") %}
 
       {# Check if search is actually enabled - see https://t.ly/DT_0V #}
       {% if search.enabled %}
-        <label class="md-header__button md-icon" for="__search">
+        <label class="md-header__button md-icon" for="__search" aria-label="{{ lang.t('search') }}">
           {% set icon = config.theme.icon.search or "material/magnify" %}
           {% include ".icons/" ~ icon ~ ".svg" %}
         </label>
@@ -94,11 +95,11 @@
     {% endif %}
 
     {# Repository information #}
-    {% if config.repo_url %}
-      <div class="md-header__source">
+    <div class="md-header__source">
+      {% if config.repo_url %}
         {% include "partials/source.html" %}
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
 
     {# Static on every page; on /account/ the openvidu-register bundle relabels it after sign-in. #}
     <div class="md-typeset log-in-div">

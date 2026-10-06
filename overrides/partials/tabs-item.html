@@ -1,18 +1,9 @@
-{# https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/partials/tabs-item.html #}
+{# https://github.com/zensical/zensical/blob/master/zensical/templates/partials/tabs-item.html #}
 
 {# Render navigation link content #}
 {% macro render_content(nav_item, ref) %}
   {% set ref = ref or nav_item %}
-
-  {# Navigation link icon #}
-  {% if nav_item == ref or "navigation.indexes" in features %}
-    {% if nav_item.is_index and nav_item.meta.icon %}
-      {% include ".icons/" ~ nav_item.meta.icon ~ ".svg" %}
-    {% endif %}
-  {% endif %}
-
-  {# Navigation link title #}
-  {{ ref.title }}
+  {{ ref.title or nav_item.title }}
 {% endmacro %}
 
 {# Render navigation item #}
@@ -27,7 +18,16 @@
 
   {# Navigation item with nested items #}
   {% if nav_item.children %}
-    {% set first = nav_item.children | first %}
+    {% set _ = namespace(index = none) %}
+    {% if "navigation.indexes" in features %}
+      {% for item in nav_item.children %}
+        {% if item.is_index and _.index is none %}
+          {% set _.index = item %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% set index = _.index %}
+    {% set first = index or nav_item.children | first %}
 
     {# Recurse, if the first item has further nested items #}
     {% if first.children %}
@@ -51,7 +51,8 @@
     </li>
   {% endif %}
 {% endmacro %}
-{# Render dropdown link #}
+
+{# Render dropdown link (tabs.html) #}
 {% macro render_dropdown_link(nav_item) %}
   {% set url = nav_item.url %}
   {% if not url and nav_item.children %}

@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-{# https://github.com/mkdocs/mkdocs/blob/master/mkdocs/templates/sitemap.xml
+{#- https://github.com/zensical/zensical/blob/master/zensical/templates/sitemap.xml
 
-   MkDocs' own sitemap template (1.6.1) plus one clause: a page declaring
-   `robots: noindex` is left out. -#}
+   Zensical's own sitemap template plus one clause: a page declaring `robots: noindex` is left
+   out. The per-page <lastmod> MkDocs' hook computed from git is added by the publish
+   (publish-tool/README.md). -#}
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{%- for file in pages -%}
-    {% if not file.page.is_link and (file.page.abs_url or file.page.canonical_url)
-          and not (file.page.meta.robots and "noindex" in file.page.meta.robots) %}
-    <url>
-         <loc>{% if file.page.canonical_url %}{{ file.page.canonical_url|e }}{% else %}{{ file.page.abs_url|e }}{% endif %}</loc>
-         {% if file.page.update_date %}<lastmod>{{file.page.update_date}}</lastmod>{% endif %}
-    </url>
+  {%- for page in pages -%}
+    {%- if page.canonical_url and not (page.meta and page.meta.robots and "noindex" in page.meta.robots) %}
+      <url>
+        <loc>{{ page.canonical_url }}</loc>
+      </url>
     {%- endif -%}
-{% endfor %}
+  {%- endfor %}
 </urlset>
