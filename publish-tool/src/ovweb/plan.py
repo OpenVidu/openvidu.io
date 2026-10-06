@@ -28,11 +28,18 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
     ),
     ("rewrite-search-index", "always", "Absolutise the search index locations", ""),
     (
+        "date-sitemap",
+        "always",
+        "Date the version sitemap's entries from git",
+        "the last commit to each page and the snippets it includes; nothing for a page git "
+        "cannot date",
+    ),
+    (
         "publish-llms-txt",
         "always",
         "Write the version's own llms.txt and, for the newest version, the root's",
-        "the version's lists only the pages served under it, pinned to it; the root's points "
-        "versioned pages at /latest/",
+        "every entry takes the page's own title and description; the version's lists only the "
+        "pages served under it, pinned to it; the root's points versioned pages at /latest/",
     ),
     (
         "rewrite-non-versioned",

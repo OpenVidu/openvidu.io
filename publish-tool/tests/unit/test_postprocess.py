@@ -80,11 +80,13 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
     base = root / version
     (base / "docs" / "releases").mkdir(parents=True)
     for asset in layout.assets:
-        (base / asset).mkdir()
+        # `search.json` is the one asset that is a file; the fixture writes it below.
+        if not Path(asset).suffix:
+            (base / asset).mkdir()
     for page in layout.non_versioned_pages:
         (base / page).mkdir()
         # Every promoted page carries its own canonical URL and two links into versioned
-        # sections, which is what the promotion rewrite has to fix: the relative one MkDocs
+        # sections, which is what the promotion rewrite has to fix: the relative one the build
         # resolves a Markdown link to, and the root-absolute one raw HTML has to use.
         (base / page / "index.html").write_text(
             f'<link rel="canonical" href="https://openvidu.io/{version}/{page}/">'
@@ -158,9 +160,9 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
         f'<a href="https://openvidu.io/3.4/docs/releases/">3.4 notes</a>',
         encoding="utf-8",
     )
-    (base / "search" / "search_index.json").write_text(
+    (base / "search.json").write_text(
         json.dumps(
-            {"docs": [{"location": ""}, {"location": "docs/"}, {"location": "pricing/"}]},
+            {"items": [{"location": ""}, {"location": "docs/"}, {"location": "pricing/"}]},
             separators=(",", ":"),
         ),
         encoding="utf-8",
@@ -333,6 +335,67 @@ def test_rewrites_llms_txt_three_ways(latest_tree, config, report):
     assert f"/{VERSION}/" not in llms
 
 
+def checkout(root):
+    """A checkout with a frontmatter for some of the fixture's pages, and no git history."""
+    docs = root / "checkout" / "docs"
+    (docs / "docs").mkdir(parents=True)
+    (docs / "index.md").write_text(
+        '---\ntitle: "Self-hosted video"\ndescription: "Run it yourself."\n---\n', encoding="utf-8"
+    )
+    (docs / "docs" / "index.md").write_text('---\ntitle: "Platform"\n---\n', encoding="utf-8")
+    (docs / "pricing.md").write_text(
+        '---\ntitle: "Pricing"\ndescription: "What it costs."\n---\n', encoding="utf-8"
+    )
+    return root / "checkout"
+
+
+def test_llms_txt_entries_take_the_pages_own_title_and_description(latest_tree, config, report):
+    """Zensical writes the nav label and no description; the sources carry both."""
+    result = postprocess(
+        latest_tree,
+        config=config,
+        version=VERSION,
+        update_latest=True,
+        report=report,
+        sources=checkout(latest_tree),
+    )
+
+    root = (latest_tree / "llms.txt").read_text()
+    assert "- [Self-hosted video](https://openvidu.io/index.md): Run it yourself." in root
+    assert "- [Pricing](https://openvidu.io/pricing/index.md): What it costs." in root
+    # No description on the page: the entry keeps what the build wrote, and the publish says so.
+    assert "- [Docs](https://openvidu.io/latest/docs/index.md): d" in root
+    assert any("docs/docs/index.md has no title or no description" in w for w in result.warnings)
+    # No git history to date the pages from: the sitemap keeps no <lastmod>.
+    assert "<lastmod>" not in (latest_tree / "sitemap.xml").read_text()
+    assert result.counts["date-sitemap"] == 0
+
+
+def test_raw_html_inside_an_export_follows_the_html_rules(latest_tree, config, report):
+    """Zensical keeps a page's raw HTML in its export, so a table's links need the HTML rules."""
+    (latest_tree / VERSION / "pricing" / "index.md").write_text(
+        '# Pricing\n\n<table><tr><td><a href="/docs/self-hosting/">Install</a></td></tr></table>\n',
+        encoding="utf-8",
+    )
+    (latest_tree / VERSION / "docs" / "index.md").write_text(
+        '# Docs\n\n<img src="/assets/logo.png">\n', encoding="utf-8"
+    )
+
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert 'href="/latest/docs/self-hosting/"' in (latest_tree / "pricing" / "index.md").read_text()
+    assert (
+        f'src="/{VERSION}/assets/logo.png"'
+        in (latest_tree / VERSION / "docs" / "index.md").read_text()
+    )
+
+
+def test_without_a_checkout_llms_txt_keeps_the_builds_entries(latest_tree, config, report):
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert "- [Home](https://openvidu.io/index.md): h" in (latest_tree / "llms.txt").read_text()
+
+
 def test_the_version_keeps_its_own_llms_txt_pruned_to_its_pages(latest_tree, config, report):
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
@@ -487,11 +550,11 @@ def test_root_search_index_points_at_latest_but_the_version_keeps_its_version(
     the root copy is served on the evergreen root pages and should not pin one."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
-    root = json.loads((latest_tree / "search" / "search_index.json").read_text())
-    version = json.loads((latest_tree / VERSION / "search" / "search_index.json").read_text())
+    root = json.loads((latest_tree / "search.json").read_text())
+    version = json.loads((latest_tree / VERSION / "search.json").read_text())
 
-    assert [entry["location"] for entry in root["docs"]] == ["/", "/latest/docs/", "/pricing/"]
-    assert [entry["location"] for entry in version["docs"]] == [
+    assert [entry["location"] for entry in root["items"]] == ["/", "/latest/docs/", "/pricing/"]
+    assert [entry["location"] for entry in version["items"]] == [
         "/",
         f"/{VERSION}/docs/",
         "/pricing/",

@@ -11,6 +11,7 @@ from __future__ import annotations
 import pytest
 
 from ovweb.rewrite.markdown import (
+    describe_llms_entries,
     prune_version_llms,
     repair_export_links,
     rewrite_promoted_markdown,
@@ -331,3 +332,70 @@ def test_an_llms_entry_description_may_contain_a_link(layout):
 
 def test_version_llms_without_sections_still_gets_the_note(layout):
     assert "llms.txt" in prune_version_llms("# X\n", version="3.8", layout=layout)
+
+
+# -- Zensical's angle-bracketed targets --------------------------------------------------
+
+
+def test_bracketed_targets_are_normalised_before_rewriting(layout):
+    text = f"[Pricing](<https://openvidu.io/{VERSION}/pricing/index.md>)"
+
+    assert versioned(text, layout) == "[Pricing](https://openvidu.io/pricing/index.md)"
+
+
+def test_a_bracketed_target_with_a_space_keeps_its_brackets(layout):
+    text = "[x](<https://example.com/a b>)"
+
+    assert promoted(text, layout) == text
+
+
+def test_llms_file_prunes_bracketed_entries(layout):
+    text = (
+        "# Site\n\n## Docs\n\n"
+        f"- [Docs](<https://openvidu.io/{VERSION}/docs/index.md>)\n"
+        f"- [Pricing](<https://openvidu.io/{VERSION}/pricing/index.md>)\n"
+    )
+
+    pruned = prune_version_llms(text, version=VERSION, layout=layout)
+
+    assert f"- [Docs](https://openvidu.io/{VERSION}/docs/index.md)" in pruned
+    assert "Pricing" not in pruned
+
+
+# -- llms.txt entries described from the pages' frontmatter -----------------------------
+
+
+PAGES = {
+    "": ("Self-hosted video conferencing", "Run video conferencing on your own servers."),
+    "meet/getting-started/": ("OpenVidu Meet: getting started", "Deploy Meet in minutes."),
+}
+
+
+def described(text, layout):
+    return describe_llms_entries(text, version=VERSION, layout=layout, pages=PAGES)
+
+
+def test_entries_take_the_pages_title_and_description(layout):
+    text = (
+        f"- [Home](<https://openvidu.io/{VERSION}/index.md>)\n"
+        f"- [Getting started](<https://openvidu.io/{VERSION}/meet/getting-started/index.md>)\n"
+    )
+
+    assert described(text, layout) == (
+        f"- [Self-hosted video conferencing](https://openvidu.io/{VERSION}/index.md): "
+        "Run video conferencing on your own servers.\n"
+        f"- [OpenVidu Meet: getting started](https://openvidu.io/{VERSION}/meet/getting-started/"
+        "index.md): Deploy Meet in minutes.\n"
+    )
+
+
+def test_an_entry_for_an_unknown_page_keeps_what_the_build_wrote(layout):
+    text = f"- [Archive](https://openvidu.io/{VERSION}/blog/archive/2026/index.md)\n"
+
+    assert described(text, layout) == text
+
+
+def test_prose_and_headings_are_left_alone(layout):
+    text = "# Site\n\n> Read [the docs](https://openvidu.io/3.8/docs/index.md) first.\n\n## Docs\n"
+
+    assert described(text, layout) == text

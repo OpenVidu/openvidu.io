@@ -130,8 +130,12 @@ def move(source: Path, destination: Path) -> None:
 
 
 def copy_tree(source: Path, destination: Path) -> None:
-    """Copy a directory, replacing whatever is already at the destination."""
+    """Copy a directory, or a single file, replacing whatever is already at the destination."""
     remove(destination, required=False)
+    if source.is_file():
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+        return
     shutil.copytree(source, destination, symlinks=True)
 
 

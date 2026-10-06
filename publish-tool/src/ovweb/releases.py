@@ -10,11 +10,11 @@ So only two regions are spliced:
 
 1. The release notes body, ``<article class="md-content__inner md-typeset">…</article>``: one
    occurrence per page.
-2. The table of contents,
-   ``<nav class="md-nav md-nav--secondary" aria-label="Table of contents">…</nav>``: two
-   byte-identical occurrences per page, the right-hand sidebar and the copy Material embeds for the
-   mobile drawer. Both are replaced, or the sidebar keeps listing the destination version's own
-   shorter list.
+2. The table of contents, ``<nav class="md-nav md-nav--secondary" aria-label="On this page">…
+   </nav>`` (``aria-label="Table of contents"`` in the pages Material built before the move to
+   Zensical): two byte-identical occurrences per page, the right-hand sidebar and the copy the theme
+   embeds for the mobile drawer. Both are replaced, or the sidebar keeps listing the destination
+   version's own shorter list.
 
 The fragments need no link rewriting: by convention every link inside a release-notes section is an
 absolute, version-pinned URL, and the table of contents holds only ``#anchor`` links. Both are
@@ -27,7 +27,11 @@ import re
 from dataclasses import dataclass
 
 ARTICLE_MARKER = '<article class="md-content__inner md-typeset">'
-TOC_MARKER = '<nav class="md-nav md-nav--secondary" aria-label="Table of contents">'
+TOC_MARKER = '<nav class="md-nav md-nav--secondary" aria-label="On this page">'
+#: What Material 9.7 wrote, which is what every version folder built before the move to Zensical
+#: holds. The source is the newest, Zensical-built page; a destination may be either.
+LEGACY_TOC_MARKER = '<nav class="md-nav md-nav--secondary" aria-label="Table of contents">'
+TOC_MARKERS = (TOC_MARKER, LEGACY_TOC_MARKER)
 
 #: Any href/src that is neither an absolute URL nor a bare "#anchor" resolves against the folder the
 #: page lives in, so it would point at the wrong version once the fragment is copied.
@@ -65,7 +69,7 @@ def splice_releases(source_html: str, destination_html: str) -> SpliceResult:
     try:
         article = _extract(source_html, ARTICLE_MARKER)
         _check_links(article, "the release notes body")
-        toc = _extract(source_html, TOC_MARKER)
+        toc = _extract(source_html, _toc_marker_of(source_html))
         _check_links(toc, "the table of contents")
     except RegionError as error:
         raise SourceRegionError(str(error)) from error
@@ -77,21 +81,30 @@ def splice_releases(source_html: str, destination_html: str) -> SpliceResult:
     result = destination_html[:start] + article + destination_html[end:]
 
     # Every occurrence, wherever the theme placed it.
+    try:
+        marker = _toc_marker_of(result)
+    except RegionError as error:
+        raise DestinationRegionError(str(error)) from error
     replaced = 0
     offset = 0
     while True:
         try:
-            start, end = find_region(result, TOC_MARKER, offset)
+            start, end = find_region(result, marker, offset)
         except RegionError:
             break
         result = result[:start] + toc + result[end:]
         offset = start + len(toc)
         replaced += 1
 
-    if replaced == 0:
-        raise DestinationRegionError(f"marker not found: {TOC_MARKER}")
-
     return SpliceResult(html=result, article_bytes=len(article), tocs_replaced=replaced)
+
+
+def _toc_marker_of(html: str) -> str:
+    """Whichever table-of-contents marker the page carries."""
+    for marker in TOC_MARKERS:
+        if marker in html:
+            return marker
+    raise RegionError(f"marker not found: tried {' and '.join(TOC_MARKERS)}")
 
 
 def find_region(html: str, marker: str, start: int = 0) -> tuple[int, int]:

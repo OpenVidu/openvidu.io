@@ -24,11 +24,17 @@ from .nonversioned import (
     rewrite_non_versioned_file,
 )
 from .search_index import promote_search_index, rewrite_search_index
-from .sitemap import promote_root_sitemap, prune_version_sitemap, sync_version_sitemap
+from .sitemap import (
+    date_sitemap,
+    promote_root_sitemap,
+    prune_version_sitemap,
+    sync_version_sitemap,
+)
 from .versioned import rewrite_versioned_file
 
 __all__ = [
     "RewriteError",
+    "date_sitemap",
     "promote_root_sitemap",
     "promote_search_index",
     "prune_version_sitemap",

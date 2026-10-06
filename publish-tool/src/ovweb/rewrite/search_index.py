@@ -1,9 +1,9 @@
-"""Rewrites applied to `search/search_index.json`.
+"""Rewrites applied to `search.json`, the search index Zensical writes at the site root.
 
-Two indexes exist and they say different things, because a page loads the index beside it: Material
-records the folder to resolve against in its runtime config (`"base": "../.."`), which the publish
-leaves relative, so a page under `/3.4/docs/` fetches `/3.4/search/search_index.json` while a root
-page fetches `/search/search_index.json`.
+Two indexes exist and they say different things, because a page loads the index beside it: the
+theme records the folder to resolve against in its runtime config (`"base": "../.."`), which the
+publish leaves relative, so a page under `/3.4/docs/` fetches `/3.4/search.json` while a root
+page fetches `/search.json`.
 
 :func:`rewrite_search_index` prepares a version's own index, where a hit on versioned documentation
 stays **inside that version** — searching the 3.4 docs must return 3.4 results.
@@ -20,8 +20,8 @@ from ..model import SiteLayout
 def rewrite_search_index(text: str, *, version: str, layout: SiteLayout) -> str:
     """Make every location in a version's own index absolute.
 
-    Material writes locations relative to the folder the index lives in, which stops resolving
-    once the pages those locations describe are moved to the site root.
+    The index holds locations relative to the folder it lives in, which stop resolving once the
+    pages those locations describe are moved to the site root.
     """
     for page in layout.versioned_pages:
         text = text.replace(f'"location":"{page}/', f'"location":"/{version}/{page}/')

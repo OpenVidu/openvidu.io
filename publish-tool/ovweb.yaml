@@ -32,17 +32,18 @@ layout:
     - acknowledgments
 
   # Copied (not moved) from the newest version folder to the root, which is what makes
-  # `pinned_assets` below work.
+  # `pinned_assets` below work. `search.json` is the search index Zensical writes at the site
+  # root: every version keeps its own copy, and ovweb rewrites both.
   assets:
     - assets
     - javascripts
     - stylesheets
-    - search
+    - search.json
 
   # Root-absolute references in versioned pages are pinned to the version folder:
   # src="/assets/x.png" -> src="/3.8/assets/x.png". The root copy always holds the newest
   # publish, so a versioned page must point at its own. Markdown links need no pinning, and
-  # `search` is excluded on purpose: its locations are rewritten by another rule.
+  # `search.json` is excluded on purpose: its locations are rewritten by another rule.
   pinned_assets:
     - assets
     - javascripts

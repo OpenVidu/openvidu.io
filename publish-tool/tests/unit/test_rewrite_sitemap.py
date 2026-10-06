@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from ovweb.rewrite.sitemap import (
+    date_sitemap,
     promote_root_sitemap,
     prune_version_sitemap,
     stub_loc,
@@ -177,3 +178,60 @@ def test_sync_leaves_real_entries_untouched():
 
 def test_sync_with_no_stubs_changes_nothing():
     assert sync_version_sitemap(SITEMAP, base_url=BASE, stubs=[]) == SITEMAP
+
+
+# -- <lastmod> from the sources ------------------------------------------------------------
+
+#: What Zensical writes: no <lastmod> anywhere.
+UNDATED = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>https://openvidu.io/3.8/</loc>
+      </url>
+      <url>
+        <loc>https://openvidu.io/3.8/docs/</loc>
+      </url>
+      <url>
+        <loc>https://openvidu.io/3.8/blog/archive/2026/</loc>
+      </url>
+</urlset>
+"""
+
+
+def dated(text, dates):
+    return date_sitemap(text, version=VERSION, base_url="https://openvidu.io", dates=dates)
+
+
+def test_dates_the_entries_whose_page_has_a_date():
+    result = dated(UNDATED, {"": "2026-01-02", "docs/": "2026-03-04"})
+
+    assert (
+        "        <loc>https://openvidu.io/3.8/</loc>\n        <lastmod>2026-01-02</lastmod>\n"
+    ) in result
+    assert (
+        "<loc>https://openvidu.io/3.8/docs/</loc>\n        <lastmod>2026-03-04</lastmod>" in result
+    )
+
+
+def test_an_entry_without_a_date_gets_none():
+    """A generated blog view has no source to date; the field is optional per URL."""
+    result = dated(UNDATED, {"": "2026-01-02"})
+
+    assert result.count("<lastmod>") == 1
+    assert "<loc>https://openvidu.io/3.8/blog/archive/2026/</loc>\n      </url>" in result
+
+
+def test_an_existing_lastmod_is_replaced_not_duplicated():
+    result = dated(SITEMAP, {"docs/": "2026-08-01"})
+
+    assert result.count("<lastmod>2026-08-01</lastmod>") == 1
+    assert (
+        "<loc>https://openvidu.io/3.8/docs/</loc>\n         <lastmod>2026-08-01</lastmod>" in result
+    )
+    assert "<loc>https://openvidu.io/3.8/pricing/</loc>\n    </url>" in result
+
+
+def test_dating_keeps_the_indentation_of_the_file():
+    result = dated(UNDATED, {"": "2026-01-02"})
+
+    assert "      <url>\n        <loc>https://openvidu.io/3.8/</loc>\n        <lastmod>" in result

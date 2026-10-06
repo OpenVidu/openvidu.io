@@ -707,7 +707,7 @@ def _check_root_search_index_uses_latest(
     they are repointed. Each version's own index keeps its version on purpose, so only the root
     copy is checked here.
     """
-    path = tree / "search" / "search_index.json"
+    path = tree / "search.json"
     if not path.is_file():
         return []
     text = fsops.read_text(path)
@@ -719,7 +719,7 @@ def _check_root_search_index_uses_latest(
                 findings.append(
                     Finding(
                         "root-search-index",
-                        "search/search_index.json",
+                        "search.json",
                         f"holds {needle!r}; a hit on versioned documentation should point at "
                         "/latest/, which is the canonical URL and does not go stale",
                     )
@@ -755,9 +755,9 @@ def _check_root_pages_have_no_version(
 
 
 def _check_search_index_absolute(tree: Path, config: SiteConfig) -> list[Finding]:
-    path = tree / "search" / "search_index.json"
+    path = tree / "search.json"
     if not path.is_file():
-        return [Finding("search-index", "search/search_index.json", "missing")]
+        return [Finding("search-index", "search.json", "missing")]
     text = fsops.read_text(path)
     findings = []
     for page in (*config.layout.versioned_pages, *config.layout.non_versioned_pages):
@@ -766,7 +766,7 @@ def _check_search_index_absolute(tree: Path, config: SiteConfig) -> list[Finding
             findings.append(
                 Finding(
                     "search-index",
-                    "search/search_index.json",
+                    "search.json",
                     f"holds the relative location {needle!r}; the root index is served from / so "
                     "every location must be absolute",
                 )

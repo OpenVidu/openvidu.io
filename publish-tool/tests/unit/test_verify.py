@@ -206,17 +206,17 @@ def test_reports_a_promoted_page_still_claiming_a_versioned_url(published, confi
 
 def test_reports_a_relative_location_in_the_root_search_index(published, config):
     """The root index is served from `/`, so a location relative to it resolves nowhere."""
-    (published / "search" / "search_index.json").write_text(
-        json.dumps({"docs": [{"location": "docs/"}]}, separators=(",", ":")), encoding="utf-8"
+    (published / "search.json").write_text(
+        json.dumps({"items": [{"location": "docs/"}]}, separators=(",", ":")), encoding="utf-8"
     )
 
-    assert findings_by_check(published, config)["search-index"] == ["search/search_index.json"]
+    assert findings_by_check(published, config)["search-index"] == ["search.json"]
 
 
 def test_reports_a_missing_root_search_index(published, config):
-    (published / "search" / "search_index.json").unlink()
+    (published / "search.json").unlink()
 
-    assert findings_by_check(published, config)["search-index"] == ["search/search_index.json"]
+    assert findings_by_check(published, config)["search-index"] == ["search.json"]
 
 
 # -- the sitemap's <lastmod> --------------------------------------------------------------
@@ -346,12 +346,12 @@ def test_reports_a_root_sitemap_entry_served_by_a_stub(published, config):
 
 
 def test_reports_a_root_search_index_that_pins_the_version(published, config):
-    (published / "search" / "search_index.json").write_text(
-        json.dumps({"docs": [{"location": f"/{VERSION}/docs/"}]}, separators=(",", ":")),
+    (published / "search.json").write_text(
+        json.dumps({"items": [{"location": f"/{VERSION}/docs/"}]}, separators=(",", ":")),
         encoding="utf-8",
     )
 
-    assert findings_by_check(published, config)["root-search-index"] == ["search/search_index.json"]
+    assert findings_by_check(published, config)["root-search-index"] == ["search.json"]
 
 
 def test_reports_a_link_to_an_export_that_does_not_exist(published, config):

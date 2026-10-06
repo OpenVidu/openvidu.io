@@ -312,6 +312,7 @@ def _post_process_gh_pages(
             update_latest=plan.update_latest,
             report=report,
             force=force,
+            sources=repo.root,
         )
 
         for warning in result.warnings:

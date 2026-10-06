@@ -6,6 +6,7 @@ import pytest
 
 from ovweb.releases import (
     ARTICLE_MARKER,
+    LEGACY_TOC_MARKER,
     TOC_MARKER,
     DestinationRegionError,
     RegionError,
@@ -15,9 +16,11 @@ from ovweb.releases import (
 )
 
 
-def page(article: str, toc: str, *, tocs: int = 2, chrome: str = "3.8") -> str:
-    """A page shaped like Material's output: one article, `tocs` copies of the sidebar."""
-    rendered_toc = f'{TOC_MARKER}<nav class="md-nav"><a href="#x">{toc}</a></nav></nav>' * tocs
+def page(
+    article: str, toc: str, *, tocs: int = 2, chrome: str = "3.8", marker: str = TOC_MARKER
+) -> str:
+    """A page shaped like the theme's output: one article, `tocs` copies of the sidebar."""
+    rendered_toc = f'{marker}<nav class="md-nav"><a href="#x">{toc}</a></nav></nav>' * tocs
     return (
         f'<html><head><link rel="canonical" href="https://openvidu.io/{chrome}/docs/releases/">'
         f"</head><body>{rendered_toc}"
@@ -115,3 +118,15 @@ def test_reports_the_spliced_size():
     source = page("3.9.0 notes", "3.9.0")
     result = splice_releases(source, page("old", "old", chrome="3.4"))
     assert result.article_bytes > len(ARTICLE_MARKER)
+
+
+def test_splices_into_a_page_material_built():
+    """The version folders built before the move to Zensical label the sidebar differently."""
+    source = page("3.9.0 notes", "3.9.0")
+    destination = page("3.4.0 notes", "3.4.0", chrome="3.4", marker=LEGACY_TOC_MARKER)
+
+    result = splice_releases(source, destination)
+
+    assert result.tocs_replaced == 2
+    assert LEGACY_TOC_MARKER not in result.html
+    assert result.html.count("3.9.0") == 3 and "<footer>3.4</footer>" in result.html

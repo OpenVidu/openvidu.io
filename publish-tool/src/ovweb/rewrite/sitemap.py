@@ -3,7 +3,7 @@
 `sitemap.xml` at the root is the one search engines read: `robots.txt` names it, and it is a plain
 `urlset` rather than a sitemap index, so it has to list every URL itself.
 
-`<X.Y>/sitemap.xml` is **not** for crawlers. **MkDocs Material's version selector fetches it at
+`<X.Y>/sitemap.xml` is **not** for crawlers. **The theme's version selector fetches it at
 runtime**: when a reader picks another version, `setupVersionSelector` requests `sitemap.xml` under
 that version and looks up the page they are on, keeping them there if it is listed and dropping
 them on the version root if it is not. So this file is what makes "switch version, keep reading the
@@ -16,7 +16,7 @@ checker or grep will find. Treat it as referenced.
 from __future__ import annotations
 
 import re
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 
 from ..model import SiteLayout
 
@@ -25,6 +25,38 @@ from ..model import SiteLayout
 URL_ENTRY = re.compile(r"[ \t]*<url>.*?</url>\n?", re.DOTALL)
 
 LOC = re.compile(r"<loc>([^<]+)</loc>")
+LASTMOD = re.compile(r"[ \t]*<lastmod>[^<]*</lastmod>\n?")
+
+
+def date_sitemap(text: str, *, version: str, base_url: str, dates: Mapping[str, str]) -> str:
+    """Give every entry whose page has a dated source a `<lastmod>`.
+
+    Zensical's sitemap carries no `<lastmod>` at all (MkDocs' hook used to set one per page from
+    git). `dates` maps a page's site-relative URL (`meet/`, `blog/2026/04/30/x/`, `""` for the
+    home page) to its `YYYY-MM-DD`; an entry with no date — a generated blog view, a page git has
+    never seen — is left without one, which the sitemap spec allows per URL, rather than given the
+    build date, which would claim every page changed on every publish.
+
+    Runs on the version's own sitemap before it is promoted or pruned, so both copies carry the
+    dates. An existing `<lastmod>` is replaced, never duplicated.
+    """
+    prefix = f"{base_url}/{version}/"
+
+    def dated(match: re.Match[str]) -> str:
+        entry = match.group(0)
+        found = LOC.search(entry)
+        if found is None or not found.group(1).startswith(prefix):
+            return entry
+        date = dates.get(found.group(1)[len(prefix) :])
+        entry = LASTMOD.sub("", entry)
+        if date is None:
+            return entry
+        indent = " " * (found.start() - entry.rfind("\n", 0, found.start()) - 1)
+        return entry.replace(
+            found.group(0), f"{found.group(0)}\n{indent}<lastmod>{date}</lastmod>", 1
+        )
+
+    return URL_ENTRY.sub(dated, text)
 
 
 def promote_root_sitemap(text: str, *, version: str, layout: SiteLayout) -> str:

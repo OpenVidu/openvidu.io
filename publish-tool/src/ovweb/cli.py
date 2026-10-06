@@ -379,6 +379,12 @@ def postprocess_command(
     """Run only the gh-pages post-processing, on a tree, touching no git and no remote."""
     ctx: Context = context.obj
     validate_minor(version)
+    # The checkout, for the sitemap dates and the llms.txt descriptions; a tree can also be
+    # post-processed outside any repository, without them.
+    try:
+        sources: Path | None = ctx.repo.root
+    except (GitError, OSError):
+        sources = None
     result = postprocess(
         tree.resolve(),
         config=ctx.config,
@@ -386,6 +392,7 @@ def postprocess_command(
         update_latest=update_latest,
         report=ctx.report,
         force=force,
+        sources=sources,
     )
     ctx.report.success(
         f"Post-processed {version} in {tree}"

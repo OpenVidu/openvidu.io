@@ -1,6 +1,6 @@
 """Rewrites for the Markdown exports published alongside the HTML.
 
-The `llmstxt` plugin writes an `index.md` next to every `index.html` and indexes them all in
+Zensical's `llmstxt` plugin writes an `index.md` next to every `index.html` and indexes them all in
 `llms.txt`. They need their own rules because the plugin makes every link **absolute**, resolved
 against the build's `site_url` — which mike makes versioned. So every internal link comes out
 pinned to the version that produced it, and the HTML patterns cannot reach any of them: those
@@ -25,6 +25,7 @@ of a link rather than its target: :func:`absolutise_root_relative_targets` and
 from __future__ import annotations
 
 import re
+from collections.abc import Mapping
 
 from ..model import SiteLayout
 
@@ -40,16 +41,59 @@ _EXPORT_TARGET = r"\]\({base}(?P<page>(?:[^)\s#]*/)?)index\.md(?P<frag>#[^)\s]*)
 #: The suffix of the exports. Used by the pipeline to pick between these rules and the HTML ones.
 SUFFIX = ".md"
 
+#: A link target Zensical writes between angle brackets: `](<https://…>)`. Both forms are
+#: Markdown; the brackets only matter for a target holding spaces or parentheses, which is left
+#: as it is, and every pattern in this module is written for the bare form.
+BRACKETED_TARGET = re.compile(r"\]\(<([^<>\s()]+)>\)")
+
 #: An llms.txt entry: `- [Title](url): description`. The title is matched lazily rather than as
 #: "anything but a bracket", so a title carrying its own `]` is read whole; stopping at the first
 #: `](` is also what keeps a Markdown link *in the description* from being taken for the URL.
 LLMS_ENTRY = re.compile(r"^\s*-\s*\[.*?\]\((?P<url>[^)\s]+)\)", re.MULTILINE)
+
+#: An llms.txt entry split into its parts, for rewriting the title and description.
+LLMS_ENTRY_PARTS = re.compile(
+    r"^(?P<indent>\s*-\s*)\[(?P<title>.*?)\]\((?P<url>[^)\s]+)\)(?P<rest>.*)$", re.MULTILINE
+)
 
 #: What a version's own llms.txt says about the pages it does not list.
 VERSION_LLMS_NOTE = (
     "> The pages that are not tied to a version — pricing, support, the product comparisons and "
     "the blog — are listed in {base}/llms.txt."
 )
+
+
+def describe_llms_entries(
+    text: str, *, version: str, layout: SiteLayout, pages: Mapping[str, tuple[str, str]]
+) -> str:
+    """Give every llms.txt entry the page's own title and description.
+
+    Zensical writes each entry as `- [nav label](url)`: the label is what the sidebar calls the
+    page ("Install", "Overview", useless in a flat list), and there is no description, since the
+    `sections` in mkdocs.yml list paths only. `pages` maps a page's site-relative URL to its
+    frontmatter `(title, description)`; an entry for a URL that is not in it keeps what Zensical
+    wrote. Entries are the plugin's own URLs — `{base}/{version}/<page>/index.md` — so the
+    version is still on them when this runs.
+    """
+    text = normalise_link_targets(text)
+    prefix = f"{layout.base_url}/{version}/"
+
+    def describe(match: re.Match[str]) -> str:
+        url = match.group("url")
+        if not url.startswith(prefix) or not url.endswith("index.md"):
+            return match.group(0)
+        page = pages.get(url[len(prefix) : -len("index.md")])
+        if page is None:
+            return match.group(0)
+        title, description = page
+        return f"{match.group('indent')}[{title}]({url}): {description}"
+
+    return LLMS_ENTRY_PARTS.sub(describe, text)
+
+
+def normalise_link_targets(text: str) -> str:
+    """`](<url>)` -> `](url)`, so the patterns below see one form."""
+    return BRACKETED_TARGET.sub(r"](\1)", text)
 
 
 def rewrite_versioned_markdown(text: str, *, version: str, layout: SiteLayout) -> str:
@@ -59,6 +103,7 @@ def rewrite_versioned_markdown(text: str, *, version: str, layout: SiteLayout) -
     version folder are left pinned to it, and links to anything served from the site root lose
     the version segment they were built with.
     """
+    text = normalise_link_targets(text)
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
     text = _drop_version_from_file_urls(text, version=version, files=layout.root_files)
     return absolutise_root_relative_targets(text, layout=layout)
@@ -76,6 +121,7 @@ def rewrite_promoted_markdown(text: str, *, version: str, layout: SiteLayout) ->
     plugin wrote almost all of them. A pin to a *different* version — what an archival link to a
     previous release looks like — is untouched either way.
     """
+    text = normalise_link_targets(text)
     for page in layout.versioned_pages:
         text = text.replace(f"/{version}/{page}/", f"/latest/{page}/")
     text = _drop_version_from_page_urls(text, version=version, pages=layout.non_versioned_pages)
@@ -92,6 +138,7 @@ def prune_version_llms(text: str, *, version: str, layout: SiteLayout) -> str:
     outside the version's versioned-page folders goes, a section left without entries goes with
     its heading, and a note before the first section points at the root index for the rest.
     """
+    text = normalise_link_targets(text)
     prefixes = tuple(f"{layout.base_url}/{version}/{page}/" for page in layout.versioned_pages)
     note = [VERSION_LLMS_NOTE.format(base=layout.base_url), ""]
 

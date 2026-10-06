@@ -15,8 +15,9 @@ Group 2 has to precede the redirects, because promoting moves the version's `ind
 the root and the generated redirect then takes its place.
 
 Every page is published twice — as HTML and as the Markdown export the llmstxt plugin writes
-beside it — so the two rewriting steps dispatch on the file's suffix. See
-:mod:`ovweb.rewrite.markdown`.
+beside it — so the two rewriting steps dispatch on the file's suffix. An export gets the Markdown
+rules and then the HTML ones: Zensical keeps the raw HTML a page carries (a table, a video) in
+its export, links included. See :mod:`ovweb.rewrite.markdown`.
 """
 
 from __future__ import annotations
@@ -35,10 +36,13 @@ from ..expand import (
     version_redirects,
     wipe_owned,
 )
+from ..gitrepo import Git, GitError
+from ..pages import SourcePage, page_dates, scan_pages
 from ..redirects import is_generated_redirect, render_redirect
 from ..releases import DestinationRegionError, splice_releases
 from ..report import Reporter
 from ..rewrite import (
+    date_sitemap,
     promote_root_sitemap,
     promote_search_index,
     prune_version_sitemap,
@@ -53,10 +57,14 @@ from ..rewrite import (
     sync_version_sitemap,
 )
 from ..rewrite.markdown import SUFFIX as MARKDOWN
-from ..rewrite.markdown import prune_version_llms
+from ..rewrite.markdown import describe_llms_entries, prune_version_llms
+from ..sources import parse_git_log
 
 SITEMAP = "sitemap.xml"
-SEARCH_INDEX = "search/search_index.json"
+#: Zensical writes the search index as one file at the site root (Material wrote
+#: `search/search_index.json`). Listed under `layout.assets`, so the promotion copies it to the
+#: root while the version folder keeps its own; both copies are rewritten here.
+SEARCH_INDEX = "search.json"
 
 #: The index of the Markdown exports. Every version folder keeps its own, pruned to the pages
 #: served under it; the root's is the newest version's full index, rewritten like a promoted page.
@@ -84,8 +92,14 @@ def postprocess(
     update_latest: bool,
     report: Reporter,
     force: bool = False,
+    sources: Path | None = None,
 ) -> PostprocessResult:
-    """Turn mike's raw output for `version` into the published site layout."""
+    """Turn mike's raw output for `version` into the published site layout.
+
+    `sources` is the checkout the version was built from. Two steps read it — the sitemap's
+    `<lastmod>` and the llms.txt descriptions come from the page sources, since Zensical has no
+    hooks to supply them at build time — and both degrade to what the build wrote without it.
+    """
     layout = config.layout
     version_dir = tree / version
     if not version_dir.is_dir():
@@ -108,7 +122,7 @@ def postprocess(
 
     def versioned(path: Path, text: str) -> str:
         if path.suffix == MARKDOWN:
-            return rewrite_versioned_markdown(text, version=version, layout=layout)
+            text = rewrite_versioned_markdown(text, version=version, layout=layout)
         return rewrite_versioned_file(text, version=version, layout=layout)
 
     changed = 0
@@ -128,8 +142,23 @@ def postprocess(
     result.counts["rewrite-search-index"] = changed
     report.result("rewrite-search-index", files_changed=changed)
 
-    # 4. llms.txt: the version keeps its own; the root gets the full index on a latest publish.
-    _publish_llms_txt(tree, version=version, config=config, report=report, result=result)
+    # 4. What the build could not know: the pages' sources, for the sitemap dates and the
+    # llms.txt descriptions.
+    pages = _scan_sources(sources, report=report)
+    _date_sitemap(
+        tree,
+        version=version,
+        config=config,
+        report=report,
+        result=result,
+        sources=sources,
+        pages=pages,
+    )
+
+    # 5. llms.txt: the version keeps its own; the root gets the full index on a latest publish.
+    _publish_llms_txt(
+        tree, version=version, config=config, report=report, result=result, pages=pages
+    )
 
     # Group 2: build the site root from this version, or strip the root-served content out of it.
     if update_latest:
@@ -183,8 +212,87 @@ def _guard(version_dir: Path, *, force: bool) -> None:
         )
 
 
+def _scan_sources(sources: Path | None, *, report: Reporter) -> dict[str, SourcePage]:
+    """The checkout's pages by URL, or nothing when no checkout was given."""
+    if sources is None:
+        report.info(
+            "no checkout given: the sitemap keeps no <lastmod>, llms.txt the build's entries"
+        )
+        return {}
+    return scan_pages(sources)
+
+
+def _source_dates(sources: Path, *, report: Reporter) -> dict[str, str] | None:
+    """`{repository-relative path: date of its last commit}`, or None when git cannot answer.
+
+    A shallow clone is the important case: `git log` succeeds there but reports the fetched commit
+    for every path, which is silently wrong rather than absent, so it is detected and skipped.
+    """
+    git = Git(sources)
+    try:
+        if git.is_shallow():
+            report.info("shallow clone: the sitemap keeps no <lastmod>")
+            return None
+        return parse_git_log(git.log_dates_for("docs", "shared"))
+    except (GitError, OSError) as error:
+        report.info(f"could not read dates from git ({error}): the sitemap keeps no <lastmod>")
+        return None
+
+
+def _date_sitemap(
+    tree: Path,
+    *,
+    version: str,
+    config: SiteConfig,
+    report: Reporter,
+    result: PostprocessResult,
+    sources: Path | None,
+    pages: dict[str, SourcePage],
+) -> None:
+    """Give the version's sitemap a `<lastmod>` per page, from the last commit to its sources.
+
+    Zensical writes none, and the build date on every URL would be a lie a crawler learns to
+    ignore. A page's date is the newest across the page and the snippets it includes, exactly as
+    the MkDocs hook computed it. Runs before the sitemap is promoted or pruned, so the root copy
+    and the version's own both carry the dates.
+    """
+    report.step("date-sitemap", "Date the version sitemap's entries from git")
+    sitemap = tree / version / SITEMAP
+    dates = None
+    if sources is not None and pages and sitemap.is_file():
+        git_dates = _source_dates(sources, report=report)
+        if git_dates is not None:
+
+            def read(path: str) -> str | None:
+                candidate = sources / path
+                try:
+                    return candidate.read_text(encoding="utf-8") if candidate.is_file() else None
+                except OSError:
+                    return None
+
+            dates = page_dates(pages, dates=git_dates, read=read)
+
+    dated = 0
+    if dates:
+        changed = fsops.rewrite_single(
+            sitemap,
+            lambda text: date_sitemap(
+                text, version=version, base_url=config.layout.base_url, dates=dates
+            ),
+        )
+        dated = len(dates) if changed else 0
+    result.counts["date-sitemap"] = dated
+    report.result("date-sitemap", pages_dated=dated)
+
+
 def _publish_llms_txt(
-    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+    tree: Path,
+    *,
+    version: str,
+    config: SiteConfig,
+    report: Reporter,
+    result: PostprocessResult,
+    pages: dict[str, SourcePage],
 ) -> None:
     """Write this version's own llms.txt and, when the root is being rebuilt, the root's.
 
@@ -192,6 +300,10 @@ def _publish_llms_txt(
     pages served under it, pinned to the version like its exports; the root gets the full index,
     rewritten like a promoted export, on a latest publish. A branch without the plugin never built
     the file, so a past publish of one has nothing to write.
+
+    First, every entry gets the page's own `title` and `description` (`pages`), which the build
+    does not carry: Zensical writes the nav label and no description. A page listed without
+    either is a warning here and an error in `ovweb lint`, which is where CI catches it.
     """
     layout = config.layout
     report.step("publish-llms-txt", "Write the version's llms.txt, and the root's for the newest")
@@ -208,6 +320,14 @@ def _publish_llms_txt(
         return
 
     original = fsops.read_text(source)
+    described, undescribed = _describable(pages)
+    for page in undescribed:
+        message = (
+            f"{page.path} has no title or no description; its llms.txt entry keeps the build's"
+        )
+        result.warnings.append(message)
+        report.warn(message)
+    original = describe_llms_entries(original, version=version, layout=layout, pages=described)
     written = 0
     if result.update_latest:
         root_index = rewrite_promoted_markdown(original, version=version, layout=layout)
@@ -219,6 +339,21 @@ def _publish_llms_txt(
 
     result.counts["publish-llms-txt"] = written
     report.result("publish-llms-txt", written=written)
+
+
+def _describable(
+    pages: dict[str, SourcePage],
+) -> tuple[dict[str, tuple[str, str]], list[SourcePage]]:
+    """Split the pages into those with a title and a description and those missing either."""
+    described: dict[str, tuple[str, str]] = {}
+    undescribed: list[SourcePage] = []
+    for url, page in pages.items():
+        title, description = page.field("title"), page.field("description")
+        if title and description:
+            described[url] = (title, description)
+        else:
+            undescribed.append(page)
+    return described, undescribed
 
 
 def _rewrite_promoted_pages(
@@ -243,7 +378,9 @@ def _rewrite_promoted_pages(
         return rewrite_promoted_markdown(text, version=version, layout=layout)
 
     def promote(path: Path, text: str) -> str:
-        return promote_markdown(text) if path.suffix == MARKDOWN else promote_html(text)
+        if path.suffix == MARKDOWN:
+            text = promote_markdown(text)
+        return promote_html(text)
 
     for directory in layout.non_versioned_pages:
         changed += fsops.rewrite_tree_per_file(version_dir / directory, promote)
@@ -251,7 +388,11 @@ def _rewrite_promoted_pages(
     # The home page is a root file rather than a folder, so the walk above misses both halves
     # of it.
     changed += int(fsops.rewrite_single(version_dir / "index.html", promote_html))
-    changed += int(fsops.rewrite_single(version_dir / "index.md", promote_markdown, required=False))
+    changed += int(
+        fsops.rewrite_single(
+            version_dir / "index.md", lambda text: promote(Path("index.md"), text), required=False
+        )
+    )
 
     for feed in layout.feeds:
         changed += int(
