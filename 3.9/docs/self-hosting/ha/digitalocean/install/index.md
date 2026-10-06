@@ -4,9 +4,9 @@ DigitalOcean
 
 > **Info**
 >
-> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu High Availability setup on DigitalOcean. The deployed services are equivalent to those in the [On Premises High Availability installation](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/install-nlb/index.md), but provisioned as DigitalOcean resources and automated using Terraform CLI.
+This section describes how to deploy a production-ready OpenVidu High Availability setup on DigitalOcean. The deployed services are equivalent to those in the [On Premises High Availability installation](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-nlb/index.md), but provisioned as DigitalOcean resources and automated using Terraform CLI.
 
 - DigitalOcean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings, and cluster data.
 - Media Node scalability is managed via an **automated process (DigitalOcean Functions)** that scales the number of Media Nodes based on system load, although you can use a fixed number of media nodes.
@@ -60,7 +60,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
    > | ----------------- | --------------------------------------------------------------------------------------------------------------- |
    > | `doToken`         | DigitalOcean Personal Access Token for API authentication.                                                      |
    > | `stackName`       | Stack name for OpenVidu deployment.                                                                             |
-   > | `openviduLicense` | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/3.9/account/index.md) for more information. |
+   > | `openviduLicense` | OpenVidu License for PRO deployments. Go [here](https://openvidu.io/account/) for more information. |
    >
    > ### Optional Parameters
    >
@@ -191,8 +191,8 @@ If something goes wrong during the initial DigitalOcean deployment creation, you
 
    These logs will give you more information about the DigitalOcean deployment creation process.
 
-1. If everything seems fine, check the [status](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything seems fine, check the [status](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ### Configuration and administration
 
-When your **OPENVIDU_URL** is reachable, it means that everything has gone well. Now you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/ha/digitalocean/admin/index.md) section to learn how to manage your deployment.
+When your **OPENVIDU_URL** is reachable, it means that everything has gone well. Now you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/admin/index.md) section to learn how to manage your deployment.

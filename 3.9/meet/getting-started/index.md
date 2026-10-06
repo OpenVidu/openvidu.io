@@ -6,7 +6,7 @@
 
 Get started quickly with OpenVidu Meet on your local machine:
 
-[Run OpenVidu Meet locally](https://openvidu.io/3.9/meet/deployment/local/index.md)
+[Run OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md)
 
 ## A quick tour of OpenVidu Meet
 
@@ -14,7 +14,7 @@ Here’s a simple overview of a typical video call workflow using OpenVidu Meet:
 
 ### 1. Log in to OpenVidu Meet
 
-Access OpenVidu Meet with your user credentials. If no users exist yet, sign in using the root administrator credentials (learn where to get them [here](https://openvidu.io/3.9/meet/features/users/overview/#root-administrator)).
+Access OpenVidu Meet with your user credentials. If no users exist yet, sign in using the root administrator credentials (learn where to get them [here](https://openvidu.io/latest/meet/features/users/overview/#root-administrator)).
 
 ### 2. Create your first room
 
@@ -36,8 +36,8 @@ Easily access, review, and share your recorded meeting with your team or audienc
 
 Integrate a complete, fully-featured video call solution into your web app with just a few lines of code using **OpenVidu Meet Embedded**. Customize its colors to match your brand seamlessly.
 
-[Embed OpenVidu Meet into your app](https://openvidu.io/3.9/meet/embedded/intro/index.md)
+[Embed OpenVidu Meet into your app](https://openvidu.io/latest/meet/embedded/intro/index.md)
 
 ## OpenVidu Meet vs OpenVidu Platform
 
-If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](https://openvidu.io/3.9/docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/3.9/openvidu-meet-vs-openvidu-platform/index.md).
+If your project requires deeper customization, advanced features, or building custom real-time experiences, consider [**OpenVidu Platform**](https://openvidu.io/latest/docs/index.md). It provides low-level SDKs to create any type of interactive experience. Compare both solutions here: [OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).

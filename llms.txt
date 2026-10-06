@@ -82,6 +82,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 
 - [Embed OpenVidu Meet in your application](https://openvidu.io/latest/meet/embedded/intro/index.md): Add video calls to your own application with a single line of HTML: a direct link, an iframe or the OpenVidu Meet Web Component.
 - [Embed OpenVidu Meet step by step](https://openvidu.io/latest/meet/embedded/step-by-step-guide/index.md): Embed OpenVidu Meet in your web app step by step: run the server, create a room, choose an embedding option and deploy your application.
+- [Embed OpenVidu Meet with an AI coding agent](https://openvidu.io/latest/meet/embedded/building-with-ai/index.md): Let your coding agent read the OpenVidu Meet REST API, web component and webhook docs for your own deployment while it embeds Meet in your app.
 - [Deploy your OpenVidu Meet application](https://openvidu.io/latest/meet/embedded/deploy-your-app/index.md): Take the application you built around OpenVidu Meet to production, either next to your OpenVidu deployment or in an environment of its own.
 
 ## OpenVidu Meet embedding tutorials
@@ -112,6 +113,9 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [OpenVidu Platform release notes](https://openvidu.io/latest/docs/releases/index.md): Release notes for every OpenVidu Platform version, with the new features, changes and fixes each one brings, plus its upgrade notes.
 - [Build your app](https://openvidu.io/latest/docs/build-your-app/index.md): The four steps to an OpenVidu application: launch a deployment, generate access tokens in your server, build the client UI, and deploy both.
 - [Common operations](https://openvidu.io/latest/docs/build-your-app/common-operations/index.md): Every operation an OpenVidu app needs at a glance: tokens, tracks, screen sharing, recording, stream ingestion and webhooks, each with its reference.
+- [OpenVidu Agent Plugin for AI coding agents](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md): Install the OpenVidu Agent Plugin in Claude Code, Cursor, VS Code, GitHub Copilot, Codex or Kiro to build with the official OpenVidu documentation.
+- [OpenVidu MCP servers for AI coding agents](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/index.md): Add the OpenVidu documentation MCP server to Claude Code, Cursor, VS Code, Codex or any MCP client, with the docs of every OpenVidu release from 3.4.
+- [OpenVidu skills for AI coding agents](https://openvidu.io/latest/docs/building-with-ai/skills/index.md): Install the OpenVidu agent skills in Claude Code, Cursor, VS Code, Codex, Gemini CLI or Kiro: with the Agent Plugin, the skills CLI or by copying them.
 - [OpenVidu Angular Components](https://openvidu.io/latest/docs/ui-components/angular-components/index.md): A library of ready-made Angular components for video conferencing UIs, customizable enough to match your product and quick to maintain.
 - [React Components for OpenVidu apps](https://openvidu.io/latest/docs/ui-components/react-components/index.md): Build real-time audio and video UIs in React with the LiveKit-compatible React components, hooks and contexts shipped with OpenVidu.
 

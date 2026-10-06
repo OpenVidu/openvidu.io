@@ -18,6 +18,7 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 | Recording                                         | Yes                                                    | Yes                                                        |
 | Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
 | Tutorials available                               | Yes                                                    | Yes                                                        |
+| Agent Plugin for AI-assisted development          | Yes                                                    | Yes                                                        |
 | Customer support                                  | Yes                                                    | Yes                                                        |
 | Ready-to-use application                          | Yes                                                    | No                                                         |
 | No-code & Low-code options available              | Yes                                                    | No                                                         |

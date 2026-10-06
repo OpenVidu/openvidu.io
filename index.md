@@ -36,6 +36,7 @@ For developers that need complete freedom to build their real-time application u
 | Recording                                         | Yes                                                    | Yes                                                        |
 | Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
 | Tutorials available                               | Yes                                                    | Yes                                                        |
+| Agent Plugin for AI-assisted development          | Yes                                                    | Yes                                                        |
 | Customer support                                  | Yes                                                    | Yes                                                        |
 | Ready-to-use application                          | Yes                                                    | No                                                         |
 | No-code & Low-code options available              | Yes                                                    | No                                                         |
@@ -156,6 +157,12 @@ ______________________________________________________________________
   ______________________________________________________________________
 
   For the most advanced use cases: you can add pipelines to process video and audio streams in real time in your servers.
+
+- **AI-assisted development**
+
+  ______________________________________________________________________
+
+  Build with Claude Code, Cursor, VS Code or Codex: the [**OpenVidu Agent Plugin**](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md) gives your coding agent the official OpenVidu documentation, so the code it writes is up to date and accurate.
 
 [Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/latest/docs/index.md "Build with OpenVidu Platform SDKs")
 
