@@ -36,11 +36,14 @@ with the next Publish Web workflow run.
 
 ## Editing a published post
 
-Every change to the body of a published post — a corrected fact, a new version in a command, an
-added note or link — sets `date.updated` to the day it merges to `main`, adding the key if the
-post has none. It renders as the post's "updated" date, becomes the JSON-LD `dateModified` and
-dates the post in the updated RSS feed. A pull request that waits is re-dated when it merges.
-Drafts and newly published posts carry no `updated`.
+A change to what a published post says — a corrected fact, a new version in a command, an added
+note or link — sets `date.updated` to the day it merges to `main`, adding the key if the post has
+none. It renders as the post's "updated" date, becomes the JSON-LD `dateModified` and dates the
+post in the updated RSS feed. A pull request that waits is re-dated when it merges.
+
+Whether an edit counts is a judgement on the change, which is why no check enforces it.
+Frontmatter-only changes (`description`, `tags`, `categories`, `cover_image`) never do: the post
+reads the same. Drafts and newly published posts carry no `updated`.
 
 ## Frontmatter (all required unless noted)
 
