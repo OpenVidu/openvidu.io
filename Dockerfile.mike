@@ -1,8 +1,12 @@
-# Keep the tag in step with the mkdocs-material pin in publish-tool/pyproject.toml.
-# `ovweb doctor --pins` fails when they disagree: a different theme version builds different
+# Keep the tag in step with the zensical pin in publish-tool/pyproject.toml.
+# `ovweb doctor --pins` fails when they disagree: a different Zensical version builds different
 # markup, and the release-notes splice matches on that markup.
-FROM squidfunk/mkdocs-material:9.7.7@sha256:51b87149d227691486b5f08993d28c65ca7e4990010664b697265b8e6fcd5287
-RUN pip install mkdocs==1.6.1 pymdown-extensions==12.1 mkdocs-glightbox==0.5.2 mkdocs-llmstxt==0.5.0 mkdocs-rss-plugin==1.19.0 pygments==2.21.0 gitpython==3.1.62
-RUN pip install mike==2.2.0
+FROM zensical/zensical:0.0.68@sha256:862eb2099df9c20e4821e54cfc442a206fadb72bf6e8171645bc8a1dfb588ffd
+# mike needs git, and the Zensical fork of mike — pinned to a commit by the [build] extra — is
+# installed from git.
+RUN apk add --no-cache git
+COPY publish-tool /tmp/publish-tool
+RUN pip install --no-cache-dir "/tmp/publish-tool[build]" && rm -rf /tmp/publish-tool
+ENV PYTHONPATH=/docs/publish-tool/src
 ENTRYPOINT ["/sbin/tini", "--", "mike"]
 CMD ["serve", "--dev-addr=0.0.0.0:8000"]
