@@ -101,13 +101,13 @@ We've already built a complete application with a coding agent. In [Building a v
 
 The plugin itself doesn't collect anything. The documentation server logs each request your agent makes, with details such as the tool it called, what it searched for and the documentation version, but it never receives your code, your prompts or your conversation. Your IP address is only used to group requests into visits, and it's never stored. You can check exactly what is recorded, and for how long, in the [privacy section](/docs/building-with-ai/mcp-servers.md#privacy) of the documentation.
 
-## What we're working on next
+## What comes next
 
-Coding agents are becoming a big part of how applications get built, so this plugin is only our first step in this area. These are some of the things we're working on:
+This first version of the OpenVidu Agent Plugin helps you build applications with OpenVidu, but it's only our first step. Next, we'll add more MCP servers and skills to it, so your coding agent can also help you manage and operate your OpenVidu deployment.
 
-- **A Grafana and observability skill.** In [Debugging WebRTC with an AI agent and Grafana MCP](/blog/posts/2026/08/debugging-webrtc-with-ai-and-grafana-mcp.md), an agent with nothing but read-only access to Grafana tracked down what was wrong with a broken OpenVidu deployment. At the end of that post, we said we were preparing MCPs and skills so coding agents could manage and operate OpenVidu stacks. The plugin is the first of them, and this skill will be the next.
-- **Skills to migrate from OpenVidu 2 to OpenVidu 3**, to help you move applications that are still built on the previous version.
-- **Skills to migrate to OpenVidu Meet from other technologies**, for apps whose video calls run on a different solution today.
+A good example is the Grafana and observability skill we're already working on. It builds on [Debugging WebRTC with an AI agent and Grafana MCP](/blog/posts/2026/08/debugging-webrtc-with-ai-and-grafana-mcp.md), where an agent with nothing but read-only access to Grafana tracked down what was wrong with a broken OpenVidu deployment, just by going through its metrics and logs.
+
+In the meantime, you don't have to do anything to stay up to date. The documentation server is rebuilt every time we publish the OpenVidu documentation, so each new release, and every page we add or improve, reaches your agent right away. We also look at what agents search for, which tells us where the documentation falls short and what to write next. And since the plugin follows the open Agent Plugins specification, any new client that implements it will be able to install it too.
 
 ## Try it and tell us what you think
 
