@@ -136,8 +136,9 @@ feature key) — see [checks.md](checks.md).
 ### Images
 
 Write images as plain Markdown with a **relative** path — never hand-write
-`<a class="glightbox">` wrappers around images (the mkdocs-glightbox plugin generates the
-lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#only-*` suffix):
+`<a class="glightbox">` wrappers around images (Zensical's glightbox support generates the
+lightbox anchor at build time, and `auto_themed` assigns the dark/light gallery from the
+`#only-*` suffix):
 
 ```markdown
 ![Image description](../assets/images/x.png){ .round-corners loading=lazy }
@@ -174,13 +175,12 @@ lightbox anchor, and `auto_themed` assigns the dark/light gallery from the `#onl
   down to it. Images displayed small (portraits, device frames) are exported at twice their
   display size instead. Resize sources **before** committing them — the `optimize` plugin
   recompresses but never resizes, so oversized sources ship oversized.
-- **Screenshots are PNG, and every image goes through the same pipeline.** No per-image
-  formats, no `optimize_exclude` entries. The publish build reduces each PNG to a 256-colour
-  palette with `pngquant` (`optimize_png_speed: 1`, its best search effort), which is a real
-  loss on photographic content — measured 36–38 dB PSNR on the captures that contain video
-  thumbnails, against 42–49 dB on flat UI, diagrams and charts. That is the accepted cost of
-  one uniform pipeline; the palette is capped at 256 colours by the PNG format itself, so
-  there is no setting that removes it.
+- **Screenshots are PNG, and every image ships as committed.** Zensical has no counterpart of
+  Material's `optimize` plugin yet, so nothing recompresses an image at publish: compress a
+  screenshot before committing it (`pngquant --speed 1` reproduces what the plugin did — a
+  256-colour palette, a real loss on photographic content, measured 36–38 dB PSNR on captures
+  with video thumbnails against 42–49 dB on flat UI, diagrams and charts). See
+  [zensical-migration.md](zensical-migration.md).
 
 ### Icons
 
@@ -250,11 +250,14 @@ Every image and video on a page shares **one** gallery, so the arrows walk the w
 the only [GLightbox](https://biati-digital.github.io/glightbox/) instance; nothing needs a page
 feature key. What each side controls:
 
-- **mkdocs.yml** (`glightbox:`) configures the image slides — width, effects, `zoomable`, the
-  classes that opt out. The plugin computes it, the hook hands it over as `glightboxOptions`
-  and the script builds its instance on top, so that block stays the one place to change them.
-- **The script** adds what that configuration cannot express: the Plyr player options and the
-  wider video frame.
+- **mkdocs.yml** (`glightbox:`) configures what Zensical writes on each anchor — the slide
+  width, the classes that opt out, the themed galleries. Zensical's own UI bundle would then
+  build a lightbox instance of its own, loading the library from a CDN; the library is vendored
+  instead (`javascripts/glightbox.min.js`, `stylesheets/glightbox.min.css`, loaded by
+  `main.html` before the bundle) and the script points the bundle's instance at a selector
+  nothing matches.
+- **The script** owns the only instance: the library's slide defaults, the Plyr player options
+  and the wider video frame.
 - **The palette** decides membership. A themed pair contributes only the variant currently on
   screen, and the gallery is rebuilt when the palette changes — so `data-gallery="dark"` /
   `"light"` is a *marker*, not a gallery name (the `#only-*` suffix serves as a fallback).
@@ -265,16 +268,26 @@ feature key. What each side controls:
 
 ## Theme overrides
 
-Material theme customization lives in [`overrides/`](../overrides) (`custom_dir`):
+Theme customization lives in [`overrides/`](../overrides) (`custom_dir`), over Zensical's
+`classic` variant, which is Material's look:
 
-- `main.html` extends the Material base template with Jinja blocks (`extrahead`, `scripts`,
-  `styles`, `outdated`...).
+- `main.html` extends the base template with Jinja blocks (`extrahead`, `scripts`, `styles`,
+  `outdated`...).
 - `home.html` extends `main.html` (the landing page template).
 - `partials/` adds or overrides partials: `header.html`, `footer.html`, `tabs.html`,
   `tabs-item.html`, `json-ld.html`, `og.html`.
-- `sitemap.xml` is MkDocs' own template (Material ships none) with one added clause: a page
-  declaring `robots: noindex` is left out, so the sitemap never submits a URL that then
-  refuses indexing. Re-copy it from `mkdocs/templates/sitemap.xml` on a MkDocs bump.
+- `sitemap.xml` is Zensical's own template with one added clause: a page declaring
+  `robots: noindex` is left out, so the sitemap never submits a URL that then refuses
+  indexing. Re-copy it from the Zensical package (`zensical/templates/sitemap.xml`) on a bump.
+
+Zensical renders the templates with **MiniJinja**, not Jinja2. The syntax is the same; what is
+missing is anything Python: no method calls on values (`.startswith()`, `.strftime()` — use
+the `is startingwith` test and string slicing), no list concatenation (`+`), no `page.file`
+(use `page.url`, or `page.edit_url` for the source path), no `build_date_utc`, and an undefined
+value must not be printed (guard it with `is defined` or `and`). The search plugin is
+`config.plugins["search"]`, not `"material/search"`. A template error aborts the build with the
+template and line in the message. The available context and filters are whatever Zensical's own
+templates use (`zensical/templates/` in the package).
 
 Site-wide changes go here — follow the "before/after" comment markers inside the blocks.
 Comments in these templates use the Jinja form (`{# … #}`): an HTML comment is copied into every
@@ -289,10 +302,11 @@ tokens, Material's colour variables and the per-scheme overrides),
 Material overrides, utilities, components, page areas, then one `@media` block per breakpoint) and
 [`unsemantic-grid.css`](../docs/stylesheets/unsemantic-grid.css) (the complete grid build: use any
 of its classes, never edit it). Everything else is linked by a feature key from `main.html`'s
-`styles` block, which MkDocs emits *before* those three, in this order: `home.css`, `product.css`
+`styles` block, which the theme emits *before* those three, in this order: `home.css`, `product.css`
 with `meet.css`/`platform.css` on top, `carousel.css`, `sal.css`, `lead-form.css` and the account
-page's bundle styles (Splide's own `splide.min.css` alone precedes even Material's stylesheet). So at
-equal specificity a feature sheet loses to `extra.css`, and `meet.css` beats `home.css`.
+page's bundle styles (the vendored `glightbox.min.css` and Splide's own `splide.min.css` precede
+even the theme's stylesheet). So at equal specificity a feature sheet loses to `extra.css`, and
+`meet.css` beats `home.css`.
 
 Where a rule goes:
 
@@ -346,7 +360,7 @@ To put Markdown inside a styled element, pick the mechanism by **where the eleme
 **`md_in_html` does not work at depth.** Its preprocessor runs before the block parsers, so once
 content sits inside a tab or an admonition the attribute is never read: it is passed through into
 the page as a literal `markdown=""`, the element is treated as inline HTML, and the Markdown inside
-loses its paragraph. `mkdocs build --strict` reports nothing. This bites snippets hardest, because
+loses its paragraph. `zensical build --strict` reports nothing. This bites snippets hardest, because
 [`tutorials/application-client/tabs.md`](../shared/tutorials/application-client/tabs.md) includes
 the client snippets indented inside tabs while the tutorial pages include the same files at the top
 level — no attribute is right in both places, so those snippets use `/// html` blocks

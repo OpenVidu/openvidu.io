@@ -1,10 +1,10 @@
 # Link rules
 
-There is **one convention for Markdown links** and a separate one for raw HTML. The goal is a
-**zero-warning build**: every link is validated by MkDocs, and `mkdocs build --strict` (run in CI)
-fails the build on any broken link.
+There is **one convention for Markdown links** (with one exception for shared snippets) and a
+separate one for raw HTML. The goal is a **clean strict build**: every Markdown link is validated
+by Zensical, and `zensical build --strict` (run in CI) fails the build on any broken link.
 
-## 1. Markdown links and images in regular pages → relative, including the `.md` extension
+## 1. Markdown links and images in regular pages and blog posts → relative, including the `.md` extension
 
 Write internal links and images as paths relative to the current file:
 
@@ -15,18 +15,24 @@ Write internal links and images as paths relative to the current file:
 ![Diagram](../../assets/images/platform/self-hosting/diagram.png#only-dark)
 ```
 
-Relative `.md`/asset links are validated by MkDocs, **navigable in the editor** (Ctrl+click /
+Relative `.md`/asset links are validated by Zensical, **navigable in the editor** (Ctrl+click /
 preview works, which root-absolute forms break, since editors resolve `/` against the repo root
 instead of `docs/`), and version-safe: the built URLs stay inside the version folder, and the
 publish rewrites the built relative links that point to non-versioned pages into absolute URLs
 (`/pricing/`) at publish time.
 
 > [!NOTE]
-> Non-versioned pages are linked **relatively too** (`../../pricing.md`). The old bare-URL form
-> (`/pricing/`) was a pre-MkDocs-1.6 workaround: it isn't validated and used to produce a build
-> warning — don't use it in Markdown anymore.
+> Non-versioned pages are linked **relatively too** (`../../pricing.md`). The bare-URL form
+> (`/pricing/`) isn't validated — don't use it in Markdown.
 
-## 2. Markdown links and images in shared snippets and blog posts → root-absolute, resolved against `docs/`
+**Blog posts link relatively too**, from their own folder: `../../../../docs/self-hosting/local.md`,
+`../../../../assets/images/blog/YYYY/MM/<slug>/cover.png`. Every post sits four folders deep
+(`blog/posts/YYYY/MM/`), the draft placeholders included, so the move at publish keeps every
+relative link valid. Zensical validates a post's links from its source file, where a root-absolute
+path resolves to nothing and fails the strict build — `ovweb lint` reports one as an error
+(`md-root-absolute-in-post`).
+
+## 2. Markdown links and images in shared snippets → root-absolute, resolved against `docs/`
 
 A snippet is embedded in pages at different hierarchy levels, so relative paths would break.
 Write them as an absolute path from the `docs/` root:
@@ -36,11 +42,13 @@ Write them as an absolute path from the `docs/` root:
 ![Diagram](/assets/images/platform/self-hosting/diagram.png#only-dark)
 ```
 
-MkDocs resolves and validates these against `docs/` thanks to
-`validation.links.absolute_links: relative_to_docs` in `mkdocs.yml`, and rewrites them into
-correct **relative** URLs at build time — so they end up identical to hand-written relative links
-(validated, version-safe), just hierarchy-independent. The trade-off is that they are not
-editor-navigable, which is why they are reserved for snippets and blog posts.
+Zensical leaves a root-absolute path untouched, so
+[`ovweb.mdx.root_links`](../publish-tool/src/ovweb/mdx/root_links.py), a Markdown extension the
+build loads, rewrites them into the equivalent **relative** link for each including page before
+Zensical resolves, validates and rewrites it — so they end up identical to hand-written relative
+links (validated, version-safe), just hierarchy-independent. (MkDocs 1.6 did the same with
+`validation.links.absolute_links: relative_to_docs`.) The trade-off is that they are not
+editor-navigable, which is why they are reserved for snippets.
 
 **Exception — deployment-type-parametric snippets.** A few `shared/self-hosting/**` snippets are
 included in **parallel deployment-type trees** (e.g. the same snippet is used in both
@@ -51,22 +59,18 @@ point — keep them relative. Only links to *fixed* targets (anything under
 `self-hosting/configuration/`, `self-hosting/how-to-guides/`, `ai/`, `tutorials/`, etc.) become
 absolute.
 
-**Blog posts use the same root-absolute form** because a post's source file and asset folder move
-at publish time (the draft `YYYY/MM` placeholder folders become the real date folders) —
-hierarchy-independent links are what let a post move without touching its content. **One
-exception inside a post: the excerpt** (everything before `<!-- more -->`). The blog listing
-pages copy the excerpt **without rewriting resolved Markdown links**, so in the excerpt internal
-links must be raw HTML in URL form (`<a href="/meet/">…</a>`); `ovweb lint` enforces this
-(`md-link-in-excerpt`). The full blog conventions — naming, draft lifecycle, frontmatter,
-publishing — live in
+**One exception inside a blog post: the excerpt** (everything before `<!-- more -->`). The blog
+listing pages copy the excerpt, so in the excerpt internal links must be raw HTML in URL form
+(`<a href="/meet/">…</a>`); `ovweb lint` enforces this (`md-link-in-excerpt`). The full blog
+conventions — naming, draft lifecycle, frontmatter, publishing — live in
 [`.claude/skills/blog-write/references/conventions.md`](../.claude/skills/blog-write/references/conventions.md).
 
 ## 3. Raw HTML links and images (inside HTML blocks) → absolute URL form
 
-MkDocs does **not** process links inside raw HTML (`<a href>`, `<img src>`), so they are neither
-validated nor rewritten at build time. Relative paths would need a fragile per-page `../` depth
-(relative to the **built** folder, not the source file) and are impossible to get right in shared
-snippets — so use absolute URLs:
+Zensical does **not** validate links inside raw HTML (`<a href>`, `<img src>`), and it rewrites a
+*relative* one exactly like a Markdown link — from the source file, with a `../` prefix on every
+page that is not an `index.md` — so a relative path in HTML is easy to get wrong and impossible
+to get right in a shared snippet. Use absolute URLs:
 
 ```html
 <a href="/pricing/">Pricing</a>                      <!-- non-versioned page: trailing-slash URL -->
@@ -84,10 +88,10 @@ see [checks.md](checks.md).
 
 Links from HTML to **versioned** pages depend on where the linking page is served from:
 
-- **From another versioned page**, use relative-to-built-folder paths: a page `performance.md`
-  builds to `performance/index.html`, so add one extra `../` compared to the Markdown path
-  (unless linking from an `index.md`). This works only **within one version**, where source and
-  target share the version folder.
+- **From another versioned page**, write the path **relative to the source file, in directory
+  form**: from `meet/embedded/intro.md`, the sibling page is `href="step-by-step-guide/"` and the
+  folder below it `href="tutorials/"`; Zensical adds the `../` a non-index page needs. This works
+  only **within one version**, where source and target share the version folder.
 - **From a page served from the root** (`non_versioned_pages` — the landing, pricing, the
   comparisons, and every blog page including a post's excerpt), use the root-absolute form
   `/docs/…`, `/meet/…`. No relative path is right for a blog excerpt, which is copied verbatim
@@ -151,13 +155,14 @@ same pinned form — see the blog conventions). The full releases-pages contract
 
 > [!IMPORTANT]
 > **Anchors:** links to a `pymdownx.tabbed` tab label (`=== "Run OpenVidu locally"` →
-> `#run-openvidu-locally`) work at runtime but MkDocs's anchor validator can't see tab-generated
-> ids, so it logs a **false-positive `INFO` "no such anchor"**. This is expected. Anchor
-> validation is therefore kept at `info` (not `warn`) in `mkdocs.yml`, so it never fails
-> `--strict`. The authoritative anchor check with no false positives is `ovweb lint --site` over
-> a built tree — see [checks.md](checks.md).
+> `#run-openvidu-locally`) work at runtime, but Zensical's anchor validator can't see
+> tab-generated ids and would report every one of them (~110 false positives). Anchor validation
+> is therefore **off** in `mkdocs.yml` (`invalid_link_anchors: false`). The authoritative anchor
+> check with no false positives is `ovweb lint --site` over a built tree — see
+> [checks.md](checks.md).
 
 > [!NOTE]
-> When serving/building the site locally there should be **no `WARNING` messages at all**. `INFO`
-> messages about anchors are expected (see above). If you add a page that is intentionally not in
-> the nav, add it to `not_in_nav` in `mkdocs.yml` so it doesn't warn.
+> When serving/building the site locally the build must end with **"No issues found"**: any
+> warning fails `zensical build --strict`. Zensical does not check the nav for omitted pages, so a
+> page meant to be reached by direct link only needs no registration — the list of such pages is
+> kept as a comment above `nav` in `mkdocs.yml`.

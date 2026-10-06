@@ -29,6 +29,7 @@ lives in the pure layer, which is why that is where the tests are.
 | [`verify.py`](../src/ovweb/verify.py)                         | –     | Invariants of a published tree.                                                   |
 | [`lint/`](../src/ovweb/lint)                                  | –     | Authoring conventions over the sources — see [`contributing/checks.md`](../../contributing/checks.md). |
 | [`doctor.py`](../src/ovweb/doctor.py)                         | –     | Preflight checks, including the pin agreement.                                    |
-| [`mkdocs_hook.py`](../mkdocs_hook.py)                         | –     | Set each page's `<lastmod>` from git; move the glightbox library to the end of `<body>` and hand its config to `glightbox-gallery.js`. |
-| [`llmstxt_entries_hook.py`](../llmstxt_entries_hook.py)       | ✔     | Feed llms.txt each page's own `title` and `description`. Copied verbatim onto the version branches from 3.4 and into livekit-tutorials-docs. |
-| [`pygments_fence_title_hook.py`](../pygments_fence_title_hook.py) | ✔ | Restore the `<a>` Pygments escapes out of a linked code-block filename. Copied verbatim onto every version branch and into livekit-tutorials-docs. |
+| [`pages.py`](../src/ovweb/pages.py)                           | ✔     | The checkout's pages by the URL each is served at, with their frontmatter — for the sitemap dates and the llms.txt entries. |
+| [`mdx/root_links.py`](../src/ovweb/mdx/root_links.py)         | ✔     | Markdown extension for the Zensical build: root-absolute `.md` links resolved against docs/. |
+| [`mdx/fence_title.py`](../src/ovweb/mdx/fence_title.py)       | ✔     | Markdown extension for the Zensical build: the `<a>` Pygments escapes out of a linked code-block filename. |
+| [`llmstxt_preprocess.py`](../llmstxt_preprocess.py)           | ✔     | The MkDocs-era cleaning of the Markdown exports, unused by the Zensical build; kept as the reference for regenerating the exports at publish time. |

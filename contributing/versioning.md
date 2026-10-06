@@ -3,9 +3,9 @@
 The two products' docs are **versioned**; everything else is not. The URL scheme is
 version-first: `https://openvidu.io/{version}/meet/...` and `/{version}/docs/...`, with `latest`
 aliasing the newest release. Non-versioned pages live at the root (`/pricing/`, `/blog/`, ...).
-MkDocs Material versioning uses [mike](https://github.com/jimporter/mike), which hosts every
-version in the `gh-pages` branch; publishing is done by **`ovweb`**, the CLI in
-[`publish-tool/`](../publish-tool). Its [README](../publish-tool/README.md) is the authoritative
+Versioning uses the [Zensical fork of mike](https://github.com/squidfunk/mike), which builds
+each version with `zensical build` and hosts every version in the `gh-pages` branch; publishing
+is done by **`ovweb`**, the CLI in [`publish-tool/`](../publish-tool). Its [README](../publish-tool/README.md) is the authoritative
 reference for what a publish does step by step and how redirects are configured.
 
 ## Branches
@@ -14,21 +14,20 @@ reference for what a publish does step by step and how redirects are configured.
 - `main` — fixes to published content and non-versioned pages.
 - `X.Y` — past versions; fixes to an old minor are committed there, never to `main`.
 
-### What every version branch carries
+### What a past version branch is built with
 
-Three build inputs live on every past version branch as **verbatim copies of `main`'s**: MkDocs
-loads them by path from the checked-out branch, and a past version is built from its own branch.
+A past version is built from its own branch, and every branch from before the move to Zensical
+(3.0 to 3.9) still carries a **MkDocs** configuration: a `mkdocs.yml` with `hooks:`, the
+`!relative` snippet path and the MkDocs plugins, plus its own copies of the three hooks that
+shaped the MkDocs build (`publish-tool/pygments_fence_title_hook.py`,
+`llmstxt_entries_hook.py`, `llmstxt_preprocess.py`). The Zensical fork of `mike` cannot build
+such a branch, so **re-publishing a past minor (`ovweb publish past X.Y`) is not possible from
+this toolchain until that branch is migrated the same way `main` was** — see
+[zensical-migration.md](zensical-migration.md). The alternative is the previous toolchain: the
+MkDocs Material image and `mike` 2.2.0 at the last MkDocs commit of `main`.
 
-| File | Branches | Declared in `mkdocs.yml` |
-| --- | --- | --- |
-| `publish-tool/pygments_fence_title_hook.py` | all | `hooks:` |
-| `publish-tool/llmstxt_entries_hook.py` | from 3.4 (where the `llmstxt` plugin arrived) | `hooks:` |
-| `publish-tool/llmstxt_preprocess.py` | from 3.4 | `plugins: llmstxt: preprocess:`, with `autoclean: false` |
-
-Edit any of them on `main` only, then copy it byte for byte onto each branch — the current minor's
-branch is rebased onto `main` by `publish latest`, so it needs no copy. `ovweb doctor` compares
-every past branch's copy with the checkout's and fails on a difference or a missing file. The same
-files are also mirrored in `livekit-tutorials-docs/hooks/`, checked by its `tools/sync-check.py`.
+The current minor's branch needs nothing: `publish latest` rebases it onto `main`. Nothing on
+`main` is loaded by path from another branch any more.
 
 ## Minor-grouped versioning (`X.Y`)
 

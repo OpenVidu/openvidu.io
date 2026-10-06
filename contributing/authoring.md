@@ -15,17 +15,19 @@
    ---
    ```
 
-   Both keys are **required on every page** — the build fails on any llmstxt-selected page
-   missing either ([`publish-tool/llmstxt_entries_hook.py`](../publish-tool/llmstxt_entries_hook.py)), and the
-   globs select nearly every page. Both must be **unique site-wide**, and both are double-quoted.
-   `ovweb lint` enforces the length budgets and the uniqueness — see [checks.md](checks.md).
+   Both keys are **required on every page**: together they are the page's `llms.txt` entry
+   (the publish reads them off the page), its `<title>` and its search snippet, and `ovweb lint`
+   reports a page missing either as an error. Both must be **unique site-wide**, and both are
+   double-quoted. `ovweb lint` enforces the length budgets and the uniqueness too — see
+   [checks.md](checks.md).
 
 3. **Reference in `mkdocs.yml`**:
    Two changes must be made:
 
    - Add the new page to the `nav` section in [`mkdocs.yml`](../mkdocs.yml) (if you want to
      include it in the navigation) and set the title. A page intentionally left out of the nav
-     must be listed in `not_in_nav`, or the build warns.
+     is listed in the comment above `nav` — Zensical does not check the nav for omitted pages,
+     so that comment is the only record.
 
    - Check the mkdocs-llmstxt plugin's `sections` in mkdocs.yml. **Most new pages need no change
      at all**: most sections are a glob over a folder, so a page added inside one is picked up
@@ -33,11 +35,12 @@
      product pages, the Meet embedding guides and the self-hosting entry pages) or if it starts a
      new folder.
 
-     When you do add one, add **the path only.**
-     [`publish-tool/llmstxt_entries_hook.py`](../publish-tool/llmstxt_entries_hook.py) fills each entry in from the
-     page's own frontmatter — the `title` as the link text and the `description` after it — so
-     both are written once; a listed page missing either fails the build, and a page in no
-     section at all is missing from `llms.txt` *and* linked as a dead `.md`.
+     When you do add one, add **the path only.** The publish fills each entry in from the
+     page's own frontmatter — the `title` as the link text and the `description` after it
+     (`publish-llms-txt` in [`publish-tool/README.md`](../publish-tool/README.md)) — so both are
+     written once; a listed page missing either keeps the build's bare entry and `ovweb lint`
+     reports it, and a page in no section at all is missing from `llms.txt` *and* linked as a
+     dead `.md`.
 
      ```yaml
      plugins:
@@ -78,9 +81,10 @@ If the new page contains links, follow the site-wide [link rules](link-rules.md)
 
 > [!NOTE]
 > The include path is relative to [`shared`](../shared) itself — `pymdownx.snippets` is
-> configured with `base_path: [!relative $config_dir/shared]`, so the `shared/` prefix must be
-> left out. Links **inside** a snippet are root-absolute (with one documented exception) — see
-> [link rules](link-rules.md), rule 2.
+> configured with `base_path: [shared]`, so the `shared/` prefix must be left out. That path is
+> relative to the working directory (Zensical has no `!relative` tag), which is why the site is
+> always built and served from the repository root. Links **inside** a snippet are root-absolute
+> (with one documented exception) — see [link rules](link-rules.md), rule 2.
 
 > [!IMPORTANT]
 > A snippet renders inside every page that includes it. **Grep for its `--8<--` usages before

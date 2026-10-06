@@ -6,7 +6,7 @@ Every convention in these docs is enforced by a tool, in four layers:
 |---|---|---|
 | Edit-time hook | on every AI edit | [`.claude/hooks/lint-changed-file.sh`](../.claude/hooks/lint-changed-file.sh) runs `ovweb lint` on the changed file |
 | `ovweb lint` | on demand, ~1 s, no build | authoring conventions the strict build cannot see |
-| `mkdocs build --strict` | on demand + every PR | zero-WARNING build; broken Markdown links fail it |
+| `zensical build --strict` | on demand + every PR | a build with no issues; broken Markdown links fail it |
 | CI workflows | PRs, weekly, manual | the four workflows below |
 
 `/check-web` runs the lint tier; `/check-web full` adds the strict build and the built-site lint —
@@ -17,22 +17,23 @@ the exact sequence CI runs.
 Where `ovweb verify` asserts a *published* tree (see
 [`publish-tool/docs/testing-and-verify.md`](../publish-tool/docs/testing-and-verify.md)),
 `ovweb lint` checks the *sources* — the
-authoring conventions `mkdocs build --strict` cannot see, in about a second and with no build:
+authoring conventions `zensical build --strict` cannot see, in about a second and with no build:
 
-- **Raw-HTML links and images** (`href="/…"`, `src="/…"`): MkDocs never processes HTML, so a
+- **Raw-HTML links and images** (`href="/…"`, `src="/…"`): the build never validates HTML, so a
   broken target there survives every build. Resolved against the source tree, `latest/`-prefixed
   URLs included; a `.md` path inside HTML is its own finding.
-- **Link form in the files that move at publish**: a relative Markdown link in a blog post
-  (error — it breaks when the post moves) or in a shared snippet (warn — only the sibling links
+- **Link form in the files whose rendered location varies**: a root-absolute Markdown link in a
+  blog post (error — Zensical validates a post from its source, where it resolves to nothing and
+  fails the strict build) or a relative one in a shared snippet (warn — only the sibling links
   [link-rules.md](link-rules.md) documents as deliberate stay relative, and those are
   recognized), and the `page.md/#anchor` stray-slash form.
 - **Version-pin discipline**: `/X.Y/` links are allowed only on the two releases pages and in
   `Release` blog posts; the releases pages themselves must never link `latest` (the publish
   refuses it — lint catches it at PR time instead).
-- **SEO budgets** (warn): `title` over 57 characters (70 for posts), `description` over 160 or
-  not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
-  `llmstxt_entries_hook.py` — a missing field must kill CI, but a long one must not kill
-  `mkdocs serve`.
+- **SEO fields**: a page without a `title` or a `description` is an error — together they are
+  its `llms.txt` entry (the publish reads them off the page), its `<title>` and its search
+  snippet. Budgets warn: `title` over 57 characters (70 for posts), `description` over 160 or
+  not a sentence, duplicated titles/descriptions site-wide.
 - **Page composition**: `!!!warning`-without-space admonitions; the `page_features:` contract
   (a page whose content — snippets included — carries `feature-cards`, `splide`, `lazy-video`,
   `lead-form` or `data-sal` markup must list the matching feature key — `setupcardglow`,
@@ -64,11 +65,12 @@ Validate Web runs it on every PR against the PR's base branch.
 
 ### `ovweb lint --site DIR`
 
-Adds the built-site tier over a `mkdocs build` output: every internal `href`/`src`/`srcset` —
-full-domain `https://openvidu.io/…` and `/latest/…` forms included — must resolve within the
-built tree, and every `#fragment` must name an id actually present on the target page. The built
-HTML carries the `pymdownx.tabbed` ids the MkDocs validator cannot see, so this is the
-authoritative anchor check with none of the ~110 INFO false positives. Version-pinned URLs (only
+Adds the built-site tier over a `zensical build` output (`site/`): every internal
+`href`/`src`/`srcset` — full-domain `https://openvidu.io/…` and `/latest/…` forms included — must
+resolve within the built tree, and every `#fragment` must name an id actually present on the
+target page. The built HTML carries the `pymdownx.tabbed` ids Zensical's validator cannot see, so
+this is the authoritative anchor check (anchor validation is off in `mkdocs.yml` for that reason)
+with none of the ~110 false positives. Version-pinned URLs (only
 production serves those folders), external URLs (the scheduled link-check workflow's job),
 SPA-style `#/…` routing fragments of the OpenAPI viewer, and the generated `reference-docs/`
 trees as sources are all excluded by design.
@@ -84,7 +86,7 @@ same turn. It degrades silently when `ovweb` is not installed.
 
 | Workflow | Trigger | What it runs |
 |---|---|---|
-| [`validate-web.yaml`](../.github/workflows/validate-web.yaml) | PRs and pushes to `main`/`next` that touch `docs/`, `shared/`, `overrides/`, `mkdocs.yml`, `publish-tool/` or the Dockerfiles | `ovweb doctor --pins` → `ovweb redirects check` → `ovweb lint` (PRs also `--against` the base branch) → `mkdocs build --strict` → `ovweb lint --site` over that build |
+| [`validate-web.yaml`](../.github/workflows/validate-web.yaml) | PRs and pushes to `main`/`next` that touch `docs/`, `shared/`, `overrides/`, `mkdocs.yml`, `publish-tool/` or the Dockerfiles | `ovweb doctor --pins` → `ovweb redirects check` → `ovweb lint` (PRs also `--against` the base branch) → `zensical build --strict` → `ovweb lint --site` over that build |
 | [`publish-web.yaml`](../.github/workflows/publish-web.yaml) | manual (`workflow_dispatch`) | the publish: `ovweb publish <command> <version>`, then `ovweb verify`; then `deploy-docs-mcp` triggers the docs MCP server's redeploy and waits for it. Inputs: `command` (`new`/`latest`/`past`), `version`, `dry_run` |
 | [`check-external-links.yaml`](../.github/workflows/check-external-links.yaml) | weekly + manual | external URLs with lychee — never on PRs, since third-party outages must not block merges; reports through a single self-updating `broken-links` issue |
 | [`test-tools.yaml`](../.github/workflows/test-tools.yaml) | changes under `publish-tool/` | a hash-verified dry-run resolution of `requirements-publish.txt`, then `pytest` and `ruff` |

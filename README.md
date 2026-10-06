@@ -1,8 +1,9 @@
 # openvidu.io
 
-Source of [https://openvidu.io](https://openvidu.io) — an MkDocs Material site versioned with
-[mike](https://github.com/jimporter/mike) and published to the `gh-pages` branch by `ovweb`, the
-CLI in [`publish-tool/`](publish-tool/). `docs/` is **site content**; the contributor
+Source of [https://openvidu.io](https://openvidu.io) — a [Zensical](https://zensical.org) site
+(Material for MkDocs' successor, read from `mkdocs.yml`) versioned with the
+[Zensical fork of mike](https://github.com/squidfunk/mike) and published to the `gh-pages`
+branch by `ovweb`, the CLI in [`publish-tool/`](publish-tool/). `docs/` is **site content**; the contributor
 documentation lives in [`contributing/`](contributing/). **Merging to `main` publishes
 nothing** — the live site only changes when the manual
 [Publish Web workflow](https://github.com/OpenVidu/openvidu.io/actions/workflows/publish-web.yaml)
@@ -33,11 +34,11 @@ link+anchor lint. Details: [`contributing/checks.md`](contributing/checks.md).
 ## Quickstart (manual)
 
 ```bash
-# Once: build the dev image (mkdocs-material + this repo's extra plugins)
-docker build --pull --no-cache --rm=true -t squidfunk/mkdocs-material .
+# Once: build the dev image (the official zensical image + this repo's publish tool)
+docker build --pull --no-cache --rm=true -t openvidu-io .
 
 # Serve with live reload at http://localhost:8000
-docker run --name=mkdocs --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+docker run --name=zensical --rm -it -p 8000:8000 -v ${PWD}:/docs openvidu-io
 ```
 
 Everything else — full builds, validating like CI, previewing the versioned layout — is in
@@ -47,11 +48,11 @@ Everything else — full builds, validating like CI, previewing the versioned la
 
 | Path | Purpose |
 |---|---|
-| [`mkdocs.yml`](mkdocs.yml) | Site config: `nav`, theme, plugins, markdown extensions |
+| [`mkdocs.yml`](mkdocs.yml) | Site config, read by Zensical: `nav`, theme, plugins, markdown extensions |
 | [`docs/`](docs/) | Content root. Non-versioned pages at the top level (landing, pricing, blog, …) |
 | [`docs/meet/`](docs/meet/) | **OpenVidu Meet** docs (versioned, served at `/{version}/meet/`) |
 | [`docs/docs/`](docs/docs/) | **OpenVidu Platform** docs (versioned, served at `/{version}/docs/`) |
-| [`overrides/`](overrides/) | Material theme customization (`main.html`, `home.html`, `partials/`) |
+| [`overrides/`](overrides/) | Theme customization over Zensical's classic (Material) variant (`main.html`, `home.html`, `partials/`) |
 | [`shared/`](shared/) | Reusable Markdown snippets, included with `--8<--` |
 | `docs/assets/`, `docs/stylesheets/`, `docs/javascripts/` | Images/videos (organized by consuming page), CSS, JS |
 | [`publish-tool/`](publish-tool/) | `ovweb`, the publishing CLI, plus `ovweb.yaml` (site layout + every redirect) |
@@ -67,6 +68,7 @@ Everything else — full builds, validating like CI, previewing the versioned la
 | Writing any internal link or image reference | [`contributing/link-rules.md`](contributing/link-rules.md) |
 | Using HTML blocks, tags, theme overrides, light/dark images, JSON-LD | [`contributing/page-composition.md`](contributing/page-composition.md) |
 | Anything about versions, branches, releases pages or publishing | [`contributing/versioning.md`](contributing/versioning.md) |
+| What changed in the move from MkDocs Material to Zensical, what Zensical cannot do yet, the bugs found | [`contributing/zensical-migration.md`](contributing/zensical-migration.md) |
 | Serving/building locally | [`contributing/local-testing.md`](contributing/local-testing.md) |
 | Understanding the checks: `ovweb lint`, the hook, the CI workflows | [`contributing/checks.md`](contributing/checks.md) |
 | Placing a snippet in the right `shared/` folder | [`shared/README.md`](shared/README.md) |

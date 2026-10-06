@@ -35,9 +35,10 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 
 ## The Markdown exports and `llms.txt`
 
-Every page listed in the `mkdocs-llmstxt` plugin's `sections` is published twice: as
-`index.html`, and as an `index.md` beside it. `llms.txt` indexes those exports, and together they
-are the site's AI-facing channel.
+Every page listed in the `llmstxt` plugin's `sections` is published twice: as `index.html`, and
+as an `index.md` beside it. `llms.txt` indexes those exports, and together they are the site's
+AI-facing channel. Zensical writes every link target between angle brackets (`](<url>)`); the
+rewrites normalise that to the bare form first, so one set of patterns serves both.
 
 There are two indexes. The plugin writes one for the whole build, root pages included, and the
 publish derives both from it: the **root** `llms.txt` is that index with the promoted rules
@@ -46,18 +47,19 @@ entries for pages served under `/X.Y/`, pinned to the version like its exports, 
 pointing at the root index for the rest. Every version from 3.4 has one, which is what the docs
 MCP server indexes a version from; `ovweb verify` checks that each entry has its export.
 
-Neither half of an `llms.txt` entry comes from `mkdocs.yml`.
-[`llmstxt_entries_hook.py`](../llmstxt_entries_hook.py) replaces both with the page's own
-frontmatter:
+Neither half of an `llms.txt` entry comes from `mkdocs.yml`. The `publish-llms-txt` step
+replaces both with the page's own frontmatter (`describe_llms_entries`, fed by
+[`pages.py`](../src/ovweb/pages.py)):
 
 * the **description**, which the plugin would otherwise take from the value beside the path in
   `mkdocs.yml`. That is what lets a `sections` entry be a glob — the plugin's own behaviour is to
   give every page a glob matches the *same* description.
-* the **link text**, which the plugin takes from `page.title`. MkDocs resolves that to the *nav
-  label* when the nav entry has one, so most entries would render as `[Install]`, `[Overview]` or
-  `[Releases]` — fine beside a parent in a sidebar, useless in a flat list.
+* the **link text**, which the plugin takes from the page's nav label when the nav entry has one,
+  so most entries would render as `[Install]`, `[Overview]` or `[Releases]` — fine beside a parent
+  in a sidebar, useless in a flat list.
 
-A listed page missing either one fails the build.
+A listed page missing either one keeps the build's bare entry, and the publish warns;
+`ovweb lint` reports the page as an error, which is where CI catches it.
 
 They need their own rewrites for one reason: **the plugin makes every link absolute**, resolved
 against the build's `site_url` — which mike makes versioned. So an export comes out of the build

@@ -3,9 +3,10 @@
 This folder holds **`ovweb`**, the command line tool that publishes and maintains the
 versions of the [openvidu.io](https://openvidu.io) documentation website.
 
-The site is built with **MkDocs Material** and versioned with
-[**mike**](https://github.com/jimporter/mike), which hosts every version in the `gh-pages`
-branch of the repository (served through GitHub Pages). `ovweb` wraps `mike` to solve a problem
+The site is built with **Zensical** (Material for MkDocs' successor, configured in
+`mkdocs.yml`) and versioned with the [**Zensical fork of mike**](https://github.com/squidfunk/mike),
+which builds each version with `zensical build` and hosts every version in the `gh-pages` branch
+of the repository (served through GitHub Pages). `ovweb` wraps `mike` to solve a problem
 `mike` alone does not: keeping a set of **global, non-versioned pages** (pricing, blog,
 support…) served once at the site root while the **versioned documentation** lives under
 version-aliased paths.
@@ -50,8 +51,9 @@ The authoring conventions `ovweb lint` enforces are documented for contributors 
 
 ### `mike` and the `gh-pages` branch
 
-`mike` builds each documentation version into its own subfolder of the `gh-pages` branch, named
-after the version, and maintains **aliases** (friendly names that point to a version). This
+`mike` builds each documentation version (`zensical build`, with `MIKE_DOCS_VERSION` set so the
+site URL carries the version) into its own subfolder of the `gh-pages` branch, named after the
+version, and maintains **aliases** (friendly names that point to a version). This
 project uses a single alias, `latest`, configured as the default in `mkdocs.yml`:
 
 ```yaml
@@ -101,15 +103,15 @@ correctly.
 
 ## The core problem this tool solves
 
-`mike` builds the **entire** MkDocs site — versioned _and_ non-versioned pages — into each
-version folder. Two things follow:
+`mike` builds the **entire** site — versioned _and_ non-versioned pages — into each version
+folder. Two things follow:
 
 1. **Duplication.** The pricing page, blog, etc. would be published once per version. We want a
    single canonical copy served at the root (`/pricing/`), always reflecting the most recent
    release.
-2. **Broken links.** MkDocs Material emits **relative** links (e.g. `../../pricing/`). Once
-   files are relocated — non-versioned pages moved to the root, versioned docs left under
-   `/latest/` — those relative links no longer resolve.
+2. **Broken links.** Zensical emits **relative** links (e.g. `../../pricing/`). Once files are
+   relocated — non-versioned pages moved to the root, versioned docs left under `/latest/` —
+   those relative links no longer resolve.
 
 `ovweb` therefore **post-processes mike's output** on the `gh-pages` branch to:
 
@@ -173,9 +175,10 @@ The post-processing steps, in order. `--dry-run` prints exactly this list, and
 | Step                   | When   | What                                                                                                                  |
 | ---------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | `remove-stray-site`    | always | Delete a `site/` folder at the root of the gh-pages tree, present only when the tree came from a checkout rather than a fresh worktree. Tolerant of its absence. |
-| `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns. |
-| `rewrite-search-index` | always | Make every search location absolute.                                                                                  |
-| `publish-llms-txt`     | always | Keep the version's own `llms.txt`, pruned to the pages served under it and pinned to it; on a latest publish, also derive the root's full index from it, rewritten like a promoted export. |
+| `rewrite-versioned`    | always | Pin assets to the version, absolutise root links, point `canonical`/`og:url` at `/latest/`. Also each page's Markdown export, whose links need different patterns (and the HTML ones too, for the raw HTML Zensical keeps in an export). |
+| `rewrite-search-index` | always | Make every search location absolute (`search.json`, the one file Zensical writes).           |
+| `date-sitemap`         | always | Give the version's sitemap a `<lastmod>` per page, from the last commit to the page and the snippets it includes (the checkout, read through git; nothing on a shallow clone or for a generated blog view). |
+| `publish-llms-txt`     | always | Give every entry the page's own `title` and `description` (Zensical writes the nav label and nothing); keep the version's own `llms.txt`, pruned to the pages served under it and pinned to it; on a latest publish, also derive the root's full index from it, rewritten like a promoted export. |
 | `rewrite-non-versioned`| latest | Point versioned links at `/latest/`, strip the version from the promoted pages' own URLs, fix `404.html`, the feeds and the promoted pages' Markdown exports. |
 | `promote-to-root`      | latest | Copy the asset folders and move the root files and non-versioned pages out to the site root.                          |
 | `promote-sitemap`      | latest | Copy the version's sitemap to the root and rewrite it for the root URL scheme.                                        |
@@ -246,12 +249,19 @@ tests) are documented in [`contributing/checks.md`](../contributing/checks.md).
 ## Dependency pins
 
 [`pyproject.toml`](pyproject.toml) is the single place the publishing dependencies are declared,
-with two extras: `build` (the real publish, including `mkdocs-material[imaging]`) and `validate`
-(the same minus the imaging stack). `mkdocs-material` is also named as the base-image tag of
-[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), the rest of the pins
-in their `pip install` lines, and every pin again in the lock below; `ovweb doctor --pins` fails
-when any of those places disagrees. A different theme version builds different markup, and the
-release-notes splice matches on that markup.
+with two extras: `build` (the real publish: Zensical, the mike fork, the Markdown renderers) and
+`validate` (the same minus mike). `zensical` is also named as the base-image tag of
+[`Dockerfile`](../Dockerfile) and [`Dockerfile.mike`](../Dockerfile.mike), and every pin again
+in the lock below; `ovweb doctor --pins` fails when any of those places disagrees. A different
+theme version builds different markup, and the release-notes splice matches on that markup.
+Zensical leaves the three packages that render the Markdown open (`markdown`,
+`pymdown-extensions`, `pygments`), so they are pinned here too.
+
+The mike fork is a **git dependency**, pinned to a commit
+(`mike @ git+https://github.com/squidfunk/mike.git@<commit>`), which is as exact as a hash. pip
+cannot hash a git checkout, so the lock leaves it out and the publish workflow installs it
+separately, reading the commit from `pyproject.toml`; `ovweb doctor --pins` checks that
+`Dockerfile.mike` (when it names it) and the installed `mike` are at the same commit.
 
 The publish workflow does not install from the extra directly. It installs
 [`requirements-publish.txt`](requirements-publish.txt) with `pip install --require-hashes`: the
@@ -263,11 +273,12 @@ commit both:
 
 ```bash
 uv pip compile pyproject.toml --extra build --universal --generate-hashes \
-  --python-version 3.11 --no-header -o requirements-publish.txt
+  --python-version 3.11 --no-header --no-emit-package mike -o requirements-publish.txt
 ```
 
 `--universal` keeps the environment markers, so the same file installs on the 3.11 floor and on
-the 3.14 the workflow runs. `test-tools.yaml` resolves the lock with `--require-hashes` on every
+the 3.14 the workflow runs; `--no-emit-package mike` leaves the git dependency out while keeping
+its own dependencies in. `test-tools.yaml` resolves the lock with `--require-hashes` on every
 change under `publish-tool/`, so a lock pip cannot satisfy fails there rather than in the publish.
 
 Dependabot (`.github/dependabot.yml`) proposes updates only for the pins named in
@@ -287,17 +298,21 @@ regenerate the lock, and close the pull request.
 - **A publish only touches the version being published.** The one exception is the release-notes
   splice, which reaches into every other version folder. So a change to the rewriting rules
   reaches an old version only when that version is re-published.
-- **The releases-content splice is coupled to two Material markup strings.** A theme upgrade that
+- **The releases-content splice is coupled to two theme markup strings.** A theme upgrade that
   renames the `md-content__inner` article or the `md-nav--secondary` table-of-contents
-  `aria-label` breaks it. It fails loudly rather than silently — a source-side failure aborts the
+  `aria-label` (`On this page` in Zensical's pages, `Table of contents` in the ones Material
+  built — both are recognised) breaks it. It fails loudly rather than silently — a source-side failure aborts the
   publish, a destination-side one warns and leaves that page as built — so treat a
   `could not splice release notes` line in a publish log as something to fix, not noise.
 - **Per-version search indexes are not updated by the splice.** It rewrites the rendered
   `index.html`, but each version's `search/search_index.json` still holds that version's original
   releases text. The page a visitor sees is current; in-version search results for the releases
   page may lag until that version is rebuilt.
-- **The branches before 3.4 do not generate `llms.txt` or the RSS feeds.** Their `mkdocs.yml`
-  predates those plugins, so the past-version cleanup is tolerant of every root file it removes,
-  and a past publish of one writes no version `llms.txt`.
+- **A past version cannot be re-published from this toolchain yet.** Every `X.Y` branch from
+  before the move to Zensical (3.0–3.9) carries a MkDocs configuration that the Zensical fork of
+  `mike` cannot build; see [`contributing/zensical-migration.md`](../contributing/zensical-migration.md).
+  When one is migrated: the branches before 3.4 do not generate `llms.txt` or the RSS feeds —
+  their `mkdocs.yml` predates those plugins — so the past-version cleanup is tolerant of every
+  root file it removes, and a past publish of one writes no version `llms.txt`.
 - **A version can be published without a branch.** `ovweb versions list` flags it; such a version
   cannot be re-published, because the branch is the source of truth for its content.

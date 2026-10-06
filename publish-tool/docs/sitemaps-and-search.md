@@ -46,36 +46,31 @@ them.
 
 ## Where `<lastmod>` comes from
 
-MkDocs initialises `Page.update_date` to the build date for every page and its sitemap template
-emits exactly that, so the field would claim that every URL on the site changed on every publish —
-no per-page signal, and false often enough to teach a crawler to ignore the field entirely.
+Zensical's sitemap carries no `<lastmod>` at all, and the build date on every URL — what MkDocs
+emitted before a hook corrected it — would claim that every page changed on every publish: no
+per-page signal, and false often enough to teach a crawler to ignore the field entirely.
 
-The `on_env` half of [`mkdocs_hook.py`](../mkdocs_hook.py) sets `update_date` from git instead,
-using [`sources.py`](../src/ovweb/sources.py): one `git log --name-only` pass gives the last
-commit date of every file, and a page's date is the **newest across the page and the transitive
-closure of the `--8<--` snippets it includes**. Most pages assemble their content from `shared/`,
-so without the closure a rewritten shared install step would move no date at all on the pages
-that display it.
-
-`on_env` is the only hook that can do this: MkDocs renders the theme's static templates —
-`sitemap.xml` among them — *before* it renders the pages, so `on_page_content` runs too late.
-Nothing in the post-processing needs to know: `promote_root_sitemap` only rewrites URL substrings,
-so the values flow into the root sitemap untouched.
+The `date-sitemap` step sets it from git instead, on the version's sitemap before it is promoted
+or pruned, using [`pages.py`](../src/ovweb/pages.py) and [`sources.py`](../src/ovweb/sources.py):
+the checkout's pages are mapped from the URL each is served at back to its source file, one
+`git log --name-only` pass gives the last commit date of every file, and a page's date is the
+**newest across the page and the transitive closure of the `--8<--` snippets it includes**. Most
+pages assemble their content from `shared/`, so without the closure a rewritten shared install
+step would move no date at all on the pages that display it. `promote_root_sitemap` only rewrites
+URL substrings, so the values flow into the root sitemap untouched.
 
 Two deliberate behaviours:
 
 - **A generated page carries no `<lastmod>` at all.** The blog's archive, category and pagination
   views have no source file, so inventing a date for them would be the same lie in miniature; the
-  spec makes the field optional per URL. They do, however, get a **title and description** from the
-  same hook, since having no frontmatter left them serving `site_description` and a paginated view
-  sharing a byte-identical `<title>` with the view it pages. Both are derived from the view itself
-  (its own heading, the number of posts it lists, its page number), so a month or category that
-  does not exist yet is described correctly the first time it appears.
-- **Anything that stops git answering falls back to the build date, at INFO level.** A shallow
+  spec makes the field optional per URL. (Under MkDocs the hook also gave those views a title and
+  description of their own; Zensical has no hook for that, so they carry the blog's — see
+  [`contributing/zensical-migration.md`](../../contributing/zensical-migration.md).)
+- **Anything that stops git answering leaves the entries undated, at INFO level.** A shallow
   clone is the important one — `git log` still succeeds there but reports the fetched commit for
-  every path, which is silently wrong rather than absent, so it is detected and skipped.
-  `validate-web.yaml` checks out shallow; `publish-web.yaml` sets `fetch-depth: 0`. It must stay
-  INFO because `mkdocs build --strict` fails on a warning.
+  every path, which is silently wrong rather than absent, so it is detected and skipped. The
+  publish checks out with `fetch-depth: 0`; a tree post-processed outside any checkout
+  (`ovweb postprocess --tree` on a copy) gets no dates and no descriptions either.
 
 ## The two search indexes
 

@@ -27,11 +27,19 @@ Three of them are worth knowing about, because they are what keeps the rest hone
 
 ## The export preprocessor
 
+**Unused by the Zensical build**, whose native llmstxt plugin has no `preprocess` hook: the
+exports are cleaned by Zensical's own `autoclean` port, which drops the tab labels and every link
+whose label carries an icon — see
+[`contributing/zensical-migration.md`](../../contributing/zensical-migration.md), which also
+describes the follow-up this module is kept for (regenerating the exports from the built HTML at
+publish time). The version branches built with MkDocs still load their copies. What follows
+describes the module as the MkDocs build used it.
+
 [`llmstxt_preprocess.py`](../llmstxt_preprocess.py) replaces the `mkdocs-llmstxt` plugin's own
-`autoclean`, which `mkdocs.yml` turns off. It has to be a replacement rather than an addition,
-because the plugin runs `autoclean` **before** the `preprocess` hook and `autoclean` deletes every
-`twemoji` and the tab label bar — so by the time a hook sees the page, the comparison-table icons
-and the tab labels are already gone.
+`autoclean`, which the MkDocs `mkdocs.yml` turned off. It has to be a replacement rather than an
+addition, because the plugin runs `autoclean` **before** the `preprocess` hook and `autoclean`
+deletes every `twemoji` and the tab label bar — so by the time a hook sees the page, the
+comparison-table icons and the tab labels are already gone.
 
 Everything `autoclean` did is reimplemented, and the things below deliberately differ. They serve
 one reader, an assistant that cannot see the page: what it gets must read as the page does, and
