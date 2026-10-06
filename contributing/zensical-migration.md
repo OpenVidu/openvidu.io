@@ -201,6 +201,12 @@ upgrade.
    changed shape, undocumented; anything post-processing it (as `ovweb` does) has to follow.
 9. **`llmstxt` writes `](<url>)` link targets** in `llms.txt` and in every export, where
    mkdocs-llmstxt wrote `](url)`. Valid Markdown, but a change for anything parsing the files.
+10. **The blog plugin panics when a post fails to render.** With a Markdown extension that
+    cannot be imported (the upstream `zensical/zensical` image, which lacks `ovweb`), every
+    page's render raises; the build reports the `ModuleNotFoundError` once, but first the blog
+    plugin panics on its own assertion (`blog.rs:785: ordered posts have selected pages`)
+    instead of reporting the render error for the posts. A Rust panic in a worker thread, not
+    a diagnostic.
 
 ## Checking the next upgrade
 

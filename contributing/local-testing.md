@@ -12,6 +12,10 @@ docker run --name=zensical --rm -it -p 8000:8000 -v ${PWD}:/docs openvidu-io
 
 Then open http://localhost:8000. Notes:
 
+- Use this image, not the upstream `zensical/zensical` alone: the build loads `ovweb`'s Markdown
+  extensions by name, so the upstream image fails with `ModuleNotFoundError: No module named
+  'ovweb'` (and, because the blog posts then fail to render, Zensical's blog plugin panics with
+  `ordered posts have selected pages`).
 - Run from the repo root. When running non-interactively (scripts, agents), drop `-it`.
 - If host port 8000 is taken, map another one, e.g. `-p 9100:8000` — do not stop whatever holds
   it.
