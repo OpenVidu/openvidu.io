@@ -30,10 +30,10 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     !!! info
 
-        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
 
         ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
         ```
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
@@ -48,10 +48,10 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     !!! info
 
-        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
 
         ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
         ```
 
 === "Architecture overview"

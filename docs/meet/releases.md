@@ -41,7 +41,7 @@ OpenVidu Meet 3.9.0 gives you much more control over your meetings. Your applica
     - **Revoked media permissions reach the media server**: revoking a member's media permissions during a meeting did not reach the media server, so the participant kept publishing.
 - **Server and deployment improvements**:
     - **Faster REST API**: requests are validated with precompiled schemas, reducing response times.
-    - **40% smaller Docker image**: the `openvidu/openvidu-meet` image is 41% smaller and installs the exact dependency versions of its lockfile. It no longer contains pnpm, bash or `meet.sh`.
+    - **40% smaller Docker image**: the `openvidu/openvidu-meet` image is 40% smaller and installs the exact dependency versions of its lockfile. It no longer contains pnpm, bash or `meet.sh`.
     - **Higher rate limits**: the rate limits for token issuance, API requests and static assets are raised.
     - **Initial items seeded on every start**: `MEET_INITIAL_ADMIN_USER`, `MEET_INITIAL_API_KEY` and `MEET_INITIAL_WEBHOOK_URL` now create their item on any start while the deployment has none, not only on the first start.
     - **Fixed a connection leak with webhooks**: unanswered webhooks made the number of active connections grow continuously. Every webhook is now answered.

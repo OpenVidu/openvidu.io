@@ -1,7 +1,7 @@
 ---
 title: "OpenVidu 3.9.0 release notes"
 draft: false
-date: 2026-09-29
+date: 2026-09-30
 slug: release-390
 description: "OpenVidu 3.9.0 is out with a Meetings API, participant muting and meeting limits in Meet, plus Nemotron live captions and a sturdier mediasoup."
 categories:
@@ -21,8 +21,6 @@ page_features:
 ---
 
 # OpenVidu 3.9.0 is now available
-
-<!-- POSTER: add poster-light.webp and poster-dark.webp to docs/assets/images/blog/YYYY/MM/release-390/, reference them here as a #only-light/#only-dark pair with { .round-corners } (no loading=lazy), and set "cover_image: poster-light.webp" in the frontmatter. -->
 
 OpenVidu 3.9.0 is a comprehensive collection of improvements, bug fixes, and stability enhancements. It brings a renovated OpenVidu Meet with programmatic control over live meetings, and a better OpenVidu Platform that behaves more predictably in production under network changes, high load and node restarts.
 
@@ -64,10 +62,8 @@ Replace `<your-openvidu-domain>` with the domain of your deployment, `<room-id>`
 
 The same power is now available inside the meeting. The Participants panel shows the microphone, camera and screen share state of everyone in the meeting, and moderators can mute one device of one participant, or turn it off for everyone at once. The affected participant is told that a moderator turned their device off.
 
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-390/mute-participants-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-390/mute-participants-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-390/mute-participants-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-390/mute-participants-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
-
-*Participant video is stock footage.*
+<a class="glightbox" href="/assets/videos/blog/2026/09/release-390/mute-participants-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/mute-participants-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/09/release-390/mute-participants-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/mute-participants-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 !!! note "Existing rooms need the new permission"
     Muting requires the new `participantMute` permission. The `Moderator` role of rooms created from 3.9.0 on has it by default, but rooms and members created before need it granted explicitly. See [Muting participants](https://openvidu.io/3.9/meet/features/meetings/moderation/#muting-participants).
@@ -78,8 +74,8 @@ A single webhook endpoint works fine... until your billing service, your analyti
 
 There are also two new events worth subscribing to: `participantJoined` and `participantLeft`. The second one carries the leave date, the time the participant spent in the meeting and the reason they left. Attendance reports and per-minute billing are now just a webhook away.
 
-![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](/assets/images/blog/YYYY/MM/release-390/webhooks-light.png#only-light){ .round-corners loading=lazy }
-![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](/assets/images/blog/YYYY/MM/release-390/webhooks-dark.png#only-dark){ .round-corners loading=lazy }
+![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](/assets/images/blog/2026/09/release-390/webhooks-light.png#only-light){ .round-corners loading=lazy }
+![Webhook list in the Embedded page of the OpenVidu Meet app, with per-webhook event filters and room scope](/assets/images/blog/2026/09/release-390/webhooks-dark.png#only-dark){ .round-corners loading=lazy }
 
 ### Custom rules and limits per room
 
@@ -90,10 +86,8 @@ Rooms get a set of new settings that shape every meeting held in them. All of th
 - **Automatic recording**: start recording when the first participant joins, when the second one joins, or when a moderator joins. Nobody has to remember to press the button.
 - **Initial microphone and camera state**: have participants join with their microphone or camera off, which is perfect for classes and webinars. Embedded apps can override it per participant.
 
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-390/meeting-ending-soon-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-390/meeting-ending-soon-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-390/meeting-ending-soon-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-390/meeting-ending-soon-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
-
-*Participant video is stock footage.*
+<a class="glightbox" href="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/09/release-390/meeting-ending-soon-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 The details are in [Meeting configuration](https://openvidu.io/3.9/meet/features/meetings/configuration/) and [Recording trigger](https://openvidu.io/3.9/meet/features/recordings/configuration/#recording-trigger).
 
@@ -191,7 +185,7 @@ Release 3.8.0 brought [mediasoup](https://openvidu.io/3.9/docs/self-hosting/prod
 - **Faster High Availability installations**: roughly 50% faster on AWS, Oracle and GCP, and 20% on Azure. Installers also fail fast with a clear error instead of hanging.
 - **Ingresses survive restarts**: Single Node and Elastic deployments now persist Redis data, so active RTMP and WHIP Ingresses are kept across graceful restarts.
 - **Steadier clusters**: rare silent freezes, crash loops and connection leaks in Elastic and High Availability deployments are gone.
-- **Cloud improvements**: [Media Node auto-healing](https://openvidu.io/3.9/docs/self-hosting/elastic/gcp/install/#media-node-auto-healing) in Elastic deployments on GCP, user-assigned managed identities on Azure, and a DigitalOcean scale-in that never deletes a Media Node with active Rooms.
+- **Cloud improvements**: Media Node auto-healing in Elastic deployments on GCP, user-assigned managed identities on Azure, and a DigitalOcean scale-in that never deletes a Media Node with active Rooms.
 
 ### Private by default
 

@@ -1,6 +1,8 @@
 ---
 name: edit-website
 description: Modify the openvidu.io website (this repo) — landing, pricing, docs for OpenVidu Meet and OpenVidu Platform, blog-adjacent pages, templates, navigation, styling. Routes each task to the canonical doc in contributing/. Trigger phrases like "edit the website", "change the landing page", "update the pricing page", "add a docs page", "modify a section of openvidu.io".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Website Editor

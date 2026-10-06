@@ -46,7 +46,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
         ```bash
         git clone https://github.com/OpenVidu/openvidu-oracle.git
-        git -C openvidu-oracle checkout 3.8.0
+        git -C openvidu-oracle checkout 3.9.0
         cd openvidu-oracle/community/singlenode
         ```
 
@@ -54,7 +54,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
         ```bash
         git clone https://github.com/OpenVidu/openvidu-oracle.git
-        git -C openvidu-oracle checkout 3.8.0
+        git -C openvidu-oracle checkout 3.9.0
         cd openvidu-oracle/pro/singlenode
         ```
 
