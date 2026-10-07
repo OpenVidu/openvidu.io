@@ -22,6 +22,8 @@ VERSION_PIN = re.compile(
 LATEST_LINK = re.compile(r"https://openvidu\.io/latest/|\]\(/latest/|(?:href|src)=\"/latest/")
 MORE_MARKER = re.compile(r"<!--\s*more\s*-->")
 MINOR = re.compile(r"\d+\.\d+")
+# The blog plugin's default post_url_format, `{date}/{slug}` with dates as yyyy/MM/dd.
+BLOG_POST_URL = re.compile(r"blog/(\d{4})/(\d{2})/(\d{2})/([^/]+)/?")
 
 SKIP_SCHEMES = ("http://", "https://", "mailto:", "tel:", "data:", "javascript:", "//")
 
@@ -38,6 +40,21 @@ def _md_targets(text: str):
         yield match.start(), match.group(1).strip("<>")
 
 
+def _serves_blog_post(path: str, corpus: Corpus) -> bool:
+    """Whether a post's frontmatter `date.created` and `slug` produce this URL path."""
+    match = BLOG_POST_URL.fullmatch(path)
+    if not match:
+        return False
+    year, month, day, slug = match.groups()
+    return any(
+        isinstance(dates := source.meta.get("date"), dict)
+        and str(dates.get("created", ""))[:10] == f"{year}-{month}-{day}"
+        and source.meta.get("slug") == slug
+        for relpath, source in corpus.docs.items()
+        if relpath.startswith("docs/blog/posts/")
+    )
+
+
 def resolves(target: str, corpus: Corpus, layout: SiteLayout) -> bool:
     """Whether a root-absolute URL path is served by a file in the source tree."""
     path = target.partition("#")[0].partition("?")[0].lstrip("/")
@@ -45,6 +62,8 @@ def resolves(target: str, corpus: Corpus, layout: SiteLayout) -> bool:
         path = path[len("latest/") :]
     if path == "":
         return corpus.is_file("docs/index.md")
+    if _serves_blog_post(path, corpus):
+        return True
     first = path.split("/", 1)[0]
     if first in layout.assets:
         return not path.endswith("/") and corpus.is_file(f"docs/{path}")
