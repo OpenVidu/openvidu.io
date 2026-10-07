@@ -4,7 +4,7 @@ This section compares OpenVidu to other videoconference/streaming solutions, to 
 
 > **Comparing OpenVidu Meet and OpenVidu Platform instead?**
 >
-> This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/3.9/openvidu-meet-vs-openvidu-platform/index.md).
+> This page compares OpenVidu to *other* platforms and tools. If you're deciding between our own **OpenVidu Meet** and **OpenVidu Platform**, see the dedicated [Meet vs Platform comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ## OpenVidu vs LiveKit
 
@@ -27,11 +27,11 @@ What does OpenVidu Community bring over LiveKit Open Source?
 
 With OpenVidu Community you get a handful of features on top of LiveKit Open Source that will help with the development of your application:
 
-- **Egress and Ingress services already integrated with a Redis instance**: LiveKit allows you to export media from a Room (for example recording it) or import media into a Room (for example ingesting a video file), using [Egress](https://openvidu.io/3.9/docs/reference/egress/index.md) and [Ingress](https://openvidu.io/3.9/docs/reference/ingress/index.md) services respectively. These modules are independent of LiveKit Server and must be correctly configured and connected via a shared Redis. When running OpenVidu Community you will have all these services properly integrated, so you can focus on developing your app without worrying about anything else.
-- **S3 compatible storage for Egress recordings**: OpenVidu Community comes with an S3 compatible storage already configured to store [Egress](https://openvidu.io/3.9/docs/reference/egress/index.md) recordings ([Minio](https://www.min.io/) ).
-- **Administration dashboard to monitor your Rooms**: OpenVidu comes with an administration dashboard that allows you to monitor the status of your Rooms. Not only in real time, but also historically: the number of participants, the number of published tracks, Egress and Ingress processes... This is a great tool to have when developing your app, as it can help to spot issues and debugging your application's logic. [See more](https://openvidu.io/3.9/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md).
-- **OpenVidu Meet**: a fully-fledged, ready to use videoconference application. [See more](https://openvidu.io/3.9/meet/index.md).
-- **Powerful and easy to use local development environment**: OpenVidu provides a Docker Compose based deployment designed for development and testing devices on your local network. It comes with automatic certificate management that makes it easy to test mobile devices in your LAN. [See more](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
+- **Egress and Ingress services already integrated with a Redis instance**: LiveKit allows you to export media from a Room (for example recording it) or import media into a Room (for example ingesting a video file), using [Egress](https://openvidu.io/latest/docs/reference/egress/index.md) and [Ingress](https://openvidu.io/latest/docs/reference/ingress/index.md) services respectively. These modules are independent of LiveKit Server and must be correctly configured and connected via a shared Redis. When running OpenVidu Community you will have all these services properly integrated, so you can focus on developing your app without worrying about anything else.
+- **S3 compatible storage for Egress recordings**: OpenVidu Community comes with an S3 compatible storage already configured to store [Egress](https://openvidu.io/latest/docs/reference/egress/index.md) recordings ([Minio](https://www.min.io/) ).
+- **Administration dashboard to monitor your Rooms**: OpenVidu comes with an administration dashboard that allows you to monitor the status of your Rooms. Not only in real time, but also historically: the number of participants, the number of published tracks, Egress and Ingress processes... This is a great tool to have when developing your app, as it can help to spot issues and debugging your application's logic. [See more](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md).
+- **OpenVidu Meet**: a fully-fledged, ready to use videoconference application. [See more](https://openvidu.io/latest/meet/index.md).
+- **Powerful and easy to use local development environment**: OpenVidu provides a Docker Compose based deployment designed for development and testing devices on your local network. It comes with automatic certificate management that makes it easy to test mobile devices in your LAN. [See more](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network).
 
 ### OpenVidu **PRO** vs LiveKit Open Source
 
@@ -46,16 +46,16 @@ LiveKit Cloud is the official SaaS solution for LiveKit. They manage the infrast
 
 Where does OpenVidu Pro stand in relation to LiveKit Cloud? **OpenVidu Pro aims to deliver the same advanced benefits as LiveKit Cloud, but as a self-hosted solution**. We intend to provide a performant, fault-tolerant, scalable and observable cluster that is easy to deploy, configure and administrate in your own infrastructure. For now, OpenVidu Pro brings:
 
-- OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](https://openvidu.io/3.9/docs/self-hosting/production-ready/observability/index.md).
-- We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](https://openvidu.io/3.9/docs/self-hosting/production-ready/scalability/#big-videoconferences-and-massive-live-streams-working-on-it).
+- OpenVidu Pro provides a complete observability stack with Grafana, Loki, Alloy and Mimir, as well as OpenVidu Dashboard to visualize the data. [See more](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/index.md).
+- We are currently working on supporting the same scalability as LiveKit Cloud to support big videoconferences and massive live streams. [See more](https://openvidu.io/latest/docs/self-hosting/production-ready/scalability/#big-videoconferences-and-massive-live-streams-working-on-it).
 
-**[Read the full OpenVidu vs LiveKit comparison](https://openvidu.io/3.9/openvidu-vs-livekit/index.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
+**[Read the full OpenVidu vs LiveKit comparison](https://openvidu.io/openvidu-vs-livekit/index.md)**, including code samples, benchmarks, pricing and an honest look at where LiveKit still has the edge.
 
 ## OpenVidu vs Jitsi
 
 [Jitsi](https://jitsi.org/) is the other major open-source, self-hosted video platform, but it shares no codebase with OpenVidu the way LiveKit does — this is a peer comparison, not a compatibility one. Jitsi's architecture splits signaling (Prosody), conference orchestration (Jicofo) and media routing (Jitsi Videobridge) into separate components, whereas OpenVidu ships as one integrated stack. Both are Apache 2.0 licensed; Jitsi's paid option is 8x8's hosted Jitsi as a Service rather than a self-hosted PRO tier.
 
-**[Read the full OpenVidu vs Jitsi comparison](https://openvidu.io/3.9/openvidu-vs-jitsi/index.md)**, covering recording (Egress vs Jibri), scaling (Elastic/HA vs Octo), SDKs and pricing.
+**[Read the full OpenVidu vs Jitsi comparison](https://openvidu.io/openvidu-vs-jitsi/index.md)**, covering recording (Egress vs Jibri), scaling (Elastic/HA vs Octo), SDKs and pricing.
 
 ## OpenVidu vs SaaS solutions
 
@@ -67,7 +67,7 @@ The main difference between OpenVidu and these services is who owns the infrastr
 - Different sets of SDKs to integrate with your application. Some more complete than others, and maybe some low-code options.
 - A pricing model usually based on one of these two options: minutes-per-participant or total GBs of bandwidth consumed.
 
-Using a SaaS provider is a great option for some use cases, but not all. **OpenVidu is designed to be self-hosted**. This allows you to have full control over your infrastructure and data, taking the most out of your own resources and complying with the most strict regulations. While having the best features provided by SaaS: scalability, fault tolerance, observability. See [Production ready](https://openvidu.io/3.9/docs/self-hosting/production-ready/index.md) for more information.
+Using a SaaS provider is a great option for some use cases, but not all. **OpenVidu is designed to be self-hosted**. This allows you to have full control over your infrastructure and data, taking the most out of your own resources and complying with the most strict regulations. While having the best features provided by SaaS: scalability, fault tolerance, observability. See [Production ready](https://openvidu.io/latest/docs/self-hosting/production-ready/index.md) for more information.
 
 ## OpenVidu vs SFUs
 
@@ -81,18 +81,18 @@ SFUs are generally low-level tools. Using them directly to implement real-time a
 
 [mediasoup](https://mediasoup.org/) is a [WebRTC SFU](#openvidu-vs-sfus). It is a minimalist media server with a super low level API that allows building custom real-time applications. Compared to other SFUs, mediasoup is well known for its outstanding performance.
 
-OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
+OpenVidu uses mediasoup internally to transmit media streams. We have embedded mediasoup as the WebRTC engine right at the core of LiveKit Open Source, which allows OpenVidu to offer the fantastic APIs and SDKs of LiveKit while providing the cutting-edge performance of mediasoup. Learn more about mediasoup integration in section [Performance](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
 
-**[Read the full OpenVidu vs mediasoup comparison](https://openvidu.io/3.9/openvidu-vs-mediasoup/index.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
+**[Read the full OpenVidu vs mediasoup comparison](https://openvidu.io/openvidu-vs-mediasoup/index.md)**, including exactly what mediasoup leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Janus
 
 [Janus](https://janus.conf.meetecho.com/) is a general-purpose, plugin-based [WebRTC SFU](#openvidu-vs-sfus) from Meetecho. Its VideoRoom plugin provides a basic multistream room, but signaling, authentication, managed recording and a REST API are left for the integrating application to build — and it's released under GPL v3, a copyleft license unlike OpenVidu's Apache 2.0.
 
-**[Read the full OpenVidu vs Janus comparison](https://openvidu.io/3.9/openvidu-vs-janus/index.md)**, including exactly what Janus leaves for you to build yourself if you use it directly.
+**[Read the full OpenVidu vs Janus comparison](https://openvidu.io/openvidu-vs-janus/index.md)**, including exactly what Janus leaves for you to build yourself if you use it directly.
 
 ## OpenVidu vs Microsoft Teams, Google Meet, Zoom
 
 All these well-known video conferencing tools are final applications that provide little to no customization at all. They are proprietary, closed-source apps designed to be used as-is, and they are not intended to be integrated into other systems.
 
-OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](https://openvidu.io/3.9/docs/#use-cases) for some examples of what you can build with OpenVidu.
+OpenVidu is inherently different, as it provides a set of APIs and SDKs to integrate real-time video capabilities into your own application. In other words: **with OpenVidu you can easily build your own custom Microsoft Teams, Google Meet or Zoom-like application.** See [Use cases](https://openvidu.io/latest/docs/#use-cases) for some examples of what you can build with OpenVidu.

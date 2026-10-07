@@ -42,7 +42,7 @@ We pointed it at three documentation pages: the [WebComponent reference](https:/
 
 > **Your agent can now find these pages itself**
 >
-> Since October 2026, the [OpenVidu Agent Plugin](https://openvidu.io/blog/2026/10/13/openvidu-agent-plugin/index.md) gives your coding agent the OpenVidu Meet documentation for the version you run, so you no longer need to point it at the pages yourself.
+> Since October 2026, the [OpenVidu Agent Plugin](https://openvidu.io/blog/2026/10/07/openvidu-agent-plugin/index.md) gives your coding agent the OpenVidu Meet documentation for the version you run, so you no longer need to point it at the pages yourself.
 
 The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
 

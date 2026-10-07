@@ -2,7 +2,7 @@
 
 [Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/embedding-options/meet-webcomponent-basic)
 
-This tutorial extends the [Direct Link tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/direct-link/index.md) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
+This tutorial extends the [Direct Link tutorial](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/index.md) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
 At the end of this tutorial, you will have a fully functional simple video-call application with the following features:
 
@@ -15,7 +15,7 @@ At the end of this tutorial, you will have a fully functional simple video-call 
 - Moderators can record the meeting.
 - Moderators may end the meeting at any time, disconnecting all users.
 
-The application uses the [OpenVidu Meet API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md) to create and delete rooms, and the [OpenVidu Meet WebComponent](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md) to embed the video call interface directly into the application.
+The application uses the [OpenVidu Meet API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) to create and delete rooms, and the [OpenVidu Meet WebComponent](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md) to embed the video call interface directly into the application.
 
 ## Running this tutorial
 
@@ -31,7 +31,7 @@ docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.9.0 up -y openvid
 
 > **Info**
 >
-> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.9/meet/deployment/local/index.md) .
+> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md) .
 
 ### 2. Download the tutorial code
 
@@ -65,19 +65,19 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-This tutorial builds upon the [Direct Link tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/direct-link/index.md), replacing external redirect links with an embedded OpenVidu Meet WebComponent. The backend remains identical, so we'll focus on the frontend modifications that enable WebComponent integration.
+This tutorial builds upon the [Direct Link tutorial](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/index.md), replacing external redirect links with an embedded OpenVidu Meet WebComponent. The backend remains identical, so we'll focus on the frontend modifications that enable WebComponent integration.
 
 ______________________________________________________________________
 
 ### Backend
 
-The backend is identical to the [Direct Link tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/direct-link/index.md). It provides the same three REST API endpoints:
+The backend is identical to the [Direct Link tutorial](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/index.md). It provides the same three REST API endpoints:
 
 - **`POST /rooms`**: Create a new room with the given room name.
 - **`GET /rooms`**: Get the list of rooms.
 - **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
 
-For detailed backend documentation, please refer to the [Direct Link tutorial backend section](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/direct-link/#backend).
+For detailed backend documentation, please refer to the [Direct Link tutorial backend section](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/#backend).
 
 ______________________________________________________________________
 
@@ -176,7 +176,7 @@ function accessRoom(roomUrl) {
 1. Show the room screen where the WebComponent will be embedded.
 1. Inject the OpenVidu Meet WebComponent into the meeting container with the specified room URL and a leave redirect URL.
 
-The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen once they close the [End view](https://openvidu.io/3.9/meet/features/meetings/lifecycle/#end-view) after the meeting.
+The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen once they close the [End view](https://openvidu.io/latest/meet/features/meetings/lifecycle/#end-view) after the meeting.
 
 This approach provides a seamless user experience by keeping users within the same application while providing full video conferencing functionality through the embedded WebComponent.
 
@@ -186,7 +186,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 1. **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
 
-1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/3.9/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
+1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/latest/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
 
 1. **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
 
@@ -211,7 +211,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
-If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/3.9/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/latest/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
 
 1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
 
@@ -220,7 +220,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com/meet
    ```
 
-1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
+1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
 
    ```text
    OV_MEET_API_KEY=your-production-api-key
