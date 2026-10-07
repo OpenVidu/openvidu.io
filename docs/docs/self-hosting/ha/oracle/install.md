@@ -12,7 +12,7 @@ description: "Deploy OpenVidu High Availability on Oracle Cloud Infrastructure w
 
 This section describes how to deploy a production-ready OpenVidu High Availability cluster on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
-- An **OCI Network Load Balancer (NLB)** is the public entry point for the cluster. It distributes HTTPS (443), HTTP (80) and RTMP (1935) traffic across the 4 Master Nodes.
+- An **OCI Network Load Balancer (NLB)** is the public entry point for the cluster. It distributes HTTPS (443), HTTP (80) and RTMPS (1945) traffic across the 4 Master Nodes.
 - **OCI Object Storage** (S3-compatible via Customer Secret Keys) is used through two buckets: one for application data and recordings, and another for cluster-wide shared state (including the generated SSH key).
 - **OCI Vault** is used to securely store deployment secrets shared across the cluster.
 - Media Node scalability is managed through an **OCI Function** that handles scale-in actions, while the OCI Instance Pool itself takes care of scale-out based on system load.

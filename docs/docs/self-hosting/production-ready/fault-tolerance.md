@@ -54,6 +54,71 @@ In the event of Master Node failures, the service will be automatically restored
 
 Fault tolerance of Media Nodes in OpenVidu High Availability behaves the same as in [OpenVidu Elastic](#media-nodes).
 
+## Fault tolerance in cloud providers
+
+When OpenVidu Elastic or OpenVidu High Availability is deployed in a cloud provider with the official templates, all of their Media Nodes are replaced automatically when they become unhealthy, keeping the same number of Media Nodes. This applies whether the number of Media Nodes is fixed or managed by autoscaling.
+
+### Detecting an unhealthy Media Node
+
+Every Media Node runs a health watchdog, the `openvidu-media-health` systemd service, that checks the media server of the node every 30 seconds. The watchdog asks the cloud provider to replace the node when:
+
+- The media server does not accept connections for **5 minutes**.
+- The media server answers with errors or timeouts for **10 minutes**. These failures are not counted while the CPU of the node is saturated, because an overloaded media server briefly reports itself as not ready.
+- The installation of the node failed. The watchdog waits **10 minutes** before acting, so the failure can be inspected and a persistent problem does not create new nodes in a loop.
+- The installation of the node has not finished **90 minutes** after it booted.
+
+An unhealthy Media Node does not wait for its Rooms, Egress and Ingress to finish, as a node does during a regular scale-in. They are affected as described in [Media Nodes](#media-nodes), so its Rooms are rebuilt in a healthy Media Node.
+
+### Safeguards
+
+- **No Media Node is replaced while no Master Node is reachable.** A Master Node outage makes every Media Node fail its health check at once, and a new Media Node could not join the cluster either. Once a Master Node is back, the media server gets its full time window to reconnect before the watchdog acts.
+- **Failures are not counted during the first 15 minutes** after OpenVidu starts or restarts on the node.
+- **The watchdog pauses itself while the node is draining** during a regular scale-in.
+
+### How each cloud provider replaces the node
+
+=== ":fontawesome-brands-aws:{.icon .lg-icon .tab-icon} AWS"
+
+    The Media Node is marked as unhealthy in its Auto Scaling Group, which terminates it and launches a new one.
+
+=== ":material-microsoft-azure:{.icon .lg-icon .tab-icon} Azure"
+
+    The Media Node is reimaged in its Virtual Machine Scale Set, so the number of instances never changes.
+
+=== ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
+
+    The Media Node is recreated in its managed instance group with a fresh disk. In addition, the native autohealing of the group (a TCP health check on port 7880) recreates any Media Node VM that stops responding altogether.
+
+=== ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
+
+    - **With autoscaling**: the Media Node is tagged so the autoscaler deletes it and creates a new one.
+    - **With a fixed number of Media Nodes**: the Droplet is rebuilt in place.
+
+=== ":custom-oracle-cloud-infrastructure:{.icon .lg-icon .tab-icon} OCI"
+
+    - **With autoscaling**: the Media Node is terminated and its instance pool launches a new one.
+    - **With a fixed number of Media Nodes**: the node is detached from its instance pool, which launches its replacement, and then terminated.
+
+### Monitoring and pausing the watchdog
+
+To see what the watchdog is doing, run this command in the Media Node:
+
+```bash
+journalctl -u openvidu-media-health
+```
+
+To pause the watchdog, for example during manual maintenance of the node, create this file:
+
+```bash
+sudo touch /etc/openvidu/media-health.disabled
+```
+
+Delete the file to resume it:
+
+```bash
+sudo rm /etc/openvidu/media-health.disabled
+```
+
 ## Recovering Egress from node failures
 
 [Egress](../../reference/egress.md) processes can be affected by the crash of a Master Node or a Media Node. To recover Egress from...
