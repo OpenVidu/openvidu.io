@@ -194,6 +194,51 @@ def test_a_non_release_post_may_not_pin_versions(tmp_path):
     assert finding.severity == "error"
 
 
+def test_a_latest_link_in_a_versioned_page_or_snippet_is_an_error(tmp_path):
+    write(tmp_path, "docs/meet/guide.md", "[x](https://openvidu.io/latest/meet/embed/)")
+    write(tmp_path, "shared/tip.md", '<a href="/latest/docs/">x</a>')
+
+    findings = findings_of(tmp_path, "latest-in-versioned-page")
+    assert [(f.file, f.severity) for f in findings] == [
+        ("docs/meet/guide.md", "error"),
+        ("shared/tip.md", "error"),
+    ]
+
+
+def test_a_root_page_may_link_to_latest(tmp_path):
+    write(tmp_path, "docs/index.md", '<a href="/latest/docs/getting-started/">x</a>')
+
+    assert findings_of(tmp_path, "latest-in-versioned-page") == []
+
+
+RELEASE_FRONTMATTER = "---\ncategories:\n  - Release\n---\n"
+
+
+def test_a_release_post_linking_into_the_docs_without_a_version_is_an_error(tmp_path):
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/09/release-390.md",
+        RELEASE_FRONTMATTER + "[a](/docs/self-hosting/local.md)\n"
+        "[b](https://openvidu.io/latest/meet/)\n"
+        '<a href="/meet/embed/">c</a>\n'
+        "[d](https://openvidu.io/3.9/docs/)\n"
+        "[e](/pricing.md)\n",
+    )
+
+    findings = findings_of(tmp_path, "release-post-unpinned-link")
+    assert [(f.line, f.severity) for f in findings] == [(5, "error"), (6, "error"), (7, "error")]
+
+
+def test_any_other_post_may_link_to_the_docs_without_a_version(tmp_path):
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/09/howto.md",
+        "---\ncategories:\n  - How-to\n---\n[a](/docs/self-hosting/local.md)\n",
+    )
+
+    assert findings_of(tmp_path, "release-post-unpinned-link") == []
+
+
 def test_a_latest_link_on_a_releases_page_is_an_error(tmp_path):
     write(tmp_path, "docs/docs/releases.md", "[x](https://openvidu.io/latest/docs/guide/)")
 

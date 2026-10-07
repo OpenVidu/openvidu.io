@@ -96,6 +96,12 @@ POSTPROCESS_STEPS: tuple[tuple[str, str, str, str], ...] = (
         "so the version selector resolves a moved page through its stub instead of falling "
         "back to the version root",
     ),
+    (
+        "pin-superseded-exports",
+        "latest",
+        "Pin the other versions' exports to their own version",
+        "the version that held `latest` linked its exports to /latest/, which now leads here",
+    ),
     ("sync-releases", "always", "Splice the newest release notes across versions", ""),
     (
         "commit",

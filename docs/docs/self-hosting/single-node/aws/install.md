@@ -30,10 +30,10 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     !!! info
 
-        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
 
         ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
         ```
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
@@ -48,10 +48,10 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     !!! info
 
-        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.8.0`, use the following URL:
+        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
 
         ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.8.0/aws/cf-openvidu-singlenode.yaml
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
         ```
 
 === "Architecture overview"
@@ -78,7 +78,7 @@ If you are deploying the PRO edition, you need to specify some additional proper
 
     Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
 
-    For the **RTCEngine** parameter, you can choose between **Pion** (the default engine used by LiveKit) and **Mediasoup** (with a boost in performance). Learn more about the differences [here](../../production-ready/performance.md).
+    For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
 
 --8<-- "self-hosting/aws/meet.md"
 

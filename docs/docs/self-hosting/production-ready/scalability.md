@@ -273,7 +273,7 @@ When deploying in a supported **cloud provider** using our official templates, O
 
     | Input Value | Default Value | Description |
     |---|---|---|
-    | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
+    | initialNumberOfMediaNodes | 1 | Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes > 0. |
     | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
     | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
     | scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |

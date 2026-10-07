@@ -23,7 +23,7 @@ Add the `<openvidu-meet>` tag to your HTML. This will embed OpenVidu Meet interf
 <openvidu-meet room-url="{{ my-room-url }}"></openvidu-meet>
 ```
 
-The only required attribute is **`room-url`**, which determines the room to access. Different instances of the web component using the same room URL will join the same meeting.
+One of **`room-url`** or **`recording-url`** is required: the former determines the room to access, the latter the recording to display. Different instances of the web component using the same room URL will join the same meeting.
 
 !!! info "A room URL is a room access link"
 	The **room URL** is simply a [room access link](../../features/rooms/access.md): the URL an individual opens to access a room. The role and identity a participant gets depend on **which** access link you use. This guide and most examples use the **anonymous** moderator/speaker links for simplicity, but a room also has **user** and **identified-guest** links — see [Room Access](../../features/rooms/access.md) for the full picture.
@@ -48,9 +48,14 @@ Example:
 <openvidu-meet
 	room-url="{{ my-room-url }}"
 	participant-name="John Doe"
+	participant-external-id="user-42"
+	initial-video-active="false"
 	leave-redirect-url="https://meeting.end.url/"
 ></openvidu-meet>
 ```
+
+!!! info "Identify your own users"
+	`participant-external-id` and `participant-metadata` are never interpreted by OpenVidu Meet: they travel untouched as the `externalId` and `metadata` properties of every participant payload, in the `participantJoined` / `participantLeft` events and webhooks and in the [Meetings REST API](rest-api.md), so your backend can correlate a participant with one of its own users.
 
 
 
@@ -58,7 +63,7 @@ Example:
 
 The OpenVidu Meet component exposes a set of commands that allow you to control the room from your application's logic.
 
-<div class="nowrap-first-column" markdown>
+<div class="nowrap-third-column" markdown>
 
 --8<-- "meet/webcomponent/commands.md"
 
@@ -68,7 +73,14 @@ Invoke commands using JavaScript:
 
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
-openviduMeet.leaveRoom();
+openviduMeet.meetingLeave();
+```
+
+Commands that take parameters receive them as arguments, in the order listed in the table:
+
+```javascript
+openviduMeet.participantMute('participant-identity', { audioActive: false });
+openviduMeet.mediaToggleVideo(false);
 ```
 
 
@@ -89,7 +101,7 @@ Listen to events using JavaScript event listeners:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.addEventListener('joined', (event) => {
+openviduMeet.addEventListener('meetingJoined', (event) => {
 	console.log('The local participant has joined the meeting', event.detail);
 });
 ```
@@ -99,12 +111,16 @@ You can also use the API `on` | `once` | `off`:
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.on('joined', (event) => {
+openviduMeet.on('meetingJoined', (event) => {
 	console.log('The local participant has joined the meeting', event);
 });
 
-openviduMeet.once('left', (event) => {
-	console.log('The local participant has left the meeting', event);
+openviduMeet.on('participantJoined', (event) => {
+	console.log(`${event.participant.participantName} has joined the meeting`, event);
+});
+
+openviduMeet.once('meetingLeft', (event) => {
+	console.log('The local participant has left the meeting', event.reason);
 });
 ```
 
@@ -113,5 +129,15 @@ openviduMeet.once('left', (event) => {
 
 	- With the native **`addEventListener`** method, the callback receives a standard [`CustomEvent` :fontawesome-solid-external-link:{.external-link-icon}](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent){:target="_blank"}, so the payload is available in its **`detail`** property (e.g. `event.detail`).
 	- With the **`on`** | **`once`** | **`off`** API, the callback receives the payload **directly** as its argument (e.g. `event`), without needing to access any `detail` property.
+
+When the participant asks to close OpenVidu Meet, the component emits `embeddedCloseRequested`: that is the moment to remove it or show one of your own screens. Leaving the meeting does not emit it: `meetingLeft` fires and OpenVidu Meet shows its [End view](../../features/meetings/lifecycle.md#end-view), and `embeddedCloseRequested` follows when the participant closes that view. The meeting may still be running for everyone else.
+
+```javascript
+const openviduMeet = document.querySelector('openvidu-meet');
+
+openviduMeet.once('embeddedCloseRequested', () => {
+	openviduMeet.remove();
+});
+```
 
 

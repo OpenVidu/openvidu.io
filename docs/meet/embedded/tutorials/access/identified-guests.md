@@ -5,7 +5,7 @@ description: "Give each guest a fixed name and a personal access link to an Open
 
 # Identified Guests Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/access/meet-identified-guests){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/access/meet-identified-guests){ .md-button target="_blank" }
 
 This tutorial extends the [Anonymous Access tutorial](./anonymous-access.md) to show how to add **identified guests** to an OpenVidu Meet room.
 
@@ -33,7 +33,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to man
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.9.0
 ```
 
 ### 3. Run the application
@@ -92,7 +92,7 @@ Besides the usual room endpoints (`POST /rooms`, `GET /rooms`, `DELETE /rooms/:r
 
 The `POST /rooms/:roomId/members` endpoint adds an identified guest to a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/src/index.js#L74-L97' target='_blank'>index.js</a>" linenums="74"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/src/index.js#L74-L97' target='_blank'>index.js</a>" linenums="74"
 // Add an identified guest to a room
 app.post('/rooms/:roomId/members', async (req, res) => {
 	const { roomId } = req.params; // (1)!
@@ -136,7 +136,7 @@ This endpoint adds the identified guest by sending a `POST` request to the `room
 
 The `GET /rooms/:roomId/members` endpoint lists the identified guests of a room:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/src/index.js#L99-L110' target='_blank'>index.js</a>" linenums="99"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/src/index.js#L99-L110' target='_blank'>index.js</a>" linenums="99"
 // List the identified guests of a room
 app.get('/rooms/:roomId/members', async (req, res) => {
 	const { roomId } = req.params;
@@ -159,7 +159,7 @@ app.get('/rooms/:roomId/members', async (req, res) => {
 
 The `DELETE /rooms/:roomId/members/:memberId` endpoint removes a member, revoking their unique link:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/src/index.js#L112-L124' target='_blank'>index.js</a>" linenums="112"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/src/index.js#L112-L124' target='_blank'>index.js</a>" linenums="112"
 // Remove a member from a room
 app.delete('/rooms/:roomId/members/:memberId', async (req, res) => {
 	const { roomId, memberId } = req.params;
@@ -189,7 +189,7 @@ The home view keeps the shared anonymous access (access as moderator or speaker)
 
 The `getRoomListItemTemplate()` function renders each room with the inherited anonymous access buttons plus a new **Members** button:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/public/js/app.js#L54-L96' target='_blank'>app.js</a>" linenums="54"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/public/js/app.js#L54-L96' target='_blank'>app.js</a>" linenums="54"
 function getRoomListItemTemplate(room) {
 	return `
         <li class="ov-list-item">
@@ -243,7 +243,7 @@ The **Moderator** and **Speaker** buttons use the room's shared anonymous links 
 
 The `getMemberListItemTemplate()` function builds each member item, showing the name, the base role, the unique access link, and buttons to copy the link, access the room and remove the member:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/public/js/app.js#L210-L253' target='_blank'>app.js</a>" linenums="210"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/public/js/app.js#L210-L253' target='_blank'>app.js</a>" linenums="210"
 function getMemberListItemTemplate(member) {
 	// In this tutorial every member is an identified guest, so each one has a unique
 	// access link and buttons to copy it, access the room through it and remove the member.
@@ -298,7 +298,7 @@ Each item displays the member's fixed `name`, a badge with its `baseRole`, and i
 
 When the "Add guest" form is submitted, the `addGuest()` function creates the identified guest with the provided name and role:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/public/js/app.js#L255-L287' target='_blank'>app.js</a>" linenums="255"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/public/js/app.js#L255-L287' target='_blank'>app.js</a>" linenums="255"
 async function addGuest(e) {
 	// Prevent the default form submission
 	e.preventDefault();
@@ -344,7 +344,7 @@ async function addGuest(e) {
 
 The `copyAccessUrl()` function copies the member's unique link to the clipboard and briefly shows a confirmation:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/public/js/app.js#L301-L319' target='_blank'>app.js</a>" linenums="301"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/public/js/app.js#L301-L319' target='_blank'>app.js</a>" linenums="301"
 async function copyAccessUrl(memberId, button) {
 	const member = members.get(memberId);
 	if (!member) {
@@ -375,9 +375,9 @@ async function copyAccessUrl(memberId, button) {
 
 The `accessRoom()` function embeds the OpenVidu Meet WebComponent for a given room URL. It is shared by the anonymous access buttons and the per-guest access button:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/access/meet-identified-guests/public/js/app.js#L323-L355' target='_blank'>app.js</a>" linenums="323"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/access/meet-identified-guests/public/js/app.js#L323-L355' target='_blank'>app.js</a>" linenums="323"
 // Embed the OpenVidu Meet component for the given room URL.
-// 'returnViewId' is the view to show again when the meeting is closed
+// 'returnViewId' is the view to show again when the participant asks to close OpenVidu Meet
 // (the home screen for anonymous access, the members screen for an identified guest).
 function accessRoom(roomUrl, returnViewId) {
 	// Hide the home and members screens and show the room screen
@@ -397,9 +397,9 @@ function accessRoom(roomUrl, returnViewId) {
         </openvidu-meet>
     `; // (1)!
 
-	// Add event listener for when the OpenVidu Meet component is closed
+	// Add event listener for when the participant asks to close OpenVidu Meet
 	const meet = document.querySelector('openvidu-meet');
-	meet.once('closed', () => {
+	meet.once('embeddedCloseRequested', () => {
 		// (2)!
 		console.log('OpenVidu Meet component closed');
 
@@ -413,7 +413,7 @@ function accessRoom(roomUrl, returnViewId) {
 ```
 
 1. Inject the OpenVidu Meet WebComponent with the `room-url` attribute set to the given URL. For an identified guest this is their unique `accessUrl`, which already carries the member's secret, so the participant enters the meeting directly with the fixed name and no login.
-2. Add a listener for the `closed` event so that, when the component is closed, the meeting is cleared and the previous view is shown again (`returnViewId` is `#home` for anonymous access or `#members` for an identified guest).
+2. Add a listener for the `embeddedCloseRequested` event so that, when the participant asks to close OpenVidu Meet, the component is removed and the previous view is shown again (`returnViewId` is `#home` for anonymous access or `#members` for an identified guest).
 
 !!! info "Embedding vs. sharing the link"
 

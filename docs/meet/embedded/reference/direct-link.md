@@ -27,7 +27,7 @@ When someone clicks the link, they'll be redirected to the OpenVidu Meet room in
 ### Attributes
 
 !!! info
-	Direct links accept the same **attributes** as the OpenVidu Meet Web Component. See [Web Component Attributes](./webcomponent.md#attributes) for the full list and descriptions.
+	Direct links accept the same **attributes** as the OpenVidu Meet Web Component, except `room-url` and `recording-url`: the link's `href` plays that role instead. See [Web Component Attributes](./webcomponent.md#attributes) for the full list and descriptions.
 
 Customize the meeting by passing attributes as query parameters in the room URL:
 

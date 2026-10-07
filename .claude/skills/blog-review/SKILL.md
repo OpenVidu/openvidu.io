@@ -1,6 +1,8 @@
 ---
 name: blog-review
 description: Review an OpenVidu blog draft (full post or a section) for readability, SEO, technical accuracy, CTA strength, structure, formatting, and repo-specific validity (frontmatter, categories, authors, the `<!-- more -->` tag, links, image assets). Returns a scorecard, findings by severity, and prioritized edits. Use when a draft exists and needs auditing before publish. Trigger phrases like "review this post", "is this blog ready to publish", "audit the draft", "check my article".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Content Reviewer
@@ -26,9 +28,13 @@ the link forms, the excerpt rule, and the asset mirroring; trust its errors). Se
 
 - **File, naming & assets agree** (per the naming invariant) → any mismatch is High severity.
   Do NOT flag the `YYYY/MM` placeholder folders or the temporary date on a **draft** — that is
-  the documented draft mechanism. DO flag: a published post whose `date` doesn't match its
-  folders, a draft mixing placeholder and real year/month paths, a date-prefixed filename (old
-  convention), or a literal `date: YYYY-MM-DD` string (aborts the build).
+  the documented draft mechanism. DO flag: a published post whose `date.created` doesn't match
+  its folders, a draft mixing placeholder and real year/month paths, a date-prefixed filename
+  (old convention), or a literal `created: YYYY-MM-DD` string (aborts the build).
+- **Edits to a published post** (the diff changes what a post already on `main` says) →
+  `date.updated` must be set to the day the change merges (conventions' *Editing a published
+  post*); missing or stale → High. Frontmatter-only changes (`description`, `tags`…) and new
+  posts carry no new `updated`.
 - **Frontmatter complete** (all keys of the template). `title` and `description` missing →
   High (build failure). `cover_image` recommended: raster (not svg) and actually present in the
   post's asset folder — flag a missing or broken value.

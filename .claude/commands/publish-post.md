@@ -9,7 +9,7 @@ transition defined in `.claude/skills/blog-write/references/conventions.md`.
    it is not there, stop and tell the user — the post may already be published or the slug
    wrong.
 2. Take today's date as the publish date (`<year>`, zero-padded `<month>`).
-3. Set the frontmatter `date:` to the publish date.
+3. Set the frontmatter `date.created` to the publish date. A new post carries no `date.updated`.
 4. In the post body, string-replace every `YYYY/MM/` with `<year>/<month>/` — this rewrites the
    asset references and nothing else, by design.
 5. `git mv docs/blog/posts/YYYY/MM/<slug>.md docs/blog/posts/<year>/<month>/<slug>.md` and

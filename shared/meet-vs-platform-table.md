@@ -1,10 +1,12 @@
 |                       | ![OpenVidu Meet](/assets/images/logos/meet_whitefont_transback.png#only-dark){ .compare-table-logo .skip-gallery loading=lazy } ![OpenVidu Meet](/assets/images/logos/meet_greyfont_transback.png#only-light){ .compare-table-logo .skip-gallery loading=lazy }    | ![OpenVidu Platform](/assets/images/logos/platform_whitefont_transback.png#only-dark){ .compare-table-logo .skip-gallery loading=lazy } ![OpenVidu Platform](/assets/images/logos/platform_greyfont_transback.png#only-light){ .compare-table-logo .skip-gallery loading=lazy } |
 | ------------------------ | ---------------- | ----------------- |
 | Self-hosted              | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
-| Cloud deployment templates | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
-| HQ real-time video | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| Cloud templates for AWS, Azure, GCP, DO, OCI | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| HQ real-time video and crisp audio | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| Recording        | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Performant, Scalable, Fault-Tolerant & Observable | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Tutorials available      | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
+| Agent Plugin for AI-assisted development | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Customer support         | :material-check:{ .compare-table-icon-yes } | :material-check:{ .compare-table-icon-yes }  |
 | Ready-to-use application | :material-check:{ .compare-table-icon-yes } | :material-close:{ .compare-table-icon-no } :material-information-outline:{ title="OpenVidu Platform offers a collection of SDKs to build your own custom application. Use OpenVidu Meet for a polished, ready-to-use videoconferencing solution" }  |
 | No-code & Low-code options available | :material-check:{ .compare-table-icon-yes } | :material-close:{ .compare-table-icon-no } :material-information-outline:{ title="OpenVidu Platform offers powerful SDKs and APIs for custom developments. OpenVidu Meet offers embeddable options to integrate its great UI right into your application" }  |

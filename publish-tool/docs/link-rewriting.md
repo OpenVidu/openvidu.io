@@ -23,10 +23,13 @@ And the same rules again for the Markdown exports, whose links are absolute rath
 
 | Reference | mike writes | The publish makes it |
 | --- | --- | --- |
-| Versioned export → versioned page      | `…/3.9/docs/…`    | `…/3.9/docs/…` (kept, as above) |
+| Versioned export → versioned page, version `latest` points at | `…/3.9/docs/…` | `…/latest/docs/…` |
+| Versioned export → versioned page, any other version | `…/3.8/docs/…` | `…/3.8/docs/…` (kept; pinned back when superseded) |
+| Releases export → versioned page       | `…/3.9/docs/…`    | `…/3.9/docs/…` (kept, always)   |
 | Versioned export → non-versioned page  | `…/3.9/pricing/`  | `…/pricing/`                    |
 | Versioned export → home (`index.md`)   | `…/3.9/index.md`  | `…/index.md`                    |
 | Promoted export → versioned page       | `…/3.9/docs/…`    | `…/latest/docs/…`               |
+| Release post export → versioned page   | `…/3.9/docs/…`    | `…/3.9/docs/…` (kept)           |
 | Promoted export → non-versioned page   | `…/3.9/pricing/`  | `…/pricing/`                    |
 | Root `llms.txt`                        | as promoted       | as promoted                     |
 | `/X.Y/llms.txt`                        | every page of the build | the pages under `/X.Y/` only, pinned to it |
@@ -64,9 +67,8 @@ against the build's `site_url` — which mike makes versioned. So an export come
 with every internal link pinned to the version that produced it, and the HTML patterns cannot
 reach any of them, because they match `href="…"` and Markdown has no `href`.
 
-Which rule applies depends on where the export is served from, exactly as it does for HTML — and
-so the version-vs-`latest` asymmetry is the same one the two search indexes have (see
-[sitemaps-and-search.md](sitemaps-and-search.md)), for the same reason.
+Which rule applies depends on where the export is served from, as it does for HTML, with one
+difference: the exports of the version `latest` points at link into it through `/latest/`.
 
 There is deliberately **no `llms-full.txt`**. The plugin can concatenate every export into one
 file, and once `sections` covered every page that reached 2.8 MB — roughly 700k tokens, which
@@ -88,10 +90,34 @@ its target — and both exist because the plugin is inconsistent in ways only th
   shell like `/account/` would export as a bare heading. The repair reads the real set of exports
   off the tree, so it needs no list to keep in step.
 
-And one deliberate difference from the HTML:
+And one place where the HTML's shield has to be applied per page:
 
-- **A promoted export does not shield an author's pin to the version being published.** The HTML
-  does (see [sitemaps-and-search.md](sitemaps-and-search.md)), but in Markdown a hand-written pin
-  and the plugin's absolutised link are the same bytes, and the plugin wrote almost all of them. A
-  pin to a *different* version — the form a deliberately archival link takes, as when release
-  notes link back to the release before — is untouched either way.
+- **A Release post's export keeps its pins.** The HTML of a promoted page shields an author's
+  pin to the version being published (see [sitemaps-and-search.md](sitemaps-and-search.md)), but
+  in Markdown a hand-written pin and the plugin's absolutised link are the same bytes, so no rule
+  can tell them apart link by link. Release posts are the one promoted page that pins versions on
+  purpose, and the only one `ovweb lint` lets pin them (`release-post-unpinned-link` requires it),
+  so the publish reads them off the blog's own `blog/category/release/` listing and leaves their
+  exports' links into versioned documentation pinned. Every other promoted export points them at
+  `/latest/`. A pin to a *different* version is untouched either way. `ovweb verify` reports a
+  Release post linking through `/latest/` (`release-post-latest-link`).
+
+## The newest version's exports follow `latest`
+
+`latest` is a symlink to the newest version's folder, so `/latest/docs/x/index.md` and
+`/3.9/docs/x/index.md` are one file, and the root `llms.txt` hands assistants the `/latest/` URL.
+Pinned, its links were URLs assistants kept citing after the next release: 1,629 of them on 172 of
+the 213 exports on 2026-09-16. So for the version `latest` points at, `rewrite-versioned` points
+the exports' links into that version at `/latest/`. Two files stay pinned: the version's own
+`llms.txt`, which the docs MCP server indexes the version from, and the releases exports, which
+pin on purpose.
+
+The same bytes answer at `/3.9/`, so those links are right only while 3.9 holds the alias. A
+publish that moves it runs `pin-superseded-exports`, which points every other version's exports
+back at their own version: each folder ends as a `past` publish of it would leave it. That is exact
+because no versioned page or snippet links to `latest` by hand (`ovweb lint`,
+`latest-in-versioned-page`). `ovweb verify` reports either half out of step
+(`export-pins-latest-version`, `export-links-latest`).
+
+The docs MCP server pins every `/latest/` link in a version's pages to that version as it indexes
+them, because it reads the version off a URL: what it serves is unchanged.

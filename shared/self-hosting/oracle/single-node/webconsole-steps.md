@@ -60,6 +60,9 @@ OpenVidu and WebRTC require specific inbound rules on both the instance network 
 
 The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must be included in the security list rules.
 
+!!! info
+    Port `9000` is MinIO's port. This installation runs MinIO as the S3 storage service for recordings, so make sure to open it: you will need it to access the MinIO console (for example, to browse your recordings).
+
 1. From the instance _"Details"_ page, click the _"Virtual cloud network"_ resource.
 
     ![VCN location](/assets/images/platform/self-hosting/single-node/oracle/install-tutorial/vcn-location.png){ .round-corners loading=lazy }
@@ -136,6 +139,13 @@ The [minimum inbound ports to allow](../on-premises/install.md#port-rules) must 
 
     firewall-cmd --add-port=50000-60000/udp
     firewall-cmd --permanent --add-port=50000-60000/udp
+    ```
+
+    PRO only, optional: to allow WebRTC media over TCP with the Mediasoup engine:
+
+    ```bash
+    firewall-cmd --add-port=50000-60000/tcp
+    firewall-cmd --permanent --add-port=50000-60000/tcp
     ```
 
 5. Apply the rules and verify they are correctly configured:

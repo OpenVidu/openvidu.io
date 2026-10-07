@@ -201,7 +201,9 @@ def _is_release_post(source: Source) -> bool:
 
 
 def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
-    """Version-pinned links live only on the releases pages and in Release blog posts."""
+    """Version-pinned links live only on the releases pages and in Release blog posts, no
+    versioned page or snippet links to `latest` by hand, and a Release post's links into the
+    documentation are pinned."""
     findings = []
     releases = _release_files(layout)
     for collection in (corpus.docs, corpus.snippets):
@@ -220,6 +222,48 @@ def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
                         "pin versions only on the releases pages and in Release blog posts",
                     )
                 )
+
+    # Nor does a versioned page reach `latest` by hand: the publish points the newest version's
+    # exports at /latest/ and pins them back when it is superseded, rewriting every such link.
+    sections = tuple(f"docs/{section}/" for section in layout.versioned_pages)
+    versioned = [
+        source
+        for source in corpus.docs.values()
+        if source.path.startswith(sections) and source.path not in releases
+    ]
+    for source in (*versioned, *corpus.snippets.values()):
+        for match in LATEST_LINK.finditer(source.visible):
+            findings.append(
+                Finding(
+                    "latest-in-versioned-page",
+                    ERROR,
+                    source.path,
+                    source.line_of(match.start()),
+                    "versioned page links to `latest` by hand",
+                    "link relatively inside the version; the publish decides where /latest/ goes",
+                )
+            )
+
+    # And a Release post reaches the documentation pinned to the version it announces: its HTML
+    # keeps those pins, and so does its Markdown export, where the publish keeps them whole.
+    sections_pattern = "|".join(re.escape(section) for section in layout.versioned_pages)
+    unpinned = re.compile(
+        rf"(?:\]\(|(?:href|src)=\")(?:https://openvidu\.io)?/(?:latest/)?(?:{sections_pattern})/"
+    )
+    for source in corpus.docs.values():
+        if not _is_release_post(source):
+            continue
+        for match in unpinned.finditer(source.visible):
+            findings.append(
+                Finding(
+                    "release-post-unpinned-link",
+                    ERROR,
+                    source.path,
+                    source.line_of(match.start()),
+                    "Release post links into the documentation without pinning a version",
+                    "write https://openvidu.io/X.Y/docs/… with the version the post announces",
+                )
+            )
 
     # The inverse rule: the releases pages must never point at `latest` — the publish fails on it.
     for path in releases:

@@ -1,6 +1,8 @@
 ---
 name: edit-website
 description: Modify the openvidu.io website (this repo) — landing, pricing, docs for OpenVidu Meet and OpenVidu Platform, blog-adjacent pages, templates, navigation, styling. Routes each task to the canonical doc in contributing/. Trigger phrases like "edit the website", "change the landing page", "update the pricing page", "add a docs page", "modify a section of openvidu.io".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Website Editor
@@ -23,7 +25,7 @@ versions — details in [`contributing/versioning.md`](../../../contributing/ver
 | A new page, snippet or asset (placement, frontmatter, nav, llmstxt, layout) | [`contributing/authoring.md`](../../../contributing/authoring.md) + [`shared/README.md`](../../../shared/README.md) |
 | HTML blocks, `page_features:`, theme overrides/partials, JSON-LD frontmatter, light/dark images | [`contributing/page-composition.md`](../../../contributing/page-composition.md) |
 | URLs, versions, redirects, the releases pages | [`contributing/versioning.md`](../../../contributing/versioning.md) (+ [`publish-tool/README.md`](../../../publish-tool/README.md)) |
-| Blog posts | The `blog-plan`/`blog-write`/`blog-review` skills, not this one |
+| Blog posts | The `blog-plan`/`blog-write`/`blog-review` skills, not this one. A change to what a published post says sets its `date.updated` |
 
 ## The facts that bite most often
 

@@ -1,7 +1,8 @@
 ---
 title: "TURN in production WebRTC: resilience and security"
 draft: false
-date: 2026-06-09
+date:
+  created: 2026-06-09
 slug: turn-key-considerations
 description: "Why TURN is what separates a WebRTC demo from a production deployment: connectivity resilience and security behind NATs, firewalls and mobile gateways."
 cover_image: vsc.png

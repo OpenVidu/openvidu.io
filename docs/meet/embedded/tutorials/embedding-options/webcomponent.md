@@ -5,7 +5,7 @@ description: "Embed the OpenVidu Meet Web Component in a video conferencing app,
 
 # WebComponent Tutorial
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.8.0/embedding-options/meet-webcomponent-basic){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/embedding-options/meet-webcomponent-basic){ .md-button target="_blank" }
 
 This tutorial extends the [Direct Link tutorial](direct-link.md) by integrating the **OpenVidu Meet WebComponent** directly into your application instead of using external links. It is built using **Node.js and Express** for the backend and plain **HTML/CSS/JavaScript** for the frontend.
 
@@ -31,7 +31,7 @@ The application uses the [OpenVidu Meet API](../../reference/rest-api.md) to cre
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.8.0
+git clone https://github.com/OpenVidu/openvidu-meet-tutorials.git -b 3.9.0
 ```
 
 ### 3. Run the application
@@ -97,7 +97,7 @@ The main changes in the frontend involve replacing direct links with embedded We
 
 To use the OpenVidu Meet WebComponent in your application, you need to include it in your HTML file by adding a script tag to the end of the `<body>` section:
 
-```html title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-basic/public/index.html#L80-L81' target='_blank'>index.html</a>" linenums="80"
+```html title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/embedding-options/meet-webcomponent-basic/public/index.html#L80-L81' target='_blank'>index.html</a>" linenums="80"
 		<!-- OpenVidu Meet WebComponent bundle -->
 		<script src="http://localhost:9080/meet/v1/openvidu-meet.js"></script>
 ```
@@ -108,7 +108,7 @@ To use the OpenVidu Meet WebComponent in your application, you need to include i
 
 The room list template has been modified to use buttons instead of direct links, enabling WebComponent integration:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L50-L84' target='_blank'>app.js</a>" linenums="50" hl_lines="6-23"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L50-L84' target='_blank'>app.js</a>" linenums="50" hl_lines="6-23"
 function getRoomListItemTemplate(room) {
 	return `
         <li class="ov-list-item">
@@ -154,7 +154,7 @@ The key difference from the Direct Link tutorial is that instead of using anchor
 
 When the user clicks the `Moderator` or `Speaker` button, the `accessRoom()` function is called, which handles embedding the OpenVidu Meet WebComponent:
 
-```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.8.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L131-L147' target='_blank'>app.js</a>" linenums="131"
+```javascript title="<a href='https://github.com/OpenVidu/openvidu-meet-tutorials/blob/3.9.0/embedding-options/meet-webcomponent-basic/public/js/app.js#L131-L147' target='_blank'>app.js</a>" linenums="131"
 function accessRoom(roomUrl) {
 	// Hide the home screen and show the room screen
 	const homeScreen = document.querySelector('#home');
@@ -178,7 +178,7 @@ function accessRoom(roomUrl) {
 2. Show the room screen where the WebComponent will be embedded.
 3. Inject the OpenVidu Meet WebComponent into the meeting container with the specified room URL and a leave redirect URL.
 
-The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen when they leave the meeting.
+The `accessRoom()` function hides the home screen and shows the room screen to provide a dedicated space for the video meeting. Then, it dynamically creates and injects the `<openvidu-meet>` WebComponent into the meeting container, setting the `room-url` attribute with the URL provided by the OpenVidu Meet API and configuring the `leave-redirect-url` attribute to return participants to the home screen once they close the [End view](../../../features/meetings/lifecycle.md#end-view) after the meeting.
 
 This approach provides a seamless user experience by keeping users within the same application while providing full video conferencing functionality through the embedded WebComponent.
 

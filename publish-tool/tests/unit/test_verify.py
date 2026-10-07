@@ -60,6 +60,24 @@ def test_reports_a_root_file_that_pins_the_current_version(published, config, na
     assert findings_by_check(published, config)["root-export-version-pin"] == [name]
 
 
+RELEASE_POST = "blog/2026/09/30/release-390/index.md"
+
+
+def test_a_release_post_may_pin_the_current_version(published, config):
+    assert f"https://openvidu.io/{VERSION}/docs/" in (published / RELEASE_POST).read_text()
+
+    assert "root-export-version-pin" not in findings_by_check(published, config)
+
+
+def test_reports_a_release_post_linking_through_latest(published, config):
+    """What the promoted rewrite does to a post it does not know is a Release post."""
+    (published / RELEASE_POST).write_text(
+        "[docs](https://openvidu.io/latest/docs/index.md)\n", encoding="utf-8"
+    )
+
+    assert findings_by_check(published, config)["release-post-latest-link"] == [RELEASE_POST]
+
+
 def test_reports_a_version_llms_entry_outside_the_version(published, config):
     """A root page or another version in a version's own index is a URL that never exists."""
     path = published / VERSION / "llms.txt"
@@ -144,13 +162,50 @@ def test_reports_a_versioned_export_linking_to_a_root_page_under_the_version(pub
     assert grouped["export-root-page-link"] == [f"{VERSION}/docs/index.md"]
 
 
-def test_a_versioned_export_may_keep_its_own_version_for_versioned_pages(published, config):
+def test_a_link_into_the_version_is_not_a_root_page_link(published, config):
     (published / VERSION / "docs" / "index.md").write_text(
         f"[self-hosting](https://openvidu.io/{VERSION}/docs/self-hosting/index.md)\n",
         encoding="utf-8",
     )
 
     assert "export-root-page-link" not in findings_by_check(published, config)
+
+
+def test_reports_a_newest_export_pinned_to_its_version(published, config):
+    """It also answers at /latest/, the URL assistants get, and outlives the next release."""
+    for page in ("docs", "meet"):
+        (published / VERSION / page / "index.md").write_text(
+            f"[x](https://openvidu.io/{VERSION}/{page}/index.md)\n", encoding="utf-8"
+        )
+
+    assert findings_by_check(published, config)["export-pins-latest-version"] == [
+        f"{VERSION}/docs/index.md",
+        f"{VERSION}/meet/index.md",
+    ]
+
+
+def test_a_newest_releases_export_may_pin_its_version(published, config):
+    (published / VERSION / "docs" / "releases" / "index.md").write_text(
+        f"[{VERSION}.0](https://openvidu.io/{VERSION}/docs/index.md)\n", encoding="utf-8"
+    )
+
+    assert "export-pins-latest-version" not in findings_by_check(published, config)
+
+
+def test_reports_an_older_export_still_linking_through_latest(published, config):
+    """What an interrupted `new` publish would leave: /latest/ now leads to another version."""
+    (published / OLD_VERSION / "docs").mkdir(parents=True)
+    (published / OLD_VERSION / "docs" / "index.md").write_text(
+        "[x](https://openvidu.io/latest/docs/index.md)\n", encoding="utf-8"
+    )
+    (published / "versions.json").write_text(
+        json.dumps([{"version": VERSION, "aliases": ["latest"]}, {"version": OLD_VERSION}]),
+        encoding="utf-8",
+    )
+
+    assert findings_by_check(published, config)["export-links-latest"] == [
+        f"{OLD_VERSION}/docs/index.md"
+    ]
 
 
 # -- the version folders themselves ------------------------------------------------------

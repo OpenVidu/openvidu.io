@@ -1,6 +1,8 @@
 ---
 name: blog-plan
 description: Plan and outline an OpenVidu blog post. Use when turning a raw technical idea into a structured, SEO-optimized outline — title, article type, H1/H2/H3 structure with concrete talking points, and a buying-journey CTA — before any writing happens. Trigger phrases like "plan a blog post", "outline an article", "blog brief", "what should this post cover".
+metadata:
+  internal: true
 ---
 
 # OpenVidu Blog Planner

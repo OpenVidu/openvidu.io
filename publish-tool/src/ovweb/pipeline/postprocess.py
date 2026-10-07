@@ -9,7 +9,7 @@ The steps fall into three groups, and the order matters:
 2. Either build the site root from this version (when it becomes `latest`) or strip the
    root-served content out of the version folder (when it does not).
 3. Write the redirects, including the mirror that answers the versioned pages' unversioned
-   URLs; prune what is not published; sync the release notes.
+   URLs; prune what is not published; pin the other versions' exports; sync the release notes.
 
 Group 2 has to precede the redirects, because promoting moves the version's `index.html` out to
 the root and the generated redirect then takes its place.
@@ -26,7 +26,7 @@ from pathlib import Path
 
 from .. import fsops
 from ..config import SiteConfig
-from ..discovery import latest_in_tree, versions_in_tree
+from ..discovery import latest_in_tree, release_post_exports, versions_in_tree
 from ..expand import (
     alias_redirects,
     mirror_redirects,
@@ -36,7 +36,7 @@ from ..expand import (
     wipe_owned,
 )
 from ..redirects import is_generated_redirect, render_redirect
-from ..releases import DestinationRegionError, splice_releases
+from ..releases import DestinationRegionError, check_releases_export, splice_releases
 from ..report import Reporter
 from ..rewrite import (
     promote_root_sitemap,
@@ -52,8 +52,14 @@ from ..rewrite import (
     rewrite_versioned_markdown,
     sync_version_sitemap,
 )
+from ..rewrite.markdown import (
+    RELEASES_EXPORT,
+    is_releases_export,
+    pin_versioned_markdown,
+    point_versioned_markdown_at_latest,
+    prune_version_llms,
+)
 from ..rewrite.markdown import SUFFIX as MARKDOWN
-from ..rewrite.markdown import prune_version_llms
 
 SITEMAP = "sitemap.xml"
 SEARCH_INDEX = "search/search_index.json"
@@ -106,10 +112,17 @@ def postprocess(
     # 2. Versioned pages: pin assets, absolutise root links, consolidate SEO URLs.
     report.step("rewrite-versioned", "Rewrite links in versioned pages")
 
+    # On a latest publish `latest` is this version, whether or not mike has materialised the
+    # symlink yet; otherwise the tree decides.
+    holds_alias = update_latest or latest_in_tree(tree) == version
+
     def versioned(path: Path, text: str) -> str:
-        if path.suffix == MARKDOWN:
-            return rewrite_versioned_markdown(text, version=version, layout=layout)
-        return rewrite_versioned_file(text, version=version, layout=layout)
+        if path.suffix != MARKDOWN:
+            return rewrite_versioned_file(text, version=version, layout=layout)
+        text = rewrite_versioned_markdown(text, version=version, layout=layout)
+        if holds_alias and not is_releases_export(path, version_dir=version_dir, layout=layout):
+            text = point_versioned_markdown_at_latest(text, version=version, layout=layout)
+        return text
 
     changed = 0
     for directory in layout.versioned_pages:
@@ -160,6 +173,8 @@ def postprocess(
     _alias_versions(tree, version=version, config=config, report=report, result=result)
     _prune_version_sitemap(tree, version=version, config=config, report=report, result=result)
     _sync_version_sitemap(tree, version=version, config=config, report=report, result=result)
+    if update_latest:
+        _pin_superseded_exports(tree, version=version, config=config, report=report, result=result)
     _sync_releases(tree, version=version, config=config, report=report, result=result)
 
     return result
@@ -239,11 +254,18 @@ def _rewrite_promoted_pages(
     def promote_html(text: str) -> str:
         return rewrite_non_versioned_file(text, version=version, layout=layout)
 
-    def promote_markdown(text: str) -> str:
-        return rewrite_promoted_markdown(text, version=version, layout=layout)
+    def promote_markdown(text: str, *, release_post: bool = False) -> str:
+        return rewrite_promoted_markdown(
+            text, version=version, layout=layout, keep_version_pins=release_post
+        )
+
+    # Read off the category listing before the walk below rewrites its HTML.
+    release_posts = release_post_exports(version_dir)
 
     def promote(path: Path, text: str) -> str:
-        return promote_markdown(text) if path.suffix == MARKDOWN else promote_html(text)
+        if path.suffix != MARKDOWN:
+            return promote_html(text)
+        return promote_markdown(text, release_post=path in release_posts)
 
     for directory in layout.non_versioned_pages:
         changed += fsops.rewrite_tree_per_file(version_dir / directory, promote)
@@ -555,6 +577,43 @@ def _sync_version_sitemap(
     report.result("sync-version-sitemap", listed=len(stubs))
 
 
+def _pin_superseded_exports(
+    tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
+) -> None:
+    """Pin every other version's exports back to that version.
+
+    The exports of the version `latest` points at link to `/latest/` (`rewrite-versioned`). Once
+    this publish moves the alias, those links in the version that held it lead here instead, so
+    they are pinned again: the folder ends as a `past` publish of its own version would leave it.
+    Every other version is a no-op, which also repairs one an interrupted publish left behind.
+    """
+    layout = config.layout
+    report.step("pin-superseded-exports", "Pin the other versions' exports to their own version")
+
+    changed = 0
+    for other in versions_in_tree(tree):
+        other_dir = tree / other
+        if other == version or not other_dir.is_dir():
+            continue
+
+        def pin(path: Path, text: str, *, other: str = other, other_dir: Path = other_dir) -> str:
+            if path.suffix != MARKDOWN or is_releases_export(
+                path, version_dir=other_dir, layout=layout
+            ):
+                return text
+            return pin_versioned_markdown(text, version=other, layout=layout)
+
+        files = sum(
+            fsops.rewrite_tree_per_file(other_dir / page, pin) for page in layout.versioned_pages
+        )
+        if files:
+            report.detail(f"{other}: {files} export(s)")
+        changed += files
+
+    result.counts["pin-superseded-exports"] = changed
+    report.result("pin-superseded-exports", files_changed=changed)
+
+
 def _sync_releases(
     tree: Path, *, version: str, config: SiteConfig, report: Reporter, result: PostprocessResult
 ) -> None:
@@ -562,7 +621,8 @@ def _sync_releases(
 
     Publishing the newest version pushes its notes out to every other version folder;
     re-publishing an older version pulls the current newest notes back in, so a rebuild does
-    not regress it to the notes that version shipped with.
+    not regress it to the notes that version shipped with. The Markdown exports travel with the
+    HTML, since the docs MCP server indexes every version's.
     """
     report.step("sync-releases", "Splice the newest release notes across versions")
 
@@ -576,7 +636,7 @@ def _sync_releases(
             report.warn(message)
         pairs = [] if newest is None else [(newest, version)]
 
-    spliced = 0
+    spliced = copied = 0
     for source, destination in pairs:
         if source == destination:
             continue
@@ -588,9 +648,13 @@ def _sync_releases(
             report=report,
             result=result,
         )
+        copied += _copy_releases_exports(
+            tree, source=source, destination=destination, config=config, report=report
+        )
 
     result.counts["sync-releases"] = spliced
-    report.result("sync-releases", pages_spliced=spliced)
+    result.counts["sync-releases-exports"] = copied
+    report.result("sync-releases", pages_spliced=spliced, exports_copied=copied)
 
 
 def _splice_pair(
@@ -629,3 +693,22 @@ def _splice_pair(
         )
         spliced += 1
     return spliced
+
+
+def _copy_releases_exports(
+    tree: Path, *, source: str, destination: str, config: SiteConfig, report: Reporter
+) -> int:
+    """Copy the source version's releases exports over the destination's, whole.
+
+    Only where the destination has one: the versions before 3.4 build no exports.
+    """
+    copied = 0
+    for page in config.layout.versioned_pages:
+        source_file = tree / source / page / RELEASES_EXPORT
+        destination_file = tree / destination / page / RELEASES_EXPORT
+        if not source_file.is_file() or not destination_file.is_file():
+            continue
+        fsops.write_text(destination_file, check_releases_export(fsops.read_text(source_file)))
+        report.detail(f"{source}/{page} -> {destination}/{page}: Markdown export")
+        copied += 1
+    return copied

@@ -590,6 +590,14 @@ div[data-md-component="outdated"] aside {
   white-space: nowrap;
 }
 
+/* For a table whose third column holds identifiers, such as the permissions of the embedded commands
+   table, so they stay whole instead of being split mid-word. Opt in with:
+       <div class="nowrap-third-column" markdown> */
+.md-typeset .nowrap-third-column th:nth-child(3) code,
+.md-typeset .nowrap-third-column td:nth-child(3) code {
+  white-space: nowrap;
+}
+
 /* Flow a list of short items into as many columns as the width allows, instead
    of one tall single-file column. Opt in by wrapping the list in:
        <div class="column-list" markdown>
@@ -643,6 +651,10 @@ div[class*="grid-"]:has(> img) {
 
 .openvidu-pro-tag {
   background-color: #9c27b0;
+}
+
+.openvidu-deprecated-tag {
+  background-color: #e65100;
 }
 
 /* The tag inside a nav label (mkdocs.yml `nav:` entries) */
@@ -1220,6 +1232,10 @@ h1.meetplatform-slogan {
 @media (max-width: 959px) {
   .top-home-img {
     width: 85%;
+  }
+
+  .register-container {
+    margin: 0;
   }
 
   #account-btn .user-name {

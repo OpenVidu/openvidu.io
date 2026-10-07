@@ -398,3 +398,31 @@ def test_the_register_pages_icon_font_is_not_held_to_the_contract(tmp_path):
     write(tmp_path, "overrides/main.html", font_block() + icon)
 
     assert findings_of(tmp_path, "font-loading") == []
+
+
+def test_a_blog_post_with_a_scalar_date_is_an_error(tmp_path):
+    write(tmp_path, "docs/blog/posts/2026/08/post.md", "---\ndate: 2026-08-04\n---\n")
+
+    (finding,) = findings_of(tmp_path, "blog-date")
+    assert finding.severity == "error"
+
+
+def test_a_blog_post_dated_by_created_and_updated_is_silent(tmp_path):
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/08/post.md",
+        "---\ndate:\n  created: 2026-08-04\n  updated: 2026-10-06\n---\n",
+    )
+
+    assert findings_of(tmp_path, "blog-date") == []
+
+
+def test_a_blog_post_updated_before_it_was_created_is_an_error(tmp_path):
+    write(
+        tmp_path,
+        "docs/blog/posts/2026/08/post.md",
+        "---\ndate:\n  created: 2026-08-04\n  updated: 2026-08-03\n---\n",
+    )
+
+    (finding,) = findings_of(tmp_path, "blog-date")
+    assert "date.updated" in finding.message

@@ -6,9 +6,9 @@ convention is edited once.
 ## Naming — file, assets and frontmatter must agree
 
 - **Published post:** `docs/blog/posts/<year>/<month>/<slug>.md`. The `<year>/<month>` folders
-  MUST match the frontmatter `date` (the publish date) and the filename MUST be exactly
+  MUST match the frontmatter `date.created` (the publish date) and the filename MUST be exactly
   `<slug>.md`, equal to the frontmatter `slug`. The rendered URL (`/blog/YYYY/MM/DD/<slug>/`)
-  comes from `date` + `slug`, never from the file path.
+  comes from `date.created` + `slug`, never from the file path.
 - **Asset folder:** `docs/assets/images/blog/<year>/<month>/<slug>/` — mirrors the post's own
   location. All of the post's images live there, referenced root-absolute:
   `/assets/images/blog/<year>/<month>/<slug>/<file>`. The `og:image`/JSON-LD partials resolve a
@@ -16,15 +16,15 @@ convention is edited once.
   `<year>/<month>/<slug>` path under `docs/assets/videos/blog/`.
 - **Draft (not yet published):** identical layout, with the **literal placeholder `YYYY/MM`** as
   the year/month segments — backed by real directories named `YYYY/MM` — so draft branches build
-  zero-warning. `date:` holds a **temporary real date** (the draft's creation day); a literal
-  placeholder there aborts the build. There is no build guard against publishing a draft early:
-  each draft lives on its own branch, merged to `main` only when ready.
+  zero-warning. `date.created` holds a **temporary real date** (the draft's creation day); a
+  literal placeholder there aborts the build. There is no build guard against publishing a draft
+  early: each draft lives on its own branch, merged to `main` only when ready.
 - Old convention to reject: date-prefixed filenames. Also reject a draft mixing placeholder and
   real year/month paths.
 
 ## Publishing a draft (`/publish-post` runs this)
 
-1. Set the frontmatter `date` to the actual publish date.
+1. Set the frontmatter `date.created` to the actual publish date.
 2. Replace the string `YYYY/MM/` with the real `<year>/<month>/` everywhere it appears in the
    post body's asset references — a pure string replacement by design.
 3. `git mv` the post to `docs/blog/posts/<year>/<month>/<slug>.md` and the asset folder to
@@ -34,13 +34,26 @@ convention is edited once.
 Nothing else inside the post changes. Merging to `main` publishes nothing; the post goes live
 with the next Publish Web workflow run.
 
+## Editing a published post
+
+A change to what a published post says — a corrected fact, a new version in a command, an added
+note or link — sets `date.updated` to the day it merges to `main`, adding the key if the post has
+none. It renders as the post's "updated" date, becomes the JSON-LD `dateModified` and dates the
+post in the updated RSS feed. A pull request that waits is re-dated when it merges.
+
+Whether an edit counts is a judgement on the change, which is why no check enforces it.
+Frontmatter-only changes (`description`, `tags`, `categories`, `cover_image`) never do: the post
+reads the same. Drafts and newly published posts carry no `updated`.
+
 ## Frontmatter (all required unless noted)
 
 ```yaml
 ---
 title: Your post title      # REQUIRED — the build fails without it; usually the same as the H1
 draft: false
-date: 2026-07-04            # publish date; a temporary real date while a draft
+date:
+  created: 2026-07-04       # publish date; a temporary real date while a draft
+  updated: 2026-10-06       # only once published: the day an edit merged (see "Editing a published post")
 slug: your-post-slug
 description: One-sentence SEO summary. REQUIRED. Phrase it to avoid a ": " (colon-space) so it stays valid as unquoted YAML.
 cover_image: poster.jpg     # recommended; raster only (png/jpg/webp, NOT svg), inside this post's asset folder. Omit to fall back to the site-wide branded card.
@@ -54,6 +67,9 @@ page_features:
     - lazyvideo             # only when the post embeds a video — see Media below. Omit otherwise
 ---
 ```
+
+`date` is always a mapping: the RSS feeds read `date.created` and `date.updated` by key, and
+`ovweb lint` fails a post whose `date` is a bare date (`blog-date`).
 
 Do **not** add a `hide:` block: posts inherit the whole of `hide: [path, feedback, navigation,
 search-bar, version-selector]` from `docs/blog/posts/.meta.yml`. Repeating any of it in a post

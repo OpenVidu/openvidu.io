@@ -1,7 +1,8 @@
 ---
 title: Control your video calls with gestures using free AI
 draft: false
-date: 2026-08-11
+date:
+  created: 2026-08-11
 slug: control-video-calls-with-gestures-free-ai
 description: >-
   Control your camera, microphone and hand-raise requests with hand gestures,
