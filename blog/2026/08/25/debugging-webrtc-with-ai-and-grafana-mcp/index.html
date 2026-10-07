@@ -182,7 +182,7 @@
       "description": "We give a Claude Code agent nothing but read-only Grafana and a broken OpenVidu deployment, then watch it find each root cause in a reproducible case study.",
       "image": "https://openvidu.io/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/poster.webp",
       "datePublished": "2026-08-25",
-      "dateModified": "2026-08-25",
+      "dateModified": "2026-10-07",
       "inLanguage": "en",
       "author": [
         {
@@ -236,6 +236,26 @@
       
     </div>
     <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+              </button>
+            
+            
+<div id="announce">
+  New: the <a href="/blog/2026/10/07/openvidu-agent-plugin/">OpenVidu Agent Plugin</a>
+  brings the official OpenVidu documentation into your AI coding agent.
+</div>
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
       
     </div>
     
@@ -1089,6 +1109,8 @@
       
         
       
+        
+      
     
     
     
@@ -1107,7 +1129,7 @@
   
   
   
-    <a href="../../../../archive/2026/09/" class="md-nav__link">
+    <a href="../../../../archive/2026/10/" class="md-nav__link">
       
   
   
@@ -1142,6 +1164,8 @@
   
     
     
+      
+        
       
         
       
@@ -1669,6 +1693,13 @@
                       </div>
                     </li>
                     
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 13h1.5v2.82l2.44 1.41-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85"></path></svg>
+                          <time datetime="2026-10-07 00:00:00+00:00" class="md-ellipsis">October 7, 2026</time>
+                        </div>
+                      </li>
+                    
                     
                       <li class="md-nav__item">
                         <div class="md-nav__link">
@@ -1923,7 +1954,7 @@
 <p>The short answer is yes, and surprisingly well. In almost every scenario the agent worked through the metrics, jumped to the logs, and reached the right cause, often with just a handful of queries. With the domain skill it got every scenario right, and in the confusing congestion case it was the difference between correctly blaming the server and settling for a plausible but wrong explanation. It even saw through the misleading <em>"not enough CPU"</em> error, blaming the config rather than the hardware.</p>
 <p>But it doesn't replace your judgment. An agent that only reads Grafana inherits Grafana's blind spots. What isn't in a metric or a log, it won't see, and when there's no signal it can hand you a beautiful, wrong answer with total confidence. It's great for first-pass triage, for answering <em>"is it us or them?"</em>, for narrowing a vague complaint down to a subsystem and a node. For everything else, it's still you.</p>
 <p>As for that developer who has never handled a media stream in their life: our bet is that tools like this lower the bar enormously. You no longer need to master ICE, DTLS, or the guts of the SFU to start understanding what's failing; you just need observability turned on and an agent to ask. It's all in a repo ready to reproduce, so break your own deployment, wire up Claude, and see for yourself.</p>
-<p>One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. Follow OpenVidu's releases and the blog if you want to see the rest as it lands.</p>
+<p>One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. The first of them is already here: the <a href="../../../10/13/openvidu-agent-plugin/">OpenVidu Agent Plugin</a>. Follow OpenVidu's releases and the blog if you want to see the rest as it lands.</p>
 <p><em>Now it's your turn: <a href="https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues" target="_blank" rel="noopener">tell us what you find <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>. And may your on-calls be boring.</em> 😉</p>
 
 

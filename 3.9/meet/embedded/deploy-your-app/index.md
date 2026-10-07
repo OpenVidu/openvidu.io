@@ -1,6 +1,6 @@
 # Deploy your OpenVidu Meet application
 
-Once your application built with [OpenVidu Meet Embedded](https://openvidu.io/3.9/meet/embedded/intro/index.md) is ready for production, you need to decide where to deploy it. Before proceeding, make sure you have a running OpenVidu Meet deployment. If you don't have one yet, check the [Deployment](https://openvidu.io/3.9/meet/deployment/overview/index.md) section to set one up.
+Once your application built with [OpenVidu Meet Embedded](https://openvidu.io/latest/meet/embedded/intro/index.md) is ready for production, you need to decide where to deploy it. Before proceeding, make sure you have a running OpenVidu Meet deployment. If you don't have one yet, check the [Deployment](https://openvidu.io/latest/meet/deployment/overview/index.md) section to set one up.
 
 There are two options:
 
@@ -9,7 +9,7 @@ There are two options:
 
 > **Info**
 >
-> All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/customize-meet-base-path/index.md) how-to guide for more details.
+> All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](https://openvidu.io/latest/docs/self-hosting/how-to-guides/customize-meet-base-path/index.md) how-to guide for more details.
 
 ______________________________________________________________________
 
@@ -28,7 +28,7 @@ Configure your application to use the OpenVidu Meet REST API. Since your applica
 
 Both options work the same way. For example, your application can make API requests to `http://localhost:9080/meet/api/v1/rooms` or `https://your-domain/meet/api/v1/rooms`.
 
-See the [REST API reference](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md) for the full list of available endpoints.
+See the [REST API reference](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) for the full list of available endpoints.
 
 ### 2. Deploy your application on the OpenVidu node
 
@@ -58,11 +58,11 @@ Your application needs an API key to authenticate requests to the OpenVidu Meet 
 1. Go to the **"Embedded"** page.
 1. Click on **" Generate API Key"** if you haven't generated one already.
 
-Use this API key in your application to authenticate REST API requests via the `X-API-KEY` header. See the [REST API authentication](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#authentication) section for more details.
+Use this API key in your application to authenticate REST API requests via the `X-API-KEY` header. See the [REST API authentication](https://openvidu.io/latest/meet/embedded/reference/rest-api/#authentication) section for more details.
 
 ### 4. Configure the Web Component URL (if applicable)
 
-If your application uses the [OpenVidu Meet Web Component](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md), make sure the script tag points to your OpenVidu deployment's public domain:
+If your application uses the [OpenVidu Meet Web Component](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md), make sure the script tag points to your OpenVidu deployment's public domain:
 
 ```html
 <script src="https://<YOUR_OPENVIDU_DOMAIN>/meet/v1/openvidu-meet.js"></script>
@@ -70,7 +70,7 @@ If your application uses the [OpenVidu Meet Web Component](https://openvidu.io/3
 
 ### 5. Configure webhooks (optional)
 
-If your application uses [OpenVidu Meet webhooks](https://openvidu.io/3.9/meet/embedded/reference/webhooks/index.md), you need to configure the webhook URL to point to your application locally:
+If your application uses [OpenVidu Meet webhooks](https://openvidu.io/latest/meet/embedded/reference/webhooks/index.md), you need to configure the webhook URL to point to your application locally:
 
 1. Navigate to `https://your-domain/meet`.
 
@@ -92,7 +92,7 @@ If your application uses [OpenVidu Meet webhooks](https://openvidu.io/3.9/meet/e
 
 > **Info**
 >
-> All webhook events are signed with your API key using HMAC SHA256. Always [validate webhook signatures](https://openvidu.io/3.9/meet/embedded/reference/webhooks/#validate-events) in your application to ensure authenticity and prevent tampering.
+> All webhook events are signed with your API key using HMAC SHA256. Always [validate webhook signatures](https://openvidu.io/latest/meet/embedded/reference/webhooks/#validate-events) in your application to ensure authenticity and prevent tampering.
 
 ______________________________________________________________________
 
@@ -110,7 +110,7 @@ https://<YOUR_OPENVIDU_DOMAIN>/meet
 
 For example, if your OpenVidu deployment is at `https://example.openvidu.io`, your application should make API requests to `https://example.openvidu.io/meet/api/v1/rooms`, `https://example.openvidu.io/meet/api/v1/recordings`, etc.
 
-See the [REST API reference](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md) for the full list of available endpoints.
+See the [REST API reference](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) for the full list of available endpoints.
 
 ### 2. Configure the API key
 
@@ -121,11 +121,11 @@ Generate an API key from the OpenVidu Meet app and configure it in your applicat
 1. Click on **" Generate API Key"** if you haven't generated one already.
 1. Configure the API key in your application. This key must be included in every request as the `X-API-KEY` header.
 
-See the [REST API authentication](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#authentication) section for more details.
+See the [REST API authentication](https://openvidu.io/latest/meet/embedded/reference/rest-api/#authentication) section for more details.
 
 ### 3. Configure the Web Component URL (if applicable)
 
-If your application uses the [OpenVidu Meet Web Component](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md), make sure the script tag points to your OpenVidu deployment:
+If your application uses the [OpenVidu Meet Web Component](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md), make sure the script tag points to your OpenVidu deployment:
 
 ```html
 <script src="https://<YOUR_OPENVIDU_DOMAIN>/meet/v1/openvidu-meet.js"></script>
@@ -133,7 +133,7 @@ If your application uses the [OpenVidu Meet Web Component](https://openvidu.io/3
 
 ### 4. Configure webhooks (optional)
 
-If your application uses [OpenVidu Meet webhooks](https://openvidu.io/3.9/meet/embedded/reference/webhooks/index.md), configure the webhook URL to point to your application's **publicly accessible** webhook endpoint:
+If your application uses [OpenVidu Meet webhooks](https://openvidu.io/latest/meet/embedded/reference/webhooks/index.md), configure the webhook URL to point to your application's **publicly accessible** webhook endpoint:
 
 1. Navigate to your OpenVidu Meet app at `https://your-openvidu-domain/meet`.
 
@@ -153,7 +153,7 @@ If your application uses [OpenVidu Meet webhooks](https://openvidu.io/3.9/meet/e
 
 > **Info**
 >
-> All webhook events are signed with your API key using HMAC SHA256. Always [validate webhook signatures](https://openvidu.io/3.9/meet/embedded/reference/webhooks/#validate-events) in your application to ensure authenticity and prevent tampering.
+> All webhook events are signed with your API key using HMAC SHA256. Always [validate webhook signatures](https://openvidu.io/latest/meet/embedded/reference/webhooks/#validate-events) in your application to ensure authenticity and prevent tampering.
 
 ______________________________________________________________________
 
@@ -187,4 +187,4 @@ The relevant parameters are:
 >
 > Each `MEET_INITIAL_*` parameter is applied on start only while the deployment does not have that item yet. Once the item exists, changing the parameter has no effect: manage the item from the OpenVidu Meet app or the REST API.
 
-See the [Configuration Reference](https://openvidu.io/3.9/docs/self-hosting/configuration/reference/#meetenv) for all available `meet.env` parameters and the [Changing Configuration](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/index.md) section for more details on how to modify configuration files.
+See the [Configuration Reference](https://openvidu.io/latest/docs/self-hosting/configuration/reference/#meetenv) for all available `meet.env` parameters and the [Changing Configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md) section for more details on how to modify configuration files.

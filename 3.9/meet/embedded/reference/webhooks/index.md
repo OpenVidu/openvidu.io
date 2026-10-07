@@ -10,15 +10,15 @@ Every active webhook whose filters match an event receives it independently, wit
 
 ## Reference
 
-Visit [OpenVidu Meet Webhooks](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/meetingStartedWebhook) reference documentation for a complete list of all available webhook events. They include:
+Visit [OpenVidu Meet Webhooks](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/meetingStartedWebhook) reference documentation for a complete list of all available webhook events. They include:
 
-- [`meetingStarted`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/meetingStartedWebhook)
-- [`meetingEnded`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/meetingEndedWebhook)
-- [`participantJoined`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/participantJoinedWebhook)
-- [`participantLeft`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/participantLeftWebhook)
-- [`recordingStarted`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/recordingStartedWebhook)
-- [`recordingUpdated`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/recordingUpdatedWebhook)
-- [`recordingEnded`](https://openvidu.io/3.9/meet/embedded/reference/api.html#/webhooks/recordingEndedWebhook)
+- [`meetingStarted`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/meetingStartedWebhook)
+- [`meetingEnded`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/meetingEndedWebhook)
+- [`participantJoined`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/participantJoinedWebhook)
+- [`participantLeft`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/participantLeftWebhook)
+- [`recordingStarted`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/recordingStartedWebhook)
+- [`recordingUpdated`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/recordingUpdatedWebhook)
+- [`recordingEnded`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/recordingEndedWebhook)
 
 ## Configuration
 
@@ -26,24 +26,24 @@ Webhooks are managed from the **"Embedded"** page of the OpenVidu Meet app, wher
 
 > **Info**
 >
-> Webhook events are signed with the [API key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key), so deliveries fail until an API key has been generated.
+> Webhook events are signed with the [API key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key), so deliveries fail until an API key has been generated.
 
 ### REST API reference
 
-Webhooks can also be managed programmatically through the [REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md), authenticating with the API key or as an admin user. See the [REST API specification](https://openvidu.io/3.9/meet/embedded/reference/api.html) for the request bodies and response schemas.
+Webhooks can also be managed programmatically through the [REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md), authenticating with the API key or as an admin user. See the [REST API specification](https://openvidu.io/latest/meet/embedded/reference/api.html) for the request bodies and response schemas.
 
 | Operation        | HTTP Method | Reference                                                                                       |
 | ---------------- | ----------- | ----------------------------------------------------------------------------------------------- |
-| Create a webhook | POST        | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/webhookCreate) |
-| List webhooks    | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/webhookList)   |
-| Get a webhook    | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/webhookGet)    |
-| Update a webhook | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/webhookUpdate) |
-| Delete a webhook | DELETE      | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/webhookDelete) |
-| Test a webhook   | POST        | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/webhookTest)   |
+| Create a webhook | POST        | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/webhookCreate) |
+| List webhooks    | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/webhookList)   |
+| Get a webhook    | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/webhookGet)    |
+| Update a webhook | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/webhookUpdate) |
+| Delete a webhook | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/webhookDelete) |
+| Test a webhook   | POST        | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/webhookTest)   |
 
 ## Validate events
 
-OpenVidu Meet signs all webhook events with [your API key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key), so you can verify their authenticity. This way you can ensure that the events received by your application's backend are coming from your actual OpenVidu Meet deployment and have not been tampered with.
+OpenVidu Meet signs all webhook events with [your API key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key), so you can verify their authenticity. This way you can ensure that the events received by your application's backend are coming from your actual OpenVidu Meet deployment and have not been tampered with.
 
 Each webhook event includes two headers that you should use to validate the request:
 

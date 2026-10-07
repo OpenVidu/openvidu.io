@@ -2,8 +2,8 @@
 
 Every application server below has two specific purposes:
 
-- Generate LiveKit tokens on demand for any [application client](https://openvidu.io/3.9/docs/tutorials/application-client/index.md).
-- Receive LiveKit [webhook events](https://openvidu.io/3.9/docs/reference/webhooks/index.md).
+- Generate LiveKit tokens on demand for any [application client](https://openvidu.io/latest/docs/tutorials/application-client/index.md).
+- Receive LiveKit [webhook events](https://openvidu.io/latest/docs/reference/webhooks/index.md).
 
 To do so they all define two REST endpoints:
 
@@ -12,18 +12,18 @@ To do so they all define two REST endpoints:
 
 They use the proper [LiveKit Server SDK](https://docs.livekit.io/reference/) for their language, if available.
 
-[**Node.js**](https://openvidu.io/3.9/docs/tutorials/application-server/node/index.md)
+[**Node.js**](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md)
 
-[**Go**](https://openvidu.io/3.9/docs/tutorials/application-server/go/index.md)
+[**Go**](https://openvidu.io/latest/docs/tutorials/application-server/go/index.md)
 
-[**Ruby**](https://openvidu.io/3.9/docs/tutorials/application-server/ruby/index.md)
+[**Ruby**](https://openvidu.io/latest/docs/tutorials/application-server/ruby/index.md)
 
-[**Java**](https://openvidu.io/3.9/docs/tutorials/application-server/java/index.md)
+[**Java**](https://openvidu.io/latest/docs/tutorials/application-server/java/index.md)
 
-[**Python**](https://openvidu.io/3.9/docs/tutorials/application-server/python/index.md)
+[**Python**](https://openvidu.io/latest/docs/tutorials/application-server/python/index.md)
 
-[**Rust**](https://openvidu.io/3.9/docs/tutorials/application-server/rust/index.md)
+[**Rust**](https://openvidu.io/latest/docs/tutorials/application-server/rust/index.md)
 
-[**PHP**](https://openvidu.io/3.9/docs/tutorials/application-server/php/index.md)
+[**PHP**](https://openvidu.io/latest/docs/tutorials/application-server/php/index.md)
 
-[**.NET**](https://openvidu.io/3.9/docs/tutorials/application-server/dotnet/index.md)
+[**.NET**](https://openvidu.io/latest/docs/tutorials/application-server/dotnet/index.md)

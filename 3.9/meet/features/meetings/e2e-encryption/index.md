@@ -2,11 +2,11 @@
 
 OpenVidu Meet supports **end-to-end encryption (E2EE)**: audio, video, chat messages and participant names are encrypted on each device and can only be decrypted by the other participants. The server only relays encrypted data; it never has access to the meeting content.
 
-E2EE can be enabled or disabled on a per-room basis when [creating](https://openvidu.io/3.9/meet/features/rooms/management/#create-rooms) or [editing a room](https://openvidu.io/3.9/meet/features/rooms/management/#edit-rooms), from the **Features** section of the **Meeting** step of the configuration wizard. The same step also sets the room's [participant and duration limits](https://openvidu.io/3.9/meet/features/meetings/configuration/index.md), and toggles Live Captions, Chat and [Virtual Background](https://openvidu.io/3.9/meet/features/meetings/virtual-background/index.md).
+E2EE can be enabled or disabled on a per-room basis when [creating](https://openvidu.io/latest/meet/features/rooms/management/#create-rooms) or [editing a room](https://openvidu.io/latest/meet/features/rooms/management/#edit-rooms), from the **Features** section of the **Meeting** step of the configuration wizard. The same step also sets the room's [participant and duration limits](https://openvidu.io/latest/meet/features/meetings/configuration/index.md), and toggles Live Captions, Chat and [Virtual Background](https://openvidu.io/latest/meet/features/meetings/virtual-background/index.md).
 
 > **E2EE Limitations**
 >
-> - **Recording is not available** for encrypted rooms: the server cannot decrypt the content, so it cannot produce a [recording](https://openvidu.io/3.9/meet/features/recordings/overview/index.md). To record, disable E2EE for the room.
+> - **Recording is not available** for encrypted rooms: the server cannot decrypt the content, so it cannot produce a [recording](https://openvidu.io/latest/meet/features/recordings/overview/index.md). To record, disable E2EE for the room.
 > - All participants must use **exactly the same passphrase** — there is no per-role or partial access.
 
 ## What is protected
@@ -41,7 +41,7 @@ When E2EE is active, everything participants share is encrypted on their device 
 
 Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device and never sent to the server.
 
-When a member accesses an E2E-encrypted room, the [Join view](https://openvidu.io/3.9/meet/features/meetings/lifecycle/#join-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
+When a member accesses an E2E-encrypted room, the [Join view](https://openvidu.io/latest/meet/features/meetings/lifecycle/#join-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 
 > **Share the passphrase through a trusted channel**
 >

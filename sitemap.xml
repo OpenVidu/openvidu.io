@@ -137,6 +137,10 @@
          <lastmod>2026-10-06</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/10/13/openvidu-agent-plugin/</loc>
+         <lastmod>2026-10-07</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/conditions/cookie-policy/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
@@ -905,6 +909,10 @@
          <lastmod>2026-09-15</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/archive/2026/10/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/archive/2026/09/</loc>
          
     </url>
@@ -926,6 +934,14 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/archive/2026/04/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/ai/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/openvidu/</loc>
          
     </url>
     <url>
@@ -962,10 +978,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/research/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/ai/</loc>
          
     </url>
     <url>

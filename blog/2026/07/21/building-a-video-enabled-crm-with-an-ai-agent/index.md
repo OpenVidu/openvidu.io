@@ -38,7 +38,13 @@ Then came the interesting part. Could the agent integrate a videoconferencing se
 
 > Your mission is to integrate OpenVidu 3 into this CRM application, using webcomponents. Read the OpenVidu docs in its entirety, and prepare a branch with: a) OpenVidu Meet embedded into the CRM app so that meetings happen inside the app, and not in an external tool; b) a deploy folder containing scripts to prepare a Docker image with the app and a docker compose deploying both OpenVidu and the app. […] When a meeting is scheduled, the app should create a room for this client, if it does not exist yet, adding the user and client as room members.
 
-We pointed it at three documentation pages: the [WebComponent reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md), the [embedded tutorials](https://openvidu.io/latest/meet/embedded/tutorials/index.md) and the [local deployment guide](https://openvidu.io/latest/meet/deployment/local/index.md). The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
+We pointed it at three documentation pages: the [WebComponent reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md), the [embedded tutorials](https://openvidu.io/latest/meet/embedded/tutorials/index.md) and the [local deployment guide](https://openvidu.io/latest/meet/deployment/local/index.md).
+
+> **Your agent can now find these pages itself**
+>
+> Since October 2026, the [OpenVidu Agent Plugin](https://openvidu.io/blog/2026/10/13/openvidu-agent-plugin/index.md) gives your coding agent the OpenVidu Meet documentation for the version you run, so you no longer need to point it at the pages yourself.
+
+The agent read them, cloned the official tutorials for the exact API contracts, and produced the integration:
 
 - **Server side**: a small service calling the [OpenVidu Meet REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) — one room per client, created lazily on the first scheduled meeting and reused afterwards.
 - **Client side**: the `<openvidu-meet>` webcomponent embedded in the CRM's right panel. This is the entire frontend footprint of a video meeting:

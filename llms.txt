@@ -41,6 +41,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [Low Latency Live Streaming: Ingest WHIP into OpenVidu (Part 2)](https://openvidu.io/blog/2026/09/08/low-latency-whip-ingestion/index.md): Push a real stream into an OpenVidu Room over WHIP, from a browser webcam and from OBS Studio, and watch it arrive with sub-second delay.
 - [How Novakid runs 30 million live English lessons on OpenVidu](https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/index.md): How Novakid migrated from raw Kurento to OpenVidu to power live English lessons for over a million kids, and what changed for their engineering team.
 - [OpenVidu 3.9.0 release notes](https://openvidu.io/blog/2026/09/30/release-390/index.md): OpenVidu 3.9.0 is out with a Meetings API, participant muting and meeting limits in Meet, plus Nemotron live captions and a sturdier mediasoup.
+- [Introducing the OpenVidu Agent Plugin for coding agents](https://openvidu.io/blog/2026/10/13/openvidu-agent-plugin/index.md): Meet the OpenVidu Agent Plugin, which gives your coding agent the official OpenVidu documentation for the version, edition and product you run.
 
 ## OpenVidu Meet
 
