@@ -93,12 +93,16 @@
       {% endif %}
     {% endif %}
 
-    {# Repository information #}
-    {% if config.repo_url %}
-      <div class="md-header__source">
-        {% include "partials/source.html" %}
-      </div>
-    {% endif %}
+    {# GitHub badge. Replaces Material's repository widget (partials/source.html), whose star and
+       fork counts the visitor's browser fetched from api.github.com. This shields.io image is
+       downloaded at build time by the privacy plugin and served from the site, so the visitor's
+       browser contacts neither GitHub nor shields.io. mkdocs.yml sets no repo_url, which also
+       keeps the widget out of the mobile drawer (partials/nav.html). #}
+    <div class="md-header__badge">
+      <a href="https://github.com/OpenVidu/openvidu" target="_blank" rel="noopener" title="OpenVidu on GitHub">
+        <img src="https://img.shields.io/github/stars/OpenVidu/openvidu?style=flat&amp;logo=github&amp;label=GitHub" alt="OpenVidu on GitHub: star count" height="20">
+      </a>
+    </div>
 
     {# Static on every page; on /account/ the openvidu-register bundle relabels it after sign-in. #}
     <div class="md-typeset log-in-div">

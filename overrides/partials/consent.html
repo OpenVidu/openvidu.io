@@ -1,0 +1,54 @@
+{#-
+  Override of Material's partials/consent.html (mkdocs-material 9.7.7).
+
+  Why: Material renders the consent options pre-ticked and its "Accept" button saves whatever
+  boxes are ticked. Pre-ticked boxes are not valid consent (GDPR Recital 32, CJEU Planet49
+  C-673/17, AEPD cookie guide), but with the boxes unticked "Accept" would save nothing.
+  Material 9.7.7 has no setting for "accept enables every option", so this partial:
+
+  - has a single optional purpose, Google Analytics (extra.consent.cookies in mkdocs.yml). With
+    one purpose a checkbox list plus "Save choices" adds nothing, so each purpose is a hidden
+    checkbox that is never ticked before the visitor acts;
+  - "Accept" ticks the hidden checkbox(es), then submits, storing {analytics: true};
+  - "Reject" is Material's reset button (unticks everything, then saves {}), with the same
+    style and prominence as "Accept";
+  - when the footer's "#__consent" link reopens the banner, a line says which choice is
+    currently saved, and either button switches it.
+
+  Saving is still done by Material's unmodified script (partials/javascripts/consent.html),
+  which stores the ticked names with __md_set("__consent", {...}) and restores them into these
+  inputs on load; Google Analytics only loads when that key holds analytics: true.
+  There is no GitHub option: the site sets no repo_url, so Material renders no repository
+  widget and never fetches from api.github.com (the header shows a self-hosted badge).
+  On a theme upgrade, diff this file against the new partials/consent.html.
+-#}
+<h4>{{ config.extra.consent.title }}</h4>
+<p>{{ config.extra.consent.description }}</p>
+{% set cookies = config.extra.consent.cookies %}
+{% for type in cookies %}
+  {% if cookies[type] %}
+    <input type="checkbox" name="{{ type }}" hidden>
+  {% endif %}
+{% endfor %}
+<p class="md-consent__current" hidden></p>
+<div class="md-consent__controls">
+  <button class="md-button md-button--primary" data-consent-accept>Accept</button>
+  <button type="reset" class="md-button md-button--primary">Reject</button>
+</div>
+<script>
+  (function () {
+    var form = document.forms.consent
+    form.querySelector("[data-consent-accept]").addEventListener("click", function () {
+      for (var input of form.elements)
+        if (input.name && input.type === "checkbox") input.checked = true
+    })
+    var saved = __md_get("__consent")
+    if (saved) {
+      var current = form.querySelector(".md-consent__current")
+      current.textContent = saved.analytics
+        ? "Your current choice: accepted. Google Analytics is on."
+        : "Your current choice: rejected. Google Analytics is off."
+      current.hidden = false
+    }
+  })()
+</script>
