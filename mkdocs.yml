@@ -1,9 +1,10 @@
 site_name: OpenVidu
 site_url: https://openvidu.io/
 site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
-repo_name: openvidu/openvidu
-repo_url: https://github.com/openvidu/openvidu
-# Absolute on purpose: edit links point at this repo, not repo_url. Update the branch on a branch cut.
+# No repo_url/repo_name on purpose: with them, Material renders its repository widget (header
+# and mobile drawer), whose star/fork counts the visitor's browser fetches from api.github.com.
+# The header shows a static badge instead (overrides/partials/header.html). edit_uri is
+# absolute, so page edit links still work without repo_url. Update the branch on a branch cut.
 edit_uri: https://github.com/OpenVidu/openvidu.io/edit/main/docs/
 
 nav:
@@ -594,23 +595,19 @@ extra:
       link: https://openvidu.medium.com/
     - icon: simple/youtube
       link: https://www.youtube.com/@openvidu
-  # Rendered by overrides/partials/consent.html: options start unticked (pre-ticked boxes are
-  # not valid consent under the GDPR), with "Accept all", "Reject all" and "Save choices".
-  # `checked` and `actions` are ignored by that override.
+  # Rendered by overrides/partials/consent.html: one optional purpose (Google Analytics), never
+  # pre-accepted, with equally prominent "Accept" and "Reject" buttons. Each key under `cookies`
+  # becomes a hidden checkbox that "Accept" ticks; `checked` and `actions` are ignored there.
   consent:
     title: Cookie consent
     description: >
       With your permission, we use <strong>Google Analytics</strong> (by Google) to count
-      visits and see which pages are useful, and we load the <strong>GitHub</strong>
-      repository's star and fork counts from GitHub, which receives your IP address.
-      Both are optional and off until you choose. You can change your choice at any time
-      with "Change cookie settings" at the bottom of every page.
+      visits and see which pages are useful, so we can improve the site. It is off until you
+      choose. You can change your choice at any time with "Change cookie settings" at the
+      bottom of every page.
       <a href="/conditions/cookie-policy/" target="_blank">See cookie policy</a>
     cookies:
-      analytics:
-        name: "Analytics: Google Analytics measures visits to improve the site"
-      github:
-        name: "GitHub: show the repository's star and fork counts"
+      analytics: Google Analytics
 
 extra_css:
   - stylesheets/colors.css

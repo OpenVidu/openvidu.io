@@ -6,64 +6,49 @@
   C-673/17, AEPD cookie guide), but with the boxes unticked "Accept" would save nothing.
   Material 9.7.7 has no setting for "accept enables every option", so this partial:
 
-  - shows the options in the same panel as the buttons, never ticked before the visitor acts
-    (a saved choice is restored by Material's own script, partials/javascripts/consent.html);
-  - "Accept all" ticks every option, then submits;
-  - "Reject all" is Material's reset button (unticks everything, then saves), same style as
-    "Accept all";
-  - "Save choices" submits exactly the boxes the visitor ticked.
+  - has a single optional purpose, Google Analytics (extra.consent.cookies in mkdocs.yml). With
+    one purpose a checkbox list plus "Save choices" adds nothing, so each purpose is a hidden
+    checkbox that is never ticked before the visitor acts;
+  - "Accept" ticks the hidden checkbox(es), then submits, storing {analytics: true};
+  - "Reject" is Material's reset button (unticks everything, then saves {}), with the same
+    style and prominence as "Accept";
+  - when the footer's "#__consent" link reopens the banner, a line says which choice is
+    currently saved, and either button switches it.
 
-  Saving is still done by Material's unmodified script, which stores the ticked names with
-  __md_set("__consent", {...}); Google Analytics and the GitHub repository stats read that key,
-  and the footer's "#__consent" link still reopens this form showing the saved state.
+  Saving is still done by Material's unmodified script (partials/javascripts/consent.html),
+  which stores the ticked names with __md_set("__consent", {...}) and restores them into these
+  inputs on load; Google Analytics only loads when that key holds analytics: true.
+  There is no GitHub option: the site sets no repo_url, so Material renders no repository
+  widget and never fetches from api.github.com (the header shows a self-hosted badge).
   On a theme upgrade, diff this file against the new partials/consent.html.
 -#}
-{% macro render_cookie(cookie, type) %}
-  {% if cookie is string %}
-    {% set name = cookie %}
-  {% else %}
-    {% set name = cookie.name %}
-  {% endif %}
-  <li class="task-list-item">
-    <label class="task-list-control">
-      <input type="checkbox" name="{{ type }}">
-      <span class="task-list-indicator"></span>
-      {{ name }}
-    </label>
-  </li>
-{% endmacro %}
 <h4>{{ config.extra.consent.title }}</h4>
 <p>{{ config.extra.consent.description }}</p>
-{#- Kept (always checked) so Material's stylesheet shows the options without a "Manage" step. -#}
-<input class="md-toggle" type="checkbox" id="__settings" checked>
-<div class="md-consent__settings">
-  <ul class="task-list">
-    {% set cookies = config.extra.consent.cookies %}
-    {% if "analytics" not in cookies %}
-      {% if config.extra.analytics %}
-        {{ render_cookie("Google Analytics", "analytics") }}
-      {% endif %}
-    {% endif %}
-    {% if "github" not in cookies %}
-      {% if config.repo_url and "github.com" in config.repo_url %}
-        {{ render_cookie("GitHub", "github") }}
-      {% endif %}
-    {% endif %}
-    {% for type in cookies %}
-      {% if cookies[type] %}
-        {{ render_cookie(cookies[type], type) }}
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
+{% set cookies = config.extra.consent.cookies %}
+{% for type in cookies %}
+  {% if cookies[type] %}
+    <input type="checkbox" name="{{ type }}" hidden>
+  {% endif %}
+{% endfor %}
+<p class="md-consent__current" hidden></p>
 <div class="md-consent__controls">
-  <button class="md-button md-button--primary" data-consent-accept-all>Accept all</button>
-  <button type="reset" class="md-button md-button--primary">Reject all</button>
-  <button class="md-button">Save choices</button>
+  <button class="md-button md-button--primary" data-consent-accept>Accept</button>
+  <button type="reset" class="md-button md-button--primary">Reject</button>
 </div>
 <script>
-  document.querySelector("[data-consent-accept-all]").addEventListener("click", function () {
-    for (var input of this.form.elements)
-      if (input.name && input.type === "checkbox") input.checked = true
-  })
+  (function () {
+    var form = document.forms.consent
+    form.querySelector("[data-consent-accept]").addEventListener("click", function () {
+      for (var input of form.elements)
+        if (input.name && input.type === "checkbox") input.checked = true
+    })
+    var saved = __md_get("__consent")
+    if (saved) {
+      var current = form.querySelector(".md-consent__current")
+      current.textContent = saved.analytics
+        ? "Your current choice: accepted. Google Analytics is on."
+        : "Your current choice: rejected. Google Analytics is off."
+      current.hidden = false
+    }
+  })()
 </script>

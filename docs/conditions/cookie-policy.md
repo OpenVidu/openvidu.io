@@ -28,7 +28,7 @@ The site also keeps display preferences, such as the color scheme you pick, in y
 
 The durations of the Google Analytics cookies are Google's defaults, as described in [Google's documentation](https://support.google.com/analytics/answer/11397207){:target="_blank"}.
 
-**GitHub repository statistics**: if you accept the GitHub option, your browser requests the star and fork counts of the OpenVidu repository from GitHub (`api.github.com`) to show them in the page header. This website does not set any cookie for it, but GitHub receives the request, including your IP address. See the [GitHub General Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement){:target="_blank"}.
+The GitHub badges in the page header and on the home page are images served from openvidu.io itself, so viewing them sends no request to GitHub.
 
 ## How are users able to change the cookies configuration in their browsers?
 

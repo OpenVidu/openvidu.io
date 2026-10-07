@@ -67,6 +67,27 @@
   border-radius: 5px;
 }
 
+/* GitHub badge in the header (overrides/partials/header.html), in place of Material's
+   repository widget. A self-hosted image: see the comment in the partial. */
+.md-header__badge {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  line-height: 0;
+}
+
+.md-header__badge img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+/* Cookie consent: the saved choice, shown when the footer link reopens the banner. */
+.md-consent__current {
+  font-weight: 700;
+}
+
 /* Sign-in / account controls in the header */
 
 .log-in-div {
@@ -1309,6 +1330,14 @@ h1.meetplatform-slogan {
     width: 6rem !important;
     margin-left: 0.2em !important;
     margin-right: 0.4em !important;
+  }
+
+  .md-header__badge {
+    margin-left: 0.2rem;
+  }
+
+  .md-header__badge img {
+    height: 18px;
   }
 }
 
