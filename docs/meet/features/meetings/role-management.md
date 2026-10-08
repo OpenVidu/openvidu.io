@@ -10,7 +10,7 @@ Every participant joins a meeting with a different set of permissions:
 - **Users** and **identified guests** have by default the permissions of their **base role** (`Moderator` or `Speaker`), which can be fine-tuned **independently for each member** with [custom permissions](../room-members/management.md#add-a-member).
 - **Anonymous guests** can only join through the [shared `Moderator` or `Speaker` link](../rooms/access.md#anonymous-access), so they always have the [predefined permissions of that role](../rooms/access.md#predefined-roles) and cannot be customized.
 
-During a meeting, these permissions are not fixed. Participants with the `participantPromote` permission can **promote** other participants to moderator or **demote** them back to their original permissions, from the participant's menu in the **Participants** panel or through the [REST API](#rest-api-reference).
+During a meeting, these permissions are not fixed. Participants with the `participantPromote` permission can **promote** other participants to moderator or **demote** them back to their original permissions, from the participant's menu in the **Participants** panel, through the [REST API](#rest-api-reference) or, when OpenVidu Meet is embedded, with the [`participantUpdateRole` command](#embedded).
 
 !!! info
     `participantPromote` is one of the permissions the `Moderator` [predefined role](../rooms/access.md#predefined-roles) grants by default. For the complete list of permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"} schema.
@@ -44,3 +44,13 @@ A participant's role in the live meeting can also be changed from your backend w
 | Operation                         | HTTP Method | Reference                                                                                                                                                      |
 | --------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Update a participant's role       | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantRoleUpdate){:target="_blank"}     |
+
+## From your application { #embedded }
+
+When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application promotes or demotes a participant with the `participantUpdateRole` [command](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe, giving the participant's identity and the action, `upgrade` or `downgrade`. It acts on behalf of the local participant, so it requires that participant to hold the `participantPromote` permission.
+
+The participant whose role changed is told through the `participantRoleChanged` [event](../../embedded/reference/webcomponent.md#events), once the permissions of the new role are in effect. A change made while the participant is still joining is reported after `meetingJoined`. Neither the other participants nor the one who made the change receive the event.
+
+## Webhook { #webhook }
+
+Every promotion and demotion, whether it comes from the **Participants** panel, the REST API or the command, is reported to your backend as the [`participantRoleChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantRoleChangedWebhook){:target="_blank"}, which carries the participant with their new role. Editing a member's base role or custom permissions is not a promotion or a demotion, so it is not reported.
