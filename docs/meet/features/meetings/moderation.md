@@ -24,7 +24,7 @@ Muting only ever turns a device **off**: a moderator can never turn on somebody 
 
 ## Removing participants { #removing-participants }
 
-A participant with the `participantKick` permission can **remove** any other participant from the meeting. The removed participant is taken to the [End view](lifecycle.md#end-view), which tells them they were removed, and the [`participantLeft` webhook](../../embedded/reference/webhooks.md) reports `participant_kicked` as the reason.
+A participant with the `participantKick` permission can **remove** any other participant from the meeting. The removed participant is taken to the [End view](lifecycle.md#end-view), which tells them they were removed, and both the [`participantLeft` webhook](../../embedded/reference/webhooks.md) and the `participantLeft` [embedded event](../../embedded/reference/webcomponent.md#events) report `participant_kicked` as the reason.
 
 ## From your application { #embedded }
 

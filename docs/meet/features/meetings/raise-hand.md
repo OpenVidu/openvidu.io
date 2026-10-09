@@ -54,7 +54,7 @@ Raise hand is enabled by default when a room is [created](../rooms/management.md
 
 ## From your application { #embedded }
 
-When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application raises and lowers hands with the `participantHandRaise`, `participantHandLower` and `participantHandLowerAll` [commands](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. They act on behalf of the local participant: lowering another participant's hand, or every hand, requires the `participantHandLower` permission. The `participantHandChanged` [event](../../embedded/reference/webcomponent.md#events) tells the host every time a hand goes up or down, with its place in the queue and who lowered it.
+When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application raises and lowers hands with the `participantHandRaise`, `participantHandLower` and `participantHandLowerAll` [commands](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. They act on behalf of the local participant: lowering another participant's hand, or every hand, requires the `participantHandLower` permission. The `participantHandChanged` [event](../../embedded/reference/webcomponent.md#events) tells the host every time a hand goes up or down, with when it went up, which orders the queue, and who lowered it.
 
 ## REST API reference { #rest-api-reference }
 
