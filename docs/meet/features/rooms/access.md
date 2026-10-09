@@ -71,7 +71,7 @@ Grants full meeting permissions by default:
 
 - **Meeting management**: join the meeting, read its live state and end it for all participants.
 - **Recording control**: start and stop recordings, and list, play, download and delete them.
-- **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, kick them, and share room access links.
+- **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, [lower their raised hands](../meetings/raise-hand.md#lowering-hands), kick them, and share room access links.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages, change virtual background.
 
