@@ -2,11 +2,11 @@
 
 Google Cloud Platform
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Google Cloud Platform, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/index.md), but the process is automated through the Google Cloud Console.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Google Cloud Platform, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md), but the process is automated through the Google Cloud Console.
 
 > **Info**
 >
-> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 
@@ -86,7 +86,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | projectId               | GCP project id where the resources will be created.                                                                                       |
 | stackName               | Stack name for OpenVidu deployment.                                                                                                       |
-| openviduLicense **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/3.9/account/index.md) if you don't have one. |
+| openviduLicense **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/account/) if you don't have one. |
 
 ### Optional Parameters
 
@@ -182,8 +182,8 @@ If something goes wrong during the initial GCP deployment creation, your stack m
 
    These logs will give you more information about the GCP deployment creation process.
 
-1. If everything seems fine, check the [status](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything seems fine, check the [status](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ## Configuration and administration
 
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait around 5 to 10 minutes for the instance to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/gcp/admin/index.md) section to learn how to manage your deployment.
+When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait around 5 to 10 minutes for the instance to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/admin/index.md) section to learn how to manage your deployment.

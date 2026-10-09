@@ -4,27 +4,27 @@
 
 This is a guide to help identify and solve common issues related to recordings in OpenVidu.
 
-Recordings are handled by the **Egress service** in OpenVidu, built on top of LiveKit's Egress and documented in the [Egress reference](https://openvidu.io/3.9/docs/reference/egress/index.md). There are some general considerations to take into account:
+Recordings are handled by the **Egress service** in OpenVidu, built on top of LiveKit's Egress and documented in the [Egress reference](https://openvidu.io/latest/docs/reference/egress/index.md). There are some general considerations to take into account:
 
 - Recordings are **CPU intensive operations**. For recordings to work smoothly, the nodes hosting the Egress service must have sufficient free cores.
 - The first symptom of something going wrong with recordings is usually **missing recordings**: you are expecting recording files to be available in your storage, but they are simply not there. Other common symptom is receiving an **error `503 Service Unavailable`** when starting a new recording [on-demand](#on-demand-vs-automatic-recordings).
-- To be proactive when dealing with recording issues, **it is highly recommended to enable webhooks** in your OpenVidu deployment ([learn how](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/index.md)) and monitor it from your application's backend. In this way you can be notified of Egress-related events and errors as they happen.
+- To be proactive when dealing with recording issues, **it is highly recommended to enable webhooks** in your OpenVidu deployment ([learn how](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/index.md)) and monitor it from your application's backend. In this way you can be notified of Egress-related events and errors as they happen.
 
 ### On-demand vs Automatic recordings
 
 Recordings can be started **on-demand** or **automatically**:
 
-- **On-demand recordings** are started by calling any of these [Egress API](https://openvidu.io/3.9/docs/reference/egress/#starting-an-egress) operations:
+- **On-demand recordings** are started by calling any of these [Egress API](https://openvidu.io/latest/docs/reference/egress/#starting-an-egress) operations:
   - `StartRoomCompositeEgress`
   - `StartTrackCompositeEgress`
   - `StartParticipantEgress`
   - `StartTrackEgress`
   - `StartWebEgress`
-- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](https://openvidu.io/3.9/docs/reference/room-service-api/#rooms) method: then the room will be automatically recorded during its lifetime. See [Auto Egress](https://openvidu.io/3.9/docs/reference/egress/#auto-egress) for more details.
+- **Automatic recordings** are started when a room is created with auto-egress enabled. To do so just include an `egress` field when calling the [`CreateRoom`](https://openvidu.io/latest/docs/reference/room-service-api/#rooms) method: then the room will be automatically recorded during its lifetime. See [Auto Egress](https://openvidu.io/latest/docs/reference/egress/#auto-egress) for more details.
 
 > **Warning**
 >
-> It is important to distinguish between **on-demand recordings** and **automatic recordings** for a simple reason: your application is able to catch and handle errors when starting on-demand recordings, while automatic recordings will fail silently. In that case, [enabling webhooks](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/index.md) (or inspecting the service logs) is the only way to be notified of these failures.
+> It is important to distinguish between **on-demand recordings** and **automatic recordings** for a simple reason: your application is able to catch and handle errors when starting on-demand recordings, while automatic recordings will fail silently. In that case, [enabling webhooks](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/index.md) (or inspecting the service logs) is the only way to be notified of these failures.
 
 ## List of possible recording issues
 
@@ -59,9 +59,9 @@ There are not enough free CPU cores to start a new egress.
 
 - Scale out your OpenVidu deployment: deploy it in nodes with more CPU cores or add more Media Nodes to your cluster.
 
-- Consider using a less CPU intensive egress type: [Track Egress](https://openvidu.io/3.9/docs/reference/egress/#egress-types) does not require transcoding and composition, so it is much less CPU intensive than other egress types such as [Room Composite Egress](https://openvidu.io/3.9/docs/reference/egress/#egress-types).
+- Consider using a less CPU intensive egress type: [Track Egress](https://openvidu.io/latest/docs/reference/egress/#egress-types) does not require transcoding and composition, so it is much less CPU intensive than other egress types such as [Room Composite Egress](https://openvidu.io/latest/docs/reference/egress/#egress-types).
 
-- Review your [`egress.yaml` configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files), specifically the properties within `cpu_cost`:
+- Review your [`egress.yaml` configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files), specifically the properties within `cpu_cost`:
 
   ```yaml
   cpu_cost:
@@ -86,19 +86,19 @@ There are not enough free CPU cores to start a new egress.
 
 **Description**
 
-By default, OpenVidu will automatically create a new room when a user tries to connect to a room that does not exist yet. This behavior can be disabled in [`livekit.yaml` configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files):
+By default, OpenVidu will automatically create a new room when a user tries to connect to a room that does not exist yet. This behavior can be disabled in [`livekit.yaml` configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files):
 
 ```yaml
 room:
   auto_create: false
 ```
 
-When a room is auto-created on participant join, OpenVidu uses the room settings included in that participant’s token (the [`roomConfig`](https://openvidu.io/3.9/docs/reference/access-tokens/#token-claims) claim).
+When a room is auto-created on participant join, OpenVidu uses the room settings included in that participant’s token (the [`roomConfig`](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims) claim).
 
 A common problem appears when these chain of events happens:
 
 1. Your application's backend explicitly creates a room with a specific `RoomConfiguration`. For example, with an `egress` field to enable auto-egress.
-1. The room is unexpectedly deleted because of a timeout (properties `departure_timeout` or `empty_timeout` in [`livekit.yaml`](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files)).
+1. The room is unexpectedly deleted because of a timeout (properties `departure_timeout` or `empty_timeout` in [`livekit.yaml`](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files)).
 1. A participant tries to join the room using a token that does not include the same `egress` field in its `RoomConfiguration`.
 1. OpenVidu auto-creates the room again, but now using the token’s `RoomConfiguration`, not the original one.
 
@@ -140,16 +140,16 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
 
 - Consider using [on-demand egress requests](#on-demand-vs-automatic-recordings) instead of auto egress to record rooms.
 
-- Consider disabling auto-creation of rooms in file [`livekit.yaml`](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files). This enforces rooms to always be created explicitly from your backend before a participant can join to it with a token. Of course, it also requires handling connection errors in the frontend if a participant tries to join a non-existing room.
+- Consider disabling auto-creation of rooms in file [`livekit.yaml`](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files). This enforces rooms to always be created explicitly from your backend before a participant can join to it with a token. Of course, it also requires handling connection errors in the frontend if a participant tries to join a non-existing room.
 
   ```yaml
   room:
     auto_create: false
   ```
 
-- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the room configuration of both the [`CreateRoom`](https://openvidu.io/3.9/docs/reference/room-service-api/#rooms) request and the [participant's access token](https://openvidu.io/3.9/docs/reference/access-tokens/#token-claims) (its `roomConfig` claim). In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
+- If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the room configuration of both the [`CreateRoom`](https://openvidu.io/latest/docs/reference/room-service-api/#rooms) request and the [participant's access token](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims) (its `roomConfig` claim). In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
 
-- Increase the room timeout properties in [`livekit.yaml`](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files). This can reduce the probability of rooms being cleaned up before a participant tries to join:
+- Increase the room timeout properties in [`livekit.yaml`](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files). This can reduce the probability of rooms being cleaned up before a participant tries to join:
 
   ```yaml
   room:
@@ -165,7 +165,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
 
 You have configured an external storage for your recordings, but the recording files are not being uploaded to it. This can be caused by a misconfiguration or a connectivity issue between OpenVidu nodes and the external storage.
 
-External storage is configured in the [`egress.yaml` configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files) globally (with `storage` property):
+External storage is configured in the [`egress.yaml` configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files) globally (with `storage` property):
 
 ```yaml
 storage:
@@ -198,14 +198,14 @@ You can also configure external storage programmatically on a per-request basis 
   -rw-r--r-- 1 admin root   2969013 Mar 10 14:16 TrackComposite-RM_JpcnziWBTEdY-TestRoom3-2026-03-10T141625.mp4
   ```
 
-- The [EgressInfo](https://openvidu.io/3.9/docs/reference/egress/#egressinfo) objects returned by the Egress API or included in the `egress_ended` webhook event contains:
+- The [EgressInfo](https://openvidu.io/latest/docs/reference/egress/#egressinfo) objects returned by the Egress API or included in the `egress_ended` webhook event contains:
 
   - Field `backup_storage_used` with value `true`.
   - Or any other field with the substring `backup_storage` in its value (E.g. `manifestLocation = '/home/egress/backup_storage/EG_f5nHLam4xLb8.json'`).
 
 **Solutions**
 
-- Review the configuration of the external storage: in the [`egress.yaml`](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files) if you are using the global declarative configuration, or in the body of the `CreateRoom` or `StartEgress` operations if you are using the programmatic per-request configuration.
+- Review the configuration of the external storage: in the [`egress.yaml`](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files) if you are using the global declarative configuration, or in the body of the `CreateRoom` or `StartEgress` operations if you are using the programmatic per-request configuration.
 - Review the connectivity between your OpenVidu nodes and the external storage. Check if there are any network issues or firewall rules preventing OpenVidu nodes from reaching the external storage.
 
 ### No disk space free
@@ -238,7 +238,7 @@ Increase disk space in the node hosting the egress.
 
 **Description**
 
-By default, OpenVidu will kill active egresses under sustained high CPU load (see [Egress CPU overload killer](https://openvidu.io/3.9/docs/self-hosting/production-ready/scalability/#egress-cpu-overload-killer)). This is generally expected and desired, but it can impact active egresses, causing them to be interrupted.
+By default, OpenVidu will kill active egresses under sustained high CPU load (see [Egress CPU overload killer](https://openvidu.io/latest/docs/self-hosting/production-ready/scalability/#egress-cpu-overload-killer)). This is generally expected and desired, but it can impact active egresses, causing them to be interrupted.
 
 **Symptoms**
 
@@ -247,14 +247,14 @@ By default, OpenVidu will kill active egresses under sustained high CPU load (se
 
 **Solutions**
 
-- You can disable the Egress CPU overload killer by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files). This must be done with caution and care, as it could lead to overloading the entire Media Node and affecting the performance of other processes.
+- You can disable the Egress CPU overload killer by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files). This must be done with caution and care, as it could lead to overloading the entire Media Node and affecting the performance of other processes.
 - In the end this is just an under-provisioning issue: consider scaling out your OpenVidu deployment. Deploy it in nodes with more CPU cores or add more Media Nodes to your cluster.
 
 ### Track disappears before the recorder attaches (`track not found`)
 
 **Description**
 
-When recording individual tracks with [Track Egress](https://openvidu.io/3.9/docs/reference/egress/#egress-types) (on-demand via `StartTrackEgress`, or with per-track auto-egress), OpenVidu launches **one egress per published track, shortly after the track is published**. The recorder then needs a moment to connect to the room and subscribe to the track: usually well under a second, occasionally a little longer. If the track is unpublished during that window, the recorder never finds it, and the egress fails after waiting up to 30 seconds.
+When recording individual tracks with [Track Egress](https://openvidu.io/latest/docs/reference/egress/#egress-types) (on-demand via `StartTrackEgress`, or with per-track auto-egress), OpenVidu launches **one egress per published track, shortly after the track is published**. The recorder then needs a moment to connect to the room and subscribe to the track: usually well under a second, occasionally a little longer. If the track is unpublished during that window, the recorder never finds it, and the egress fails after waiting up to 30 seconds.
 
 The most common trigger is **participant reconnection**: when a client reconnects, its camera and microphone are republished with new track IDs, so the egress that was launched for the old track ID is orphaned. Other triggers are very short-lived publishes and quick unpublishes. This is a startup race tied to the track lifecycle, **not a capacity problem**.
 
@@ -304,7 +304,7 @@ Then look for a new `mediaTrack published` from the same participant identity in
 
 The recorder connects and subscribes to the track successfully, but the recording pipeline never starts because no media ever arrives from the publisher. When the track finally closes, the egress aborts having recorded nothing.
 
-This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](https://openvidu.io/3.9/docs/reference/client-sdk/#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
+This is almost always a **camera track that is published without sending video**: a participant who joins with the camera off or [muted](https://openvidu.io/latest/docs/reference/client-sdk/#muteunmute-a-track) (a muted track stays published but sends no media), or whose camera has not started producing frames yet. It can also be a **reconnection orphan**: the track belongs to a peer connection that is being replaced, so media never stabilizes before the new connection takes over.
 
 It is **not** a network, egress-node or capacity problem. The same peer connection's other tracks (for example the microphone) typically record fine at the same time, which proves the media path works; there is simply no video being sent.
 

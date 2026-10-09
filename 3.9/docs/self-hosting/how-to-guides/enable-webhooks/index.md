@@ -46,7 +46,7 @@ If you are using the V2 Compatibility module, you can also enable webhooks for t
 
    Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
 
-   Check in the [Configuration Reference](https://openvidu.io/3.9/docs/self-hosting/configuration/reference/#pro-v2compatibilityenv) all the webhook events you can receive by setting the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
+   Check in the [Configuration Reference](https://openvidu.io/latest/docs/self-hosting/configuration/reference/#pro-v2compatibilityenv) all the webhook events you can receive by setting the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
 
 ## Send Webhooks to a Local Application Server
 

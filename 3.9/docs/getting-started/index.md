@@ -24,11 +24,11 @@ That is the whole shape of an OpenVidu application, and it does not change when 
 
 > **Prerequisites**
 >
-> [Docker and Docker Compose](https://docs.docker.com/get-started/get-docker/) , and [Node.js](https://nodejs.org/) for the example server on this page. The [application server tutorials](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) cover eight other languages.
+> [Docker and Docker Compose](https://docs.docker.com/get-started/get-docker/) , and [Node.js](https://nodejs.org/) for the example server on this page. The [application server tutorials](https://openvidu.io/latest/docs/tutorials/application-server/index.md) cover eight other languages.
 
 > **Building with an AI coding agent?**
 >
-> Install the [OpenVidu Agent Plugin](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/index.md) first. Claude Code, Cursor, VS Code, Codex and other coding agents then read the OpenVidu documentation for the version you run, this page included, so the code they write is up to date and accurate.
+> Install the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md) first. Claude Code, Cursor, VS Code, Codex and other coding agents then read the OpenVidu documentation for the version you run, this page included, so the code they write is up to date and accurate.
 
 ## 1. Run OpenVidu locally
 
@@ -75,7 +75,7 @@ Once it is up, open <http://localhost:7880>. That page lists every service in th
 
 Keep the dashboard open in a tab. It is the fastest way to see whether something worked.
 
-For what else the local deployment gives you — including testing from a phone on the same network with real certificates — see [OpenVidu Local installation](https://openvidu.io/3.9/docs/self-hosting/local/index.md).
+For what else the local deployment gives you — including testing from a phone on the same network with real certificates — see [OpenVidu Local installation](https://openvidu.io/latest/docs/self-hosting/local/index.md).
 
 ## 2. Mint an access token
 
@@ -187,7 +187,7 @@ Now look at the [dashboard](http://localhost:7880/dashboard): one room, two part
 
   The same token endpoint plus webhook handling, as a complete working project in nine languages.
 
-  [Application server tutorials](https://openvidu.io/3.9/docs/tutorials/application-server/index.md)
+  [Application server tutorials](https://openvidu.io/latest/docs/tutorials/application-server/index.md)
 
 - **Build the client properly**
 
@@ -195,7 +195,7 @@ Now look at the [dashboard](http://localhost:7880/dashboard): one room, two part
 
   React, Angular, Vue, Electron, Ionic, Android and iOS, each a full application rather than a page of script.
 
-  [Application client tutorials](https://openvidu.io/3.9/docs/tutorials/application-client/index.md)
+  [Application client tutorials](https://openvidu.io/latest/docs/tutorials/application-client/index.md)
 
 - **Look things up**
 
@@ -203,7 +203,7 @@ Now look at the [dashboard](http://localhost:7880/dashboard): one room, two part
 
   Every operation at a glance — tokens, room management, recording, screen sharing — each one linking to its reference page.
 
-  [Common operations](https://openvidu.io/3.9/docs/build-your-app/common-operations/index.md)
+  [Common operations](https://openvidu.io/latest/docs/build-your-app/common-operations/index.md)
 
 - **Go to production**
 
@@ -211,6 +211,6 @@ Now look at the [dashboard](http://localhost:7880/dashboard): one room, two part
 
   Single Node, Elastic or High Availability, on your own servers or any major cloud.
 
-  [Deployment types](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md)
+  [Deployment types](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md)
 
-Prefer a finished video conferencing application over building one? [OpenVidu Meet](https://openvidu.io/3.9/meet/index.md) is ready to deploy and embed, and the [comparison](https://openvidu.io/3.9/openvidu-meet-vs-openvidu-platform/index.md) shows which of the two fits your project.
+Prefer a finished video conferencing application over building one? [OpenVidu Meet](https://openvidu.io/latest/meet/index.md) is ready to deploy and embed, and the [comparison](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md) shows which of the two fits your project.
