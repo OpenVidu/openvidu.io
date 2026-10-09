@@ -307,8 +307,9 @@ Where a rule goes:
   inline is fine.
 - **Product tags** are written `**PRO**{ .openvidu-tag .openvidu-pro-tag }` /
   `**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }` and have one size everywhere, 0.8em of
-  the surrounding text: never size one inline. Only inside a raw HTML table (the pricing table)
-  do they stay `<span>`s.
+  the surrounding text: never size one inline. Only inside raw HTML without a `markdown`
+  attribute (the pricing table, the pricing page's price block) do they stay `<span>`s: Markdown
+  never parses there, so the attribute list would render as literal text.
 - **Anything site-wide** → the matching section of `extra.css`; a responsive rule joins the
   existing `@media` block for its breakpoint.
 
