@@ -73,7 +73,7 @@ Grants full meeting permissions by default:
 - **Recording control**: start and stop recordings, and list, play, download and delete them.
 - **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, [lower their raised hands](../meetings/raise-hand.md#lowering-hands), kick them, and share room access links.
 - **Media publishing**: publish video, audio, and share screen.
-- **Communication**: send chat messages, change virtual background.
+- **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 
 ### Speaker
 
@@ -82,7 +82,7 @@ Grants basic participation permissions by default:
 - **Meeting access**: join the meeting and read its live state.
 - **Recording access**: list, play and download the room's recordings — but not start, stop or delete them.
 - **Media publishing**: publish video, audio, and share screen.
-- **Communication**: send chat messages, change virtual background.
+- **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 
 !!! info
 

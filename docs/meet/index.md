@@ -88,6 +88,24 @@ Connect dozens of participants in a room. OpenVidu Meet automatically adapts to 
 
 <div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
 
+- __Raise hand__{ .ov-meet-commercial-card-title }
+
+    Participants ask for a turn without interrupting, and everyone sees the queue.
+
+    <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/raise-hand-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/raise-hand-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+    <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/raise-hand-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/raise-hand-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+
+- __Reactions__{ .ov-meet-commercial-card-title }
+
+    A quick emoji on their tile tells whoever is speaking what the room thinks, without a word.
+
+    <a class="glightbox" href="/assets/videos/meet/meetings/reactions/send-reaction-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/reactions/send-reaction-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+    <a class="glightbox" href="/assets/videos/meet/meetings/reactions/send-reaction-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/reactions/send-reaction-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+
+</div>
+
+<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
+
 - __Pre-join view__{ .ov-meet-commercial-card-title }
 
     Participants can set up their video/audio devices, virtual background and language before joining the meeting.
@@ -167,23 +185,23 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" markdown>
 
--   :material-record-rec:{ .feature-icon } __Recording__{ .feature-name }
-
-    ---
-
-    Record your video calls in multiple layouts and easily control who can access or manage each recording.
-
 -   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
 
     ---
 
     Share your screen in stunning quality for flawless presentations and smooth collaboration every time.
 
--   :material-face-man-shimmer-outline:{ .feature-icon .padding-icon } __Background effects__{ .feature-name }
+-   :material-shield-account-outline:{ .feature-icon .padding-icon } __Meeting moderation__{ .feature-name }
 
     ---
 
-    Enhance your videos by blurring backgrounds or replacing them with custom images and effects.
+    Mute participants, lower their hands, remove them from the call or promote them to moderator.
+
+-   :material-account-key-outline:{ .feature-icon .padding-icon } __Roles and permissions__{ .feature-name }
+
+    ---
+
+    Decide per room and per member who can record, share their screen, chat, react or moderate.
 
 </div>
 
@@ -389,7 +407,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
--	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools. Locked rooms, breakout groups and many more features coming soon to enhance the learning experience.
+-	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools: students raise their hand to ask for a turn and react with an emoji instead of interrupting. Locked rooms, breakout groups and many more features coming soon to enhance the learning experience.
 
 ![Use case e-learning](../assets/images/meet/embedded/use-cases/elearning.png){ .round-corners loading=lazy width=1920 height=1079 }
 
