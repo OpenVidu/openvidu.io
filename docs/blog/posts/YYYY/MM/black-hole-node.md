@@ -1,9 +1,15 @@
 ---
-title: "The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)"
+title: >-
+  The Black Hole Node: how one full disk broke recordings in an entire WebRTC
+  cluster (Bug stories #1)
 draft: false
-date: 2026-09-21
+date:
+  created: 2026-10-13
 slug: black-hole-node
-description: How a single full disk turned OpenVidu's CPU-based egress placement into a black hole that swallowed every recording in the cluster, and how we traced it.
+description: >-
+  How a single full disk turned OpenVidu's CPU-based egress placement into a
+  black hole that swallowed every recording in the cluster, and how we traced
+  it.
 cover_image: poster-dark.png
 categories:
   - OpenVidu Platform
