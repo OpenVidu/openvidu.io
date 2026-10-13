@@ -20,7 +20,7 @@ The **Participants** panel of the [Meeting view](lifecycle.md#meeting-view) list
 
 Muting only ever turns a device **off**: a moderator can never turn on somebody else's microphone or camera. The affected participant is told that a moderator turned off one of their devices, and may turn it back on at any time. Moderators cannot be muted, and turning off a device for everyone leaves the moderators alone.
 
-`participantMute` is granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room created from OpenVidu Meet 3.9.0 on. Rooms and room members that existed before start without it, so it has to be granted explicitly in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member).
+`participantMute` is granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room created. Rooms and room members that existed before start without it, so it has to be granted explicitly in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member).
 
 ## Removing participants { #removing-participants }
 
