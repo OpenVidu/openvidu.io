@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Every OpenVidu Blog article published in October 2026: 1 post, on self-hosted video conferencing and WebRTC engineering.">
+        <meta name="description" content="Every OpenVidu Blog article published in October 2026: 2 posts, on self-hosted video conferencing and WebRTC engineering.">
       
       
       
@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="OpenVidu">
 <meta property="og:type" content="website">
 <meta property="og:title" content="October 2026">
-<meta property="og:description" content="Every OpenVidu Blog article published in October 2026: 1 post, on self-hosted video conferencing and WebRTC engineering.">
+<meta property="og:description" content="Every OpenVidu Blog article published in October 2026: 2 posts, on self-hosted video conferencing and WebRTC engineering.">
 <meta property="og:url" content="https://openvidu.io/blog/archive/2026/10/">
 <meta property="og:image" content="https://openvidu.io/assets/images/og/openvidu-card.png">
 <meta property="og:image:width" content="1200">
@@ -1715,6 +1715,59 @@
       <header class="md-typeset">
         <h1 id="october-2026">October 2026<a class="headerlink" href="#october-2026" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorCR.jpg" alt="Carlos Ruiz">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-10-13 00:00:00+00:00">October 13, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../../category/openvidu-platform/" class="md-meta__link">OpenVidu Platform</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              7 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="the-black-hole-node-how-one-full-disk-broke-recordings-in-an-entire-webrtc-cluster-bug-stories-1"><a class="toclink" href="../../../2026/10/13/black-hole-node/">The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)</a></h2>
+<p><img alt="The Black Hole Node: one full disk swallowed every recording in the cluster" class="round-corners" src="/assets/images/blog/2026/10/black-hole-node/poster-dark.png#only-dark">
+<img alt="The Black Hole Node: one full disk swallowed every recording in the cluster" class="round-corners" src="/assets/images/blog/2026/10/black-hole-node/poster-light.png#only-light"></p>
+<p>OpenVidu records media from its rooms with a service called Egress, and spreads that work across multiple Media Nodes, each one running an Egress of its own. Our Egress is built on LiveKit's, but the algorithm that decides which node takes each recording is our own implementation. LiveKit does not choose by CPU: it weights each recording by type to decide which nodes can take it at all, then hands the job to one that is already recording, picking at random when every candidate is idle. We added a CPU-aware strategy on top and made it the default, so a new recording lands on the node with the most headroom rather than on the busiest one.</p>
+<p>We did that to keep the load even across the cluster and get more out of every Media Node. But in systems as complex as WebRTC it is easy to miss second-order effects: parts that behave perfectly on their own and break once you put them together. Our strategy broke when it met a disk limit nobody had accounted for, and it took the recording capability of a whole cluster with it.</p>
+<p>The metrics never pointed at it. What they measure is whether a cluster is healthy, and this one was. The failure was somewhere else, in the logs, and that is where we traced it, node by node, until we found what to fix.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../../2026/10/13/black-hole-node/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

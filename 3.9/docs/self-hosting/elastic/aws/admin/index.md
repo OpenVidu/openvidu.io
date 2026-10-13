@@ -2,7 +2,7 @@
 
 AWS
 
-The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) . This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/index.md) documentation. However, there are specific considerations unique to the AWS environment that are worth keeping in mind.
+The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) . This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/index.md) documentation. However, there are specific considerations unique to the AWS environment that are worth keeping in mind.
 
 ## Cluster Shutdown and Startup
 
@@ -137,9 +137,9 @@ If you need to maintain a fixed number of Media Nodes instead of allowing the Au
 
 ## Administration and configuration
 
-For administration, you can follow the instructions from the [On Premises Elastic Administration](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/index.md) section.
+For administration, you can follow the instructions from the [On Premises Elastic Administration](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/index.md) section.
 
-Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/index.md) section. Additionally, the [How to Guides](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md) section. Additionally, the [How to Guides](https://openvidu.io/latest/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
 In addition to these, an AWS deployment provides the capability to manage global configurations via the AWS Console using AWS Secrets created during the deployment. To manage configurations this way, follow these steps:
 
@@ -156,4 +156,4 @@ Changes will be applied automatically in all the nodes of your OpenVidu Elastic 
 
 ## Backup and Restore
 
-Review the [Backup and restore OpenVidu deployments](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.
+Review the [Backup and restore OpenVidu deployments](https://openvidu.io/latest/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.

@@ -1,6 +1,6 @@
 # OpenVidu MCP servers
 
-An MCP server gives a coding agent tools it can call. OpenVidu provides the documentation server below, included in the [OpenVidu Agent Plugin](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/index.md). Add it on its own when your client doesn't load plugins, or when you would rather not install one.
+An MCP server gives a coding agent tools it can call. OpenVidu provides the documentation server below, included in the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md). Add it on its own when your client doesn't load plugins, or when you would rather not install one.
 
 ## OpenVidu documentation server
 
@@ -18,7 +18,7 @@ It searches and reads the OpenVidu Meet and OpenVidu Platform documentation of e
 | `list_versions`                            | Lists the documentation versions, and the one used by default.                                                             |
 | `resolve_openvidu_version_edition_product` | Explains how to find out the version, edition and product a project uses, and maps a LiveKit Server version to OpenVidu's. |
 | `get_changelog`                            | Returns the release notes of a version.                                                                                    |
-| `get_pricing_info`                         | Returns the editions, plans and [pricing](https://openvidu.io/3.9/pricing/index.md).                                       |
+| `get_pricing_info`                         | Returns the editions, plans and [pricing](https://openvidu.io/pricing/index.md).                                       |
 
 The tools that read the documentation take the version your deployment reports (`3.9.1`) and answer from that release's documentation (`3.9`); without one, they use the latest. A version the server doesn't carry is an error, never an answer for another release. There is nothing to update on your side: the server is rebuilt each time this documentation is published.
 
@@ -140,7 +140,7 @@ Each request your coding agent makes to `docs-mcp.openvidu.io` is logged as one 
 
 Your IP address is used only to group one client's requests into a visit, and is discarded before anything is written to storage: visits are labelled with a random identifier that cannot be traced back to an address or linked to a later visit. Request logs are deleted after 7 days. The archive, which contains no addresses, is deleted after 395 days so a year-over-year comparison is possible. Aggregate counts are kept. Nothing is shared with third parties.
 
-When your agent reads LiveKit's documentation, it fetches those pages from docs.livekit.io itself: that request never passes through OpenVidu, and LiveKit's own policies apply to it. The rest of what openvidu.io collects is in the [privacy policy](https://openvidu.io/3.9/conditions/privacy-policy/index.md).
+When your agent reads LiveKit's documentation, it fetches those pages from docs.livekit.io itself: that request never passes through OpenVidu, and LiveKit's own policies apply to it. The rest of what openvidu.io collects is in the [privacy policy](https://openvidu.io/conditions/privacy-policy/index.md).
 
 ### Troubleshooting
 

@@ -4,7 +4,7 @@
 
 **OpenVidu Meet is an open-source, self-hosted video conferencing application** — a ready-to-use alternative to Zoom, Google Meet or Jitsi Meet that runs on your own servers, needs no code to deploy, and can be embedded in your product through a web component, REST API and webhooks.
 
-[Deploy Meet in minutes](https://openvidu.io/3.9/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+[Deploy Meet in minutes](https://openvidu.io/latest/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
 
 - **Feature-rich for videoconferencing**
 
@@ -134,7 +134,7 @@ ______________________________________________________________________
 
   Enable participants to share files easily during calls with a simple drag-and-drop feature.
 
-[Deploy Meet in minutes](https://openvidu.io/3.9/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+[Deploy Meet in minutes](https://openvidu.io/latest/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
 
 ______________________________________________________________________
 
@@ -159,7 +159,7 @@ curl --request POST \
     --data '{"roomName": "My Room"}'
 ```
 
-## Explore [**OpenVidu Meet Embedded**](https://openvidu.io/3.9/meet/embedded/intro) to integrate video calls into your application.
+## Explore [**OpenVidu Meet Embedded**](https://openvidu.io/latest/meet/embedded/intro) to integrate video calls into your application.
 
 ______________________________________________________________________
 
@@ -203,7 +203,7 @@ Self-host OpenVidu Meet on your own infrastructure for maximum security and cost
 
   Deploy in Oracle Cloud Infrastructure through the web console
 
-## Check out the [**deployment documentation**](https://openvidu.io/3.9/meet/deployment/overview).
+## Check out the [**deployment documentation**](https://openvidu.io/latest/meet/deployment/overview).
 
 ______________________________________________________________________
 
@@ -305,7 +305,7 @@ Build trust with instant, reliable support through embedded video calls that per
 
   Customize the look and feel of your support rooms to match your brand identity.
 
-[Deploy Meet in minutes](https://openvidu.io/3.9/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
+[Deploy Meet in minutes](https://openvidu.io/latest/meet/getting-started/index.md) [Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io)
 
 ______________________________________________________________________
 
@@ -323,10 +323,10 @@ OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/3.9/pricing/index.md) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing/index.md) for more details.
 
-## You can choose the OpenVidu edition that best fits your needs when [deploying OpenVidu Meet](https://openvidu.io/3.9/meet/deployment/overview/index.md).
+## You can choose the OpenVidu edition that best fits your needs when [deploying OpenVidu Meet](https://openvidu.io/latest/meet/deployment/overview/index.md).
 
 ______________________________________________________________________
 
-## Need total control and advanced SDKs to build your custom real-time application? Check out [**OpenVidu Platform**](https://openvidu.io/3.9/docs/index.md). Not sure which one fits? [Compare Meet vs Platform](/openvidu-meet-vs-openvidu-platform/).
+## Need total control and advanced SDKs to build your custom real-time application? Check out [**OpenVidu Platform**](https://openvidu.io/latest/docs/index.md). Not sure which one fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/).

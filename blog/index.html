@@ -185,6 +185,12 @@
       "blogPost": [
         {
           "@type": "BlogPosting",
+          "headline": "The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)",
+          "url": "https://openvidu.io/blog/2026/10/13/black-hole-node/",
+          "datePublished": "2026-10-13"
+        },
+        {
+          "@type": "BlogPosting",
           "headline": "Introducing the OpenVidu Agent Plugin for coding agents",
           "url": "https://openvidu.io/blog/2026/10/07/openvidu-agent-plugin/",
           "datePublished": "2026-10-07"
@@ -1638,6 +1644,59 @@
       <nav class="md-post__authors md-typeset">
         
           <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorCR.jpg" alt="Carlos Ruiz">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-10-13 00:00:00+00:00">October 13, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/openvidu-platform/" class="md-meta__link">OpenVidu Platform</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              7 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="the-black-hole-node-how-one-full-disk-broke-recordings-in-an-entire-webrtc-cluster-bug-stories-1"><a class="toclink" href="2026/10/13/black-hole-node/">The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)</a></h2>
+<p><img alt="The Black Hole Node: one full disk swallowed every recording in the cluster" class="round-corners" src="/assets/images/blog/2026/10/black-hole-node/poster-dark.png#only-dark">
+<img alt="The Black Hole Node: one full disk swallowed every recording in the cluster" class="round-corners" src="/assets/images/blog/2026/10/black-hole-node/poster-light.png#only-light"></p>
+<p>OpenVidu records media from its rooms with a service called Egress, and spreads that work across multiple Media Nodes, each one running an Egress of its own. Our Egress is built on LiveKit's, but the algorithm that decides which node takes each recording is our own implementation. LiveKit does not choose by CPU: it weights each recording by type to decide which nodes can take it at all, then hands the job to one that is already recording, picking at random when every candidate is idle. We added a CPU-aware strategy on top and made it the default, so a new recording lands on the node with the most headroom rather than on the busiest one.</p>
+<p>We did that to keep the load even across the cluster and get more out of every Media Node. But in systems as complex as WebRTC it is easy to miss second-order effects: parts that behave perfectly on their own and break once you put them together. Our strategy broke when it met a disk limit nobody had accounted for, and it took the recording capability of a whole cluster with it.</p>
+<p>The metrics never pointed at it. What they measure is whether a cluster is healthy, and this one was. The failure was somewhere else, in the logs, and that is where we traced it, node by node, until we found what to fix.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="2026/10/13/black-hole-node/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
             <img src="https://openvidu.io/assets/images/about-us/authorJCM.jpg" alt="Juan Carlos Moreno">
           </span>
         
@@ -2095,65 +2154,6 @@
     
       <nav class="md-post__action">
         <a href="2026/08/11/control-video-calls-with-gestures-free-ai/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorPF.jpg" alt="Pablo Fuente">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-08-04 00:00:00+00:00">August 4, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/ai/" class="md-meta__link">AI</a>, 
-              <a href="category/implementation/" class="md-meta__link">Implementation</a>, 
-              <a href="category/livekit/" class="md-meta__link">LiveKit</a>, 
-              <a href="category/technology/" class="md-meta__link">Technology</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              9 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="building-an-ai-agent-for-transcribing-and-summarizing-audio-calls"><a class="toclink" href="2026/08/04/transcriber-summarizer-agent/">Building an AI agent for transcribing and summarizing audio calls</a></h2>
-<p><img alt="Header image: a microphone turning into text inside an audio call" class="round-corners" src="/assets/images/blog/2026/08/transcriber-summarizer-agent/transcriber-summarizer-agent.png"></p>
-<p>With the world being flooded with all kinds of agents, bots, and AI services, let's keep things grounded and code something tangible in a few simple steps. Let's build an AI agent that helps people in an audio call. Our agent will:</p>
-<ol>
-<li>Store the <strong>full transcript</strong> of the meeting in a text file.</li>
-<li>Send <strong>live captions</strong> to everyone in the call.</li>
-<li>When someone joins late, send them a <strong>private summary</strong> of what they missed.</li>
-</ol>
-<p>We'll be using <strong>OpenVidu</strong> as our media server, and <a href="https://docs.livekit.io/agents/" target="_blank" rel="noopener"><strong>LiveKit Agents</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> Python framework to build our agent. These tools handle all the hard parts of real-time audio transport, so we can focus on our agent features.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="2026/08/04/transcriber-summarizer-agent/">
           Continue reading
         </a>
       </nav>
