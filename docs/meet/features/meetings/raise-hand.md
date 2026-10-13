@@ -43,7 +43,7 @@ The participant is told that a moderator lowered their hand.
 <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/lower-hands-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/lower-hands-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/lower-hands-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/lower-hands-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
-`participantHandLower` is granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room created from OpenVidu Meet 3.10.0 on. Rooms and room members that existed before start without it, so it has to be granted explicitly in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member).
+`participantHandLower` is granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room created. Rooms and room members that existed before start without it, so it has to be granted explicitly in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member).
 
 ## Enable or disable raise hand for a room { #enable-or-disable }
 
