@@ -26,8 +26,8 @@ authors:
 
 # The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)
 
-![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-dark.png#only-dark){ .round-corners }
-![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/YYYY/MM/black-hole-node/poster-light.png#only-light){ .round-corners }
+![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/2026/10/black-hole-node/poster-dark.png#only-dark){ .round-corners }
+![The Black Hole Node: one full disk swallowed every recording in the cluster](/assets/images/blog/2026/10/black-hole-node/poster-light.png#only-light){ .round-corners }
 
 OpenVidu records media from its rooms with a service called Egress, and spreads that work across multiple Media Nodes, each one running an Egress of its own. Our Egress is built on LiveKit's, but the algorithm that decides which node takes each recording is our own implementation. LiveKit does not choose by CPU: it weights each recording by type to decide which nodes can take it at all, then hands the job to one that is already recording, picking at random when every candidate is idle. We added a CPU-aware strategy on top and made it the default, so a new recording lands on the node with the most headroom rather than on the busiest one.
 
@@ -45,7 +45,7 @@ When CPU metrics don't indicate an overload, it's time to dig into the logs. Ope
 
 The status was identical across the board: `EGRESS_FAILED`, and every `egress_ended` webhook carried the same reason:
 
-![Recordings returning as EGRESS_FAILED](/assets/images/blog/YYYY/MM/black-hole-node/discover-egress-failed.png){ .round-corners loading=lazy }
+![Recordings returning as EGRESS_FAILED](/assets/images/blog/2026/10/black-hole-node/discover-egress-failed.png){ .round-corners loading=lazy }
 
 `"error": "No space left on the resource."`: the issue was disk space. Recordings are first written to a temporary directory before being uploaded to external storage; if that directory fills up, the write operation fails. The strange part wasn't the failure itself, but its scale: it wasn't just a few isolated recordings failing. Nearly the entire cluster was affected.
 
@@ -53,7 +53,7 @@ At first glance, it seemed as if all Media Nodes had run out of disk space simul
 
 The webhook tells you that a recording failed and why, but it doesn't specify which Media Node hosted the Egress. In an OpenVidu cluster, that could be any of them. We pivoted from the Room logs to the logs of every container in the cluster, filtered for failed Egresses, and looked at the node label on each line. The results were unexpected:
 
-![Every egress_failed line in the cluster carries the same node_id label](/assets/images/blog/YYYY/MM/black-hole-node/discover-node.png){ .round-corners loading=lazy }
+![Every egress_failed line in the cluster carries the same node_id label](/assets/images/blog/2026/10/black-hole-node/discover-node.png){ .round-corners loading=lazy }
 
 All failures originated from a single source: one Media Node with a full disk, where Egress processes repeatedly died while attempting to write to the filesystem. The rest of the Media Nodes had plenty of space, and recordings weren't even reaching the healthy ones.
 
@@ -72,8 +72,8 @@ However, a full disk completely subverts this logic:
 3. A Media Node with zero active Egresses reports maximum free CPU, giving it the highest possible `cpuload` score.
 4. The algorithm, doing exactly what it was told, sees the Media Node as the most available and sends it the next recording. It fails, leaving the Media Node idle once more, and the cycle continues as it wins the next assignment too...
 
-![The loop that makes the node with the full disk win all the recordings](/assets/images/blog/YYYY/MM/black-hole-node/bug-cycle-dark.png#only-dark){ .round-corners loading=lazy }
-![The loop that makes the node with the full disk win all the recordings](/assets/images/blog/YYYY/MM/black-hole-node/bug-cycle-light.png#only-light){ .round-corners loading=lazy }
+![The loop that makes the node with the full disk win all the recordings](/assets/images/blog/2026/10/black-hole-node/bug-cycle-dark.png#only-dark){ .round-corners loading=lazy }
+![The loop that makes the node with the full disk win all the recordings](/assets/images/blog/2026/10/black-hole-node/bug-cycle-light.png#only-light){ .round-corners loading=lazy }
 
 The broken Media Node had become a black hole: **the more it failed, the more idle it appeared, and the more work it attracted**. The healthy Media Nodes, fully capable of recording, sat there doing nothing.
 
@@ -85,7 +85,7 @@ The fix addresses this directly: checking disk availability before accepting a t
 
 With the fix applied to the same cluster, and the disk still full, the affected Media Node now rejects each request and explains why, while a healthy Media Node picks up the recording:
 
-![The full Media Node rejecting recordings with reason: disk while a healthy node starts them](/assets/images/blog/YYYY/MM/black-hole-node/after-node1-rejects.png){ .round-corners loading=lazy }
+![The full Media Node rejecting recordings with reason: disk while a healthy node starts them](/assets/images/blog/2026/10/black-hole-node/after-node1-rejects.png){ .round-corners loading=lazy }
 
 ```
 WARN egress  can not accept request
@@ -97,8 +97,8 @@ Because the full node steps aside, the algorithm routes the recordings to the he
 
 The following diagram illustrates the entire lifecycle: from how the bug dragged almost all recordings toward the full Media Node, to how that same Media Node behaves now with the fix in place.
 
-![The journey of the bug and the behavior of the full node with the fix](/assets/images/blog/YYYY/MM/black-hole-node/bug-phases-dark.png#only-dark){ .round-corners loading=lazy }
-![The journey of the bug and the behavior of the full node with the fix](/assets/images/blog/YYYY/MM/black-hole-node/bug-phases-light.png#only-light){ .round-corners loading=lazy }
+![The journey of the bug and the behavior of the full node with the fix](/assets/images/blog/2026/10/black-hole-node/bug-phases-dark.png#only-dark){ .round-corners loading=lazy }
+![The journey of the bug and the behavior of the full node with the fix](/assets/images/blog/2026/10/black-hole-node/bug-phases-light.png#only-light){ .round-corners loading=lazy }
 
 ## Conclusions
 
