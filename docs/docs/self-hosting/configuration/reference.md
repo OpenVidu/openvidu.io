@@ -79,7 +79,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_AZURE_SUBCONTAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
-| **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. |
+| **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. Leave it empty to authenticate with the managed identity of the VM or pod running Meet, which needs a data role on the storage account, such as Storage Blob Data Contributor. |
 | **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |
 | **`MEET_REDIS_PORT`** | Redis port used by the OpenVidu Meet service to connect to the Redis server. |
 | **`MEET_REDIS_USERNAME`** | Redis username used by the OpenVidu Meet service to connect to the Redis server. |
