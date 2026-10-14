@@ -30,7 +30,7 @@ Clicking the counts opens the **Participants** panel, where each reaction takes 
 <a class="glightbox" href="/assets/videos/meet/meetings/reactions/reactions-panel-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/reactions/reactions-panel-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/meetings/reactions/reactions-panel-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/reactions/reactions-panel-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
-!!! warning
+!!! info "Note"
 
     Reactions are not stored: a participant who joins the meeting does not see the reactions sent before, and reactions do not appear in [recordings](../recordings/overview.md).
 
@@ -47,4 +47,31 @@ Reactions are enabled by default when a room is [created](../rooms/management.md
 
 ## From your application { #embedded }
 
-When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application sends a reaction on behalf of the local participant with the `participantReactionSend` [command](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe, which takes the emoji itself, such as `'👍'`. The `participantReactionSent` [event](../../embedded/reference/webcomponent.md#events) tells the host about every reaction sent in the meeting, the local participant's included, with who sent it.
+When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application sends a reaction on behalf of the local participant with the `participantReactionSend` [command](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. The `participantReactionSent` [event](../../embedded/reference/webcomponent.md#events) tells the host about every reaction sent in the meeting, the local participant's included, with who sent it.
+
+Both name each reaction with a plain string: the [Unicode CLDR short name :fontawesome-solid-external-link:{.external-link-icon}](https://unicode.org/emoji/charts/full-emoji-list.html){:target="_blank"} of its emoji, in snake_case. The host application compares and stores these values without writing any emoji in its code, and shows each reaction with the emoji or icon of its choice.
+
+| Reaction | Value                    |
+| :------: | ------------------------ |
+| 👍       | `thumbs_up`              |
+| 👎       | `thumbs_down`            |
+| 😀       | `grinning_face`          |
+| 🙁       | `slightly_frowning_face` |
+| 😕       | `confused_face`          |
+| 😮       | `face_with_open_mouth`   |
+| 👏       | `clapping_hands`         |
+| ❤️       | `red_heart`              |
+
+The values are listed in the order the picker offers them, the same order as the keys `1` to `8`.
+
+```javascript
+const openviduMeet = document.querySelector('openvidu-meet');
+
+openviduMeet.participantReactionSend('thumbs_up');
+
+openviduMeet.on('participantReactionSent', (event) => {
+	if (event.reaction === 'thumbs_up') {
+		console.log(`${event.participant.participantName} agrees`);
+	}
+});
+```
