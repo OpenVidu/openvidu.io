@@ -27,6 +27,9 @@ Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-i
 - [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){:target="_blank"}
 - [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingUpdatedWebhook){:target="_blank"}
 - [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingEndedWebhook){:target="_blank"}
+- [`broadcastStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastStartedWebhook){:target="_blank"}
+- [`broadcastUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastUpdatedWebhook){:target="_blank"}
+- [`broadcastEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastEndedWebhook){:target="_blank"}
 
 ## Configuration
 
