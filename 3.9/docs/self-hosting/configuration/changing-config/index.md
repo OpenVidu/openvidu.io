@@ -34,7 +34,7 @@ Configuration files can be divided into three types:
    ${openvidu.DOMAIN_NAME}
    ```
 
-   You can check the [OpenVidu Configuration In depth](https://openvidu.io/3.9/docs/self-hosting/configuration/in-depth/index.md) section to learn more about how the configuration system works.
+   You can check the [OpenVidu Configuration In depth](https://openvidu.io/latest/docs/self-hosting/configuration/in-depth/index.md) section to learn more about how the configuration system works.
 
 ## Config files
 

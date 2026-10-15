@@ -2,7 +2,7 @@
 
 DigitalOcean
 
-In DigitalOcean environments, we recommend upgrading by redeploying the [OpenVidu High Availability DigitalOcean](https://openvidu.io/3.9/docs/self-hosting/ha/digitalocean/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as DigitalOcean terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+In DigitalOcean environments, we recommend upgrading by redeploying the [OpenVidu High Availability DigitalOcean](https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as DigitalOcean terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu High Availability in place. The following steps outline how to perform an in-place upgrade of your OpenVidu High Availability deployment on DigitalOcean:
 

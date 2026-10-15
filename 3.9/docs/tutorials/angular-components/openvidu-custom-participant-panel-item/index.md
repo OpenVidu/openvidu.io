@@ -49,11 +49,11 @@ Replacing the default participant item is made simple with the **ParticipantsPan
 
 **Deploy OpenVidu**
 
-To use a production-ready OpenVidu deployment, visit the official [deployment guide](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md).
+To use a production-ready OpenVidu deployment, visit the official [deployment guide](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
 
 > **Configure Webhooks**
 >
-> All [application servers](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
+> All [application servers](https://openvidu.io/latest/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
@@ -86,7 +86,7 @@ To run this server application, you need [Node.js](https://nodejs.org/en/downloa
    npm start
    ```
 
-For more information, check the [Node.js tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/node/index.md) .
+For more information, check the [Node.js tutorial](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md) .
 
 **Go**
 
@@ -104,7 +104,7 @@ To run this server application, you need [Go](https://go.dev/doc/install) instal
    go run main.go
    ```
 
-For more information, check the [Go tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/go/index.md) .
+For more information, check the [Go tutorial](https://openvidu.io/latest/docs/tutorials/application-server/go/index.md) .
 
 **Ruby**
 
@@ -128,7 +128,7 @@ To run this server application, you need [Ruby](https://www.ruby-lang.org/en/doc
    ruby app.rb
    ```
 
-For more information, check the [Ruby tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/ruby/index.md) .
+For more information, check the [Ruby tutorial](https://openvidu.io/latest/docs/tutorials/application-server/ruby/index.md) .
 
 **Java**
 
@@ -146,7 +146,7 @@ To run this server application, you need [Java](https://www.java.com/en/download
    mvn spring-boot:run
    ```
 
-For more information, check the [Java tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/java/index.md) .
+For more information, check the [Java tutorial](https://openvidu.io/latest/docs/tutorials/application-server/java/index.md) .
 
 **Python**
 
@@ -196,7 +196,7 @@ To run this server application, you need [Python 3](https://www.python.org/downl
    python app.py
    ```
 
-For more information, check the [Python tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/python/index.md) .
+For more information, check the [Python tutorial](https://openvidu.io/latest/docs/tutorials/application-server/python/index.md) .
 
 **Rust**
 
@@ -214,7 +214,7 @@ To run this server application, you need [Rust](https://rust-lang.org/tools/inst
    cargo run
    ```
 
-For more information, check the [Rust tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/rust/index.md) .
+For more information, check the [Rust tutorial](https://openvidu.io/latest/docs/tutorials/application-server/rust/index.md) .
 
 **PHP**
 
@@ -242,7 +242,7 @@ To run this server application, you need [PHP](https://www.php.net/manual/en/ins
 >
 > LiveKit PHP SDK requires library [BCMath](https://www.php.net/manual/en/book.bc.php) . This is available out-of-the-box in PHP for Windows, but a manual installation might be necessary in other OS. Run **`sudo apt install php-bcmath`** or **`sudo yum install php-bcmath`**
 
-For more information, check the [PHP tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/php/index.md) .
+For more information, check the [PHP tutorial](https://openvidu.io/latest/docs/tutorials/application-server/php/index.md) .
 
 **.NET**
 
@@ -264,7 +264,7 @@ To run this server application, you need [.NET](https://dotnet.microsoft.com/en-
 >
 > This .NET server application needs the `LIVEKIT_API_SECRET` env variable to be at least 32 characters long. Make sure to update it [here](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/application-server/dotnet/appsettings.json#L11) and in your [OpenVidu Server](#1-run-openvidu-server).
 
-For more information, check the [.NET tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/dotnet/index.md) .
+For more information, check the [.NET tutorial](https://openvidu.io/latest/docs/tutorials/application-server/dotnet/index.md) .
 
 ### 4. Run the openvidu-custom-participant-panel-item tutorial
 
@@ -294,13 +294,13 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application client with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:5443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
 ## Understanding the code
 
 This tutorial is an Angular project generated with Angular CLI tool. Therefore, you will see many configuration files and other components that are not the primary focus of this tutorial. We will concentrate on the following files in the `src` directory:
 
-- `main.ts`: This file defines the root application component. It imports the `OpenViduComponentsModule`, where we configure the [OpenVidu Components Angular](https://openvidu.io/3.9/docs/reference-docs/openvidu-components-angular/index.md) library.
+- `main.ts`: This file defines the root application component. It imports the `OpenViduComponentsModule`, where we configure the [OpenVidu Components Angular](https://openvidu.io/latest/docs/reference-docs/openvidu-components-angular/) library.
 - `app/app.component.ts`: This file defines the **AppComponent**, the primary and sole component of the application. It is responsible for requesting the OpenVidu token and passing it to the videoconference component, facilitating the connection to the OpenVidu Room.
 - `styles.scss`: This file defines the global styles of the application. Here, you can customize the UI of the OpenVidu Components Angular library.
 
