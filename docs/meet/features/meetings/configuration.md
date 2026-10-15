@@ -21,7 +21,7 @@ A few settings of a [room](../rooms/overview.md) shape every meeting held in it.
 
 The **participant limit** caps how many participants may be in the meeting at the same time, from 1 to 30. Once it is reached, anyone else trying to join is told the meeting is full. Leave it empty for no limit.
 
-Via the REST API it is the `config.maxParticipants` property of the room configuration; `null` lifts the limit. The limit is read when the meeting starts, so changing it does not affect a meeting already in progress.
+Via the REST API it is the `config.maxParticipants` property of the room configuration; `null` lifts the limit. The meeting settings cannot be changed while a meeting is in progress; a change applies from the next meeting.
 
 ## Duration limit { #duration-limit }
 
