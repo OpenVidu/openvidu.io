@@ -10,7 +10,7 @@ OpenVidu offers scalability out-of-the-box for typical **videoconferencing** use
 
 OpenVidu allows you to host multiple small and medium videoconferences (up to 10 participants). The number of simultaneous rooms depends on the deployment used and the power of machines.
 
-- **Single Node deployment** (OpenVidu Community): In this deployment, OpenVidu can manage up to **50** simultaneous videoconferences of 8 participants in a 4 CPU server. If you need more videoconferences at the same time, you can use a more powerful server. This is known as **vertical scalability**. The limit here is usually the maximum computational power available for a single server and the maximum network bandwidth for it. You can read more about this benchmark scenario in the [Performance benchmarks](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/#benchmarking) page.
+- **Single Node deployment** (OpenVidu Community): In this deployment, OpenVidu can manage up to **50** simultaneous videoconferences of 8 participants in a 4 CPU server. If you need more videoconferences at the same time, you can use a more powerful server. This is known as **vertical scalability**. The limit here is usually the maximum computational power available for a single server and the maximum network bandwidth for it. You can read more about this benchmark scenario in the [Performance benchmarks](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/#benchmarking) page.
 - **Elastic and High Availability deployments** (OpenVidu Pro): In these deployments, OpenVidu is able to distribute the videoconferences across multiple media servers. This is known as **horizontal scalability**. In this case, the maximum number of simultaneous videoconferences depends on the number of media servers used and the computational power of each of them. Also, other services used to coordinate and monitor the media servers (caches, databases, proxies) can themselves become bottlenecks and limit the capacity of the system. In High Availability deployments, these services are distributed across 4 master nodes, so it is able to handle more load than the Elastic deployment (with only 1 master node).
 
 ### Big live streams
@@ -32,7 +32,7 @@ In **OpenVidu Elastic** and **OpenVidu High Availability**, work is distributed 
 
 ### Rooms
 
-The Room allocation strategy can be configured in the [**`livekit.yaml`** configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files). Specifically, property `node_selector` defines the strategy to select the Media Node where a new Room will be hosted:
+The Room allocation strategy can be configured in the [**`livekit.yaml`** configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files). Specifically, property `node_selector` defines the strategy to select the Media Node where a new Room will be hosted:
 
 livekit.yaml
 
@@ -72,9 +72,9 @@ Upon a new Room creation request:
 
 > **Info**
 >
-> Check out the [Egress reference](https://openvidu.io/3.9/docs/reference/egress/index.md) for every Egress type, output format and status value.
+> Check out the [Egress reference](https://openvidu.io/latest/docs/reference/egress/index.md) for every Egress type, output format and status value.
 
-The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files).
+The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files).
 
 egress.yaml
 
@@ -99,7 +99,7 @@ Upon a new Egress request:
 
    1. Its **CPU load is below a certain threshold** (by default 80%).
    1. It has enough **free CPUs** to handle the new Egress. The amount of free CPUs required depends on the type of Egress (room composite egress, web egress, participant egress, track composite egress, track egress).
-   1. It has enough **free disk space** in the directory where recordings are temporarily stored (by default, at least 512 MB). This criterion complements the CPU ones instead of replacing them: the allocation strategy keeps working exactly as described below, but a Media Node that cannot write a recording is never eligible, so it is never chosen. See [No disk space free](https://openvidu.io/3.9/docs/troubleshooting/recording/#no-disk-space-free) for the symptoms of a Media Node running out of space.
+   1. It has enough **free disk space** in the directory where recordings are temporarily stored (by default, at least 512 MB). This criterion complements the CPU ones instead of replacing them: the allocation strategy keeps working exactly as described below, but a Media Node that cannot write a recording is never eligible, so it is never chosen. See [No disk space free](https://openvidu.io/latest/docs/troubleshooting/recording/#no-disk-space-free) for the symptoms of a Media Node running out of space.
 
    Sane defaults are provided by OpenVidu, but you can configure both the CPU load threshold and the amount of free CPUs required for each type of Egress in the `cpu_cost`:
 
@@ -117,7 +117,7 @@ Upon a new Egress request:
        track_cpu_cost: 0.5
    ```
 
-   The minimum free disk space required is configured with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files). Set it to a negative value to disable the disk check altogether:
+   The minimum free disk space required is configured with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files). Set it to a negative value to disable the disk check altogether:
 
    egress.yaml
 
@@ -146,7 +146,7 @@ Upon a new Egress request:
 
 By default the Egress service has the ability to **automatically kill active egresses under sustained high CPU load**. If a >95% CPU load is sustained over 10 seconds, the Egress service will automatically terminate the most CPU-intensive active egress.
 
-This helps prevent an egress process from overloading the entire Media Node. Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files):
+This helps prevent an egress process from overloading the entire Media Node. Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files):
 
 egress.yaml
 
@@ -159,11 +159,11 @@ openvidu:
 
 > **Info**
 >
-> Check out the [Ingress reference](https://openvidu.io/3.9/docs/reference/ingress/index.md) for every input type, transcoding option and Ingress state.
+> Check out the [Ingress reference](https://openvidu.io/latest/docs/reference/ingress/index.md) for every input type, transcoding option and Ingress state.
 
 The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 
-1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Ingress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Ingress (RTMP, WHIP, URL). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`ingress.yaml`** configuration file](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#config-files):
+1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Ingress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Ingress (RTMP, WHIP, URL). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`ingress.yaml`** configuration file](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#config-files):
 
    ingress.yaml
 
@@ -180,9 +180,9 @@ The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingre
 
 ### Agents
 
-For AI agents the allocation strategy varies depending if the Agent is an [**OpenVidu agent**](https://openvidu.io/3.9/docs/ai/openvidu-agents/overview/index.md) or a [**custom agent**](https://openvidu.io/3.9/docs/ai/custom-agents/index.md).
+For AI agents the allocation strategy varies depending if the Agent is an [**OpenVidu agent**](https://openvidu.io/latest/docs/ai/openvidu-agents/overview/index.md) or a [**custom agent**](https://openvidu.io/latest/docs/ai/custom-agents/index.md).
 
-- For [**OpenVidu agents**](https://openvidu.io/3.9/docs/ai/openvidu-agents/overview/index.md): the agent will be available to process a new request if the CPU load of its Media Node is below a threshold. The default threshold is 70%, but you can change it in the agent's YAML configuration file. For example, for the **Speech Processing Agent**, you can change it in [**`agent-speech-processing.yaml`**](https://openvidu.io/3.9/docs/ai/openvidu-agents/speech-processing-agent/#configuration-reference):
+- For [**OpenVidu agents**](https://openvidu.io/latest/docs/ai/openvidu-agents/overview/index.md): the agent will be available to process a new request if the CPU load of its Media Node is below a threshold. The default threshold is 70%, but you can change it in the agent's YAML configuration file. For example, for the **Speech Processing Agent**, you can change it in [**`agent-speech-processing.yaml`**](https://openvidu.io/latest/docs/ai/openvidu-agents/speech-processing-agent/#configuration-reference):
 
   agent-speech-processing.yaml
 
@@ -191,7 +191,7 @@ For AI agents the allocation strategy varies depending if the Agent is an [**Ope
   load_threshold: 0.7
   ```
 
-- When developing a [**custom agent**](https://openvidu.io/3.9/docs/ai/custom-agents/index.md): the agent will be available to process a new request if its load does not exceed a specific threshold. Both the load metric and its threshold have the same defaults as for OpenVidu agents (average CPU load must be below 70%), but you can customize them in the `WorkerOptions` when developing your agent:
+- When developing a [**custom agent**](https://openvidu.io/latest/docs/ai/custom-agents/index.md): the agent will be available to process a new request if its load does not exceed a specific threshold. Both the load metric and its threshold have the same defaults as for OpenVidu agents (average CPU load must be below 70%), but you can customize them in the `WorkerOptions` when developing your agent:
 
   **Python**
 
@@ -226,7 +226,7 @@ For AI agents the allocation strategy varies depending if the Agent is an [**Ope
   };
   ```
 
-In both cases, OpenVidu will assign the request to a random available agent. If no agent is available, the request will be ignored. The log of the [OpenVidu Server service](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#media-node-services) will show an INFO message stating `not dispatching agent job since no worker is available`.
+In both cases, OpenVidu will assign the request to a random available agent. If no agent is available, the request will be ignored. The log of the [OpenVidu Server service](https://openvidu.io/latest/docs/self-hosting/deployment-types/#media-node-services) will show an INFO message stating `not dispatching agent job since no worker is available`.
 
 ## Autoscaling
 
@@ -246,8 +246,8 @@ When deploying in a supported **cloud provider** using our official templates, O
 
 Deploy OpenVidu using our official **CloudFormation** template:
 
-- [OpenVidu Elastic in AWS](https://openvidu.io/3.9/docs/self-hosting/elastic/aws/install/index.md)
-- [OpenVidu High Availability in AWS](https://openvidu.io/3.9/docs/self-hosting/ha/aws/install/index.md)
+- [OpenVidu Elastic in AWS](https://openvidu.io/latest/docs/self-hosting/elastic/aws/install/index.md)
+- [OpenVidu High Availability in AWS](https://openvidu.io/latest/docs/self-hosting/ha/aws/install/index.md)
 
 The cluster scales automatically thanks to [AWS Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) . You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
 
@@ -263,8 +263,8 @@ The **ScaleTargetCPU** parameter specifies the target CPU utilization to trigger
 
 Deploy OpenVidu using our official **ARM** template:
 
-- [OpenVidu Elastic in Azure](https://openvidu.io/3.9/docs/self-hosting/elastic/azure/install/index.md)
-- [OpenVidu High Availability in Azure](https://openvidu.io/3.9/docs/self-hosting/ha/azure/install/index.md)
+- [OpenVidu Elastic in Azure](https://openvidu.io/latest/docs/self-hosting/elastic/azure/install/index.md)
+- [OpenVidu High Availability in Azure](https://openvidu.io/latest/docs/self-hosting/ha/azure/install/index.md)
 
 The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/) . You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
 
@@ -280,8 +280,8 @@ The **Scale Target CPU** parameter specifies the target CPU utilization to trigg
 
 Deploy OpenVidu using our official **Terraform** template:
 
-- [OpenVidu Elastic in GCP](https://openvidu.io/3.9/docs/self-hosting/elastic/gcp/install/index.md)
-- [OpenVidu High Availability in GCP](https://openvidu.io/3.9/docs/self-hosting/ha/gcp/install/index.md)
+- [OpenVidu Elastic in GCP](https://openvidu.io/latest/docs/self-hosting/elastic/gcp/install/index.md)
+- [OpenVidu High Availability in GCP](https://openvidu.io/latest/docs/self-hosting/ha/gcp/install/index.md)
 
 The cluster scales automatically thanks to [Managed Instance Groups](https://docs.cloud.google.com/compute/docs/instance-groups#managed_instance_groups) . You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
 
@@ -296,10 +296,10 @@ The cluster scales automatically thanks to [Managed Instance Groups](https://doc
 
 Deploy OpenVidu using our official **Terraform** template:
 
-- [OpenVidu Elastic in DigitalOcean](https://openvidu.io/3.9/docs/self-hosting/elastic/digitalocean/install/index.md)
-- [OpenVidu High Availability in DigitalOcean](https://openvidu.io/3.9/docs/self-hosting/ha/digitalocean/install/index.md)
+- [OpenVidu Elastic in DigitalOcean](https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/install/index.md)
+- [OpenVidu High Availability in DigitalOcean](https://openvidu.io/latest/docs/self-hosting/ha/digitalocean/install/index.md)
 
-The cluster scales automatically thanks to an automated process using [DigitalOcean Functions](https://docs.digitalocean.com/products/functions/) (see [Custom scale-in strategy in Digital Ocean](https://openvidu.io/3.9/docs/self-hosting/elastic/digitalocean/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+The cluster scales automatically thanks to an automated process using [DigitalOcean Functions](https://docs.digitalocean.com/products/functions/) (see [Custom scale-in strategy in Digital Ocean](https://openvidu.io/latest/docs/self-hosting/elastic/digitalocean/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
 
 | Input Value               | Default Value | Description                                                                                                                                                                                                                                                                       |
 | ------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -313,10 +313,10 @@ The cluster scales automatically thanks to an automated process using [DigitalOc
 
 Deploy OpenVidu using our official **Terraform** template:
 
-- [OpenVidu Elastic in Oracle Cloud Infrastructure](https://openvidu.io/3.9/docs/self-hosting/elastic/oracle/install/index.md)
-- [OpenVidu High Availability in Oracle Cloud Infrastructure](https://openvidu.io/3.9/docs/self-hosting/ha/oracle/install/index.md)
+- [OpenVidu Elastic in Oracle Cloud Infrastructure](https://openvidu.io/latest/docs/self-hosting/elastic/oracle/install/index.md)
+- [OpenVidu High Availability in Oracle Cloud Infrastructure](https://openvidu.io/latest/docs/self-hosting/ha/oracle/install/index.md)
 
-The cluster scales automatically thanks to an [OCI Instance Pool](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm) for scale-out, combined with an [OCI Function](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm) that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](https://openvidu.io/3.9/docs/self-hosting/elastic/oracle/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
+The cluster scales automatically thanks to an [OCI Instance Pool](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm) for scale-out, combined with an [OCI Function](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm) that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](https://openvidu.io/latest/docs/self-hosting/elastic/oracle/install/#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
 
 | Input Value               | Default Value | Description                                                  |
 | ------------------------- | ------------- | ------------------------------------------------------------ |
@@ -331,16 +331,16 @@ The cluster scales automatically thanks to an [OCI Instance Pool](https://docs.o
 When deploying an OpenVidu cluster **On Premises** you are responsible for monitoring the load of your Media Nodes and triggering the addition of new Media Nodes or removal of existing Media Nodes. Depending on your OpenVidu deployment type, you can do so like this:
 
 - For **OpenVidu Elastic On Premises**:
-  - [Add a new Media Node](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#adding-media-nodes)
-  - [Removing Media Nodes gracefully](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#removing-media-nodes-gracefully)
-  - [Removing Media Nodes forcefully](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#removing-media-nodes-forcefully)
+  - [Add a new Media Node](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#adding-media-nodes)
+  - [Removing Media Nodes gracefully](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#removing-media-nodes-gracefully)
+  - [Removing Media Nodes forcefully](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#removing-media-nodes-forcefully)
 - For **OpenVidu High Availability On Premises**:
-  - [Adding Media Nodes](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#adding-media-nodes)
-  - [Removing Media Nodes gracefully](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#removing-media-nodes-gracefully)
-  - [Removing Media Nodes forcefully](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#removing-media-nodes-forcefully)
+  - [Adding Media Nodes](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#adding-media-nodes)
+  - [Removing Media Nodes gracefully](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#removing-media-nodes-gracefully)
+  - [Removing Media Nodes forcefully](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#removing-media-nodes-forcefully)
 
 ## Planning for a specific scale target?
 
 Tell us your expected rooms and participants and we will help you size the deployment.
 
-[Talk to an expert](/support/#talk-to-an-expert)
+[Talk to an expert](https://openvidu.io/support/#talk-to-an-expert)

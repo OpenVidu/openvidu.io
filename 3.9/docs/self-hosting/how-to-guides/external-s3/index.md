@@ -126,8 +126,8 @@ EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT={"department":"engineering","project":"op
 
 On any problem, check these sections:
 
-- [Config Troubleshooting](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/#troubleshooting-configuration)
+- [Config Troubleshooting](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/#troubleshooting-configuration)
 - The Status and Checking Logs sections under Administration for each deployment type:
-  - [Single Node](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services)
-  - [Elastic](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#checking-the-status-of-services)
-  - [High Availability](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services)
+  - [Single Node](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services)
+  - [Elastic](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#checking-the-status-of-services)
+  - [High Availability](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services)

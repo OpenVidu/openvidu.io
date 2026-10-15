@@ -2,7 +2,7 @@
 
 Azure
 
-In Azure environments, we recommend upgrading by redeploying [OpenVidu Elastic Azure](https://openvidu.io/3.9/docs/self-hosting/elastic/azure/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Azure templates and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+In Azure environments, we recommend upgrading by redeploying [OpenVidu Elastic Azure](https://openvidu.io/latest/docs/self-hosting/elastic/azure/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Azure templates and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu Elastic in place. The following steps outline how to perform an in-place upgrade of your OpenVidu Elastic deployment on Azure:
 

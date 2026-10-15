@@ -2,7 +2,7 @@
 
 Webhooks allow your application server to be notified of events of Rooms, Egress and Ingress without the need of polling. OpenVidu POSTs a signed JSON event to the URLs you configure, as Rooms start and finish, participants come and go, tracks are published, and Egress or Ingress processes change state.
 
-To turn webhooks on, see [Enable OpenVidu webhooks](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/index.md). This page is the reference for what arrives once they are on.
+To turn webhooks on, see [Enable OpenVidu webhooks](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/index.md). This page is the reference for what arrives once they are on.
 
 OpenVidu is API-compatible with LiveKit, so all LiveKit webhook events are supported. Visit the LiveKit docs for a complete reference of webhook management:
 
@@ -91,7 +91,7 @@ The LiveKit server SDKs do both for you:
 **Node.js**
 
 - Using [LiveKit Node SDK](https://docs.livekit.io/reference/server-sdk-js/) .
-- For a working example run the [Node.js tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/node/index.md).
+- For a working example run the [Node.js tutorial](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md).
 
 ```javascript
 import express from "express";
@@ -116,7 +116,7 @@ app.post("/livekit/webhook", async (req, res) => {
 **Go**
 
 - Using [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2) .
-- For a working example run the [Go tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/go/index.md).
+- For a working example run the [Go tutorial](https://openvidu.io/latest/docs/tutorials/application-server/go/index.md).
 
 ```go
 import (
@@ -141,7 +141,7 @@ func receiveWebhook(w http.ResponseWriter, r *http.Request) {
 **Ruby**
 
 - Using [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby) .
-- For a working example run the [Ruby tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/ruby/index.md).
+- For a working example run the [Ruby tutorial](https://openvidu.io/latest/docs/tutorials/application-server/ruby/index.md).
 
 The Ruby SDK has no `WebhookReceiver` class. Verify the `Authorization` header with `LiveKit::TokenVerifier`, compare the body hash against the token's `sha256` claim, then parse the body yourself:
 
@@ -167,7 +167,7 @@ end
 **Java**
 
 - Using [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin) .
-- For a working example run the [Java tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/java/index.md).
+- For a working example run the [Java tutorial](https://openvidu.io/latest/docs/tutorials/application-server/java/index.md).
 
 ```java
 import io.livekit.server.WebhookReceiver;
@@ -184,7 +184,7 @@ WebhookEvent event = webhookReceiver.receive(body, authHeader);
 **Python**
 
 - Using [LiveKit Python SDK](https://github.com/livekit/python-sdks) .
-- For a working example run the [Python tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/python/index.md).
+- For a working example run the [Python tutorial](https://openvidu.io/latest/docs/tutorials/application-server/python/index.md).
 
 ```python
 from livekit.api import TokenVerifier, WebhookReceiver
@@ -206,7 +206,7 @@ def receive_webhook():
 **Rust**
 
 - Using [LiveKit Rust SDK](https://github.com/livekit/rust-sdks) .
-- For a working example run the [Rust tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/rust/index.md).
+- For a working example run the [Rust tutorial](https://openvidu.io/latest/docs/tutorials/application-server/rust/index.md).
 
 ```rust
 use livekit_api::access_token::TokenVerifier;
@@ -235,7 +235,7 @@ async fn receive_webhook(headers: HeaderMap, body: String) -> StatusCode {
 **PHP**
 
 - Using [LiveKit PHP SDK](https://github.com/agence104/livekit-server-sdk-php) .
-- For a working example run the [PHP tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/php/index.md).
+- For a working example run the [PHP tutorial](https://openvidu.io/latest/docs/tutorials/application-server/php/index.md).
 
 ```php
 <?php
@@ -257,7 +257,7 @@ try {
 **.NET**
 
 - Using [LiveKit .NET SDK](https://github.com/pabloFuente/livekit-server-sdk-dotnet) .
-- For a working example run the [.NET tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/dotnet/index.md).
+- For a working example run the [.NET tutorial](https://openvidu.io/latest/docs/tutorials/application-server/dotnet/index.md).
 
 ```csharp
 using Livekit.Server.Sdk.Dotnet;
@@ -285,12 +285,12 @@ app.MapPost("/livekit/webhook", async (HttpRequest request) =>
 
 ## Developing against a remote deployment
 
-Your local machine is not reachable from your OpenVidu deployment, so webhooks sent to `localhost` never arrive. Expose your local server with a tunnel and configure that public URL instead — see [Send webhooks to a local application server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server).
+Your local machine is not reachable from your OpenVidu deployment, so webhooks sent to `localhost` never arrive. Expose your local server with a tunnel and configure that public URL instead — see [Send webhooks to a local application server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server).
 
 ## Related
 
-- [Enable OpenVidu webhooks](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/index.md): configuring `webhook.urls` in `livekit.yaml`.
-- [Access tokens reference](https://openvidu.io/3.9/docs/reference/access-tokens/index.md): the same key pair, used in the other direction.
-- [Egress reference](https://openvidu.io/3.9/docs/reference/egress/index.md) and [Ingress reference](https://openvidu.io/3.9/docs/reference/ingress/index.md): the objects `egressInfo` and `ingressInfo` carry.
-- [Recording tutorial](https://openvidu.io/3.9/docs/tutorials/advanced-features/recording-advanced-s3/#handling-webhook-events): egress webhook events in a real application server.
-- **OpenVidu Meet** sends its own, higher-level webhooks. If you are embedding Meet rather than building on Platform, see the [OpenVidu Meet webhooks reference](https://openvidu.io/3.9/meet/embedded/reference/webhooks/index.md).
+- [Enable OpenVidu webhooks](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/index.md): configuring `webhook.urls` in `livekit.yaml`.
+- [Access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): the same key pair, used in the other direction.
+- [Egress reference](https://openvidu.io/latest/docs/reference/egress/index.md) and [Ingress reference](https://openvidu.io/latest/docs/reference/ingress/index.md): the objects `egressInfo` and `ingressInfo` carry.
+- [Recording tutorial](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-advanced-s3/#handling-webhook-events): egress webhook events in a real application server.
+- **OpenVidu Meet** sends its own, higher-level webhooks. If you are embedding Meet rather than building on Platform, see the [OpenVidu Meet webhooks reference](https://openvidu.io/latest/meet/embedded/reference/webhooks/index.md).
