@@ -15,9 +15,13 @@ A meeting streams to up to **five destinations** at once. Each destination is it
 
 Live broadcast is turned on per room from the **Live broadcast** step of the room configuration wizard, when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) a room. The **Allow live broadcast** toggle needs at least one **default destination**: the channels the room's meetings go live to.
 
-Each destination has a **name** and the **stream URL** the platform gives you, of the form `rtmp://host/app/key` or `rtmps://host/app/key`, stream key included. The wizard recognises the URLs of YouTube, Facebook, Instagram, X, Vimeo, Twitch and Kick, and shows each destination with its platform's logo. A room saves up to five destinations, each with its own stream key: two destinations with the same stream key are rejected, even on different servers.
+Each destination has a **name** and the **stream URL** the platform gives you, of the form `rtmp://host/app/key` or `rtmps://host/app/key`, stream key included. The wizard recognises the URLs of YouTube, Facebook, Instagram, X, Vimeo, Twitch and Kick, and shows each destination with its platform's logo. A room saves up to five destinations, each with its own stream key.
 
-**Stream keys stay hidden once saved**: the wizard, the REST API and every event show a destination URL with its stream key replaced by `********`. To change only the name of a destination, leave its URL as it is and the saved stream key is kept; to change the key, paste the full URL again.
+!!! info "Stream keys"
+
+	A stream key is a secret that identifies the channel to the RTMP server. It is never shown in full after it is saved, and it is never sent to the browser of any participant.
+	Two destinations with the same stream key are rejected.
+
 
 The same step chooses the **layout** of the stream, with the same options as [recordings](../recordings/configuration.md): a grid of every participant, the active speaker with the others below, or the active speaker alone.
 
