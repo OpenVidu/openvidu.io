@@ -34,7 +34,7 @@ def _get(url):
 
 
 def _round(value):
-    """Material's own formatting (src/templates/assets/javascripts/utilities/round): 2160 -> 2.2k."""
+    """Material's own number formatting (javascripts/utilities/round): 2160 -> 2.2k."""
     if value > 999:
         digits = 1 if (value - 950) % 1000 > 99 else 0
         return f"{(value + 0.000001) / 1000:.{digits}f}k"
@@ -48,7 +48,7 @@ def _fetch():
         facts["stars"] = _round(repo["stargazers_count"])
         facts["forks"] = _round(repo["forks_count"])
         facts["version"] = _get(_API + "/releases/latest")["tag_name"]
-    except Exception as e:  # noqa: BLE001 - the facts are decoration; never fail the build
+    except Exception as e:  # the facts are decoration; never fail the build
         log.warning("GitHub facts not available (%s); the header shows the repository name only", e)
     return facts
 
