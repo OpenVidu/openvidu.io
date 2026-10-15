@@ -212,24 +212,89 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
+-   :material-hand-back-left:{ .feature-icon .padding-icon } __Raise hand__{ .feature-name .coming-soon-overlay .eta-2026-10 }
 
--   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
+    ---
+
+    Let participants raise their hand to ask for the floor without interrupting, so moderators can keep large meetings orderly.
+
+-   :material-emoticon-outline:{ .feature-icon .padding-icon } __Reactions__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+
+    ---
+
+    React with emojis in real time to share quick feedback and keep everyone engaged without unmuting.
+
+-   :material-tune:{ .feature-icon .padding-icon } __Redesigned settings panel__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+
+    ---
+
+    A cleaner settings panel to configure your devices, audio, video and preferences in a couple of clicks.
+
+</div>
+
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
+
+-   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Live broadcasting__{ .feature-name .coming-soon-overlay .eta-2026-10 }
 
     ---
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay }
+-   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay .eta-2026-10 }
 
     ---
 
     Keep your meetings secure by blocking unwanted guests and requiring moderator approval to join.
 
--   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay }
+-   :material-message-text-clock-outline:{ .feature-icon .padding-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+
+    ---
+
+    Chat history is kept across sessions, so participants who join late or reconnect never miss a message.
+
+</div>
+
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
+
+-   :material-message-reply-text-outline:{ .feature-icon .padding-icon } __Chat reactions, mentions and editing__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+
+    ---
+
+    React to messages, mention other participants, and edit or delete messages you have already sent.
+
+-   :material-message-lock-outline:{ .feature-icon .padding-icon } __Private chats__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+
+    ---
+
+    Send direct messages to a single participant during the call, without leaving the meeting.
+
+-   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-11 }
 
     ---
 
     Enable participants to share files easily during calls with a simple drag-and-drop feature.
+
+</div>
+
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
+
+-   :material-draw:{ .feature-icon .padding-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+
+    ---
+
+    Sketch ideas together on a shared whiteboard, with every stroke synced in real time for all participants.
+
+-   :material-note-multiple-outline:{ .feature-icon .padding-icon } __Shared notes__{ .feature-name .coming-soon-overlay }
+
+    ---
+
+    Write collaborative notes with all participants during the call, keeping decisions and action items in one place.
+
+-   :material-account-group-outline:{ .feature-icon .padding-icon } __Breakout rooms__{ .feature-name .coming-soon-overlay }
+
+    ---
+
+    Split participants into smaller groups for focused discussions and bring them back to the main room whenever you want.
 
 </div>
 
