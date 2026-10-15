@@ -217,12 +217,12 @@ li:has(.coming-soon-overlay[class*="eta-"])::after {
   padding: 0.35rem 1rem;
 }
 
-li:has(.coming-soon-overlay.eta-2026-10)::after {
-  content: 'Coming October 2026';
-}
-
 li:has(.coming-soon-overlay.eta-2026-11)::after {
   content: 'Coming November 2026';
+}
+
+li:has(.coming-soon-overlay.eta-2026-12)::after {
+  content: 'Coming December 2026';
 }
 
 /* Hover effect to make content more visible temporarily */

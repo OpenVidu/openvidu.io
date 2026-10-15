@@ -212,19 +212,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
--   :material-hand-back-left:{ .feature-icon .padding-icon } __Raise hand__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+-   :material-hand-back-left:{ .feature-icon .padding-icon } __Raise hand__{ .feature-name .coming-soon-overlay .eta-2026-11 }
 
     ---
 
     Let participants raise their hand to ask for the floor without interrupting, so moderators can keep large meetings orderly.
 
--   :material-emoticon-outline:{ .feature-icon .padding-icon } __Reactions__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+-   :material-emoticon-outline:{ .feature-icon .padding-icon } __Reactions__{ .feature-name .coming-soon-overlay .eta-2026-11 }
 
     ---
 
     React with emojis in real time to share quick feedback and keep everyone engaged without unmuting.
 
--   :material-tune:{ .feature-icon .padding-icon } __Redesigned settings panel__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+-   :material-tune:{ .feature-icon .padding-icon } __Redesigned settings panel__{ .feature-name .coming-soon-overlay .eta-2026-11 }
 
     ---
 
@@ -234,19 +234,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
--   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Live broadcasting__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+-   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Live broadcasting__{ .feature-name .coming-soon-overlay .eta-2026-11 }
 
     ---
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay .eta-2026-10 }
+-   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay .eta-2026-11 }
 
     ---
 
     Keep your meetings secure by blocking unwanted guests and requiring moderator approval to join.
 
--   :material-message-text-clock-outline:{ .feature-icon .padding-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+-   :material-message-text-clock-outline:{ .feature-icon .padding-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
@@ -256,19 +256,19 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
--   :material-message-reply-text-outline:{ .feature-icon .padding-icon } __Chat reactions, mentions and editing__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+-   :material-message-reply-text-outline:{ .feature-icon .padding-icon } __Chat reactions, mentions and editing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     React to messages, mention other participants, and edit or delete messages you have already sent.
 
--   :material-message-lock-outline:{ .feature-icon .padding-icon } __Private chats__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+-   :material-message-lock-outline:{ .feature-icon .padding-icon } __Private chats__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     Send direct messages to a single participant during the call, without leaving the meeting.
 
--   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+-   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
@@ -278,7 +278,7 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
--   :material-draw:{ .feature-icon .padding-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+-   :material-draw:{ .feature-icon .padding-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
