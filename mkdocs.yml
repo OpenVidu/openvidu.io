@@ -2,8 +2,9 @@ site_name: OpenVidu
 site_url: https://openvidu.io/
 site_description: "Self-hosted video conferencing & custom WebRTC: deploy OpenVidu Meet in minutes or build with OpenVidu Platform SDKs."
 # No repo_url/repo_name on purpose: with them, Material renders its repository widget (header
-# and mobile drawer), whose star/fork counts the visitor's browser fetches from api.github.com.
-# The header shows a static badge instead (overrides/partials/header.html). edit_uri is
+# and mobile drawer), whose release/star/fork counts the visitor's browser fetches from
+# api.github.com. The header renders the same widget from facts fetched at build time instead
+# (publish-tool/github_facts_hook.py, overrides/partials/header.html). edit_uri is
 # absolute, so page edit links still work without repo_url. Update the branch on a branch cut.
 edit_uri: https://github.com/OpenVidu/openvidu.io/edit/main/docs/
 
@@ -279,6 +280,7 @@ not_in_nav: |
 # copies of those two).
 hooks:
   - publish-tool/mkdocs_hook.py
+  - publish-tool/github_facts_hook.py
   - publish-tool/llmstxt_entries_hook.py
   - publish-tool/pygments_fence_title_hook.py
 
@@ -286,6 +288,7 @@ watch:
   - shared
   - overrides
   - publish-tool/mkdocs_hook.py
+  - publish-tool/github_facts_hook.py
   - publish-tool/llmstxt_entries_hook.py
   - publish-tool/pygments_fence_title_hook.py
   - publish-tool/llmstxt_preprocess.py
