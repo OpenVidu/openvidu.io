@@ -67,6 +67,11 @@
   border-radius: 5px;
 }
 
+/* Cookie consent: the saved choice, shown when the footer link reopens the banner. */
+.md-consent__current {
+  font-weight: 700;
+}
+
 /* Sign-in / account controls in the header */
 
 .log-in-div {
