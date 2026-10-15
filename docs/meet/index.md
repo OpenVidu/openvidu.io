@@ -284,13 +284,13 @@ With all the features you need to fine-tune your perfect video calling service.
 
     Sketch ideas together on a shared whiteboard, with every stroke synced in real time for all participants.
 
--   :material-note-multiple-outline:{ .feature-icon .padding-icon } __Shared notes__{ .feature-name .coming-soon-overlay }
+-   :material-note-multiple-outline:{ .feature-icon .padding-icon } __Shared notes__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
 
     ---
 
     Write collaborative notes with all participants during the call, keeping decisions and action items in one place.
 
--   :material-account-group-outline:{ .feature-icon .padding-icon } __Breakout rooms__{ .feature-name .coming-soon-overlay }
+-   :material-account-group-outline:{ .feature-icon .padding-icon } __Breakout rooms__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
 
     ---
 

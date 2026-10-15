@@ -220,6 +220,10 @@ li:has(.coming-soon-overlay.eta-2026-12)::after {
   content: 'December 2026';
 }
 
+li:has(.coming-soon-overlay.eta-2027-q1)::after {
+  content: 'Q1 2027';
+}
+
 /* Hover effect to make content more visible temporarily */
 li:has(.coming-soon-overlay):hover::before{
   opacity: 0.3;
