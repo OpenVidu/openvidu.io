@@ -19,7 +19,8 @@
   which stores the ticked names with __md_set("__consent", {...}) and restores them into these
   inputs on load; Google Analytics only loads when that key holds analytics: true.
   There is no GitHub option: the site sets no repo_url, so Material renders no repository
-  widget and never fetches from api.github.com (the header shows a self-hosted badge).
+  widget and never fetches from api.github.com (the header renders the widget from facts
+  fetched at build time: publish-tool/github_facts_hook.py).
   On a theme upgrade, diff this file against the new partials/consent.html.
 -#}
 <h4>{{ config.extra.consent.title }}</h4>

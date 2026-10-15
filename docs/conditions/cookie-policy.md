@@ -22,7 +22,7 @@ Nothing optional is used until you choose it in the cookie consent banner. You c
 | --- | --- | --- | --- | --- |
 | `_ga` | Google Analytics | Used to distinguish users | 2 years | Only if you accept analytics |
 | `_ga_<container-id>` | Google Analytics | Used to persist session state | 2 years | Only if you accept analytics |
-| `__consent` (browser local storage, not a cookie) | openvidu.io | Remembers your cookie consent choice | Until you clear your browser data | Always, once you make a choice |
+| `/.__consent` (browser local storage, not a cookie) | openvidu.io | Remembers your cookie consent choice | Until you clear your browser data | Always, once you make a choice |
 
 The site also keeps display preferences, such as the color scheme you pick, in your browser's local storage; they are not sent anywhere.
 
