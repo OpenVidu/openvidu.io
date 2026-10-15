@@ -6,8 +6,8 @@ date:
 slug: low-latency-whip-ingestion
 cover_image: poster-light.webp
 description: >-
-  Push a real stream into an OpenVidu Room over WHIP, from a browser webcam and
-  from OBS Studio, and watch it arrive with sub-second delay.
+  Push a live stream into a self-hosted OpenVidu Room over WHIP, from a browser
+  webcam and from OBS Studio, and watch it arrive with sub-second delay.
 categories:
   - How-to
   - Technology
