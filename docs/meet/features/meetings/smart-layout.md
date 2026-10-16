@@ -15,8 +15,8 @@ The meeting view uses a responsive grid that automatically adapts to the number 
 
 Each participant can change how the grid is built from the **Layout settings** in the meeting settings panel (**More options → Adjust Layout**):
 
-- **Mosaic** — shows all participants in a single grid.
-- **Smart Mosaic** (default) — displays a limited number of participants (up to 4 by default) and prioritizes active speakers, keeping the current conversation in focus.
+- **Mosaic**: shows all participants in a single grid, in equal tiles.
+- **Smart Mosaic** (default): displays a limited number of participants (up to 4 remote participants by default, 2 on phones and tablets) and prioritizes active speakers, keeping the current conversation in focus.
 
 ![Layout settings with the Smart Mosaic and Grid options](../../../assets/images/meet/meetings/smart-layout/layout-settings-dark.webp#only-dark){ .round-corners loading=lazy }
 ![Layout settings with the Smart Mosaic and Grid options](../../../assets/images/meet/meetings/smart-layout/layout-settings-light.webp#only-light){ .round-corners loading=lazy }
