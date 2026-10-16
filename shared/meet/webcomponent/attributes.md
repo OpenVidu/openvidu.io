@@ -5,14 +5,14 @@
 |-----------|-------------|----------|
 | `room-url` | The OpenVidu Meet room URL to access to. | Yes (This attribute is required unless `recording-url` is provided.) |
 | `recording-url` | The URL of a recording to view. | Yes (This attribute is required unless `room-url` is provided.) |
-| `participant-name` | Display name for the local participant. | No |
+| `participant-name` | Display name for the local participant. It fills and locks the join screen's name field, unless the participant is a room member or a signed-in user, whose own name is used instead. | No |
 | `participant-external-id` | Identifier of the local participant in your own application, to correlate it with your users. Up to 64 characters (letters, digits, `_` and `-`). Never interpreted by OpenVidu Meet. | No |
 | `participant-metadata` | Opaque application-defined payload attached to the local participant (JSON is recommended). Up to 2048 bytes (UTF-8). Never interpreted by OpenVidu Meet. | No |
 | `initial-audio-active` | Join the meeting with the microphone active (`true`) or not (`false`). It **overrides the room's `config.initialAudioActive`**; if omitted, the room's value applies. The participant can change it afterwards, and a denied `mediaPublishAudio` permission always wins. | No |
 | `initial-video-active` | Join the meeting with the camera active (`true`) or not (`false`). It **overrides the room's `config.initialVideoActive`**; if omitted, the room's value applies. The participant can change it afterwards, and a denied `mediaPublishVideo` permission always wins. | No |
 | `language` | Language the interface starts in: `en`, `es`, `de`, `fr`, `zh` (Simplified), `hi`, `it`, `ja`, `nl` or `pt` (European). A regional variant uses its language (`pt-BR` is `pt`). `auto` uses the browser's preferred languages, and English when none is available. It **overrides the participant's previous choice**, which they can still change unless `show-language-selector` is `false`. An unsupported value is ignored. | No |
 | `show-language-selector` | Show the language selectors (`true` by default). `"false"` hides them, so the participant cannot change the language. | No |
-| `e2ee-key` | Secret key for end-to-end encryption (E2EE). If provided, the participant will join the meeting using E2EE key. | No |
+| `e2ee-key` | Secret key for end-to-end encryption (E2EE). Used only in a room whose `config.e2ee.enabled` is `true`, where it fills the join screen's encryption key; ignored otherwise. | No |
 | `leave-redirect-url` | URL to redirect to when the participant dismisses the post-meeting, join, error or recording screen, right after the **`embeddedCloseRequested` event** fires. | No |
 | `show-only-recordings` | Show only the recordings instead of the live meeting. A bare attribute or any value other than `"false"` is `true`. | No |
 | `show-recording` | Identifier of the recording to display. When provided along with `room-url`, the app redirects to the recording view. | No |
