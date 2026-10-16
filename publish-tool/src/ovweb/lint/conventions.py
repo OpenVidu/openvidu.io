@@ -94,11 +94,14 @@ def check_tag_contract(corpus: Corpus) -> list[Finding]:
 #: The site's font stylesheet and the preload hints that go with it (overrides/main.html).
 FONT_LINK = re.compile(r"<link\b[^>]*fonts\.googleapis\.com/css2\?[^>]*>", re.DOTALL)
 FONT_PRELOAD = re.compile(
-    r"\{#\s*(?P<family>Tomorrow|Roboto Mono)(?:\s+(?P<weight>\d{3}))?\s*#\}\s*"
+    r"\{#\s*(?P<family>Bricolage Grotesque|Instrument Sans|JetBrains Mono)"
+    r"(?:\s+(?P<weight>\d{3}))?\s*#\}\s*"
     r"<link\b(?P<attrs>[^>]*)>",
     re.DOTALL,
 )
-FONT_FAMILY_AXES = re.compile(r"family=([^:&]+):ital,wght@([^&]+)")
+#: `family=Name:ital,wght@0,400;1,400` or `family=Name:opsz,wght@12..96,500;12..96,700`: the
+#: axis list names which values each tuple carries, the weight is always the last one.
+FONT_FAMILY_AXES = re.compile(r"family=([^:&]+):((?:[a-z]+,)*wght)@([^&]+)")
 
 
 def _attr(tag: str, name: str) -> str:
@@ -109,9 +112,14 @@ def _attr(tag: str, name: str) -> str:
 def _requested_weights(url: str) -> dict[str, set[str]]:
     """Family -> upright weights a Google Fonts css2 URL requests."""
     families: dict[str, set[str]] = {}
-    for family, axes in FONT_FAMILY_AXES.findall(url):
-        pairs = (pair.split(",") for pair in axes.split(";"))
-        families[family.replace("+", " ")] = {w for ital, w in pairs if ital == "0"}
+    for family, axis_names, tuples in FONT_FAMILY_AXES.findall(url):
+        names = axis_names.split(",")
+        weights = set()
+        for tuple_ in tuples.split(";"):
+            values = dict(zip(names, tuple_.split(","), strict=False))
+            if values.get("ital", "0") == "0":
+                weights.add(values["wght"])
+        families[family.replace("+", " ")] = weights
     return families
 
 

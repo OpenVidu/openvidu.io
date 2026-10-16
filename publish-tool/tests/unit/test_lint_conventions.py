@@ -334,8 +334,9 @@ def test_the_readers_own_deployment_is_not_an_external_site(tmp_path):
 # -- font loading ----------------------------------------------------------------------------
 
 FONT_URL = (
-    "https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,300;0,400;0,700;1,400"
-    "&family=Roboto+Mono:ital,wght@0,400;0,700&display=block"
+    "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700"
+    "&family=Instrument+Sans:ital,wght@0,400;0,600;1,400"
+    "&family=JetBrains+Mono:ital,wght@0,400;0,700&display=block"
 )
 PRELOAD = (
     '{{# {label} #}}<link rel="preload" href="https://fonts.gstatic.com/s/x/v1/x.woff2" '
@@ -343,7 +344,7 @@ PRELOAD = (
 )
 
 
-def preload(label="Tomorrow 400", crossorigin='crossorigin="anonymous" '):
+def preload(label="Instrument Sans 400", crossorigin='crossorigin="anonymous" '):
     return PRELOAD.format(label=label, crossorigin=crossorigin)
 
 
@@ -354,7 +355,8 @@ def font_block(url=FONT_URL, preloads=None, link=None):
 
 
 def test_a_font_block_that_keeps_the_contract_is_silent(tmp_path):
-    write(tmp_path, "overrides/main.html", font_block(preloads=(preload(), preload("Roboto Mono"))))
+    preloads = (preload(), preload("JetBrains Mono"), preload("Bricolage Grotesque 700"))
+    write(tmp_path, "overrides/main.html", font_block(preloads=preloads))
 
     assert findings_of(tmp_path, "font-loading") == []
 
@@ -377,10 +379,11 @@ def test_display_swap_is_an_error(tmp_path):
 
 
 def test_preloading_a_weight_the_url_does_not_request_is_an_error(tmp_path):
-    write(tmp_path, "overrides/main.html", font_block(preloads=(preload("Tomorrow 800"),)))
+    preloads = (preload("Bricolage Grotesque 800"),)
+    write(tmp_path, "overrides/main.html", font_block(preloads=preloads))
 
     (finding,) = findings_of(tmp_path, "font-loading")
-    assert "Tomorrow 800" in finding.message
+    assert "Bricolage Grotesque 800" in finding.message
 
 
 def test_a_font_preload_without_crossorigin_is_an_error(tmp_path):

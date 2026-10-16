@@ -1,156 +1,223 @@
-/* Site palette. Layering: this sheet defines the brand tokens (--ov-*) and Material's
-   variables for the site-wide look plus the per-scheme overrides; meet.css and platform.css
-   set the --product-* values of their product, and product.css maps --product-* onto
-   Material's variables on product pages. Every repeated colour lives here as a token; only
-   white, black and single-use UI colours stay literal in the other sheets. */
+/* Site palette — the "Two doors" design. Layering: this sheet defines the brand tokens (--ov-*)
+   and Material's variables for the site-wide look plus the per-scheme overrides; meet.css and
+   platform.css set the --product-* values of their product, and product.css maps --product-*
+   onto the accent variables on product pages. Every repeated colour lives here as a token;
+   only white, black and single-use UI colours stay literal in the other sheets.
+
+   The light scheme is the design's native one: a soft grey ground, white cards, near-black
+   ink. The slate scheme inverts the grounds (dark ground, slightly lighter cards, light ink)
+   and keeps the same accents, radii and type. */
 
 :root {
-  --ov-meet-primary: rgb(0, 147, 73);
-  --ov-meet-primary-rgb: 0, 147, 73;
+  /* Surfaces and ink (light values; slate overrides below) */
+  --ov-ground: #f4f6f7;
+  --ov-surface: #ffffff;
+  --ov-surface-2: #e9eef0;
+  --ov-text: #101618;
+  --ov-muted: #4a5a60;
+  --ov-border: #d9e0e3;
+  --ov-ink: #101618; /* the dark panel and the solid button */
+  --ov-ink-fg: #ffffff;
+  --ov-ink-muted: #c9d4d8;
+  --ov-code-window: #0b1a1f; /* the landing's code window, same in both schemes */
+  --ov-code-window-border: #1e3a44;
+
+  /* Product accents */
+  --ov-meet-primary: #007a3d; /* dark enough for white text on it */
+  --ov-meet-primary-rgb: 0, 122, 61;
   --ov-meet-accent: #06d362;
   --ov-meet-accent-rgb: 6, 211, 98;
   --ov-meet-accent-hover: #05b855;
-  --ov-platform-primary: #0088aa;
-  --ov-platform-primary-rgb: 0, 136, 170;
-  --ov-platform-primary-hover: #007394;
+  --ov-meet-primary-dark: #005f30;
+  --ov-meet-primary-dark-rgb: 0, 95, 48;
+  --ov-meet-ink: #062a15; /* text on the Meet green */
+  --ov-platform-primary: #005f78;
+  --ov-platform-primary-rgb: 0, 95, 120;
+  --ov-platform-primary-hover: #004b5f;
   --ov-platform-accent: #00c8f7;
-  --ov-nav-grey: #4d4d4d;
-  --ov-grey: #868686;
-  --ov-grey-muted: #818181;
+  --ov-platform-accent-rgb: 0, 200, 247;
+  --ov-platform-accent-hover: #4fd8f7;
+  --ov-platform-ink: #00283a; /* text on the Platform cyan */
+  --ov-yellow: #ffcc00;
+  --ov-yellow-ink: #1f1800;
+  --ov-pro: #8e24aa;
+  --ov-community: #5f6b70;
+
+  /* Legacy names other sheets still read */
+  --ov-nav-grey: var(--ov-muted);
+  --ov-grey: var(--ov-community);
+  --ov-grey-muted: var(--ov-muted);
   --ov-aws-orange: #ff9900;
   --ov-aws-navy: #252f3e;
 
-  --md-primary-fg-color: var(--ov-nav-grey);
+  /* Shape and type */
+  --ov-radius: 28px;
+  --ov-radius-md: 20px;
+  --ov-radius-sm: 14px;
+  --ov-radius-xs: 8px;
+  --ov-display-font: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+
+  --ov-btn-primary-hover: #2a3539;
+  --ov-accent: var(--ov-platform-primary);
+  --ov-accent-rgb: var(--ov-platform-primary-rgb);
+
   --md-primary-fg-color--light: var(--ov-platform-accent);
   --md-primary-fg-color--dark: var(--ov-platform-primary);
-  --md-primary-bg-color: #fff;
   --md-primary-bg-color--dark: var(--ov-platform-primary);
-  --md-accent-fg-color: var(--ov-platform-primary);
-  --md-accent-fg-color--transparent: var(--ov-grey-muted);
+  --md-accent-fg-color: var(--ov-accent);
+  --md-accent-fg-color--transparent: rgba(var(--ov-accent-rgb), 0.1);
   --md-accent-bg-color: #ffffff;
   --md-accent-bg-color--light: #ffffff;
-  --md-hue: 190deg;
-  color-scheme: dark;
+  --md-hue: 195deg;
   --plyr-video-background: transparent;
-  --top-home-section-color: linear-gradient(
-    0deg,
-    rgb(30, 39, 41) 0%,
-    rgb(30, 39, 41) 39%,
-    var(--ov-nav-grey) 100%
-  );
+  --plyr-color-main: var(--ov-platform-primary);
 
-  --slate-md-typeset-color: hsla(var(--md-hue), 15%, 90%, 0.82);
-  --slate-md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
-  --slate-md-default-fg-color--light: hsla(var(--md-hue), 15%, 90%, 0.56);
+  --slate-md-typeset-color: #eef2f3;
+  --slate-md-default-bg-color: #0f1517;
+  --slate-md-default-fg-color--light: #a3b1b6;
 
   --gradient: conic-gradient(
     from 60deg at 50% 50%,
-    var(--ov-platform-primary) 0%,
-    var(--ov-platform-primary) 13%,
-    var(--ov-platform-primary) 61%,
-    var(--ov-platform-primary) 99%
+    var(--ov-accent) 0%,
+    var(--ov-accent) 13%,
+    var(--ov-accent) 61%,
+    var(--ov-accent) 99%
   );
 }
 
-/* Custom colors for dark mode */
-[data-md-color-scheme="slate"] {
-  --md-typeset-a-color: var(--md-primary-fg-color--light);
-  --card-glow-intensity: 0.6;
-
-  video[src$="#only-light"] {
-    display: none;
-  }
+/* Derived from the scheme-dependent tokens, so declared on the element that carries the
+   scheme (<body>): a `var()` is resolved where it is declared, and at :root it would only ever
+   see the light values. Material paints the header and tabs with --md-primary-fg-color as
+   background and --md-primary-bg-color as text, so the header sits on the ground like
+   everything else. The solid button is ink by default; product.css recolours it per product. */
+[data-md-color-scheme] {
+  --md-primary-fg-color: var(--ov-ground);
+  --md-primary-bg-color: var(--ov-text);
+  --md-primary-bg-color--light: var(--ov-muted);
+  --ov-btn-primary-bg: var(--ov-ink);
+  --ov-btn-primary-fg: var(--ov-ink-fg);
 }
 
-/* Custom colors for light mode */
+/* Light scheme: the design's own values */
 [data-md-color-scheme="default"] {
+  color-scheme: light;
+  --md-default-bg-color: var(--ov-ground);
+  --md-default-fg-color: var(--ov-text);
+  --md-default-fg-color--light: var(--ov-muted);
+  --md-default-fg-color--lighter: #8a979c;
+  --md-default-fg-color--lightest: var(--ov-border);
+  --md-typeset-color: var(--ov-text);
+  --md-typeset-a-color: var(--md-primary-fg-color--dark);
+  --md-code-bg-color: var(--ov-surface);
+  --md-code-fg-color: #1d2a2f;
+  --md-code-hl-color: rgba(255, 204, 0, 0.35);
+  --md-typeset-table-color: var(--ov-border);
+  --md-typeset-table-color--light: rgba(16, 22, 24, 0.03);
+  --md-typeset-kbd-color: var(--ov-surface);
+  --md-typeset-kbd-border-color: var(--ov-border);
+  --md-admonition-bg-color: var(--ov-surface);
+  --md-footer-bg-color: var(--ov-surface);
+  --md-footer-bg-color--dark: var(--ov-surface);
+  --md-footer-fg-color: var(--ov-text);
+  --md-footer-fg-color--light: var(--ov-muted);
+  --md-footer-fg-color--lighter: #8a979c;
+  --md-shadow-z1: 0 1px 2px rgba(16, 22, 24, 0.06), 0 0 0 1px var(--ov-border);
+  --md-shadow-z2: 0 8px 24px rgba(16, 22, 24, 0.1), 0 0 0 1px var(--ov-border);
+  --md-shadow-z3: 0 16px 40px rgba(16, 22, 24, 0.16), 0 0 0 1px var(--ov-border);
+  --card-glow-intensity: 0.25;
 
   video[src$="#only-dark"] {
     display: none;
   }
 
-  --md-typeset-a-color: var(--md-primary-fg-color--dark);
-  --card-glow-intensity: 0.25;
-  /* Light-mode hero gradient: the TOP stop stays at the nav-bar gray
-     (--md-primary-fg-color, --ov-nav-grey) so it blends seamlessly with the header
-     (no hard boundary), and it lightens toward the bottom — a lighter version
-     of the dark-mode gradient. Kept dark enough for the light slogan and
-     description text to stay readable (the hero stays dark on purpose). */
-  --top-home-section-color: linear-gradient(
-    0deg,
-    rgb(80, 90, 94) 0%,
-    rgb(80, 90, 94) 39%,
-    var(--ov-nav-grey) 100%
-  );
-  .md-button--primary {
-    background-color: var(--md-accent-fg-color--transparent);
-    border-color: var(--md-accent-fg-color--transparent);
-  }
-  hr {
-    background-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgb(202, 202, 202) 25%,
-      rgba(202, 202, 202) 75%,
-      transparent 100%
-    );
-  }
-  #sign-in-button {
-    color: var(--slate-md-typeset-color);
-  }
-  #sign-in-button:hover {
-    color: #ffffff;
-    background-color: var(--slate-md-typeset-color);
-    border-color: var(--slate-md-typeset-color);
-  }
-  img.dark-img {
-    background-color: var(--slate-md-default-bg-color);
-  }
-  /* Fully opaque white for the hero text so it stays maximally readable over
-     the light-mode gradient (WCAG AAA, >=7:1, even at the lightest bottom). */
-  .slogan {
-    color: #ffffff;
-  }
-  .home-description {
-    color: #ffffff;
-  }
-  .top-home-section .home-under-cta,
-  .top-home-section .home-under-cta a,
-  .top-home-section .home-trust-line {
-    color: #ffffff;
-  }
-  a#account-btn {
-    color: var(--slate-md-typeset-color);
-  }
   .price-cell {
-    color: black;
+    color: var(--ov-text);
   }
+
   .ai-provider-icon {
     filter: brightness(0.4);
   }
+
+  img.dark-img {
+    background-color: var(--slate-md-default-bg-color);
+  }
 }
 
-/* Audience-routed CTA buttons (hero and end of features grid): each product's
-   identity color (same as its product card's Get Started button) in both
-   themes, so green=Meet / blue=Platform routing is consistent page-wide. */
-.md-typeset .home-buttons .md-button.home-meet-button {
+/* Slate scheme: inverted grounds, same accents */
+[data-md-color-scheme="slate"] {
+  color-scheme: dark;
+  --ov-ground: #0f1517;
+  --ov-surface: #171f22;
+  --ov-surface-2: #1f292d;
+  --ov-text: #eef2f3;
+  --ov-muted: #a3b1b6;
+  --ov-border: #2a3539;
+  --ov-ink: #f4f6f7;
+  --ov-ink-fg: #101618;
+  --ov-ink-muted: #4a5a60;
+  --ov-btn-primary-hover: #d9e0e3;
+  --ov-aws-navy: #ff9900;
+  --plyr-color-main: var(--ov-platform-accent);
+
+  --md-default-bg-color: var(--ov-ground);
+  --md-default-fg-color: var(--ov-text);
+  --md-default-fg-color--light: var(--ov-muted);
+  --md-default-fg-color--lighter: #6f7f85;
+  --md-default-fg-color--lightest: var(--ov-border);
+  --md-typeset-color: var(--ov-text);
+  --md-typeset-a-color: var(--md-primary-fg-color--light);
+  --md-code-bg-color: var(--ov-surface);
+  --md-code-fg-color: #dfe7ea;
+  --md-code-hl-color: rgba(255, 204, 0, 0.25);
+  --md-typeset-table-color: var(--ov-border);
+  --md-typeset-table-color--light: rgba(255, 255, 255, 0.03);
+  --md-typeset-kbd-color: var(--ov-surface-2);
+  --md-typeset-kbd-border-color: var(--ov-border);
+  --md-admonition-bg-color: var(--ov-surface);
+  --md-footer-bg-color: var(--ov-surface);
+  --md-footer-bg-color--dark: var(--ov-surface);
+  --md-footer-fg-color: var(--ov-text);
+  --md-footer-fg-color--light: var(--ov-muted);
+  --md-footer-fg-color--lighter: #6f7f85;
+  --md-shadow-z1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--ov-border);
+  --md-shadow-z2: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--ov-border);
+  --md-shadow-z3: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--ov-border);
+  --card-glow-intensity: 0.6;
+
+  video[src$="#only-light"] {
+    display: none;
+  }
+
+  .price-cell {
+    color: var(--ov-text);
+  }
+}
+
+/* Audience-routed CTA buttons (hero and end of features grid, the comparison pages, the
+   404): each product's identity colour, so green=Meet / blue=Platform routing is consistent
+   site-wide. On the green and cyan the ink is the product's dark tone, as on the landing. */
+.md-typeset .home-buttons .md-button.home-meet-button,
+.home-buttons .md-button.home-meet-button {
   background-color: var(--ov-meet-accent);
   border-color: var(--ov-meet-accent);
-  color: #ffffff;
+  color: var(--ov-meet-ink);
 }
-.md-typeset .home-buttons .md-button.home-meet-button:hover {
+.md-typeset .home-buttons .md-button.home-meet-button:hover,
+.home-buttons .md-button.home-meet-button:hover {
   background-color: var(--ov-meet-accent-hover);
   border-color: var(--ov-meet-accent-hover);
-  color: #ffffff;
+  color: var(--ov-meet-ink);
 }
 
-.md-typeset .home-buttons .md-button.home-platform-button {
-  background-color: var(--ov-platform-primary);
-  border-color: var(--ov-platform-primary);
-  color: #ffffff;
+.md-typeset .home-buttons .md-button.home-platform-button,
+.home-buttons .md-button.home-platform-button {
+  background-color: var(--ov-platform-accent);
+  border-color: var(--ov-platform-accent);
+  color: var(--ov-platform-ink);
 }
-.md-typeset .home-buttons .md-button.home-platform-button:hover {
-  background-color: var(--ov-platform-primary-hover);
-  border-color: var(--ov-platform-primary-hover);
-  color: #ffffff;
+.md-typeset .home-buttons .md-button.home-platform-button:hover,
+.home-buttons .md-button.home-platform-button:hover {
+  background-color: #1fd6ff;
+  border-color: #1fd6ff;
+  color: var(--ov-platform-ink);
 }
