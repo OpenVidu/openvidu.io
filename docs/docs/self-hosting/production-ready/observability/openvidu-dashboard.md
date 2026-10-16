@@ -36,6 +36,7 @@ Every page shares the same header and the same rules:
 - **Shareable views**: the time range, filters, sort order and page of every list live in the URL. Copy the URL to share exactly what you see; the browser's **Back** button restores the previous view.
 - **Identifiers** have a copy button, and every Room, Participant, Egress and Ingress links to its details.
 - **Theme**: light and dark themes, following the operating system by default.
+- **Version**: the bottom of the side menu shows the OpenVidu version and edition, with a link to this documentation.
 
 ![Search results grouped by resource in OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/search-light.png#only-light){ .round-corners loading=lazy }
 ![Search results grouped by resource in OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/search-dark.png#only-dark){ .round-corners loading=lazy }
@@ -44,9 +45,9 @@ Every page shares the same header and the same rules:
 
 The landing page answers "what is happening right now":
 
-- **Live counters** of active rooms, participants, publishers, egresses, ingresses and agents, each linking to its list.
+- **Live counters** of active rooms, participants, publishers, services (egress, ingress and agent sessions), egresses, ingresses and agents, each linking to its list.
 - **Today**: rooms, participants, minutes, egresses and ingresses since midnight.
-- **Server status**: OpenVidu version, data schema, time of the last data written, progress of a [data migration](#upgrading-from-previous-versions) and retention in effect.
+- **Data pipeline**: time of the last data written by OpenVidu Server, how many nodes are reporting, and the progress of a [data migration](#upgrading-from-previous-versions) while it runs.
 - **Recent rooms**: the last rooms created.
 - **By node** **PRO**{ .openvidu-tag .openvidu-pro-tag }: version, region, state, rooms and participants of each node.
 
@@ -61,7 +62,7 @@ Charts and figures over the selected time range, with a granularity from 5 minut
 
 - **Summary**: rooms created, participant sessions, unique identities, connection success rate, bandwidth, egresses and API error rate.
 - **Rooms**: rooms created and ended, average room size and duration.
-- **Participants**: participants joined and aborted, connection success rate and participants by kind.
+- **Participants**: participants joined and aborted, connection success rate and sessions by kind.
 - **Clients**: SDK, operating system, browser and connection type of the participants.
 - **Bandwidth**: upstream and downstream traffic.
 - **Egress**: egresses started, ended and failed, by type.
@@ -72,7 +73,7 @@ Charts and figures over the selected time range, with a granularity from 5 minut
 - **Failures**: disconnection reasons, room end reasons, subscription failures and API calls and errors by method.
 - **Ingress**: ingress sessions and failures by input type.
 - **Top rooms**: the rooms with most participants, longest duration, most bandwidth or worst quality.
-- **Scope**: any of the above for the whole cluster or for a single node.
+- **Scope**: any of the above for the whole cluster or for a single node, chosen in the page header.
 
 ![Analytics page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics-light.png#only-light){ .round-corners loading=lazy }
 ![Analytics page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/analytics-dark.png#only-dark){ .round-corners loading=lazy }
@@ -93,7 +94,7 @@ Charts and figures over the selected time range, with a granularity from 5 minut
 
 ## Rooms
 
-Active and closed rooms of the selected time range, with counters of active rooms, rooms in range, participant sessions and active participants. Filter by status, search by name prefix or SID, and filter the rooms that used egress, ingress, agents or SIP. The table shows each room's status, start and end time, duration, participants, bandwidth, features and node.
+Active and closed rooms of the selected time range, with counters of active rooms, rooms in range, participant sessions and active participants. Filter by status, search by name prefix or SID, and filter the rooms that used egress, ingress or agents. The table shows each room's status, start and end time, duration, participants, bandwidth, features and node.
 
 ![Rooms page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms-light.png#only-light){ .round-corners loading=lazy }
 ![Rooms page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms-dark.png#only-dark){ .round-corners loading=lazy }
@@ -120,9 +121,9 @@ Everything about one room: duration, participants, connection success, bandwidth
 
 ## Participants
 
-Search participant sessions by identity prefix or SID over the selected time range, and filter them by kind (standard, agent, egress, ingress, SIP and others), status and room. The table shows each session's room, kind, status, join and leave time, duration, client and connection type.
+Search participant sessions by identity prefix or SID over the selected time range, and filter them by kind (standard participants by default, or agent, egress and ingress sessions), status and room. The table shows each session's room, kind, status, join and leave time, duration, client and connection type.
 
-A participant may connect to a room several times with the same identity: each connection is a **participant session**, with its own SID.
+A participant may connect to a room several times with the same identity: each connection is a **participant session**, with its own SID. Participant counts across the dashboard include standard participants only; agent, egress and ingress sessions are counted apart as **services**.
 
 ![Participants page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participants-light.png#only-light){ .round-corners loading=lazy }
 ![Participants page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/participants-dark.png#only-dark){ .round-corners loading=lazy }
@@ -169,7 +170,7 @@ Egresses of the selected time range, with counters of active, started and failed
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
-One egress: its error, if any; its outputs (files, streams, segments or images) with their location and size; the timeline of its status changes; the request that started it; and its events. Credentials in URLs and storage settings are never shown.
+One egress: the participant it records, if any; its error, if any; its outputs (files, streams, segments or images) with their location and size; the timeline of its status changes; a summary of the request that started it (layout, preset, recorded tracks...) followed by the full request; and its events. Credentials in URLs and storage settings are never shown.
 
 ![Egress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-detail-light.png#only-light){ .round-corners loading=lazy }
 ![Egress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-detail-dark.png#only-dark){ .round-corners loading=lazy }
@@ -185,7 +186,7 @@ Ingresses with activity in the selected time range, with their counters. Filter 
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
-One ingress: its last error, its definition, each of its sessions with the room it published to and its video and audio details, and its events. Stream keys and credentials in URLs are never shown.
+One ingress: its last error, its definition, each of its sessions with the participant it published as, its room and its video and audio details, and its events. An RTSP camera pulled by a URL ingress reads **URL (RTSP)**. Stream keys and credentials in URLs are never shown.
 
 ![Ingress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress-detail-light.png#only-light){ .round-corners loading=lazy }
 ![Ingress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress-detail-dark.png#only-dark){ .round-corners loading=lazy }
@@ -193,7 +194,7 @@ One ingress: its last error, its definition, each of its sessions with the room 
 ## Settings
 
 - **Preferences**: theme, time zone, default time range, rows per page and auto-refresh period. They are stored in the browser.
-- **About**: versions of the dashboard and OpenVidu Server, data schema, MongoDB, data migration, retention in effect and the storage used by each collection. In **PRO**{ .openvidu-tag .openvidu-pro-tag }, also the license key, partially masked.
+- **About**: the OpenVidu version and edition, the progress of a data migration while it runs, the retention in effect and the storage used by each collection.
 
 ![About tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-about-light.png#only-light){ .round-corners loading=lazy }
 ![About tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-about-dark.png#only-dark){ .round-corners loading=lazy }
