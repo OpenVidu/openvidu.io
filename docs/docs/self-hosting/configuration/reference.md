@@ -50,7 +50,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | --------- | ----------- |
 | **`SERVER_PORT`** | Port where the OpenVidu Meet service will be running. |
 | **`SERVER_CORS_ORIGIN`** | CORS origin for the OpenVidu Meet service. It is `*` by default, allowing all origins. |
-| **`SERVER_TRUST_PROXY`** | Configures whether the OpenVidu Meet service trusts the `X-Forwarded-*` headers from reverse proxies. This is essential for proper rate limiting and obtaining the real client IP address. Supported values: `true` (trust all proxies), `false` (disable), or a number (number of hops to trust). This is required when OpenVidu Meet is behind a reverse proxy. Default is `true`. |
+| **`SERVER_TRUST_PROXY`** | Configures whether the OpenVidu Meet service trusts the `X-Forwarded-*` headers from reverse proxies. This is essential for proper rate limiting and obtaining the real client IP address. Supported values: `true` (trust all proxies), `false` (disable), a number (number of hops to trust), or a comma-separated list of the addresses and subnets of the proxies to trust (for example `10.0.0.1,172.16.0.0/12`). This is required when OpenVidu Meet is behind a reverse proxy. Default is `true`. |
 | **`LIVEKIT_URL`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
@@ -65,17 +65,17 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
 | **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered. |
 | **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.|
-| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
-| **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). Default is `s3`. With `gcs`, OpenVidu Meet uses the bucket of `MEET_S3_BUCKET` and the path of `MEET_S3_SUBBUCKET`, and authenticates with Google Application Default Credentials: the service account key file named by `GOOGLE_APPLICATION_CREDENTIALS`, or else the service account attached to the machine. |
+| **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the Google Cloud Storage bucket. Default is `openvidu-appdata`. |
+| **`MEET_S3_SUBBUCKET`** | Path inside the bucket where the recordings of OpenVidu Meet are stored. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the path inside the Google Cloud Storage bucket. Default is `openvidu-meet`. |
 | **`MEET_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for OpenVidu Meet service. |
 | **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
 | **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
 | **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
-| **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm for the OpenVidu Meet S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
-| **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
-| **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
+| **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). OpenVidu Meet writes nothing to the bucket, so this setting encrypts nothing: recordings are written by the egress, which follows `EXTERNAL_S3_SSE_TYPE`, `EXTERNAL_S3_SSE_KMS_KEY_ID` and `EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT` of `openvidu.env`. With `MEET_BLOB_STORAGE_MODE` set to `s3`, OpenVidu Meet only validates the three `MEET_S3_SSE_*` variables at startup, and does not start when their combination is invalid. |
+| **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`, and not allowed otherwise. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
+| **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only allowed with `SSE-KMS`**. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
 | **`MEET_AZURE_SUBCONTAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
