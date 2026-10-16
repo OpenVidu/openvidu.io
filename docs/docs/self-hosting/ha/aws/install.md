@@ -38,7 +38,7 @@ This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability AWS Architecture](../../../../assets/images/platform/self-hosting/ha/aws/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public.svg){ .round-corners .dark-img loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
@@ -46,10 +46,6 @@ This is what the deployment architecture looks like.
     - Clients that cannot use UDP (for example, behind a firewall that blocks it) relay their media with TURN over TLS on **DomainName**, through the Load Balancer and the Master Nodes.
     - 4 fixed EC2 Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
-
-=== "Network"
-
-    ![Network layout: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public.svg){ .round-corners .dark-img loading=lazy }
 
     By default, every node has a public IP. Clients send media over UDP directly to the Media Nodes, the lowest latency and the best quality, and the Load Balancer runs in the Master Nodes' subnets. It is the simplest setup: no NAT gateway and no extra subnets or Load Balancers.
 
@@ -92,6 +88,7 @@ In this section, you need to specify the domain name and the SSL certificate to 
     - **What they do**: by default, clients that cannot send media over UDP use TURN over TLS on **DomainName**, and the Master Nodes relay that traffic to the Media Nodes. With these parameters, clients use **TurnDomainName** instead, and a dedicated TURN Load Balancer forwards the traffic directly to the Media Nodes (see layout 1 in [Private subnets and TURN options](#private-subnets-and-turn-options)).
     - **When to use them**: when many of your clients are on networks that block UDP, so that their media relay scales with the Media Nodes instead of adding load, even if small, to the Master Nodes.
     - **How to set them**: both are required to enable the TURN Load Balancer. Set **TurnDomainName** to a domain different from **DomainName** (for example `turn.example.io`) and **TurnCertificateARN** to the ARN of an AWS Certificate Manager certificate valid for it. Once the stack is created, point **TurnDomainName** to the `TurnLoadBalancerDNS` output.
+    - **With Media Nodes in private subnets**: the stack also creates a TURN UDP Load Balancer, so that clients send their media over UDP instead of TURN over TLS (see layout 4 in [Private subnets and TURN options](#private-subnets-and-turn-options)).
 
     Leave both empty to keep the default behavior.
 
@@ -164,7 +161,7 @@ In this section, you need to specify the VPC and Subnet configuration for the de
 
     The **OpenViduMediaNodeSubnets** specifies the subnets where the Media Nodes will be deployed. There is no limit on the number of subnets you can specify.
 
-    The optional **LoadBalancerSubnets** parameter specifies the public subnets where the internet-facing Load Balancer is placed. Leave it empty to place the Load Balancer in the **OpenViduMasterNodeSubnets** (the default behavior). Set it to dedicated public subnets when you want to run the Master Nodes in private subnets: the Load Balancer stays public and reachable while the Master Nodes have their own outbound internet access, for example through a NAT gateway. If you configure a dedicated TURN Load Balancer, it is placed in these subnets too, or in the **OpenViduMediaNodeSubnets** when this parameter is empty.
+    The optional **LoadBalancerSubnets** parameter specifies the public subnets where the internet-facing Load Balancer is placed. Leave it empty to place the Load Balancer in the **OpenViduMasterNodeSubnets** (the default behavior). Set it to dedicated public subnets when you want to run the Master Nodes in private subnets: the Load Balancer stays public and reachable while the Master Nodes have their own outbound internet access, for example through a NAT gateway. If you configure a dedicated TURN Load Balancer, it is placed in these subnets too, or in the **OpenViduMediaNodeSubnets** when this parameter is empty. The TURN UDP Load Balancer of layout 4 is always placed in these subnets. If you change this parameter in a stack update, the IPs of the TURN UDP Load Balancer change: replace the Media Nodes afterwards so that they announce the new ones.
 
     !!! warning
 
@@ -190,6 +187,8 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
 When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_. The stack will take about 5 to 12 minutes to create all resources.
 
+The stack reaches the `CREATE_COMPLETE` status only when OpenVidu is installed and healthy on every Master Node. If the installation fails on any of them, the stack ends in `CREATE_FAILED`, and its CloudFormation events show the instance ID of each Master Node that failed (see [Troubleshooting Initial CloudFormation Stack Creation](#troubleshooting-initial-cloudformation-stack-creation)).
+
 When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation:
 
 === "CloudFormation Outputs"
@@ -203,6 +202,8 @@ When everything is ready, you will see the following links in the _"Outputs"_ se
     ![CloudFormation Outputs with a dedicated TURN Load Balancer](../../../../assets/images/platform/self-hosting/ha/aws/outputs-turn-lb.png){ .round-corners loading=lazy }
 
     If you configured a dedicated TURN Load Balancer, the Outputs also include **TurnLoadBalancerDNS**. Point **DomainName** to the **LoadBalancerDNS** output and **TurnDomainName** to the **TurnLoadBalancerDNS** output, for example with a CNAME or an alias record for each one.
+
+    If the Media Nodes are in private subnets (layout 4), the Outputs also include **TurnUDPLoadBalancerDNS**: the DNS name of the TURN UDP Load Balancer. It needs no DNS record of yours, because OpenVidu gives the IPs it resolves to directly to the clients. If your clients are behind a firewall, allow outbound UDP 443 to these IPs.
 
 ## Configure your application to use the deployment
 
@@ -240,7 +241,7 @@ Each layout includes its pros and cons to help you choose the one that fits your
 - [**1. Dedicated TURN Load Balancer**](#1-dedicated-turn-load-balancer): the default layout plus a TURN Load Balancer, so that clients that cannot use UDP relay their media through the Media Nodes instead of the Master Nodes.
 - [**2. Private Master Nodes**](#2-private-master-nodes): the Master Nodes have no public IP. The Media Nodes stay public and media still goes over UDP.
 - [**3. All private**](#3-all-private): no node has a public IP. All media goes over TURN over TLS through the Master Nodes.
-- [**4. All private + Dedicated TURN Load Balancer**](#4-all-private--dedicated-turn-load-balancer): as layout 3, but the TURN Load Balancer takes the relay to the Media Nodes, out of the Master Nodes.
+- [**4. All private + Dedicated TURN Load Balancer**](#4-all-private--dedicated-turn-load-balancer): no node has a public IP. Media goes over UDP through a TURN UDP Load Balancer to the Media Nodes, with TURN over TLS through the TURN Load Balancer as the fallback.
 
 === "1. Dedicated TURN Load Balancer"
 
@@ -259,6 +260,7 @@ Each layout includes its pros and cons to help you choose the one that fits your
     - It needs a second domain, a second certificate and a second Load Balancer, with its own cost.
     - Two DNS records to point: **DomainName** and **TurnDomainName**.
     - For clients that relay their media, TURN over TLS still has more latency than UDP.
+    - When a Media Node is scaled in, clients whose TURN relay runs on it, while their Room runs on another Media Node, lose their media for about 1 second and then reconnect automatically. The Load Balancer can place the relay on any Media Node, and TURN cannot tell the client to move it before the node stops.
 
     | Parameter | Example value | Notes |
     | --- | --- | --- |
@@ -310,7 +312,7 @@ Each layout includes its pros and cons to help you choose the one that fits your
     **Cons**
 
     - No UDP: all media goes over TURN over TLS, which runs on TCP. Latency is higher than with UDP, and quality drops sooner when there is packet loss.
-    - All the media traffic of every client goes through the Load Balancer and the Master Nodes, which relay it to the Media Nodes. Forwarding it is a small load for each Master Node, but here it grows with the traffic of every client, so take it into account when sizing the Master Nodes. Adding a TURN Load Balancer (layout 4) moves this relay to the Media Nodes, but media still goes over TCP.
+    - All the media traffic of every client goes through the Load Balancer and the Master Nodes, which relay it to the Media Nodes. Forwarding it is a small load for each Master Node, but here it grows with the traffic of every client, so take it into account when sizing the Master Nodes. Adding a TURN Load Balancer (layout 4) moves this relay to the Media Nodes, and media goes over UDP.
     - The Load Balancer processes all the media traffic, which increases its cost.
     - It needs public subnets for the Load Balancer and outbound internet access for the private subnets, for example a NAT gateway, with its own cost.
 
@@ -326,28 +328,35 @@ Each layout includes its pros and cons to help you choose the one that fits your
 
     ![Network layout: all nodes in private subnets with a dedicated TURN Load Balancer](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-turn-lb.svg){ .round-corners .dark-img loading=lazy }
 
-    Use it when no node can have a public IP and you do not want the media to go through the Master Nodes. As in layout 3, clients cannot reach the Media Nodes directly and all media goes through TURN over TLS, but on **TurnDomainName**: a dedicated TURN Load Balancer forwards it straight to the Media Nodes, which relay it themselves.
+    Use it when no node can have a public IP but you want media over UDP. Clients cannot reach the Media Nodes directly, so the stack places two Load Balancers in front of them:
+
+    - A **TURN UDP Load Balancer** forwards TURN over UDP 443 to the Media Nodes. It has one static public IP per availability zone, assigned by AWS, so it uses no Elastic IPs of your account. Each Media Node gives its clients the IP of the Load Balancer in its own availability zone, so clients send their media over UDP, as in the default layout. It is created automatically: there is no parameter for it.
+    - The **TURN Load Balancer** on **TurnDomainName** forwards TURN over TLS to the Media Nodes, for clients on networks that block UDP.
+
+    The Media Nodes relay the media themselves, so the Master Nodes are out of the media path.
 
     **Pros**
 
-    - No node has a public IP: only the two Load Balancers are exposed to the internet.
+    - No node has a public IP: only the Load Balancers are exposed to the internet.
+    - Media goes over UDP: lower latency and better quality under packet loss than TURN over TLS. Clients that cannot use UDP fall back to TURN over TLS automatically.
     - The Master Nodes are out of the media path: the relay scales with the Media Nodes autoscaling group.
 
     **Cons**
 
-    - No UDP: all media goes over TURN over TLS, which runs on TCP. Latency is higher than with UDP, and quality drops sooner when there is packet loss.
-    - It needs a second domain, a second certificate and a second Load Balancer, with its own cost. The TURN Load Balancer processes all the media traffic.
+    - It needs a second domain and a second certificate, and two more Load Balancers, with their own cost. The TURN Load Balancers process all the media traffic.
+    - Clients on networks that allow only some destinations must allow UDP 443 to the IPs that the **TurnUDPLoadBalancerDNS** output resolves to.
+    - When a Media Node is scaled in, clients whose TURN relay runs on it, while their Room runs on another Media Node, lose their media for about 15 seconds over UDP, or 1 second over TLS, and then reconnect automatically. The Load Balancer can place the relay on any Media Node, and TURN cannot tell the client to move it before the node stops.
     - It needs public subnets for the Load Balancers and outbound internet access for the private subnets, for example a NAT gateway, with its own cost.
 
     | Parameter | Example value | Notes |
     | --- | --- | --- |
     | **OpenViduMasterNodeSubnets** | `subnet-0bb11111,subnet-0bb22222,subnet-0bb33333,subnet-0bb44444` | Your private subnets with outbound internet access, one per availability zone |
     | **OpenViduMediaNodeSubnets** | `subnet-0bb11111,subnet-0bb22222,subnet-0bb33333,subnet-0bb44444` | Your private subnets with outbound internet access, one per availability zone |
-    | **LoadBalancerSubnets** | `subnet-0aa11111,subnet-0aa22222,subnet-0aa33333,subnet-0aa44444` | Your public subnets, in the same availability zones as the Master Nodes. Both Load Balancers go here |
+    | **LoadBalancerSubnets** | `subnet-0aa11111,subnet-0aa22222,subnet-0aa33333,subnet-0aa44444` | Your public subnets, in the same availability zones as the Master Nodes. All the Load Balancers go here |
     | **TurnDomainName** | `turn.example.com` | A second domain of yours, different from **DomainName** |
     | **TurnCertificateARN** | `arn:aws:acm:us-east-1:123456789012:certificate/9f8e7d6c-5b4a-3f2e-1d0c-9b8a7f6e5d4c` | Your certificate for **TurnDomainName** |
 
-    After creating the stack, point **DomainName** to the **LoadBalancerDNS** output and **TurnDomainName** to the **TurnLoadBalancerDNS** output (see [Deploying the stack](#deploying-the-stack)).
+    After creating the stack, point **DomainName** to the **LoadBalancerDNS** output and **TurnDomainName** to the **TurnLoadBalancerDNS** output (see [Deploying the stack](#deploying-the-stack)). The TURN UDP Load Balancer needs no DNS record.
 
 
 ## Troubleshooting Initial CloudFormation Stack Creation
