@@ -154,14 +154,19 @@ openvidu:
         enabled: true # (2)
         mongo_url: mongodb://<MONGO_ADMIN_USERNAME>:<MONGO_ADMIN_PASSWORD>@localhost:20000/ # (3)
         interval: 10s # (4)
-        expiration: 768h # (5)
+        retention: # (5)
+            events: 168h
+            stats: 168h
+            tracks: 168h
+            entities: 2160h
+            rollups_hourly: 9600h
 ```
 
 1. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 2. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
 3. MongoDB connection string. In OpenVidu Single Node, the MongoDB service is running on the same machine, so you can use `localhost` as the hostname. The default port in OpenVidu for MongoDB is `20000`. `MONGO_ADMIN_USERNAME` and `MONGO_ADMIN_PASSWORD` are the credentials to access the MongoDB database.
 4. Time interval to send analytics data to MongoDB.
-5. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
+5. Time to keep each class of analytics data in MongoDB: raw events, statistics, closed tracks and subscriptions, closed rooms, participants, egresses and ingresses, and hourly rollups. Daily rollups are kept forever. See [Analytics settings](#analytics-settings).
 
 ### **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Server Configuration:
 
@@ -178,7 +183,12 @@ openvidu:
     analytics: # (3)
         enabled: true # (4)
         interval: 10s # (5)
-        expiration: 768h # (6)
+        retention: # (6)
+            events: 168h
+            stats: 168h
+            tracks: 168h
+            entities: 2160h
+            rollups_hourly: 9600h
         mongo_url: <MONGO_URL> # (7)
     rtc:
         engine: mediasoup # (8)
@@ -193,7 +203,7 @@ openvidu:
 3. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 4. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
 5. Time interval to send analytics data to MongoDB.
-6. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
+6. Time to keep each class of analytics data in MongoDB: raw events, statistics, closed tracks and subscriptions, closed rooms, participants, egresses and ingresses, and hourly rollups. Daily rollups are kept forever. See [Analytics settings](#analytics-settings).
 7. MongoDB URL. This is the connection string to the MongoDB database where the analytics data will be stored.
 8. The `rtc.engine` parameter is set to `mediasoup` by default. This is the WebRTC engine used by OpenVidu. Depending on your requirements, you can use:
     - `mediasoup`
@@ -206,6 +216,33 @@ openvidu:
 11. Comma-separated list of log tag names, for debugging. [More info :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/documentation/v3/mediasoup/debugging/){:target="_blank"}.
     - Valid values are: `info`, `ice`, `dtls`, `rtp`, `srtp`, `rtcp`, `rtx`, `bwe`, `score`, `simulcast`, `svc`, `sctp`, `message`.
     - Default is `[info, ice, rtp, rtcp, message]`.
+
+### Analytics settings
+
+Every key of the `openvidu.analytics` section of `livekit.yaml`. The analytics data feeds the [OpenVidu Dashboard](../production-ready/observability/openvidu-dashboard.md#analytics-data).
+
+| Key | Default | Description |
+| --- | --- | --- |
+| `enabled` | `false` | Write analytics data to MongoDB. |
+| `mongo_url` | | MongoDB connection string. |
+| `database` | `openvidu` | MongoDB database. |
+| `interval` | `10s` | Period of the writes to MongoDB, from `1s` to `60s`. |
+| `retention.events` | `168h` | Time raw events are kept. |
+| `retention.stats` | `168h` | Time statistics and 5-minute rollups are kept. |
+| `retention.tracks` | `168h` | Time closed tracks and subscriptions are kept. |
+| `retention.entities` | `2160h` | Time closed rooms, participants, egresses and ingresses are kept. |
+| `retention.rollups_hourly` | `9600h` | Time hourly rollups are kept. Daily rollups are kept forever. |
+| `stats_detail` | `participant` in **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, `track` in **PRO**{ .openvidu-tag .openvidu-pro-tag } | `participant` stores one statistics document per participant and direction every 30 seconds; `track`, one per track and direction. |
+| `anonymize_ip` | `false` | Leave client IP addresses out. |
+| `store_metadata` | `false` | Store room and participant metadata and attributes. |
+| `events.store_types` | All but `TRACK_PUBLISHED_UPDATE`, `TRACK_MAX_SUBSCRIBED_VIDEO_QUALITY` and `TRACK_SUBSCRIBE_REQUESTED` | Event types kept as raw events, as a list. Every event updates rooms, participants and rollups whatever this list says. |
+| `fixer_interval` | `60s` | Period of the checks that close the rooms, participants, egresses and ingresses whose end event never arrived. |
+| `reconciler.enabled` | `true` | Run those checks. |
+| `migration.enabled` | `true` | Migrate the analytics data of versions before 3.10 at the first start. |
+| `migration.rate` | `2000` | Documents migrated per second at most; `0` removes the limit. |
+| `expiration` | | **Deprecated**. Sets `retention.events` and `retention.stats` when neither is set. |
+
+Retentions are durations of at least `1h`. Every key can also be set with an environment variable of OpenVidu Server named `LIVEKIT_OPENVIDU_ANALYTICS_` plus the key in upper case, with `_` instead of `.`; for example, `LIVEKIT_OPENVIDU_ANALYTICS_RETENTION_EVENTS=720h`.
 
 ## Other Services Configuration
 
