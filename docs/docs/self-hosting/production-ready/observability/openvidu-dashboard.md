@@ -31,7 +31,8 @@ Go to `https://your.domain/dashboard/` and **log in** with the admin credentials
 Every page shares the same header and the same rules:
 
 - **Time range**: the selector in the header applies to every page. It offers presets from the last hour to the last 90 days, the current month and a custom range, in the browser's time zone or in UTC.
-- **Auto-refresh**: pages showing live data refresh every 10 seconds by default. You can choose another period or turn it off; refreshing pauses while the browser tab is hidden.
+- **Auto-refresh**: pages showing live data refresh every 10 seconds by default. You can choose another period or turn it off; refreshing pauses while the browser tab is hidden. The **LIVE** label next to the page title reads **paused** while auto-refresh is off, and **stale** when the data shown may be out of date.
+- **Data warnings**: on every page, a banner warns when no analytics data has been written for over a minute and shows the progress of a [data migration](#upgrading-from-previous-versions) while it runs. These warnings keep updating even with auto-refresh off.
 - **Search**: press `/` or click the search box. Typing an exact identifier (a Room, Participant, Track, Egress or Ingress SID) opens its details; any other text finds rooms, participants, egresses and ingresses whose name starts with it.
 - **Shareable views**: the time range, filters, sort order and page of every list live in the URL. Copy the URL to share exactly what you see; the browser's **Back** button restores the previous view.
 - **Identifiers** have a copy button, and every Room, Participant, Egress and Ingress links to its details.
@@ -51,7 +52,7 @@ The landing page answers "what is happening right now":
 - **Recent rooms**: the last rooms created.
 - **By node** **PRO**{ .openvidu-tag .openvidu-pro-tag }: version, region, state, rooms and participants of each node.
 
-A warning appears when no analytics data has been written for a while, or when some entities have stopped receiving statistics.
+A warning appears when some active rooms and participants have stopped receiving statistics.
 
 ![Overview page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/overview-light.png#only-light){ .round-corners loading=lazy }
 ![Overview page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/overview-dark.png#only-dark){ .round-corners loading=lazy }
