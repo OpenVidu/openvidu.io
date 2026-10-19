@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 420" width="460" height="420" role="img" aria-label="AI agents: OpenVidu routes room media to AI models such as OpenAI, Gemini or Claude and back">
+<title>AI agents: OpenVidu routes room media to AI models such as OpenAI, Gemini or Claude and back</title>
+<defs>
+<marker id="up" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#06d362" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="down" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#00c8f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="110" y="140" width="240" height="130" rx="20" fill="#eef2f3" />
+<g transform="translate(150.0 185.0) scale(0.95)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<text x="196.0" y="213.0" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="24" font-weight="800" fill="#0f1517" text-anchor="start" >OpenVidu</text>
+<text x="230.0" y="237.0" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.75">Agents</text>
+<rect x="170" y="24" width="120" height="40" rx="20" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="230" y="50" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#eef2f3" text-anchor="middle" >OpenAI</text>
+<rect x="50" y="356" width="120" height="40" rx="20" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="110" y="382" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#eef2f3" text-anchor="middle" >Gemini</text>
+<rect x="290" y="356" width="120" height="40" rx="20" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="350" y="382" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#eef2f3" text-anchor="middle" >Claude</text>
+<line x1="218" y1="66" x2="218" y2="130" stroke="#00c8f7" stroke-width="3" stroke-linecap="round" marker-end="url(#down)"/>
+<line x1="242" y1="130" x2="242" y2="66" stroke="#06d362" stroke-width="3" stroke-linecap="round" marker-end="url(#up)"/>
+<line x1="150" y1="280" x2="130" y2="354" stroke="#00c8f7" stroke-width="3" stroke-linecap="round" marker-end="url(#down)"/>
+<line x1="110" y1="354" x2="130" y2="280" stroke="#06d362" stroke-width="3" stroke-linecap="round" marker-end="url(#up)"/>
+<line x1="310" y1="280" x2="330" y2="354" stroke="#00c8f7" stroke-width="3" stroke-linecap="round" marker-end="url(#down)"/>
+<line x1="350" y1="354" x2="330" y2="280" stroke="#06d362" stroke-width="3" stroke-linecap="round" marker-end="url(#up)"/>
+<circle cx="40" cy="187.0" r="11.0" fill="#a3b1b6"/>
+<path d="M20.0 226.0 v-12.100000000000001 a20.0 22.0 0 0 1 40.0 0 v12.100000000000001 z" fill="#a3b1b6"/>
+<circle cx="420" cy="187.0" r="11.0" fill="#a3b1b6"/>
+<path d="M400.0 226.0 v-12.100000000000001 a20.0 22.0 0 0 1 40.0 0 v12.100000000000001 z" fill="#a3b1b6"/>
+<line x1="100" y1="192" x2="72" y2="192" stroke="#00c8f7" stroke-width="3" stroke-linecap="round" marker-end="url(#down)"/>
+<line x1="72" y1="216" x2="100" y2="216" stroke="#06d362" stroke-width="3" stroke-linecap="round" marker-end="url(#up)"/>
+<line x1="360" y1="192" x2="388" y2="192" stroke="#00c8f7" stroke-width="3" stroke-linecap="round" marker-end="url(#down)"/>
+<line x1="388" y1="216" x2="360" y2="216" stroke="#06d362" stroke-width="3" stroke-linecap="round" marker-end="url(#up)"/>
+<text x="230" y="410" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#a3b1b6" text-anchor="middle" >Audio, video and data tracks in; AI output back into the room</text>
+</svg>

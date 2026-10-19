@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="OpenVidu application architecture: the application client with a client SDK, the application server with a server SDK, and the OpenVidu deployment">
+<title>OpenVidu application architecture: the application client with a client SDK, the application server with a server SDK, and the OpenVidu deployment</title>
+<line x1="380" y1="20" x2="380" y2="380" stroke="#d9e0e3" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 10"/>
+<text x="190" y="36" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#4a5a60" text-anchor="middle" >Your users' devices</text>
+<text x="570" y="36" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#4a5a60" text-anchor="middle" >Your infrastructure</text>
+<rect x="40" y="120" width="280" height="160" rx="24" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="180" y="158" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="22" font-weight="700" fill="#101618" text-anchor="middle" >Application client</text>
+<rect x="90" y="190" width="180" height="56" rx="14" fill="#101618" />
+<text x="180" y="224" font-family="Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="600" fill="#f4f6f7" text-anchor="middle" >Client SDK</text>
+<rect x="440" y="60" width="280" height="150" rx="24" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="580" y="98" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="22" font-weight="700" fill="#101618" text-anchor="middle" >Application server</text>
+<rect x="490" y="128" width="180" height="56" rx="14" fill="#101618" />
+<text x="580" y="162" font-family="Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="600" fill="#f4f6f7" text-anchor="middle" >Server SDK</text>
+<rect x="440" y="240" width="280" height="120" rx="24" fill="#005f78" />
+<g transform="translate(500 268) scale(1.0)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<text x="548" y="296" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="start" >OpenVidu</text>
+<text x="580" y="330" font-family="Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="500" fill="#ffffff" text-anchor="middle" opacity="0.85">deployment</text>
+<path d="M320 170 L400 170 L400 135 L440 135" fill="none" stroke="#4a5a60" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="360" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle" >token</text>
+<path d="M270 218 L400 218 L400 300 L440 300" fill="none" stroke="#4a5a60" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="406" y="250" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="start" >media</text>
+<line x1="580" y1="184" x2="580" y2="240" stroke="#4a5a60" stroke-width="2.5" stroke-linecap="round"/>
+<text x="594" y="220" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="start" >API</text>
+</svg>
