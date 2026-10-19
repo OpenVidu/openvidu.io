@@ -77,12 +77,19 @@ Both are granted by default to the `Moderator` [predefined role](../rooms/access
 
 ## From your application { #embedded }
 
-When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application controls the broadcasts on behalf of the local participant with the `broadcastStart` and `broadcastStop` [commands](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. Without options, `broadcastStart` goes live to every room destination the meeting is not streaming to yet, and `broadcastStop` stops every broadcast. The `broadcastStarted`, `broadcastUpdated` and `broadcastEnded` [events](../../embedded/reference/webcomponent.md#events) report each broadcast of the meeting, whoever started it.
+When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application controls the broadcasts on behalf of the local participant with the `broadcastStart` and `broadcastStop` [commands](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. Without options, `broadcastStart` goes live to every room destination the meeting is not streaming to yet, and `broadcastStop` stops every broadcast. `destinationIds` picks some of the room destinations, or none with an empty list, and `destinations` adds destinations for this meeting only, by name and URL. The `broadcastStarted`, `broadcastUpdated` and `broadcastEnded` [events](../../embedded/reference/webcomponent.md#events) report each broadcast of the meeting, whoever started it.
 
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
+// Every room destination not streamed to yet
 openviduMeet.broadcastStart();
+
+// Only a destination for this meeting, none of the room's
+openviduMeet.broadcastStart({
+	destinationIds: [],
+	destinations: [{ name: 'Own media server', url: 'rtmp://media.example.com/live/stream-key' }]
+});
 
 openviduMeet.on('broadcastUpdated', (event) => {
 	if (event.status === 'active') {
