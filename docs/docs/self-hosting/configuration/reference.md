@@ -67,7 +67,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.|
 | **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). Default is `s3`. With `gcs`, OpenVidu Meet uses the bucket of `MEET_S3_BUCKET` and the path of `MEET_S3_SUBBUCKET`, and authenticates with Google Application Default Credentials: the service account key file named by `GOOGLE_APPLICATION_CREDENTIALS`, or else the service account attached to the machine. |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the Google Cloud Storage bucket. Default is `openvidu-appdata`. |
-| **`MEET_S3_SUBBUCKET`** | Path inside the bucket where the recordings of OpenVidu Meet are stored. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the path inside the Google Cloud Storage bucket. Default is `openvidu-meet`. |
+| **`MEET_S3_SUBBUCKET`** | Path inside the bucket where the recordings of OpenVidu Meet are stored. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the path inside the Google Cloud Storage bucket. With `abs`, it has no effect: the path comes from `MEET_AZURE_SUBCONTAINER_NAME`. Default is `openvidu-meet`. |
 | **`MEET_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for OpenVidu Meet service. |
 | **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
@@ -77,7 +77,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`, and not allowed otherwise. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
 | **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only allowed with `SSE-KMS`**. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path inside the Azure Blob Storage container where OpenVidu Meet stores its recordings. It decides both where new recordings are written and where they are read from. Default is `openvidu-meet`. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
 | **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. Leave it empty to authenticate with the managed identity of the VM or pod running Meet, which needs a data role on the storage account, such as Storage Blob Data Contributor. |
 | **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |
