@@ -923,6 +923,26 @@ div[data-md-component="outdated"] aside a {
   border-color: var(--ov-meet-primary) !important;
 }
 
+/* As buttons (the Meet vs Platform table) they are the landing's routed pills: the product's
+   bright accent with its dark ink, legible in both schemes */
+.md-typeset .md-button.platform-primary-color,
+.md-typeset .md-button.platform-primary-color:is(:hover, :focus) {
+  background-color: var(--ov-platform-accent) !important;
+  border-color: var(--ov-platform-accent) !important;
+  color: var(--ov-platform-ink);
+}
+
+.md-typeset .md-button.meet-primary-color,
+.md-typeset .md-button.meet-primary-color:is(:hover, :focus) {
+  background-color: var(--ov-meet-accent) !important;
+  border-color: var(--ov-meet-accent) !important;
+  color: var(--ov-meet-ink);
+}
+
+.md-typeset .md-button:is(.platform-primary-color, .meet-primary-color):is(:hover, :focus) {
+  filter: brightness(1.08);
+}
+
 .meet-link-color {
   color: var(--ov-meet-accent) !important;
 }
@@ -1143,12 +1163,71 @@ span:has(> a > .openvidu-tag) {
    .md-typeset prefix outranks Material's `> :last-child { margin-bottom: 0 }` reset, which
    the block usually is. */
 .md-typeset .cta-section {
-  margin: 6em 0;
+  margin: 4em 0;
   text-align: center;
+}
+
+/* On the content pages the call to action is a surface card like the landing's, with the
+   display type at its weight and the solid ink pill as the action */
+.md-typeset .second-slogan.cta-section {
+  padding: 2.6em 2em;
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius);
+  background: var(--ov-surface);
 }
 
 .md-typeset .cta-section h2 {
   margin-bottom: 1em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.md-typeset .cta-section .md-button.home-secondary-button {
+  padding: 0.75em 1.6em;
+  background-color: var(--ov-ink);
+  border-color: var(--ov-ink);
+  color: var(--ov-ink-fg);
+  font-size: 0.85rem;
+}
+
+.md-typeset .cta-section .md-button.home-secondary-button:is(:hover, :focus) {
+  background-color: var(--ov-btn-primary-hover);
+  border-color: var(--ov-btn-primary-hover);
+  color: var(--ov-ink-fg);
+}
+
+/* Pricing: the per-core price is the landing's yellow price panel */
+.md-typeset .pricing-text {
+  margin: 1.5em 0 2em;
+  padding: 1.8em 1.5em 2em;
+  border-radius: var(--ov-radius);
+  background: var(--ov-yellow);
+  color: var(--ov-yellow-ink);
+  font-size: 1.3em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.md-typeset .pricing-quant {
+  margin-bottom: 0.15em;
+  font-family: var(--ov-display-font);
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-size: 3.2em;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.price-cell__pro {
+  font-weight: 700;
+}
+
+.price-cell__amount {
+  font-family: var(--ov-display-font);
+  font-weight: 800;
+  font-size: 1.3em;
+  letter-spacing: -0.02em;
 }
 
 .md-typeset .cta-section .cta-title {
@@ -1478,6 +1557,91 @@ h1.meetplatform-slogan {
 
 .register-container {
   margin: 0 6vw 0 6vw;
+}
+
+/* The account app (openvidu-register) is an Angular Material web component in a shadow
+   root. It still declares the old theme on its :host (Tomorrow, Material teal, white
+   surfaces); declarations on the host element from the page win over :host rules, and
+   custom properties inherit into the shadow tree, so the design's tokens go here: type
+   families, ink as the primary (solid ink pill buttons), the scheme's surfaces and outlines,
+   and the design's radii. Declared on the element so var() resolves per scheme. */
+[data-md-color-scheme] openvidu-register {
+  --ov-reg-body: "Instrument Sans", system-ui, sans-serif;
+  --ov-reg-display: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+  --mat-sys-body-large-font: var(--ov-reg-body);
+  --mat-sys-body-medium-font: var(--ov-reg-body);
+  --mat-sys-body-small-font: var(--ov-reg-body);
+  --mat-sys-label-large-font: var(--ov-reg-body);
+  --mat-sys-label-medium-font: var(--ov-reg-body);
+  --mat-sys-label-small-font: var(--ov-reg-body);
+  --mat-sys-title-large-font: var(--ov-reg-display);
+  --mat-sys-title-medium-font: var(--ov-reg-body);
+  --mat-sys-title-small-font: var(--ov-reg-body);
+  --mat-sys-headline-large-font: var(--ov-reg-display);
+  --mat-sys-headline-medium-font: var(--ov-reg-display);
+  --mat-sys-headline-small-font: var(--ov-reg-display);
+  --mat-sys-display-large-font: var(--ov-reg-display);
+  --mat-sys-display-medium-font: var(--ov-reg-display);
+  --mat-sys-display-small-font: var(--ov-reg-display);
+  --mat-sys-body-large: 400 1rem / 1.5rem var(--ov-reg-body);
+  --mat-sys-body-medium: 400 0.875rem / 1.25rem var(--ov-reg-body);
+  --mat-sys-body-small: 400 0.75rem / 1rem var(--ov-reg-body);
+  --mat-sys-label-large: 600 0.9375rem / 1.25rem var(--ov-reg-body);
+  --mat-sys-label-medium: 500 0.75rem / 1rem var(--ov-reg-body);
+  --mat-sys-label-small: 500 0.6875rem / 1rem var(--ov-reg-body);
+  --mat-sys-title-large: 700 1.375rem / 1.75rem var(--ov-reg-display);
+  --mat-sys-title-medium: 600 1rem / 1.5rem var(--ov-reg-body);
+  --mat-sys-title-small: 600 0.875rem / 1.25rem var(--ov-reg-body);
+  --mat-sys-headline-large: 800 2rem / 2.4rem var(--ov-reg-display);
+  --mat-sys-headline-medium: 800 1.75rem / 2.1rem var(--ov-reg-display);
+  --mat-sys-headline-small: 800 1.5rem / 1.9rem var(--ov-reg-display);
+  --mat-sys-display-large: 800 3.5rem / 3.8rem var(--ov-reg-display);
+  --mat-sys-display-medium: 800 2.8rem / 3.1rem var(--ov-reg-display);
+  --mat-sys-display-small: 800 2.25rem / 2.6rem var(--ov-reg-display);
+  --mat-sys-primary: var(--ov-ink);
+  --mat-sys-on-primary: var(--ov-ink-fg);
+  --mat-sys-surface-tint: var(--ov-ink);
+  --mat-sys-primary-container: var(--ov-surface-2);
+  --mat-sys-on-primary-container: var(--ov-text);
+  --mat-sys-secondary: var(--ov-muted);
+  --mat-sys-secondary-container: var(--ov-surface-2);
+  --mat-sys-on-secondary-container: var(--ov-text);
+  --mat-sys-background: var(--ov-ground);
+  --mat-sys-on-background: var(--ov-text);
+  --mat-sys-surface: var(--ov-surface);
+  --mat-sys-surface-bright: var(--ov-surface);
+  --mat-sys-surface-dim: var(--ov-surface-2);
+  --mat-sys-surface-variant: var(--ov-surface-2);
+  --mat-sys-surface-container-lowest: var(--ov-surface);
+  --mat-sys-surface-container-low: var(--ov-surface);
+  --mat-sys-surface-container: var(--ov-surface-2);
+  --mat-sys-surface-container-high: var(--ov-surface-2);
+  --mat-sys-surface-container-highest: var(--ov-surface-2);
+  --mat-sys-on-surface: var(--ov-text);
+  --mat-sys-on-surface-variant: var(--ov-muted);
+  --mat-sys-outline: var(--ov-muted);
+  --mat-sys-outline-variant: var(--ov-border);
+  --mat-sys-inverse-surface: var(--ov-ink);
+  --mat-sys-inverse-on-surface: var(--ov-ink-fg);
+  --mat-sys-corner-extra-small: 10px;
+  --mat-sys-corner-small: 12px;
+  --mat-sys-corner-medium: 14px;
+  --mat-sys-corner-large: 20px;
+  --mat-sys-corner-extra-large: 28px;
+  --mat-button-filled-container-shape: 999px;
+  --mat-button-outlined-container-shape: 999px;
+  --mat-button-text-container-shape: 999px;
+  --mat-button-protected-container-shape: 999px;
+  --mat-button-tonal-container-shape: 999px;
+  --mat-form-field-outlined-container-shape: 14px;
+  --mat-form-field-filled-container-shape: 14px;
+}
+
+[data-md-color-scheme="slate"] openvidu-register {
+  --mat-sys-error: #ff8a80;
+  --mat-sys-on-error: #3b0906;
+  --mat-sys-error-container: #5c1712;
+  --mat-sys-on-error-container: #ffdad6;
 }
 
 /* Platform docs: use cases, basic concepts, AI services */

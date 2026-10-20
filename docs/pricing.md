@@ -41,7 +41,7 @@ page_features:
   <tr>
     <td class="first-column border-right">Price</td>
     <td class="border-right price-cell">Free</td>
-    <td colspan="3" class="border-right price-cell"><div><span style="font-weight: bold"><span style="font-family: system-ui; font-size: 1.3em">0.0006$</span> core/minute</span></div></td>
+    <td colspan="3" class="border-right price-cell"><div><span class="price-cell__pro"><span class="price-cell__amount">0.0006$</span> core/minute</span></div></td>
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
@@ -95,8 +95,8 @@ OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They
 
 OpenVidu Pro follows a simple pricing model based on the number of cores used by the OpenVidu Pro cluster:
 
-<div class="pricing-text" style="text-align: center; font-size: 1.5em">
-<div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
+<div class="pricing-text">
+<div class="pricing-quant">$0.0006</div>
 per core per minute available<br>
 for your OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span> cluster
 </div>
