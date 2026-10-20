@@ -187,11 +187,42 @@ page_features:
   </div>
 </section>
 
-<section class="ov-wrap ov-section ov-proof" aria-label="Track record" data-sal="slide-up">
-  <div class="ov-stat"><span class="ov-stat__value">12+</span><span class="ov-stat__label">years building WebRTC</span></div>
-  <div class="ov-stat"><a href="/research/" class="ov-stat__value">19</a><span class="ov-stat__label">research publications</span></div>
-  <div class="ov-stat"><a href="/research/" class="ov-stat__value">500+</a><span class="ov-stat__label">academic citations</span></div>
-  <div class="ov-stat"><span class="ov-stat__value ov-stat__value--text">Kurento, LiveKit, mediasoup</span><span class="ov-stat__label">open source we contribute to</span></div>
+<!-- PLACEHOLDER: fictional customer content, replace before publishing -->
+<section class="ov-wrap ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
+  <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams that already picked a door.</h2>
+  <div class="ov-logos" role="group" aria-label="Teams running on OpenVidu">
+    <span class="ov-logos__label">Running on OpenVidu</span>
+    <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="13" cy="13" r="10.5"></circle><path d="M13 8v10M8 13h10"></path></svg><span class="ov-logo__name">Acme Health</span></span>
+    <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M13 2l9 22-9-5-9 5z"></path></svg><span class="ov-logo__name ov-logo__name--heavy">Northwind<small>Labs</small></span></span>
+    <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="13" cy="13" r="10.5"></circle><ellipse cx="13" cy="13" rx="4.5" ry="10.5"></ellipse><path d="M2.5 13h21"></path></svg><span class="ov-logo__name ov-logo__name--caps">Globex</span></span>
+    <span class="ov-logo"><span class="ov-logo__name ov-logo__name--lower">initech<i aria-hidden="true"></i></span></span>
+    <span class="ov-logo"><svg class="ov-logo__mark" width="28" height="26" viewBox="0 0 28 26" fill="currentColor" aria-hidden="true"><path d="M2 13a12 11 0 0 1 24 0z"></path><path d="M14 13v8a3 3 0 0 1-6 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg><span class="ov-logo__name">Umbrella<small>Edu</small></span></span>
+    <span class="ov-logo"><svg class="ov-logo__mark" width="24" height="26" viewBox="0 0 24 26" fill="currentColor" aria-hidden="true"><path d="M4 3l17 10-17 10z"></path></svg><span class="ov-logo__name ov-logo__name--caps">Vandelay</span></span>
+  </div>
+  <div class="ov-voice">
+    <figure class="ov-quote">
+      <blockquote class="ov-quote__text"><p>“Patient video had to stay on our own servers. OpenVidu Meet got us there in one sprint instead of a quarter.”</p></blockquote>
+      <figcaption class="ov-quote__by"><span class="ov-avatar ov-avatar--meet" aria-hidden="true">LO</span><span><strong>Laura Okafor</strong>, CTO at Acme Health</span></figcaption>
+    </figure>
+    <div class="ov-proof" role="group" aria-label="Track record">
+      <div class="ov-stat"><span class="ov-stat__value">12+</span><span class="ov-stat__label">years building WebRTC</span></div>
+      <div class="ov-stat"><a href="/research/" class="ov-stat__value">19</a><span class="ov-stat__label">research publications</span></div>
+      <div class="ov-stat"><a href="/research/" class="ov-stat__value">500+</a><span class="ov-stat__label">academic citations</span></div>
+      <div class="ov-stat"><span class="ov-stat__value ov-stat__value--text">Kurento, LiveKit, mediasoup</span><span class="ov-stat__label">open source we contribute to</span></div>
+    </div>
+  </div>
+  <div class="ov-stories__grid">
+    <figure class="ov-story">
+      <span class="ov-story__tag ov-story__tag--platform">Built on OpenVidu Platform</span>
+      <blockquote class="ov-story__text"><p>“Forty drone feeds land in one control room and we process every one of them server-side. The SDKs gave us that control without writing a media server.”</p></blockquote>
+      <figcaption class="ov-story__by"><span class="ov-avatar ov-avatar--platform" aria-hidden="true">TR</span><span class="ov-story__who"><strong>Tomás Rivera</strong><span>Lead engineer, Northwind Labs</span></span></figcaption>
+    </figure>
+    <figure class="ov-story">
+      <span class="ov-story__tag ov-story__tag--meet">Runs OpenVidu Meet</span>
+      <blockquote class="ov-story__text"><p>“Teachers get recording, screen sharing and raised hands in a classroom that carries our brand, on servers we already run.”</p></blockquote>
+      <figcaption class="ov-story__by"><span class="ov-avatar ov-avatar--meet" aria-hidden="true">PN</span><span class="ov-story__who"><strong>Priya Natarajan</strong><span>Head of product, Umbrella Edu</span></span></figcaption>
+    </figure>
+  </div>
 </section>
 
 <section class="ov-wrap ov-section ov-closing" data-sal="slide-up">

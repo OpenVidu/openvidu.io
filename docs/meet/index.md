@@ -32,6 +32,19 @@ page_features:
 
 </section>
 
+<!-- PLACEHOLDER: fictional customer content, replace before publishing -->
+<div class="ov-logos-row" data-sal="slide-up">
+<div class="ov-logos" role="group" aria-label="Teams running on OpenVidu">
+  <span class="ov-logos__label">Running on OpenVidu</span>
+  <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="13" cy="13" r="10.5"></circle><path d="M13 8v10M8 13h10"></path></svg><span class="ov-logo__name">Acme Health</span></span>
+  <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M13 2l9 22-9-5-9 5z"></path></svg><span class="ov-logo__name ov-logo__name--heavy">Northwind<small>Labs</small></span></span>
+  <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="13" cy="13" r="10.5"></circle><ellipse cx="13" cy="13" rx="4.5" ry="10.5"></ellipse><path d="M2.5 13h21"></path></svg><span class="ov-logo__name ov-logo__name--caps">Globex</span></span>
+  <span class="ov-logo"><span class="ov-logo__name ov-logo__name--lower">initech<i aria-hidden="true"></i></span></span>
+  <span class="ov-logo"><svg class="ov-logo__mark" width="28" height="26" viewBox="0 0 28 26" fill="currentColor" aria-hidden="true"><path d="M2 13a12 11 0 0 1 24 0z"></path><path d="M14 13v8a3 3 0 0 1-6 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg><span class="ov-logo__name">Umbrella<small>Edu</small></span></span>
+  <span class="ov-logo"><svg class="ov-logo__mark" width="24" height="26" viewBox="0 0 24 26" fill="currentColor" aria-hidden="true"><path d="M4 3l17 10-17 10z"></path></svg><span class="ov-logo__name ov-logo__name--caps">Vandelay</span></span>
+</div>
+</div>
+
 <section class="ov-section" data-sal="slide-up" markdown>
 
 <div class="grid cards ov-cards" markdown>
@@ -549,6 +562,15 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 </div>
 
+</section>
+
+<!-- PLACEHOLDER: fictional customer content, replace before publishing -->
+<section class="ov-section ov-stories" aria-label="Customer story" data-sal="slide-up">
+<figure class="ov-story ov-story--solo">
+  <span class="ov-story__tag ov-story__tag--meet">Runs OpenVidu Meet</span>
+  <blockquote class="ov-story__text"><p>“We open a video call straight from a support ticket, and every recording stays in our own storage.”</p></blockquote>
+  <figcaption class="ov-story__by"><span class="ov-avatar ov-avatar--meet" aria-hidden="true">DK</span><span class="ov-story__who"><strong>Daniel Kim</strong><span>Support platform lead, Globex Telecom</span></span></figcaption>
+</figure>
 </section>
 
 <section class="ov-section" markdown>

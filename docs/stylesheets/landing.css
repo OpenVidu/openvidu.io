@@ -688,6 +688,245 @@ a.ov-stat__value:hover {
   font-size: 15px;
 }
 
+/* Success stories: the customer-logo row, the big quote beside the track record (the mockup's
+   "Customer voice" slot) and the testimonial cards. The Meet and Platform landings reuse the logo
+   row and one card. The customer content is placeholder (see the comment in the pages). */
+.ov-stories {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.md-typeset .ov-landing .ov-stories__title {
+  margin: 0;
+  max-width: 16ch;
+}
+
+.ov-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 24px;
+  padding: 24px 28px;
+  border-radius: var(--ov-radius);
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+}
+
+.ov-logos__label {
+  font-weight: 600;
+  color: var(--ov-muted);
+}
+
+.ov-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ov-text);
+  opacity: 0.78;
+  font-family: var(--ov-display-font);
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.ov-logo__mark {
+  flex: none;
+}
+
+.ov-logo__name small {
+  margin-left: 5px;
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ov-logo__name--heavy {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.ov-logo__name--caps {
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ov-logo__name--lower {
+  font-weight: 800;
+  font-size: 23px;
+  letter-spacing: -0.05em;
+}
+
+.ov-logo__name--lower i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: 3px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.ov-voice {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
+  gap: 40px;
+  align-items: end;
+  padding-top: 28px;
+}
+
+.ov-voice .ov-proof {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.md-typeset .ov-landing :is(figure.ov-quote, figure.ov-story) {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  text-align: left;
+}
+
+.ov-quote {
+  gap: 22px;
+}
+
+.md-typeset .ov-landing :is(.ov-quote__text, .ov-story__text) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--ov-text);
+}
+
+.md-typeset .ov-landing :is(.ov-quote__text, .ov-story__text) p {
+  margin: 0;
+}
+
+.md-typeset .ov-landing .ov-quote__text {
+  font-family: var(--ov-display-font);
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+.md-typeset .ov-landing :is(.ov-quote__by, .ov-story__by) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: none;
+  margin: 0;
+  color: var(--ov-muted);
+  font-size: 16px;
+  font-style: normal;
+  text-align: left;
+}
+
+.ov-quote__by strong,
+.ov-story__who strong {
+  color: var(--ov-text);
+  font-weight: 600;
+}
+
+.ov-avatar {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-family: var(--ov-display-font);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.ov-avatar--meet {
+  background: var(--ov-meet-accent);
+  color: var(--ov-meet-ink);
+}
+
+.ov-avatar--platform {
+  background: #005f78;
+  color: #ffffff;
+}
+
+.ov-stories__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 20px;
+}
+
+.ov-story {
+  gap: 20px;
+  padding: clamp(26px, 3vw, 36px);
+  border-radius: var(--ov-radius);
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+}
+
+.ov-story__tag {
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ov-story__tag--meet {
+  background: var(--ov-meet-accent);
+  color: var(--ov-meet-ink);
+}
+
+.ov-story__tag--platform {
+  background: #005f78;
+  color: #ffffff;
+}
+
+.md-typeset .ov-landing .ov-story__text {
+  font-size: 19px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.md-typeset .ov-landing .ov-story__by {
+  margin-top: auto;
+}
+
+.ov-story__who {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+/* The product landings: the logo row right under the hero, one quote card further down */
+.ov-logos-row {
+  padding-top: 40px;
+}
+
+/* Their column is narrower: the label takes its own line above the six names */
+.ov-logos-row .ov-logos__label {
+  flex-basis: 100%;
+}
+
+.md-typeset .ov-landing .ov-story--solo .ov-story__text {
+  max-width: 34ch;
+  font-family: var(--ov-display-font);
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
 /* Pick your door */
 .ov-closing {
   padding-bottom: clamp(72px, 9vw, 120px);
@@ -773,6 +1012,33 @@ a.ov-stat__value:hover {
 
   .ov-stat__value {
     font-size: 36px;
+  }
+
+  .ov-logos {
+    justify-content: flex-start;
+    gap: 18px 26px;
+    padding: 20px 22px;
+  }
+
+  .ov-logos__label {
+    flex-basis: 100%;
+  }
+
+  .ov-logo {
+    font-size: 18px;
+  }
+
+  .ov-logo__name--lower {
+    font-size: 22px;
+  }
+
+  .ov-voice {
+    gap: 32px;
+    padding-top: 12px;
+  }
+
+  .ov-stat:has(.ov-stat__value--text) {
+    grid-column: 1 / -1;
   }
 }
 
