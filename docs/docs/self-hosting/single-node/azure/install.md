@@ -34,7 +34,8 @@ To use the Azure template, click the button below (you will be redirected to Azu
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## Template Parameters
 

@@ -26,7 +26,8 @@ To import the template into Azure, click the button below and you will be redire
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Elastic Azure Architecture](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic Azure Architecture](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic Azure Architecture](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
