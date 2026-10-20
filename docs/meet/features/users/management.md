@@ -65,6 +65,8 @@ Users can be deleted individually or in bulk from the **"Users"** page. The root
 
 Any user can change their own password from their **Profile** page. You are asked to enter your **current password** and then type the **new password twice** to confirm it. Once changed, the new password is required the next time you log in.
 
+Changing your password also signs you out of every other browser or device where you were logged in. The browser where you made the change stays signed in.
+
 ![Change password form in the user profile page](../../../assets/images/meet/users/management/change-password-dark.png#only-dark){ .round-corners loading=lazy }
 ![Change password form in the user profile page](../../../assets/images/meet/users/management/change-password-light.png#only-light){ .round-corners loading=lazy }
 
