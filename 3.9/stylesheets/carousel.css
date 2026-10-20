@@ -1,0 +1,92 @@
+/* Use-cases carousel on the Meet landing page: the `setupcarousel` feature key loads
+   splide.min.css (Splide's theme), splide.min.js and this sheet, which restyles the theme's
+   arrows and pagination and gives the slides their card look. */
+
+.splide {
+  margin-top: 3em;
+  margin-bottom: 4em;
+}
+
+.splide__slide {
+  width: 85%;
+  transition: opacity 0.4s;
+  opacity: 0.3;
+}
+
+.splide__slide.is-active {
+  opacity: 1;
+}
+
+.carousel-cell-content {
+  padding: 1.5em;
+  padding-bottom: 2em;
+  border-radius: 10px;
+  background-color: rgba(var(--product-primary-color-light-rgb), 0.1) !important;
+  box-shadow: none;
+  transition: box-shadow 0.4s ease;
+}
+
+.splide__slide.is-active .carousel-cell-content {
+  box-shadow: var(--md-shadow-z2);
+  height: 100%;
+}
+
+.splide__slide p {
+  margin-top: 0.5em !important;
+  font-size: 1.1em !important;
+}
+
+.splide__slide .fake-title {
+  font-size: 1.3em !important;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  margin: 1.6em 0 0.8em;
+  margin-top: 0 !important;
+}
+
+.splide__track {
+  transition: height 0.2s;
+}
+
+/* transparent, big arrow buttons */
+button.splide__arrow {
+  background: transparent;
+  transition: background-color 0.3s ease !important;
+  width: 60px;
+  height: 60px;
+}
+
+button.splide__arrow svg {
+  fill: var(--md-primary-fg-color--light) !important;
+  width: 2.2em;
+  height: 2.2em;
+}
+
+button.splide__arrow:hover {
+  background: rgba(var(--product-primary-color-rgb), 0.08) !important;
+}
+
+button.splide__arrow:disabled {
+  display: none;
+}
+
+/* dots are lines, below the carousel */
+ul.splide__pagination {
+  bottom: -30px;
+}
+
+.splide__pagination__page {
+  height: 4px;
+  width: 40px;
+  margin: 0 !important;
+  border-radius: 0;
+  background: var(--md-primary-fg-color--light);
+  opacity: 0.25;
+}
+
+.splide__pagination__page.is-active {
+  opacity: 1;
+  transform: none;
+  background: var(--md-primary-fg-color--light);
+}
