@@ -55,8 +55,8 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. |
-| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created. |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. It must be at least 5 characters long, or OpenVidu Meet does not start. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created, and then it must be at least 5 characters long, or OpenVidu Meet does not start. |
 | **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Registered on start when the service has no API key. |
 | **`MEET_ACCESS_TOKEN_EXPIRATION`** | Expiration time for access tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_REFRESH_TOKEN_EXPIRATION`** | Expiration time for refresh tokens issued by OpenVidu Meet. Default is `1d`. |
