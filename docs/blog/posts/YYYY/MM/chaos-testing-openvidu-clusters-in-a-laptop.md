@@ -1,7 +1,8 @@
 ---
 title: How we develop and test complex OpenVidu clusters in a single machine
 draft: false
-date: 2026-10-03
+date:
+  created: 2026-10-20
 slug: chaos-testing-openvidu-clusters-in-a-laptop
 description: >-
   We replicate production OpenVidu clusters on a single machine with
