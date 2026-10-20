@@ -25,7 +25,7 @@ authors:
 
 # How we develop and test complex OpenVidu clusters in our laptops
 
-![Developing and testing complex OpenVidu clusters on a laptop: production topologies inside Docker-in-Docker, and the chaos tests that break them on purpose](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/poster.webp){ .round-corners width=100% }
+![Developing and testing complex OpenVidu clusters on a laptop: production topologies inside Docker-in-Docker, and the chaos tests that break them on purpose](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/poster.webp){ .round-corners width=100% }
 
 Any modern software system of a certain size that aims to be scalable and fault-tolerant consists of multiple services running on different nodes. OpenVidu is no exception, and it goes even further: as a real-time system, there are other factors that become critical: shared state, concurrency, and response time.
 
@@ -49,13 +49,13 @@ OpenVidu is not just one server, is a set of services that work together:
 
 All of these services run in production as carefully configured and orchestrated Docker containers. Each one on different node types [Master Nodes, Media Nodes], and each one with different scaling and fault-tolerance requirements.
 
-![OpenVidu node architecture: the services that run on a Master Node and on a Media Node](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-node-architecture-light.svg#only-light){ loading=lazy }
-![OpenVidu node architecture: the services that run on a Master Node and on a Media Node](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-node-architecture-dark.svg#only-dark){ loading=lazy }
+![OpenVidu node architecture: the services that run on a Master Node and on a Media Node](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-node-architecture-light.svg#only-light){ loading=lazy }
+![OpenVidu node architecture: the services that run on a Master Node and on a Media Node](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-node-architecture-dark.svg#only-dark){ loading=lazy }
 
 In a High Availability deployment both node types are replicated, and they are replicated differently. The Master Nodes form a fixed cluster of four, because that is what the state services need to keep a quorum. The Media Nodes are an elastic pool that grows and shrinks with the workload.
 
-![OpenVidu High Availability cluster: a fixed group of Master Nodes and an elastic pool of Media Nodes, both serving clients](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-ha-cluster-light.svg#only-light){ loading=lazy }
-![OpenVidu High Availability cluster: a fixed group of Master Nodes and an elastic pool of Media Nodes, both serving clients](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-ha-cluster-dark.svg#only-dark){ loading=lazy }
+![OpenVidu High Availability cluster: a fixed group of Master Nodes and an elastic pool of Media Nodes, both serving clients](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-ha-cluster-light.svg#only-light){ loading=lazy }
+![OpenVidu High Availability cluster: a fixed group of Master Nodes and an elastic pool of Media Nodes, both serving clients](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-ha-cluster-dark.svg#only-dark){ loading=lazy }
 
 We develop each individual service on its own, carefully testing it in isolation. But integrating all of them together and chaos testing the system as a whole requires a distributed environment, whatever form it may take.
 
@@ -127,7 +127,7 @@ d175c922c581  master-node-2    playground-master-node-2  2026-10-05 23:01:15  Up
 
 And inside each Docker-in-Docker node, we can see the real OpenVidu services running just as they do in production:
 
-![Seven terminal panes watching the Docker-in-Docker cluster: four Master Nodes each running Caddy, the operator, Redis server and Sentinel, MongoDB, MinIO, the dashboard, OpenVidu Meet, v2compatibility and the observability stack, and three Media Nodes each running the media server, egress, ingress, Caddy, the operator, Prometheus and Alloy](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-playground-ha-docker-ps.png){ .round-corners loading=lazy }
+![Seven terminal panes watching the Docker-in-Docker cluster: four Master Nodes each running Caddy, the operator, Redis server and Sentinel, MongoDB, MinIO, the dashboard, OpenVidu Meet, v2compatibility and the observability stack, and three Media Nodes each running the media server, egress, ingress, Caddy, the operator, Prometheus and Alloy](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-playground-ha-docker-ps.png){ .round-corners loading=lazy }
 
 Our bash script `openvidu-playground.sh` has a lot of other commands to manage the cluster, including stopping and destroying it, scaling nodes up and down, and even breaking things on purpose to test fault-tolerance:
 
@@ -153,8 +153,8 @@ An OpenVidu Master Node runs services that take up around 4GB of disk space, and
 
 The idea is simple, and it has two parts. First, a pull-through registry mirror runs on the host machine, and every node is configured to use it as its Docker registry. The mirror caches images from Docker Hub, so each image is downloaded only once and then reused by every node. Second, every node bind-mounts the same host directories for its Docker `overlay2` layers and image metadata, so all the nodes share one physical copy of each layer on disk.
 
-![The shared Docker cache: a pull-through registry mirror and a shared image layer store on the host, used by every emulated node](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-shared-cache-light.svg#only-light){ loading=lazy }
-![The shared Docker cache: a pull-through registry mirror and a shared image layer store on the host, used by every emulated node](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-shared-cache-dark.svg#only-dark){ loading=lazy }
+![The shared Docker cache: a pull-through registry mirror and a shared image layer store on the host, used by every emulated node](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-shared-cache-light.svg#only-light){ loading=lazy }
+![The shared Docker cache: a pull-through registry mirror and a shared image layer store on the host, used by every emulated node](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/openvidu-shared-cache-dark.svg#only-dark){ loading=lazy }
 
 This also has a useful side effect when developing any of the OpenVidu services. You build the image once, load it into the shared registry mirror, and it is immediately available to every node, with no round trip through Docker Hub. The whole development loop runs locally on a single machine, which makes it fast and convenient:
 
@@ -187,7 +187,7 @@ All of these bugs were found (or at least replicated once a production cluster r
 
 And this is just a small sample of all the edge cases and failure scenarios we consistently test in our CI/CD pipelines: below is a screenshot of the results of our integration test suite running our DinD environment in small GitHub Actions runners.
 
-![GitHub Actions summary of the OpenVidu integration test suite](/assets/images/blog/YYYY/MM/chaos-testing-openvidu-clusters-in-a-laptop/integration-tests.png){ .round-corners loading=lazy }
+![GitHub Actions summary of the OpenVidu integration test suite](/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/integration-tests.png){ .round-corners loading=lazy }
 
 This ever-growing test suite is capable of setting up multiple fresh DinD OpenVidu clusters and running all of those scenarios in a single Ubuntu worker, in just over an hour.
 
