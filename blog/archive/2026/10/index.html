@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Every OpenVidu Blog article published in October 2026: 2 posts, on self-hosted video conferencing and WebRTC engineering.">
+        <meta name="description" content="Every OpenVidu Blog article published in October 2026: 3 posts, on self-hosted video conferencing and WebRTC engineering.">
       
       
       
@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="OpenVidu">
 <meta property="og:type" content="website">
 <meta property="og:title" content="October 2026">
-<meta property="og:description" content="Every OpenVidu Blog article published in October 2026: 2 posts, on self-hosted video conferencing and WebRTC engineering.">
+<meta property="og:description" content="Every OpenVidu Blog article published in October 2026: 3 posts, on self-hosted video conferencing and WebRTC engineering.">
 <meta property="og:url" content="https://openvidu.io/blog/archive/2026/10/">
 <meta property="og:image" content="https://openvidu.io/assets/images/og/openvidu-card.png">
 <meta property="og:image:width" content="1200">
@@ -423,7 +423,7 @@
               <ul class="md-source__facts">
                 <li class="md-source__fact md-source__fact--version">v3.9.0</li>
                 <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">479</li>
+                <li class="md-source__fact md-source__fact--forks">480</li>
               </ul>
             
           </div>
@@ -1710,6 +1710,59 @@
       <header class="md-typeset">
         <h1 id="october-2026">October 2026<a class="headerlink" href="#october-2026" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorPF.jpg" alt="Pablo Fuente">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-10-20 00:00:00+00:00">October 20, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../../category/technology/" class="md-meta__link">Technology</a>, 
+              <a href="../../../category/research/" class="md-meta__link">Research</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="how-we-develop-and-test-complex-openvidu-clusters-in-our-laptops"><a class="toclink" href="../../../2026/10/20/chaos-testing-openvidu-clusters-in-a-laptop/">How we develop and test complex OpenVidu clusters in our laptops</a></h2>
+<p><img alt="Developing and testing complex OpenVidu clusters on a laptop: production topologies inside Docker-in-Docker, and the chaos tests that break them on purpose" class="round-corners" src="/assets/images/blog/2026/10/chaos-testing-openvidu-clusters-in-a-laptop/poster.webp" width="100%"></p>
+<p>Any modern software system of a certain size that aims to be scalable and fault-tolerant consists of multiple services running on different nodes. OpenVidu is no exception, and it goes even further: as a real-time system, there are other factors that become critical: shared state, concurrency, and response time.</p>
+<p>Developing and testing such a distributed system is not trivial. In this post, we will explain how we are able to replicate production OpenVidu clusters on a single machine using Docker-in-Docker. This allows us to test and find bugs that only appear in a distributed environment, without the need for multiple VMs or physical machines.</p>
+<p>The idea is that this short post will serve as inspiration for developers and sysadmins who may face similar challenges when working with distributed systems and need a practical solution to chaos test them, in a cost-effective and efficient way.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../../2026/10/20/chaos-testing-openvidu-clusters-in-a-laptop/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

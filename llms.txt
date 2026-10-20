@@ -42,6 +42,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [How Novakid runs 30 million live English lessons on OpenVidu](https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/index.md): How Novakid migrated from raw Kurento to OpenVidu to power live English lessons for over a million kids, and what changed for their engineering team.
 - [OpenVidu 3.9.0 release notes](https://openvidu.io/blog/2026/09/30/release-390/index.md): OpenVidu 3.9.0 is out with a Meetings API, participant muting and meeting limits in Meet, plus Nemotron live captions and a sturdier mediasoup.
 - [The Black Hole Node: how one full disk broke recordings in an entire WebRTC cluster (Bug stories #1)](https://openvidu.io/blog/2026/10/13/black-hole-node/index.md): How a single full disk turned OpenVidu's CPU-based egress placement into a black hole that swallowed every recording in the cluster, and how we traced it.
+- [How we develop and test complex OpenVidu clusters in a single machine](https://openvidu.io/blog/2026/10/20/chaos-testing-openvidu-clusters-in-a-laptop/index.md): We replicate production OpenVidu clusters on a single machine with Docker-in-Docker, to find the bugs that only appear in a real distributed deployment.
 - [Introducing the OpenVidu Agent Plugin for coding agents](https://openvidu.io/blog/2026/10/07/openvidu-agent-plugin/index.md): Meet the OpenVidu Agent Plugin, which gives your coding agent the official OpenVidu documentation for the version, edition and product you run.
 
 ## OpenVidu Meet

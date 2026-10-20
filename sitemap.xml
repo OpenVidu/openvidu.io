@@ -141,6 +141,10 @@
          <lastmod>2026-10-13</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/10/20/chaos-testing-openvidu-clusters-in-a-laptop/</loc>
+         <lastmod>2026-10-20</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/2026/10/07/openvidu-agent-plugin/</loc>
          <lastmod>2026-10-07</lastmod>
     </url>
@@ -941,6 +945,14 @@
          
     </url>
     <url>
+         <loc>https://openvidu.io/blog/category/technology/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/research/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/category/openvidu-platform/</loc>
          
     </url>
@@ -973,15 +985,7 @@
          
     </url>
     <url>
-         <loc>https://openvidu.io/blog/category/technology/</loc>
-         
-    </url>
-    <url>
          <loc>https://openvidu.io/blog/category/comparison/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/research/</loc>
          
     </url>
     <url>

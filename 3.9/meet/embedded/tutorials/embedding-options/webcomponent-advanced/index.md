@@ -2,12 +2,12 @@
 
 [Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/embedding-options/meet-webcomponent-commands-events)
 
-This tutorial extends the [basic WebComponent tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/webcomponent/index.md) to add **advanced WebComponent functionality** through commands and event handling. It demonstrates how to interact with the OpenVidu Meet WebComponent programmatically and respond to meeting events.
+This tutorial extends the [basic WebComponent tutorial](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/webcomponent/index.md) to add **advanced WebComponent functionality** through commands and event handling. It demonstrates how to interact with the OpenVidu Meet WebComponent programmatically and respond to meeting events.
 
 The application includes all the features from the basic WebComponent tutorial, plus:
 
-- **WebComponent commands**: Control the meeting from your application, such as ending it for everyone when the participant is a moderator (see the [commands reference](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#commands)).
-- **Event handling**: React when the participant joins or leaves the meeting and when they ask to close OpenVidu Meet (see the [events reference](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#events)).
+- **WebComponent commands**: Control the meeting from your application, such as ending it for everyone when the participant is a moderator (see the [commands reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#commands)).
+- **Event handling**: React when the participant joins or leaves the meeting and when they ask to close OpenVidu Meet (see the [events reference](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#events)).
 - **Role-based UI**: Display different interface elements based on user role (moderator/speaker).
 - **Meeting header**: Show room information and controls above the WebComponent.
 - **Enhanced room management**: In-memory room tracking with unique names per room.
@@ -26,7 +26,7 @@ docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.9.0 up -y openvid
 
 > **Info**
 >
-> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.9/meet/deployment/local/index.md) .
+> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md) .
 
 ### 2. Download the tutorial code
 
@@ -60,7 +60,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-This tutorial builds upon the [basic WebComponent tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/webcomponent/index.md), adding advanced WebComponent interaction capabilities and enhanced room management. We'll focus on the key differences and new functionality.
+This tutorial builds upon the [basic WebComponent tutorial](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/webcomponent/index.md), adding advanced WebComponent interaction capabilities and enhanced room management. We'll focus on the key differences and new functionality.
 
 ______________________________________________________________________
 
@@ -72,7 +72,7 @@ The backend is identical to previous tutorials. It provides the same three REST 
 - **`GET /rooms`**: Get the list of rooms.
 - **`DELETE /rooms/:roomId`**: Delete a room with the given room ID.
 
-For detailed backend documentation, please refer to the [Direct Link tutorial backend section](https://openvidu.io/3.9/meet/embedded/tutorials/embedding-options/direct-link/#backend).
+For detailed backend documentation, please refer to the [Direct Link tutorial backend section](https://openvidu.io/latest/meet/embedded/tutorials/embedding-options/direct-link/#backend).
 
 ______________________________________________________________________
 
@@ -242,7 +242,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 1. **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
 
-1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/3.9/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
+1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/latest/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
 
 1. **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
 
@@ -267,7 +267,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
-If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/3.9/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/latest/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
 
 1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
 
@@ -276,7 +276,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com/meet
    ```
 
-1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
+1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
 
    ```text
    OV_MEET_API_KEY=your-production-api-key
