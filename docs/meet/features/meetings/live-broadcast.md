@@ -67,7 +67,7 @@ A broadcast never outlives its meeting: when the meeting ends, every broadcast e
 Two [room member permissions](../room-members/overview.md#permissions) control live broadcast:
 
 - **`broadcastControl`** (**Go live**): start and stop the broadcasts of the room's destinations, all of them or only some.
-- **`broadcastAddDestinations`** (**Add destinations**): stream the meeting to a destination the room does not have.
+- **`broadcastEdit`** (**Add destinations**): stream the meeting to a destination the room does not have.
 
 Both are granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) and not to the `Speaker` role. They are independent, so a room can let its moderators choose among vetted channels without allowing them to stream anywhere else. Without `broadcastControl`, a participant sees the activity and the **LIVE** mark but cannot start or stop anything.
 
