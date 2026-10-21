@@ -1,6 +1,6 @@
 ---
 title: "Live broadcast in OpenVidu Meet"
-description: "Stream an OpenVidu Meet meeting live to YouTube, Twitch or any RTMP server, to up to five destinations at once, each one started and stopped on its own."
+description: "Stream an OpenVidu Meet meeting live to YouTube, Twitch or any RTMP server, to several destinations at once, each one started and stopped on its own."
 page_features:
   - lazyvideo
 ---
@@ -9,13 +9,13 @@ page_features:
 
 A meeting can be **streamed live** to an audience outside it, on YouTube, Twitch, Facebook or any RTMP server, without a separate streaming tool. Webinars, town halls and classes reach everyone who follows the channel while the meeting goes on as usual for its participants.
 
-A meeting streams to up to **five destinations** at once. Each destination is its own **broadcast**: it starts, goes live, and stops or fails without touching the others, so a channel that drops its connection never takes the rest of the broadcast with it.
+A meeting streams to as many **destinations** at once as you choose. Each destination is its own **broadcast**: it starts, goes live, and stops or fails without touching the others, so a channel that drops its connection never takes the rest of the broadcast with it.
 
 ## Default destinations of a room { #room-destinations }
 
 Live broadcast is turned on per room from the **Live broadcast** step of the room configuration wizard, when [creating](../rooms/management.md#create-rooms) or [editing](../rooms/management.md#edit-rooms) a room. The **Allow live broadcast** toggle needs at least one **default destination**: the channels the room's meetings go live to.
 
-Each destination has a **name** and the **stream URL** the platform gives you, of the form `rtmp://host/app/key` or `rtmps://host/app/key`, stream key included. The wizard recognises the URLs of YouTube, Facebook, Instagram, X, Vimeo, Twitch and Kick, and shows each destination with its platform's logo. A room saves up to five destinations, each with its own stream key.
+Each destination has a **name** and the **stream URL** the platform gives you, of the form `rtmp://host/app/key` or `rtmps://host/app/key`, stream key included. The wizard recognises the URLs of YouTube, Facebook, Instagram, X, Vimeo, Twitch and Kick, and shows each destination with its platform's logo. A room saves as many destinations as you need, each with its own stream key.
 
 !!! info "Stream keys"
 
