@@ -125,7 +125,7 @@ ssh root@<your-server-ip>
 And run the installer:
 
 ```bash
-sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
+sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh)
 ```
 
 The script checks for Docker and installs it if missing, then launches a configuration wizard right there in the terminal. For a test deployment you don't even need a domain name: use the defaults suggested by the wizard. What those defaults mean:

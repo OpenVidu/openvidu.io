@@ -27,7 +27,7 @@ Upgrading OpenVidu Elastic is very simple. These are the steps you need to follo
 2. SSH into your Master Node and your Media Nodes and execute on each of them the following command:
 
     ```
-    sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
+    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
     ```
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).

@@ -42,7 +42,7 @@ This section contains the instructions to deploy a production-ready deployment o
 Run this command in your server to start the installation wizard:
 
 ```bash
-sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install_meet.sh)
+sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install_meet.sh)
 ```
 
 Follow the instructions of the installation wizard. They are self-explanatory, but here is a breakdown:
