@@ -22,7 +22,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 2. Execute the following command in the Master Node:
 
     ```
-    sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
+    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
     ```
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
