@@ -348,9 +348,9 @@ gitdb==4.0.12 \
     --hash=sha256:5ef71f855d191a3326fcfbc0d5da835f26b13fbcba60c32c21091c349ffdb571 \
     --hash=sha256:67073e15955400952c6565cc3e707c554a4eea2e428946f7a4c162fab9bd9bcf
     # via gitpython
-gitpython==3.1.62 \
-    --hash=sha256:1791de66309bc0c7cfca40bf8d2e3de7ca091cbf94e6051be1ad0722c61062af \
-    --hash=sha256:7002251225e10e29d2e1f49e6532613fe5d5d9f0b6f1f02997a52b38fe56899e
+gitpython==3.2.1 \
+    --hash=sha256:0f1229ec5c057bdabdeeda8bda4f17bda679ab33dbccc00f24e6a480553c8613 \
+    --hash=sha256:d66b0832aa8755c1a84892937282df0befb16c97e5a64aeebd68be9c5e323f53
     # via
     #   ovweb (pyproject.toml)
     #   mkdocs-rss-plugin
@@ -523,9 +523,9 @@ mkdocs-glightbox==0.5.2 \
     --hash=sha256:23a431ea802b60b1030c73323db2eed6ba859df1a0822ce575afa43e0ea3f47e \
     --hash=sha256:c7622799347c32310878e01ccf14f70648445561010911c80590cec0353370ac
     # via ovweb (pyproject.toml)
-mkdocs-llmstxt==0.5.0 \
-    --hash=sha256:753c699913d2d619a9072604b26b6dc9f5fb6d257d9b107857f80c8a0b787533 \
-    --hash=sha256:b2fa9e6d68df41d7467e948a4745725b6c99434a36b36204857dbd7bb3dfe041
+mkdocs-llmstxt==0.5.1 \
+    --hash=sha256:bc3ffa62f0e511159918554f18e9495d60b4fd704695704e9bdb3bf5985d745d \
+    --hash=sha256:c890b3af4a9d0dad155bdca8cc632c778d9340e7b9d480142f26a7ea38a10862
     # via ovweb (pyproject.toml)
 mkdocs-material==9.7.7 \
     --hash=sha256:8ea9bb1737a5b524a5f9dcf2e1b4ebda8274ae3008aa7845720a97083bef708f \
@@ -764,9 +764,9 @@ pygments==2.21.0 \
     #   ovweb (pyproject.toml)
     #   mkdocs-material
     #   rich
-pymdown-extensions==12.1 \
-    --hash=sha256:4a254b771acfcddc6c110a7f4590d818f1f849e2d5aacf69b4b07c8dd2a9700d \
-    --hash=sha256:fdb8f47f5d7fd069d10ef2a7d8908e613d7865ff0419d544a0ffd3984e884f11
+pymdown-extensions==12.3 \
+    --hash=sha256:345493a8e3497e24382902903a1c43a28e34a52f2b7571a1c9641429b820ca74 \
+    --hash=sha256:a7f2a4e0bc60c6e6babfa7922cfb3b01cd640eb00fb208f3c582e12bae00ea67
     # via
     #   ovweb (pyproject.toml)
     #   mkdocs-material
