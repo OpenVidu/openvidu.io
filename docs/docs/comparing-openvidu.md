@@ -76,6 +76,10 @@ The main difference between OpenVidu and these services is who owns the infrastr
 
 Using a SaaS provider is a great option for some use cases, but not all. **OpenVidu is designed to be self-hosted**. This allows you to have full control over your infrastructure and data, taking the most out of your own resources and complying with the most strict regulations. While having the best features provided by SaaS: scalability, fault tolerance, observability. See [Production ready](self-hosting/production-ready/index.md) for more information.
 
+:octicons-arrow-right-24: **[Read the full OpenVidu vs Twilio Video comparison](../openvidu-vs-twilio-video.md)**, including the status of Twilio Programmable Video after its reversed end-of-life, a per-participant-minute vs pay-per-core cost model, and what porting the client actually involves.
+
+:octicons-arrow-right-24: **[Read the full OpenVidu vs Agora comparison](../openvidu-vs-agora.md)**, including how Agora's aggregate-resolution billing grows with call size, data residency via geofencing vs self-hosting, and the channel/uid to room/identity mapping.
+
 ## OpenVidu vs SFUs
 
 This includes projects such as [Kurento :fontawesome-solid-external-link:{.external-link-icon}](https://doc-kurento.readthedocs.io/en/latest/){:target="_blank"}, [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}, [Pion :fontawesome-solid-external-link:{.external-link-icon}](https://pion.ly/){:target="_blank"}, [Janus :fontawesome-solid-external-link:{.external-link-icon}](https://janus.conf.meetecho.com/){:target="_blank"}, [Jitsi Videobridge :fontawesome-solid-external-link:{.external-link-icon}](https://jitsi.org/jitsi-videobridge/){:target="_blank"} or [Medooze :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/medooze/sfu){:target="_blank"}.
