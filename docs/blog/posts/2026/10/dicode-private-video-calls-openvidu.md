@@ -25,8 +25,8 @@ authors:
 
 # How Dicode built private video calls on OpenVidu
 
-![Dicode and OpenVidu customer success story](/assets/images/blog/YYYY/MM/dicode-private-video-calls-openvidu/poster-light.webp#only-light "Dicode + OpenVidu"){ .round-corners }
-![Dicode and OpenVidu customer success story](/assets/images/blog/YYYY/MM/dicode-private-video-calls-openvidu/poster-dark.webp#only-dark "Dicode + OpenVidu"){ .round-corners }
+![Dicode and OpenVidu customer success story](/assets/images/blog/2026/10/dicode-private-video-calls-openvidu/poster-light.webp#only-light "Dicode + OpenVidu"){ .round-corners }
+![Dicode and OpenVidu customer success story](/assets/images/blog/2026/10/dicode-private-video-calls-openvidu/poster-dark.webp#only-dark "Dicode + OpenVidu"){ .round-corners }
 
 What do you build when your clients hold confidential conversations, and "just use Teams" isn't an answer you can give them? That's the question [Dicode :fontawesome-solid-external-link:{.external-link-icon}](https://dicode.fi/){:target="_blank"}, a software company from Tampere, Finland, faced when it set out to give non-profit organizations video calls that are easy to join and keep their data private.
 
