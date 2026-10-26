@@ -2,9 +2,11 @@
 title: How Dicode built private video calls on OpenVidu
 draft: false
 date:
-  created: 2026-10-20
+  created: 2026-10-27
 slug: dicode-private-video-calls-openvidu
-description: How Finnish software house Dicode built private, embeddable video calls for non-profit organizations on OpenVidu, with data kept under its own control.
+description: >-
+  How Finnish software house Dicode built private, embeddable video calls for
+  non-profit organizations on OpenVidu, with data kept under its own control.
 cover_image: poster-light.webp
 categories:
   - Success story
