@@ -13,7 +13,59 @@ page_features:
   - homestyles
   - revealonscroll
   - setupcardglow
+  - setupcarousel
 ---
+
+<div class="success-stories-section" data-sal="slide-up">
+  <div class="success-stories-heading">
+    <h2>Trusted by teams building real-time video</h2>
+  </div>
+  <div class="splide" aria-label="Customer success stories" data-splide='{"type": "slide", "focus": 0, "autoHeight": false, "gap": "1.5rem", "omitEnd": true}'>
+    <div class="splide__track">
+      <div class="splide__list">
+        <div class="splide__slide">
+          <div class="carousel-cell-content">
+            <div class="success-story-card">
+              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="382" height="148" />
+              <hr class="success-story-separator">
+              <blockquote class="success-story-quote">
+                "With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience."
+              </blockquote>
+              <p class="success-story-attribution">Matteo Resconi, IT &amp; Development Area Manager, Mega Italia Media</p>
+              <a class="success-story-link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a>
+            </div>
+          </div>
+        </div>
+        <div class="splide__slide">
+          <div class="carousel-cell-content">
+            <div class="success-story-card">
+              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208" />
+              <hr class="success-story-separator">
+              <blockquote class="success-story-quote">
+                "OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain."
+              </blockquote>
+              <p class="success-story-attribution">Andrei Iakimov, DevOps Lead, Novakid</p>
+              <a class="success-story-link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a>
+            </div>
+          </div>
+        </div>
+        <div class="splide__slide">
+          <div class="carousel-cell-content">
+            <div class="success-story-card">
+              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085" />
+              <hr class="success-story-separator">
+              <blockquote class="success-story-quote">
+                "From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams."
+              </blockquote>
+              <p class="success-story-attribution">Janne Sikiö, CEO, Dicode</p>
+              <a class="success-story-link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="second-slogan" data-sal="slide-up">
   <h2 id="get-started">
