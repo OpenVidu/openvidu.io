@@ -27,7 +27,7 @@ This file defines global configuration parameters used by other services, such a
 | **`DASHBOARD_ADMIN_PASSWORD`**               | Admin password for OpenVidu Dashboard                                                                                                                                                                         |
 | **`GRAFANA_ADMIN_USERNAME`**                 | Admin username for Grafana                                                                                                                                                                                    |
 | **`GRAFANA_ADMIN_PASSWORD`**                 | Admin password for Grafana                                                                                                                                                                                    |
-| **`OPENVIDU_PRO_LICENSE`**                   | **PRO** OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/3.9/account/index.md) .                                                                                              |
+| **`OPENVIDU_PRO_LICENSE`**                   | **PRO** OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/account/) .                                                                                              |
 | **`OPENVIDU_RTC_ENGINE`**                    | **PRO** The WebRTC engine to use. Can be `mediasoup` (default) or `pion`.                                                                                                                                     |
 | **`MEET_BASE_PATH`**                         | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
@@ -52,7 +52,7 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_ROOM_MEMBER_TOKEN_EXPIRATION`**     | Expiration time for room member tokens issued by OpenVidu Meet. Default is `2h`.                                                                                                                                                                                                                                                                                                     |
 | **`MEET_PASSWORD_CHANGE_TOKEN_EXPIRATION`** | Expiration time for password change tokens issued by OpenVidu Meet. Default is `15m`.                                                                                                                                                                                                                                                                                                |
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`**   | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`.                                                                                                                                                                                                                                                                                                 |
-| **`MEET_INITIAL_WEBHOOK_ENABLED`**          | If `true`, the [webhook](https://openvidu.io/3.9/meet/embedded/reference/webhooks/index.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered.                                                                                    |
+| **`MEET_INITIAL_WEBHOOK_ENABLED`**          | If `true`, the [webhook](https://openvidu.io/latest/meet/embedded/reference/webhooks/index.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered.                                                                                    |
 | **`MEET_INITIAL_WEBHOOK_URL`**              | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.                                                                                                                                                                                             |
 | **`MEET_BLOB_STORAGE_MODE`**                | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage).                                                                                                                                                                                                                                     |
 | **`MEET_S3_BUCKET`**                        | S3 bucket name for OpenVidu Meet service. It is used to store recordings.                                                                                                                                                                                                                                                                                                            |
@@ -78,20 +78,20 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REDIS_SENTINEL_PASSWORD`**          | Redis Sentinel password used by the OpenVidu Meet service to connect to Redis Sentinel servers.                                                                                                                                                                                                                                                                                      |
 | **`MEET_REDIS_SENTINEL_MASTER_NAME`**       | Redis Sentinel master name used by the OpenVidu Meet service to connect to Redis Sentinel servers.                                                                                                                                                                                                                                                                                   |
 | **`MEET_BASE_PATH`**                        | Base path where the OpenVidu Meet application is served. Default is `/meet`.                                                                                                                                                                                                                                                                                                         |
-| **`MEET_CAPTIONS_ENABLED`**                 | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](https://openvidu.io/3.9/meet/features/meetings/live-captions/index.md).            |
+| **`MEET_CAPTIONS_ENABLED`**                 | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](https://openvidu.io/latest/meet/features/meetings/live-captions/index.md).            |
 | **`MEET_LOG_LEVEL`**                        | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`.                                                                                                                                                                                                                                                                         |
 
 ## **PRO** `v2compatibility.env`
 
 > **Info**
 >
-> OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu V2 Compatibility is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2**](https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/) , adding the prefix `V2COMPAT_` to the parameter name.
 
 | Parameter                                                     | Description                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`OPENVIDU_PRO_LICENSE`**                                    | OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/3.9/account/index.md) .                                                                                                                                                    |
+| **`OPENVIDU_PRO_LICENSE`**                                    | OpenVidu Pro license key. Get an OpenVidu Pro License [here](https://openvidu.io/account/) .                                                                                                                                                    |
 | **`V2COMPAT_OPENVIDU_SHIM_PORT`**                             | Port where the OpenVidu V2 Compatibility will be running. Defaults to `4443`.                                                                                                                                                                               |
 | **`V2COMPAT_OPENVIDU_SHIM_URL`**                              | Public URL for OpenVidu v2 applications, used by external clients to connect to the OpenVidu V2 Compatibility Server.                                                                                                                                       |
 | **`V2COMPAT_OPENVIDU_SECRET`**                                | OpenVidu Secret used by OpenVidu v2 applications to connect to the OpenVidu deployment.                                                                                                                                                                     |
@@ -126,7 +126,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 
 ## `livekit.yaml`:
 
-As OpenVidu Server is [built on top of LiveKit](https://openvidu.io/3.9/docs/comparing-openvidu/#openvidu-vs-livekit), the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration](https://github.com/livekit/livekit/blob/master/config-sample.yaml) .
+As OpenVidu Server is [built on top of LiveKit](https://openvidu.io/latest/docs/comparing-openvidu/#openvidu-vs-livekit), the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration](https://github.com/livekit/livekit/blob/master/config-sample.yaml) .
 
 ### **COMMUNITY** OpenVidu Server Configuration:
 
@@ -149,7 +149,7 @@ openvidu:
 
 > **Info**
 >
-> Before deploying OpenVidu PRO, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> Before deploying OpenVidu PRO, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ```yaml
 openvidu:
@@ -168,7 +168,7 @@ openvidu:
         log_tags: [info, ice, rtp, rtcp, message] # (11)
 ```
 
-1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](https://openvidu.io/3.9/account/index.md) .
+1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here](https://openvidu.io/account/) .
 1. The cluster ID for the OpenVidu deployment. It is configured by default by OpenVidu Installer with the domain name of the deployment.
 1. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 1. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
@@ -193,7 +193,7 @@ OpenVidu comes with other services configured to work in the deployment. These a
 
 > **Info**
 >
-> The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.9.0). To see the version number of each service, refer to the *"Version table"* of release 3.9.0 on the [Releases](https://openvidu.io/3.9/docs/releases/index.md) page.
+> The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.9.0). To see the version number of each service, refer to the *"Version table"* of release 3.9.0 on the [Releases](https://openvidu.io/latest/docs/releases/index.md) page.
 
 | Service                | Description                                                   | Reference documentation                                                                                                  |
 | ---------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
