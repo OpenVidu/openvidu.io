@@ -170,17 +170,23 @@ jobs:
           echo "Following $RUN_URL"
           echo "Docs MCP deploy: $RUN_URL" >> "$GITHUB_STEP_SUMMARY"
 
-          # gh run watch redraws its progress; the final state is read separately.
-          set +e
-          timeout 40m gh run watch "$RUN_ID" -R "$REPO" --exit-status --interval 20 > /dev/null 2>&1
-          WATCH=$?
-          set -e
-          if [ "$WATCH" -eq 124 ]; then
-            echo "::error::The docs MCP deploy is still running after 40 minutes: $RUN_URL. The site is published; the MCP server keeps serving the previous index until that run finishes. Follow it there."
-            exit 1
-          fi
+          # Polled rather than followed with gh run watch, which exits on the first API request that
+          # fails while the run may still be going. A failed poll is retried.
+          DEADLINE=$(( $(date +%s) + 40 * 60 ))
+          while :; do
+            if STATE=$(gh run view "$RUN_ID" -R "$REPO" --json status,conclusion --jq '"\(.status) \(.conclusion // "")"'); then
+              read -r STATUS CONCLUSION <<<"$STATE"
+              if [ "$STATUS" = completed ] && [ -n "$CONCLUSION" ]; then break; fi
+            else
+              echo "::warning::Could not read the state of $RUN_URL; trying again."
+            fi
+            if [ "$(date +%s)" -ge "$DEADLINE" ]; then
+              echo "::error::The docs MCP deploy is still running after 40 minutes: $RUN_URL. The site is published; the MCP server keeps serving the previous index until that run finishes. Follow it there."
+              exit 1
+            fi
+            sleep 20
+          done
 
-          CONCLUSION=$(gh run view "$RUN_ID" -R "$REPO" --json conclusion --jq '.conclusion')
           case "$CONCLUSION" in
             success)
               echo "Docs MCP server redeployed: $RUN_URL"
