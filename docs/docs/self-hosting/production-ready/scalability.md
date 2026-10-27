@@ -261,6 +261,7 @@ When deploying in a supported **cloud provider** using our official templates, O
     | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
     | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
     | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
+    | fixedNumberOfMediaNodes | 0 | If greater than 0, deploys exactly that number of Media Nodes with no autoscaling (initialNumberOfMediaNodes, minNumberOfMediaNodes, maxNumberOfMediaNodes and scaleTargetCPU are ignored). 0 = use autoscaling. |
 
 === ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
 

@@ -128,6 +128,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
 | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
 | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
+| fixedNumberOfMediaNodes | 0 | If greater than 0, deploys exactly that number of Media Nodes with no autoscaling (initialNumberOfMediaNodes, minNumberOfMediaNodes, maxNumberOfMediaNodes and scaleTargetCPU are ignored). 0 = use autoscaling. |
 | GCSAppDataBucketName | (none) | Name of the GCS bucket to store application data and recordings. If empty, a bucket will be created |
 | GCSClusterDataBucketName | (none) | Name of the GCS bucket to store cluster data. If empty, a bucket will be created |
 | rtcEngine | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |

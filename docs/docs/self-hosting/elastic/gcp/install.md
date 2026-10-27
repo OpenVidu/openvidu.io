@@ -125,6 +125,7 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
 | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
 | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
+| fixedNumberOfMediaNodes | 0 | If greater than 0, deploys exactly that number of Media Nodes with no autoscaling (initialNumberOfMediaNodes, minNumberOfMediaNodes, maxNumberOfMediaNodes and scaleTargetCPU are ignored). 0 = use autoscaling. |
 | bucketName | (none) | Name of the GCS bucket to store data and recordings. If empty, a bucket will be created. |
 | rtcEngine | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |

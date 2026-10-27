@@ -7,3 +7,5 @@
     The **InitialNumberOfMediaNodes** parameter specifies the initial number of Media Nodes to deploy. The **MinNumberOfMediaNodes** and **MaxNumberOfMediaNodes** parameters specify the minimum and maximum number of Media Nodes that you want to be deployed.
 
     The **ScaleTargetCPU** parameter specifies the target CPU utilization to trigger the scaling up or down. The goal is to keep the CPU utilization of the Media Nodes close to this value. The autoscaling policy is based on [Target Tracking Scaling Policy :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html){:target="_blank"}.
+
+    The **FixedNumberOfMediaNodes** parameter, when greater than `0`, deploys exactly that number of Media Nodes with no autoscaling: **InitialNumberOfMediaNodes**, **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **ScaleTargetCPU** are ignored. Leave it at `0` (the default) to scale automatically.
