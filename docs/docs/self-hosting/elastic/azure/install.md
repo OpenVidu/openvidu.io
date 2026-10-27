@@ -16,6 +16,9 @@ description: "Deploy OpenVidu Elastic on Azure from an Azure Resource Manager te
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on Azure. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Azure resources and can be automated through an ARM Template Spec.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 To import the template into Azure, click the button below and you will be redirected to Azure.
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>

@@ -16,6 +16,9 @@ description: "Deploy OpenVidu Elastic on Google Cloud from a deployment stack in
 
 This section describes how to deploy a production-ready OpenVidu Elastic instance on Google Cloud Platform. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Google Cloud Platform resources and can be automated through the Google Cloud Console.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Google Cloud Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console. Then follow the next steps and fill in your preferred parameters.
 
 === "Architecture overview"
