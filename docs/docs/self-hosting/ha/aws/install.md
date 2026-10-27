@@ -179,7 +179,7 @@ In this section, you need to specify the configuration for the EBS volumes that 
 
     ![Volumes Configuration](../../../../assets/images/platform/self-hosting/ha/aws/volumes-config.png){ .round-corners loading=lazy }
 
-    The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB.
+    The **MasterNodesDiskSize** parameter specifies the size of the EBS volumes in GB (200 by default).
 
 --8<-- "self-hosting/aws/additional-flags.md"
 

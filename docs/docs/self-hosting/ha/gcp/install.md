@@ -114,16 +114,16 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 |---|---|---|
 | region | "europe-west2" | GCP region where resources will be created. |
 | zone | "europe-west2-b" | GCP zone that some resources will use. |
-| certificateType | "letsEncrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
+| certificateType | "letsencrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
 | publicIpAddress | (none) | Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP. |
 | domainName | (none) | Domain name for the OpenVidu Deployment. |
 | ownPublicCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
 | ownPrivateCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
 | initialMeetAdminPassword | (none) | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
 | initialMeetApiKey | (none) | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
-| masterNodesInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Master Node. |
-| masterNodesDiskSize | 100 | Size of the disk in GB for master nodes |
-| mediaNodeInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
+| masterNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Master Nodes. The former name `masterNodesInstanceType` is still accepted but deprecated. |
+| masterNodesDiskSize | 200 | Size of the disk in GB for master nodes |
+| mediaNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
 | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
 | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
 | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
