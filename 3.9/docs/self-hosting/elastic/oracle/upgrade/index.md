@@ -2,7 +2,7 @@
 
 Oracle Cloud Infrastructure
 
-In Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying [OpenVidu Elastic Oracle Cloud Infrastructure](https://openvidu.io/3.9/docs/self-hosting/elastic/oracle/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Oracle Cloud Infrastructure terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+In Oracle Cloud Infrastructure environments, we recommend upgrading by redeploying [OpenVidu Elastic Oracle Cloud Infrastructure](https://openvidu.io/latest/docs/self-hosting/elastic/oracle/install/index.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as Oracle Cloud Infrastructure terraform files and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
 
 However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu Elastic in place. The following steps outline how to perform an in-place upgrade of your OpenVidu Elastic deployment on Oracle Cloud Infrastructure:
 

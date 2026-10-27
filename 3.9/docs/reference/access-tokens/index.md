@@ -8,7 +8,7 @@ OpenVidu is API-compatible with LiveKit, so any LiveKit server SDK can generate 
 
 The tutorials show a working token endpoint in different languages:
 
-[**Application server tutorials**](https://openvidu.io/3.9/docs/tutorials/application-server/index.md)
+[**Application server tutorials**](https://openvidu.io/latest/docs/tutorials/application-server/index.md)
 
 ## API key and API secret
 
@@ -16,12 +16,12 @@ Tokens are signed with the key pair configured in your OpenVidu deployment:
 
 | Parameter            | Where it lives                                                                                                                |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `LIVEKIT_API_KEY`    | `openvidu.env`: see the [configuration reference](https://openvidu.io/3.9/docs/self-hosting/configuration/reference/index.md) |
+| `LIVEKIT_API_KEY`    | `openvidu.env`: see the [configuration reference](https://openvidu.io/latest/docs/self-hosting/configuration/reference/index.md) |
 | `LIVEKIT_API_SECRET` | `openvidu.env`: same file                                                                                                     |
 
 Two notes:
 
-- An [OpenVidu local deployment](https://openvidu.io/3.9/docs/self-hosting/local/index.md) starts with the development pair `LIVEKIT_API_KEY=devkey` and `LIVEKIT_API_SECRET=secret`.
+- An [OpenVidu local deployment](https://openvidu.io/latest/docs/self-hosting/local/index.md) starts with the development pair `LIVEKIT_API_KEY=devkey` and `LIVEKIT_API_SECRET=secret`.
 - Any production OpenVidu deployment must keep its API key and secret private. Always keep those values in your application server's environment, never in a browser or mobile bundle.
 
 ## Anatomy of a token
@@ -83,8 +83,8 @@ The `video` claim is where permissions live. Every field is optional; anything y
 | `roomJoin`             | boolean         | Allows joining a Room as a participant                                                                                                                         |
 | `roomAdmin`            | boolean         | Allows moderating a Room. This is generally a server-side permission (remove participants, mute tracks, update participant permissions... )                    |
 | `room`                 | string          | The Room name this token is valid for. Required when setting `roomJoin`or `roomAdmin`                                                                          |
-| `roomRecord`           | boolean         | Allows calling the [Egress API](https://openvidu.io/3.9/docs/reference/egress/index.md). This is generally a server-side permission                            |
-| `ingressAdmin`         | boolean         | Allows calling the [Ingress API](https://openvidu.io/3.9/docs/reference/ingress/index.md). This is generally a server-side permission                          |
+| `roomRecord`           | boolean         | Allows calling the [Egress API](https://openvidu.io/latest/docs/reference/egress/index.md). This is generally a server-side permission                            |
+| `ingressAdmin`         | boolean         | Allows calling the [Ingress API](https://openvidu.io/latest/docs/reference/ingress/index.md). This is generally a server-side permission                          |
 | `canPublish`           | boolean         | Allows publishing tracks. **Defaults to true** when the field is absent. Set it to `false` explicitly for a viewer-only participant                            |
 | `canSubscribe`         | boolean         | Allows subscribing to other participants' tracks. **Defaults to true** when the field is absent. Set it to `false` explicitly for a publisher-only participant |
 | `canPublishData`       | boolean         | Allows sending data messages. **Defaults to true** when the field is absent                                                                                    |
@@ -97,7 +97,7 @@ The `video` claim is where permissions live. Every field is optional; anything y
 **Node.js**
 
 - Using [LiveKit Node SDK](https://docs.livekit.io/reference/server-sdk-js/) .
-- For a working example run the [Node.js tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/node/index.md).
+- For a working example run the [Node.js tutorial](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md).
 
 ```javascript
 import { AccessToken } from 'livekit-server-sdk';
@@ -118,7 +118,7 @@ const token = await at.toJwt();
 **Go**
 
 - Using [LiveKit Go SDK](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2) .
-- For a working example run the [Go tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/go/index.md).
+- For a working example run the [Go tutorial](https://openvidu.io/latest/docs/tutorials/application-server/go/index.md).
 
 ```go
 import "github.com/livekit/protocol/auth"
@@ -141,7 +141,7 @@ token, err := at.ToJWT()
 **Ruby**
 
 - Using [LiveKit Ruby SDK](https://github.com/livekit/server-sdk-ruby) .
-- For a working example run the [Ruby tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/ruby/index.md).
+- For a working example run the [Ruby tutorial](https://openvidu.io/latest/docs/tutorials/application-server/ruby/index.md).
 
 ```ruby
 require 'livekit'
@@ -161,7 +161,7 @@ jwt = token.to_jwt
 **Java**
 
 - Using [LiveKit Kotlin SDK](https://github.com/livekit/server-sdk-kotlin) .
-- For a working example run the [Java tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/java/index.md).
+- For a working example run the [Java tutorial](https://openvidu.io/latest/docs/tutorials/application-server/java/index.md).
 
 ```java
 import io.livekit.server.*;
@@ -181,7 +181,7 @@ String jwt = token.toJwt();
 **Python**
 
 - Using [LiveKit Python SDK](https://github.com/livekit/python-sdks) .
-- For a working example run the [Python tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/python/index.md).
+- For a working example run the [Python tutorial](https://openvidu.io/latest/docs/tutorials/application-server/python/index.md).
 
 ```python
 from livekit.api import AccessToken, VideoGrants
@@ -205,7 +205,7 @@ token = (
 **Rust**
 
 - Using [LiveKit Rust SDK](https://github.com/livekit/rust-sdks) .
-- For a working example run the [Rust tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/rust/index.md).
+- For a working example run the [Rust tutorial](https://openvidu.io/latest/docs/tutorials/application-server/rust/index.md).
 
 ```rust
 use livekit_api::access_token::{AccessToken, VideoGrants};
@@ -226,7 +226,7 @@ let token = AccessToken::with_api_key("api-key", "api-secret")
 **PHP**
 
 - Using [LiveKit PHP SDK](https://github.com/agence104/livekit-server-sdk-php) .
-- For a working example run the [PHP tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/php/index.md).
+- For a working example run the [PHP tutorial](https://openvidu.io/latest/docs/tutorials/application-server/php/index.md).
 
 ```php
 <?php
@@ -251,7 +251,7 @@ $jwt = (new AccessToken('api-key', 'api-secret'))
 **.NET**
 
 - Using [LiveKit .NET SDK](https://github.com/pabloFuente/livekit-server-sdk-dotnet) .
-- For a working example run the [.NET tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/dotnet/index.md).
+- For a working example run the [.NET tutorial](https://openvidu.io/latest/docs/tutorials/application-server/dotnet/index.md).
 
 ```csharp
 using Livekit.Server.Sdk.Dotnet;
@@ -294,13 +294,13 @@ OpenVidu keeps issuing refreshed tokens to participants while they are connected
 
 - Refreshed tokens let a client recover from a dropped connection without asking your backend for a new token.
 - Each refreshed token is rebuilt from the participant's current claims, so it always carries the permissions in effect at that moment.
-- Any change to the participant's name, metadata, attributes or permissions ([`UpdateParticipant`](https://openvidu.io/3.9/docs/reference/room-service-api/#participants)) triggers a refresh immediately.
+- Any change to the participant's name, metadata, attributes or permissions ([`UpdateParticipant`](https://openvidu.io/latest/docs/reference/room-service-api/#participants)) triggers a refresh immediately.
 
 The refreshed token exchange is invisible to your application: the client SDK replaces the token it holds in memory and raises no event for it, and your backend is not involved.
 
 ### Revocation
 
-An issued token cannot be revoked. Neither [`RemoveParticipant`](https://openvidu.io/3.9/docs/reference/room-service-api/#participants) nor narrowing a participant's grants invalidates a token that is already out: it stays usable to connect until it expires on its own.
+An issued token cannot be revoked. Neither [`RemoveParticipant`](https://openvidu.io/latest/docs/reference/room-service-api/#participants) nor narrowing a participant's grants invalidates a token that is already out: it stays usable to connect until it expires on its own.
 
 Two habits follow from that:
 
@@ -309,9 +309,9 @@ Two habits follow from that:
 
 ### Updating token permissions
 
-[`UpdateParticipant`](https://openvidu.io/3.9/docs/reference/room-service-api/#participants) applies new permissions to an already-connected participant without a reconnect, for example promoting a viewer to speaker:
+[`UpdateParticipant`](https://openvidu.io/latest/docs/reference/room-service-api/#participants) applies new permissions to an already-connected participant without a reconnect, for example promoting a viewer to speaker:
 
-- The client observes a [`ParticipantPermissionsChanged`](https://openvidu.io/3.9/docs/reference/client-sdk/#participants-and-room-state) event.
+- The client observes a [`ParticipantPermissionsChanged`](https://openvidu.io/latest/docs/reference/client-sdk/#participants-and-room-state) event.
 - Revoking [`canPublish` video grant](#video-grants) automatically unpublishes every track that participant had published.
 
 ## Designing your permission model
@@ -321,4 +321,4 @@ Access tokens are the whole authorization surface: OpenVidu Platform has no noti
 - **Authenticate before you generate.** The token endpoint must be behind your own login. An open `/token` endpoint lets anyone join any Room under any name.
 - **Generate the narrowest token that works.** Scope it to one Room, set `canPublish: false` for viewers, and keep administration grants out of client tokens.
 
-For server-side operations run from your application server, all LiveKit server SDKs automatically generate a token with the required grants for each operation. Visit the [Room Service API reference](https://openvidu.io/3.9/docs/reference/room-service-api/index.md), [Egress API reference](https://openvidu.io/3.9/docs/reference/egress/index.md) and [Ingress API reference](https://openvidu.io/3.9/docs/reference/ingress/index.md) for further information.
+For server-side operations run from your application server, all LiveKit server SDKs automatically generate a token with the required grants for each operation. Visit the [Room Service API reference](https://openvidu.io/latest/docs/reference/room-service-api/index.md), [Egress API reference](https://openvidu.io/latest/docs/reference/egress/index.md) and [Ingress API reference](https://openvidu.io/latest/docs/reference/ingress/index.md) for further information.

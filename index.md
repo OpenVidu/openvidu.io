@@ -1,3 +1,29 @@
+## Trusted by teams building real-time video
+
+______________________________________________________________________
+
+> "With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience."
+
+Matteo Resconi, IT & Development Area Manager, Mega Italia Media
+
+[Read the full story →](https://openvidu.io/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/)
+
+______________________________________________________________________
+
+> "OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain."
+
+Andrei Iakimov, DevOps Lead, Novakid
+
+[Read the full story →](https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/)
+
+______________________________________________________________________
+
+> "From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams."
+
+Janne Sikiö, CEO, Dicode
+
+[Read the full story →](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/)
+
 ## Choose the ideal OpenVidu solution for your real-time needs
 
 ### 
