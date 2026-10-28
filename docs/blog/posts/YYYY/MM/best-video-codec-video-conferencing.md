@@ -34,7 +34,7 @@ The reason is that compression efficiency is only part of the problem. Choosing 
 <!-- more -->
 
 !!! tip "TL;DR"
-    There is no best video codec for video conferencing. You have to pick the one that offers the best balance between **compatibility, efficiency, computational cost and quality on the devices your users actually have** — and the only way to know which one that is, is to measure it on the worst device you have to support. The rest of this post is how to do that.
+    There is no best video codec for video conferencing, only the one that offers the best balance between **compatibility, efficiency, computational cost and quality on the devices your users actually have**. As a starting point, we recommend `H.264` when your users join from mixed devices and browsers, and `VP9` or `AV1` when you control modern devices that can encode them in hardware. Whichever you pick, confirm it on the worst device you have to support. The rest of this post explains why, and how to do it.
 
 A codec can halve the data you need to transmit, but if a device cannot encode it in hardware, those savings can turn into more CPU, more battery and more latency. And when your users are on devices with very different capabilities, what runs perfectly on one can become a bottleneck on another.
 
@@ -45,12 +45,20 @@ Before going further, one thing worth settling about the audio codec: **that cho
 On the video side, there is no winning decision. Every codec has its upsides and its downsides, and that is what we are going to look at in this post.
 
 
-## `H.264` vs `VP8` vs `H.265` vs `VP9` vs `AV1`: which codec should you pick?
+## Which video codec should you pick?
 
 
-When we say a codec is **30% more efficient** than another, we mean it needs 30% less data to reach a similar quality. If `H.264` needs 1 Mbps, a codec that is 30% more efficient could reach comparable quality with around 700 Kbps.
+These are the five video codecs you will come across when you build a video conferencing application on WebRTC:
 
-Taking `H.264` and `VP8` as the baseline, these are the figures you will usually see:
+* `H.264` (AVC): the most widely deployed video codec.
+* `VP8`: Google's royalty-free alternative to `H.264`.
+* `H.265` (HEVC): the successor of `H.264`.
+* `VP9`: Google's successor of `VP8`.
+* `AV1`: the newest of the five, royalty-free, from the Alliance for Open Media.
+
+The obvious first criterion to compare them is how much each one compresses. When we say a codec is **30% more efficient** than another, we mean it needs 30% less data to reach a similar quality. If `H.264` needs 1 Mbps, a codec that is 30% more efficient could reach comparable quality with around 700 Kbps.
+
+Comparisons usually take `H.264` and `VP8` as the baseline: they are the oldest and least efficient of the five, roughly on par with each other, and every newer codec was designed to improve on them. These are the figures you will usually see:
 
 | Codec             |   Released   | Approximate data reduction |
 | ----------------- | :----------: | -------------------------: |
@@ -59,19 +67,19 @@ Taking `H.264` and `VP8` as the baseline, these are the figures you will usually
 | `VP9`             |         2013 |                     23–50% |
 | `AV1`             |         2018 |                     24–52% |
 /// caption
-Figures commonly quoted for each codec, compiled from [different published comparisons :fontawesome-solid-external-link:{.external-link-icon}](https://streaminglearningcenter.com/codecs/bandwidth-savings-vp9-hevc-av1.html){:target="_blank"} — which is exactly why they are so wide and overlap.
+Figures commonly quoted for each codec, compiled from [different published comparisons :fontawesome-solid-external-link:{.external-link-icon}](https://streaminglearningcenter.com/codecs/bandwidth-savings-vp9-hevc-av1.html){:target="_blank"}, which is exactly why they are so wide and overlap.
 ///
 
 Those ranges overlap, and that is the first thing worth understanding about them: **they do not come from a single experiment**. Each one is measured on different content, at different resolutions and with different encoder settings, so the table cannot be read as a ranking. `H.265` looking better than `AV1` here is an artefact of that, not a property of the codecs.
 
-Compared head to head on the same material, the newer codec does come out ahead. A [peer-reviewed analysis :fontawesome-solid-external-link:{.external-link-icon}](https://www.cambridge.org/core/journals/apsipa-transactions-on-signal-and-information-processing/article/compression-efficiency-analysis-of-av1-vvc-and-hevc-for-random-access-applications/D2345DDC3750055AB0AA3D24FCF743BE){:target="_blank"} puts `AV1` around 10–15% below `H.265` in bitrate for the same quality — while also showing how much that figure moves with the resolution and the encoder settings.
+Compared head to head on the same material, the newer codec does come out ahead. A [peer-reviewed analysis :fontawesome-solid-external-link:{.external-link-icon}](https://www.cambridge.org/core/journals/apsipa-transactions-on-signal-and-information-processing/article/compression-efficiency-analysis-of-av1-vvc-and-hevc-for-random-access-applications/D2345DDC3750055AB0AA3D24FCF743BE){:target="_blank"} puts `AV1` around 10–15% below `H.265` in bitrate for the same quality, while also showing how much that figure moves with the resolution and the encoder settings.
 
 And one shift matters especially here: **these savings shrink at low bitrates**. In [one practical comparison :fontawesome-solid-external-link:{.external-link-icon}](https://streaminglearningcenter.com/articles/comparing-h-264-hevc-vp9-and-av1-in-sbe-from-bd-rate-to-contextual-roi.html){:target="_blank"}, the saving of `AV1` over `H.264` drops from roughly 60% to about 23% once the measurement is weighted towards the low quality levels that mobile viewers actually receive. A video call lives exactly in that zone.
 
-So the rule of thumb holds — **newer codecs are designed to get more out of the same bitrate** — but how much of it you actually get depends on your content, your resolution and your bitrate. And that efficiency has a price. More advanced codecs usually need more resources to encode and decode the video, especially when there is no hardware acceleration available.
+So the rule of thumb holds (**newer codecs are designed to get more out of the same bitrate**), but how much of it you actually get depends on your content, your resolution and your bitrate. And that efficiency has a price. More advanced codecs usually need more resources to encode and decode the video, especially when there is no hardware acceleration available.
 
 !!! note "Why `H.265` is the odd one out"
-    `H.265` is in that table for its compression, not because it is an easy choice: its patents are split across [three separate licensing pools :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Patent_licensing){:target="_blank"}, while `AV1` is [royalty-free :fontawesome-solid-external-link:{.external-link-icon}](https://aomedia.org/about/story/){:target="_blank"}. Chrome has shipped it for WebRTC since version 136, but [only where the device can encode it in hardware :fontawesome-solid-external-link:{.external-link-icon}](https://groups.google.com/a/chromium.org/g/blink-dev/c/3h8lL8a377c){:target="_blank"} — this post's argument, stated by the browser itself.
+    `H.265` is in that table for its compression, not because it is an easy choice: its patents are split across [three separate licensing pools :fontawesome-solid-external-link:{.external-link-icon}](https://en.wikipedia.org/wiki/High_Efficiency_Video_Coding#Patent_licensing){:target="_blank"}, while `AV1` is [royalty-free :fontawesome-solid-external-link:{.external-link-icon}](https://aomedia.org/about/story/){:target="_blank"}. Chrome has shipped it for WebRTC since version 136, but [only where the device can encode it in hardware :fontawesome-solid-external-link:{.external-link-icon}](https://groups.google.com/a/chromium.org/g/blink-dev/c/3h8lL8a377c){:target="_blank"}: this post's argument, stated by the browser itself.
 
 And this is where the choice stops being a comparison of percentages. **Knowing how much a codec compresses is not enough; you also need to know whether your users' devices can handle it efficiently.**
 
@@ -95,7 +103,7 @@ And the answer is not the same for every user you have, which is what makes a co
 
 ### The least capable device sets the rules
 
-So far we have talked about codec support as if it were a property of the device. In practice, **it also depends on the combination of hardware, operating system and browser** — and that combination is different for every person who joins your call.
+So far we have talked about codec support as if it were a property of the device. In practice, **it also depends on the combination of hardware, operating system and browser**, and that combination is different for every person who joins your call.
 
 Which leads to the rule that should drive the whole decision: **your codec floor is set by the least capable client you have to support**, not by the average of your user base. If 5% of your users join from a four-year-old phone, that phone decides what you can publish.
 
@@ -117,11 +125,17 @@ Latency comes into play as well. In a video call it is not only about how long t
 That is why a useful test should not stop at checking whether a codec works. You have to run it during a real call, for as long as a real meeting would last, and on the least powerful devices you have to support.
 
 
-## So which codec should you use?
+## Our recommendations
 
-If you got this far looking for **the best codec**, the answer is simple: there is no single one that is best in every scenario.
+There is no single codec that is best in every scenario. That said, these are the codecs we recommend for each context:
 
-The choice should start from the devices you have to support and the real cost each codec has on them.
+* **Consumer application with mixed devices and browsers: `H.264`.** Its broad compatibility and hardware acceleration make it the safest pick when you do not know what your users will join from.
+
+* **Controlled environment with modern devices: `VP9` or `AV1`.** They offer interesting bandwidth savings, as long as the available hardware can encode them efficiently.
+
+* **Very specific ecosystems: `H.265`.** It can make sense when you control the hardware, now that Chrome negotiates it over WebRTC. But it only works on devices that can encode it in hardware, which makes it hard to justify as a universal choice.
+
+Take them as a starting point, not a verdict: the devices you have to support and the real cost each codec has on them have the final say. To confirm your pick:
 
 1. **List the clients you have to support.** The least capable device can set your compatibility ceiling.
 
@@ -137,14 +151,6 @@ The choice should start from the devices you have to support and the real cost e
 
 ![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/codec-selection-process-light.webp#only-light "The six steps to choose a video codec"){ .round-corners loading=lazy }
 ![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/codec-selection-process-dark.webp#only-dark "The six steps to choose a video codec"){ .round-corners loading=lazy }
-
-From there, some decisions can be reasonable:
-
-* **Consumer application with mixed devices and browsers:** `H.264` is usually the conservative pick, thanks to its broad compatibility and hardware acceleration.
-
-* **Controlled environment with modern devices:** `VP9` or `AV1` can offer interesting bandwidth savings, as long as the available hardware can handle them efficiently.
-
-* **Very specific ecosystems:** `H.265` can make sense when you control the hardware, now that Chrome negotiates it over WebRTC. But it only works on devices that can encode it in hardware, which makes it hard to justify as a universal choice.
 
 The important idea is that **you do not have to pick the codec that is most efficient on paper**. You have to pick the one that offers the best balance between **compatibility, efficiency, computational cost and quality on the devices your users actually have**.
 
@@ -177,7 +183,7 @@ That way, choosing a codec stops being a single benchmark decision: it becomes t
 
 ## What to do next
 
-Every metric this post asks you to look at — `encoderImplementation`, the quality limitation reason, the frame rate under load — comes from WebRTC statistics you can already read in your own application. What you need is somewhere to run the tests:
+Every metric this post asks you to look at (`encoderImplementation`, the quality limitation reason, the frame rate under load) comes from WebRTC statistics you can already read in your own application. What you need is somewhere to run the tests:
 
 - **To get an environment to measure in**, [install OpenVidu on a single machine](/docs/self-hosting/single-node/on-premises/install.md). You get the SFU, the observability stack and the client SDK in one deployment, and you can switch codecs from the publishing options
 - **If what you need is video calls inside your product** rather than infrastructure to experiment with, look at [embedding OpenVidu Meet](/meet/embedded/intro.md), which handles the codec negotiation for you
