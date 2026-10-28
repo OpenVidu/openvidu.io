@@ -266,7 +266,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/configuration/reference/</loc>
-         <lastmod>2026-09-30</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/docs/self-hosting/elastic/</loc>
@@ -794,7 +794,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/webcomponent/</loc>
-         <lastmod>2026-10-05</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/embedded/reference/webhooks/</loc>
@@ -842,11 +842,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/configuration/</loc>
-         <lastmod>2026-09-25</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/e2e-encryption/</loc>
-         <lastmod>2026-09-30</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/lifecycle/</loc>
@@ -858,11 +858,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/moderation/</loc>
-         <lastmod>2026-09-11</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/overview/</loc>
-         <lastmod>2026-09-23</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/role-management/</loc>
@@ -870,11 +870,11 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/smart-layout/</loc>
-         <lastmod>2026-08-18</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/meetings/virtual-background/</loc>
-         <lastmod>2026-09-25</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/recordings/configuration/</loc>
@@ -906,7 +906,7 @@
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/rooms/overview/</loc>
-         <lastmod>2026-08-18</lastmod>
+         <lastmod>2026-10-28</lastmod>
     </url>
     <url>
          <loc>https://openvidu.io/latest/meet/features/users/management/</loc>

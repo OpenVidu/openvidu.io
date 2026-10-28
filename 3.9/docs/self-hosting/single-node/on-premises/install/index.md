@@ -6,7 +6,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
 > **Info**
 >
-> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 **Architecture overview**
 
@@ -21,7 +21,7 @@ All services are deployed on a single machine, which includes:
 - **Redis** as a shared database for OpenVidu Server and Ingress/Egress services.
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates.
-- **[OpenVidu Meet](https://openvidu.io/3.9/meet/index.md)**, an optional high-quality video calling service.
+- **[OpenVidu Meet](https://openvidu.io/latest/meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 - **OpenVidu V2 Compatibility (v2compatibility module)** **PRO** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
 
@@ -161,11 +161,11 @@ A wizard will guide you through the installation process. You will be asked for 
 
   > **Note**
   >
-  > If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md).
+  > If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](https://openvidu.io/latest/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md).
 
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
 
-  - [*OpenVidu Meet*](https://openvidu.io/3.9/meet/index.md): A high-quality video calling service based on OpenVidu.
+  - [*OpenVidu Meet*](https://openvidu.io/latest/meet/index.md): A high-quality video calling service based on OpenVidu.
   - *Observability*: Grafana stack, which includes logs and monitoring stats.
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
@@ -203,17 +203,17 @@ A wizard will guide you through the installation process. You will be asked for 
 
   > **Note**
   >
-  > If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md).
+  > If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](https://openvidu.io/latest/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md).
 
 - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
 
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
 
-  - [*OpenVidu Meet*](https://openvidu.io/3.9/meet/index.md): A high-quality video calling service based on OpenVidu.
+  - [*OpenVidu Meet*](https://openvidu.io/latest/meet/index.md): A high-quality video calling service based on OpenVidu.
   - *Observability*: Grafana stack, which includes logs and monitoring stats.
   - *OpenVidu V2 Compatibility*: Compatibility API for applications developed with OpenVidu v2.
 
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
 
@@ -485,7 +485,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.9.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
 **Self-signed certificates**
@@ -519,7 +519,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.9.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
 **With Domain Name**
@@ -556,7 +556,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.9.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
 **Self-signed certificates**
@@ -591,7 +591,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.9.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
 **Custom certificates**
@@ -631,7 +631,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
 >
 > In case you want to deploy a specific version, just replace `latest` with the desired version. For example: `3.9.0`.
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
 
@@ -641,7 +641,7 @@ Some notes about the command:
 
 - The argument `--domain-name` is optional. If not provided, the public IP is used as the domain name, and a [Let's Encrypt](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability) certificate is issued for it.
 - When using autogenerated domains (no FQDN (Fully Qualified Domain Name) provided), only `selfsigned` and `letsencrypt` certificate types are available.
-- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](https://openvidu.io/3.9/meet/index.md), `observability` (Grafana stack) and, PRO only, `v2compatibility` (OpenVidu v2 compatibility API).
+- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](https://openvidu.io/latest/meet/index.md), `observability` (Grafana stack) and, PRO only, `v2compatibility` (OpenVidu v2 compatibility API).
 - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media.
 
 To start OpenVidu, remember to run:
@@ -652,7 +652,7 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/index.md) section to learn how to manage your OpenVidu Single Node deployment.
+Once you have OpenVidu deployed, you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md) section to learn how to manage your OpenVidu Single Node deployment.
 
 ## Plain Docker Compose installation
 

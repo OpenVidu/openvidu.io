@@ -6,17 +6,17 @@ OpenVidu Meet includes a built-in **Live Captions** feature that turns speech in
 
 > **Local Meet Deployment Limitation**
 >
-> Live Captions are **not available** in local Meet deployments. You must use either the [OpenVidu Local deployment](https://openvidu.io/3.9/docs/self-hosting/local/index.md) or an [OpenVidu production deployment](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md) to enable this feature.
+> Live Captions are **not available** in local Meet deployments. You must use either the [OpenVidu Local deployment](https://openvidu.io/latest/docs/self-hosting/local/index.md) or an [OpenVidu production deployment](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md) to enable this feature.
 
 ### 1. Connect to your OpenVidu deployment
 
 SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
 
-Depending on your [OpenVidu deployment type](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md):
+Depending on your [OpenVidu deployment type](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
 **OpenVidu Local (Development)**
 
-If you are using [OpenVidu Local (Development)](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-local-development), simply navigate to the configuration folder of the project:
+If you are using [OpenVidu Local (Development)](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-local-development), simply navigate to the configuration folder of the project:
 
 ```bash
 # For OpenVidu Local COMMUNITY
@@ -28,7 +28,7 @@ cd openvidu-local-deployment/pro
 
 **OpenVidu Single Node**
 
-If you are using [OpenVidu Single Node](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
+If you are using [OpenVidu Single Node](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
 
 ```bash
 cd /opt/openvidu/config
@@ -36,7 +36,7 @@ cd /opt/openvidu/config
 
 **OpenVidu Elastic**
 
-If you are using [OpenVidu Elastic](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-elastic), SSH into the only Master Node and navigate to:
+If you are using [OpenVidu Elastic](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-elastic), SSH into the only Master Node and navigate to:
 
 ```bash
 cd /opt/openvidu/config/cluster/media_node
@@ -44,7 +44,7 @@ cd /opt/openvidu/config/cluster/media_node
 
 **OpenVidu High Availability**
 
-If you are using [OpenVidu High Availability](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
+If you are using [OpenVidu High Availability](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
 
 ```bash
 cd /opt/openvidu/config/cluster/media_node
@@ -70,11 +70,11 @@ live_captions:
 >
 > By default, the Speech Processing Agent uses a local Vosk model for speech-to-text transcription.
 >
-> For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](https://openvidu.io/3.9/docs/ai/live-captions/#cloud-providers) for more information.
+> For a more advanced setup, consider using a cloud-based provider. See [Cloud providers](https://openvidu.io/latest/docs/ai/live-captions/#cloud-providers) for more information.
 
 > **Default language is English**
 >
-> The Speech Processing Agent uses **English** for speech-to-text transcription by default. To use a different language, you must configure a different Vosk model. See [Vosk models configuration](https://openvidu.io/3.9/docs/ai/live-captions/#vosk) for details on changing the language model.
+> The Speech Processing Agent uses **English** for speech-to-text transcription by default. To use a different language, you must configure a different Vosk model. See [Vosk models configuration](https://openvidu.io/latest/docs/ai/live-captions/#vosk) for details on changing the language model.
 
 ### 3. Enable Captions in OpenVidu Meet configuration
 
@@ -88,7 +88,7 @@ MEET_CAPTIONS_ENABLED=true
 
 Apply your changes by restarting OpenVidu. This ensures the system recognizes the new live captioning capabilities.
 
-Depending on your [OpenVidu deployment type](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md):
+Depending on your [OpenVidu deployment type](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
 **OpenVidu Local (Development)**
 
@@ -124,7 +124,7 @@ sudo systemctl restart openvidu
 
 ### 5. Enable/Disable Captions for specific Rooms
 
-Captions are enabled by default when a room is [created](https://openvidu.io/3.9/meet/features/rooms/management/#create-rooms), whether through the UI or the [REST API](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createRoom) . This behavior can be overridden to enable or disable captions on a per-room basis from the **Features** section of the **Meeting** step of the room configuration wizard, using the **Live captions** toggle. The same step also sets the room's [participant and duration limits](https://openvidu.io/3.9/meet/features/meetings/configuration/index.md), and toggles [End-to-End Encryption](https://openvidu.io/3.9/meet/features/meetings/e2e-encryption/index.md), Chat and [Virtual Background](https://openvidu.io/3.9/meet/features/meetings/virtual-background/index.md).
+Captions are enabled by default when a room is [created](https://openvidu.io/latest/meet/features/rooms/management/#create-rooms), whether through the UI or the [REST API](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createRoom) . This behavior can be overridden to enable or disable captions on a per-room basis from the **Features** section of the **Meeting** step of the room configuration wizard, using the **Live captions** toggle. The same step also sets the room's [participant and duration limits](https://openvidu.io/latest/meet/features/meetings/configuration/index.md), and toggles [End-to-End Encryption](https://openvidu.io/latest/meet/features/meetings/e2e-encryption/index.md), Chat and [Virtual Background](https://openvidu.io/latest/meet/features/meetings/virtual-background/index.md).
 
 ## Using Live Captions in a Meeting
 
