@@ -483,10 +483,6 @@
   background: var(--ov-surface-2);
 }
 
-.md-typeset .ov-landing .ov-pick__shot--wide {
-  object-position: center;
-}
-
 /* The feature pills under the screenshot */
 .md-typeset .ov-landing .ov-feats {
   display: flex;

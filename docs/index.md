@@ -87,8 +87,7 @@ page_features:
       <a href="/meet/" class="ov-btn ov-btn--ink">Deploy OpenVidu Meet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
     <div class="ov-pick__visual">
-      <img class="ov-pick__shot skip-gallery" src="/assets/images/meet/meetings/moderation/participants-panel-light.png#only-light" alt="An OpenVidu Meet consultation with the participants panel open" width="1920" height="1080" loading="lazy" />
-      <img class="ov-pick__shot skip-gallery" src="/assets/images/meet/meetings/moderation/participants-panel-dark.png#only-dark" alt="An OpenVidu Meet consultation with the participants panel open" width="1920" height="1080" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/telehealth.webp" alt="A telehealth consultation: the doctor and the patient on camera, a shared X-ray on screen and the session notes beside it" width="1920" height="994" loading="lazy" />
       <ul class="ov-feats" aria-label="Features used">
         <li class="ov-feat">Embed with one tag</li>
         <li class="ov-feat">Roles and permissions</li>
@@ -141,7 +140,8 @@ page_features:
       <a href="/docs/" class="ov-btn ov-btn--ink">Build with OpenVidu Platform<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
     <div class="ov-pick__visual">
-      <img class="ov-pick__shot skip-gallery" src="/assets/images/blog/2026/09/low-latency-whip-ingestion/publisher-and-viewer.webp" alt="A publisher and a viewer side by side, the stream arriving in under a second" width="1600" height="867" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/live-events-light.webp#only-light" alt="A live concert stream with a multi-camera director view, sub-second playback and the audience chat" width="1600" height="900" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/live-events-dark.webp#only-dark" alt="A live concert stream with a multi-camera director view, sub-second playback and the audience chat" width="1600" height="900" loading="lazy" />
       <ul class="ov-feats" aria-label="Features used">
         <li class="ov-feat">WHIP ingest</li>
         <li class="ov-feat">Sub-second latency</li>
@@ -158,7 +158,8 @@ page_features:
       <a href="/docs/" class="ov-btn ov-btn--ink">Build with OpenVidu Platform<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
     <div class="ov-pick__visual">
-      <img class="ov-pick__shot ov-pick__shot--wide skip-gallery" src="/assets/images/blog/2026/09/low-latency-whip-ingestion/obs-whip-and-viewer.webp" alt="OBS Studio publishing a camera over WHIP, and the same feed playing in a browser" width="1920" height="734" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/drones-light.webp#only-light" alt="A drone operations console: an aerial feed with flight telemetry, recording, and a list of camera sources" width="1600" height="900" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/drones-dark.webp#only-dark" alt="A drone operations console: an aerial feed with flight telemetry, recording, and a list of camera sources" width="1600" height="900" loading="lazy" />
       <ul class="ov-feats" aria-label="Features used">
         <li class="ov-feat">WHIP and RTMP ingest</li>
         <li class="ov-feat">Server-side pipelines</li>
@@ -175,7 +176,8 @@ page_features:
       <a href="/docs/" class="ov-btn ov-btn--ink">Build with OpenVidu Platform<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
     </div>
     <div class="ov-pick__visual">
-      <img class="ov-pick__shot skip-gallery" src="/assets/images/blog/2026/08/transcriber-summarizer-agent/web-app-screenshot.png" alt="A call with an AI agent writing the live transcript and a catch-up summary" width="1866" height="1011" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/voice-agent-light.webp#only-light" alt="A support call with an AI voice agent, the live transcript and a running summary in the side panel" width="1600" height="900" loading="lazy" />
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/voice-agent-dark.webp#only-dark" alt="A support call with an AI voice agent, the live transcript and a running summary in the side panel" width="1600" height="900" loading="lazy" />
       <ul class="ov-feats" aria-label="Features used">
         <li class="ov-feat">Live transcription</li>
         <li class="ov-feat">Voice agents</li>
