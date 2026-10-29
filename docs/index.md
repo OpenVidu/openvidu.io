@@ -240,8 +240,8 @@ page_features:
       <a class="ov-topo__card" href="/docs/self-hosting/local/">
         <span class="ov-tag ov-tag--dev">DEVELOPMENT</span>
         <span class="ov-topo__figure">
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture-light.svg#only-light" alt="OpenVidu Local: everything on your laptop, reachable across your LAN" width="520" height="360" loading="lazy" />
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-local-architecture-dark.svg#only-dark" alt="OpenVidu Local: everything on your laptop, reachable across your LAN" width="520" height="360" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-local-light.svg#only-light" alt="OpenVidu Local: everything on your laptop, reachable across your LAN" width="400" height="300" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-local-dark.svg#only-dark" alt="OpenVidu Local: everything on your laptop, reachable across your LAN" width="400" height="300" loading="lazy" />
         </span>
         <span class="ov-topo__name">Local</span>
         <span class="ov-topo__text">Docker Compose on your machine, with certificates for every device on your network.</span>
@@ -249,8 +249,8 @@ page_features:
       <a class="ov-topo__card" href="/docs/self-hosting/single-node/">
         <span class="ov-topo__tags"><span class="ov-tag ov-tag--community">COMMUNITY</span><span class="ov-tag ov-tag--pro">PRO</span></span>
         <span class="ov-topo__figure">
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture-light.svg#only-light" alt="OpenVidu Single Node: all services on one server" width="520" height="360" loading="lazy" />
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-single-node-architecture-dark.svg#only-dark" alt="OpenVidu Single Node: all services on one server" width="520" height="360" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-single-node-light.svg#only-light" alt="OpenVidu Single Node: all services on one server" width="400" height="300" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-single-node-dark.svg#only-dark" alt="OpenVidu Single Node: all services on one server" width="400" height="300" loading="lazy" />
         </span>
         <span class="ov-topo__name">Single Node</span>
         <span class="ov-topo__text">One server for medium user load. Free with COMMUNITY. PRO doubles the media performance on the same hardware.</span>
@@ -258,8 +258,8 @@ page_features:
       <a class="ov-topo__card" href="/docs/self-hosting/elastic/">
         <span class="ov-tag ov-tag--pro">PRO</span>
         <span class="ov-topo__figure">
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-elastic-architecture-light.svg#only-light" alt="OpenVidu Elastic: one master node and a pool of media nodes that grows with demand" width="720" height="420" loading="lazy" />
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-elastic-architecture-dark.svg#only-dark" alt="OpenVidu Elastic: one master node and a pool of media nodes that grows with demand" width="720" height="420" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-elastic-light.svg#only-light" alt="OpenVidu Elastic: one master node and a pool of media nodes that grows with demand" width="400" height="300" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-elastic-dark.svg#only-dark" alt="OpenVidu Elastic: one master node and a pool of media nodes that grows with demand" width="400" height="300" loading="lazy" />
         </span>
         <span class="ov-topo__name">Elastic</span>
         <span class="ov-topo__text">Media nodes come and go with demand. You pay for what runs.</span>
@@ -267,8 +267,8 @@ page_features:
       <a class="ov-topo__card" href="/docs/self-hosting/ha/">
         <span class="ov-tag ov-tag--pro">PRO</span>
         <span class="ov-topo__figure">
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture-light.svg#only-light" alt="OpenVidu High Availability: four replicated master nodes and a pool of media nodes" width="760" height="460" loading="lazy" />
-          <img class="skip-gallery" src="/assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture-dark.svg#only-dark" alt="OpenVidu High Availability: four replicated master nodes and a pool of media nodes" width="760" height="460" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-ha-light.svg#only-light" alt="OpenVidu High Availability: four replicated master nodes and a pool of media nodes" width="400" height="300" loading="lazy" />
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-ha-dark.svg#only-dark" alt="OpenVidu High Availability: four replicated master nodes and a pool of media nodes" width="400" height="300" loading="lazy" />
         </span>
         <span class="ov-topo__name">High Availability</span>
         <span class="ov-topo__text">Replicated master nodes. A failed server never stops a call.</span>
