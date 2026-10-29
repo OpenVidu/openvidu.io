@@ -1211,10 +1211,10 @@
    ground) look the same in both schemes; in the light scheme the chip blends into the card. */
 .ov-story__logo {
   display: inline-flex;
-  align-self: flex-start;
+  align-self: center;
   align-items: center;
-  height: 60px;
-  padding: 8px 14px;
+  min-height: 72px;
+  padding: 8px 16px;
   border-radius: var(--ov-radius-sm);
   background: #ffffff;
 }
@@ -1225,10 +1225,16 @@
   display: block;
   flex: none;
   width: auto;
-  height: 44px;
-  max-width: 170px;
+  height: 48px;
+  max-width: 220px;
   margin: 0;
   object-fit: contain;
+}
+
+/* Wordmarks with a squarer aspect (DynDevice) or inner padding of their own (Dicode) need
+   more height to read as large as the wide Novakid one. */
+.md-typeset .ov-landing .ov-story__logo--tall img {
+  height: 64px;
 }
 
 .ov-story__tag--neutral {
