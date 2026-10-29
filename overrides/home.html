@@ -7,12 +7,16 @@
 {# The hero is the page's single <h1>: the Markdown body carries no heading of its own, so
    Material's content.html must not inject the page title as a second one (see below). #}
 <section class="ov-hero ov-wrap md-typeset">
-  <img class="ov-hero__logo ov-logo--light skip-gallery" src="{{ 'assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png' | url }}" alt="OpenVidu" width="1093" height="216" fetchpriority="high" draggable="false" />
-  <img class="ov-hero__logo ov-logo--dark skip-gallery" src="{{ 'assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png' | url }}" alt="OpenVidu" width="1044" height="276" fetchpriority="high" draggable="false" />
-  <h1 class="ov-hero__title">Video calls inside your product. On&nbsp;your&nbsp;servers.</h1>
-  <p class="ov-hero__lead">
-    Self-hosted real-time video, on any cloud or your own hardware. Pick how much you want to build.
-  </p>
+  <div class="ov-hero__brand">
+    <img class="ov-hero__logo ov-logo--light skip-gallery" src="{{ 'assets/images/logos/openvidu_grey_bg_transp_cropped.png' | url }}" alt="OpenVidu" width="1087" height="565" fetchpriority="high" draggable="false" />
+    <img class="ov-hero__logo ov-logo--dark skip-gallery" src="{{ 'assets/images/logos/openvidu_white_bg_transp_cropped.png' | url }}" alt="OpenVidu" width="1078 561" height="" fetchpriority="high" draggable="false" />
+  </div>
+  <div class="ov-hero__copy">
+    <h1 class="ov-hero__title">Video calls inside your product. On&nbsp;your&nbsp;servers.</h1>
+    <p class="ov-hero__lead">
+      Self-hosted real-time video, on any cloud or your own hardware. Pick how much you want to build.
+    </p>
+  </div>
 </section>
 
 {% endblock %}

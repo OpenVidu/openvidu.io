@@ -167,24 +167,36 @@
   text-underline-offset: 4px;
 }
 
-/* Hero */
+/* Hero: the stacked logo on the left, vertically centred, the title and lead on the right.
+   Below 900px the logo goes above the copy and everything centres. */
 .ov-hero {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: clamp(280px, 34%, 440px) 1fr;
   align-items: center;
-  text-align: center;
-  gap: 22px;
-  padding-top: 72px;
+  gap: clamp(32px, 5vw, 72px);
+  padding-top: 64px;
   padding-bottom: 48px;
 }
 
-/* The OpenVidu wordmark above the title; extra.css swaps the light and dark files */
+.ov-hero__brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* extra.css swaps the light and dark files */
 .md-typeset .ov-hero__logo {
   display: block;
-  align-self: flex-start;
-  width: clamp(180px, 22vw, 260px);
+  width: 100%;
+  max-width: 420px;
   height: auto;
-  margin: 0 0 6px;
+  margin: 0;
+}
+
+.ov-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .md-typeset .ov-hero__title {
@@ -192,7 +204,7 @@
   font-family: var(--ov-display-font);
   font-optical-sizing: auto;
   font-weight: 800;
-  font-size: clamp(42px, 6vw, 86px) !important;
+  font-size: clamp(42px, 5.4vw, 78px) !important;
   line-height: 0.98;
   letter-spacing: -0.035em;
   max-width: 15ch;
@@ -205,6 +217,23 @@
   font-size: clamp(18px, 1.6vw, 21px);
   color: var(--ov-muted);
   text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .ov-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 28px;
+  }
+
+  .md-typeset .ov-hero__logo {
+    max-width: 240px;
+  }
+
+  .ov-hero__copy {
+    align-items: center;
+  }
 }
 
 /* The two doors */
