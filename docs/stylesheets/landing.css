@@ -28,15 +28,16 @@
 /* Inside a component the text sits where the component puts it, and links take the
    component's own colour; the .md-typeset prefix outranks Material's rules (extra.css loads
    after this sheet, so order alone would not). */
-.md-typeset .ov-landing :is(.ov-hero, .ov-door, .ov-pick, .ov-tier, .ov-price, .ov-closing__panel,
-    .ov-stat, .ov-shared__item, .ov-card, .ov-eyebrow, .ov-compare) :is(p, h1, h2, h3, pre, ul),
+.md-typeset .ov-landing :is(.ov-hero, .ov-door, .ov-pick, .ov-closing__panel, .ov-stat,
+    .ov-shared__item, .ov-card, .ov-eyebrow, .ov-compare, .ov-deploy__head, .ov-arch, .ov-stack,
+    .ov-topo, .ov-topo__card, .ov-plan, .ov-record__grid) :is(p, h1, h2, h3, pre, ul),
 .md-typeset .ov-landing :is(.ov-h2, .ov-hero__title, .ov-hero__lead, .ov-door__title, .ov-closing__title),
 .md-typeset .ov-hero :is(h1, p) {
   margin: 0;
 }
 
-.md-typeset .ov-landing :is(.ov-hero, .ov-door, .ov-pick, .ov-tier, .ov-price, .ov-closing__panel,
-    .ov-stat, .ov-card__media) a,
+.md-typeset .ov-landing :is(.ov-hero, .ov-door, .ov-pick, .ov-closing__panel, .ov-stat,
+    .ov-card__media, .ov-plan) a,
 .md-typeset .ov-hero a,
 .md-typeset .ov-landing a.ov-btn,
 .md-typeset .ov-landing a.ov-link {
@@ -362,37 +363,6 @@
   color: var(--ov-muted);
 }
 
-.ov-clouds {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 32px;
-  margin-top: 16px;
-  padding: 24px 28px;
-  border-radius: var(--ov-radius);
-  background: var(--ov-surface);
-  border: 1px solid var(--ov-border);
-}
-
-.ov-clouds__label {
-  font-weight: 600;
-  color: var(--ov-muted);
-}
-
-.ov-cloud {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--ov-display-font);
-  font-weight: 700;
-  font-size: 18px;
-}
-
-.ov-cloud svg {
-  flex: none;
-}
-
 /* What are you building? */
 .ov-cases {
   display: flex;
@@ -436,10 +406,11 @@
   color: var(--ov-ground);
 }
 
+/* The answer panel: the pitch on the left, a screenshot with the features it uses on the right */
 .ov-pick {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
-  gap: 32px;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(28px, 4vw, 56px);
   align-items: center;
   padding: clamp(28px, 4vw, 48px);
   border-radius: var(--ov-radius);
@@ -454,7 +425,8 @@
 .ov-pick__lead {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .ov-pick__badge {
@@ -471,7 +443,7 @@
 }
 
 .ov-pick--platform .ov-pick__badge {
-  background: #005f78;
+  background: var(--ov-platform-primary);
   color: #ffffff;
 }
 
@@ -484,25 +456,74 @@
   text-wrap: pretty;
 }
 
-.ov-pick__detail {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-}
-
 .ov-pick__why {
   color: var(--ov-muted);
 }
 
-/* From one server to a cluster that stays up */
-.ov-scale {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+.ov-pick__lead .ov-btn {
+  margin-top: 6px;
 }
 
-.ov-scale__head {
+.ov-pick__visual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.md-typeset .ov-landing .ov-pick__shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: var(--ov-radius-sm);
+  border: 1px solid var(--ov-border);
+  background: var(--ov-surface-2);
+}
+
+.md-typeset .ov-landing .ov-pick__shot--wide {
+  object-position: center;
+}
+
+/* The feature pills under the screenshot */
+.md-typeset .ov-landing .ov-feats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset .ov-landing .ov-feats li {
+  margin: 0;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--ov-surface-2);
+  color: var(--ov-text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.ov-pick--meet .ov-feats li {
+  background: rgba(var(--ov-meet-accent-rgb), 0.18);
+}
+
+.ov-pick--platform .ov-feats li {
+  background: rgba(var(--ov-platform-accent-rgb), 0.18);
+}
+
+/* Deploy where you already run: the provider cards, the stack diagram, the four deployments */
+.ov-deploy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.ov-deploy__head {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -510,37 +531,237 @@
   gap: 20px 48px;
 }
 
-.ov-scale__title {
-  max-width: 16ch;
+.md-typeset .ov-landing .ov-deploy__title {
+  max-width: 14ch;
 }
 
-.ov-scale__lead {
-  max-width: 400px;
+.ov-deploy__lead {
+  max-width: 460px;
   color: var(--ov-muted);
 }
 
-.ov-scale__grid {
+.ov-where {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 12px;
 }
 
-.ov-tier {
+.md-typeset .ov-landing a.ov-provider {
+  color: var(--ov-text);
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.md-typeset .ov-landing a.ov-provider:hover,
+.md-typeset .ov-landing a.ov-provider:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--ov-text);
+}
+
+.ov-provider__body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 26px;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Six across on the main landing: the icon sits above the name */
+.ov-where .ov-provider {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+}
+
+.ov-where .ov-provider__name {
+  font-size: 17px;
+}
+
+.ov-where .ov-provider__text {
+  font-size: 13px;
+}
+
+.ov-provider--aws .ov-provider__icon {
+  background: var(--ov-aws-orange);
+  color: #252f3e; /* the navy token turns orange in slate; the mark sits on orange here */
+}
+
+.ov-provider--azure .ov-provider__icon {
+  background: #0072c6;
+}
+
+.ov-provider--gcp .ov-provider__icon {
+  background: #34a853;
+}
+
+.ov-provider--do .ov-provider__icon {
+  background: #0080ff;
+}
+
+.ov-provider--oracle .ov-provider__icon {
+  background: #c74634;
+}
+
+.ov-provider--onprem .ov-provider__icon {
+  background: var(--ov-community);
+}
+
+/* The stack diagram beside its explanation */
+.ov-arch {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(28px, 4vw, 48px);
   border-radius: var(--ov-radius);
   background: var(--ov-surface);
   border: 1px solid var(--ov-border);
 }
 
-.ov-tier--ink {
+.ov-arch__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.md-typeset .ov-landing .ov-arch__title,
+.md-typeset .ov-landing .ov-topo__title {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.ov-arch__text {
+  color: var(--ov-muted);
+}
+
+.ov-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.ov-stack__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ov-stack__label {
+  flex: none;
+  width: 84px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ov-muted);
+}
+
+.ov-stack__app {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  min-height: 64px;
+  padding: 12px 20px;
+  border: 2px dashed var(--ov-text);
+  border-radius: var(--ov-radius-md);
+}
+
+.ov-stack__name {
+  font-family: var(--ov-display-font);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.ov-stack__sub {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.ov-stack__pick {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ov-stack__product {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 18px;
+  border-radius: var(--ov-radius-md);
+}
+
+.ov-stack__product--meet {
+  background: var(--ov-meet-accent);
+  color: var(--ov-meet-ink);
+}
+
+.ov-stack__product--platform {
+  background: var(--ov-platform-primary);
+  color: #ffffff;
+}
+
+.ov-stack__engine {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  min-height: 72px;
+  padding: 14px 20px;
+  border-radius: var(--ov-radius-md);
   background: var(--ov-ink);
-  border-color: var(--ov-ink);
   color: var(--ov-ink-fg);
 }
 
+.ov-stack__engine .ov-stack__name {
+  font-size: 20px;
+}
+
+.ov-stack__chips {
+  display: flex;
+  gap: 6px;
+}
+
+.ov-stack__note {
+  width: 100%;
+  font-size: 13px;
+  color: var(--ov-ink-muted);
+}
+
+.ov-stack__infra {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(88px, 100%), 1fr));
+  gap: 6px;
+}
+
+.ov-stack__host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 4px;
+  border-radius: var(--ov-radius-sm);
+  background: var(--ov-surface-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Edition tags */
 .ov-tag {
   align-self: flex-start;
   padding: 3px 10px;
@@ -559,128 +780,217 @@
   background: var(--ov-pro);
 }
 
-.ov-tier__nodes {
+.ov-tag--dev {
+  background: var(--ov-platform-primary);
+}
+
+/* The four deployments, each with its diagram */
+.ov-topo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.ov-topo__lead {
+  max-width: 640px;
+  margin: -8px 0 0;
+  color: var(--ov-muted);
+}
+
+.ov-topo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
+  gap: 14px;
+}
+
+.md-typeset .ov-landing a.ov-topo__card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  border-radius: var(--ov-radius);
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+  color: var(--ov-text);
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.md-typeset .ov-landing a.ov-topo__card:hover,
+.md-typeset .ov-landing a.ov-topo__card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--ov-text);
+}
+
+.ov-topo__tags {
   display: flex;
   gap: 6px;
-  height: 40px;
-  align-items: flex-end;
 }
 
-.ov-node {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: var(--ov-text);
+.ov-topo__figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  padding: 12px;
+  border-radius: var(--ov-radius-sm);
+  background: var(--ov-ground);
 }
 
-.ov-node--ring {
-  box-shadow: 0 0 0 4px var(--ov-meet-accent);
+.md-typeset .ov-landing .ov-topo__figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.ov-node--media {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  background: #005f78;
-}
-
-.ov-node--ghost {
-  box-sizing: border-box;
-  background: transparent;
-  border: 2px dashed #005f78;
-}
-
-.ov-node--master {
-  width: 18px;
-  height: 40px;
-  border-radius: 5px;
-  background: var(--ov-ink-fg);
-}
-
-.ov-node--cyan {
-  background: var(--ov-platform-accent);
-}
-
-[data-md-color-scheme="slate"] .ov-node--media {
-  background: var(--ov-platform-accent);
-}
-
-[data-md-color-scheme="slate"] .ov-node--ghost {
-  background: transparent;
-  border-color: var(--ov-platform-accent);
-}
-
-[data-md-color-scheme="slate"] .ov-tier--ink .ov-node--cyan {
-  background: #005f78;
-}
-
-.ov-tier__name {
+.ov-topo__name {
   font-family: var(--ov-display-font);
   font-weight: 700;
   font-size: 22px;
   line-height: 1.1;
 }
 
-.ov-tier__text {
+.ov-topo__text {
   color: var(--ov-muted);
   font-size: 15px;
 }
 
-.ov-tier--ink .ov-tier__text {
+/* Start free. Scale when you need to: the two editions */
+.ov-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 20px;
+}
+
+.ov-plan {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  padding: clamp(26px, 3.4vw, 40px);
+  border-radius: var(--ov-radius);
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+}
+
+.ov-plan--pro {
+  background: var(--ov-ink);
+  border-color: var(--ov-ink);
+  color: var(--ov-ink-fg);
+}
+
+.ov-plan__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.ov-plan__amount {
+  font-family: var(--ov-display-font);
+  font-weight: 800;
+  font-size: clamp(44px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.ov-plan__unit {
+  color: var(--ov-muted);
+}
+
+.ov-plan--pro .ov-plan__unit {
   color: var(--ov-ink-muted);
 }
 
-.ov-price {
+.md-typeset .ov-landing .ov-plan__list {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px 32px;
-  padding: 22px 28px;
-  border-radius: var(--ov-radius);
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset .ov-landing .ov-plan__list li {
+  position: relative;
+  margin: 0;
+  padding-left: 28px;
+}
+
+.md-typeset .ov-landing .ov-plan__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ov-meet-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%23062a15' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+
+.md-typeset .ov-landing .ov-plan--pro .ov-plan__list li::before {
+  background-color: var(--ov-yellow);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' fill='none' stroke='%231f1800' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.ov-plan .ov-btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+.md-typeset .ov-landing a.ov-btn--yellow {
   background: var(--ov-yellow);
   color: var(--ov-yellow-ink);
 }
 
-.ov-price__text {
-  font-size: 18px;
+.md-typeset .ov-landing .ov-plans__note {
+  margin: 20px 0 0;
+  font-size: 15px;
+  color: var(--ov-muted);
 }
 
-.ov-price__text strong {
-  font-family: var(--ov-display-font);
-  font-size: 22px;
-  font-weight: 700;
+.md-typeset .ov-landing .ov-plans__note a {
+  color: var(--ov-text);
+  font-weight: 600;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
 }
 
-/* Track record */
-.ov-proof {
+/* Track record: four figures, each a link */
+.ov-record__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-  gap: 24px 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border-radius: var(--ov-radius);
+  background: var(--ov-border);
+  border: 1px solid var(--ov-border);
 }
 
-.ov-stat {
+.md-typeset .ov-landing a.ov-stat {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
+  padding: 28px;
+  background: var(--ov-surface);
+  color: var(--ov-text);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.md-typeset .ov-landing a.ov-stat:hover,
+.md-typeset .ov-landing a.ov-stat:focus-visible {
+  background: var(--ov-surface-2);
 }
 
 .ov-stat__value {
   font-family: var(--ov-display-font);
   font-weight: 800;
-  font-size: 44px;
+  font-size: 48px;
   line-height: 1;
   letter-spacing: -0.02em;
-}
-
-.ov-stat__value--text {
-  font-size: 26px;
-  line-height: 1.2;
-}
-
-a.ov-stat__value:hover {
-  text-decoration: underline;
-  text-underline-offset: 6px;
 }
 
 .ov-stat__label {
@@ -688,9 +998,9 @@ a.ov-stat__value:hover {
   font-size: 15px;
 }
 
-/* Success stories: the customer-logo row, the big quote beside the track record (the mockup's
-   "Customer voice" slot) and the testimonial cards. The Meet and Platform landings reuse the logo
-   row and one card. The customer content is placeholder (see the comment in the pages). */
+/* Success stories: the customer-logo row and three testimonial cards. The Meet and Platform
+   landings reuse the logo row and one card. The customer content is placeholder (see the comment
+   in the pages). */
 .ov-stories {
   display: flex;
   flex-direction: column;
@@ -772,19 +1082,8 @@ a.ov-stat__value:hover {
   background: currentColor;
 }
 
-.ov-voice {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
-  gap: 40px;
-  align-items: end;
-  padding-top: 28px;
-}
 
-.ov-voice .ov-proof {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.md-typeset .ov-landing :is(figure.ov-quote, figure.ov-story) {
+.md-typeset .ov-landing figure.ov-story {
   display: flex;
   flex-direction: column;
   width: auto;
@@ -793,32 +1092,20 @@ a.ov-stat__value:hover {
   text-align: left;
 }
 
-.ov-quote {
-  gap: 22px;
-}
 
-.md-typeset .ov-landing :is(.ov-quote__text, .ov-story__text) {
+.md-typeset .ov-landing .ov-story__text {
   margin: 0;
   padding: 0;
   border: 0;
   color: var(--ov-text);
 }
 
-.md-typeset .ov-landing :is(.ov-quote__text, .ov-story__text) p {
+.md-typeset .ov-landing .ov-story__text p {
   margin: 0;
 }
 
-.md-typeset .ov-landing .ov-quote__text {
-  font-family: var(--ov-display-font);
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-size: clamp(26px, 2.8vw, 38px);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  text-wrap: pretty;
-}
 
-.md-typeset .ov-landing :is(.ov-quote__by, .ov-story__by) {
+.md-typeset .ov-landing .ov-story__by {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -830,7 +1117,6 @@ a.ov-stat__value:hover {
   text-align: left;
 }
 
-.ov-quote__by strong,
 .ov-story__who strong {
   color: var(--ov-text);
   font-weight: 600;
@@ -855,7 +1141,12 @@ a.ov-stat__value:hover {
 }
 
 .ov-avatar--platform {
-  background: #005f78;
+  background: var(--ov-platform-primary);
+  color: #ffffff;
+}
+
+.ov-avatar--pro {
+  background: var(--ov-pro);
   color: #ffffff;
 }
 
@@ -863,6 +1154,10 @@ a.ov-stat__value:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
   gap: 20px;
+}
+
+.ov-stories__grid--three {
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
 }
 
 .ov-story {
@@ -887,7 +1182,12 @@ a.ov-stat__value:hover {
 }
 
 .ov-story__tag--platform {
-  background: #005f78;
+  background: var(--ov-platform-primary);
+  color: #ffffff;
+}
+
+.ov-story__tag--pro {
+  background: var(--ov-pro);
   color: #ffffff;
 }
 
@@ -970,6 +1270,14 @@ a.ov-stat__value:hover {
   color: var(--ov-ink-fg);
 }
 
+/* The two-column panels stack before the phone widths */
+@media (max-width: 900px) {
+  .ov-pick,
+  .ov-arch {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* Reveal-on-scroll: the sections slide in like the rest of the site */
 .ov-landing [data-sal] {
   --sal-duration: 0.5s;
@@ -997,21 +1305,30 @@ a.ov-stat__value:hover {
     text-align: center;
   }
 
-  .ov-clouds {
-    justify-content: flex-start;
-    padding: 20px 22px;
-  }
-
   .ov-pick {
     gap: 20px;
   }
 
-  .ov-proof {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .ov-stat__value {
     font-size: 36px;
+  }
+
+  .ov-stack__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .ov-stack__label {
+    width: auto;
+  }
+
+  .ov-stack__pick {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ov-plan__amount {
+    font-size: 40px;
   }
 
   .ov-logos {
@@ -1032,14 +1349,7 @@ a.ov-stat__value:hover {
     font-size: 22px;
   }
 
-  .ov-voice {
-    gap: 32px;
-    padding-top: 12px;
-  }
 
-  .ov-stat:has(.ov-stat__value--text) {
-    grid-column: 1 / -1;
-  }
 }
 
 /* ==========================================================================

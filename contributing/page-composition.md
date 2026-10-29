@@ -116,7 +116,7 @@ page, copy its feature keys too.** These are the keys currently used:
   page (or the first child of a nav group).
 
 - `landingstyles`: loads [`landing.css`](../docs/stylesheets/landing.css), the landing
-  components (`.ov-*`: hero, doors, cards, tiers, use-case picker, code window, closing panel)
+  components (`.ov-*`: hero, doors, cards, use-case picker with screenshot and feature pills, provider cards, stack diagram, deployment cards, edition plans, track record, success stories, code window, closing panel)
   shared by the main landing, the Meet landing and the Platform landing. The page wraps its
   content in `<div class="ov-landing" markdown>`; the sheet's resets are scoped to the
   components, so prose between them keeps Material's spacing.
