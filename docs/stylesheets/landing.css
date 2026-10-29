@@ -998,9 +998,9 @@
   font-size: 15px;
 }
 
-/* Success stories: the customer-logo row and three testimonial cards. The Meet and Platform
-   landings reuse the logo row and one card. The customer content is placeholder (see the comment
-   in the pages). */
+/* Success stories: three testimonial cards, each with the customer's logo, quote, attribution
+   and a link to its blog post. The Meet and Platform landings reuse the card and the logo row
+   (their customer content is still placeholder, see the comment in those pages). */
 .ov-stories {
   display: flex;
   flex-direction: column;
@@ -1205,6 +1205,52 @@
   display: flex;
   flex-direction: column;
   line-height: 1.35;
+}
+
+/* The customer logo sits on a white chip, so the logos (opaque PNGs and an SVG with its own white
+   ground) look the same in both schemes; in the light scheme the chip blends into the card. */
+.ov-story__logo {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  height: 60px;
+  padding: 8px 14px;
+  border-radius: var(--ov-radius-sm);
+  background: #ffffff;
+}
+
+/* A fixed height, not max-height: an SVG with only a viewBox has no intrinsic size and
+   collapses to zero width when a flex item is sized by max-height alone. */
+.md-typeset .ov-landing .ov-story__logo img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 44px;
+  max-width: 170px;
+  margin: 0;
+  object-fit: contain;
+}
+
+.ov-story__tag--neutral {
+  background: var(--ov-surface-2);
+  color: var(--ov-text);
+}
+
+.md-typeset .ov-landing .ov-story__by {
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.md-typeset .ov-landing a.ov-story__link {
+  margin-left: auto;
+  color: var(--ov-text);
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.md-typeset .ov-landing a.ov-story__link:hover {
+  text-decoration: underline;
 }
 
 /* The product landings: the logo row right under the hero, one quote card further down */
