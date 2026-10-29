@@ -178,6 +178,14 @@
   padding-bottom: 48px;
 }
 
+/* The OpenVidu wordmark above the title; extra.css swaps the light and dark files */
+.md-typeset .ov-hero__logo {
+  display: block;
+  width: clamp(180px, 22vw, 260px);
+  height: auto;
+  margin: 0 0 6px;
+}
+
 .md-typeset .ov-hero__title {
   margin: 0;
   font-family: var(--ov-display-font);
