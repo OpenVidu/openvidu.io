@@ -55,7 +55,7 @@
   --ov-radius-md: 20px;
   --ov-radius-sm: 14px;
   --ov-radius-xs: 8px;
-  --ov-display-font: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+  --ov-display-font: "Unbounded", "Instrument Sans", system-ui, sans-serif;
 
   --ov-btn-primary-hover: #2a3539;
   --ov-accent: var(--ov-platform-primary);

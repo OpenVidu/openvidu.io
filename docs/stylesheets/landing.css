@@ -167,6 +167,22 @@
   text-underline-offset: 4px;
 }
 
+/* Review aid: which display font this build uses. Remove before publishing. */
+.ov-fontlabel {
+  margin: 0;
+  padding-top: 18px;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ov-muted);
+}
+
+.ov-fontlabel strong {
+  font-family: var(--ov-display-font);
+  font-weight: 700;
+  color: var(--ov-text);
+}
+
 /* Hero: the stacked logo on the left, vertically centred, the title and lead on the right.
    Below 900px the logo goes above the copy and everything centres. */
 .ov-hero {
