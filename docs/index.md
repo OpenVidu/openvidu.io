@@ -49,7 +49,7 @@ page_features:
 <pre class="ov-code__pre"><span class="ov-code__kw">import</span> { Room } <span class="ov-code__kw">from</span> <span class="ov-code__str">"livekit-client"</span>;
 
 <span class="ov-code__kw">const</span> room = <span class="ov-code__kw">new</span> Room();
-<span class="ov-code__kw">await</span> room.connect(<span class="ov-code__str">"wss://your-openvidu-deployment"</span>, token);
+<span class="ov-code__kw">await</span> room.connect(<span class="ov-code__str">"wss://your-deployment"</span>, token);
 <span class="ov-code__kw">await</span> room.localParticipant
   .enableCameraAndMicrophone();</pre>
       </div>
@@ -321,7 +321,7 @@ page_features:
   <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams that already picked a door.</h2>
   <div class="ov-stories__grid ov-stories__grid--three">
     <figure class="ov-story">
-      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="382" height="148"></span>
+      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
       <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
       <blockquote class="ov-story__text"><p>“With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”</p></blockquote>
       <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Matteo Resconi</strong><span>IT &amp; Development Area Manager, Mega Italia Media</span></span><a class="ov-story__link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a></figcaption>

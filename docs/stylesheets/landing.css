@@ -181,6 +181,7 @@
 /* The OpenVidu wordmark above the title; extra.css swaps the light and dark files */
 .md-typeset .ov-hero__logo {
   display: block;
+  align-self: flex-start;
   width: clamp(180px, 22vw, 260px);
   height: auto;
   margin: 0 0 6px;
@@ -317,7 +318,9 @@
 
 .ov-landing .ov-code__pre {
   padding: 18px 20px 28px;
-  overflow-x: auto;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   background: transparent;
   font-family: var(--md-code-font-family);
   font-size: 14px;
