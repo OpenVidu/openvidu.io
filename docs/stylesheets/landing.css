@@ -171,9 +171,9 @@
    Below 900px the logo goes above the copy and everything centres. */
 .ov-hero {
   display: grid;
-  grid-template-columns: clamp(280px, 34%, 440px) 1fr;
+  grid-template-columns: 1fr 1fr; /* the same two columns as the doors below */
   align-items: center;
-  gap: clamp(32px, 5vw, 72px);
+  gap: 20px;
   padding-top: 64px;
   padding-bottom: 48px;
 }
@@ -188,7 +188,7 @@
 .md-typeset .ov-hero__logo {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   height: auto;
   margin: 0;
 }
@@ -204,10 +204,10 @@
   font-family: var(--ov-display-font);
   font-optical-sizing: auto;
   font-weight: 800;
-  font-size: clamp(42px, 5.4vw, 78px) !important;
+  font-size: clamp(42px, 5vw, 72px) !important;
   line-height: 0.98;
   letter-spacing: -0.035em;
-  max-width: 15ch;
+  max-width: 14ch;
   text-wrap: balance;
   color: var(--ov-text);
 }
