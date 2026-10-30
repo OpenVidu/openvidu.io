@@ -2,7 +2,7 @@
 
 > **Info**
 >
-> OpenVidu Single Node Pro is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](/account/) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Single Node Pro is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section contains the instructions of how to deploy a production-ready OpenVidu Single Node PRO deployment in Google Cloud Platform. Deployed services are the same as the [On Premises Single Node installation](https://openvidu.io/3.5/docs/self-hosting/single-node-pro/on-premises/install/index.md) but they will be resources in Google Cloud Platform and you can automate the process in the Google Cloud Console.
 
