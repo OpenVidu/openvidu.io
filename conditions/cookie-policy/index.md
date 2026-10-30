@@ -21,7 +21,7 @@ Nothing optional is used until you choose it in the cookie consent banner. You c
 
 The site also keeps display preferences, such as the color scheme you pick, in your browser's local storage; they are not sent anywhere.
 
-The durations of the Google Analytics cookies are Google's defaults, as described in [Google's documentation](https://support.google.com/analytics/answer/11397207).
+The durations of the Google Analytics cookies are Google's defaults, as described in [Google's documentation](https://support.google.com/analytics/answer/11397207) .
 
 The GitHub badges in the page header and on the home page are images served from openvidu.io itself, so viewing them sends no request to GitHub.
 

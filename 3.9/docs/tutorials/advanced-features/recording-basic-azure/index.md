@@ -2,7 +2,7 @@
 
 [Source code](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.9.0/advanced-features/openvidu-recording-basic-node-azure)
 
-This tutorial is a simple video-call application, built upon [Node.js server](https://openvidu.io/3.9/docs/tutorials/application-server/node/index.md) and [JavaScript client](https://openvidu.io/3.9/docs/tutorials/application-client/javascript/index.md) tutorials, and extends them by adding recording capabilities:
+This tutorial is a simple video-call application, built upon [Node.js server](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md) and [JavaScript client](https://openvidu.io/latest/docs/tutorials/application-client/javascript/index.md) tutorials, and extends them by adding recording capabilities:
 
 - Start and stop recording a room.
 - List all recordings in a room.
@@ -59,7 +59,7 @@ For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob 
 
 **Deploy OpenVidu in Azure**
 
-1. Deploy OpenVidu Single Node in Azure following these instructions [to deploy in Azure](https://openvidu.io/3.9/docs/self-hosting/single-node/azure/install/index.md).
+1. Deploy OpenVidu Single Node in Azure following these instructions [to deploy in Azure](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/index.md).
 
    > **CPUs to be able to record**
    >
@@ -67,7 +67,7 @@ For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob 
 
 1. Point the tutorial to your Azure deployment:
 
-   - Modify file [`.env`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-basic-node-azure/.env) to update the LiveKit and Azure configuration to the values of your Azure deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Check deployment outputs in Azure Key Vault](https://openvidu.io/3.9/docs/self-hosting/single-node/azure/install/#check-deployment-outputs-in-azure-key-vault) section. You can get the values of `AZURE_ACCOUNT_NAME`, `AZURE_ACCOUNT_KEY` and `AZURE_CONTAINER_NAME` from the `openvidu.env` file of your deployment (see [Azure SSH Outputs](https://openvidu.io/3.9/docs/self-hosting/single-node/azure/install/#check-deployment-outputs-in-the-instance)).
+   - Modify file [`.env`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-basic-node-azure/.env) to update the LiveKit and Azure configuration to the values of your Azure deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Check deployment outputs in Azure Key Vault](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/#check-deployment-outputs-in-azure-key-vault) section. You can get the values of `AZURE_ACCOUNT_NAME`, `AZURE_ACCOUNT_KEY` and `AZURE_CONTAINER_NAME` from the `openvidu.env` file of your deployment (see [Azure SSH Outputs](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/#check-deployment-outputs-in-the-instance)).
    - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L3) to update the value of `LIVEKIT_URL` to `wss://your.azure.deployment.domain`
 
 > **Warning**
@@ -76,7 +76,7 @@ For OpenVidu deployments in Azure, all recordings are stored in an **Azure Blob 
 
 > **Configure Webhooks**
 >
-> All [application servers](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
+> All [application servers](https://openvidu.io/latest/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
@@ -112,7 +112,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 
 ## Understanding the code
 
@@ -132,7 +132,7 @@ ______________________________________________________________________
 
 ### Backend
 
-The server application extends the [Node.js server tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/node/index.md) by adding the following REST API endpoints:
+The server application extends the [Node.js server tutorial](https://openvidu.io/latest/docs/tutorials/application-server/node/index.md) by adding the following REST API endpoints:
 
 - **`POST /recordings/start`**: Starts the recording of a room.
 - **`POST /recordings/stop`**: Stops the recording of a room.
@@ -175,7 +175,7 @@ There are two new environment variables:
 
 Besides, the `index.js` file configures the server to serve static files from the `public` directory.
 
-It also initializes the `EgressClient`, which will help interacting with [Egress API](https://openvidu.io/3.9/docs/reference/egress/index.md) to manage recordings, and the `AzureBlobStorageService`, which will help interacting with the Blob Container:
+It also initializes the `EgressClient`, which will help interacting with [Egress API](https://openvidu.io/latest/docs/reference/egress/index.md) to manage recordings, and the `AzureBlobStorageService`, which will help interacting with the Blob Container:
 
 [index.js](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-basic-node-azure/src/index.js#L33-L38)
 
@@ -271,7 +271,7 @@ app.post("/recordings/start", async (req, res) => {
 1. If there is already an active recording for the room, the server returns a `409 Conflict` status code.
 1. Use the `EncodedFileOutput` class to export the recording to an external file.
 1. Define the file type as `MP4`.
-1. Define the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](https://openvidu.io/3.9/docs/reference/egress/#filenames).
+1. Define the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](https://openvidu.io/latest/docs/reference/egress/#filenames).
 1. Start a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with the `roomName` and `fileOutput` as parameters.
 1. Extract the recording name from the `fileResults` array.
 1. Return the recording metadata to the client.
@@ -300,7 +300,7 @@ This endpoint does the following:
    };
    ```
 
-1. Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](https://openvidu.io/3.9/docs/reference/egress/#filenames).
+1. Initializes an `EncodedFileOutput` object to export the recording to an external file. It sets the file type as `MP4` and defines the file path where the recording will be stored. The `{room_name}`, `{time}` and `{room_id}` templates will be replaced by the actual room name, timestamp and room ID, respectively. Check out all available [filename templates](https://openvidu.io/latest/docs/reference/egress/#filenames).
 
 1. Starts a `RoomCompositeEgress` to record all participants in the room by calling the `startRoomCompositeEgress` method of the `EgressClient` with `roomName` and `fileOutput` as parameters.
 
@@ -669,7 +669,7 @@ ______________________________________________________________________
 
 ### Frontend
 
-The client application extends the [JavaScript client tutorial](https://openvidu.io/3.9/docs/tutorials/application-client/javascript/index.md) by adding recording features, introducing new buttons to facilitate actions such as starting and stopping recording a room, as well as listing, playing and deleting recordings. When these newly introduced buttons are interacted with, the client triggers requests to the REST API endpoints of the server application.
+The client application extends the [JavaScript client tutorial](https://openvidu.io/latest/docs/tutorials/application-client/javascript/index.md) by adding recording features, introducing new buttons to facilitate actions such as starting and stopping recording a room, as well as listing, playing and deleting recordings. When these newly introduced buttons are interacted with, the client triggers requests to the REST API endpoints of the server application.
 
 In order to update the user interface of all participants in the room according to the recording status, the client application subscribes to the `RoomEvent.RecordingStatusChanged` event, which is triggered when the room changes from being recorded to not being recorded, and vice versa. When this event is triggered, the `updateRecordingInfo` function is called to update the recording information of the room displayed on the screen. This function is also called when a participant joins the room, using the current value of the `room.recording` property at that moment. This is done in the `joinRoom` function of the `app.js` file:
 
@@ -677,7 +677,7 @@ In order to update the user interface of all participants in the room according 
 >
 > By using the `RoomEvent.RecordingStatusChanged` event, we can only detect when the recording has started or stopped, but not other states like `starting`, `stopping` or `failed`. Additionally, when the recording stops, the event is not triggered until the recorder participant leaves the room, causing a delay of 20 seconds approximately between the stop and when participants are notified.
 >
-> To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](https://openvidu.io/3.9/docs/tutorials/advanced-features/recording-advanced-azure/index.md), where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
+> To overcome these limitations, you can follow the steps described in the [advanced recording tutorial](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-advanced-azure/index.md), where we implement a custom notification system. This system informs participants about the recording status by listening to webhook events and updating room metadata.
 
 [app.js](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-basic-node-azure/public/app.js#L20-L87)
 
@@ -801,7 +801,7 @@ The `showRecordingList` function creates a new `div` element for each recording 
 >
 > When a recording is deleted, it is removed from the recording list, but only for the user who initiated the deletion. Other users will continue to see the recording in their list until it is refreshed.
 >
-> In the [advanced recording tutorial](https://openvidu.io/3.9/docs/tutorials/advanced-features/recording-advanced-azure/index.md), we show how to implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
+> In the [advanced recording tutorial](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-advanced-azure/index.md), we show how to implement a custom notification system that alerts all participants of a recording's deletion by sending data messages.
 
 When the user clicks the play button, the `displayRecording` function is called to play the recording. This function opens a dialog window with an embedded video element and sets the source of the video to the [get recording endpoint](#get-recording) of the server application:
 
