@@ -232,7 +232,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.7.0`
 
 > **Info**
 >
-> Sherpa live captions provider is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](/account/) to get your license key. There's a 15-day free trial waiting for you!
+> Sherpa live captions provider is part of **OpenVidu PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ##### Sherpa vs Vosk
 

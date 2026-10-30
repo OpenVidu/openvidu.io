@@ -9,7 +9,7 @@ There are two options:
 
 > **Info**
 >
-> All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](/docs/self-hosting/how-to-guides/customize-meet-base-path/) how-to guide for more details.
+> All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](https://openvidu.io/docs/self-hosting/how-to-guides/customize-meet-base-path/) how-to guide for more details.
 
 ______________________________________________________________________
 
