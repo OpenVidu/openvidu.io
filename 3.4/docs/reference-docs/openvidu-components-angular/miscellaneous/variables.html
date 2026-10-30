@@ -1,0 +1,474 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>OpenVidu Components Angular Documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">OpenVidu Components Angular Documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#directives" title="projects/openvidu-components-angular/src/lib/directives/api/api.directive.module.ts" ><b>directives</b>&nbsp;&nbsp;&nbsp;(projects/.../api.directive.module.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LAYOUT_CONSTANTS" title="projects/openvidu-components-angular/src/lib/models/layout.model.ts" ><b>LAYOUT_CONSTANTS</b>&nbsp;&nbsp;&nbsp;(projects/.../layout.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SESSION_KEYS" title="projects/openvidu-components-angular/src/lib/models/storage.model.ts" ><b>SESSION_KEYS</b>&nbsp;&nbsp;&nbsp;(projects/.../storage.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SHARED_PERSISTENT_KEYS" title="projects/openvidu-components-angular/src/lib/models/storage.model.ts" ><b>SHARED_PERSISTENT_KEYS</b>&nbsp;&nbsp;&nbsp;(projects/.../storage.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STORAGE_PREFIX" title="projects/openvidu-components-angular/src/lib/models/storage.model.ts" ><b>STORAGE_PREFIX</b>&nbsp;&nbsp;&nbsp;(projects/.../storage.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TAB_MANAGEMENT_KEYS" title="projects/openvidu-components-angular/src/lib/models/storage.model.ts" ><b>TAB_MANAGEMENT_KEYS</b>&nbsp;&nbsp;&nbsp;(projects/.../storage.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TAB_SPECIFIC_KEYS" title="projects/openvidu-components-angular/src/lib/models/storage.model.ts" ><b>TAB_SPECIFIC_KEYS</b>&nbsp;&nbsp;&nbsp;(projects/.../storage.model.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>projects/openvidu-components-angular/src/lib/directives/api/api.directive.module.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="directives"></a>
+                    <span class="name">
+                        <span ><b>directives</b></span>
+                        <a href="#directives"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+	LivekitUrlDirective,
+	TokenDirective,
+	TokenErrorDirective,
+	MinimalDirective,
+	LangDirective,
+	LangOptionsDirective,
+	// CaptionsLangOptionsDirective,
+	// CaptionsLangDirective,
+	PrejoinDirective,
+	PrejoinDisplayParticipantName,
+	VideoEnabledDirective,
+	RecordingActivityReadOnlyDirective,
+	RecordingActivityShowControlsDirective,
+	AudioEnabledDirective,
+	ShowDisconnectionDialogDirective,
+	RecordingStreamBaseUrlDirective,
+	ToolbarCameraButtonDirective,
+	ToolbarMicrophoneButtonDirective,
+	ToolbarScreenshareButtonDirective,
+	ToolbarFullscreenButtonDirective,
+	ToolbarBackgroundEffectsButtonDirective,
+	// ToolbarCaptionsButtonDirective,
+	ToolbarLeaveButtonDirective,
+	ToolbarRecordingButtonDirective,
+	ToolbarBroadcastingButtonDirective,
+	ToolbarParticipantsPanelButtonDirective,
+	ToolbarChatPanelButtonDirective,
+	ToolbarActivitiesPanelButtonDirective,
+	ToolbarDisplayRoomNameDirective,
+	ToolbarDisplayLogoDirective,
+	ToolbarSettingsButtonDirective,
+	ToolbarAdditionalButtonsPossitionDirective,
+	ToolbarViewRecordingsButtonDirective,
+	StreamDisplayParticipantNameDirective,
+	StreamDisplayAudioDetectionDirective,
+	StreamVideoControlsDirective,
+	FallbackLogoDirective,
+	ToolbarBrandingLogoDirective,
+	ParticipantPanelItemMuteButtonDirective,
+	ParticipantNameDirective,
+	ActivitiesPanelRecordingActivityDirective,
+	ActivitiesPanelBroadcastingActivityDirective,
+	AdminDashboardRecordingsListDirective,
+	AdminLoginTitleDirective,
+	AdminLoginErrorDirective,
+	AdminDashboardTitleDirective,
+	LayoutRemoteParticipantsDirective,
+	StartStopRecordingButtonsDirective,
+	RecordingActivityViewRecordingsButtonDirective,
+	RecordingActivityShowRecordingsListDirective,
+	ToolbarRoomNameDirective,
+	ShowThemeSelectorDirective
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>projects/openvidu-components-angular/src/lib/models/layout.model.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LAYOUT_CONSTANTS"></a>
+                    <span class="name">
+                        <span ><b>LAYOUT_CONSTANTS</b></span>
+                        <a href="#LAYOUT_CONSTANTS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+	DEFAULT_VIDEO_WIDTH: 640,
+	DEFAULT_VIDEO_HEIGHT: 480,
+	DEFAULT_MAX_RATIO: 3 / 2,
+	DEFAULT_MIN_RATIO: 9 / 16,
+	DEFAULT_BIG_PERCENTAGE: 0.8,
+	UPDATE_TIMEOUT: 50,
+	ANIMATION_DURATION: &#x27;0.1s&#x27;,
+	ANIMATION_EASING: &#x27;linear&#x27;
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Layout configuration constants</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>projects/openvidu-components-angular/src/lib/models/storage.model.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SESSION_KEYS"></a>
+                    <span class="name">
+                        <span ><b>SESSION_KEYS</b></span>
+                        <a href="#SESSION_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StorageKeys[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[StorageKeys.TAB_ID]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SHARED_PERSISTENT_KEYS"></a>
+                    <span class="name">
+                        <span ><b>SHARED_PERSISTENT_KEYS</b></span>
+                        <a href="#SHARED_PERSISTENT_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StorageKeys[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+	StorageKeys.VIDEO_DEVICE,
+	StorageKeys.AUDIO_DEVICE,
+	StorageKeys.LANG,
+	StorageKeys.CAPTION_LANG,
+	StorageKeys.BACKGROUND
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STORAGE_PREFIX"></a>
+                    <span class="name">
+                        <span ><b>STORAGE_PREFIX</b></span>
+                        <a href="#STORAGE_PREFIX"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;ovComponents-&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TAB_MANAGEMENT_KEYS"></a>
+                    <span class="name">
+                        <span ><b>TAB_MANAGEMENT_KEYS</b></span>
+                        <a href="#TAB_MANAGEMENT_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StorageKeys[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[StorageKeys.TAB_ID, StorageKeys.ACTIVE_TABS]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TAB_SPECIFIC_KEYS"></a>
+                    <span class="name">
+                        <span ><b>TAB_SPECIFIC_KEYS</b></span>
+                        <a href="#TAB_SPECIFIC_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>StorageKeys[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[StorageKeys.PARTICIPANT_NAME, StorageKeys.MICROPHONE_ENABLED, StorageKeys.CAMERA_ENABLED]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
