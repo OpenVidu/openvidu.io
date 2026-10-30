@@ -281,6 +281,32 @@ Comments in these templates use the Jinja form (`{# … #}`): an HTML comment is
 built page. A partial copied from upstream opens with a Jinja comment naming the file it came
 from, so it can be re-diffed on a theme bump.
 
+### Announcement bar
+
+The `announce` block in `main.html` carries the bar shown above the header on every page. Each
+announcement names the UTC day it ends on, so it disappears without another edit:
+
+```jinja
+{% block announce -%}
+{%- set announce_until = "YYYY-MM-DD" -%}
+{%- if build_date_utc.strftime("%Y-%m-%d") < announce_until -%}
+<div id="announce">…</div>
+<script>
+  if (Date.now() >= Date.parse("{{ announce_until }}")) {
+    document.querySelector("[data-md-component=announce]").hidden = true;
+  }
+</script>
+{%- endif -%}
+{%- endblock %}
+```
+
+- A build on or after the day leaves the bar out; the script hides it on pages built before,
+  which keep it baked in for as long as their folder stays published.
+- Keep every whitespace trim (`-`): Material renders the bar whenever the block yields any text,
+  so a stray newline leaves an empty bar with a close button.
+- `ovweb lint` warns when the bar has no `announce_until` or its day has passed, and fails on a
+  date that is not `YYYY-MM-DD`. Delete an expired announcement from the block.
+
 ## Stylesheets
 
 Every page loads, in this order, [`colors.css`](../docs/stylesheets/colors.css) (the `--ov-*` brand
