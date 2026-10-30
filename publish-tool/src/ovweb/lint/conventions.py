@@ -9,7 +9,8 @@ the key must sit on the page.
 from __future__ import annotations
 
 import re
-from datetime import date, datetime
+from contextlib import suppress
+from datetime import UTC, date, datetime
 
 from ..sources import sources_of
 from .corpus import Corpus, Source
@@ -190,6 +191,73 @@ def check_font_loading(corpus: Corpus) -> list[Finding]:
                 )
             )
     return findings
+
+
+JINJA_COMMENT = re.compile(r"\{#.*?#\}", re.DOTALL)
+ANNOUNCE_BLOCK = re.compile(
+    r"\{%-?\s*block\s+announce\s*-?%\}(?P<body>.*?)\{%-?\s*endblock\b", re.DOTALL
+)
+ANNOUNCE_UNTIL = re.compile(r"""\{%-?\s*set\s+announce_until\s*=\s*["'](?P<day>[^"']*)["']""")
+
+
+def check_announce_expiry(corpus: Corpus) -> list[Finding]:
+    """The announcement bar in main.html names the UTC day it ends on, and that day is ahead.
+
+    Pages built before the day keep the bar in their HTML and hide it with a script, so the bar
+    goes away on time without a publish; an expired one is dead code left to delete.
+    """
+    path = "overrides/main.html"
+    text = corpus.overrides.get(path)
+    if text is None:
+        return []
+    text = JINJA_COMMENT.sub(lambda match: re.sub(r"[^\n]", " ", match.group(0)), text)
+    block = ANNOUNCE_BLOCK.search(text)
+    if block is None or not block.group("body").strip():
+        return []
+    until = ANNOUNCE_UNTIL.search(block.group("body"))
+    if until is None:
+        return [
+            Finding(
+                "announce-expiry",
+                WARN,
+                path,
+                text.count("\n", 0, block.start()) + 1,
+                "the announcement bar has no end date",
+                "set `announce_until` and guard the bar with it, as contributing/"
+                "page-composition.md shows; otherwise every page published with it keeps the bar",
+            )
+        ]
+    line = text.count("\n", 0, block.start("body") + until.start()) + 1
+    day = until.group("day")
+    ends = None
+    # fromisoformat also takes 20261104 and week dates, which the script cannot parse.
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+        with suppress(ValueError):
+            ends = date.fromisoformat(day)
+    if ends is None:
+        return [
+            Finding(
+                "announce-expiry",
+                ERROR,
+                path,
+                line,
+                f'`announce_until` "{day}" is not a YYYY-MM-DD date',
+                "the build compares it as text and the script parses it as a UTC day; any other "
+                "form never ends the bar",
+            )
+        ]
+    if ends <= datetime.now(UTC).date():
+        return [
+            Finding(
+                "announce-expiry",
+                WARN,
+                path,
+                line,
+                f"the announcement bar ended on {day}",
+                "visitors no longer see it: remove the announcement from the `announce` block",
+            )
+        ]
+    return []
 
 
 IMG_TAG = re.compile(r"<img\b[^>]*>")

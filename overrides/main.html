@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 
-{% block announce %}
+{% block announce -%}
+{#- The bar ends on `announce_until`, a UTC day: a build on or after it leaves the bar out, and
+    the script hides it on pages built before, which keep it for as long as they stay published.
+    Material shows the bar whenever this block yields any text, so the whitespace trims are
+    load-bearing. -#}
+{%- set announce_until = "2026-11-04" -%}
+{%- if build_date_utc.strftime("%Y-%m-%d") < announce_until -%}
 <div id="announce">
   New: the <a href="/blog/2026/10/07/openvidu-agent-plugin/">OpenVidu Agent Plugin</a>
   brings the official OpenVidu documentation into your AI coding agent.
 </div>
-{% endblock %}
+<script>
+  if (Date.now() >= Date.parse("{{ announce_until }}")) {
+    document.querySelector("[data-md-component=announce]").hidden = true;
+  }
+</script>
+{%- endif -%}
+{%- endblock %}
 
 {% block site_meta %}
 {{ super() }}
