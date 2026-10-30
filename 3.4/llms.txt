@@ -4,6 +4,8 @@
 
 Self-hosted videoconference solution and SDK
 
+> The pages that are not tied to a version — pricing, support, the product comparisons and the blog — are listed in https://openvidu.io/llms.txt.
+
 ## OpenVidu Meet
 
 - [Getting started with OpenVidu Meet](https://openvidu.io/3.4/meet/getting-started/index.md): First steps with OpenVidu Meet: run it locally, log in, create a room, hold and record a meeting, and see how to embed Meet in your app.
@@ -210,4 +212,3 @@ Self-hosted videoconference solution and SDK
 - [OpenVidu Elastic installation on-premises with DNS Load Balancing](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/install-dlb/index.md): Learn how to deploy OpenVidu Elastic on-premises with DNS Load Balancing
 - [OpenVidu Elastic installation on-premises with Network Load Balancer](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/install-nlb/index.md): Learn how to deploy OpenVidu Elastic on-premises with Network Load Balancer
 - [Upgrade OpenVidu High Availability - On premises](https://openvidu.io/3.4/docs/self-hosting/ha/on-premises/upgrade/index.md): How to upgrade OpenVidu High Availability on premises deployments
-
