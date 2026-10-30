@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 210" width="210" height="210">
+  <!--
+    6 solid-color diamonds arranged in a heart/chevron:
+
+    Top row 3 diamonds, each half-width=35, half-height=50:
+      D1 center (35,  50): top=(35,0),  right=(70,50),  bottom=(35,100), left=(0,50)
+      D2 center (105, 50): top=(105,0), right=(140,50), bottom=(105,100),left=(70,50)
+      D3 center (175, 50): top=(175,0), right=(210,50), bottom=(175,100),left=(140,50)
+
+    Middle row 2 diamonds (nestled in the valleys between top row):
+      D4 center (70,  100): top=(70,50),  right=(105,100), bottom=(70,150), left=(35,100)
+      D5 center (140, 100): top=(140,50), right=(175,100), bottom=(140,150),left=(105,100)
+
+    Bottom 1 diamond (the bottom peak):
+      D6 center (105, 150): top=(105,100),right=(140,150),bottom=(105,200),left=(70,150)
+  -->
+
+  <!-- D1: far left - darkest teal -->
+  <polygon points="35,0 70,50 35,100 0,50" fill="#1a7a68"/>
+
+  <!-- D2: middle - medium teal -->
+  <polygon points="105,0 140,50 105,100 70,50" fill="#3aaa96"/>
+
+  <!-- D3: right - lightest teal -->
+  <polygon points="175,0 210,50 175,100 140,50" fill="#66cdb8"/>
+
+  <!-- D4: middle-left lower - medium dark teal -->
+  <polygon points="70,50 105,100 70,150 35,100" fill="#2a9484"/>
+
+  <!-- D5: middle-right lower - medium light teal -->
+  <polygon points="140,50 175,100 140,150 105,100" fill="#52bfac"/>
+
+  <!-- D6: bottom peak - medium teal -->
+  <polygon points="105,100 140,150 105,200 70,150" fill="#3daf9c"/>
+
+</svg>
