@@ -116,7 +116,7 @@ backup branch and no force-push recovery path to remember. The workflow runs `ov
 afterwards to assert the published layout.
 
 **Publishing also redeploys the docs MCP server.** The `deploy-docs-mcp` job that follows the
-publish tells [`openvidu-docs-mcp`](https://github.com/OpenVidu/openvidu-docs-mcp) to rebuild its
+publish tells `OpenVidu/openvidu-docs-mcp` to rebuild its
 index from the `gh-pages` commit just pushed — without waiting for GitHub Pages to serve it —
 waits for that deploy and fails if it fails. The site is published either way: a red
 `deploy-docs-mcp` means agents still get the previous documentation, and the job's log

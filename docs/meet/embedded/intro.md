@@ -60,3 +60,9 @@ __Integrate OpenVidu Meet into your own UI and business logic__{ .ov-meet-commer
 <h2 class="meetplatform-slogan">
 Where to start? We recommend following the <a href="../step-by-step-guide"><strong>step by step guide</strong></a> or exploring one of our <a href="../tutorials"><strong>tutorials</strong></a>.
 </h2>
+
+<div class="centered-section" markdown>
+
+Building with an AI coding agent? Give it the OpenVidu Meet documentation for your own deployment with the [OpenVidu Agent Plugin](building-with-ai.md).
+
+</div>

@@ -228,7 +228,8 @@ There is not enough free disk space in the node hosting the egress to start a ne
 
 **Solutions**
 
-Increase disk space in the node hosting the egress.
+- Increase disk space in the node hosting the egress.
+- If needed, tune the minimum free disk space a Media Node requires to accept new Egress requests with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](../self-hosting/configuration/changing-config.md#config-files). It defaults to 512 MB, and a negative value disables the check altogether, which means a Media Node that cannot write a recording will accept egresses again. See [how OpenVidu distributes Egress requests](../self-hosting/production-ready/scalability.md#egress) for how this check combines with the CPU criteria.
 
 ### Egress CPU overload killer
 

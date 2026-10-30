@@ -63,6 +63,17 @@
   font-weight: 500;
 }
 
+/* Three per row on wide screens, with a lone card in the last row centered */
+@media (min-width: 960px) {
+  .feature-cards .grid.cards.center-last {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .feature-cards .grid.cards.center-last > ul > li:last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
+
 .padding-icon {
   padding: 6px 0;
 }
@@ -389,4 +400,117 @@ ul.product-features li:before {
   ul.product-features li {
     font-size: 0.85rem;
   }
+}
+
+/* Success stories: a carousel of customer logo + quote cards right after the hero
+   (page_features: setupcarousel). Adding a story is one more .splide__slide in index.md. */
+.success-stories-section {
+  margin: 0 0 3.5em 0;
+}
+
+.success-stories-heading {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.success-stories-heading h2 {
+  margin: 0;
+}
+
+/* carousel.css is written for the Meet landing's wide use-case panels: here each slide is
+   just its card, all fully visible, with no panel behind it */
+.success-stories-section .splide {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.success-stories-section .splide__slide {
+  width: auto;
+  opacity: 1;
+}
+
+.success-stories-section .carousel-cell-content,
+.success-stories-section .splide__slide.is-active .carousel-cell-content {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0.5em 0 2.5em;
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+/* index.md's data-splide makes this a plain sliding row: while every card fits, Splide leaves
+   out .is-overflow and the row is centred, with no arrows or dots to suggest more */
+.success-stories-section .splide:not(.is-overflow) .splide__list {
+  justify-content: center;
+}
+
+.success-stories-section .splide:not(.is-overflow) .splide__arrows,
+.success-stories-section .splide:not(.is-overflow) .splide__pagination {
+  display: none;
+}
+
+.success-story-card {
+  height: 100%;
+  box-sizing: border-box;
+  background: var(--md-default-bg-color);
+  border: 2px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.4rem;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 20rem;
+  max-width: 80vw;
+}
+
+.success-story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--md-primary-fg-color);
+}
+
+.success-story-logo {
+  max-width: 150px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.9rem;
+}
+
+.success-story-separator {
+  width: 3rem;
+  height: 2px;
+  background: var(--md-default-fg-color--lightest);
+  border: none;
+  margin: 0 0 0.9rem 0;
+}
+
+[dir] .md-typeset blockquote.success-story-quote {
+  font-style: italic;
+  color: var(--md-default-fg-color);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  margin: 0 0 0.8rem 0;
+  border: none;
+  padding: 0;
+}
+
+.success-story-attribution {
+  color: var(--md-typeset-color);
+  opacity: 0.7;
+  margin: 0 0 0.9rem 0;
+}
+
+/* beats carousel.css's `.splide__slide p`, which sets both with !important */
+.success-stories-section .splide__slide .success-story-attribution {
+  margin-top: 0 !important;
+  font-size: 0.85rem !important;
+}
+
+.success-story-link {
+  font-weight: 600;
+  font-size: 0.9rem;
 }

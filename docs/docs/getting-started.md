@@ -35,6 +35,10 @@ That is the whole shape of an OpenVidu application, and it does not change when 
 
     [Docker and Docker Compose :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/get-started/get-docker/){:target="_blank"}, and [Node.js :fontawesome-solid-external-link:{.external-link-icon}](https://nodejs.org/){:target="_blank"} for the example server on this page. The [application server tutorials](./tutorials/application-server/index.md) cover eight other languages.
 
+!!! tip "Building with an AI coding agent?"
+
+    Install the [OpenVidu Agent Plugin](./building-with-ai/agent-plugin.md) first. Claude Code, Cursor, VS Code, Codex and other coding agents then read the OpenVidu documentation for the version you run, this page included, so the code they write is up to date and accurate.
+
 ## 1. Run OpenVidu locally
 
 --8<-- "tutorials/run-openvidu-locally.md"

@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           # The Python inside squidfunk/mkdocs-material, which is where this code has to keep
           # working: `docker run … squidfunk/mkdocs-material` (the documented way to serve the
@@ -41,7 +41,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install safe-chain
-        uses: OpenVidu/actions/install-safe-chain@070fb73fda8fe7a08e28991b1c2d276f12a009ef # v1.0.22
+        uses: OpenVidu/actions/install-safe-chain@26a149ff32c72503a7c7ce4fb5fa4d000cb3262d # 1.0.25
 
       - name: Install the tool and its test dependencies
         # Editable here on purpose, unlike the publish workflow: the tests import the package

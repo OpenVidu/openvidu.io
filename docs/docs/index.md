@@ -56,6 +56,8 @@ Real-time video in your app takes a few lines with our LiveKit fork's SDKs:
 [Start with a tutorial](./tutorials/application-server/index.md){ .md-button }
 [Build your app](./build-your-app/index.md){ .md-button }
 
+Building with an AI coding agent? Install the [OpenVidu Agent Plugin](./building-with-ai/agent-plugin.md).
+
 </div>
 
 ## Use cases

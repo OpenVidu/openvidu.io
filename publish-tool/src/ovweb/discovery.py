@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import posixpath
 import re
 from pathlib import Path
 
@@ -17,6 +18,13 @@ VERSION_FOLDER = re.compile(r"\d+\.\d+")
 
 VERSIONS_JSON = "versions.json"
 LATEST_ALIAS = "latest"
+
+#: The blog plugin's listing of the posts in the Release category, at its default
+#: `categories_url_format`; a long one is paginated below it.
+RELEASE_LISTING = "blog/category/release"
+
+#: A link from that listing to a post: the plugin's `yyyy/MM/dd/slug/` URL, relative to the page.
+POST_LINK = re.compile(r'href="([^"#?]*\d{4}/\d{2}/\d{2}/[^"#?/]+/)"')
 
 
 # -- from the repository ---------------------------------------------------------------------
@@ -91,3 +99,21 @@ def latest_in_tree(tree: Path, *, alias: str = LATEST_ALIAS) -> str | None:
     if path.is_file():
         return alias_target(read_versions_json(fsops.read_text(path)), alias)
     return None
+
+
+def release_post_exports(root: Path) -> frozenset[Path]:
+    """The Markdown exports of the posts in the Release category under `root`.
+
+    `root` is where the blog is: the version folder before promotion, the site root after. Read
+    off the blog's own listing of the category, so the sources need not be at hand.
+    """
+    listing = root / RELEASE_LISTING
+    if not listing.is_dir():
+        return frozenset()
+    exports = set()
+    for page in sorted(listing.rglob("index.html")):
+        for match in POST_LINK.finditer(fsops.read_text(page)):
+            post = Path(posixpath.normpath(posixpath.join(page.parent.as_posix(), match.group(1))))
+            if (post / "index.md").is_file():
+                exports.add(post / "index.md")
+    return frozenset(exports)

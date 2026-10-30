@@ -19,6 +19,9 @@ So only two regions are spliced:
 The fragments need no link rewriting: by convention every link inside a release-notes section is an
 absolute, version-pinned URL, and the table of contents holds only ``#anchor`` links. Both are
 verified before splicing.
+
+The page's Markdown export is its content and nothing else, so it is copied whole, after the same
+check (:func:`check_releases_export`).
 """
 
 from __future__ import annotations
@@ -32,6 +35,9 @@ TOC_MARKER = '<nav class="md-nav md-nav--secondary" aria-label="Table of content
 #: Any href/src that is neither an absolute URL nor a bare "#anchor" resolves against the folder the
 #: page lives in, so it would point at the wrong version once the fragment is copied.
 RELOCATABLE_LINK = re.compile(r'(?:href|src)="(?!https?://|mailto:|#)([^"]*)"')
+
+#: The same, as a Markdown link or image target.
+RELOCATABLE_TARGET = re.compile(r"\]\((?!https?://|mailto:|#)([^)\s]*)")
 
 
 class RegionError(Exception):
@@ -92,6 +98,21 @@ def splice_releases(source_html: str, destination_html: str) -> SpliceResult:
         raise DestinationRegionError(f"marker not found: {TOC_MARKER}")
 
     return SpliceResult(html=result, article_bytes=len(article), tocs_replaced=replaced)
+
+
+def check_releases_export(text: str) -> str:
+    """Return the newest releases page's Markdown export, checked for copying into another version.
+
+    Raises :class:`SourceRegionError` when it holds a link relative to its version folder.
+    """
+    relocatable = sorted({match.group(1) for match in RELOCATABLE_TARGET.finditer(text)})
+    if relocatable:
+        raise SourceRegionError(
+            f"the Markdown export holds {len(relocatable)} link(s) relative to the version "
+            f"folder, which would break once copied into another version: {relocatable[:5]}. "
+            "Links in the releases pages must be absolute and version-pinned."
+        )
+    return text
 
 
 def find_region(html: str, marker: str, start: int = 0) -> tuple[int, int]:

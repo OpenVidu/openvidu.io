@@ -43,8 +43,9 @@ Four consequences worth keeping in mind:
   touches the version being published, so a version's canonical is rewritten to `/latest/…` when
   that version is (re)published, not when another one is. An older folder keeps whatever its last
   publish produced until it is rebuilt.
-- **The Markdown export does not travel.** The releases pages have an `index.md` beside them like
-  any other page in the plugin's `sections`, but only the content of the HTML is spliced. The
-  export a reader actually reaches is `/latest/<vp>/releases/index.md` — the one `llms.txt`
-  references, and the newest version's own, so it is built rather than copied. An
-  old version folder's export keeps that version's notes; nothing links to it.
+- **The Markdown export travels whole.** The releases pages have an `index.md` beside them like
+  any other page in the plugin's `sections`, and every version's own `llms.txt` lists it, which
+  is where the docs MCP server indexes that version from. An export is the page's content and
+  nothing else, so the newest one replaces each other version's whole, after the same check for
+  links relative to the version folder. A version built before the exports existed (before 3.4)
+  gets none.

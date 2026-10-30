@@ -93,10 +93,30 @@
       {% endif %}
     {% endif %}
 
-    {# Repository information #}
-    {% if config.repo_url %}
+    {# Repository information, as Material's widget (partials/source.html) shows it: name, latest
+       release, stars and forks. Material's version has the visitor's browser fetch those from
+       api.github.com and cache them in session storage; here publish-tool/github_facts_hook.py
+       fetches them at build time, so the visitor's browser contacts nobody. No
+       data-md-component="source", so Material's script leaves it alone. mkdocs.yml sets no
+       repo_url, which keeps Material's own widget out of the header and the mobile drawer. #}
+    {% set gh = config.extra.github_facts %}
+    {% if gh %}
       <div class="md-header__source">
-        {% include "partials/source.html" %}
+        <a href="{{ gh.url }}" title="{{ lang.t('source') }}" class="md-source" target="_blank" rel="noopener">
+          <div class="md-source__icon md-icon">
+            {% include ".icons/" ~ (config.theme.icon.repo or "fontawesome/brands/git-alt") ~ ".svg" %}
+          </div>
+          <div class="md-source__repository{% if gh.stars %} md-source__repository--active{% endif %}">
+            {{ gh.name }}
+            {% if gh.stars %}
+              <ul class="md-source__facts">
+                {% if gh.version %}<li class="md-source__fact md-source__fact--version">{{ gh.version }}</li>{% endif %}
+                <li class="md-source__fact md-source__fact--stars">{{ gh.stars }}</li>
+                <li class="md-source__fact md-source__fact--forks">{{ gh.forks }}</li>
+              </ul>
+            {% endif %}
+          </div>
+        </a>
       </div>
     {% endif %}
 

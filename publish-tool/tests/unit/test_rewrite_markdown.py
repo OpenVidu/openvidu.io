@@ -11,6 +11,8 @@ from __future__ import annotations
 import pytest
 
 from ovweb.rewrite.markdown import (
+    pin_versioned_markdown,
+    point_versioned_markdown_at_latest,
     prune_version_llms,
     repair_export_links,
     rewrite_promoted_markdown,
@@ -70,6 +72,52 @@ def test_versioned_export_leaves_its_own_assets_pinned(layout):
     """Matching the HTML: the root /assets/ folder only ever holds the newest publish's copy."""
     text = "![diagram](https://openvidu.io/3.8/assets/images/x.png)"
     assert versioned(text, layout) == text
+
+
+# -- the export of the version `latest` points at ---------------------------------------
+
+
+def at_latest(text, layout):
+    return point_versioned_markdown_at_latest(text, version=VERSION, layout=layout)
+
+
+def pinned(text, layout):
+    return pin_versioned_markdown(text, version=VERSION, layout=layout)
+
+
+@pytest.mark.parametrize("page", ["docs", "meet"])
+def test_the_newest_versions_export_links_into_it_through_latest(layout, page):
+    text = f"[x](https://openvidu.io/3.8/{page}/self-hosting/index.md#ports)"
+    assert at_latest(text, layout) == (
+        f"[x](https://openvidu.io/latest/{page}/self-hosting/index.md#ports)"
+    )
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "[3.7 notes](https://openvidu.io/3.7/docs/releases/index.md)",
+        "![diagram](https://openvidu.io/3.8/assets/images/x.png)",
+        "[repo](https://github.com/OpenVidu/openvidu/tree/3.8/docs/)",
+    ],
+    ids=["another version", "own assets", "another host"],
+)
+def test_the_newest_versions_export_keeps_every_other_pin(layout, text):
+    assert at_latest(text, layout) == text
+
+
+@pytest.mark.parametrize("page", ["docs", "meet"])
+def test_a_superseded_export_is_pinned_back_to_its_version(layout, page):
+    text = f"[x](https://openvidu.io/latest/{page}/self-hosting/index.md)"
+    assert pinned(text, layout) == f"[x](https://openvidu.io/3.8/{page}/self-hosting/index.md)"
+
+
+def test_pinning_back_undoes_pointing_at_latest(layout):
+    text = (
+        "[a](https://openvidu.io/3.8/docs/a/index.md) [b](https://openvidu.io/3.8/meet/b/)\n"
+        "[c](https://openvidu.io/pricing/index.md) [d](https://openvidu.io/3.7/docs/d/)\n"
+    )
+    assert pinned(at_latest(text, layout), layout) == text
 
 
 # -- the export of a page promoted to the root -------------------------------------------

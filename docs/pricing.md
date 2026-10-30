@@ -98,7 +98,7 @@ OpenVidu Pro follows a simple pricing model based on the number of cores used by
 <div class="pricing-text" style="text-align: center; font-size: 1.5em">
 <div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
 per core per minute available<br>
-for your OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } cluster
+for your OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span> cluster
 </div>
 
 Taking into account the following points:
