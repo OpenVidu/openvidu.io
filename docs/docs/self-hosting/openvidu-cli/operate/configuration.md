@@ -14,8 +14,10 @@ $ ov stack config view            # the whole configuration the stack runs with
 $ ov stack config get openviduStack.domain.name
 172-30-0-96.openvidu-local.dev
 $ ov stack config get DASHBOARD_ADMIN_PASSWORD
-F7hGggZdP5xNRDVLsyJ3FJ7Pd3wrtXYzC99JfKk43vz7
+********
 ```
+
+`config get` prints secrets in clear; the value is masked here. A key exists only when the stack uses it: `DASHBOARD_ADMIN_PASSWORD` needs the `dashboard` module, and without it `config get` fails with `key "DASHBOARD_ADMIN_PASSWORD" is not set`.
 
 A key can be named several ways: the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or the key as it appears in `config/openvidu.env` (`DOMAIN_NAME`). All of them read and write the same setting.
 

@@ -8,7 +8,7 @@ page_features: [lazyvideo]
 
 A local stack is OpenVidu running on your own machine with **Docker Compose**, for development. `ov` materializes a real `docker compose` project you can inspect and edit, starts it, waits for it to be ready, and then operates it: list the published ports, grow and shrink the module selection without redeploying, read the logs, and take it down.
 
-<!-- VIDEO: deploy-local.mp4 (docs-video) -->
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" preload="none" muted playsinline loop></video></a>
 
 A local stack runs on Docker Compose with **either edition**, so you can develop against OpenVidu PRO without Kubernetes on your laptop. The [`ov` CLI](../install.md) is Linux-only for now.
 
@@ -150,6 +150,8 @@ incremental change: start mongodb,ov-meet; restart the media server (its config 
 ✓ docker compose up -d --no-deps mongodb ov-meet
 modules updated
 ```
+
+The command returns once the new services are started, not once they answer: OpenVidu Meet takes some seconds more. `ov stack status --wait` waits for it.
 
 Only the new services start (and the media server restarts because its config changed); nothing else is touched. Removing a module is just as incremental:
 

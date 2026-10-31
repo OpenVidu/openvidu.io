@@ -5,7 +5,7 @@ description: "Check an OpenVidu stack with the OpenVidu CLI: live status, descri
 
 # Status and health checks
 
-Every command on this page resolves **the stack in the current directory** (or the one `--dir` points at), with no name and no flags. They work the same whether the stack runs locally, on your servers or on a cloud.
+Every command on this page resolves **the stack in the current directory** (or the one `--dir` points at), with no name and no flags. They work the same whether the stack runs locally, on your servers or on a cloud, except `check-ports`, which is for servers and clouds only.
 
 ## Status
 
@@ -16,6 +16,16 @@ $ ov stack status
 HOST          ROLE     STATE
 172.30.0.96   single   active
 ```
+
+On a local stack it is this machine:
+
+```console
+$ ov stack status
+HOST        ROLE    STATE
+localhost   local   running
+```
+
+On a local stack, `ov stack status --wait` prints the same banner as the deploy, with the URLs and credentials, once everything answers.
 
 On a PRO stack (Kubernetes) it is the workloads:
 
@@ -104,7 +114,7 @@ Per-service logs through `ov` are not available yet; omit the service for the wh
 
 ## Check the ports
 
-`ov stack check-ports` verifies that the inbound ports a stack needs actually arrive. It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified — which dialling a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
+`ov stack check-ports` verifies that the inbound ports a stack needs actually arrive at a server or a cloud machine. A local stack has no firewall to check: there it exits with code `2` and points at [`ov stack ports`](#list-the-published-ports). It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified — which dialling a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
 
 Against a **stopped or not-yet-deployed** node it gives the complete check:
 
