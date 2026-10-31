@@ -105,6 +105,10 @@ The deployment is a normal `docker compose` project inside the stack directory (
 
     `--no-lan` keeps the stack on `localhost`, without the HTTPS access from other devices of your network.
 
+    A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. A production deployment needs a [license](../../../../account.md).
+
+    <!-- CHECK (docs-ov): ov stores --openvidu-pro-license in the spec but a local stack does not use it yet (mvp-qa reported it, H34). Say whether it is needed once that is settled. -->
+
 !!! warning "One local OpenVidu runs at a time"
 
     Each stack is **namespaced** by its compose project (its containers, volumes and network are per-stack), so you can keep several side by side — each in its own directory — and `ov stack destroy --delete-data` on one never touches another's data. But all stacks bind the **same host ports** (7880, 9080, 9000, and, since local is dev-only, Redis 6379 and MongoDB 27017), so only one can run at once. Deploying a new one detects the running stack and offers to stop it and start the new one (`--free-ports`).

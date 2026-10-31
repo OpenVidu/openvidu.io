@@ -19,6 +19,15 @@ $ ov stack config get DASHBOARD_ADMIN_PASSWORD
 
 `config get` prints secrets in clear; the value is masked here. A key exists only when the stack uses it: `DASHBOARD_ADMIN_PASSWORD` needs the `dashboard` module, and without it `config get` fails with `key "DASHBOARD_ADMIN_PASSWORD" is not set`.
 
+A key you never set takes the model's default, and `config get` says so (exit code `1`):
+
+```console
+$ ov stack config get rtc-engine
+ov: openviduStack.rtcEngine is not set in stack "labp": it takes the model's default, mediasoup
+```
+
+<!-- CHECK (docs-ov): this message comes from mvp-qa 7e38b861 (unpushed). Verify before publishing. -->
+
 A key can be named several ways: the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or the key as it appears in `config/openvidu.env` (`DOMAIN_NAME`). All of them read and write the same setting.
 
 `ov stack config set` changes one or more values. It shows the impact and recreates only what needs it:
