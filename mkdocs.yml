@@ -139,6 +139,27 @@ nav:
           - Ingress: docs/reference/ingress.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
+          - Deploy with the OpenVidu CLI:
+              - docs/self-hosting/openvidu-cli/index.md
+              - Install the CLI: docs/self-hosting/openvidu-cli/install.md
+              - Deploy:
+                  - Local (development): docs/self-hosting/openvidu-cli/deploy/local.md
+                  - On premises: docs/self-hosting/openvidu-cli/deploy/on-premises.md
+                  - AWS: docs/self-hosting/openvidu-cli/deploy/aws.md
+                  - Azure: docs/self-hosting/openvidu-cli/deploy/azure.md
+                  - Google Cloud: docs/self-hosting/openvidu-cli/deploy/gcp.md
+                  - Oracle Cloud: docs/self-hosting/openvidu-cli/deploy/oracle.md
+                  - DigitalOcean: docs/self-hosting/openvidu-cli/deploy/digitalocean.md
+              - Operate:
+                  - Status and health checks: docs/self-hosting/openvidu-cli/operate/status.md
+                  - Configuration: docs/self-hosting/openvidu-cli/operate/configuration.md
+                  - Modules and agents: docs/self-hosting/openvidu-cli/operate/modules.md
+                  - Scaling: docs/self-hosting/openvidu-cli/operate/scaling.md
+                  - Operate from another machine: docs/self-hosting/openvidu-cli/operate/remote.md
+                  - Update and migrate: docs/self-hosting/openvidu-cli/operate/update.md
+                  - Destroy: docs/self-hosting/openvidu-cli/operate/destroy.md
+              - Command reference: docs/self-hosting/openvidu-cli/reference.md
+              - Troubleshooting: docs/self-hosting/openvidu-cli/troubleshooting.md
           - Production ready:
               - docs/self-hosting/production-ready/index.md
               - Performance: docs/self-hosting/production-ready/performance.md
@@ -510,6 +531,9 @@ plugins:
         - docs/self-hosting/single-node/index.md
         - docs/self-hosting/elastic/index.md
         - docs/self-hosting/ha/index.md
+
+        OpenVidu Platform deployment with the OpenVidu CLI:
+        - docs/self-hosting/openvidu-cli/*.md
 
         OpenVidu Platform production readiness:
         - docs/self-hosting/production-ready/*.md

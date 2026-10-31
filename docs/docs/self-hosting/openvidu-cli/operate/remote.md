@@ -1,0 +1,112 @@
+---
+title: "Operate an OpenVidu stack from another machine"
+description: "Adopt a running OpenVidu stack into a new directory with ov stack import, over SSH, a kubeconfig or its cloud record kept by remote state."
+---
+
+# Operate from another machine
+
+`ov` operates one stack per directory. To operate a running stack from a machine that has no directory for it — a colleague's laptop, a CI runner, a replacement for a lost directory — use **`ov stack import`**. It reads the description the stack publishes about itself and writes the two files a deploy would have left (`openvidu-stack.yml` and the `.openvidu/` state), so every `ov stack` verb works afterwards.
+
+## Import a stack
+
+| Source | What it adopts |
+| --- | --- |
+| `--this-node` | The stack running on **this machine** (reads its published description; escalates with `sudo` for root-only files). |
+| `--ssh [user@]host` | A node over **SSH** (with `--ssh-key`, `--ssh-port`). |
+| `--kubeconfig <path>` | A **PRO** stack, from the cluster credential. The stack holds its own desired state, so nothing has to have been published. |
+| `-f <file>` | A description document you already have. |
+| `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from the **record** it keeps on the cloud — infrastructure included. |
+
+Over SSH, `ov` shows what it found and asks before saving (the document names hosts your client would connect to); `-y` answers in advance:
+
+```console
+$ mkdir -p ~/stacks/web && cd ~/stacks/web
+$ ov stack import web --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 -y
+
+Stack described by the deployment:
+  name         web
+  deployment   single_node · on-premises · community
+  version      ov-admin
+  dashboard    https://172-30-0-96.openvidu-local.dev
+  nodes        172.30.0.96
+  published    by ov/ov-admin on 2026-10-29 14:41 UTC (generation 1)
+
+✔ imported stack "web" into /home/me/stacks/web
+  desired state: /home/me/stacks/web/openvidu-stack.yml
+
+Try it:
+  ov stack status
+  ov stack logs --tail 50
+```
+
+If the node has lost its desired state, the import rebuilds it from the files `ov` deployed under `/opt/openvidu` and says so (`note: the stack published no desired state; rebuilt it from the files …`).
+
+## Community: a single-administrator product vs PRO
+
+The import behaves differently per edition, because the two store their configuration in different places (see [Configuration](configuration.md#where-the-configuration-lives)).
+
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. Every `config get`, `set`, `view` and `plan` reads the node first, so clients do not drift silently on the keys of those files: a `set` from one client is what the other sees next time it asks, and it adopts the change into its own spec with a note.
+
+    What can go stale is a client's `openvidu-stack.yml` between commands — and always the **render parameters** another client changed (the certificate type, an external proxy, the public IP), which are not keys of a file and so are not read back. That copy matters for a **redeploy**, which renders the tree from the spec. Keep it current with `ov stack plan`, or import again (`--replace`) before one.
+
+    In short, a Community deployment is a **single-administrator** product: comfortable for one person or one pipeline, workable for a few who coordinate.
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    The stack holds its own desired state, so two clients **cannot drift apart**: both read and write the same release, and `ov stack config view` always answers from it. Any administrator with credentials points a directory at the stack and operates it — a **team** product. A lost directory is reconstructed from the deployment itself (`--kubeconfig`, or `sudo ov stack import --this-node` on the node), never stale.
+
+## Recover a cloud stack, infrastructure included
+
+`--kubeconfig` adopts the cluster but not the machines under it: that directory can operate OpenVidu, not delete its cloud resources or change its template parameters. By default the stack's directory is the only place that drives the machines, and if it is lost, it is lost.
+
+A deploy with **`--remote-state`** also keeps the stack on its cloud, so another machine can take it over completely. It prints where on its last lines:
+
+```console
+✔ OpenVidu Pro (elastic) is up on AWS
+  URL:          https://openvidu-id5fv9-15-217-125-1.sslip.io/
+  record:       s3://openvidu-cfn-templates-123456789012-eu-south-2/ov-aws-im2/registry/openvidu-stack.yml (from another machine: ov stack import --cloud aws --stack-name ov-aws-im2)
+  SSH key:      Secrets Manager secret openvidu/ov-aws-im2/ssh-private-key (the private half, for that import)
+```
+
+From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. The record never holds a secret, so a parameter the template marks sensitive — the license above all — is asked for again, exactly as the deploy asked for it:
+
+```console
+$ mkdir ~/stacks/ov-aws-im2 && cd ~/stacks/ov-aws-im2
+$ ov stack import --cloud aws --aws-region eu-south-2 --stack-name ov-aws-im2 --openvidu-pro-license <license>
+This is what will be read from AWS to import the stack ov-aws-im2 (nothing there is changed):
+…
+▶ Register the stack…
+   ✓ Register the stack
+
+✔ imported the AWS stack ov-aws-im2 (elastic) into ~/stacks/ov-aws-im2
+  URL:          https://openvidu-id5fv9-15-217-125-1.sslip.io/
+  kubeconfig:   .openvidu/aws/kubeconfig.yaml
+  SSH key:      both halves, the private one from the stack's secret store on the cloud.
+
+From here, as from the directory that deployed it:
+  ov stack status
+  ov stack deploy --cloud aws --param Name=Value   # change a template parameter
+  ov stack destroy --keep-data   # or --delete-data: what becomes of the recordings
+```
+
+From then on, `ov stack deploy --cloud … --param …` and `ov stack destroy` work here as they did in the directory that deployed the stack. Without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the way back is its deploying directory, or `--kubeconfig` for the cluster alone.
+
+### What `--remote-state` stores per cloud
+
+Everything that drives the stack, kept where the stack's infrastructure already lives, so another machine with that cloud's credentials can take it over:
+
+| Where it is kept | AWS | Azure | Google Cloud, Oracle, DigitalOcean |
+| --- | --- | --- | --- |
+| **Terraform state** | (CloudFormation; no state file) | (Bicep; no state file) | a bucket of the stack's own (`<stack>-terraform-state`) |
+| **The record** (infrastructure, no secrets) | the template bucket (`<stack>/registry/`) | a Key Vault secret (`OPENVIDU-REGISTRY`) | the state bucket (`openvidu/registry/`) |
+| **The SSH private key** `ov` generated | a Secrets Manager secret (`openvidu/<stack>/ssh-private-key`) | the stack's Key Vault (`OPENVIDU-SSH-PRIVATE-KEY`) | in the Terraform state |
+
+All of it is deleted by `ov stack destroy`.
+
+## Next steps
+
+- [Destroy](destroy.md) a stack, including the `--remote-state` cleanup.
+- [Update and migrate](update.md).
+- The full [command reference](../reference.md).

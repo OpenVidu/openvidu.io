@@ -7,6 +7,10 @@ description: "The four OpenVidu deployment types side by side: local for develop
 
 OpenVidu offers **user-friendly installers** that facilitate quick **on-premises deployments**, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
 
+!!! tip "New: the OpenVidu CLI"
+
+    Every deployment type on this page can also be deployed and operated with the [OpenVidu CLI](openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported.
+
 There are different deployment options available, depending on your needs:
 
 | Type of deployment        | [**OpenVidu**<br>**Local (development)**{ .nowrap }](#openvidu-local-development)         | <div class="w-10em">[**OpenVidu**<br>**Single Node**{ .nowrap }](#openvidu-single-node)</div> | [**OpenVidu**<br>**Elastic**{ .nowrap }](#openvidu-elastic) | [**OpenVidu**<br>**High Availability**{ .nowrap }](#openvidu-high-availability) |

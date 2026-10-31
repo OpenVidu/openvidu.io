@@ -1,0 +1,269 @@
+---
+title: "Deploy OpenVidu on Azure with the OpenVidu CLI"
+description: "Create the virtual machines and deploy OpenVidu COMMUNITY or PRO on Azure with one command of the OpenVidu CLI, then operate and destroy the stack."
+page_features: [lazyvideo]
+---
+
+# Deploy OpenVidu on Azure with the OpenVidu CLI
+
+<div class="provider-chip" markdown>
+
+:material-microsoft-azure:{ .provider-chip-icon } Azure
+
+</div>
+
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Bicep template embedded in its own binary for the edition and topology you ask for, applies it with **your own `az` CLI** (which compiles the Bicep), and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+
+<!-- VIDEO: deploy-azure.mp4 (docs-video) -->
+
+## Requirements
+
+- The [OpenVidu CLI](../install.md).
+- An Azure subscription and the [`az` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/cli/azure/install-azure-cli){:target="_blank"}, **authenticated**: `az account show` must answer. `ov` runs your own client, so your login, subscription and audit trail are the ones that apply. `az` compiles the Bicep itself, so no separate Bicep install is needed.
+- A location: `--azure-location`, else `$AZURE_LOCATION`. The resource group defaults to `<stack>-rg` (`--azure-resource-group` names your own).
+- Permission to create resource groups and everything in them: virtual machines, a static public IP, a network security group, a Storage Account with a Blob container, a Key Vault, and for Elastic and High Availability a load balancer and a scale set of media nodes.
+- **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param InstanceType=<size>`.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your subscription.
+
+You need no key pair and, except for a production High Availability stack, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real.
+
+## Deploy
+
+An empty directory is the stack. Choose the edition and topology:
+
+=== "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --certificate-type letsencrypt --mode auto
+    ```
+
+    One virtual machine (`Standard_D4s_v3` by default, `--param InstanceType=<size>` to change it) running OpenVidu on Docker Compose.
+
+=== "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> \
+      --certificate-type letsencrypt --mode auto
+    ```
+
+    One virtual machine running OpenVidu PRO on Kubernetes. `--param kubeApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
+
+    <!-- PENDING-RUN (docs-ov, dw): azure pro single_node with today's ov -->
+
+=== "Elastic **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode auto
+    ```
+
+    One master node and a scale set of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
+
+    <!-- PENDING-RUN (docs-ov, dw): azure pro elastic with today's ov -->
+
+=== "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --domain-name openvidu.example.com --certificate-type letsencrypt --mode auto
+    ```
+
+    Four master nodes behind a load balancer, plus a scale set of media nodes. TLS ends at Caddy on the masters (the load balancer passes it through), so Let's Encrypt works without a pre-provisioned certificate; use a real domain for a production stack.
+
+    <!-- PENDING-RUN (docs-ov, dw): azure pro ha with today's ov -->
+
+Before it touches your subscription, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
+
+```text
+This is what will be done in your Azure subscription (location northeurope):
+
+  # SSH access: the key pair for this stack, its public half handed to the template.
+  #   .openvidu/azure/openvidu-ce12a-key.pub
+  # The template, rendered from the one embedded in this CLI for the single node topology,
+  # written out for you to read (az compiles the Bicep itself):
+  #   .openvidu/azure/cf-openvidu-singlenode.bicep
+  az group create --name openvidu-ce12a-rg --location northeurope --only-show-errors -o none
+  # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
+  # OpenVidu CLI. The command returns when Azure is done (about 4 minutes); OpenVidu comes up after.
+  az deployment group create --resource-group openvidu-ce12a-rg --name openvidu-ce12a --template-file .openvidu/azure/cf-openvidu-singlenode.bicep --only-show-errors --query properties.provisioningState -o tsv --parameters certificateType=letsencrypt deployedBy=instance … stackName=openvidu-ce12a 'publicIpAddressObject={"newOrExistingOrNone":"new","name":"openvidu-ce12a-pip"}' adminSshKey="{\"sshPublicKey\":\"$(cat .openvidu/azure/openvidu-ce12a-key.pub)\"}"
+
+  # What the stack published: URL and credentials, as secrets in the Key Vault the deployment outputs (OPENVIDU_URL appears once
+  # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
+  az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs -o json
+  KV="$(az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs.sharedInfoKeyVault.value -o tsv)"
+  az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
+```
+
+Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then it runs them, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes — once Azure has provisioned the VM, but before OpenVidu is installed — so the wait is the real one: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks the published URL answers Caddy's health check:
+
+```text
+▶ Create the machines on Azure…
+   · create the resource group openvidu-ce12a-rg in northeurope
+   · create the machines from .openvidu/azure/cf-openvidu-singlenode.bicep (this returns when Azure is done)
+note: recorded this stack's infrastructure in openvidu-stack.yml, so `ov stack destroy` removes it even if the wait below fails
+   ✓ Create the machines on Azure
+
+▶ Wait for the machines to deploy OpenVidu…
+   · waiting for OpenVidu to come up (2s elapsed): the published values are not readable yet: no secret exists in openvidu-ce12a-keyvault yet
+   · waiting for OpenVidu to come up (1m11s elapsed): the stack has not published its URL yet (OpenVidu is still installing)
+   …
+   · OpenVidu is up: the stack published its URL and https://openvidu-zclupo-40-112-77-3.sslip.io/health/caddy answers 200
+   ✓ Wait for the machines to deploy OpenVidu
+
+▶ Register the stack…
+
+Stack described by the deployment:
+  name         ce12a
+  deployment   single_node · azure · community
+  version      ov-admin
+  modules      dashboard, egress, ingress, meet, observability
+  dashboard    https://openvidu-zclupo-40-112-77-3.sslip.io
+  nodes        40.112.77.3
+  published    by ov/ov-admin on 2026-10-29 16:37 UTC (generation 1)
+
+note: this stack was deployed on the machine itself, so its desired state named 127.0.0.1; retargeted at 40.112.77.3, the host this import reached
+✔ registered stack "ce12a" in /home/me/ce12a
+   ✓ Register the stack
+
+✔ OpenVidu Community (single node) is up on Azure
+  URL:          https://openvidu-zclupo-40-112-77-3.sslip.io/
+  credentials:  az keyvault secret show --vault-name openvidu-ce12a-keyvault --name OPENVIDU-URL --query value -o tsv
+  SSH:          ubuntu@40.112.77.3 (key .openvidu/azure/openvidu-ce12a-key.pem)
+
+Try it:
+  ov stack status
+  ov stack logs --tail 50
+```
+
+The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param InstanceType=<size>`. A low quota for the VM's family limits how many stacks run in a location at once.
+
+## What the deploy creates
+
+| Resource | Notes |
+| --- | --- |
+| A resource group, `openvidu-<name>-rg` | Holds everything the stack is; `--azure-resource-group` names it; tagged `created-by=openvidu-cli` |
+| Virtual machines | One for Single Node; master nodes and a scale set of media nodes for Elastic and High Availability |
+| A static public IP and a network security group | The ports OpenVidu needs, open to the internet |
+| A load balancer | High Availability only |
+| A Storage Account and a Blob container (`openvidu-appdata`) | Recordings and OpenVidu Meet data. `--param StorageAccountName=<name>` uses your own |
+| A Key Vault, `openvidu-<name>-keyvault` | What the stack publishes: URL and credentials (and the kubeconfig on PRO) |
+| An SSH key pair | `ov` generates it; the private half stays in `.openvidu/azure/` |
+
+`ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+
+## Access OpenVidu
+
+The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with a valid certificate:
+
+```console
+$ D=openvidu-zclupo-40-112-77-3.sslip.io
+$ curl -s -o /dev/null -w "meet %{http_code}\n" https://$D/
+meet 302
+$ curl -s -o /dev/null -w "dashboard %{http_code}\n" https://$D/dashboard/
+dashboard 200
+```
+
+The credentials are secrets in the stack's Key Vault, the command printed on the `credentials:` line. These are the keys of a Single Node COMMUNITY stack (values replaced by their length; the storage account's key masked too):
+
+```text
+vault openvidu-ce12a-keyvault
+AZURE-STORAGE-ACCOUNT-KEY      <set, 88 chars>
+AZURE-STORAGE-ACCOUNT-NAME     ovdatammuudi34y26y2
+AZURE-STORAGE-CONTAINER-NAME   openvidu-appdata
+DASHBOARD-ADMIN-PASSWORD       <set, 44 chars>
+DASHBOARD-ADMIN-USERNAME       dashboardadmin
+DASHBOARD-URL                  https://openvidu-zclupo-40-112-77-3.sslip.io/dashboard/
+DOMAIN-NAME                    openvidu-zclupo-40-112-77-3.sslip.io
+ENABLED-MODULES                egress,ingress,dashboard,meet,observability
+LIVEKIT-API-KEY                <set, 15 chars>
+LIVEKIT-API-SECRET             <set, 44 chars>
+LIVEKIT-URL                    wss://openvidu-zclupo-40-112-77-3.sslip.io/
+OPENVIDU-URL                   https://openvidu-zclupo-40-112-77-3.sslip.io/
+…
+```
+
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the node's files are the truth, not the Key Vault.
+
+Your applications connect with `LIVEKIT-URL`, `LIVEKIT-API-KEY` and `LIVEKIT-API-SECRET`, as with any other OpenVidu deployment.
+
+To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The login user is `ubuntu`, and the node has `ov` too, so `sudo ov stack …` there operates the same stack:
+
+```bash
+ssh -i .openvidu/azure/openvidu-ce12a-key.pem ubuntu@40.112.77.3
+```
+
+## Review the commands first: assisted mode
+
+`--mode assisted` runs **nothing at all** in your subscription. It writes the rendered template into `.openvidu/azure/` and prints the same commands, for you to read, change and run yourself:
+
+```bash
+ov stack deploy openvidu --cloud azure --azure-location northeurope \
+  --certificate-type letsencrypt --mode assisted
+```
+
+It ends with the command that continues the deploy once you have run them:
+
+```text
+Nothing above has been run. Run it yourself, then continue the deploy — naming
+the resource group is enough, this CLI reads everything else back from it:
+
+  ov stack deploy --cloud azure --mode auto
+
+From there the deploy waits for OpenVidu to come up, reads the stack from the machine
+over SSH (as `ov stack import --ssh` does) with the key pair above, and registers
+this directory as the stack, exactly as it would have done here.
+```
+
+That command needs no flags: the desired state and every parameter are already in `openvidu-stack.yml`, and a deployment that already succeeded is **reused**, not created again.
+
+<!-- PENDING-RUN (mvp-cloud mq4): azure pro single node assisted -->
+
+## Change a parameter of the stack
+
+`ov stack deploy --cloud azure --param Name=Value` in the stack's directory runs the deployment again with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
+
+```bash
+ov stack deploy --cloud azure --param maxNumberOfMediaNodes=3 --mode auto -y
+```
+
+See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+
+## Destroy the stack
+
+One command deletes the machines too. You must say what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves them, `--delete-data` deletes them. The whole stack is one resource group, so deleting it is the teardown:
+
+```console
+$ ov stack destroy -y --delete-data
+This is what will be deleted from your Azure subscription:
+
+  # The resource group, which holds everything the stack is: machines, disks, network,
+  # load balancer, Key Vault and storage account.
+  az group delete --name openvidu-ce12a-rg --yes --only-show-errors
+
+--delete-data: the recordings and Meet data are in the storage account: this deletes them.
+
+▶ Delete the machines on Azure…
+   · delete the resource group openvidu-ce12a-rg (this returns when Azure is done)
+   ✓ Delete the machines on Azure
+✔ removed stack "ce12a" from this directory
+```
+
+With `--delete-data` the storage account goes with the resource group, recordings and all. With `--keep-data` the account first moves to a resource group of its own, `<group>-data`, so deleting the stack's group leaves it. `--keep-infrastructure` tears the deployment down but leaves the VM running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+
+!!! warning "Names may be shortened"
+
+    A Key Vault name may be at most 24 characters, so when `openvidu-<name>-keyvault` would exceed it, `ov` shortens the prefix from `openvidu-` to `ov-` (resource group `ov-<name>-rg`, Key Vault `ov-<name>-keyvault`). Take the stack's cloud name from the `record:` line the deploy prints; it is what `ov stack import --cloud azure --stack-name <name>` needs.
+
+## Next steps
+
+- [Check the status](../operate/status.md) of the stack and run its health check.
+- [Change its configuration](../operate/configuration.md) or [its modules](../operate/modules.md).
+- [Operate it from another machine](../operate/remote.md), with `--remote-state`.

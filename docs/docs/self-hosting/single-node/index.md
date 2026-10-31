@@ -5,6 +5,10 @@ description: "Every OpenVidu service on one server. Install, upgrade and adminis
 
 # OpenVidu Single Node
 
+!!! tip "New: the OpenVidu CLI"
+
+    OpenVidu Single Node can also be deployed and operated with the [OpenVidu CLI](../openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported.
+
 OpenVidu Single Node is a production-ready deployment option that provides all the necessary features for running real-time applications with medium user load. It is available in two editions:
 
 - **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }: the open-source edition, free to use.

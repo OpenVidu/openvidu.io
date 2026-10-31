@@ -7,6 +7,10 @@ description: "Run a full OpenVidu deployment on your own machine with Docker Com
 
 For development purposes, we provide an [easy-to-install local deployment :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-local-deployment){:target="_blank"} based on Docker Compose that automatically configures all the necessary services for OpenVidu, allowing you to develop and test your applications seamlessly.
 
+!!! tip "New: the OpenVidu CLI"
+
+    The [OpenVidu CLI](openvidu-cli/deploy/local.md) also runs a local OpenVidu COMMUNITY or PRO deployment for development, and operates it with the same commands as a production one. The installation methods described here are still supported.
+
 ## Installation instructions
 
 First, make sure you have the following prerequisites:

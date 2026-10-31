@@ -5,6 +5,10 @@ description: "A Master Node with autoscaling Media Nodes. Install, upgrade and a
 
 # OpenVidu Elastic
 
+!!! tip "New: the OpenVidu CLI"
+
+    OpenVidu Elastic can also be deployed and operated with the [OpenVidu CLI](../openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported.
+
 OpenVidu Elastic is part of the **PRO**{ .openvidu-tag .openvidu-pro-tag } edition of OpenVidu. You have the following deployment options:
 
 Choose your provider:
