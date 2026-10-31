@@ -31,7 +31,7 @@ On a PRO stack (Kubernetes) it is the workloads:
 
 ```console
 $ ov stack status
-HOST                               ROLE   STATE
+POD                                READY  STATE
 caddy-proxy-86f66c6568-czv58       1/1    Running
 grafana-5df667c689-pwj4t           0/1    ContainerCreating
 mongodb-0                          0/2    PodInitializing
@@ -40,6 +40,8 @@ ov-livekit-server-87mw2            0/1    PodInitializing
 ov-meet-cbbf88b85-kkrvx            1/1    Running
 …
 ```
+
+<!-- CHECK (docs-ov): PRO status headers POD/READY/STATE come from mvp-qa 9dc5010b (unpushed); ov-admin of 2026-10-31 prints HOST/ROLE/STATE. Verify before publishing. -->
 
 ### Wait until ready
 
@@ -70,7 +72,23 @@ When it gives up, it names the pods still starting.
 
 `ov stack describe` prints the stack's record, endpoints and a configuration summary.
 
-This is a local OpenVidu PRO stack:
+On a Community server, reached over SSH:
+
+```console
+$ ov stack describe
+Stack:       qce1
+Type:        single_node
+Environment: on-premises
+Edition:     community
+Endpoint:    https://172-30-0-150.openvidu-local.dev
+Spec:        openvidu-stack.yml
+Access:      ssh
+
+Nodes:
+  172.30.0.150     single       active
+```
+
+`Access` says how this directory reaches the stack: `ssh` for a Community server, `kube` (the cluster API) for a PRO stack, `local` for a stack on this machine. A local OpenVidu PRO stack:
 
 ```console
 $ ov stack describe
@@ -86,7 +104,7 @@ Nodes:
   localhost        local        running
 ```
 
-<!-- CHECK (docs-ov): the first line reads "Context:" in ov-admin of 2026-10-31; mvp-qa renames it to "Stack:" (unpushed). Verify before publishing. PENDING-RUN (mvp-qa): describe of a server stack -->
+<!-- CHECK (docs-ov): the first line reads "Context:" in ov-admin of 2026-10-31; mvp-qa renames it to "Stack:" (unpushed). Verify before publishing. -->
 
 ## Health test
 

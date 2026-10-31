@@ -79,7 +79,17 @@ On the machine that will join, `ov stack join --this-node --as master|media` enr
 ov stack join-info          # prints OPENVIDU_JOIN_ADDRESS and OPENVIDU_JOIN_TOKEN
 ```
 
-<!-- PENDING-RUN (docs-ov): ov stack join-info output -->
+On the master of an Elastic stack (token replaced here):
+
+```console
+$ sudo ov stack join-info
+OPENVIDU_JOIN_ADDRESS=https://172.30.0.96:6443
+OPENVIDU_JOIN_TOKEN=<token>
+$ sudo ov stack join-info --format json
+{"address":"https://172.30.0.96:6443","token":"<token>"}
+```
+
+The token lets a machine join the cluster: treat it as a secret.
 
 `ov stack join-info --wait 30m` blocks until the cluster is up; `--format json` for machine consumption.
 
