@@ -21,9 +21,10 @@ The OpenVidu CLI is a single static binary, `ov`, published for Linux on **amd64
 Every release publishes the binaries and a `SHA256SUMS` file at `https://get.openvidu.io/cli/<version>/`. A published version never changes.
 
 ```bash
+OV_VERSION=3.10.0
 ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
-curl -fsSLO https://get.openvidu.io/cli/3.10.0/ov_linux_${ARCH}.gz
-curl -fsSLO https://get.openvidu.io/cli/3.10.0/SHA256SUMS
+curl -fsSLO https://get.openvidu.io/cli/${OV_VERSION}/ov_linux_${ARCH}.gz
+curl -fsSLO https://get.openvidu.io/cli/${OV_VERSION}/SHA256SUMS
 sha256sum --check --ignore-missing SHA256SUMS
 ```
 
@@ -41,14 +42,13 @@ gunzip ov_linux_${ARCH}.gz
 sudo install -m 0755 ov_linux_${ARCH} /usr/local/bin/ov
 ```
 
-Check that it runs:
+Check that it runs: `ov version` prints the version you downloaded.
 
-```console
-$ ov version
-ov 3.10.0
+```bash
+ov version
 ```
 
-The version of `ov` matters: **a release of `ov` deploys the same release of OpenVidu**. `ov` 3.10.0 deploys OpenVidu 3.10.0, and the cloud machines it creates download that same build. To deploy or update to another version, use the `ov` of that version.
+The version of `ov` matters: **a release of `ov` deploys the same release of OpenVidu**. `ov` X.Y.Z deploys OpenVidu X.Y.Z, and the cloud machines it creates download that same build. To deploy or update to another version, use the `ov` of that version.
 
 ## Shell completion
 

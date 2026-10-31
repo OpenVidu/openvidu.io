@@ -14,12 +14,12 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
 
 ## Requirements
 
-- One or more **Ubuntu servers** with a sudo-capable user, reachable over SSH (and, for Elastic and High Availability, reachable from each other on their private addresses).
+- One or more **Linux servers** with a sudo-capable user, reachable over SSH (and, for Elastic and High Availability, reachable from each other on their private addresses).
 - A **domain** pointing at the server (at a load balancer in front of the masters, for HA in production), and a **certificate type**:
     - `letsencrypt` or `zerossl` — a certificate obtained automatically (needs port 80 reachable).
     - `owncert` — bring your own, with `--owncert-public-key` and `--owncert-private-key`.
     - `selfsigned` — for a throwaway.
-- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable: `443/tcp` and `80/tcp` (Caddy), `443/udp` (media, recommended `7881/tcp` and the media UDP range), and on PRO the cluster API on `6443/tcp`. See the port preflight below.
+- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable: `443/tcp`; `80/tcp` with `letsencrypt` or `zerossl`; `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; `1935/tcp` and `7885/udp` with the `ingress` module; and on PRO the cluster API on `6443/tcp` from your machine. See the port preflight below.
 - The [OpenVidu CLI](../install.md). Nothing else needs to be pre-installed on the servers: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
 - For PRO, your **OpenVidu Pro license** (`--openvidu-pro-license`).
 
@@ -183,6 +183,8 @@ An empty directory on your machine is the stack. Pick the edition and topology:
     ov stack join --ssh ubuntu@172.30.0.99 --as master
     ov stack join --ssh ubuntu@172.30.0.100 --as media
     ```
+
+    <!-- PENDING-RUN (docs-ov): on-premises pro ha joins output -->
 
     A master join takes the stack's domain from the directory; `--lb-host` names the load balancer in front of the masters and `--public-ip` the server's public address, both kept reachable on the cluster API. As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir spread one replica per master. `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
 

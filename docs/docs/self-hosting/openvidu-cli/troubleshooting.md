@@ -16,7 +16,7 @@ Before anything is installed, a remote deploy (and `ov stack join`) checks the n
          - sudo ufw allow 443/udp   (run it on the node)
 ```
 
-`ov` reads firewalls but never changes them — run the printed fix on the node. Then redeploy. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time to see the full report; it is the only check that verifies UDP, which a healthy-looking stack with no media needs. If a port is opened by another team shortly after, the deploy itself continues (a required port only warns during the deploy and is repeated at the end); `--skip-port-check` turns the check off.
+`ov` reads firewalls but never changes them — run the printed fix on the node. Then redeploy. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time to see the full report; it is the only check that verifies UDP, which a healthy-looking stack with no media needs. A **recommended** port that does not answer, such as `443/udp` in the example above, only warns and the deploy continues; `--skip-port-check` turns the check off.
 
 ## No media, but every service is healthy
 

@@ -5,7 +5,7 @@ description: "Update a Community OpenVidu server with a three-way merge and roll
 
 # Update and migrate
 
-**A release of `ov` deploys the same release of OpenVidu**: `ov` 3.10.0 deploys OpenVidu 3.10.0. So updating a stack means running the command with the `ov` of the version you want — [install that version](../install.md) first. Every plan and every message names the version the stack runs and the one it goes to; an older `ov` refuses to downgrade.
+**A release of `ov` deploys the same release of OpenVidu**: `ov` X.Y.Z deploys OpenVidu X.Y.Z. So updating a stack means running the command with the `ov` of the version you want — [install that version](../install.md) first. Every plan and every message names the version the stack runs and the one it goes to; an older `ov` refuses to downgrade.
 
 ## Update a Community server
 
