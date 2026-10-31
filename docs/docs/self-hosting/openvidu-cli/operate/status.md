@@ -60,7 +60,23 @@ When it gives up, it names the pods still starting.
 
 `ov stack describe` prints the stack's record, endpoints and a configuration summary.
 
-<!-- PENDING-RUN (docs-ov): ov stack describe output -->
+This is a local OpenVidu PRO stack:
+
+```console
+$ ov stack describe
+Stack:       qal2
+Type:        single_node
+Environment: local
+Edition:     pro
+Endpoint:    http://localhost:7880
+Spec:        openvidu-stack.yml
+Access:      local
+
+Nodes:
+  localhost        local        running
+```
+
+<!-- CHECK (docs-ov): the first line reads "Context:" in ov-admin of 2026-10-31; mvp-qa renames it to "Stack:" (unpushed). Verify before publishing. PENDING-RUN (mvp-qa): describe of a server stack -->
 
 ## Health test
 

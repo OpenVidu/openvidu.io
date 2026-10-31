@@ -64,13 +64,46 @@ The deployment is a normal `docker compose` project inside the stack directory (
 
     `--edition pro` runs OpenVidu PRO on the same Docker Compose engine (not Kubernetes) — the Pro media engine and the Pro images, locally:
 
-    ```bash
-    mkdir labc-stack && cd labc-stack
-    ov stack deploy labc --environment local --edition pro \
-      --openvidu-pro-license <your-license> --modules livekit-server,egress
+    ```console
+    $ mkdir qal2 && cd qal2
+    $ ov stack deploy qal2 --environment local --edition pro --no-lan --openvidu-pro-license <your-license>
+    wrote spec to openvidu-stack.yml
+    materializing the deployment into ./openvidu-local-qal2 and starting it (the first run downloads images)…
+    ✓ docker compose up -d --remove-orphans
+    ✔ OpenVidu compose deployment started in ./openvidu-local-qal2
+    ✔ stack "qal2" recorded in this directory
+      OpenVidu Meet API: http://localhost:9080
+    waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
+      ⏳ still starting: OpenVidu, Meet, Dashboard, MinIO (0s)
+      ⏳ still starting: Meet, Dashboard (2s)
+    …
+      ⏳ still starting: Meet, Dashboard (21s)
+
+    ====================================================
+    🎉 OpenVidu is ready! 🎉
+    ====================================================
+
+    This deployment is for local development only. Do not use it in production.
+
+    ------------------ OpenVidu Meet -------------------
+      - Access from this machine:
+          - http://localhost:9080
+      - Credentials:
+          - Username: admin
+          - Password: ********
+          - API Key:  meet-api-key
+
+    ----------------- LiveKit Server API ---------------
+      - Access from this machine:
+          - http://localhost:7880
+          - ws://localhost:7880
+      - Credentials:
+          - API Key:    devkey
+          - API Secret: ********
+    …
     ```
 
-    <!-- PENDING-RUN (docs-ov): local pro deploy output -->
+    `--no-lan` keeps the stack on `localhost`, without the HTTPS access from other devices of your network.
 
 !!! warning "One local OpenVidu runs at a time"
 
