@@ -1450,6 +1450,11 @@
   gap: 14px;
 }
 
+/* Grids of showcases or figures take the wider gap of the section rhythm */
+.ov-grid:has(> .ov-showcase, > .ov-figure) {
+  gap: 20px;
+}
+
 .ov-grid--2 {
   grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
 }
@@ -1546,6 +1551,17 @@
 
 .md-typeset .ov-landing .ov-card__media .highlight {
   margin: 0;
+}
+
+/* Consecutive cards in a section (showcases, card grids, figures) keep the same air between
+   them as the grids keep between their cells; without this they stack border to border. */
+.md-typeset .ov-landing .ov-section > :is(.ov-showcase, .ov-grid, .ov-figure) + :is(.ov-showcase, .ov-grid, .ov-figure) {
+  margin-top: 20px;
+}
+
+/* A lead paragraph that follows a card grid, introducing the next block */
+.md-typeset .ov-landing .ov-section > .ov-lead--after {
+  margin-top: 28px;
 }
 
 /* A showcase: a big media card with its title and text beside or above it */
