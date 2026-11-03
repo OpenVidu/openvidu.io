@@ -128,6 +128,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
 | **`V2COMPAT_OPENVIDU_RECORDING_ZIP_FILES`** | If `true`, save individual recordings as zip files |
 | **`V2COMPAT_OPENVIDU_RECORDING_RAW_FILES`** | If `true`, save individual recordings as files directly |
+| **`V2COMPAT_OPENVIDU_RECORDING_AUTOSTOP_TIMEOUT`** | Number of seconds that a session, and therefore its recording, remains active after the last participant leaves. It must be an integer greater than or equal to `1`; any other value is ignored and the default is used. Default value is `1`. <br>In OpenVidu 3 a recording is tied to its session, so keeping the recording active requires keeping the session alive. In OpenVidu 2 the session was destroyed immediately when the last participant left, while the recording continued independently. The OpenVidu 2 equivalent is `120`, but the default is `1` to preserve the session lifecycle of OpenVidu 2. It applies to the sessions created after the service starts with the new value. |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET`** | Default bucket name for recordings |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for the recordings |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY`** | Access key for the recordings S3 bucket |
