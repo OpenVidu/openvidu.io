@@ -26,8 +26,8 @@ authors:
 
 # ARM or x86 for WebRTC media servers? Participants per node on 3 clouds
 
-![Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud](/assets/images/blog/YYYY/MM/arm-vs-x86-webrtc-server-costs/participants-per-node-light.png#only-light "ARM vs x86: participants per OpenVidu node"){ .round-corners }
-![Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud](/assets/images/blog/YYYY/MM/arm-vs-x86-webrtc-server-costs/participants-per-node-dark.png#only-dark "ARM vs x86: participants per OpenVidu node"){ .round-corners }
+![Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud](/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/participants-per-node-light.png#only-light "ARM vs x86: participants per OpenVidu node"){ .round-corners }
+![Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud](/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/participants-per-node-dark.png#only-dark "ARM vs x86: participants per OpenVidu node"){ .round-corners }
 
 On every major cloud, an ARM instance costs less per hour than the x86 instance of the same size. On AWS, for example, a 4-vCPU Graviton3 machine is about 20% cheaper than its Intel equivalent. But a lower price only saves money if the machine can handle a similar load, and for a WebRTC media server that means forwarding a similar number of RTP packets per second.
 
@@ -107,8 +107,8 @@ Breaking the results down:
 
 Dividing the hourly price by the number of participants at 80% CPU gives the compute cost of having 1,000 participants in calls for one hour:
 
-![Compute cost per 1,000 participant-hours at 80% CPU, ARM vs x86, by cloud](/assets/images/blog/YYYY/MM/arm-vs-x86-webrtc-server-costs/cost-per-participant-light.png#only-light "Compute cost per 1,000 participant-hours"){ .round-corners loading=lazy }
-![Compute cost per 1,000 participant-hours at 80% CPU, ARM vs x86, by cloud](/assets/images/blog/YYYY/MM/arm-vs-x86-webrtc-server-costs/cost-per-participant-dark.png#only-dark "Compute cost per 1,000 participant-hours"){ .round-corners loading=lazy }
+![Compute cost per 1,000 participant-hours at 80% CPU, ARM vs x86, by cloud](/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/cost-per-participant-light.png#only-light "Compute cost per 1,000 participant-hours"){ .round-corners loading=lazy }
+![Compute cost per 1,000 participant-hours at 80% CPU, ARM vs x86, by cloud](/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/cost-per-participant-dark.png#only-dark "Compute cost per 1,000 participant-hours"){ .round-corners loading=lazy }
 
 The two cheapest options are Oracle's `E5` (x86, $0.101) and AWS's Graviton4 (ARM, $0.123). The most expensive is Google's `t2a` (ARM, $0.244), 32% more than the `t2d` in the same cloud.
 
