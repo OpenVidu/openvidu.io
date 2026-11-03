@@ -11,7 +11,7 @@ Participants **react** with an emoji to show how they feel without speaking or w
 
 ## Sending a reaction { #sending-a-reaction }
 
-Hover over the **Reactions** button in the toolbar, right after [**Raise hand**](raise-hand.md), and pick one of the eight reactions: 👍 👎 😀 🙁 😕 😮 👏 ❤️. From the keyboard, press `E` anywhere outside a text field to open the picker, and then a number from `1` to `8` to send the reaction in that place. On phones, the reactions are in the **More options** menu.
+Hover over the **Reactions** button in the toolbar, right after [**Raise hand**](raise-hand.md), and pick one of the eight reactions: 👍 👎 😀 🙁 😕 😮 👏 ❤️. From the keyboard, press `E` anywhere outside a text field to open the picker, and then a number from `1` to `8` to send the reaction in that place. In a meeting embedded with the Web Component, these keys work once you have clicked inside the meeting, not while you are using the rest of the page. On phones, the reactions are in the **More options** menu.
 
 Your reaction shows on your own camera tile, and the button wears it with a ring that empties as its time runs out. A new reaction replaces the previous one and starts its time over.
 

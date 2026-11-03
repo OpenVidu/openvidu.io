@@ -11,7 +11,7 @@ Participants **raise their hand** to ask for a turn without interrupting whoever
 
 ## Raising your hand { #raising-your-hand }
 
-Click the **Raise hand** button in the toolbar, or press the `R` key anywhere outside a text field. Click it or press `R` again to lower your hand. On phones, the button is in the **More options** menu.
+Click the **Raise hand** button in the toolbar, or press the `R` key anywhere outside a text field. Click it or press `R` again to lower your hand. In a meeting embedded with the Web Component, the key works once you have clicked inside the meeting, not while you are using the rest of the page. On phones, the button is in the **More options** menu.
 
 Your camera tile is highlighted and shows your place in the queue. When a hand ahead of yours goes down, your place moves up.
 
