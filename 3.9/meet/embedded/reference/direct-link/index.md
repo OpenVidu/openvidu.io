@@ -14,9 +14,9 @@ When someone clicks the link, they'll be redirected to the OpenVidu Meet room in
 
 > **A room URL is a room access link**
 >
-> The room URL is a [room access link](https://openvidu.io/3.9/meet/features/rooms/access/index.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](https://openvidu.io/3.9/meet/features/rooms/access/index.md) for all of them.
+> The room URL is a [room access link](https://openvidu.io/latest/meet/features/rooms/access/index.md). The examples use the **anonymous** moderator/speaker links, but a room also has **user** and **identified-guest** links — see [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for all of them.
 >
-> You can get them programmatically from your backend with the [REST API](https://openvidu.io/3.9/meet/embedded/reference/api.html#/schemas/MeetRoom) : the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
+> You can get them programmatically from your backend with the [REST API](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoom) : the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the `MeetRoom` object, or an identified guest's `accessUrl`.
 
 ## API Reference
 
@@ -24,7 +24,7 @@ When someone clicks the link, they'll be redirected to the OpenVidu Meet room in
 
 > **Info**
 >
-> Direct links accept the same **attributes** as the OpenVidu Meet Web Component, except `room-url` and `recording-url`: the link's `href` plays that role instead. See [Web Component Attributes](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/#attributes) for the full list and descriptions.
+> Direct links accept the same **attributes** as the OpenVidu Meet Web Component, except `room-url` and `recording-url`: the link's `href` plays that role instead. See [Web Component Attributes](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#attributes) for the full list and descriptions.
 
 Customize the meeting by passing attributes as query parameters in the room URL:
 
@@ -36,8 +36,8 @@ Customize the meeting by passing attributes as query parameters in the room URL:
 
 ### Commands
 
-Direct links do not support programmatic commands since the meeting runs in a separate browser context. If you need to control the meeting programmatically, consider using the [Web Component](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md) or [Iframe](https://openvidu.io/3.9/meet/embedded/reference/iframe/index.md) approaches instead.
+Direct links do not support programmatic commands since the meeting runs in a separate browser context. If you need to control the meeting programmatically, consider using the [Web Component](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md) or [Iframe](https://openvidu.io/latest/meet/embedded/reference/iframe/index.md) approaches instead.
 
 ### Events
 
-Direct links do not emit events to your application since the meeting runs in a separate browser context. If you need to listen to meeting events, consider using the [Web Component](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md) or [Iframe](https://openvidu.io/3.9/meet/embedded/reference/iframe/index.md) approaches instead.
+Direct links do not emit events to your application since the meeting runs in a separate browser context. If you need to listen to meeting events, consider using the [Web Component](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md) or [Iframe](https://openvidu.io/latest/meet/embedded/reference/iframe/index.md) approaches instead.

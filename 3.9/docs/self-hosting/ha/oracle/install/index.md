@@ -4,9 +4,9 @@ Oracle Cloud Infrastructure
 
 > **Info**
 >
-> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu High Availability cluster on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises High Availability installation](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/install-nlb/index.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
+This section describes how to deploy a production-ready OpenVidu High Availability cluster on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises High Availability installation](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-nlb/index.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
 - An **OCI Network Load Balancer (NLB)** is the public entry point for the cluster. It distributes HTTPS (443), HTTP (80) and RTMP (1935) traffic across the 4 Master Nodes.
 - **OCI Object Storage** (S3-compatible via Customer Secret Keys) is used through two buckets: one for application data and recordings, and another for cluster-wide shared state (including the generated SSH key).
@@ -155,7 +155,7 @@ Build the scale-in function image yourself from the OpenVidu sources and push it
    > | `compartment_ocid`        | OCI Compartment OCID where resources will be created.                                                                                                                                                                                                                                                                                                            |
    > | `user_ocid`               | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage.                                                                                                                                                                                                                                                                    |
    > | `stackName`               | Stack name for the OpenVidu deployment.                                                                                                                                                                                                                                                                                                                          |
-   > | `openviduLicense`         | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/3.9/account/index.md) to obtain your license.                                                                                                                                                                                                                                        |
+   > | `openviduLicense`         | OpenVidu PRO license key. Visit [your OpenVidu account](https://openvidu.io/account/) to obtain your license.                                                                                                                                                                                                                                        |
    > | `scale_in_function_image` | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
    >
    > ### Optional Parameters
@@ -296,8 +296,8 @@ If something goes wrong during the initial Oracle Cloud Infrastructure deploymen
 
    These logs contain detailed information about the Oracle Cloud Infrastructure deployment process.
 
-1. If everything appears to be in order, check the [status](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services) and [logs](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-logs) of the installed OpenVidu services on all Master Nodes and Media Nodes.
+1. If everything appears to be in order, check the [status](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services) and [logs](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-logs) of the installed OpenVidu services on all Master Nodes and Media Nodes.
 
 ### Configuration and administration
 
-Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](https://openvidu.io/3.9/docs/self-hosting/ha/oracle/admin/index.md) section to learn how to manage your OpenVidu High Availability deployment.
+Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](https://openvidu.io/latest/docs/self-hosting/ha/oracle/admin/index.md) section to learn how to manage your OpenVidu High Availability deployment.

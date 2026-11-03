@@ -1,12 +1,12 @@
 # OpenVidu skills
 
-A skill is a set of instructions that a coding agent loads when a task calls for it, defined by the [Agent Skills specification](https://agentskills.io/specification) . OpenVidu's skills are included in the [OpenVidu Agent Plugin](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/index.md), and can also be installed on their own.
+A skill is a set of instructions that a coding agent loads when a task calls for it, defined by the [Agent Skills specification](https://agentskills.io/specification) . OpenVidu's skills are included in the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md), and can also be installed on their own.
 
 ## Available skills
 
 | Skill                              | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `openvidu-version-edition-product` | Finds out which OpenVidu version, edition and product your project uses when an answer depends on them. It reads them from the deployment itself, asks before contacting a remote host and never reads a credential. Then it offers to write them into `AGENTS.md` or `CLAUDE.md`, [like this](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/#tell-your-agent-which-openvidu-you-run). It needs the [documentation server](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/index.md). |
+| `openvidu-version-edition-product` | Finds out which OpenVidu version, edition and product your project uses when an answer depends on them. It reads them from the deployment itself, asks before contacting a remote host and never reads a credential. Then it offers to write them into `AGENTS.md` or `CLAUDE.md`, [like this](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/#tell-your-agent-which-openvidu-you-run). It needs the [documentation server](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/index.md). |
 
 ## Install
 
@@ -52,11 +52,11 @@ Claude Code lists them in `/skills`. In VS Code, type `/` in the chat. Elsewhere
 
 ## Keep them current
 
-- **With the plugin**, they update with it: see the **Updates** line of your client in [Install](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/#install).
+- **With the plugin**, they update with it: see the **Updates** line of your client in [Install](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/#install).
 - **With the skills CLI**, run `npx skills update`.
 - **Copied by hand**, copy them again.
 
-A client without skills can still get what the `openvidu-version-edition-product` skill would establish: [write it into `AGENTS.md`](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/#tell-your-agent-which-openvidu-you-run) yourself.
+A client without skills can still get what the `openvidu-version-edition-product` skill would establish: [write it into `AGENTS.md`](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/#tell-your-agent-which-openvidu-you-run) yourself.
 
 ## Troubleshooting
 

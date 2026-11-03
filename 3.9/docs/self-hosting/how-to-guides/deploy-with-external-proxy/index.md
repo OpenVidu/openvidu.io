@@ -6,7 +6,7 @@ By default, OpenVidu is deployed with an internal [Caddy server](https://caddyse
 - A specific proxy server is required for enhanced security.
 - You need to integrate a proxy server already in your infrastructure.
 
-If none of these scenarios apply to you and you prefer to use the default internal Caddy server, please refer to the [official installation guides](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md).
+If none of these scenarios apply to you and you prefer to use the default internal Caddy server, please refer to the [official installation guides](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
 
 For those needing to deploy OpenVidu using an external proxy, this guide offers detailed steps to deploy it and configure the external proxy.
 
@@ -18,7 +18,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
 > **Note**
 >
-> The Single Node deployment with an external proxy is based on the same instructions as the [Single Node Deployment](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/index.md) (both the COMMUNITY and PRO editions), but with some modifications to the installation command and port rules. We recommend reading the installation guide before proceeding with this guide for a better understanding of the deployment.
+> The Single Node deployment with an external proxy is based on the same instructions as the [Single Node Deployment](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md) (both the COMMUNITY and PRO editions), but with some modifications to the installation command and port rules. We recommend reading the installation guide before proceeding with this guide for a better understanding of the deployment.
 
 This is what the architecture of the deployment looks like:
 
@@ -27,7 +27,7 @@ This is what the architecture of the deployment looks like:
 To deploy OpenVidu with an external proxy, ensure you have the following prerequisites:
 
 - **A machine with at least 4GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**. This machine will serve as the OpenVidu server.
-- An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as OpenVidu, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/#port-rules), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
+- An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as OpenVidu, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#port-rules), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
 - **Generous disk space (100GB recommended)** if you are going to record your sessions.
 - The machine where OpenVidu is installed **must have a Public IP or a reachable IP from the users**.
 - The proxy server also **must have a Public IP or a reachable IP from the users**.
@@ -36,7 +36,7 @@ To deploy OpenVidu with an external proxy, ensure you have the following prerequ
 
 **2. Port Rules**
 
-You can follow the same rule ports of the [Single Node Deployment](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/#port-rules) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
+You can follow the same rule ports of the [Single Node Deployment](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#port-rules) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
 
 **OpenVidu Machine**
 
@@ -132,7 +132,7 @@ Notes:
 
 - Replace `openvidu.example.io` with your FQDN.
 - Replace `turn.example.io` with your TURN server FQDN.
-- In **PRO** edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](https://openvidu.io/3.9/account/index.md) .
+- In **PRO** edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here](https://openvidu.io/account/) .
 - In **PRO** edition, depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
 
 **4. Configure the external proxy**
@@ -263,13 +263,13 @@ Notes:
 - Replace `<SINGLE_NODE_PRIVATE_IP>` with the private IP of the OpenVidu server.
 - You can also have a proxy in the same machine as OpenVidu, simply replace `<SINGLE_NODE_PRIVATE_IP>` with `127.0.0.1`.
 
-If you want to force all traffic including WebRTC to go through the external proxy, check the [Force media traffic through port 443](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/force-single-port/index.md) guide.
+If you want to force all traffic including WebRTC to go through the external proxy, check the [Force media traffic through port 443](https://openvidu.io/latest/docs/self-hosting/how-to-guides/force-single-port/index.md) guide.
 
 **Elastic**
 
 > **Note**
 >
-> The Elastic deployment with an external proxy is based on the same instructions as the [Elastic Deployment](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/index.md), but with some modifications to the installation command and port rules. We recommend reading the [Elastic Deployment](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/index.md) guide before proceeding with this guide for a better understanding of the deployment.
+> The Elastic deployment with an external proxy is based on the same instructions as the [Elastic Deployment](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/index.md), but with some modifications to the installation command and port rules. We recommend reading the [Elastic Deployment](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/index.md) guide before proceeding with this guide for a better understanding of the deployment.
 
 This is what the architecture of the deployment looks like:
 
@@ -278,7 +278,7 @@ This is what the architecture of the deployment looks like:
 To deploy OpenVidu Elastic with an external proxy, ensure you have the following prerequisites:
 
 - **At least 2 machines** for OpenVidu, each with a minimum of **4GB RAM**, **4 CPU cores**, and **Linux** installed (Ubuntu is recommended). One machine will serve as the Master Node, while the others will function as Media Nodes.
-- An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/#port-rules-master-node), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
+- An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/#port-rules-master-node), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
 - Significant disk space on the **Master Node, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
 - **Each machine must have a Public IP or a reachable IP from the users**.
 - **The proxy server must have a Public IP or a reachable IP from the users**.
@@ -287,7 +287,7 @@ To deploy OpenVidu Elastic with an external proxy, ensure you have the following
 
 **2. Port Rules**
 
-You can follow the same rule ports of the Elastic Deployment for the [Master Node](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/#port-rules-master-node) and for the [Media Nodes](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/#port-rules-media-nodes) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
+You can follow the same rule ports of the Elastic Deployment for the [Master Node](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/#port-rules-master-node) and for the [Media Nodes](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/#port-rules-media-nodes) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
 
 **Master Node**
 
@@ -380,7 +380,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node
 
 Notes:
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Replace `openvidu.example.io` with your FQDN.
 - Replace `turn.example.io` with your TURN server FQDN.
 - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
@@ -533,8 +533,8 @@ Notes:
 - Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
 - You can also have a proxy in the same machine as the Master Node, simply replace `<MASTER_NODE_PRIVATE_IP>` with `127.0.0.1`.
 
-If you want to force all traffic including WebRTC to go through the external proxy, check the [Force media traffic through port 443](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/force-single-port/index.md) guide.
+If you want to force all traffic including WebRTC to go through the external proxy, check the [Force media traffic through port 443](https://openvidu.io/latest/docs/self-hosting/how-to-guides/force-single-port/index.md) guide.
 
 **High Availability**
 
-The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained [in this section](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/install-nlb/index.md).
+The High Availability deployment already has a way to configure an external proxy (described as a Network Load Balancer), which is explained [in this section](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-nlb/index.md).

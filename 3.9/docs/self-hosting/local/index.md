@@ -112,7 +112,7 @@ To install OpenVidu locally, follow these steps:
 > - Maximum 8 Participants across all Rooms
 > - Maximum 5 minutes duration per Room
 >
-> For a production environment, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get a license key. There's a 15 day free trial waiting for you!
+> For a production environment, you need to [create an OpenVidu account](https://openvidu.io/account/) to get a license key. There's a 15 day free trial waiting for you!
 
 The deployment is ready when you see the following message:
 
@@ -150,7 +150,7 @@ By visiting <http://localhost:7880> you have the OpenVidu Developer UI available
 - **MinIO** (<http://localhost:7880/minio-console>): an S3 storage service for recordings.
 - **OpenVidu Meet** (<http://localhost:9080>): a high-quality video calling service based on OpenVidu.
 
-You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](https://openvidu.io/3.9/docs/tutorials/application-client/index.md) for a step-by-step guide to developing your first application using OpenVidu.
+You just need to point your OpenVidu and LiveKit applications to `http://localhost:7880` or `ws://localhost:7880` and start developing. Check our [tutorials](https://openvidu.io/latest/docs/tutorials/application-client/index.md) for a step-by-step guide to developing your first application using OpenVidu.
 
 ## Configuration
 
@@ -257,4 +257,4 @@ This setup simplifies the configuration of local OpenVidu deployments with SSL, 
 
 The HTTPS offered by `openvidu-local.dev` is intended for development or testing purposes with the sole goal of making your local devices trust your application (which is mandatory in WebRTC applications). For any other use case, it should be treated with the same security considerations as plain HTTP.
 
-For production, you should consider deploying a [production-grade OpenVidu deployment](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-single-node).
+For production, you should consider deploying a [production-grade OpenVidu deployment](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-single-node).
