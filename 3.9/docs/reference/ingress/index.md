@@ -16,7 +16,7 @@ The full enum is [`IngressInput`](https://docs.livekit.io/reference/other/ingres
 
 > **IP cameras**
 >
-> RTSP cameras are ingested through `URL_INPUT`, passing the camera's `rtsp://` URL. There is a worked example in eight languages under [IP Cameras](https://openvidu.io/3.9/docs/build-your-app/common-operations/#ip-cameras).
+> RTSP cameras are ingested through `URL_INPUT`, passing the camera's `rtsp://` URL. There is a worked example in eight languages under [IP Cameras](https://openvidu.io/latest/docs/build-your-app/common-operations/#ip-cameras).
 
 ### Push and pull workflows
 
@@ -38,7 +38,7 @@ A **pull** Ingress (`URL_INPUT`) starts on its own:
 
 ## Creating an Ingress
 
-Ingress are created by making a request to the [Ingress API](https://docs.livekit.io/reference/other/ingress/api/) from your application server. Requests to the Ingress API require a token with the [`ingressAdmin` grant](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
+Ingress are created by making a request to the [Ingress API](https://docs.livekit.io/reference/other/ingress/api/) from your application server. Requests to the Ingress API require a token with the [`ingressAdmin` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
 
 The example below creates an RTMP Ingress that publishes into `"my-room"`:
 
@@ -226,7 +226,7 @@ var ingressInfo = await ingressClient.CreateIngress(new CreateIngressRequest
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Server API](https://openvidu.io/3.9/docs/reference/room-service-api/index.md) directly. `CreateIngress` is a POST to `/twirp/livekit.Ingress/CreateIngress`, authenticated with a token carrying the `ingressAdmin` [grant](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants):
+1. Call the [Server API](https://openvidu.io/latest/docs/reference/room-service-api/index.md) directly. `CreateIngress` is a POST to `/twirp/livekit.Ingress/CreateIngress`, authenticated with a token carrying the `ingressAdmin` [grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Ingress/CreateIngress' \
@@ -275,7 +275,7 @@ These are the fields of the create request:
 | `url`                  | Where to pull media from. `URL_INPUT` only                                                                                                                 |
 | `name`                 | Your own label for this Ingress                                                                                                                            |
 | `room_name`            | The Room to publish into                                                                                                                                   |
-| `participant_identity` | Identity the Ingress publishes as. Same uniqueness rules as any [participant identity](https://openvidu.io/3.9/docs/reference/access-tokens/#token-claims) |
+| `participant_identity` | Identity the Ingress publishes as. Same uniqueness rules as any [participant identity](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims) |
 | `participant_name`     | Display name of the publishing participant                                                                                                                 |
 | `participant_metadata` | Metadata attached to the publishing participant                                                                                                            |
 | `enable_transcoding`   | Whether to re-encode the incoming media. See [Transcoding](#transcoding)                                                                                   |
@@ -393,7 +393,7 @@ The fields that matter most:
 
 ### Webhooks
 
-Two [webhook events](https://openvidu.io/3.9/docs/reference/webhooks/#events) track an Ingress, both carrying the full `ingressInfo`:
+Two [webhook events](https://openvidu.io/latest/docs/reference/webhooks/#events) track an Ingress, both carrying the full `ingressInfo`:
 
 | Event             | Fires when                                 |
 | ----------------- | ------------------------------------------ |
@@ -404,8 +404,8 @@ An Ingress publishing into a Room also produces ordinary participant and track e
 
 ## Related
 
-- [IP Cameras](https://openvidu.io/3.9/docs/build-your-app/common-operations/#ip-cameras): RTSP ingest in eight languages.
-- [Stream ingestion](https://openvidu.io/3.9/docs/build-your-app/common-operations/#stream-ingestion): choosing between the input types.
-- [Access tokens reference](https://openvidu.io/3.9/docs/reference/access-tokens/index.md): the `ingressAdmin` grant gates these operations.
-- [Webhooks reference](https://openvidu.io/3.9/docs/reference/webhooks/index.md): the Ingress events and their payloads.
-- [Egress reference](https://openvidu.io/3.9/docs/reference/egress/index.md): media in the other direction.
+- [IP Cameras](https://openvidu.io/latest/docs/build-your-app/common-operations/#ip-cameras): RTSP ingest in eight languages.
+- [Stream ingestion](https://openvidu.io/latest/docs/build-your-app/common-operations/#stream-ingestion): choosing between the input types.
+- [Access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): the `ingressAdmin` grant gates these operations.
+- [Webhooks reference](https://openvidu.io/latest/docs/reference/webhooks/index.md): the Ingress events and their payloads.
+- [Egress reference](https://openvidu.io/latest/docs/reference/egress/index.md): media in the other direction.

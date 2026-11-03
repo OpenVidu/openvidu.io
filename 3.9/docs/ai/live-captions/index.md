@@ -6,9 +6,9 @@ Transcribe the audio tracks of your Rooms in real time with great accuracy and d
 
 Live Captions service is provided by the **Speech Processing agent**:
 
-[Enable the Speech Processing agent](https://openvidu.io/3.9/docs/ai/openvidu-agents/speech-processing-agent/#enable-the-agent-and-configure-ai-services)
+[Enable the Speech Processing agent](https://openvidu.io/latest/docs/ai/openvidu-agents/speech-processing-agent/#enable-the-agent-and-configure-ai-services)
 
-You configure the Live Captions service by setting up the following properties when [modifying file `agent-speech-processing.yaml`](https://openvidu.io/3.9/docs/ai/openvidu-agents/speech-processing-agent/#2-modify-file-agent-speech-processingyaml):
+You configure the Live Captions service by setting up the following properties when [modifying file `agent-speech-processing.yaml`](https://openvidu.io/latest/docs/ai/openvidu-agents/speech-processing-agent/#2-modify-file-agent-speech-processingyaml):
 
 [agent-speech-processing.yaml](https://github.com/OpenVidu/openvidu-agents/blob/3.9.0/speech-processing/agent-speech-processing.yaml)
 
@@ -47,9 +47,9 @@ live_captions:
 You can decide when the Speech Processing agent will connect to Rooms to provide Live Captions service:
 
 - **Automatic processing**: the agent will automatically connect to new Rooms as soon as they are created. All your Rooms will be transcribed without any additional action from your application. Set YAML property `live_captions.processing` to `automatic` in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment).
-- **Manual processing**: the agent will connect to new Rooms only when your application dictates it with [explicit agent dispatch](https://openvidu.io/3.9/docs/ai/openvidu-agents/agent-dispatch/#explicit-agent-dispatch). This allows you to toggle Live Captions service on demand for specific Rooms. Set YAML property `live_captions.processing` to `manual` in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment).
+- **Manual processing**: the agent will connect to new Rooms only when your application dictates it with [explicit agent dispatch](https://openvidu.io/latest/docs/ai/openvidu-agents/agent-dispatch/#explicit-agent-dispatch). This allows you to toggle Live Captions service on demand for specific Rooms. Set YAML property `live_captions.processing` to `manual` in file [`agent-speech-processing.yaml`](#how-to-enable-live-captions-service-in-your-openvidu-deployment).
 
-Learn more about [Automatic vs Manual processing](https://openvidu.io/3.9/docs/ai/openvidu-agents/agent-dispatch/index.md).
+Learn more about [Automatic vs Manual processing](https://openvidu.io/latest/docs/ai/openvidu-agents/agent-dispatch/index.md).
 
 ## How to receive Live Captions in your frontend application
 
@@ -243,7 +243,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.9.0`
 
 > **Info**
 >
-> Sherpa live captions provider is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> Sherpa live captions provider is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ##### Sherpa vs Vosk
 
@@ -449,7 +449,7 @@ How many participants one Speech Processing agent can transcribe at the same tim
 
 ##### Increasing capacity with smaller models
 
-For smaller models without multilingual support you can configure the `job_executor` property in [`agent-speech-processing.yaml`](https://openvidu.io/3.9/docs/ai/openvidu-agents/speech-processing-agent/#configuration-reference) depending on your hardware and your needs:
+For smaller models without multilingual support you can configure the `job_executor` property in [`agent-speech-processing.yaml`](https://openvidu.io/latest/docs/ai/openvidu-agents/speech-processing-agent/#configuration-reference) depending on your hardware and your needs:
 
 - `job_executor: thread` (default value): transcribe all Rooms under the same process using threads. That saves memory, but can hit a limit of about 20 concurrent audio tracks per agent container.
 - `job_executor: process`: transcribe each Room in its own process. Each process has to load the transcription model in memory, so memory consumption can grow fast. But this allows the agent container to scale with the CPUs of the server.
@@ -458,7 +458,7 @@ Configuring **`job_executor: process`** only makes sense in smaller, monolingual
 
 ## Tutorial
 
-Check out the [Live Captions tutorial](https://openvidu.io/3.9/docs/tutorials/ai-services/openvidu-live-captions/index.md) for a complete example.
+Check out the [Live Captions tutorial](https://openvidu.io/latest/docs/tutorials/ai-services/openvidu-live-captions/index.md) for a complete example.
 
 ## Configuration reference
 

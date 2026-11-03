@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Every OpenVidu Blog article filed under Research: 3 posts, on self-hosted video conferencing and WebRTC engineering.">
+        <meta name="description" content="Every OpenVidu Blog article filed under Research: 4 posts, on self-hosted video conferencing and WebRTC engineering.">
       
       
       
@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="OpenVidu">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Research">
-<meta property="og:description" content="Every OpenVidu Blog article filed under Research: 3 posts, on self-hosted video conferencing and WebRTC engineering.">
+<meta property="og:description" content="Every OpenVidu Blog article filed under Research: 4 posts, on self-hosted video conferencing and WebRTC engineering.">
 <meta property="og:url" content="https://openvidu.io/blog/category/research/">
 <meta property="og:image" content="https://openvidu.io/assets/images/og/openvidu-card.png">
 <meta property="og:image:width" content="1200">
@@ -1093,6 +1093,8 @@
       
         
       
+        
+      
     
     
     
@@ -1111,7 +1113,7 @@
   
   
   
-    <a href="../../archive/2026/10/" class="md-nav__link">
+    <a href="../../archive/2026/11/" class="md-nav__link">
       
   
   
@@ -1923,6 +1925,59 @@
       <header class="md-typeset">
         <h1 id="research">Research<a class="headerlink" href="#research" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorSF.jpg" alt="Sergio Fernández">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-11-03 00:00:00+00:00">November 3, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../comparison/" class="md-meta__link">Comparison</a>, 
+              <a href="./" class="md-meta__link">Research</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="arm-or-x86-for-webrtc-media-servers-participants-per-node-on-3-clouds"><a class="toclink" href="../../2026/11/03/arm-vs-x86-webrtc-server-costs/">ARM or x86 for WebRTC media servers? Participants per node on 3 clouds</a></h2>
+<p><img alt="Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud" class="round-corners" src="/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/participants-per-node-light.png#only-light" title="ARM vs x86: participants per OpenVidu node">
+<img alt="Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud" class="round-corners" src="/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/participants-per-node-dark.png#only-dark" title="ARM vs x86: participants per OpenVidu node"></p>
+<p>On every major cloud, an ARM instance costs less per hour than the x86 instance of the same size. On AWS, for example, a 4-vCPU Graviton3 machine is about 20% cheaper than its Intel equivalent. But a lower price only saves money if the machine can handle a similar load, and for a WebRTC media server that means forwarding a similar number of RTP packets per second.</p>
+<p>We didn't find any published numbers for SFU workloads on ARM, so we ran the test ourselves. We deployed the same OpenVidu 3.8 single node on matching ARM and x86 instances in AWS, Google Cloud and Oracle Cloud, and used the same load generator and ramp on all of them, adding participants until the CPU ran out.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="../../2026/11/03/arm-vs-x86-webrtc-server-costs/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">

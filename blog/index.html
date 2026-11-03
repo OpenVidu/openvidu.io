@@ -185,6 +185,12 @@
       "blogPost": [
         {
           "@type": "BlogPosting",
+          "headline": "ARM or x86 for WebRTC media servers? Participants per node on 3 clouds",
+          "url": "https://openvidu.io/blog/2026/11/03/arm-vs-x86-webrtc-server-costs/",
+          "datePublished": "2026-11-03"
+        },
+        {
+          "@type": "BlogPosting",
           "headline": "How Dicode built private video calls on OpenVidu",
           "url": "https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/",
           "datePublished": "2026-10-27"
@@ -1257,6 +1263,8 @@
       
         
       
+        
+      
     
     
     
@@ -1275,7 +1283,7 @@
   
   
   
-    <a href="archive/2026/10/" class="md-nav__link">
+    <a href="archive/2026/11/" class="md-nav__link">
       
   
   
@@ -1647,6 +1655,59 @@
       <header class="md-typeset">
         <h1 id="blog">Blog<a class="headerlink" href="#blog" title="Anchor link to this section for reference">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorSF.jpg" alt="Sergio Fernández">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-11-03 00:00:00+00:00">November 3, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/comparison/" class="md-meta__link">Comparison</a>, 
+              <a href="category/research/" class="md-meta__link">Research</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="arm-or-x86-for-webrtc-media-servers-participants-per-node-on-3-clouds"><a class="toclink" href="2026/11/03/arm-vs-x86-webrtc-server-costs/">ARM or x86 for WebRTC media servers? Participants per node on 3 clouds</a></h2>
+<p><img alt="Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud" class="round-corners" src="/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/participants-per-node-light.png#only-light" title="ARM vs x86: participants per OpenVidu node">
+<img alt="Participants per node at 80% CPU, ARM vs x86, on AWS, Google Cloud and Oracle Cloud" class="round-corners" src="/assets/images/blog/2026/11/arm-vs-x86-webrtc-server-costs/participants-per-node-dark.png#only-dark" title="ARM vs x86: participants per OpenVidu node"></p>
+<p>On every major cloud, an ARM instance costs less per hour than the x86 instance of the same size. On AWS, for example, a 4-vCPU Graviton3 machine is about 20% cheaper than its Intel equivalent. But a lower price only saves money if the machine can handle a similar load, and for a WebRTC media server that means forwarding a similar number of RTP packets per second.</p>
+<p>We didn't find any published numbers for SFU workloads on ARM, so we ran the test ourselves. We deployed the same OpenVidu 3.8 single node on matching ARM and x86 instances in AWS, Google Cloud and Oracle Cloud, and used the same load generator and ramp on all of them, adding participants until the CPU ran out.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="2026/11/03/arm-vs-x86-webrtc-server-costs/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
@@ -2114,59 +2175,6 @@
     
       <nav class="md-post__action">
         <a href="2026/09/01/low-latency-live-streaming/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorCR.jpg" alt="Carlos Ruiz">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-08-25 00:00:00+00:00">August 25, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/research/" class="md-meta__link">Research</a>, 
-              <a href="category/ai/" class="md-meta__link">AI</a>, 
-              <a href="category/openvidu-platform/" class="md-meta__link">OpenVidu Platform</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              14 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="debugging-webrtc-with-an-ai-agent-and-grafana-mcp"><a class="toclink" href="2026/08/25/debugging-webrtc-with-ai-and-grafana-mcp/">Debugging WebRTC with an AI agent and Grafana MCP</a></h2>
-<p><img alt="Debugging WebRTC with an AI agent and Grafana MCP: read-only Grafana, a broken deployment, and an agent that works through the metrics to find each root cause" class="round-corners" src="/assets/images/blog/2026/08/debugging-webrtc-with-ai-and-grafana-mcp/poster.webp" width="100%"></p>
-<p>What if you gave an AI agent nothing but <strong>read-only access to your Grafana</strong>, pointed it at a WebRTC deployment it had never seen, and asked what was broken? No shell, no source code, no config files, nothing but the dashboards and logs any on-call engineer would stare at. Could it actually find the root cause?</p>
-<p>That is the experiment we ran at OpenVidu. We took a real OpenVidu deployment, broke it on purpose in five different ways, and handed a blind Claude Code session a single vague complaint and a link to Grafana. This post walks through what it found, where it shone and where it fell flat, and it ships with a companion repo so you can reproduce every bit of it yourself.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="2026/08/25/debugging-webrtc-with-ai-and-grafana-mcp/">
           Continue reading
         </a>
       </nav>

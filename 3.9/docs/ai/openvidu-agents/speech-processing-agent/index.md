@@ -4,17 +4,17 @@ The Speech Processing agent provides all the AI services related to transcribing
 
 ## List of provided AI services
 
-- [**Live Captions**](https://openvidu.io/3.9/docs/ai/live-captions/index.md): transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.
+- [**Live Captions**](https://openvidu.io/latest/docs/ai/live-captions/index.md): transcribe the audio tracks of your Rooms in real time with great accuracy and display the results as live captions in your frontend.
 
 ## Enable the agent and configure AI services
 
 ### 1. SSH into an OpenVidu Node and go to configuration folder
 
-Depending on your [OpenVidu deployment type](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md):
+Depending on your [OpenVidu deployment type](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
 **OpenVidu Local (Development)**
 
-If you are using [OpenVidu Local (Development)](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-local-development), simply navigate to the configuration folder of the project:
+If you are using [OpenVidu Local (Development)](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-local-development), simply navigate to the configuration folder of the project:
 
 ```bash
 # For OpenVidu Local COMMUNITY
@@ -26,7 +26,7 @@ cd openvidu-local-deployment/pro
 
 **OpenVidu Single Node**
 
-If you are using [OpenVidu Single Node](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
+If you are using [OpenVidu Single Node](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
 
 ```bash
 cd /opt/openvidu/config
@@ -34,7 +34,7 @@ cd /opt/openvidu/config
 
 **OpenVidu Elastic**
 
-If you are using [OpenVidu Elastic](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-elastic), SSH into the only Master Node and navigate to:
+If you are using [OpenVidu Elastic](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-elastic), SSH into the only Master Node and navigate to:
 
 ```bash
 cd /opt/openvidu/config/cluster/media_node
@@ -42,7 +42,7 @@ cd /opt/openvidu/config/cluster/media_node
 
 **OpenVidu High Availability**
 
-If you are using [OpenVidu High Availability](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
+If you are using [OpenVidu High Availability](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
 
 ```bash
 cd /opt/openvidu/config/cluster/media_node
@@ -62,11 +62,11 @@ enabled: true
 
 You can set up the following AI services in this agent:
 
-- **Live Captions**: see [Live Captions service](https://openvidu.io/3.9/docs/ai/live-captions/#how-to-enable-live-captions-service-in-your-openvidu-deployment).
+- **Live Captions**: see [Live Captions service](https://openvidu.io/latest/docs/ai/live-captions/#how-to-enable-live-captions-service-in-your-openvidu-deployment).
 
 ### 3. Restart OpenVidu
 
-Depending on your [OpenVidu deployment type](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md):
+Depending on your [OpenVidu deployment type](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
 **OpenVidu Local (Development)**
 

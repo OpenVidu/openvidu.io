@@ -7,7 +7,7 @@ The client SDK is what runs in your **application client**:
 - A desktop app
 - IoT and robotic devices
 
-It represents one participant inside a Room. It connects with an [access token](https://openvidu.io/3.9/docs/reference/access-tokens/index.md), publishes camera, microphone or screen, subscribes to what others publish, and raises events as the Room changes around it.
+It represents one participant inside a Room. It connects with an [access token](https://openvidu.io/latest/docs/reference/access-tokens/index.md), publishes camera, microphone or screen, subscribes to what others publish, and raises events as the Room changes around it.
 
 OpenVidu is API-compatible with LiveKit, so the LiveKit client SDKs work unchanged: JavaScript, React, Swift, Android, Flutter, React Native, Unity and more. This page documents the model they all share.
 
@@ -35,7 +35,7 @@ Visit the LiveKit docs for the complete client-side documentation, and for the e
 
 The tutorials build a complete application client in different frameworks:
 
-[**Application client tutorials**](https://openvidu.io/3.9/docs/tutorials/application-client/index.md)
+[**Application client tutorials**](https://openvidu.io/latest/docs/tutorials/application-client/index.md)
 
 ## Connecting to a Room
 
@@ -57,7 +57,7 @@ await room.localParticipant.enableCameraAndMicrophone(); // (4)!
 
 1. Create the `Room` object. It represents this participant's session, and nothing happens on the network yet.
 1. Register Room event handlers. Usually the best place to do this is before connecting to avoid missing events.
-1. Connect to the Room. `OPENVIDU_URL` is your deployment's WebSocket endpoint: `ws://localhost:7880` for a [local deployment](https://openvidu.io/3.9/docs/self-hosting/local/index.md), `wss://your-domain` in production. The token comes from your application server, see [access tokens](https://openvidu.io/3.9/docs/reference/access-tokens/index.md).
+1. Connect to the Room. `OPENVIDU_URL` is your deployment's WebSocket endpoint: `ws://localhost:7880` for a [local deployment](https://openvidu.io/latest/docs/self-hosting/local/index.md), `wss://your-domain` in production. The token comes from your application server, see [access tokens](https://openvidu.io/latest/docs/reference/access-tokens/index.md).
 1. Publish the camera and the microphone of the device, so the other participants can subscribe to them.
 
 ### Disconnect from a Room
@@ -104,8 +104,8 @@ This is equivalent to every participant leaving the Room and joining it again, s
 Some notes:
 
 - A `ConnectionQualityChanged` event with value `lost` is emitted before `Reconnecting` or `Disconnected`. It is the earliest signal that the connection is failing.
-- A `reconnecting` state does not mean the Room is over for the participant. In an [Elastic or High Availability deployment](https://openvidu.io/3.9/docs/self-hosting/production-ready/fault-tolerance/index.md), a Media Node failure is recovered by rebuilding the Room on a healthy node in a few seconds.
-- Reconnecting does not require a new token. The client uses the token that OpenVidu refreshed while it was connected, so the application server is not involved. See [token lifecycle](https://openvidu.io/3.9/docs/reference/access-tokens/#token-lifecycle).
+- A `reconnecting` state does not mean the Room is over for the participant. In an [Elastic or High Availability deployment](https://openvidu.io/latest/docs/self-hosting/production-ready/fault-tolerance/index.md), a Media Node failure is recovered by rebuilding the Room on a healthy node in a few seconds.
+- Reconnecting does not require a new token. The client uses the token that OpenVidu refreshed while it was connected, so the application server is not involved. See [token lifecycle](https://openvidu.io/latest/docs/reference/access-tokens/#token-lifecycle).
 - A participant that leaves without calling `disconnect()`, because the tab was closed or the process was killed, is automatically removed from the Room after 15 seconds.
 
 ## Tracks
@@ -153,7 +153,7 @@ Three behaviours are worth knowing before wiring a UI to them:
 
 - **Muting is not unpublishing.** A muted track stops sending data but stays published, and everyone in the Room receives `TrackMuted`. Unpublishing removes the publication altogether, and only then do the others get `TrackUnpublished`.
 - **Unpublishing does not release the device by itself.** The camera light stays on unless the local track is also stopped.
-- **The token decides what may be published.** The `canPublishSources` grant can allow the camera and the microphone but not the screen, and revoking `canPublish` while connected unpublishes everything that Participant had published. See [video grants](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants).
+- **The token decides what may be published.** The `canPublishSources` grant can allow the camera and the microphone but not the screen, and revoking `canPublish` while connected unpublishes everything that Participant had published. See [video grants](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants).
 
 ### Mute/Unmute a Track
 
@@ -418,8 +418,8 @@ const track = await room.localParticipant.publishDataTrack({ name: "my_sensor_da
 
 Room metadata and participant attributes are not messages but state: the server stores them and synchronizes them to everyone, including participants that connect later.
 
-- **Room metadata** is a single string for the whole Room. Only your application server can set it, with [`CreateRoom`](https://openvidu.io/3.9/docs/reference/room-service-api/#rooms) or [`UpdateRoomMetadata`](https://openvidu.io/3.9/docs/reference/room-service-api/#rooms). Clients read `room.metadata` and listen for event `RoomMetadataChanged`.
-- **Participant attributes** are a key-value store, so a single key can be updated without resending the rest. **Participant metadata** is the single-string equivalent. Both can be given an initial value in the [access token](https://openvidu.io/3.9/docs/reference/access-tokens/index.md), so they are available the moment the participant connects, and a participant can change its own if its token carries grant [`canUpdateOwnMetadata`](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants).
+- **Room metadata** is a single string for the whole Room. Only your application server can set it, with [`CreateRoom`](https://openvidu.io/latest/docs/reference/room-service-api/#rooms) or [`UpdateRoomMetadata`](https://openvidu.io/latest/docs/reference/room-service-api/#rooms). Clients read `room.metadata` and listen for event `RoomMetadataChanged`.
+- **Participant attributes** are a key-value store, so a single key can be updated without resending the rest. **Participant metadata** is the single-string equivalent. Both can be given an initial value in the [access token](https://openvidu.io/latest/docs/reference/access-tokens/index.md), so they are available the moment the participant connects, and a participant can change its own if its token carries grant [`canUpdateOwnMetadata`](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants).
 
 ```typescript
 console.log(room.metadata); // Room metadata, set from your application server
@@ -454,7 +454,7 @@ room.on(RoomEvent.DataReceived, (payload, participant, kind, topic) => {
 });
 ```
 
-Reliable packets are retransmitted and delivered in order; lossy packets are sent once. Each packet holds up to 15 KiB, and your application server can publish them too with [`SendData`](https://openvidu.io/3.9/docs/reference/room-service-api/#data).
+Reliable packets are retransmitted and delivered in order; lossy packets are sent once. Each packet holds up to 15 KiB, and your application server can publish them too with [`SendData`](https://openvidu.io/latest/docs/reference/room-service-api/#data).
 
 ## Room events
 
@@ -512,7 +512,7 @@ Participants emit their own [`ParticipantEvent`](https://docs.livekit.io/referen
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `DataReceived`          | A data message arrived, from a participant or from your backend's `SendData`                                                          | Room, Participant |
 | `ChatMessage`           | A chat message arrived                                                                                                                | Room, Participant |
-| `TranscriptionReceived` | A transcription segment arrived. This is how [live captions](https://openvidu.io/3.9/docs/ai/live-captions/index.md) reach the client | Room, Participant |
+| `TranscriptionReceived` | A transcription segment arrived. This is how [live captions](https://openvidu.io/latest/docs/ai/live-captions/index.md) reach the client | Room, Participant |
 
 ### Quality, devices and diagnostics
 
@@ -528,7 +528,7 @@ Participants emit their own [`ParticipantEvent`](https://docs.livekit.io/referen
 
 ## Related
 
-- [Application client tutorials](https://openvidu.io/3.9/docs/tutorials/application-client/index.md): complete application clients in different frameworks.
-- [Access tokens reference](https://openvidu.io/3.9/docs/reference/access-tokens/index.md): what a participant is allowed to do inside a Room.
-- [Room Service API reference](https://openvidu.io/3.9/docs/reference/room-service-api/index.md): the same Room, managed from your application server.
-- [UI Components](https://openvidu.io/3.9/docs/ui-components/angular-components/index.md): prebuilt components, if you would rather not wire events by hand.
+- [Application client tutorials](https://openvidu.io/latest/docs/tutorials/application-client/index.md): complete application clients in different frameworks.
+- [Access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): what a participant is allowed to do inside a Room.
+- [Room Service API reference](https://openvidu.io/latest/docs/reference/room-service-api/index.md): the same Room, managed from your application server.
+- [UI Components](https://openvidu.io/latest/docs/ui-components/angular-components/index.md): prebuilt components, if you would rather not wire events by hand.

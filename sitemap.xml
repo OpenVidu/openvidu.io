@@ -153,6 +153,10 @@
          <lastmod>2026-10-07</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/2026/11/03/arm-vs-x86-webrtc-server-costs/</loc>
+         <lastmod>2026-11-03</lastmod>
+    </url>
+    <url>
          <loc>https://openvidu.io/conditions/cookie-policy/</loc>
          <lastmod>2026-10-30</lastmod>
     </url>
@@ -921,6 +925,10 @@
          <lastmod>2026-09-15</lastmod>
     </url>
     <url>
+         <loc>https://openvidu.io/blog/archive/2026/11/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/archive/2026/10/</loc>
          
     </url>
@@ -949,6 +957,14 @@
          
     </url>
     <url>
+         <loc>https://openvidu.io/blog/category/comparison/</loc>
+         
+    </url>
+    <url>
+         <loc>https://openvidu.io/blog/category/research/</loc>
+         
+    </url>
+    <url>
          <loc>https://openvidu.io/blog/category/success-story/</loc>
          
     </url>
@@ -958,10 +974,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/technology/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/research/</loc>
          
     </url>
     <url>
@@ -986,10 +998,6 @@
     </url>
     <url>
          <loc>https://openvidu.io/blog/category/how-to/</loc>
-         
-    </url>
-    <url>
-         <loc>https://openvidu.io/blog/category/comparison/</loc>
          
     </url>
     <url>

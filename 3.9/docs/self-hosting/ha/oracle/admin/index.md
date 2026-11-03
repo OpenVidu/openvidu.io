@@ -4,7 +4,7 @@ Oracle Cloud Infrastructure
 
 The deployment of OpenVidu High Availability on Oracle Cloud Infrastructure is automated using the Terraform CLI, with 4 Compute instances as Master Nodes behind an [OCI Network Load Balancer](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/home.htm) , and any number of Media Nodes managed within an [OCI Instance Pool](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm) . An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
 
-Internally, the Oracle Cloud Infrastructure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/index.md) documentation. However, there are specific considerations unique to the Oracle Cloud Infrastructure environment that are worth keeping in mind:
+Internally, the Oracle Cloud Infrastructure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/index.md) documentation. However, there are specific considerations unique to the Oracle Cloud Infrastructure environment that are worth keeping in mind:
 
 ## Cluster shutdown and startup
 
@@ -161,9 +161,9 @@ Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automat
 
 ## Administration and configuration
 
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises High Availability Administration](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/index.md).
+Regarding the administration of your deployment, you can follow the instructions in section [On Premises High Availability Administration](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/index.md).
 
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/index.md). Additionally, the [How to Guides](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md). Additionally, the [How to Guides](https://openvidu.io/latest/docs/self-hosting/how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
 
 In addition to these, an Oracle Cloud Infrastructure deployment provides the capability to manage global configurations via the OCI Console using OCI Vault Secrets:
 
@@ -179,4 +179,4 @@ Changes will be applied automatically on all nodes of your OpenVidu High Availab
 
 ## Backup and Restore
 
-Review the [Backup and restore OpenVidu deployments](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.
+Review the [Backup and restore OpenVidu deployments](https://openvidu.io/latest/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.
