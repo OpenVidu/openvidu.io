@@ -1992,7 +1992,9 @@
   margin-bottom: 2px;
 }
 
-/* Centred CTA rows between sections */
+/* Centred CTA rows between sections. Markdown wraps the links of a row in one <p>, which
+   would make them a single flex item with no gap between them: the paragraph steps out of the
+   layout so each link is an item of its own. */
 .md-typeset .ov-landing .ov-actions {
   display: flex;
   flex-wrap: wrap;
@@ -2007,7 +2009,21 @@
 }
 
 .md-typeset .ov-landing .ov-actions p {
+  display: contents;
   margin: 0;
+}
+
+/* The hero row of a product landing starts at the title's left edge, with more air between
+   the button and the links */
+.md-typeset .ov-landing--product .ov-hero .ov-actions {
+  justify-content: flex-start;
+  gap: 14px 32px;
+}
+
+@media (max-width: 900px) {
+  .md-typeset .ov-landing--product .ov-hero .ov-actions {
+    justify-content: center;
+  }
 }
 
 /* Admonitions and tables inside a landing keep their width in check */
