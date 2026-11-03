@@ -1770,8 +1770,9 @@
 }
 
 /* Hero of a product landing: the two-line wordmark (the product name under "openVidu") on the
-   left, sized per product so the lettering renders the same height on both, as wide as its
-   column allows but never into the title's column. */
+   left, as wide as its column allows but never into the title's column. Meet's is wider than
+   the lettering alone would need: its hero is taller, so the logo sits lower on the page and
+   reads smaller than Platform's at the same size. */
 .ov-hero__logo {
   display: block;
   width: min(100%, 320px);
@@ -1784,8 +1785,8 @@
 }
 
 .md-typeset .ov-landing--product .ov-hero__logo--meet {
-  width: min(100%, 430px);
-  max-width: 430px;
+  width: min(100%, 490px);
+  max-width: 490px;
 }
 
 .md-typeset .ov-landing--product .ov-hero__logo--platform {
@@ -1795,7 +1796,7 @@
 
 @media (max-width: 900px) {
   .md-typeset .ov-landing--product .ov-hero__logo--meet {
-    max-width: 230px;
+    max-width: 250px;
   }
 
   .md-typeset .ov-landing--product .ov-hero__logo--platform {
