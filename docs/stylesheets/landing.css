@@ -1769,7 +1769,9 @@
   color: #8fb3bd;
 }
 
-/* Hero of a product landing: logo above the headline, visual below the CTAs */
+/* Hero of a product landing: the two-line wordmark (the product name under "openVidu") on the
+   left, sized per product so the lettering renders the same height on both, as wide as its
+   column allows but never into the title's column. */
 .ov-hero__logo {
   display: block;
   width: min(100%, 320px);
@@ -1779,6 +1781,26 @@
 
 .md-typeset .ov-landing .ov-hero__logo {
   margin-bottom: 4px;
+}
+
+.md-typeset .ov-landing--product .ov-hero__logo--meet {
+  width: min(100%, 430px);
+  max-width: 430px;
+}
+
+.md-typeset .ov-landing--product .ov-hero__logo--platform {
+  width: min(100%, 570px);
+  max-width: 570px;
+}
+
+@media (max-width: 900px) {
+  .md-typeset .ov-landing--product .ov-hero__logo--meet {
+    max-width: 230px;
+  }
+
+  .md-typeset .ov-landing--product .ov-hero__logo--platform {
+    max-width: 300px;
+  }
 }
 
 .ov-hero__visual {

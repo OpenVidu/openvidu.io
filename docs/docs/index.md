@@ -12,8 +12,8 @@ page_features:
 
 <section class="ov-hero" markdown>
 
-![](../assets/images/logos/platform_greyfont_transback.png#only-light){ .ov-hero__logo .skip-gallery .not-selectable width=1648 height=345 }
-![](../assets/images/logos/platform_whitefont_transback.png#only-dark){ .ov-hero__logo .skip-gallery .not-selectable width=1648 height=345 }
+![](../assets/images/logos/platform_2lines_greyfont_transback_cropped.png#only-light){ .ov-hero__logo .ov-hero__logo--platform .skip-gallery .not-selectable width=1266 height=357 }
+![](../assets/images/logos/platform_2lines_whitefont_transback_cropped.png#only-dark){ .ov-hero__logo .ov-hero__logo--platform .skip-gallery .not-selectable width=1266 height=357 }
 
 <h1 class="ov-hero__title">Self-hosted WebRTC SDKs for real-time apps</h1>
 

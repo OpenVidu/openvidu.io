@@ -14,8 +14,8 @@ page_features:
 
 <section class="ov-hero" markdown>
 
-![](../assets/images/logos/meet_greyfont_transback.png#only-light){ .ov-hero__logo .skip-gallery .not-selectable width=1441 height=345 }
-![](../assets/images/logos/meet_whitefont_transback.png#only-dark){ .ov-hero__logo .skip-gallery .not-selectable width=1441 height=345 }
+![](../assets/images/logos/meet_2lines_greyfont_transback_cropped.png#only-light){ .ov-hero__logo .ov-hero__logo--meet .skip-gallery .not-selectable width=953 height=356 }
+![](../assets/images/logos/meet_2lines_whitefont_transback_cropped.png#only-dark){ .ov-hero__logo .ov-hero__logo--meet .skip-gallery .not-selectable width=953 height=356 }
 
 <h1 class="ov-hero__title">Self-hosted video conferencing, ready in minutes</h1>
 
