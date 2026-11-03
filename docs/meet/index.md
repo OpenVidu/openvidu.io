@@ -17,7 +17,7 @@ page_features:
 ![](../assets/images/logos/meet_greyfont_transback.png#only-light){ .ov-hero__logo .skip-gallery .not-selectable width=1441 height=345 }
 ![](../assets/images/logos/meet_whitefont_transback.png#only-dark){ .ov-hero__logo .skip-gallery .not-selectable width=1441 height=345 }
 
-<h1 class="ov-hero__title">OpenVidu Meet: self-hosted video conferencing, ready in minutes</h1>
+<h1 class="ov-hero__title">Self-hosted video conferencing, ready in minutes</h1>
 
 <p class="ov-hero__lead" markdown="span">**OpenVidu Meet is an open-source, self-hosted video conferencing application** — a ready-to-use alternative to Zoom, Google Meet or Jitsi Meet that runs on your own servers, needs no code to deploy, and can be embedded in your product through a web component, REST API and webhooks.</p>
 

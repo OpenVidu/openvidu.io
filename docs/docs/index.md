@@ -15,7 +15,7 @@ page_features:
 ![](../assets/images/logos/platform_greyfont_transback.png#only-light){ .ov-hero__logo .skip-gallery .not-selectable width=1648 height=345 }
 ![](../assets/images/logos/platform_whitefont_transback.png#only-dark){ .ov-hero__logo .skip-gallery .not-selectable width=1648 height=345 }
 
-<h1 class="ov-hero__title">OpenVidu Platform: self-hosted WebRTC SDKs for real-time apps</h1>
+<h1 class="ov-hero__title">Self-hosted WebRTC SDKs for real-time apps</h1>
 
 <p class="ov-hero__lead" markdown="span">OpenVidu Platform enables you to build real-time applications. You can build your new OpenVidu application from scratch, but it is also very easy to integrate OpenVidu in your already existing application.</p>
 
