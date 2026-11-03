@@ -1,10 +1,13 @@
 ---
-title: "ARM or x86 for WebRTC media servers? Participants per node on 3 clouds"
+title: ARM or x86 for WebRTC media servers? Participants per node on 3 clouds
 draft: false
 date:
-  created: 2026-09-15
+  created: 2026-11-03
 slug: arm-vs-x86-webrtc-server-costs
-description: "We deployed OpenVidu 3.8 on matching ARM and x86 instances in AWS, Google Cloud and Oracle Cloud and measured how many participants each node holds per dollar."
+description: >-
+  We deployed OpenVidu 3.8 on matching ARM and x86 instances in AWS, Google
+  Cloud and Oracle Cloud and measured how many participants each node holds per
+  dollar.
 cover_image: participants-per-node-light.png
 categories:
   - Comparison
