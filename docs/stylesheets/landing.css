@@ -1080,44 +1080,6 @@
   white-space: nowrap;
 }
 
-.ov-logo__mark {
-  flex: none;
-}
-
-.ov-logo__name small {
-  margin-left: 5px;
-  font-size: 0.6em;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.ov-logo__name--heavy {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-}
-
-.ov-logo__name--caps {
-  font-size: 15px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.ov-logo__name--lower {
-  font-weight: 800;
-  font-size: 23px;
-  letter-spacing: -0.05em;
-}
-
-.ov-logo__name--lower i {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-left: 3px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
 
 .md-typeset .ov-landing figure.ov-story {
   display: flex;
@@ -1158,34 +1120,6 @@
   font-weight: 600;
 }
 
-.ov-avatar {
-  flex: none;
-  display: inline-grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  font-family: var(--ov-display-font);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.02em;
-}
-
-.ov-avatar--meet {
-  background: var(--ov-meet-accent);
-  color: var(--ov-meet-ink);
-}
-
-.ov-avatar--platform {
-  background: var(--ov-platform-primary);
-  color: #ffffff;
-}
-
-.ov-avatar--pro {
-  background: var(--ov-pro);
-  color: #ffffff;
-}
-
 .ov-stories__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
@@ -1210,21 +1144,6 @@
   border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
-}
-
-.ov-story__tag--meet {
-  background: var(--ov-meet-accent);
-  color: var(--ov-meet-ink);
-}
-
-.ov-story__tag--platform {
-  background: var(--ov-platform-primary);
-  color: #ffffff;
-}
-
-.ov-story__tag--pro {
-  background: var(--ov-pro);
-  color: #ffffff;
 }
 
 .md-typeset .ov-landing .ov-story__text {
@@ -1295,24 +1214,61 @@
   text-decoration: underline;
 }
 
-/* The product landings: the logo row right under the hero, one quote card further down */
+/* The story grid's title keeps to the flex gap of .ov-stories, with no section-heading margin */
+.md-typeset .ov-landing .ov-section > h2.ov-stories__title {
+  margin-bottom: 0;
+}
+
+/* The toc extension appends its permalink "#" to every h2 with an id, raw HTML included. On a
+   landing title with a tight measure the hidden anchor can wrap onto a line of its own, which
+   leaves an empty line of air under the title: these titles carry no permalink. */
+.md-typeset .ov-landing .ov-h2 > .headerlink {
+  display: none;
+}
+
+/* The product landings: the customer logo row right under the hero (the three success
+   stories' logos, each linking to its story), the three story cards further down */
 .ov-logos-row {
   padding-top: 40px;
 }
 
-/* Their column is narrower: the label takes its own line above the six names */
+.ov-logos-row .ov-logos {
+  justify-content: flex-start;
+  gap: 16px 28px;
+}
+
+/* The label takes its own line above the logos */
 .ov-logos-row .ov-logos__label {
   flex-basis: 100%;
 }
 
-.md-typeset .ov-landing .ov-story--solo .ov-story__text {
-  max-width: 34ch;
-  font-family: var(--ov-display-font);
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-size: clamp(24px, 2.6vw, 34px);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+/* Logos as images sit on a white chip, as in the story cards, so they read the same in both
+   schemes; the link carries no underline, the hover lifts the opacity */
+.md-typeset .ov-landing a.ov-logo--img {
+  padding: 8px 16px;
+  border-radius: var(--ov-radius-xs);
+  background: #ffffff;
+  opacity: 1; /* the chip must stay white: the text logos' 0.78 would grey it on the dark ground */
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.md-typeset .ov-landing a.ov-logo--img:hover {
+  transform: translateY(-2px);
+}
+
+.md-typeset .ov-landing .ov-logo--img img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 36px;
+  max-width: 180px;
+  margin: 0;
+  object-fit: contain;
+}
+
+.md-typeset .ov-landing .ov-logo--tall img {
+  height: 48px;
 }
 
 /* Pick your door */
@@ -1433,11 +1389,7 @@
     font-size: 18px;
   }
 
-  .ov-logo__name--lower {
-    font-size: 22px;
-  }
-
-
+  
 }
 
 /* ==========================================================================

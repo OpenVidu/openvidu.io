@@ -27,16 +27,12 @@ page_features:
 
 </section>
 
-<!-- PLACEHOLDER: fictional customer content, replace before publishing -->
 <div class="ov-logos-row" data-sal="slide-up">
 <div class="ov-logos" role="group" aria-label="Teams running on OpenVidu">
   <span class="ov-logos__label">Running on OpenVidu</span>
-  <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="13" cy="13" r="10.5"></circle><path d="M13 8v10M8 13h10"></path></svg><span class="ov-logo__name">Acme Health</span></span>
-  <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M13 2l9 22-9-5-9 5z"></path></svg><span class="ov-logo__name ov-logo__name--heavy">Northwind<small>Labs</small></span></span>
-  <span class="ov-logo"><svg class="ov-logo__mark" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="13" cy="13" r="10.5"></circle><ellipse cx="13" cy="13" rx="4.5" ry="10.5"></ellipse><path d="M2.5 13h21"></path></svg><span class="ov-logo__name ov-logo__name--caps">Globex</span></span>
-  <span class="ov-logo"><span class="ov-logo__name ov-logo__name--lower">initech<i aria-hidden="true"></i></span></span>
-  <span class="ov-logo"><svg class="ov-logo__mark" width="28" height="26" viewBox="0 0 28 26" fill="currentColor" aria-hidden="true"><path d="M2 13a12 11 0 0 1 24 0z"></path><path d="M14 13v8a3 3 0 0 1-6 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg><span class="ov-logo__name">Umbrella<small>Edu</small></span></span>
-  <span class="ov-logo"><svg class="ov-logo__mark" width="24" height="26" viewBox="0 0 24 26" fill="currentColor" aria-hidden="true"><path d="M4 3l17 10-17 10z"></path></svg><span class="ov-logo__name ov-logo__name--caps">Vandelay</span></span>
+  <a class="ov-logo ov-logo--img ov-logo--tall" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/" title="DynDevice: virtual classrooms built into an LMS"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></a>
+  <a class="ov-logo ov-logo--img" href="/blog/2026/09/15/novakid-live-english-lessons/" title="Novakid: 30 million live English lessons"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></a>
+  <a class="ov-logo ov-logo--img ov-logo--tall" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/" title="Dicode: private video calls for consulting"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></a>
 </div>
 </div>
 
@@ -278,13 +274,28 @@ A process that performs AI-driven operations to the media of a Room. It is a spe
 
 </section>
 
-<!-- PLACEHOLDER: fictional customer content, replace before publishing -->
-<section class="ov-section ov-stories" aria-label="Customer story" data-sal="slide-up">
-<figure class="ov-story ov-story--solo">
-  <span class="ov-story__tag ov-story__tag--platform">Built on OpenVidu Platform</span>
-  <blockquote class="ov-story__text"><p>“Our live shows reach hundreds of viewers with the delay of a call, not a broadcast, and we decide every track and layout ourselves.”</p></blockquote>
-  <figcaption class="ov-story__by"><span class="ov-avatar ov-avatar--platform" aria-hidden="true">MS</span><span class="ov-story__who"><strong>Marta Silva</strong><span>CTO, Vandelay Media</span></span></figcaption>
-</figure>
+<section class="ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
+  <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams already running on OpenVidu.</h2>
+  <div class="ov-stories__grid ov-stories__grid--three">
+    <figure class="ov-story">
+      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
+      <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
+      <blockquote class="ov-story__text"><p>“With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”</p></blockquote>
+      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Matteo Resconi</strong><span>IT &amp; Development Area Manager, Mega Italia Media</span></span><a class="ov-story__link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a></figcaption>
+    </figure>
+    <figure class="ov-story">
+      <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></span>
+      <span class="ov-story__tag ov-story__tag--neutral">Live English lessons · EdTech</span>
+      <blockquote class="ov-story__text"><p>“OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain.”</p></blockquote>
+      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Andrei Iakimov</strong><span>DevOps Lead, Novakid</span></span><a class="ov-story__link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a></figcaption>
+    </figure>
+    <figure class="ov-story">
+      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></span>
+      <span class="ov-story__tag ov-story__tag--neutral">Private video calls · Consulting</span>
+      <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
+      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
+    </figure>
+  </div>
 </section>
 
 <section class="ov-section" markdown>
