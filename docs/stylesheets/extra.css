@@ -1567,7 +1567,7 @@ h1.meetplatform-slogan {
    and the design's radii. Declared on the element so var() resolves per scheme. */
 [data-md-color-scheme] openvidu-register {
   --ov-reg-body: "Instrument Sans", system-ui, sans-serif;
-  --ov-reg-display: "Unbounded", "Instrument Sans", system-ui, sans-serif;
+  --ov-reg-display: "Lexend", "Instrument Sans", system-ui, sans-serif;
   --mat-sys-body-large-font: var(--ov-reg-body);
   --mat-sys-body-medium-font: var(--ov-reg-body);
   --mat-sys-body-small-font: var(--ov-reg-body);
