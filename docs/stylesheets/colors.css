@@ -31,6 +31,7 @@
   --ov-meet-primary-dark: #005f30;
   --ov-meet-primary-dark-rgb: 0, 95, 48;
   --ov-meet-ink: #062a15; /* text on the Meet green */
+  --ov-meet-header: rgb(0, 147, 73); /* the header bar on Meet pages, as on the public site */
   --ov-platform-primary: #005f78;
   --ov-platform-primary-rgb: 0, 95, 120;
   --ov-platform-primary-hover: #004b5f;
@@ -38,6 +39,7 @@
   --ov-platform-accent-rgb: 0, 200, 247;
   --ov-platform-accent-hover: #4fd8f7;
   --ov-platform-ink: #00283a; /* text on the Platform cyan */
+  --ov-platform-header: #0088aa; /* the header bar on Platform pages, as on the public site */
   --ov-yellow: #ffcc00;
   --ov-yellow-ink: #1f1800;
   --ov-pro: #8e24aa;

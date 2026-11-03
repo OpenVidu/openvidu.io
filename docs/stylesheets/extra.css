@@ -92,22 +92,11 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* The header sits on the ground: a hairline below it, and on product pages a product-coloured
-   line above it (product.css sets --ov-header-line). */
+/* The header sits on the ground with a hairline below it; on product pages product.css paints
+   it in the product colour. */
 .md-header {
   border-bottom: 1px solid var(--ov-border);
   position: sticky;
-}
-
-.md-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--ov-header-line, transparent);
-  pointer-events: none;
 }
 
 .md-header--shadow {

@@ -23,15 +23,15 @@
       aria-label="{{ config.site_name }}"
       data-md-component="logo"
     >
-      {# The header sits on the page ground, so each wordmark comes in a grey-font file for the
-         light scheme and a white-font one for slate; extra.css shows the one the scheme needs. #}
+      {# Product pages paint the header in the product colour (product.css), so their wordmark
+         is the all-white file in both schemes. Elsewhere the header sits on the page ground and
+         the wordmark comes in a grey-font file for the light scheme and a white-font one for
+         slate; extra.css shows the one the scheme needs. #}
       {% set page_path = page.file.src_path if page.file else "" %}
       {% if page_path.startswith("meet/") %}
-        <img src="{{ base_url }}/assets/images/logos/meet_greyfont_transback.png" alt="OpenVidu Meet" class="custom-logo ov-logo--light"/>
-        <img src="{{ base_url }}/assets/images/logos/meet_whitefont_transback.png" alt="OpenVidu Meet" class="custom-logo ov-logo--dark"/>
+        <img src="{{ base_url }}/assets/images/logos/meet_whiteallfont_transback_cropped.png" alt="OpenVidu Meet" class="custom-logo"/>
       {% elif page_path.startswith("docs/") %}
-        <img src="{{ base_url }}/assets/images/logos/platform_greyfont_transback.png" alt="OpenVidu Platform" class="custom-logo ov-logo--light"/>
-        <img src="{{ base_url }}/assets/images/logos/platform_whitefont_transback.png" alt="OpenVidu Platform" class="custom-logo ov-logo--dark"/>
+        <img src="{{ base_url }}/assets/images/logos/platform_whiteallfont_transback_cropped.png" alt="OpenVidu Platform" class="custom-logo"/>
       {% else %}
         <img src="{{ 'assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png' | url }}" alt="OpenVidu" class="ov-logo--light"/>
         <img src="{{ config.theme.logo | url }}" alt="OpenVidu" class="ov-logo--dark"/>

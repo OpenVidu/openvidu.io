@@ -11,6 +11,7 @@
   --product-primary-color-light-hover: var(--ov-platform-accent-hover) !important;
   --product-body-color-dark: var(--ov-platform-ink) !important;
   --product-body-color-dark-rgb: 0, 40, 58 !important;
+  --product-header-color: var(--ov-platform-header) !important;
 }
 
 .platform-header .img-title {

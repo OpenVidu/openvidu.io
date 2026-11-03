@@ -11,6 +11,7 @@
   --product-primary-color-light-hover: var(--ov-meet-accent-hover) !important;
   --product-body-color-dark: var(--ov-meet-ink) !important;
   --product-body-color-dark-rgb: 6, 42, 21 !important;
+  --product-header-color: var(--ov-meet-header) !important;
 }
 
 /* START: MkDocs Material custom admonition styles */
