@@ -22,19 +22,24 @@ A local stack runs on Docker Compose with **either edition**, so you can develop
 
 ## Deploy
 
-An empty directory is the stack. Make one and work from it (or point `--dir` at it). Start with a subset of modules so you can grow it later:
+An empty directory is the stack. Make one and deploy from it; everything is on by default (OpenVidu Meet, the Dashboard, recording, ingest):
 
 ```console
-$ mkdir labc-stack && cd labc-stack
-$ ov stack deploy labc --environment local --local-dir ./labc --no-lan \
-    --modules livekit-server,egress
-materializing the deployment into ./labc and starting it (the first run downloads images)…
+$ mkdir openvidu-local && cd openvidu-local
+$ ov stack deploy --environment local
+discovered private IP 192.168.0.27 for LAN access
+materializing the deployment into ./openvidu-local-stack1 and starting it (the first run downloads images)…
 wrote spec to openvidu-stack.yml
 ✓ docker compose up -d --remove-orphans
-✔ OpenVidu compose deployment started in ./labc
-✔ stack "labc" recorded in this directory
+✔ OpenVidu compose deployment started in ./openvidu-local-stack1
+✔ stack "stack1" recorded in this directory
+  OpenVidu Meet API: https://192-168-0-27.openvidu-local.dev:9443
 waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
-  ⏳ still starting: MinIO (0s)
+  ⏳ still starting: OpenVidu, Meet, Dashboard, MinIO (0s)
+  ⏳ still starting: Meet, Dashboard (2s)
+  ⏳ still starting: Meet, Dashboard (5s)
+  ⏳ still starting: Meet, Dashboard (7s)
+  ⏳ still starting: Meet, Dashboard (9s)
 
 ====================================================
 🎉 OpenVidu is ready! 🎉
@@ -42,15 +47,32 @@ waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps r
 
 This deployment is for local development only. Do not use it in production.
 
+------------------ OpenVidu Meet -------------------
+  - Access from this machine:
+      - http://localhost:9080
+  - Access from other devices in your LAN:
+      - https://192-168-0-27.openvidu-local.dev:9443
+  - Credentials:
+      - Username: admin
+      - Password: admin
+      - API Key:  meet-api-key
+
 ----------------- LiveKit Server API ---------------
   - Access from this machine:
       - http://localhost:7880
       - ws://localhost:7880
+  - Access from other devices in your LAN:
+      - https://192-168-0-27.openvidu-local.dev:7443
+      - wss://192-168-0-27.openvidu-local.dev:7443
   - Credentials:
       - API Key:    devkey
       - API Secret: secret
 
 ------------------- Other Services -----------------
+  - OpenVidu Dashboard:
+      - URL:      http://localhost:7880/dashboard
+      - Username: admin
+      - Password: admin
   - MinIO Console:
       - URL:      http://localhost:7880/minio-console
       - Username: minioadmin
@@ -59,9 +81,9 @@ This deployment is for local development only. Do not use it in production.
 Operate this deployment with `ov stack ...`.
 ```
 
-`ov` waits for the endpoints itself and prints the banner with the URLs and credentials; `--no-wait` skips the wait. The banner lists only what the enabled modules serve. `--no-lan` keeps this example on `localhost` ([access over your LAN](#access-it-over-your-lan) is on by default). The stack name (`labc` here) is optional; omit it and `ov` auto-names it `stack1`.
+`ov` waits for the endpoints itself and prints the banner with the URLs and credentials; `--no-wait` skips the wait. The banner lists only what the enabled modules serve. LAN access is on by default: `ov` detects this machine's private IP and adds the `openvidu-local.dev` URLs ([Access it over your LAN](#access-it-over-your-lan)). Without a name, `ov` names the stack `stack1` and materializes it in `./openvidu-local-stack1`; `ov stack deploy <name>` and `--local-dir` choose them.
 
-The deployment is a normal `docker compose` project inside the stack directory (`./labc` here, or `./openvidu-local-<name>` by default). Its files are real and yours to edit: the configuration is `config/openvidu.yaml` and the service files beside it, and `ov stack config` changes them for you ([Configuration](../operate/configuration.md)). After editing a file by hand, `ov stack deploy` applies it.
+The deployment is a normal `docker compose` project inside the stack directory (`./openvidu-local-<name>` by default). Its files are real and yours to edit: the configuration is `config/openvidu.yaml` and the service files beside it, and `ov stack config` changes them for you ([Configuration](../operate/configuration.md)). After editing a file by hand, `ov stack deploy` applies it.
 
 ### OpenVidu PRO locally
 
@@ -124,14 +146,14 @@ A local OpenVidu PRO deployment runs in **evaluation mode**, for development and
 
 ## Access it over your LAN
 
-From a phone or another computer on your network you need HTTPS, which the `openvidu-local.dev` wildcard domain provides. **LAN access is on by default**: the deploy detects this machine's private IP and the banner adds the URLs (`Access from other devices in your LAN: https://192-168-1-214.openvidu-local.dev:7443` for the IP `192.168.1.214`). `--lan-ip` overrides the detected IP, and `--no-lan` keeps the stack on `localhost` only. The URLs replace the dots of the IP with dashes (`192.168.1.214` → `192-168-1-214`):
+From a phone or another computer on your network you need HTTPS, which the `openvidu-local.dev` wildcard domain provides. **LAN access is on by default**: the deploy detects this machine's private IP and the banner adds the URLs, as in the deploy above. `--lan-ip` overrides the detected IP, and `--no-lan` keeps the stack on `localhost` only. The URLs replace the dots of the IP with dashes (`192.168.0.27` → `192-168-0-27`):
 
 | | Local | From your network |
 |---|---|---|
-| OpenVidu (LiveKit) | `http://localhost:7880` | `https://192-168-1-214.openvidu-local.dev:7443` |
-| Your app's frontend | `http://localhost:5080` | `https://192-168-1-214.openvidu-local.dev:5443` |
-| Your app's backend | `http://localhost:6080` | `https://192-168-1-214.openvidu-local.dev:6443` |
-| OpenVidu Meet | `http://localhost:9080/meet` | `https://192-168-1-214.openvidu-local.dev:9443/meet` |
+| OpenVidu (LiveKit) | `http://localhost:7880` | `https://192-168-0-27.openvidu-local.dev:7443` |
+| Your app's frontend | `http://localhost:5080` | `https://192-168-0-27.openvidu-local.dev:5443` |
+| Your app's backend | `http://localhost:6080` | `https://192-168-0-27.openvidu-local.dev:6443` |
+| OpenVidu Meet | `http://localhost:9080/meet` | `https://192-168-0-27.openvidu-local.dev:9443/meet` |
 
 ## Show the published ports
 
@@ -141,21 +163,33 @@ From a phone or another computer on your network you need HTTPS, which the `open
 $ ov stack ports
 CATEGORY   PORT        PROTO   PURPOSE
 API        7880        tcp     OpenVidu / LiveKit server API (HTTP & WebSocket); also serves the Dashboard, MinIO console and Developer UI
+API        9080        tcp     OpenVidu Meet on localhost
 LAN        6443        tcp     Your application backend (localhost:6080) over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
 LAN        5443        tcp     Your application frontend (localhost:5080) over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
 LAN        7443        tcp     OpenVidu / LiveKit server API over HTTPS/WSS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
+LAN        9443        tcp     OpenVidu Meet over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
+Debug      27017       tcp     MongoDB
 Debug      6379        tcp     Redis
 Debug      9000        tcp     MinIO S3 API (recordings storage)
+Ingest     1935        tcp     RTMP ingress (stream into a room)
+Ingest     8085        tcp     WHIP ingress — WebRTC over HTTP (stream into a room)
+Ingest     7895        udp     WHIP ingress media (UDP)
 WebRTC     3478        udp     TURN relay for WebRTC media (UDP)
 WebRTC     7881        tcp     WebRTC media over TCP (fallback when UDP is blocked)
 WebRTC     7900-7999   udp     WebRTC media (UDP)
 ```
 
-Only the ports the enabled modules use are listed: this stack has `egress`, so Redis and MinIO are there, but no MongoDB, no Meet (9080) and no ingress. The **LAN** ports are listed always, even with `--no-lan`: the container publishes them, and they answer once LAN access is on. The **Debug** group exposes Redis, MongoDB and MinIO on the host because local is dev-only. Add `-o wide` for the compose service that owns each port.
+Only the ports the enabled modules use are listed: a stack without `ingress` has no **Ingest** group, and one without `meet` no 9080. The **LAN** ports are listed always, even with `--no-lan`: the container publishes them, and they answer once LAN access is on. The **Debug** group exposes Redis, MongoDB and MinIO on the host because local is dev-only. Add `-o wide` for the compose service that owns each port.
 
 ## Add and remove modules on the running stack
 
-The module selection changes **incrementally**, without redeploying (`--dry-run` previews a change):
+The module selection changes **incrementally**, without redeploying (`--dry-run` previews a change). These examples start from a stack deployed with only part of the modules:
+
+```bash
+ov stack deploy labc --environment local --local-dir ./labc --no-lan --modules livekit-server,egress
+```
+
+Adding OpenVidu Meet:
 
 ```console
 $ ov stack module add meet
@@ -198,11 +232,11 @@ caddy-proxy-1        | {"level":"info","ts":1793284658.2489977,"logger":"http.lo
 …
 ```
 
-Follow them live with `ov stack logs -f`. Per-service logs through `ov` are not available yet; read them with Compose in the deployment directory instead (`cd labc && docker compose logs -f ov-livekit-server`).
+Follow them live with `ov stack logs -f`. Per-service logs through `ov` are not available yet; read them with Compose in the deployment directory instead (`cd openvidu-local-stack1 && docker compose logs -f ov-livekit-server`).
 
 ## Destroy
 
-The destroy also removes the directory's record:
+The destroy also removes the directory's record (here, the `labc` stack of the module examples):
 
 ```console
 $ ov stack destroy --delete-data -y
