@@ -229,7 +229,7 @@ Unique secure links give access to your rooms with different permission levels.
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-door-sliding-lock:{ .feature-icon } __Locked rooms__{ .feature-name .coming-soon-overlay .eta-2026-11 }
+-   :material-door-sliding-lock:{ .feature-icon } __Locked rooms__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
