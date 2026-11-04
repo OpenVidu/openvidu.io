@@ -54,15 +54,15 @@ waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deploy
 ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet)
 ```
 
-On an Elastic or High Availability stack it waits until, at the same time, the stack's URL answers and every node and service is ready, counting them by tier:
+On an Elastic or High Availability stack it waits until, at the same time, the stack's URL answers and every node and service is ready, counting them by tier and naming the pods that are still restarting:
 
 ```console
 $ ov stack status --wait
-waiting for https://172-30-0-96.openvidu-local.dev to be ready (Ctrl-C to stop)…
-  ⏳ master nodes 1/1, media nodes 1/1, services 12/20, URL not answering yet (5s)
-  ⏳ master nodes 1/1, media nodes 1/1, services 17/20 (1m45s)
-  ⏳ master nodes 1/1, media nodes 1/1, services 19/20 (2m34s)
-✔ el is ready (https://172-30-0-96.openvidu-local.dev)
+waiting for https://172-30-0-101.openvidu-local.dev to be ready (Ctrl-C to stop)…
+  ⏳ master nodes 1/1, media nodes 1/1, services 12/20, restarting: ov-dashboard-6ccd78b5c9-78jqv, ov-meet-7648647fdb-vhqsr (0s)
+…
+  ⏳ master nodes 1/1, media nodes 1/1, services 18/20, restarting: ov-dashboard-6ccd78b5c9-78jqv, ov-meet-7648647fdb-vhqsr (2m51s)
+✔ el is ready (https://172-30-0-101.openvidu-local.dev)
 ```
 
 When it gives up, it names the pods still starting. Right after a first PRO deploy, while the nodes pull the images and some pods restart before they settle, the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`.
@@ -112,6 +112,15 @@ Nodes:
 $ ov stack test
 ✓ openvidu-active    172.30.0.96   active
 all 1 check(s) passed
+```
+
+On PRO it checks the cluster API and the pods:
+
+```console
+$ ov stack test
+✓ Kubernetes API reachable
+✓ 16/16 pods ready
+all 2 check(s) passed
 ```
 
 ## Logs

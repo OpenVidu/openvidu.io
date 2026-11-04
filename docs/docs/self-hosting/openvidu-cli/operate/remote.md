@@ -47,7 +47,7 @@ The import behaves differently per edition, because the two store their configur
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. Every `config get`, `set`, `view` and `plan` reads the node first, so clients do not drift silently on the keys of those files: a `set` from one client is what the other sees next time it asks, and it adopts the change into its own spec with a note.
+    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. `config get` and `config view` read the node, so a change another client made is what you see next time you ask. `config set` also adopts the node's values into your own spec, with a note (`openvidu-stack.yml now follows the node for: …`). `ov stack plan`, on the other hand, compares your spec with the node: a value another client changed shows as a change your redeploy would undo.
 
     What can go stale is a client's `openvidu-stack.yml` between commands. The public IP and the owncert files another client set are never read back, because they live in that client's spec, not in a file of the node. The copy matters for a **redeploy**, which renders the tree from the spec. Before one, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it.
 

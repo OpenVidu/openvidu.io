@@ -48,6 +48,18 @@ local deployment torn down
 
 `--keep-context` tears the deployment down but keeps the directory's record.
 
+On PRO, the destroy uninstalls OpenVidu from the cluster and keeps the machines as they are:
+
+```console
+$ ov stack destroy -y
+uninstalling OpenVidu…
+removing the stack's resources…
+stack removed
+✔ removed stack "prod" from this directory
+```
+
+The OpenVidu node agent stays on each server, and the joined nodes stay in the cluster. To take a joined node out, run `sudo ov stack leave --this-node --uninstall` on it ([Scaling](scaling.md#take-a-node-out)).
+
 ## A cloud stack: the machines go too
 
 A stack whose machines this CLI created (`--cloud`) also loses the machines. The deployment is **not** stopped first, because deleting the instance is a more thorough teardown than stopping services on it. What will be removed is printed before the confirmation:

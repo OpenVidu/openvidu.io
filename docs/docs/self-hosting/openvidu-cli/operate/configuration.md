@@ -146,7 +146,7 @@ On PRO, any low-level chart value with no setting of its own goes in `--helm-val
 Credentials are never written in plain text where they do not belong. At deploy time `ov` generates every missing credential and **pins** it into the spec, so a redeploy reuses it instead of replacing it (which would leave MongoDB and MinIO locked out of their data).
 
 - `--set-secret key=value` (on deploy, or `--set-secret key=@file`, `key=env:VAR`) stores the value under `.openvidu/secrets/` and writes a `secrets://` reference into the spec. The spec then carries the reference, not the value.
-- `ov stack export --gitops` prints the spec with every secret externalized to a `secrets://` reference, so the spec is safe to commit to a Git repository while the values stay out of it.
+- `ov stack export --gitops` prints the spec with every secret externalized to a `secrets://` reference, so the spec is safe to commit to a Git repository while the values stay out of it. A plain `ov stack export` prints the values themselves, the PRO license and the owncert keys included: do not share its output.
 
 Keep the `.openvidu/` directory private: it holds the stack's state and secrets.
 

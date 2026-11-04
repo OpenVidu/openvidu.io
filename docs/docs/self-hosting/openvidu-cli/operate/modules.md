@@ -107,7 +107,7 @@ Disabling removes the container; the definition stays, so `enable` brings it bac
 
 - On a **Community** stack the definitions are `config/agent-<name>.yaml` on the node, and an agent of your own is one more such file. The next deploy (or `ov stack agent enable`) picks it up.
 - On a **local** stack they are the `agent-*.yaml` files in the deployment directory.
-- On a **PRO** stack they are entries of the release's `agents` values (the chart ships `speech-processing`, disabled), and `enable`/`disable` is a `helm upgrade`.
+- On a **PRO** stack they are configuration documents of the stack (`agent-<name>.yaml`, the chart ships `speech-processing`, disabled), and `enable`/`disable` writes the document and runs one `helm upgrade` that creates or removes the agent's workload.
 
 `<name>` is the file's name without the extension, with or without the `agent-` prefix.
 
