@@ -9,7 +9,21 @@ description: "Fix common OpenVidu CLI problems: closed ports and exit codes, Let
 
 Before anything is installed, a remote deploy (and `ov stack join`) checks the node's inbound ports. A **required** port that does not arrive (`443/tcp`, or `22/tcp` for `ov` itself), or the node's firewall dropping the pod networks on PRO, stops the deploy with exit `6`, before anything is installed, and prints the rule to add for the firewall it found.
 
-<!-- PENDING-RUN (doc-pulido): real exit 6 output from doc-local -->
+```console
+$ ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 …
+…
+checking the inbound ports before installing anything…
+  Ports of 172.30.0.96 (Community single node)
+  PORT             SCOPE   LEVEL        STATE   TO OPEN
+  443/tcp          public  required     closed  sudo ufw allow 443/tcp
+  443/udp          public  recommended  open
+  80/tcp           public  recommended  open
+  50000-60000/udp  public  recommended  open
+  7881/tcp         public  recommended  open
+  22/tcp           admin   required     open
+  1 of 6 checked port(s) do NOT reach the node: 443/tcp
+ov: nothing was installed: 443/tcp must reach the node first. ov changes no firewall: add the rules above and deploy again (--skip-port-check deploys anyway)
+```
 
 `ov` reads firewalls but never changes them: run the printed fix on the node, then deploy again. A **recommended** port that does not arrive (`443/udp`, `80/tcp`, `7881/tcp` or the media range `50000-60000/udp`) only warns, and the deploy continues; `--skip-port-check` turns the check off. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time for the full report: it is the check that verifies UDP, which a healthy-looking stack with no media needs.
 

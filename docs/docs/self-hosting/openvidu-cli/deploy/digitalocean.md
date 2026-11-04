@@ -14,7 +14,9 @@ page_features: [lazyvideo]
 
 One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you ask for, applies it with **your own `terraform` and API token**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-<!-- VIDEO: deploy-digitalocean.mp4 (docs-video) -->
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" preload="none" muted playsinline loop></video></a>
+
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`.
 
 ## Requirements
 
@@ -79,6 +81,8 @@ An empty directory is the stack. Choose the edition and topology:
     <!-- PENDING-RUN (docs-ov, dw): digitalocean pro elastic with today's ov -->
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha.mp4" preload="none" muted playsinline loop></video></a>
 
     ```bash
     mkdir openvidu && cd openvidu

@@ -14,7 +14,9 @@ page_features: [lazyvideo]
 
 One command creates the machines and OpenVidu comes up on them. `ov` renders the CloudFormation template embedded in its own binary for the edition and topology you ask for, applies it with **your own `aws` CLI**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-<!-- VIDEO: deploy-aws.mp4 (docs-video) -->
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce.mp4" preload="none" muted playsinline loop></video></a>
+
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`.
 
 ## Requirements
 
@@ -82,6 +84,8 @@ An empty directory is the stack. Choose the edition and topology:
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     High Availability needs three things of your own: a **domain**, an **ACM certificate** for it in the same region, and a **VPC with three or more subnets in different availability zones** (the four masters spread across them so the cluster survives losing a zone). A region's default VPC has one subnet per zone, so this picks them:
+
+    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ha.mp4" preload="none" muted playsinline loop></video></a>
 
     ```bash
     mkdir openvidu && cd openvidu

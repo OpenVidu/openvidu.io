@@ -5,13 +5,13 @@ description: "Tear an OpenVidu stack down with the OpenVidu CLI: preview with dr
 
 # Destroy a stack
 
-`ov stack destroy` tears the deployment down and removes the directory's record. It asks for confirmation — type the stack name, or pass `-y`. `--dry-run` asks nothing and changes nothing: it prints exactly what the destroy would do with the same flags, and whether the record would go.
+`ov stack destroy` tears the deployment down and removes the directory's record. It asks for confirmation: type the stack name, or pass `-y` (with no terminal, `-y` is required). `--dry-run` asks nothing and changes nothing: it prints exactly what the destroy would do with the same flags, and whether the record would go.
 
 A destroy **deletes only what is the stack's by record**, never by name: the resources a cloud stack lists as its own, what its Terraform state holds, and on Azure a resource group that carries the `created-by=openvidu-cli` tag `ov` puts on groups it creates. It never deletes a bucket, account or group it did not create.
 
 ## Local and on-premises
 
-On a server, the stack is stopped and disabled; its files and data stay under `/opt/openvidu`, so the same `ov stack deploy` brings it back with its data:
+On a server, the stack is stopped and disabled; its files and data stay under `/opt/openvidu`, so `ov stack deploy --mode auto` in the same directory brings it back with its data and configuration:
 
 ```console
 $ ov stack destroy -y
@@ -21,10 +21,23 @@ stack stopped and disabled on all nodes (its files and data stay under /opt/open
 ✔ removed stack "web" from this directory
 ```
 
-Two flags go further, independently:
+Two flags go further:
 
 - `--delete-data` removes the deployment's data after teardown (on a server, `/opt/openvidu/data`: MongoDB, MinIO, Redis, recordings, metrics and logs, certificates; on a local stack, the Docker volumes).
-- `--delete-config` removes the whole deployment directory — on a server, `/opt/openvidu` with the systemd unit; locally, the compose and config files. It implies `--delete-data`.
+- `--delete-config` removes the deployment directory. On a server that is `/opt/openvidu` with the systemd unit, so the data goes with it; locally it is the compose and config files, and the volumes stay unless you add `--delete-data`.
+
+On a server:
+
+```console
+$ ov stack destroy --delete-data -y
+✓ [172.30.0.96 single] systemctl stop openvidu
+✓ [172.30.0.96 single] systemctl disable openvidu
+✓ [172.30.0.96 single] rm -rf '/opt/openvidu/data'
+stack stopped and disabled on all nodes; its data under /opt/openvidu/data is gone
+✔ removed stack "web" from this directory
+```
+
+Locally, `--delete-data` removes the Docker volumes:
 
 ```console
 $ ov stack destroy --delete-data -y

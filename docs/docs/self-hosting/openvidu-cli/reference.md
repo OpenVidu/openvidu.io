@@ -146,7 +146,7 @@ Tears the deployment down and removes the directory's record. Without `-y` it as
 | Flag | Purpose |
 | --- | --- |
 | `--delete-data` / `--keep-data` | What becomes of the data and recordings. `--keep-data` is the default on a server and locally; on a cloud one of the two is **required**. |
-| `--delete-config` | Also remove the deployment directory (server/local). Implies `--delete-data`. |
+| `--delete-config` | Also remove the deployment directory: on a server `/opt/openvidu` and its unit, data included; locally the compose and config files, keeping the volumes unless `--delete-data`. |
 | `--keep-context` | Keep the directory's record after teardown. |
 | `--keep-infrastructure` | Cloud: tear the deployment down but keep the machines running. |
 
