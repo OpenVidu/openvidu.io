@@ -274,18 +274,82 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    High Availability is four masters plus one or more media nodes. Deploy the first master with `--deployment-type ha` (as the Elastic tab, with `ha`), then join three more as masters and the media nodes:
+    High Availability is four masters plus one or more media nodes. Deploy the first master with `--deployment-type ha` (as the Elastic tab, with `ha`), then join three more as masters and the media nodes, from the same directory:
 
     ```bash
-    ov stack join --ssh ubuntu@172.30.0.97 --as master
-    ov stack join --ssh ubuntu@172.30.0.98 --as master
-    ov stack join --ssh ubuntu@172.30.0.99 --as master
-    ov stack join --ssh ubuntu@172.30.0.100 --as media
+    ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
+      --ssh ubuntu@172.30.0.110 --ssh-key ~/.ssh/id_ed25519 \
+      --openvidu-pro-license <your-license> \
+      --domain-name 172-30-0-110.openvidu-local.dev \
+      --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
+      --mode auto
+    ov stack join --ssh ubuntu@172.30.0.111 --as master
+    ov stack join --ssh ubuntu@172.30.0.112 --as master
+    ov stack join --ssh ubuntu@172.30.0.113 --as master
+    ov stack join --ssh ubuntu@172.30.0.114 --as media
     ```
 
-    <!-- PENDING-RUN (docs-ov): on-premises pro ha joins output -->
+    Each master join checks the cluster's internal ports (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) both ways with the masters already in the stack, then joins the machine and confirms it carries the labels the stack schedules by:
 
-    A master join takes the stack's domain from the directory; `--lb-host` names the load balancer in front of the masters and `--public-ip` the server's public address, both kept reachable on the cluster API. As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir spread one replica per master. `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
+    ```console
+    $ ov stack join --ssh ubuntu@172.30.0.111 --as master
+    → reading the join address and token from 172.30.0.110
+    → checking the ports of 172.30.0.111 from here and from the stack's masters
+      Ports of 172.30.0.111 (master node of an ha stack)
+      PORT                      SCOPE     LEVEL        STATE  TO OPEN
+      443/tcp                   public    required     open
+      80/tcp                    public    recommended  open
+      22/tcp                    admin     required     open
+      6443/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+      8472/udp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+      2379/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+      2380/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+      10250/tcp ← 172.30.0.110  internal  required     open   (only from 172.30.0.110)
+
+      Ports of 172.30.0.110 (reached from 172.30.0.111)
+      PORT                   SCOPE     LEVEL     STATE       TO OPEN
+      6443/tcp ← this node   internal  required  open
+      8472/udp ← this node   internal  required  unverified
+      2379/tcp ← this node   internal  required  open
+      2380/tcp ← this node   internal  required  open
+      10250/tcp ← this node  internal  required  open
+      ✓ host firewall: no firewall is active on the node
+
+    ▶ Connect…
+       · check root/sudo access on 172.30.0.111
+       ✓ Connect
+
+    ▶ Join the cluster…
+       · upload the OpenVidu node-agent installer
+       · join 172.30.0.111 to the stack as a control-plane node
+       ✓ Join the cluster
+
+    ▶ Confirm the node's labels…
+       · confirm this master carries the labels the stack schedules by
+       ✓ Confirm the node's labels
+
+    ▶ Leave the OpenVidu CLI on the node…
+       · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
+       ✓ Leave the OpenVidu CLI on the node
+
+    ▶ Wait for the stack to see the node…
+       · wait until fake-vm-172-30-0-111 is ready in the stack
+       ✓ Wait for the stack to see the node
+
+    ✔ 172.30.0.111 joined the stack as a master node.
+    ```
+
+    As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir spread one replica per master. The first `ov stack status --wait` after the joins takes some minutes while the replicas settle:
+
+    ```console
+    $ ov stack status --wait
+    waiting for https://172-30-0-110.openvidu-local.dev to be ready (Ctrl-C to stop)…
+      ⏳ master nodes 4/4, media nodes 1/1, services 28/53, restarting: caddy-proxy-75b8b6cbf5-5g5cx, caddy-proxy-75b8b6cbf5-7vjvg (0s)
+    …
+    ✔ ha is ready (https://172-30-0-110.openvidu-local.dev)
+    ```
+
+    A master join takes the stack's domain from the directory; with a load balancer in front of the masters, `--lb-host` names it and `--public-ip` the server's public address, both kept reachable on the cluster API. `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
 
 ### The port preflight
 
