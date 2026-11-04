@@ -112,7 +112,7 @@ From here, as from the directory that deployed it:
   ov stack destroy --keep-data   # or --delete-data: what becomes of the recordings
 ```
 
-From then on, `ov stack status`, `ov stack deploy <name> --cloud … --param …` (with the stack's name, `dpaws2` here, not as the hint above prints it) and `ov stack destroy` work here as they did in the directory that deployed the stack (a destroy from the imported directory deletes the machines too). Without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the way back is its deploying directory, or `--kubeconfig` for the cluster alone.
+From then on, `ov stack status`, `ov stack deploy <name> --cloud … --param …` (with the stack's name, `dpaws2` here) and `ov stack destroy` work here as they did in the directory that deployed the stack (a destroy from the imported directory deletes the machines too). Without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the way back is its deploying directory, or `--kubeconfig` for the cluster alone.
 
 ### What `--remote-state` stores per cloud
 

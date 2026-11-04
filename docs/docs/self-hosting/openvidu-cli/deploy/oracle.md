@@ -19,16 +19,26 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - The [OpenVidu CLI](../install.md).
 - An Oracle Cloud tenancy and [**Terraform** :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/install){:target="_blank"} on your PATH: `ov` drives your own Terraform, so the provider plugins, the state and the audit trail are the ones that apply. With `--remote-state` the `oci` backend needs Terraform **1.12.0 or later**.
 - Your **OCI API key** configured (`~/.oci/config`), which Terraform and the `oci` reads use.
-- The tenancy, compartment and user OCIDs (`--oci-tenancy` / `--oci-compartment` / `--oci-user`, else `$OCI_TENANCY_OCID` / `$OCI_COMPARTMENT_OCID` / `$OCI_USER_OCID`) and a region (`--oci-region`, else `$OCI_REGION`, else your `oci` configuration's).
+- The tenancy, compartment and user OCIDs (`--oci-tenancy` / `--oci-compartment` / `--oci-user`, else `$OCI_TENANCY_OCID` / `$OCI_COMPARTMENT_OCID` / `$OCI_USER_OCID`) and a region (`--oci-region`, else `$OCI_REGION`, else your `oci` configuration's, else the template's `eu-frankfurt-1`).
 - Permission to create compute instances, a virtual cloud network with a subnet and network security group, an Object Storage bucket, a Customer Secret Key and (unless `--oci-vault`) a KMS vault for the stack's secrets.
 - **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks run under one user at a time.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your tenancy.
+
+The examples below take the OCIDs from the environment and reuse one vault:
+
+```bash
+export OCI_TENANCY_OCID=ocid1.tenancy.oc1..<tenancy>
+export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+export OCI_USER_OCID=ocid1.user.oc1..<user>
+```
+
+`--oci-vault` names an existing KMS vault: create one once in the console (**Identity & Security → Vault**) and copy its OCID. Without it, the template creates a vault per stack, which OCI keeps for at least 7 days after the destroy (see [Vaults and Customer Secret Keys](#destroy-the-stack)).
 
 You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology:
+An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -113,6 +123,8 @@ An empty directory is the stack. Choose the edition and topology:
           --owncert-public-key "$(base64 -w0 fullchain.pem)" \
           --owncert-private-key "$(base64 -w0 privkey.pem)"
         ```
+
+        On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
     Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
 
@@ -202,7 +214,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The instance gets the template's shape, `VM.Standard.E4.Flex` with 4 OCPUs and 8 GB, and a 100 GB boot volume, unless you pass `--param instanceType=<shape>`.
+The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. The instance gets the template's shape, `VM.Standard.E4.Flex` with 4 OCPUs and 8 GB, and a 100 GB boot volume, unless you pass `--param instanceType=<shape>`.
 
 ## What the deploy creates
 
@@ -248,7 +260,7 @@ S3_APP_DATA_BUCKET             openvidu-ce12o-appdata-9f79dd
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the node's files are the truth, not the vault.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 
@@ -291,7 +303,7 @@ On OpenVidu PRO the continuation reads the kubeconfig the stack published instea
 ov stack deploy openvidu --cloud oracle --param maxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-Name the stack (`openvidu` in these examples), or the redeploy registers it under the default name. See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
 
 ## Destroy the stack
 

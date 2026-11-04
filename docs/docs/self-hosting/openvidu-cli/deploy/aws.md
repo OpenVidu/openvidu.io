@@ -30,7 +30,7 @@ You need no key pair and, except for High Availability, no domain: the deploy ge
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology:
+An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -210,7 +210,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-A region that does not offer the default instance type (`c6a.xlarge` is missing from `eu-south-2`, for one) gets the same size in `c5` or `m5`, and the deploy says so. A type you choose yourself is never replaced: if the region does not offer it, the deploy stops before creating anything.
+The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. A region that does not offer the default instance type (`c6a.xlarge` is missing from `eu-south-2`, for one) gets the same size in `c5` or `m5`, and the deploy says so. A type you choose yourself is never replaced: if the region does not offer it, the deploy stops before creating anything.
 
 ## What the deploy creates
 
@@ -262,7 +262,7 @@ S3_APP_DATA_BUCKET             openvidu-appdata-d56324d0
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack is the truth, not the secret.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 
@@ -303,7 +303,7 @@ That command needs no flags: the desired state, the CloudFormation stack's name 
 ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-Name the stack (`openvidu` in these examples), or the redeploy registers it under the default name. See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
 
 ## Destroy the stack
 
@@ -315,8 +315,7 @@ This is what will be deleted from your AWS account:
 
   # The machines (for elastic/HA also their auto-scaling group and load balancer),
   # the Elastic IP, the security groups and the secret.
-  # elastic/HA: first let the media nodes go without draining their sessions.
-  aws autoscaling delete-lifecycle-hook --auto-scaling-group-name '$(aws cloudformation describe-stack-resource --stack-name openvidu-ce10 --logical-resource-id MediaNodeAutoScalingGroup --query StackResourceDetail.PhysicalResourceId --output text --region us-east-1)' --lifecycle-hook-name openvidu-media-drain --region us-east-1
+  …
   aws cloudformation delete-stack --stack-name openvidu-ce10 --region us-east-1
 
   # The key pair this stack's deploy imported.
@@ -337,11 +336,11 @@ This is what will be deleted from your AWS account:
 ✔ removed stack "ce10" from this directory
 ```
 
-The bucket `openvidu-cfn-templates-<account>-<region>` stays, because every stack of the region shares it. More options in [Destroy](../operate/destroy.md).
+The bucket `openvidu-cfn-templates-<account>-<region>` stays, because every stack of the region shares it. `--keep-infrastructure` tears the deployment down but leaves the instances running (and says so, because they still cost money). More options in [Destroy](../operate/destroy.md).
 
 !!! warning "Reusing a stack name"
 
-    Secrets Manager deletes a secret with a recovery window, so its name stays taken for some days. Deploying a new stack with the same name in the same region fails until then. Free the name with `aws secretsmanager delete-secret --secret-id openvidu-<region>-openvidu-<name> --force-delete-without-recovery`.
+    Secrets Manager deletes a secret with a recovery window, so its name stays taken for some days. Deploying a new stack with the same name in the same region fails until then. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name the deploy printed on its `credentials:` line: `openvidu-<region>-openvidu-<name>` for a single node, `openvidu-elastic-<region>-openvidu-<name>` for Elastic, `openvidu-ha-<region>-openvidu-<name>` for High Availability.
 
 ## Next steps
 

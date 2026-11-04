@@ -36,16 +36,15 @@ data services (derived from the module selection): redis=yes  mongodb=yes  minio
 
 ## Add and remove modules, live
 
-Changing the selection is **incremental**: `ov` starts only the new services (and recreates the ones whose configuration changed, such as the media server), or stops the removed ones; nothing else is touched. Preview with `--dry-run`, then apply. On a Community server, `modules` is a value of `config/openvidu.yaml`:
+Changing the selection is **incremental**: `ov` starts only the new services (and recreates the ones whose configuration changed, such as the media server), or stops the removed ones; nothing else is touched. `--dry-run` previews the change. On a local stack:
 
 ```console
 $ ov stack module add meet
 enable:  meet
-modules: ingress, dashboard, observability  →  ingress, dashboard, meet, observability
-on-premise change: rewrite modules: in config/openvidu.yaml, render config/ into data/runtime/ again, recreate the affected services; the rest keep running.
-✓ set modules=ingress,dashboard,meet,observability in config/openvidu.yaml
-✓ sudo ov stack render --this-node
-✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps ov-livekit-server ov-meet
+modules: livekit-server, egress  →  livekit-server, egress, meet
+incremental change: start mongodb,ov-meet; restart the media server (its config changed); other services keep running.
+✔ updated openvidu-stack.yml
+✓ docker compose up -d --no-deps --force-recreate mongodb ov-livekit-server ov-meet
 modules updated
 ```
 
@@ -54,20 +53,19 @@ Removing is just as incremental:
 ```console
 $ ov stack module rm meet
 disable: meet
-modules: ingress, dashboard, meet, observability  →  ingress, dashboard, observability
-on-premise change: rewrite modules: in config/openvidu.yaml, render config/ into data/runtime/ again, recreate the affected services; the rest keep running.
-✓ set modules=ingress,dashboard,observability in config/openvidu.yaml
-✓ sudo ov stack render --this-node
-✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps ov-livekit-server
-✓ docker compose --env-file data/runtime/compose.env rm --stop --force ov-meet
+modules: livekit-server, egress, meet  →  livekit-server, egress
+incremental change: stop mongodb,ov-meet; restart the media server (its config changed); other services keep running.
+✔ updated openvidu-stack.yml
+✓ docker compose rm -sf mongodb ov-meet
+✓ docker compose up -d --no-deps --force-recreate ov-livekit-server
 modules updated
 ```
 
-The spec follows the stack: `openvidu-stack.yml` records the new selection. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`.
+On a Community server the same commands rewrite `modules:` in `config/openvidu.yaml`, render the configuration again and recreate the affected services (`✓ set modules=… in config/openvidu.yaml`). The spec follows the stack: `openvidu-stack.yml` records the new selection. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`.
 
 ## Data services follow the modules
 
-The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them any more. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both (a local stack here):
+The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them any more. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both:
 
 ```console
 $ ov stack module add meet

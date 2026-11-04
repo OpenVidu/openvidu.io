@@ -1,5 +1,5 @@
 ---
-title: "Deploy OpenVidu on your servers with the CLI"
+title: "Deploy OpenVidu on premises with the OpenVidu CLI"
 description: "Deploy OpenVidu Community or PRO on your own Linux servers over SSH or on the machine itself, from Single Node to Elastic and High Availability."
 page_features: [lazyvideo]
 ---
@@ -8,13 +8,12 @@ page_features: [lazyvideo]
 
 Deploy OpenVidu on your own Linux servers. `ov` installs and starts the stack over SSH or on the machine it runs on, generating every credential, and leaves a copy of itself on each node so the stack can be operated from there too, as well as from the stack's directory on your machine.
 
-<!-- VIDEO: deploy-on-premises.mp4 (docs-video) -->
-
 Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the whole decision** — `--edition community` (the default) or `--edition pro` — and how OpenVidu is installed and run on the server follows from it. Elastic and High Availability grow past one machine, so they are PRO only.
 
 ## Requirements
 
-- One or more **Linux servers** with a sudo-capable user, reachable over SSH (and, for Elastic and High Availability, reachable from each other on their private addresses).
+- One or more **Linux servers** (Ubuntu recommended), each with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size them like the cloud templates do by default: 4 vCPU and 8 GB per node.
+- A sudo-capable user on each server, reachable over SSH (and, for Elastic and High Availability, the servers reachable from each other on their private addresses).
 - A **domain** pointing at the server (at a load balancer in front of the masters, for HA in production), and a **certificate type**:
     - `letsencrypt` or `zerossl` — a certificate obtained automatically (needs port 80 reachable).
     - `owncert` — bring your own, with `--owncert-public-key` and `--owncert-private-key`.
@@ -321,7 +320,12 @@ Either way the server ends up operable from itself: a deploy from your laptop ha
 
 ## Review the commands first: assisted mode
 
-`--mode assisted` runs **nothing** on the server. It writes the same files and prints the same commands, step by step, for you to review and run yourself.
+`--mode assisted` runs **nothing** on the server. It writes the same files and prints the same commands, step by step, for you to review and run yourself. Add it to any deploy above:
+
+```bash
+ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+  --domain-name 172-30-0-96.openvidu-local.dev --certificate-type selfsigned --mode assisted
+```
 
 ## Next steps
 

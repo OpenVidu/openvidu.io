@@ -22,7 +22,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 
 - The [OpenVidu CLI](../install.md).
 - An Azure subscription and the [`az` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/cli/azure/install-azure-cli){:target="_blank"}, **authenticated**: `az account show` must answer. `ov` runs your own client, so your login, subscription and audit trail are the ones that apply. `az` compiles the Bicep itself, so no separate Bicep install is needed.
-- A location: `--azure-location`, else `$AZURE_LOCATION`. The resource group defaults to `<stack>-rg` (`--azure-resource-group` names your own).
+- A location: `--azure-location`, else `$AZURE_LOCATION`. The resource group defaults to `openvidu-<name>-rg`, or `ov-<name>-rg` when the name is long (see [Names may be shortened](#destroy-the-stack)); `--azure-resource-group` names your own. With the name `openvidu` of these examples, the group is `ov-openvidu-rg` and the Key Vault `ov-openvidu-keyvault`.
 - Permission to create resource groups and everything in them: virtual machines, a static public IP, a network security group, a Storage Account with a Blob container, a Key Vault, and for Elastic and High Availability a load balancer and a scale set of media nodes.
 - **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param instanceType=<size>`.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your subscription.
@@ -31,7 +31,7 @@ You need no key pair and no domain: the deploy generates an SSH key pair for the
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology:
+An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -113,7 +113,9 @@ An empty directory is the stack. Choose the edition and topology:
           --owncert-private-key "$(base64 -w0 privkey.pem)"
         ```
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+        On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
+
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
 
     Five machines take more vCPU quota than the default sizes of a single node: the run below passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit the location's quota.
 
@@ -194,7 +196,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param instanceType=<size>`. A low quota for the VM's family limits how many stacks run in a location at once.
+The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param instanceType=<size>`. A low quota for the VM's family limits how many stacks run in a location at once.
 
 ## What the deploy creates
 
@@ -241,7 +243,7 @@ OPENVIDU-URL                   https://openvidu-zclupo-40-112-77-3.sslip.io/
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the node's files are the truth, not the Key Vault.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
 
 Your applications connect with the values of `LIVEKIT-URL`, `LIVEKIT-API-KEY` and `LIVEKIT-API-SECRET` (`LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` in your application's environment), as with any other OpenVidu deployment. Key Vault does not allow `_` in a secret name, so the keys use `-`.
 
@@ -294,7 +296,7 @@ Until you continue, the directory holds the plan but no stack: `ov stack status`
 ov stack deploy openvidu --cloud azure --param maxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-Name the stack (`openvidu` in these examples), or the redeploy registers it under the default name. See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
 
 ## Destroy the stack
 

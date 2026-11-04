@@ -8,8 +8,6 @@ page_features: [lazyvideo]
 
 The **OpenVidu CLI** (`ov`) installs and operates OpenVidu. One tool covers the whole life of a deployment: create it, check it, change its configuration, turn features on and off while it runs, add and remove nodes, and take it down. The same commands work on the OpenVidu running on your laptop and on the one serving your users.
 
-<!-- VIDEO: overview.mp4, general clip of the section (docs-video) -->
-
 ```bash
 mkdir my-stack && cd my-stack
 ov stack deploy my-stack --cloud aws --aws-region us-east-1   # create the machine; it deploys OpenVidu itself
@@ -44,7 +42,7 @@ The topologies are the ones described in [Deployment types](../deployment-types.
 | Deployed with | `ov stack deploy --edition community` | `ov stack deploy --edition pro --openvidu-pro-license <key>` (no license locally) |
 | Runs on the server as | Docker Compose and a systemd unit | Kubernetes, with OpenVidu as a Helm release |
 | Topologies | Single Node | Single Node, Elastic, High Availability |
-| Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the stack itself, which any administrator can read |
+| Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the cluster (`openvidu.yaml` and the service files, as Kubernetes objects), which any administrator can read |
 | Administrators | One client at a time holds the desired state; another one imports a copy | Every client reads the same stack |
 
 A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop, in evaluation mode and with no license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes.
@@ -65,7 +63,7 @@ The directory holds two things:
 Every deploy can run in two modes:
 
 - **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It waits for a confirmation; `-y` answers it in advance.
-- **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. When you are done, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flag, because everything is already written in `openvidu-stack.yml`.
+- **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. When you are done, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flag, because everything is already written in `openvidu-stack.yml`. Until then the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
 
 Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
 
@@ -105,4 +103,5 @@ The data services (`redis`, `mongodb`, `minio`) come up because a module needs t
 
 1. [Install the CLI](install.md).
 2. Deploy: [locally](deploy/local.md), [on premises](deploy/on-premises.md) or on [AWS](deploy/aws.md), [Azure](deploy/azure.md), [Google Cloud](deploy/gcp.md), [Oracle Cloud](deploy/oracle.md) or [DigitalOcean](deploy/digitalocean.md).
-3. Operate it: [status](operate/status.md), [configuration](operate/configuration.md), [modules](operate/modules.md), [scaling](operate/scaling.md), [updates](operate/update.md).
+3. Operate it: [status](operate/status.md), [configuration](operate/configuration.md), [modules](operate/modules.md), [scaling](operate/scaling.md), [updates](operate/update.md), [from another machine](operate/remote.md), [destroy](operate/destroy.md).
+4. When something goes wrong: [Troubleshooting](troubleshooting.md). Every command: [Command reference](reference.md).

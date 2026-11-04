@@ -65,7 +65,7 @@ waiting for https://172-30-0-96.openvidu-local.dev to be ready (Ctrl-C to stop)�
 ✔ el is ready (https://172-30-0-96.openvidu-local.dev)
 ```
 
-When it gives up, it names the pods still starting.
+When it gives up, it names the pods still starting. Right after a first PRO deploy, while the nodes pull the images and some pods restart before they settle, the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`.
 
 ## Describe
 
@@ -127,7 +127,7 @@ Nov 04 03:26:58 fake-vm-172-30-0-96 docker[4229]: ov-livekit-server  | 2026-11-0
 …
 ```
 
-Per-service logs through `ov` are not available yet; omit the service for the whole stack, or read one service's logs with the engine underneath (`docker compose logs <service>` locally, `kubectl logs` on PRO).
+Per-service logs through `ov` are not available yet. Read one service's logs with the engine underneath: `docker compose logs <service>` in the deployment directory locally, or `kubectl --kubeconfig <file> logs <pod>` on PRO. A cloud stack keeps its kubeconfig in `.openvidu/<cloud>/kubeconfig.yaml`; on premises, `sudo ov stack kubeconfig --this-node --server <public-address>` on the master prints one.
 
 ## Check the ports
 

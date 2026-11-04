@@ -20,7 +20,7 @@ At the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fix
 
 ## Redeploy with `--param`
 
-Any parameter the cloud template declares is changed from the stack's directory with `ov stack deploy <name> --cloud <cloud> --param Name=Value`. **Name the stack** in the command: without the name, the redeploy registers the stack under the default name. The stack that exists is **updated** with the parameters that changed, compared against what it runs with; a redeploy with the same parameters reuses it as it is. For example, raising the ceiling of an Elastic stack on AWS:
+Any parameter the cloud template declares is changed from the stack's directory with `ov stack deploy <name> --cloud <cloud> --param Name=Value`. The stack that exists is **updated** with the parameters that changed, compared against what it runs with; a redeploy with the same parameters reuses it as it is. For example, raising the ceiling of an Elastic stack on AWS:
 
 ```bash
 ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y

@@ -66,8 +66,10 @@ A deploy with no `--domain-name` on a machine with a public IPv4 address derives
 AWS Secrets Manager deletes a secret with a recovery window, so the stack's secret name stays taken for some days. Deploying a new stack with the **same name in the same region** fails until then. Free the name at once:
 
 ```bash
-aws secretsmanager delete-secret --secret-id openvidu-<region>-openvidu-<name> --force-delete-without-recovery
+aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery
 ```
+
+`<secret>` is the name on the deploy's `credentials:` line: `openvidu-<region>-openvidu-<name>` for a single node, `openvidu-elastic-<region>-openvidu-<name>` for Elastic, `openvidu-ha-<region>-openvidu-<name>` for High Availability.
 
 Or deploy with a different name (or in a different region).
 
@@ -81,7 +83,7 @@ az group update --name <group> --set tags.created-by=openvidu-cli
 
 ## A cloud quota blocked the deploy
 
-If the cloud refuses to create the machines (an instance-type or vCPU quota, an address or disk limit), the error comes from your cloud CLI, which `ov` runs as you. Request a quota increase, pick a smaller instance type (`--aws-instance-type` and the per-cloud equivalents), or deploy in another region. A region that does not offer the default instance type is handled automatically for the default (`ov` substitutes the same size in another family and says so), but a type you chose yourself is never replaced: the deploy stops before creating anything.
+If the cloud refuses to create the machines (an instance-type or vCPU quota, an address or disk limit), the error comes from your cloud CLI, which `ov` runs as you. Request a quota increase, pick a smaller instance type (`--aws-instance-type` on AWS, `--param instanceType=<type>` on the other clouds), or deploy in another region. A region that does not offer the default instance type is handled automatically for the default (`ov` substitutes the same size in another family and says so), but a type you chose yourself is never replaced: the deploy stops before creating anything.
 
 ## A cloud deploy timed out while waiting for OpenVidu
 
@@ -114,7 +116,7 @@ ov stack test                 # active health check
 
 The directory holds the handle to the stack, not the stack itself. Recreate it with [`ov stack import`](operate/remote.md):
 
-- **PRO:** `ov stack import --kubeconfig ./kubeconfig.yaml` (the cluster holds its own state), or `sudo ov stack import --this-node` on the node.
+- **PRO:** `ov stack import --kubeconfig <file>` (the cluster holds its own state). Get the file on the master with `sudo ov stack kubeconfig --this-node --server <its public address>`, or on a cloud from the stack's secret store (the `credentials:` line of the deploy); or run `sudo ov stack import --this-node` on the master itself.
 - **Community:** `ov stack import --ssh ubuntu@<host> --ssh-key <key>` (rebuilt from the node's files if needed).
 - **A cloud stack deployed with `--remote-state`:** `ov stack import --cloud <cloud> --stack-name <name>` brings back the infrastructure too, so `ov stack destroy` and `--param` redeploys work again. Without `--remote-state`, only the deploying directory can drive the machines.
 

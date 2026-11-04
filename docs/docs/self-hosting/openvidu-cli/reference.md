@@ -15,7 +15,7 @@ The OpenVidu CLI operates **the stack in a directory** (`--dir`, default the cur
 | `-o, --output <fmt>` | `table` (default), `json`, `yaml`, `wide`, `name`, plus `jsonpath=<expr>` and `go-template=<expr>` for scripting. |
 | `--non-interactive` | Never prompt; a missing required value is an error. |
 | `-y, --yes` | Assume "yes" for confirmations (for example `destroy`). |
-| `--dry-run` | Compute and print what would happen; change nothing. A command that cannot preview refuses it (exit `2`) instead of ignoring it: `deploy` (preview one with `--mode assisted` or `ov stack plan`), `join`, `leave` and `import`. |
+| `--dry-run` | Compute and print what would happen; change nothing. A command that cannot preview refuses it (exit `2`) instead of ignoring it: `deploy` (preview one with `--mode assisted` or `ov stack plan`), `join`, `leave`, `import`, and `export` with `--out`, `--to-stack` or `--gitops`. |
 | `-v, --verbose` / `--debug` | More logging. |
 | `-h, --help` | Help. |
 | `-V, --cli-version` | Print the CLI version. |

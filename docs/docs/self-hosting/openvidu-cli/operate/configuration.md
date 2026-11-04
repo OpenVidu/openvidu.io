@@ -43,7 +43,7 @@ configuration applied
 
 `--dry-run` shows the plan and changes nothing. `ov stack config unset <key>` returns a value to its default. `ov stack config edit` opens `openvidu.yaml` in `$EDITOR`, with the secrets as `***` unless `--show-secrets`; a secret left as `***` keeps its value.
 
-Some settings shape whole files besides `openvidu.yaml`: the certificate type and its files, the TURN domain, an external proxy, the public IP, UTC. `set` applies them all the same, rendering the files they shape and merging the change into your own edits. An owncert value is the path of a PEM file, a base64 PEM or the PEM itself:
+Some settings shape whole files besides `openvidu.yaml`: the certificate type and its files, the TURN domain, an external proxy, the public IP, UTC. `set` applies them all the same, rendering the files they shape and merging the change into your own edits. An owncert value is the path of a PEM file, a base64 PEM or the PEM itself. On a stack at `video.example.com`:
 
 ```console
 $ ov stack config set certificate-type=owncert owncert-public-key=/home/me/fullchain.pem owncert-private-key=/home/me/privkey.pem
@@ -61,12 +61,16 @@ restart: [caddy-proxy]
 ✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps caddy-proxy
 ✔ updated openvidu-stack.yml
 configuration applied
-
-$ ov stack config set external-proxy=true
-ov: config/caddy.yaml was edited on the node where this change rewrites it: nothing was written; edit the file by hand, or apply the change with `ov stack deploy`, which writes the file again
 ```
 
 If you edited those files on the very lines the change rewrites, nothing is written (exit `4`) and the message names the file: edit it by hand, or apply the change with `ov stack deploy`, which writes the files again.
+
+For example, after editing `config/caddy.yaml` by hand:
+
+```console
+$ ov stack config set external-proxy=true
+ov: config/caddy.yaml was edited on the node where this change rewrites it: nothing was written; edit the file by hand, or apply the change with `ov stack deploy`, which writes the file again
+```
 
 What the deployment sets once (MongoDB's credentials, Meet's initial admin and API key) is **refused** on a running stack (exit `4`): the service that owns it keeps the value it was first started with, and a changed value would only lock the others out:
 
@@ -116,7 +120,7 @@ This is the main operational difference between the editions.
 
     **The node's files are the truth.** `config/openvidu.yaml` and the service files under `/opt/openvidu/config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change rewrites the value in the document, keeping its comments and order, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services whose rendered files changed; then `openvidu-stack.yml` follows the node. Editing a file by hand and `sudo systemctl restart openvidu` is a supported path too: the unit renders before every start (a typo in `openvidu.yaml` stops it, naming the line), and the next `set`, `edit` or `plan` sees the edit.
 
-    Because the truth is on the node, every administrator's `openvidu-stack.yml` is a copy that a redeploy renders the tree from. Keep it current with `ov stack plan`, or [import again](remote.md) before a redeploy.
+    Because the truth is on the node, every administrator's `openvidu-stack.yml` is a copy that a redeploy renders the tree from. Before a redeploy, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it ([Operate from another machine](remote.md)).
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 

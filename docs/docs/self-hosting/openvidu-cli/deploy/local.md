@@ -15,6 +15,7 @@ A local stack runs on Docker Compose with **either edition**, so you can develop
 ## Requirements
 
 - [Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/){:target="_blank"} installed and running, with the Compose plugin.
+<!-- PENDING-RUN (doc-pulido): measured memory of a local CE and PRO stack (doc-local) -->
 - The [OpenVidu CLI](../install.md).
 
 ## Deploy
@@ -121,7 +122,7 @@ The deployment is a normal `docker compose` project inside the stack directory (
 
 ## Access it over your LAN
 
-From a phone or another computer on your network you need HTTPS, which the `openvidu-local.dev` wildcard domain provides. **LAN access is on by default**: the deploy detects this machine's private IP and the banner adds the URLs (`Access from other devices in your LAN: https://192-168-0-27.openvidu-local.dev:7443`). `--lan-ip` overrides the detected IP, and `--no-lan` keeps the stack on `localhost` only. The URLs replace the dots of the IP with dashes (`192.168.1.214` → `192-168-1-214`):
+From a phone or another computer on your network you need HTTPS, which the `openvidu-local.dev` wildcard domain provides. **LAN access is on by default**: the deploy detects this machine's private IP and the banner adds the URLs (`Access from other devices in your LAN: https://192-168-1-214.openvidu-local.dev:7443` for the IP `192.168.1.214`). `--lan-ip` overrides the detected IP, and `--no-lan` keeps the stack on `localhost` only. The URLs replace the dots of the IP with dashes (`192.168.1.214` → `192-168-1-214`):
 
 | | Local | From your network |
 |---|---|---|
@@ -152,7 +153,7 @@ Only the ports the enabled modules use are listed: this stack has `egress`, so R
 
 ## Add and remove modules on the running stack
 
-The module selection changes **incrementally**, without redeploying. Preview with `--dry-run`, then apply:
+The module selection changes **incrementally**, without redeploying (`--dry-run` previews a change):
 
 ```console
 $ ov stack module add meet
