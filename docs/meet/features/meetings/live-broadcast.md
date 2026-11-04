@@ -69,7 +69,7 @@ Two [room member permissions](../room-members/overview.md#permissions) control l
 - **`broadcastControl`** (**Go live**): start and stop the broadcasts of the room's destinations, all of them or only some.
 - **`broadcastEdit`** (**Add destinations**): stream the meeting to a destination the room does not have.
 
-Both are granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) and not to the `Speaker` role. They are independent, so a room can let its moderators choose among vetted channels without allowing them to stream anywhere else. Without `broadcastControl`, a participant sees the activity and the **LIVE** mark but cannot start or stop anything.
+Both are granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room created, and not to the `Speaker` role. Rooms and room members that existed before live broadcast start without them, so they have to be granted explicitly in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member). They are independent, so a room can let its moderators choose among vetted channels without allowing them to stream anywhere else. Without `broadcastControl`, a participant sees the activity and the **LIVE** mark but cannot start or stop anything.
 
 !!! warning "Not available with end-to-end encryption"
 
