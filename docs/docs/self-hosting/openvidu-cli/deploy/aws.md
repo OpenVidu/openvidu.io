@@ -53,7 +53,7 @@ An empty directory is the stack. Choose the edition and topology:
 
     One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-kube-api-cidr` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
 
-    This is how the deploy of a stack named `dpaws1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+    This is how the deploy of a stack named `dpaws1` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
     ```text
     …
@@ -67,19 +67,35 @@ An empty directory is the stack. Choose the edition and topology:
 
 === "Elastic **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
+    Elastic runs in a VPC of yours: one subnet for the master and one or more for the media nodes. This uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
+
     ```bash
     mkdir openvidu && cd openvidu
+    VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
+      --query 'Vpcs[0].VpcId' --output text)
+    SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
+      --query 'Subnets[].SubnetId' --output text | tr '\t' ,)
     ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
       --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-      --param OpenViduVPC=vpc-0123456789abcdef0 \
-      --param OpenViduMasterNodeSubnet=subnet-aaaa1111 \
-      --param OpenViduMediaNodeSubnets=subnet-aaaa1111,subnet-bbbb2222 \
+      --param OpenViduVPC=$VPC \
+      --param OpenViduMasterNodeSubnet=${SUBNETS%%,*} \
+      --param OpenViduMediaNodeSubnets=$SUBNETS \
       --certificate-type letsencrypt --mode auto
     ```
 
     One master node and an auto scaling group of media nodes, in the VPC and subnets you name. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
 
-    <!-- PENDING-RUN (docs-ov, dw): aws pro elastic with today's ov -->
+    This is how the deploy of a stack named `dpaws2` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 51.95.197.8:6443
+    …
+    ✔ OpenVidu Pro (elastic) is up on AWS
+      URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
+      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-dpaws2 --query SecretString --output text --region eu-south-2
+      kubeconfig:   .openvidu/aws/kubeconfig.yaml
+    ```
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 

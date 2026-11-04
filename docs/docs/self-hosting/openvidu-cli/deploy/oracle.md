@@ -77,7 +77,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One master node and an autoscaling pool of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
 
-    <!-- PENDING-RUN (docs-ov, dw): oracle pro elastic with today's ov -->
+    This is how the deploy of a stack named `dpoci2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 51.170.59.236:6443
+    …
+    ✔ OpenVidu Pro (elastic) is up on Oracle Cloud
+      URL:          https://openvidu-m3l4vn-51-170-59-236.sslip.io/
+      credentials:  oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id ocid1.vault.oc1.eu-madrid-1.<vault> --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
+      kubeconfig:   .openvidu/oracle/kubeconfig.yaml
+    ```
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 

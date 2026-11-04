@@ -78,7 +78,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
 
-    <!-- PENDING-RUN (docs-ov, dw): digitalocean pro elastic with today's ov -->
+    This is how the deploy of a stack named `dpdo2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at openvidu-7qr30p-142-93-224-169.sslip.io:6443
+    …
+    ✔ OpenVidu Pro (elastic) is up on DigitalOcean
+      URL:          https://openvidu-7qr30p-142-93-224-169.sslip.io/
+      credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo2-space-d15fca9b1c/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+      kubeconfig:   .openvidu/digitalocean/kubeconfig.yaml
+    ```
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 

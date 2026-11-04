@@ -77,7 +77,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
 
-    <!-- PENDING-RUN (mvp-cloud mq2): gcp pro elastic output -->
+    This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 34.153.183.72:6443
+    …
+    ✔ OpenVidu Pro (elastic) is up on Google Cloud
+      URL:          https://openvidu-pwvcha-34-153-183-72.sslip.io/
+      credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp2-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp2-)
+      kubeconfig:   .openvidu/gcp/kubeconfig.yaml
+    ```
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
