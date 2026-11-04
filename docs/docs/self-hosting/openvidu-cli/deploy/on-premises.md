@@ -339,7 +339,7 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
     ✔ 172.30.0.111 joined the stack as a master node.
     ```
 
-    As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir spread one replica per master. The first `ov stack status --wait` after the joins takes some minutes while the replicas settle:
+    As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir spread one replica per master. The first wait after the joins takes several minutes while the replicas settle:
 
     ```console
     $ ov stack status --wait
@@ -353,18 +353,27 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
 
     **Behind a load balancer.** In production, put a load balancer in front of the four masters so the stack survives losing one:
 
-    - **TCP passthrough**, not TLS termination: `443/tcp` and `80/tcp` (and `1935/tcp` with RTMP ingest) to the four masters, with a TCP health check on `443`. Optionally `6443/tcp` too, to reach the cluster API through it.
+    - **TCP passthrough**, not TLS termination: `443/tcp` and `80/tcp` (and `1935/tcp` with RTMP ingest) to the four masters, with a TCP health check on `443`.
     - **The domain points at the load balancer.** Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: Let's Encrypt does not work behind a passthrough balancer.
-    - **Deploy the first master with `--skip-port-check`.** Its port check probes the domain, and nothing behind the load balancer is healthy yet. Open the ports listed in Requirements yourself before you skip it.
-    - **Join the masters with the load balancer's name and the node's public address**, which stay reachable on the cluster API:
+    - **Deploy the first master with the load balancer's domain and `--skip-port-check`.** Its port check probes the domain, and nothing behind the load balancer is healthy yet. Open the ports listed in Requirements yourself before you skip it:
+
+        ```bash
+        ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
+          --ssh ubuntu@<master-1> --ssh-key ~/.ssh/id_ed25519 \
+          --openvidu-pro-license <your-license> \
+          --domain-name <domain of the load balancer> --certificate-type selfsigned \
+          --skip-port-check --mode auto
+        ```
+
+    - **Join the masters with `--lb-host`**, the load balancer in front of the masters, and `--public-ip`, the node's public address; both are kept reachable on the cluster API:
 
         ```bash
         ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>
         ```
 
-    - When the nodes reach each other on a private network and you reach them on public addresses, the join's port check reports the internal ports (`6443`, `8472`, `2379-2380`, `10250`) as closed although they are open between the nodes. Open them between the nodes, then join with `--skip-port-check`.
+    - When the nodes reach each other on a private network and you reach them on public addresses, the join's port check reports the internal ports (`6443`, `8472`, `2379-2380`, `10250`) as closed although they are open between the nodes. Open them between the nodes, then join the masters and the media nodes with `--skip-port-check`.
 
-    Expect the stack to be ready about 10 minutes after the last join.
+    Expect the stack to be ready about 10 minutes after the last join: wait for it with `ov stack status --wait --wait-timeout 20m`, so the wait does not give up first.
 
 ### The port preflight
 

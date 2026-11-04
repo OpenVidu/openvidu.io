@@ -65,7 +65,7 @@ On a Community server the same commands rewrite `modules:` in `config/openvidu.y
 
 ## Data services follow the modules
 
-The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them any more. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both:
+The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them any more. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both (locally and on PRO; on a Community server, `meet` runs the egress service itself without listing `egress` as a module):
 
 ```console
 $ ov stack module add meet

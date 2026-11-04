@@ -136,7 +136,7 @@ Nov 04 03:26:58 fake-vm-172-30-0-96 docker[4229]: ov-livekit-server  | 2026-11-0
 …
 ```
 
-Per-service logs through `ov` are not available yet. Read one service's logs with the engine underneath: `docker compose logs <service>` in the deployment directory locally, or `kubectl --kubeconfig <file> logs <pod>` on PRO. A cloud stack keeps its kubeconfig in `.openvidu/<cloud>/kubeconfig.yaml`; on premises, `sudo ov stack kubeconfig --this-node --server <public-address>` on the master prints one.
+Per-service logs through `ov` are not available yet. Read one service's logs with the engine underneath: `docker compose logs <service>` in the deployment directory locally, or `kubectl --kubeconfig <file> -n <namespace> logs <pod>` on PRO, where `<namespace>` is `openvidu-single-node`, `openvidu-elastic` or `openvidu-ha` (`kubectl get pods -A` lists them). A cloud stack keeps its kubeconfig in `.openvidu/<cloud>/kubeconfig.yaml`; on premises, `sudo ov stack kubeconfig --this-node --server <public-address>` on the master prints one.
 
 ## Check the ports
 
