@@ -75,12 +75,12 @@ All of these resolve the directory's stack with no arguments. See [Status and he
 
 | Command | What it does |
 | --- | --- |
-| `ov stack status [--wait]` | Per-service state. `--wait` blocks until ready. |
+| `ov stack status [--wait]` | The state of each node, or of each pod on PRO. `--wait` blocks until ready (`--wait-timeout`, 5 minutes by default). |
 | `ov stack describe` | The stack's record, endpoints and configuration summary. |
 | `ov stack start` / `stop` / `restart` | Control the whole stack (per-service control is not available yet). |
 | `ov stack test` | Active health check; exit `8` on failure. |
 | `ov stack logs [--tail N] [--since …] [-f]` | Fetch or follow the whole stack's logs (`--tail` counts per service on a local stack, in total on a server). |
-| `ov stack export [--gitops]` | Print the spec; `--gitops` externalizes secrets to `secrets://` references. |
+| `ov stack export [--out <file>] [--gitops] [--bundle] [--to-stack]` | Print the spec (`--out` writes it to a file); `--gitops` externalizes the secrets to `secrets://` references; `--bundle` prints the self-contained description `ov stack import -f` reads; `--to-stack` publishes that description on the stack, for `import --ssh`. |
 
 ## Configuration
 
@@ -107,7 +107,7 @@ See [Modules and agents](operate/modules.md).
 | `ov stack module add <id>` / `rm <id>` | Turn a module on or off, live; the data services follow. |
 | `ov stack agent ls` | The agents of the stack, each with its state and image. |
 | `ov stack agent enable <name>` / `disable <name>` | Turn an agent on or off, live. `--dry-run` prints the commands. |
-| `ov stack ports` | The ports the stack needs (read live from Docker on a local stack). |
+| `ov stack ports` | Local stack only: the host ports the deployment publishes, read live from Docker. |
 | `ov stack check-ports` | Verify the inbound ports of a node actually arrive (needs SSH access to the node). Exit `8` on failure. |
 
 ## Nodes of a multi-node stack
