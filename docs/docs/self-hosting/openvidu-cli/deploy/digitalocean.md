@@ -198,7 +198,7 @@ The Droplet gets the template's size, `s-4vcpu-8gb` (4 vCPU, 8 GB, 160 GB disk),
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with a valid certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
 
 ```console
 $ D=openvidu-324jl8-164-92-159-209.sslip.io

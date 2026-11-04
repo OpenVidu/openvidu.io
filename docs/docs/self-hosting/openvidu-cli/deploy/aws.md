@@ -209,7 +209,7 @@ A region that does not offer the default instance type (`c6a.xlarge` is missing 
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with a valid certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
 
 ```console
 $ D=openvidu-40mfas-54-82-78-43.sslip.io

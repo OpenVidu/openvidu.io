@@ -198,7 +198,7 @@ The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless 
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with a valid certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
 
 ```console
 $ D=openvidu-zclupo-40-112-77-3.sslip.io

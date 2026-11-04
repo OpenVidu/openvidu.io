@@ -128,7 +128,7 @@ This is the main operational difference between the editions.
 
 ## Settings only one edition has
 
-Community is Professional's feature on another engine, so almost every setting exists in both, under the same key and meaning; only where it is written changes. The exceptions are a handful of settings one edition does not have — the Pro license and media engine, the offline media nodes and the cluster-data container (PRO only), and a number of host-network ports and credentials the chart manages itself (Community only). `ov stack deploy` and `ov stack config set` refuse one set for the other edition, naming it and its flag (exit `4`):
+COMMUNITY and PRO run the same features on different engines, so almost every setting exists in both, under the same key and meaning; only where it is written changes. The exceptions are a handful of settings one edition does not have: the PRO license and media engine, the offline media nodes and the cluster's own data bucket or container (PRO only), and some host-network ports and credentials that Kubernetes manages by itself (Community only). `ov stack deploy` and `ov stack config set` refuse a setting of the other edition, naming it and its flag (exit `4`):
 
 ```console
 $ ov stack deploy pro13 --environment on-premises --edition pro --openvidu-pro-license … --set openviduStack.mongo.internalPort=27018

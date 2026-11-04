@@ -64,10 +64,10 @@ The directory holds two things:
 
 Every deploy can run in two modes:
 
-- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud CLI** (`aws`, `az`, `terraform`), already authenticated, and prints every command before running any. It waits for a confirmation; `-y` answers it in advance.
+- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It waits for a confirmation; `-y` answers it in advance.
 - **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. When you are done, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flag, because everything is already written in `openvidu-stack.yml`.
 
-Both modes print the same list, because it comes from the same code.
+Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
 
 ### Cloud deployments
 

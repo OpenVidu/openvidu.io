@@ -198,7 +198,7 @@ The instance gets the template's machine type, `e2-standard-4`, and a 100 GiB `p
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with a valid certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
 
 ```console
 $ D=openvidu-uj9zj7-34-105-214-170.sslip.io

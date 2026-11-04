@@ -205,7 +205,7 @@ The instance gets the template's shape, `VM.Standard.E4.Flex` with 4 OCPUs and 8
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with a valid certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
 
 ```console
 $ D=openvidu-u57z2l-51-170-56-241.sslip.io
