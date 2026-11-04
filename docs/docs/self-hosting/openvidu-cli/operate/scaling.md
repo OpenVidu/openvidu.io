@@ -5,9 +5,9 @@ description: "Scale an Elastic or High Availability OpenVidu stack: autoscaling 
 
 # Scaling
 
-Elastic and High Availability stacks grow past one machine with **media nodes**. They are OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } only. The stack is deployed on the master; every media node (and, for HA, every other master) **joins** it.
+Elastic and High Availability stacks scale beyond one machine by adding **media nodes**. They require OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }. The stack is deployed on the master; every media node (and, for HA, every other master) **joins** it.
 
-## Autoscaling vs a fixed count
+## Autoscaling vs. a fixed count
 
 On a cloud stack the media nodes **autoscale** by default: the cloud's auto scaling group runs between a minimum and a maximum, and removes nodes gracefully when load drops (see [Graceful drain](#graceful-drain)). The minimum, the maximum and a fixed count are parameters of the cloud template:
 
@@ -16,7 +16,7 @@ On a cloud stack the media nodes **autoscale** by default: the cloud's auto scal
 | AWS | `MinNumberOfMediaNodes`, `MaxNumberOfMediaNodes` | `FixedNumberOfMediaNodes` |
 | Azure, Google Cloud, Oracle Cloud, DigitalOcean | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | `fixedNumberOfMediaNodes` |
 
-At the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well. On a stack that is already running, change it with the template parameter, below.
+On the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well. On a stack that is already running, change it with the template parameter, as shown below.
 
 ## Redeploy with `--param`
 
@@ -32,11 +32,11 @@ Or running exactly one media node on a DigitalOcean Elastic stack (the same para
 ov stack deploy openvidu --cloud digitalocean --param fixedNumberOfMediaNodes=1 --mode auto -y
 ```
 
-Whether a parameter is changed in place or replaces a machine is the template's; when it matters, check first with a change set or `terraform plan`.
+Whether a parameter change applies in place or replaces a machine depends on the template; when it matters, check first with a change set or `terraform plan`.
 
 !!! note "Azure Elastic and HA"
 
-    Each media node protects itself from scale-in, and Azure refuses an autoscale update whose minimum or maximum falls below the protected instances. So a redeploy while more media nodes run than the new minimum fails on Azure. Lower the count when fewer nodes are running.
+    Each media node protects itself from scale-in, and Azure refuses an autoscale update whose minimum or maximum falls below the protected instances. So on Azure, a redeploy fails while more media nodes are running than the new minimum. Lower the count when fewer nodes are running.
 
 ## Add a node to an on-premises stack
 
@@ -81,9 +81,9 @@ $ ov stack join --ssh ubuntu@172.30.0.102 --as media
 ✔ 172.30.0.102 joined the stack as a media node.
 ```
 
-The token never appears on screen. The login, key and port default to the ones the stack recorded (`--ssh-user`, `--ssh-key`, `--ssh-port` override them). The join returns once the stack sees the node as ready, so the node takes work as soon as the command ends. `--as master` adds an HA control-plane node (HA masters 2-4); it is refused on an Elastic stack (`ov: stack "el" is elastic: its one master is the deployed node, so another machine joins --as media`, exit `2`) and on any single node. A master join takes `--domain`, `--lb-host` and `--public-ip`, the names the cluster API must stay reachable at.
+The token never appears on screen. The login, key and port default to the ones the stack recorded (`--ssh-user`, `--ssh-key`, `--ssh-port` override them). The join returns once the stack sees the node as ready, so the node takes work as soon as the command ends. `--as master` adds an HA control-plane node (HA masters 2-4); it is refused on an Elastic stack (`ov: stack "el" is elastic: its one master is the deployed node, so another machine joins --as media`, exit `2`) and on any single node. A master join takes `--domain`, `--lb-host` and `--public-ip`, the addresses at which the cluster API must remain reachable.
 
-`join` checks the ports first, as above: the new node's, from your machine and from the masters (the kubelet on `10250/tcp` and the overlay network on `8472/udp`), and the master's API on `6443/tcp` from the new node. A required port closed exits `6` before anything is installed, with the `ufw` rule to add on each machine, scoped to the source (`--skip-port-check` turns the check off).
+`join` checks the ports first, as above: the new node's, from your machine and from the masters (the kubelet on `10250/tcp` and the overlay network on `8472/udp`), and the master's API on `6443/tcp` from the new node. If a required port is closed, the join exits `6` before anything is installed and prints the `ufw` rule to add on each machine, scoped to the source (`--skip-port-check` turns the check off).
 
 ### Joining the machine itself
 
@@ -105,11 +105,11 @@ $ sudo ov stack join-info --format json
 
 The token lets a machine join the cluster: treat it as a secret.
 
-`ov stack join-info --wait 30m` blocks until the cluster is up; `--format json` for machine consumption.
+`ov stack join-info --wait 30m` blocks until the cluster is up; `--format json` prints it for scripts.
 
 ## Take a node out
 
-`join` leaves `ov` on the server, so the server can leave by itself. Log into it and drain it:
+`join` leaves `ov` on the server, so the server can leave by itself. Log in to it and drain it:
 
 ```console
 $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
@@ -125,9 +125,9 @@ $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
 
 ## Graceful drain
 
-A media node that is being removed must not drop the rooms, recordings or ingests it holds. With `--drain`, the stack stops sending new rooms to the node, and the command waits, **with no time limit**, until everything the node holds has ended, then leaves. The stack deletes the node afterwards. Interrupted, the node keeps draining, and running the command again resumes the wait.
+A media node that is being removed must not drop the rooms, recordings or ingests it holds. With `--drain`, the stack stops sending new rooms to the node, and the command waits, **with no time limit**, until everything the node holds has ended, then leaves. The stack deletes the node afterwards. If the command is interrupted, the node keeps draining, and running it again resumes the wait.
 
-This is exactly what a cloud autoscaler's about-to-terminate media node runs on its own, which is why autoscaling never cuts a live session: the node finishes its rooms before the machine goes.
+A cloud media node that the autoscaler is about to terminate runs exactly this on its own. That is why autoscaling never cuts a live session: the node finishes its rooms before the machine is removed.
 
 ## Next steps
 

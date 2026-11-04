@@ -5,7 +5,7 @@ description: "Reference for the OpenVidu CLI: global flags, exit codes and every
 
 # Command reference
 
-The OpenVidu CLI operates **the stack in a directory** (`--dir`, default the current one). This page lists every `ov stack` command with its purpose and main flags; `ov help stack <command>` prints the authoritative flag list of each one. The task-oriented guides are linked throughout.
+The OpenVidu CLI operates **the stack in a directory** (`--dir`, the current directory by default). This page lists every `ov stack` command with its purpose and main flags; `ov help stack <command>` prints the authoritative flag list of each one. The task-oriented guides are linked throughout.
 
 ## Global flags
 
@@ -15,7 +15,7 @@ The OpenVidu CLI operates **the stack in a directory** (`--dir`, default the cur
 | `-o, --output <fmt>` | `table` (default), `json`, `yaml`, `wide`, `name`, plus `jsonpath=<expr>` and `go-template=<expr>` for scripting. |
 | `--non-interactive` | Never prompt; a missing required value is an error. |
 | `-y, --yes` | Assume "yes" for confirmations (for example `destroy`). |
-| `--dry-run` | Compute and print what would happen; change nothing. A command that cannot preview refuses it (exit `2`) instead of ignoring it: `deploy` (preview one with `--mode assisted` or `ov stack plan`), `join`, `leave`, `import`, and `export` with `--out`, `--to-stack` or `--gitops`. |
+| `--dry-run` | Compute and print what would happen; change nothing. A command that cannot preview rejects the flag (exit `2`) rather than ignoring it: `deploy` (preview one with `--mode assisted` or `ov stack plan`), `join`, `leave`, `import`, and `export` with `--out`, `--to-stack` or `--gitops`. |
 | `-v, --verbose` / `--debug` | More logging. |
 | `-h, --help` | Help. |
 | `-V, --cli-version` | Print the CLI version. |
@@ -39,23 +39,23 @@ The OpenVidu CLI operates **the stack in a directory** (`--dir`, default the cur
 
 ### `ov stack deploy [NAME]`
 
-Creates the stack described by the configuration and records it in the directory. There is **no wizard**: a missing required value fails naming the field. See the deploy guides: [local](deploy/local.md), [on premises](deploy/on-premises.md), [AWS](deploy/aws.md), [Azure](deploy/azure.md), [Google Cloud](deploy/gcp.md), [Oracle Cloud](deploy/oracle.md), [DigitalOcean](deploy/digitalocean.md).
+Creates the stack described by the configuration and records it in the directory. There is **no wizard**: if a required value is missing, the command fails and names the field. See the deploy guides: [local](deploy/local.md), [on premises](deploy/on-premises.md), [AWS](deploy/aws.md), [Azure](deploy/azure.md), [Google Cloud](deploy/gcp.md), [Oracle Cloud](deploy/oracle.md), [DigitalOcean](deploy/digitalocean.md).
 
 | Flag | Purpose |
 | --- | --- |
-| `--edition community\|pro` | Which OpenVidu (default `community`). PRO needs `--openvidu-pro-license`, except locally. |
+| `--edition community\|pro` | Which OpenVidu edition (default `community`). PRO needs `--openvidu-pro-license`, except locally. |
 | `--environment <where>` | `local`, `on-premises` or a cloud. Where the machines are. |
 | `--deployment-type single_node\|elastic\|ha` | The topology. Elastic and HA deploy the master; other nodes `join` it. |
 | `--ssh [user@]host` | Deploy to another machine over SSH (`--ssh-user`, `--ssh-key`, `--ssh-port`). |
 | `--this-node` | Deploy on the machine `ov` runs on (Linux server only). |
 | `--cloud <cloud>` | Create the machines on a cloud first; they deploy OpenVidu themselves. |
 | `--mode auto\|assisted` | Run everything, or print the commands for you to run. |
-| `--domain-name`, `--certificate-type`, `--enabled-modules`, … | Friendly flags, each setting one configuration key. |
+| `--domain-name`, `--certificate-type`, `--enabled-modules`, … | Shorthand flags, each setting one configuration key. |
 | `--modules`, `--lan` / `--no-lan`, `--local-dir`, `--free-ports` | Local only: the module selection, access from your network, where the Compose project goes, and stopping whatever holds the ports. |
 | `-f <file>`, `--set key=value`, `--set-secret key=value` | An overlay of `openvidu-stack.yml`, a single key, a secret. |
 | `--param Name=Value`, `--remote-state` | A cloud template parameter; also keep the stack's state on the cloud. |
 | `--skip-port-check` | Deploy without the port preflight (locally, that the host ports are free; remotely, that the inbound ports reach the node). |
-| `--no-wait`, `--wait-timeout` | Skip or bound the wait for readiness (`5m` by default; `40m` with `--cloud`). |
+| `--no-wait`, `--wait-timeout` | Skip or limit the wait for readiness (`5m` by default; `40m` with `--cloud`). |
 
 ### `ov stack plan`
 
@@ -63,7 +63,7 @@ Previews what a deploy or a configuration change would do, without changing anyt
 
 ### `ov stack update`
 
-Brings a Community server or a PRO stack to the version of this `ov`, merging your edits to its configuration three ways, checking the disk first and rolling back on failure. A local stack is updated by deploying it again with the new `ov`. See [Update and migrate](operate/update.md).
+Brings a Community server or a PRO stack to the version of this `ov`, merging your edits to its configuration three ways, checking the disk first and rolling back on failure. To update a local stack, deploy it again with the new `ov`. See [Update and migrate](operate/update.md).
 
 ### `ov stack migrate [NAME]`
 
@@ -71,7 +71,7 @@ Converts, once, a deployment that `install.sh` 3.9.0 installed (Community, a PRO
 
 ## Live operations
 
-All of these resolve the directory's stack with no arguments. See [Status and health checks](operate/status.md).
+All of these operate on the directory's stack, with no arguments. See [Status and health checks](operate/status.md).
 
 | Command | What it does |
 | --- | --- |
@@ -91,7 +91,7 @@ See [Configuration](operate/configuration.md).
 | `ov stack config view` | The configuration the stack runs with. |
 | `ov stack config get <key>` | One value, by its path in `openvidu.yaml` (`domain.name`), model key, flag, alias or old `openvidu.env` name. |
 | `ov stack config set k=v …` | Change values, recreating only the services that read them. `--dry-run` shows the plan. |
-| `ov stack config unset <key>` | Back to the default. |
+| `ov stack config unset <key>` | Return a value to its default. |
 | `ov stack config edit` | Edit `openvidu.yaml` in `$EDITOR` (secrets as `***` unless `--show-secrets`). |
 | `ov stack config file ls` | The stack's configuration documents: `openvidu.yaml` and the service files (`livekit.yaml`, `caddy.yaml`, `agent-<name>.yaml`…). |
 | `ov stack config file get <doc>` / `edit <doc>` / `diff <file>` / `apply <file>` | Read, edit, compare or upload one document. `apply` validates it first, restarts only what reads it, and refuses a document changed since you read it (exit `7`) unless `--force`. |
@@ -108,7 +108,7 @@ See [Modules and agents](operate/modules.md).
 | `ov stack agent ls` | The agents of the stack, each with its state and image. |
 | `ov stack agent enable <name>` / `disable <name>` | Turn an agent on or off, live. `--dry-run` prints the commands. |
 | `ov stack ports` | Local stack only: the host ports the deployment publishes, read live from Docker. |
-| `ov stack check-ports` | Verify the inbound ports of a node actually arrive (needs SSH access to the node). Exit `8` on failure. |
+| `ov stack check-ports` | Verify that a node's inbound ports are actually reachable (needs SSH access to the node). Exit `8` on failure. |
 
 ## Nodes of a multi-node stack
 

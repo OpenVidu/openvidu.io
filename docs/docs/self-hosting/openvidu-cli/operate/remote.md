@@ -17,7 +17,7 @@ description: "Adopt a running OpenVidu stack into a new directory with ov stack 
 | `-f <file>` | A description document you already have. |
 | `--cloud <cloud> --stack-name openvidu-<name>` | A stack deployed with `--remote-state`, from the **record** it keeps on the cloud, infrastructure included. The name is the one on the deploy's `record:` line. |
 
-Over SSH, `ov` shows what it found and asks before saving (the document names hosts your client would connect to); `-y` answers in advance:
+Over SSH, `ov` shows what it found and asks before saving (the document names hosts your client would connect to); `-y` confirms in advance:
 
 ```console
 $ mkdir -p ~/stacks/web && cd ~/stacks/web
@@ -47,21 +47,21 @@ The import behaves differently per edition, because the two store their configur
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. `config get` and `config view` read the node, so a change another client made is what you see next time you ask. `config set` also adopts the node's values into your own `openvidu-stack.yml`, with a note (`openvidu-stack.yml now follows the node for: …`). `ov stack plan`, on the other hand, compares your `openvidu-stack.yml` with the node: a value another client changed shows as a change your redeploy would undo.
+    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. `config get` and `config view` read the node, so you see a change another client made the next time you ask. `config set` also adopts the node's values into your own `openvidu-stack.yml`, with a note (`openvidu-stack.yml now follows the node for: …`). `ov stack plan`, on the other hand, compares your `openvidu-stack.yml` with the node: a value another client changed shows as a change your redeploy would undo.
 
     What can go stale is a client's `openvidu-stack.yml` between commands. The public IP and the owncert files another client set are never read back, because they live in that client's `openvidu-stack.yml`, not in a file of the node. The copy matters for a **redeploy**, which renders the tree from `openvidu-stack.yml`. Before one, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it.
 
-    In short, a Community deployment is a **single-administrator** product: comfortable for one person or one pipeline, workable for a few who coordinate.
+    In short, a Community deployment is a **single-administrator** product: suited to one person or one pipeline, and workable for a small team that coordinates.
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    The stack holds its own desired state, so two clients **cannot drift apart**: both read and write the same release, and `ov stack config view` always answers from it. Any administrator with credentials points a directory at the stack and operates it: a **team** product. A lost directory is reconstructed from the deployment itself (`--kubeconfig`, or `sudo ov stack import --this-node` on the node), never stale.
+    The stack holds its own desired state, so two clients **cannot drift apart**: both read and write the same release, and `ov stack config view` always answers from it. Any administrator with credentials can point a directory at the stack and operate it, which makes PRO a **team** product. A lost directory is rebuilt from the deployment itself (`--kubeconfig`, or `sudo ov stack import --this-node` on the node), never stale.
 
 ## Recover a cloud stack, infrastructure included
 
-`--kubeconfig` adopts the cluster but not the machines under it: that directory can operate OpenVidu, not delete its cloud resources or change its template parameters. By default the stack's directory is the only place that drives the machines, and if it is lost, it is lost.
+`--kubeconfig` adopts the cluster but not the machines under it: that directory can operate OpenVidu, not delete its cloud resources or change its template parameters. By default, the stack's directory is the only place that drives the machines: if you lose it, you lose control of them.
 
-A deploy with **`--remote-state`** also keeps the stack on its cloud, so another machine can take it over completely. It prints where on its last lines (an Elastic stack named `dpaws2`):
+A deploy with **`--remote-state`** also keeps the stack on its cloud, so another machine can take it over completely. The deploy says where in its last lines (an Elastic stack named `dpaws2`):
 
 ```console
 ✔ OpenVidu Pro (elastic) is up on AWS
@@ -72,7 +72,7 @@ A deploy with **`--remote-state`** also keeps the stack on its cloud, so another
   SSH key:      Secrets Manager secret openvidu/openvidu-dpaws2/ssh-private-key (the private half, for that import)
 ```
 
-From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it: `openvidu-<name>` for a stack deployed as `<name>`, not the name of its directory. The record never holds a secret, so a parameter the template marks sensitive, the license above all, is passed again, exactly as the deploy took it:
+From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it: `openvidu-<name>` for a stack deployed as `<name>`, not the name of its directory. The record never holds a secret, so any parameter the template marks as sensitive, the license in particular, must be passed again, exactly as it was given to the deploy:
 
 ```console
 $ mkdir -p ~/stacks/dpaws2 && cd ~/stacks/dpaws2
@@ -112,7 +112,7 @@ From here, as from the directory that deployed it:
   ov stack destroy --keep-data   # or --delete-data: what becomes of the recordings
 ```
 
-From then on, `ov stack status`, `ov stack deploy <name> --cloud … --param …` (with the stack's name, `dpaws2` here) and `ov stack destroy` work here as they did in the directory that deployed the stack (a destroy from the imported directory deletes the machines too). Without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the way back is its deploying directory, or `--kubeconfig` for the cluster alone.
+From then on, `ov stack status`, `ov stack deploy <name> --cloud … --param …` (with the stack's name, `dpaws2` here) and `ov stack destroy` work here as they did in the directory that deployed the stack (a destroy from the imported directory deletes the machines too). A Community stack is imported the same way, with no license: the import takes the SSH private key from the cloud's secret store (on AWS, the Secrets Manager secret `openvidu/openvidu-<name>/ssh-private-key`) and operates the stack over SSH. On a PRO stack, without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the only way back is the directory that deployed it, or `--kubeconfig` for the cluster alone.
 
 ### What `--remote-state` stores per cloud
 
@@ -120,11 +120,11 @@ Everything that drives the stack, kept where the stack's infrastructure already 
 
 | Where it is kept | AWS | Azure | Google Cloud, Oracle, DigitalOcean |
 | --- | --- | --- | --- |
-| **Terraform state** | (CloudFormation; no state file) | (Bicep; no state file) | a bucket of the stack's own (`<stack>-terraform-state`) |
+| **Terraform state** | (CloudFormation; no state file) | (Bicep; no state file) | a dedicated bucket (`<stack>-terraform-state`) |
 | **The record** (infrastructure, no secrets) | the template bucket (`<stack>/registry/`) | a Key Vault secret (`OPENVIDU-REGISTRY`) | the state bucket (`openvidu/registry/`) |
 | **The SSH private key** `ov` generated | a Secrets Manager secret (`openvidu/<stack>/ssh-private-key`) | the stack's Key Vault (`OPENVIDU-SSH-PRIVATE-KEY`) | in the Terraform state |
 
-All of it is deleted by `ov stack destroy`.
+`ov stack destroy` deletes all of it.
 
 ## Next steps
 

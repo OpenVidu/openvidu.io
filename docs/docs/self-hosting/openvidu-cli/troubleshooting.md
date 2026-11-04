@@ -37,11 +37,11 @@ On PRO, the node's own firewall must also let the pod networks reach it. When it
 ov: nothing was installed: the pod networks (10.42.0.0/16, 10.43.0.0/16) must reach the node first. ov changes no firewall: add the rules above and deploy again (--skip-port-check deploys anyway)
 ```
 
-`ov` reads firewalls but never changes them: run the printed fix on the node, then deploy again. A **recommended** port that does not arrive (`443/udp`, `80/tcp`, `7881/tcp` or the media range `50000-60000/udp`) only warns, and the deploy continues; `--skip-port-check` turns the check off. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time for the full report: it is the check that verifies UDP, which a healthy-looking stack with no media needs.
+`ov` reads firewalls but never changes them: run the printed fix on the node, then deploy again. A **recommended** port that is not reachable (`443/udp`, `80/tcp`, `7881/tcp` or the media range `50000-60000/udp`) only warns, and the deploy continues; `--skip-port-check` turns the check off. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time for the full report: it is the check that verifies UDP, the usual culprit when a stack looks healthy but has no media.
 
 ## No media, but every service is healthy
 
-Almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works and the stack looks fine, but media never arrives. A running stack cannot prove this by dialing, so stop it for a few seconds and run the full check:
+This is almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works and the stack looks fine, but media never arrives. Probing a running stack cannot prove this, so stop it for a few seconds and run the full check:
 
 ```bash
 ov stack stop && ov stack check-ports && ov stack start
@@ -51,7 +51,7 @@ Open the ports the report flags on the node and on any perimeter firewall (cloud
 
 ## Let's Encrypt fails: port 80 must be reachable
 
-`--certificate-type letsencrypt` (and `zerossl`) obtains a certificate over HTTP, so **port 80 must reach the node** from the internet. If it is blocked, certificate issuance fails even though 443 is open. Open `80/tcp`, or use `owncert` to bring your own certificate, or `selfsigned` for a throwaway.
+`--certificate-type letsencrypt` (and `zerossl`) obtains a certificate over HTTP, so **port 80 must reach the node** from the internet. If it is blocked, certificate issuance fails even though 443 is open. Open `80/tcp`, or use `owncert` to bring your own certificate, or `selfsigned` for a throwaway deployment.
 
 ## High Availability never gets ready with Let's Encrypt
 
@@ -61,9 +61,9 @@ On Google Cloud, Azure, Oracle Cloud and DigitalOcean, a High Availability stack
 
 A deploy with no `--domain-name` on a machine with a public IPv4 address derives an `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A machine without a public IPv4 address, or one you reach by hostname, still needs `--domain-name`.
 
-## AWS: a stack name is taken for a few days after destroy
+## AWS: a stack name stays in use for several days after a destroy
 
-AWS Secrets Manager deletes a secret with a recovery window, so the stack's secret name stays taken for some days. Deploying a new stack with the **same name in the same region** fails until then. Free the name at once:
+AWS Secrets Manager deletes a secret with a recovery window, so the stack's secret name remains in use for several days. Deploying a new stack with the **same name in the same region** fails until then. To free the name immediately:
 
 ```bash
 aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery
@@ -75,7 +75,7 @@ Or deploy with a different name (or in a different region).
 
 ## Azure: a resource group without the created-by tag
 
-`ov` deletes only a resource group it created, recognized by a `created-by=openvidu-cli` tag. A deploy **refuses** a resource group that exists without that tag (deleting the stack would delete whatever else is in it). If an earlier `ov` created the group untagged, mark it (the refusal prints the command):
+`ov` deletes only a resource group it created, recognized by a `created-by=openvidu-cli` tag. A deploy **refuses** a resource group that exists without that tag (deleting the stack would delete whatever else is in it). If an earlier version of `ov` created the group without the tag, add it (the refusal prints the command):
 
 ```bash
 az group update --name <group> --set tags.created-by=openvidu-cli
@@ -83,7 +83,7 @@ az group update --name <group> --set tags.created-by=openvidu-cli
 
 ## A cloud quota blocked the deploy
 
-If the cloud refuses to create the machines (an instance-type or vCPU quota, an address or disk limit), the error comes from your cloud CLI, which `ov` runs as you. Request a quota increase, pick a smaller instance type (`--aws-instance-type` on AWS, `--param instanceType=<type>` on the other clouds), or deploy in another region. A region that does not offer the default instance type is handled automatically for the default (`ov` substitutes the same size in another family and says so), but a type you chose yourself is never replaced: the deploy stops before creating anything.
+If the cloud refuses to create the machines (an instance-type or vCPU quota, an address or disk limit), the error comes from your cloud CLI, which `ov` runs as you. Request a quota increase, pick a smaller instance type (`--aws-instance-type` on AWS, `--param instanceType=<type>` on the other clouds), or deploy in another region. If a region does not offer the default instance type, `ov` substitutes the same size in another family and says so. A type you chose yourself is never replaced: the deploy stops before creating anything.
 
 ## A cloud deploy timed out while waiting for OpenVidu
 
@@ -97,7 +97,7 @@ No other flag is needed: everything is already in `openvidu-stack.yml`, and a cl
 
 ## A cloud create failed partway
 
-`ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating anything, so a failed attempt can always be cleaned up from the directory:
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating anything, so a failed attempt can always be cleaned up from the directory:
 
 ```bash
 ov stack destroy --delete-data   # or --keep-data

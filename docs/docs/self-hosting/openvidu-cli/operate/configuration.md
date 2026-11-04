@@ -5,9 +5,9 @@ description: "View, get, set, unset and edit an OpenVidu stack's configuration w
 
 # Configuration
 
-`ov stack config` reads and changes the configuration of a **running** stack, with the minimal impact: it recreates only the services that read a changed value, while the rest keep running. Every command resolves the stack in the current directory.
+`ov stack config` reads and changes the configuration of a **running** stack, with minimal impact: it recreates only the services that read a changed value, while the rest keep running. Every command operates on the stack in the current directory.
 
-The configuration is one YAML document, **`openvidu.yaml`**, with a comment above each value, plus the service files beside it (`livekit.yaml`, `caddy.yaml`, the agents' `agent-<name>.yaml`…). Every edition and environment has the same documents; only where they are kept changes ([see below](#where-the-configuration-lives)).
+The configuration is one YAML document, **`openvidu.yaml`**, with a comment above each value, plus the service files beside it (`livekit.yaml`, `caddy.yaml`, the agents' `agent-<name>.yaml`…). Every edition and environment has the same documents; only where they are stored differs ([see below](#where-the-configuration-lives)).
 
 ## View, get, set, unset
 
@@ -22,7 +22,7 @@ $ ov stack config get DOMAIN_NAME
 172-30-0-96.openvidu-local.dev
 ```
 
-`config get` prints secrets in clear (`ov stack config get DASHBOARD_ADMIN_PASSWORD`). A setting nobody changed answers with its default.
+`config get` prints secrets in plain text (`ov stack config get DASHBOARD_ADMIN_PASSWORD`). For a setting nobody has changed, it prints the default.
 
 A key can be named several ways: its path in `openvidu.yaml` (`domain.name`), the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or its old `openvidu.env` name (`DOMAIN_NAME`). All of them read and write the same setting.
 
@@ -43,7 +43,7 @@ configuration applied
 
 `--dry-run` shows the plan and changes nothing. `ov stack config unset <key>` returns a value to its default. `ov stack config edit` opens `openvidu.yaml` in `$EDITOR`, with the secrets as `***` unless `--show-secrets`; a secret left as `***` keeps its value.
 
-Some settings shape whole files besides `openvidu.yaml`: the certificate type and its files, the TURN domain, an external proxy, the public IP, UTC. `set` applies them all the same, rendering the files they shape and merging the change into your own edits. An owncert value is the path of a PEM file, a base64 PEM or the PEM itself. On a stack at `video.example.com`:
+Some settings shape whole files besides `openvidu.yaml`: the certificate type and its files, the TURN domain, an external proxy, the public IP, UTC. `set` applies them just like any other setting: it renders the files they shape and merges the change into your own edits. An owncert value is the path of a PEM file, a base64 PEM or the PEM itself. On a stack at `video.example.com`:
 
 ```console
 $ ov stack config set certificate-type=owncert owncert-public-key=/home/me/fullchain.pem owncert-private-key=/home/me/privkey.pem
@@ -91,7 +91,7 @@ ov: openviduStack.credentials.mongoAdminPassword is set when the stack is deploy
 | `ov stack config file diff <file>` | Shows how a file differs from the stack's document, and what applying it would restart. |
 | `ov stack config file apply <file> [--as <doc>]` | Uploads a document. It is validated and the stack rendered with it before anything is written (exit `4` if either fails), and only the services that read it restart. |
 
-`file apply` refuses a document that changed since your `file get` or `file edit` read it (exit `7`), so two administrators cannot overwrite each other's edit; `--force` applies it anyway. `--dry-run` prints the diff and the restarts and writes nothing (exit `5` when it would change something).
+`file apply` refuses a document that changed since your `file get` or `file edit` read it (exit `7`), so two administrators cannot overwrite each other's edits; `--force` applies it anyway. `--dry-run` prints the diff and the restarts and writes nothing (exit `5` when it would change something).
 
 ## Preview a change: `ov stack plan`
 
@@ -110,7 +110,7 @@ openviduStack.turnDomain.name   added    turn.172-30-0-96.openvidu-local.dev   a
 restart: [caddy-proxy ov-livekit-server]
 ```
 
-`--detailed-exitcode` exits `5` when the plan is not empty, for gating a pipeline.
+`--detailed-exitcode` exits `5` when the plan is not empty, which is useful as a pipeline gate.
 
 ## Where the configuration lives
 
@@ -118,13 +118,13 @@ This is the main operational difference between the editions.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    **The node's files are the source of truth.** `config/openvidu.yaml` and the service files under `/opt/openvidu/config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change rewrites the value in the document, keeping its comments and order, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services whose rendered files changed; then `openvidu-stack.yml` follows the node. Editing a file by hand and `sudo systemctl restart openvidu` is a supported path too: the unit renders before every start (a typo in `openvidu.yaml` stops it, naming the line), and the next `set`, `edit` or `plan` sees the edit.
+    **The node's files are the source of truth.** `config/openvidu.yaml` and the service files under `/opt/openvidu/config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change rewrites the value in the document, keeping its comments and order, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services whose rendered files changed; `openvidu-stack.yml` is then updated to match the node. Editing a file by hand and running `sudo systemctl restart openvidu` is also supported: the unit renders before every start (a typo in `openvidu.yaml` stops it, naming the line), and the next `set`, `edit` or `plan` sees the edit.
 
-    Because the source of truth is on the node, every administrator's `openvidu-stack.yml` is a copy that a redeploy renders the tree from. Before a redeploy, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it ([Operate from another machine](remote.md)).
+    Because the source of truth is on the node, every administrator's `openvidu-stack.yml` is a copy, and a redeploy renders the tree from that copy. Before a redeploy, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it ([Operate from another machine](remote.md)).
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    **The documents in the cluster are the source of truth.** `openvidu.yaml` is a Secret of the stack's namespace (`ov-config-openvidu.yaml`) and every service file a ConfigMap (`ov-config-livekit.yaml`…), kept outside the Helm release. `set` changes `openvidu.yaml`, validates and renders the stack with it, and applies it as a `helm upgrade`; each pod renders its documents when it starts, so only the pods that read a changed value restart. A chart value with no setting of its own is refused (it goes in `--helm-values`). The stack holds its own configuration, so no client can be stale and every administrator reads the same documents.
+    **The documents in the cluster are the source of truth.** `openvidu.yaml` is a Secret of the stack's namespace (`ov-config-openvidu.yaml`) and each service file is a ConfigMap (`ov-config-livekit.yaml`…), kept outside the Helm release. `set` changes `openvidu.yaml`, validates and renders the stack with it, and applies it as a `helm upgrade`; each pod renders its documents when it starts, so only the pods that read a changed value restart. A chart value with no setting of its own is refused (such values go in `--helm-values`). The stack holds its own configuration, so no client can be stale and every administrator reads the same documents.
 
 === "Local"
 
@@ -132,7 +132,7 @@ This is the main operational difference between the editions.
 
 ## Settings only one edition has
 
-COMMUNITY and PRO run the same features on different engines, so almost every setting exists in both, under the same key and meaning; only where it is written changes. The exceptions are a handful of settings one edition does not have: the PRO license and media engine, the offline media nodes and the cluster's own data bucket or container (PRO only), and some host-network ports and credentials that Kubernetes manages by itself (Community only). `ov stack deploy` and `ov stack config set` refuse a setting of the other edition, naming it and its flag (exit `4`):
+COMMUNITY and PRO run the same features on different engines, so almost every setting exists in both, under the same key and meaning; only where it is written changes. The exceptions are a handful of settings one edition does not have: the PRO license and media engine, the offline media nodes and the cluster's own data bucket or container (PRO only), and some host-network ports and credentials that Kubernetes manages by itself (Community only). `ov stack deploy` and `ov stack config set` reject a setting that belongs to the other edition and name the setting and its flag (exit `4`):
 
 ```console
 $ ov stack deploy pro13 --environment on-premises --edition pro --openvidu-pro-license … --set openviduStack.mongo.internalPort=27018
@@ -143,7 +143,7 @@ On PRO, any low-level chart value with no setting of its own goes in `--helm-val
 
 ## Secrets
 
-Credentials are never written in plain text where they do not belong. At deploy time `ov` generates every missing credential and **pins** it into `openvidu-stack.yml`, so a redeploy reuses it instead of replacing it (which would leave MongoDB and MinIO locked out of their data).
+Credentials are never written in plain text where they do not belong. At deploy time, `ov` generates every missing credential and **pins** it into `openvidu-stack.yml`, so a redeploy reuses it instead of replacing it (which would leave MongoDB and MinIO locked out of their data).
 
 - `--set-secret key=value` (on deploy, or `--set-secret key=@file`, `key=env:VAR`) stores the value under `.openvidu/secrets/` and writes a `secrets://` reference into `openvidu-stack.yml`. The file then carries the reference, not the value.
 - `ov stack export --gitops` prints `openvidu-stack.yml` with every secret externalized to a `secrets://` reference, so the file is safe to commit to a Git repository while the values stay out of it. A plain `ov stack export` prints the values themselves, the PRO license and the owncert keys included: do not share its output.
@@ -168,7 +168,7 @@ data/runtime/config/redis/redis.env                                        redis
 modules: egress,ingress,dashboard — 0 created, 5 updated, 8 unchanged, 0 removed
 ```
 
-The files updated are those that read the changed value, which are the services `config set` recreates. `--dry-run` reports what would be written and writes nothing. A PRO stack has nothing to render here: each pod renders its own documents when it starts. A local stack renders its directory's `config/` the same way.
+The updated files are those that read the changed value; they belong to the same services that `config set` recreates. `--dry-run` reports what would be written and writes nothing. A PRO stack has nothing to render here: each pod renders its own documents when it starts. A local stack renders its directory's `config/` the same way.
 
 ## Next steps
 

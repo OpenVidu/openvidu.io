@@ -5,9 +5,9 @@ description: "Tear an OpenVidu stack down with the OpenVidu CLI: preview with dr
 
 # Destroy a stack
 
-`ov stack destroy` tears the deployment down and removes the directory's record. It asks for confirmation: type the stack name, or pass `-y` (with no terminal, `-y` is required). `--dry-run` asks nothing and changes nothing: it prints exactly what the destroy would do with the same flags, and whether the record would go.
+`ov stack destroy` tears the deployment down and removes the directory's record. It asks for confirmation: type the stack name, or pass `-y` (with no terminal, `-y` is required). `--dry-run` asks nothing and changes nothing: it prints exactly what the destroy would do with the same flags, and whether the record would be removed.
 
-A destroy **deletes only what is the stack's by record**, never by name: the resources a cloud stack lists as its own, what its Terraform state holds, and on Azure a resource group that carries the `created-by=openvidu-cli` tag `ov` puts on groups it creates. It never deletes a bucket, account or group it did not create.
+A destroy **deletes only what belongs to the stack according to its record**, never anything matched by name: the resources a cloud stack lists as its own, what its Terraform state holds, and on Azure a resource group that carries the `created-by=openvidu-cli` tag `ov` puts on groups it creates. It never deletes a bucket, account or group it did not create.
 
 ## Local and on-premises
 
@@ -62,7 +62,7 @@ The OpenVidu node agent stays on each server, and the joined nodes stay in the c
 
 ## A cloud stack: the machines go too
 
-A stack whose machines this CLI created (`--cloud`) also loses the machines. The deployment is **not** stopped first, because deleting the instance is a more thorough teardown than stopping services on it. What will be removed is printed before the confirmation:
+When `ov` created the stack's machines (`--cloud`), the destroy deletes them too. The deployment is **not** stopped first, because deleting the instance is a more thorough teardown than stopping services on it. What will be removed is printed before the confirmation:
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -84,14 +84,14 @@ A destroy that deletes machines **must** say what becomes of the recordings and 
 | Cloud | `--keep-data` | `--delete-data` |
 | --- | --- | --- |
 | AWS | the data buckets stay (the template marks them `Retain`) | emptied and deleted after the stack |
-| Google Cloud, Oracle, DigitalOcean | the data buckets (Spaces) are left out of the Terraform state before the destroy, so they stay | emptied and deleted by the destroy |
+| Google Cloud, Oracle, DigitalOcean | the data buckets (Spaces) are removed from the Terraform state before the destroy, so they stay | emptied and deleted by the destroy |
 | Azure | the storage account moves to a resource group of its own (`<group>-data`) before the stack's group is deleted | deleted with the stack's resource group |
 
 A bucket, Space or storage account **of your own** (named with `--param`) is not the stack's, so it stays either way.
 
-!!! info "Destroy with `ov` to choose"
+!!! info "Destroy with `ov` to control the data"
 
-    Through `ov` the five clouds behave the same. Outside it they do not: deleting a CloudFormation stack from the AWS console keeps the data buckets, a bare `terraform destroy` deletes them, and deleting an Azure resource group from the portal deletes the storage account with it. Use `ov stack destroy` to make the choice yourself.
+    Through `ov`, the five clouds behave the same way. Outside `ov`, they do not: deleting a CloudFormation stack from the AWS console keeps the data buckets, a bare `terraform destroy` deletes them, and deleting an Azure resource group from the portal deletes the storage account with it. Use `ov stack destroy` to make the choice yourself.
 
 ### Keep the machines
 
@@ -99,12 +99,12 @@ A bucket, Space or storage account **of your own** (named with `--param`) is not
 
 ### Remote-state cleanup
 
-A stack deployed with `--remote-state` also keeps its Terraform state, record and SSH key on the cloud (see [Operate from another machine](remote.md#what-remote-state-stores-per-cloud)). `ov stack destroy` deletes those too: the state bucket `ov` created (kept with `--keep-infrastructure`) and, on AWS, the secret that held the SSH private key. From a state bucket that already existed under that name, the destroy removes only this stack's own objects and leaves the bucket.
+A stack deployed with `--remote-state` also keeps its Terraform state, record and SSH key on the cloud (see [Operate from another machine](remote.md#what-remote-state-stores-per-cloud)). `ov stack destroy` deletes those too: the state bucket `ov` created (kept with `--keep-infrastructure`) and, on AWS, the secret that held the SSH private key. If the state bucket already existed under that name, the destroy removes only this stack's objects and leaves the bucket.
 
 ## Destroying an imported or incomplete stack
 
-- A stack **imported without its infrastructure** (`--kubeconfig`, or `--ssh` on a Community server) is torn down on the nodes its record names, but the directory that deployed it is the one that deletes a cloud stack's machines.
-- A failed cloud **create** can still be destroyed: `ov` writes the stack's infrastructure into `openvidu-stack.yml` before creating anything, so `ov stack destroy` in the directory removes whatever the attempt left.
+- A stack **imported without its infrastructure** (`--kubeconfig`, or `--ssh` on a Community server) is torn down on the nodes its record names; only the directory that deployed a cloud stack can delete its machines.
+- A failed cloud **create** can still be destroyed: `ov` records the stack's infrastructure in `openvidu-stack.yml` before creating anything, so `ov stack destroy` in the directory removes whatever the attempt left behind.
 
 ## Next steps
 
