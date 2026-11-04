@@ -43,7 +43,7 @@ The topologies are the ones described in [Deployment types](../deployment-types.
 | Runs on the server as | Docker Compose and a systemd unit | Kubernetes, with OpenVidu as a Helm release |
 | Topologies | Single Node | Single Node, Elastic, High Availability |
 | Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the cluster (`openvidu.yaml` and the service files, as Kubernetes objects), which any administrator can read |
-| Administrators | One client at a time holds the desired state; another one imports a copy | Every client reads the same stack |
+| Administrators | Each administrator's directory keeps a copy of the desired state; the node's files win | Every administrator reads and writes the same configuration in the cluster |
 
 A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop, in evaluation mode and with no license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes.
 
@@ -72,16 +72,16 @@ Both modes print the same commands, so what you review in assisted mode is exact
 `--cloud aws|azure|gcp|oracle|digitalocean` makes the deploy create the machines first, from the infrastructure template embedded in the CLI: CloudFormation on AWS, Bicep on Azure and Terraform on Google Cloud, Oracle Cloud and DigitalOcean. Then:
 
 1. **The machines deploy OpenVidu themselves.** Each one downloads the same `ov` build, checks it against the published checksums, and runs `ov stack deploy --this-node` (the first node) or `ov stack join` (every other node). No SSH from your machine is part of the installation.
-2. **Your `ov` waits** until OpenVidu answers at its URL.
+2. **Your `ov` waits** until OpenVidu is up: on Community, until its URL answers; on PRO, until the stack publishes its kubeconfig and the cluster API answers.
 3. **Your `ov` registers the stack** in your directory: OpenVidu PRO through the cluster credentials (kubeconfig) the stack publishes, OpenVidu COMMUNITY over SSH with the key pair the machine was created with.
 
 From then on, `ov stack status`, `ov stack config`, `ov stack logs` and `ov stack destroy` work from that directory. Recordings and OpenVidu Meet data go to the cloud's object storage (S3, Azure Blob Storage, Cloud Storage, Object Storage or Spaces), so they outlive the machines.
 
 ### Remote state
 
-By default everything that drives a cloud stack stays in its directory: the Terraform state, the stack's record and the SSH private key. If you lose the directory, you can still administer the stack itself, but `ov` can no longer change or delete its machines.
+By default everything that drives a cloud stack stays in its directory: the Terraform state (on the clouds that use Terraform), the stack's record and the SSH private key. If you lose the directory, you can still import the stack and administer OpenVidu on it (over SSH, or with its kubeconfig), but `ov` can no longer change or delete its machines.
 
-`--remote-state` also keeps the stack on its cloud: the Terraform state in a bucket of the stack's own, a **record** of the stack (its infrastructure, no secrets) and the SSH private key in the cloud's secret store. Any machine with credentials for that cloud can then take the stack over with `ov stack import --cloud <cloud> --stack-name <name>`. See [Operate from another machine](operate/remote.md).
+`--remote-state` also keeps the stack on its cloud: the Terraform state in a bucket of the stack's own (Google Cloud, Oracle Cloud, DigitalOcean), a **record** of the stack (its infrastructure, no secrets) and the SSH private key in the cloud's secret store. Any machine with credentials for that cloud can then take the stack over with `ov stack import --cloud <cloud> --stack-name <name>`. See [Operate from another machine](operate/remote.md).
 
 ## Modules and services
 

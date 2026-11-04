@@ -9,7 +9,7 @@ The OpenVidu CLI is a single static binary, `ov`, published for Linux on **amd64
 
 ## Requirements
 
-- A Linux machine. It can be your workstation or the server you deploy on.
+- A Linux machine (macOS and Windows are not supported yet). It can be your workstation or the server you deploy on.
 - `curl`, `gunzip` and `sha256sum`, available on every common distribution.
 - What each kind of deployment drives:
     - **Local**: [Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/){:target="_blank"} with the Compose plugin.
@@ -28,7 +28,7 @@ curl -fsSLO https://get.openvidu.io/cli/${OV_VERSION}/SHA256SUMS
 sha256sum --check --ignore-missing SHA256SUMS
 ```
 
-The check must print `OK` for the file you downloaded:
+The check must print `OK` (or your locale's word for it) for the file you downloaded:
 
 ```console
 $ sha256sum --check --ignore-missing SHA256SUMS
