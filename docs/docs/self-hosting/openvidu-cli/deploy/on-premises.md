@@ -69,7 +69,7 @@ The fix is printed, never run: `ov` reads firewalls, it does not change them. He
 
 ## Deploy
 
-Each stack lives in its own empty directory on your machine. Choose the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway deployment.
+Each stack lives in its own empty directory on your machine. Choose the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself), kept here in `~/certs/`. On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway deployment.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -80,7 +80,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
       --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
       --domain-name 172-30-0-96.openvidu-local.dev \
       --certificate-type owncert \
-      --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
+      --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
       --mode auto
     note: generated 11 credential(s) and pinned them in this stack's spec, so a later deploy reuses them instead of replacing them: livekit-api-key, livekit-api-secret, redis-password, minio-access-key, minio-secret-key, mongo-admin-password, mongo-replica-set-key, dashboard-admin-password, grafana-admin-password, meet-initial-admin-password, meet-initial-api-key
     checking the inbound ports before installing anything…
@@ -133,7 +133,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
       --ssh ubuntu@172.30.0.101 --ssh-key ~/.ssh/id_ed25519 \
       --openvidu-pro-license <your-license> \
       --domain-name 172-30-0-101.openvidu-local.dev \
-      --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
+      --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
       --mode auto
 
     ▶ Connect to the VM…
@@ -199,7 +199,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
         --ssh ubuntu@172.30.0.101 --ssh-key ~/.ssh/id_ed25519 \
         --openvidu-pro-license <your-license> \
         --domain-name 172-30-0-101.openvidu-local.dev \
-        --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
+        --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
         --mode auto
 
     ▶ Connect to the VM…
@@ -283,7 +283,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
       --ssh ubuntu@172.30.0.110 --ssh-key ~/.ssh/id_ed25519 \
       --openvidu-pro-license <your-license> \
       --domain-name 172-30-0-110.openvidu-local.dev \
-      --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
+      --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
       --mode auto
     ov stack join --ssh ubuntu@172.30.0.111 --as master
     ov stack join --ssh ubuntu@172.30.0.112 --as master
