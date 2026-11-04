@@ -62,22 +62,20 @@ The deployment is a normal `docker compose` project inside the stack directory (
 
 === "Deploy OpenVidu PRO locally"
 
-    `--edition pro` runs OpenVidu PRO on the same Docker Compose engine (not Kubernetes) — the Pro media engine and the Pro images, locally:
+    `--edition pro` runs OpenVidu PRO on the same Docker Compose engine (not Kubernetes): the PRO media server, Egress, Ingress and the OpenVidu 2 compatibility API, locally. It needs **no license**:
 
     ```console
-    $ mkdir qal2 && cd qal2
-    $ ov stack deploy qal2 --environment local --edition pro --no-lan --openvidu-pro-license <your-license>
+    $ mkdir labp-stack && cd labp-stack
+    $ ov stack deploy labp --environment local --edition pro --local-dir ./labp --no-lan
+    materializing the deployment into ./labp and starting it (the first run downloads images)…
     wrote spec to openvidu-stack.yml
-    materializing the deployment into ./openvidu-local-qal2 and starting it (the first run downloads images)…
     ✓ docker compose up -d --remove-orphans
-    ✔ OpenVidu compose deployment started in ./openvidu-local-qal2
-    ✔ stack "qal2" recorded in this directory
+    ✔ OpenVidu compose deployment started in ./labp
+    ✔ stack "labp" recorded in this directory
       OpenVidu Meet API: http://localhost:9080
     waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
-      ⏳ still starting: OpenVidu, Meet, Dashboard, MinIO (0s)
-      ⏳ still starting: Meet, Dashboard (2s)
+      ⏳ still starting: Meet, Dashboard (0s)
     …
-      ⏳ still starting: Meet, Dashboard (21s)
 
     ====================================================
     🎉 OpenVidu is ready! 🎉
@@ -90,24 +88,12 @@ The deployment is a normal `docker compose` project inside the stack directory (
           - http://localhost:9080
       - Credentials:
           - Username: admin
-          - Password: ********
+          - Password: admin
           - API Key:  meet-api-key
-
-    ----------------- LiveKit Server API ---------------
-      - Access from this machine:
-          - http://localhost:7880
-          - ws://localhost:7880
-      - Credentials:
-          - API Key:    devkey
-          - API Secret: ********
     …
     ```
 
-    `--no-lan` keeps the stack on `localhost`, without the HTTPS access from other devices of your network.
-
-    A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. A production deployment needs a [license](../../../../account.md).
-
-    <!-- CHECK (docs-ov): ov stores --openvidu-pro-license in the spec but a local stack does not use it yet (mvp-qa reported it, H34). Say whether it is needed once that is settled. -->
+    A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. It takes no license, and `--openvidu-pro-license` is refused (exit `4`) before anything is touched. A licensed deployment belongs on a server or a cloud: see the [pricing page](../../../../pricing.md) for what the license includes. The OpenVidu Dashboard of a local stack is the Community one, because the PRO dashboard checks the license when it starts.
 
 !!! warning "One local OpenVidu runs at a time"
 

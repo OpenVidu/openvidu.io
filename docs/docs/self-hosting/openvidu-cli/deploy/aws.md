@@ -24,7 +24,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 - A region: `--aws-region`, else `$AWS_REGION`, else the one `aws configure` has.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your account.
 
-You need no key pair and, except for High Availability, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real.
+You need no key pair and, except for High Availability, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real. High Availability needs your own domain and an ACM certificate for it (see its tab below).
 
 ## Deploy
 
@@ -71,21 +71,44 @@ An empty directory is the stack. Choose the edition and topology:
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
+    High Availability needs three things of your own: a **domain**, an **ACM certificate** for it in the same region, and a **VPC with three or more subnets in different availability zones** (the four masters spread across them so the cluster survives losing a zone). A region's default VPC has one subnet per zone, so this picks them:
+
     ```bash
     mkdir openvidu && cd openvidu
+    VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
+      --query 'Vpcs[0].VpcId' --output text)
+    SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
+      --query 'Subnets[].SubnetId' --output text | tr '\t' ,)
     ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
       --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
       --domain-name openvidu.example.com \
-      --param OpenViduCertificateARN=arn:aws:acm:us-east-1:123456789012:certificate/… \
-      --param OpenViduVPC=vpc-0123456789abcdef0 \
-      --param OpenViduMasterNodeSubnets=subnet-aaaa1111,subnet-bbbb2222 \
-      --param OpenViduMediaNodeSubnets=subnet-aaaa1111,subnet-bbbb2222 \
+      --param OpenViduCertificateARN=arn:aws:acm:us-east-1:123456789012:certificate/<id> \
+      --param OpenViduVPC=$VPC \
+      --param OpenViduMasterNodeSubnets=$SUBNETS \
+      --param OpenViduMediaNodeSubnets=$SUBNETS \
       --mode auto
     ```
 
-    Four master nodes behind a Network Load Balancer, plus an auto scaling group of media nodes. High Availability needs a real domain and an ACM certificate for it, because TLS ends at the load balancer: see [Create AWS certificate for HA](../../how-to-guides/create-configure-AWS-certificate.md). After the deploy, point the domain at the load balancer's DNS name.
+    Four master nodes behind a Network Load Balancer, plus an auto scaling group of media nodes. TLS ends at the load balancer with the ACM certificate ([Create AWS certificate for HA](../../how-to-guides/create-configure-AWS-certificate.md)), so `--certificate-type` does not apply. With only two subnets the CloudFormation stack fails to create (`Fn::Select` cannot find index 2).
 
-    <!-- PENDING-RUN (mvp-cloud mq1): aws pro ha output -->
+    When the deploy ends, **point the domain at the load balancer**: a CNAME (or a Route 53 ALIAS record) to the stack's `NLBDNS` output. Nothing serves the domain until you do. This prints it (the CloudFormation stack is `openvidu-<name>`):
+
+    ```bash
+    aws cloudformation describe-stacks --stack-name openvidu-openvidu --region us-east-1 \
+      --query "Stacks[0].Outputs[?OutputKey=='NLBDNS'].OutputValue" --output text
+    ```
+
+    Because the load balancer terminates TLS, `ov stack status --wait` counts the nodes and services and leaves the URL to it. This is the wait of a stack named `demo-ha`:
+
+    ```console
+    $ ov stack status --wait
+    note: the stack runs behind a proxy that terminates TLS, so its URL is checked at that proxy: the wait counts nodes and services only
+    waiting for https://openvidu.example.com to be ready (Ctrl-C to stop)…
+      ⏳ master nodes 4/4, media nodes 1/1, services 41/49 (0s)
+    …
+      ⏳ master nodes 4/4, media nodes 1/1, services 48/49 (44s)
+    ✔ demo-ha is ready (every node and service; its URL answers at the proxy in front of it)
+    ```
 
 Before it touches your account, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce10`:
 

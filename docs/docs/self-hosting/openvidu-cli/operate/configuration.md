@@ -26,7 +26,6 @@ $ ov stack config get rtc-engine
 ov: openviduStack.rtcEngine is not set in stack "labp": it takes the model's default, mediasoup
 ```
 
-<!-- CHECK (docs-ov): this message comes from mvp-qa 7e38b861 (unpushed). Verify before publishing. -->
 
 A key can be named several ways: the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or the key as it appears in `config/openvidu.env` (`DOMAIN_NAME`). All of them read and write the same setting.
 

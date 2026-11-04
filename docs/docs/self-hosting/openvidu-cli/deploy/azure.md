@@ -25,7 +25,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 - **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param InstanceType=<size>`.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your subscription.
 
-You need no key pair and, except for a production High Availability stack, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real.
+You need no key pair and no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
 ## Deploy
 
@@ -73,12 +73,39 @@ An empty directory is the stack. Choose the edition and topology:
     mkdir openvidu && cd openvidu
     ov stack deploy openvidu --cloud azure --azure-location northeurope \
       --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-      --domain-name openvidu.example.com --certificate-type letsencrypt --mode auto
+      --mode auto
     ```
 
-    Four master nodes behind a load balancer, plus a scale set of media nodes. TLS ends at Caddy on the masters (the load balancer passes it through), so Let's Encrypt works without a pre-provisioned certificate; use a real domain for a production stack.
+    Four master nodes behind a passthrough load balancer, plus a scale set of media nodes.
 
-    <!-- PENDING-RUN (docs-ov, dw): azure pro ha with today's ov -->
+    The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
+
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+
+        ```bash
+        --domain-name openvidu.example.com --certificate-type owncert \
+          --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+          --owncert-private-key "$(base64 -w0 privkey.pem)"
+        ```
+
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output).
+
+    Five machines take more vCPU quota than the default sizes of a single node: the run below passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit the location's quota.
+
+    This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
+
+    ```text
+    …
+    ✔ OpenVidu Pro (high availability) is up on Azure
+      URL:          https://openvidu-zksfiv-20-107-185-207.sslip.io/
+      credentials:  az keyvault secret show --vault-name ov-demo-ha-keyvault --name OPENVIDU-URL --query value -o tsv
+      kubeconfig:   .openvidu/azure/kubeconfig.yaml
+
+    $ ov stack status --wait
+    waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C to stop)…
+    ✔ demo-ha is ready (https://openvidu-zksfiv-20-107-185-207.sslip.io)
+    ```
 
 Before it touches your subscription, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
 

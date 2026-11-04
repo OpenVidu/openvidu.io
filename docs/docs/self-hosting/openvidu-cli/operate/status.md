@@ -41,7 +41,6 @@ ov-meet-cbbf88b85-kkrvx            1/1    Running
 …
 ```
 
-<!-- CHECK (docs-ov): PRO status headers POD/READY/STATE come from mvp-qa 9dc5010b (unpushed); ov-admin of 2026-10-31 prints HOST/ROLE/STATE. Verify before publishing. -->
 
 ### Wait until ready
 
@@ -104,7 +103,6 @@ Nodes:
   localhost        local        running
 ```
 
-<!-- CHECK (docs-ov): the first line reads "Context:" in ov-admin of 2026-10-31; mvp-qa renames it to "Stack:" (unpushed). Verify before publishing. -->
 
 ## Health test
 

@@ -16,7 +16,7 @@ Before anything is installed, a remote deploy (and `ov stack join`) checks the n
          - sudo ufw allow 443/udp   (run it on the node)
 ```
 
-`ov` reads firewalls but never changes them — run the printed fix on the node. Then redeploy. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time to see the full report; it is the only check that verifies UDP, which a healthy-looking stack with no media needs. A **recommended** port that does not answer, such as `443/udp` in the example above, only warns and the deploy continues; `--skip-port-check` turns the check off.
+`ov` reads firewalls but never changes them — run the printed fix on the node. Then redeploy. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time to see the full report; it is the only check that verifies UDP, which a healthy-looking stack with no media needs. A **recommended** port that does not answer, such as the media range `50000-60000/udp`, only warns and the deploy continues; `--skip-port-check` turns the check off.
 
 ## No media, but every service is healthy
 
@@ -32,9 +32,13 @@ Open the ports the report flags on the node and on any perimeter firewall (cloud
 
 `--certificate-type letsencrypt` (and `zerossl`) obtains a certificate over HTTP, so **port 80 must reach the node** from the internet. If it is blocked, certificate issuance fails even though 443 is open. Open `80/tcp`, or use `owncert` to bring your own certificate, or `selfsigned` for a throwaway.
 
+## High Availability never gets ready with Let's Encrypt
+
+On Google Cloud, Azure, Oracle Cloud and DigitalOcean, a High Availability stack sits behind a load balancer that passes TLS through to the masters. Let's Encrypt's HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Deploy High Availability with the default `selfsigned` certificate, or with `owncert` for production. On AWS the load balancer terminates TLS with an ACM certificate, so the question does not arise. See the High Availability tab of each [cloud guide](index.md#where-you-can-deploy).
+
 ## No domain: the `sslip.io` fallback
 
-A deploy with no `--domain-name` on a machine with a public IPv4 address derives a `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. This is fine for testing; use your own domain for anything real. A private or named target still needs `--domain-name`.
+A deploy with no `--domain-name` on a machine with a public IPv4 address derives a `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A private or named target still needs `--domain-name`.
 
 ## AWS: a stack name is taken for a few days after destroy
 

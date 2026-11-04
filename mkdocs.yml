@@ -534,6 +534,7 @@ plugins:
 
         OpenVidu Platform deployment with the OpenVidu CLI:
         - docs/self-hosting/openvidu-cli/*.md
+        - docs/self-hosting/openvidu-cli/*/*.md
 
         OpenVidu Platform production readiness:
         - docs/self-hosting/production-ready/*.md

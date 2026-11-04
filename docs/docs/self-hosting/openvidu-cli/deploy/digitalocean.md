@@ -26,7 +26,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 - Permission to create Droplets, a firewall, a Space with a bucket-scoped Spaces key, SSH keys and the stack's tag (and, for Elastic and High Availability, a VPC and a load balancer).
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your account.
 
-You need no key pair and, except for a production High Availability stack, no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real.
+You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
 ## Deploy
 
@@ -74,12 +74,37 @@ An empty directory is the stack. Choose the edition and topology:
     mkdir openvidu && cd openvidu
     ov stack deploy openvidu --cloud digitalocean \
       --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-      --domain-name openvidu.example.com --certificate-type letsencrypt --mode auto
+      --mode auto
     ```
 
-    Four master nodes behind a load balancer, plus an autoscaling pool of media nodes. TLS ends at Caddy on the masters, so Let's Encrypt works without a pre-provisioned certificate; use a real domain for a production stack, pointed at the load balancer's address.
+    Four master nodes behind a passthrough load balancer, plus an autoscaling pool of media nodes.
 
-    <!-- PENDING-RUN (docs-ov, dw): digitalocean pro ha with today's ov -->
+    The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
+
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+
+        ```bash
+        --domain-name openvidu.example.com --certificate-type owncert \
+          --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+          --owncert-private-key "$(base64 -w0 privkey.pem)"
+        ```
+
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`).
+
+    This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
+
+    ```text
+    …
+    ✔ OpenVidu Pro (high availability) is up on DigitalOcean
+      URL:          https://openvidu-j78sfb-129-212-214-216.sslip.io/
+      credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-demo-ha-space-appdata-b62adba1a3/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+      kubeconfig:   .openvidu/digitalocean/kubeconfig.yaml
+
+    $ ov stack status --wait
+    waiting for https://openvidu-j78sfb-129-212-214-216.sslip.io to be ready (Ctrl-C to stop)…
+    ✔ demo-ha is ready (https://openvidu-j78sfb-129-212-214-216.sslip.io)
+    ```
 
 Before it touches your account, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
 

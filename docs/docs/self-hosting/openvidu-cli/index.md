@@ -41,13 +41,13 @@ The topologies are the ones described in [Deployment types](../deployment-types.
 
 | | OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | --- | --- | --- |
-| Deployed with | `ov stack deploy --edition community` | `ov stack deploy --edition pro --openvidu-pro-license <key>` |
+| Deployed with | `ov stack deploy --edition community` | `ov stack deploy --edition pro --openvidu-pro-license <key>` (no license locally) |
 | Runs on the server as | Docker Compose and a systemd unit | Kubernetes, with OpenVidu as a Helm release |
 | Topologies | Single Node | Single Node, Elastic, High Availability |
 | Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the stack itself, which any administrator can read |
 | Administrators | One client at a time holds the desired state; another one imports a copy | Every client reads the same stack |
 
-A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes.
+A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop, in evaluation mode and with no license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes.
 
 ## How a deployment works
 

@@ -22,7 +22,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 - **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks run under one user at a time.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your tenancy.
 
-You need no key pair and, except for a production High Availability stack, no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real.
+You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
 ## Deploy
 
@@ -74,12 +74,43 @@ An empty directory is the stack. Choose the edition and topology:
     ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
       --oci-vault ocid1.vault.oc1.eu-madrid-1.<vault> \
       --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-      --domain-name openvidu.example.com --certificate-type letsencrypt --mode auto
+      --mode auto
     ```
 
-    Four master nodes behind a load balancer, plus an autoscaling pool of media nodes. TLS ends at Caddy on the masters, so Let's Encrypt works without a pre-provisioned certificate; use a real domain for a production stack, pointed at the load balancer's address.
+    Four master nodes behind a passthrough network load balancer, plus an autoscaling pool of media nodes.
 
-    <!-- PENDING-RUN (docs-ov, dw): oracle pro ha with today's ov -->
+    The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
+
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+
+        ```bash
+        --domain-name openvidu.example.com --certificate-type owncert \
+          --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+          --owncert-private-key "$(base64 -w0 privkey.pem)"
+        ```
+
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`).
+
+    This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
+
+    ```text
+    …
+    ✔ OpenVidu Pro (high availability) is up on Oracle Cloud
+      URL:          https://openvidu-qbgqz3-51-170-44-98.sslip.io/
+      credentials:  oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id ocid1.vault.oc1.eu-madrid-1.<vault> --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
+      kubeconfig:   .openvidu/oracle/kubeconfig.yaml
+
+    $ ov stack status --wait
+    waiting for https://openvidu-qbgqz3-51-170-44-98.sslip.io to be ready (Ctrl-C to stop)…
+      ⏳ master nodes 4/4, media nodes 1/1, services 41/49 (0s)
+      ⏳ master nodes 4/4, media nodes 1/1, services 42/49 (2s)
+      ⏳ master nodes 4/4, media nodes 1/1, services 44/49 (8s)
+      ⏳ master nodes 4/4, media nodes 1/1, services 46/49 (10s)
+      ⏳ master nodes 4/4, media nodes 1/1, services 47/49 (13s)
+      ⏳ master nodes 4/4, media nodes 1/1, services 48/49 (17s)
+    ✔ demo-ha is ready (https://openvidu-qbgqz3-51-170-44-98.sslip.io)
+    ```
 
 Before it touches your tenancy, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29, OCIDs and the Object Storage namespace shown as placeholders):
 
