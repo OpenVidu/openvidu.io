@@ -155,7 +155,7 @@ This is what will be done in your Google Cloud project my-project (region europe
   gcloud secrets versions access latest --secret=${PREFIX}OPENVIDU_URL --project=my-project
 ```
 
-Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about two minutes — before OpenVidu is installed — so the wait is the real one: `ov` polls Secret Manager for the stack's `OPENVIDU_URL` secret, then checks the published URL answers Caddy's health check:
+Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about two minutes, before OpenVidu is installed, so the wait is the real one: `ov` polls Secret Manager for the stack's `OPENVIDU_URL` secret, then checks the published URL answers Caddy's health check:
 
 ```text
 ▶ Create the machines on Google Cloud…
@@ -241,7 +241,7 @@ S3_APP_DATA_BUCKET             my-project-openvidu-ce12g-1300d7
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy. `GCP_CREDENTIALS_JSON` is the exception Terraform writes itself — the one input only Google Cloud knows.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy. `GCP_CREDENTIALS_JSON` is the exception Terraform writes itself: the one input only Google Cloud knows.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 

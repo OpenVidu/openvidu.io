@@ -5,7 +5,7 @@ description: "Adopt a running OpenVidu stack into a new directory with ov stack 
 
 # Operate from another machine
 
-`ov` operates one stack per directory. To operate a running stack from a machine that has no directory for it — a colleague's laptop, a CI runner, a replacement for a lost directory — use **`ov stack import`**. It reads the description the stack publishes about itself and writes the two files a deploy would have left (`openvidu-stack.yml` and the `.openvidu/` state), so every `ov stack` verb works afterwards.
+`ov` operates one stack per directory. To operate a running stack from a machine that has no directory for it (a colleague's laptop, a CI runner, a replacement for a lost directory), use **`ov stack import`**. It reads the description the stack publishes about itself and writes the two files a deploy would have left (`openvidu-stack.yml` and the `.openvidu/` state), so every `ov stack` verb works afterwards.
 
 ## Import a stack
 
@@ -15,7 +15,7 @@ description: "Adopt a running OpenVidu stack into a new directory with ov stack 
 | `--ssh [user@]host` | A node over **SSH** (with `--ssh-key`, `--ssh-port`). |
 | `--kubeconfig <path>` | A **PRO** stack, from the cluster credential. The stack holds its own desired state, so nothing has to have been published. |
 | `-f <file>` | A description document you already have. |
-| `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from the **record** it keeps on the cloud — infrastructure included. |
+| `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from the **record** it keeps on the cloud, infrastructure included. |
 
 Over SSH, `ov` shows what it found and asks before saving (the document names hosts your client would connect to); `-y` answers in advance:
 
@@ -49,13 +49,13 @@ The import behaves differently per edition, because the two store their configur
 
     The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. Every `config get`, `set`, `view` and `plan` reads the node first, so clients do not drift silently on the keys of those files: a `set` from one client is what the other sees next time it asks, and it adopts the change into its own spec with a note.
 
-    What can go stale is a client's `openvidu-stack.yml` between commands — and always the **render parameters** another client changed (the certificate type, an external proxy, the public IP), which are not keys of a file and so are not read back. That copy matters for a **redeploy**, which renders the tree from the spec. Keep it current with `ov stack plan`, or import again (`--replace`) before one.
+    What can go stale is a client's `openvidu-stack.yml` between commands. The public IP and the owncert files another client set are never read back, because they live in that client's spec, not in a file of the node. The copy matters for a **redeploy**, which renders the tree from the spec. Before one, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it.
 
     In short, a Community deployment is a **single-administrator** product: comfortable for one person or one pipeline, workable for a few who coordinate.
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    The stack holds its own desired state, so two clients **cannot drift apart**: both read and write the same release, and `ov stack config view` always answers from it. Any administrator with credentials points a directory at the stack and operates it — a **team** product. A lost directory is reconstructed from the deployment itself (`--kubeconfig`, or `sudo ov stack import --this-node` on the node), never stale.
+    The stack holds its own desired state, so two clients **cannot drift apart**: both read and write the same release, and `ov stack config view` always answers from it. Any administrator with credentials points a directory at the stack and operates it: a **team** product. A lost directory is reconstructed from the deployment itself (`--kubeconfig`, or `sudo ov stack import --this-node` on the node), never stale.
 
 ## Recover a cloud stack, infrastructure included
 

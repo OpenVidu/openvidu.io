@@ -155,7 +155,7 @@ This is what will be done in your Azure subscription (location northeurope):
   az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
 ```
 
-Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then it runs them, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes — once Azure has provisioned the VM, but before OpenVidu is installed — so the wait is the real one: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks the published URL answers Caddy's health check:
+Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then it runs them, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so the wait is the real one: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks the published URL answers Caddy's health check:
 
 ```text
 ▶ Create the machines on Azure…

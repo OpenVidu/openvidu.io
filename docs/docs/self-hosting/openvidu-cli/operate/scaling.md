@@ -125,7 +125,7 @@ $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
 
 ## Graceful drain
 
-A media node that is being removed must not drop the rooms, recordings or ingests it holds. With `--drain`, the stack stops sending new rooms to the node, and the command waits — **with no time limit** — until everything the node holds has ended, then leaves. The stack deletes the node afterwards. Interrupted, the node keeps draining, and running the command again resumes the wait.
+A media node that is being removed must not drop the rooms, recordings or ingests it holds. With `--drain`, the stack stops sending new rooms to the node, and the command waits, **with no time limit**, until everything the node holds has ended, then leaves. The stack deletes the node afterwards. Interrupted, the node keeps draining, and running the command again resumes the wait.
 
 This is exactly what a cloud autoscaler's about-to-terminate media node runs on its own, which is why autoscaling never cuts a live session: the node finishes its rooms before the machine goes.
 

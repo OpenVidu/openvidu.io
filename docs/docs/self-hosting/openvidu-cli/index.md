@@ -55,7 +55,7 @@ A local stack runs on Docker Compose with either edition, so you can develop aga
 
 The directory holds two things:
 
-- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it: the deploy flags (`--domain-name`, `--certificate-type`, `--modules`…), `--set key=value` overrides and `-f file.yml` overlays all write into it, and the deploy fills the rest with defaults and **generates every credential the stack needs**. A redeploy from that file reuses the same credentials.
+- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it. The deploy flags (`--domain-name`, `--certificate-type`, `--modules`…), `--set key=value` and `-f file.yml` write into it, and the deploy fills in the rest with defaults. It also **generates every credential the stack needs** and pins them here, so a redeploy reuses them.
 - **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it (SSH key, kubeconfig), the template and variables it applied on a cloud, and its secrets. Keep it private.
 
 ### Auto and assisted mode

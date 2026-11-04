@@ -75,7 +75,7 @@ Or deploy with a different name (or in a different region).
 
 ## Azure: a resource group without the created-by tag
 
-`ov` deletes only a resource group it created, recognised by a `created-by=openvidu-cli` tag. A deploy **refuses** a resource group that exists without that tag (deleting the stack would delete whatever else is in it). If an earlier `ov` created the group untagged, mark it — the refusal prints the command:
+`ov` deletes only a resource group it created, recognised by a `created-by=openvidu-cli` tag. A deploy **refuses** a resource group that exists without that tag (deleting the stack would delete whatever else is in it). If an earlier `ov` created the group untagged, mark it (the refusal prints the command):
 
 ```bash
 az group update --name <group> --set tags.created-by=openvidu-cli
@@ -87,7 +87,7 @@ If the cloud refuses to create the machines (an instance-type or vCPU quota, an 
 
 ## A cloud deploy timed out while waiting for OpenVidu
 
-The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, default 40 minutes with `--cloud`). The infrastructure already exists, so simply **resume** — it waits and registers the stack, reusing what is there:
+The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, default 40 minutes with `--cloud`). The infrastructure already exists, so simply **resume**: it waits and registers the stack, reusing what is there:
 
 ```bash
 ov stack deploy --cloud <cloud> --mode auto

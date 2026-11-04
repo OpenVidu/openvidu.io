@@ -25,7 +25,7 @@ stack "web" on 10.5.0.3 already runs main, the version of this ov: nothing to up
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    **Your edits survive a three-way merge.** Every file `ov` manages (`docker-compose.yaml` and `config/`) is merged against three sides: the file as the installed version wrote it (kept on the node under `.ov/base/<version>/`), the file on the node now, and the new version's file. `config/openvidu.yaml` is merged by values, the other files by lines. A file nobody edited becomes the new version's; an edit away from what the new version changes is kept; an edit on the **same lines** (or the same value) is a conflict, and the update stops before touching anything (exit `4`), naming the file:
+    **Your edits survive a three-way merge.** Every file `ov` manages (`docker-compose.yaml` and `config/`) is merged against three sides: the file as the installed version wrote it (kept on the node under `.ov/base/<version>/`), the file on the node now, and the new version's file. `config/openvidu.yaml` is merged by values, the other files by lines. A file nobody edited becomes the new version's. An edit away from what the new version changes is kept. An edit on the **same lines** (or the same value) is a conflict: the update stops before touching anything (exit `4`) and names the file:
 
     ```console
     $ ov stack update --dry-run

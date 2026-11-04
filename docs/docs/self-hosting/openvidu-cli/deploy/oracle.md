@@ -174,7 +174,7 @@ This is what will be done in your Oracle Cloud tenancy (region eu-madrid-1, comp
   oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id $VAULT --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
 ```
 
-Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about three minutes — before OpenVidu is installed — so the wait is the real one: `ov` polls the vault for the stack's `OPENVIDU_URL` secret and checks the published URL answers Caddy's health check:
+Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about three minutes, before OpenVidu is installed, so the wait is the real one: `ov` polls the vault for the stack's `OPENVIDU_URL` secret and checks the published URL answers Caddy's health check:
 
 ```text
 ▶ Create the machines on Oracle Cloud…

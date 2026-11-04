@@ -8,23 +8,23 @@ page_features: [lazyvideo]
 
 Deploy OpenVidu on your own Linux servers. `ov` installs and starts the stack over SSH or on the machine it runs on, generating every credential, and leaves a copy of itself on each node so the stack can be operated from there too, as well as from the stack's directory on your machine.
 
-Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the whole decision** — `--edition community` (the default) or `--edition pro` — and how OpenVidu is installed and run on the server follows from it. Elastic and High Availability grow past one machine, so they are PRO only.
+Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the whole decision**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. Elastic and High Availability grow past one machine, so they are PRO only.
 
 ## Requirements
 
 - One or more **Linux servers** (Ubuntu recommended), each with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size them like the cloud templates do by default: 4 vCPU and 8 GB per node.
 - A sudo-capable user on each server, reachable over SSH (and, for Elastic and High Availability, the servers reachable from each other on their private addresses).
 - A **domain** pointing at the server (at a load balancer in front of the masters, for HA in production), and a **certificate type**:
-    - `letsencrypt` or `zerossl` — a certificate obtained automatically (needs port 80 reachable).
-    - `owncert` — bring your own, with `--owncert-public-key` and `--owncert-private-key`.
-    - `selfsigned` — for a throwaway.
+    - `letsencrypt` or `zerossl`: a certificate obtained automatically (needs port 80 reachable).
+    - `owncert`: bring your own, with `--owncert-public-key` and `--owncert-private-key`.
+    - `selfsigned`: for a throwaway.
 - The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`. On PRO, also the cluster API on `6443/tcp` from your machine, and the node's own firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. Between the nodes of an Elastic or High Availability stack, `6443/tcp`, `10250/tcp` and `8472/udp` (and `2379-2380/tcp` between HA masters). See the port check below.
 - The [OpenVidu CLI](../install.md). Nothing else needs to be pre-installed on the servers: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
 - For PRO, your **OpenVidu Pro license** (`--openvidu-pro-license`).
 
 ## Check the ports first
 
-The commonest way an on-premises OpenVidu "does not work" is a stack that comes up perfectly and has no media: every service healthy, and UDP never reaching the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it — which verifies TCP *and* UDP, something dialling a running stack cannot do.
+The commonest way an on-premises OpenVidu "does not work" is a stack that comes up perfectly and has no media: every service healthy, and UDP never reaching the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. That verifies TCP *and* UDP, which dialling a running stack cannot do.
 
 ```console
 $ ov stack check-ports --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
@@ -306,7 +306,7 @@ A deploy from a directory whose spec already exists needs the mode named (`--mod
 
 ## Install on the server itself
 
-Instead of `--ssh`, put `ov` on the server, log in, and deploy with **`--this-node`** — *the machine I am running on*. The CLI writes the deployment there and escalates with `sudo`, so a user with passwordless sudo is enough. The stack of `--this-node` lives in `/opt/openvidu/stack`:
+Instead of `--ssh`, put `ov` on the server, log in, and deploy with **`--this-node`** (*the machine I am running on*). The CLI writes the deployment there and escalates with `sudo`, so a user with passwordless sudo is enough. The stack of `--this-node` lives in `/opt/openvidu/stack`:
 
 ```console
 $ sudo ov stack deploy web --environment on-premises --this-node \

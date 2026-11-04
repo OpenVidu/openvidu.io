@@ -118,7 +118,7 @@ The deployment is a normal `docker compose` project inside the stack directory (
 
 !!! warning "One local OpenVidu runs at a time"
 
-    Each stack is **namespaced** by its compose project (its containers, volumes and network are per-stack), so you can keep several side by side — each in its own directory — and `ov stack destroy --delete-data` on one never touches another's data. But all stacks bind the **same host ports** (7880, 9080, 9000, and, since local is dev-only, Redis 6379 and MongoDB 27017), so only one can run at once. Deploying a new one while another runs fails, naming the reason (`a local OpenVidu stack is already running — only one runs at a time`); `--free-ports` stops the running one first (it asks, or `-y`) and keeps its data.
+    Each stack is **namespaced** by its compose project (its containers, volumes and network are per-stack), so you can keep several side by side, each in its own directory, and `ov stack destroy --delete-data` on one never touches another's data. But all stacks bind the **same host ports** (7880, 9080, 9000, and, since local is dev-only, Redis 6379 and MongoDB 27017), so only one can run at once. Deploying a new one while another runs fails, naming the reason (`a local OpenVidu stack is already running — only one runs at a time`); `--free-ports` stops the running one first (it asks, or `-y`) and keeps its data.
 
 ## Access it over your LAN
 
@@ -225,7 +225,7 @@ wrote spec to openvidu-stack.yml
   OpenVidu Meet API: http://localhost:9080
 ```
 
-From there you drive the project yourself: `docker compose config --services` is the authority on what is enabled, `COMPOSE_PROFILES` in `.env` selects the modules, and `COMPOSE_PROFILES='*' docker compose down` tears everything down whatever the current selection. Turning a module off by hand takes more than editing `.env` — Compose does not stop a container when its profile stops being active, and the media server's `livekit.yaml` must change with the data services. `ov stack module add/rm` does that bookkeeping for you.
+From there you drive the project yourself: `docker compose config --services` is the authority on what is enabled, `COMPOSE_PROFILES` in `.env` selects the modules, and `COMPOSE_PROFILES='*' docker compose down` tears everything down whatever the current selection. Turning a module off by hand takes more than editing `.env`: Compose does not stop a container when its profile stops being active, and the media server's `livekit.yaml` must change with the data services. `ov stack module add/rm` does that bookkeeping for you.
 
 ## Next steps
 

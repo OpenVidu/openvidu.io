@@ -42,7 +42,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
       --certificate-type letsencrypt --mode auto
     ```
 
-    One Droplet (`s-4vcpu-8gb` by default — 4 vCPU, 8 GB, 160 GB disk, `--param instanceType=<slug>` to change it) running OpenVidu on Docker Compose.
+    One Droplet (`s-4vcpu-8gb` by default: 4 vCPU, 8 GB, 160 GB disk; `--param instanceType=<slug>` to change it) running OpenVidu on Docker Compose.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -157,7 +157,7 @@ This is what will be done in your DigitalOcean account (region ams3, Spaces in a
   env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://$SPACE/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
 ```
 
-Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about a minute — before OpenVidu is installed — so the wait is the real one: `ov` polls the Space for `secrets.env`, then checks the published URL answers Caddy's health check:
+Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about a minute, before OpenVidu is installed, so the wait is the real one: `ov` polls the Space for `secrets.env`, then checks the published URL answers Caddy's health check:
 
 ```text
 ▶ Create the machines on DigitalOcean…

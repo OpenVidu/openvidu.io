@@ -50,7 +50,7 @@ local deployment torn down
 
 ## A cloud stack: the machines go too
 
-A stack whose machines this CLI created (`--cloud`) also loses the machines — the deployment is **not** stopped first, because deleting the instance is a more thorough teardown than stopping services on it. What will be removed is printed before the confirmation:
+A stack whose machines this CLI created (`--cloud`) also loses the machines. The deployment is **not** stopped first, because deleting the instance is a more thorough teardown than stopping services on it. What will be removed is printed before the confirmation:
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -67,7 +67,7 @@ This is what will be deleted from your AWS account:
 
 ### You must choose what happens to the data
 
-A destroy that deletes machines **must** say what becomes of the recordings and Meet data, on every cloud: with neither flag (or both), nothing is deleted and the command stops (exit `2`). There is no default, because either choice loses something — the data, or the money its storage costs.
+A destroy that deletes machines **must** say what becomes of the recordings and Meet data, on every cloud: with neither flag (or both), nothing is deleted and the command stops (exit `2`). There is no default, because either choice loses something: the data, or the money its storage costs.
 
 | Cloud | `--keep-data` | `--delete-data` |
 | --- | --- | --- |
