@@ -264,7 +264,7 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
        ✓ Leave the OpenVidu CLI on the node
 
     ▶ Wait for the stack to see the node…
-       · wait until fake-vm-172-30-0-102 is ready in the stack
+       · wait until node-172-30-0-102 is ready in the stack
        ✓ Wait for the stack to see the node
 
     ✔ 172.30.0.102 joined the stack as a media node.
@@ -335,7 +335,7 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
        ✓ Leave the OpenVidu CLI on the node
 
     ▶ Wait for the stack to see the node…
-       · wait until fake-vm-172-30-0-111 is ready in the stack
+       · wait until node-172-30-0-111 is ready in the stack
        ✓ Wait for the stack to see the node
 
     ✔ 172.30.0.111 joined the stack as a master node.
@@ -357,7 +357,7 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
 
     Put a load balancer in front of the four masters, so the stack survives losing one:
 
-    - **TCP passthrough**, not TLS termination: `443/tcp` and `80/tcp` (and `1935/tcp` with RTMP ingest) to the four masters, with a TCP health check on `443`.
+    - **TCP passthrough**, not TLS termination: `443/tcp`, `80/tcp` and `6443/tcp` (the cluster API, at the address `--lb-host` names), and `1935/tcp` with RTMP ingest, to the four masters, with a TCP health check on `443`.
     - **The domain points at the load balancer.** Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: Let's Encrypt does not work behind a passthrough balancer.
     - **Deploy the first master with the load balancer's domain and `--skip-port-check`.** Its port check probes the domain, and nothing behind the load balancer is healthy yet. Open the ports listed in Requirements yourself before you skip it:
 
@@ -405,7 +405,7 @@ $ sudo ov stack deploy web --environment on-premises --this-node \
   --domain-name 172-30-0-96.openvidu-local.dev \
   --certificate-type selfsigned
 …
-✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard)
+✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
 ```
 
 Either way the server ends up operable from itself: a deploy from your laptop hands the node the CLI and its own stack directory on the way out, so `sudo ov stack status` works there with no directory to name.

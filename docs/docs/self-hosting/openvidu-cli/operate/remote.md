@@ -15,7 +15,7 @@ description: "Adopt a running OpenVidu stack into a new directory with ov stack 
 | `--ssh [user@]host` | A node over **SSH** (with `--ssh-key`, `--ssh-port`). |
 | `--kubeconfig <path>` | A **PRO** stack, from the cluster credential. The stack holds its own desired state, so nothing has to have been published. |
 | `-f <file>` | A description document you already have. |
-| `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from the **record** it keeps on the cloud, infrastructure included. |
+| `--cloud <cloud> --stack-name openvidu-<name>` | A stack deployed with `--remote-state`, from the **record** it keeps on the cloud, infrastructure included. The name is the one on the deploy's `record:` line. |
 
 Over SSH, `ov` shows what it found and asks before saving (the document names hosts your client would connect to); `-y` answers in advance:
 

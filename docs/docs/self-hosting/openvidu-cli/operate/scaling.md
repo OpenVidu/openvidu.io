@@ -75,7 +75,7 @@ $ ov stack join --ssh ubuntu@172.30.0.102 --as media
    ✓ Leave the OpenVidu CLI on the node
 
 ▶ Wait for the stack to see the node…
-   · wait until fake-vm-172-30-0-102 is ready in the stack
+   · wait until node-172-30-0-102 is ready in the stack
    ✓ Wait for the stack to see the node
 
 ✔ 172.30.0.102 joined the stack as a media node.
@@ -97,10 +97,10 @@ On the master of an Elastic stack (token replaced here):
 
 ```console
 $ sudo ov stack join-info
-OPENVIDU_JOIN_ADDRESS=https://172.30.0.96:6443
+OPENVIDU_JOIN_ADDRESS=https://172.30.0.101:6443
 OPENVIDU_JOIN_TOKEN=<token>
 $ sudo ov stack join-info --format json
-{"address":"https://172.30.0.96:6443","token":"<token>"}
+{"address":"https://172.30.0.101:6443","token":"<token>"}
 ```
 
 The token lets a machine join the cluster: treat it as a secret.
@@ -113,9 +113,9 @@ The token lets a machine join the cluster: treat it as a secret.
 
 ```console
 $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
-⏳ draining fake-vm-172-30-0-102: no new rooms come here; waiting, with no time limit, for the ones it holds
+⏳ draining node-172-30-0-102: no new rooms come here; waiting, with no time limit, for the ones it holds
   still serving after 0s: openvidu-elastic/ov-egress-xrcqw openvidu-elastic/ov-ingress-bfxwl openvidu-elastic/ov-livekit-server-4mhmv
-✔ fake-vm-172-30-0-102 has no sessions left.
+✔ node-172-30-0-102 has no sessions left.
 ✔ this machine left the stack.
 ```
 

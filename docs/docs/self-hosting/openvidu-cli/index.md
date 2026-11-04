@@ -91,7 +91,7 @@ From then on, `ov stack status`, `ov stack config`, `ov stack logs` and `ov stac
 
 By default everything that drives a cloud stack stays in its directory: the Terraform state (on the clouds that use Terraform), the stack's record and the SSH private key. If you lose the directory, you can still import the stack and administer OpenVidu on it (over SSH, or with its kubeconfig), but `ov` can no longer change or delete its machines.
 
-`--remote-state` also keeps the stack on its cloud: the Terraform state in a bucket of the stack's own (Google Cloud, Oracle Cloud, DigitalOcean), a **record** of the stack (its infrastructure, no secrets) and the SSH private key in the cloud's secret store. Any machine with credentials for that cloud can then take the stack over with `ov stack import --cloud <cloud> --stack-name <name>`. See [Operate from another machine](operate/remote.md).
+`--remote-state` also keeps the stack on its cloud: the Terraform state in a bucket of the stack's own (Google Cloud, Oracle Cloud, DigitalOcean), a **record** of the stack (its infrastructure, no secrets) and the SSH private key in the cloud's secret store. Any machine with credentials for that cloud can then take the stack over with `ov stack import --cloud <cloud> --stack-name openvidu-<name>` (the name on the deploy's `record:` line). See [Operate from another machine](operate/remote.md).
 
 ## Modules and services
 

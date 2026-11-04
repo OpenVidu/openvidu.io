@@ -118,7 +118,7 @@ The directory holds the handle to the stack, not the stack itself. Recreate it w
 
 - **PRO:** `ov stack import --kubeconfig <file>` (the cluster holds its own state). Get the file on the master with `sudo ov stack kubeconfig --this-node --server <its public address>`, or on a cloud from the stack's secret store (the `credentials:` line of the deploy); or run `sudo ov stack import --this-node` on the master itself.
 - **Community:** `ov stack import --ssh ubuntu@<host> --ssh-key <key>` (rebuilt from the node's files if needed).
-- **A cloud stack deployed with `--remote-state`:** `ov stack import --cloud <cloud> --stack-name <name>` brings back the infrastructure too, so `ov stack destroy` and `--param` redeploys work again. Without `--remote-state`, only the deploying directory can drive the machines.
+- **A cloud stack deployed with `--remote-state`:** `ov stack import --cloud <cloud> --stack-name openvidu-<name>` (the name on the deploy's `record:` line) brings back the infrastructure too, so `ov stack destroy` and `--param` redeploys work again. Without `--remote-state`, only the deploying directory can drive the machines.
 
 ## See also
 
