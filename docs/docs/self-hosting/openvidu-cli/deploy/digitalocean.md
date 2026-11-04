@@ -76,7 +76,7 @@ An empty directory is the stack. Choose the edition and topology:
       --certificate-type letsencrypt --mode auto
     ```
 
-    One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
+    One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scaling](../operate/scaling.md).
 
     This is how the deploy of a stack named `dpdo2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 

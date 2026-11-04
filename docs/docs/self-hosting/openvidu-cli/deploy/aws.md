@@ -83,7 +83,7 @@ An empty directory is the stack. Choose the edition and topology:
       --certificate-type letsencrypt --mode auto
     ```
 
-    One master node and an auto scaling group of media nodes, in the VPC and subnets you name. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
+    One master node and an auto scaling group of media nodes, in the VPC and subnets you name. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scaling](../operate/scaling.md).
 
     This is how the deploy of a stack named `dpaws2` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
