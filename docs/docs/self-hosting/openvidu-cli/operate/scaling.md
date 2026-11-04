@@ -26,7 +26,7 @@ Any parameter the cloud template declares is changed from the stack's directory 
 ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-Or running exactly one media node on a DigitalOcean Elastic stack (the same parameter is `FixedNumberOfMediaNodes` on AWS); `0` returns it to autoscaling:
+Or running exactly one media node on a DigitalOcean Elastic stack (the same parameter is `FixedNumberOfMediaNodes` on AWS):
 
 ```bash
 ov stack deploy openvidu --cloud digitalocean --param fixedNumberOfMediaNodes=1 --mode auto -y
