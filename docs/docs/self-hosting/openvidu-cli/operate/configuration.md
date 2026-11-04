@@ -7,6 +7,8 @@ description: "View, get, set, unset and edit an OpenVidu stack's configuration w
 
 `ov stack config` reads and changes the configuration of a **running** stack, with the minimal impact: it recreates only the services that read a changed value, while the rest keep running. Every command resolves the stack in the current directory.
 
+The configuration is one YAML document, **`openvidu.yaml`**, with a comment above each value, plus the service files beside it (`livekit.yaml`, `caddy.yaml`, the agents' `agent-<name>.yaml`…). Every edition and environment has the same documents; only where they are kept changes ([see below](#where-the-configuration-lives)).
+
 ## View, get, set, unset
 
 ```console
@@ -27,7 +29,7 @@ ov: openviduStack.rtcEngine is not set in stack "labp": it takes the model's def
 ```
 
 
-A key can be named several ways: the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or the key as it appears in `config/openvidu.env` (`DOMAIN_NAME`). All of them read and write the same setting.
+A key can be named several ways: its path in `openvidu.yaml` (`domain.name`), the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or its old `openvidu.env` name (`DOMAIN_NAME`). All of them read and write the same setting.
 
 `ov stack config set` changes one or more values. It shows the impact and recreates only what needs it:
 
@@ -37,35 +39,55 @@ KEY                                                CHANGE    NEW   IMPACT
 openviduStack.credentials.dashboardAdminPassword   changed   ***   appRestart
 
 restart: [ov-dashboard]
-✓ set DASHBOARD_ADMIN_PASSWORD=*** in config/openvidu.env
+✓ set credentials.dashboardAdminPassword=*** in config/openvidu.yaml
 ✓ sudo ov stack render --this-node
-✓ docker compose --env-file config/openvidu.env up -d --force-recreate --no-deps ov-dashboard
+✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps ov-dashboard
 ✔ updated openvidu-stack.yml
 configuration applied
 ```
 
-`--dry-run` shows the plan and changes nothing. `ov stack config unset <key>` returns a value to its default. `ov stack config edit` opens the configuration in `$EDITOR`.
+`--dry-run` shows the plan and changes nothing. `ov stack config unset <key>` returns a value to its default. `ov stack config edit` opens `openvidu.yaml` in `$EDITOR`, with the secrets as `***` unless `--show-secrets`; a secret left as `***` keeps its value.
 
-Some settings are not a single key of a file — the certificate type and its files, the TURN domain, an external proxy, the public IP, UTC. `set` applies them all the same, rendering the files they shape and merging the change with your own edits:
+Some settings shape whole files besides `openvidu.yaml`: the certificate type and its files, the TURN domain, an external proxy, the public IP, UTC. `set` applies them all the same, rendering the files they shape and merging the change into your own edits. An owncert value is the path of a PEM file, a base64 PEM or the PEM itself:
 
 ```console
-$ ov stack config set certificate-type=owncert owncert-public-key=fullchain.pem owncert-private-key=privkey.pem
+$ ov stack config set certificate-type=owncert owncert-public-key=/home/me/fullchain.pem owncert-private-key=/home/me/privkey.pem
 KEY                                            CHANGE    NEW       IMPACT
 openviduStack.certificate.type                 changed   owncert   appRestart
 openviduStack.certificate.owncert.privateKey   added     ***       appRestart
 openviduStack.certificate.owncert.publicKey    added     ***       appRestart
 
 restart: [caddy-proxy]
+✓ set certificate.type=owncert in config/openvidu.yaml
 ✓ render config/caddy.yaml with the new parameters
-✓ write owncert/172-30-0-96.openvidu-local.dev.cert
-✓ write owncert/172-30-0-96.openvidu-local.dev.key
+✓ write owncert/video.example.com.cert
+✓ write owncert/video.example.com.key
 ✓ sudo ov stack render --this-node
-✓ docker compose --env-file config/openvidu.env up -d --force-recreate --no-deps caddy-proxy
+✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps caddy-proxy
 ✔ updated openvidu-stack.yml
 configuration applied
+
+$ ov stack config set external-proxy=true
+ov: config/caddy.yaml was edited on the node where this change rewrites it: nothing was written; edit the file by hand, or apply the change with `ov stack deploy`, which writes the file again
 ```
 
+If you edited those files on the very lines the change rewrites, nothing is written (exit `4`) and the message names the file: edit it by hand, or apply the change with `ov stack deploy`, which writes the files again.
+
 What the deployment sets once — MongoDB's credentials, Meet's initial admin and API key — is **refused** on a running stack (exit `4`): the store keeps the value it was first started with, and a changed file would only lock the services out.
+
+## Service files: `ov stack config file`
+
+`openvidu.yaml` holds the settings; the service files hold what a single service reads, such as the media server's `livekit.yaml`. `ov stack config file` works on any of them:
+
+| Command | What it does |
+| --- | --- |
+| `ov stack config file ls` | Lists the documents, the services that read each one, where it is kept and whether it differs from the one the installed version ships. |
+| `ov stack config file get <doc> [--out <file>]` | Prints one document (`--out` writes it to a file of mode `0600`, secrets included). |
+| `ov stack config file edit <doc>` | Opens it in `$EDITOR` and applies it when you save. |
+| `ov stack config file diff <file>` | Shows how a file differs from the stack's document, and what applying it would restart. |
+| `ov stack config file apply <file> [--as <doc>]` | Uploads a document. It is validated and the stack rendered with it before anything is written (exit `4` if either fails), and only the services that read it restart. |
+
+`file apply` refuses a document that changed since your `file get` or `file edit` read it (exit `7`), so two administrators cannot overwrite each other's edit; `--force` applies it anyway. `--dry-run` prints the diff and the restarts and writes nothing (exit `5` when it would change something).
 
 ## Preview a change: `ov stack plan`
 
@@ -92,13 +114,17 @@ This is the main operational difference between the editions.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    **The node's files are the truth.** `config/openvidu.env` and the service files under `config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change writes the key in its file, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services that read it; then `openvidu-stack.yml` is updated so the spec says what the node runs. Editing a file by hand and `sudo systemctl restart openvidu` is a supported path too — the unit renders before every start, and the next `set`, `edit` or `plan` sees the edit.
+    **The node's files are the truth.** `config/openvidu.yaml` and the service files under `/opt/openvidu/config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change rewrites the value in the document, keeping its comments and order, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services whose rendered files changed; then `openvidu-stack.yml` follows the node. Editing a file by hand and `sudo systemctl restart openvidu` is a supported path too: the unit renders before every start (a typo in `openvidu.yaml` stops it, naming the line), and the next `set`, `edit` or `plan` sees the edit.
 
     Because the truth is on the node, every administrator's `openvidu-stack.yml` is a copy that a redeploy renders the tree from. Keep it current with `ov stack plan`, or [import again](remote.md) before a redeploy.
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    **The Helm release's values are the truth.** No node holds an `openvidu.env`. `set` takes a chart value by its path (`caddyProxy.certificateType=letsencrypt`), or any model name for the value it maps to, and applies it as a `helm upgrade`. The stack holds its own desired state, so no client can be stale and every administrator reads the same release.
+    **The documents in the cluster are the truth.** `openvidu.yaml` is a Secret of the stack's namespace (`ov-config-openvidu.yaml`) and every service file a ConfigMap (`ov-config-livekit.yaml`…), kept outside the Helm release. `set` changes `openvidu.yaml`, validates and renders the stack with it, and applies it as a `helm upgrade`; each pod renders its documents when it starts, so only the pods that read a changed value restart. A chart value with no setting of its own is refused (it goes in `--helm-values`). The stack holds its own configuration, so no client can be stale and every administrator reads the same documents.
+
+=== "Local"
+
+    **The directory's files are the truth**, with a Community server's layout inside the stack's local directory: `config/openvidu.yaml` and the service files. `config set` recreates the services whose files changed; after editing a file by hand, `ov stack deploy` applies it.
 
 ## Settings only one edition has
 

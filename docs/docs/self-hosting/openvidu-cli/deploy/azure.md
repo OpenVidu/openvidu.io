@@ -22,7 +22,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 - An Azure subscription and the [`az` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/cli/azure/install-azure-cli){:target="_blank"}, **authenticated**: `az account show` must answer. `ov` runs your own client, so your login, subscription and audit trail are the ones that apply. `az` compiles the Bicep itself, so no separate Bicep install is needed.
 - A location: `--azure-location`, else `$AZURE_LOCATION`. The resource group defaults to `<stack>-rg` (`--azure-resource-group` names your own).
 - Permission to create resource groups and everything in them: virtual machines, a static public IP, a network security group, a Storage Account with a Blob container, a Key Vault, and for Elastic and High Availability a load balancer and a scale set of media nodes.
-- **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param InstanceType=<size>`.
+- **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param instanceType=<size>`.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your subscription.
 
 You need no key pair and no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
@@ -39,7 +39,7 @@ An empty directory is the stack. Choose the edition and topology:
       --certificate-type letsencrypt --mode auto
     ```
 
-    One virtual machine (`Standard_D4s_v3` by default, `--param InstanceType=<size>` to change it) running OpenVidu on Docker Compose.
+    One virtual machine (`Standard_D4s_v3` by default, `--param instanceType=<size>` to change it) running OpenVidu on Docker Compose.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -170,7 +170,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param InstanceType=<size>`. A low quota for the VM's family limits how many stacks run in a location at once.
+The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param instanceType=<size>`. A low quota for the VM's family limits how many stacks run in a location at once.
 
 ## What the deploy creates
 
@@ -180,7 +180,7 @@ The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless 
 | Virtual machines | One for Single Node; master nodes and a scale set of media nodes for Elastic and High Availability |
 | A static public IP and a network security group | The ports OpenVidu needs, open to the internet |
 | A load balancer | High Availability only |
-| A Storage Account and a Blob container (`openvidu-appdata`) | Recordings and OpenVidu Meet data. `--param StorageAccountName=<name>` uses your own |
+| A Storage Account and a Blob container (`openvidu-appdata`) | Recordings and OpenVidu Meet data. `--param storageAccountName=<name>` uses your own |
 | A Key Vault, `openvidu-<name>-keyvault` | What the stack publishes: URL and credentials (and the kubeconfig on PRO) |
 | An SSH key pair | `ov` generates it; the private half stays in `.openvidu/azure/` |
 
@@ -219,7 +219,7 @@ OPENVIDU-URL                   https://openvidu-zclupo-40-112-77-3.sslip.io/
 
 `ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the node's files are the truth, not the Key Vault.
 
-Your applications connect with `LIVEKIT-URL`, `LIVEKIT-API-KEY` and `LIVEKIT-API-SECRET`, as with any other OpenVidu deployment.
+Your applications connect with the values of `LIVEKIT-URL`, `LIVEKIT-API-KEY` and `LIVEKIT-API-SECRET` (`LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` in your application's environment), as with any other OpenVidu deployment. Key Vault does not allow `_` in a secret name, so the keys use `-`.
 
 To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The login user is `ubuntu`, and the node has `ov` too, so `sudo ov stack …` there operates the same stack:
 

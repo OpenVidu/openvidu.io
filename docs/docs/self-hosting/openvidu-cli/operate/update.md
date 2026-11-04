@@ -1,28 +1,35 @@
 ---
 title: "Update and migrate an OpenVidu stack"
-description: "Update a Community OpenVidu server with a three-way merge and rollback, upgrade PRO by deploying again, and migrate a node installed by install.sh."
+description: "Update an OpenVidu stack with the OpenVidu CLI, keeping your configuration edits and rolling back on failure, and migrate an install.sh deployment."
 ---
 
 # Update and migrate
 
-**A release of `ov` deploys the same release of OpenVidu**: `ov` X.Y.Z deploys OpenVidu X.Y.Z. So updating a stack means running the command with the `ov` of the version you want — [install that version](../install.md) first. Every plan and every message names the version the stack runs and the one it goes to; an older `ov` refuses to downgrade.
+**A release of `ov` deploys the same release of OpenVidu**: `ov` X.Y.Z deploys OpenVidu X.Y.Z. So updating a stack means running the command with the `ov` of the version you want: [install that version](../install.md) first. Every plan and every message names the version the stack runs and the one it goes to.
 
-## Update a Community server
+## Update a stack
+
+`ov stack update` brings a Community server or a PRO stack to the version of this `ov`. A local stack is updated by deploying it again with the new `ov` (`ov stack deploy` in its directory).
+
+```bash
+ov stack update --dry-run   # the plan
+ov stack update             # asks, then updates
+```
+
+Without `-y` it asks (and `-y` is required with no terminal). A stack that already runs this version says so and does nothing:
+
+```console
+$ ov stack update --dry-run
+stack "web" on 10.5.0.3 already runs main, the version of this ov: nothing to update
+```
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    `ov stack update` brings a Community stack on a server to the version of this `ov`.
-
-    ```bash
-    ov stack update --dry-run   # the plan
-    ov stack update             # asks, then updates
-    ```
-
-    **Your edits survive a three-way merge.** Every file `ov` manages (`docker-compose.yaml` and `config/`) is merged by lines against three sides: the file as the installed version wrote it (kept on the node under `.ov/base/<version>/`), the file on the node now, and the new version's file. A file nobody edited becomes the new version's; an edit away from what the new version changes is kept; an edit on the **same lines** is a conflict, and the update stops before touching anything (exit `4`), naming the file:
+    **Your edits survive a three-way merge.** Every file `ov` manages (`docker-compose.yaml` and `config/`) is merged against three sides: the file as the installed version wrote it (kept on the node under `.ov/base/<version>/`), the file on the node now, and the new version's file. `config/openvidu.yaml` is merged by values, the other files by lines. A file nobody edited becomes the new version's; an edit away from what the new version changes is kept; an edit on the **same lines** (or the same value) is a conflict, and the update stops before touching anything (exit `4`), naming the file:
 
     ```console
     $ ov stack update --dry-run
-    update stack "web" on 172.30.0.10 from OpenVidu main to main
+    update stack "web" on 10.5.0.3 from OpenVidu main to main
     configuration: 0 file(s) take main's version, 0 keep your edits, 0 new, 0 removed, 19 unchanged, 1 in conflict
       ! config/livekit.yaml (your edits touch the lines main changes)
     steps on the node:
@@ -31,76 +38,91 @@ description: "Update a Community OpenVidu server with a three-way merge and roll
     ov: your edits to /opt/openvidu/config/livekit.yaml touch the lines main changes, so they cannot be carried over by themselves. Undo those edits on the node (keep a copy), run the update, and apply them again to the new file
     ```
 
-    With no conflict, the update backs up, writes the new files, pulls the new images **while the old version still runs**, renders and restarts — so the stack is down only for the restart:
+    **The disk is checked first.** The plan measures, for each filesystem of the node, what the update writes there (the backup, the new files, the new images) plus a margin, against what is free. One that does not fit stops the update before anything changes (exit `9`), saying how much is missing and where.
+
+    With no conflict, the update backs up, writes the new files, pulls the new images **while the old version still runs**, renders and restarts, so the stack is down only for the restart:
 
     ```console
     $ ov stack update -y
-    update stack "web" on 172.30.0.10 from OpenVidu main to main
+    update stack "web" on 10.5.0.3 from OpenVidu main to main
     configuration: 0 file(s) take main's version, 1 keep your edits, 0 new, 0 removed, 19 unchanged
       ~ config/livekit.yaml (your edits kept)
     …
-    ✓ [172.30.0.10 single] docker compose --env-file config/openvidu.env pull --quiet
-    ✓ [172.30.0.10 single] render config/ into data/runtime/ (ov stack render) — 0 created, 1 updated, 20 unchanged, 0 removed
-    ✓ [172.30.0.10 single] systemctl restart openvidu
-    ✔ stack "web" updated from main to main
+    disk space on the node (each need with a margin of 10% plus 1.0 GiB, for the estimates and the services' first writes):
+      FILESYSTEM                            NEEDS        FREE
+      overlay (/)                         1.3 GiB   255.6 GiB  ok
     …
-    ✔ OpenVidu is ready at https://172-30-0-10.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
+    ✓ [10.5.0.3 single] install this CLI at /usr/local/bin/ov
+    ✓ [10.5.0.3 single] render config/ into data/runtime/ (ov stack render) — 0 created, 1 updated, 21 unchanged, 0 removed
+    ✓ [10.5.0.3 single] docker compose --env-file data/runtime/compose.env pull --quiet
+    ✓ [10.5.0.3 single] systemctl restart openvidu
+    ✔ stack "web" updated from main to main
+    waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deployment keeps running)…
+      ⏳ still starting: openvidu, dashboard, meet, grafana (0s)
+    …
+    ✔ OpenVidu is ready at https://playground.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
     ```
 
-    Without `-y` it asks (and `-y` is required with no terminal). A stack that already runs this version has nothing to do and says so.
-
-    **A failure rolls back.** If a step fails once the update has started, the backup under `.ov/update/<version it ran>/` is restored — the previous `ov` included, since the unit renders the configuration with it on every start — and the stack is started again at the version it ran. The command fails saying so:
+    **A failure rolls back.** If a step fails once the update has started, the backup under `.ov/update/<version it ran>/` is restored (the previous `ov` included, since the unit renders the configuration with it on every start) and the stack is started again at the version it ran. The command fails saying so:
 
     ```console
     $ ov stack update -y
     …
-    ✗ [172.30.0.10 single] docker compose --env-file config/openvidu.env pull --quiet
+    ✗ [10.5.0.3 single] docker compose --env-file data/runtime/compose.env pull --quiet
         output:  … Error manifest for busybox:0.0.0-missing not found: manifest unknown
-    ✓ [172.30.0.10 single] systemctl stop openvidu || true
-    ✓ [172.30.0.10 single] rm -r -f config '.ov/base' && cp -a '.ov/update/main'/config . && …
-    ✓ [172.30.0.10 single] systemctl daemon-reload && systemctl start openvidu
+    ✓ [10.5.0.3 single] systemctl stop openvidu || true
+    ✓ [10.5.0.3 single] rm -r -f config '.ov/base' && cp -a '.ov/update/main'/config . && …
+    ✓ [10.5.0.3 single] systemctl daemon-reload && systemctl start openvidu
     …
     ov: the update from main to main failed and was rolled back: the node runs main again, unchanged (the backup stays in /opt/openvidu/.ov/update/main)
     ```
 
-    If the rollback itself fails, the error lists its commands to run by hand.
+    If the rollback itself fails, the error lists its commands to run by hand. (The versions read `main` here because these runs used a development build of `ov`; a release names its version.)
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    PRO stacks are not updated by `ov stack update` yet. **Deploy again with the new `ov`** to upgrade the release in place:
+    The update installs this `ov`'s chart over the release, with the values the stack's configuration documents give:
 
-    ```bash
-    ov stack deploy --edition pro   # from the stack's directory, with the new ov on your PATH
-    ```
+    - **Your configuration is merged.** The documents (`openvidu.yaml` and the service files) are merged with this version's against the base kept in the cluster since the deploy or the last update: `openvidu.yaml` by values, the service files by lines. A setting the new version adds arrives at its default; a default nobody touched moves to the new one; your values, comments and secrets stay. A value both you and the new version changed is a conflict, and the update stops before touching anything (exit `4`), naming it.
+    - **The plan comes from a dry run of the upgrade itself:** the chart, each image that changes, the workloads whose pods are replaced and the values that move (secrets as `***`).
+    - **The nodes' disk is checked first:** the images each node lacks, against its free space. A node short of room stops the update (exit `9`).
+    - **A failure rolls back.** After confirmation the update backs the documents up in the cluster, writes them, runs `helm upgrade --wait` and waits for the stack (`--wait-timeout`, 10 minutes by default). If the upgrade or the wait fails, it runs `helm rollback` to the revision the stack ran and puts the documents back.
 
-    This runs a `helm upgrade`, after a confirmation. The credentials and volumes are kept, and the values are rebuilt in three layers: the new chart's defaults for the topology, then every setting changed on the release since it was installed (`config set`, modules), then the spec, which wins. A chart default that changed since the release was installed reaches it, unless the release had set that value itself.
+    Run it from the stack's directory, with the new `ov` on your `PATH`.
 
-## Migrate a node installed by `install.sh`
+An older `ov` refuses to downgrade a stack.
 
-A Community single node installed with the published `install.sh` (3.9.0) becomes a stack `ov` deploys and operates with **`ov stack migrate`**, run once from an empty directory. It keeps the node's configuration with your edits, its certificates and the data of MongoDB, MinIO and Redis (Meet's rooms and users, recordings).
+## Migrate a deployment installed by `install.sh`
+
+A deployment installed with the published `install.sh` (3.9.0) becomes a stack `ov` deploys and operates with **`ov stack migrate`**, run once from an empty directory, on the same machines. It converts a Community single node, a PRO single node, an Elastic cluster and a High Availability cluster, and keeps the configuration with your edits, the certificates and the data (Meet's rooms and users, recordings).
 
 ```bash
 ov stack migrate web --ssh ubuntu@<host> --ssh-key ~/.ssh/key --dry-run   # the plan
 ov stack migrate web --ssh ubuntu@<host> --ssh-key ~/.ssh/key             # asks, then migrates
 sudo ov stack migrate web --this-node                                      # on the node itself
+ov stack migrate el --ssh ubuntu@10.0.0.5 --media-node 10.0.0.7           # Elastic
+ov stack migrate ha --ssh ubuntu@10.0.0.5 --master-node 10.0.0.6 \
+  --master-node 10.0.0.7 --master-node 10.0.0.8 --media-node 10.0.0.9      # High Availability
 ```
 
-The plan names both versions and merges your edits the same three ways the update does — the base this time being the file the 3.9.0 installer wrote, which `ov` reproduces byte for byte:
+`--ssh` names the node `ov` talks to (the master); `--master-node` (the other masters of HA) and `--media-node` name the rest, by address, with the same SSH user, key and port. A Community node becomes the plain Docker Compose tree `ov` deploys; a PRO deployment becomes Kubernetes on the same machines.
+
+The plan names both versions and merges your edits the same three ways the update does, the base this time being the file the 3.9.0 installer wrote, which `ov` reproduces byte for byte:
 
 ```console
-$ ov stack migrate web --ssh ubuntu@172.30.0.10 --ssh-key ~/.ssh/id_ed25519 --dry-run
-migrate stack "web" on 172.30.0.10 from OpenVidu 3.9.0, installed by install.sh, to main
-found: OpenVidu 3.9.0 Community at 172-30-0-10.openvidu-local.dev (on-premises, certificate owncert), modules: egress,ingress,dashboard,meet,observability
-configuration: 19 file(s) become ov's, 1 keep your edits, 0 new
+$ ov stack migrate web --ssh ubuntu@10.5.0.3 --ssh-key ~/.ssh/id_ed25519 --dry-run
+migrate stack "web" on 10.5.0.3 from OpenVidu 3.9.0, installed by install.sh, to main
+found: OpenVidu 3.9.0 Community at playground.openvidu-local.dev (on-premises, certificate owncert), modules: egress,ingress,dashboard,meet,observability
+configuration: 19 file(s) become ov's, 1 keep your edits, 1 new
   ~ config/livekit.yaml (your edits kept)
 steps on the node:
   systemctl stop openvidu
   …
   then as a deploy: ov's tree, the unit, this CLI, the render, the pull, the start
-(dry run — nothing changed; the node still runs the installed 3.9.0)
+…
 ```
 
-Running it (type the stack name, or `-y`) stops the installed stack, backs it up to `.ov/migrate/3.9.0/`, moves MongoDB's files to the layout `ov` runs, removes the installer's leftovers, and then does what a deploy does. Since the images become this `ov`'s, **migrating with the `ov` of the release you want is also the update to it**. A conflict (an edit on the lines `ov` changes) stops it before anything runs, exit `4`, and a failure after the stack is stopped rolls it back to the unchanged 3.9.0. A node at an older release updates to 3.9.0 with its own updater first; a PRO deployment is not migratable this way yet.
+Running it (type the stack name, or `-y`) stops the installed stack, backs it up to `.ov/migrate/3.9.0/`, converts `config/openvidu.env` into `config/openvidu.yaml`, moves MongoDB's files to the layout `ov` runs, removes the installer's leftovers, and then does what a deploy does. Since the images become this `ov`'s, **migrating with the `ov` of the release you want is also the update to it**. A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), so does a node without the disk space it needs (exit `9`), and a failure after the stack is stopped rolls it back to the unchanged 3.9.0. A node at an older release updates to 3.9.0 with its own updater first.
 
 ## Next steps
 

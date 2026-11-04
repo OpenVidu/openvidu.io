@@ -37,7 +37,7 @@ An empty directory is the stack. Choose the edition and topology:
       --certificate-type letsencrypt --mode auto
     ```
 
-    One compute instance (`VM.Standard.E4.Flex` with 4 OCPUs and 8 GB by default, `--param InstanceType=<shape>` to change it) running OpenVidu on Docker Compose.
+    One compute instance (`VM.Standard.E4.Flex` with 4 OCPUs and 8 GB by default, `--param instanceType=<shape>` to change it) running OpenVidu on Docker Compose.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -178,7 +178,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The instance gets the template's shape, `VM.Standard.E4.Flex` with 4 OCPUs and 8 GB, and a 100 GB boot volume, unless you pass `--param InstanceType=<shape>`.
+The instance gets the template's shape, `VM.Standard.E4.Flex` with 4 OCPUs and 8 GB, and a 100 GB boot volume, unless you pass `--param instanceType=<shape>`.
 
 ## What the deploy creates
 
@@ -187,7 +187,7 @@ The instance gets the template's shape, `VM.Standard.E4.Flex` with 4 OCPUs and 8
 | Compute instances | One for Single Node; master nodes and an autoscaling pool of media nodes for Elastic and High Availability |
 | A virtual cloud network, subnet and network security group | The ports OpenVidu needs, open to the internet |
 | A load balancer | High Availability only |
-| An Object Storage bucket and a Customer Secret Key | Recordings and OpenVidu Meet data, reached over the S3-compatible API. `--param BucketName=<name>` uses your own |
+| An Object Storage bucket and a Customer Secret Key | Recordings and OpenVidu Meet data, reached over the S3-compatible API. `--param bucketName=<name>` uses your own |
 | A KMS vault, one secret per key | What the stack publishes: URL and credentials (and the kubeconfig on PRO). `--oci-vault` reuses one; else one vault per stack |
 | An SSH key pair | The template generates it; `ov` keeps the private half in `.openvidu/oracle/` |
 
@@ -290,7 +290,7 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 ✔ removed stack "ce12o" from this directory
 ```
 
-`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param BucketName=<name>`) stays either way. A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param bucketName=<name>`) stays either way. A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
 
 !!! warning "Vaults and Customer Secret Keys"
 

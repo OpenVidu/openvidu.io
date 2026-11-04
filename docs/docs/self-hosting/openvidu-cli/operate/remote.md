@@ -70,7 +70,7 @@ A deploy with **`--remote-state`** also keeps the stack on its cloud, so another
   SSH key:      Secrets Manager secret openvidu/ov-aws-im2/ssh-private-key (the private half, for that import)
 ```
 
-From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. The record never holds a secret, so a parameter the template marks sensitive — the license above all — is asked for again, exactly as the deploy asked for it:
+From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it: `openvidu-<name>` for a stack deployed as `<name>`, not the name of its directory (this stack's CloudFormation name was set to `ov-aws-im2`). The record never holds a secret, so a parameter the template marks sensitive — the license above all — is asked for again, exactly as the deploy asked for it:
 
 ```console
 $ mkdir ~/stacks/ov-aws-im2 && cd ~/stacks/ov-aws-im2

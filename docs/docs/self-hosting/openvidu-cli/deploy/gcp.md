@@ -39,7 +39,7 @@ An empty directory is the stack. Choose the edition and topology:
       --certificate-type letsencrypt --mode auto
     ```
 
-    One Compute Engine instance (`e2-standard-4` by default, `--param InstanceType=<type>` to change it) running OpenVidu on Docker Compose.
+    One Compute Engine instance (`e2-standard-4` by default, `--param instanceType=<type>` to change it) running OpenVidu on Docker Compose.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -170,7 +170,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The instance gets the template's machine type, `e2-standard-4`, and a 100 GiB `pd-balanced` boot disk, unless you pass `--param InstanceType=<type>`.
+The instance gets the template's machine type, `e2-standard-4`, and a 100 GiB `pd-balanced` boot disk, unless you pass `--param instanceType=<type>`.
 
 ## What the deploy creates
 
@@ -179,7 +179,7 @@ The instance gets the template's machine type, `e2-standard-4`, and a 100 GiB `p
 | Compute Engine instances | One for Single Node; master nodes and a managed instance group of media nodes for Elastic and High Availability |
 | A static address and a firewall rule | The ports OpenVidu needs, open to the internet |
 | A passthrough TCP load balancer | High Availability only |
-| A Cloud Storage bucket | Recordings and OpenVidu Meet data. `--param BucketName=<name>` uses your own |
+| A Cloud Storage bucket | Recordings and OpenVidu Meet data. `--param bucketName=<name>` uses your own |
 | Two service accounts and a service-account key | The instance's (Meet uses it) and a storage-only one whose key egress uploads with |
 | Secret Manager secrets | What the stack publishes: one secret per key, prefixed with the stack name (and the kubeconfig on PRO) |
 | An SSH key pair | The template generates it; `ov` keeps the private half in `.openvidu/gcp/` |
@@ -280,7 +280,7 @@ This is what will be deleted from your Google Cloud project my-project:
 ✔ removed stack "ce12g" from this directory
 ```
 
-`--delete-data` takes the bucket the template created with the stack, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param BucketName=<name>`) is not in the state, so it stays either way. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+`--delete-data` takes the bucket the template created with the stack, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param bucketName=<name>`) is not in the state, so it stays either way. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
 
 !!! warning "Service-account key creation"
 

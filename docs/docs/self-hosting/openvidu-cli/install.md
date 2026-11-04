@@ -42,10 +42,11 @@ gunzip ov_linux_${ARCH}.gz
 sudo install -m 0755 ov_linux_${ARCH} /usr/local/bin/ov
 ```
 
-Check that it runs: `ov version` prints the version you downloaded.
+Check that it runs: `ov version` (or `ov -V`) prints the version you downloaded.
 
-```bash
-ov version
+```console
+$ ov version
+ov 3.10.0
 ```
 
 The version of `ov` matters: **a release of `ov` deploys the same release of OpenVidu**. `ov` X.Y.Z deploys OpenVidu X.Y.Z, and the cloud machines it creates download that same build. To deploy or update to another version, use the `ov` of that version.
@@ -68,32 +69,33 @@ Usage:
   ov stack <subcommand> [operands] [flags]
 
 Subgroups:
-  stack agent
+  stack agent    list, enable and disable the stack's agents
   stack config   view and change the stack's configuration
-  stack module
+  stack module   list, enable and disable the stack's modules
 
 Subcommands:
-  check-ports   check that the inbound ports a stack needs actually arrive
-  deploy        create a new stack and its context
-  describe      show detailed live information about the stack
-  destroy       tear down the deployment (destructive)
-  export        serialize the stack's desired state to openvidu-stack.yml
-  import        adopt a deployed stack into this directory (this machine, SSH, a kubeconfig, or its record on the cloud)
-  join          join a machine to a running stack as a control-plane or media node
-  join-info     print what another machine needs to join this stack (address and token)
-  kubeconfig    print the administrative kubeconfig of the stack running on this machine
-  leave         take this machine out of the stack it joined (stops its node agent)
-  logs          fetch or follow the stack's logs
-  migrate       convert a Community node install.sh 3.9.0 made into the tree ov deploys
-  plan          preview what a deploy or a config change would do
-  ports         show the published Docker ports of the local deployment
-  render        render config/ into data/runtime/ (Community on Docker Compose)
-  restart       restart the stack (whole stack; per-service not yet supported)
-  start         start the stack (whole stack; per-service not yet supported)
-  status        show live health/status of the stack
-  stop          stop the stack (whole stack; per-service not yet supported)
-  test          verify the stack (connectivity)
-  update        update the stack to this ov's version, keeping your edits to its files
+  check-ports          check that the inbound ports a stack needs actually arrive
+  check-ports-listen   internal: hold this node's ports for `check-ports`
+  deploy               deploy a new stack and record it in this directory
+  describe             show detailed live information about the stack
+  destroy              tear down the deployment (destructive)
+  export               serialize the stack's desired state to openvidu-stack.yml
+  import               adopt a deployed stack into this directory (this machine, SSH, a kubeconfig, or its record on the cloud)
+  join                 join a machine to a running stack as a control-plane or media node
+  join-info            print what another machine needs to join this stack (address and token)
+  kubeconfig           print the administrative kubeconfig of the stack running on this machine
+  leave                take this machine out of the stack it joined (stops its node agent)
+  logs                 fetch or follow the stack's logs
+  migrate              convert a deployment install.sh 3.9.0 made (Community, a Professional single node, Elastic or HA) into the stack ov deploys
+  plan                 preview what a deploy or a config change would do
+  ports                show the published Docker ports of the local deployment
+  render               render config/ into data/runtime/ (Community on Docker Compose)
+  restart              restart the stack (whole stack; per-service not yet supported)
+  start                start the stack (whole stack; per-service not yet supported)
+  status               show live health/status of the stack
+  stop                 stop the stack (whole stack; per-service not yet supported)
+  test                 verify the stack (connectivity)
+  update               update the stack to this ov's version, keeping your edits to its files
 
 Run 'ov help stack <subcommand>' for more information.
 ```

@@ -40,7 +40,7 @@ An empty directory is the stack. Choose the edition and topology:
       --certificate-type letsencrypt --mode auto
     ```
 
-    One Droplet (`s-4vcpu-8gb` by default — 4 vCPU, 8 GB, 160 GB disk, `--param InstanceType=<slug>` to change it) running OpenVidu on Docker Compose.
+    One Droplet (`s-4vcpu-8gb` by default — 4 vCPU, 8 GB, 160 GB disk, `--param instanceType=<slug>` to change it) running OpenVidu on Docker Compose.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -171,7 +171,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The Droplet gets the template's size, `s-4vcpu-8gb` (4 vCPU, 8 GB, 160 GB disk), unless you pass `--param InstanceType=<slug>`. DigitalOcean logs you in as `root`; add your own DigitalOcean console keys with `--param SshKeyNames=<name,…>`.
+The Droplet gets the template's size, `s-4vcpu-8gb` (4 vCPU, 8 GB, 160 GB disk), unless you pass `--param instanceType=<slug>`. DigitalOcean logs you in as `root`; add your own DigitalOcean console keys with `--param sshKeyNames=<name,…>`.
 
 ## What the deploy creates
 
@@ -181,7 +181,7 @@ The Droplet gets the template's size, `s-4vcpu-8gb` (4 vCPU, 8 GB, 160 GB disk),
 | A firewall | The ports OpenVidu needs, open to the internet (and outbound everywhere) |
 | A VPC | Elastic and High Availability only |
 | A load balancer | High Availability only |
-| A Space and a bucket-scoped Spaces key | Recordings and OpenVidu Meet data; also the stack's secret store (`secrets.env`). `--param SpaceName=<name>` uses your own |
+| A Space and a bucket-scoped Spaces key | Recordings and OpenVidu Meet data; also the stack's secret store (`secrets.env`). `--param spaceName=<name>` uses your own |
 | An SSH key pair and the stack's tag | The template generates the key; `ov` keeps the private half in `.openvidu/digitalocean/` |
 
 `ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
@@ -287,7 +287,7 @@ This is what will be deleted from your DigitalOcean account:
 ✔ removed stack "ce12d2" from this directory
 ```
 
-With `--delete-data` the Space the template created goes with the stack: the destroy empties it and Terraform deletes it. With `--keep-data` the Space leaves the Terraform state first, so one destroy takes the rest and the Space stays, with the recordings, Meet data and this deployment's `secrets.env`. A Space of your own (`--param SpaceName=<name>`) stays either way. `--keep-infrastructure` tears the deployment down but leaves the Droplet running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+With `--delete-data` the Space the template created goes with the stack: the destroy empties it and Terraform deletes it. With `--keep-data` the Space leaves the Terraform state first, so one destroy takes the rest and the Space stays, with the recordings, Meet data and this deployment's `secrets.env`. A Space of your own (`--param spaceName=<name>`) stays either way. `--keep-infrastructure` tears the deployment down but leaves the Droplet running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
 
 !!! warning "The Space is the secret store"
 

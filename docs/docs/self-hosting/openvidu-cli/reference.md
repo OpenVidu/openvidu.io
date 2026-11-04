@@ -15,7 +15,7 @@ The OpenVidu CLI operates **the stack in a directory** (`--dir`, default the cur
 | `-o, --output <fmt>` | `table` (default), `json`, `yaml`, `wide`, `name`, plus `jsonpath=<expr>` and `go-template=<expr>` for scripting. |
 | `--non-interactive` | Never prompt; a missing required value is an error. |
 | `-y, --yes` | Assume "yes" for confirmations (for example `destroy`). |
-| `--dry-run` | Compute and print what would happen; change nothing. |
+| `--dry-run` | Compute and print what would happen; change nothing. A command that cannot preview refuses it (exit `2`) instead of ignoring it: `deploy` (preview one with `--mode assisted` or `ov stack plan`), `join`, `leave` and `import`. |
 | `-v, --verbose` / `--debug` | More logging. |
 | `-h, --help` | Help. |
 | `-V, --cli-version` | Print the CLI version. |
@@ -29,9 +29,11 @@ The OpenVidu CLI operates **the stack in a directory** (`--dir`, default the cur
 | `2` | Usage error |
 | `3` | No stack in the directory |
 | `4` | Configuration validation failed |
-| `5` | Plan not empty (`plan --detailed-exitcode`) |
+| `5` | Plan not empty (`plan --detailed-exitcode`), or `config file apply\|edit --dry-run` would change something |
 | `6` | A deploy or join stopped before touching the node: a required port is closed, or the node's firewall drops the pod networks (PRO) |
-| `8` | `stack test` or `stack check-ports` failed |
+| `7` | A configuration document changed since it was read (`config file apply` without `--force`) |
+| `8` | `stack test` failed, or `stack check-ports` found a required port failing (or, on PRO, the node's firewall dropping the pod networks) |
+| `9` | An update or migration stopped before touching the node: a filesystem lacks the space it needs |
 
 ## Deploy
 
@@ -41,7 +43,7 @@ Creates the stack described by the configuration and records it in the directory
 
 | Flag | Purpose |
 | --- | --- |
-| `--edition community\|pro` | Which OpenVidu (default `community`). PRO needs `--openvidu-pro-license`. |
+| `--edition community\|pro` | Which OpenVidu (default `community`). PRO needs `--openvidu-pro-license`, except locally. |
 | `--environment <where>` | `local`, `on-premises` or a cloud. Where the machines are. |
 | `--deployment-type single_node\|elastic\|ha` | The topology. Elastic and HA deploy the master; other nodes `join` it. |
 | `--ssh [user@]host` | Deploy to another machine over SSH (`--ssh-user`, `--ssh-key`, `--ssh-port`). |
@@ -49,10 +51,11 @@ Creates the stack described by the configuration and records it in the directory
 | `--cloud <cloud>` | Create the machines on a cloud first; they deploy OpenVidu themselves. |
 | `--mode auto\|assisted` | Run everything, or print the commands for you to run. |
 | `--domain-name`, `--certificate-type`, `--enabled-modules`, … | Friendly flags, each setting one configuration key. |
+| `--modules`, `--lan` / `--no-lan`, `--local-dir`, `--free-ports` | Local only: the module selection, access from your network, where the Compose project goes, and stopping whatever holds the ports. |
 | `-f <file>`, `--set key=value`, `--set-secret key=value` | A spec overlay, a single key, a secret. |
 | `--param Name=Value`, `--remote-state` | A cloud template parameter; also keep the stack's state on the cloud. |
-| `--skip-port-check` | Deploy without the inbound-port preflight. |
-| `--no-wait`, `--wait-timeout` | Skip or bound the wait for readiness. |
+| `--skip-port-check` | Deploy without the port preflight (locally, that the host ports are free; remotely, that the inbound ports reach the node). |
+| `--no-wait`, `--wait-timeout` | Skip or bound the wait for readiness (`5m` by default; `40m` with `--cloud`). |
 
 ### `ov stack plan`
 
@@ -60,11 +63,11 @@ Previews what a deploy or a configuration change would do, without changing anyt
 
 ### `ov stack update`
 
-Brings a **Community** server to the version of this `ov`, merging your edits three ways and rolling back on failure. PRO upgrades by deploying again. See [Update and migrate](operate/update.md).
+Brings a Community server or a PRO stack to the version of this `ov`, merging your edits to its configuration three ways, checking the disk first and rolling back on failure. A local stack is updated by deploying it again with the new `ov`. See [Update and migrate](operate/update.md).
 
 ### `ov stack migrate [NAME]`
 
-Converts, once, a Community single node that `install.sh` 3.9.0 installed into the tree `ov` deploys, keeping its configuration, certificates and data. See [Update and migrate](operate/update.md#migrate-a-node-installed-by-installsh).
+Converts, once, a deployment that `install.sh` 3.9.0 installed (Community, a PRO single node, Elastic or High Availability) into the stack `ov` deploys, on the same machines, keeping its configuration, certificates and data. `--master-node` and `--media-node` name the other machines of a cluster. See [Update and migrate](operate/update.md#migrate-a-deployment-installed-by-installsh).
 
 ## Live operations
 
@@ -86,10 +89,12 @@ See [Configuration](operate/configuration.md).
 | Command | What it does |
 | --- | --- |
 | `ov stack config view` | The configuration the stack runs with. |
-| `ov stack config get <key>` | One value (model key, flag, alias or env key). |
+| `ov stack config get <key>` | One value, by its path in `openvidu.yaml` (`domain.name`), model key, flag, alias or old `openvidu.env` name. |
 | `ov stack config set k=v …` | Change values, recreating only the services that read them. `--dry-run` shows the plan. |
 | `ov stack config unset <key>` | Back to the default. |
-| `ov stack config edit` | Edit the configuration in `$EDITOR`. |
+| `ov stack config edit` | Edit `openvidu.yaml` in `$EDITOR` (secrets as `***` unless `--show-secrets`). |
+| `ov stack config file ls` | The stack's configuration documents: `openvidu.yaml` and the service files (`livekit.yaml`, `caddy.yaml`, `agent-<name>.yaml`…). |
+| `ov stack config file get <doc>` / `edit <doc>` / `diff <file>` / `apply <file>` | Read, edit, compare or upload one document. `apply` validates it first, restarts only what reads it, and refuses a document changed since you read it (exit `7`) unless `--force`. |
 | `ov stack render` | Render `config/` into the runtime tree (Community). `--this-node` for the local node. |
 
 ## Modules, agents and ports
@@ -111,7 +116,7 @@ An Elastic or HA stack is deployed on one machine; every other machine joins it.
 
 | Command | What it does |
 | --- | --- |
-| `ov stack join-info [--format env\|json] [--wait]` | On the deployed node: print the address and token another machine needs to join. |
+| `ov stack join-info [--format env\|json] [--wait <duration>]` | On the deployed node: print the address and token another machine needs to join. |
 | `ov stack join --this-node --as master\|media` | On the joining machine (as root): enrol it in the stack. |
 | `ov stack join --ssh [user@]host --as master\|media` | From the stack's directory: join a machine over SSH. `--skip-port-check` skips the port check. |
 | `ov stack kubeconfig --this-node [--server <address>]` | On the deployed node: print the cluster's administrative kubeconfig. |
@@ -129,18 +134,18 @@ Adopts a deployed stack into the directory, so every verb works afterwards. See 
 | `--ssh [user@]host` | A node over SSH (`--ssh-key`, `--ssh-port`). |
 | `--kubeconfig <path>` | A PRO stack, from its cluster credential (`--kube-context`). |
 | `-f <file>` | A description document. |
-| `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from its cloud record (infrastructure included). `--openvidu-pro-license` and `--param` supply the secrets the record leaves out. |
+| `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from its cloud record (infrastructure included). `<name>` is the stack's name on the cloud, `openvidu-<name>` by default, as the deploy prints it on its `record:` line. `--openvidu-pro-license` and `--param` supply the secrets the record leaves out. |
 | `--replace` | Overwrite the stack recorded in this directory. |
 
 ## Teardown
 
 ### `ov stack destroy`
 
-Tears the deployment down and removes the directory's record. See [Destroy](operate/destroy.md).
+Tears the deployment down and removes the directory's record. Without `-y` it asks you to type the stack's name. See [Destroy](operate/destroy.md).
 
 | Flag | Purpose |
 | --- | --- |
-| `--delete-data` / `--keep-data` | What becomes of the data and recordings (one is **required** on a cloud). |
+| `--delete-data` / `--keep-data` | What becomes of the data and recordings. `--keep-data` is the default on a server and locally; on a cloud one of the two is **required**. |
 | `--delete-config` | Also remove the deployment directory (server/local). Implies `--delete-data`. |
 | `--keep-context` | Keep the directory's record after teardown. |
 | `--keep-infrastructure` | Cloud: tear the deployment down but keep the machines running. |
