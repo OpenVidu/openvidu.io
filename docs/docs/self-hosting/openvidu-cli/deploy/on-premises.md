@@ -15,7 +15,7 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
 - One or more **Linux servers** (Ubuntu recommended), each with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size them like the cloud templates do by default: 4 vCPU and 8 GB per node.
 - A sudo-capable user on each server, reachable over SSH (and, for Elastic and High Availability, the servers reachable from each other on their private addresses).
 - A **domain** pointing at the server (at a load balancer in front of the masters, for HA in production), and a **certificate type**:
-    - `letsencrypt` or `zerossl`: a certificate obtained automatically (needs port 80 reachable).
+    - `letsencrypt` or `zerossl`: a certificate obtained automatically (needs port 80 reachable; not behind the load balancer of a High Availability stack).
     - `owncert`: bring your own, with `--owncert-public-key` and `--owncert-private-key`.
     - `selfsigned`: for a throwaway.
 - The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`. On PRO, also the cluster API on `6443/tcp` from your machine, and the node's own firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. Between the nodes of an Elastic or High Availability stack, `6443/tcp`, `10250/tcp` and `8472/udp` (and `2379-2380/tcp` between HA masters). See the port check below.
@@ -349,7 +349,22 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
     ✔ ha is ready (https://172-30-0-110.openvidu-local.dev)
     ```
 
-    A master join takes the stack's domain from the directory; with a load balancer in front of the masters, `--lb-host` names it and `--public-ip` the server's public address, both kept reachable on the cluster API. `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
+    `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
+
+    **Behind a load balancer.** In production, put a load balancer in front of the four masters so the stack survives losing one:
+
+    - **TCP passthrough**, not TLS termination: `443/tcp` and `80/tcp` (and `1935/tcp` with RTMP ingest) to the four masters, with a TCP health check on `443`. Optionally `6443/tcp` too, to reach the cluster API through it.
+    - **The domain points at the load balancer.** Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: Let's Encrypt does not work behind a passthrough balancer.
+    - **Deploy the first master with `--skip-port-check`.** Its port check probes the domain, and nothing behind the load balancer is healthy yet. Open the ports listed in Requirements yourself before you skip it.
+    - **Join the masters with the load balancer's name and the node's public address**, which stay reachable on the cluster API:
+
+        ```bash
+        ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>
+        ```
+
+    - When the nodes reach each other on a private network and you reach them on public addresses, the join's port check reports the internal ports (`6443`, `8472`, `2379-2380`, `10250`) as closed although they are open between the nodes. Open them between the nodes, then join with `--skip-port-check`.
+
+    Expect the stack to be ready about 10 minutes after the last join.
 
 ### The port preflight
 
