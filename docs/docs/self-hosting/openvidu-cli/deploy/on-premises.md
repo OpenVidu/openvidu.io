@@ -19,7 +19,7 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
     - `letsencrypt` or `zerossl` — a certificate obtained automatically (needs port 80 reachable).
     - `owncert` — bring your own, with `--owncert-public-key` and `--owncert-private-key`.
     - `selfsigned` — for a throwaway.
-- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`; on PRO, the cluster API on `6443/tcp` from your machine. See the port check below.
+- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`. On PRO, also the cluster API on `6443/tcp` from your machine, and the node's own firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. Between the nodes of an Elastic or High Availability stack, `6443/tcp`, `10250/tcp` and `8472/udp` (and `2379-2380/tcp` between HA masters). See the port check below.
 - The [OpenVidu CLI](../install.md). Nothing else needs to be pre-installed on the servers: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
 - For PRO, your **OpenVidu Pro license** (`--openvidu-pro-license`).
 
@@ -131,41 +131,61 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
     $ mkdir ov-pro && cd ov-pro
     $ ov stack deploy prod \
       --edition pro --environment on-premises \
-      --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+      --ssh ubuntu@172.30.0.101 --ssh-key ~/.ssh/id_ed25519 \
       --openvidu-pro-license <your-license> \
-      --domain-name 172-30-0-96.openvidu-local.dev \
+      --domain-name 172-30-0-101.openvidu-local.dev \
       --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
       --mode auto
 
     ▶ Connect to the VM…
+       · open an SSH session and check root/sudo access
        ✓ Connect to the VM
 
     ▶ Check the inbound ports…
+       · bind the ports on the node and probe them from here (nothing is installed yet, so UDP is verifiable)
+           Ports of 172.30.0.101 (Pro single node)
+           PORT             SCOPE   LEVEL        STATE  TO OPEN
+           443/tcp          public  required     open
+           443/udp          public  recommended  open
+           80/tcp           public  recommended  open
+           50000-60000/udp  public  recommended  open
+           7881/tcp         public  recommended  open
+           6443/tcp         admin   required     open
+           22/tcp           admin   required     open
+           ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
        ✓ Check the inbound ports
 
     ▶ Install the OpenVidu node agent…
        · upload the OpenVidu node-agent installer
-       · run the node agent installer
+       · run the node agent installer (k3s v1.36.4+k3s1)
        ✓ Install the OpenVidu node agent
 
     ▶ Deploy OpenVidu…
        · fetch the node's credentials
+       · read the stack's configuration
        · generate the deployment
        · write the stack values (domain, TLS, modules, credentials)
+       · create the configuration documents (openvidu.yaml and the service files)
        · install OpenVidu (reusing the existing credentials on a redeploy)
        ✓ Deploy OpenVidu
 
     ▶ Leave the OpenVidu CLI on the node…
-       · copy this CLI to /usr/local/bin/ov
+       · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
        · give the node its own stack directory
        ✓ Leave the OpenVidu CLI on the node
 
     ▶ Check access from outside…
+       · reach https://172-30-0-101.openvidu-local.dev/ (services may still be starting)
        ✓ Check access from outside
 
     ✔ deploy completed.
     wrote spec to openvidu-stack.yml
     ✔ stack "prod" recorded in this directory
+
+    Inbound ports
+      all 7 checked port(s) arrive at the node
+      measured from the node's own network: this says nothing about the internet path
+      full report: ov stack check-ports
     ```
 
     Kubernetes, with OpenVidu as a Helm release. The node needs nothing pre-installed: the node agent and the software it installs come inside `ov`. Services come up over a few minutes after the deploy returns; [`ov stack status --wait`](../operate/status.md) blocks until they are ready.
@@ -177,41 +197,81 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
     ```console
     $ mkdir ov-elastic && cd ov-elastic
     $ ov stack deploy el --edition pro --environment on-premises --deployment-type elastic \
-        --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+        --ssh ubuntu@172.30.0.101 --ssh-key ~/.ssh/id_ed25519 \
         --openvidu-pro-license <your-license> \
-        --domain-name 172-30-0-96.openvidu-local.dev \
+        --domain-name 172-30-0-101.openvidu-local.dev \
         --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
         --mode auto
+
+    ▶ Connect to the VM…
+       · open an SSH session and check root/sudo access
+       ✓ Connect to the VM
+
+    ▶ Check the inbound ports…
+       · bind the ports on the node and probe them from here (nothing is installed yet, so UDP is verifiable)
+           Ports of 172.30.0.101 (master node of an elastic stack)
+           PORT      SCOPE   LEVEL        STATE  TO OPEN
+           443/tcp   public  required     open
+           80/tcp    public  recommended  open
+           6443/tcp  admin   required     open
+           22/tcp    admin   required     open
+           ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
+       ✓ Check the inbound ports
+
     …
+
     ✔ deploy completed.
     wrote spec to openvidu-stack.yml
     ✔ stack "el" recorded in this directory
+
+    Inbound ports
+      all 4 checked port(s) arrive at the node
+      measured from the node's own network: this says nothing about the internet path
+      full report: ov stack check-ports
     ```
 
     The stack is up with its data tier on the master, but its media services have nowhere to run yet. Join a media node from the same directory:
 
     ```console
-    $ ov stack join --ssh ubuntu@172.30.0.97 --as media
-    → reading the join address and token from 172.30.0.96
+    $ ov stack join --ssh ubuntu@172.30.0.102 --as media
+    → reading the join address and token from 172.30.0.101
+    → checking the ports of 172.30.0.102 from here and from the stack's masters
+      Ports of 172.30.0.102 (media node of an elastic stack)
+      PORT                      SCOPE     LEVEL        STATE  TO OPEN
+      443/udp                   public    recommended  open
+      50000-60000/udp           public    recommended  open
+      7881/tcp                  public    recommended  open
+      22/tcp                    admin     required     open
+      10250/tcp ← 172.30.0.101  internal  required     open   (only from 172.30.0.101)
+      8472/udp ← 172.30.0.101   internal  required     open   (only from 172.30.0.101)
+
+      Ports of 172.30.0.101 (reached from 172.30.0.102)
+      PORT                  SCOPE     LEVEL     STATE       TO OPEN
+      6443/tcp ← this node  internal  required  open
+      8472/udp ← this node  internal  required  unverified
+      ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
 
     ▶ Connect…
+       · check root/sudo access on 172.30.0.102
        ✓ Connect
 
     ▶ Join the cluster…
        · upload the OpenVidu node-agent installer
-       · join 172.30.0.97 to the stack as a media node
+       · join 172.30.0.102 to the stack as a media node
        ✓ Join the cluster
 
     ▶ Leave the OpenVidu CLI on the node…
+       · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
        ✓ Leave the OpenVidu CLI on the node
 
     ▶ Wait for the stack to see the node…
+       · wait until fake-vm-172-30-0-102 is ready in the stack
        ✓ Wait for the stack to see the node
 
-    ✔ 172.30.0.97 joined the stack as a media node.
+    ✔ 172.30.0.102 joined the stack as a media node.
     ```
 
-    `ov` reads the join address and token from the master over SSH and logs into the new server with the same user, key and port (the token never appears on screen). Each media node is one more `ov stack join --ssh`. See [Scaling](../operate/scaling.md).
+    `ov` reads the join address and token from the master over SSH and logs into the new server with the same user, key and port (the token never appears on screen). Before installing anything it checks the ports the new node needs, from your machine and from the masters: a required internal port that does not arrive stops the join with exit `6` and the `ufw` rule to add on each side. Each media node is one more `ov stack join --ssh`. See [Scaling](../operate/scaling.md).
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 

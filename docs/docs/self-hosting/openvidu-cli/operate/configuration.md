@@ -91,7 +91,7 @@ ov: openviduStack.credentials.mongoAdminPassword is set when the stack is deploy
 
 ## Preview a change: `ov stack plan`
 
-`ov stack plan` previews what a deploy or a config change would do, without touching anything. It compares the desired state (`openvidu-stack.yml`) with what the stack currently runs and prints what would change and which services would restart:
+`ov stack plan` previews what a deploy or a config change would do, without touching anything. It compares the desired state (`openvidu-stack.yml`, plus any deploy flag you pass) with what the stack currently runs and prints what would change and which services would restart:
 
 ```console
 $ ov stack plan
@@ -99,11 +99,11 @@ no changes — desired state already matches current state
 ```
 
 ```console
-$ ov stack plan
-KEY                           CHANGE    NEW   IMPACT
-openviduStack.meet.basePath   removed   -     appRestart
+$ ov stack plan --turn-domain-name turn.172-30-0-96.openvidu-local.dev
+KEY                             CHANGE   NEW                                   IMPACT
+openviduStack.turnDomain.name   added    turn.172-30-0-96.openvidu-local.dev   appRestart
 
-restart: [caddy-proxy ov-meet]
+restart: [caddy-proxy ov-livekit-server]
 ```
 
 `--detailed-exitcode` exits `5` when the plan is non-empty, for gating a pipeline.

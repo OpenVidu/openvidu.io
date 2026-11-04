@@ -25,6 +25,18 @@ checking the inbound ports before installing anything…
 ov: nothing was installed: 443/tcp must reach the node first. ov changes no firewall: add the rules above and deploy again (--skip-port-check deploys anyway)
 ```
 
+On PRO, the node's own firewall must also let the pod networks reach it. When it does not, the port check says so before anything is installed:
+
+```text
+▶ Check the inbound ports…
+…
+       ✗ host firewall: the ufw firewall on the node does not let 10.42.0.0/16 and 10.43.0.0/16 reach the node: the pods cannot reach the cluster API, LiveKit or the kubelet, and the deploy does not finish
+           sudo ufw allow from 10.42.0.0/16
+           sudo ufw allow from 10.43.0.0/16
+…
+ov: nothing was installed: the pod networks (10.42.0.0/16, 10.43.0.0/16) must reach the node first. ov changes no firewall: add the rules above and deploy again (--skip-port-check deploys anyway)
+```
+
 `ov` reads firewalls but never changes them: run the printed fix on the node, then deploy again. A **recommended** port that does not arrive (`443/udp`, `80/tcp`, `7881/tcp` or the media range `50000-60000/udp`) only warns, and the deploy continues; `--skip-port-check` turns the check off. Run [`ov stack check-ports`](operate/status.md#check-the-ports) at any time for the full report: it is the check that verifies UDP, which a healthy-looking stack with no media needs.
 
 ## No media, but every service is healthy
