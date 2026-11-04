@@ -26,7 +26,11 @@ Any parameter the cloud template declares is changed from the stack's directory 
 ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-<!-- PENDING-RUN (doc-pulido): sergio-ad confirms --param fixedNumberOfMediaNodes with the name (DO) -->
+Or running exactly one media node on a DigitalOcean Elastic stack (the same parameter is `FixedNumberOfMediaNodes` on AWS); `0` returns it to autoscaling:
+
+```bash
+ov stack deploy openvidu --cloud digitalocean --param fixedNumberOfMediaNodes=1 --mode auto -y
+```
 
 Whether a parameter is changed in place or replaces a machine is the template's; when it matters, check first with a change set or `terraform plan`.
 
