@@ -16,22 +16,22 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
 ## Requirements
 
 - The [OpenVidu CLI](../install.md).
 - A Google Cloud project and [**Terraform** :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/install){:target="_blank"} on your PATH: `ov` drives your own Terraform, so the provider plugins, the state and the audit trail are the ones that apply.
 - The [`gcloud` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install){:target="_blank"} with **application-default credentials** (`gcloud auth application-default login`), which Terraform and the secret reads use.
-- A project id: `--gcp-project`, else `$GCP_PROJECT_ID`, else what `gcloud` has configured. `--gcp-region` / `--gcp-zone` default to the template's `europe-west2` / `europe-west2-b`.
+- A project id: `--gcp-project`, otherwise `$GCP_PROJECT_ID`, otherwise what `gcloud` has configured. `--gcp-region` / `--gcp-zone` default to the template's `europe-west2` / `europe-west2-b`.
 - Permission to create Compute Engine instances, a static address, firewall rules, a Cloud Storage bucket, service accounts and Secret Manager secrets. The template also **mints a service-account key** (see the [warning below](#destroy-the-stack)).
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your project.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your project.
 
-You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
+You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+Each stack lives in its own empty directory. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -93,7 +93,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
     <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -117,7 +117,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `load_balancer_ip` output of `terraform -chdir=.openvidu/gcp output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `load_balancer_ip` output of `terraform -chdir=.openvidu/gcp output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
 
     This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -133,7 +133,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
     ✔ demo-ha is ready (https://openvidu-3jjbjv-34-39-52-221.sslip.io)
     ```
 
-Before it touches your project, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
+Before it touches your project, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
 
 ??? example "The full plan (click to expand)"
 
@@ -245,7 +245,7 @@ S3_APP_DATA_BUCKET             my-project-openvidu-ce12g-1300d7
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy. `GCP_CREDENTIALS_JSON` is the exception Terraform writes itself: the one input only Google Cloud knows.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at deploy time: after a later `ov stack config set`, the stack's configuration is the source of truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy. `GCP_CREDENTIALS_JSON` is the exception Terraform writes itself: the one input only Google Cloud knows.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 

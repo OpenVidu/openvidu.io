@@ -24,7 +24,7 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
 
 ## Check the ports first
 
-The commonest way an on-premises OpenVidu "does not work" is a stack that comes up perfectly and has no media: every service healthy, and UDP never reaching the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. That verifies TCP *and* UDP, which dialling a running stack cannot do.
+The commonest way an on-premises OpenVidu "does not work" is a stack that comes up perfectly and has no media: every service healthy, and UDP never reaching the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. That verifies TCP *and* UDP, which dialing a running stack cannot do.
 
 ```console
 $ ov stack check-ports --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
@@ -69,7 +69,7 @@ The fix is printed, never run: `ov` reads firewalls, it does not change them. He
 
 ## Deploy
 
-An empty directory on your machine is the stack. Pick the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway.
+Each stack lives in its own empty directory on your machine. Choose the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -119,7 +119,7 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
       full report: ov stack check-ports
     ```
 
-    Plain Docker Compose and a systemd unit: no installer image, no operator. The ports are checked before anything is installed, and every credential is generated and **pinned** into the spec, so a later deploy reuses them instead of locking the stack out of its data.
+    Plain Docker Compose and a systemd unit: no installer image, no operator. The ports are checked before anything is installed, and every credential is generated and **pinned** in `openvidu-stack.yml`, so a later deploy reuses them instead of locking the stack out of its data.
 
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
@@ -385,7 +385,7 @@ Before anything is installed, a remote deploy binds the node's ports with a temp
 
 ### Deploying again
 
-A deploy to a node that already runs OpenVidu says so and keeps its data: it rewrites `docker-compose.yaml` and `config/` from the spec (your `docker-compose.override.yaml` stays) and reuses the credentials the data was written with:
+A deploy to a node that already runs OpenVidu says so and keeps its data: it rewrites `docker-compose.yaml` and `config/` from `openvidu-stack.yml` (your `docker-compose.override.yaml` stays) and reuses the credentials the data was written with:
 
 ```text
 172.30.0.96 already runs OpenVidu on 172-30-0-96.openvidu-local.dev (currently stopped). Deploying again rewrites its files from the spec and restarts it.

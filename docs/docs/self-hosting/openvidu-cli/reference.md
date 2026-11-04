@@ -52,14 +52,14 @@ Creates the stack described by the configuration and records it in the directory
 | `--mode auto\|assisted` | Run everything, or print the commands for you to run. |
 | `--domain-name`, `--certificate-type`, `--enabled-modules`, … | Friendly flags, each setting one configuration key. |
 | `--modules`, `--lan` / `--no-lan`, `--local-dir`, `--free-ports` | Local only: the module selection, access from your network, where the Compose project goes, and stopping whatever holds the ports. |
-| `-f <file>`, `--set key=value`, `--set-secret key=value` | A spec overlay, a single key, a secret. |
+| `-f <file>`, `--set key=value`, `--set-secret key=value` | An overlay of `openvidu-stack.yml`, a single key, a secret. |
 | `--param Name=Value`, `--remote-state` | A cloud template parameter; also keep the stack's state on the cloud. |
 | `--skip-port-check` | Deploy without the port preflight (locally, that the host ports are free; remotely, that the inbound ports reach the node). |
 | `--no-wait`, `--wait-timeout` | Skip or bound the wait for readiness (`5m` by default; `40m` with `--cloud`). |
 
 ### `ov stack plan`
 
-Previews what a deploy or a configuration change would do, without changing anything. `--detailed-exitcode` exits `5` when the plan is non-empty. See [Configuration](operate/configuration.md#preview-a-change-ov-stack-plan).
+Previews what a deploy or a configuration change would do, without changing anything. `--detailed-exitcode` exits `5` when the plan is not empty. See [Configuration](operate/configuration.md#preview-a-change-ov-stack-plan).
 
 ### `ov stack update`
 
@@ -80,7 +80,7 @@ All of these resolve the directory's stack with no arguments. See [Status and he
 | `ov stack start` / `stop` / `restart` | Control the whole stack (per-service control is not available yet). |
 | `ov stack test` | Active health check; exit `8` on failure. |
 | `ov stack logs [--tail N] [--since …] [-f]` | Fetch or follow the whole stack's logs (`--tail` counts per service on a local stack, in total on a server). |
-| `ov stack export [--out <file>] [--gitops] [--bundle] [--to-stack]` | Print the spec (`--out` writes it to a file); `--gitops` externalizes the secrets to `secrets://` references; `--bundle` prints the self-contained description `ov stack import -f` reads; `--to-stack` publishes that description on the stack, for `import --ssh`. |
+| `ov stack export [--out <file>] [--gitops] [--bundle] [--to-stack]` | Print `openvidu-stack.yml` (`--out` writes it to a file); `--gitops` externalizes the secrets to `secrets://` references; `--bundle` prints the self-contained description `ov stack import -f` reads; `--to-stack` publishes that description on the stack, for `import --ssh`. |
 
 ## Configuration
 
@@ -117,7 +117,7 @@ An Elastic or HA stack is deployed on one machine; every other machine joins it.
 | Command | What it does |
 | --- | --- |
 | `ov stack join-info [--format env\|json] [--wait <duration>]` | On the deployed node: print the address and token another machine needs to join. |
-| `ov stack join --this-node --as master\|media` | On the joining machine (as root): enrol it in the stack. |
+| `ov stack join --this-node --as master\|media` | On the joining machine (as root): enroll it in the stack. |
 | `ov stack join --ssh [user@]host --as master\|media` | From the stack's directory: join a machine over SSH. `--skip-port-check` skips the port check. |
 | `ov stack kubeconfig --this-node [--server <address>]` | On the deployed node: print the cluster's administrative kubeconfig. |
 | `ov stack leave --this-node [--drain] [--uninstall]` | On a joined node: take it out of the stack. `--drain` leaves gracefully (media nodes); `--uninstall` removes the agent. |
@@ -126,7 +126,7 @@ An Elastic or HA stack is deployed on one machine; every other machine joins it.
 
 ### `ov stack import [NAME]`
 
-Adopts a deployed stack into the directory, so every verb works afterwards. See [Operate from another machine](operate/remote.md).
+Adopts a deployed stack into the directory, so every command works afterwards. See [Operate from another machine](operate/remote.md).
 
 | Flag | Source |
 | --- | --- |

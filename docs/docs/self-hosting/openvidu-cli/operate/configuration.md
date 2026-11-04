@@ -110,7 +110,7 @@ openviduStack.turnDomain.name   added    turn.172-30-0-96.openvidu-local.dev   a
 restart: [caddy-proxy ov-livekit-server]
 ```
 
-`--detailed-exitcode` exits `5` when the plan is non-empty, for gating a pipeline.
+`--detailed-exitcode` exits `5` when the plan is not empty, for gating a pipeline.
 
 ## Where the configuration lives
 
@@ -118,17 +118,17 @@ This is the main operational difference between the editions.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    **The node's files are the truth.** `config/openvidu.yaml` and the service files under `/opt/openvidu/config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change rewrites the value in the document, keeping its comments and order, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services whose rendered files changed; then `openvidu-stack.yml` follows the node. Editing a file by hand and `sudo systemctl restart openvidu` is a supported path too: the unit renders before every start (a typo in `openvidu.yaml` stops it, naming the line), and the next `set`, `edit` or `plan` sees the edit.
+    **The node's files are the source of truth.** `config/openvidu.yaml` and the service files under `/opt/openvidu/config/` are what `view` and `get` read and what `set`, `unset` and `edit` write. A change rewrites the value in the document, keeping its comments and order, renders `config/` into the runtime tree ([`ov stack render`](#render-the-configuration-tree)) and recreates the services whose rendered files changed; then `openvidu-stack.yml` follows the node. Editing a file by hand and `sudo systemctl restart openvidu` is a supported path too: the unit renders before every start (a typo in `openvidu.yaml` stops it, naming the line), and the next `set`, `edit` or `plan` sees the edit.
 
-    Because the truth is on the node, every administrator's `openvidu-stack.yml` is a copy that a redeploy renders the tree from. Before a redeploy, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it ([Operate from another machine](remote.md)).
+    Because the source of truth is on the node, every administrator's `openvidu-stack.yml` is a copy that a redeploy renders the tree from. Before a redeploy, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it ([Operate from another machine](remote.md)).
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    **The documents in the cluster are the truth.** `openvidu.yaml` is a Secret of the stack's namespace (`ov-config-openvidu.yaml`) and every service file a ConfigMap (`ov-config-livekit.yaml`…), kept outside the Helm release. `set` changes `openvidu.yaml`, validates and renders the stack with it, and applies it as a `helm upgrade`; each pod renders its documents when it starts, so only the pods that read a changed value restart. A chart value with no setting of its own is refused (it goes in `--helm-values`). The stack holds its own configuration, so no client can be stale and every administrator reads the same documents.
+    **The documents in the cluster are the source of truth.** `openvidu.yaml` is a Secret of the stack's namespace (`ov-config-openvidu.yaml`) and every service file a ConfigMap (`ov-config-livekit.yaml`…), kept outside the Helm release. `set` changes `openvidu.yaml`, validates and renders the stack with it, and applies it as a `helm upgrade`; each pod renders its documents when it starts, so only the pods that read a changed value restart. A chart value with no setting of its own is refused (it goes in `--helm-values`). The stack holds its own configuration, so no client can be stale and every administrator reads the same documents.
 
 === "Local"
 
-    **The directory's files are the truth**, with a Community server's layout inside the stack's local directory: `config/openvidu.yaml` and the service files. `config set` recreates the services whose files changed; after editing a file by hand, `ov stack deploy` applies it.
+    **The directory's files are the source of truth**, with a Community server's layout inside the stack's local directory: `config/openvidu.yaml` and the service files. `config set` recreates the services whose files changed; after editing a file by hand, `ov stack deploy` applies it.
 
 ## Settings only one edition has
 
@@ -143,10 +143,10 @@ On PRO, any low-level chart value with no setting of its own goes in `--helm-val
 
 ## Secrets
 
-Credentials are never written in plain text where they do not belong. At deploy time `ov` generates every missing credential and **pins** it into the spec, so a redeploy reuses it instead of replacing it (which would leave MongoDB and MinIO locked out of their data).
+Credentials are never written in plain text where they do not belong. At deploy time `ov` generates every missing credential and **pins** it into `openvidu-stack.yml`, so a redeploy reuses it instead of replacing it (which would leave MongoDB and MinIO locked out of their data).
 
-- `--set-secret key=value` (on deploy, or `--set-secret key=@file`, `key=env:VAR`) stores the value under `.openvidu/secrets/` and writes a `secrets://` reference into the spec. The spec then carries the reference, not the value.
-- `ov stack export --gitops` prints the spec with every secret externalized to a `secrets://` reference, so the spec is safe to commit to a Git repository while the values stay out of it. A plain `ov stack export` prints the values themselves, the PRO license and the owncert keys included: do not share its output.
+- `--set-secret key=value` (on deploy, or `--set-secret key=@file`, `key=env:VAR`) stores the value under `.openvidu/secrets/` and writes a `secrets://` reference into `openvidu-stack.yml`. The file then carries the reference, not the value.
+- `ov stack export --gitops` prints `openvidu-stack.yml` with every secret externalized to a `secrets://` reference, so the file is safe to commit to a Git repository while the values stay out of it. A plain `ov stack export` prints the values themselves, the PRO license and the owncert keys included: do not share its output.
 
 Keep the `.openvidu/` directory private: it holds the stack's state and secrets.
 

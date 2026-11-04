@@ -16,22 +16,22 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
 ## Requirements
 
 - The [OpenVidu CLI](../install.md).
-- An Azure subscription and the [`az` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/cli/azure/install-azure-cli){:target="_blank"}, **authenticated**: `az account show` must answer. `ov` runs your own client, so your login, subscription and audit trail are the ones that apply. `az` compiles the Bicep itself, so no separate Bicep install is needed.
-- A location: `--azure-location`, else `$AZURE_LOCATION`. The resource group defaults to `openvidu-<name>-rg`, or `ov-<name>-rg` when the name is long (see the note «Names may be shortened» at the end of [Destroy the stack](#destroy-the-stack)); `--azure-resource-group` names your own. With the name `openvidu` of these examples, the group is `ov-openvidu-rg` and the Key Vault `ov-openvidu-keyvault`.
+- An Azure subscription and the [`az` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/cli/azure/install-azure-cli){:target="_blank"}, **authenticated**: `az account show` must succeed. `ov` runs your own client, so your login, subscription and audit trail are the ones that apply. `az` compiles the Bicep itself, so no separate Bicep install is needed.
+- A location: `--azure-location`, otherwise `$AZURE_LOCATION`. The resource group defaults to `openvidu-<name>-rg`, or `ov-<name>-rg` when the name is long (see the note "Names may be shortened" at the end of [Destroy the stack](#destroy-the-stack)); `--azure-resource-group` names your own. With the name `openvidu` of these examples, the group is `ov-openvidu-rg` and the Key Vault `ov-openvidu-keyvault`.
 - Permission to create resource groups and everything in them: virtual machines, a static public IP, a network security group, a Storage Account with a Blob container, a Key Vault, and for Elastic and High Availability a load balancer and a scale set of media nodes.
 - **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param instanceType=<size>`.
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your subscription.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your subscription.
 
-You need no key pair and no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
+You need no key pair and no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+Each stack lives in its own empty directory. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -93,7 +93,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
     <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -117,7 +117,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
 
     Five machines take more vCPU quota than the default sizes of a single node: the run below passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit the location's quota.
 
@@ -135,7 +135,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
     ✔ demo-ha is ready (https://openvidu-zksfiv-20-107-185-207.sslip.io)
     ```
 
-Before it touches your subscription, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
+Before it touches your subscription, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
 
 ??? example "The full plan (click to expand)"
 
@@ -247,7 +247,7 @@ OPENVIDU-URL                   https://openvidu-zclupo-40-112-77-3.sslip.io/
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at deploy time: after a later `ov stack config set`, the stack's configuration is the source of truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
 
 Your applications connect with the values of `LIVEKIT-URL`, `LIVEKIT-API-KEY` and `LIVEKIT-API-SECRET` (`LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` in your application's environment), as with any other OpenVidu deployment. Key Vault does not allow `_` in a secret name, so the keys use `-`.
 

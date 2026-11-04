@@ -5,7 +5,7 @@ description: "Adopt a running OpenVidu stack into a new directory with ov stack 
 
 # Operate from another machine
 
-`ov` operates one stack per directory. To operate a running stack from a machine that has no directory for it (a colleague's laptop, a CI runner, a replacement for a lost directory), use **`ov stack import`**. It reads the description the stack publishes about itself and writes the two files a deploy would have left (`openvidu-stack.yml` and the `.openvidu/` state), so every `ov stack` verb works afterwards.
+`ov` operates one stack per directory. To operate a running stack from a machine that has no directory for it (a colleague's laptop, a CI runner, a replacement for a lost directory), use **`ov stack import`**. It reads the description the stack publishes about itself and writes the two files a deploy would have left (`openvidu-stack.yml` and the `.openvidu/` state), so every `ov stack` command works afterwards.
 
 ## Import a stack
 
@@ -47,9 +47,9 @@ The import behaves differently per edition, because the two store their configur
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. `config get` and `config view` read the node, so a change another client made is what you see next time you ask. `config set` also adopts the node's values into your own spec, with a note (`openvidu-stack.yml now follows the node for: …`). `ov stack plan`, on the other hand, compares your spec with the node: a value another client changed shows as a change your redeploy would undo.
+    The configuration lives in the node's files, and each client holds a **copy** in its own `openvidu-stack.yml`. `config get` and `config view` read the node, so a change another client made is what you see next time you ask. `config set` also adopts the node's values into your own `openvidu-stack.yml`, with a note (`openvidu-stack.yml now follows the node for: …`). `ov stack plan`, on the other hand, compares your `openvidu-stack.yml` with the node: a value another client changed shows as a change your redeploy would undo.
 
-    What can go stale is a client's `openvidu-stack.yml` between commands. The public IP and the owncert files another client set are never read back, because they live in that client's spec, not in a file of the node. The copy matters for a **redeploy**, which renders the tree from the spec. Before one, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it.
+    What can go stale is a client's `openvidu-stack.yml` between commands. The public IP and the owncert files another client set are never read back, because they live in that client's `openvidu-stack.yml`, not in a file of the node. The copy matters for a **redeploy**, which renders the tree from `openvidu-stack.yml`. Before one, `ov stack plan` shows whether your copy differs from the node, and `ov stack import --ssh … --replace` refreshes it.
 
     In short, a Community deployment is a **single-administrator** product: comfortable for one person or one pipeline, workable for a few who coordinate.
 

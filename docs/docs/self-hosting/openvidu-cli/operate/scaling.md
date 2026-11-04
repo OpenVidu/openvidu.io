@@ -87,7 +87,7 @@ The token never appears on screen. The login, key and port default to the ones t
 
 ### Joining the machine itself
 
-On the machine that will join, `ov stack join --this-node --as master|media` enrols it directly (as root). It takes the address and token from `--address`/`--token` or the environment variables `OPENVIDU_JOIN_ADDRESS` and `OPENVIDU_JOIN_TOKEN`. Get those from the deployed node:
+On the machine that will join, `ov stack join --this-node --as master|media` enrolls it directly (as root). It takes the address and token from `--address`/`--token` or the environment variables `OPENVIDU_JOIN_ADDRESS` and `OPENVIDU_JOIN_TOKEN`. Get those from the deployed node:
 
 ```bash
 ov stack join-info          # prints OPENVIDU_JOIN_ADDRESS and OPENVIDU_JOIN_TOKEN

@@ -72,7 +72,7 @@ The directory holds two things:
 
 Every deploy can run in two modes:
 
-- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It waits for a confirmation; `-y` answers it in advance.
+- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It waits for a confirmation; `-y` confirms in advance.
 - **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. When you are done, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flag, because everything is already written in `openvidu-stack.yml`. Until then the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
 
 Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
@@ -107,7 +107,7 @@ A **module** is a feature of OpenVidu you turn on or off. A **service** is a con
 | `observability` | Metrics, logs and the [Grafana stack](../production-ready/observability/grafana-stack.md) | `grafana`, `loki`, `prometheus` or `mimir`, `alloy` |
 | `v2compatibility` | The OpenVidu 2 REST API, PRO only | `ov-v2compat` |
 
-The data services (`redis`, `mongodb`, `minio`) come up because a module needs them and go away when no module needs them any more. You never name them. [Modules and agents](operate/modules.md) explains how to change the selection on a running stack.
+The data services (`redis`, `mongodb`, `minio`) come up because a module needs them and go away when no module needs them anymore. You never name them. [Modules and agents](operate/modules.md) explains how to change the selection on a running stack.
 
 ## Next steps
 

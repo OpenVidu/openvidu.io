@@ -61,11 +61,11 @@ incremental change: stop mongodb,ov-meet; restart the media server (its config c
 modules updated
 ```
 
-On a Community server the same commands rewrite `modules:` in `config/openvidu.yaml`, render the configuration again and recreate the affected services (`✓ set modules=… in config/openvidu.yaml`). The spec follows the stack: `openvidu-stack.yml` records the new selection. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`.
+On a Community server the same commands rewrite `modules:` in `config/openvidu.yaml`, render the configuration again and recreate the affected services (`✓ set modules=… in config/openvidu.yaml`). `openvidu-stack.yml` follows the stack: `openvidu-stack.yml` records the new selection. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`.
 
 ## Data services follow the modules
 
-The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them any more. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both (locally and on PRO; on a Community server, `meet` runs the egress service itself without listing `egress` as a module):
+The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them anymore. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both (locally and on PRO; on a Community server, `meet` runs the egress service itself without listing `egress` as a module):
 
 ```console
 $ ov stack module add meet

@@ -108,5 +108,5 @@ A stack deployed with `--remote-state` also keeps its Terraform state, record an
 
 ## Next steps
 
-- [Deploy again](../index.md#where-you-can-deploy): the spec stays, so the same deploy recreates the stack.
+- [Deploy again](../index.md#where-you-can-deploy): `openvidu-stack.yml` stays, so the same deploy recreates the stack.
 - The full [command reference](../reference.md).

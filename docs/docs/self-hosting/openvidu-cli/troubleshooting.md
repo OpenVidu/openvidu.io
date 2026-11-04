@@ -41,7 +41,7 @@ ov: nothing was installed: the pod networks (10.42.0.0/16, 10.43.0.0/16) must re
 
 ## No media, but every service is healthy
 
-Almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works and the stack looks fine, but media never arrives. A running stack cannot prove this by dialling, so stop it for a few seconds and run the full check:
+Almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works and the stack looks fine, but media never arrives. A running stack cannot prove this by dialing, so stop it for a few seconds and run the full check:
 
 ```bash
 ov stack stop && ov stack check-ports && ov stack start
@@ -59,7 +59,7 @@ On Google Cloud, Azure, Oracle Cloud and DigitalOcean, a High Availability stack
 
 ## No domain: the `sslip.io` fallback
 
-A deploy with no `--domain-name` on a machine with a public IPv4 address derives a `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A private or named target still needs `--domain-name`.
+A deploy with no `--domain-name` on a machine with a public IPv4 address derives an `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A private or named target still needs `--domain-name`.
 
 ## AWS: a stack name is taken for a few days after destroy
 
@@ -75,7 +75,7 @@ Or deploy with a different name (or in a different region).
 
 ## Azure: a resource group without the created-by tag
 
-`ov` deletes only a resource group it created, recognised by a `created-by=openvidu-cli` tag. A deploy **refuses** a resource group that exists without that tag (deleting the stack would delete whatever else is in it). If an earlier `ov` created the group untagged, mark it (the refusal prints the command):
+`ov` deletes only a resource group it created, recognized by a `created-by=openvidu-cli` tag. A deploy **refuses** a resource group that exists without that tag (deleting the stack would delete whatever else is in it). If an earlier `ov` created the group untagged, mark it (the refusal prints the command):
 
 ```bash
 az group update --name <group> --set tags.created-by=openvidu-cli

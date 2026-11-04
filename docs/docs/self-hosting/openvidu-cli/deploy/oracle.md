@@ -12,17 +12,17 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
 ## Requirements
 
 - The [OpenVidu CLI](../install.md).
 - An Oracle Cloud tenancy and [**Terraform** :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/install){:target="_blank"} on your PATH: `ov` drives your own Terraform, so the provider plugins, the state and the audit trail are the ones that apply. With `--remote-state` the `oci` backend needs Terraform **1.12.0 or later**.
 - The [`oci` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm){:target="_blank"}, configured with your **OCI API key** (`~/.oci/config`), which Terraform uses too. `ov` reads the stack's secrets and Object Storage with it.
-- The tenancy, compartment and user OCIDs (`--oci-tenancy` / `--oci-compartment` / `--oci-user`, else `$OCI_TENANCY_OCID` / `$OCI_COMPARTMENT_OCID` / `$OCI_USER_OCID`) and a region (`--oci-region`, else `$OCI_REGION`, else your `oci` configuration's, else the template's `eu-frankfurt-1`).
+- The tenancy, compartment and user OCIDs (`--oci-tenancy` / `--oci-compartment` / `--oci-user`, otherwise `$OCI_TENANCY_OCID` / `$OCI_COMPARTMENT_OCID` / `$OCI_USER_OCID`) and a region (`--oci-region`, otherwise `$OCI_REGION`, otherwise your `oci` configuration's, else the template's `eu-frankfurt-1`).
 - Permission to create compute instances, a virtual cloud network with a subnet and network security group, an Object Storage bucket, a Customer Secret Key and (unless `--oci-vault`) a KMS vault for the stack's secrets.
 - **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks run under one user at a time.
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your tenancy.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your tenancy.
 
 The examples below take the OCIDs from the environment and reuse one vault:
 
@@ -34,11 +34,11 @@ export OCI_USER_OCID=ocid1.user.oc1..<user>
 
 `--oci-vault` names an existing KMS vault: create one once in the console (**Identity & Security → Vault**) and copy its OCID. Without it, the template creates a vault per stack, which OCI keeps for at least 7 days after the destroy (see [Vaults and Customer Secret Keys](#destroy-the-stack)).
 
-You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
+You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+Each stack lives in its own empty directory. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -103,7 +103,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
     <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -128,7 +128,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at a `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
 
     This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -150,7 +150,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
     ✔ demo-ha is ready (https://openvidu-qbgqz3-51-170-44-98.sslip.io)
     ```
 
-Before it touches your tenancy, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29, OCIDs and the Object Storage namespace shown as placeholders):
+Before it touches your tenancy, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29, OCIDs and the Object Storage namespace shown as placeholders):
 
 ??? example "The full plan (click to expand)"
 
@@ -264,7 +264,7 @@ S3_APP_DATA_BUCKET             openvidu-ce12o-appdata-9f79dd
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at deploy time: after a later `ov stack config set`, the stack's configuration is the source of truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 

@@ -10,7 +10,7 @@ A local stack is OpenVidu running on your own machine with **Docker Compose**, f
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a local deploy, its ports, adding OpenVidu Meet with a call in it, and the destroy. Click it to enlarge it; the player there can pause and seek.
+The video shows a local deploy, its ports, adding OpenVidu Meet with a call in it, and the destroy. Click it to open a larger player, where you can pause and seek.
 
 A local stack runs on Docker Compose with **either edition**, so you can develop against OpenVidu PRO without Kubernetes on your laptop. The [`ov` CLI](../install.md) is Linux-only for now.
 
@@ -245,7 +245,7 @@ local deployment torn down
 ✔ removed stack "labc" from this directory
 ```
 
-`--delete-data` removes the Docker volumes (recordings, rooms, Meet's configuration); `--delete-config` removes the deployment directory (`docker-compose.yaml` and `config/`). Locally they are independent: `--delete-config` alone leaves the volumes. The spec (`openvidu-stack.yml`) stays and records the stack's name, so `ov stack deploy` in the same directory brings the stack back, with its data unless you deleted it.
+`--delete-data` removes the Docker volumes (recordings, rooms, Meet's configuration); `--delete-config` removes the deployment directory (`docker-compose.yaml` and `config/`). Locally they are independent: `--delete-config` alone leaves the volumes. The desired-state file (`openvidu-stack.yml`) stays and records the stack's name, so `ov stack deploy` in the same directory brings the stack back, with its data unless you deleted it.
 
 ## Operate it by hand: assisted mode
 

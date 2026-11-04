@@ -16,21 +16,21 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
 ## Requirements
 
 - The [OpenVidu CLI](../install.md).
-- An AWS account and the [`aws` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html){:target="_blank"}, **authenticated**: `aws sts get-caller-identity` must answer. `ov` runs your own client, so your profile, region and audit trail are the ones that apply. `--aws-profile` picks a named profile.
+- An AWS account and the [`aws` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html){:target="_blank"}, **authenticated**: `aws sts get-caller-identity` must succeed. `ov` runs your own client, so your profile, region and audit trail are the ones that apply. `--aws-profile` picks a named profile.
 - Permissions to create CloudFormation stacks with IAM resources, EC2 instances, Elastic IPs, security groups, S3 buckets and Secrets Manager secrets.
-- A region: `--aws-region`, else `$AWS_REGION`, else the one `aws configure` has.
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your account.
+- A region: `--aws-region`, otherwise `$AWS_REGION`, otherwise the one `aws configure` has.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your account.
 
-You need no key pair and, except for High Availability, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives a `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything real. High Availability needs your own domain and an ACM certificate for it (see its tab below).
+You need no key pair and, except for High Availability, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives an `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything beyond testing. High Availability needs your own domain and an ACM certificate for it (see its tab below).
 
 ## Deploy
 
-An empty directory is the stack. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+Each stack lives in its own empty directory. Choose the edition and topology. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -103,7 +103,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
     <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to open a larger player, where you can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -121,7 +121,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
       --mode auto
     ```
 
-    Four master nodes behind a Network Load Balancer, plus an auto scaling group of media nodes. TLS ends at the load balancer with the ACM certificate ([Create AWS certificate for HA](../../how-to-guides/create-configure-AWS-certificate.md)), so `--certificate-type` does not apply. With only two subnets the CloudFormation stack fails to create (`Fn::Select` cannot find index 2).
+    Four master nodes behind a Network Load Balancer, plus an auto scaling group of media nodes. TLS terminates at the load balancer with the ACM certificate ([Create AWS certificate for HA](../../how-to-guides/create-configure-AWS-certificate.md)), so `--certificate-type` does not apply. With only two subnets, CloudFormation fails to create the stack (`Fn::Select` cannot find index 2).
 
     When the deploy ends, **point the domain at the load balancer**: a CNAME (or a Route 53 ALIAS record) to the stack's `NLBDNS` output. Nothing serves the domain until you do. This prints it (the CloudFormation stack is `openvidu-<name>`):
 
@@ -142,7 +142,7 @@ An empty directory is the stack. Choose the edition and topology. The commands n
     ✔ demo-ha is ready (every node and service; its URL answers at the proxy in front of it)
     ```
 
-Before it touches your account, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce10`:
+Before it touches your account, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce10`:
 
 ??? example "The full plan (click to expand)"
 
@@ -266,7 +266,7 @@ S3_APP_DATA_BUCKET             openvidu-appdata-d56324d0
 …
 ```
 
-`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at the deploy: after a later `ov stack config set`, the stack's configuration is the truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
+`ov stack config get <key>` reads any of them from the running stack. The secret is a copy made at deploy time: after a later `ov stack config set`, the stack's configuration is the source of truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 
