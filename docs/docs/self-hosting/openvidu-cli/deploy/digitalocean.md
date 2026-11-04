@@ -12,7 +12,7 @@ page_features: [lazyvideo]
 
 </div>
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and API token**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and your API token**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -28,7 +28,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - Permission to create Droplets, a firewall, a Space with a bucket-scoped Spaces key, SSH keys and the stack's tag (and, for Elastic and High Availability, a VPC and a load balancer).
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your account.
 
-You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
+You need neither a key pair nor a domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
@@ -107,7 +107,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
     The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
     - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
         ```bash
@@ -118,7 +118,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
     This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -161,7 +161,7 @@ Before it touches your account, the deploy prints exactly what it will run and a
       env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://$SPACE/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
     ```
 
-Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about a minute, before OpenVidu is installed, so the wait is the real one: `ov` polls the Space for `secrets.env`, then checks the published URL answers Caddy's health check:
+Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about a minute, before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls the Space for `secrets.env`, then checks that the published URL passes Caddy's health check:
 
 ```text
 ▶ Create the machines on DigitalOcean…
@@ -317,11 +317,11 @@ This is what will be deleted from your DigitalOcean account:
 ✔ removed stack "ce12d2" from this directory
 ```
 
-With `--delete-data` the Space the template created goes with the stack: the destroy empties it and Terraform deletes it. With `--keep-data` the Space leaves the Terraform state first, so one destroy takes the rest and the Space stays, with the recordings, Meet data and this deployment's `secrets.env`. A Space of your own (`--param spaceName=<name>`) stays either way. `--keep-infrastructure` tears the deployment down but leaves the Droplet running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
+With `--delete-data`, the Space the template created is deleted with the stack: the destroy empties it and Terraform deletes it. With `--keep-data`, the Space is first removed from the Terraform state, so a single destroy removes everything else and the Space remains, with the recordings, Meet data and this deployment's `secrets.env`. A Space of your own (`--param spaceName=<name>`) stays either way. `--keep-infrastructure` tears the deployment down but leaves the Droplet running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "The Space is the secret store"
 
-    DigitalOcean has no managed secret store, so the stack's own Space holds both the recordings and `secrets.env` (the URLs and credentials). The Space is created without `force_destroy`, so `--delete-data` empties it in an explicit, separate step before deleting; `--keep-data` leaves it, `secrets.env` and recordings and all. Keep the Spaces keys available whenever you operate the stack.
+    DigitalOcean has no managed secret store, so the stack's own Space holds both the recordings and `secrets.env` (the URLs and credentials). The Space is created without `force_destroy`, so `--delete-data` empties it in an explicit, separate step before deleting; `--keep-data` leaves it in place, with `secrets.env` and the recordings. Keep the Spaces keys available whenever you operate the stack.
 
 ## Next steps
 

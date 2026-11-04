@@ -8,7 +8,7 @@ page_features: [lazyvideo]
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and OCI API key**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and your OCI API key**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -21,7 +21,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - The [`oci` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm){:target="_blank"}, configured with your **OCI API key** (`~/.oci/config`), which Terraform uses too. `ov` reads the stack's secrets and Object Storage with it.
 - The tenancy, compartment and user OCIDs (`--oci-tenancy` / `--oci-compartment` / `--oci-user`, otherwise `$OCI_TENANCY_OCID` / `$OCI_COMPARTMENT_OCID` / `$OCI_USER_OCID`) and a region (`--oci-region`, otherwise `$OCI_REGION`, otherwise your `oci` configuration's, else the template's `eu-frankfurt-1`).
 - Permission to create compute instances, a virtual cloud network with a subnet and network security group, an Object Storage bucket, a Customer Secret Key and (unless `--oci-vault`) a KMS vault for the stack's secrets.
-- **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks run under one user at a time.
+- **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks can run under one user at a time.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your tenancy.
 
 The examples below take the OCIDs from the environment and reuse one vault:
@@ -34,7 +34,7 @@ export OCI_USER_OCID=ocid1.user.oc1..<user>
 
 `--oci-vault` names an existing KMS vault: create one once in the console (**Identity & Security → Vault**) and copy its OCID. Without it, the template creates a vault per stack, which OCI keeps for at least 7 days after the destroy (see [Vaults and Customer Secret Keys](#destroy-the-stack)).
 
-You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
+You need neither a key pair nor a domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
@@ -117,7 +117,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
     The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
     - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
         ```bash
@@ -128,7 +128,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
     This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -178,7 +178,7 @@ Before it touches your tenancy, the deploy prints exactly what it will run and a
       oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id $VAULT --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
     ```
 
-Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about three minutes, before OpenVidu is installed, so the wait is the real one: `ov` polls the vault for the stack's `OPENVIDU_URL` secret and checks the published URL answers Caddy's health check:
+Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about three minutes, before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls the vault for the stack's `OPENVIDU_URL` secret and checks the published URL answers Caddy's health check:
 
 ```text
 ▶ Create the machines on Oracle Cloud…
@@ -330,11 +330,11 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 ✔ removed stack "ce12o" from this directory
 ```
 
-`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param bucketName=<name>`) stays either way. A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
+`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` first removes it from the Terraform state, so the destroy leaves it in place and prints its name. A bucket of your own (`--param bucketName=<name>`) stays either way. A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "Vaults and Customer Secret Keys"
 
-    Without `--oci-vault`, the template creates one KMS vault per stack, and OCI only deletes a vault after a waiting period of at least 7 days. Reuse one with `--oci-vault <ocid>`, but never share a vault between two live stacks: the secrets have fixed names inside the vault and the second would overwrite the first's. OCI also caps Customer Secret Keys at 2 per user, and each stack mints one, so at most two of these stacks run under one user at a time.
+    Without `--oci-vault`, the template creates one KMS vault per stack, and OCI only deletes a vault after a waiting period of at least 7 days. Reuse one with `--oci-vault <ocid>`, but never share a vault between two live stacks: the secrets have fixed names inside the vault , so the second stack would overwrite the first one's. OCI also caps Customer Secret Keys at 2 per user, and each stack mints one, so at most two of these stacks run under one user at a time.
 
 ## Next steps
 

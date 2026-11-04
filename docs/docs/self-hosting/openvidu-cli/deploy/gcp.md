@@ -12,7 +12,7 @@ page_features: [lazyvideo]
 
 </div>
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and `gcloud` credentials**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and your `gcloud` credentials**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -27,7 +27,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - Permission to create Compute Engine instances, a static address, firewall rules, a Cloud Storage bucket, service accounts and Secret Manager secrets. The template also **mints a service-account key** (see the [warning below](#destroy-the-stack)).
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your project.
 
-You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
+You need neither a key pair nor a domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
@@ -106,7 +106,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
     The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
     - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
         ```bash
@@ -117,7 +117,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `load_balancer_ip` output of `terraform -chdir=.openvidu/gcp output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `load_balancer_ip` output of `terraform -chdir=.openvidu/gcp output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
     This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -159,7 +159,7 @@ Before it touches your project, the deploy prints exactly what it will run and a
       gcloud secrets versions access latest --secret=${PREFIX}OPENVIDU_URL --project=my-project
     ```
 
-Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about two minutes, before OpenVidu is installed, so the wait is the real one: `ov` polls Secret Manager for the stack's `OPENVIDU_URL` secret, then checks the published URL answers Caddy's health check:
+Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about two minutes, before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls Secret Manager for the stack's `OPENVIDU_URL` secret, then checks that the published URL passes Caddy's health check:
 
 ```text
 ▶ Create the machines on Google Cloud…
@@ -228,7 +228,7 @@ $ curl -s -o /dev/null -w "dashboard %{http_code}\n" https://$D/dashboard/
 dashboard 200
 ```
 
-The credentials are one Secret Manager secret per key, every id prefixed with the stack name, the command printed on the `credentials:` line. These are the keys of a Single Node COMMUNITY stack (values replaced by their length; the service-account key masked whole):
+The credentials are stored as one Secret Manager secret per key, each id prefixed with the stack name; the `credentials:` line prints the command that reads them. These are the keys of a Single Node COMMUNITY stack (values replaced by their length; the service-account key is masked entirely):
 
 ```text
 DASHBOARD_ADMIN_PASSWORD       <set, 44 chars>
@@ -310,11 +310,11 @@ This is what will be deleted from your Google Cloud project my-project:
 ✔ removed stack "ce12g" from this directory
 ```
 
-`--delete-data` takes the bucket the template created with the stack, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param bucketName=<name>`) is not in the state, so it stays either way. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
+`--delete-data` deletes the bucket the template created, recordings and all. `--keep-data` first removes it from the Terraform state, so the destroy leaves it in place and prints its name. A bucket of your own (`--param bucketName=<name>`) is not in the state, so it stays either way. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "Service-account key creation"
 
-    The template mints a Cloud Storage service-account key for egress to upload recordings with. An organization policy that blocks key creation (`iam.disableServiceAccountKeyCreation`) stops the apply. Allow key creation in the project, or the deploy cannot finish.
+    The template mints a Cloud Storage service-account key that egress uses to upload recordings. An organization policy that blocks key creation (`iam.disableServiceAccountKeyCreation`) stops the apply. Allow key creation in the project, or the deploy cannot finish.
 
 ## Next steps
 

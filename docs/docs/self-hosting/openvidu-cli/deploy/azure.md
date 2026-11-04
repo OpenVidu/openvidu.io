@@ -22,12 +22,12 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 
 - The [OpenVidu CLI](../install.md).
 - An Azure subscription and the [`az` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/cli/azure/install-azure-cli){:target="_blank"}, **authenticated**: `az account show` must succeed. `ov` runs your own client, so your login, subscription and audit trail are the ones that apply. `az` compiles the Bicep itself, so no separate Bicep install is needed.
-- A location: `--azure-location`, otherwise `$AZURE_LOCATION`. The resource group defaults to `openvidu-<name>-rg`, or `ov-<name>-rg` when the name is long (see the note "Names may be shortened" at the end of [Destroy the stack](#destroy-the-stack)); `--azure-resource-group` names your own. With the name `openvidu` of these examples, the group is `ov-openvidu-rg` and the Key Vault `ov-openvidu-keyvault`.
+- A location: `--azure-location`, otherwise `$AZURE_LOCATION`. The resource group defaults to `openvidu-<name>-rg`, or `ov-<name>-rg` when the name is long (see the "Names may be shortened" note at the end of [Destroy the stack](#destroy-the-stack)); `--azure-resource-group` uses one of your own. With the name `openvidu` of these examples, the group is `ov-openvidu-rg` and the Key Vault `ov-openvidu-keyvault`.
 - Permission to create resource groups and everything in them: virtual machines, a static public IP, a network security group, a Storage Account with a Blob container, a Key Vault, and for Elastic and High Availability a load balancer and a scale set of media nodes.
-- **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param instanceType=<size>`.
+- **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks can run at once; raise it, or pick a smaller size with `--param instanceType=<size>`.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your subscription.
 
-You need no key pair and no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
+You need neither a key pair nor a domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
 ## Deploy
 
@@ -106,7 +106,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
     The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so it is for trying the topology out.
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
     - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
         ```bash
@@ -117,9 +117,9 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
 
         On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain (`URL not answering yet` until then).
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
-    Five machines take more vCPU quota than the default sizes of a single node: the run below passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit the location's quota.
+    Five machines need more vCPU quota than a single node: the run below passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit within the location's quota.
 
     This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -159,7 +159,7 @@ Before it touches your subscription, the deploy prints exactly what it will run 
       az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
     ```
 
-Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then it runs them, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so the wait is the real one: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks the published URL answers Caddy's health check:
+Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then `ov` runs the commands, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks that the published URL passes Caddy's health check:
 
 ```text
 ▶ Create the machines on Azure…
@@ -200,7 +200,7 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param instanceType=<size>`. A low quota for the VM's family limits how many stacks run in a location at once.
+The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param instanceType=<size>`.
 
 ## What the deploy creates
 
@@ -228,7 +228,7 @@ $ curl -s -o /dev/null -w "dashboard %{http_code}\n" https://$D/dashboard/
 dashboard 200
 ```
 
-The credentials are secrets in the stack's Key Vault, the command printed on the `credentials:` line. These are the keys of a Single Node COMMUNITY stack (values replaced by their length; the storage account's key masked too):
+The credentials are secrets in the stack's Key Vault; the `credentials:` line prints the command that reads them. These are the keys of a Single Node COMMUNITY stack (values replaced by their length; the storage account key is masked too):
 
 ```text
 vault openvidu-ce12a-keyvault
@@ -322,11 +322,11 @@ This is what will be deleted from your Azure subscription:
 ✔ removed stack "ce12a" from this directory
 ```
 
-With `--delete-data` the storage account goes with the resource group, recordings and all. With `--keep-data` the account first moves to a resource group of its own, `<group>-data`, so deleting the stack's group leaves it. `--keep-infrastructure` tears the deployment down but leaves the VM running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
+With `--delete-data` the storage account goes with the resource group, recordings and all. With `--keep-data`, the account first moves to a resource group of its own, `<group>-data`, so it survives the deletion of the stack's group. `--keep-infrastructure` tears the deployment down but leaves the VM running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "Names may be shortened"
 
-    A Key Vault name may be at most 24 characters, so when `openvidu-<name>-keyvault` would exceed it, `ov` shortens the prefix from `openvidu-` to `ov-` (resource group `ov-<name>-rg`, Key Vault `ov-<name>-keyvault`). Take the stack's cloud name from the `record:` line the deploy prints; it is what `ov stack import --cloud azure --stack-name <name>` needs.
+    A Key Vault name can be at most 24 characters long, so when `openvidu-<name>-keyvault` would exceed it, `ov` shortens the prefix from `openvidu-` to `ov-` (resource group `ov-<name>-rg`, Key Vault `ov-<name>-keyvault`). Take the stack's cloud name from the `record:` line the deploy prints; it is what `ov stack import --cloud azure --stack-name <name>` needs.
 
 ## Next steps
 
