@@ -233,6 +233,19 @@ An empty directory on your machine is the stack. Pick the edition and topology:
 
 Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them, and prints a table of them (`checking the inbound ports before installing anything…` in the output above). A **required** port closed (or, on PRO, the node's firewall dropping the pod and service networks) stops the deploy with **exit code 6** and the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` skips it by construction (reachability cannot be verified from the node itself).
 
+### Deploying again
+
+A deploy to a node that already runs OpenVidu says so and keeps its data: it rewrites `docker-compose.yaml` and `config/` from the spec (your `docker-compose.override.yaml` stays) and reuses the credentials the data was written with:
+
+```text
+172.30.0.96 already runs OpenVidu on 172-30-0-96.openvidu-local.dev (currently stopped). Deploying again rewrites its files from the spec and restarts it.
+  · Its docker-compose.yaml and config/ are rewritten from the spec you are deploying; docker-compose.override.yaml is kept.
+  · Its data is kept — nothing deletes MongoDB, MinIO or recordings.
+  · The credentials in your spec are reused, so the kept data stays readable.
+```
+
+A deploy from a directory whose spec already exists needs the mode named (`--mode auto` or `--mode assisted`).
+
 ## Install on the server itself
 
 Instead of `--ssh`, put `ov` on the server, log in, and deploy with **`--this-node`** — *the machine I am running on*. The CLI writes the deployment there and escalates with `sudo`, so a user with passwordless sudo is enough. The stack of `--this-node` lives in `/opt/openvidu/stack`:

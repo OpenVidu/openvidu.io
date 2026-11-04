@@ -77,7 +77,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One master node and a scale set of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them.
 
-    <!-- PENDING-RUN (docs-ov, dw): azure pro elastic with today's ov -->
+    This is how the deploy of a stack named `dpaz2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 52.138.152.30:6443
+    …
+    ✔ OpenVidu Pro (elastic) is up on Azure
+      URL:          https://openvidu-i4mxo8-52-138-152-30.sslip.io/
+      credentials:  az keyvault secret show --vault-name openvidu-dpaz2-keyvault --name OPENVIDU-URL --query value -o tsv
+      kubeconfig:   .openvidu/azure/kubeconfig.yaml
+    ```
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
