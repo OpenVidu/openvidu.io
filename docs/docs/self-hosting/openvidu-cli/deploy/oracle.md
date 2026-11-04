@@ -8,7 +8,7 @@ page_features: [lazyvideo]
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you ask for, applies it with **your own `terraform` and OCI API key**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and OCI API key**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -61,7 +61,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
       --certificate-type letsencrypt --mode auto
     ```
 
-    One compute instance running OpenVidu PRO on Kubernetes. `--param kubeAPIAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
+    One compute instance running OpenVidu PRO on Kubernetes. `--param kubeAPIAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
     This is how the deploy of a stack named `dpoci1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
@@ -231,11 +231,11 @@ The `retargeted` note is expected: the machine deployed OpenVidu on itself, and 
 | A KMS vault, one secret per key | What the stack publishes: URL and credentials (and the kubeconfig on PRO). `--oci-vault` reuses one; else one vault per stack |
 | An SSH key pair | The template generates it; `ov` keeps the private half in `.openvidu/oracle/` |
 
-`ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-u57z2l-51-170-56-241.sslip.io
@@ -276,7 +276,7 @@ ssh -i .openvidu/oracle/openvidu-ce12o-key.pem ubuntu@51.170.56.241
 
 ## Review the commands first: assisted mode
 
-`--mode assisted` runs **nothing at all** in your tenancy. It writes the rendered template and its variables into `.openvidu/oracle/` and prints the same commands, for you to read, change and run yourself:
+`--mode assisted` runs **nothing at all** in your tenancy. It writes the rendered template and its variables to `.openvidu/oracle/` and prints the same commands, for you to read, change and run yourself:
 
 ```bash
 ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
@@ -311,7 +311,7 @@ See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../oper
 
 ## Destroy the stack
 
-One command deletes the machines too. You must say what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the bucket, `--delete-data` deletes it:
+One command deletes the machines too. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the bucket, `--delete-data` deletes it:
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -330,7 +330,7 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 ✔ removed stack "ce12o" from this directory
 ```
 
-`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param bucketName=<name>`) stays either way. A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` takes it out of the Terraform state first, so the destroy leaves it and names it. A bucket of your own (`--param bucketName=<name>`) stays either way. A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. `--keep-infrastructure` tears the deployment down but leaves the instance running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "Vaults and Customer Secret Keys"
 

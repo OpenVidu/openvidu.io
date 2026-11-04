@@ -369,7 +369,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
           --skip-port-check --mode auto
         ```
 
-    - **Join the masters with `--lb-host`**, the load balancer in front of the masters, and `--public-ip`, the node's public address; both are kept reachable on the cluster API:
+    - **Join the masters with `--lb-host`** (the load balancer in front of the masters) **and `--public-ip`** (the node's public address). The cluster API's certificate covers both, so the API stays reachable at either address:
 
         ```bash
         ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>

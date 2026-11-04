@@ -12,7 +12,7 @@ page_features: [lazyvideo]
 
 </div>
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you ask for, applies it with **your own `terraform` and API token**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you choose and applies it with **your own `terraform` and API token**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -53,7 +53,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
       --certificate-type letsencrypt --mode auto
     ```
 
-    One Droplet running OpenVidu PRO on Kubernetes. `--param kubeAPIAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
+    One Droplet running OpenVidu PRO on Kubernetes. `--param kubeAPIAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
     This is how the deploy of a stack named `dpdo1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
@@ -214,11 +214,11 @@ The `retargeted` note is expected: the machine deployed OpenVidu on itself, and 
 | A Space and a bucket-scoped Spaces key | Recordings and OpenVidu Meet data; also the stack's secret store (`secrets.env`). `--param spaceName=<name>` uses your own |
 | An SSH key pair and the stack's tag | The template generates the key; `ov` keeps the private half in `.openvidu/digitalocean/` |
 
-`ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-324jl8-164-92-159-209.sslip.io
@@ -259,7 +259,7 @@ ssh -i .openvidu/digitalocean/openvidu-ce12d2-key.pem root@164.92.159.209
 
 ## Review the commands first: assisted mode
 
-`--mode assisted` runs **nothing at all** in your account. It writes the rendered template and its variables into `.openvidu/digitalocean/` and prints the same commands, for you to read, change and run yourself:
+`--mode assisted` runs **nothing at all** in your account. It writes the rendered template and its variables to `.openvidu/digitalocean/` and prints the same commands, for you to read, change and run yourself:
 
 ```bash
 ov stack deploy openvidu --cloud digitalocean \
@@ -293,7 +293,7 @@ See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../oper
 
 ## Destroy the stack
 
-One command deletes the machines too. You must say what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the Space, `--delete-data` deletes it. A Space must be empty to go, and the machine writes into it until it is gone, so the Space is emptied between two passes:
+One command deletes the machines too. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the Space, `--delete-data` deletes it. A Space must be empty to go, and the machine writes into it until it is gone, so the Space is emptied between two passes:
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -317,7 +317,7 @@ This is what will be deleted from your DigitalOcean account:
 ✔ removed stack "ce12d2" from this directory
 ```
 
-With `--delete-data` the Space the template created goes with the stack: the destroy empties it and Terraform deletes it. With `--keep-data` the Space leaves the Terraform state first, so one destroy takes the rest and the Space stays, with the recordings, Meet data and this deployment's `secrets.env`. A Space of your own (`--param spaceName=<name>`) stays either way. `--keep-infrastructure` tears the deployment down but leaves the Droplet running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+With `--delete-data` the Space the template created goes with the stack: the destroy empties it and Terraform deletes it. With `--keep-data` the Space leaves the Terraform state first, so one destroy takes the rest and the Space stays, with the recordings, Meet data and this deployment's `secrets.env`. A Space of your own (`--param spaceName=<name>`) stays either way. `--keep-infrastructure` tears the deployment down but leaves the Droplet running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "The Space is the secret store"
 

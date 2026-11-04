@@ -59,7 +59,7 @@ On Google Cloud, Azure, Oracle Cloud and DigitalOcean, a High Availability stack
 
 ## No domain: the `sslip.io` fallback
 
-A deploy with no `--domain-name` on a machine with a public IPv4 address derives an `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A private or named target still needs `--domain-name`.
+A deploy with no `--domain-name` on a machine with a public IPv4 address derives an `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A machine without a public IPv4 address, or one you reach by hostname, still needs `--domain-name`.
 
 ## AWS: a stack name is taken for a few days after destroy
 

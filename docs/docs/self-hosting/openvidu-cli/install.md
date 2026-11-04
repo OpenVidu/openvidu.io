@@ -10,8 +10,8 @@ The OpenVidu CLI is a single static binary, `ov`, published for Linux on **amd64
 ## Requirements
 
 - A Linux machine (macOS and Windows are not supported yet). It can be your workstation or the server you deploy on.
-- `curl`, `gunzip` and `sha256sum`, available on every common distribution.
-- What each kind of deployment drives:
+- `curl`, `gunzip` and `sha256sum`, which every common distribution ships.
+- Depending on where you deploy:
     - **Local**: [Docker :fontawesome-solid-external-link:{.external-link-icon}](https://docs.docker.com/engine/install/){:target="_blank"} with the Compose plugin.
     - **On premises**: SSH access to your servers. `ov` installs whatever else the servers need.
     - **A cloud**: that cloud's own CLI, authenticated. Each [deployment guide](index.md#where-you-can-deploy) lists it.

@@ -81,7 +81,7 @@ $ ov stack join --ssh ubuntu@172.30.0.102 --as media
 ✔ 172.30.0.102 joined the stack as a media node.
 ```
 
-The token never appears on screen. The login, key and port default to the ones the stack recorded (`--ssh-user`, `--ssh-key`, `--ssh-port` override them). The join returns once the stack sees the node ready, so what it schedules there already exists. `--as master` adds an HA control-plane node (HA masters 2-4); it is refused on an Elastic stack (`ov: stack "el" is elastic: its one master is the deployed node, so another machine joins --as media`, exit `2`) and on any single node. A master join takes `--domain`, `--lb-host` and `--public-ip`, the names the cluster API must stay reachable at.
+The token never appears on screen. The login, key and port default to the ones the stack recorded (`--ssh-user`, `--ssh-key`, `--ssh-port` override them). The join returns once the stack sees the node as ready, so the node takes work as soon as the command ends. `--as master` adds an HA control-plane node (HA masters 2-4); it is refused on an Elastic stack (`ov: stack "el" is elastic: its one master is the deployed node, so another machine joins --as media`, exit `2`) and on any single node. A master join takes `--domain`, `--lb-host` and `--public-ip`, the names the cluster API must stay reachable at.
 
 `join` checks the ports first, as above: the new node's, from your machine and from the masters (the kubelet on `10250/tcp` and the overlay network on `8472/udp`), and the master's API on `6443/tcp` from the new node. A required port closed exits `6` before anything is installed, with the `ufw` rule to add on each machine, scoped to the source (`--skip-port-check` turns the check off).
 

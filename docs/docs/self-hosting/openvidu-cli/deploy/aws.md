@@ -12,7 +12,7 @@ page_features: [lazyvideo]
 
 </div>
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the CloudFormation template embedded in its own binary for the edition and topology you ask for, applies it with **your own `aws` CLI**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the CloudFormation template embedded in its own binary for the edition and topology you choose and applies it with **your own `aws` CLI**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-aws-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -21,9 +21,9 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 ## Requirements
 
 - The [OpenVidu CLI](../install.md).
-- An AWS account and the [`aws` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html){:target="_blank"}, **authenticated**: `aws sts get-caller-identity` must succeed. `ov` runs your own client, so your profile, region and audit trail are the ones that apply. `--aws-profile` picks a named profile.
+- An AWS account and the [`aws` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html){:target="_blank"}, **authenticated**: `aws sts get-caller-identity` must succeed. `ov` runs your own client, so your profile, region and audit trail are the ones that apply. `--aws-profile` selects a named profile.
 - Permissions to create CloudFormation stacks with IAM resources, EC2 instances, Elastic IPs, security groups, S3 buckets and Secrets Manager secrets.
-- A region: `--aws-region`, otherwise `$AWS_REGION`, otherwise the one `aws configure` has.
+- A region: `--aws-region`, otherwise `$AWS_REGION`, otherwise the one set with `aws configure`.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your account.
 
 You need no key pair and, except for High Availability, no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the machine derives an `sslip.io` name from its public IP, so Let's Encrypt has a name to certify. Use your own domain for anything beyond testing. High Availability needs your own domain and an ACM certificate for it (see its tab below).
@@ -51,7 +51,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
       --certificate-type letsencrypt --mode auto
     ```
 
-    One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-kube-api-cidr` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
+    One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-kube-api-cidr` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
     This is how the deploy of a stack named `dpaws1` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
@@ -130,7 +130,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
       --query "Stacks[0].Outputs[?OutputKey=='NLBDNS'].OutputValue" --output text
     ```
 
-    Because the load balancer terminates TLS, `ov stack status --wait` counts the nodes and services and leaves the URL to it. This is the wait of a stack named `demo-ha`:
+    Because the load balancer terminates TLS, `ov stack status --wait` only counts nodes and services; the URL is checked at the load balancer. This is the wait of a stack named `demo-ha`:
 
     ```console
     $ ov stack status --wait
@@ -214,13 +214,13 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. A region that does not offer the default instance type (`c6a.xlarge` is missing from `eu-south-2`, for one) gets the same size in `c5` or `m5`, and the deploy says so. A type you choose yourself is never replaced: if the region does not offer it, the deploy stops before creating anything.
+The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. A region that does not offer the default instance type (`c6a.xlarge` is not available in `eu-south-2`, for example) gets the equivalent `c5` or `m5` size, and the deploy says so. A type you choose yourself is never replaced: if the region does not offer it, the deploy stops before creating anything.
 
 ## What the deploy creates
 
 | Resource | Notes |
 | --- | --- |
-| A CloudFormation stack, `openvidu-<name>` | Holds every resource below except the key pair; `--aws-stack-name` names it |
+| A CloudFormation stack, `openvidu-<name>` | Holds every resource below except the key pair; `--aws-stack-name` sets its name |
 | EC2 instances | One for Single Node; master nodes and an auto scaling group of media nodes for Elastic and High Availability |
 | An Elastic IP and security groups | The ports OpenVidu needs, open to the internet |
 | A Network Load Balancer | High Availability only |
@@ -229,11 +229,11 @@ The `retargeted` note is expected: the machine deployed OpenVidu on itself, and 
 | An EC2 key pair, `openvidu-<name>-key` | Only its public half; the private half stays in `.openvidu/aws/` |
 | The bucket `openvidu-cfn-templates-<account>-<region>` | Stages the template, shared by every stack of the account in that region |
 
-`ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-40mfas-54-82-78-43.sslip.io
@@ -278,7 +278,7 @@ ssh -i .openvidu/aws/openvidu-ce10-key.pem ubuntu@54.82.78.43
 
 ## Review the commands first: assisted mode
 
-`--mode assisted` runs **nothing at all** in your account. It writes the rendered template and its parameters into `.openvidu/aws/` and prints the same commands, for you to read, change and run yourself:
+`--mode assisted` runs **nothing at all** in your account. It writes the rendered template and its parameters to `.openvidu/aws/` and prints the same commands, for you to read, change and run yourself:
 
 ```bash
 ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
@@ -311,7 +311,7 @@ See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../oper
 
 ## Destroy the stack
 
-One command deletes the machines too. You must say what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the S3 bucket, `--delete-data` deletes it.
+One command deletes the machines too. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the S3 bucket, `--delete-data` deletes it.
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -340,11 +340,11 @@ This is what will be deleted from your AWS account:
 ✔ removed stack "ce10" from this directory
 ```
 
-The bucket `openvidu-cfn-templates-<account>-<region>` stays, because every stack of the region shares it. `--keep-infrastructure` tears the deployment down but leaves the instances running (and says so, because they still cost money). More options in [Destroy](../operate/destroy.md).
+The bucket `openvidu-cfn-templates-<account>-<region>` stays, because every stack of the region shares it. `--keep-infrastructure` tears the deployment down but leaves the instances running (and says so, because they still cost money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "Reusing a stack name"
 
-    Secrets Manager deletes a secret with a recovery window, so its name stays taken for some days. Deploying a new stack with the same name in the same region fails until then. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name the deploy printed on its `credentials:` line: `openvidu-<region>-openvidu-<name>` for a single node, `openvidu-elastic-<region>-openvidu-<name>` for Elastic, `openvidu-ha-<region>-openvidu-<name>` for High Availability.
+    Secrets Manager deletes a secret only after a recovery window, so its name remains in use for several days. Until then, deploying a new stack with the same name in the same region fails. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name the deploy printed on its `credentials:` line: `openvidu-<region>-openvidu-<name>` for a single node, `openvidu-elastic-<region>-openvidu-<name>` for Elastic, `openvidu-ha-<region>-openvidu-<name>` for High Availability.
 
 ## Next steps
 

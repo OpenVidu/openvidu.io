@@ -6,7 +6,7 @@ page_features: [lazyvideo]
 
 # Deploy OpenVidu with the OpenVidu CLI
 
-The **OpenVidu CLI** (`ov`) installs and operates OpenVidu. One tool covers the whole life of a deployment: create it, check it, change its configuration, turn features on and off while it runs, add and remove nodes, and take it down. The same commands work on the OpenVidu running on your laptop and on the one serving your users.
+The **OpenVidu CLI** (`ov`) installs and operates OpenVidu. One tool covers the whole life of a deployment: create it, check it, change its configuration, turn features on and off while it runs, add and remove nodes, and take it down. The same commands operate the OpenVidu on your laptop and the one serving your users.
 
 ```bash
 mkdir my-stack && cd my-stack
@@ -15,7 +15,7 @@ ov stack status                          # operate it from this directory
 ov stack destroy --delete-data           # and take it down again
 ```
 
-The same directory-based flow deploys to your servers or to a cloud, where one command creates the machines and they deploy OpenVidu themselves:
+The same directory-based flow deploys to your own servers or to a cloud. On a cloud, one command creates the machines, and the machines then deploy OpenVidu themselves:
 
 ```bash
 ov stack deploy my-stack --cloud aws --aws-region us-east-1 --mode auto
@@ -37,21 +37,21 @@ ov stack deploy my-stack --cloud aws --aws-region us-east-1 --mode auto
 | **Oracle Cloud** | COMMUNITY and PRO | PRO | PRO | [Oracle Cloud](deploy/oracle.md) |
 | **DigitalOcean** | COMMUNITY and PRO | PRO | PRO | [DigitalOcean](deploy/digitalocean.md) |
 
-The topologies are the ones described in [Deployment types](../deployment-types.md). Elastic and High Availability grow past one machine, so they are OpenVidu PRO only.
+The topologies are the ones described in [Deployment types](../deployment-types.md). Elastic and High Availability span more than one machine, so they require OpenVidu PRO.
 
 ## COMMUNITY and PRO: the same commands
 
-`--edition community` (the default) or `--edition pro` is the whole decision. How OpenVidu is installed and run on the machine follows from the edition and is not something you configure:
+Choosing `--edition community` (the default) or `--edition pro` is the only decision you make. How OpenVidu is installed and run on the machine follows from the edition; you do not configure it:
 
 | | OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } |
 | --- | --- | --- |
-| Deployed with | `ov stack deploy --edition community` | `ov stack deploy --edition pro --openvidu-pro-license <key>` (no license locally) |
+| Deployed with | `ov stack deploy --edition community` | `ov stack deploy --edition pro --openvidu-pro-license <key>` (no license needed on a local stack) |
 | Runs on the server as | Docker Compose and a systemd unit | Kubernetes, with OpenVidu as a Helm release |
 | Topologies | Single Node | Single Node, Elastic, High Availability |
 | Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the cluster (`openvidu.yaml` and the service files, as Kubernetes objects), which any administrator can read |
-| Administrators | Each administrator's directory keeps a copy of the desired state; the node's files win | Every administrator reads and writes the same configuration in the cluster |
+| Administrators | Each administrator's directory keeps a copy of the desired state; if they differ, the node's files take precedence | Every administrator reads and writes the same configuration in the cluster |
 
-A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop, in evaluation mode and with no license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes; to get one, [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} (there is a 15-day free trial).
+A local stack runs on Docker Compose with either edition. This lets you develop against OpenVidu PRO on your laptop without Kubernetes, in evaluation mode and without a license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes; to get one, [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} (there is a 15-day free trial).
 
 ## Already running OpenVidu 3.9.0?
 
@@ -61,19 +61,19 @@ A deployment installed with `install.sh` (Single Node, Elastic or High Availabil
 
 ### The stack directory
 
-`ov` operates **one stack per directory**. The directory you deploy from becomes the stack: every later command finds the stack in the directory you run it from, with no name and no flags, and `--dir <path>` points at one from anywhere else. Two stacks are two directories.
+`ov` operates **one stack per directory**. The directory you deploy from becomes the stack: every later command finds the stack in the directory you run it from, with no name and no flags. From anywhere else, `--dir <path>` points to it. Two stacks are two directories.
 
 The directory holds two things:
 
 - **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it. The deploy flags (`--domain-name`, `--certificate-type`, `--modules`…), `--set key=value` and `-f file.yml` write into it, and the deploy fills in the rest with defaults. It also **generates every credential the stack needs** and pins them here, so a redeploy reuses them.
 - **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it (SSH key, kubeconfig), the template and variables it applied on a cloud, and its secrets. Keep it private.
 
-### Auto and assisted mode
+### Auto and assisted modes
 
 Every deploy can run in two modes:
 
-- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It waits for a confirmation; `-y` confirms in advance.
-- **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. When you are done, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flag, because everything is already written in `openvidu-stack.yml`. Until then the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
+- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It asks for confirmation first; `-y` confirms in advance.
+- **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. Once you have run them, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flags, because everything is already written in `openvidu-stack.yml`. Until then the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
 
 Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
 

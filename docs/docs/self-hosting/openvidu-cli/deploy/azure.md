@@ -12,7 +12,7 @@ page_features: [lazyvideo]
 
 </div>
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Bicep template embedded in its own binary for the edition and topology you ask for, applies it with **your own `az` CLI** (which compiles the Bicep), and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Bicep template embedded in its own binary for the edition and topology you choose and applies it with **your own `az` CLI** (which compiles the Bicep). The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
@@ -52,7 +52,7 @@ Each stack lives in its own empty directory. Choose the edition and topology. Th
       --certificate-type letsencrypt --mode auto
     ```
 
-    One virtual machine running OpenVidu PRO on Kubernetes. `--param kubeApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
+    One virtual machine running OpenVidu PRO on Kubernetes. `--param kubeApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
     This is how the deploy of a stack named `dpaz1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
@@ -214,11 +214,11 @@ The `retargeted` note is expected: the machine deployed OpenVidu on itself, and 
 | A Key Vault, `openvidu-<name>-keyvault` | What the stack publishes: URL and credentials (and the kubeconfig on PRO) |
 | An SSH key pair | `ov` generates it; the private half stays in `.openvidu/azure/` |
 
-`ov` writes the stack's infrastructure into `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
 
 ## Access OpenVidu
 
-The deploy prints the URL of the deployment. OpenVidu Meet answers at `/`, and OpenVidu Dashboard at `/dashboard/`, with the Let's Encrypt certificate of the Single Node example:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-zclupo-40-112-77-3.sslip.io
@@ -259,7 +259,7 @@ ssh -i .openvidu/azure/openvidu-ce12a-key.pem ubuntu@40.112.77.3
 
 ## Review the commands first: assisted mode
 
-`--mode assisted` runs **nothing at all** in your subscription. It writes the rendered template into `.openvidu/azure/` and prints the same commands, for you to read, change and run yourself:
+`--mode assisted` runs **nothing at all** in your subscription. It writes the rendered template to `.openvidu/azure/` and prints the same commands, for you to read, change and run yourself:
 
 ```bash
 ov stack deploy openvidu --cloud azure --azure-location northeurope \
@@ -304,7 +304,7 @@ See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../oper
 
 ## Destroy the stack
 
-One command deletes the machines too. You must say what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves them, `--delete-data` deletes them. The whole stack is one resource group, so deleting it is the teardown:
+One command deletes the machines too. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves them, `--delete-data` deletes them. The whole stack is one resource group, so deleting it is the teardown:
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -322,7 +322,7 @@ This is what will be deleted from your Azure subscription:
 ✔ removed stack "ce12a" from this directory
 ```
 
-With `--delete-data` the storage account goes with the resource group, recordings and all. With `--keep-data` the account first moves to a resource group of its own, `<group>-data`, so deleting the stack's group leaves it. `--keep-infrastructure` tears the deployment down but leaves the VM running (and says so, because it is still costing money). More options in [Destroy](../operate/destroy.md).
+With `--delete-data` the storage account goes with the resource group, recordings and all. With `--keep-data` the account first moves to a resource group of its own, `<group>-data`, so deleting the stack's group leaves it. `--keep-infrastructure` tears the deployment down but leaves the VM running (and says so, because it is still costing money). [Destroy](../operate/destroy.md) describes the other options.
 
 !!! warning "Names may be shortened"
 
