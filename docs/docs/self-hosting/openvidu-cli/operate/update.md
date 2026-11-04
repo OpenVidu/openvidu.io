@@ -120,9 +120,10 @@ steps on the node:
   …
   then as a deploy: ov's tree, the unit, this CLI, the render, the pull, the start
 …
+(dry run — nothing changed; the node still runs the installed 3.9.0)
 ```
 
-Running it (type the stack name, or `-y`) stops the installed stack, backs it up to `.ov/migrate/3.9.0/`, converts `config/openvidu.env` into `config/openvidu.yaml`, moves MongoDB's files to the layout `ov` runs, removes the installer's leftovers, and then does what a deploy does. Since the images become this `ov`'s, **migrating with the `ov` of the release you want is also the update to it**. A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), so does a node without the disk space it needs (exit `9`), and a failure after the stack is stopped rolls it back to the unchanged 3.9.0. A node at an older release updates to 3.9.0 with its own updater first.
+Running it (type the stack name, or `-y`) stops the installed stack, backs it up to `.ov/migrate/3.9.0/`, converts `config/openvidu.env` into `config/openvidu.yaml`, moves MongoDB's files to the layout `ov` runs, removes the installer's leftovers, and then does what a deploy does. Since the images become this `ov`'s, **migrating with the `ov` of the release you want is also the update to it**. A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), so does a node without the disk space it needs (exit `9`), and a failure after the stack is stopped rolls it back to the unchanged 3.9.0. A node at an older release updates to 3.9.0 with its own updater first. A PRO deployment starts the logs and metrics of the `observability` module anew (`data/loki_data` and `data/prometheus_data` are not carried over); Grafana's own data is kept. A node already migrated is refused (`/opt/openvidu has no deployment-info.yaml: it is not a deployment install.sh made`).
 
 ## Next steps
 
