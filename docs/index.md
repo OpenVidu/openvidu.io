@@ -19,9 +19,9 @@ page_features:
   <div class="ov-door ov-door--meet">
     <div class="ov-door__head">
       <span class="ov-door__name">OpenVidu Meet</span>
-      <span class="ov-door__badge">Ready-made app</span>
+      <span class="ov-door__badge">Customizable ready-made app</span>
     </div>
-    <h2 class="ov-door__title">A finished meeting app. Embed it today.</h2>
+    <h2 class="ov-door__title">A finished meeting app. Customizable. Embed it today.</h2>
     <p class="ov-door__text">Rooms, recordings, roles and your branding, out of the box. Drop it into your product with one tag, a REST API and webhooks.</p>
     <div class="ov-door__actions">
       <a href="/meet/" class="ov-btn ov-btn--meet-ink" title="Get started with OpenVidu Meet">Deploy Meet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
@@ -39,10 +39,6 @@ page_features:
     </div>
     <h2 class="ov-door__title">The raw engine. Build anything.</h2>
     <p class="ov-door__text">Client and server SDKs from our LiveKit fork, for every major language, with full control over tracks, codecs and layouts.</p>
-    <div class="ov-door__actions">
-      <a href="/docs/" class="ov-btn ov-btn--white" title="Build with OpenVidu Platform SDKs">Start building<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-      <a href="/docs/tutorials/application-server/" class="ov-link" title="OpenVidu Platform tutorials">Browse tutorials</a>
-    </div>
     <div class="ov-door__visual">
       <div class="ov-code">
         <div class="ov-code__bar" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -53,6 +49,11 @@ page_features:
 <span class="ov-code__kw">await</span> room.localParticipant
   .enableCameraAndMicrophone();</pre>
       </div>
+    </div>
+    <p class="ov-door__ai">Build it with your AI coding agent: the <a href="/docs/building-with-ai/agent-plugin/">OpenVidu Agent Plugin</a> puts this documentation inside Claude Code, Cursor, VS Code, Copilot, Codex or Kiro.</p>
+    <div class="ov-door__actions">
+      <a href="/docs/" class="ov-btn ov-btn--white" title="Build with OpenVidu Platform SDKs">Start building<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <a href="/docs/tutorials/application-server/" class="ov-link" title="OpenVidu Platform tutorials">Browse tutorials</a>
     </div>
   </div>
 </section>
@@ -308,15 +309,6 @@ page_features:
   <p class="ov-plans__note">Both editions run Meet and Platform. You pay only while a PRO cluster runs, never per participant. <a href="/pricing/">See pricing</a></p>
 </section>
 
-<section class="ov-wrap ov-section ov-record" aria-label="Track record" data-sal="slide-up">
-  <div class="ov-record__grid">
-    <a class="ov-stat" href="/research/"><span class="ov-stat__value">12+</span><span class="ov-stat__label">years building WebRTC</span></a>
-    <a class="ov-stat" href="/research/"><span class="ov-stat__value">19</span><span class="ov-stat__label">peer-reviewed research publications</span></a>
-    <a class="ov-stat" href="/research/"><span class="ov-stat__value">500+</span><span class="ov-stat__label">academic citations</span></a>
-    <a class="ov-stat" href="https://github.com/OpenVidu" target="_blank" title="OpenVidu on GitHub (opens in a new tab)"><span class="ov-stat__value">3</span><span class="ov-stat__label">open source media stacks we contribute to: Kurento, LiveKit and mediasoup</span></a>
-  </div>
-</section>
-
 <section class="ov-wrap ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
   <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams that already picked a door.</h2>
   <div class="ov-stories__grid ov-stories__grid--three">
@@ -338,6 +330,15 @@ page_features:
       <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
       <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
     </figure>
+  </div>
+</section>
+
+<section class="ov-wrap ov-section ov-record" aria-label="Track record" data-sal="slide-up">
+  <div class="ov-record__grid">
+    <a class="ov-stat" href="/research/"><span class="ov-stat__value">12+</span><span class="ov-stat__label">years building WebRTC</span></a>
+    <a class="ov-stat" href="/research/"><span class="ov-stat__value">19</span><span class="ov-stat__label">peer-reviewed research publications</span></a>
+    <a class="ov-stat" href="/research/"><span class="ov-stat__value">500+</span><span class="ov-stat__label">academic citations</span></a>
+    <a class="ov-stat" href="https://github.com/OpenVidu" target="_blank" title="OpenVidu on GitHub (opens in a new tab)"><span class="ov-stat__value">3</span><span class="ov-stat__label">open source media stacks we contribute to: Kurento, LiveKit and mediasoup</span></a>
   </div>
 </section>
 

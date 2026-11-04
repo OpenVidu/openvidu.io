@@ -27,14 +27,6 @@ page_features:
 
 </section>
 
-<div class="ov-logos-row" data-sal="slide-up">
-<div class="ov-logos" role="group" aria-label="Teams running on OpenVidu">
-  <span class="ov-logos__label">Running on OpenVidu</span>
-  <a class="ov-logo ov-logo--img ov-logo--tall" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/" title="DynDevice: virtual classrooms built into an LMS"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></a>
-  <a class="ov-logo ov-logo--img" href="/blog/2026/09/15/novakid-live-english-lessons/" title="Novakid: 30 million live English lessons"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></a>
-  <a class="ov-logo ov-logo--img ov-logo--tall" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/" title="Dicode: private video calls for consulting"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></a>
-</div>
-</div>
 
 <section class="ov-section" data-sal="slide-up" markdown>
 
@@ -83,13 +75,35 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 </div>
 
-<div class="ov-figure" data-sal="slide-up" markdown>
-![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-dark.svg#only-dark){ .skip-gallery loading=lazy }
-![OpenVidu vs LiveKit](../assets/images/platform/home/openvidu-stack-light.svg#only-light){ .skip-gallery loading=lazy }
-/// caption
-OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.
-///
+<div class="ov-stack" role="img" aria-label="The OpenVidu stack: your app on top, OpenVidu Meet or OpenVidu Platform below it, the OpenVidu engine under both, running on AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises" data-sal="slide-up">
+<div class="ov-stack__row">
+<span aria-hidden="true" class="ov-stack__label">Your app</span>
+<div class="ov-stack__app"><span class="ov-stack__name">Your product</span><span class="ov-stack__sub">your UI, your users</span></div>
 </div>
+<div class="ov-stack__row">
+<span aria-hidden="true" class="ov-stack__label">Pick one</span>
+<div class="ov-stack__pick">
+<div class="ov-stack__product ov-stack__product--meet"><span class="ov-stack__name">Meet</span><span class="ov-stack__sub">finished app, embed it</span></div>
+<div class="ov-stack__product ov-stack__product--platform"><span class="ov-stack__name">Platform</span><span class="ov-stack__sub">SDKs, build it</span></div>
+</div>
+</div>
+<div class="ov-stack__row">
+<span aria-hidden="true" class="ov-stack__label">Engine</span>
+<div class="ov-stack__engine">
+<span class="ov-stack__name">OpenVidu</span>
+<span class="ov-stack__chips"><span class="ov-tag ov-tag--community">COMMUNITY</span><span class="ov-tag ov-tag--pro">PRO</span></span>
+<span class="ov-stack__note">LiveKit-compatible APIs · mediasoup media engine</span>
+</div>
+</div>
+<div class="ov-stack__row">
+<span aria-hidden="true" class="ov-stack__label">Your infra</span>
+<div class="ov-stack__infra">
+<span class="ov-stack__host">AWS</span><span class="ov-stack__host">Azure</span><span class="ov-stack__host">Google Cloud</span><span class="ov-stack__host">DigitalOcean</span><span class="ov-stack__host">Oracle Cloud</span><span class="ov-stack__host">On-premises</span>
+</div>
+</div>
+</div>
+
+<p class="ov-lead ov-lead--after" markdown="span">OpenVidu is a custom fork of LiveKit, 100% compatible in terms of its API and SDKs, with the power of mediasoup at its core. This and other integrations provide improved performance, new features and facilitate the deployment and management of your self-hosted, production-grade cluster.</p>
 
 </section>
 
@@ -274,28 +288,34 @@ A process that performs AI-driven operations to the media of a Room. It is a spe
 
 </section>
 
-<section class="ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
-  <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams already running on OpenVidu.</h2>
-  <div class="ov-stories__grid ov-stories__grid--three">
-    <figure class="ov-story">
-      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
-      <blockquote class="ov-story__text"><p>“With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Matteo Resconi</strong><span>IT &amp; Development Area Manager, Mega Italia Media</span></span><a class="ov-story__link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a></figcaption>
-    </figure>
-    <figure class="ov-story">
-      <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Live English lessons · EdTech</span>
-      <blockquote class="ov-story__text"><p>“OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Andrei Iakimov</strong><span>DevOps Lead, Novakid</span></span><a class="ov-story__link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a></figcaption>
-    </figure>
-    <figure class="ov-story">
-      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Private video calls · Consulting</span>
-      <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
-    </figure>
-  </div>
+<section class="ov-section" markdown>
+
+<h2 class="ov-h2" id="build-with-ai">Build it with your AI coding agent</h2>
+
+<p class="ov-lead" markdown="span">OpenVidu ships an **agent plugin** for Claude Code, Cursor, VS Code, GitHub Copilot, Codex and Kiro. Install it once and your agent reads the official documentation of the OpenVidu version your project runs, instead of guessing from its training data.</p>
+
+<div class="ov-grid ov-grid--3" data-sal="slide-up" markdown>
+<div class="ov-card" markdown>
+### Agent plugin
+
+One install brings the OpenVidu MCP server and skills into your coding agent, in the format of the Agent Plugins specification. [Install the plugin](./building-with-ai/agent-plugin.md).
+</div>
+<div class="ov-card" markdown>
+### Documentation MCP server
+
+Searches and reads the OpenVidu Meet and OpenVidu Platform documentation of every release from 3.4, with no account or API key. [Add the MCP server](./building-with-ai/mcp-servers.md).
+</div>
+<div class="ov-card" markdown>
+### Skills
+
+Procedures your agent follows, such as finding out which OpenVidu version, edition and product your project uses before it answers. [Browse the skills](./building-with-ai/skills.md).
+</div>
+</div>
+
+<div class="ov-actions" markdown>
+[Set up your coding agent](./building-with-ai/agent-plugin.md){ .ov-btn .ov-btn--ink title="Install the OpenVidu Agent Plugin" }
+</div>
+
 </section>
 
 <section class="ov-section" markdown>
@@ -339,7 +359,7 @@ OpenVidu commercial edition. It is a multi-server deployment with all the featur
 <div class="ov-closing__panel" markdown>
 <h2 class="ov-closing__title">Build your first app.</h2>
 <div class="ov-closing__actions" markdown>
-[Tutorials in 8 languages](./tutorials/application-server/index.md){ .ov-btn .ov-btn--lg .ov-btn--platform title="Build your first app with the OpenVidu Platform tutorials" }
+[Tutorials in your favorite programming language](./tutorials/application-server/index.md){ .ov-btn .ov-btn--lg .ov-btn--platform title="Build your first app with the OpenVidu Platform tutorials" }
 [Run OpenVidu locally](./self-hosting/local.md){ .ov-btn .ov-btn--lg .ov-btn--outline }
 </div>
 [Or talk to an expert](../support/index.md){ .ov-closing__link }

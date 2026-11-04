@@ -323,6 +323,37 @@
   box-shadow: 0 -10px 40px rgba(6, 42, 21, 0.25);
 }
 
+/* The Platform door shows the code above its actions, with the AI note between: the code
+   window sits inside the card with its full radius, and the actions take the card's bottom air */
+.ov-door--platform .ov-door__visual {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.ov-door--platform .ov-code {
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0, 20, 28, 0.4);
+}
+
+.ov-door--platform .ov-door__actions {
+  margin-top: auto;
+  padding-bottom: clamp(28px, 3.6vw, 44px);
+}
+
+.md-typeset .ov-landing .ov-door__ai {
+  margin: -6px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.md-typeset .ov-landing .ov-door__ai a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
 /* The code window keeps its dark glass in both schemes */
 .ov-code {
   border-radius: 14px 14px 0 0;
@@ -368,7 +399,7 @@
 .ov-landing .ov-compare {
   padding-top: 24px;
   text-align: center;
-  font-size: 15px;
+  font-size: 18px;
   color: var(--ov-muted);
 }
 
@@ -1048,38 +1079,6 @@
   max-width: 16ch;
 }
 
-.ov-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px 24px;
-  padding: 24px 28px;
-  border-radius: var(--ov-radius);
-  background: var(--ov-surface);
-  border: 1px solid var(--ov-border);
-}
-
-.ov-logos__label {
-  font-weight: 600;
-  color: var(--ov-muted);
-}
-
-.ov-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--ov-text);
-  opacity: 0.78;
-  font-family: var(--ov-display-font);
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-size: 19px;
-  line-height: 1;
-  letter-spacing: -0.015em;
-  white-space: nowrap;
-}
-
 
 .md-typeset .ov-landing figure.ov-story {
   display: flex;
@@ -1221,54 +1220,10 @@
 
 /* The toc extension appends its permalink "#" to every h2 with an id, raw HTML included. On a
    landing title with a tight measure the hidden anchor can wrap onto a line of its own, which
-   leaves an empty line of air under the title: these titles carry no permalink. */
-.md-typeset .ov-landing .ov-h2 > .headerlink {
+   leaves an empty line of air under the title: these titles carry no permalink, nor does the
+   hero title, which is the page itself and needs no anchor. */
+.md-typeset .ov-landing :is(.ov-h2, .ov-hero__title) > .headerlink {
   display: none;
-}
-
-/* The product landings: the customer logo row right under the hero (the three success
-   stories' logos, each linking to its story), the three story cards further down */
-.ov-logos-row {
-  padding-top: 40px;
-}
-
-.ov-logos-row .ov-logos {
-  justify-content: flex-start;
-  gap: 16px 28px;
-}
-
-/* The label takes its own line above the logos */
-.ov-logos-row .ov-logos__label {
-  flex-basis: 100%;
-}
-
-/* Logos as images sit on a white chip, as in the story cards, so they read the same in both
-   schemes; the link carries no underline, the hover lifts the opacity */
-.md-typeset .ov-landing a.ov-logo--img {
-  padding: 8px 16px;
-  border-radius: var(--ov-radius-xs);
-  background: #ffffff;
-  opacity: 1; /* the chip must stay white: the text logos' 0.78 would grey it on the dark ground */
-  text-decoration: none;
-  transition: transform 0.2s;
-}
-
-.md-typeset .ov-landing a.ov-logo--img:hover {
-  transform: translateY(-2px);
-}
-
-.md-typeset .ov-landing .ov-logo--img img {
-  display: block;
-  flex: none;
-  width: auto;
-  height: 36px;
-  max-width: 180px;
-  margin: 0;
-  object-fit: contain;
-}
-
-.md-typeset .ov-landing .ov-logo--tall img {
-  height: 48px;
 }
 
 /* Pick your door */
@@ -1373,20 +1328,6 @@
 
   .ov-plan__amount {
     font-size: 40px;
-  }
-
-  .ov-logos {
-    justify-content: flex-start;
-    gap: 18px 26px;
-    padding: 20px 22px;
-  }
-
-  .ov-logos__label {
-    flex-basis: 100%;
-  }
-
-  .ov-logo {
-    font-size: 18px;
   }
 
   
@@ -1961,6 +1902,12 @@
 
 .md-typeset .ov-landing .ov-cards .feature-icon.oracle-icon {
   background: #c74634;
+}
+
+/* Body text inside cards is justified; quotes, titles and tags are not */
+.md-typeset .ov-landing :is(.ov-card, .ov-door, .ov-showcase, .ov-provider, .ov-shared__item, .ov-topo__card, .ov-usecase, .ov-pick, .ov-plan, .ov-arch) :is(p, li, .ov-shared__text, .ov-provider__text, .ov-topo__text, .ov-arch__text) {
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* Edition cards: the tag sits above the heading */
