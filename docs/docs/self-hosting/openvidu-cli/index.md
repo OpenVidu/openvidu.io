@@ -10,9 +10,15 @@ The **OpenVidu CLI** (`ov`) installs and operates OpenVidu. One tool covers the 
 
 ```bash
 mkdir my-stack && cd my-stack
-ov stack deploy my-stack --cloud aws --aws-region us-east-1   # create the machine; it deploys OpenVidu itself
-ov stack status                                               # operate it from this directory
-ov stack destroy --delete-data                                # and take it down again
+ov stack deploy --environment local      # OpenVidu on this machine, with Docker
+ov stack status                          # operate it from this directory
+ov stack destroy --delete-data           # and take it down again
+```
+
+The same directory-based flow deploys to your servers or to a cloud, where one command creates the machines and they deploy OpenVidu themselves:
+
+```bash
+ov stack deploy my-stack --cloud aws --aws-region us-east-1 --mode auto
 ```
 
 !!! info "The OpenVidu CLI and the current installation methods"
@@ -45,7 +51,11 @@ The topologies are the ones described in [Deployment types](../deployment-types.
 | Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the cluster (`openvidu.yaml` and the service files, as Kubernetes objects), which any administrator can read |
 | Administrators | Each administrator's directory keeps a copy of the desired state; the node's files win | Every administrator reads and writes the same configuration in the cluster |
 
-A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop, in evaluation mode and with no license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes.
+A local stack runs on Docker Compose with either edition, so you can develop against OpenVidu PRO without Kubernetes on your laptop, in evaluation mode and with no license. Both editions are deployed, configured and operated with the commands described in this section. The [pricing page](../../../pricing.md) explains what the PRO license includes; to get one, [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"} (there is a 15-day free trial).
+
+## Already running OpenVidu 3.9.0?
+
+A deployment installed with `install.sh` (Single Node, Elastic or High Availability) becomes a stack `ov` operates with one command, on the same machines, keeping your configuration edits, certificates and data: see [Migrate a deployment installed by install.sh](operate/update.md#migrate-a-deployment-installed-by-installsh).
 
 ## How a deployment works
 
@@ -101,7 +111,7 @@ The data services (`redis`, `mongodb`, `minio`) come up because a module needs t
 
 ## Next steps
 
-1. [Install the CLI](install.md).
+1. [Install the CLI](install.md). Coming from `install.sh`? [Migrate your deployment](operate/update.md#migrate-a-deployment-installed-by-installsh).
 2. Deploy: [locally](deploy/local.md), [on premises](deploy/on-premises.md) or on [AWS](deploy/aws.md), [Azure](deploy/azure.md), [Google Cloud](deploy/gcp.md), [Oracle Cloud](deploy/oracle.md) or [DigitalOcean](deploy/digitalocean.md).
 3. Operate it: [status](operate/status.md), [configuration](operate/configuration.md), [modules](operate/modules.md), [scaling](operate/scaling.md), [updates](operate/update.md), [from another machine](operate/remote.md), [destroy](operate/destroy.md).
 4. When something goes wrong: [Troubleshooting](troubleshooting.md). Every command: [Command reference](reference.md).

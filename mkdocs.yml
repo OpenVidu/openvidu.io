@@ -143,7 +143,7 @@ nav:
               - docs/self-hosting/openvidu-cli/index.md
               - Install the CLI: docs/self-hosting/openvidu-cli/install.md
               - Deploy:
-                  - Local (development): docs/self-hosting/openvidu-cli/deploy/local.md
+                  - Local: docs/self-hosting/openvidu-cli/deploy/local.md
                   - On premises: docs/self-hosting/openvidu-cli/deploy/on-premises.md
                   - AWS: docs/self-hosting/openvidu-cli/deploy/aws.md
                   - Azure: docs/self-hosting/openvidu-cli/deploy/azure.md
@@ -156,7 +156,7 @@ nav:
                   - Modules and agents: docs/self-hosting/openvidu-cli/operate/modules.md
                   - Scaling: docs/self-hosting/openvidu-cli/operate/scaling.md
                   - Operate from another machine: docs/self-hosting/openvidu-cli/operate/remote.md
-                  - Update and migrate: docs/self-hosting/openvidu-cli/operate/update.md
+                  - Update, and migrate from install.sh: docs/self-hosting/openvidu-cli/operate/update.md
                   - Destroy: docs/self-hosting/openvidu-cli/operate/destroy.md
               - Command reference: docs/self-hosting/openvidu-cli/reference.md
               - Troubleshooting: docs/self-hosting/openvidu-cli/troubleshooting.md

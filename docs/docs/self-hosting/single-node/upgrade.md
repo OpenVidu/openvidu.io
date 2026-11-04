@@ -5,6 +5,10 @@ description: "Upgrade an OpenVidu Single Node deployment to a newer version, in 
 
 # Upgrade OpenVidu Single Node
 
+!!! tip "Moving to the OpenVidu CLI"
+
+    A deployment that `install.sh` 3.9.0 installed on your own servers can also be [migrated to the OpenVidu CLI](../openvidu-cli/operate/update.md#migrate-a-deployment-installed-by-installsh): one command converts it on the same machines, keeping its configuration edits, certificates and data, and from then on `ov stack update` updates it.
+
 There are two ways to upgrade an OpenVidu Single Node deployment:
 
 - **Redeploying** your cloud provider's template with the new version. This is what we recommend when you deployed OpenVidu from one of our templates. See [Redeploying from your cloud template](#redeploying-from-your-cloud-template).

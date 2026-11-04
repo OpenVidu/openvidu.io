@@ -8,7 +8,9 @@ page_features: [lazyvideo]
 
 A local stack is OpenVidu running on your own machine with **Docker Compose**, for development. `ov` materializes a real `docker compose` project you can inspect and edit, starts it, waits for it to be ready, and then operates it: list the published ports, grow and shrink the module selection without redeploying, read the logs, and take it down.
 
-<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-local-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
+
+The video shows a local deploy, its ports, adding OpenVidu Meet with a call in it, and the destroy. Click it to enlarge it; the player there can pause and seek.
 
 A local stack runs on Docker Compose with **either edition**, so you can develop against OpenVidu PRO without Kubernetes on your laptop. The [`ov` CLI](../install.md) is Linux-only for now.
 
@@ -61,60 +63,60 @@ Operate this deployment with `ov stack ...`.
 
 The deployment is a normal `docker compose` project inside the stack directory (`./labc` here, or `./openvidu-local-<name>` by default). Its files are real and yours to edit: the configuration is `config/openvidu.yaml` and the service files beside it, and `ov stack config` changes them for you ([Configuration](../operate/configuration.md)). After editing a file by hand, `ov stack deploy` applies it.
 
-=== "Deploy OpenVidu PRO locally"
+### OpenVidu PRO locally
 
-    `--edition pro` runs OpenVidu PRO on the same Docker Compose engine (not Kubernetes): the PRO media server, Egress, Ingress and the OpenVidu 2 compatibility API, locally. It needs **no license**:
+`--edition pro` runs OpenVidu PRO on the same Docker Compose engine (not Kubernetes): the PRO media server, Egress, Ingress and the OpenVidu 2 compatibility API, locally. It needs **no license**:
 
-    ```console
-    $ mkdir labp-stack && cd labp-stack
-    $ ov stack deploy labp --environment local --edition pro --local-dir ./labp --no-lan
-    materializing the deployment into ./labp and starting it (the first run downloads images)…
-    wrote spec to openvidu-stack.yml
-    ✓ docker compose up -d --remove-orphans
-    ✔ OpenVidu compose deployment started in ./labp
-    ✔ stack "labp" recorded in this directory
-      OpenVidu Meet API: http://localhost:9080
-    waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
-      ⏳ still starting: Meet, Dashboard (0s)
-      ⏳ still starting: Meet, Dashboard (2s)
-      ⏳ still starting: Meet, Dashboard (4s)
+```console
+$ mkdir labp-stack && cd labp-stack
+$ ov stack deploy labp --environment local --edition pro --local-dir ./labp --no-lan
+materializing the deployment into ./labp and starting it (the first run downloads images)…
+wrote spec to openvidu-stack.yml
+✓ docker compose up -d --remove-orphans
+✔ OpenVidu compose deployment started in ./labp
+✔ stack "labp" recorded in this directory
+  OpenVidu Meet API: http://localhost:9080
+waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
+  ⏳ still starting: Meet, Dashboard (0s)
+  ⏳ still starting: Meet, Dashboard (2s)
+  ⏳ still starting: Meet, Dashboard (4s)
 
-    ====================================================
-    🎉 OpenVidu is ready! 🎉
-    ====================================================
+====================================================
+🎉 OpenVidu is ready! 🎉
+====================================================
 
-    This deployment is for local development only. Do not use it in production.
+This deployment is for local development only. Do not use it in production.
 
-    ------------------ OpenVidu Meet -------------------
-      - Access from this machine:
-          - http://localhost:9080
-      - Credentials:
-          - Username: admin
-          - Password: admin
-          - API Key:  meet-api-key
+------------------ OpenVidu Meet -------------------
+  - Access from this machine:
+      - http://localhost:9080
+  - Credentials:
+      - Username: admin
+      - Password: admin
+      - API Key:  meet-api-key
 
-    ----------------- LiveKit Server API ---------------
-      - Access from this machine:
-          - http://localhost:7880
-          - ws://localhost:7880
-      - Credentials:
-          - API Key:    devkey
-          - API Secret: secret
+----------------- LiveKit Server API ---------------
+  - Access from this machine:
+      - http://localhost:7880
+      - ws://localhost:7880
+  - Credentials:
+      - API Key:    devkey
+      - API Secret: secret
 
-    ------------------- Other Services -----------------
-      - OpenVidu Dashboard:
-          - URL:      http://localhost:7880/dashboard
-          - Username: admin
-          - Password: admin
-      - MinIO Console:
-          - URL:      http://localhost:7880/minio-console
-          - Username: minioadmin
-          - Password: minioadmin
-    ====================================================
-    Operate this deployment with `ov stack ...`.
-    ```
+------------------- Other Services -----------------
+  - OpenVidu Dashboard:
+      - URL:      http://localhost:7880/dashboard
+      - Username: admin
+      - Password: admin
+  - MinIO Console:
+      - URL:      http://localhost:7880/minio-console
+      - Username: minioadmin
+      - Password: minioadmin
+====================================================
+Operate this deployment with `ov stack ...`.
+```
 
-    A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. It takes no license: `--openvidu-pro-license` is refused (exit `4`, `license (--openvidu-pro-license) cannot be set on a local stack`) before any container starts. Every module is on by default, `v2compatibility` included. A licensed deployment belongs on a server or a cloud: see the [pricing page](../../../../pricing.md) for what the license includes. The OpenVidu Dashboard of a local stack is the Community one, because the PRO dashboard checks the license when it starts.
+A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. It takes no license: `--openvidu-pro-license` is refused (exit `4`, `license (--openvidu-pro-license) cannot be set on a local stack`) before any container starts. Every module is on by default, `v2compatibility` included. A licensed deployment belongs on a server or a cloud: see the [pricing page](../../../../pricing.md) for what the license includes. The OpenVidu Dashboard of a local stack is the Community one, because the PRO dashboard checks the license when it starts.
 
 !!! warning "One local OpenVidu runs at a time"
 
@@ -229,6 +231,7 @@ From there you drive the project yourself: `docker compose config --services` is
 
 ## Next steps
 
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects at `http://localhost:7880` with the API key `devkey` and the secret `secret` of the banner.
 - [Deploy on your own servers](on-premises.md) or on [AWS](aws.md), [Azure](azure.md), [Google Cloud](gcp.md), [Oracle Cloud](oracle.md) or [DigitalOcean](digitalocean.md).
 - Operate it: [status](../operate/status.md), [configuration](../operate/configuration.md), [modules and agents](../operate/modules.md).
 - The full [command reference](../reference.md).

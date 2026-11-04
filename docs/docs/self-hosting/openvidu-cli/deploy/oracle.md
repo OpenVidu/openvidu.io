@@ -10,19 +10,19 @@ page_features: [lazyvideo]
 
 One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you ask for, applies it with **your own `terraform` and OCI API key**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
 ## Requirements
 
 - The [OpenVidu CLI](../install.md).
 - An Oracle Cloud tenancy and [**Terraform** :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/install){:target="_blank"} on your PATH: `ov` drives your own Terraform, so the provider plugins, the state and the audit trail are the ones that apply. With `--remote-state` the `oci` backend needs Terraform **1.12.0 or later**.
-- Your **OCI API key** configured (`~/.oci/config`), which Terraform and the `oci` reads use.
+- The [`oci` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm){:target="_blank"}, configured with your **OCI API key** (`~/.oci/config`), which Terraform uses too. `ov` reads the stack's secrets and Object Storage with it.
 - The tenancy, compartment and user OCIDs (`--oci-tenancy` / `--oci-compartment` / `--oci-user`, else `$OCI_TENANCY_OCID` / `$OCI_COMPARTMENT_OCID` / `$OCI_USER_OCID`) and a region (`--oci-region`, else `$OCI_REGION`, else your `oci` configuration's, else the template's `eu-frankfurt-1`).
 - Permission to create compute instances, a virtual cloud network with a subnet and network security group, an Object Storage bucket, a Customer Secret Key and (unless `--oci-vault`) a KMS vault for the stack's secrets.
 - **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks run under one user at a time.
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your tenancy.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your tenancy.
 
 The examples below take the OCIDs from the environment and reuse one vault:
 
@@ -101,7 +101,9 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha.mp4" preload="none" muted playsinline loop></video></a>
+    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-oracle-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
+
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -150,29 +152,31 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 Before it touches your tenancy, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29, OCIDs and the Object Storage namespace shown as placeholders):
 
-```text
-This is what will be done in your Oracle Cloud tenancy (region eu-madrid-1, compartment ocid1.compartment.oc1..<compartment>):
+??? example "The full plan (click to expand)"
 
-  # Terraform authenticates with your OCI API key (~/.oci/config); so does the state
-  # bucket's backend, which needs Terraform 1.12.0 or later.
-  # The template, rendered from the one embedded in this CLI for the single node topology,
-  # and its variables, written out for you to read (the variables file is 0600: it
-  # can carry secrets, such as Meet's seed credentials or a private key):
-  #   .openvidu/oracle/tf-oracle-openvidu-singlenode.tf
-  #   .openvidu/oracle/openvidu.auto.tfvars.json
-  terraform -chdir=.openvidu/oracle init -input=false -no-color -force-copy
-  # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
-  # OpenVidu CLI. `apply` returns when Terraform is done (about 3 minutes, then OpenVidu installs); OpenVidu comes up after.
-  terraform -chdir=.openvidu/oracle apply -auto-approve -input=false -no-color
+    ```text
+    This is what will be done in your Oracle Cloud tenancy (region eu-madrid-1, compartment ocid1.compartment.oc1..<compartment>):
 
-  # Read back where the stack is (sensitive outputs, such as a generated SSH key, show as
-  # <sensitive>: `terraform output -raw <name>` prints one).
-  terraform -chdir=.openvidu/oracle output
-  # What the stack published: URL and credentials, as secrets in the stack's vault, base64 (OPENVIDU_URL appears once
-  # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
-  VAULT="$(terraform -chdir=.openvidu/oracle output -raw vault_id)"
-  oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id $VAULT --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
-```
+      # Terraform authenticates with your OCI API key (~/.oci/config); so does the state
+      # bucket's backend, which needs Terraform 1.12.0 or later.
+      # The template, rendered from the one embedded in this CLI for the single node topology,
+      # and its variables, written out for you to read (the variables file is 0600: it
+      # can carry secrets, such as Meet's seed credentials or a private key):
+      #   .openvidu/oracle/tf-oracle-openvidu-singlenode.tf
+      #   .openvidu/oracle/openvidu.auto.tfvars.json
+      terraform -chdir=.openvidu/oracle init -input=false -no-color -force-copy
+      # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
+      # OpenVidu CLI. `apply` returns when Terraform is done (about 3 minutes, then OpenVidu installs); OpenVidu comes up after.
+      terraform -chdir=.openvidu/oracle apply -auto-approve -input=false -no-color
+
+      # Read back where the stack is (sensitive outputs, such as a generated SSH key, show as
+      # <sensitive>: `terraform output -raw <name>` prints one).
+      terraform -chdir=.openvidu/oracle output
+      # What the stack published: URL and credentials, as secrets in the stack's vault, base64 (OPENVIDU_URL appears once
+      # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
+      VAULT="$(terraform -chdir=.openvidu/oracle output -raw vault_id)"
+      oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id $VAULT --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
+    ```
 
 Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about three minutes, before OpenVidu is installed, so the wait is the real one: `ov` polls the vault for the stack's `OPENVIDU_URL` secret and checks the published URL answers Caddy's health check:
 
@@ -334,6 +338,7 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 
 ## Next steps
 
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
 - [Check the status](../operate/status.md) of the stack and run its health check.
 - [Change its configuration](../operate/configuration.md) or [its modules](../operate/modules.md).
 - [Operate it from another machine](../operate/remote.md), with `--remote-state`.

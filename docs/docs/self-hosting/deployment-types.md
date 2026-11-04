@@ -9,7 +9,7 @@ OpenVidu offers **user-friendly installers** that facilitate quick **on-premises
 
 !!! tip "New: the OpenVidu CLI"
 
-    Every deployment type on this page can also be deployed and operated with the [OpenVidu CLI](openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported.
+    Every deployment type on this page can also be deployed and operated with the [OpenVidu CLI](openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported. A deployment that `install.sh` 3.9.0 installed on your own servers can be [migrated to the CLI](openvidu-cli/operate/update.md#migrate-a-deployment-installed-by-installsh), keeping its configuration and data.
 
 There are different deployment options available, depending on your needs:
 

@@ -14,9 +14,9 @@ page_features: [lazyvideo]
 
 One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you ask for, applies it with **your own `terraform` and API token**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - The Spaces keys `$SPACES_ACCESS_KEY_ID` / `$SPACES_SECRET_ACCESS_KEY`: the deployment's object storage and (DigitalOcean has no managed secret store) its secret store are both a Space, written and read with these. `ov` uses the [`aws` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html){:target="_blank"} as the S3 client to read that Space back.
 - A region: `--do-region`, else `$DO_REGION`, else the template's default `ams3`.
 - Permission to create Droplets, a firewall, a Space with a bucket-scoped Spaces key, SSH keys and the stack's tag (and, for Elastic and High Availability, a VPC and a load balancer).
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your account.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your account.
 
 You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
@@ -92,7 +92,9 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha.mp4" preload="none" muted playsinline loop></video></a>
+    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-digitalocean-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
+
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -134,28 +136,30 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 Before it touches your account, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
 
-```text
-This is what will be done in your DigitalOcean account (region ams3, Spaces in ams3):
+??? example "The full plan (click to expand)"
 
-  # Terraform authenticates with the token in the variables file (from DIGITALOCEAN_TOKEN).
-  # The template, rendered from the one embedded in this CLI for the single node topology,
-  # and its variables, written out for you to read (the variables file is 0600: it
-  # can carry secrets, such as Meet's seed credentials or a private key):
-  #   .openvidu/digitalocean/tf-do-openvidu-singlenode.tf
-  #   .openvidu/digitalocean/openvidu.auto.tfvars.json
-  terraform -chdir=.openvidu/digitalocean init -input=false -no-color -force-copy
-  # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
-  # OpenVidu CLI. `apply` returns when Terraform is done (about 1 minute, then OpenVidu installs); OpenVidu comes up after.
-  terraform -chdir=.openvidu/digitalocean apply -auto-approve -input=false -no-color
+    ```text
+    This is what will be done in your DigitalOcean account (region ams3, Spaces in ams3):
 
-  # Read back where the stack is (sensitive outputs, such as a generated SSH key, show as
-  # <sensitive>: `terraform output -raw <name>` prints one).
-  terraform -chdir=.openvidu/digitalocean output
-  # What the stack published: URL and credentials in secrets.env, in the stack's Space
-  # (it appears once OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it). Read with the Spaces keys.
-  SPACE="$(terraform -chdir=.openvidu/digitalocean output -raw appDataBucket)"
-  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://$SPACE/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-```
+      # Terraform authenticates with the token in the variables file (from DIGITALOCEAN_TOKEN).
+      # The template, rendered from the one embedded in this CLI for the single node topology,
+      # and its variables, written out for you to read (the variables file is 0600: it
+      # can carry secrets, such as Meet's seed credentials or a private key):
+      #   .openvidu/digitalocean/tf-do-openvidu-singlenode.tf
+      #   .openvidu/digitalocean/openvidu.auto.tfvars.json
+      terraform -chdir=.openvidu/digitalocean init -input=false -no-color -force-copy
+      # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
+      # OpenVidu CLI. `apply` returns when Terraform is done (about 1 minute, then OpenVidu installs); OpenVidu comes up after.
+      terraform -chdir=.openvidu/digitalocean apply -auto-approve -input=false -no-color
+
+      # Read back where the stack is (sensitive outputs, such as a generated SSH key, show as
+      # <sensitive>: `terraform output -raw <name>` prints one).
+      terraform -chdir=.openvidu/digitalocean output
+      # What the stack published: URL and credentials in secrets.env, in the stack's Space
+      # (it appears once OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it). Read with the Spaces keys.
+      SPACE="$(terraform -chdir=.openvidu/digitalocean output -raw appDataBucket)"
+      env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://$SPACE/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+    ```
 
 Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about a minute, before OpenVidu is installed, so the wait is the real one: `ov` polls the Space for `secrets.env`, then checks the published URL answers Caddy's health check:
 
@@ -321,6 +325,7 @@ With `--delete-data` the Space the template created goes with the stack: the des
 
 ## Next steps
 
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
 - [Check the status](../operate/status.md) of the stack and run its health check.
 - [Change its configuration](../operate/configuration.md) or [its modules](../operate/modules.md).
 - [Operate it from another machine](../operate/remote.md), with `--remote-state`.

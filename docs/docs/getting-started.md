@@ -43,6 +43,10 @@ That is the whole shape of an OpenVidu application, and it does not change when 
 
 --8<-- "tutorials/run-openvidu-locally.md"
 
+!!! tip "Or with the OpenVidu CLI"
+
+    The [OpenVidu CLI](./self-hosting/openvidu-cli/deploy/local.md) runs the same local deployment with one command, `ov stack deploy --environment local`, and operates it with the same commands as a production one.
+
 Once it is up, open [http://localhost:7880](http://localhost:7880){:target="_blank"}. That page lists every service in the deployment along with its credentials, and it is where you will find:
 
 - **OpenVidu API** — `ws://localhost:7880`, the URL your client connects to.

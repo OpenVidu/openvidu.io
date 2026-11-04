@@ -7,7 +7,7 @@ description: "Four Master Nodes with autoscaling Media Nodes. Install, upgrade a
 
 !!! tip "New: the OpenVidu CLI"
 
-    OpenVidu High Availability can also be deployed and operated with the [OpenVidu CLI](../openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported.
+    OpenVidu High Availability can also be deployed and operated with the [OpenVidu CLI](../openvidu-cli/index.md): one command on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean. The installation methods described here are still supported. A deployment that `install.sh` 3.9.0 installed on your own servers can be [migrated to the CLI](../openvidu-cli/operate/update.md#migrate-a-deployment-installed-by-installsh), keeping its configuration and data.
 
 OpenVidu High Availability is part of the **PRO**{ .openvidu-tag .openvidu-pro-tag } edition of OpenVidu. You have the following deployment options:
 

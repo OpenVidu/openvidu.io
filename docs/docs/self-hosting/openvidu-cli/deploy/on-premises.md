@@ -20,7 +20,7 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
     - `selfsigned`: for a throwaway.
 - The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`. On PRO, also the cluster API on `6443/tcp` from your machine, and the node's own firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. Between the nodes of an Elastic or High Availability stack, `6443/tcp`, `10250/tcp` and `8472/udp` (and `2379-2380/tcp` between HA masters). See the port check below.
 - The [OpenVidu CLI](../install.md). Nothing else needs to be pre-installed on the servers: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
-- For PRO, your **OpenVidu Pro license** (`--openvidu-pro-license`).
+- For PRO, your **OpenVidu PRO license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial.
 
 ## Check the ports first
 
@@ -274,7 +274,9 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    High Availability is four masters plus one or more media nodes. Deploy the first master with `--deployment-type ha` (as the Elastic tab, with `ha`), then join three more as masters and the media nodes, from the same directory:
+    High Availability is four masters plus one or more media nodes. There are two ways to reach them: for a test cluster, point the domain at the first master, as below; in production, put a TCP load balancer in front of the masters ([In production: behind a load balancer](#in-production-behind-a-load-balancer)), so the stack survives losing any of them.
+
+    Deploy the first master with `--deployment-type ha` (as the Elastic tab, with `ha`), then join three more as masters and the media nodes, from the same directory:
 
     ```bash
     ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
@@ -351,7 +353,9 @@ An empty directory on your machine is the stack. Pick the edition and topology. 
 
     `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
 
-    **Behind a load balancer.** In production, put a load balancer in front of the four masters so the stack survives losing one:
+    #### In production: behind a load balancer
+
+    Put a load balancer in front of the four masters, so the stack survives losing one:
 
     - **TCP passthrough**, not TLS termination: `443/tcp` and `80/tcp` (and `1935/tcp` with RTMP ingest) to the four masters, with a TCP health check on `443`.
     - **The domain points at the load balancer.** Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: Let's Encrypt does not work behind a passthrough balancer.
@@ -390,7 +394,7 @@ A deploy to a node that already runs OpenVidu says so and keeps its data: it rew
   · The credentials in your spec are reused, so the kept data stays readable.
 ```
 
-A deploy from a directory whose spec already exists needs the mode named (`--mode auto` or `--mode assisted`).
+A remote deploy asks for the mode unless `--mode auto` or `--mode assisted` names it (with `--non-interactive`, it is required).
 
 ## Install on the server itself
 
@@ -417,6 +421,7 @@ ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 --ssh-key
 
 ## Next steps
 
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
 - [Check the status](../operate/status.md) and run the health check.
 - [Change the configuration](../operate/configuration.md) or [the modules](../operate/modules.md).
 - [Scale the media nodes](../operate/scaling.md) of an Elastic or HA stack.

@@ -14,9 +14,9 @@ page_features: [lazyvideo]
 
 One command creates the machines and OpenVidu comes up on them. `ov` renders the Bicep template embedded in its own binary for the edition and topology you ask for, applies it with **your own `az` CLI** (which compiles the Bicep), and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
 ## Requirements
 
@@ -25,7 +25,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - A location: `--azure-location`, else `$AZURE_LOCATION`. The resource group defaults to `openvidu-<name>-rg`, or `ov-<name>-rg` when the name is long (see [Names may be shortened](#destroy-the-stack)); `--azure-resource-group` names your own. With the name `openvidu` of these examples, the group is `ov-openvidu-rg` and the Key Vault `ov-openvidu-keyvault`.
 - Permission to create resource groups and everything in them: virtual machines, a static public IP, a network security group, a Storage Account with a Blob container, a Key Vault, and for Elastic and High Availability a load balancer and a scale set of media nodes.
 - **Quota for the VM size.** The template's default size is `Standard_D4s_v3` (4 vCPU, Standard DSv3 family). A low family quota in a location limits how many of these stacks run at once; raise it, or pick a smaller size with `--param instanceType=<size>`.
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your subscription.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your subscription.
 
 You need no key pair and no domain: the deploy generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
@@ -91,7 +91,9 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha.mp4" preload="none" muted playsinline loop></video></a>
+    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-azure-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
+
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -135,25 +137,27 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 Before it touches your subscription, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
 
-```text
-This is what will be done in your Azure subscription (location northeurope):
+??? example "The full plan (click to expand)"
 
-  # SSH access: the key pair for this stack, its public half handed to the template.
-  #   .openvidu/azure/openvidu-ce12a-key.pub
-  # The template, rendered from the one embedded in this CLI for the single node topology,
-  # written out for you to read (az compiles the Bicep itself):
-  #   .openvidu/azure/cf-openvidu-singlenode.bicep
-  az group create --name openvidu-ce12a-rg --location northeurope --only-show-errors -o none
-  # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
-  # OpenVidu CLI. The command returns when Azure is done (about 4 minutes); OpenVidu comes up after.
-  az deployment group create --resource-group openvidu-ce12a-rg --name openvidu-ce12a --template-file .openvidu/azure/cf-openvidu-singlenode.bicep --only-show-errors --query properties.provisioningState -o tsv --parameters certificateType=letsencrypt deployedBy=instance … stackName=openvidu-ce12a 'publicIpAddressObject={"newOrExistingOrNone":"new","name":"openvidu-ce12a-pip"}' adminSshKey="{\"sshPublicKey\":\"$(cat .openvidu/azure/openvidu-ce12a-key.pub)\"}"
+    ```text
+    This is what will be done in your Azure subscription (location northeurope):
 
-  # What the stack published: URL and credentials, as secrets in the Key Vault the deployment outputs (OPENVIDU_URL appears once
-  # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
-  az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs -o json
-  KV="$(az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs.sharedInfoKeyVault.value -o tsv)"
-  az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
-```
+      # SSH access: the key pair for this stack, its public half handed to the template.
+      #   .openvidu/azure/openvidu-ce12a-key.pub
+      # The template, rendered from the one embedded in this CLI for the single node topology,
+      # written out for you to read (az compiles the Bicep itself):
+      #   .openvidu/azure/cf-openvidu-singlenode.bicep
+      az group create --name openvidu-ce12a-rg --location northeurope --only-show-errors -o none
+      # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
+      # OpenVidu CLI. The command returns when Azure is done (about 4 minutes); OpenVidu comes up after.
+      az deployment group create --resource-group openvidu-ce12a-rg --name openvidu-ce12a --template-file .openvidu/azure/cf-openvidu-singlenode.bicep --only-show-errors --query properties.provisioningState -o tsv --parameters certificateType=letsencrypt deployedBy=instance … stackName=openvidu-ce12a 'publicIpAddressObject={"newOrExistingOrNone":"new","name":"openvidu-ce12a-pip"}' adminSshKey="{\"sshPublicKey\":\"$(cat .openvidu/azure/openvidu-ce12a-key.pub)\"}"
+
+      # What the stack published: URL and credentials, as secrets in the Key Vault the deployment outputs (OPENVIDU_URL appears once
+      # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
+      az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs -o json
+      KV="$(az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs.sharedInfoKeyVault.value -o tsv)"
+      az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
+    ```
 
 Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then it runs them, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so the wait is the real one: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks the published URL answers Caddy's health check:
 
@@ -326,6 +330,7 @@ With `--delete-data` the storage account goes with the resource group, recording
 
 ## Next steps
 
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
 - [Check the status](../operate/status.md) of the stack and run its health check.
 - [Change its configuration](../operate/configuration.md) or [its modules](../operate/modules.md).
 - [Operate it from another machine](../operate/remote.md), with `--remote-state`.

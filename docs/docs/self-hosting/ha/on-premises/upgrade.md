@@ -11,6 +11,10 @@ description: "Upgrade an existing OpenVidu High Availability deployment on your 
 
 </div>
 
+!!! tip "Moving to the OpenVidu CLI"
+
+    A deployment that `install.sh` 3.9.0 installed on your own servers can also be [migrated to the OpenVidu CLI](../../openvidu-cli/operate/update.md#migrate-a-deployment-installed-by-installsh): one command converts it on the same machines, keeping its configuration edits, certificates and data, and from then on `ov stack update` updates it.
+
 OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
 
 ## Upgrading OpenVidu High Availability

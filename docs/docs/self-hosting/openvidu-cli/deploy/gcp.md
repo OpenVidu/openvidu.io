@@ -14,9 +14,9 @@ page_features: [lazyvideo]
 
 One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the edition and topology you ask for, applies it with **your own `terraform` and `gcloud` credentials**, and the machines deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ce-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
 
-The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`.
+The video shows a Single Node COMMUNITY deploy from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
 ## Requirements
 
@@ -25,7 +25,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - The [`gcloud` CLI :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.google.com/sdk/docs/install){:target="_blank"} with **application-default credentials** (`gcloud auth application-default login`), which Terraform and the secret reads use.
 - A project id: `--gcp-project`, else `$GCP_PROJECT_ID`, else what `gcloud` has configured. `--gcp-region` / `--gcp-zone` default to the template's `europe-west2` / `europe-west2-b`.
 - Permission to create Compute Engine instances, a static address, firewall rules, a Cloud Storage bucket, service accounts and Secret Manager secrets. The template also **mints a service-account key** (see the [warning below](#destroy-the-stack)).
-- For OpenVidu PRO, your **license** (`--openvidu-pro-license`). The deploy checks it is there before it touches your project.
+- For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks it is there before it touches your project.
 
 You need no key pair and no domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives a `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything real.
 
@@ -91,7 +91,9 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha.mp4" preload="none" muted playsinline loop></video></a>
+    <a class="glightbox" href="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha.mp4" poster="/assets/videos/platform/self-hosting/openvidu-cli/deploy-gcp-ha-poster.jpg" style="aspect-ratio: 16 / 9; width: 100%;" preload="none" muted playsinline loop></video></a>
+
+    The video shows a High Availability PRO deploy with the default certificate, from an empty directory to `ov stack destroy`. Click it to enlarge it; the player there can pause and seek.
 
     ```bash
     mkdir openvidu && cd openvidu
@@ -133,27 +135,29 @@ An empty directory is the stack. Choose the edition and topology. The commands n
 
 Before it touches your project, the deploy prints exactly what it will run and asks for confirmation (`-y` answers it in advance; the list is still printed). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
 
-```text
-This is what will be done in your Google Cloud project my-project (region europe-west2, zone europe-west2-b):
+??? example "The full plan (click to expand)"
 
-  # The template, rendered from the one embedded in this CLI for the single node topology,
-  # and its variables, written out for you to read (the variables file is 0600: it
-  # can carry secrets, such as Meet's seed credentials or a private key):
-  #   .openvidu/gcp/tf-gpc-openvidu-singlenode.tf
-  #   .openvidu/gcp/openvidu.auto.tfvars.json
-  terraform -chdir=.openvidu/gcp init -input=false -no-color -force-copy
-  # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
-  # OpenVidu CLI. `apply` returns when Terraform is done (about 2 minutes, then OpenVidu installs); OpenVidu comes up after.
-  terraform -chdir=.openvidu/gcp apply -auto-approve -input=false -no-color
+    ```text
+    This is what will be done in your Google Cloud project my-project (region europe-west2, zone europe-west2-b):
 
-  # Read back where the stack is (sensitive outputs, such as a generated SSH key, show as
-  # <sensitive>: `terraform output -raw <name>` prints one).
-  terraform -chdir=.openvidu/gcp output
-  # What the stack published: URL and credentials, as Secret Manager secrets under the prefix the stack outputs (OPENVIDU_URL appears once
-  # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
-  PREFIX="$(terraform -chdir=.openvidu/gcp output -raw secret_prefix)"
-  gcloud secrets versions access latest --secret=${PREFIX}OPENVIDU_URL --project=my-project
-```
+      # The template, rendered from the one embedded in this CLI for the single node topology,
+      # and its variables, written out for you to read (the variables file is 0600: it
+      # can carry secrets, such as Meet's seed credentials or a private key):
+      #   .openvidu/gcp/tf-gpc-openvidu-singlenode.tf
+      #   .openvidu/gcp/openvidu.auto.tfvars.json
+      terraform -chdir=.openvidu/gcp init -input=false -no-color -force-copy
+      # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
+      # OpenVidu CLI. `apply` returns when Terraform is done (about 2 minutes, then OpenVidu installs); OpenVidu comes up after.
+      terraform -chdir=.openvidu/gcp apply -auto-approve -input=false -no-color
+
+      # Read back where the stack is (sensitive outputs, such as a generated SSH key, show as
+      # <sensitive>: `terraform output -raw <name>` prints one).
+      terraform -chdir=.openvidu/gcp output
+      # What the stack published: URL and credentials, as Secret Manager secrets under the prefix the stack outputs (OPENVIDU_URL appears once
+      # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
+      PREFIX="$(terraform -chdir=.openvidu/gcp output -raw secret_prefix)"
+      gcloud secrets versions access latest --secret=${PREFIX}OPENVIDU_URL --project=my-project
+    ```
 
 Then it runs them, waits for OpenVidu and registers the stack. The `apply` returns in about two minutes, before OpenVidu is installed, so the wait is the real one: `ov` polls Secret Manager for the stack's `OPENVIDU_URL` secret, then checks the published URL answers Caddy's health check:
 
@@ -314,6 +318,7 @@ This is what will be deleted from your Google Cloud project my-project:
 
 ## Next steps
 
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
 - [Check the status](../operate/status.md) of the stack and run its health check.
 - [Change its configuration](../operate/configuration.md) or [its modules](../operate/modules.md).
 - [Operate it from another machine](../operate/remote.md), with `--remote-state`.
