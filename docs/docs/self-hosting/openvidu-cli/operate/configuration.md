@@ -148,18 +148,23 @@ Keep the `.openvidu/` directory private: it holds the stack's state and secrets.
 
 ## Render the configuration tree
 
-On a Community stack, `ov stack render` turns `config/` (with its `${openvidu.*}` placeholders) into the runtime files the services mount, under `data/runtime/`, and generates `docker-compose.agents.yaml` from the agent definitions. It is what the systemd unit runs before every start, so editing a file under `config/` and restarting applies it:
+On a Community stack, `ov stack render` turns `config/` into the files the services mount, under `data/runtime/`: every file with its placeholders expanded from `config/openvidu.yaml`, plus `data/runtime/compose.env` for Compose and `docker-compose.agents.yaml` from the agents' definitions. The systemd unit runs it before every start, so editing a file under `config/` and `sudo systemctl restart openvidu` applies it. If any file fails to render (a required value left blank, an agent without its image), nothing is written and the error names the file and the key (exit `4`).
+
+After a change of the Redis password in `config/openvidu.yaml`:
 
 ```console
 $ sudo ov stack render --this-node
-FILE                                                 SERVICE             ACTION
-data/runtime/config/openvidu/livekit.yaml            ov-livekit-server   update
-data/runtime/config/redis/redis.env                  redis               update
+FILE                                                                       SERVICE                   ACTION
+data/runtime/compose.env                                                   -                         update
+data/runtime/config/egress/egress.yaml                                     ov-egress                 update
+data/runtime/config/ingress/ingress.yaml                                   ov-ingress                update
+data/runtime/config/openvidu/livekit.yaml                                  ov-livekit-server         update
+data/runtime/config/redis/redis.env                                        redis                     update
 …
-modules: egress,ingress,dashboard — 0 created, 4 updated, 8 unchanged, 0 removed
+modules: egress,ingress,dashboard — 0 created, 5 updated, 8 unchanged, 0 removed
 ```
 
-The files updated are exactly those that read the changed value — the same services `config set` recreates. `--dry-run` reports what would be written and writes nothing. A PRO stack has nothing to render (its truth is the Helm release); a local stack renders only `docker-compose.agents.yaml`.
+The files updated are those that read the changed value, which are the services `config set` recreates. `--dry-run` reports what would be written and writes nothing. A PRO stack has nothing to render here: each pod renders its own documents when it starts. A local stack renders its directory's `config/` the same way.
 
 ## Next steps
 

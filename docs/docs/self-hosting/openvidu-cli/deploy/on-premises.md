@@ -6,7 +6,7 @@ page_features: [lazyvideo]
 
 # Deploy OpenVidu on premises with the OpenVidu CLI
 
-Deploy OpenVidu on your own Linux servers. `ov` installs and starts the stack over SSH or on the machine it runs on, generating every credential, and leaves a copy of itself on each node so the stack can be operated from there too. Everything is then operated from the stack's directory on your machine.
+Deploy OpenVidu on your own Linux servers. `ov` installs and starts the stack over SSH or on the machine it runs on, generating every credential, and leaves a copy of itself on each node so the stack can be operated from there too, as well as from the stack's directory on your machine.
 
 <!-- VIDEO: deploy-on-premises.mp4 (docs-video) -->
 
@@ -70,7 +70,7 @@ The fix is printed, never run: `ov` reads firewalls, it does not change them. He
 
 ## Deploy
 
-An empty directory on your machine is the stack. Pick the edition and topology:
+An empty directory on your machine is the stack. Pick the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -122,7 +122,6 @@ An empty directory on your machine is the stack. Pick the edition and topology:
 
     Plain Docker Compose and a systemd unit: no installer image, no operator. The ports are checked before anything is installed, and every credential is generated and **pinned** into the spec, so a later deploy reuses them instead of locking the stack out of its data.
 
-    These examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
