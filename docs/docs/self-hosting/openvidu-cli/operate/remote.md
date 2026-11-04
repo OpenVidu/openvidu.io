@@ -41,7 +41,7 @@ Try it:
 
 If the node has lost its desired state, the import rebuilds it from the files `ov` deployed under `/opt/openvidu` and says so (`note: the stack published no desired state; rebuilt it from the files …`).
 
-## Community: a single-administrator product vs PRO
+## One administrator or a team: COMMUNITY and PRO
 
 The import behaves differently per edition, because the two store their configuration in different places (see [Configuration](configuration.md#where-the-configuration-lives)).
 
