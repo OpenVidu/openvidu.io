@@ -6,25 +6,25 @@ page_features: [lazyvideo]
 
 # Deploy OpenVidu on premises with the OpenVidu CLI
 
-Deploy OpenVidu on your own Linux servers. `ov` installs and starts the stack over SSH or on the machine it runs on, generating every credential, and leaves a copy of itself on each node so the stack can be operated from there too, as well as from the stack's directory on your machine.
+Deploy OpenVidu on your own Linux servers. `ov` installs and starts the stack over SSH, or on the machine it runs on, and generates every credential. It also leaves a copy of itself on each node, so you can operate the stack from the node as well as from the stack's directory on your machine.
 
-Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the whole decision**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. Elastic and High Availability grow past one machine, so they are PRO only.
+Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the only decision you make**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. Elastic and High Availability span more than one machine, so they require PRO.
 
 ## Requirements
 
-- One or more **Linux servers** (Ubuntu recommended), each with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size them like the cloud templates do by default: 4 vCPU and 8 GB per node.
+- One or more **Linux servers** (Ubuntu recommended), each with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size them as the cloud templates do by default: 4 vCPU and 8 GB per node.
 - A sudo-capable user on each server, reachable over SSH (and, for Elastic and High Availability, the servers reachable from each other on their private addresses).
 - A **domain** pointing at the server (at a load balancer in front of the masters, for HA in production), and a **certificate type**:
-    - `letsencrypt` or `zerossl`: a certificate obtained automatically (needs port 80 reachable; not behind the load balancer of a High Availability stack).
+    - `letsencrypt` or `zerossl`: a certificate obtained automatically (requires port 80 to be reachable; does not work behind the load balancer of a High Availability stack).
     - `owncert`: bring your own, with `--owncert-public-key` and `--owncert-private-key`.
-    - `selfsigned`: for a throwaway.
-- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`. On PRO, also the cluster API on `6443/tcp` from your machine, and the node's own firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. Between the nodes of an Elastic or High Availability stack, `6443/tcp`, `10250/tcp` and `8472/udp` (and `2379-2380/tcp` between HA masters). See the port check below.
+    - `selfsigned`: for a throwaway deployment.
+- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended: `443/udp`, `7881/tcp` and the media range `50000-60000/udp` (without them, media is relayed over TURN on 443, at a cost in latency and quality), and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`. On PRO, also the cluster API on `6443/tcp` from your machine, and the node's own firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. Between the nodes of an Elastic or High Availability stack, `6443/tcp`, `10250/tcp` and `8472/udp` (and `2379-2380/tcp` between HA masters). See the port check below.
 - The [OpenVidu CLI](../install.md). Nothing else needs to be pre-installed on the servers: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
 - For PRO, your **OpenVidu PRO license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial.
 
 ## Check the ports first
 
-The commonest way an on-premises OpenVidu "does not work" is a stack that comes up perfectly and has no media: every service healthy, and UDP never reaching the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. That verifies TCP *and* UDP, which dialing a running stack cannot do.
+The most common reason an on-premises OpenVidu "does not work" is a stack that comes up perfectly but has no media: every service is healthy, yet UDP never reaches the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. This verifies both TCP *and* UDP, which probing a running stack cannot do.
 
 ```console
 $ ov stack check-ports --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
@@ -65,11 +65,11 @@ Recommended
 …
 ```
 
-The fix is printed, never run: `ov` reads firewalls, it does not change them. Here only recommended ports fail, so the check warns and exits `0`; a required port that fails exits `8`. The report goes on to check the DNS name and that the node reaches the registries the deploy pulls from. The same check runs automatically before every remote deploy (`--skip-port-check` turns it off). See [Status and health checks](../operate/status.md#check-the-ports) for the full report and its options.
+The fix is printed, never run: `ov` reads firewalls, it does not change them. Here only recommended ports fail, so the check warns and exits `0`; if a required port fails, it exits `8`. The report goes on to check the DNS name and that the node reaches the registries the deploy pulls from. The same check runs automatically before every remote deploy (`--skip-port-check` turns it off). See [Status and health checks](../operate/status.md#check-the-ports) for the full report and its options.
 
 ## Deploy
 
-Each stack lives in its own empty directory on your machine. Choose the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway.
+Each stack lives in its own empty directory on your machine. Choose the edition and topology. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway deployment.
 
 === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
@@ -191,7 +191,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
 
 === "Elastic **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    An Elastic stack is **deployed on one machine** (the master) with `--deployment-type elastic`, exactly as a Single Node PRO; every media node then **joins** it.
+    An Elastic stack is **deployed on one machine** (the master) with `--deployment-type elastic`, exactly like a Single Node PRO; every media node then **joins** it.
 
     ```console
     $ mkdir ov-elastic && cd ov-elastic
@@ -270,13 +270,13 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
     ✔ 172.30.0.102 joined the stack as a media node.
     ```
 
-    `ov` reads the join address and token from the master over SSH and logs into the new server with the same user, key and port (the token never appears on screen). Before installing anything it checks the ports the new node needs, from your machine and from the masters: a required internal port that does not arrive stops the join with exit `6` and the `ufw` rule to add on each side. Each media node is one more `ov stack join --ssh`. See [Scaling](../operate/scaling.md).
+    `ov` reads the join address and token from the master over SSH and logs in to the new server with the same user, key and port (the token never appears on screen). Before installing anything it checks the ports the new node needs, from your machine and from the masters: if a required internal port is not reachable, the join stops with exit `6` and prints the `ufw` rule to add on each side. Each media node is one more `ov stack join --ssh`. See [Scaling](../operate/scaling.md).
 
 === "High Availability **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    High Availability is four masters plus one or more media nodes. There are two ways to reach them: for a test cluster, point the domain at the first master, as below; in production, put a TCP load balancer in front of the masters ([In production: behind a load balancer](#in-production-behind-a-load-balancer)), so the stack survives losing any of them.
+    High Availability is four masters plus one or more media nodes. There are two ways to expose them. For a test cluster, point the domain at the first master, as below. In production, put a TCP load balancer in front of the masters ([In production: behind a load balancer](#in-production-behind-a-load-balancer)), so the stack survives the loss of any of them.
 
-    Deploy the first master with `--deployment-type ha` (as the Elastic tab, with `ha`), then join three more as masters and the media nodes, from the same directory:
+    Deploy the first master with `--deployment-type ha` (as in the Elastic tab, but with `ha`), then join three more masters and the media nodes from the same directory:
 
     ```bash
     ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
@@ -341,7 +341,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
     ✔ 172.30.0.111 joined the stack as a master node.
     ```
 
-    As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir spread one replica per master. The first wait after the joins takes several minutes while the replicas settle:
+    As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir place one replica on each master. The first wait after the joins takes several minutes while the replicas settle:
 
     ```console
     $ ov stack status --wait
@@ -351,15 +351,15 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
     ✔ ha is ready (https://172-30-0-110.openvidu-local.dev)
     ```
 
-    `join` refuses what the stack has no place for before touching any server: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
+    Before touching any server, `join` rejects any node the stack has no place for: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Scaling](../operate/scaling.md).
 
     #### In production: behind a load balancer
 
     Put a load balancer in front of the four masters, so the stack survives losing one:
 
     - **TCP passthrough**, not TLS termination: `443/tcp`, `80/tcp` and `6443/tcp` (the cluster API, at the address `--lb-host` names), and `1935/tcp` with RTMP ingest, to the four masters, with a TCP health check on `443`.
-    - **The domain points at the load balancer.** Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: Let's Encrypt does not work behind a passthrough balancer.
-    - **Deploy the first master with the load balancer's domain and `--skip-port-check`.** Its port check probes the domain, and nothing behind the load balancer is healthy yet. Open the ports listed in Requirements yourself before you skip it:
+    - **The domain points at the load balancer.** Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: Let's Encrypt does not work behind a passthrough load balancer.
+    - **Deploy the first master with the load balancer's domain and `--skip-port-check`.** Its port check probes the domain, and nothing behind the load balancer is healthy yet. Before skipping the check, open the ports listed in [Requirements](#requirements) yourself:
 
         ```bash
         ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
@@ -377,11 +377,11 @@ Each stack lives in its own empty directory on your machine. Choose the edition 
 
     - When the nodes reach each other on a private network and you reach them on public addresses, the join's port check reports the internal ports (`6443`, `8472`, `2379-2380`, `10250`) as closed although they are open between the nodes. Open them between the nodes, then join the masters and the media nodes with `--skip-port-check`.
 
-    Expect the stack to be ready about 10 minutes after the last join: wait for it with `ov stack status --wait --wait-timeout 20m`, so the wait does not give up first.
+    Expect the stack to be ready about 10 minutes after the last join: wait for it with `ov stack status --wait --wait-timeout 20m`, so the wait does not time out before the stack is ready.
 
 ### The port preflight
 
-Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them, and prints a table of them (`checking the inbound ports before installing anything…` in the output above). A **required** port closed (or, on PRO, the node's firewall dropping the pod and service networks) stops the deploy with **exit code 6** and the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` skips it by construction (reachability cannot be verified from the node itself).
+Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them, and prints a table of them (`checking the inbound ports before installing anything…` in the output above). If a **required** port is closed (or, on PRO, the node's firewall drops the pod and service networks), the deploy stops with **exit code 6** and prints the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` never runs it (reachability cannot be verified from the node itself).
 
 ### Deploying again
 
@@ -394,11 +394,11 @@ A deploy to a node that already runs OpenVidu says so and keeps its data: it rew
   · The credentials in your spec are reused, so the kept data stays readable.
 ```
 
-A remote deploy asks for the mode unless `--mode auto` or `--mode assisted` names it (with `--non-interactive`, it is required).
+A remote deploy asks which mode to use unless you pass `--mode auto` or `--mode assisted`; with `--non-interactive`, `--mode` is required.
 
 ## Install on the server itself
 
-Instead of `--ssh`, put `ov` on the server, log in, and deploy with **`--this-node`** (*the machine I am running on*). The CLI writes the deployment there and escalates with `sudo`, so a user with passwordless sudo is enough. The stack of `--this-node` lives in `/opt/openvidu/stack`:
+Instead of `--ssh`, put `ov` on the server, log in, and deploy with **`--this-node`** (*the machine I am running on*). The CLI writes the deployment there and escalates with `sudo`, so a user with passwordless sudo is enough. A `--this-node` stack lives in `/opt/openvidu/stack`:
 
 ```console
 $ sudo ov stack deploy web --environment on-premises --this-node \
@@ -408,7 +408,7 @@ $ sudo ov stack deploy web --environment on-premises --this-node \
 ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
 ```
 
-Either way the server ends up operable from itself: a deploy from your laptop hands the node the CLI and its own stack directory on the way out, so `sudo ov stack status` works there with no directory to name.
+Either way the server ends up operable from itself: a deploy from your laptop, as its last step, leaves the CLI and a stack directory of its own on the node, so `sudo ov stack status` works there with no directory to name.
 
 ## Review the commands first: assisted mode
 

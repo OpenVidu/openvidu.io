@@ -5,11 +5,11 @@ description: "Check an OpenVidu stack with the OpenVidu CLI: live status, descri
 
 # Status and health checks
 
-Every command on this page resolves **the stack in the current directory** (or the one `--dir` points at), with no name and no flags. They work the same whether the stack runs locally, on your servers or on a cloud, except `check-ports`, which needs SSH access to a node.
+Every command on this page operates on **the stack in the current directory** (or the one `--dir` points at), with no name and no flags. They work the same whether the stack runs locally, on your servers or on a cloud, except `check-ports`, which needs SSH access to a node.
 
 ## Status
 
-`ov stack status` prints the state of each node or service. On a Community server it is the nodes:
+`ov stack status` prints the state of each node or service. On a Community server, it shows the nodes:
 
 ```console
 $ ov stack status
@@ -17,7 +17,7 @@ HOST          ROLE     STATE
 172.30.0.96   single   active
 ```
 
-On a local stack it is this machine:
+On a local stack, it shows this machine:
 
 ```console
 $ ov stack status
@@ -27,7 +27,7 @@ localhost   local   running
 
 On a local stack, `ov stack status --wait` prints the same banner as the deploy, with the URLs and credentials, once everything answers.
 
-On a PRO stack (Kubernetes) it is the workloads:
+On a PRO stack (Kubernetes), it shows the workloads:
 
 ```console
 $ ov stack status
@@ -44,7 +44,7 @@ ov-meet-cbbf88b85-kkrvx            1/1    Running
 
 ### Wait until ready
 
-`--wait` blocks until the stack is ready. On a Community server it probes the node itself (Caddy, the media server and each enabled module's web) over the stack's own transport, so no DNS or route from your machine is needed:
+`--wait` blocks until the stack is ready. On a Community server it probes the node itself (Caddy, the media server and each enabled module's web endpoint) over the stack's own transport, so no DNS or route from your machine is needed:
 
 ```console
 $ ov stack status --wait
@@ -54,7 +54,7 @@ waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deploy
 ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet)
 ```
 
-On an Elastic or High Availability stack it waits until, at the same time, the stack's URL answers and every node and service is ready, counting them by tier and naming the pods that are still restarting:
+On an Elastic or High Availability stack it waits until both the stack's URL answers and every node and service is ready, counting them by tier and naming the pods that are still restarting:
 
 ```console
 $ ov stack status --wait
@@ -65,7 +65,7 @@ waiting for https://172-30-0-101.openvidu-local.dev to be ready (Ctrl-C to stop)
 ✔ el is ready (https://172-30-0-101.openvidu-local.dev)
 ```
 
-When it gives up, it names the pods still starting. Right after a first PRO deploy, while the nodes pull the images and some pods restart before they settle, the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`.
+If it times out, it lists the pods that are still starting. Right after a first PRO deploy, while the nodes pull the images and some pods restart before they settle, the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`.
 
 ## Describe
 
@@ -125,7 +125,7 @@ all 2 check(s) passed
 
 ## Logs
 
-`ov stack logs` fetches the logs of the whole stack, one interleaved stream; `--since` bounds the window and `-f` follows them live. On a server they come from the node's journal, so `--tail N` is the last N lines of the whole stack (`--since` takes a journal value such as `'1 hour ago'`); on a local stack `--tail` is per service, and on PRO it is capped at 200 (`--since` takes a duration such as `1h`):
+`ov stack logs` fetches the logs of the whole stack as one interleaved stream; `--since` limits the time window and `-f` follows them live. On a server they come from the node's journal, so `--tail N` is the last N lines of the whole stack (`--since` takes a journal value such as `'1 hour ago'`); on a local stack `--tail` is per service, and on PRO it is capped at 200 (`--since` takes a duration such as `1h`):
 
 ```console
 $ ov stack logs --tail 8
@@ -140,9 +140,9 @@ Per-service logs through `ov` are not available yet. Read one service's logs wit
 
 ## Check the ports
 
-`ov stack check-ports` verifies that the inbound ports a stack needs actually arrive at a server or a cloud machine, so it needs SSH access to the node: a stack deployed over SSH, or a Community cloud stack. A local stack has no firewall to check, and a PRO cloud stack registered through its kubeconfig has no SSH access recorded; both exit with code `2` (the local one pointing at [`ov stack ports`](#list-the-published-ports)). It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified, which dialing a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
+`ov stack check-ports` verifies that the inbound ports a stack needs actually reach a server or a cloud machine, so it needs SSH access to the node: a stack deployed over SSH, or a Community cloud stack. A local stack has no firewall to check, and a PRO cloud stack registered through its kubeconfig has no SSH access recorded; both exit with code `2` (for a local stack, the message points to [`ov stack ports`](#list-the-published-ports)). It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified, which probing a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
 
-Against a **stopped or not-yet-deployed** node it gives the complete check. `ov` holds the ports with a temporary listener on the node (the node's own `python3`, or `ov` itself when the node has none) and probes them from your machine:
+Against a **stopped or not-yet-deployed** node, it runs the complete check. `ov` holds the ports with a temporary listener on the node (the node's own `python3`, or `ov` itself when the node has none) and probes them from your machine:
 
 ```console
 $ ov stack check-ports
@@ -171,7 +171,7 @@ Recommended
 …
 ```
 
-Against a **running** stack it can only dial the ports, and it says so instead of pretending: an open UDP port and a dropped one look the same while the stack holds them, and the media range is bound only for connected participants:
+Against a **running** stack, it can only connect to the ports, and it says so rather than reporting a false result: an open UDP port and a dropped one look the same while the stack holds them, and the media range is bound only for connected participants:
 
 ```console
 $ ov stack check-ports
@@ -213,11 +213,11 @@ To re-verify the media path end to end, take the ports back for a few seconds:
 ov stack stop && ov stack check-ports && ov stack start
 ```
 
-It exits `8` when a required port fails (a recommended one is a warning, exit `0`), and never changes a firewall: the fix is printed for you to run. Besides the ports it checks that the domain resolves to the node and that the node reaches the image registries. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `--ssh [user@]host` to check a machine before deploying to it, `-o json` for every verdict.
+It exits `8` when a required port fails (a recommended one is a warning, exit `0`), and never changes a firewall: the fix is printed for you to run. Besides the ports, it also checks that the domain resolves to the node and that the node reaches the image registries. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `--ssh [user@]host` to check a machine before deploying to it, `-o json` for every verdict.
 
 ## List the published ports
 
-`ov stack ports` is for a local stack (elsewhere it exits `2`; use `check-ports` on a server). It reads the host ports the deployment publishes live from Docker, grouped by what each one is for:
+`ov stack ports` is for a local stack (elsewhere it exits `2`; use `check-ports` on a server). It reads, live from Docker, the host ports the deployment publishes, grouped by what each one is for:
 
 ```console
 $ ov stack ports
@@ -241,7 +241,7 @@ $ ov stack restart
 restart completed on 1 node(s)
 ```
 
-`--dry-run` prints the commands and runs none. Restarting a single service is not available yet (omit the service for the whole stack).
+`--dry-run` prints the commands and runs none. Restarting a single service is not available yet; these commands always act on the whole stack.
 
 ## Next steps
 
