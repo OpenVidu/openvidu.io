@@ -9,32 +9,22 @@ Elastic and High Availability stacks grow past one machine with **media nodes**.
 
 ## Autoscaling vs a fixed count
 
-On a cloud stack the media nodes **autoscale** by default: the cloud's auto scaling group runs between a minimum and a maximum you set, and removes nodes gracefully when load drops (see [Graceful drain](#graceful-drain)). The minimum and maximum are template parameters (`MinNumberOfMediaNodes` / `MaxNumberOfMediaNodes` on AWS, and the equivalents on each cloud), changed with `--param`.
+On a cloud stack the media nodes **autoscale** by default: the cloud's auto scaling group runs between a minimum and a maximum, and removes nodes gracefully when load drops (see [Graceful drain](#graceful-drain)). The minimum, the maximum and a fixed count are parameters of the cloud template:
 
-To run **exactly N media nodes with no autoscaling**, set a fixed count — on every cloud:
-
-```bash
-ov stack deploy --cloud aws --set infrastructure.mediaNodes.fixedCount=3 --mode auto -y
-# equivalently, through the template parameter:
-ov stack deploy --cloud aws --param FixedNumberOfMediaNodes=3 --mode auto -y
-```
-
-`0` (the default) means autoscaling.
+| Cloud | Minimum and maximum | Fixed count (`0` = autoscaling, the default) |
+| --- | --- | --- |
+| AWS | `MinNumberOfMediaNodes`, `MaxNumberOfMediaNodes` | `FixedNumberOfMediaNodes` |
+| Azure, Google Cloud, Oracle Cloud, DigitalOcean | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | `fixedNumberOfMediaNodes` |
 
 ## Redeploy with `--param`
 
-Any parameter the cloud template declares is changed from the stack's directory with `ov stack deploy --cloud <cloud> --param Name=Value`. The stack that exists is **updated** with the parameters that changed, compared against what it runs with; a redeploy with the same parameters reuses it as it is. For example, raising the ceiling of an Elastic stack:
+Any parameter the cloud template declares is changed from the stack's directory with `ov stack deploy <name> --cloud <cloud> --param Name=Value`. **Name the stack** in the command: without the name, the redeploy registers the stack under the default name. The stack that exists is **updated** with the parameters that changed, compared against what it runs with; a redeploy with the same parameters reuses it as it is. For example, raising the ceiling of an Elastic stack on AWS:
 
-```console
-$ ov stack deploy --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
-The CloudFormation stack ov-aws-im2 already exists (CREATE_COMPLETE): the parameters that changed are applied to it
-as an update; CloudFormation keeps every resource they do not touch.
-…
-▶ Create the machines on AWS…
-   · update the CloudFormation stack ov-aws-im2 with the parameters that changed (this returns when CloudFormation is done)
-   ✓ Create the machines on AWS
-…
+```bash
+ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
 ```
+
+<!-- PENDING-RUN (doc-pulido): sergio-ad confirms --param fixedNumberOfMediaNodes with the name (DO) -->
 
 Whether a parameter is changed in place or replaces a machine is the template's; when it matters, check first with a change set or `terraform plan`.
 

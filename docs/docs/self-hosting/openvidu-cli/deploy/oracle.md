@@ -285,13 +285,13 @@ On OpenVidu PRO the continuation reads the kubeconfig the stack published instea
 
 ## Change a parameter of the stack
 
-`ov stack deploy --cloud oracle --param Name=Value` in the stack's directory runs `terraform apply` again with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
+`ov stack deploy <name> --cloud oracle --param Name=Value` in the stack's directory runs `terraform apply` again with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
 
 ```bash
-ov stack deploy --cloud oracle --param maxNumberOfMediaNodes=3 --mode auto -y
+ov stack deploy openvidu --cloud oracle --param maxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+Name the stack (`openvidu` in these examples), or the redeploy registers it under the default name. See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
 
 ## Destroy the stack
 

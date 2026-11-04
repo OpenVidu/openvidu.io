@@ -297,13 +297,13 @@ That command needs no flags: the desired state, the CloudFormation stack's name 
 
 ## Change a parameter of the stack
 
-`ov stack deploy --cloud aws --param Name=Value` in the stack's directory updates the CloudFormation stack with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
+`ov stack deploy <name> --cloud aws --param Name=Value` in the stack's directory updates the CloudFormation stack with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
 
 ```bash
-ov stack deploy --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
+ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+Name the stack (`openvidu` in these examples), or the redeploy registers it under the default name. See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
 
 ## Destroy the stack
 

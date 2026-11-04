@@ -61,27 +61,48 @@ The import behaves differently per edition, because the two store their configur
 
 `--kubeconfig` adopts the cluster but not the machines under it: that directory can operate OpenVidu, not delete its cloud resources or change its template parameters. By default the stack's directory is the only place that drives the machines, and if it is lost, it is lost.
 
-A deploy with **`--remote-state`** also keeps the stack on its cloud, so another machine can take it over completely. It prints where on its last lines:
+A deploy with **`--remote-state`** also keeps the stack on its cloud, so another machine can take it over completely. It prints where on its last lines (an Elastic stack named `dpaws2`):
 
 ```console
 ✔ OpenVidu Pro (elastic) is up on AWS
-  URL:          https://openvidu-id5fv9-15-217-125-1.sslip.io/
-  record:       s3://openvidu-cfn-templates-123456789012-eu-south-2/ov-aws-im2/registry/openvidu-stack.yml (from another machine: ov stack import --cloud aws --stack-name ov-aws-im2)
-  SSH key:      Secrets Manager secret openvidu/ov-aws-im2/ssh-private-key (the private half, for that import)
+  URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
+  credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-dpaws2 --query SecretString --output text --region eu-south-2
+  kubeconfig:   .openvidu/aws/kubeconfig.yaml
+  record:       s3://openvidu-cfn-templates-123456789012-eu-south-2/openvidu-dpaws2/registry/openvidu-stack.yml (from another machine: ov stack import --cloud aws --stack-name openvidu-dpaws2)
+  SSH key:      Secrets Manager secret openvidu/openvidu-dpaws2/ssh-private-key (the private half, for that import)
 ```
 
-From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it: `openvidu-<name>` for a stack deployed as `<name>`, not the name of its directory (this stack's CloudFormation name was set to `ov-aws-im2`). The record never holds a secret, so a parameter the template marks sensitive — the license above all — is asked for again, exactly as the deploy asked for it:
+From an empty directory on another machine, `ov stack import --cloud` reads that record and registers the stack. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it: `openvidu-<name>` for a stack deployed as `<name>`, not the name of its directory. The record never holds a secret, so a parameter the template marks sensitive, the license above all, is passed again, exactly as the deploy took it:
 
 ```console
-$ mkdir ~/stacks/ov-aws-im2 && cd ~/stacks/ov-aws-im2
-$ ov stack import --cloud aws --aws-region eu-south-2 --stack-name ov-aws-im2 --openvidu-pro-license <license>
-This is what will be read from AWS to import the stack ov-aws-im2 (nothing there is changed):
+$ mkdir -p ~/stacks/dpaws2 && cd ~/stacks/dpaws2
+$ ov stack import --cloud aws --aws-region eu-south-2 --stack-name openvidu-dpaws2 --openvidu-pro-license <license> -y
+This is what will be read from AWS to import the stack openvidu-dpaws2 (nothing there is changed):
 …
+▶ Read the stack's record from AWS…
+   ✓ Read the stack's record from AWS
+
+▶ Write this directory's copy…
+   ✓ Write this directory's copy
+
+▶ Read what the stack published…
+   ✓ Read what the stack published
+
 ▶ Register the stack…
+
+Stack described by the deployment:
+  name         dpaws2
+  deployment   elastic · aws · pro
+  version      ov-admin
+  modules      dashboard, egress, ingress, meet, observability
+  dashboard    https://openvidu-239b62-51-95-197-8.sslip.io
+  published    by ov-deployer/ov-admin (from the Helm release) on 2026-11-04 03:43 UTC (generation 1)
+
+✔ registered stack "dpaws2" in /home/me/stacks/dpaws2
    ✓ Register the stack
 
-✔ imported the AWS stack ov-aws-im2 (elastic) into ~/stacks/ov-aws-im2
-  URL:          https://openvidu-id5fv9-15-217-125-1.sslip.io/
+✔ imported the AWS stack openvidu-dpaws2 (elastic) into /home/me/stacks/dpaws2
+  URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
   kubeconfig:   .openvidu/aws/kubeconfig.yaml
   SSH key:      both halves, the private one from the stack's secret store on the cloud.
 
@@ -91,7 +112,7 @@ From here, as from the directory that deployed it:
   ov stack destroy --keep-data   # or --delete-data: what becomes of the recordings
 ```
 
-From then on, `ov stack deploy --cloud … --param …` and `ov stack destroy` work here as they did in the directory that deployed the stack. Without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the way back is its deploying directory, or `--kubeconfig` for the cluster alone.
+From then on, `ov stack status`, `ov stack deploy <name> --cloud … --param …` and `ov stack destroy` work here as they did in the directory that deployed the stack (a destroy from the imported directory deletes the machines too). Without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the way back is its deploying directory, or `--kubeconfig` for the cluster alone.
 
 ### What `--remote-state` stores per cloud
 

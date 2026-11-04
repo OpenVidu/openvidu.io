@@ -288,13 +288,13 @@ Until you continue, the directory holds the plan but no stack: `ov stack status`
 
 ## Change a parameter of the stack
 
-`ov stack deploy --cloud azure --param Name=Value` in the stack's directory runs the deployment again with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
+`ov stack deploy <name> --cloud azure --param Name=Value` in the stack's directory runs the deployment again with the parameters that changed. Any parameter the template declares can be set this way. For example, the maximum number of media nodes of an Elastic stack:
 
 ```bash
-ov stack deploy --cloud azure --param maxNumberOfMediaNodes=3 --mode auto -y
+ov stack deploy openvidu --cloud azure --param maxNumberOfMediaNodes=3 --mode auto -y
 ```
 
-See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
+Name the stack (`openvidu` in these examples), or the redeploy registers it under the default name. See [Scaling](../operate/scaling.md) for media nodes and [Configuration](../operate/configuration.md) for OpenVidu's own settings, which change without touching the machines.
 
 ## Destroy the stack
 
