@@ -5,7 +5,7 @@ description: "Check an OpenVidu stack with the OpenVidu CLI: live status, descri
 
 # Status and health checks
 
-Every command on this page resolves **the stack in the current directory** (or the one `--dir` points at), with no name and no flags. They work the same whether the stack runs locally, on your servers or on a cloud, except `check-ports`, which is for servers and clouds only.
+Every command on this page resolves **the stack in the current directory** (or the one `--dir` points at), with no name and no flags. They work the same whether the stack runs locally, on your servers or on a cloud, except `check-ports`, which needs SSH access to a node.
 
 ## Status
 
@@ -130,7 +130,7 @@ Per-service logs through `ov` are not available yet; omit the service for the wh
 
 ## Check the ports
 
-`ov stack check-ports` verifies that the inbound ports a stack needs actually arrive at a server or a cloud machine. A local stack has no firewall to check: there it exits with code `2` and points at [`ov stack ports`](#list-the-published-ports). It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified — which dialling a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
+`ov stack check-ports` verifies that the inbound ports a stack needs actually arrive at a server or a cloud machine, so it needs SSH access to the node: a stack deployed over SSH, or a Community cloud stack. A local stack has no firewall to check, and a PRO cloud stack registered through its kubeconfig has no SSH access recorded; both exit with code `2` (the local one pointing at [`ov stack ports`](#list-the-published-ports)). It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified — which dialling a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
 
 Against a **stopped or not-yet-deployed** node it gives the complete check:
 

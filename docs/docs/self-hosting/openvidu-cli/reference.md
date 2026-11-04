@@ -108,7 +108,7 @@ See [Modules and agents](operate/modules.md).
 | `ov stack agent ls` | The agents of the stack, each with its state and image. |
 | `ov stack agent enable <name>` / `disable <name>` | Turn an agent on or off, live. `--dry-run` prints the commands. |
 | `ov stack ports` | The ports the stack needs (read live from Docker on a local stack). |
-| `ov stack check-ports` | Verify the inbound ports of a node actually arrive. Exit `8` on failure. |
+| `ov stack check-ports` | Verify the inbound ports of a node actually arrive (needs SSH access to the node). Exit `8` on failure. |
 
 ## Nodes of a multi-node stack
 

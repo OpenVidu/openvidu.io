@@ -51,7 +51,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-kube-api-cidr` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
 
-    <!-- PENDING-RUN (docs-ov, dw): aws pro single_node with today's ov -->
+    This is how the deploy of a stack named `dpaws1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 89.60.28.34:6443
+    …
+    ✔ OpenVidu Pro (single node) is up on AWS
+      URL:          https://openvidu-geepav-89-60-28-34.sslip.io/
+      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-eu-south-2-openvidu-dpaws1 --query SecretString --output text --region eu-south-2
+      kubeconfig:   .openvidu/aws/kubeconfig.yaml
+    ```
 
 === "Elastic **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -251,7 +261,7 @@ ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
   --certificate-type letsencrypt --mode assisted
 ```
 
-It ends with the command that continues the deploy once you have run them (this output is from a PRO Elastic deploy):
+It ends with the command that continues the deploy once you have run them. On OpenVidu PRO the continuation reads the kubeconfig the stack published; on Community it reads the stack from the machine over SSH. This output is from a PRO Elastic deploy:
 
 ```text
 Nothing above has been run. Run it yourself, then continue the deploy — naming

@@ -51,7 +51,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One compute instance running OpenVidu PRO on Kubernetes. `--param kubeAPIAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
 
-    <!-- PENDING-RUN (docs-ov, dw): oracle pro single_node with today's ov -->
+    This is how the deploy of a stack named `dpoci1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 51.170.35.19:6443
+    …
+    ✔ OpenVidu Pro (single node) is up on Oracle Cloud
+      URL:          https://openvidu-9ox1vk-51-170-35-19.sslip.io/
+      credentials:  oci secrets secret-bundle get-secret-bundle-by-name --secret-name OPENVIDU_URL --vault-id ocid1.vault.oc1.eu-madrid-1.<vault> --query 'data."secret-bundle-content".content' --raw-output --region eu-madrid-1 | base64 -d
+      kubeconfig:   .openvidu/oracle/kubeconfig.yaml
+    ```
 
 === "Elastic **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -244,7 +254,7 @@ ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
   --certificate-type letsencrypt --mode assisted
 ```
 
-It ends with the command that continues the deploy once you have run them:
+It ends with the command that continues the deploy once you have run them. This is the end for Community, which reads the stack from the machine over SSH:
 
 ```text
 Nothing above has been run. Run it yourself, then continue the deploy — the Terraform
@@ -257,7 +267,7 @@ over SSH (as `ov stack import --ssh` does) with the key the template generated (
 this directory as the stack, exactly as it would have done here.
 ```
 
-That command needs no flags: the Terraform state and every parameter are already in place, and `terraform apply` is idempotent, so a resume applies the same state again (a no-op that refreshes the outputs) and then waits for OpenVidu.
+On OpenVidu PRO the continuation reads the kubeconfig the stack published instead of using SSH. That command needs no flags: the Terraform state and every parameter are already in place, and `terraform apply` is idempotent, so a resume applies the same state again (a no-op that refreshes the outputs) and then waits for OpenVidu.
 
 ## Change a parameter of the stack
 

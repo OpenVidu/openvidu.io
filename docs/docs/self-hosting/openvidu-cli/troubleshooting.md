@@ -26,7 +26,7 @@ Almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works
 ov stack stop && ov stack check-ports && ov stack start
 ```
 
-Open the ports the report flags on the node and on any perimeter firewall (cloud security group, router).
+Open the ports the report flags on the node and on any perimeter firewall (cloud security group, router). `check-ports` needs SSH access to the node, so it does not run against a PRO cloud stack registered through its kubeconfig (exit `2`); there, the template opens the ports, and the cloud's firewall rules for the stack are the place to look.
 
 ## Let's Encrypt fails: port 80 must be reachable
 

@@ -52,7 +52,17 @@ An empty directory is the stack. Choose the edition and topology:
 
     One virtual machine running OpenVidu PRO on Kubernetes. `--param kubeApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443, which gives full control of the stack: do not leave it open to `0.0.0.0/0` on a production stack.
 
-    <!-- PENDING-RUN (docs-ov, dw): azure pro single_node with today's ov -->
+    This is how the deploy of a stack named `dpaz1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 104.41.221.2:6443
+    …
+    ✔ OpenVidu Pro (single node) is up on Azure
+      URL:          https://openvidu-j064da-104-41-221-2.sslip.io/
+      credentials:  az keyvault secret show --vault-name openvidu-dpaz1-keyvault --name OPENVIDU-URL --query value -o tsv
+      kubeconfig:   .openvidu/azure/kubeconfig.yaml
+    ```
 
 === "Elastic **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -236,7 +246,7 @@ ov stack deploy openvidu --cloud azure --azure-location northeurope \
   --certificate-type letsencrypt --mode assisted
 ```
 
-It ends with the command that continues the deploy once you have run them:
+It ends with the command that continues the deploy once you have run them. This is the end for Community, which reads the stack from the machine over SSH:
 
 ```text
 Nothing above has been run. Run it yourself, then continue the deploy — naming
@@ -251,7 +261,16 @@ this directory as the stack, exactly as it would have done here.
 
 That command needs no flags: the desired state and every parameter are already in `openvidu-stack.yml`, and a deployment that already succeeded is **reused**, not created again.
 
-<!-- PENDING-RUN (mvp-cloud mq4): azure pro single node assisted -->
+On OpenVidu PRO the plan also writes the license into a `0600` parameters file (`.openvidu/azure/secure-parameters.json`) instead of the command line, and the continuation reads the kubeconfig the stack published instead of using SSH. The end of a PRO Single Node plan (stack `dpaz0`):
+
+```text
+  ov stack deploy --cloud azure --mode auto
+
+From there the deploy waits for OpenVidu to come up, reads the kubeconfig the stack
+published and registers this directory as the stack, exactly as it would have done here.
+```
+
+Until you continue, the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
 
 ## Change a parameter of the stack
 
