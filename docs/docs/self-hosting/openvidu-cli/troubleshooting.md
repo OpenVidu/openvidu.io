@@ -95,6 +95,10 @@ ov stack deploy --cloud <cloud> --mode auto
 
 No other flag is needed: everything is already in `openvidu-stack.yml`, and a cloud stack that already exists is reused, not created again.
 
+## Oracle Cloud: the deploy waits until it times out
+
+If an Oracle Cloud deploy keeps waiting for the stack to publish its URL until `--wait-timeout` runs out, the machine could not write its secrets into the vault. Look at `/var/log/cloud-init-output.log` on the instance (over SSH, with the key pair in `.openvidu/oracle/`). A `LimitExceeded` from the vault means it already holds the secrets of another stack, or too many versions of them: the secret names are fixed, so one vault serves one stack at a time. Destroy the attempt and deploy again with a vault of its own, or without `--oci-vault` so the template creates one.
+
 ## A cloud create failed partway
 
 `ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating anything, so a failed attempt can always be cleaned up from the directory:

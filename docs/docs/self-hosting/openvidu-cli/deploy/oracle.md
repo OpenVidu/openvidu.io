@@ -24,7 +24,7 @@ The video shows a Single Node COMMUNITY deploy from an empty directory to `ov st
 - **One Customer Secret Key per stack.** The template mints a Customer Secret Key for the instance to reach Object Storage over its S3-compatible API. OCI caps Customer Secret Keys at **2 per user**, so at most two of these stacks can run under one user at a time.
 - For OpenVidu PRO, your **license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial. The deploy checks that it is present before it touches your tenancy.
 
-The examples below take the OCIDs from the environment and reuse one vault:
+The examples below take the OCIDs from the environment:
 
 ```bash
 export OCI_TENANCY_OCID=ocid1.tenancy.oc1..<tenancy>
@@ -32,7 +32,7 @@ export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
 export OCI_USER_OCID=ocid1.user.oc1..<user>
 ```
 
-`--oci-vault` names an existing KMS vault: create one once in the console (**Identity & Security → Vault**) and copy its OCID. Without it, the template creates a vault per stack, which OCI keeps for at least 7 days after the destroy (see [Vaults and Customer Secret Keys](#destroy-the-stack)).
+`--oci-vault` names an existing KMS vault for the stack: create it in the console (**Identity & Security → Vault**) and copy its OCID. A vault holds the secrets of one stack at a time, because their names are fixed: give each stack you keep running a vault of its own, and never point a second stack at it. Without `--oci-vault`, the template creates a vault for the stack, which OCI keeps for at least 7 days after the destroy (see [Vaults and Customer Secret Keys](#destroy-the-stack)).
 
 You need neither a key pair nor a domain: the template generates an SSH key pair for the stack, and without `--domain-name` the stack derives an `sslip.io` name from its public IP (on High Availability, from the load balancer's), so Let's Encrypt has a name to certify on Single Node and Elastic. Use your own domain for anything beyond testing.
 
@@ -228,7 +228,7 @@ The `retargeted` note is expected: the machine deployed OpenVidu on itself, and 
 | A virtual cloud network, subnet and network security group | The ports OpenVidu needs, open to the internet |
 | A load balancer | High Availability only |
 | An Object Storage bucket and a Customer Secret Key | Recordings and OpenVidu Meet data, reached over the S3-compatible API. `--param bucketName=<name>` uses your own |
-| A KMS vault, one secret per key | What the stack publishes: URL and credentials (and the kubeconfig on PRO). `--oci-vault` reuses one; else one vault per stack |
+| A KMS vault, one secret per key | What the stack publishes: URL and credentials (and the kubeconfig on PRO). `--oci-vault` uses one of yours, one per stack; otherwise the template creates one |
 | An SSH key pair | The template generates it; `ov` keeps the private half in `.openvidu/oracle/` |
 
 `ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
@@ -334,7 +334,7 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 
 !!! warning "Vaults and Customer Secret Keys"
 
-    Without `--oci-vault`, the template creates one KMS vault per stack, and OCI only deletes a vault after a waiting period of at least 7 days. Reuse one with `--oci-vault <ocid>`, but never share a vault between two live stacks: the secrets have fixed names inside the vault , so the second stack would overwrite the first one's. OCI also caps Customer Secret Keys at 2 per user, and each stack mints one, so at most two of these stacks run under one user at a time.
+    Without `--oci-vault`, the template creates one KMS vault per stack, and OCI only deletes a vault after a waiting period of at least 7 days. With `--oci-vault <ocid>` the vault is yours, but it holds the secrets of one stack at a time: the secret names are fixed, so a second stack would overwrite the first one's, and every deploy adds versions to the same secrets until OCI refuses another (`LimitExceeded`; see [Troubleshooting](../troubleshooting.md#oracle-cloud-the-deploy-waits-until-it-times-out)). Give each stack you keep running a vault of its own. OCI also caps Customer Secret Keys at 2 per user, and each stack mints one, so at most two of these stacks can run under one user at a time.
 
 ## Next steps
 
