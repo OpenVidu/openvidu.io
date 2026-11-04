@@ -19,7 +19,7 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
     - `letsencrypt` or `zerossl` — a certificate obtained automatically (needs port 80 reachable).
     - `owncert` — bring your own, with `--owncert-public-key` and `--owncert-private-key`.
     - `selfsigned` — for a throwaway.
-- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable: `443/tcp`; `80/tcp` with `letsencrypt` or `zerossl`; `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; `1935/tcp` and `7885/udp` with the `ingress` module; and on PRO the cluster API on `6443/tcp` from your machine. See the port preflight below.
+- The [ports OpenVidu needs](../operate/status.md#check-the-ports) reachable. Required: `443/tcp`, and `22/tcp` for `ov` itself. Recommended, because media is relayed over TURN on 443 without them, at a cost in latency and quality: `443/udp`, `7881/tcp` and the media range `50000-60000/udp`; and `80/tcp`, which `letsencrypt` and `zerossl` need to obtain the certificate. With the `ingress` module, `1935/tcp` and `7885/udp`; on PRO, the cluster API on `6443/tcp` from your machine. See the port check below.
 - The [OpenVidu CLI](../install.md). Nothing else needs to be pre-installed on the servers: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
 - For PRO, your **OpenVidu Pro license** (`--openvidu-pro-license`).
 
@@ -28,26 +28,45 @@ Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **T
 The commonest way an on-premises OpenVidu "does not work" is a stack that comes up perfectly and has no media: every service healthy, and UDP never reaching the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it — which verifies TCP *and* UDP, something dialling a running stack cannot do.
 
 ```console
-$ ov stack check-ports -f vm.yml \
-  --ssh-user ubuntu --ssh-key ~/.ssh/id_ed25519
-checking the inbound ports of 172.30.0.55…
-Inbound ports of 172-30-0-55.openvidu-local.dev (172.30.0.55)
+$ ov stack check-ports --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+    --domain-name 172-30-0-96.openvidu-local.dev
+checking the inbound ports of 172.30.0.96…
+read-node: reading what is already bound and what the firewall allows
+listener: the node's python3 is holding 9 port(s) for us
+probe: probing 172-30-0-96.openvidu-local.dev: 3 TCP, 6 UDP
+checked in 4.6s
+Inbound ports of 172-30-0-96.openvidu-local.dev (172.30.0.96)
   state     fresh — nothing of ours is deployed here, so every port was free to measure
   method    a temporary listener on the node (its own python3; nothing written to disk)
-  verdict   3 of 5 checked port(s) do NOT reach the node: 443/udp, 50000-60000/udp, 7881/tcp
+  verdict   3 of 6 checked port(s) do NOT reach the node: 443/udp, 50000-60000/udp, 7881/tcp
 
 Required
   the stack does not work without these
-  ✗ 443/udp           dropped · host-firewall
-      OpenVidu LiveKit Server — the ufw firewall on the node drops it (deny (incoming), allow (outgoing), allow (routed))
-      fix (on the node): sudo ufw allow 443/udp
   ✓ 443/tcp           open
+      Caddy — the probe arrived at the node — the whole path is open
+  ✓ 22/tcp            open
+      SSH — ov is connected to the node over SSH
+
+Recommended
+  it works without these, but every call is worse
+  ! 443/udp           dropped · host-firewall
+      OpenVidu LiveKit Server — the ufw firewall on the node drops it (deny (incoming), allow (outgoing), allow (routed))
+      Participants behind restrictive networks are relayed over TURN/TLS on 443/tcp instead of UDP.
+      fix (on the node): sudo ufw allow 443/udp
+  ! 50000-60000/udp   dropped · host-firewall
+      OpenVidu LiveKit Server — the ufw firewall on the node drops it (deny (incoming), allow (outgoing), allow (routed)) [sampled: 50000, 52500, 55000, 57500, 60000]
+      Media is relayed through TURN on 443, which adds latency and load and lowers quality under load.
+      fix (on the node): sudo ufw allow 50000:60000/udp
+  ! 7881/tcp          dropped · host-firewall
+      OpenVidu LiveKit Server — the ufw firewall on the node drops it (deny (incoming), allow (outgoing), allow (routed))
+      Media is relayed through TURN on 443, which adds latency and load and lowers quality under load.
+      fix (on the node): sudo ufw allow 7881/tcp
   ✓ 80/tcp            open
+      Caddy — the probe arrived at the node — the whole path is open
 …
-ov: 3 ports did not answer
 ```
 
-The fix is printed, never run — `ov` reads firewalls, it does not change them. The same check runs automatically as a phase of every remote deploy (`--skip-port-check` turns it off). See [Status and health checks](../operate/status.md#check-the-ports) for the full report and its options.
+The fix is printed, never run: `ov` reads firewalls, it does not change them. Here only recommended ports fail, so the check warns and exits `0`; a required port that fails exits `8`. The report goes on to check the DNS name and that the node reaches the registries the deploy pulls from. The same check runs automatically before every remote deploy (`--skip-port-check` turns it off). See [Status and health checks](../operate/status.md#check-the-ports) for the full report and its options.
 
 ## Deploy
 
@@ -61,27 +80,49 @@ An empty directory on your machine is the stack. Pick the edition and topology:
       --environment on-premises \
       --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
       --domain-name 172-30-0-96.openvidu-local.dev \
-      --certificate-type letsencrypt \
+      --certificate-type owncert \
+      --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
       --mode auto
     note: generated 11 credential(s) and pinned them in this stack's spec, so a later deploy reuses them instead of replacing them: livekit-api-key, livekit-api-secret, redis-password, minio-access-key, minio-secret-key, mongo-admin-password, mongo-replica-set-key, dashboard-admin-password, grafana-admin-password, meet-initial-admin-password, meet-initial-api-key
+    checking the inbound ports before installing anything…
+      Ports of 172.30.0.96 (Community single node)
+      PORT             SCOPE   LEVEL        STATE  TO OPEN
+      443/tcp          public  required     open
+      443/udp          public  recommended  open
+      80/tcp           public  recommended  open
+      50000-60000/udp  public  recommended  open
+      7881/tcp         public  recommended  open
+      22/tcp           admin   required     open
+      all 6 checked port(s) arrive at the node
     ✓ [172.30.0.96 single] if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then echo 'docker and the compose plugin are already installed'; else curl -fsSL https://get.docker.com -o /tmp/get-docker.sh && sh /tmp/get-docker.sh && rm -f /tmp/get-docker.sh; fi && systemctl enable --now docker
-    ✓ [172.30.0.96 single] write 42 files to /opt/openvidu (docker-compose.yaml, config/, .ov/base/)
+    ✓ [172.30.0.96 single] write 44 files to /opt/openvidu (docker-compose.yaml, config/, .ov/base/)
     ✓ [172.30.0.96 single] write 2 host files (/etc/systemd/system/openvidu.service, /etc/sysctl.d/50-openvidu.conf)
+    ✓ [172.30.0.96 single] sysctl -q -p /etc/sysctl.d/50-openvidu.conf || echo 'note: the sysctl settings could not be applied now; they apply at boot'; systemctl daemon-reload && systemctl enable openvidu
     ✓ [172.30.0.96 single] install this CLI at /usr/local/bin/ov
-    ✓ [172.30.0.96 single] render config/ into data/runtime/ (ov stack render) — 11 created, 0 updated, 1 unchanged, 0 removed
-    ✓ [172.30.0.96 single] docker compose --env-file config/openvidu.env pull --quiet
+    ✓ [172.30.0.96 single] render config/ into data/runtime/ (ov stack render) — 21 created, 0 updated, 1 unchanged, 0 removed
+    ✓ [172.30.0.96 single] docker compose --env-file data/runtime/compose.env pull --quiet
     ✓ [172.30.0.96 single] systemctl restart openvidu
     deploy completed successfully
     wrote spec to openvidu-stack.yml
     ✔ stack "web" recorded in this directory
-    ✔ published /opt/openvidu/stack/context.yaml (recover this context elsewhere with `ov stack import --ssh ubuntu@<host>`)
+    ✔ published /opt/openvidu/stack/context.yaml (recover this stack's directory elsewhere with `ov stack import --ssh ubuntu@<host>`)
     ✔ the node operates this stack itself (`sudo ov stack status` there)
     waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deployment keeps running)…
-      ⏳ still starting: openvidu (20s)
-    ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard)
+      ⏳ still starting: caddy, openvidu, dashboard, meet, grafana (0s)
+      ⏳ still starting: openvidu, dashboard, meet, grafana (5s)
+      ⏳ still starting: openvidu, dashboard, meet (10s)
+      ⏳ still starting: openvidu (15s)
+    ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
+
+    Inbound ports
+      all 6 checked port(s) arrive at the node
+      measured from the node's own network: this says nothing about the internet path
+      full report: ov stack check-ports
     ```
 
-    Plain Docker Compose and a systemd unit: no installer image, no operator. Every credential is generated and **pinned** into the spec, so a later deploy reuses them instead of locking the stack out of its data.
+    Plain Docker Compose and a systemd unit: no installer image, no operator. The ports are checked before anything is installed, and every credential is generated and **pinned** into the spec, so a later deploy reuses them instead of locking the stack out of its data.
+
+    These examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself). On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway.
 
 === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -94,7 +135,7 @@ An empty directory on your machine is the stack. Pick the edition and topology:
       --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
       --openvidu-pro-license <your-license> \
       --domain-name 172-30-0-96.openvidu-local.dev \
-      --certificate-type letsencrypt \
+      --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
       --mode auto
 
     ▶ Connect to the VM…
@@ -140,7 +181,7 @@ An empty directory on your machine is the stack. Pick the edition and topology:
         --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
         --openvidu-pro-license <your-license> \
         --domain-name 172-30-0-96.openvidu-local.dev \
-        --certificate-type letsencrypt \
+        --certificate-type owncert --owncert-public-key fullchain.pem --owncert-private-key privkey.pem \
         --mode auto
     …
     ✔ deploy completed.
@@ -190,7 +231,7 @@ An empty directory on your machine is the stack. Pick the edition and topology:
 
 ### The port preflight
 
-Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them. A **required** port closed (or, on PRO, the node's firewall dropping the pod and service networks) stops the deploy with **exit code 6** and a table with the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` skips it by construction (reachability cannot be verified from the node itself).
+Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them, and prints a table of them (`checking the inbound ports before installing anything…` in the output above). A **required** port closed (or, on PRO, the node's firewall dropping the pod and service networks) stops the deploy with **exit code 6** and the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` skips it by construction (reachability cannot be verified from the node itself).
 
 ## Install on the server itself
 

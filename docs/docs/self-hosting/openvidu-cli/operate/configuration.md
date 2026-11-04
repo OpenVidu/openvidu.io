@@ -11,23 +11,18 @@ The configuration is one YAML document, **`openvidu.yaml`**, with a comment abov
 
 ## View, get, set, unset
 
+`ov stack config view` prints the whole `openvidu.yaml` as the stack runs it, comments included, with the secrets as `***` (`--show-secrets` prints them). `config get` reads one value; these are three names of the same setting on a Community server:
+
 ```console
-$ ov stack config view            # the whole configuration the stack runs with
+$ ov stack config get domain.name
+172-30-0-96.openvidu-local.dev
 $ ov stack config get openviduStack.domain.name
 172-30-0-96.openvidu-local.dev
-$ ov stack config get DASHBOARD_ADMIN_PASSWORD
-********
+$ ov stack config get DOMAIN_NAME
+172-30-0-96.openvidu-local.dev
 ```
 
-`config get` prints secrets in clear; the value is masked here. A key exists only when the stack uses it: `DASHBOARD_ADMIN_PASSWORD` needs the `dashboard` module, and without it `config get` fails with `key "DASHBOARD_ADMIN_PASSWORD" is not set`.
-
-A key you never set takes the model's default, and `config get` says so (exit code `1`):
-
-```console
-$ ov stack config get rtc-engine
-ov: openviduStack.rtcEngine is not set in stack "labp": it takes the model's default, mediasoup
-```
-
+`config get` prints secrets in clear (`ov stack config get DASHBOARD_ADMIN_PASSWORD`). A setting nobody changed answers with its default.
 
 A key can be named several ways: its path in `openvidu.yaml` (`domain.name`), the model key (`openviduStack.domain.name`), the deploy flag that sets it (`domain-name`), an alias (`domain`) or its old `openvidu.env` name (`DOMAIN_NAME`). All of them read and write the same setting.
 
@@ -73,7 +68,12 @@ ov: config/caddy.yaml was edited on the node where this change rewrites it: noth
 
 If you edited those files on the very lines the change rewrites, nothing is written (exit `4`) and the message names the file: edit it by hand, or apply the change with `ov stack deploy`, which writes the files again.
 
-What the deployment sets once — MongoDB's credentials, Meet's initial admin and API key — is **refused** on a running stack (exit `4`): the store keeps the value it was first started with, and a changed file would only lock the services out.
+What the deployment sets once (MongoDB's credentials, Meet's initial admin and API key) is **refused** on a running stack (exit `4`): the service that owns it keeps the value it was first started with, and a changed value would only lock the others out:
+
+```console
+$ ov stack config set mongo-admin-password=abc
+ov: openviduStack.credentials.mongoAdminPassword is set when the stack is deployed and does not change on a running node: the service that owns it keeps the value it was first started with, and the rest would stop connecting
+```
 
 ## Service files: `ov stack config file`
 

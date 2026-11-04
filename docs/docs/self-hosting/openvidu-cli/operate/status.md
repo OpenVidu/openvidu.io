@@ -116,13 +116,14 @@ all 1 check(s) passed
 
 ## Logs
 
-`ov stack logs` fetches the logs of the whole stack, one interleaved stream. `--tail N` is per service; `--since` bounds the window; `-f` follows them live:
+`ov stack logs` fetches the logs of the whole stack, one interleaved stream; `--since` bounds the window and `-f` follows them live. On a server they come from the node's journal, so `--tail N` is the last N lines of the whole stack (`--since` takes a journal value such as `'1 hour ago'`); on a local stack `--tail` is per service, and on PRO it is capped at 200 (`--since` takes a duration such as `1h`):
 
 ```console
 $ ov stack logs --tail 8
 ==> 172.30.0.96 (single) <==
-Oct 29 14:46:10 fake-vm-172-30-0-96 docker[2534]: redis              | 1:M 29 Oct 2026 14:46:10.134 * Background saving terminated with success
-Oct 29 14:46:13 fake-vm-172-30-0-96 docker[2534]: ov-livekit-server  | 2026-10-29T14:46:13.802Z        INFO        livekit.agents        service/agentservice.go:351        last worker deregistered …
+Nov 04 03:26:57 fake-vm-172-30-0-96 docker[4229]: mongodb            | {"t":{"$date":"2026-11-04T03:26:57.833+00:00"},"s":"I",  "c":"-",        "id":9023600, "ctx":" …
+Nov 04 03:26:57 fake-vm-172-30-0-96 docker[4229]: mongodb            | {"t":{"$date":"2026-11-04T03:26:57.835+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":" …
+Nov 04 03:26:58 fake-vm-172-30-0-96 docker[4229]: ov-livekit-server  | 2026-11-04T03:26:58.118Z        WARN        livekit        service/utils.go:85        error ha …
 …
 ```
 
@@ -132,33 +133,69 @@ Per-service logs through `ov` are not available yet; omit the service for the wh
 
 `ov stack check-ports` verifies that the inbound ports a stack needs actually arrive at a server or a cloud machine, so it needs SSH access to the node: a stack deployed over SSH, or a Community cloud stack. A local stack has no firewall to check, and a PRO cloud stack registered through its kubeconfig has no SSH access recorded; both exit with code `2` (the local one pointing at [`ov stack ports`](#list-the-published-ports)). It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified — which dialling a running stack cannot do. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
 
-Against a **stopped or not-yet-deployed** node it gives the complete check:
+Against a **stopped or not-yet-deployed** node it gives the complete check. `ov` holds the ports with a temporary listener on the node (the node's own `python3`, or `ov` itself when the node has none) and probes them from your machine:
 
 ```console
 $ ov stack check-ports
-…
+Inbound ports of 172-30-0-96.openvidu-local.dev (172.30.0.96)
+  state     fresh — nothing of ours is deployed here, so every port was free to measure
+  method    a temporary listener on the node (its own python3; nothing written to disk)
+  verdict   all 6 checked port(s) arrive at the node
+
 Required
   the stack does not work without these
   ✓ 443/tcp           open
-  ✓ 443/udp           open
-  ✓ 80/tcp            open
+      Caddy — the probe arrived at the node — the whole path is open
+  ✓ 22/tcp            open
+      SSH — ov is connected to the node over SSH
 
 Recommended
   it works without these, but every call is worse
+  ✓ 443/udp           open
+      OpenVidu LiveKit Server — the probe arrived at the node — the whole path is open
+  ✓ 80/tcp            open
+      Caddy — the probe arrived at the node — the whole path is open
   ✓ 50000-60000/udp   open
+      OpenVidu LiveKit Server — 5 of the 5 sampled ports answered (of 50000-60000): the range is open as far as sampling can show
   ✓ 7881/tcp          open
+      OpenVidu LiveKit Server — the probe arrived at the node — the whole path is open
+…
 ```
 
-Against a **running** stack it can only dial the ports, and it says so honestly instead of pretending — an open UDP port and a dropped one are indistinguishable while the stack holds them:
+Against a **running** stack it can only dial the ports, and it says so instead of pretending: an open UDP port and a dropped one look the same while the stack holds them, and the media range is bound only for connected participants:
 
 ```console
 $ ov stack check-ports
-the stack is RUNNING, so its ports could only be dialled — probed from this machine only
-PORT        NEED       STATE          WHERE   DETAIL
-✓ 443/tcp   required   open           -       something is listening and answered
-– 443/udp   required   inconclusive   -       UDP has no handshake: with nothing of ours listening on the node, an open port and a dropped one look identical from here
-✗ 80/tcp    required   dropped        node    the path is open but nothing is listening — the service that should own this port is not up
-note: to verify the media path end to end, stop the stack first: ov stack stop && ov stack check-ports && ov stack start
+Inbound ports of 172-30-0-96.openvidu-local.dev (172.30.0.96)
+  state     running — the stack holds these ports, so they could only be dialled
+  method    probes from this machine only (no listener on the node)
+  verdict   4 checked port(s) arrive; 2 could not be established (443/udp, 50000-60000/udp)
+
+Required
+  the stack does not work without these
+  ✓ 443/tcp           open
+      Caddy — something is listening and answered
+  ✓ 22/tcp            open
+      SSH — ov is connected to the node over SSH
+
+Recommended
+  it works without these, but every call is worse
+  – 443/udp           inconclusive
+      OpenVidu LiveKit Server — UDP has no handshake: with nothing of ours listening on the node, an open port and a dropped one look identical from here
+      Participants behind restrictive networks are relayed over TURN/TLS on 443/tcp instead of UDP.
+  – 50000-60000/udp   inconclusive
+      OpenVidu LiveKit Server — not checkable while the stack runs: it binds ports of this range only for the participants connected at the moment, so a probe cannot tell an open port from a dropped one
+      Media is relayed through TURN on 443, which adds latency and load and lowers quality under load.
+  ✓ 80/tcp            open
+      Caddy — something is listening and answered
+  ✓ 7881/tcp          open
+      OpenVidu LiveKit Server — something is listening and answered
+
+Not established
+  443/udp, 50000-60000/udp
+  the running stack holds these ports, or binds them only on demand. To measure them end to end:
+  ov stack stop && ov stack check-ports && ov stack start
+…
 ```
 
 To re-verify the media path end to end, take the ports back for a few seconds:
@@ -167,11 +204,11 @@ To re-verify the media path end to end, take the ports back for a few seconds:
 ov stack stop && ov stack check-ports && ov stack start
 ```
 
-It exits `8` when any probed port fails, and never changes a firewall — the fix is printed for you to run. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `-o json` for every verdict. A local deployment has no firewall to check; use [`ov stack ports`](#list-the-published-ports) there.
+It exits `8` when a required port fails (a recommended one is a warning, exit `0`), and never changes a firewall: the fix is printed for you to run. Besides the ports it checks that the domain resolves to the node and that the node reaches the image registries. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `--ssh [user@]host` to check a machine before deploying to it, `-o json` for every verdict.
 
 ## List the published ports
 
-`ov stack ports` reports the ports the stack needs, from its configuration. On a local stack it reads the published host ports live from Docker, grouped by what each one is for:
+`ov stack ports` is for a local stack (elsewhere it exits `2`; use `check-ports` on a server). It reads the host ports the deployment publishes live from Docker, grouped by what each one is for:
 
 ```console
 $ ov stack ports

@@ -79,7 +79,7 @@ All of these resolve the directory's stack with no arguments. See [Status and he
 | `ov stack describe` | The stack's record, endpoints and configuration summary. |
 | `ov stack start` / `stop` / `restart` | Control the whole stack (per-service control is not available yet). |
 | `ov stack test` | Active health check; exit `8` on failure. |
-| `ov stack logs [--tail N] [--since …] [-f]` | Fetch or follow logs (`--tail` is per service). |
+| `ov stack logs [--tail N] [--since …] [-f]` | Fetch or follow the whole stack's logs (`--tail` counts per service on a local stack, in total on a server). |
 | `ov stack export [--gitops]` | Print the spec; `--gitops` externalizes secrets to `secrets://` references. |
 
 ## Configuration

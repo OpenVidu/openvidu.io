@@ -16,11 +16,11 @@ livekit-server   yes       base
 egress           yes       selected
 ingress          yes       selected
 dashboard        yes       selected
-meet             no        off
-observability    no        off
+meet             yes       selected
+observability    yes       selected
 ```
 
-`base` is always there, `selected` is what you asked for, `off` is not running. On a PRO stack the listing shows what each module requires:
+This is a Community server. `base` is always there, `selected` is what you asked for, `off` is not running. On a PRO stack the listing shows what each module requires, and which data services the selection brings:
 
 ```console
 $ ov stack module ls
@@ -30,22 +30,22 @@ ingress           yes       redis
 dashboard         yes       redis, mongodb
 meet              yes       egress, redis, mongodb, minio
 observability     yes       -
-v2compatibility   yes       redis
-data services (derived from the module selection): redis=yes  mongodb=yes  minio=yes
+v2compatibility   no        redis
+data services (derived from the module selection): redis=yes  mongodb=yes  minio=no
 ```
 
 ## Add and remove modules, live
 
-Changing the selection is **incremental**: `ov` starts only the new services (and restarts the media server when its config changed), or stops the removed ones; nothing else is touched. Preview with `--dry-run`, then apply.
+Changing the selection is **incremental**: `ov` starts only the new services (and recreates the ones whose configuration changed, such as the media server), or stops the removed ones; nothing else is touched. Preview with `--dry-run`, then apply. On a Community server, `modules` is a value of `config/openvidu.yaml`:
 
 ```console
 $ ov stack module add meet
 enable:  meet
-modules: egress, ingress, dashboard  →  egress, ingress, dashboard, meet
-on-premise change: rewrite ENABLED_MODULES, render config/ into data/runtime/ again, recreate the affected services; the rest keep running.
-✓ set ENABLED_MODULES=egress,ingress,dashboard,meet in config/openvidu.env
+modules: ingress, dashboard, observability  →  ingress, dashboard, meet, observability
+on-premise change: rewrite modules: in config/openvidu.yaml, render config/ into data/runtime/ again, recreate the affected services; the rest keep running.
+✓ set modules=ingress,dashboard,meet,observability in config/openvidu.yaml
 ✓ sudo ov stack render --this-node
-✓ docker compose --env-file config/openvidu.env up -d --force-recreate --no-deps ov-livekit-server ov-meet
+✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps ov-livekit-server ov-meet
 modules updated
 ```
 
@@ -54,25 +54,28 @@ Removing is just as incremental:
 ```console
 $ ov stack module rm meet
 disable: meet
-modules: livekit-server, egress, meet  →  livekit-server, egress
-incremental change: stop mongodb,ov-meet; restart the media server (its config changed); other services keep running.
-✓ docker compose rm -sf mongodb ov-meet
-✓ docker compose restart ov-livekit-server
+modules: ingress, dashboard, meet, observability  →  ingress, dashboard, observability
+on-premise change: rewrite modules: in config/openvidu.yaml, render config/ into data/runtime/ again, recreate the affected services; the rest keep running.
+✓ set modules=ingress,dashboard,observability in config/openvidu.yaml
+✓ sudo ov stack render --this-node
+✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps ov-livekit-server
+✓ docker compose --env-file data/runtime/compose.env rm --stop --force ov-meet
 modules updated
 ```
 
-The spec follows the stack: `openviduStack.modules` in `openvidu-stack.yml` records the new selection.
+The spec follows the stack: `openvidu-stack.yml` records the new selection. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`.
 
 ## Data services follow the modules
 
-The data services — **`redis`, `mongodb` and `minio`** — are never named directly. They come up because a module needs them and go away when no module needs them any more. In the first example above, adding `meet` started `mongodb` because Meet reads it; removing `meet` stopped it again. Dependencies between modules are handled for you too:
+The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them any more. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both (a local stack here):
 
 ```console
-$ ov stack module rm egress
-nothing to do: the requested module(s) are not enabled, or are still required by another enabled module
+$ ov stack module add meet
+enable:  egress, meet
+modules: livekit-server  →  livekit-server, egress, meet
+incremental change: start minio,mongodb,ov-egress,ov-meet,redis; restart the media server (its config changed); other services keep running.
+…
 ```
-
-`meet` needs `egress`, so `ov` keeps `egress` while `meet` is on, and exits `0`. Likewise, adding `meet` to a stack without `egress` enables both.
 
 ## Agents
 
@@ -92,14 +95,14 @@ enable: agent-speech-processing (docker.io/openvidu/agent-speech-processing-vosk
 on-premise change: set enabled in the agent's definition, render config/ into data/runtime/ again (docker-compose.agents.yaml with it), create the agent's service; the rest keep running.
 ✓ set enabled=true in config/agent-speech-processing.yaml
 ✓ sudo ov stack render --this-node
-✓ docker compose --env-file config/openvidu.env up -d --force-recreate --no-deps agent-speech-processing
+✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps agent-speech-processing
 agent agent-speech-processing enabled
 ```
 
 ```console
 $ ov stack agent ls -o wide
-AGENT                     ENABLED   IMAGE                                                  STATE     STATUS          FILE
-agent-speech-processing   yes       docker.io/openvidu/agent-speech-processing-vosk:main   running   Up 21 seconds   config/agent-speech-processing.yaml
+AGENT                     ENABLED   IMAGE                                                  STATE     STATUS                  FILE
+agent-speech-processing   yes       docker.io/openvidu/agent-speech-processing-vosk:main   running   Up Less than a second   config/agent-speech-processing.yaml
 ```
 
 Disabling removes the container; the definition stays, so `enable` brings it back. The first start pulls the agent image, which is large (the models are inside it), so give it time.
