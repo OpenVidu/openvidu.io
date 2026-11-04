@@ -1718,6 +1718,23 @@
   margin-top: 18px;
 }
 
+/* The Meet hero's video spans both columns, centred and wider than one column; the hero and
+   the section after it give back the height the video gained, so the cards keep their place */
+.ov-landing--product .ov-hero__visual {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 720px);
+  margin-top: 0;
+}
+
+.ov-landing--product .ov-hero:has(.ov-hero__visual) {
+  padding-bottom: 0;
+}
+
+.ov-landing--product .ov-hero:has(.ov-hero__visual) + .ov-section {
+  padding-top: clamp(16px, 1.8vw, 26px);
+}
+
 .md-typeset .ov-landing .ov-hero__visual :is(img, video) {
   display: block;
   width: 100%;
