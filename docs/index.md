@@ -20,7 +20,7 @@ page_features:
   <div class="success-stories-heading">
     <h2>Trusted by teams building real-time video</h2>
   </div>
-  <div class="splide" aria-label="Customer success stories" data-splide='{"type": "slide", "focus": 0, "autoHeight": false, "gap": "1.5rem", "omitEnd": true}'>
+  <div class="splide" aria-label="Customer success stories" data-splide='{"type": "loop", "autoWidth": false, "perPage": 3, "perMove": 1, "focus": 0, "autoHeight": false, "gap": "1.5rem", "padding": "2.5rem", "autoplay": true, "interval": 5000, "pauseOnHover": true, "pauseOnFocus": true, "breakpoints": {"1100": {"perPage": 2}, "700": {"perPage": 1}}}'>
     <div class="splide__track">
       <div class="splide__list">
         <div class="splide__slide">
@@ -59,6 +59,19 @@ page_features:
               </blockquote>
               <p class="success-story-attribution">Janne Sikiö, CEO, Dicode</p>
               <a class="success-story-link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a>
+            </div>
+          </div>
+        </div>
+        <div class="splide__slide">
+          <div class="carousel-cell-content">
+            <div class="success-story-card">
+              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/eventials-logo.svg" loading="lazy" alt="Eventials" width="343" height="57" />
+              <hr class="success-story-separator">
+              <blockquote class="success-story-quote">
+                "Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities."
+              </blockquote>
+              <p class="success-story-attribution">Henrique Otsuka, Head of Information Technology, Eventials</p>
+              <a class="success-story-link" href="/blog/2026/11/04/eventials-live-streaming-openvidu/">Read the full story →</a>
             </div>
           </div>
         </div>
