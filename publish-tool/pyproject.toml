@@ -29,8 +29,8 @@ build = [
     "pygments==2.21.0",
     "mkdocs-glightbox==0.5.3",
     "mkdocs-llmstxt==0.5.1",
-    "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.62",
+    "mkdocs-rss-plugin==1.20.0",
+    "gitpython==3.2.1",
     # The build backend, so the publish workflow can install this package with
     # --no-build-isolation from the hash-locked requirements-publish.txt.
     "hatchling==1.32.4",
@@ -43,8 +43,8 @@ validate = [
     "pygments==2.21.0",
     "mkdocs-glightbox==0.5.3",
     "mkdocs-llmstxt==0.5.1",
-    "mkdocs-rss-plugin==1.19.0",
-    "gitpython==3.1.62",
+    "mkdocs-rss-plugin==1.20.0",
+    "gitpython==3.2.1",
 ]
 dev = [
     "pytest>=8",
