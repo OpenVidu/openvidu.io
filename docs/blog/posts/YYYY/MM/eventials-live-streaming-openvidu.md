@@ -30,7 +30,7 @@ authors:
 
 Sometimes, companies face challenges for which they envision a solution that doesn't exist. **[Eventials :fontawesome-solid-external-link:{.external-link-icon}](https://eventials.com){:target="_blank"}** is one of them. When tackling 30,000+ viewer live streams, the team needed an infrastructure that could scale, while at the same time kept the costs low and under control, all of them without breaking their sanity. 
 
-We talked to **Henrique Otsuka**, Head of Information Technology at Eventials, about how they produce those broadcasts on OpenVidu: what they tried before, why he led the move to OpenVidu 3, and how separating interaction from distribution lets them scale. For 16 years Eventials has run webinars, white-label corporate learning platforms and professional live streaming production for organizations across Latin America, being the largest webinar platform in Brazil.
+We talked to **Henrique Otsuka**, Head of Information Technology at Eventials, about how they produce those broadcasts on OpenVidu: what they tried before, why he led the move to OpenVidu 3, and how separating interaction from distribution lets them scale. For 13 years Eventials has run webinars, white-label corporate learning platforms and professional live streaming production for organizations across Latin America, being the largest webinar platform in Brazil.
 
 <!-- more -->
 
