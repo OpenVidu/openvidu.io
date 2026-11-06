@@ -93,7 +93,7 @@ openviduMeet.broadcastStart({
 
 openviduMeet.on('broadcastUpdated', (event) => {
 	if (event.status === 'active') {
-		console.log(`Live on ${event.name}`);
+		console.log(`Live on ${event.destination.name}`);
 	}
 });
 ```
