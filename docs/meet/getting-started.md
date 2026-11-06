@@ -11,9 +11,16 @@ page_features:
 
 ## Run OpenVidu Meet locally
 
-Get started quickly with OpenVidu Meet on your local machine:
+One command. Docker is the only requirement, and there is nothing to clone or configure first:
 
-[Run OpenVidu Meet locally](deployment/local.md){ .md-button .md-button--primary }
+```bash
+docker compose -p openvidu-meet -f oci://openvidu/local-meet:latest up -y openvidu-meet-init
+```
+
+When it finishes, open <http://localhost:9080> and log in with the default credentials the command prints. To join from other devices on your network, pin a specific version, or work around a known Docker Desktop for Windows issue, see the full guide:
+
+[Local deployment guide](deployment/local.md){ .md-button .md-button--primary }
+[Production deployments](deployment/overview.md){ .md-button }
 
 ## A quick tour of OpenVidu Meet
 
