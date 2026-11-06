@@ -451,20 +451,6 @@ ul.product-features li:before {
   display: none;
 }
 
-/* Material's `.md-typeset ul` margin and `li` indent push the bars to the left of the row:
-   centre them under the carousel instead */
-.success-stories-section ul.splide__pagination {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  gap: 20px;
-}
-
-.success-stories-section ul.splide__pagination li {
-  margin: 0;
-}
-
 .success-story-card {
   height: 100%;
   box-sizing: border-box;
