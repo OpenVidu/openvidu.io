@@ -201,6 +201,10 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-vosk:3.9.0`
     COPY --chown=appuser:appuser vosk-models /app/vosk-models
     ```
 
+    !!! info
+
+        The base image contains only what the agent needs to run: it has no pip, compilers or git. Add your models with `COPY`, as above.
+
 2. Download and unzip the [desired Vosk models :fontawesome-solid-external-link:{.external-link-icon}](https://alphacephei.com/vosk/models){:target="_blank"} into a local folder `vosk-models`. The folder structure should be like this:
 
     ```
@@ -310,7 +314,7 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.9.
 
     ```Dockerfile
     FROM docker.io/openvidu/agent-speech-processing-sherpa-base:3.9.0
-    COPY --chown=appuser:appuser sherpa-models /app/sherpa-models
+    COPY --chown=appuser:appuser sherpa-onnx-streaming-models /app/sherpa-onnx-streaming-models
     ```
 
     !!! info
@@ -318,6 +322,10 @@ The default Docker image `docker.io/openvidu/agent-speech-processing-sherpa:3.9.
         To build a custom Sherpa image [with GPU acceleration](#gpu-acceleration-with-nemotron), just change the FROM line to:
         
           - `FROM docker.io/openvidu/agent-speech-processing-sherpa-cuda12-base:3.9.0`
+
+    !!! info
+
+        The base images contain only what the agent needs to run: they have no pip, compilers or git. Add your models with `COPY`, as above.
 
 2. Download and unzip the [desired sherpa-onnx streaming models :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models){:target="_blank"} into a local folder `sherpa-onnx-streaming-models`. The folder structure should be like this:
 
