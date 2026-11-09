@@ -2,7 +2,7 @@
 title: How Eventials cut live streaming incidents by 90% with OpenVidu
 draft: false
 date:
-  created: 2026-11-04
+  created: 2026-11-10
 slug: eventials-live-streaming-openvidu
 description: >-
   How Brazilian webinar platform Eventials streams live broadcasts to 30,000+
