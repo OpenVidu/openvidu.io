@@ -25,8 +25,8 @@ authors:
 
 # How Eventials cut live streaming incidents by 90% with OpenVidu
 
-![Eventials and OpenVidu customer success story](/assets/images/blog/YYYY/MM/eventials-live-streaming-openvidu/poster-light.webp#only-light "Eventials + OpenVidu"){ .round-corners }
-![Eventials and OpenVidu customer success story](/assets/images/blog/YYYY/MM/eventials-live-streaming-openvidu/poster-dark.webp#only-dark "Eventials + OpenVidu"){ .round-corners }
+![Eventials and OpenVidu customer success story](/assets/images/blog/2026/11/eventials-live-streaming-openvidu/poster-light.webp#only-light "Eventials + OpenVidu"){ .round-corners }
+![Eventials and OpenVidu customer success story](/assets/images/blog/2026/11/eventials-live-streaming-openvidu/poster-dark.webp#only-dark "Eventials + OpenVidu"){ .round-corners }
 
 Sometimes, companies face challenges for which they envision a solution that doesn't exist. **[Eventials :fontawesome-solid-external-link:{.external-link-icon}](https://eventials.com){:target="_blank"}** is one of them. When tackling 30,000+ viewer live streams, the team needed an infrastructure that could scale, while at the same time kept the costs low and under control, all of them without breaking their sanity. 
 
@@ -63,8 +63,8 @@ So the presenters' room is a regular OpenVidu Room. Presenters and invited parti
 
 Eventials makes a smart use of WebRTC and HLS technologies, by chaining them and getting the best from both worlds. WebRTC and HLS are good at opposite things: WebRTC gives the presenters a real conversation, while HLS and a CDN give tens of thousands of viewers a cheap, cacheable stream. Our post on [WebRTC vs HLS and DASH](/blog/posts/2026/09/low-latency-live-streaming.md) goes deeper into that trade-off.
 
-![Eventials architecture: presenters join an OpenVidu Room over WebRTC, a Room Composite Egress renders a custom React layout and pushes RTMP to AWS Elemental, which delivers HLS through a CDN to 30,000+ viewers](/assets/images/blog/YYYY/MM/eventials-live-streaming-openvidu/architecture-light.svg#only-light){ loading=lazy }
-![Eventials architecture: presenters join an OpenVidu Room over WebRTC, a Room Composite Egress renders a custom React layout and pushes RTMP to AWS Elemental, which delivers HLS through a CDN to 30,000+ viewers](/assets/images/blog/YYYY/MM/eventials-live-streaming-openvidu/architecture-dark.svg#only-dark){ loading=lazy }
+![Eventials architecture: presenters join an OpenVidu Room over WebRTC, a Room Composite Egress renders a custom React layout and pushes RTMP to AWS Elemental, which delivers HLS through a CDN to 30,000+ viewers](/assets/images/blog/2026/11/eventials-live-streaming-openvidu/architecture-light.svg#only-light){ loading=lazy }
+![Eventials architecture: presenters join an OpenVidu Room over WebRTC, a Room Composite Egress renders a custom React layout and pushes RTMP to AWS Elemental, which delivers HLS through a CDN to 30,000+ viewers](/assets/images/blog/2026/11/eventials-live-streaming-openvidu/architecture-dark.svg#only-dark){ loading=lazy }
 
 ## Before OpenVidu: composing in the browser
 
