@@ -37,6 +37,8 @@ This section contains the instructions to deploy a production-ready deployment o
     | TCP      | 7881          | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
     | UDP      | 50000 - 60000 | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
 
+- A proxy or load balancer of your own in front of OpenVidu Meet must let WebSocket upgrades through on the Meet path (`/meet` by default), passing the `Upgrade` and `Connection` headers, and keep idle connections open for more than 20 seconds. The proxy and load balancers that OpenVidu deploys already do.
+
 ## Installation
 
 Run this command in your server to start the installation wizard:
