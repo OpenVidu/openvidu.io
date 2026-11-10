@@ -27,14 +27,14 @@ These links can be shared freely with anyone, unless anonymous access for that r
 
 #### From the OpenVidu Meet app
 
-Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
+Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page. A user who shares access links without managing the room is offered only the links whose permissions they hold: a user with the `Speaker` permissions and `roomShareAccessLinks` can share the speaker link, never the moderator one.
 
 <a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 #### From an active meeting
 
-Participants with the `roomShareAccessLinks` permission can share the room access link from the active meeting view.
+Participants with the `roomShareAccessLinks` permission can share the room's anonymous speaker link from the active meeting view, provided they also hold every permission of the `Speaker` role. Otherwise no link is offered, as when the anonymous speaker link is disabled.
 
 ![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark){ .round-corners loading=lazy }
 ![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-light.png#only-light){ .round-corners loading=lazy }
