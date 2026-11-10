@@ -24,6 +24,14 @@ Janne Sikiö, CEO, Dicode
 
 [Read the full story →](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/)
 
+______________________________________________________________________
+
+> "Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities."
+
+Henrique Otsuka, Head of Information Technology, Eventials
+
+[Read the full story →](https://openvidu.io/blog/2026/11/04/eventials-live-streaming-openvidu/)
+
 ## Choose the ideal OpenVidu solution for your real-time needs
 
 ### 

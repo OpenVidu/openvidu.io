@@ -18,13 +18,13 @@ The advanced wizard guides you through the following steps:
 | Step             | What you configure                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Room Details** | The room **name** and an optional [auto-deletion date](#room-auto-deletion).                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **Meeting**      | The [meeting configuration](https://openvidu.io/3.9/meet/features/meetings/configuration/index.md) (a **participant limit**, a **duration limit** and whether participants join with the **microphone** and **camera** on) and the in-meeting features: **End-to-End Encryption**, **Live Captions**, **Chat** and **Virtual Backgrounds**.                                                                                                                                                     |
-| **Recording**    | Whether meetings can be [recorded](https://openvidu.io/3.9/meet/features/recordings/configuration/#enabling-recordings) and, if so, the [trigger](https://openvidu.io/3.9/meet/features/recordings/configuration/#recording-trigger) that starts the recording, its [layout](https://openvidu.io/3.9/meet/features/recordings/configuration/#recording-layouts) and [anonymous recording sharing](https://openvidu.io/3.9/meet/features/recordings/configuration/#anonymous-recording-sharing). |
-| **Room Access**  | Enable/disable **anonymous** access per role (Moderator / Speaker), allow **all users** to join, customize the default permissions of the `Moderator` and `Speaker` [roles](https://openvidu.io/3.9/meet/features/rooms/access/#predefined-roles), and add [room members](https://openvidu.io/3.9/meet/features/room-members/management/index.md).                                                                                                                                              |
+| **Meeting**      | The [meeting configuration](https://openvidu.io/latest/meet/features/meetings/configuration/index.md) (a **participant limit**, a **duration limit** and whether participants join with the **microphone** and **camera** on) and the in-meeting features: **End-to-End Encryption**, **Live Captions**, **Chat** and **Virtual Backgrounds**.                                                                                                                                                     |
+| **Recording**    | Whether meetings can be [recorded](https://openvidu.io/latest/meet/features/recordings/configuration/#enabling-recordings) and, if so, the [trigger](https://openvidu.io/latest/meet/features/recordings/configuration/#recording-trigger) that starts the recording, its [layout](https://openvidu.io/latest/meet/features/recordings/configuration/#recording-layouts) and [anonymous recording sharing](https://openvidu.io/latest/meet/features/recordings/configuration/#anonymous-recording-sharing). |
+| **Room Access**  | Enable/disable **anonymous** access per role (Moderator / Speaker), allow **all users** to join, customize the default permissions of the `Moderator` and `Speaker` [roles](https://openvidu.io/latest/meet/features/rooms/access/#predefined-roles), and add [room members](https://openvidu.io/latest/meet/features/room-members/management/index.md).                                                                                                                                              |
 
 > **Info**
 >
-> Learn more about access control and the predefined roles in [Room Access](https://openvidu.io/3.9/meet/features/rooms/access/index.md), and about who can create and manage rooms in the [Users](https://openvidu.io/3.9/meet/features/users/overview/index.md) feature.
+> Learn more about access control and the predefined roles in [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md), and about who can create and manage rooms in the [Users](https://openvidu.io/latest/meet/features/users/overview/index.md) feature.
 
 ## Edit a room
 
@@ -38,7 +38,7 @@ Reopen the configuration wizard for an existing room from the **"Rooms"** page o
 
 Every room has a status that controls whether it can host meetings:
 
-- **Open**: the room is available; opening one of its [access links](https://openvidu.io/3.9/meet/features/rooms/access/index.md) and pressing the join button starts a new meeting or joins the ongoing one.
+- **Open**: the room is available; opening one of its [access links](https://openvidu.io/latest/meet/features/rooms/access/index.md) and pressing the join button starts a new meeting or joins the ongoing one.
 - **Active meeting**: a meeting is currently in progress in the room.
 - **Closed**: the room no longer accepts new meetings, but it is kept (along with its recordings).
 
@@ -54,14 +54,14 @@ The **"Rooms"** page lists every room available to you, with its owner, status, 
 - Open the [room details page](#room-details).
 - [Edit a room](#edit-rooms) (if no meeting is active) or [change its status](#room-status).
 - [Delete rooms](#delete-rooms) individually or in bulk.
-- Share [room access links](https://openvidu.io/3.9/meet/features/rooms/access/index.md).
+- Share [room access links](https://openvidu.io/latest/meet/features/rooms/access/index.md).
 
 ## Room details
 
 Clicking a room opens its **details page**, which shows the room information and available actions such as accessing the room, sharing the access links, editing, closing/reopening, or deleting it. It also organizes the room's content in two tabs:
 
-- **Recordings**: the [recordings](https://openvidu.io/3.9/meet/features/recordings/overview/index.md) generated in this room, with play, download, share and delete actions (subject to [recording permissions](https://openvidu.io/3.9/meet/features/recordings/overview/#recording-permissions)).
-- **Room Members**: the [users and identified guests](https://openvidu.io/3.9/meet/features/room-members/overview/index.md) explicitly added to the room. See [Room Members › Creation & Management](https://openvidu.io/3.9/meet/features/room-members/management/index.md).
+- **Recordings**: the [recordings](https://openvidu.io/latest/meet/features/recordings/overview/index.md) generated in this room, with play, download, share and delete actions (subject to [recording permissions](https://openvidu.io/latest/meet/features/recordings/overview/#recording-permissions)).
+- **Room Members**: the [users and identified guests](https://openvidu.io/latest/meet/features/room-members/overview/index.md) explicitly added to the room. See [Room Members › Creation & Management](https://openvidu.io/latest/meet/features/room-members/management/index.md).
 
 ## Delete rooms
 
@@ -111,17 +111,17 @@ You can also choose between a `light` and a `dark` background style, to ensure t
 
 ## REST API reference
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md). See the [REST API specification](https://openvidu.io/3.9/meet/embedded/reference/api.html) for the full list of available endpoints, request bodies and response schemas.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md). See the [REST API specification](https://openvidu.io/latest/meet/embedded/reference/api.html) for the full list of available endpoints, request bodies and response schemas.
 
 | Operation                           | HTTP Method | Reference                                                                                          |
 | ----------------------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
-| Create a room                       | POST        | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createRoom)       |
-| List rooms                          | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getRooms)         |
-| Bulk delete rooms                   | DELETE      | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/bulkDeleteRooms)  |
-| Get a room                          | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getRoom)          |
-| Delete a room                       | DELETE      | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/deleteRoom)       |
-| Get room config                     | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getRoomConfig)    |
-| Update room config                  | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/updateRoomConfig) |
-| Update roles permissions for a room | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/updateRoomRoles)  |
-| Update room access config           | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/updateRoomAccess) |
-| Update room status                  | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/updateRoomStatus) |
+| Create a room                       | POST        | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createRoom)       |
+| List rooms                          | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRooms)         |
+| Bulk delete rooms                   | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/bulkDeleteRooms)  |
+| Get a room                          | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoom)          |
+| Delete a room                       | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/deleteRoom)       |
+| Get room config                     | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getRoomConfig)    |
+| Update room config                  | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomConfig) |
+| Update roles permissions for a room | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomRoles)  |
+| Update room access config           | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomAccess) |
+| Update room status                  | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateRoomStatus) |

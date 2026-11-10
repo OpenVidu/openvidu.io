@@ -1,6 +1,6 @@
 # Custom agents
 
-OpenVidu provides a [set of built-in agents](https://openvidu.io/3.9/docs/ai/openvidu-agents/overview/#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework](https://docs.livekit.io/agents/) .
+OpenVidu provides a [set of built-in agents](https://openvidu.io/latest/docs/ai/openvidu-agents/overview/#list-of-available-openvidu-agents), each one offering a set of AI services to help enhance the user experience in your Rooms. But you can also create **your own custom agents** to fine-tune the AI capabilities of your OpenVidu application. You can do so using the powerful [LiveKit Agents framework](https://docs.livekit.io/agents/) .
 
 ## 1. Implement your custom agent using the LiveKit Agents framework
 
@@ -83,11 +83,11 @@ CMD ["python", "agent.py", "start"]
 
 ### 1. SSH into an OpenVidu Node and go to configuration folder
 
-Depending on your [OpenVidu deployment type](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md):
+Depending on your [OpenVidu deployment type](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
 **OpenVidu Local (Development)**
 
-If you are using [OpenVidu Local (Development)](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-local-development), simply navigate to the configuration folder of the project:
+If you are using [OpenVidu Local (Development)](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-local-development), simply navigate to the configuration folder of the project:
 
 ```bash
 # For OpenVidu Local COMMUNITY
@@ -99,7 +99,7 @@ cd openvidu-local-deployment/pro
 
 **OpenVidu Single Node**
 
-If you are using [OpenVidu Single Node](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
+If you are using [OpenVidu Single Node](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
 
 ```bash
 cd /opt/openvidu/config
@@ -107,7 +107,7 @@ cd /opt/openvidu/config
 
 **OpenVidu Elastic**
 
-If you are using [OpenVidu Elastic](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-elastic), SSH into the only Master Node and navigate to:
+If you are using [OpenVidu Elastic](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-elastic), SSH into the only Master Node and navigate to:
 
 ```bash
 cd /opt/openvidu/config/cluster/media_node
@@ -115,7 +115,7 @@ cd /opt/openvidu/config/cluster/media_node
 
 **OpenVidu High Availability**
 
-If you are using [OpenVidu High Availability](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
+If you are using [OpenVidu High Availability](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
 
 ```bash
 cd /opt/openvidu/config/cluster/media_node
@@ -136,12 +136,12 @@ CUSTOM_CONFIGURATION: ...
 ```
 
 - The `docker_image` field must be the full name of the Docker image you built in [step 2](#2-dockerize-your-custom-agent). Of course, your OpenVidu nodes must have access to that Docker image's registry.
-- The `enabled` field indicates whether the agent will be started by OpenVidu or not. Setting this to `false` will result in your agent NOT being launched and not being available, even if you later try to [manually dispatch](https://openvidu.io/3.9/docs/ai/openvidu-agents/agent-dispatch/#explicit-agent-dispatch) your agent.
+- The `enabled` field indicates whether the agent will be started by OpenVidu or not. Setting this to `false` will result in your agent NOT being launched and not being available, even if you later try to [manually dispatch](https://openvidu.io/latest/docs/ai/openvidu-agents/agent-dispatch/#explicit-agent-dispatch) your agent.
 - You can add as many other properties as you want to this YAML file. You can access them within your agent's code (see [Accessing the agent's configuration file](#accessing-the-agents-configuration-file)).
 
 ### 3. Restart OpenVidu
 
-Depending on your [OpenVidu deployment type](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md):
+Depending on your [OpenVidu deployment type](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md):
 
 **OpenVidu Local (Development)**
 
@@ -209,7 +209,7 @@ const opts = new WorkerOptions({
 
 > **Property agent_name must match the value AGENT_NAME in the file agent-AGENT_NAME.yaml created here.**
 
-Then you can manually dispatch your agent using the [Dispatch API](https://openvidu.io/3.9/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-api) or via a [Participant connection](https://openvidu.io/3.9/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-a-participant-connection).
+Then you can manually dispatch your agent using the [Dispatch API](https://openvidu.io/latest/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-api) or via a [Participant connection](https://openvidu.io/latest/docs/ai/openvidu-agents/agent-dispatch/#dispatch-via-a-participant-connection).
 
 ### Accessing the agent's configuration file
 
@@ -241,7 +241,7 @@ console.log(config);
 
 ## Elasticity and graceful shutdowns
 
-Custom agents in multi-node OpenVidu deployments ([OpenVidu Elastic](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-elastic) and [OpenVidu High Availability](https://openvidu.io/3.9/docs/self-hosting/deployment-types/#openvidu-high-availability)) support automatic graceful shutdowns when Media Nodes are scaled down.
+Custom agents in multi-node OpenVidu deployments ([OpenVidu Elastic](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-elastic) and [OpenVidu High Availability](https://openvidu.io/latest/docs/self-hosting/deployment-types/#openvidu-high-availability)) support automatic graceful shutdowns when Media Nodes are scaled down.
 
 When a Media Node hosting custom agents is being removed from the OpenVidu cluster:
 

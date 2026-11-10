@@ -2,7 +2,7 @@
 
 [Source code](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-demo-app)
 
-Introducing **OpenVidu Components Demo App**, the premier videoconference application that showcases the full potential of the OpenVidu platform. OpenVidu Components Demo App is not just any videoconferencing tool; it’s the default and flagship app built with the robust and versatile [OpenVidu Components](https://openvidu.io/3.9/docs/ui-components/angular-components/index.md).
+Introducing **OpenVidu Components Demo App**, the premier videoconference application that showcases the full potential of the OpenVidu platform. OpenVidu Components Demo App is not just any videoconferencing tool; it’s the default and flagship app built with the robust and versatile [OpenVidu Components](https://openvidu.io/latest/docs/ui-components/angular-components/index.md).
 
 ## Run OpenVidu Components Demo App
 
@@ -47,11 +47,11 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 
 **Deploy OpenVidu**
 
-To use a production-ready OpenVidu deployment, visit the official [deployment guide](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md).
+To use a production-ready OpenVidu deployment, visit the official [deployment guide](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
 
 > **Configure Webhooks**
 >
-> OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
+> OpenVidu Components Demo App have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the demo code
 

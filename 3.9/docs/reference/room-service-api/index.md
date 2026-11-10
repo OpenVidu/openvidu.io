@@ -1,6 +1,6 @@
 # Room Service API
 
-The Room Service API is what your **application server** uses to manage Rooms from the outside: create and delete them, list who is in them, mute a track, remove a participant, push data into a Room. It is the counterpart to the [client SDKs](https://openvidu.io/3.9/docs/reference/client-sdk/index.md), which act from *inside* a Room as a participant.
+The Room Service API is what your **application server** uses to manage Rooms from the outside: create and delete them, list who is in them, mute a track, remove a participant, push data into a Room. It is the counterpart to the [client SDKs](https://openvidu.io/latest/docs/reference/client-sdk/index.md), which act from *inside* a Room as a participant.
 
 The API is **Twirp-based HTTP** (plain `POST` requests with a JSON body) so any language can call it. OpenVidu is API-compatible with LiveKit, so any LiveKit server SDK can be used to manage Rooms. Visit the LiveKit docs for a complete reference of the Room Service API:
 
@@ -8,7 +8,7 @@ The API is **Twirp-based HTTP** (plain `POST` requests with a JSON body) so any 
 
 ## Calling the API
 
-Each server SDK exposes the same operations through a RoomService client, built with your deployment URL, API key and API secret. The SDK signs an [access token](https://openvidu.io/3.9/docs/reference/access-tokens/index.md) with the administrative grants of each operation for you, so a server-side token never leaves your backend. For example, removing a participant:
+Each server SDK exposes the same operations through a RoomService client, built with your deployment URL, API key and API secret. The SDK signs an [access token](https://openvidu.io/latest/docs/reference/access-tokens/index.md) with the administrative grants of each operation for you, so a server-side token never leaves your backend. For example, removing a participant:
 
 **Node.js**
 
@@ -129,7 +129,7 @@ await roomClient.RemoveParticipant(new RoomParticipantIdentity
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the Room Service API directly. Every operation is a POST to `/twirp/livekit.RoomService/<Operation>`, with `Content-Type: application/json` and an [access token](https://openvidu.io/3.9/docs/reference/access-tokens/index.md) in the `Authorization` header. Parameters travel in a JSON body, accepted in both `snake_case` and `camelCase`, and operations that take none receive `{}`. The [Egress](https://openvidu.io/3.9/docs/reference/egress/index.md) and [Ingress](https://openvidu.io/3.9/docs/reference/ingress/index.md) modules expose their own services the same way, at `/twirp/livekit.Egress/` and `/twirp/livekit.Ingress/`:
+1. Call the Room Service API directly. Every operation is a POST to `/twirp/livekit.RoomService/<Operation>`, with `Content-Type: application/json` and an [access token](https://openvidu.io/latest/docs/reference/access-tokens/index.md) in the `Authorization` header. Parameters travel in a JSON body, accepted in both `snake_case` and `camelCase`, and operations that take none receive `{}`. The [Egress](https://openvidu.io/latest/docs/reference/egress/index.md) and [Ingress](https://openvidu.io/latest/docs/reference/ingress/index.md) modules expose their own services the same way, at `/twirp/livekit.Egress/` and `/twirp/livekit.Ingress/`:
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/RemoveParticipant' \
@@ -199,7 +199,7 @@ Every operation includes:
 | [`GetParticipant`](https://docs.livekit.io/reference/other/roomservice-api/#getparticipant)           | `roomAdmin` | [`ParticipantInfo`](https://docs.livekit.io/reference/other/roomservice-api/#participantinfo)         | Returns one participant by identity                                                                                                                                                                                                 |
 | [`RemoveParticipant`](https://docs.livekit.io/reference/other/roomservice-api/#removeparticipant)     | `roomAdmin` | Empty                                                                                                 | Disconnects a participant. They can reconnect with a valid token. To keep them out, stop issuing tokens                                                                                                                             |
 | [`UpdateParticipant`](https://docs.livekit.io/reference/other/roomservice-api/#updateparticipant)     | `roomAdmin` | [`ParticipantInfo`](https://docs.livekit.io/reference/other/roomservice-api/#participantinfo)         | Changes a participant's metadata, name, attributes or permissions. Broadcast to the Room                                                                                                                                            |
-| [`MutePublishedTrack`](https://docs.livekit.io/reference/other/roomservice-api/#mutepublishedtrack)   | `roomAdmin` | [`TrackInfo`](https://docs.livekit.io/reference/other/roomservice-api/#trackinfo)                     | Mutes or unmutes one of a participant's published tracks. Remote unmute additionally requires `room.enable_remote_unmute: true` in [`livekit.yaml`](https://openvidu.io/3.9/docs/self-hosting/configuration/reference/#livekityaml) |
+| [`MutePublishedTrack`](https://docs.livekit.io/reference/other/roomservice-api/#mutepublishedtrack)   | `roomAdmin` | [`TrackInfo`](https://docs.livekit.io/reference/other/roomservice-api/#trackinfo)                     | Mutes or unmutes one of a participant's published tracks. Remote unmute additionally requires `room.enable_remote_unmute: true` in [`livekit.yaml`](https://openvidu.io/latest/docs/self-hosting/configuration/reference/#livekityaml) |
 | [`UpdateSubscriptions`](https://docs.livekit.io/reference/other/roomservice-api/#updatesubscriptions) | `roomAdmin` | Empty                                                                                                 | Subscribes or unsubscribes a participant to specific tracks, from the server side                                                                                                                                                   |
 
 ### Data
@@ -230,11 +230,11 @@ Each side can do things the other cannot:
 | Change what a participant subscribes to | Its own subscriptions                                       | Any participant's subscriptions                                                          |
 | Send data messages                      | Yes                                                         | Yes                                                                                      |
 
-The same split holds beyond this API. [Egress](https://openvidu.io/3.9/docs/reference/egress/index.md) and [Ingress](https://openvidu.io/3.9/docs/reference/ingress/index.md) are server-side services as well, so a participant cannot start a recording or pull in an external stream on its own. See [*Common operations* > *From your application server*](https://openvidu.io/3.9/docs/build-your-app/common-operations/#from-your-application-server) for a list of every operation that only exists on the server side.
+The same split holds beyond this API. [Egress](https://openvidu.io/latest/docs/reference/egress/index.md) and [Ingress](https://openvidu.io/latest/docs/reference/ingress/index.md) are server-side services as well, so a participant cannot start a recording or pull in an external stream on its own. See [*Common operations* > *From your application server*](https://openvidu.io/latest/docs/build-your-app/common-operations/#from-your-application-server) for a list of every operation that only exists on the server side.
 
 ## Related
 
-- [Access tokens reference](https://openvidu.io/3.9/docs/reference/access-tokens/index.md): the access token grants in detail
-- [Common operations](https://openvidu.io/3.9/docs/build-your-app/common-operations/index.md): the cheat sheet of every operation, client-side and server-side
-- [Application server tutorials](https://openvidu.io/3.9/docs/tutorials/application-server/index.md): complete servers in nine languages
-- [Client SDK reference](https://openvidu.io/3.9/docs/reference/client-sdk/index.md): the same Room, seen from inside
+- [Access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): the access token grants in detail
+- [Common operations](https://openvidu.io/latest/docs/build-your-app/common-operations/index.md): the cheat sheet of every operation, client-side and server-side
+- [Application server tutorials](https://openvidu.io/latest/docs/tutorials/application-server/index.md): complete servers in nine languages
+- [Client SDK reference](https://openvidu.io/latest/docs/reference/client-sdk/index.md): the same Room, seen from inside

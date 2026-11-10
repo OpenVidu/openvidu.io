@@ -46,6 +46,7 @@ OpenVidu is self-hosted: it runs on infrastructure you control. Two products sha
 - [How Dicode built private video calls on OpenVidu](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/index.md): How Finnish software house Dicode built private, embeddable video calls for non-profit organizations on OpenVidu, with data kept under its own control.
 - [Introducing the OpenVidu Agent Plugin for coding agents](https://openvidu.io/blog/2026/10/07/openvidu-agent-plugin/index.md): Meet the OpenVidu Agent Plugin, which gives your coding agent the official OpenVidu documentation for the version, edition and product you run.
 - [ARM or x86 for WebRTC media servers? Participants per node on 3 clouds](https://openvidu.io/blog/2026/11/03/arm-vs-x86-webrtc-server-costs/index.md): We deployed OpenVidu 3.8 on matching ARM and x86 instances in AWS, Google Cloud and Oracle Cloud and measured how many participants each node holds per dollar.
+- [How Eventials cut live streaming incidents by 90% with OpenVidu](https://openvidu.io/blog/2026/11/10/eventials-live-streaming-openvidu/index.md): How Brazilian webinar platform Eventials streams live broadcasts to 30,000+ viewers on OpenVidu, and why incidents dropped after moving to OpenVidu 3.
 
 ## OpenVidu Meet
 

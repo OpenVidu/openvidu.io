@@ -630,7 +630,7 @@ About the exported variables:
 
 > **Info**
 >
-> If any of the MongoDB or MinIO restore commands fail, check the version compatibility between the Docker images used in the backup/restore process and the versions running in your OpenVidu deployment. You can check the versions in the [Release Notes](https://openvidu.io/3.9/docs/releases/index.md) and adjust the image tags in the `docker run` commands to match your environment.
+> If any of the MongoDB or MinIO restore commands fail, check the version compatibility between the Docker images used in the backup/restore process and the versions running in your OpenVidu deployment. You can check the versions in the [Release Notes](https://openvidu.io/latest/docs/releases/index.md) and adjust the image tags in the `docker run` commands to match your environment.
 
 ## Method 4: Only snapshots provided by external services used for S3 or MongoDB
 
@@ -677,7 +677,7 @@ To ensure everything works correctly after restoring data, follow these steps:
      MASTER_NODE_PRIVATE_IP=<MASTER_NODE_PRIVATE_IP>
      ```
 
-   - In case you need to reinstall Media Nodes, follow [this command](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/#non-interactive-installation)
+   - In case you need to reinstall Media Nodes, follow [this command](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/#non-interactive-installation)
 
    **High Availability**
 
@@ -702,7 +702,7 @@ To ensure everything works correctly after restoring data, follow these steps:
      MASTER_NODE_4_PRIVATE_IP=<MASTER_NODE_4_PRIVATE_IP>
      ```
 
-   - In case you need to reinstall Media Nodes, follow [this command](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/install-dlb/#non-interactive-installation)
+   - In case you need to reinstall Media Nodes, follow [this command](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-dlb/#non-interactive-installation)
 
 1. **Check if all containers are running smoothly**
 
