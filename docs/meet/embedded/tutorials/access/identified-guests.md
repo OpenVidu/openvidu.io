@@ -124,7 +124,7 @@ app.post('/rooms/:roomId/members', async (req, res) => {
 3. The `name` is the fixed display name the participant will have in the meeting. Providing `name` (and **not** `userId`) is what tells the API to create a member of type `identified_guest`.
 4. The `baseRole` (`moderator` or `speaker`) defines the default set of permissions for the member.
 
-This endpoint adds the identified guest by sending a `POST` request to the `rooms/:roomId/members` endpoint. The API responds with the created member, which includes a generated `memberId` (in the form `guest-XXXX`) and a unique `accessUrl` such as `http://localhost:9080/meet/room/<roomId>?secret=guest-XXXX`. That URL is unique to this member and grants access to the room with no login required.
+This endpoint adds the identified guest by sending a `POST` request to the `rooms/:roomId/members` endpoint. The API responds with the created member, which includes a generated `memberId` (in the form `guest-XXXX`) and a unique `accessUrl` such as `http://localhost:9080/meet/room/<roomId>?secret=guest-XXXX-YYYY`. That URL is unique to this member and grants access to the room with no login required. Always share the `accessUrl` as it is: the `memberId` alone does not grant access, because it is also the guest's identity, visible to the other participants of the meeting.
 
 !!! info
 
