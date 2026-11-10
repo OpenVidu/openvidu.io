@@ -68,6 +68,8 @@ When you create a shareable link for a recording, you choose **who can access it
 - **OpenVidu Meet users**: any logged-in OpenVidu Meet user can view the recording — even if they have no recording permissions in that room, or no access to the room at all.
 - **Anyone**: any individual with the link can view it without logging in. This option is available only when the room has [anonymous recording sharing](configuration.md#anonymous-recording-sharing) enabled.
 
+A link offers the download only when the person who created it holds the download permission. A link created without it plays the recording but does not offer to download it.
+
 <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
