@@ -164,6 +164,7 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application 
 - A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `lobbyStatusChanged`.
 - While waiting, `mediaToggleAudio` and `mediaToggleVideo` act on the preview, and `meetingLeave` leaves the waiting room and reports `left`.
 - Removing the element or the iframe while the participant waits is not a leave: the place is lost after about a minute and reported as `expired`.
+- With an iframe, the host waits for `lobbyStatusChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
 
 A host page with a Content Security Policy must also allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](../../embedded/reference/webcomponent.md#content-security-policy).
 
