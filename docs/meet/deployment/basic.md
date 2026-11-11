@@ -87,6 +87,10 @@ OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refe
 - [Upgrade OpenVidu Meet to a newer version](../../docs/self-hosting/single-node/upgrade.md)
 - [Uninstall OpenVidu Meet](../../docs/self-hosting/single-node/on-premises/admin.md#uninstalling-openvidu)
 
+## Troubleshooting { #troubleshooting }
+
+**A meeting shows the connection error screen while a participant waits to be let in**, and the browser console shows an error naming a WebSocket URL. A proxy or network between the browser and OpenVidu Meet blocks WebSocket upgrades. The proxy and load balancers that OpenVidu deploys already let them through, so look at a proxy or load balancer of your own, or at the participant's network: it must pass the `Upgrade` and `Connection` headers on the Meet path (`/meet` by default) and keep idle connections open for more than 20 seconds, as the [networking requirements](#networking) say. In a multi-node deployment, see also [Proxies, load balancers and Redis](./advanced.md#proxies-load-balancers-and-redis).
+
 ## Other deployment options
 
 This guide has covered the manual installation of OpenVidu Meet as a single-node deployment in a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:

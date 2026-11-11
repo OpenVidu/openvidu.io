@@ -21,6 +21,10 @@ This view allows members to tune their microphone and camera before joining the 
 ![Device view for tuning microphone, camera and virtual background](../../../assets/images/meet/meetings/lifecycle/device-view-dark.png#only-dark){ .round-corners loading=lazy }
 ![Device view for tuning microphone, camera and virtual background](../../../assets/images/meet/meetings/lifecycle/device-view-light.png#only-light){ .round-corners loading=lazy }
 
+## Waiting view
+
+In a room with the [waiting room](waiting-room.md) on, a member without the `lobbyBypass` permission sees this view instead of the Device view. Its Join view button reads **Ask to join**, and the Waiting view shows their position in line, the room's message and a camera preview to set up their devices while a moderator decides. When they are admitted, they enter the Meeting view without reloading the page.
+
 ## Meeting view
 
 The Meeting View is the central interface where all participants can see, hear, and interact with each other in real time. It features a [smart, dynamic layout](smart-layout.md) that automatically adapts to the number of active participants, ensuring an optimal viewing experience at all times.

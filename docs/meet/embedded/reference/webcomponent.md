@@ -30,6 +30,14 @@ One of **`room-url`** or **`recording-url`** is required: the former determines 
 
 	You can obtain a room's access links programmatically from your backend with the [REST API](rest-api.md): the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](api.html#/schemas/MeetRoom){:target="_blank"} object, or the unique `accessUrl` of an [identified-guest member](../../features/room-members/overview.md#users-vs-identified-guests).
 
+## Content Security Policy { #content-security-policy }
+
+The Web Component runs in your page and opens its connections to OpenVidu Meet from it. If your page sets a [Content Security Policy :fontawesome-solid-external-link:{.external-link-icon}](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP){:target="_blank"}, allow the OpenVidu Meet origin in `connect-src` for HTTPS requests and for WebSocket too (`wss://`). The realtime connection of a participant [waiting to be admitted](../../features/meetings/waiting-room.md) uses the WebSocket one.
+
+```text
+Content-Security-Policy: connect-src 'self' https://{{ your-domain }} wss://{{ your-domain }}
+```
+
 ## API Reference
 
 ### Attributes
