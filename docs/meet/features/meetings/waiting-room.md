@@ -13,6 +13,9 @@ The interface says "waiting room". The REST API, the webhooks and the embedded A
 
 The waiting room is off by default. Turn it on per room from the **Waiting room** section of the **Room Access** step of the room configuration wizard, or with the room config `lobby.enabled`. In the same section, an optional **message** of up to 500 characters is shown to everyone while they wait. Use it to say what the meeting is or when it starts.
 
+![Room Access step of the room wizard with the waiting room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/waiting-room/room-wizard-lobby-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Room Access step of the room wizard with the waiting room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/waiting-room/room-wizard-lobby-light.webp#only-light){ .control-height .round-corners loading=lazy }
+
 Via the REST API, `lobby` takes `enabled` and an optional `message`. Sending `message` as `null` removes it:
 
 ```json
@@ -46,6 +49,9 @@ Both are granted by default to the `Moderator` [predefined role](../rooms/access
 
 In the [Join view](lifecycle.md#join-view), the button of a participant who would wait reads **Ask to join**. Pressing it puts them in line at once, and they skip the [Device view](lifecycle.md#device-view): the waiting view is where they prepare their camera and microphone. A participant who joins without waiting sees **Join Meeting** and the Device view as usual.
 
+![Join view of a room with a waiting room, with the Ask to join button](../../../assets/images/meet/meetings/waiting-room/join-ask-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Join view of a room with a waiting room, with the Ask to join button](../../../assets/images/meet/meetings/waiting-room/join-ask-light.webp#only-light){ .control-height .round-corners loading=lazy }
+
 If the waiting room is turned on while someone is in the Device view, pressing join takes them to the waiting view with the devices they chose.
 
 ### The waiting view { #waiting-view }
@@ -58,6 +64,9 @@ While they wait, participants see:
 - A **camera preview** with the device controls, to set up the camera, the microphone and the [virtual background](virtual-background.md) while they wait.
 - "The meeting hasn't started yet", while no meeting is running in the room.
 - A **Leave waiting room** button.
+
+![Waiting view showing the position in line, the time waited, the room message and the camera preview](../../../assets/images/meet/meetings/waiting-room/waiting-screen-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Waiting view showing the position in line, the time waited, the room message and the camera preview](../../../assets/images/meet/meetings/waiting-room/waiting-screen-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 All of it updates live. The position and whether the meeting has started can lag by up to about 20 seconds. Screen readers announce position changes politely, at most once every 10 seconds, and announce the admission or the end of the wait at once.
 
@@ -76,6 +85,9 @@ The view says why the wait ended:
 | The room was closed or deleted                   | The same error view as a closed room without the waiting room.                          |
 | They pressed **Leave waiting room**              | A message that they left.                                                              |
 | 100 participants were already waiting            | "The waiting room is full", with **Ask to join again**. See [Capacity](#capacity).       |
+
+![The "You weren't let in" view of a participant whom a moderator denied](../../../assets/images/meet/meetings/waiting-room/rejected-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![The "You weren't let in" view of a participant whom a moderator denied](../../../assets/images/meet/meetings/waiting-room/rejected-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 In an [embedded](../../embedded/intro.md) meeting, these views offer the same dismiss button as the [End view](lifecycle.md#end-view): pressing it emits `embeddedCloseRequested` to the host application.
 
@@ -96,11 +108,17 @@ A page that never manages to connect shows the connection error screen instead o
 
 Participants with `lobbyAdmin` see who waits, live, from the moment each one presses **Ask to join**. Everyone else in the meeting sees nothing of it.
 
+![Participants panel of a moderator with the Waiting to join section, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Participants panel of a moderator with the Waiting to join section, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-light.webp#only-light){ .control-height .round-corners loading=lazy }
+
 - A **Waiting to join** section at the top of the **Participants** panel lists the participants in arrival order, each with **Admit** and **Deny**. Under a [participant limit](configuration.md#participant-limit), it also shows the free places, such as "2 places left".
 - A **Shared link** label marks the participants who asked with a shared link of the room: anyone with the link can type any name, so the label tells them apart from an account or a personal link. When two rows share a name, each shows the time it asked to join.
 - From two waiting, **Deny all** rejects everyone waiting, after a confirmation, and **Admit N** admits the first N in line that fit in the free places.
 - The **status rail** at the top of the meeting shows a chip with the number waiting, such as "3 waiting to join".
 - While the panel is closed, a **notification** below the rail names each participant who starts waiting, with **Deny** and **Admit**. Several are gathered into one with the number waiting and a **View** button, and joining a meeting where people already wait shows one gathered notification. Opening the panel dismisses it. It never takes the keyboard focus.
+
+![Notification below the status rail announcing a participant who asks to join, with Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-dark.webp#only-dark){ .round-corners loading=lazy }
+![Notification below the status rail announcing a participant who asks to join, with Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-light.webp#only-light){ .round-corners loading=lazy }
 
 A participant who is **admitted** joins the meeting. One who is **denied** is told they weren't let in. Denying everyone rejects whoever waits when the request arrives, and whoever asks afterwards waits as usual. There is no block list, and no way to send a participant back to the line.
 
