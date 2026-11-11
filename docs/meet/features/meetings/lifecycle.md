@@ -23,7 +23,7 @@ This view allows members to tune their microphone and camera before joining the 
 
 ## Waiting view
 
-In a room with the [waiting room](waiting-room.md) on, a member without the `lobbyBypass` permission sees this view instead of the Device view. Its Join view button reads **Ask to join**, and the Waiting view shows their position in line, the room's message and a camera preview to set up their devices while a moderator decides. When they are admitted, they enter the Meeting view without reloading the page.
+In a room with the [waiting room](waiting-room.md) on, a member without the `waitingRoomBypass` permission sees this view instead of the Device view. Its Join view button reads **Ask to join**, and the Waiting view shows their position in line, the room's message and a camera preview to set up their devices while a moderator decides. When they are admitted, they enter the Meeting view without reloading the page.
 
 ## Meeting view
 

@@ -73,7 +73,7 @@ Grants full meeting permissions by default:
 - **Recording control**: start and stop recordings, and list, play, download and delete them.
 - **Live broadcast control**: start and stop the [live broadcast](../meetings/live-broadcast.md) of the meeting to the room's destinations, and stream it to destinations the room does not have.
 - **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, [lower their raised hands](../meetings/raise-hand.md#lowering-hands), kick them, and share room access links.
-- **Waiting room**: `lobbyBypass` to join [without waiting](../meetings/waiting-room.md#who-waits) and `lobbyAdmin` to [admit or reject](../meetings/waiting-room.md#admitting-and-rejecting) the participants who wait, in rooms that have the waiting room on.
+- **Waiting room**: `waitingRoomBypass` to join [without waiting](../meetings/waiting-room.md#who-waits) and `waitingRoomAdmin` to [admit or reject](../meetings/waiting-room.md#admitting-and-rejecting) the participants who wait, in rooms that have the waiting room on.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 
@@ -83,7 +83,7 @@ Grants basic participation permissions by default:
 
 - **Meeting access**: join the meeting and read its live state.
 - **Recording access**: list, play and download the room's recordings — but not start, stop or delete them.
-- **Waiting room**: neither `lobbyBypass` nor `lobbyAdmin`, so in a room with the [waiting room](../meetings/waiting-room.md) on, a speaker asks to join and waits to be admitted.
+- **Waiting room**: neither `waitingRoomBypass` nor `waitingRoomAdmin`, so in a room with the [waiting room](../meetings/waiting-room.md) on, a speaker asks to join and waits to be admitted.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 

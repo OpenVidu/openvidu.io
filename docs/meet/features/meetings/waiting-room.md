@@ -7,19 +7,17 @@ description: "Hold participants in a waiting room until a moderator admits or re
 
 In a room with the **waiting room** on, a participant who asks to join does not enter the meeting. They wait, and someone with the right permission **admits** or **denies** them. It suits classes, consultations and public meetings, where the host wants to see who is asking before letting anyone in.
 
-The interface says "waiting room". The REST API, the webhooks and the embedded API call it `lobby`.
-
 ## Turning it on { #turning-it-on }
 
-The waiting room is off by default. Turn it on per room from the **Waiting room** section of the **Room Access** step of the room configuration wizard, or with the room config `lobby.enabled`. In the same section, an optional **message** of up to 500 characters is shown to everyone while they wait. Use it to say what the meeting is or when it starts.
+The waiting room is off by default. Turn it on per room from the **Waiting room** section of the **Room Access** step of the room configuration wizard, or with the room config `waitingRoom.enabled`. In the same section, an optional **message** of up to 500 characters is shown to everyone while they wait. Use it to say what the meeting is or when it starts.
 
-![Room Access step of the room wizard with the waiting room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/waiting-room/room-wizard-lobby-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
-![Room Access step of the room wizard with the waiting room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/waiting-room/room-wizard-lobby-light.webp#only-light){ .control-height .round-corners loading=lazy }
+![Room Access step of the room wizard with the waiting room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/waiting-room/room-wizard-waiting-room-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Room Access step of the room wizard with the waiting room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/waiting-room/room-wizard-waiting-room-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
-Via the REST API, `lobby` takes `enabled` and an optional `message`. Sending `message` as `null` removes it:
+Via the REST API, `waitingRoom` takes `enabled` and an optional `message`. Sending `message` as `null` removes it:
 
 ```json
-{ "config": { "lobby": { "enabled": true, "message": "The class starts at 10:00. We will let you in shortly." } } }
+{ "config": { "waitingRoom": { "enabled": true, "message": "The class starts at 10:00. We will let you in shortly." } } }
 ```
 
 - Like the rest of the room config, the waiting room can only be changed while **no meeting is running**. A meeting has no switch to turn it off.
@@ -31,16 +29,16 @@ Via the REST API, `lobby` takes `enabled` and an optional `message`. Sending `me
 
 Two [permissions](../rooms/access.md#predefined-roles) decide it. They are independent of each other:
 
-| Permission    | Name in the interface | What it allows                                                                |
-| ------------- | --------------------- | ----------------------------------------------------------------------------- |
-| `lobbyBypass` | Join without waiting  | Joining the meeting directly, without asking.                                 |
-| `lobbyAdmin`  | Admit participants    | Seeing who waits, and admitting or rejecting them, from the meeting or an API. |
+| Permission          | Name in the interface | What it allows                                                                 |
+| ------------------- | --------------------- | ------------------------------------------------------------------------------ |
+| `waitingRoomBypass` | Join without waiting  | Joining the meeting directly, without asking.                                  |
+| `waitingRoomAdmin`  | Admit participants    | Seeing who waits, and admitting or rejecting them, from the meeting or an API. |
 
 Both are granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room, including the rooms created before this feature existed, and to the room members with that role. The `Speaker` role has neither, so speakers wait. Both can be revoked or granted to other participants in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member). The wizard groups them under **Waiting room**.
 
-- A participant with `lobbyAdmin` but without `lobbyBypass` waits like anyone else. Once they are let in, they admit the others.
+- A participant with `waitingRoomAdmin` but without `waitingRoomBypass` waits like anyone else. Once they are let in, they admit the others.
 - **Admins** and the **room owner** have every permission, so they never wait.
-- A participant who gains `lobbyBypass` while waiting keeps waiting until someone admits them.
+- A participant who gains `waitingRoomBypass` while waiting keeps waiting until someone admits them.
 - The usual checks of a join run before anyone waits: a closed room, a disabled link or a missing `meetingJoin` permission never reach the waiting room. Only the [participant limit](configuration.md#participant-limit) is checked later, when the participant is let in.
 
 ## What the participant sees { #participant-view }
@@ -106,7 +104,7 @@ A page that never manages to connect shows the connection error screen instead o
 
 ## Admitting and rejecting { #admitting-and-rejecting }
 
-Participants with `lobbyAdmin` see who waits, live, from the moment each one presses **Ask to join**. Everyone else in the meeting sees nothing of it.
+Participants with `waitingRoomAdmin` see who waits, live, from the moment each one presses **Ask to join**. Everyone else in the meeting sees nothing of it.
 
 ![Participants panel of a moderator with the Waiting to join section, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
 ![Participants panel of a moderator with the Waiting to join section, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-light.webp#only-light){ .control-height .round-corners loading=lazy }
@@ -133,14 +131,14 @@ The waiting room works with the room's [participant limit](configuration.md#part
 - **Admitted participants count as taken places until they join**, a minute at most. An admission that is not used within a minute is lost: the waiter sees "You lost your place" and asks again, and the place is free again for the next admission.
 - Two moderators admitting at the same time cannot both take the last place. One succeeds, and the other is told there is no room.
 - Admitting named participants who outnumber the free places admits nobody. **Admitting everyone waiting** admits the first in line, up to the free places, and the rest keep their place.
-- A participant who is admitted but finds the meeting full when they ask for their join, because someone with `lobbyBypass` took the place meanwhile, goes back to their place in line.
+- A participant who is admitted but finds the meeting full when they ask for their join, because someone with `waitingRoomBypass` took the place meanwhile, goes back to their place in line.
 - **Turning the waiting room off** while more participants wait than the meeting can take lets in whoever connects first, not the first in line. The others see "Meeting full".
 - A participant is **listed as soon as they ask**, before their waiting view connects. One who never opens it, such as a script or a tab closed at once, shows for 15 to 20 seconds and then disappears.
 - The waiting list holds up to **100 participants**. One more asking to join sees "The waiting room is full".
 
 ## Acting on a meeting behind a waiting room { #who-acts }
 
-In a room with the waiting room on, a **room member token** acts on the meeting only if its holder was let in, which means the token carries a participant identity, as the token of an admitted participant or of a holder of `lobbyBypass` does. Acting on the meeting covers reading it and its participants, ending it, moderating it, controlling recordings and broadcasts, and admitting or rejecting.
+In a room with the waiting room on, a **room member token** acts on the meeting only if its holder was let in, which means the token carries a participant identity, as the token of an admitted participant or of a holder of `waitingRoomBypass` does. Acting on the meeting covers reading it and its participants, ending it, moderating it, controlling recordings and broadcasts, and admitting or rejecting.
 
 A token obtained without joining keeps only the recording permissions (`recordingList`, `recordingPlay`, `recordingDownload`, `recordingDelete`) and `roomShareAccessLinks`. So a participant who waits cannot read the meeting, list its participants or admit anyone, themselves included, whatever their permissions.
 
@@ -170,42 +168,42 @@ A **host application acting for itself**, such as a dashboard or an admission ba
 
 When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application drives the waiting room with the [commands](../../embedded/reference/webcomponent.md#commands) and [events](../../embedded/reference/webcomponent.md#events) of the Web Component and the iframe.
 
-**For the participants who admit.** They act on behalf of the local participant, who must hold `lobbyAdmin` and be in the meeting:
+**For the participants who admit.** They act on behalf of the local participant, who must hold `waitingRoomAdmin` and be in the meeting:
 
-- `lobbyAdmit` and `lobbyReject` take an optional `participantIdentities` list. With identities, they act on exactly those participants, all or none. Without it, they act on everyone waiting: `lobbyAdmit` admits the first in line up to the free places, and `lobbyReject` rejects everyone waiting when the command runs. An empty list is refused.
-- `participantKnocked` fires once for each participant who starts waiting while the local participant is in the meeting. The participants already waiting when the element joined, and a participant back in line after an admission that failed, arrive in `lobbyUpdated` instead.
-- `lobbyUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes.
+- `waitingRoomAdmit` and `waitingRoomReject` take an optional `participantIdentities` list. With identities, they act on exactly those participants, all or none. Without it, they act on everyone waiting: `waitingRoomAdmit` admits the first in line up to the free places, and `waitingRoomReject` rejects everyone waiting when the command runs. An empty list is refused.
+- `participantKnocked` fires once for each participant who starts waiting while the local participant is in the meeting. The participants already waiting when the element joined, and a participant back in line after an admission that failed, arrive in `waitingRoomUpdated` instead.
+- `waitingRoomUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes.
 
-**For the participant who waits.** The host of a waiting participant receives `lobbyStatusChanged` with the `participantIdentity`, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks).
+**For the participant who waits.** The host of a waiting participant receives `waitingRoomStatusChanged` with the `participantIdentity`, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks).
 
-- `meetingJoined`, not `admitted`, is what confirms the join. A join that finds the meeting full after `admitted` raises no lobby event.
-- A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `lobbyStatusChanged`.
+- `meetingJoined`, not `admitted`, is what confirms the join. A join that finds the meeting full after `admitted` raises no waiting room event.
+- A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `waitingRoomStatusChanged`.
 - While waiting, `mediaToggleAudio` and `mediaToggleVideo` act on the preview, and `meetingLeave` leaves the waiting room and reports `left`.
 - Removing the element or the iframe while the participant waits is not a leave: the place is lost after about a minute and reported as `expired`.
-- With an iframe, the host waits for `lobbyStatusChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
+- With an iframe, the host waits for `waitingRoomStatusChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
 
 A host page with a Content Security Policy must also allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](../../embedded/reference/webcomponent.md#content-security-policy).
 
 ## REST API and webhooks { #rest-api-reference }
 
-The waiting room can also be run from your backend with the [Meetings REST API](../../embedded/reference/rest-api.md). Unlike the other meeting operations, these three answer whether or not a meeting is running, since participants wait before the first one starts it. They require `lobbyAdmin`, and a request authenticated with the API key is not subject to it. A room member token needs its holder to have been let in, as [explained above](#who-acts).
+The waiting room can also be run from your backend with the [Meetings REST API](../../embedded/reference/rest-api.md). Unlike the other meeting operations, these three answer whether or not a meeting is running, since participants wait before the first one starts it. They require `waitingRoomAdmin`, and a request authenticated with the API key is not subject to it. A room member token needs its holder to have been let in, as [explained above](#who-acts).
 
 | Operation                          | HTTP Method | Reference                                                                                                                                                  |
 | ---------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List the participants waiting      | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/lobbyList){:target="_blank"}             |
-| Admit waiting participants         | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/lobbyAdmit){:target="_blank"}            |
-| Reject waiting participants        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/lobbyReject){:target="_blank"}           |
+| List the participants waiting      | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingRoomList){:target="_blank"}             |
+| Admit waiting participants         | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingRoomAdmit){:target="_blank"}            |
+| Reject waiting participants        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingRoomReject){:target="_blank"}           |
 
-- `lobbyList` answers `participants`, those waiting in arrival order, each with its `participantIdentity`, `participantName`, `type`, `knockDate` and, when the client sent them, `externalId` and `metadata`. It also answers `availablePlaces`, the free places, or `null` when the room has no participant limit.
-- `lobbyAdmit` and `lobbyReject` take `participantIdentities`, from 1 to 100 distinct identities, or no `participantIdentities` for everyone waiting. An empty or repeated list is a `422`, never read as everyone. A decision on named participants applies to all of them or to none: it answers `404`, naming the first identity that no longer waits, and `lobbyAdmit` also answers `409` when they outnumber the free places. Both answer the participants decided on.
-- With the waiting room off, `lobbyList` answers an empty list, a decision on named participants answers `404`, and a decision on everyone waiting answers an empty list of participants.
+- `waitingRoomList` answers `participants`, those waiting in arrival order, each with its `participantIdentity`, `participantName`, `type`, `knockDate` and, when the client sent them, `externalId` and `metadata`. It also answers `availablePlaces`, the free places, or `null` when the room has no participant limit.
+- `waitingRoomAdmit` and `waitingRoomReject` take `participantIdentities`, from 1 to 100 distinct identities, or no `participantIdentities` for everyone waiting. An empty or repeated list is a `422`, never read as everyone. A decision on named participants applies to all of them or to none: it answers `404`, naming the first identity that no longer waits, and `waitingRoomAdmit` also answers `409` when they outnumber the free places. Both answer the participants decided on.
+- With the waiting room off, `waitingRoomList` answers an empty list, a decision on named participants answers `404`, and a decision on everyone waiting answers an empty list of participants.
 
 ### Webhooks { #webhooks }
 
 Two [webhooks](../../embedded/reference/webhooks.md) report the waiting room:
 
 - The [`participantKnocked` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantKnockedWebhook){:target="_blank"} is sent once for each wait, when the participant asks to join and before their waiting view connects. A participant who never connects therefore produces a `participantKnocked` and, about 20 seconds later, an `expired` status.
-- The [`lobbyStatusChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/lobbyStatusChangedWebhook){:target="_blank"} is sent for each later change of the wait, one per participant, also when a decision covers everyone waiting. It carries the participant, a `status` and the `origin` of the change.
+- The [`waitingRoomStatusChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/waitingRoomStatusChangedWebhook){:target="_blank"} is sent for each later change of the wait, one per participant, also when a decision covers everyone waiting. It carries the participant, a `status` and the `origin` of the change.
 
 | `status`        | What happened                                                                             |
 | --------------- | ----------------------------------------------------------------------------------------- |
@@ -222,7 +220,7 @@ Two [webhooks](../../embedded/reference/webhooks.md) report the waiting room:
 ```json
 {
   "creationDate": 1620000012000,
-  "event": "lobbyStatusChanged",
+  "event": "waitingRoomStatusChanged",
   "data": {
     "roomId": "room-123",
     "roomName": "room",
