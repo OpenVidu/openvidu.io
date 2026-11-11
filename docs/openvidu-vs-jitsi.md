@@ -179,10 +179,8 @@ inside their product rather than a UI built from primitives.
 
 ## Where Jitsi still has the edge
 
-Jitsi Meet ships app-level features OpenVidu Meet doesn't have yet: a lobby, where a moderator
-approves each participant before letting them in (OpenVidu Meet's equivalent, locked rooms, is on
-the roadmap but not shipped); breakout rooms and a collaborative whiteboard; and native mobile apps
-for iOS and Android.
+Jitsi Meet ships app-level features OpenVidu Meet doesn't have yet: breakout rooms and a
+collaborative whiteboard; and native mobile apps for iOS and Android.
 
 ## Pricing
 
