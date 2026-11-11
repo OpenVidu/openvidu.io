@@ -170,7 +170,7 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application 
 
 **For the participants who admit.** They act on behalf of the local participant, who must hold `waitingRoomAdmin` and be in the meeting:
 
-- `waitingRoomAdmit` and `waitingRoomReject` take an optional `participantIdentities` list. With identities, they act on exactly those participants, all or none. Without it, they act on everyone waiting: `waitingRoomAdmit` admits the first in line up to the free places, and `waitingRoomReject` rejects everyone waiting when the command runs. An empty list is refused.
+- `participantWaitingAdmit` and `participantWaitingReject` take an optional `participantIdentities` list. With identities, they act on exactly those participants, all or none. Without it, they act on everyone waiting: `participantWaitingAdmit` admits the first in line up to the free places, and `participantWaitingReject` rejects everyone waiting when the command runs. An empty list is refused.
 - `participantKnocked` fires once for each participant who starts waiting while the local participant is in the meeting. The participants already waiting when the element joined, and a participant back in line after an admission that failed, arrive in `waitingRoomUpdated` instead.
 - `waitingRoomUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes.
 
@@ -190,13 +190,13 @@ The waiting room can also be run from your backend with the [Meetings REST API](
 
 | Operation                          | HTTP Method | Reference                                                                                                                                                  |
 | ---------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List the participants waiting      | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingRoomList){:target="_blank"}             |
-| Admit waiting participants         | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingRoomAdmit){:target="_blank"}            |
-| Reject waiting participants        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingRoomReject){:target="_blank"}           |
+| List the participants waiting      | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantWaitingList){:target="_blank"}             |
+| Admit waiting participants         | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantWaitingAdmit){:target="_blank"}            |
+| Reject waiting participants        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantWaitingReject){:target="_blank"}           |
 
-- `waitingRoomList` answers `participants`, those waiting in arrival order, each with its `participantIdentity`, `participantName`, `type`, `knockDate` and, when the client sent them, `externalId` and `metadata`. It also answers `availablePlaces`, the free places, or `null` when the room has no participant limit.
-- `waitingRoomAdmit` and `waitingRoomReject` take `participantIdentities`, from 1 to 100 distinct identities, or no `participantIdentities` for everyone waiting. An empty or repeated list is a `422`, never read as everyone. A decision on named participants applies to all of them or to none: it answers `404`, naming the first identity that no longer waits, and `waitingRoomAdmit` also answers `409` when they outnumber the free places. Both answer the participants decided on.
-- With the waiting room off, `waitingRoomList` answers an empty list, a decision on named participants answers `404`, and a decision on everyone waiting answers an empty list of participants.
+- `participantWaitingList` answers `participants`, those waiting in arrival order, each with its `participantIdentity`, `participantName`, `type`, `knockDate` and, when the client sent them, `externalId` and `metadata`. It also answers `availablePlaces`, the free places, or `null` when the room has no participant limit.
+- `participantWaitingAdmit` and `participantWaitingReject` take `participantIdentities`, from 1 to 100 distinct identities, or no `participantIdentities` for everyone waiting. An empty or repeated list is a `422`, never read as everyone. A decision on named participants applies to all of them or to none: it answers `404`, naming the first identity that no longer waits, and `participantWaitingAdmit` also answers `409` when they outnumber the free places. Both answer the participants decided on.
+- With the waiting room off, `participantWaitingList` answers an empty list, a decision on named participants answers `404`, and a decision on everyone waiting answers an empty list of participants.
 
 ### Webhooks { #webhooks }
 
