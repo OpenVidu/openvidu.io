@@ -16,9 +16,9 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 --delete-data: the recordings and Meet data are in the Object Storage bucket: this deletes them.
 note: Oracle does not delete a vault at once: the stack's vault stays pending deletion, with its secrets, for 7 days or more, and a deploy with the same name meanwhile creates another one
 
-▶ Delete the machines on Oracle Cloud…
+▶ Delete the machine on Oracle Cloud…
    · destroy .openvidu/oracle (this returns when Terraform is done)
-   ✓ Delete the machines on Oracle Cloud
+   ✓ Delete the machine on Oracle Cloud
 ✔ removed stack "ce12o" from this directory
 ```
 

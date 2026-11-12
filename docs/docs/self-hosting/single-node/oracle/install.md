@@ -9,7 +9,7 @@ description: "Create the machine and deploy OpenVidu Single Node Community or PR
 
 One command creates the machine and OpenVidu comes up on it. `ov` renders the Terraform module embedded in its own binary for the edition you choose and applies it with **your own `terraform` and your OCI API key**. The machine then deploys OpenVidu on itself with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-Community runs on Docker Compose; PRO runs on Kubernetes, with OpenVidu as a Helm release. The edition is the only decision you make: `--edition community` (the default) or `--edition pro`.
+Community runs on Docker Compose; PRO runs on Kubernetes. The edition is the only decision you make: `--edition community` (the default) or `--edition pro`.
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
@@ -46,7 +46,11 @@ The stack lives in its own empty directory. Choose the edition. The commands nam
       --certificate-type letsencrypt --mode auto
     ```
 
-    One compute instance running OpenVidu PRO on Kubernetes, with OpenVidu as a Helm release. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    One compute instance running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the stack's remote admin control protocol, where `ov` administers it from your machine. It gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+
+## Use your own domain { #use-your-own-domain }
+
+--8<-- "self-hosting/oracle/ov-domain.md"
 
 ## What the deploy runs { #what-the-deploy-runs }
 

@@ -2,10 +2,10 @@
 
 If an Oracle Cloud deploy keeps waiting for the stack to publish its URL until `--wait-timeout` runs out (40 minutes by default with `--cloud`), the machine could not write its secrets into the vault. Look at `/var/log/cloud-init-output.log` on the master (over SSH, with the key pair in `.openvidu/oracle/`). A `LimitExceeded` from the vault means it already holds the secrets of another stack, or too many versions of them: the secret names are fixed, so one vault serves one stack at a time. Destroy the attempt and deploy again letting the template create a vault of its own (leave `--oci-vault` out), or point `--oci-vault` at a vault no other stack uses.
 
-The infrastructure already exists, so once the cause is fixed you simply resume, reusing what is there:
+The infrastructure already exists, so once the cause is fixed you simply resume, reusing what is there. Name the stack, as the deploy does: without it the resume would register a stack named `openvidu`:
 
 ```bash
-ov stack deploy --cloud oracle --mode auto
+ov stack deploy openvidu --cloud oracle --mode auto
 ```
 
 ### What the stack publishes cannot be read { #what-the-stack-publishes-cannot-be-read }

@@ -7,13 +7,9 @@ description: "Operate an OpenVidu Elastic stack on Oracle Cloud with the OpenVid
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-An Oracle Cloud Elastic stack is operated from the directory that deployed it, with the same commands as any other stack. The canonical operations page documents them all:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to an Elastic stack on Oracle Cloud.
 
-- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe), the [health test](../../single-node/on-premises/admin.md#health-test) and the [logs](../../single-node/on-premises/admin.md#logs).
-- [Start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
-- [Change its configuration](../../configuration/changing-config.md#view-get-set-unset) and [enable or disable modules](../../how-to-guides/enable-disable-modules.md#modules-and-services).
-
-What follows is specific to an Oracle Cloud deployment.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
@@ -50,7 +46,7 @@ ov stack deploy openvidu --cloud oracle --param fixedNumberOfMediaNodes=0 \
       --length 1000000 --file - | grep openvidu-scalein-watch
     ```
 
-On the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count. `ov stack check-ports` does not apply to this stack: it needs SSH access to the node, and the stack is operated without it (exit `2`).
+`--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count, on the first deploy or on a redeploy. To check the node's inbound ports, use `ov stack check-ports`: a cloud PRO stack keeps no SSH access in its record, so the command exits `2` and prints the one that does work, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>` (the master's public address, and the key `ov` generated in `.openvidu/oracle/`). Run that command to verify the ports.
 
 ## Operate from another machine { #operate-from-another-machine }
 

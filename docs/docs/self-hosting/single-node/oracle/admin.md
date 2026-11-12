@@ -7,13 +7,9 @@ description: "Operate an OpenVidu Single Node stack on Oracle Cloud with the Ope
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-An Oracle Cloud Single Node stack is operated from the directory that deployed it, with the same commands as any other stack. The canonical operations page documents them all:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a Single Node stack on Oracle Cloud.
 
-- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe), the [health test](../on-premises/admin.md#health-test) and the [logs](../on-premises/admin.md#logs).
-- [Start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
-- [Change its configuration](../../configuration/changing-config.md#view-get-set-unset) and [enable or disable modules](../../how-to-guides/enable-disable-modules.md#modules-and-services).
-
-What follows is specific to an Oracle Cloud deployment.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 

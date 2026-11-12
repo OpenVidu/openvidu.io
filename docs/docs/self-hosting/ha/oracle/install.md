@@ -9,13 +9,13 @@ description: "Create the machines and deploy OpenVidu High Availability behind a
 
 --8<-- "self-hosting/common/ha-license-intro.md"
 
-One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the High Availability topology and applies it with **your own `terraform` and your OCI API key**. The first master installs OpenVidu on itself and the other three masters and the media nodes join it, all with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there. OpenVidu High Availability runs on Kubernetes, with OpenVidu as a Helm release.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the High Availability topology and applies it with **your own `terraform` and your OCI API key**. The first master installs OpenVidu on itself and the other three masters and the media nodes join it, all with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there. OpenVidu High Availability runs on Kubernetes.
 
 === "Architecture overview"
 
     ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
 
-    - An OCI Network Load Balancer is the public entry point. It passes HTTPS (443), HTTP (80) and RTMPS (1945) through to the four master nodes.
+    - An OCI Network Load Balancer is the public entry point. It passes HTTPS (443), HTTP (80) and RTMPS (1935) through to the four master nodes.
     - Four master nodes run behind the load balancer; they spread across availability domains and fault domains, so the stack keeps serving with a master, a fault domain, or (in a region of three) an availability domain down.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the media nodes, which belong to an autoscaling OCI Instance Pool with a scale-in OCI Function.
 
@@ -26,7 +26,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 High Availability adds a few requirements of its own:
 
 - **A domain and a certificate.** The cluster sits behind a network load balancer that passes TLS through to the masters, so **Let's Encrypt and ZeroSSL do not work** (their HTTP challenge reaches a port 80 that only redirects to HTTPS). Use `selfsigned` (the default, for trying the topology out) or `owncert` with your own certificate (production). Point your domain at the load balancer, as described under [Deploy](#deploy).
-- **The scale-in function's image (autoscaling only).** An autoscaling media pool uses an OCI Function that gracefully drains a media node before the pool removes it. Its image, the template's `scale_in_function_image` parameter, must be in an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target="_blank"} your tenancy can pull from, in the deployment's region; pass it with `--param scale_in_function_image=<image>`. With a fixed media-node count (`--param fixedNumberOfMediaNodes=N`) there is no function and no image is needed.
+- **The scale-in function's image (autoscaling only).** An autoscaling media pool uses an OCI Function that gracefully drains a media node before the pool removes it. Its image is the template's `scale_in_function_image` parameter. The template ships a default, `mad.ocir.io/axp2ice0s7el/openvidu-oci-scalein:main`, which is published in `eu-madrid-1` and works there with no extra flag. In any other region an OCI Function can only pull from an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target="_blank"} of that region, so copy the image into your region's OCIR and pass it with `--param scale_in_function_image=<image>`. With a fixed media-node count (`--param fixedNumberOfMediaNodes=N`) there is no function and no image is needed.
 - **A regional subnet, if you bring your own.** `--param subnet_ocid=<ocid>` (and `vcn_ocid=<ocid>`) must name a public, regional subnet: High Availability spreads its masters across availability domains, so a single-availability-domain subnet is refused.
 
 ## Deploy { #deploy }
