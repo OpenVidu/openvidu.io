@@ -3,6 +3,7 @@ title: "Host your own private video calls at home"
 draft: false
 date:
   created: 2026-06-30
+  updated: 2026-11-12
 slug: secure-home-video-conferencing
 description: "Host a private, free video conferencing server at home on a Raspberry Pi, an old laptop or a mini-PC, with no accounts and no time limits, in three steps."
 cover_image: poster.jpg
@@ -30,6 +31,10 @@ In reality, it's much easier than you might think. At OpenVidu we've worked hard
 
 With a tiny computer like a Raspberry Pi, an old laptop or a mini-PC, you can have your own private video conferencing server running in a matter of minutes. This guide walks you through it in three simple steps using <a href="/meet/" target="_blank">OpenVidu Meet :fontawesome-solid-external-link:{.external-link-icon}</a>.
 <!-- more -->
+
+!!! note "OpenVidu 3.10 and later"
+
+    This post installs OpenVidu with the installer of OpenVidu 3.9. From OpenVidu 3.10, OpenVidu is deployed and operated with the [OpenVidu CLI](/docs/self-hosting/openvidu-cli.md): the [on-premises installation guide](/docs/self-hosting/single-node/on-premises/install.md) shows the same deployment done with it.
 
 ## Why self-host your video calls?
 

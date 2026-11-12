@@ -1,6 +1,6 @@
 ---
 title: "Deploy OpenVidu Meet on a single server"
-description: "Production deployment of OpenVidu Meet on one Linux server: prerequisites, ports, domain and TLS certificates, and the installer command."
+description: "Production deployment of OpenVidu Meet on one Linux server: prerequisites, ports, domain and TLS certificates, and the OpenVidu CLI command."
 ---
 
 # Deploy OpenVidu Meet on a single server
@@ -27,55 +27,58 @@ This section contains the instructions to deploy a production-ready deployment o
 
 - A public IP, that doesn't change between restarts (a static IP).
 - (Recommended) A domain name (FQDN) pointing to the public IP.
-- Port rules: these inbound ports must be open in your firewall and reachable from the internet.
+- Port rules: these inbound ports must reach the server from the internet. The OpenVidu CLI checks them before it installs anything, and stops if a required one is closed.
 
-    | Protocol | Ports         | Source          | Requirement                                                        |
-    | -------- | ------------- | --------------- | ------------------------------------------------------------------ |
-    | TCP      | 80            | 0.0.0.0/0, ::/0 | Mandatory                                                          |
-    | TCP      | 443           | 0.0.0.0/0, ::/0 | Mandatory                                                          |
-    | UDP      | 443           | 0.0.0.0/0, ::/0 | Mandatory                                                          |
-    | TCP      | 7881          | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
-    | UDP      | 50000 - 60000 | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
+    | Protocol | Ports         | Source          | Requirement                                                                 |
+    | -------- | ------------- | --------------- | --------------------------------------------------------------------------- |
+    | TCP      | 443           | 0.0.0.0/0, ::/0 | Required                                                                    |
+    | TCP      | 22            | your machine    | Required when you deploy from your machine over SSH                         |
+    | TCP      | 80            | 0.0.0.0/0, ::/0 | Recommended: Let's Encrypt needs it to obtain the certificate               |
+    | UDP      | 443           | 0.0.0.0/0, ::/0 | Recommended for optimal performance and media quality                       |
+    | TCP      | 7881          | 0.0.0.0/0, ::/0 | Recommended for optimal performance and media quality                       |
+    | UDP      | 50000 - 60000 | 0.0.0.0/0, ::/0 | Recommended for optimal performance and media quality                       |
+
+    The [port rules of OpenVidu Single Node](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) explain each one.
 
 ## Installation
 
-Run this command in your server to start the installation wizard:
+OpenVidu Meet is installed with the [OpenVidu CLI](../../docs/self-hosting/openvidu-cli.md) (`ov`), which deploys an OpenVidu Single Node with OpenVidu Meet on. [Install the CLI](../../docs/self-hosting/openvidu-cli.md#install-the-openvidu-cli) on your machine or on the server, then deploy from an empty directory.
+
+From your machine, over SSH:
 
 ```bash
-sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install_meet.sh)
+mkdir openvidu-meet && cd openvidu-meet
+ov stack deploy meet --environment on-premises \
+  --ssh ubuntu@<server-ip> --ssh-key ~/.ssh/id_ed25519 \
+  --domain-name <your-domain> --certificate-type letsencrypt \
+  --mode auto
 ```
 
-Follow the instructions of the installation wizard. They are self-explanatory, but here is a breakdown:
+Or on the server itself:
 
-1.  Select **Yes** to continue when prompted after the installation summary:
+```bash
+sudo ov stack deploy meet --environment on-premises --this-node \
+  --domain-name <your-domain> --certificate-type letsencrypt
+```
 
-    ![Installation summary](../../assets/images/meet/deployment/basic/wizard-1.png){ .round-corners loading=lazy }
+Without `--domain-name`, a server with a public IPv4 address gets an `sslip.io` name derived from it, with a Let's Encrypt certificate. The deploy generates every credential, waits until OpenVidu is ready and prints its URL. OpenVidu Meet is served at that URL; the initial administrator is `admin`, and these commands print its password and the API key of the OpenVidu Meet REST API:
 
-2.  If you have a domain name, enter it when prompted. If you don't have one, just press **Enter** to continue and the public IP will be used as the domain name, with a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate issued for it:
+```bash
+ov stack config get meet-initial-admin-password
+ov stack config get meet-initial-api-key
+```
 
-    ![Press Enter](../../assets/images/meet/deployment/basic/wizard-2.png){ .round-corners loading=lazy }
-
-3.  The installer will ask you to confirm if you want to proceed with the installation. Select **Yes** to start the installation.
-
-    The installation will begin, downloading the software and configuring your server. Once the installation is complete, you will see this message:
-
-    ![Installation complete](../../assets/images/meet/deployment/basic/wizard-3.png){ .round-corners loading=lazy }
-
-    You can access OpenVidu Meet in your browser using the URL and credentials shown in the installation completion message.
+The [OpenVidu Single Node installation guide](../../docs/self-hosting/single-node/on-premises/install.md) covers every option: your own certificate, the port check, assisted mode and the PRO edition.
 
 ## Administration
 
-You can manage the OpenVidu Meet installation running simple commands on your server:
+The OpenVidu CLI operates the deployment from the directory you deployed it from, or from the server itself (`sudo ov stack …` there):
 
 ```bash
-# Start OpenVidu Meet
-sudo systemctl start openvidu
-
-# Stop OpenVidu Meet
-sudo systemctl stop openvidu
-
-# Restart OpenVidu Meet
-sudo systemctl restart openvidu
+ov stack status    # the state of each service
+ov stack stop      # stop OpenVidu Meet
+ov stack start     # start it again
+ov stack restart   # restart it
 ```
 
 OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refer to the [OpenVidu Platform Single Node administration guide](../../docs/self-hosting/single-node/on-premises/admin.md) for more advanced management tasks, including:
@@ -87,16 +90,14 @@ OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refe
 
 ## Other deployment options
 
-This guide has covered the manual installation of OpenVidu Meet as a single-node deployment in a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:
-
-- **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](../../docs/self-hosting/single-node/on-premises/install.md#deploy) guide for OpenVidu Platform.
+This guide has covered the installation of OpenVidu Meet as a single-node deployment on a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:
 
 - If you prefer a cloud deployment, choose your provider and follow the corresponding guide:
 
-    - **AWS**: CloudFormation-based deployment using native AWS resources. [AWS deployment](../../docs/self-hosting/single-node/aws/install.md)
-    - **Azure**: ARM-based deployment using native Azure resources. [Azure deployment](../../docs/self-hosting/single-node/azure/install.md)
-    - **GCP**: Terraform-based deployment using native GCP resources. [GCP deployment](../../docs/self-hosting/single-node/gcp/install.md)
-    - **DigitalOcean**: Terraform-based deployment using native DigitalOcean resources. [DigitalOcean deployment](../../docs/self-hosting/single-node/digitalocean/install.md)
-    - **OCI**: Terraform-based deployment using native Oracle Cloud Infrastructure resources. [OCI deployment](../../docs/self-hosting/single-node/oracle/install.md)
+    - **AWS**: One OpenVidu CLI command creates the machines with a CloudFormation template. [AWS deployment](../../docs/self-hosting/single-node/aws/install.md)
+    - **Azure**: One OpenVidu CLI command creates the machines with a Bicep template. [Azure deployment](../../docs/self-hosting/single-node/azure/install.md)
+    - **GCP**: One OpenVidu CLI command creates the machines with a Terraform template. [GCP deployment](../../docs/self-hosting/single-node/gcp/install.md)
+    - **DigitalOcean**: One OpenVidu CLI command creates the machines with a Terraform template. [DigitalOcean deployment](../../docs/self-hosting/single-node/digitalocean/install.md)
+    - **OCI**: One OpenVidu CLI command creates the machines with a Terraform template. [OCI deployment](../../docs/self-hosting/single-node/oracle/install.md)
 
 - **Deploy OpenVidu Meet in a multi-node architecture**: there are multi-node deployment options available to make your OpenVidu Meet installation scalable and fault-tolerant. Check out the [Advanced deployments](./advanced.md) section for more information.

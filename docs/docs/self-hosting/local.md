@@ -346,7 +346,7 @@ When using OpenVidu Local Deployment, you can access OpenVidu Server (which is 1
     | OpenVidu (LiveKit) | `http://localhost:7880` | `https://192-168-0-27.openvidu-local.dev:7443` |
     | Your app's frontend | `http://localhost:5080` | `https://192-168-0-27.openvidu-local.dev:5443` |
     | Your app's backend | `http://localhost:6080` | `https://192-168-0-27.openvidu-local.dev:6443` |
-    | OpenVidu Meet | `http://localhost:9080/meet` | `https://192-168-0-27.openvidu-local.dev:9443/meet` |
+    | OpenVidu Meet | `http://localhost:9080` | `https://192-168-0-27.openvidu-local.dev:9443` |
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows and :simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
@@ -390,7 +390,7 @@ On Linux, `ov` operates the local stack from its directory, like any other OpenV
 $ ov stack ports
 CATEGORY   PORT        PROTO   PURPOSE
 API        7880        tcp     OpenVidu / LiveKit server API (HTTP & WebSocket); also serves the Dashboard, MinIO console and Developer UI
-API        9080        tcp     OpenVidu Meet on localhost
+API        9080        tcp     OpenVidu Meet on localhost (listed always: the container publishes it; it answers once meet is on)
 LAN        6443        tcp     Your application backend (localhost:6080) over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
 LAN        5443        tcp     Your application frontend (localhost:5080) over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
 LAN        7443        tcp     OpenVidu / LiveKit server API over HTTPS/WSS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
@@ -406,7 +406,7 @@ WebRTC     7881        tcp     WebRTC media over TCP (fallback when UDP is block
 WebRTC     7900-7999   udp     WebRTC media (UDP)
 ```
 
-Only the ports the enabled modules use are listed: a stack without `ingress` has no **Ingest** group, and one without `meet` no 9080. The **LAN** ports are always listed, even with `--no-lan`: the container publishes them, and they answer once LAN access is on. The **Debug** group exposes Redis, MongoDB and MinIO on the host because local is dev-only. Add `-o wide` for the compose service that owns each port.
+Only the ports the enabled modules use are listed: a stack without `ingress` has no **Ingest** group. Meet's 9080 and the **LAN** ports are always listed, even without `meet` or with `--no-lan`: the container publishes them, and they answer once `meet` and LAN access are on. The **Debug** group exposes Redis, MongoDB and MinIO on the host because local is dev-only. Add `-o wide` for the compose service that owns each port.
 
 ### Add and remove modules on the running stack
 

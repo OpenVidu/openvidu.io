@@ -3,6 +3,7 @@ title: Deploy OpenVidu on Hetzner Cloud in 15 Minutes
 draft: false
 date:
   created: 2026-08-18
+  updated: 2026-11-12
 slug: deploy-openvidu-hetzner
 description: >-
   Deploy a self-hosted OpenVidu video conferencing server on a Hetzner Cloud VM
@@ -30,6 +31,10 @@ authors:
 This post is a getting-started guide to OpenVidu on Hetzner Cloud. It gathers in one place all the steps needed to go from an empty Hetzner account to a working OpenVidu deployment in a few minutes: which instance to pick, which ports to open, and the one command that installs everything. It is deliberately shorter than the official self-hosting documentation; the goal here is a running deployment today, not covering every option.
 
 <!-- more -->
+
+!!! note "OpenVidu 3.10 and later"
+
+    This post installs OpenVidu with the installer of OpenVidu 3.9. From OpenVidu 3.10, OpenVidu is deployed and operated with the [OpenVidu CLI](/docs/self-hosting/openvidu-cli.md): the [on-premises installation guide](/docs/self-hosting/single-node/on-premises/install.md) shows the same deployment done with it.
 
 The server and its firewall are created in the [Hetzner Cloud console :fontawesome-solid-external-link:{.external-link-icon}](https://console.hetzner.com/){:target="_blank"}, and everything from there on happens over SSH inside the instance. The result is a production-grade video conferencing stack with valid HTTPS, running [OpenVidu Meet](/meet/index.md), reachable from any browser. Hetzner bills by the hour, so if the goal is just to try OpenVidu, the server can be deleted at the end and the whole experiment costs cents.
 
