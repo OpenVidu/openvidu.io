@@ -31,7 +31,7 @@ Each Master Node runs the clustered data tier (MinIO, the MongoDB replica set, R
 
 ## Requirements
 
-Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least six machines**: four Master Nodes and two or more Media Nodes, each with a minimum of 4 CPU cores and 4 GB of RAM and Linux (Ubuntu recommended). The Master Nodes need generous disk (100 GB recommended) for recordings; all nodes must reach each other on their private addresses, and the Media Nodes need a public IP because media is sent directly to them. The whole cluster runs the OpenVidu PRO license you pass to the first master.
+Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least five machines**: four Master Nodes and one or more Media Nodes, each with a minimum of 4 CPU cores and 4 GB of RAM and Linux (Ubuntu recommended). The Master Nodes need generous disk (100 GB recommended) for recordings; all nodes must reach each other on their private addresses, and the Media Nodes need a public IP because media is sent directly to them. The whole cluster runs the OpenVidu PRO license you pass to the first master.
 
 ## Port rules
 
@@ -99,7 +99,7 @@ $ ov stack join --ssh ubuntu@172.30.0.111 --as master
   10250/tcp ← 172.30.0.110  internal  required     open   (only from 172.30.0.110)
 
 ▶ Join the cluster…
-   · join 172.30.0.111 to the stack as a control-plane node
+   · join 172.30.0.111 to the stack as a master node
    ✓ Join the cluster
 
 ▶ Confirm the node's labels…
@@ -113,18 +113,18 @@ As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clus
 ```console
 $ ov stack status --wait
 waiting for https://172-30-0-110.openvidu-local.dev to be ready (Ctrl-C to stop)…
-  ⏳ master nodes 4/4, media nodes 1/1, services 28/53, restarting: caddy-proxy-75b8b6cbf5-5g5cx, caddy-proxy-75b8b6cbf5-7vjvg (0s)
+  ⏳ master nodes 4/4, media nodes 1/1, services 28/53, restarting: caddy-proxy@node-172-30-0-111, caddy-proxy@node-172-30-0-112 (0s)
 …
 ✔ ha is ready (https://172-30-0-110.openvidu-local.dev)
 ```
 
-On shared or simulated machines the wait can exceed the default 5 minutes; `ov stack status --wait --wait-timeout 15m` is the honest setting there. Before touching any server, `join` rejects any node the stack has no place for: a fifth `--as master`, any join to a single node, and any join to a Community stack. See [Add a media node](admin.md#add-a-media-node).
+On shared or simulated machines the wait can exceed the default 5 minutes; `ov stack status --wait --wait-timeout 15m` is the honest setting there. While the cluster is still being assembled, `ov stack status --wait --joined` waits only for the masters that have joined and says how many are missing; the assisted runbook of each join ends with `ov stack status --wait --joined --wait-timeout 15m`. Before touching any server, `join` rejects a join the stack has no place for: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Add a media node](admin.md#add-a-media-node).
 
 ## In production: behind a load balancer { #behind-a-load-balancer }
 
 Put a load balancer in front of the four masters, so the stack survives losing one:
 
-- **TCP passthrough, not TLS termination.** Pass `443/tcp`, `80/tcp` and `6443/tcp` (the cluster API) through to the four masters, with a TCP health check on `443`; add `1935/tcp` with RTMP ingest. Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: **Let's Encrypt does not work behind a passthrough load balancer**.
+- **TCP passthrough, not TLS termination.** Pass `443/tcp`, `80/tcp` and `6443/tcp` (the stack's remote admin control protocol) through to the four masters, with a TCP health check on `443`; add `1935/tcp` with RTMP ingest. Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: **Let's Encrypt does not work behind a passthrough load balancer**. TCP passthrough is the default and needs no proxy flag. For a load balancer that terminates TLS instead, deploy with `--external-load-balancer` (Caddy then gets plain HTTP on `7880` and plain RTMP on `1935`); adding `--internal-tls-termination` keeps a declared load balancer in TCP passthrough while Caddy terminates TLS.
 - **The domain points at the load balancer.**
 - **Deploy the first master with the load balancer's domain and `--skip-port-check`.** The port check probes the domain, and nothing behind the load balancer is healthy yet. Before skipping the check, open the ports yourself:
 
@@ -136,7 +136,7 @@ Put a load balancer in front of the four masters, so the stack survives losing o
       --skip-port-check --mode auto
     ```
 
-- **Join the masters with `--lb-host`** (the load balancer in front of the masters) **and `--public-ip`** (the node's public address). The cluster API's certificate covers both, so the API stays reachable at either address:
+- **Join the masters with `--lb-host`** (the load balancer in front of the masters) **and `--public-ip`** (the node's public address). The certificate of port `6443` covers both, so `ov` reaches the stack at either address:
 
     ```bash
     ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>

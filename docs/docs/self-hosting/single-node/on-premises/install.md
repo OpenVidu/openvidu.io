@@ -14,7 +14,7 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on your own Linux ser
 
 Deploy OpenVidu Single Node on your own Linux server with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). `ov` installs and starts the stack over SSH, or on the machine it runs on, and generates every credential. It also leaves a copy of itself on the node, so you can operate the stack from the node as well as from the stack's directory on your machine.
 
-Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes, with OpenVidu as a Helm release. **The edition is the only decision you make**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. [How OpenVidu is deployed](../../deployment-types.md#how-openvidu-is-deployed) explains the model (one stack per directory, auto and assisted modes, COMMUNITY and PRO).
+Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the only decision you make**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. [How OpenVidu is deployed](../../deployment-types.md#how-openvidu-is-deployed) explains the model (one stack per directory, auto and assisted modes, COMMUNITY and PRO).
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
@@ -239,7 +239,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition.
       full report: ov stack check-ports
     ```
 
-    Kubernetes, with OpenVidu as a Helm release. The node needs nothing pre-installed: the node agent and the software it installs come inside `ov`. Services come up over a few minutes after the deploy returns; [`ov stack status --wait`](admin.md#status) blocks until they are ready.
+    Kubernetes. The node needs nothing pre-installed: the node agent and the software it installs come inside `ov`. Services come up over a few minutes after the deploy returns; [`ov stack status --wait`](admin.md#status) blocks until they are ready.
 
 ### The port preflight { #the-port-preflight }
 
@@ -274,14 +274,14 @@ Either way the server ends up operable from itself: a deploy from your laptop, a
 
 ## Review the commands first: assisted mode { #assisted-mode }
 
-`--mode assisted` runs **nothing** on the server. It writes the same files and prints the same commands, step by step, for you to review and run yourself. Add it to any deploy above:
+`--mode assisted` runs **nothing** on the server. It writes the files and prints the runbook, step by step, for you to review and run yourself. Add it to any deploy above:
 
 ```bash
 ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
   --domain-name 172-30-0-96.openvidu-local.dev --certificate-type selfsigned --mode assisted
 ```
 
-Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
+The runbook is the `ssh`, `scp` and `ov` commands that carry out the deploy, and it ends by recording the stack in this directory and waiting for it (`ov stack import … --ssh … --replace -y`, then `ov stack status --wait --wait-timeout 15m`). Auto mode does that same work itself, printing each step as it completes.
 
 ## Configure your application to use the deployment
 

@@ -11,8 +11,9 @@ description: "Administer OpenVidu Elastic on your own servers with the OpenVidu 
 
 </div>
 
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to an Elastic stack on your own servers.
 
-An Elastic stack is operated with the same commands as a Single Node: **[the operations reference](../../single-node/on-premises/admin.md)** covers status, describe, the health test, logs, ports, start/stop/restart, configuration, modules, operating from another machine and destroy, all from the stack's directory. On a PRO stack, `ov stack status` lists every service with the nodes it runs on, and each node's disk. This page covers what is specific to a multi-node stack: adding and removing media nodes.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Add a media node { #add-a-media-node }
 
@@ -25,7 +26,7 @@ Elastic scales by adding media nodes. From the stack's directory, `ov stack join
     ssh <master> sudo ov stack join-info | ssh <media-node> sudo ov stack join --this-node --as media --join-info -
     ```
 
-- **Review the commands first**: `ov stack join --ssh ubuntu@<media-node> --as media --mode assisted` prints the commands that join the machine and runs nothing. (`--this-node` refuses `--mode assisted`.)
+- **Review the commands first**: `ov stack join --ssh ubuntu@<media-node> --as media --mode assisted` prints the commands that join the machine and runs nothing; the runbook ends with `ov stack status --wait --joined --wait-timeout 15m`. (`--this-node` refuses `--mode assisted`.)
 
 `--as master` is refused on an Elastic stack: its one master is the deployed node, so another machine joins `--as media`. On a cloud stack the media nodes autoscale instead; see [Autoscaling](../../production-ready/scalability.md#autoscaling).
 

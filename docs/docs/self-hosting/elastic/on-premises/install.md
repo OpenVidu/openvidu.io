@@ -125,7 +125,9 @@ Before installing anything it checks the ports the new node needs, from your mac
 
 ## Install on the servers themselves, or review the commands first
 
-As on a Single Node, you can put `ov` on the master and deploy with [`--this-node`](../../single-node/on-premises/install.md#install-on-the-server-itself), and [review every command before it runs with `--mode assisted`](../../single-node/on-premises/install.md#assisted-mode). A media node can also [join itself](admin.md#add-a-media-node) from the machine with `ov stack join --this-node`.
+As on a Single Node, you can put `ov` on the master and deploy with [`--this-node`](../../single-node/on-premises/install.md#install-on-the-server-itself), and [review every command before it runs with `--mode assisted`](../../single-node/on-premises/install.md#assisted-mode) (the assisted runbook of a join ends with `ov stack status --wait --joined --wait-timeout 15m`). A media node can also [join itself](admin.md#add-a-media-node) from the machine with `ov stack join --this-node`.
+
+A master deployed with `--this-node` records no SSH to itself, so `ov stack join --ssh <media-node>` from its directory cannot read the join address and token from the master over SSH. Pass them with `--address` and `--token` from `ov stack join-info` (run on the master), or join each media node on the machine itself with `ov stack join --this-node`.
 
 ## Configure your application to use the deployment
 

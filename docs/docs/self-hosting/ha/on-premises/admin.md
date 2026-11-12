@@ -11,8 +11,9 @@ description: "Administer OpenVidu High Availability on your own servers with the
 
 </div>
 
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a High Availability stack on your own servers.
 
-A High Availability stack is operated with the same commands as a Single Node: **[the operations reference](../../single-node/on-premises/admin.md)** covers status, describe, the health test, logs, ports, start/stop/restart, configuration, modules, operating from another machine and destroy, all from the stack's directory. On a PRO stack, `ov stack status` counts the four masters and the media nodes by tier, lists every service with the nodes it runs on, and shows each node's disk. This page covers what is specific to the cluster: joining and removing nodes.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Add a media node { #add-a-media-node }
 
@@ -20,13 +21,13 @@ From the stack's directory, `ov stack join --ssh ubuntu@<media-node> --as media`
 
 ## Add a master node
 
-High Availability runs four masters. A master is added with `--as master` (masters 2-4), which takes `--domain`, `--lb-host` and `--public-ip`, the addresses at which the cluster API must remain reachable:
+High Availability runs four masters. A master is added with `--as master` (masters 2-4), which takes `--domain`, `--lb-host` and `--public-ip`, the addresses at which the stack's remote admin control protocol (port `6443`) must remain reachable:
 
 ```bash
 ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>
 ```
 
-A master join checks the cluster's internal ports in both directions with the masters already in the stack (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) and confirms the node carries the labels the stack schedules by. See [Deploy a test cluster](install-nlb.md#deploy-a-test-cluster) and [In production: behind a load balancer](install-nlb.md#behind-a-load-balancer). A fifth `--as master` is refused before anything runs.
+A master join checks the cluster's internal ports in both directions with the masters already in the stack (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) and confirms the node carries the labels the stack schedules by. See [Deploy a test cluster](install-nlb.md#deploy-a-test-cluster) and [In production: behind a load balancer](install-nlb.md#behind-a-load-balancer).
 
 ## Take a node out { #take-a-node-out }
 
