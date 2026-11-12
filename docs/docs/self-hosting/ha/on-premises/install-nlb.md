@@ -34,7 +34,7 @@ Each Master Node runs the clustered data tier (MinIO, the MongoDB replica set, R
 
 ## Requirements
 
-Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least five machines**: four Master Nodes and one or more Media Nodes, each with a minimum of 4 CPU cores and 4 GB of RAM and Linux (Ubuntu recommended). The Master Nodes need generous disk (100 GB recommended) for recordings; all nodes must reach each other on their private addresses, and the Media Nodes need a public IP because media is sent directly to them. The whole cluster runs the OpenVidu PRO license you pass to the first master.
+Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least five machines**: four Master Nodes and one or more Media Nodes, each with a minimum of 4 CPU cores and Linux (Ubuntu recommended). Each Master Node needs at least **8 GB of RAM**; each Media Node at least **4 GB**, or 8 GB if it records. With speech to text from a local provider (`vosk` or `sherpa` in the [speech processing agent](../../../ai/live-captions.md)), give the nodes that run that agent 8 to 16 GB. These figures are estimates, not measured limits. The Master Nodes need generous disk (100 GB recommended) for recordings; all nodes must reach each other on their private addresses, and the Media Nodes need a public IP because media is sent directly to them. The whole cluster runs the OpenVidu PRO license you pass to the first master.
 
 ## Port rules
 

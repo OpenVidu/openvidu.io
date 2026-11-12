@@ -39,7 +39,7 @@ All services are deployed on a single machine, which includes:
 
 ## Requirements { #requirements }
 
-- One **Linux server** (Ubuntu recommended), with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size it as the cloud templates do by default: 4 vCPU and 8 GB.
+- One **Linux server** (Ubuntu recommended), with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, at least **8 GB of RAM**, 16 GB recommended. With speech to text from a local provider (`vosk` or `sherpa` in the [speech processing agent](../../../ai/live-captions.md)), give the server 8 to 16 GB. These figures are estimates, not measured limits.
 - A sudo-capable user on the server, reachable over SSH. Nothing else needs to be pre-installed: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
 - A **domain** pointing at the server, and a **certificate type**:
     - `letsencrypt` or `zerossl`: a certificate obtained automatically (requires port 80 to be reachable).

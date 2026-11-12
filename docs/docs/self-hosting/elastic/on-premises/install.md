@@ -30,7 +30,7 @@ The Master Node runs the data tier (MinIO, Redis, MongoDB), Caddy, the Dashboard
 
 ## Requirements
 
-Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least two machines**: one Master Node and one or more Media Nodes, each with a minimum of 4 CPU cores and 4 GB of RAM and Linux (Ubuntu recommended). The Master Node needs generous disk (100 GB recommended) for recordings; the nodes must reach each other on their private addresses. Each node runs the OpenVidu PRO license you pass to the master.
+Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least two machines**: one Master Node and one or more Media Nodes, each with a minimum of 4 CPU cores and Linux (Ubuntu recommended). The Master Node needs at least **8 GB of RAM**; each Media Node at least **4 GB**, or 8 GB if it records. With speech to text from a local provider (`vosk` or `sherpa` in the [speech processing agent](../../../ai/live-captions.md)), give the nodes that run that agent 8 to 16 GB. These figures are estimates, not measured limits. The Master Node needs generous disk (100 GB recommended) for recordings; the nodes must reach each other on their private addresses. Each node runs the OpenVidu PRO license you pass to the master.
 
 ## Port rules
 

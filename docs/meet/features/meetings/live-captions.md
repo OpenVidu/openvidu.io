@@ -48,14 +48,14 @@ live_captions:
 
 ### 3. Enable Captions in OpenVidu Meet configuration
 
-Edit the `meet.env` file (with the OpenVidu CLI, `ov stack config file edit meet.env`) and ensure the following configuration variable is set:
+Edit the `meet.env` file and ensure the following configuration variable is set. On an OpenVidu COMMUNITY server it is `config/meet.env` in the node's deployment directory (`/opt/openvidu`), which `ov stack config file edit meet.env` opens and applies from the stack's directory:
 
 ```
 MEET_CAPTIONS_ENABLED=true
 ```
 
-!!! note
-    A **PRO** stack deployed with the OpenVidu CLI has no `meet.env` document: see [`meet.env`](../../../docs/self-hosting/configuration/reference.md#meetenv) in the configuration reference.
+!!! warning "OpenVidu PRO"
+    On an OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } stack deployed with the OpenVidu CLI, live captions in OpenVidu Meet are **not configurable in this version**: the stack sets `MEET_CAPTIONS_ENABLED=false` and there is no `meet.env` to change it.
 
 ### 4. Restart OpenVidu
 

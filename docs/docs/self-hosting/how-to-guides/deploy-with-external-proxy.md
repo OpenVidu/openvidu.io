@@ -32,7 +32,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     To deploy OpenVidu with an external proxy, ensure you have the following prerequisites:
 
-    - **A machine with at least 4GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**. This machine will serve as the OpenVidu server.
+    - **A machine with at least 4 CPU cores and 4GB RAM** (8GB on PRO, 16GB recommended) and **Linux installed (Ubuntu recommended)**. This machine will serve as the OpenVidu server.
     - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as OpenVidu, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../single-node/on-premises/install.md#port-rules), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
     - **Generous disk space (100GB recommended)** if you are going to record your sessions.
     - The machine where OpenVidu is installed **must have a Public IP or a reachable IP from the users**.
@@ -143,7 +143,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     To deploy OpenVidu Elastic with an external proxy, ensure you have the following prerequisites:
 
-    - **At least 2 machines** for OpenVidu, each with a minimum of **4GB RAM**, **4 CPU cores**, and **Linux** installed (Ubuntu is recommended). One machine will serve as the Master Node, while the others will function as Media Nodes.
+    - **At least 2 machines** for OpenVidu, each with a minimum of **4 CPU cores** and **Linux** installed (Ubuntu is recommended), and at least **8GB RAM** on the Master Node and **4GB RAM** on each Media Node (8GB if it records). One machine will serve as the Master Node, while the others will function as Media Nodes.
     - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../elastic/on-premises/install.md#port-rules), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
     - Significant disk space on the **Master Node, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
     - **Each machine must have a Public IP or a reachable IP from the users**.
