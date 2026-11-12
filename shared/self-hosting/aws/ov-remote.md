@@ -19,7 +19,7 @@ The deploy prints where the record is in its last lines (an Elastic stack named 
   SSH key:      Secrets Manager secret openvidu/openvidu-dpaws2/ssh-private-key (the private half, for that import)
 ```
 
-From an empty directory on another machine, `ov stack import --cloud aws` reads that record and registers the stack, infrastructure included. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it (`openvidu-<name>`, not the directory's name). The record never holds a secret, so any parameter the template marks as sensitive, the license in particular, must be passed again:
+From an empty directory on another machine, `ov stack import --cloud aws` reads that record and registers the stack, infrastructure included. `--stack-name` takes the stack's name **on the cloud**, exactly as the `record:` line prints it (`openvidu-<name>`, not the directory's name); (the name it was deployed as works too: `ov` reads the exact name first, then `openvidu-<name>`, and says which stack it imported). The record never holds a secret, so any parameter the template marks as sensitive, the license in particular, must be passed again:
 
 ```console
 $ mkdir -p ~/stacks/dpaws2 && cd ~/stacks/dpaws2

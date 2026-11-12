@@ -33,7 +33,7 @@ A bucket of your own (named with `--param`) is not the stack's, so it stays eith
 - **`--dry-run`** asks nothing and changes nothing: it prints exactly what the destroy would do with the same flags.
 - A stack deployed with **`--remote-state`** also keeps its record and SSH key on AWS. The destroy deletes those too: the stack's objects in the template bucket and the Secrets Manager secret that held the SSH private key.
 
-See [Destroy a stack](/docs/self-hosting/openvidu-cli.md#command-reference) for the options shared by every deployment.
+See [`ov stack destroy`](/docs/self-hosting/openvidu-cli.md#teardown-ov-stack-destroy) for the flags every deployment shares.
 
 !!! warning "Reusing a stack name"
 

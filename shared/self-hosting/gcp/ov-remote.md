@@ -4,9 +4,9 @@ By default, the stack's directory is the only place that drives the machines: lo
 | --- | --- |
 | **Terraform state** | a dedicated Cloud Storage bucket of the stack's own (`<project>-<stack>-<hash>-terraform-state`) |
 | **The record** (infrastructure, no secrets) | the state bucket, under `openvidu/registry/` |
-| **The SSH private key** `ov` generated | inside the Terraform state |
+| **The machines' SSH private key**, which the template generates on Community (a PRO stack on Google Cloud has none: `gcloud compute ssh` logs in) | inside the Terraform state |
 
-From an empty directory on another machine, `ov stack import --cloud gcp` reads that record and registers the stack, infrastructure included. `--stack-name` takes the stack's name **on Google Cloud**, exactly as the deploy's `record:` line prints it (`openvidu-<name>` for a stack deployed as `<name>`):
+From an empty directory on another machine, `ov stack import --cloud gcp` reads that record and registers the stack, infrastructure included. `--stack-name` takes the stack's name **on Google Cloud**, exactly as the deploy's `record:` line prints it (`openvidu-<name>` for a stack deployed as `<name>`); (the name it was deployed as works too: `ov` reads the exact name first, then `openvidu-<name>`, and says which stack it imported):
 
 ```bash
 mkdir openvidu && cd openvidu

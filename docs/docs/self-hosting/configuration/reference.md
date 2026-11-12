@@ -28,7 +28,7 @@ These are the global configuration parameters used by other services, such as th
 | **`EXTERNAL_S3_REGION`** | `externalS3.region` | Region of the external S3 service if used. |
 | **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | `externalS3.pathStyleAccess` | If `true`, use path-style access for the external S3 service if used. |
 | **`EXTERNAL_S3_BUCKET_APP_DATA`** | `externalS3.appDataBucket` | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
-| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | `externalS3.clusterDataBucket` | **PRO**{ .openvidu-tag .openvidu-pro-tag } External S3 bucket used in High Availability to store Observability data. This key has no `openvidu.env` alias: set it by its `openvidu.yaml` key. |
+| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | `externalS3.clusterDataBucket` | **PRO**{ .openvidu-tag .openvidu-pro-tag } External S3 bucket used in High Availability to store Observability data. This key has no `openvidu.env` alias and is fixed at deploy time: pass it with `--set openviduStack.externalS3.clusterDataBucket=<bucket>` on the first deploy, not with `ov stack config set` (see [External S3](../how-to-guides/external-s3.md)). |
 | **`EXTERNAL_S3_SSE_TYPE`** | `externalS3.sse.type` | Server-side encryption algorithm for the external S3 service. Supported values: `SSE-S3` (S3-managed AES256) or `SSE-KMS` (AWS KMS-managed). Leave empty to disable SSE. |
 | **`EXTERNAL_S3_SSE_KMS_KEY_ID`** | `externalS3.sse.kmsKeyId` | AWS KMS key ID for SSE-KMS encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is `SSE-KMS`. |
 | **`EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | `externalS3.sse.kmsEncryptionContext` | Optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. |
@@ -202,7 +202,7 @@ openvidu:
 ```
 
 1. Specify your OpenVidu Pro license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
-2. The cluster ID for the OpenVidu deployment. It is configured by default by OpenVidu Installer with the domain name of the deployment.
+2. The cluster ID for the OpenVidu deployment. By default it is the domain name of the deployment (`${openvidu.domain.name}` in the `livekit.yaml` the stack ships).
 3. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 4. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
 5. Time interval to send analytics data to MongoDB.

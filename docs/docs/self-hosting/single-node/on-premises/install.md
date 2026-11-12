@@ -208,7 +208,7 @@ Each stack lives in its own empty directory on your machine. Choose the edition.
 
     ▶ Install the OpenVidu node agent…
        · upload the OpenVidu node-agent installer
-       · run the node agent installer (k3s v1.36.4+k3s1)
+       · run the node agent installer (k3s v1.37.2+k3s1)
        ✓ Install the OpenVidu node agent
 
     ▶ Deploy OpenVidu…

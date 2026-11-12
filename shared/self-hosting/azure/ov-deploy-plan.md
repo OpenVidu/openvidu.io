@@ -13,7 +13,7 @@ This is what ov does in your Azure subscription (location northeurope); --debug 
 Run these in your account? Only yes or y goes ahead [y/N]:
 ```
 
-Every command is shown with `--debug`, and `--mode assisted` prints them all too. Azure takes its parameters on the `az deployment group create` line itself; there is no separate parameters file:
+Every command is shown with `--debug`, and `--mode assisted` prints them all too. Azure takes its parameters on the `az deployment group create` line itself; on Community there is no separate parameters file (on PRO the license goes in a `0600` file, `.openvidu/azure/secure-parameters.json`, instead of the command line):
 
 ??? example "Every command (`--debug` and assisted mode)"
 

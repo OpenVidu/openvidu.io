@@ -112,7 +112,7 @@ A local stack runs on Docker Compose with either edition. This lets you develop 
 
 The directory holds two things:
 
-- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it. The deploy flags (`--domain-name`, `--certificate-type`, `--modules`…), `--set key=value` and `-f file.yml` write into it, and the deploy fills in the rest with defaults. It also **generates every credential the stack needs** and pins them here, so a redeploy reuses them.
+- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it. The deploy flags (`--domain-name`, `--certificate-type`, `--enabled-modules`, or `--modules` on a local stack…), `--set key=value` and `-f file.yml` write into it, and the deploy fills in the rest with defaults. It also **generates every credential the stack needs** and pins them here, so a redeploy reuses them.
 - **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it (an SSH key, or the access a PRO stack publishes), the template and variables it applied on a cloud, and its secrets. Keep it private.
 
 Every deployed node also gets a copy of `ov` and a stack directory of its own, so `sudo ov stack status` works on the node too. A lost directory is recreated with `ov stack import` ([I lost the stack's directory](openvidu-cli.md#lost-the-stack-directory)).

@@ -225,7 +225,7 @@ By default everything that drives a cloud stack stays in its directory: the Terr
 | --- | --- | --- | --- |
 | **Terraform state** | (CloudFormation; no state file) | (Bicep; no state file) | a dedicated bucket: `<project>-<stack>-<hash>-terraform-state` on Google Cloud, `<stack>-<8 hex>-terraform-state` on Oracle Cloud and DigitalOcean |
 | **The record** (infrastructure, no secrets) | the template bucket (`<stack>/registry/`) | a Blob container (`openvidu-registry`) of a storage account the template creates in the stack's resource group (`ovreg<hash>`) | the state bucket (`openvidu/registry/`) |
-| **The SSH private key** `ov` generated | a Secrets Manager secret (`openvidu/<stack>/ssh-private-key`) | the stack's Key Vault (`OPENVIDU-SSH-PRIVATE-KEY`) | in the Terraform state |
+| **The machines' SSH private key** (`ov` generates it on AWS and Azure, the template on the other clouds) | a Secrets Manager secret (`openvidu/<stack>/ssh-private-key`) | the stack's Key Vault (`OPENVIDU-SSH-PRIVATE-KEY`) | in the Terraform state |
 
 On Azure, the record is written with the storage account's key: where an Azure Policy of your organization forbids shared key access, the deploy warns that `--remote-state` cannot keep it, and the way to carry the stack is `ov stack export --bundle --out <file>` and `ov stack import -f <file>`.
 
@@ -291,7 +291,7 @@ On Google Cloud, Azure, Oracle Cloud and DigitalOcean, a High Availability stack
 
 ### No domain: the `sslip.io` fallback
 
-A deploy with no `--domain-name` on a machine with a public IPv4 address derives an `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address. This is fine for testing; use your own domain for anything real. A machine without a public IPv4 address, or one you reach by hostname, still needs `--domain-name`.
+A deploy with no `--domain-name` on a machine with a public IPv4 address derives an `sslip.io` name from it (for example `openvidu-40mfas-54-82-78-43.sslip.io`), so Let's Encrypt has a name to certify. On a High Availability cloud stack the name comes from the load balancer's address, except on AWS, where High Availability always needs a domain. This is fine for testing; use your own domain for anything real. A machine without a public IPv4 address, or one you reach by hostname, still needs `--domain-name`.
 
 ### A cloud quota blocked the deploy
 

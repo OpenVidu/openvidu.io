@@ -32,4 +32,4 @@ A few points specific to Oracle Cloud:
 - **Keep the machines.** `--keep-infrastructure` tears the OpenVidu deployment down but leaves the machines running (and says so, because they still cost money). Use it to reinstall onto the same machines.
 - **Remote-state cleanup.** A stack deployed with `--remote-state` also keeps its Terraform state and record in a bucket of its own; `ov stack destroy` deletes that too (kept with `--keep-infrastructure`). If the state bucket already existed under that name, the destroy removes only this stack's objects and leaves the bucket.
 
-See [Destroy a stack](/docs/self-hosting/single-node/on-premises/admin.md#destroy) for the options common to every deployment.
+See [`ov stack destroy`](/docs/self-hosting/openvidu-cli.md#teardown-ov-stack-destroy) for the flags every deployment shares.

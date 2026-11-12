@@ -25,6 +25,9 @@ ov stack deploy openvidu --cloud azure --param mediaNodeInstanceType=Standard_F1
 
 The media node **count** is a parameter too; see [Scale the media nodes](#scale-the-media-nodes) below. See [Changing configuration](../../configuration/changing-config.md) for OpenVidu's own settings, which change without touching the machines.
 
+!!! warning
+    Every redeploy of an Elastic or High Availability stack on Azure, not only one that changes the media nodes, also decides what happens to the media nodes' autoscale setting, and that part has not been verified on Azure yet. Check the deployment with `az deployment group what-if` (or `--mode assisted`) before you apply a redeploy to a stack in production.
+
 ## Scale the media nodes { #scale-the-media-nodes }
 
 On Azure the media nodes **autoscale** by default: the Virtual Machine Scale Set runs between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, and a media node being removed drains gracefully, so autoscaling never cuts a live session. The range and a fixed count are template parameters, set when you deploy:

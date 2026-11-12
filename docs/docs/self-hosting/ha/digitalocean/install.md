@@ -46,7 +46,7 @@ ov stack deploy openvidu --cloud digitalocean \
   --mode auto
 ```
 
-Four master nodes behind a passthrough load balancer, plus an autoscaling pool of media nodes.
+Four master nodes behind a passthrough load balancer, plus an autoscaling pool of media nodes, in a VPC the template creates. The VPC is a `/24` the template derives from the stack's name inside `10.64.0.0`-`10.99.255.0`, so several stacks share an account and a region; `--param vpcIpRange=<cidr>` picks another (keep it clear of the ranges DigitalOcean reserves in the region and of `10.42.0.0/16` and `10.43.0.0/16`, which the cluster uses inside the nodes). A stack that exists keeps its range. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol (default `0.0.0.0/0`).
 
 The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 

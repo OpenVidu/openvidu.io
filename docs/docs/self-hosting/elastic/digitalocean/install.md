@@ -40,7 +40,7 @@ ov stack deploy openvidu --cloud digitalocean \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them (at the first deploy or on a redeploy). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them (at the first deploy or on a redeploy). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). The VPC is a `/24` the template derives from the stack's name inside `10.64.0.0`-`10.99.255.0`, so several stacks share an account and a region; `--param vpcIpRange=<cidr>` picks another (keep it clear of the ranges DigitalOcean reserves in the region and of `10.42.0.0/16` and `10.43.0.0/16`, which the cluster uses inside the nodes). A stack that exists keeps its range. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol (default `0.0.0.0/0`).
 
 This is how the deploy of a stack named `dpdo2` ends: `ov` waits until OpenVidu is up, then registers the stack:
 

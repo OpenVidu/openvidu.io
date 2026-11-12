@@ -4,9 +4,9 @@ By default, the stack's directory is the only place that drives the machines: if
 | --- | --- |
 | The Terraform state | a dedicated Object Storage bucket, `<stack>-<hash>-terraform-state` |
 | The record (infrastructure, no secrets) | the same bucket (`openvidu/registry/`) |
-| The SSH private key `ov` generated | the Terraform state |
+| The machines' SSH private key, which the template generates | the Terraform state |
 
-From an empty directory on another machine, `ov stack import --cloud oracle` reads that record and registers the stack. The bucket is named after the tenancy and the compartment too, so the import needs `--oci-compartment` (and the region, which defaults to your `oci` profile's). `--stack-name` takes the stack's name **on the cloud**, `openvidu-<name>`, exactly as the deploy's `record:` line prints it, not the name of its directory. The record never holds a secret, so a PRO license must be passed again:
+From an empty directory on another machine, `ov stack import --cloud oracle` reads that record and registers the stack. The bucket is named after the tenancy and the compartment too, so the import needs `--oci-compartment` (and the region, which defaults to your `oci` profile's). `--stack-name` takes the stack's name **on the cloud**, `openvidu-<name>`, exactly as the deploy's `record:` line prints it, not the name of its directory; (the name it was deployed as works too: `ov` reads the exact name first, then `openvidu-<name>`, and says which stack it imported). The record never holds a secret, so a PRO license must be passed again:
 
 ```bash
 ov stack import --cloud oracle --stack-name openvidu-el --oci-region eu-madrid-1 \
