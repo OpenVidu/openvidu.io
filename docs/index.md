@@ -71,7 +71,7 @@ page_features:
                 "Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities."
               </blockquote>
               <p class="success-story-attribution">Henrique Otsuka, Head of Information Technology, Eventials</p>
-              <a class="success-story-link" href="/blog/2026/11/04/eventials-live-streaming-openvidu/">Read the full story →</a>
+              <a class="success-story-link" href="/blog/2026/11/10/eventials-live-streaming-openvidu/">Read the full story →</a>
             </div>
           </div>
         </div>
