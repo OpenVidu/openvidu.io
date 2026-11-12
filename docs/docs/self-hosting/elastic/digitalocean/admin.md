@@ -25,7 +25,7 @@ For example, the master node's size (`masterNodeInstanceType`) or the media node
 ov stack deploy openvidu --cloud digitalocean --param masterNodeInstanceType=s-8vcpu-16gb --mode auto -y
 ```
 
-Before asking to go ahead, the redeploy reads Terraform's plan and says what it does: a new size resizes a Droplet in place (powered off for a few minutes, and none can move to a size with a smaller disk), and a change to what a node boots with creates it again. The media node size is baked into the autoscaler, so running media nodes keep their size until they are replaced.
+Before asking to go ahead, the redeploy reads Terraform's plan and says what it does: a new size resizes a Droplet in place (powered off for a few minutes, and none can move to a size with a smaller disk), and a change to what a node boots with (a `--param` of its first-boot data or another OpenVidu CLI) creates it again. The settings a redeploy gives (`--domain-name`, `--certificate-type` and the own certificate, the license, any other friendly flag, `--set` and `--set-secret`) never reach the template: `ov` applies them in the running stack, as `ov stack config set` does, and the machine is not touched. The media node size is baked into the autoscaler, so running media nodes keep their size until they are replaced.
 
 For OpenVidu's own settings, which change without touching the machines, see [Changing configuration](../../configuration/changing-config.md).
 

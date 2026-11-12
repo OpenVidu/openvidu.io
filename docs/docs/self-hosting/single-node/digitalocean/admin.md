@@ -25,7 +25,7 @@ The most common change is the Droplet size:
 ov stack deploy openvidu --cloud digitalocean --param instanceType=s-8vcpu-16gb --mode auto -y
 ```
 
-Before asking to go ahead, the redeploy reads Terraform's plan and says what it does. A new size is resized in place, with the Droplet powered off for a few minutes (none can move to a size with a smaller disk). A change to what the Droplet boots with (the domain, the certificate, the license, the Meet credentials, another OpenVidu CLI) creates it again from scratch, with a new public IP, so a domain pointed at it has to be pointed again; the plan says `REPLACES the Droplet`.
+Before asking to go ahead, the redeploy reads Terraform's plan and says what it does. A new size is resized in place, with the Droplet powered off for a few minutes (none can move to a size with a smaller disk). A change to what the Droplet boots with (a `--param` of its first-boot data, such as `domainName` or `certificateType`, or another OpenVidu CLI) creates it again from scratch, with a new public IP, so a domain pointed at it has to be pointed again; the plan says `REPLACES the Droplet`. The settings a redeploy gives (`--domain-name`, `--certificate-type` and the own certificate, the license, any other friendly flag, `--set` and `--set-secret`) never reach the template: `ov` applies them in the running stack, as `ov stack config set` does, and the machine is not touched.
 
 For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md).
 

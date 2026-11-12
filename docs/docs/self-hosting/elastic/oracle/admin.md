@@ -13,7 +13,7 @@ The sections up to [Export the desired state](#export) are the operations every 
 
 ## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
-Any parameter the Oracle template declares is changed from the stack's directory with `ov stack deploy <name> --cloud oracle --param Name=Value`, which runs `terraform apply` again with the parameters that changed. A redeploy reads Terraform's plan first and says what it does before you answer: an instance whose shape, OCPUs or memory change restarts in place, while a change to what the master boots with (the domain, the certificate, the license, the Meet credentials or a newer OpenVidu CLI) `REPLACES the master`, which comes back with a new public IP.
+Any parameter the Oracle template declares is changed from the stack's directory with `ov stack deploy <name> --cloud oracle --param Name=Value`, which runs `terraform apply` again with the parameters that changed. A redeploy reads Terraform's plan first and says what it does before you answer: an instance whose shape, OCPUs or memory change restarts in place, while a change to what the master boots with (a `--param` of its first-boot data, such as `domainName` or `certificateType`, or a newer OpenVidu CLI) `REPLACES the master`, which comes back with a new public IP. The settings a redeploy gives (`--domain-name`, `--certificate-type` and the own certificate, the license, any other friendly flag, `--set` and `--set-secret`) never reach the template: `ov` applies them in the running stack, as `ov stack config set` does, and the machine is not touched.
 
 To change OpenVidu's own settings without touching the machines, use [its configuration](../../configuration/changing-config.md#view-get-set-unset), not a redeploy.
 

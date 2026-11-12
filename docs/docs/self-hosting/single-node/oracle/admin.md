@@ -20,7 +20,7 @@ ov stack deploy openvidu --cloud oracle --param instanceType=VM.Standard.E4.Flex
   --param instanceOCPUs=4 --param instanceMemory=16 --mode auto -y
 ```
 
-A redeploy reads Terraform's plan first: a change to the instance's shape, OCPUs or memory restarts it in place, while a change to what it boots with (the domain, the certificate, the license, the Meet credentials or a newer OpenVidu CLI) recreates it from scratch, and it comes back with a new public IP, so a domain pointed at it must be pointed again. The plan says which before you answer.
+A redeploy reads Terraform's plan first: a change to the instance's shape, OCPUs or memory restarts it in place, while a change to what it boots with (a `--param` of its first-boot data, such as `domainName` or `certificateType`, or a newer OpenVidu CLI) recreates it from scratch, and it comes back with a new public IP, so a domain pointed at it must be pointed again. The plan says which before you answer. The settings a redeploy gives (`--domain-name`, `--certificate-type` and the own certificate, the license, any other friendly flag, `--set` and `--set-secret`) never reach the template: `ov` applies them in the running stack, as `ov stack config set` does, and the machine is not touched.
 
 To change OpenVidu's own settings without touching the machine, use [its configuration](../../configuration/changing-config.md#view-get-set-unset), not a redeploy.
 

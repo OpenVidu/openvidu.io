@@ -22,4 +22,4 @@ As soon as the machines exist, the deploy prints the `A` record to create: `<dom
 
 - **COMMUNITY** (Single Node) reaches OpenVidu at its URL, so the deploy **waits for the record**: create it as soon as the deploy prints it, or the wait times out. With Let's Encrypt the certificate is issued once the name resolves.
 
-To move a running stack to a domain afterwards, redeploy with `--domain-name` and the certificate flags. The domain is part of what the instance boots with, so that redeploy recreates the instance from scratch and it comes back with a new public IP; the redeploy's plan says so before you confirm.
+To move a running stack to a domain afterwards, run `ov stack config set domain-name=openvidu.example.com` (with the certificate settings it needs), or redeploy with `--domain-name` and the certificate flags, which applies them the same way. The change is made in the running stack: the instance is not recreated and keeps its public IP, so point the `A` record at that same address. The vault keeps the `DOMAIN_NAME` and `OPENVIDU_URL` of the first boot.
