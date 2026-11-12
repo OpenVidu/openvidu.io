@@ -4,21 +4,23 @@ One command deletes the machines too. You must choose what happens to the record
 $ ov stack destroy -y --delete-data
 This is what will be deleted from your DigitalOcean account:
 
-  # Everything the Terraform state in .openvidu/digitalocean holds: the Droplets, the VPC, the
-  # firewalls, the load balancer and the Spaces. A Space must be empty to go, and the master
-  # writes into it until it is gone, so the Spaces are emptied between two passes.
+  # Everything the Terraform state in .openvidu/digitalocean holds: the Droplet, its
+  # firewall, its tag, the SSH key, the Spaces key, the Space with the recordings and Meet
+  # data. A Space must be empty to go, and the machine writes into it until it is gone, so
+  # the Space is emptied between two passes; only a Space the state holds is emptied,
+  # never one of your own (--param spaceName=<name>).
   terraform -chdir=.openvidu/digitalocean init -input=false -no-color -force-copy
   env OPENVIDU_STACK_DESTROY=1 terraform -chdir=.openvidu/digitalocean destroy -auto-approve -input=false -no-color
   env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 rm s3://openvidu-ce12d2-space-dae2e06c8c --recursive --endpoint-url https://ams3.digitaloceanspaces.com
   env OPENVIDU_STACK_DESTROY=1 terraform -chdir=.openvidu/digitalocean destroy -auto-approve -input=false -no-color
 
---delete-data: the recordings and Meet data are in the Spaces: this deletes them.
+--delete-data: the recordings and Meet data are in the Space: this deletes them.
 
-▶ Delete the machines on DigitalOcean…
+▶ Delete the machine on DigitalOcean…
    · destroy .openvidu/digitalocean (this returns when Terraform is done)
    · empty the Space openvidu-ce12d2-space-dae2e06c8c so it can be deleted
    · destroy .openvidu/digitalocean (this returns when Terraform is done)
-   ✓ Delete the machines on DigitalOcean
+   ✓ Delete the machine on DigitalOcean
 ✔ removed stack "ce12d2" from this directory
 ```
 

@@ -24,10 +24,20 @@ A High Availability stack sits behind a load balancer that passes TLS through to
 
 ### No media, but every service is healthy
 
-This is almost always a blocked **UDP** port (`443/udp` or the media range `50000-60000/udp`). HTTPS works and the stack looks fine, but media never arrives. On DigitalOcean the template opens the ports in the stack's firewall; if you narrowed it, open them there. Probing a running stack cannot prove this, so stop it for a few seconds and run the full check on a reachable node:
+This is almost always a blocked **UDP** port (`443/udp` or the media range `50000-60000/udp`). HTTPS works and the stack looks fine, but media never arrives. On DigitalOcean the template opens the ports in the stack's firewall; if you narrowed it, open them there. Probing a running stack cannot prove this (the media range is dialable only while a participant holds it), so stop the stack for a few seconds and run the full check.
+
+On a **Community** single node the stack's record keeps SSH to the node, so `check-ports` runs between stop and start:
 
 ```bash
 ov stack stop && ov stack check-ports && ov stack start
+```
+
+A **PRO** stack is operated through its admin control protocol, not SSH, so `ov stack check-ports` on its own exits `2` there and prints the command that does reach the node, with the master's address and the key path filled in. Run that between stop and start:
+
+```bash
+ov stack stop
+ov stack check-ports --ssh <user>@<master> --ssh-key <key>
+ov stack start
 ```
 
 ### The deploy timed out while waiting for OpenVidu
@@ -35,8 +45,10 @@ ov stack stop && ov stack check-ports && ov stack start
 The Droplets were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, 40 minutes by default with `--cloud`). The infrastructure already exists, so simply resume: it waits and registers the stack, reusing what is there.
 
 ```bash
-ov stack deploy --cloud digitalocean --mode auto
+ov stack deploy <name> --cloud digitalocean --mode auto
 ```
+
+Name the stack: without the name it would be registered as `openvidu`.
 
 ### A create failed partway
 

@@ -1,6 +1,19 @@
-Before it touches your account, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
+Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: the answer is read from its input, a terminal or a pipe, and only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
 
-??? example "The full plan (click to expand)"
+```text
+This is what ov does in your DigitalOcean account (region ams3, Spaces in ams3); --debug shows every command:
+
+  1. Template: render the single node template into .openvidu/digitalocean/tf-do-openvidu-singlenode.tf
+     and its variables into .openvidu/digitalocean/openvidu.auto.tfvars.json (0600)
+  2. Machines: create the machine, which installs OpenVidu Community on itself with Terraform (about 1 minute, then OpenVidu installs)
+  3. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+
+Run these in your account? Only yes or y goes ahead [y/N]:
+```
+
+`--debug`, and `--mode assisted`, print every command of that plan instead:
+
+??? example "The full command list (click to expand)"
 
     ```text
     This is what will be done in your DigitalOcean account (region ams3, Spaces in ams3):

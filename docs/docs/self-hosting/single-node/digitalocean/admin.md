@@ -11,9 +11,9 @@ description: "Operate an OpenVidu Single Node DigitalOcean stack with the CLI: c
 
 </div>
 
-The stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu deployment. The canonical operations page covers them all: [status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe), the [health test](../on-premises/admin.md#health-test), [logs](../on-premises/admin.md#logs) and [start, stop and restart](../on-premises/admin.md#start-stop-and-restart). Its [configuration](../../configuration/changing-config.md) and its [modules](../../how-to-guides/enable-disable-modules.md) are changed the same way as anywhere else.
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a Single Node stack on DigitalOcean.
 
-This page covers only what is specific to DigitalOcean.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack
 

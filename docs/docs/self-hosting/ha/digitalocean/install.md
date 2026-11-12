@@ -33,7 +33,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 On High Availability there are two topology-specific points:
 
 - **A certificate.** The load balancer passes TLS through to the masters, so Let's Encrypt and ZeroSSL do **not** work here (their HTTP challenge reaches a port 80 that only redirects to HTTPS). Use `selfsigned` (the default) to try the topology out, or `owncert` for production.
-- **A domain, for production.** No DigitalOcean template points a domain. After the deploy, point an `A` record at the load balancer's address (the `loadBalancerIp` output), as described below.
+- **A domain, for production.** No DigitalOcean template points a domain. Point an `A` record at the load balancer's address, which the deploy prints as soon as the load balancer exists, while it waits for the machines, as described below.
 
 ## Deploy
 
@@ -61,7 +61,7 @@ The load balancer passes TLS through untouched, and Caddy on the masters termina
 
     On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
+Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address. With your own domain, point an `A` record at that address: the deploy prints the record to create (`openvidu.example.com. A <loadBalancerIp>`) as soon as the load balancer exists, while it waits for the machines, so create it then. If the domain does not resolve yet when OpenVidu is up, the deploy ends with `! OpenVidu Pro (high availability) is deployed on DigitalOcean, with one step left: openvidu.example.com does not point at it yet.` and the record again, and `ov stack status --wait` reports `URL not answering yet` until the record resolves. The address is also the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`.
 
 This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
@@ -70,7 +70,6 @@ This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack st
 ✔ OpenVidu Pro (high availability) is up on DigitalOcean
   URL:          https://openvidu-j78sfb-129-212-214-216.sslip.io/
   credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-demo-ha-space-appdata-b62adba1a3/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-  kubeconfig:   .openvidu/digitalocean/kubeconfig.yaml
 
 $ ov stack status --wait
 waiting for https://openvidu-j78sfb-129-212-214-216.sslip.io to be ready (Ctrl-C to stop)…

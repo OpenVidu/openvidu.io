@@ -48,19 +48,25 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
       --certificate-type letsencrypt --mode auto
     ```
 
-    One Droplet running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    One Droplet running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
-    This is how the deploy of a stack named `dpdo1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+    This is how the deploy of a stack named `dpdo1` ends: `ov` waits until OpenVidu is up, then registers the stack:
 
     ```text
-    …
-       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at openvidu-wakvlb-188-166-126-9.sslip.io:6443
+    ▶ Wait for the machines to deploy OpenVidu…
+       · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-dpdo1-space-ef16b466b1 yet (the machine writes it as it installs)
+       · waiting for OpenVidu to come up (1m5s elapsed): OpenVidu is still installing
+       · OpenVidu is up
+       ✓ Wait for the machines to deploy OpenVidu
     …
     ✔ OpenVidu Pro (single node) is up on DigitalOcean
       URL:          https://openvidu-wakvlb-188-166-126-9.sslip.io/
       credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo1-space-ef16b466b1/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-      kubeconfig:   .openvidu/digitalocean/kubeconfig.yaml
     ```
+
+## Use your own domain
+
+--8<-- "self-hosting/digitalocean/ov-domain.md"
 
 ## What the deploy runs
 

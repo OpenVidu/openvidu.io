@@ -40,19 +40,25 @@ ov stack deploy openvidu --cloud digitalocean \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them (at the first deploy or on a redeploy). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
 
-This is how the deploy of a stack named `dpdo2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+This is how the deploy of a stack named `dpdo2` ends: `ov` waits until OpenVidu is up, then registers the stack:
 
 ```text
-…
-   · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at openvidu-7qr30p-142-93-224-169.sslip.io:6443
+▶ Wait for the machines to deploy OpenVidu…
+   · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-dpdo2-space-d15fca9b1c yet (the machine writes it as it installs)
+   · waiting for OpenVidu to come up (2m10s elapsed): OpenVidu is still installing
+   · OpenVidu is up
+   ✓ Wait for the machines to deploy OpenVidu
 …
 ✔ OpenVidu Pro (elastic) is up on DigitalOcean
   URL:          https://openvidu-7qr30p-142-93-224-169.sslip.io/
   credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo2-space-d15fca9b1c/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-  kubeconfig:   .openvidu/digitalocean/kubeconfig.yaml
 ```
+
+## Use your own domain
+
+--8<-- "self-hosting/digitalocean/ov-domain.md"
 
 ## What the deploy runs
 

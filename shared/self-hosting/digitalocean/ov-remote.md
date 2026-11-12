@@ -6,7 +6,7 @@ From an empty directory on the other machine, `ov stack import --cloud digitaloc
 ov stack import --cloud digitalocean --stack-name openvidu-<name> --openvidu-pro-license <your-license>
 ```
 
-The other machine needs `$DIGITALOCEAN_TOKEN` of the same account and the Spaces keys, and `--do-spaces-region` when the Spaces are not in `ams3`. A Community stack is imported the same way, with no license: the import takes the SSH private key from the Terraform state and operates the stack over SSH. On a PRO stack, without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing.
+The other machine needs `$DIGITALOCEAN_TOKEN` of the same account and the Spaces keys. The state Space is looked for in `--do-spaces-region`, else `--do-region`, else `$DO_REGION`, else `ams3`, so pass `--do-spaces-region` when the Spaces are in another region. A Community stack is imported the same way, with no license: the import takes the SSH private key from the Terraform state and operates the stack over SSH. On a PRO stack, without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing.
 
 What `--remote-state` keeps on DigitalOcean, where the stack's infrastructure already lives:
 
@@ -16,6 +16,6 @@ What `--remote-state` keeps on DigitalOcean, where the stack's infrastructure al
 | **The record** (infrastructure, no secrets) | the state Space (`openvidu/registry/`) |
 | **The SSH private key** `ov` generated | the Terraform state |
 
-`ov stack destroy` deletes all of it. A stack deployed **without** `--remote-state` has no record to read: the only way back is the directory that deployed it, or `--kubeconfig` for the cluster alone (PRO).
+`ov stack destroy` deletes all of it. A stack deployed **without** `--remote-state` has no record to read: the way back is the directory that deployed it. If that directory is gone, a PRO stack is still adopted from one of its nodes with `ov stack import --ssh <user>@<master>` (any master on High Availability), with `sudo ov stack import --this-node` run on the node itself, or with `ov stack import -f <file>` of a bundle written beforehand by `ov stack export --bundle --out <file>`. That adopts OpenVidu, so `ov stack status`, `config` and `logs` work, but not the infrastructure: there is no `--param` redeploy and no `ov stack destroy` of the machines from that directory.
 
 See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general part.
