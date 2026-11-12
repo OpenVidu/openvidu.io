@@ -96,8 +96,9 @@ In an [embedded](../../embedded/intro.md) meeting, these views offer the same di
 A place in line belongs to the participant's **live connection** to OpenVidu Meet, and it is kept only while the page stays connected.
 
 - A short loss of connection is fine. The participant keeps their place if the connection is back within about a minute.
-- About a **minute without connection** loses the place, whatever the cause: the network, a closed tab, a phone that suspends the page, or a host application that removes the embedded element or iframe.
-- A **reload** continues the same wait: the participant returns to the waiting screen with the same place and identity, without asking again. The page remembers the wait of its tab, so another tab asks to join again. A participant who was admitted and reloads the page after joining also asks again at the end of the line.
+- A page that **closes, reloads or navigates away** loses its place about 15 seconds later unless the page connects again, so a moderator sees the participant leave the list within seconds.
+- About a **minute without connection** loses the place, whatever the cause: the network, a phone that suspends the page, a browser that crashes, or a host application that removes the embedded element or iframe.
+- A **reload** continues the same wait if the page connects again within those 15 seconds: the participant returns to the waiting screen with the same place and identity, without asking again. The page remembers the wait of its tab, so another tab asks to join again. A participant who was admitted and reloads the page after joining also asks again at the end of the line.
 - **Leave waiting room** ends the wait at once, even while the connection is down.
 
 A page that never manages to connect shows the connection error screen instead of "You lost your place". That points to a network that blocks WebSockets: see the [troubleshooting note](../../deployment/basic.md#troubleshooting).
@@ -175,7 +176,7 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application 
 - `meetingJoined`, not `admitted`, is what confirms the join. A join that finds the meeting full after `admitted` raises no waiting room event.
 - A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `participantWaitingChanged`.
 - While waiting, `mediaToggleAudio` and `mediaToggleVideo` act on the preview, and `meetingLeave` leaves the waiting room and reports `left`.
-- Removing the element or the iframe while the participant waits is not a leave: the place is lost after about a minute and reported as `expired`.
+- Removing the element or the iframe while the participant waits is not a leave: the place is lost within about a minute and reported as `expired`.
 - With an iframe, the host waits for `participantWaitingChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
 
 A host page with a Content Security Policy must also allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](../../embedded/reference/webcomponent.md#content-security-policy).
