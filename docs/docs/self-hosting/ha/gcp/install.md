@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu High Availability on Google Cloud"
-description: "Deploy OpenVidu High Availability on Google Cloud from a deployment stack in the Google Cloud console, then point your application at the result."
+description: "Deploy OpenVidu High Availability on Google Cloud with one OpenVidu CLI command: four master nodes behind a load balancer and autoscaling media nodes."
 ---
 
 # OpenVidu High Availability installation: Google Cloud Platform
@@ -11,20 +11,16 @@ description: "Deploy OpenVidu High Availability on Google Cloud from a deploymen
 
 </div>
 
-
 --8<-- "self-hosting/common/ha-license-intro.md"
 
-This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the High Availability topology and applies it with **your own `terraform` and your `gcloud` credentials**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 !!! info
     Port `9000` is MinIO's port. This deployment stores recordings and application data in Google Cloud Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
 
-
-To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console. Then follow these steps and fill in your preferred parameters.
-
-This is what the deployment architecture looks like:
-
 === "Architecture overview"
+
+    This is what the deployment architecture looks like:
 
     ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
 
@@ -34,165 +30,78 @@ This is what the deployment architecture looks like:
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Managed Instance Group of Media Nodes is created to scale the number of Media Nodes based on system load.
 
---8<-- "self-hosting/gcp/custom-scale-in.md"
+## Requirements { #requirements }
 
-## Deployment details
+--8<-- "self-hosting/gcp/ov-requirements.md"
 
---8<-- "self-hosting/gcp/info-deployment.md"
+High Availability adds two requirements for a production deployment:
 
-To deploy OpenVidu, first create a new deployment using the top-left button, as shown in the image.
+- **Your own domain and certificate.** The four masters sit behind a passthrough TCP load balancer that passes TLS through untouched, so Let's Encrypt and ZeroSSL cannot be issued on this topology (their HTTP challenge reaches a port 80 that only redirects to HTTPS). Use the default `selfsigned` certificate only to try the topology out, and `owncert` with your own domain for production.
+- **A DNS record you point at the load balancer** once the deploy creates it (see below). No Google Cloud template points a domain for you.
 
-![Google Cloud Platform create new deployment](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment.png){ .round-corners loading=lazy }
+## Deploy { #deploy }
 
-Once you click the button, you will see this window.
+The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-![Google Cloud Platform create new deployment window](../../../../assets/images/platform/self-hosting/shared/gcp/create-deployment-window.png){ .round-corners loading=lazy }
+```bash
+mkdir openvidu && cd openvidu
+ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+  --mode auto
+```
 
-* Fill **Deployment ID** with any name you prefer (for example, openvidu-ha-deployment).   
-* Change the **Region** to the one you prefer.
-!!! warning
-    
-    If you change the region in the previous step, don't forget to update the [region and zone :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/regions-zones?hl=en){:target="_blank"} in the Terraform values.
+Four master nodes behind a passthrough TCP load balancer, plus a managed instance group of media nodes.
 
-* Leave **Terraform version** as 1.5.7.   
-* For **Service Account**, you will need to create a new one with _"Owner"_ permissions. To do this, click the _"Service Account"_ label and then _"New Service Account"_. Choose your service account name, click _"Create and Continue"_, select the _"Owner"_ role, click _"Continue"_, and then _"Done"_.   
-??? details "New Service Account Steps"
+The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-    ![Google Cloud Platform create new Service Account step 1](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-1.png){ .round-corners loading=lazy }
-    /// caption
-    Step 1: Create Service Account
-    ///
+- **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
+- **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
-    ![Google Cloud Platform create new Service Account step 2](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-2.png){ .round-corners loading=lazy }
-    /// caption
-    Step 2: Service Account Details
-    ///
-
-    ![Google Cloud Platform create new Service Account step 3](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-3.png){ .round-corners loading=lazy }
-    /// caption
-    Step 3: Grant Permissions
-    ///
-
-    ![Google Cloud Platform create new Service Account step 4](../../../../assets/images/platform/self-hosting/shared/gcp/create-service-account-4.png){ .round-corners loading=lazy }
-    /// caption
-    Step 4: Complete Setup
-    ///
-
-* Fill **Git repository** with this link, which corresponds to our Git repository where the Terraform files to deploy OpenVidu are located:
-
-    ```
-    https://github.com/OpenVidu/openvidu.git
+    ```bash
+    --domain-name openvidu.example.com --certificate-type owncert \
+      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+      --owncert-private-key "$(base64 -w0 privkey.pem)"
     ```
 
-* Fill the **Git directory** with the following path:
+    On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    ```
-    openvidu-deployment/pro/ha/gcp
-    ```
+Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `load_balancer_ip` output of `terraform -chdir=.openvidu/gcp output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
-* For the **Git ref**, use the version you want to deploy:
+This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
-    ```
-    v3.9.0
-    ```
+```text
+…
+✔ OpenVidu Pro (high availability) is up on Google Cloud
+  URL:          https://openvidu-3jjbjv-34-39-52-221.sslip.io/
+  credentials:  gcloud secrets versions access latest --secret=openvidu-demo-ha-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-demo-ha-)
+  kubeconfig:   .openvidu/gcp/kubeconfig.yaml
 
-Finally, click Continue.
+$ ov stack status --wait
+waiting for https://openvidu-3jjbjv-34-39-52-221.sslip.io to be ready (Ctrl-C to stop)…
+✔ demo-ha is ready (https://openvidu-3jjbjv-34-39-52-221.sslip.io)
+```
 
-## Input Values
+## What the deploy runs { #what-the-deploy-runs }
 
-In Google Cloud Platform, there is no built-in template with parameters. You need to manually enter the parameters in the console declared in our Terraform files, so below is a detailed table of all optional and mandatory parameters.
+--8<-- "self-hosting/gcp/ov-deploy-plan.md"
 
-### Mandatory Parameters
-| Input Value | Description |
-|---|---|
-| projectId | GCP project id where the resources will be created. |
-| stackName | Stack name for OpenVidu deployment. |
-| openviduLicense | Your OpenVidu License. Get one [here](../../../../account.md) if you don't have one. |
+## What the deploy creates { #what-the-deploy-creates }
 
-### Optional Parameters
-| Input Value | Default Value | Description |
-|---|---|---|
-| region | "europe-west2" | GCP region where resources will be created. |
-| zone | "europe-west2-b" | GCP zone that some resources will use. |
-| certificateType | "letsencrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
-| publicIpAddress | (none) | Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP. |
-| domainName | (none) | Domain name for the OpenVidu Deployment. |
-| ownPublicCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
-| ownPrivateCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
-| initialMeetAdminPassword | (none) | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
-| initialMeetApiKey | (none) | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
-| masterNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Master Nodes. The former name `masterNodesInstanceType` is still accepted but deprecated. |
-| masterNodesDiskSize | 200 | Size of the disk in GB for master nodes |
-| mediaNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
-| initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
-| minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-| maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-| scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
-| fixedNumberOfMediaNodes | 0 | If greater than 0, deploys exactly that number of Media Nodes with no autoscaling (initialNumberOfMediaNodes, minNumberOfMediaNodes, maxNumberOfMediaNodes and scaleTargetCPU are ignored). 0 = use autoscaling. |
-| GCSAppDataBucketName | (none) | Name of the GCS bucket to store application data and recordings. If empty, a bucket will be created |
-| GCSClusterDataBucketName | (none) | Name of the GCS bucket to store cluster data. If empty, a bucket will be created |
-| rtcEngine | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
-| additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
+--8<-- "self-hosting/gcp/ov-resources.md"
 
-For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.9.0/openvidu-deployment/pro/ha/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
+## Access OpenVidu { #access-openvidu }
 
-!!! warning
-    It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.
+--8<-- "self-hosting/gcp/ov-access.md"
 
-    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/shared/gcp/input-variables.png){ .round-corners loading=lazy }
+## Review the commands first: assisted mode { #assisted-mode }
 
-## Deploying the stack
+--8<-- "self-hosting/gcp/ov-assisted.md"
 
-When you are satisfied with your input values, click _"Continue"_ and then _"Create deployment"_. The deployment will be validated and all resources will be created. Wait around 4 to 7 minutes for the nodes to install OpenVidu.
-
-!!! warning
-
-    If deployment fails, check the Cloud Build logs shown at the top of the screen and redeploy after applying the required changes. If the failure is related to an API, delete the deployment and create a new one. If it keeps failing, contact us.
-    
-    ![Google Cloud Platform input variables](../../../../assets/images/platform/self-hosting/ha/gcp/cloud-build-logs.png){ .round-corners loading=lazy }
-
-When everything is ready, you can check the secrets on the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} or by connecting through SSH to the instances:
-
-=== "Check deployment outputs in GCP Secret Manager"
-
-    1. Go to the [Secret Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"}.
-
-    2. Once you are in the Secret Manager you will see all the secrets by their name.
-
-        ![Google Cloud Platform Secrets location](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-manager.png){ .round-corners loading=lazy }
-
-    3. Here click on the secret of your choice, choose the last version and then click on the _"3 dots"_ -> _"View secret value"_ to retrieve that secret.
-
-        ![Google Cloud Platform Secrets version](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-version.png){ .round-corners loading=lazy }
-
-=== "Check deployment outputs in the instance"
-
-    SSH to any of the Master Nodes by gcloud command generated in the web console and navigate to the config folder `/opt/openvidu/config/cluster`. Files with the deployment outputs are:
-
-    - `openvidu.env`
-    - `master_node/meet.env`
-
-    To find out the command go to [Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} and click on the arrow close to the SSH letters and then *"View gcloud command"*.
-
-    ![Google Cloud Platform gcloud command](../../../../assets/images/platform/self-hosting/ha/gcp/gcloud-command.png){ .round-corners loading=lazy }
-
-    To install gcloud in your shell follow the official [instructions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/sdk/docs/install-sdk?hl=en#linux){:target="_blank"}.
-
-## Configure your application to use the deployment 
-
-You need the secret outputs from Google Cloud Platform to configure your OpenVidu application. You can check these secrets in Secret Manager using either of these two methods: ([Check deployment outputs in GCP Secret Manager](#check-deployment-outputs-in-gcp-secret-manager)) or ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
-
-Your authentication credentials and the URL to point your applications to are:
-
---8<-- "self-hosting/gcp/credentials-general.md"
---8<-- "self-hosting/gcp/credentials-v2compatibility.md"
-
-## Troubleshooting initial Google Cloud Platform deployment creation
+## Troubleshooting { #troubleshooting }
 
 --8<-- "self-hosting/gcp/troubleshooting.md"
 
-3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
+## Next steps { #next-steps }
 
-## Configuration and administration
-
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait about 4 to 7 minutes for the instances to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+- [Administer the stack](./admin.md): change a parameter, scale the media nodes, operate it from another machine and destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).

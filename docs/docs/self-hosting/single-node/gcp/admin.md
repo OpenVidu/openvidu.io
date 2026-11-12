@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu Single Node on Google Cloud"
-description: "Administer OpenVidu Single Node on Google Cloud: start and stop it, change its configuration and back up its data."
+description: "Administer OpenVidu Single Node on Google Cloud from the directory that deployed it: change a parameter, operate it remotely and destroy it."
 ---
 
 # OpenVidu Single Node administration: Google Cloud Platform
@@ -11,69 +11,34 @@ description: "Administer OpenVidu Single Node on Google Cloud: start and stop it
 
 </div>
 
+A Google Cloud stack is operated from the directory that deployed it, with the same commands as any other OpenVidu stack. The canonical operations are documented once, on the On Premises page:
 
-Google Cloud Platform OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with Terraform from Google Cloud Platform.
+- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe), [health test](../on-premises/admin.md#health-test) and [logs](../on-premises/admin.md#logs).
+- [Start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
+- [Change the configuration](../../configuration/changing-config.md) of OpenVidu and [enable or disable modules](../../how-to-guides/enable-disable-modules.md), which change without touching the machine.
 
-However, there are certain things worth mentioning:
+This page covers what is specific to a Google Cloud stack.
 
-## Start and stop OpenVidu through Google Cloud Platform Console
+## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
-You can start and stop all services as explained in the [On Premises Single Node](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Virtual Machine instance directly from Google Cloud Platform Console. This will stop all services running in the instance and reduce Google Cloud Platform costs.
+`ov stack deploy <name> --cloud gcp --param Name=Value` in the stack's directory runs `terraform apply` again with the parameters that changed. Any parameter the template declares can be set this way. For example, the instance type:
 
-=== "Stop OpenVidu Single Node"
+```bash
+ov stack deploy openvidu --cloud gcp --param instanceType=e2-standard-8 --mode auto -y
+```
 
-    1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO). Click on it.
-    3. In the Virtual Machine section, click the stop button to stop the Virtual Machine (and therefore OpenVidu).
+A new machine type is an update in place: the instance carries `allow_stopping_for_update`, so Google Cloud stops the machine for a few minutes and starts it with the new type. On a stack that already exists, auto mode runs `terraform plan` first (it changes nothing) and the plan says what it found before asking to go ahead.
 
-    ![Stop instance](../../../../assets/images/platform/self-hosting/single-node/gcp/stop-instance.png){ .round-corners loading=lazy }
+For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md).
 
-=== "Start OpenVidu Single Node"
+## Operate from another machine { #operate-from-another-machine }
 
-    1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-    2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO).  Click on it.
-    3. In the Virtual Machine section, click the start button to start the Virtual Machine (and therefore OpenVidu).
+--8<-- "self-hosting/gcp/ov-remote.md"
 
-    ![Start instance](../../../../assets/images/platform/self-hosting/single-node/gcp/start-instance.png){ .round-corners loading=lazy }
+## Destroy the stack { #destroy-the-stack }
 
-## Change the instance type
+--8<-- "self-hosting/gcp/ov-destroy.md"
 
-You can change the instance type of the OpenVidu Single Node instance to adapt it to your needs. To do this, follow these steps:
-
-1. Go to [GCP Compute Engine Instances :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/instances){:target="_blank"} of Google Cloud Platform.
-2. There, you will find the Virtual Machine that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-pro` (PRO). Click on it.
-3. Stop the instance if it is not stopped. Wait for it to stop.
-4. Click on _"Edit"_, scroll down and change the **Machine Type**.
-
-    === "Change instance type"
-
-        ![Change instance type](../../../../assets/images/platform/self-hosting/single-node/gcp/instance-type.png){ .round-corners loading=lazy }
-
-5. Select the new instance type and click on _"Save"_.
-
-## Administration and configuration
-
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node Administration](../on-premises/admin.md).
-
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
-
-In addition to these, a Google Cloud Platform deployment provides the capability to manage global configurations via the Google Cloud Platform Console using Secrets Manager created during the deployment:
-
-=== "Changing configuration through Secrets Manager"
-
-    1. Navigate to the [GCP Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/security/secret-manager){:target="_blank"} on Google Cloud Platform.
-    2. Click on the desired secret you want to change and click on _"New Version"_.
-
-        ![Google Cloud Platform Secrets Manager New Version Secret](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-new-version.png){ .round-corners loading=lazy }
-
-    3. Enter the new secret value on _"Secret Value"_ field and click on _"Add new version"_.
-
-        ![Google Cloud Platform Secrets Manager New Version Secret Create](../../../../assets/images/platform/self-hosting/shared/gcp/secrets-create-version.png){ .round-corners loading=lazy }
-
-    4. Go to the Instance resource of OpenVidu and click on [_Stop_](#stop-openvidu-single-node) -> [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
-
-    Changes will be applied automatically.
-
-## Backup and Restore
+## Backup and restore { #backup-and-restore }
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
