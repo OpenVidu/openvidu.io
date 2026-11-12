@@ -1,4 +1,4 @@
-The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example below, both use the Let's Encrypt certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/meet` (`/` redirects there unless you serve your own application) and OpenVidu Dashboard at `/dashboard/`. In the Single Node example below, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-uj9zj7-34-105-214-170.sslip.io

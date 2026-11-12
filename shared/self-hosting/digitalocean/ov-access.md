@@ -1,4 +1,4 @@
-The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/meet` (`/` redirects there unless you serve your own application) and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-324jl8-164-92-159-209.sslip.io
@@ -31,8 +31,22 @@ S3_APP_DATA_BUCKET             openvidu-ce12d2-space-dae2e06c8c
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
 
-To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The login user is `root`, and the node has `ov` too, so `ov stack …` there operates the same stack:
+To look inside a machine, the login user is `root` and the node has `ov` too, so `ov stack …` there operates the same stack. Where the private key is depends on the edition:
 
-```bash
-ssh -i .openvidu/digitalocean/openvidu-ce12d2-key.pem root@164.92.159.209
-```
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    Use the key the template generated, which `ov` saves in the stack directory (the `SSH:` line of the summary):
+
+    ```bash
+    ssh -i .openvidu/digitalocean/openvidu-ce12d2-key.pem root@164.92.159.209
+    ```
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    The template generated the machines' key and keeps it in its state, not as a file in the stack directory. The `sshPrivateKey` output prints its private half:
+
+    ```bash
+    terraform -chdir=.openvidu/digitalocean output -raw sshPrivateKey > openvidu-key.pem
+    chmod 600 openvidu-key.pem
+    ssh -i openvidu-key.pem root@<master's public address>
+    ```

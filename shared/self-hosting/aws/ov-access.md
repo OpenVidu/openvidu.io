@@ -1,4 +1,4 @@
-The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/meet` (`/` redirects there unless you serve your own application) and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-40mfas-54-82-78-43.sslip.io
@@ -35,7 +35,7 @@ S3_APP_DATA_BUCKET             openvidu-appdata-d56324d0
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 
-To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The node has `ov` too, so `sudo ov stack …` there operates the same stack:
+To look inside a machine, use the key pair the deploy generated, which `ov` keeps in `.openvidu/aws/` (a Community deploy also prints it on the `SSH:` line; on PRO, log in to a master's public address). The node has `ov` too, so `sudo ov stack …` there operates the same stack:
 
 ```bash
 ssh -i .openvidu/aws/openvidu-ce10-key.pem ubuntu@54.82.78.43

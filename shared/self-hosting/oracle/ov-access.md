@@ -1,4 +1,4 @@
-The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/meet` (`/` redirects there unless you serve your own application) and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-u57z2l-51-170-56-241.sslip.io
@@ -40,8 +40,23 @@ That vault copy is made at deploy time and is not updated afterwards: after a la
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 
-To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The login user is `ubuntu`, and the node has `ov` too, so `sudo ov stack …` there operates the same stack:
+To look inside a machine, the login user is `ubuntu` and the node has `ov` too, so `sudo ov stack …` there operates the same stack. Where the private key is depends on the edition:
 
-```bash
-ssh -i .openvidu/oracle/openvidu-ce12o-key.pem ubuntu@51.170.56.241
-```
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    Use the key the template generated, which `ov` saves in the stack directory (the `SSH:` line of the summary):
+
+    ```bash
+    ssh -i .openvidu/oracle/openvidu-ce12o-key.pem ubuntu@51.170.56.241
+    ```
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    The template generated the machines' key (master and media nodes share it) and keeps its private half in Object Storage, not in the stack directory. The `ssh_private_key_object` output names the object as `<bucket>/<object>`; download it and log in to a master's public address:
+
+    ```bash
+    terraform -chdir=.openvidu/oracle output -raw ssh_private_key_object
+    oci os object get --bucket-name <bucket> --name <object> --file openvidu-key.pem
+    chmod 600 openvidu-key.pem
+    ssh -i openvidu-key.pem ubuntu@<master's public address>
+    ```

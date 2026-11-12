@@ -1,4 +1,4 @@
-The deploy prints the URL of the deployment. OpenVidu Meet is served at `/` and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
+The deploy prints the URL of the deployment. OpenVidu Meet is served at `/meet` (`/` redirects there unless you serve your own application) and OpenVidu Dashboard at `/dashboard/`. In the Single Node example, both use the Let's Encrypt certificate:
 
 ```console
 $ D=openvidu-zclupo-40-112-77-3.sslip.io
@@ -31,7 +31,7 @@ OPENVIDU-URL                   https://openvidu-zclupo-40-112-77-3.sslip.io/
 
 Your applications connect with the values of `LIVEKIT-URL`, `LIVEKIT-API-KEY` and `LIVEKIT-API-SECRET` (`LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` in your application's environment), as with any other OpenVidu deployment. Key Vault does not allow `_` in a secret name, so the keys use `-`.
 
-To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The login user is `ubuntu`, and the node has `ov` too, so `sudo ov stack …` there operates the same stack:
+To look inside a machine, use the key pair the deploy generated, which `ov` keeps in `.openvidu/azure/` as `<stack>-key.pem` (a Community deploy also prints it on the `SSH:` line; on PRO, log in to a master's public address). The login user is `ubuntu`, and the node has `ov` too, so `sudo ov stack …` there operates the same stack:
 
 ```bash
 ssh -i .openvidu/azure/openvidu-ce12a-key.pem ubuntu@40.112.77.3
