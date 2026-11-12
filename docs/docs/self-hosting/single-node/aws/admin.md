@@ -11,14 +11,9 @@ description: "Administer an OpenVidu Single Node AWS stack with the OpenVidu CLI
 
 </div>
 
-The AWS stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The canonical operations page documents all of them:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a Single Node stack on AWS.
 
-- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe) and the [health test](../on-premises/admin.md#health-test).
-- [Logs](../on-premises/admin.md#logs) and [ports](../on-premises/admin.md#ports).
-- [Start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
-- [Change its configuration](../../configuration/changing-config.md) and [enable or disable its modules](../../how-to-guides/enable-disable-modules.md).
-
-This page covers only what is specific to AWS.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack
 

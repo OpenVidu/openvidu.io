@@ -50,19 +50,24 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
       --certificate-type letsencrypt --mode auto
     ```
 
-    One EC2 instance running OpenVidu PRO on Kubernetes, with OpenVidu as a Helm release. `--aws-kube-api-cidr` limits who can reach the stack's remote admin control protocol on port 6443. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-cluster-api-cidr` limits who can reach the stack's remote admin control protocol on port 6443. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
-    This is how the deploy of a stack named `dpaws1` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+    This is how the deploy of a stack named `pro` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
 
     ```text
     …
-       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 89.60.28.34:6443
+    ▶ Wait for the machines to deploy OpenVidu…
+       · OpenVidu is up
+       ✓ Wait for the machines to deploy OpenVidu
     …
     ✔ OpenVidu Pro (single node) is up on AWS
       URL:          https://openvidu-geepav-89-60-28-34.sslip.io/
-      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-eu-south-2-openvidu-dpaws1 --query SecretString --output text --region eu-south-2
-      kubeconfig:   .openvidu/aws/kubeconfig.yaml
+      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-eu-south-2-openvidu-pro --query SecretString --output text --region eu-south-2
     ```
+
+## Use your own domain
+
+--8<-- "self-hosting/aws/ov-domain.md"
 
 ## What the deploy runs
 

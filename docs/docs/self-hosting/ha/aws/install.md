@@ -52,9 +52,9 @@ This uses the region's default VPC, the masters spread across its availability z
 ```bash
 mkdir openvidu && cd openvidu
 VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
-  --query 'Vpcs[0].VpcId' --output text)
+  --query 'Vpcs[0].VpcId' --output text --region us-east-1)
 SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
-  --query 'Subnets[].SubnetId' --output text | tr '\t' ,)
+  --query 'Subnets[].SubnetId' --output text --region us-east-1 | tr '\t' ,)
 ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
   --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
   --domain-name openvidu.example.com \

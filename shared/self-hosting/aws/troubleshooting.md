@@ -6,10 +6,10 @@ ov stack destroy --delete-data   # or --keep-data
 
 To see why the machine itself did not finish deploying OpenVidu, SSH into the instance with the key pair the deploy generated (in `.openvidu/aws/`) and read `/var/log/cloud-init-output.log` and `/var/log/cloud-init.log`.
 
-**The deploy timed out waiting for OpenVidu.** The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, 40 minutes by default with `--cloud`). The infrastructure already exists, so simply resume, reusing what is there:
+**The deploy timed out waiting for OpenVidu.** The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, 40 minutes by default with `--cloud`). The infrastructure already exists, so simply resume, reusing what is there (name the stack, as on the first deploy: without the name it would be registered as `openvidu`):
 
 ```bash
-ov stack deploy --cloud aws --mode auto
+ov stack deploy <name> --cloud aws --mode auto
 ```
 
 **Deploying fails because the stack name is still in use.** Secrets Manager keeps a deleted secret for a recovery window, so for several days after a destroy a new stack with the **same name in the same region** cannot be created. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name on the deploy's `credentials:` line, or deploy with a different name or region.

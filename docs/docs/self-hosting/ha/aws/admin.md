@@ -11,14 +11,9 @@ description: "Administer an OpenVidu High Availability AWS stack with the OpenVi
 
 </div>
 
-The AWS stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The canonical operations page documents all of them:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a High Availability stack on AWS.
 
-- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe) and the [health test](../../single-node/on-premises/admin.md#health-test).
-- [Logs](../../single-node/on-premises/admin.md#logs) and [ports](../../single-node/on-premises/admin.md#ports).
-- [Start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
-- [Change its configuration](../../configuration/changing-config.md) and [enable or disable its modules](../../how-to-guides/enable-disable-modules.md).
-
-This page covers only what is specific to AWS.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack
 
@@ -32,7 +27,7 @@ The stack that exists is updated with the parameters that changed; a redeploy wi
 
 !!! info
 
-    On a High Availability stack, the domain and the TURN domain do not change once the stack exists: the load balancers serve the ACM certificate of the names the stack was created with. A redeploy or an `ov stack config set` with another `domain-name` or `turn-domain-name` is refused.
+    On a High Availability stack, the domain and the TURN domain do not change once the stack exists: the load balancers serve the ACM certificate of the names the stack was created with. A redeploy with another `--domain-name` or `--turn-domain-name`, and an `ov stack config set domain-name=…` or `turn-domain-name=…`, are refused with exit `4` and nothing written. To change the domain, destroy the stack and deploy it again. A Single Node or Elastic stack serves its certificate from Caddy, so its domain changes like anywhere else.
 
 ## Scale the media nodes { #scale-the-media-nodes }
 
@@ -43,7 +38,7 @@ The media nodes **autoscale** by default: an AWS Auto Scaling Group runs between
 | `MinNumberOfMediaNodes`, `MaxNumberOfMediaNodes` | The autoscaling range |
 | `FixedNumberOfMediaNodes` | A fixed number of media nodes (`0` = autoscaling, the default) |
 
-On the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well. On a stack that is already running, change it with `--param` from the stack's directory, for example raising the ceiling:
+On the first deploy and on a redeploy alike, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count (the same as `--param FixedNumberOfMediaNodes=N`). Change it from the stack's directory, for example raising the ceiling:
 
 ```bash
 ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y

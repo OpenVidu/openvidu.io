@@ -18,7 +18,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md); on AWS the machines and their resources are created for you.
 
 !!! info
-    Port `9000` is MinIO's port. This deployment stores recordings and application data in Amazon S3 instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Amazon S3 instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open. The exception is the `v2compatibility` module: with it on, the chart runs MinIO even beside S3 (for its own recordings), and port `9000` is used again.
 
 === "Architecture overview"
 
@@ -35,18 +35,27 @@ The deployed services are the same as in the [On Premises Elastic installation](
 
 --8<-- "self-hosting/aws/ov-requirements.md"
 
-Elastic also needs a **VPC** of yours with public subnets, one for the master node and one or more for the media nodes. Without `--param OpenViduVPC=…`, the deploy uses the region's default VPC and its default subnets.
+Elastic also needs a **VPC** with public subnets, one for the master node and one or more for the media nodes. Without any of the network parameters, the deploy uses the region's default VPC and its default subnets.
 
 ## Deploy
 
-The stack lives in its own empty directory. Elastic runs in a VPC of yours: one subnet for the master and one or more for the media nodes. This uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
+The stack lives in its own empty directory. With no network parameters, Elastic uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
+
+```bash
+mkdir openvidu && cd openvidu
+ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+  --certificate-type letsencrypt --mode auto
+```
+
+To run in a VPC of your own, pass **all three** network parameters (`ov` then uses them as they are and reads nothing). The reads below pick the default VPC's IDs; point them at your own, and keep `--region` the same as the deploy:
 
 ```bash
 mkdir openvidu && cd openvidu
 VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
-  --query 'Vpcs[0].VpcId' --output text)
+  --query 'Vpcs[0].VpcId' --output text --region us-east-1)
 SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
-  --query 'Subnets[].SubnetId' --output text | tr '\t' ,)
+  --query 'Subnets[].SubnetId' --output text --region us-east-1 | tr '\t' ,)
 ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
   --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
   --param OpenViduVPC=$VPC \
@@ -55,19 +64,26 @@ ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and an auto scaling group of media nodes, in the VPC and subnets you name. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+Pass the three together or none: `ov` refuses part of a network (exit `2`), and the template checks that every subnet is in that VPC.
 
-This is how the deploy of a stack named `dpaws2` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+One master node and an auto scaling group of media nodes. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--param FixedNumberOfMediaNodes=N` (equivalently `--set infrastructure.mediaNodes.fixedCount=N`) runs exactly N of them, on the first deploy and on a redeploy. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+
+This is how the deploy of a stack named `el` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
 
 ```text
 …
-   · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 51.95.197.8:6443
+▶ Wait for the machines to deploy OpenVidu…
+   · OpenVidu is up
+   ✓ Wait for the machines to deploy OpenVidu
 …
 ✔ OpenVidu Pro (elastic) is up on AWS
   URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
-  credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-dpaws2 --query SecretString --output text --region eu-south-2
-  kubeconfig:   .openvidu/aws/kubeconfig.yaml
+  credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-el --query SecretString --output text --region eu-south-2
 ```
+
+## Use your own domain
+
+--8<-- "self-hosting/aws/ov-domain.md"
 
 ## What the deploy runs
 

@@ -5,7 +5,7 @@
 | An Elastic IP and security groups | The ports OpenVidu needs, open to the internet |
 | A Network Load Balancer | High Availability only |
 | An S3 bucket and an IAM user scoped to it | Recordings and OpenVidu Meet data. `--aws-app-data-bucket` uses your own bucket |
-| A Secrets Manager secret | What the stack publishes: URL and credentials (and the kubeconfig on PRO) |
+| A Secrets Manager secret | What the stack publishes: URL and credentials (and, on PRO, the access `ov` administers it with) |
 | An EC2 key pair, `openvidu-<name>-key` | Only its public half; the private half stays in `.openvidu/aws/` |
 | The bucket `openvidu-cfn-templates-<account>-<region>` | Stages the template, shared by every stack of the account in that region |
 

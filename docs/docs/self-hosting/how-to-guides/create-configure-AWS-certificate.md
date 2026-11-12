@@ -5,7 +5,13 @@ description: "Issue an AWS certificate for an OpenVidu High Availability deploym
 
 # Create AWS certificate for OpenVidu HA deployment
 
-You will need this certificate to deploy the High Availability deployment. This guide shows you how to create it.
+An OpenVidu High Availability stack on AWS terminates TLS at a Network Load Balancer with an AWS Certificate Manager (ACM) certificate.
+
+!!! info "When your domain is in Route 53, you do not need this guide"
+
+    If the domain is in a public Route 53 hosted zone of the same account, `ov stack deploy` requests the ACM certificate and creates the DNS records for you, with nothing to do by hand. See [Install OpenVidu High Availability on AWS](../ha/aws/install.md).
+
+Follow this guide only when the domain's DNS is **outside Route 53** (another provider or another account), or when you keep the DNS in your own hands with `--param HostedZoneId=`. Then you request the certificate yourself and pass its ARN to the deploy with `--param OpenViduCertificateARN=…`.
 
 ## Prerequisites
 
@@ -70,11 +76,16 @@ ov stack deploy ha --cloud aws --aws-region <region> \
   --mode auto
 ```
 
-Because the load balancer terminates TLS with this ACM certificate, `--certificate-type` does not apply to an HA stack on AWS. For the full AWS deploy options (VPC, subnets and the rest), see [Deploy OpenVidu on AWS](../deployment-types.md#cloud-deployments).
+Because the load balancer terminates TLS with this ACM certificate, `--certificate-type` does not apply to an HA stack on AWS (if you pass one, the deploy warns and goes on). For the full AWS deploy options (VPC, subnets and the rest), see [Install OpenVidu High Availability on AWS](../ha/aws/install.md).
 
 ## Point the domain at the load balancer
 
-When the deploy finishes, **point your domain at the load balancer**: nothing serves the domain until you do. In Route 53 (the Hosted Zone of your domain), create a record for `yourdesiredname.yourdomain`:
+As soon as the stack exists, the deploy prints the record to create, so you can create it while the machines deploy; until the domain points at the load balancer, nothing serves it. The `NLBDNS` output is the load balancer's DNS name:
+
+- **At your DNS provider** (the domain is outside Route 53): create a **CNAME** record from `yourdesiredname.yourdomain` to the stack's `NLBDNS` output.
+- **In a Route 53 zone you kept with `--param HostedZoneId=`:** create an **alias** record instead.
+
+To create the alias in Route 53:
 
 ![Create Load Balancer record](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-lbrecord.png){ .round-corners loading=lazy }
 
