@@ -30,7 +30,7 @@ ______________________________________________________________________
 
 Henrique Otsuka, Head of Information Technology, Eventials
 
-[Read the full story →](https://openvidu.io/blog/2026/11/04/eventials-live-streaming-openvidu/)
+[Read the full story →](https://openvidu.io/blog/2026/11/10/eventials-live-streaming-openvidu/)
 
 ## Choose the ideal OpenVidu solution for your real-time needs
 

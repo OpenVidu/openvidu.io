@@ -4,7 +4,7 @@ Only **admin** users can manage other users — from the **"Users"** page of the
 
 ## Create a user
 
-From the **"Users"** page, click **"Create User"** and provide a `userId`, a name and a [role](https://openvidu.io/3.9/meet/features/users/overview/#user-roles) (`admin`, `room_manager` or `room_member`). For the **temporary password**, you can either specify one or auto-generate one and then copy it.
+From the **"Users"** page, click **"Create User"** and provide a `userId`, a name and a [role](https://openvidu.io/latest/meet/features/users/overview/#user-roles) (`admin`, `room_manager` or `room_member`). For the **temporary password**, you can either specify one or auto-generate one and then copy it.
 
 > **Info**
 >
@@ -14,7 +14,7 @@ Send the credentials to the user. On their **first login** they are required to 
 
 ## Update a user's role
 
-Change a user's [role](https://openvidu.io/3.9/meet/features/users/overview/#user-roles) from the user list at any time. The [root administrator](https://openvidu.io/3.9/meet/features/users/overview/#root-administrator) (**`admin`**) and your own account cannot be modified.
+Change a user's [role](https://openvidu.io/latest/meet/features/users/overview/#user-roles) from the user list at any time. The [root administrator](https://openvidu.io/latest/meet/features/users/overview/#root-administrator) (**`admin`**) and your own account cannot be modified.
 
 ## Reset a user's password
 
@@ -28,9 +28,9 @@ Clicking a user opens their **profile page**, which shows the user's details tog
 
 ## Delete users
 
-Users can be deleted individually or in bulk from the **"Users"** page. The root administrator cannot be deleted, and you cannot delete your own account. Deleting a user removes their account and automatically removes them from any room where they were a [member](https://openvidu.io/3.9/meet/features/room-members/overview/index.md). In addition:
+Users can be deleted individually or in bulk from the **"Users"** page. The root administrator cannot be deleted, and you cannot delete your own account. Deleting a user removes their account and automatically removes them from any room where they were a [member](https://openvidu.io/latest/meet/features/room-members/overview/index.md). In addition:
 
-- If the user **owns rooms**, ownership of those rooms is transferred to the [root administrator](https://openvidu.io/3.9/meet/features/users/overview/#root-administrator).
+- If the user **owns rooms**, ownership of those rooms is transferred to the [root administrator](https://openvidu.io/latest/meet/features/users/overview/#root-administrator).
 - If the user is **currently in a meeting**, they are kicked from it immediately.
 
 ## Changing your password
@@ -39,14 +39,14 @@ Any user can change their own password from their **Profile** page. You are aske
 
 ## REST API reference
 
-All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md). See the [REST API specification](https://openvidu.io/3.9/meet/embedded/reference/api.html) for the full list of available endpoints, request bodies and response schemas.
+All of these operations can also be performed programmatically with the [OpenVidu Meet REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md). See the [REST API specification](https://openvidu.io/latest/meet/embedded/reference/api.html) for the full list of available endpoints, request bodies and response schemas.
 
 | Operation               | HTTP Method | Reference                                                                                           |
 | ----------------------- | ----------- | --------------------------------------------------------------------------------------------------- |
-| Create a user           | POST        | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/createUser)        |
-| List users              | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getUsers)          |
-| Bulk delete users       | DELETE      | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/bulkDeleteUsers)   |
-| Get a user              | GET         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/getUser)           |
-| Delete a user           | DELETE      | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/deleteUser)        |
-| Reset a user's password | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/resetUserPassword) |
-| Update a user's role    | PUT         | [Reference](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/updateUserRole)    |
+| Create a user           | POST        | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/createUser)        |
+| List users              | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getUsers)          |
+| Bulk delete users       | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/bulkDeleteUsers)   |
+| Get a user              | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/getUser)           |
+| Delete a user           | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/deleteUser)        |
+| Reset a user's password | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/resetUserPassword) |
+| Update a user's role    | PUT         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/updateUserRole)    |

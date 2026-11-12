@@ -112,7 +112,7 @@ You can also review your logs using the Grafana dashboard provided with OpenVidu
 
 ## Changing the configuration
 
-You can check how to change the configuration in the [Changing Configuration](https://openvidu.io/3.9/docs/self-hosting/configuration/changing-config/index.md) section. Also, there are multiple guides in the [How to Guides](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/index.md) section that can help you with specific configuration changes.
+You can check how to change the configuration in the [Changing Configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md) section. Also, there are multiple guides in the [How to Guides](https://openvidu.io/latest/docs/self-hosting/how-to-guides/index.md) section that can help you with specific configuration changes.
 
 ## Uninstalling OpenVidu
 
@@ -128,4 +128,4 @@ rm /etc/sysctl.d/50-openvidu.conf
 
 ## Backup and Restore
 
-Review the [Backup and restore OpenVidu deployments](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.
+Review the [Backup and restore OpenVidu deployments](https://openvidu.io/latest/docs/self-hosting/how-to-guides/backup-and-restore/index.md) guide for recommended backup workflows.

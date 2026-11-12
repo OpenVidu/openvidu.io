@@ -9,7 +9,7 @@ This section describes two ways to install OpenVidu Single Node on DigitalOcean,
 
 > **Info**
 >
-> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Single Node Pro is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 ## **Web Console**
 
@@ -36,7 +36,7 @@ ______________________________________________________________________
 
 OpenVidu and WebRTC require specific inbound rules on the Firewall network security for it to work.
 
-The [minimum inbound ports to allow](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/#port-rules) must be included in the Firewall rules.
+The [minimum inbound ports to allow](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#port-rules) must be included in the Firewall rules.
 
 > **Info**
 >
@@ -67,18 +67,18 @@ ______________________________________________________________________
    sudo apt update && sudo apt upgrade -y
    ```
 
-1. Follow the [On-Premises install instructions](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/#guided-installation) to install OpenVidu on the instance.
+1. Follow the [On-Premises install instructions](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#guided-installation) to install OpenVidu on the instance.
 
 ______________________________________________________________________
 
 ### 4. Administration and upgrade
 
-- For administration of this OpenVidu Single Node deployment, see the [On-Premises administration section](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/index.md).
-- To upgrade OpenVidu, see the [Upgrade section](https://openvidu.io/3.9/docs/self-hosting/single-node/upgrade/index.md).
+- For administration of this OpenVidu Single Node deployment, see the [On-Premises administration section](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md).
+- To upgrade OpenVidu, see the [Upgrade section](https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/index.md).
 
 ## **Terraform**
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on DigitalOcean, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/index.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on DigitalOcean, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md), but the process is automated through the Terraform CLI. Additionally, DigitalOcean Spaces (S3-compatible storage) is used to store recordings and other persistent data.
 
 > **Info**
 >
@@ -124,7 +124,7 @@ This is what the deployment architecture looks like:
    > | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
    > | `doToken`                 | DigitalOcean Personal Access Token for API authentication.                                                                                |
    > | `stackName`               | Stack name for OpenVidu deployment.                                                                                                       |
-   > | `openviduLicense` **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/3.9/account/index.md) if you don't have one. |
+   > | `openviduLicense` **PRO** | Only required for the PRO edition. Your OpenVidu License. Get one [here](https://openvidu.io/account/) if you don't have one. |
    >
    > #### Optional Parameters
    >
@@ -247,8 +247,8 @@ If something goes wrong during the initial DigitalOcean deployment creation, you
 
    These logs will give you more information about the DigitalOcean deployment creation process.
 
-1. If everything seems fine, check the [status](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything seems fine, check the [status](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ### Configuration and administration
 
-When your **OPENVIDU_URL** is reachable, it means that everything has gone well. Now you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/digitalocean/admin/index.md) section to learn how to manage your deployment.
+When your **OPENVIDU_URL** is reachable, it means that everything has gone well. Now you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/admin/index.md) section to learn how to manage your deployment.

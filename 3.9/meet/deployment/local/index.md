@@ -4,11 +4,11 @@ You can easily deploy **OpenVidu Meet** on your local machine to explore its fea
 
 You can simulate **several users** joining to the **same room** using different tabs of your preferred browser.
 
-This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](https://openvidu.io/3.9/meet/embedded/intro/index.md).
+This local deployment is the ideal choice to develop the [embedding of OpenVidu Meet into your own application](https://openvidu.io/latest/meet/embedded/intro/index.md).
 
 > **Warning**
 >
-> Remember that this deployment is designed for **demo** and **development** purposes. For production follow the [Basic deployment](https://openvidu.io/3.9/meet/deployment/basic/index.md) or [Advanced deployments](https://openvidu.io/3.9/meet/deployment/advanced/index.md).
+> Remember that this deployment is designed for **demo** and **development** purposes. For production follow the [Basic deployment](https://openvidu.io/latest/meet/deployment/basic/index.md) or [Advanced deployments](https://openvidu.io/latest/meet/deployment/advanced/index.md).
 
 ## Prerequisites
 
@@ -117,11 +117,11 @@ You can access **OpenVidu Meet** by opening <http://localhost:9080> in your web 
 - User ID: `admin`
 - Password: `admin`
 
-You can use the [REST API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md) to [embed OpenVidu Meet](https://openvidu.io/3.9/meet/embedded/intro/index.md) using:
+You can use the [REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) to [embed OpenVidu Meet](https://openvidu.io/latest/meet/embedded/intro/index.md) using:
 
 - API Key: `meet-api-key`
 
-You can change them later from the [OpenVidu Meet app](https://openvidu.io/3.9/meet/features/users/management/#changing-credentials).
+You can change them later from the [OpenVidu Meet app](https://openvidu.io/latest/meet/features/users/management/#changing-credentials).
 
 ## Managing the deployment
 
@@ -225,4 +225,4 @@ Follow these steps:
 
 ## Advanced Local Deployment
 
-If you want to modify some configurations or have more control over the local deployment, you can deploy the [OpenVidu Platform Local deployment](https://openvidu.io/3.9/docs/self-hosting/local/index.md) which by default includes **OpenVidu Meet** as one of its services.
+If you want to modify some configurations or have more control over the local deployment, you can deploy the [OpenVidu Platform Local deployment](https://openvidu.io/latest/docs/self-hosting/local/index.md) which by default includes **OpenVidu Meet** as one of its services.

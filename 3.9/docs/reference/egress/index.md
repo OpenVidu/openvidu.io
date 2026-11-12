@@ -4,7 +4,7 @@
 
 OpenVidu ships Egress already wired to the bundled S3-compatible storage, so a recording has somewhere to land with no extra setup.
 
-For working examples, see the [recording tutorials](https://openvidu.io/3.9/docs/tutorials/advanced-features/index.md).
+For working examples, see the [recording tutorials](https://openvidu.io/latest/docs/tutorials/advanced-features/index.md).
 
 ## Egress types
 
@@ -24,7 +24,7 @@ Five request types, each starting a different kind of export:
 
 ## Starting an Egress
 
-Egress are started by making a request to the [Egress API](https://docs.livekit.io/reference/other/egress/api/) from your application server. Requests to the Egress API require a token with the [`roomRecord` grant](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
+Egress are started by making a request to the [Egress API](https://docs.livekit.io/reference/other/egress/api/) from your application server. Requests to the Egress API require a token with the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
 
 The example below records `"my-room"` to an MP4 file. The output carries no explicit upload target, so OpenVidu sends it to the bundled MinIO S3 storage:
 
@@ -198,7 +198,7 @@ EgressInfo egressInfo = await egressClient.StartRoomCompositeEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartRoomCompositeEgress' \
@@ -516,7 +516,7 @@ EgressInfo egressInfo = await egressClient.StartRoomCompositeEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartRoomCompositeEgress' \
@@ -787,7 +787,7 @@ EgressInfo egressInfo = await egressClient.StartRoomCompositeEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.9/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartRoomCompositeEgress' \
@@ -844,7 +844,7 @@ If your backend technology does not have its own SDK, you have two options:
 
 > **Output files may survive crashes**
 >
-> If the Egress process crashes, the output is not necessarily lost: OpenVidu keeps a copy on the node's disk. Visit [Recovering Egress from node failures](https://openvidu.io/3.9/docs/self-hosting/production-ready/fault-tolerance/#recovering-egress-from-node-failures) for how to retrieve it.
+> If the Egress process crashes, the output is not necessarily lost: OpenVidu keeps a copy on the node's disk. Visit [Recovering Egress from node failures](https://openvidu.io/latest/docs/self-hosting/production-ready/fault-tolerance/#recovering-egress-from-node-failures) for how to retrieve it.
 
 ## Layouts and custom templates
 
@@ -876,9 +876,9 @@ A Room can record itself from the moment it is created, with no call to the Egre
 
 > **Tip**
 >
-> You can also include the same `egress` field in the `roomConfig` claim of [access tokens](https://openvidu.io/3.9/docs/reference/access-tokens/#token-claims), in case you are letting participants create Rooms when they join.
+> You can also include the same `egress` field in the `roomConfig` claim of [access tokens](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims), in case you are letting participants create Rooms when they join.
 
-Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/index.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](https://openvidu.io/3.9/docs/troubleshooting/recording/index.md) when auto egress does not produce the expected output.
+Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/index.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](https://openvidu.io/latest/docs/troubleshooting/recording/index.md) when auto egress does not produce the expected output.
 
 ## Egress lifecycle
 
@@ -928,7 +928,7 @@ The fields that matter most while an application is running:
 
 ### Webhooks
 
-Rather than polling `ListEgress`, let OpenVidu tell you. Three [webhook events](https://openvidu.io/3.9/docs/reference/webhooks/#events) track an Egress, and all of them carry the full `egressInfo`:
+Rather than polling `ListEgress`, let OpenVidu tell you. Three [webhook events](https://openvidu.io/latest/docs/reference/webhooks/#events) track an Egress, and all of them carry the full `egressInfo`:
 
 | Event            | Fires when                                  |
 | ---------------- | ------------------------------------------- |
@@ -952,9 +952,9 @@ Rather than polling `ListEgress`, let OpenVidu tell you. Three [webhook events](
 
 ## Related
 
-- [Recording tutorials](https://openvidu.io/3.9/docs/tutorials/advanced-features/index.md): Egress in a working application, with S3 and Azure variants.
-- [Configure external S3](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/external-s3/index.md): sending recordings to your own bucket.
-- [Troubleshoot OpenVidu recordings](https://openvidu.io/3.9/docs/troubleshooting/recording/index.md): missing recordings, 503s, CPU pressure.
-- [Access tokens reference](https://openvidu.io/3.9/docs/reference/access-tokens/index.md): the `roomRecord` grant gates these operations.
-- [Webhooks reference](https://openvidu.io/3.9/docs/reference/webhooks/index.md): the Egress events and their payloads.
-- [Ingress reference](https://openvidu.io/3.9/docs/reference/ingress/index.md): media in the other direction.
+- [Recording tutorials](https://openvidu.io/latest/docs/tutorials/advanced-features/index.md): Egress in a working application, with S3 and Azure variants.
+- [Configure external S3](https://openvidu.io/latest/docs/self-hosting/how-to-guides/external-s3/index.md): sending recordings to your own bucket.
+- [Troubleshoot OpenVidu recordings](https://openvidu.io/latest/docs/troubleshooting/recording/index.md): missing recordings, 503s, CPU pressure.
+- [Access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): the `roomRecord` grant gates these operations.
+- [Webhooks reference](https://openvidu.io/latest/docs/reference/webhooks/index.md): the Egress events and their payloads.
+- [Ingress reference](https://openvidu.io/latest/docs/reference/ingress/index.md): media in the other direction.

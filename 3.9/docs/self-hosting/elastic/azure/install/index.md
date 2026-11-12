@@ -4,9 +4,9 @@ Azure
 
 > **Info**
 >
-> OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu Elastic is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu Elastic instance on Azure. The deployed services are identical to those in the [On Premises Elastic installation](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/install/index.md), but are provisioned as Azure resources and can be automated through an ARM Template Spec.
+This section describes how to deploy a production-ready OpenVidu Elastic instance on Azure. The deployed services are identical to those in the [On Premises Elastic installation](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/install/index.md), but are provisioned as Azure resources and can be automated through an ARM Template Spec.
 
 To import the template into Azure, click the button below and you will be redirected to Azure.
 
@@ -110,9 +110,9 @@ In this section, you need to specify some properties needed for the OpenVidu Ela
 
 Parameters of this section look like this:
 
-Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/3.9/account/index.md) .
+Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/) .
 
-For the **RTC Engine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
+For the **RTC Engine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
 
 ### Azure Instance Configuration
 
@@ -244,8 +244,8 @@ If something goes wrong during the initial Azure stack creation, your stack may 
 
    These logs will give you more information about the Azure stack creation process.
 
-1. If everything seems fine, check the [status](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/3.9/docs/self-hosting/elastic/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything seems fine, check the [status](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/latest/docs/self-hosting/elastic/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ## Configuration and administration
 
-When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 3 to 6 minutes for the instances to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/elastic/azure/admin/index.md) section to learn how to manage your deployment.
+When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 3 to 6 minutes for the instances to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/elastic/azure/admin/index.md) section to learn how to manage your deployment.

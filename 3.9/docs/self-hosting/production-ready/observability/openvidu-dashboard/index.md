@@ -1,6 +1,6 @@
 # OpenVidu Dashboard
 
-It is a web application designed to provide **OpenVidu administrators** with a comprehensive view of **usage statistics** and **real-time monitoring** of video **Rooms**. OpenVidu Dashboard is included by default in any [OpenVidu deployment](https://openvidu.io/3.9/docs/self-hosting/deployment-types/index.md).
+It is a web application designed to provide **OpenVidu administrators** with a comprehensive view of **usage statistics** and **real-time monitoring** of video **Rooms**. OpenVidu Dashboard is included by default in any [OpenVidu deployment](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
 
 To access **OpenVidu Dashboard**, go to `https://your.domain/dashboard/` and **log in** using your **admin credentials**.
 
