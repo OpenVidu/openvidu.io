@@ -1,6 +1,19 @@
-Before it touches your project, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
+Before it touches your project, `--mode auto` shows a **short plan**: one numbered line per step, what is done and where, without the commands. Then it asks whether to run it, and only `yes` or `y` goes ahead (`-y` answers in advance, and the plan still appears; no answer or any other answer creates nothing). This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
 
-??? example "The full plan (click to expand)"
+```text
+This is what ov does in your Google Cloud project my-project (region europe-west2, zone europe-west2-b); --debug shows every command:
+
+  1. Template: render the single node template into .openvidu/gcp/tf-gpc-openvidu-singlenode.tf
+     and its variables into .openvidu/gcp/openvidu.auto.tfvars.json (0600)
+  2. Machines: create the machine, which installs OpenVidu Community on itself with Terraform (about 2 minutes, then OpenVidu installs)
+  3. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+
+Run these in your account? Only yes or y goes ahead [y/N]:
+```
+
+The commands themselves are not in the short plan. `--debug` prints them instead, and [assisted mode](#assisted-mode) prints the same list and runs nothing. These are the commands for the deploy above:
+
+??? example "The commands themselves (`--debug`, or assisted mode)"
 
     ```text
     This is what will be done in your Google Cloud project my-project (region europe-west2, zone europe-west2-b):

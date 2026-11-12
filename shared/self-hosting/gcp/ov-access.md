@@ -29,8 +29,20 @@ S3_APP_DATA_BUCKET             my-project-openvidu-ce12g-1300d7
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 
-To look inside a machine, use the key pair the deploy generated (the `SSH:` line). The login user is `ubuntu`, and the node has `ov` too, so `sudo ov stack …` there operates the same stack:
+To look inside a machine, the login user is `ubuntu` and the node has `ov` too, so `sudo ov stack …` there operates the same stack. How you reach it depends on the edition:
 
-```bash
-ssh -i .openvidu/gcp/openvidu-ce12g-key.pem ubuntu@34.105.214.170
-```
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    Use the key pair the deploy generated (the `SSH:` line of the summary):
+
+    ```bash
+    ssh -i .openvidu/gcp/openvidu-ce12g-key.pem ubuntu@34.105.214.170
+    ```
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    A PRO stack keeps no key pair. Reach the node with `gcloud compute ssh`, as the deploy's `ssh_command` output prints (`terraform -chdir=.openvidu/gcp output -raw ssh_command`):
+
+    ```bash
+    gcloud compute ssh <instance-name> --zone <zone> --project my-project
+    ```

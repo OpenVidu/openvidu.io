@@ -50,17 +50,21 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 
     One Compute Engine instance running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the port your machine administers the stack through. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
-    This is how the deploy of a stack named `dpgcp1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+    This is how the deploy of a stack named `dpgcp1` ends: `ov` waits until OpenVidu is up, then registers the stack:
 
     ```text
     …
-       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 35.234.130.186:6443
+       · waiting for OpenVidu to come up (1m12s elapsed): OpenVidu is still installing
+       · OpenVidu is up
     …
     ✔ OpenVidu Pro (single node) is up on Google Cloud
       URL:          https://openvidu-eos260-35-234-130-186.sslip.io/
       credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp1-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp1-)
-      kubeconfig:   .openvidu/gcp/kubeconfig.yaml
     ```
+
+## Use your own domain { #use-your-own-domain }
+
+--8<-- "self-hosting/gcp/ov-domain.md"
 
 ## What the deploy runs { #what-the-deploy-runs }
 

@@ -11,13 +11,9 @@ description: "Administer OpenVidu Elastic on Google Cloud from its directory: ch
 
 </div>
 
-A Google Cloud stack is operated from the directory that deployed it, with the same commands as any other OpenVidu stack. The canonical operations are documented once, on the On Premises page:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to an Elastic stack on Google Cloud.
 
-- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe), [health test](../../single-node/on-premises/admin.md#health-test) and [logs](../../single-node/on-premises/admin.md#logs).
-- [Start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
-- [Change the configuration](../../configuration/changing-config.md) of OpenVidu and [enable or disable modules](../../how-to-guides/enable-disable-modules.md), which change without touching the machines.
-
-This page covers what is specific to a Google Cloud Elastic stack.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
@@ -27,7 +23,7 @@ This page covers what is specific to a Google Cloud Elastic stack.
 ov stack deploy openvidu --cloud gcp --param mediaNodeInstanceType=e2-standard-8 --mode auto -y
 ```
 
-On a stack that already exists, auto mode runs `terraform plan` first (it changes nothing) and the plan says what it found before asking to go ahead. Whether a parameter change applies in place or replaces a machine depends on the template. For OpenVidu's own settings, which change without touching the machines, see [Changing configuration](../../configuration/changing-config.md).
+On a stack that already exists, auto mode runs `terraform plan` first (it changes nothing) and the plan says what it found before asking to go ahead. A new node size is an update in place (the machines carry `allow_stopping_for_update`), but a change to what a machine **boots with** — the domain, the certificate, the license, the Meet credentials or another OpenVidu CLI build — makes Terraform recreate that machine from scratch: its disk is lost and it is down until it installs again (the reserved addresses stay, so the public IPs do not change). The plan prints `REPLACES the machine` when it will; run `--mode assisted` to read Terraform's plan yourself first. For OpenVidu's own settings, which change without touching the machines, see [Changing configuration](../../configuration/changing-config.md).
 
 ## Scale the media nodes { #scale-the-media-nodes }
 
@@ -38,7 +34,7 @@ An Elastic stack scales beyond one machine by adding **media nodes**, in a manag
 | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | the autoscaling range |
 | `fixedNumberOfMediaNodes` | `0` (the default) autoscales; a value greater than `0` runs exactly that many media nodes, with no autoscaler |
 
-At the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well. On a stack that is already running, change any of these with the template parameter. For example, raising the ceiling:
+`--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count the same way (`--param fixedNumberOfMediaNodes=N` is its template-parameter form). Any of these — the autoscaling range or the fixed count — works on the first deploy and can be changed on a later redeploy. For example, raising the ceiling:
 
 ```bash
 ov stack deploy openvidu --cloud gcp --param maxNumberOfMediaNodes=3 --mode auto -y

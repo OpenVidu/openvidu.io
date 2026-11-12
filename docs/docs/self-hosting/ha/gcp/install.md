@@ -37,7 +37,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 High Availability adds two requirements for a production deployment:
 
 - **Your own domain and certificate.** The four masters sit behind a passthrough TCP load balancer that passes TLS through untouched, so Let's Encrypt and ZeroSSL cannot be issued on this topology (their HTTP challenge reaches a port 80 that only redirects to HTTPS). Use the default `selfsigned` certificate only to try the topology out, and `owncert` with your own domain for production.
-- **A DNS record you point at the load balancer** once the deploy creates it (see below). No Google Cloud template points a domain for you.
+- **A DNS record you point at the load balancer**, which `ov` prints as soon as the load balancer exists (see below). No Google Cloud template points a domain for you.
 
 ## Deploy { #deploy }
 
@@ -65,16 +65,28 @@ The load balancer passes TLS through untouched, and Caddy on the masters termina
 
     On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `load_balancer_ip` output of `terraform -chdir=.openvidu/gcp output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
+Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address.
 
-This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
+With your own domain, **point it at the load balancer**. The deploy does it for you up to the DNS record: as soon as the load balancer exists the deploy prints the `A` record to create (`<domain> A <load_balancer_ip>`), so you can create it while OpenVidu installs. If the name does not point at the stack when OpenVidu is up, the deploy ends with one step left instead of `is up`, and prints the record again:
+
+```text
+! OpenVidu Pro (high availability) is deployed on Google Cloud, with one step left: openvidu.example.com does not point at it yet.
+  Create this DNS record where its zone is hosted, and it is up:
+    openvidu.example.com.                    A      34.39.52.221
+  URL:          https://openvidu.example.com/ (once the record resolves)
+  Meanwhile `ov stack status` works (it reaches the stack by its address), and
+  `ov stack status --wait` waits for the record too.
+```
+
+Create the record as soon as `ov` prints it: `ov stack status --wait` reports `URL not answering yet` until the name resolves to the load balancer.
+
+This is how the deploy of a stack named `demo-ha` ends with an `sslip.io` name (nothing to point), followed by `ov stack status --wait` confirming that every node and service is ready:
 
 ```text
 …
 ✔ OpenVidu Pro (high availability) is up on Google Cloud
   URL:          https://openvidu-3jjbjv-34-39-52-221.sslip.io/
   credentials:  gcloud secrets versions access latest --secret=openvidu-demo-ha-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-demo-ha-)
-  kubeconfig:   .openvidu/gcp/kubeconfig.yaml
 
 $ ov stack status --wait
 waiting for https://openvidu-3jjbjv-34-39-52-221.sslip.io to be ready (Ctrl-C to stop)…

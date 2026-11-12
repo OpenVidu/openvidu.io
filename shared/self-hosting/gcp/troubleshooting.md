@@ -21,16 +21,16 @@ Request more quota for the project in europe-west2 (Google Cloud console: IAM & 
 
 Request more quota, pick smaller sizes with `--param`, or deploy in another region, then run the same command again.
 
-### Service-account key creation is blocked
+### Service-account key creation is blocked (COMMUNITY)
 
-The template mints a Cloud Storage service-account key that egress uses to upload recordings. An organization policy that blocks key creation (`iam.disableServiceAccountKeyCreation`) stops the apply. Allow key creation in the project, or the deploy cannot finish.
+On **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } the template mints a Cloud Storage service-account key that egress uses to upload recordings. An organization policy that blocks key creation (`iam.disableServiceAccountKeyCreation`) stops the apply. Allow key creation in the project, or the deploy cannot finish. A **PRO**{ .openvidu-tag .openvidu-pro-tag } deploy is not affected: it reaches Cloud Storage through its S3-compatible API with HMAC keys, which this policy does not block.
 
 ### The deploy timed out while waiting for OpenVidu
 
-The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, 40 minutes with `--cloud` by default). The infrastructure already exists, so simply **resume**: it waits and registers the stack, reusing what is there.
+The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, 40 minutes with `--cloud` by default). The infrastructure already exists, so simply **resume**: it waits and registers the stack, reusing what is there. Name the stack, as the deploy did; without it the stack would be registered as `openvidu`:
 
 ```bash
-ov stack deploy --cloud gcp --mode auto
+ov stack deploy <name> --cloud gcp --mode auto
 ```
 
 ### High Availability never gets ready with Let's Encrypt
@@ -43,7 +43,13 @@ A deploy with no `--domain-name` derives an `sslip.io` name from the public IP (
 
 ### The state bucket already keeps another stack's state
 
-With `--remote-state`, `ov` refuses a state bucket whose record names another stack (the same stack deployed from another directory), with exit `2` and nothing created. Take that stack over here instead:
+With `--remote-state` the state bucket is the stack's own. `ov` refuses it, with exit `2` and nothing created, when it already holds a state **this directory did not record**: the same stack deployed from another directory, or a different stack whose record is in a bucket of the same name. Applying from here would run this directory's settings over that stack's machines, so `ov` stops and offers both ways out:
+
+```text
+ov: the state bucket gs://<bucket> already keeps the state of the stack openvidu-g1, deployed from another directory, so nothing was created: applying it from here would apply this directory's settings over that stack's machines. Take that stack over here with `ov stack import --cloud gcp --stack-name openvidu-g1 --gcp-project my-proj`, or deploy this one with another name (--param stackName=<another name>)
+```
+
+Take the existing stack over here to operate it, or redeploy this one under another name:
 
 ```bash
 ov stack import --cloud gcp --stack-name openvidu-<name> --gcp-project my-proj

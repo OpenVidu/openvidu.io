@@ -4,18 +4,20 @@ One command deletes the machines too. You must choose what happens to the record
 $ ov stack destroy -y --delete-data
 This is what will be deleted from your Google Cloud project my-project:
 
-  # Everything the Terraform state in .openvidu/gcp holds: the machines, addresses,
-  # firewall rules, secrets and service accounts.
+  # Everything the Terraform state in .openvidu/gcp holds: the machine, its disk, its
+  # static address, the firewall rules, the service account and the secrets.
   terraform -chdir=.openvidu/gcp init -input=false -no-color -force-copy
   terraform -chdir=.openvidu/gcp destroy -auto-approve -input=false -no-color
   …
---delete-data: the recordings and Meet data are in the Cloud Storage buckets: this deletes them.
+--delete-data: the recordings and Meet data are in the Cloud Storage bucket: this deletes them.
 
-▶ Delete the machines on Google Cloud…
+▶ Delete the machine on Google Cloud…
    · destroy .openvidu/gcp (this returns when Terraform is done)
-   ✓ Delete the machines on Google Cloud
+   ✓ Delete the machine on Google Cloud
 ✔ removed stack "ce12g" from this directory
 ```
+
+The example above is a Single Node stack, so it says "the machine". An Elastic or High Availability destroy says "the machines" and removes the master nodes and the whole managed instance group of media nodes.
 
 A destroy **deletes only what belongs to the stack according to its Terraform state**, never anything matched by name:
 

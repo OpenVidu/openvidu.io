@@ -44,19 +44,23 @@ ov stack deploy openvidu --cloud gcp --gcp-project my-project \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them with no autoscaler. Either works on the first deploy and on a redeploy; to change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
 
-This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until OpenVidu is up, then registers the stack:
 
 ```text
 …
-   · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 34.153.183.72:6443
+   · waiting for OpenVidu to come up (1m12s elapsed): OpenVidu is still installing
+   · OpenVidu is up
 …
 ✔ OpenVidu Pro (elastic) is up on Google Cloud
   URL:          https://openvidu-pwvcha-34-153-183-72.sslip.io/
   credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp2-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp2-)
-  kubeconfig:   .openvidu/gcp/kubeconfig.yaml
 ```
+
+## Use your own domain { #use-your-own-domain }
+
+--8<-- "self-hosting/gcp/ov-domain.md"
 
 ## What the deploy runs { #what-the-deploy-runs }
 

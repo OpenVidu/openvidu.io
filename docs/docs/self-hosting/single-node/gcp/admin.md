@@ -11,13 +11,9 @@ description: "Administer OpenVidu Single Node on Google Cloud from the directory
 
 </div>
 
-A Google Cloud stack is operated from the directory that deployed it, with the same commands as any other OpenVidu stack. The canonical operations are documented once, on the On Premises page:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a Single Node stack on Google Cloud.
 
-- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe), [health test](../on-premises/admin.md#health-test) and [logs](../on-premises/admin.md#logs).
-- [Start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
-- [Change the configuration](../../configuration/changing-config.md) of OpenVidu and [enable or disable modules](../../how-to-guides/enable-disable-modules.md), which change without touching the machine.
-
-This page covers what is specific to a Google Cloud stack.
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
@@ -27,7 +23,7 @@ This page covers what is specific to a Google Cloud stack.
 ov stack deploy openvidu --cloud gcp --param instanceType=e2-standard-8 --mode auto -y
 ```
 
-A new machine type is an update in place: the instance carries `allow_stopping_for_update`, so Google Cloud stops the machine for a few minutes and starts it with the new type. On a stack that already exists, auto mode runs `terraform plan` first (it changes nothing) and the plan says what it found before asking to go ahead.
+A new machine type is an update in place: the instance carries `allow_stopping_for_update`, so Google Cloud stops the machine for a few minutes and starts it with the new type. A change to what the machine **boots with** is different: the domain, the certificate, the license, the Meet credentials or another OpenVidu CLI build make Terraform recreate the machine from scratch, so what is on its disk is lost and OpenVidu is down until it installs again (the static address stays, so the public IP does not change). On a stack that already exists, auto mode runs `terraform plan` first (it changes nothing), and the plan says which of the two it is — it prints `REPLACES the machine` for a recreate — before asking to go ahead. Run `--mode assisted` to read Terraform's plan yourself first.
 
 For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md).
 
