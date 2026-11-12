@@ -8,7 +8,7 @@ The proxy needs these rules:
 2. **Proxy TLS traffic on port `443`** using SNI to route:
     - API domain → local `127.0.0.1:7880` → HTTP reverse-proxy → OpenVidu node on port `7880`.
     - TURN domain → OpenVidu node on port `5349`.
-3. **Proxy TLS traffic on port `1935`** to the OpenVidu node on port `1945` (RTMP).
+3. **Proxy TLS traffic on port `1935`** to the OpenVidu node on port `1945` on COMMUNITY (Ingress itself) or `1935` on PRO (Caddy, which forwards it to Ingress), as plain RTMP.
 
 The following is an example Nginx configuration file:
 
@@ -28,7 +28,7 @@ stream {
     }
 
     upstream rtmp_backend {
-        server <SINGLE_NODE_PRIVATE_IP>:1945;
+        server <SINGLE_NODE_PRIVATE_IP>:1945;  # 1935 on OpenVidu PRO
     }
 
     # Use SNI to determine which upstream server to proxy to

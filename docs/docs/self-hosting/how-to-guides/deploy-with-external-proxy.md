@@ -52,7 +52,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880           | External proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 5349           | External proxy | TURN with TLS. |
-        | TCP         | 1945           | External proxy | Needed if you want to ingest RTMP streams using Ingress service. |
+        | TCP         | 1945 (COMMUNITY) or 1935 (PRO) | External proxy | Needed if you want to ingest RTMP streams using Ingress service. On COMMUNITY the proxy reaches Ingress directly on `1945`; on PRO, Caddy still receives plain RTMP on `1935`. |
         | UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
         | TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
         | TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
@@ -163,7 +163,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
         | TCP         | 7880           | External Proxy | HTTP API: LiveKit API, OpenVidu v2 Compatibility API, Dashboard, Meet, WHIP API, custom layouts. |
         | TCP         | 5349           | External Proxy | TURN with TLS. |
-        | TCP         | 1945           | External Proxy | RTMP ingest, with the `ingress` module. |
+        | TCP         | 1935           | External Proxy | RTMP ingest, with the `ingress` module (plain RTMP to Caddy, which forwards it to Ingress). |
 
         The admin ports (`6443/tcp`, `22/tcp`) and the Kubernetes cluster traffic between the master and the media nodes are unchanged from the [install guide](../elastic/on-premises/install.md#port-rules).
 
