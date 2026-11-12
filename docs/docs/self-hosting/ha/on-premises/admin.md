@@ -50,7 +50,7 @@ A media node that is being removed must not drop the rooms, recordings or ingest
 
 ## Destroy
 
-`ov stack destroy` from the stack's directory uninstalls OpenVidu from the cluster and keeps the machines as they are; the node agent stays on each server, and the joined nodes stay in the cluster. To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. See the [Destroy](../../single-node/on-premises/admin.md#destroy) section for the flags.
+`ov stack destroy` from the stack's directory uninstalls OpenVidu from the cluster and keeps the machines as they are; the node agent stays on each server, and the joined nodes stay in the cluster. To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. The destroy **deletes the stack's data** (MongoDB, Redis, MinIO and the recordings): back it up first. See [Destroy](../../single-node/on-premises/admin.md#destroy).
 
 ## Backup and restore
 

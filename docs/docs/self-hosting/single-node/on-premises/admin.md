@@ -50,21 +50,34 @@ For a cloud stack kept on its cloud with `--remote-state`, any machine with that
 
 `ov stack destroy` tears the deployment down and removes the directory's record. It asks for confirmation (type the stack name, or pass `-y`); `--dry-run` changes nothing and prints exactly what it would do.
 
-On a server, the stack is stopped and disabled; its files and data stay under `/opt/openvidu`, so `ov stack deploy --mode auto` in the same directory brings it back with its data and configuration:
+What becomes of the data depends on the edition:
 
-```console
-$ ov stack destroy -y
-✓ [172.30.0.96 single] systemctl stop openvidu
-✓ [172.30.0.96 single] systemctl disable openvidu
-stack stopped and disabled on all nodes (its files and data stay under /opt/openvidu)
-✔ removed stack "web" from this directory
-```
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-Two flags go further:
+    The stack is stopped and disabled; its files and data stay under `/opt/openvidu`, so `ov stack deploy --mode auto` in the same directory brings it back with its data and configuration:
 
-- `--delete-data` removes the deployment's data after teardown (`/opt/openvidu/data`: MongoDB, MinIO, Redis, recordings, metrics and logs, certificates).
-- `--delete-config` removes the deployment directory (`/opt/openvidu` with the systemd unit), so the data goes with it.
+    ```console
+    $ ov stack destroy -y
+    ✓ [172.30.0.96 single] systemctl stop openvidu
+    ✓ [172.30.0.96 single] systemctl disable openvidu
+    stack stopped and disabled on all nodes (its files and data stay under /opt/openvidu)
+    ✔ removed stack "web" from this directory
+    ```
+
+    Two flags go further:
+
+    - `--delete-data` removes the deployment's data after teardown (`/opt/openvidu/data`: MongoDB, MinIO, Redis, recordings, metrics and logs, certificates).
+    - `--delete-config` removes the deployment directory (`/opt/openvidu` with the systemd unit), so the data goes with it.
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    The destroy uninstalls OpenVidu from the cluster **and deletes its data with it**: MongoDB, Redis, MinIO with the recordings, and the rest of what the stack's services store in the cluster. `--keep-data`, `--delete-data` and `--delete-config` do not change that. The machines, the node agent and the cluster's nodes stay as they are. The destroy waits for the stack's namespace to go, up to ten minutes. `--dry-run` says it before anything happens: `would remove OpenVidu from the stack's nodes: its services and their data`.
+
+    !!! warning
+        Back up what you need **before** you destroy a PRO stack: the MongoDB and S3 data with [Method 3](../../how-to-guides/backup-and-restore.md#method-3-only-backup-data-from-minios3-and-mongodb), or the external services' own backups ([Method 4](../../how-to-guides/backup-and-restore.md#method-4-only-snapshots-provided-by-external-services-used-for-s3-or-mongodb)). Data in an external MongoDB or S3 is not touched by the destroy.
+
+    The exception is an Elastic stack converted from a 3.9.0 installation: its stores kept their directories on the master as static volumes, and those are kept when the stack is destroyed ([Migrate a deployment installed by install.sh](../../elastic/on-premises/upgrade.md#migrate-a-deployment-installed-by-installsh)).
 
 ## Backup and restore { #backup-and-restore }
 
-Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows. A destroy without `--delete-data` keeps the data under `/opt/openvidu/data`, so a later deploy in the same directory brings the stack back as it was.
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows. On a COMMUNITY server, a destroy without `--delete-data` keeps the data under `/opt/openvidu/data`, so a later deploy in the same directory brings the stack back as it was. A PRO destroy deletes the data (see [Destroy](#destroy)), so back it up first.

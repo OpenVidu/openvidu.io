@@ -64,7 +64,7 @@ stack removed
 ✔ removed stack "el" from this directory
 ```
 
-To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. See the [Destroy](../../single-node/on-premises/admin.md#destroy) section for the flags.
+To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. The destroy **deletes the stack's data** (MongoDB, Redis, MinIO and the recordings), except the static volumes of a stack converted from a 3.9.0 installation: back it up first. See [Destroy](../../single-node/on-premises/admin.md#destroy).
 
 ## Backup and restore
 

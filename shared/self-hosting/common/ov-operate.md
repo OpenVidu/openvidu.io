@@ -81,15 +81,19 @@ On a PRO stack, `ov stack logs SERVICE` fetches one service's logs: `ov stack lo
 
 `ov stack check-ports` verifies that the inbound ports the stack needs actually reach the server. It runs a temporary listener on the node and probes it, so TCP **and** UDP (and the media range) are really verified. It is the single most useful check before going live, because a stack with a blocked media port looks perfectly healthy and simply has no media.
 
-Against a running stack, `ov` can only connect to the ports, and it says so rather than reporting a false result: an open UDP port and a dropped one look the same while the stack holds them. To verify the media path end to end, take the ports back for a few seconds:
+The check needs SSH access to the node. A Community stack keeps it in its record. A PRO stack on a cloud does not: on AWS and Azure the check logs in to the master as `ubuntu` with the key pair `ov` generated, when the directory holds its private half; on the other clouds it exits `2` and prints the command to run, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>`, and where that key is.
+
+Against a running stack, `ov` can only connect to the ports, and it says so rather than reporting a false result: an open UDP port and a dropped one look the same while the stack holds them. To verify the media path end to end, take the ports back for a few seconds, and start the stack again **whatever the check reports**:
 
 ```bash
-ov stack stop && ov stack check-ports && ov stack start
+ov stack stop
+ov stack check-ports   # a PRO stack on Google Cloud, Oracle Cloud or DigitalOcean: add --ssh <user>@<master> --ssh-key <key>
+ov stack start
 ```
 
-It exits `8` when a required port fails (a recommended one is a warning, exit `0`), and never changes a firewall: the fix is printed for you to run. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `--ssh [user@]host` to check a machine before deploying to it, `-o json` for every verdict.
+Do not chain the three with `&&`: when the check finds a problem it exits non-zero, and the stack would stay stopped.
 
-The check needs SSH access to the node. A Community stack keeps it in its record. A PRO stack on a cloud does not: on AWS and Azure the check logs in to the master as `ubuntu` with the key pair `ov` generated, when the directory holds its private half; on the other clouds it exits `2` and prints the command to run, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>`. `ov stack ports`, which reads the published host ports live, is for a **local** stack only.
+It exits `8` when a required port fails (a recommended one is a warning, exit `0`), and never changes a firewall: the fix is printed for you to run. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `--ssh [user@]host` to check a machine before deploying to it, `-o json` for every verdict. `ov stack ports`, which reads the published host ports live, is for a **local** stack only.
 
 ## Start, stop and restart { #start-stop-and-restart }
 

@@ -206,7 +206,7 @@ Tears the deployment down and removes the directory's record. Without `-y` it as
 
 | Flag | Purpose |
 | --- | --- |
-| `--delete-data` / `--keep-data` | What becomes of the data and recordings. `--keep-data` is the default on a server and locally; on a cloud one of the two is **required**. |
+| `--delete-data` / `--keep-data` | What becomes of the data and recordings. `--keep-data` is the default on a COMMUNITY server and locally; on a cloud one of the two is **required**. On an on-premises PRO stack neither applies: the destroy removes the stack's data with it. |
 | `--delete-config` | Also remove the deployment directory: on a server `/opt/openvidu` and its unit, data included; locally the compose and config files, keeping the volumes unless `--delete-data`. |
 | `--keep-context` | Keep the directory's record after teardown. |
 | `--keep-infrastructure` | Cloud: tear the deployment down but keep the machines running. |
@@ -271,13 +271,17 @@ ov: nothing was installed: the pod networks (10.42.0.0/16, 10.43.0.0/16) must re
 
 ### No media, but every service is healthy
 
-This is almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works and the stack looks fine, but media never arrives. Probing a running stack cannot prove this, so stop it for a few seconds and run the full check:
+This is almost always a blocked **UDP** port (`443/udp` or the media range). HTTPS works and the stack looks fine, but media never arrives. Probing a running stack cannot prove this, so stop it for a few seconds, run the full check, and start it again whatever the check reports:
 
 ```bash
-ov stack stop && ov stack check-ports && ov stack start
+ov stack stop
+ov stack check-ports
+ov stack start
 ```
 
-Open the ports the report flags on the node and on any perimeter firewall (cloud security group, router). `check-ports` needs SSH access to the node. A PRO stack on a cloud keeps none in its record: on AWS and Azure the check logs in to the master as `ubuntu` with the key pair `ov` generated, when the directory holds its private half; on the other clouds it exits `2` and prints the command to run, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>`.
+Do not chain them with `&&`: the check exits non-zero when it finds a problem, and the stack would stay stopped.
+
+Open the ports the report flags on the node and on any perimeter firewall (cloud security group, router). `check-ports` needs SSH access to the node. A PRO stack on a cloud keeps none in its record: on AWS and Azure the check logs in to the master as `ubuntu` with the key pair `ov` generated, when the directory holds its private half; on the other clouds it exits `2` and prints the command to run, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>`, and where that key is.
 
 ### Let's Encrypt fails: port 80 must be reachable
 
