@@ -96,7 +96,7 @@ In an [embedded](../../embedded/intro.md) meeting, these views offer the same di
 A place in line belongs to the participant's **live connection** to OpenVidu Meet, and it is kept only while the page stays connected.
 
 - A short loss of connection is fine. The participant keeps their place if the connection is back within about a minute.
-- A page that **closes, reloads or navigates away** loses its place at once, reported as `expired` with `reason` `page_closed`: a moderator sees the participant leave the list within seconds.
+- A page that **closes, reloads or navigates away** loses its place at once, reported as `expired` with `reason` `page_closed`: a moderator sees the participant leave the list within seconds. A tab the browser discards in the background without warning, as phones do, loses it within about a minute, as `connection_lost`. A dropped realtime connection alone, such as a proxy restart, keeps the place.
 - About a **minute without connection** loses the place, whatever the cause: the network, a phone that suspends the page, a browser that crashes, or a host application that removes the web component element.
 - A **reload** asks to join again on its own, without the join screen: the participant waits at the end of the line, as a new wait that moderators are told about again. A member or a user keeps their identity. A participant who was admitted and reloads the page after joining also asks again at the end of the line.
 - **Leave waiting room** ends the wait at once, even while the connection is down.
@@ -169,7 +169,7 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application 
 
 - `participantWaitingAdmit` and `participantWaitingReject` take an optional `participantIdentities` list. With identities, they act on exactly those participants, all or none. Without it, they act on everyone waiting: `participantWaitingAdmit` admits the first in line up to the free places, and `participantWaitingReject` rejects everyone waiting when the command runs. An empty list is refused.
 - `participantKnocked` fires once for each participant who starts waiting while the local participant is in the meeting. The participants already waiting when the element joined, and a participant back in line after an admission that failed, arrive in `waitingRoomUpdated` instead.
-- `waitingRoomUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes.
+- `waitingRoomUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes. A room with the waiting room off sends none.
 
 **For the participant who waits.** The host of a waiting participant receives `participantWaitingChanged` with the `participant`, the same object the webhooks carry, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks), each with the `origin` of the change, and the `reason` where it applies, when the meeting knows them.
 
@@ -194,7 +194,7 @@ The waiting room can also be run from your backend with the [Meetings REST API](
 - `participantWaitingList` answers `participants`, those waiting in arrival order, each with its `participantIdentity`, `participantName`, `type`, `knockDate` and, when the client sent them, `externalId` and `metadata`. It also answers `availablePlaces`, the free places, or `null` when the room has no participant limit.
 - `participantWaitingAdmit` and `participantWaitingReject` take `participantIdentities`, from 1 to 100 distinct identities, or no `participantIdentities` for everyone waiting. An empty or repeated list is a `422`, never read as everyone. A decision on named participants applies to all of them or to none: it answers `404`, naming the first identity that no longer waits, and `participantWaitingAdmit` also answers `409` when they outnumber the free places. Both answer the participants decided on.
 - With the waiting room off, `participantWaitingList` answers an empty list, a decision on named participants answers `404`, and a decision on everyone waiting answers an empty list of participants.
-- A refused request names its cause in `error`, a code to tell it apart without reading `message`: `participant_not_waiting`, with the participant in `participantIdentity`, or `not_enough_places`.
+- A refused request names its cause in `error`, a code to tell it apart without reading `message`: `participant_not_waiting`, with the participant in `participantIdentity`, or `not_enough_places`, with the free places in `availablePlaces`.
 
 ### Webhooks { #webhooks }
 
