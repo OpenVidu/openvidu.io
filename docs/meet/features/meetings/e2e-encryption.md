@@ -53,7 +53,7 @@ When E2EE is active, everything participants share is encrypted on their device 
 
 ## Joining an encrypted meeting
 
-Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device and never sent to the server.
+Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device, and a passphrase typed in the Join view never leaves the device. A passphrase given as the `e2ee-key` query parameter of a direct link or of an iframe `src` does reach the OpenVidu Meet server, with the request for the page, before the meeting removes it from the address bar.
 
 When a member accesses an E2E-encrypted room, the [Join view](lifecycle.md#join-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 

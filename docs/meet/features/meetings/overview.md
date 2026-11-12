@@ -7,7 +7,7 @@ page_features:
 
 # Meetings
 
-A **Meeting** is a temporary session within a [room](../rooms/overview.md) where participants join in real-time to communicate, share content, and collaborate. It starts when the first participant joins and ends when the last one leaves — or when a moderator explicitly ends it for all participants. Unlike rooms (which are persistent), a meeting only exists while at least one participant is connected. The same room can host many meetings over time, but only one at a time.
+A **Meeting** is a temporary session within a [room](../rooms/overview.md) where participants join in real-time to communicate, share content, and collaborate. It starts when the first participant presses the join button, and ends 20 seconds after the last participant leaves, or as soon as it is ended for everyone. A participant who joins within those 20 seconds enters the same meeting. Unlike rooms, which are persistent, meetings are temporary: the same room can host many meetings over time, but only one at a time.
 
 ## How to join a meeting
 

@@ -48,6 +48,9 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
 - **Font loading**: `overrides/main.html` loads the font stylesheet render-blocking with
   `display=block`, and every `{# Family NNN #}` preload hint names a weight the URL requests
   and carries `crossorigin` — the no-flicker contract the template's own comment describes.
+- **Announcement bar** (warn): the `announce` block in `overrides/main.html` sets an
+  `announce_until` day that is still ahead; a value that is not `YYYY-MM-DD` is an error, since
+  the bar would never end ([page-composition.md](page-composition.md#announcement-bar)).
 - **Commented-out dead links** (info): janitorial, since MkDocs skips comments too.
 
 Findings live in code fences, inline code and HTML comments are excluded before matching, so a

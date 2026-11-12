@@ -5,7 +5,7 @@ description: "What a room is in OpenVidu Meet: a permanent, reusable space with 
 
 # Rooms
 
-A **Room** is a persistent virtual space designed to host one or more [meetings](../meetings/overview.md) in OpenVidu Meet. Think of it as a physical conference room, customizable with a name, appearance, and security settings.
+A **Room** is a persistent virtual space designed to host one or more [meetings](../meetings/overview.md) in OpenVidu Meet. Think of it as a physical conference room, customizable with a name, its features and its access settings. The appearance of every room is set once for the whole deployment (see [Room Appearance](management.md#room-appearance)).
 
 Rooms are the entry point to OpenVidu Meet: every video call happens inside a room, and every room provides the configuration and access controls that govern the meetings that take place in it.
 
@@ -17,5 +17,5 @@ Rooms are the entry point to OpenVidu Meet: every video call happens inside a ro
 
 ## In this section
 
-- [Creation & Management](management.md) — create, edit, list and delete rooms from the OpenVidu Meet app, configure their features and appearance, and the equivalent REST API operations.
-- [Room Access](access.md) — how individuals access a room as [room members](../room-members/overview.md) (anonymous, user and identified-guest access links) and the predefined roles (`Moderator` and `Speaker`).
+- [Creation & Management](management.md): create, edit, list and delete rooms from the OpenVidu Meet app, configure their features, and the equivalent REST API operations.
+- [Room Access](access.md): how individuals access a room as [room members](../room-members/overview.md) (anonymous, user and identified-guest access links) and the predefined roles (`Moderator` and `Speaker`).
