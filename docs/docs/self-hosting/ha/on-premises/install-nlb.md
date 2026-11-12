@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu High Availability on-premises"
-description: "Deploy an OpenVidu High Availability cluster on your own servers with the OpenVidu CLI: four master nodes and media nodes, behind a load balancer."
+description: "Deploy OpenVidu High Availability on your own servers with the OpenVidu CLI: four masters and media nodes, exposed by DNS or a load balancer."
 ---
 
 # OpenVidu High Availability installation: On-premises
@@ -16,7 +16,10 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers w
 
 Deploy OpenVidu High Availability on your own Linux servers with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). High Availability is **four master nodes plus one or more media nodes**: the first master is deployed, then three more masters and the media nodes **join** it. The stack survives the loss of any single master. High Availability requires OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }.
 
-There are two ways to expose the masters. For a **test cluster**, point the domain at the first master. In **production**, put a TCP load balancer in front of the four masters ([In production: behind a load balancer](#behind-a-load-balancer)), so the stack survives the loss of any of them.
+There are two ways to expose the four masters:
+
+- **A DNS record per master**: the stack's domain has one `A` record for each master, so clients reach any of them. This is how the [deploy below](#deploy-with-a-dns-record-per-master) runs, and it needs nothing in front of the masters.
+- **A TCP load balancer** in front of the four masters, which the domain points at. This is the setup for production: the load balancer's health checks keep clients away from a master that is down ([In production: behind a load balancer](#behind-a-load-balancer)).
 
 === "Architecture overview"
 
@@ -64,15 +67,15 @@ These are the inbound ports `ov` checks, with the names it prints for them. `joi
 
 With the `ingress` module, also open `1935/tcp` and `7885/udp` on the media nodes.
 
-## Deploy a test cluster
+## Deploy with a DNS record per master { #deploy-with-a-dns-record-per-master }
 
-Deploy the first master with `--deployment-type ha`, pointing the domain at it, exactly like a [Single Node PRO](../../single-node/on-premises/install.md#deploy). Then join three more masters and the media nodes from the same directory:
+Create one `A` record per master for the stack's domain (here `ha.example.com`, with records for `172.30.0.110` to `172.30.0.113`), and bring a certificate for it (`owncert`) or use `selfsigned`. Deploy the first master with `--deployment-type ha` and that domain, exactly like a [Single Node PRO](../../single-node/on-premises/install.md#deploy). Then join three more masters and the media nodes from the same directory:
 
 ```bash
 ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
   --ssh ubuntu@172.30.0.110 --ssh-key ~/.ssh/id_ed25519 \
   --openvidu-pro-license <your-license> \
-  --domain-name 172-30-0-110.openvidu-local.dev \
+  --domain-name ha.example.com \
   --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
   --mode auto
 ov stack join --ssh ubuntu@172.30.0.111 --as master
@@ -112,10 +115,10 @@ As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clus
 
 ```console
 $ ov stack status --wait
-waiting for https://172-30-0-110.openvidu-local.dev to be ready (Ctrl-C to stop)…
+waiting for https://ha.example.com to be ready (Ctrl-C to stop)…
   ⏳ master nodes 4/4, media nodes 1/1, services 28/53, restarting: caddy-proxy@node-172-30-0-111, caddy-proxy@node-172-30-0-112 (0s)
 …
-✔ ha is ready (https://172-30-0-110.openvidu-local.dev)
+✔ ha is ready (https://ha.example.com)
 ```
 
 On shared or simulated machines the wait can exceed the default 5 minutes; `ov stack status --wait --wait-timeout 15m` is the honest setting there. While the cluster is still being assembled, `ov stack status --wait --joined` waits only for the masters that have joined and says how many are missing; the assisted runbook of each join ends with `ov stack status --wait --joined --wait-timeout 15m`. Before touching any server, `join` rejects a join the stack has no place for: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Add a media node](admin.md#add-a-media-node).

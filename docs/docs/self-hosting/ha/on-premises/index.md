@@ -13,6 +13,6 @@ description: "OpenVidu High Availability on your own servers: four Master Nodes 
 
 In this section you can install, administer and upgrade OpenVidu High Availability on your own infrastructure with the [OpenVidu CLI](../../openvidu-cli.md).
 
-- [**Install**](./install-nlb.md): deploy the four Master Nodes and the Media Nodes, as a test cluster or behind a load balancer.
+- [**Install**](./install-nlb.md): deploy the four Master Nodes and the Media Nodes, with a DNS record per master or behind a load balancer.
 - [**Admin**](./admin.md): operate the stack, join and drain nodes, and back up its data.
 - [**Upgrade**](./upgrade.md): update the cluster, or convert a deployment installed by `install.sh`.
