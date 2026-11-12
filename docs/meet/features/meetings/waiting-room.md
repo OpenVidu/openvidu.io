@@ -76,7 +76,7 @@ The view says why the wait ended:
 
 | What happened                                    | What the participant sees                                                              |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| A moderator denied them                          | "You weren't let in", with **Ask to join again**, disabled for the next 15 seconds.     |
+| A moderator denied them                          | "You weren't let in", with **Ask to join again**.                                      |
 | They lost their place                            | "You lost your place", with **Ask to join again**. See [Keeping a place](#keeping-a-place). |
 | They asked again from another tab or device      | The earlier page says "You lost your place": the new request is the one that waits.     |
 | The meeting was ended for everyone               | A message that the meeting has ended.                                                  |
