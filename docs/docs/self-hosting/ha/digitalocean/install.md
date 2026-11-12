@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu High Availability on DigitalOcean"
-description: "Deploy OpenVidu High Availability on DigitalOcean with Terraform, then point your application at the result."
+description: "Deploy OpenVidu High Availability on DigitalOcean with one command of the OpenVidu CLI: four masters behind a load balancer, then operate it."
 ---
 
 # OpenVidu High Availability installation: DigitalOcean
@@ -11,22 +11,9 @@ description: "Deploy OpenVidu High Availability on DigitalOcean with Terraform, 
 
 </div>
 
-
 --8<-- "self-hosting/common/ha-license-intro.md"
 
-This section describes how to deploy a production-ready OpenVidu High Availability setup on DigitalOcean. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but provisioned as DigitalOcean resources and automated using Terraform CLI.
-
-- DigitalOcean **Spaces Object Storage** (S3-compatible) is used for storing application data, recordings, and cluster data.
-- Media Node scalability is managed via an **automated process (DigitalOcean Functions)** that scales the number of Media Nodes based on system load, although you can use a fixed number of media nodes.
-
-!!! info
-    Port `9000` is MinIO's port. This deployment stores recordings and application data in DigitalOcean Spaces instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
-
-## Prerequisites
-
-* You need to have a DigitalOcean account with a [Personal Access Token :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/reference/api/create-personal-access-token/){:target="_blank"}.
-* You need to have installed [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"}.
-* You need to have installed Git.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the High Availability topology, and applies it with **your own `terraform` and your API token**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
 === "Architecture overview"
 
@@ -38,129 +25,79 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - 4 fixed Droplets are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
-    - An automated process using DigitalOcean Functions handles the scale-in and scale-out of Media Nodes based on system load. The initial Media Node(s) are provisioned right after the Master Nodes are ready (a bootstrap invocation avoids waiting for the first scheduled tick). A full deployment is typically ready in **5 to 7 minutes**.
 
+## Requirements
 
+--8<-- "self-hosting/digitalocean/ov-requirements.md"
 
---8<-- "self-hosting/digitalocean/custom-scale-in.md"
+On High Availability there are two topology-specific points:
 
-## Deployment details
-1. Clone the OpenVidu repository with the terraform files:
+- **A certificate.** The load balancer passes TLS through to the masters, so Let's Encrypt and ZeroSSL do **not** work here (their HTTP challenge reaches a port 80 that only redirects to HTTPS). Use `selfsigned` (the default) to try the topology out, or `owncert` for production.
+- **A domain, for production.** No DigitalOcean template points a domain. After the deploy, point an `A` record at the load balancer's address (the `loadBalancerIp` output), as described below.
+
+## Deploy
+
+The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
+
+```bash
+mkdir openvidu && cd openvidu
+ov stack deploy openvidu --cloud digitalocean \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+  --mode auto
+```
+
+Four master nodes behind a passthrough load balancer, plus an autoscaling pool of media nodes.
+
+The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
+
+- **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
+- **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+
     ```bash
-    git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-    git -C openvidu-digitalocean checkout 3.9.0
-    cd openvidu-digitalocean/pro/ha
-    ```
-2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
-
-    ??? details "Information about parameters"
-
-        ### Mandatory Parameters
-
-        /// html | div.nowrap-first-column
-        | Input Value | Description |
-        |---|---|
-        | `doToken` | DigitalOcean Personal Access Token for API authentication. |
-        | `stackName` | Stack name for OpenVidu deployment. |
-        | `openviduLicense` | OpenVidu License for PRO deployments. Go [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} for more information. |
-        ///
-
-        ### Optional Parameters
-
-        /// html | div.nowrap-first-column
-        | Input Value | Default Value | Description |
-        |---|---|---|
-        | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
-        | `masterNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Nodes. The former name `masterNodesInstanceType` is still accepted but deprecated. |
-        | `mediaNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Media Nodes. |
-        | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Number of Media Nodes to create at initial deployment. On its first run the autoscaler brings the cluster straight to `max(minNumberOfMediaNodes, initialNumberOfMediaNodes)` Media Nodes; afterwards the number stays between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` based on CPU load. Ignored when `fixedNumberOfMediaNodes` > 0. |
-        | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of media nodes. The autoscaler never scales below this value. |
-        | `maxNumberOfMediaNodes` | `5`{ .nowrap } | Maximum number of media nodes. The autoscaler never scales above this value. |
-        | `scaleTargetCPU` | `50`{ .nowrap } | Target CPU percentage to scale up or down. |
-        | `fixedNumberOfMediaNodes` | `0`{ .nowrap } | Fixed number of media nodes to create (0 = use autoscaling). |
-        | `rtcEngine` | `"mediasoup"`{ .nowrap } | Media Engine. Available options: `mediasoup`, `pion`. |
-        | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li><li>`owncert` - Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li><li>`letsencrypt` - Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
-        | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu Deployment. Not mandatory; if not provided, the public IP is used as the domain name. |
-        | `ownPublicCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
-        | `ownPrivateCertificate` | `(none)`{ .nowrap } | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
-        | `initialMeetAdminPassword` | `(none)`{ .nowrap } | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
-        | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
-        | `volumeSize` | `100`{ .nowrap } | Size of the additional volume in GB for Master Node. |
-        | `spaceAppDataName` | `(none)`{ .nowrap } | Name of the DigitalOcean Space (S3-compatible bucket) to store application data and recordings. If empty, a bucket will be created with default name. |
-        | `spaceClusterDataName` | `(none)`{ .nowrap } | Name of the DigitalOcean Space (S3-compatible bucket) to store cluster data. If empty, a bucket will be created with default name. |
-        | `spaceRegion` | `"ams3"`{ .nowrap } | DigitalOcean Spaces region where the bucket will be created. |
-        | `spacesAccessId` | `(none)`{ .nowrap } | Access key ID for DigitalOcean Spaces (S3-compatible). Required if spaceAppDataName or spaceClusterDataName is empty. |
-        | `spacesSecretKey` | `(none)`{ .nowrap } | Secret access key for DigitalOcean Spaces (S3-compatible). Required if spaceAppDataName or spaceClusterDataName is empty. |
-        | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). Currently we only have one flag that is `--force-utc-timezone` to force UTC as the timezone for OpenVidu. By default, OpenVidu uses the timezone configured in the host machine where it is installed. Note that in general it is recommended to use UTC, and DigitalOcean Droplets already default to UTC, so this flag is not usually necessary. |
-        ///
-
-    !!! warning
-
-        In DigitalOcean, you need [Space Access Keys :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces/access_keys){:target="_blank"} to create a bucket. If you leave the **spaceAppDataName** or **spaceClusterDataName** variable empty, you must configure these keys with full access so a new bucket can be created. [Here is how :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/spaces/how-to/manage-access/#access-keys){:target="_blank"}.
-        
-1. Use the following commands to deploy with terraform.
-  ```bash
-  terraform init
-  terraform apply
-  ```
-1. You will see logs appear in the terraform apply execution console. Wait for it to finish and display `Apply Complete!`. Now go to [Space Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/spaces){:target="_blank"} and wait for the ssh key to appear in the bucket you have configured.   
-
-    !!! warning
-        After downloading the SSH key, it is highly recommended to **DELETE IT** from the bucket. This file is the private key used to access the droplet. If exposed, unauthorized users could gain access to the instance.
-
-    ![SSH Key in Bucket](../../../../assets/images/platform/self-hosting/ha/digitalocean/bucket-ssh-key.png){ .round-corners loading=lazy }
-
-2. Give the SSH Key the necessary permissions for it to work.
-
-    === "Linux"
-        Command in linux:
-        ```
-        chmod 600 <PATH_TO_THE_KEY>/openvidu_ssh_key_ha.pem
-        ```
-    === "Powershell"
-        Command in powershell:
-        ```
-        $KeyPath = "<PATH_TO_THE_KEY>" &&
-        icacls $KeyPath /inheritance:r &&
-        icacls $KeyPath /grant:r "$($env:USERNAME):(R)"
-        ```
-
-### Access OpenVidu
-
-Wait for the `secrets.env` file to appear in the bucket that you've configured and open it to view the credentials of OpenVidu. This file is uploaded as soon as the first Master Node has generated the secrets, before the installation finishes, so the credentials become available a while before the deployment is actually reachable: **OPENVIDU_URL** responding is the signal that everything is up and running.
-
-=== "View OpenVidu credentials in the Web"
-    - Go to the Space Object Storage bucket that you've configured and download the `secrets.env` file.
-
-    ![Secrets.env in Bucket](../../../../assets/images/platform/self-hosting/ha/digitalocean/secrets-env.png){ .round-corners loading=lazy }
-
-
-=== "View OpenVidu credentials in the instance"
-
-    SSH to the instance by running this command from the directory where your SSH key is located:
-    ```
-    ssh -i openvidu_ssh_key_ha.pem root@PUBLIC_DROPLET_IP
+    --domain-name openvidu.example.com --certificate-type owncert \
+      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+      --owncert-private-key "$(base64 -w0 privkey.pem)"
     ```
 
-    Then navigate to /opt/openvidu/ and you will find all required credentials in `secrets.env`.
+    On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-Then open **OPENVIDU_URL** and you will see the OpenVidu Meet interface. Log in with **MEET_INITIAL_ADMIN_PASSWORD** and you will be able to enjoy the features of OpenVidu Meet.
+Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
-## Configure your application to use the deployment 
+This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
-You may need your Digital Ocean credentials to configure your OpenVidu application. You can check these secrets following these steps ([View OpenVidu credentials in the Web](#view-openvidu-credentials-in-the-web)) or ([View OpenVidu credentials in the instance](#view-openvidu-credentials-in-the-instance)).
+```text
+…
+✔ OpenVidu Pro (high availability) is up on DigitalOcean
+  URL:          https://openvidu-j78sfb-129-212-214-216.sslip.io/
+  credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-demo-ha-space-appdata-b62adba1a3/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+  kubeconfig:   .openvidu/digitalocean/kubeconfig.yaml
 
-Your authentication credentials and the URL to point your applications to are:
+$ ov stack status --wait
+waiting for https://openvidu-j78sfb-129-212-214-216.sslip.io to be ready (Ctrl-C to stop)…
+✔ demo-ha is ready (https://openvidu-j78sfb-129-212-214-216.sslip.io)
+```
 
---8<-- "self-hosting/digitalocean/credentials-general.md"
---8<-- "self-hosting/digitalocean/credentials-v2compatibility.md"
+## What the deploy runs
 
-### Troubleshooting initial DigitalOcean deployment creation
+--8<-- "self-hosting/digitalocean/ov-deploy-plan.md"
+
+## What the deploy creates
+
+--8<-- "self-hosting/digitalocean/ov-resources.md"
+
+## Access OpenVidu
+
+--8<-- "self-hosting/digitalocean/ov-access.md"
+
+## Review the commands first: assisted mode
+
+--8<-- "self-hosting/digitalocean/ov-assisted.md"
+
+## Troubleshooting
 
 --8<-- "self-hosting/digitalocean/troubleshooting.md"
 
-3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
+## Next steps
 
-### Configuration and administration
-
-When your **OPENVIDU_URL** is reachable, it means that everything has gone well. Now you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+- [Administer the stack](./admin.md): scale the media nodes, change a parameter, operate it from another machine, destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`.

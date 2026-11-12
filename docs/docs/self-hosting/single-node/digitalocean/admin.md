@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu Single Node on DigitalOcean"
-description: "Administer OpenVidu Single Node on DigitalOcean: start and stop it, change its configuration and back up its data."
+description: "Operate an OpenVidu Single Node DigitalOcean stack with the CLI: change a parameter, run it from another machine, and destroy it."
 ---
 
 # OpenVidu Single Node administration: DigitalOcean
@@ -11,66 +11,32 @@ description: "Administer OpenVidu Single Node on DigitalOcean: start and stop it
 
 </div>
 
+The stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu deployment. The canonical operations page covers them all: [status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe), the [health test](../on-premises/admin.md#health-test), [logs](../on-premises/admin.md#logs) and [start, stop and restart](../on-premises/admin.md#start-stop-and-restart). Its [configuration](../../configuration/changing-config.md) and its [modules](../../how-to-guides/enable-disable-modules.md) are changed the same way as anywhere else.
 
-DigitalOcean OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is that the deployment is automated with Terraform.
+This page covers only what is specific to DigitalOcean.
 
-However, there are certain things worth mentioning:
+## Change a parameter of the stack
 
-## Start and stop OpenVidu through DigitalOcean web
+`ov stack deploy <name> --cloud digitalocean --param Name=Value` in the stack's directory runs `terraform apply` again with the parameters that changed. Any parameter the template declares can be set this way. Always name the stack in a redeploy: without the name it is registered again as `openvidu`.
 
-You can start and stop all services as explained in the [On Premises Single Node](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Droplet directly from DigitalOcean web. This will stop all services running in the droplet and reduce DigitalOcean costs.
+The most common change is the Droplet size:
 
-=== "Stop OpenVidu Single Node"
+```bash
+ov stack deploy openvidu --cloud digitalocean --param instanceType=s-8vcpu-16gb --mode auto -y
+```
 
-    1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
-    2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-ce-pro` (PRO).
-    3. In the Droplet section, click _"Power"_ and then _"Turn Off"_ to stop the Droplet (and therefore OpenVidu).
+Before asking to go ahead, the redeploy reads Terraform's plan and says what it does. A new size is resized in place, with the Droplet powered off for a few minutes (none can move to a size with a smaller disk). A change to what the Droplet boots with (the domain, the certificate, the license, the Meet credentials, another OpenVidu CLI) creates it again from scratch, with a new public IP, so a domain pointed at it has to be pointed again; the plan says `REPLACES the Droplet`.
 
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md).
 
-        ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet.png){ .round-corners loading=lazy }
+## Operate from another machine
 
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+--8<-- "self-hosting/digitalocean/ov-remote.md"
 
-        ![Stop droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/stop-droplet-pro.png){ .round-corners loading=lazy }
+## Destroy the stack
 
-=== "Start OpenVidu Single Node"
+--8<-- "self-hosting/digitalocean/ov-destroy.md"
 
-    1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
-    2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-ce-pro` (PRO).
-    3. In the Droplet section, click _"Power"_ and then _"Turn On"_ to start the Droplet (and therefore OpenVidu).
-
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-        ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet.png){ .round-corners loading=lazy }
-
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-        ![Start droplet](../../../../assets/images/platform/self-hosting/single-node/digitalocean/start-droplet-pro.png){ .round-corners loading=lazy }
-
-## Change the droplet size
-
-You can change the droplet size of the OpenVidu Single Node to adapt it to your needs. To do this, follow these steps:
-
-1. Go to [DigitalOcean Droplets :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.digitalocean.com/droplets){:target="_blank"}.
-2. There, you will find the Droplet that runs OpenVidu. Its name should be something like `<STACK_NAME>-vm-ce` (COMMUNITY) or `<STACK_NAME>-vm-ce-pro` (PRO).
-3. [Stop](#stop-openvidu-single-node) the droplet if it is not stopped.
-4. Click on _"Upsize Droplet"_ and change the size, then click on _"Resize"_.
-
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet.png){ .round-corners loading=lazy }
-
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-        ![Change droplet size](../../../../assets/images/platform/self-hosting/single-node/digitalocean/resize-droplet-pro.png){ .round-corners loading=lazy }
-
-## Administration and configuration
-
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node Administration](../on-premises/admin.md).
-
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
-
-## Backup and Restore
+## Backup and restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.
