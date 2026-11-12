@@ -1,229 +1,65 @@
 ---
 title: "Administer OpenVidu High Availability on Oracle Cloud"
-description: "Administer OpenVidu High Availability on Oracle Cloud Infrastructure: shut down and start the cluster, resize instances and tune Media Node autoscaling."
+description: "Operate an OpenVidu High Availability stack on Oracle Cloud with the OpenVidu CLI: scale the media nodes, change a parameter and destroy it."
 ---
 
 # OpenVidu High Availability administration: Oracle Cloud Infrastructure
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
+An Oracle Cloud High Availability stack is operated from the directory that deployed it, with the same commands as any other stack. The canonical operations page documents them all:
 
-The deployment of OpenVidu High Availability on Oracle Cloud Infrastructure is automated using the Terraform CLI, with 4 Compute instances as Master Nodes behind an [OCI Network Load Balancer :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/home.htm){:target="_blank"}, and any number of Media Nodes managed within an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"}. An OCI Function takes care of triggering scale-in actions, while the Instance Pool itself handles scale-out when more capacity is needed.
+- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe), the [health test](../../single-node/on-premises/admin.md#health-test) and the [logs](../../single-node/on-premises/admin.md#logs).
+- [Start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
+- [Change its configuration](../../configuration/changing-config.md#view-get-set-unset) and [enable or disable modules](../../how-to-guides/enable-disable-modules.md#modules-and-services).
 
-Internally, the Oracle Cloud Infrastructure High Availability deployment mirrors the On Premises High Availability deployment, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the Oracle Cloud Infrastructure environment that are worth keeping in mind:
+What follows is specific to an Oracle Cloud deployment.
 
-## Cluster shutdown and startup
+## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
-The Master Nodes are 4 individual Compute instances, while the Media Nodes are part of an OCI Instance Pool. The process for starting and stopping these components differs:
+Any parameter the Oracle template declares is changed from the stack's directory with `ov stack deploy <name> --cloud oracle --param Name=Value`, which runs `terraform apply` again with the parameters that changed. A redeploy reads Terraform's plan first and says what it does before you answer: an instance whose shape, OCPUs or memory change restarts in place. Masters 2-4 are never recreated for their boot script; a change to what master-1 boots with (the certificate, the license, the Meet credentials or a newer OpenVidu CLI) replaces master-1 only.
 
-=== "Shutting down the cluster"
+To change OpenVidu's own settings without touching the machines, use [its configuration](../../configuration/changing-config.md#view-get-set-unset), not a redeploy.
 
-    To shut down the cluster, you need to stop the Media Nodes first and then stop the Master Nodes.
+## Scale the media nodes { #scale-the-media-nodes }
 
-    !!! warning "Gracefully stopping Media Nodes"
+The number of media nodes is a variable of the template, so it changes with a redeploy that names the stack and the variable. On a cloud stack the media nodes **autoscale** by default: the OCI Instance Pool runs between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, adding a node when the pool's average CPU goes over `scaleTargetCPU`, and the scale-in OCI Function removes nodes gracefully when load drops. See [Autoscaling](../../production-ready/scalability.md#autoscaling).
 
-        Setting the Instance Pool size to 0 terminates the Media Nodes immediately without waiting for active Rooms to complete. The graceful drain that the scale-in OCI Function performs is **not** invoked on a manual pool resize.
+Run exactly N media nodes, with no autoscaling and no scale-in Function:
 
-        Wait for your active Rooms to finish before stopping the cluster, or SSH into each Media Node and run `/usr/local/bin/graceful_shutdown.sh` to drain it before saving the change.
+```bash
+ov stack deploy openvidu --cloud oracle --param fixedNumberOfMediaNodes=2 --mode auto
+```
 
-    1. Navigate to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}.
-    2. Click into the Instance Pool called `<STACK_NAME>-media-pool`, then click on _"Edit"_.
+Back to autoscaling, with another ceiling:
 
-        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .round-corners loading=lazy }
+```bash
+ov stack deploy openvidu --cloud oracle --param fixedNumberOfMediaNodes=0 \
+  --param maxNumberOfMediaNodes=6 --mode auto
+```
 
-    3. Set the **Number of instances** to 0, then click _"Save changes"_ and wait for the change to be applied.
+!!! info "The media nodes that go drain first"
 
-        ![Set instances to 0](../../../../assets/images/platform/self-hosting/ha/oracle/instances-to-0.png){ .round-corners loading=lazy }
+    No live session is cut. Lowering `fixedNumberOfMediaNodes`, narrowing the autoscaling range, or moving between a fixed count and the autoscaler (whose start sets the pool to `initialNumberOfMediaNodes`) detaches the nodes that go, newest first. Each one takes no new rooms, waits for the rooms, recordings and ingests on it to end, leaves the cluster and terminates itself, and the apply waits for that, up to `$OPENVIDU_MEDIA_DRAIN_TIMEOUT` seconds (7200 by default). This runs on your machine, with `oci` and `jq`. Raising the count adds media nodes and leaves the running ones untouched. The destroy of the whole stack drains nothing.
 
-    4. After confirming that all Media Node instances are terminated, go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and stop each Master Node one by one. The Master Nodes are named `<STACK_NAME>-master-node-x`. Click each one and select *"Stop"*.
-
-        ![Stop Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/stop-master-node.png){ .round-corners loading=lazy }
-
-        !!! info
-            All 4 Master Nodes must be stopped to fully shut down the cluster. Stopping fewer than 4 leaves the deployment in a degraded state.
-
-
-=== "Starting up the cluster"
-
-    To start the cluster, first start all 4 Master Nodes and then the Media Nodes.
-
-    1. Navigate to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
-    2. Select all the instances named `<STACK_NAME>-master-node-x`, then click _"Start"_. Wait until the instances are running.
-
-        ![Start Master Node](../../../../assets/images/platform/self-hosting/ha/oracle/start-master-node.png){ .round-corners loading=lazy }
-
-    3. Go to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"} and click the Instance Pool called `<STACK_NAME>-media-pool`, then click on *"Edit"*.
-
-        ![Edit Instance Pool](../../../../assets/images/platform/self-hosting/ha/oracle/edit-instance-pool.png){ .round-corners loading=lazy }
-
-    4. Set the **Number of instances** to your desired value and click _"Save changes"_, then wait for the Instance Pool to apply the changes.
-
-        !!! warning
-
-            This **Number of instances** is just an initial set — it does **not** become a fixed size and does **not** raise `minNumberOfMediaNodes`. If you set it above `minNumberOfMediaNodes`, the scale-in OCI Function may terminate the extra Media Nodes back down to the minimum as soon as it detects low CPU usage.
-
-## Change the instance shape
-
-You can change the OCI Compute shape of both the Master Nodes and the Media Nodes. Since the Media Nodes belong to an Instance Pool, the process differs. The following section details the procedures:
-
-=== "Master Nodes"
-
-    !!! warning
-
-        This procedure requires downtime, as it involves stopping all Master Nodes.
-
-    1. [Shutdown the cluster](#shutting-down-the-cluster).
-
-        !!! info
-
-            All 4 Master Nodes must run with the same shape. Changing only some of them will leave the cluster in an inconsistent state.
-
-    2. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and locate the resource named `<STACK_NAME>-master-node-1`. Click on it.
-    3. Click _"Edit"_ next to the **Shape** field, select the new shape (or adjust OCPUs/Memory for Flex shapes) and click _"Save changes"_.
-
-        ![Change Master Node shape](../../../../assets/images/platform/self-hosting/ha/oracle/change-shape-master.png){ .round-corners loading=lazy }
-
-    4. Repeat steps 2 and 3 for `<STACK_NAME>-master-node-2`, `<STACK_NAME>-master-node-3` and `<STACK_NAME>-master-node-4`, using the same shape and size on every Master Node.
-    5. [Start the cluster](#starting-up-the-cluster).
-
-=== "Media Nodes"
-
-    !!! warning
-        This will replace the running Media Nodes without graceful shutdown. If you want to drain them gracefully, run `/usr/local/bin/graceful_shutdown.sh` on each Media Node and wait for it to finish before changing the Instance Configuration, since the Instance Pool will terminate existing instances and launch new ones with the updated configuration.
-
-    1. Navigate to the [OCI Instance Configurations :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-configurations){:target="_blank"}.
-    2. Locate the Instance Configuration used by `<STACK_NAME>-media-pool`, click on it, open the _"Actions"_ menu and select _"Create duplicate"_. The form opens pre-filled with the current configuration — adjust the shape (or OCPUs/Memory for Flex shapes) and create the new Instance Configuration.
-
-        ![Create Instance Configuration](../../../../assets/images/platform/self-hosting/ha/oracle/create-instance-configuration.png){ .round-corners loading=lazy }
-
-        !!! warning
-
-            **Only change the shape** (or OCPUs/Memory for Flex shapes). Do **not** modify any other field — the rest of the configuration must remain identical to the original so the Instance Pool keeps working as expected.
-
-    3. Go back to the [OCI Instance Pools :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instance-pools){:target="_blank"}, open `<STACK_NAME>-media-pool`, click *"Edit"*, and change the **Instance Configuration** to the one you just created. Click *"Save changes"* and wait for the Instance Pool to roll out the new configuration.
-
-        ![Change Instance Configuration in Pool](../../../../assets/images/platform/self-hosting/ha/oracle/change-instance-configuration.png){ .round-corners loading=lazy }
-
-    4. Terminate the existing Media Nodes from the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} page so the Instance Pool replaces them with new ones launched from the updated Instance Configuration. Old Media Nodes are **not** replaced automatically when the Instance Configuration changes — only newly launched instances use the new shape.
-
-## Media Nodes Autoscaling Configuration
-
-!!! warning
-
-    If you previously [changed the Media Node shape](#change-the-instance-shape) by creating a duplicated Instance Configuration manually from the OCI Console, Terraform is unaware of it. Running `terraform apply` will point the Instance Pool back to its own Instance Configuration (the original one, recreated by Terraform), and the manually duplicated Instance Configuration will be orphaned.
-
-You can modify the autoscaling configuration of the Media Nodes via the `terraform.tfvars` file and `terraform apply`:
-
-=== "Media Nodes Autoscaling Configuration"
-
-    1. Go to the `terraform.tfvars` file and change the values related to autoscaling, such as:
-        - **scaleTargetCPU**
-        - **minNumberOfMediaNodes**
-        - **maxNumberOfMediaNodes**
-
-    2. Open a terminal and run the following command once you have updated the value(s):
-    ```
-    terraform apply
-    ```
-    3. Confirm the change that Terraform proposes (it will update the autoscaling configuration, and the scale-in OCI Function when `scaleTargetCPU` or `minNumberOfMediaNodes` change), and the changes will take effect.
-
-        ![Terraform output autoscale change](../../../../assets/images/platform/self-hosting/shared/oracle/terraform-output-autoscale-change.png){ .round-corners loading=lazy }
-
-## Fixed Number of Media Nodes
-
-You can switch between **autoscaling mode** (autoscaling Instance Pool + scale-in OCI Function) and **fixed mode** (a static number of Media Nodes with no autoscaling) by changing the **`fixedNumberOfMediaNodes`** variable and running `terraform apply`.
-
-Switching modes does **not** recreate the Master Nodes. Each Master Node carries a `scale-in-mode` freeform tag that Terraform flips in place (`elastic` ⇄ `fixed`), and the scale-in scripts on every node read this tag at runtime. The 4 Master Nodes and the Media Node Instance Configuration are therefore left untouched — only the scale-in OCI Function and the autoscaling configuration are created or destroyed, and the Instance Pool is resized.
-
-!!! warning
-
-    Any Media Nodes terminated during these transitions are killed immediately without running the graceful shutdown — active Rooms on those nodes are cut.
-
-=== "Activate Fixed Number of Media Nodes"
-
-    1. Go to the `terraform.tfvars` file and set:
-        - **`fixedNumberOfMediaNodes`** to the desired number of Media Nodes (must be greater than 0).
-
-    2. Open a terminal and run:
-        ```
-        terraform apply
-        ```
-
-    3. Confirm the change that Terraform proposes. It will destroy the scale-in OCI Function and the autoscaling configuration, flip the Master Nodes' `scale-in-mode` tag to `fixed`, and resize the Instance Pool to the fixed number of Media Nodes.
-
-        ![Terraform output activate fixed media nodes](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-fixed.png){ .round-corners loading=lazy }
-
-### Lower the number of Media Nodes
-
-A smaller Instance Pool terminates Media Nodes without their graceful shutdown, so lowering **`fixedNumberOfMediaNodes`** with `terraform apply` cuts the Rooms running on the Media Nodes it removes. To lower it without interrupting them, remove the extra Media Nodes first:
-
-1. For each Media Node to remove, SSH into it and run:
+    A media node takes no SSH, so to follow one that drains, read its `openvidu-scale-in` tag (`draining`, then `left`) in the OCI console, or its watcher's log on its serial console:
 
     ```bash
-    sudo systemd-run --unit=openvidu-graceful-shutdown --setenv=HOME=/root /usr/local/bin/graceful_shutdown.sh
+    oci compute console-history capture --instance-id <node-ocid>   # prints the history's id
+    oci compute console-history get-content --instance-console-history-id <id> \
+      --length 1000000 --file - | grep openvidu-scalein-watch
     ```
 
-    The Media Node stops accepting new Rooms and its drain ends when its ongoing Rooms, recordings and ingests end. `systemd-run` keeps the drain running after you close the SSH session, however long the Rooms last. `systemctl is-active openvidu-graceful-shutdown` prints `inactive` once it is over.
+On the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count. `ov stack check-ports` does not apply to this stack: it needs SSH access to the node, and the stack is operated without it (exit `2`).
 
-2. When the drain of a Media Node is over, detach it from the Instance Pool called `<STACK_NAME>-media-pool`, decreasing the pool size, and terminate it. In the OCI Cloud Shell, or in a terminal with the OCI CLI:
+## Operate from another machine { #operate-from-another-machine }
 
-    ```bash
-    oci compute-management instance-pool-instance detach \
-      --instance-pool-id <INSTANCE_POOL_OCID> --instance-id <INSTANCE_OCID> \
-      --is-decrement-size true --is-auto-terminate true
-    ```
+--8<-- "self-hosting/oracle/ov-remote.md"
 
-3. Set **`fixedNumberOfMediaNodes`** to the new number in `terraform.tfvars` and run `terraform apply`. The Instance Pool already has that size, so nothing else changes.
+## Destroy the stack { #destroy-the-stack }
 
-Raising **`fixedNumberOfMediaNodes`** adds Media Nodes to the Instance Pool and leaves the running ones untouched.
+--8<-- "self-hosting/oracle/ov-destroy.md"
 
-## Activate Scale In
-
-Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automatic Media Node scaling and the scale-in OCI Function.
-
-=== "Activate Scale In"
-
-    1. Go to the `terraform.tfvars` file and set:
-        - **`fixedNumberOfMediaNodes`** to `0`.
-        - **`scaleTargetCPU`** if you don't want the default.
-        - **`minNumberOfMediaNodes`** if you don't want the default.
-        - **`maxNumberOfMediaNodes`** if you don't want the default.
-
-    2. Open a terminal and run:
-        ```
-        terraform apply
-        ```
-
-    3. Confirm the change that Terraform proposes. It will recreate the scale-in OCI Function, re-attach the autoscaling configuration to the Instance Pool, and flip the Master Nodes' `scale-in-mode` tag back to `elastic`.
-
-        ![Terraform output activate scale in](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-scalein.png){ .round-corners loading=lazy }
-
-!!! warning "`terraform apply` in autoscaling mode"
-
-    In autoscaling mode, every `terraform apply` sets the Instance Pool back to **`initialNumberOfMediaNodes`**: if the autoscaler has added Media Nodes, the extra ones are terminated without their graceful shutdown and their Rooms are cut. Before applying any change in autoscaling mode, set **`initialNumberOfMediaNodes`** in `terraform.tfvars` to the number of Media Nodes running.
-
-## Administration and configuration
-
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises High Availability Administration](../on-premises/admin.md).
-
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
-
-In addition to these, an Oracle Cloud Infrastructure deployment provides the capability to manage global configurations via the OCI Console using OCI Vault Secrets:
-
-=== "Changing configuration through OCI Secret Manager"
-
-    1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
-    2. Click the secret you want to change.
-    3. Scroll down to _"Versions"_ and click _"Create secret version"_ to add a new version with the updated value.
-
-        ![Create Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/create-secret-version.png){ .round-corners loading=lazy }
-
-    4. Enter the new secret value and click _"Create secret version"_.
-
-        ![New Secret Version](../../../../assets/images/platform/self-hosting/shared/oracle/new-secret-version.png){ .round-corners loading=lazy }
-
-    5. [Shut down](#shutting-down-the-cluster) and [start up](#starting-up-the-cluster) the cluster to apply the changes to the OpenVidu High Availability deployment.
-
-    Changes will be applied automatically on all nodes of your OpenVidu High Availability deployment.
+## Backup and restore { #backup-and-restore }
 
 --8<-- "self-hosting/oracle/backup-and-restore.md"

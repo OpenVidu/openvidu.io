@@ -1,184 +1,67 @@
 ---
 title: "Install OpenVidu Elastic on Oracle Cloud"
-description: "Deploy OpenVidu Elastic on Oracle Cloud Infrastructure with Terraform, then point your application at the result."
+description: "Create the machines and deploy OpenVidu Elastic with autoscaling media nodes on Oracle Cloud with one command of the OpenVidu CLI, then operate it."
 ---
 
 # OpenVidu Elastic installation: Oracle Cloud Infrastructure
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-
 --8<-- "self-hosting/common/elastic-license-intro.md"
 
-This section describes how to deploy a production-ready OpenVidu Elastic instance on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
-
-- **OCI Object Storage** (S3-compatible via Customer Secret Keys) is used for storing application data and recordings.
-- **OCI Vault** is used to securely store deployment secrets.
-- Media Node scale-out is handled automatically by the **OCI Instance Pool autoscaling configuration** based on system load, and scale-in is delegated to an **OCI Function** that performs a graceful drain before terminating the instance. You can also use a fixed number of Media Nodes.
-
-!!! info
-    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
-
-## Prerequisites
-
-* An Oracle Cloud Infrastructure account with permissions to create Compute instances, VCNs, Object Storage buckets, Vaults, Functions and IAM resources.
-* [Terraform CLI :fontawesome-solid-external-link:{.external-link-icon}](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"} installed on your machine.
-* Git installed on your machine.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Terraform module embedded in its own binary for the Elastic topology and applies it with **your own `terraform` and your OCI API key**. The master installs OpenVidu on itself and the media nodes join it, all with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there. OpenVidu Elastic runs on Kubernetes, with OpenVidu as a Helm release.
 
 === "Architecture overview"
 
-    The deployment architecture is as follows:
-
     ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
 
-    - The Master Node acts as a Load Balancer, managing traffic and distributing it among the Media Nodes and the services running on the Master Node itself.
-    - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
-    - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
-    - Scale-out is performed automatically by the OCI Instance Pool autoscaling configuration based on the average CPU of the pool. Scale-in is delegated to an OCI Function that gracefully drains the target Media Node before terminating it.
+    - The master node runs a Caddy reverse proxy (Layer 4 for TURN with TLS and RTMPS, Layer 7 for the APIs, OpenVidu Dashboard and OpenVidu Meet) and distributes traffic to the media nodes.
+    - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the media nodes.
+    - Media nodes belong to an OCI Instance Pool. Scale-out is handled by its autoscaling configuration; scale-in is delegated to an OCI Function that gracefully drains a media node before terminating it.
 
-## Custom scale-in strategy
+## Requirements { #requirements }
 
-Scale-out is handled natively by the OCI Instance Pool autoscaling configuration, which adds Media Nodes when the pool's average CPU exceeds **`scaleTargetCPU`**. Scale-in, however, uses a custom strategy to enable the graceful shutdown of Media Nodes, ensuring that active Rooms are never disrupted when the cluster removes a Media Node.
+--8<-- "self-hosting/oracle/ov-requirements.md"
 
-=== "Custom scale-in strategy"
+Elastic adds one requirement when the media nodes autoscale:
 
-    - An **OCI Function** is deployed and triggered on a regular schedule. It polls the average CPU of the Instance Pool against **`scaleTargetCPU`** and never scales the pool below **`minNumberOfMediaNodes`**, and when a scale-in decision is made, the target Media Node is flagged as "draining" so it stops accepting new Rooms.
-    - Each Media Node runs a `systemd` daemon that periodically checks whether the instance has been marked as "draining". If so, the graceful shutdown script is triggered, which waits for all active Rooms on that node to end before shutting the instance down.
+- **The scale-in function's image (autoscaling only).** An autoscaling media pool uses an OCI Function that gracefully drains a media node before the pool removes it. Its image, the template's `scale_in_function_image` parameter, must be in an [OCI Registry (OCIR) :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm){:target="_blank"} your tenancy can pull from, in the deployment's region; pass it with `--param scale_in_function_image=<image>`. With a fixed media-node count (`--param fixedNumberOfMediaNodes=N`) there is no function and no image is needed.
 
---8<-- "self-hosting/oracle/scalein-function-image.md"
+## Deploy { #deploy }
 
-## Deployment details
+The stack lives in its own empty directory:
 
-1. Clone the OpenVidu repository containing the Terraform files:
+```bash
+export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+mkdir openvidu && cd openvidu
+ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+  --certificate-type letsencrypt --mode auto
+```
 
-    ```bash
-    git clone https://github.com/OpenVidu/openvidu-oracle.git
-    git -C openvidu-oracle checkout 3.9.0
-    cd openvidu-oracle/pro/elastic
-    ```
+One master node and an autoscaling pool of media nodes: one to start with, between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, adding one when their average CPU goes over `scaleTargetCPU` (all `--param`). At the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` (or `--param fixedNumberOfMediaNodes=N`) runs exactly N media nodes with no autoscaling and no scale-in Function. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
 
-2. Copy **`terraform.tfvars.example`** to **`terraform.tfvars`**, update the required parameters with your values, and adjust any optional defaults as needed.
+## What the deploy runs { #what-the-deploy-runs }
 
-    ??? details "Information about parameters"
+--8<-- "self-hosting/oracle/ov-deploy-plan.md"
 
-        ### Mandatory Parameters
+## What the deploy creates { #what-the-deploy-creates }
 
-        /// html | div.nowrap-first-column
-        | Input Value | Description |
-        |---|---|
-        | `tenancy_ocid` | OCI Tenancy OCID. Required for the Object Storage namespace. |
-        | `compartment_ocid` | OCI Compartment OCID where resources will be created. |
-        | `user_ocid` | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
-        | `stackName` | Stack name for the OpenVidu deployment. |
-        | `openviduLicense` | OpenVidu PRO license key. Visit [your OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to obtain your license. |
-        | `scale_in_function_image` | OCIR image URL consumed by the OCI Function that handles graceful Media Node scale-in. There is no default value — you must publish this image to an OCI Registry in your deployment's region and point this parameter to it. See [Publishing the scale-in function image](#publishing-the-scale-in-function-image). Ignored when `fixedNumberOfMediaNodes > 0`. |
-        ///
+--8<-- "self-hosting/oracle/ov-resources.md"
 
-        ### Optional Parameters
+## Access OpenVidu { #access-openvidu }
 
-        /// html | div.nowrap-first-column
-        | Input Value | Default Value | Description |
-        |---|---|---|
-        | `region` | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
-        | `availability_domain` | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
-        | `masterNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Master Node. |
-        | `masterNodeOcpus` | `2`{ .nowrap } | Number of OCPUs for the Master Node (applies to Flex shapes only). |
-        | `masterNodeMemory` | `8`{ .nowrap } | Memory in GB for the Master Node (applies to Flex shapes only). |
-        | `masterNodeDiskSize` | `200`{ .nowrap } | Boot disk size in GB for the Master Node. |
-        | `mediaNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
-        | `mediaNodeOcpus` | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
-        | `mediaNodeMemory` | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |
-        | `mediaNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for the Media Nodes. |
-        | `fixedNumberOfMediaNodes` | `0`{ .nowrap } | If `> 0`, deploys a fixed number of Media Nodes with no autoscaling and no scale-in OCI Function (`initialNumberOfMediaNodes`, `minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU` and `scale_in_function_image` are ignored). If `0` (default), the deployment is elastic and autoscaling is enabled. |
-        | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Initial number of Media Nodes to deploy. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of Media Nodes the autoscaling Instance Pool will keep running. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `maxNumberOfMediaNodes` | `5`{ .nowrap } | Maximum number of Media Nodes the autoscaling Instance Pool can launch. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `scaleTargetCPU` | `50`{ .nowrap } | Target CPU percentage. The Instance Pool autoscaling triggers scale-out above this threshold; the OCI Function triggers graceful scale-in when usage falls below it. Ignored when `fixedNumberOfMediaNodes > 0`. |
-        | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
-        | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name. |
-        | `ownPublicCertificate` | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the public certificate in base64 format. |
-        | `ownPrivateCertificate` | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the private certificate in base64 format. |
-        | `initialMeetAdminPassword` | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
-        | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
-        | `bucketName` | `(none)`{ .nowrap } | Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
-        | `rtcEngine` | `"mediasoup"`{ .nowrap } | WebRTC media engine to use. Options: <ul><li>`mediasoup` - Default media engine, with a boost in performance.</li><li>`pion` - The engine of LiveKit Open Source.</li></ul> |
-        | `vault_ocid` | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
-        | `key_ocid` | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
-        | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
-        ///
+--8<-- "self-hosting/oracle/ov-access.md"
 
-3. Deploy with Terraform using the following commands:
+## Review the commands first: assisted mode { #assisted-mode }
 
-    ```bash
-    terraform init
-    terraform apply
-    ```
+--8<-- "self-hosting/oracle/ov-assisted.md"
 
-4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured bucket.
-
-    !!! note
-        A full Elastic deployment (Master Node + the initial Media Nodes joining the cluster) typically completes in about **6 to 9 minutes**.
-
-    !!! warning
-        After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the Master Node — if exposed, unauthorized users could gain access.
-
-    ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/elastic/oracle/bucket-ssh-key.png){ .round-corners loading=lazy }
-
-5. Set the correct permissions on the SSH key so it can be used.
-
---8<-- "self-hosting/oracle/ssh-key-permissions.md"
-
-### Access OpenVidu
-
-To verify that your OpenVidu deployment is working correctly, check the credentials in the OCI Vault Secrets Manager.
-
-=== "View OpenVidu credentials in the Web"
-    1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
-    2. Click the secret you want to view.
-    3. Scroll down to _"Versions"_, click the _"3 dots"_ menu next to the current version, and select _"View secret contents"_.
-
-        ![View Secret](../../../../assets/images/platform/self-hosting/shared/oracle/view-secret.png){ .round-corners loading=lazy }
-
-        !!! warning
-            Click _"Show decoded Base64 digit"_ to see the actual value of the secret.
-
-=== "View OpenVidu credentials in the instance"
-
-    SSH into the Master Node by running the following command from the directory where your SSH key is located:
-    ```bash
-    ssh -i openvidu_private_ssh_key_<STACK_NAME>.pem ubuntu@PUBLIC_INSTANCE_IP
-    ```
-
-    Then navigate to `/opt/openvidu/config/` where you will find all credentials in the following files:
-
-    - `openvidu.env`
-    - `meet.env`
-
-Open **OPENVIDU_URL** and you will see the OpenVidu Meet interface.
-
-Log in with **MEET_INITIAL_ADMIN_PASSWORD** to start using OpenVidu Meet.
-
-## Configure your application to use the deployment
-
-To configure your OpenVidu application, you will need your OCI credentials. You can retrieve them by following the steps in [View OpenVidu credentials in the Web](#view-openvidu-credentials-in-the-web) or [View OpenVidu credentials in the instance](#view-openvidu-credentials-in-the-instance).
-
-Your authentication credentials and the URL to point your applications to are:
-
---8<-- "self-hosting/oracle/credentials-general.md"
-
-### Troubleshooting initial Oracle Cloud Infrastructure deployment
+## Troubleshooting { #troubleshooting }
 
 --8<-- "self-hosting/oracle/troubleshooting.md"
 
-3. If everything appears to be in order, check the [status](../on-premises/admin.md#checking-the-status-of-services) and [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services on the Master Node and Media Nodes.
+## Next steps { #next-steps }
 
-!!! info "Startup errors to look for in `cloud-init-output.log`"
-
-    Every wait performed while a node boots is bounded, so a stuck deployment ends with a terminal error message instead of hanging indefinitely. Two of them are worth grepping for:
-
-    - `Timeout waiting for ALL_SECRETS_GENERATED=<token> after 30 min` on a Media Node — it never received the secrets published by the Master Node for this deployment. Check the Master Node's own log first.
-    - `[check_app_ready] OpenVidu health endpoint not ready after 20 min` on the Master Node — the node booted and installed OpenVidu, but the service never became healthy.
-
-### Configuration and administration
-
-Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](./admin.md) section to learn how to manage your OpenVidu Elastic deployment.
+- [Administer the stack](./admin.md): change a parameter, scale the media nodes, operate it from another machine, destroy it.
+- [Build your app](../../../build-your-app/index.md) against it: it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).

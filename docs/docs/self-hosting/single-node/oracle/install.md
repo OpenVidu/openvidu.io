@@ -1,126 +1,74 @@
 ---
 title: "Install OpenVidu Single Node on Oracle Cloud"
-description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Oracle Cloud Infrastructure from the web console or with Terraform, then point your application at the result."
+description: "Create the machine and deploy OpenVidu Single Node Community or PRO on Oracle Cloud with one command of the OpenVidu CLI, then operate it."
 ---
 
 # OpenVidu Single Node installation: Oracle Cloud Infrastructure
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-This section describes two ways to install OpenVidu Single Node on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition:
+One command creates the machine and OpenVidu comes up on it. `ov` renders the Terraform module embedded in its own binary for the edition you choose and applies it with **your own `terraform` and your OCI API key**. The machine then deploys OpenVidu on itself with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-* [**Web Console**](#web-console): Can be deployed without installing anything on your machine, but requires more manual steps and has some limitations. For example, recordings are stored on the machine itself rather than in OCI Object Storage.
-* [**Terraform**](#terraform): More powerful and fully automated, but requires the Terraform CLI to be installed on your machine.
+Community runs on Docker Compose; PRO runs on Kubernetes, with OpenVidu as a Helm release. The edition is the only decision you make: `--edition community` (the default) or `--edition pro`.
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
-## Web Console
+=== "Architecture overview"
 
-This page explains how to create a Compute instance in Oracle Cloud Infrastructure (OCI), configure networking, and prepare it for an OpenVidu Single Node On-Premises installation. Installing, administering, and upgrading OpenVidu Single Node itself is covered in the On-Premises documentation.
+    ![OpenVidu Single Node Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/single-node/oracle/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
---8<-- "self-hosting/oracle/single-node/webconsole-steps.md"
+## Requirements { #requirements }
 
-6. Follow the [On-Premises install instructions](../on-premises/install.md) to install OpenVidu on the instance.
+--8<-- "self-hosting/oracle/ov-requirements.md"
 
----
+## Deploy { #deploy }
 
-### 5. Administration and upgrade
+The stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-- For administration of this OpenVidu Single Node deployment, see the [Administration](./admin.md) section.
-- To upgrade OpenVidu, see the [Upgrade](../upgrade.md) section.
-
-## Terraform
-
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On-Premises Single Node installation](../on-premises/install.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
-
-!!! info
-    Port `9000` is MinIO's port. This deployment stores recordings and application data in OCI Object Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
-
---8<-- "self-hosting/oracle/single-node/terraform-architecture.md"
-
-### Deployment details
-
-1. Clone the OpenVidu repository containing the Terraform files:
-
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-        ```bash
-        git clone https://github.com/OpenVidu/openvidu-oracle.git
-        git -C openvidu-oracle checkout 3.9.0
-        cd openvidu-oracle/community/singlenode
-        ```
-
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-        ```bash
-        git clone https://github.com/OpenVidu/openvidu-oracle.git
-        git -C openvidu-oracle checkout 3.9.0
-        cd openvidu-oracle/pro/singlenode
-        ```
-
-2. Copy **`terraform.tfvars.example`** to **`terraform.tfvars`**, update the required parameters with your values, and adjust any optional defaults as needed.
-
-    ??? details "Information about parameters"
-
-        #### Mandatory Parameters
-
-        /// html | div.nowrap-first-column
-        | Input Value | Description |
-        |---|---|
-        | `tenancy_ocid` | OCI Tenancy OCID. Required for the Object Storage namespace. |
-        | `compartment_ocid` | OCI Compartment OCID where resources will be created. |
-        | `user_ocid` | OCI User OCID used to create Customer Secret Keys for S3-compatible access to Object Storage. |
-        | `stackName` | Stack name for the OpenVidu deployment. |
-        | `openviduLicense` **PRO**{ .openvidu-tag .openvidu-pro-tag } | Only required for the PRO edition. Your OpenVidu License. Get one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} if you don't have one. |
-        ///
-
-        #### Optional Parameters
-
-        /// html | div.nowrap-first-column
-        | Input Value | Default Value | Description |
-        |---|---|---|
-        | `region` | `"eu-frankfurt-1"`{ .nowrap } | OCI region where resources will be created. |
-        | `availability_domain` | `1`{ .nowrap } | Availability Domain number (1, 2, or 3) to use for resources. |
-        | `instanceType` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu instance. |
-        | `rtcEngine` **PRO**{ .openvidu-tag .openvidu-pro-tag } | `"mediasoup"`{ .nowrap } | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. Only applies to the PRO edition. The former name `RTCEngine` is still accepted but deprecated. |
-        | `instanceOCPUs` | `2`{ .nowrap } | Number of OCPUs for the instance (applies to Flex shapes only). |
-        | `instanceMemory` | `8`{ .nowrap } | Memory in GB for the instance (applies to Flex shapes only). |
-        | `certificateType` | `"letsencrypt"`{ .nowrap } | Certificate type for the OpenVidu deployment. Options: <ul><li>`selfsigned` - Not recommended for production use. Intended for testing or development environments only. A FQDN is not required.</li><li>`owncert` - Suitable for production environments. Uses your own certificate. A FQDN is required.</li><li>`letsencrypt` - Suitable for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li></ul> |
-        | `domainName` | `(none)`{ .nowrap } | Domain name for the OpenVidu deployment. Optional — if not provided, the public IP is used as the domain name. |
-        | `ownPublicCertificate` | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the public certificate in base64 format. |
-        | `ownPrivateCertificate` | `(none)`{ .nowrap } | If the certificate type is `owncert`, this parameter specifies the private certificate in base64 format. |
-        | `initialMeetAdminPassword` | `(none)`{ .nowrap } | Initial password for the `admin` user in OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, a random password will be generated. |
-        | `initialMeetApiKey` | `(none)`{ .nowrap } | Initial API key for OpenVidu Meet. Alphanumeric characters, underscores or hyphens only (A-Z, a-z, 0-9, _, -). If not provided, no API key will be set; one can be configured later from the Meet Console. |
-        | `bucketName` | `(none)`{ .nowrap } | Name of the OCI Object Storage bucket for application data and recordings. If left empty, a bucket will be created with a default name. |
-        | `vault_ocid` | `(none)`{ .nowrap } | OCI KMS Vault OCID for secrets management. If left empty, a new vault will be created. |
-        | `key_ocid` | `(none)`{ .nowrap } | OCI KMS Key OCID for secrets management. If left empty, a new key will be created. |
-        | `additionalInstallFlags` | `(none)`{ .nowrap } | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., `--flag1=value, --flag2`). |
-        ///
-
-3. Deploy with Terraform using the following commands:
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     ```bash
-    terraform init
-    terraform apply
+    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --certificate-type letsencrypt --mode auto
     ```
 
-4. Logs will appear in the `terraform apply` console output. Wait for it to finish and display `Apply Complete!`. Then go to [OCI Object Storage :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/object-storage/buckets){:target="_blank"} and wait for the SSH key to appear in your configured bucket.
+    One compute instance (`VM.Standard.E4.Flex` with 4 OCPUs and 8 GB by default, `--param instanceType=<shape>` to change it) running OpenVidu on Docker Compose.
 
-    !!! warning
-        After downloading the SSH key, it is strongly recommended to **DELETE IT** from the bucket. This file is the private key used to access the instance — if exposed, unauthorized users could gain access.
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+    ```bash
+    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --edition pro --openvidu-pro-license <your-license> \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-        ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key.png){ .round-corners loading=lazy }
+    One compute instance running OpenVidu PRO on Kubernetes, with OpenVidu as a Helm release. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+## What the deploy runs { #what-the-deploy-runs }
 
-        ![SSH Key in bucket](../../../../assets/images/platform/self-hosting/single-node/oracle/bucket-ssh-key-pro.png){ .round-corners loading=lazy }
+--8<-- "self-hosting/oracle/ov-deploy-plan.md"
 
-5. Set the correct permissions on the SSH key so it can be used.
+## What the deploy creates { #what-the-deploy-creates }
 
---8<-- "self-hosting/oracle/ssh-key-permissions.md"
+--8<-- "self-hosting/oracle/ov-resources.md"
 
---8<-- "self-hosting/oracle/single-node/access-openvidu.md"
+## Access OpenVidu { #access-openvidu }
 
---8<-- "self-hosting/oracle/single-node/configure-app.md"
+--8<-- "self-hosting/oracle/ov-access.md"
+
+## Review the commands first: assisted mode { #assisted-mode }
+
+--8<-- "self-hosting/oracle/ov-assisted.md"
+
+## Troubleshooting { #troubleshooting }
+
+--8<-- "self-hosting/oracle/troubleshooting.md"
+
+## Next steps { #next-steps }
+
+- [Administer the stack](./admin.md): change a parameter, operate it from another machine, destroy it.
+- [Build your app](../../../build-your-app/index.md) against it: it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).

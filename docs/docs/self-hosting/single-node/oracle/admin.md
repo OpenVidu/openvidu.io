@@ -1,89 +1,41 @@
 ---
 title: "Administer OpenVidu Single Node on Oracle Cloud"
-description: "Administer OpenVidu Single Node on Oracle Cloud Infrastructure: start and stop it, change its configuration and back up its data."
+description: "Operate an OpenVidu Single Node stack on Oracle Cloud with the OpenVidu CLI: change a parameter, run it from another machine and destroy it."
 ---
 
 # OpenVidu Single Node administration: Oracle Cloud Infrastructure
 
 --8<-- "self-hosting/oracle/provider-chip.md"
 
-Oracle Cloud Infrastructure OpenVidu Single Node deployments are internally identical to On Premises Single Node deployments, so you can follow the same instructions from [On Premises Single Node](../on-premises/admin.md) documentation for administration and configuration. The only difference is the underlying cloud infrastructure.
+An Oracle Cloud Single Node stack is operated from the directory that deployed it, with the same commands as any other stack. The canonical operations page documents them all:
 
-However, there are certain things worth mentioning:
+- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe), the [health test](../on-premises/admin.md#health-test) and the [logs](../on-premises/admin.md#logs).
+- [Start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
+- [Change its configuration](../../configuration/changing-config.md#view-get-set-unset) and [enable or disable modules](../../how-to-guides/enable-disable-modules.md#modules-and-services).
 
-## Start and stop OpenVidu through the OCI Console
+What follows is specific to an Oracle Cloud deployment.
 
-You can start and stop all services as explained in the [On Premises Single Node](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the Compute instance directly from the OCI Console. This will stop all services running in the instance and reduce Oracle Cloud Infrastructure costs.
+## Change a parameter of the stack { #change-a-parameter-of-the-stack }
 
-=== "Stop OpenVidu Single Node"
+Any parameter the Oracle template declares is changed from the stack's directory with `ov stack deploy <name> --cloud oracle --param Name=Value`, which runs `terraform apply` again with the parameters that changed. For example, to resize the instance, change its shape (and, on a Flex shape, its OCPUs and memory):
 
-    1. Go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
-    2. There, you will find the Compute instance that runs OpenVidu.
-    3. Click the three-dots action menu next to the instance and select _"Stop"_ to stop the instance (and therefore OpenVidu).
+```bash
+ov stack deploy openvidu --cloud oracle --param instanceType=VM.Standard.E4.Flex \
+  --param instanceOCPUs=4 --param instanceMemory=16 --mode auto -y
+```
 
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+A redeploy reads Terraform's plan first: a change to the instance's shape, OCPUs or memory restarts it in place, while a change to what it boots with (the domain, the certificate, the license, the Meet credentials or a newer OpenVidu CLI) recreates it from scratch, and it comes back with a new public IP, so a domain pointed at it must be pointed again. The plan says which before you answer.
 
-        ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance.png){ .round-corners loading=lazy }
+To change OpenVidu's own settings without touching the machine, use [its configuration](../../configuration/changing-config.md#view-get-set-unset), not a redeploy.
 
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+## Operate from another machine { #operate-from-another-machine }
 
-        ![Stop OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/stop-instance-pro.png){ .round-corners loading=lazy }
+--8<-- "self-hosting/oracle/ov-remote.md"
 
-=== "Start OpenVidu Single Node"
+## Destroy the stack { #destroy-the-stack }
 
-    1. Go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
-    2. There, you will find the Compute instance that runs OpenVidu.
-    3. Click the three-dots action menu next to the instance and select _"Start"_ to start the instance (and therefore OpenVidu).
+--8<-- "self-hosting/oracle/ov-destroy.md"
 
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-        ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance.png){ .round-corners loading=lazy }
-
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-        ![Start OCI instance](../../../../assets/images/platform/self-hosting/single-node/oracle/start-instance-pro.png){ .round-corners loading=lazy }
-
-## Change the instance shape
-
-You can change the shape (instance type) of the OpenVidu Single Node instance to adapt it to your needs. To do this, follow these steps:
-
-1. Go to [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"}.
-2. There, you will find the Compute instance that runs OpenVidu.
-3. [Stop](#stop-openvidu-single-node) the instance if it is not already stopped. Wait for it to reach the **Stopped** state.
-4. Click on the instance name to open its details, then click _"Edit"_ next to the **Shape** field and select the new shape.
-
-    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-        ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape.png){ .round-corners loading=lazy }
-
-    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-        ![Change OCI instance shape](../../../../assets/images/platform/self-hosting/single-node/oracle/change-shape-pro.png){ .round-corners loading=lazy }
-
-5. Confirm the new shape and [start](#start-openvidu-single-node) the instance again.
-
-## Administration and configuration
-
-Regarding the administration of your deployment, you can follow the instructions in section [On Premises Single Node Administration](../on-premises/admin.md).
-
-Regarding the configuration of your deployment, you can follow the instructions in section [Changing Configuration](../../configuration/changing-config.md). Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
-
-In addition to these, an Oracle Cloud Infrastructure deployment provides the capability to manage global configurations via the OCI Console using the Secrets via Secret Manager:
-
-=== "Changing configuration through OCI Secret Manager"
-
-    1. Navigate to the [OCI Secrets Manager :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/security/secrets){:target="_blank"} in the OCI Console.
-    2. Click on the desired secret you want to change.
-    3. Scroll down to _"Versions"_ and click on _"Create secret version"_ to add a new version with the updated value.
-
-            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/create-secret-version.png){ .round-corners loading=lazy }
-
-    4. Enter the new secret value and click on _"Create secret version"_.
-
-            ![Create Secret Version](../../../../assets/images/platform/self-hosting/single-node/oracle/new-secret-version.png){ .round-corners loading=lazy }
-
-    5. Go to the [OCI Compute Instances :fontawesome-solid-external-link:{.external-link-icon}](https://cloud.oracle.com/compute/instances){:target="_blank"} and click on [_Stop_](#stop-openvidu-single-node) → [_Start_](#start-openvidu-single-node) to apply the changes to the OpenVidu Single Node deployment.
-
-    Changes will be applied automatically.
+## Backup and restore { #backup-and-restore }
 
 --8<-- "self-hosting/oracle/backup-and-restore.md"
