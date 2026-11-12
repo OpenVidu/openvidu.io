@@ -174,13 +174,13 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application 
 - `participantKnocked` fires once for each participant who starts waiting while the local participant is in the meeting. The participants already waiting when the element joined, and a participant back in line after an admission that failed, arrive in `waitingRoomUpdated` instead.
 - `waitingRoomUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes.
 
-**For the participant who waits.** The host of a waiting participant receives `waitingRoomStatusChanged` with the `participantIdentity`, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks).
+**For the participant who waits.** The host of a waiting participant receives `participantWaitingChanged` with the `participant`, the same object the webhooks carry, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks), each with the `origin` of the change when the meeting knows it.
 
 - `meetingJoined`, not `admitted`, is what confirms the join. A join that finds the meeting full after `admitted` raises no waiting room event.
-- A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `waitingRoomStatusChanged`.
+- A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `participantWaitingChanged`.
 - While waiting, `mediaToggleAudio` and `mediaToggleVideo` act on the preview, and `meetingLeave` leaves the waiting room and reports `left`.
 - Removing the element or the iframe while the participant waits is not a leave: the place is lost after about a minute and reported as `expired`.
-- With an iframe, the host waits for `waitingRoomStatusChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
+- With an iframe, the host waits for `participantWaitingChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
 
 A host page with a Content Security Policy must also allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](../../embedded/reference/webcomponent.md#content-security-policy).
 
@@ -203,7 +203,7 @@ The waiting room can also be run from your backend with the [Meetings REST API](
 Two [webhooks](../../embedded/reference/webhooks.md) report the waiting room:
 
 - The [`participantKnocked` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantKnockedWebhook){:target="_blank"} is sent once for each wait, when the participant asks to join and before their waiting view connects. A participant who never connects therefore produces a `participantKnocked` and, about 20 seconds later, an `expired` status.
-- The [`waitingRoomStatusChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/waitingRoomStatusChangedWebhook){:target="_blank"} is sent for each later change of the wait, one per participant, also when a decision covers everyone waiting. It carries the participant, a `status` and the `origin` of the change.
+- The [`participantWaitingChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantWaitingChangedWebhook){:target="_blank"} is sent for each later change of the wait, one per participant, also when a decision covers everyone waiting. It carries the participant, a `status` and the `origin` of the change.
 
 | `status`        | What happened                                                                             |
 | --------------- | ----------------------------------------------------------------------------------------- |
@@ -220,7 +220,7 @@ Two [webhooks](../../embedded/reference/webhooks.md) report the waiting room:
 ```json
 {
   "creationDate": 1620000012000,
-  "event": "waitingRoomStatusChanged",
+  "event": "participantWaitingChanged",
   "data": {
     "roomId": "room-123",
     "roomName": "room",
