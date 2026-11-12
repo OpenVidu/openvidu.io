@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu Single Node on AWS"
-description: "Deploy OpenVidu Single Node COMMUNITY or PRO on AWS from a CloudFormation stack, then point your application at the result."
+description: "Create the EC2 machine and deploy OpenVidu Single Node COMMUNITY or PRO on AWS with one command of the OpenVidu CLI, then operate the stack."
 ---
 
 # OpenVidu Single Node installation: AWS
@@ -11,48 +11,11 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on AWS from a CloudFo
 
 </div>
 
+One command creates the machine and OpenVidu comes up on it. `ov` renders the CloudFormation template embedded in its own binary for the edition you choose and applies it with **your own `aws` CLI**. The machine then deploys OpenVidu itself with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on AWS, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md); on AWS the machine and its resources are created for you.
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
-
-First, import the template in the AWS CloudFormation console. You can click the following button...
-
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-    [:fontawesome-brands-aws:{.deploy-button-icon} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
-
-    ...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
-
-    ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/latest/aws/cf-openvidu-singlenode.yaml
-    ```
-
-    !!! info
-
-        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
-
-        ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
-        ```
-
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-    [:fontawesome-brands-aws:{.deploy-button-icon} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduSingleNode&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
-
-    ...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
-
-    ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/latest/aws/cf-openvidu-singlenode.yaml
-    ```
-
-    !!! info
-
-        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
-
-        ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
-        ```
 
 === "Architecture overview"
 
@@ -60,86 +23,68 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
-## CloudFormation Parameters
+## Requirements
 
-Depending on your needs, you need to fill the following CloudFormation parameters:
+--8<-- "self-hosting/aws/ov-requirements.md"
 
---8<-- "self-hosting/aws/ssl-domain.md"
+## Deploy
 
-## OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag } configuration
+Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-If you are deploying the PRO edition, you need to specify some additional properties.
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-=== "OpenVidu Single Node PRO Configuration"
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-    Parameters of this section look like this:
+    One EC2 instance (`c6a.xlarge` by default, `--aws-instance-type` to change it) running OpenVidu on Docker Compose.
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-pro-config.png){ .round-corners loading=lazy }
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-    For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
+    One EC2 instance running OpenVidu PRO on Kubernetes, with OpenVidu as a Helm release. `--aws-kube-api-cidr` limits who can reach the stack's remote admin control protocol on port 6443. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
---8<-- "self-hosting/aws/meet.md"
+    This is how the deploy of a stack named `dpaws1` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
-### EC2 Instance Configuration
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 89.60.28.34:6443
+    …
+    ✔ OpenVidu Pro (single node) is up on AWS
+      URL:          https://openvidu-geepav-89-60-28-34.sslip.io/
+      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-eu-south-2-openvidu-dpaws1 --query SecretString --output text --region eu-south-2
+      kubeconfig:   .openvidu/aws/kubeconfig.yaml
+    ```
 
-You need to specify some properties for the EC2 instance that will be created.
+## What the deploy runs
 
-=== "EC2 Instance configuration"
+--8<-- "self-hosting/aws/ov-deploy-plan.md"
 
-    Parameters in this section look like this:
+## What the deploy creates
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/single-node/aws/ec2-instance-config.png){ .round-corners loading=lazy }
+--8<-- "self-hosting/aws/ov-resources.md"
 
-    Simply select the type of instance you want to deploy at **InstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
+## Access OpenVidu { #configure-your-application-to-use-the-deployment }
 
-    By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
+--8<-- "self-hosting/aws/ov-access.md"
 
---8<-- "self-hosting/aws/single-elastic-s3.md"
+## Review the commands first: assisted mode
 
---8<-- "self-hosting/aws/additional-flags.md"
+--8<-- "self-hosting/aws/ov-assisted.md"
 
-## Deploying the stack
-
-When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_.
-
-When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation:
-
-=== "CloudFormation Outputs"
-
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/single-node/aws/outputs.png){ .round-corners loading=lazy }
-
-## Configure your application to use the deployment
-
-The Output Key **ServicesAndCredentials** of the [previous section](#deploying-the-stack) points to an AWS Secret Manager secret that contains all URLs and credentials to access the services deployed. You can access the secret by clicking on the link in the **Output Value** column.
-
-Then, click on **Retrieve secret value** to get the JSON with all the information.
-
-<div class="grid-container" markdown>
-
-<div class="grid-50" markdown>
-![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/single-node/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
-</div>
-
-<div class="grid-50" markdown>
-![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/single-node/aws/2-secrets.png){ .round-corners loading=lazy }
-</div>
-
-</div>
-
-To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
-
---8<-- "self-hosting/aws/credentials-general.md"
-
---8<-- "self-hosting/aws/credentials-v2compatibility.md"
-
-## Troubleshooting Initial CloudFormation Stack Creation
+## Troubleshooting
 
 --8<-- "self-hosting/aws/troubleshooting.md"
 
-4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
+## Next steps
 
-## Configuration and administration
-
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your deployment.
+- [Administer the stack](./admin.md): change its configuration, back up its data and destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).

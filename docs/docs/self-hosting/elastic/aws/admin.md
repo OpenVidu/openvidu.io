@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu Elastic on AWS"
-description: "Administer OpenVidu Elastic on AWS: shut down and start the cluster, resize instances and tune Media Node autoscaling."
+description: "Administer an OpenVidu Elastic AWS stack with the OpenVidu CLI: scale the media nodes, change parameters, operate it remotely and destroy it."
 ---
 
 # OpenVidu Elastic administration: AWS
@@ -11,224 +11,50 @@ description: "Administer OpenVidu Elastic on AWS: shut down and start the cluste
 
 </div>
 
+The AWS stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The canonical operations page documents all of them:
 
-The deployment of OpenVidu Elastic on AWS is automated using AWS CloudFormation, with Media Nodes managed within an [Auto Scaling Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"}. This group dynamically adjusts the number of instances based on a target average CPU utilization. Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises Elastic](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth keeping in mind.
+- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe) and the [health test](../../single-node/on-premises/admin.md#health-test).
+- [Logs](../../single-node/on-premises/admin.md#logs) and [ports](../../single-node/on-premises/admin.md#ports).
+- [Start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
+- [Change its configuration](../../configuration/changing-config.md) and [enable or disable its modules](../../how-to-guides/enable-disable-modules.md).
 
-## Cluster Shutdown and Startup
+This page covers only what is specific to AWS.
 
-The Master Node is an EC2 instance, while the Media Nodes are part of an Auto Scaling Group. The process for starting and stopping these components differs. The following sections detail the procedures.
+## Change a parameter of the stack
 
-=== "Shutdown the Cluster"
+`ov stack deploy <name> --cloud aws --param Name=Value` in the stack's directory updates the CloudFormation stack with the parameters that changed. Any parameter the template declares can be set this way, for example the instance sizes:
 
-    To shut down the cluster, you need to stop the Media Nodes first and then stop the Master Node. This way, any ongoing session will not be interrupted.
+```bash
+ov stack deploy openvidu --cloud aws --param MasterNodeInstanceType=c6a.2xlarge --param MediaNodeInstanceType=c6a.2xlarge --mode auto -y
+```
 
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`**, and click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
+The stack that exists is updated with the parameters that changed; a redeploy with the same parameters reuses it as it is. For OpenVidu's own settings, which change without touching the machines, see [Changing configuration](../../configuration/changing-config.md).
 
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-media-asg.png){ .round-corners loading=lazy }
+## Scale the media nodes { #scale-the-media-nodes }
 
-    4. Click on _"Actions > Edit"_.
+The media nodes **autoscale** by default: an AWS Auto Scaling Group runs between a minimum and a maximum and removes nodes gracefully when load drops. The minimum, the maximum and a fixed count are parameters of the template:
 
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-edit-media-asg.png){ .round-corners loading=lazy }
+| Parameter | Meaning |
+| --- | --- |
+| `MinNumberOfMediaNodes`, `MaxNumberOfMediaNodes` | The autoscaling range |
+| `FixedNumberOfMediaNodes` | A fixed number of media nodes (`0` = autoscaling, the default) |
 
-    5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to 0, and click on _"Update"_.
+On the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well. On a stack that is already running, change it with `--param` from the stack's directory, for example raising the ceiling:
 
-        ![Set Desired Capacity to 0](../../../../assets/images/platform/self-hosting/shared/aws/admin-set-desired-capacity-stop.png){ .round-corners loading=lazy }
+```bash
+ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
+```
 
-    6. Wait until the _"Instance Management"_ tab shows that there are no instances in the Auto Scaling Group.
+A media node that is scaled in is **drained gracefully**: the stack stops sending it new rooms and the machine is removed only once the rooms, recordings and ingests it holds have ended. That is why autoscaling never cuts a live session. See [Autoscaling](../../production-ready/scalability.md#autoscaling) for how the scaling signal works.
 
-        ![Instance Management](../../../../assets/images/platform/self-hosting/shared/aws/admin-instance-management-stop.png){ .round-corners loading=lazy }
+## Operate from another machine
 
-        !!! warning
-            
-            It may happen that some instances are still in the _"Terminating:Wait"_ lifecycle state after setting the desired capacity to 0. This is because the Auto Scaling Group waits for the instances to finish processing any ongoing room, ingress, or egress operations before terminating them. This can take a few minutes. If you want to force the termination of the instances, you can manually terminate them from the EC2 Dashboard.
+--8<-- "self-hosting/aws/ov-remote.md"
 
-    7. After confirming that all Media Node instances are terminated, go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
+## Destroy the stack
 
-        ![Delete CloudFormation Stack](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-master.png){ .round-corners loading=lazy }
+--8<-- "self-hosting/aws/ov-destroy.md"
 
-    8. Right-click on the instance and select _"Stop instance"_.
-
-        ![Stop instance](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-stop-master.png){ .round-corners loading=lazy }
-
-=== "Startup the Cluster"
-
-    To start the cluster, we recommend starting the Master Node first and then the Media Nodes.
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. Locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
-
-        ![Select CloudFormation Stack](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-master.png){ .round-corners loading=lazy }
-
-    4. Right-click on the instance and select _"Start instance"_.
-
-        ![Start instance](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-start-master.png){ .round-corners loading=lazy }
-
-    5. Wait until the instance is running.
-    6. Go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    7. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    8. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the desired number of Media Nodes, and click on _"Update"_. In this example, we set the desired capacity to 2.
-
-        ![Set Desired Capacity to 2](../../../../assets/images/platform/self-hosting/shared/aws/admin-set-desired-capacity-start.png){ .round-corners loading=lazy }
-
-    9. Wait until the _"Instance Management"_ tab shows that there are the desired number of instances in the Auto Scaling Group.
-
-        ![Instance Management](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-instance-management-start.png){ .round-corners loading=lazy }
-
-
-## Change the instance type
-
-It is possible to change the instance type of both the Master Node and the Media Nodes. However, since the Media Nodes are part of an Auto Scaling Group, the process differs. The following section details the procedures.
-
-=== "Master Nodes"
-
-    !!! warning
-        
-        This procedure requires downtime, as it involves stopping the Master Node.
-
-    1. [Shutdown the cluster](#shutdown-the-cluster).
-
-        !!! info
-            
-            You can stop only the Master Node instance to change its instance type, but it is recommended to stop the whole cluster to avoid any issues.
-    2. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMasterNode`**. Click on it to go to the EC2 Dashboard with the Master Node instance selected.
-
-        ![Select CloudFormation Stack](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-master.png){ .round-corners loading=lazy }
-
-    3. Right-click on the instance and select _"Instance Settings > Change Instance Type"_.
-
-        ![Change instance type](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-master-instance-type.png){ .round-corners loading=lazy }
-
-    4. Select the new instance type and click on _"Apply"_.
-    5. [Start the cluster](#startup-the-cluster).
-
-=== "Media Nodes"
-
-    1. Go to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. Locate the resource with the logical ID: **`OpenViduMediaNodeLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Media Nodes selected.
-
-        ![Select Launch Template](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-launch-template.png){ .round-corners loading=lazy }
-
-    4. Click on _"Actions > Modify template (Create new version)"_.
-
-        ![Edit Launch Template](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-action-modify-template.png){ .round-corners loading=lazy }
-
-    5. In the _"Instance type"_ section, select the new instance type and click on _"Create template version"_.
-
-        ![Change instance type](../../../../assets/images/platform/self-hosting/shared/aws/admin-template-instance-type.png){ .round-corners loading=lazy }
-
-    6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    7. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    8. In the Launch Template section, select the new version of the launch template we just created at step 5, which is the highest version number.
-
-        Then, click on _"Update"_.
-
-        !!! info
-            
-            By configuring _"Latest"_ as the launch template version, you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
-
-        ![Change launch template version](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-asg-update-launch-template.png){ .round-corners loading=lazy }
-
-    9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new instance type.
-
-        !!! info
-            
-            If you want to avoid downtime, you can wait until the Auto Scaling Group replaces the old instances with the new ones. But you will need to increase the desired capacity to force the replacement of the instances and then decrease it to the desired number of instances.
-
-## Media Nodes Autoscaling Configuration
-
-To configure the Auto Scaling settings for the Media Nodes, follow the steps outlined below. This configuration allows you to set the parameters that control how the Auto Scaling Group will scale based on the target average CPU utilization.
-
-=== "Media Nodes Autoscaling Configuration"
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    4. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    5. To configure scaling policies, navigate to the _"Automatic scaling"_ tab within the Auto Scaling Group Dashboard, select the unique _"Target tracking scaling"_ autoscaling policy, and click on _"Actions > Edit"_.
-
-        ![Scaling Policies](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-automatic-scaling.png){ .round-corners loading=lazy }
-
-    6. It will open a panel where you can configure multiple parameters. In this example, we set the target average CPU utilization to 30%. Then, click on _"Update"_.
-
-        ![Edit Scaling Policies](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-admin-edit-scaling-policies.png){ .round-corners loading=lazy }
-
-        !!! info
-            
-            OpenVidu Elastic is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU utilization, however, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [AWS Auto Scaling documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html){:target="_blank"}.
-
-## Fixed Number of Media Nodes
-
-You can switch between **autoscaling mode** (the Auto Scaling Group adds and removes Media Nodes based on CPU usage) and **fixed mode** (a constant number of Media Nodes with no autoscaling) with the **`FixedNumberOfMediaNodes`** parameter of the CloudFormation stack. With a value greater than `0`, CloudFormation sets the minimum, maximum and desired capacity of the Auto Scaling Group to that number and removes its scaling policy, so **InitialNumberOfMediaNodes**, **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **ScaleTargetCPU** are ignored.
-
-=== "Set a Fixed Number of Media Nodes"
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic and click on _"Update"_.
-    3. Choose _"Use existing template"_ and click on _"Next"_.
-    4. Set **FixedNumberOfMediaNodes** to the number of Media Nodes you want, keep the rest of the parameters as they are, and continue until you can click on _"Submit"_.
-    5. Wait until the stack reaches the _"UPDATE_COMPLETE"_ status.
-
-=== "Back to Autoscaling"
-
-    Follow the same steps and set **FixedNumberOfMediaNodes** to `0`. The Auto Scaling Group goes back to **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **InitialNumberOfMediaNodes**, and its scaling policy based on **ScaleTargetCPU** is created again. The group starts again from **InitialNumberOfMediaNodes**: if more Media Nodes are running, the extra ones are drained and removed as in a scale-in, and autoscaling adds Media Nodes again when the load requires them.
-
-!!! info
-
-    Media Nodes removed because the number goes down are drained gracefully, exactly as in an automatic scale-in: they stop accepting new Rooms and are terminated when their ongoing work ends (up to the 48-hour limit AWS puts on a lifecycle hook).
-
-!!! warning
-
-    Do not edit the capacity of the Auto Scaling Group by hand: the next stack update resets it to what the parameters say.
-
-## Administration and configuration
-
-For administration, you can follow the instructions from the [On Premises Elastic Administration](../on-premises/admin.md) section.
-
-Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
-
-In addition to these, an AWS deployment provides the capability to manage global configurations via the AWS Console using AWS Secrets created during the deployment. To manage configurations this way, follow these steps:
-
-=== "Changing Configuration through AWS Secrets"
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu Elastic.
-    3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu Elastic Deployment.
-
-        ![Select Secrets Manager](../../../../assets/images/platform/self-hosting/elastic/aws/outputs.png){ .round-corners loading=lazy }
-
-    4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
-
-        ![Retrieve Secret Value](../../../../assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
-
-    5. Modify the parameter you want to change and click on _"Save"_.
-    6. Go to the EC2 Console and click on _"Reboot instance"_ in the Master Node instance to apply the changes.
-
-        ![Reboot Instance](../../../../assets/images/platform/self-hosting/elastic/aws/reboot-instance.png){ .round-corners loading=lazy }
-
-    Changes will be applied automatically in all the nodes of your OpenVidu Elastic deployment.
-
-## Backup and Restore
+## Backup and restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

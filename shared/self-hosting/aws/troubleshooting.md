@@ -1,16 +1,17 @@
+**The CloudFormation stack failed to create.** `ov` runs `aws cloudformation deploy` as you, so a create that ends in `CREATE_FAILED` (a bad parameter, a missing permission, an AWS-side problem) surfaces as an error from your own `aws` CLI. `ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating anything, so you can always clean a failed attempt up from the directory:
 
-If something goes wrong during the initial CloudFormation stack creation, your stack may reach the `CREATE_FAILED` status for multiple reasons. It could be due to a misconfiguration in the parameters, a lack of permissions, or a problem with the AWS services. When this happens, the following steps can help you troubleshoot the issue and identify what went wrong:
+```bash
+ov stack destroy --delete-data   # or --keep-data
+```
 
-1. While deploying the stack, make sure at _"Stack failure options"_ you have selected the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of an error.
+To see why the machine itself did not finish deploying OpenVidu, SSH into the instance with the key pair the deploy generated (in `.openvidu/aws/`) and read `/var/log/cloud-init-output.log` and `/var/log/cloud-init.log`.
 
-    === "Disable Rollback on failure"
+**The deploy timed out waiting for OpenVidu.** The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, 40 minutes by default with `--cloud`). The infrastructure already exists, so simply resume, reusing what is there:
 
-        ![Disable Rollback on failure](/assets/images/platform/self-hosting/shared/aws/disable-rollback.png){ .round-corners loading=lazy }
+```bash
+ov stack deploy --cloud aws --mode auto
+```
 
-2. Check if the EC2 instance or instances are running. If they are not, check the CloudFormation events for any error messages.
-3. If the EC2 instance or instances are running, SSH into the instance and check the logs of the following files:
+**Deploying fails because the stack name is still in use.** Secrets Manager keeps a deleted secret for a recovery window, so for several days after a destroy a new stack with the **same name in the same region** cannot be created. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name on the deploy's `credentials:` line, or deploy with a different name or region.
 
-    - `/var/log/cloud-init-output.log`
-    - `/var/log/cloud-init.log`
-
-    These logs will give you more information about the CloudFormation stack creation process.
+For closed ports, Let's Encrypt and port 80, cloud quotas and the other generic cases, see [Troubleshooting the OpenVidu CLI](/docs/self-hosting/openvidu-cli.md#troubleshooting).

@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu High Availability on AWS"
-description: "Administer OpenVidu High Availability on AWS: shut down and start the cluster, resize instances and tune Media Node autoscaling."
+description: "Administer an OpenVidu High Availability AWS stack with the OpenVidu CLI: scale the media nodes, change parameters, operate it remotely and destroy it."
 ---
 
 # OpenVidu High Availability administration: AWS
@@ -11,235 +11,54 @@ description: "Administer OpenVidu High Availability on AWS: shut down and start 
 
 </div>
 
+The AWS stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The canonical operations page documents all of them:
 
-The deployment of OpenVidu High Availability on AWS is automated using AWS CloudFormation, with 4 EC2 Instances as Master Nodes and any number of Media Nodes managed within an [Auto Scaling Group :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"}. The Auto Scaling Group of Media Nodes is configured to scale based on the target average CPU utilization.
+- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe) and the [health test](../../single-node/on-premises/admin.md#health-test).
+- [Logs](../../single-node/on-premises/admin.md#logs) and [ports](../../single-node/on-premises/admin.md#ports).
+- [Start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
+- [Change its configuration](../../configuration/changing-config.md) and [enable or disable its modules](../../how-to-guides/enable-disable-modules.md).
 
-Internally, the AWS deployment mirrors the on-premises setup, allowing you to follow the same administration and configuration guidelines provided in the [On Premises High Availability](../on-premises/admin.md) documentation. However, there are specific considerations unique to the AWS environment that are worth keeping in mind.
+This page covers only what is specific to AWS.
 
-## Cluster Shutdown and Startup
+## Change a parameter of the stack
 
-You can start and stop the OpenVidu High Availability cluster at any time. The following sections detail the procedures.
+`ov stack deploy <name> --cloud aws --param Name=Value` in the stack's directory updates the CloudFormation stack with the parameters that changed. Any parameter the template declares can be set this way, for example the media node instance size:
 
-=== "Shutdown the Cluster"
+```bash
+ov stack deploy openvidu --cloud aws --param MediaNodeInstanceType=c6a.2xlarge --mode auto -y
+```
 
-    To shut down the cluster, you need to stop the Media Nodes first and then stop the Master Nodes; this way, any ongoing session will not be interrupted.
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`**, and click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    4. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to 0, and click on _"Update"_.
-
-        ![Set Desired Capacity to 0](../../../../assets/images/platform/self-hosting/shared/aws/admin-set-desired-capacity-stop.png){ .round-corners loading=lazy }
-
-    6. Wait until the _"Instance Management"_ tab shows that there are no instances in the Auto Scaling Group.
-
-        ![Instance Management](../../../../assets/images/platform/self-hosting/shared/aws/admin-instance-management-stop.png){ .round-corners loading=lazy }
-
-        !!! warning
-
-            It may happen that some instances are still in the _"Terminating:Wait"_ lifecycle state after setting the desired capacity to 0. This is because the Auto Scaling Group waits for the instances to finish processing any ongoing room, ingress, or egress operations before terminating them. This can take a few minutes. If you want to force the termination of the instances, you can manually terminate them from the EC2 Dashboard.
-
-    7. Navigate to the [EC2 Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/ec2/v2/home#Instances:sort=instanceId){:target="_blank"} on AWS.
-    8. Stop all the Master Nodes instances by selecting them and clicking on _"Stop instance"_.
-
-        ![Stop Master Nodes](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-stop-master-instances.png){ .round-corners loading=lazy }
-
-    9. Wait until the instances are stopped.
-
-=== "Startup the Cluster"
-
-    To start the cluster, we recommend starting the Master Node first and then the Media Nodes.
-
-    1. Navigate to the [EC2 Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/ec2/v2/home#Instances:sort=instanceId){:target="_blank"} on AWS.
-    2. Start all the Master Nodes instances by selecting them and clicking on _"Start instance"_.
-
-        ![Start Master Nodes](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-start-master-instances.png){ .round-corners loading=lazy }
-
-    3. Wait until the instances are running.
-    5. Go to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    6. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
-    7. Locate the resource with the logical ID: **`OpenViduMasterNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Master Nodes selected.
-
-        ![Select CloudFormation Stack](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-master-asg.png){ .round-corners loading=lazy }
-
-    8. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-master-asg.png){ .round-corners loading=lazy }
-
-    9. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the desired number of Media Nodes, and click on _"Update"_. **For the Master Nodes auto scaling group, the number of instances must be 4**.
-
-        ![Set Desired Capacity to 2](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-set-desired-capacity-master-start.png){ .round-corners loading=lazy }
-
-    10. Wait until the _"Instance Management"_ tab shows that there are the desired number of instances in the Auto Scaling Group.
-
-        ![Instance Management](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-instance-management-master-start.png){ .round-corners loading=lazy }
-
-    11. Go back to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    12. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    13. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the desired number of Media Nodes, and click on _"Update"_. In this example, we set the desired capacity to 2.
-
-        ![Set Desired Capacity to 2](../../../../assets/images/platform/self-hosting/shared/aws/admin-set-desired-capacity-start.png){ .round-corners loading=lazy }
-
-    14. Wait until the _"Instance Management"_ tab shows that there are the desired number of instances in the Auto Scaling Group.
-
-        ![Instance Management](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-instance-management-media-start.png){ .round-corners loading=lazy }
-
-
-## Change the instance type
-
-It is possible to change the instance type of both the Master Node and the Media Nodes. The following section details the procedures.
-
-=== "Master Nodes"
-
-    !!! warning
-
-        This procedure requires downtime, as it involves stopping all the Master Nodes and starting them again with the new instance type.
-
-    1. Navigate to the [EC2 Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/ec2/v2/home#Instances:sort=instanceId){:target="_blank"} on AWS.
-    2. Stop all the Master Nodes instances by selecting them and clicking on _"Stop instance"_.
-
-        ![Stop Master Nodes](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-stop-master-instances.png){ .round-corners loading=lazy }
-
-    3. Wait until the instances are stopped.
-    4. For each node you want to change the instance type, select it, and click on _"Instance settings > Change instance type"_.
-
-        ![Change instance type](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-change-instance-type-master.png){ .round-corners loading=lazy }
-
-    5. Select the new instance type and click on _"Change"_.
-    6. Repeat the process for all the Master Nodes.
-
-=== "Media Nodes"
-
-    1. Go to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
-    3. Locate the resource with the logical ID: **`OpenViduMediaNodeLaunchTemplate`**. Click on it to go to the Launch Template Dashboard with the Launch Template of the Media Nodes selected.
-
-        ![Select Launch Template](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-launch-template-media.png){ .round-corners loading=lazy }
-
-    4. Click on _"Actions > Modify template (Create new version)"_.
-
-        ![Edit Launch Template](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-action-modify-template-media.png){ .round-corners loading=lazy }
-
-    5. In the _"Instance type"_ section, select the new instance type and click on _"Create template version"_.
-
-        ![Change instance type](../../../../assets/images/platform/self-hosting/shared/aws/admin-template-instance-type.png){ .round-corners loading=lazy }
-
-    6. Go to the CloudFormation Stack and locate the resource with the logical ID: **`OpenViduMediaNodeASG`**. Click on it to go to the Auto Scaling Group Dashboard with the Auto Scaling Group of the Media Nodes selected.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    7. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    8. In the Launch Template section, select the new version of the launch template we just created at step 5, which is the highest version number.
-
-        Then, click on _"Update"_.
-
-        !!! info
-
-            By configuring _"Latest"_ as the launch template version,  you no longer need to update the Auto Scaling Group every time you modify the launch template. The Auto Scaling Group will automatically use the latest version of the launch template.
-
-        ![Change launch template version](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-asg-update-launch-template-media.png){ .round-corners loading=lazy }
-
-    9. Terminate the old instances manually from the EC2 Dashboard if you want to force the termination of the instances. New instances will be launched with the new instance type.
-
-        !!! info
-
-            If you want to avoid downtime, you can wait until the Auto Scaling Group replaces the old instances with the new ones. But you will need to increase the desired capacity to force the replacement of the instances and then decrease it to the desired number of instances.
-
-## Media Nodes Autoscaling Configuration
-
-To configure the Auto Scaling settings for the Media Nodes, follow the steps outlined below. This configuration allows you to set the parameters that control how the Auto Scaling Group will scale based on the target average CPU utilization.
-
-=== "Media Nodes Autoscaling Configuration"
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
-
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-media-asg.png){ .round-corners loading=lazy }
-
-    4. Click on _"Actions > Edit"_.
-
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-media-asg.png){ .round-corners loading=lazy }
-
-    5. To configure scaling policies, navigate to the _"Automatic scaling"_ tab within the Auto Scaling Group Dashboard, select the unique _"Target tracking scaling"_ autoscaling policy, and click on _"Actions > Edit"_.
-
-        ![Scaling Policies](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-automatic-scaling.png){ .round-corners loading=lazy }
-
-    6. It will open a panel where you can configure multiple parameters. In this example, we set the target average CPU utilization to 30%. Then, click on _"Update"_.
-
-        ![Edit Scaling Policies](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-scaling-policies.png){ .round-corners loading=lazy }
-
-        !!! info
-
-            OpenVidu High Availability is by default configured with a _"Target tracking scaling"_ policy that scales based on the target average CPU utilization, however, you can configure different autoscaling policies according to your needs. For more information on the various types of autoscaling policies and how to implement them, refer to the [AWS Auto Scaling documentation :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html){:target="_blank"}.
-
-## Fixed Number of Media Nodes
-
-You can switch between **autoscaling mode** (the Auto Scaling Group adds and removes Media Nodes based on CPU usage) and **fixed mode** (a constant number of Media Nodes with no autoscaling) with the **`FixedNumberOfMediaNodes`** parameter of the CloudFormation stack. With a value greater than `0`, CloudFormation sets the minimum, maximum and desired capacity of the Auto Scaling Group to that number and removes its scaling policy, so **InitialNumberOfMediaNodes**, **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **ScaleTargetCPU** are ignored.
-
-=== "Set a Fixed Number of Media Nodes"
-
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability and click on _"Update"_.
-    3. Choose _"Use existing template"_ and click on _"Next"_.
-    4. Set **FixedNumberOfMediaNodes** to the number of Media Nodes you want, keep the rest of the parameters as they are, and continue until you can click on _"Submit"_.
-    5. Wait until the stack reaches the _"UPDATE_COMPLETE"_ status.
-
-=== "Back to Autoscaling"
-
-    Follow the same steps and set **FixedNumberOfMediaNodes** to `0`. The Auto Scaling Group goes back to **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **InitialNumberOfMediaNodes**, and its scaling policy based on **ScaleTargetCPU** is created again. The group starts again from **InitialNumberOfMediaNodes**: if more Media Nodes are running, the extra ones are drained and removed as in a scale-in, and autoscaling adds Media Nodes again when the load requires them.
+The stack that exists is updated with the parameters that changed; a redeploy with the same parameters reuses it as it is. For OpenVidu's own settings, which change without touching the machines, see [Changing configuration](../../configuration/changing-config.md).
 
 !!! info
 
-    Media Nodes removed because the number goes down are drained gracefully, exactly as in an automatic scale-in: they stop accepting new Rooms and are terminated when their ongoing work ends (up to the 48-hour limit AWS puts on a lifecycle hook).
+    On a High Availability stack, the domain and the TURN domain do not change once the stack exists: the load balancers serve the ACM certificate of the names the stack was created with. A redeploy or an `ov stack config set` with another `domain-name` or `turn-domain-name` is refused.
 
-!!! warning
+## Scale the media nodes { #scale-the-media-nodes }
 
-    Do not edit the capacity of the Auto Scaling Group by hand: the next stack update resets it to what the parameters say.
+The media nodes **autoscale** by default: an AWS Auto Scaling Group runs between a minimum and a maximum and removes nodes gracefully when load drops. The minimum, the maximum and a fixed count are parameters of the template:
 
-## Administration and configuration
+| Parameter | Meaning |
+| --- | --- |
+| `MinNumberOfMediaNodes`, `MaxNumberOfMediaNodes` | The autoscaling range |
+| `FixedNumberOfMediaNodes` | A fixed number of media nodes (`0` = autoscaling, the default) |
 
-For administration, you can follow the instructions from the [On Premises High Availability Administration](../on-premises/admin.md) section.
+On the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well. On a stack that is already running, change it with `--param` from the stack's directory, for example raising the ceiling:
 
-Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+```bash
+ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
+```
 
-In addition to these, an AWS deployment provides the capability to manage global configurations via the AWS Console using AWS Secrets created during the deployment. To manage configurations this way, follow these steps:
+The master nodes are a fixed set of four and are not scaled. A media node that is scaled in is **drained gracefully**: the stack stops sending it new rooms and the machine is removed only once the rooms, recordings and ingests it holds have ended. That is why autoscaling never cuts a live session. See [Autoscaling](../../production-ready/scalability.md#autoscaling) for how the scaling signal works.
 
-=== "Changing Configuration through AWS Secrets"
+## Operate from another machine
 
-    1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
-    3. In the _"Outputs"_ tab, click the Link at _"ServicesAndCredentials"_. This will open the AWS Secrets Manager which contains all the configurations of the OpenVidu High Availability Deployment.
+--8<-- "self-hosting/aws/ov-remote.md"
 
-        ![Select Secrets Manager](../../../../assets/images/platform/self-hosting/ha/aws/outputs.png){ .round-corners loading=lazy }
+## Destroy the stack
 
-    4. Click on the _"Retrieve secret value"_ button to get the JSON with all the information.
+--8<-- "self-hosting/aws/ov-destroy.md"
 
-        ![Retrieve Secret Value](../../../../assets/images/platform/self-hosting/ha/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
-
-    5. Modify the parameter you want to change and click on _"Save"_.
-    6. Go to the EC2 Console and click on _"Reboot instance"_ in the Master Node instance to apply the changes.
-
-        ![Reboot Instance](../../../../assets/images/platform/self-hosting/ha/aws/reboot-instance.png){ .round-corners loading=lazy }
-
-    Changes will be applied automatically in all the nodes of your OpenVidu High Availability deployment.
-
-## Backup and Restore
+## Backup and restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

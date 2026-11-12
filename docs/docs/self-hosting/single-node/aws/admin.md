@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu Single Node on AWS"
-description: "Administer OpenVidu Single Node on AWS: start and stop it, change its configuration and back up its data."
+description: "Administer an OpenVidu Single Node AWS stack with the OpenVidu CLI: change parameters, operate it remotely and destroy it."
 ---
 
 # OpenVidu Single Node administration: AWS
@@ -11,27 +11,33 @@ description: "Administer OpenVidu Single Node on AWS: start and stop it, change 
 
 </div>
 
+The AWS stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The canonical operations page documents all of them:
 
-AWS deployment of OpenVidu Single Node is internally identical to the on-premises deployment, so you can follow the same instructions from the [On Premises Single Node](../on-premises/admin.md) for administration and configuration. The only difference is that the deployment is automated with AWS CloudFormation.
+- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe) and the [health test](../on-premises/admin.md#health-test).
+- [Logs](../on-premises/admin.md#logs) and [ports](../on-premises/admin.md#ports).
+- [Start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
+- [Change its configuration](../../configuration/changing-config.md) and [enable or disable its modules](../../how-to-guides/enable-disable-modules.md).
 
-However, there are certain things worth mentioning:
+This page covers only what is specific to AWS.
 
-## Start and stop OpenVidu through AWS Console
+## Change a parameter of the stack
 
-You can start and stop all services as explained in the [On Premises Single Node](../on-premises/admin.md#starting-stopping-and-restarting-openvidu) section. But you can also start and stop the EC2 instance directly from the AWS Console. This will stop all services running in the instance and reduce AWS costs.
+`ov stack deploy <name> --cloud aws --param Name=Value` in the stack's directory updates the CloudFormation stack with the parameters that changed. Any parameter the template declares can be set this way. For a Single Node stack, the instance size is the `InstanceType` parameter:
 
---8<-- "self-hosting/aws/single-node/start-stop.md"
+```bash
+ov stack deploy openvidu --cloud aws --param InstanceType=c6a.2xlarge --mode auto -y
+```
 
---8<-- "self-hosting/aws/single-node/change-instance-type.md"
+The stack that exists is updated with the parameters that changed; a redeploy with the same parameters reuses it as it is. For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md).
 
-## Administration and configuration
+## Operate from another machine
 
-For administration, you can follow the instructions from the [On Premises Single Node Administration](../on-premises/admin.md) section.
+--8<-- "self-hosting/aws/ov-remote.md"
 
-Regarding the configuration, in AWS it is managed similarly to an on-premises deployment. For detailed instructions, please refer to the [Changing Configuration](../../configuration/changing-config.md) section. Additionally, the [How to Guides](../../how-to-guides/index.md) offer multiple resources to assist with specific configuration changes.
+## Destroy the stack
 
---8<-- "self-hosting/aws/single-node/config.md"
+--8<-- "self-hosting/aws/ov-destroy.md"
 
-## Backup and Restore
+## Backup and restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

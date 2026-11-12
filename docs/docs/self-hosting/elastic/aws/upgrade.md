@@ -1,6 +1,6 @@
 ---
 title: "Upgrade OpenVidu Elastic on AWS"
-description: "Upgrade an existing OpenVidu Elastic deployment on AWS to a newer OpenVidu version, keeping its configuration and data."
+description: "Upgrade an OpenVidu Elastic AWS stack to a newer OpenVidu version with the OpenVidu CLI, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: AWS
@@ -11,96 +11,14 @@ description: "Upgrade an existing OpenVidu Elastic deployment on AWS to a newer 
 
 </div>
 
+An OpenVidu Elastic stack deployed on AWS with the OpenVidu CLI is upgraded from its own directory, with `ov stack update`. The update changes OpenVidu on the running machines and keeps the stack's configuration and data.
 
-In AWS environments, we recommend upgrading by redeploying the [OpenVidu Elastic CloudFormation](../aws/install.md) stack using the latest version. This approach ensures that all components are updated accurately and consistently, as CloudFormation templates and related configurations may vary between releases. Redeploying guarantees that all necessary changes are properly applied.
+## Update the stack
 
-However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu Elastic in place. The following steps outline how to perform an in-place upgrade of your OpenVidu Elastic deployment on AWS:
+--8<-- "self-hosting/common/ov-update-pro.md"
 
-## Upgrading OpenVidu Elastic on AWS
+<!-- PENDING(docs-integrate): upgrade path for deployments created from the 3.9.0 cloud templates (waiting for Carlos) -->
 
-1. SSH into your Master Node server.
-2. Execute the following command in the Master Node:
+## Next steps
 
-    ```
-    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
-    ```
-
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
-
-3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
-
-    ```
-    Stopping OpenVidu service...
-    Backing up files...
-
-        - Backing up file '/opt/openvidu/config' to '/opt/openvidu/backups/<DATE>_<VERSION>/config'
-        ... More files ...
-
-    --------------------
-    📦 Backup directory: /opt/openvidu/backups/<DATE>_<VERSION>/
-    --------------------
-
-    --------------------
-    🚀 Updating OpenVidu from 3.x.x to 3.y.y
-    --------------------
-
-    ? Do you want to update from 3.x.x to 3.y.y? ›
-    • Yes
-      No
-    ```
-
-4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
-
-    For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
-
-    !!! warning
-        The updater will flag any deployment breaking changes if they are present. Pay special attention to these, as they may require you to update firewall rules, open or close specific ports, or perform other manual configuration changes.
-
-    !!! info "Pulling Docker images"
-        When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
-
-        Any missing images will be pulled automatically when you run `systemctl start openvidu`.
-
-
-5. After the last intermediate upgrade completes, **you need to terminate the Media Nodes** to apply the changes. Go to your EC2 Panel, select the Media Nodes instances, and terminate them. The Auto Scaling Group will automatically launch new Media Nodes with the updated configuration.
-6. Once the Media Nodes are up and running, start OpenVidu Elastic again by executing the following command in the Master Node:
-
-    ```bash
-    systemctl start openvidu && journalctl -f -u openvidu
-    ```
-
-    The `journalctl` command will show you the logs of the OpenVidu services. You can stop the logs by pressing `Ctrl + C`.
-
-## Backups and Rollback
-
-When you finish the upgrade process, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. The backup only contains the previous configuration files that have changed in the upgrade process.
-To roll back to the previous version, you have to copy the files from the backup to the OpenVidu directory. You can do it with the following command:
-
-```bash
-cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu
-/usr/local/bin/store_secret.sh save OPENVIDU_VERSION "<VERSION>"
-```
-
-Where `<DATE>` and `<VERSION>` are the date and version of the backup you want to restore. For example:
-
-```
-cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
-/usr/local/bin/store_secret.sh save OPENVIDU_VERSION "3.0.0"
-```
-
-Notice the `store_secret.sh` command at the end. This command is necessary to update the `OPENVIDU_VERSION` secret in the AWS Secrets Manager, which is used by the AWS deployment to know which version of OpenVidu should be running in Media Nodes. You need to do this in the Master Node only.
-
-Remember to **terminate the Media Nodes** after rolling back to the previous version so the Auto Scaling Group can launch new Media Nodes with the restored configuration. You can do this by going to your EC2 Panel, selecting the Media Nodes instances, and terminating them.
-
-## Recommendations
-
-- Always upgrade all nodes in your OpenVidu Elastic deployment. Running mismatched versions across nodes may cause compatibility issues.
-- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
-- Keep your Docker and Docker Compose versions up to date.
-- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
-
-    ```bash
-    docker image prune -a
-    ```
-
-    This command removes all images that are not currently in use by any container.
+- [Administer the stack](./admin.md): scale the media nodes, change its configuration and destroy it.

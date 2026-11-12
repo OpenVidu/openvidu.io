@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu Elastic on AWS"
-description: "Deploy OpenVidu Elastic on AWS from a CloudFormation stack, then point your application at the result."
+description: "Create the EC2 machines and deploy OpenVidu Elastic on AWS with one command of the OpenVidu CLI, then operate the stack from its directory."
 ---
 
 # OpenVidu Elastic installation: AWS
@@ -11,31 +11,14 @@ description: "Deploy OpenVidu Elastic on AWS from a CloudFormation stack, then p
 
 </div>
 
-
 --8<-- "self-hosting/common/elastic-license-intro.md"
 
-This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on AWS. The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the CloudFormation template embedded in its own binary for the Elastic topology and applies it with **your own `aws` CLI**. The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there.
+
+The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md); on AWS the machines and their resources are created for you.
 
 !!! info
     Port `9000` is MinIO's port. This deployment stores recordings and application data in Amazon S3 instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
-
-First, import the template in the AWS CloudFormation console. You can click the following button...
-
-[:fontawesome-brands-aws:{.deploy-button-icon} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduElastic&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-openvidu-elastic.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
-
-...or access your [AWS CloudFormation console :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home?#/stacks/new){:target="_blank"} and manually set this S3 URL in the `Specify template` section:
-
-```
-https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-openvidu-elastic.yaml
-```
-
-!!! info
-    
-    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
-
-    ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.9.0/aws/cf-openvidu-elastic.yaml
-    ```
 
 === "Architecture overview"
 
@@ -48,107 +31,65 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
-## CloudFormation Parameters
+## Requirements
 
-Depending on your needs, you need to fill in the following CloudFormation parameters:
+--8<-- "self-hosting/aws/ov-requirements.md"
 
---8<-- "self-hosting/aws/ssl-domain.md"
+Elastic also needs a **VPC** of yours with public subnets, one for the master node and one or more for the media nodes. Without `--param OpenViduVPC=…`, the deploy uses the region's default VPC and its default subnets.
 
-### OpenVidu Elastic Configuration
+## Deploy
 
-In this section, you need to specify some properties needed for the OpenVidu Elastic deployment.
+The stack lives in its own empty directory. Elastic runs in a VPC of yours: one subnet for the master and one or more for the media nodes. This uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
 
-=== "OpenVidu Elastic Configuration"
+```bash
+mkdir openvidu && cd openvidu
+VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
+  --query 'Vpcs[0].VpcId' --output text)
+SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
+  --query 'Subnets[].SubnetId' --output text | tr '\t' ,)
+ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+  --param OpenViduVPC=$VPC \
+  --param OpenViduMasterNodeSubnet=${SUBNETS%%,*} \
+  --param OpenViduMediaNodeSubnets=$SUBNETS \
+  --certificate-type letsencrypt --mode auto
+```
 
-    Parameters of this section look like this:
+One master node and an auto scaling group of media nodes, in the VPC and subnets you name. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/elastic/aws/openvidu-elastic-config.png){ .round-corners loading=lazy }
+This is how the deploy of a stack named `dpaws2` (in `eu-south-2`) ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
+```text
+…
+   · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 51.95.197.8:6443
+…
+✔ OpenVidu Pro (elastic) is up on AWS
+  URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
+  credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-dpaws2 --query SecretString --output text --region eu-south-2
+  kubeconfig:   .openvidu/aws/kubeconfig.yaml
+```
 
-    For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
+## What the deploy runs
 
---8<-- "self-hosting/aws/meet.md"
+--8<-- "self-hosting/aws/ov-deploy-plan.md"
 
-### EC2 Instance Configuration
+## What the deploy creates
 
-You need to specify some properties for the EC2 instances that will be created.
+--8<-- "self-hosting/aws/ov-resources.md"
 
-=== "EC2 Instance configuration"
+## Access OpenVidu
 
-    Parameters in this section look like this:
+--8<-- "self-hosting/aws/ov-access.md"
 
-    ![EC2 Instance configuration](../../../../assets/images/platform/self-hosting/elastic/aws/ec2-instance-config.png){ .round-corners loading=lazy }
+## Review the commands first: assisted mode
 
-    Simply select the type of instance you want to deploy at **MasterNodeInstanceType** and **MediaNodeInstanceType**, the SSH key you want to use to access the machine at **KeyName**, and the Ubuntu distribution you want to use at **OperatingSystem**.
+--8<-- "self-hosting/aws/ov-assisted.md"
 
-    By default, the parameter **OperatingSystem** is configured to use the latest LTS Ubuntu AMI, so ideally you don’t need to modify this.
-
-### Media Nodes Autoscaling Group Configuration
-
-The number of Media Nodes can scale up or down based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up or down.
-
---8<-- "self-hosting/aws/media-nodes-asg-config.md"
-
---8<-- "self-hosting/aws/single-elastic-s3.md"
-
-### VPC Configuration
-
-In this section, you need to specify the VPC and Subnet configuration for the deployment.
-
-=== "VPC Configuration"
-
-    Parameters in this section look like this:
-
-    ![VPC Configuration](../../../../assets/images/platform/self-hosting/elastic/aws/vpc-config.png){ .round-corners loading=lazy }
-
-    The **OpenViduVPC** parameter specifies the VPC where the deployment will be created.
-
-    The **OpenViduMasterNodeSubnet** and **OpenViduMediaNodeSubnet** parameters specify the subnets where the Master and Media Nodes will be deployed. All of them must be in the previously specified **OpenViduVPC**.
-
-    !!! warning
-        
-        You must use public subnets for the Master Nodes and Media Nodes and have enabled the auto-assign public IP option.
-
-## Deploying the stack
-
-When you are ready with your CloudFormation parameters, just click on _"Next"_, specify in _"Stack failure options"_ the option _"Preserve successfully provisioned resources"_ to be able to troubleshoot the deployment in case of error, click on _"Next"_ again, and finally _"Submit"_. The stack will take about 6 to 8 minutes to create all resources.
-
-When everything is ready, you will see the following links in the _"Outputs"_ section of CloudFormation:
-
-=== "CloudFormation Outputs"
-
-    ![CloudFormation Outputs](../../../../assets/images/platform/self-hosting/elastic/aws/outputs.png){ .round-corners loading=lazy }
-
-## Configure your application to use the deployment
-
-The Output Key **ServicesAndCredentials** of the [previous section](#deploying-the-stack) points to an AWS Secret Manager secret that contains all URLs and credentials to access the services deployed. You can access the secret by clicking on the link in the **Output Value** column.
-
-Then, click on **Retrieve secret value** to get the JSON with all the information.
-
-<div class="grid-container" markdown>
-
-<div class="grid-50" markdown>
-![AWS Secrets Manager console with the Retrieve secret value button](../../../../assets/images/platform/self-hosting/elastic/aws/1-secrets-retrieve.png){ .round-corners loading=lazy }
-</div>
-
-<div class="grid-50" markdown>
-![AWS Secrets Manager showing the deployment's secret values](../../../../assets/images/platform/self-hosting/elastic/aws/2-secrets.png){ .round-corners loading=lazy }
-</div>
-
-</div>
-
-To use your OpenVidu deployment, check the values of the JSON secret. All access credentials of all services are defined in this object. The most relevant ones are:
-
---8<-- "self-hosting/aws/credentials-general.md"
---8<-- "self-hosting/aws/credentials-v2compatibility.md"
-
-## Troubleshooting Initial CloudFormation Stack Creation
+## Troubleshooting
 
 --8<-- "self-hosting/aws/troubleshooting.md"
 
-4. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services in the Master Node and Media Nodes.
+## Next steps
 
-## Configuration and administration
-
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status (about 6 to 8 minutes), your OpenVidu Elastic deployment is ready to use. You can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Elastic deployment.
+- [Administer the stack](./admin.md): scale the media nodes, change its configuration and destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
