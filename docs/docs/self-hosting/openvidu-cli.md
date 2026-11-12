@@ -142,7 +142,7 @@ All of these operate on the directory's stack, with no arguments. See [Administr
 
 | Command | What it does |
 | --- | --- |
-| `ov stack status [--wait]` | The state of each service, and the disk of each node. `--wait` blocks until the stack is ready (`--wait-timeout`, 5 minutes by default). |
+| `ov stack status [--wait [--joined]]` | The state of each service, and the disk of each node. `--wait` blocks until the stack is ready (`--wait-timeout`, 5 minutes by default). |
 | `ov stack describe` | The stack's record, endpoints and configuration summary. |
 | `ov stack start` / `stop` / `restart` | Control the whole stack (per-service control is not available yet). |
 | `ov stack test` | Active health check; exit `8` on failure. |

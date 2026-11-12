@@ -23,7 +23,7 @@ That command carries the stack's name, which `openvidu-stack.yml` keeps; the des
 On OpenVidu PRO the plan also writes the license into a `0600` parameters file (`.openvidu/azure/secure-parameters.json`) instead of the command line, and the continuation reads the access the stack published instead of using SSH. The end of a PRO Single Node plan (stack `dpaz0`):
 
 ```text
-  ov stack deploy openvidu --cloud azure --mode auto
+  ov stack deploy dpaz0 --cloud azure --mode auto
 
 From there the deploy waits for OpenVidu to come up, reads the access the stack
 published and registers this directory as the stack, exactly as it would have done here.

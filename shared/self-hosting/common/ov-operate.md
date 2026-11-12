@@ -10,7 +10,7 @@ HOST          ROLE     STATE    DATA DISK USED
 172.30.0.96   single   active   55% (397.0 GiB free)
 ```
 
-On a PRO stack it shows one row per service (`SERVICE NODES READY STATE`), and after them each node's disk (`NODE ROLE DISK USED FREE SIZE`, the node's root filesystem, where the stack's volumes grow). It warns at 85% used, and on PRO also when a node reports `DiskPressure`. A node it cannot reach over SSH shows `unreachable` in its row, and the exit code is still `0`.
+On a PRO stack it shows one row per service (`SERVICE NODES READY STATE`), and after them each node's disk (`NODE ROLE DISK USED FREE SIZE`, the node's root filesystem, where the stack's volumes grow). It warns at 85% used, and on PRO also when a node reports `DiskPressure`. On a Community server, a node it cannot reach over SSH shows `unreachable` in its row, and the exit code is still `0`.
 
 `--wait` blocks until the stack is ready. On a Community server it probes the node itself (Caddy, the media server and each enabled module's web endpoint) over the stack's own transport, so no DNS or route from your machine is needed:
 
@@ -22,7 +22,9 @@ waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deploy
 ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet)
 ```
 
-Right after a first PRO deploy, while the nodes pull the images and some services restart before they settle, the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`. On an Elastic or High Availability stack that is still being assembled, `--wait --joined` waits for the nodes that have joined so far and says how many are missing.
+Right after a first PRO deploy, while the nodes pull the images and some services restart before they settle, the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`. On PRO the wait prints the counts as they change (`master nodes 1/4, media nodes 0/1, services 30/40` on Elastic and High Availability) and ends when the stack's URL answers and every node and service is ready. On a cloud it also counts the media nodes the stack asks for (its fixed number, else the minimum of its autoscaling) before they have joined: the cloud creates those machines and they join on their own, minutes after the deploy, so after a deploy or a change of their number the wait holds until they are in (`media nodes 1/2`). On servers it counts the media nodes that have joined.
+
+`--wait --joined` is for a High Availability stack that is still being put together: while it lacks masters, it waits for the nodes that have joined so far and ends saying how many masters are missing. With the four masters in, and on any other stack, it is the same wait as `--wait`.
 
 ## Describe { #describe }
 

@@ -42,6 +42,8 @@ ov stack deploy openvidu --cloud gcp --param maxNumberOfMediaNodes=3 --mode auto
 
 Lowering the count drains the extra media nodes **gracefully**: a media node that is being removed stops accepting new rooms and keeps running until the rooms, recordings and ingests it holds have ended, then leaves. That is why a scale-in never cuts a live session. For the general autoscaling model, see [Scalability](../../production-ready/scalability.md#autoscaling).
 
+A change of the number of media nodes returns when the cloud has taken it: the new machines boot and join on their own, minutes later. `ov stack status --wait` waits for them, since on a cloud it counts the media nodes the stack asks for, not only the ones that have joined (`media nodes 1/2` until the second is in).
+
 ## Operate from another machine { #operate-from-another-machine }
 
 --8<-- "self-hosting/gcp/ov-remote.md"

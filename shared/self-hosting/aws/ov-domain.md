@@ -1,7 +1,13 @@
 The deploy commands above derive an `sslip.io` name from the machine's public IP and certify it with Let's Encrypt, so they work without a domain of yours. That is meant for testing. For anything else, use your own domain: add `--domain-name openvidu.example.com` to the deploy, and choose a certificate for it.
 
 - **`--certificate-type letsencrypt`** (the default) issues a Let's Encrypt certificate once the domain resolves.
-- **`--certificate-type owncert --owncert-public-key <fullchain> --owncert-private-key <key>`** serves a certificate of yours instead.
+- **`--certificate-type owncert`** serves a certificate of yours instead. On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded, not the path to the file:
+
+    ```bash
+    --domain-name openvidu.example.com --certificate-type owncert \
+      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+      --owncert-private-key "$(base64 -w0 privkey.pem)"
+    ```
 
 Caddy serves the certificate from the machine, as in any other Single Node or Elastic deployment. With `--domain-name`, the deploy reads the domain's DNS in your account (read-only calls, in both modes) while it builds the plan, and the plan says which of two paths applies:
 
@@ -15,7 +21,7 @@ Caddy serves the certificate from the machine, as in any other Single Node or El
         openvidu.example.com.                    A      89.60.28.34
     ```
 
-    If the domain does not resolve to the stack by the time the machine is ready, the deploy does not say the stack is up. It ends with the step left instead:
+    What happens at the end depends on the edition. A **COMMUNITY** deploy reaches OpenVidu at its URL, so it **waits for the record** (up to `--wait-timeout`): create it as soon as the deploy prints it, or the wait times out. A **PRO** deploy does not wait for it: if the domain does not resolve to the stack by the time the machine is ready, the deploy does not say the stack is up. It ends with the step left instead:
 
     ```text
     ! OpenVidu Pro (single node) is deployed on AWS, with one step left: openvidu.example.com does not point at it yet.

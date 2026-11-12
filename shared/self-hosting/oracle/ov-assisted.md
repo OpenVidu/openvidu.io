@@ -4,7 +4,7 @@
 ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 --mode assisted
 ```
 
-It ends with the command that continues the deploy once you have run them:
+It ends with the command that continues the deploy once you have run them. This is the end of a PRO deploy; Community's continuation reads the stack over SSH instead:
 
 ```text
 Nothing above has been run. Run it yourself, then continue the deploy — the Terraform
@@ -16,4 +16,4 @@ From there the deploy waits for OpenVidu to come up, reads the access the stack
 published and registers this directory as the stack, exactly as it would have done here.
 ```
 
-On Community the continuation reads the stack from the machine over SSH (as `ov stack import --ssh` does) with the key the template generated; on PRO it reads the kubeconfig the stack published instead. The continuation needs no flags: the Terraform state and every parameter are already in place, and `terraform apply` is idempotent, so a resume applies the same state again (a no-op that refreshes the outputs) and then waits for OpenVidu.
+On Community the continuation reads the stack from the machine over SSH (as `ov stack import --ssh` does) with the key the template generated; on PRO it reads the access the stack published instead. The continuation needs no flags: the Terraform state and every parameter are already in place, and `terraform apply` is idempotent, so a resume applies the same state again (a no-op that refreshes the outputs) and then waits for OpenVidu.

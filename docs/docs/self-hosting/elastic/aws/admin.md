@@ -42,6 +42,8 @@ ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto
 
 A media node that is scaled in is **drained gracefully**: the stack stops sending it new rooms and the machine is removed only once the rooms, recordings and ingests it holds have ended. That is why autoscaling never cuts a live session. See [Autoscaling](../../production-ready/scalability.md#autoscaling) for how the scaling signal works.
 
+A change of the number of media nodes returns when the cloud has taken it: the new machines boot and join on their own, minutes later. `ov stack status --wait` waits for them, since on a cloud it counts the media nodes the stack asks for, not only the ones that have joined (`media nodes 1/2` until the second is in).
+
 ## Operate from another machine
 
 --8<-- "self-hosting/aws/ov-remote.md"
