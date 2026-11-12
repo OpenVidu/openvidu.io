@@ -107,17 +107,17 @@ A page that never manages to connect shows the connection error screen instead o
 
 Participants with `waitingRoomAdmin` see who waits, live, from the moment each one presses **Ask to join**. Everyone else in the meeting sees nothing of it.
 
-![Participants panel of a moderator with the Waiting to join section, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
-![Participants panel of a moderator with the Waiting to join section, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-light.webp#only-light){ .control-height .round-corners loading=lazy }
+![Participants panel of a moderator with the Waiting to join section, each participant with their avatar, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
+![Participants panel of a moderator with the Waiting to join section, each participant with their avatar, the free places and the status rail chip](../../../assets/images/meet/meetings/waiting-room/admit-panel-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
-- A **Waiting to join** section at the top of the **Participants** panel lists the participants in arrival order, each with **Admit** and **Deny**. Under a [participant limit](configuration.md#participant-limit), it also shows the free places, such as "2 places left".
+- A **Waiting to join** section at the top of the **Participants** panel lists the participants in arrival order, each with their avatar, **Deny** and **Admit**. Under a [participant limit](configuration.md#participant-limit), it also shows the free places, such as "2 places left".
 - A **Shared link** label marks the participants who asked with a shared link of the room: anyone with the link can type any name, so the label tells them apart from an account or a personal link. When two rows share a name, each shows the time it asked to join.
-- From two waiting, **Deny all** rejects everyone waiting, after a confirmation, and **Admit N** admits the first N in line that fit in the free places.
-- The **status rail** at the top of the meeting shows a chip with the number waiting, such as "3 waiting to join".
-- While the panel is closed, a **notification** below the rail names each participant who starts waiting, with **Deny** and **Admit**. Several are gathered into one with the number waiting and a **View** button, and joining a meeting where people already wait shows one gathered notification. Opening the panel dismisses it. It never takes the keyboard focus.
+- From two waiting, **Deny all**, in red, rejects everyone waiting, after a confirmation, and **Admit N** admits the first N in line that fit in the free places.
+- The **status rail** at the top of the meeting shows a chip with the number waiting, such as "3 waiting to join", and the **Participants** button of the toolbar shows a yellow dot while someone waits.
+- While the panel is closed, a **notification** below the rail names each participant who starts waiting, with their avatar, **Deny** and **Admit**. Several are gathered into one with their stacked avatars, the number waiting and a **View** button, and joining a meeting where people already wait shows one gathered notification. Opening the panel dismisses it. It never takes the keyboard focus.
 
-![Notification below the status rail announcing a participant who asks to join, with Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-dark.webp#only-dark){ .round-corners loading=lazy }
-![Notification below the status rail announcing a participant who asks to join, with Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-light.webp#only-light){ .round-corners loading=lazy }
+![Notification below the status rail announcing a participant who asks to join, with their avatar, Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-dark.webp#only-dark){ .round-corners loading=lazy }
+![Notification below the status rail announcing a participant who asks to join, with their avatar, Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-light.webp#only-light){ .round-corners loading=lazy }
 
 A participant who is **admitted** joins the meeting. One who is **denied** is told they weren't let in. Admitting or denying a participant who left an instant before shows a notification that they already left, and the list is read again. Denying everyone rejects whoever waits when the request arrives, and whoever asks afterwards waits as usual. There is no block list, and no way to send a participant back to the line.
 
