@@ -1,6 +1,6 @@
 ---
 title: "Use external S3 storage for recordings"
-description: "Store OpenVidu recordings in an S3 provider of your choice instead of the bundled MinIO, and keep its credentials out of the config file."
+description: "Store OpenVidu recordings in an S3 provider of your choice instead of the bundled MinIO, configured with the OpenVidu CLI and kept out of the config file."
 ---
 
 # Configuring external S3 for OpenVidu recordings
@@ -9,24 +9,22 @@ OpenVidu, by default, uses MinIO for recording storage, but it can be configured
 
 !!! info
 
-    If you are deploying using AWS CloudFormation, the S3 bucket is configured automatically to use the AWS S3 service. **In this case, there is no need to follow this guide**.
+    If you are deploying on a cloud with the OpenVidu CLI, the object storage bucket is configured automatically to use the cloud's S3 service. **In this case, there is no need to follow this guide**.
 
 ## Configuration
 
-Configuring an external S3 bucket in OpenVidu is straightforward. Update the following parameters in the `openvidu.env` file on one of the Master Nodes or your Single Node deployment. Depending on your deployment type, the location of the `openvidu.env` file is as follows:
-
-- **Single Node**: `/opt/openvidu/config/openvidu.env`
-- **Elastic / High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
+These settings live in the `openvidu.yaml` document. Set them with [`ov stack config set`](../configuration/changing-config.md#view-get-set-unset), which writes the values and recreates only the services that read them, on every node of the deployment. The parameter names below are accepted as aliases:
 
 ```bash
-EXTERNAL_S3_ENDPOINT=<YOUR_S3_HTTP_ENDPOINT>
-EXTERNAL_S3_ACCESS_KEY=<YOUR_S3_ACCESS_KEY>
-EXTERNAL_S3_SECRET_KEY=<YOUR_S3_SECRET_KEY>
-EXTERNAL_S3_REGION=<YOUR_S3_REGION>
-EXTERNAL_S3_PATH_STYLE_ACCESS=<YOUR_S3_PATH_STYLE_ACCESS>
-EXTERNAL_S3_BUCKET_APP_DATA=<YOUR_APP_DATA_BUCKET>
+ov stack config set \
+  EXTERNAL_S3_ENDPOINT=<YOUR_S3_HTTP_ENDPOINT> \
+  EXTERNAL_S3_ACCESS_KEY=<YOUR_S3_ACCESS_KEY> \
+  EXTERNAL_S3_SECRET_KEY=<YOUR_S3_SECRET_KEY> \
+  EXTERNAL_S3_REGION=<YOUR_S3_REGION> \
+  EXTERNAL_S3_PATH_STYLE_ACCESS=<YOUR_S3_PATH_STYLE_ACCESS> \
+  EXTERNAL_S3_BUCKET_APP_DATA=<YOUR_APP_DATA_BUCKET>
 # For High Availability deployments only
-EXTERNAL_S3_BUCKET_CLUSTER_DATA=<YOUR_CLUSTER_DATA_BUCKET>
+ov stack config set EXTERNAL_S3_BUCKET_CLUSTER_DATA=<YOUR_CLUSTER_DATA_BUCKET>
 ```
 
 **Parameter Details:**
@@ -39,30 +37,22 @@ EXTERNAL_S3_BUCKET_CLUSTER_DATA=<YOUR_CLUSTER_DATA_BUCKET>
 - `EXTERNAL_S3_BUCKET_APP_DATA`: Bucket for storing OpenVidu recordings and data related to the OpenVidu Meet service.
 - `EXTERNAL_S3_BUCKET_CLUSTER_DATA` (High Availability only): Bucket for storing observability data and other data specific to a High Availability deployment.
 
-After updating the `openvidu.env` file, restart the Master Node or your Single Node deployment:
-
-```bash
-systemctl restart openvidu
-```
-
 !!! info
 
-    Note that when using an external S3 bucket, the MinIO service will not be started and will appear as `Exited (0)` when checking the status of the services.
+    When using an external S3 bucket, the bundled MinIO service is not started. On a Community server it appears as `Exited (0)` when checking the status of the services.
 
 ## Example with AWS S3
 
 Assume the region of your bucket is `eu-west-1` and you have an S3 bucket named `my-openvidu-bucket`. Your configuration should be:
 
 ```bash
-EXTERNAL_S3_ENDPOINT=https://s3.eu-west-1.amazonaws.com
-EXTERNAL_S3_ACCESS_KEY=<YOUR_AWS_ACCESS_KEY>
-EXTERNAL_S3_SECRET_KEY=<YOUR_AWS_SECRET_KEY>
-EXTERNAL_S3_REGION=eu-west-1
-EXTERNAL_S3_PATH_STYLE_ACCESS=true
-EXTERNAL_S3_BUCKET_APP_DATA=my-openvidu-bucket
-
-# For High Availability deployments only
-EXTERNAL_S3_BUCKET_CLUSTER_DATA=my-openvidu-cluster-bucket
+ov stack config set \
+  EXTERNAL_S3_ENDPOINT=https://s3.eu-west-1.amazonaws.com \
+  EXTERNAL_S3_ACCESS_KEY=<YOUR_AWS_ACCESS_KEY> \
+  EXTERNAL_S3_SECRET_KEY=<YOUR_AWS_SECRET_KEY> \
+  EXTERNAL_S3_REGION=eu-west-1 \
+  EXTERNAL_S3_PATH_STYLE_ACCESS=true \
+  EXTERNAL_S3_BUCKET_APP_DATA=my-openvidu-bucket
 ```
 
 !!! warning
@@ -87,12 +77,13 @@ Usually the value `false` is compatible with all S3 providers, but some provider
 
 When using an external S3 provider, you can optionally enable **Server-Side Encryption (SSE)** for data at rest. This applies to both the application data bucket (`EXTERNAL_S3_BUCKET_APP_DATA`) and, in High Availability deployments, the cluster data bucket (`EXTERNAL_S3_BUCKET_CLUSTER_DATA`).
 
-Add the following parameters to your `openvidu.env` file:
+Set the following parameters:
 
 ```bash
-EXTERNAL_S3_SSE_TYPE=<YOUR_SSE_TYPE>
-EXTERNAL_S3_SSE_KMS_KEY_ID=<YOUR_KMS_KEY_ID>
-EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=<YOUR_KMS_ENCRYPTION_CONTEXT>
+ov stack config set \
+  EXTERNAL_S3_SSE_TYPE=<YOUR_SSE_TYPE> \
+  EXTERNAL_S3_SSE_KMS_KEY_ID=<YOUR_KMS_KEY_ID> \
+  EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=<YOUR_KMS_ENCRYPTION_CONTEXT>
 ```
 
 **Parameter Details:**
@@ -112,9 +103,7 @@ EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=<YOUR_KMS_ENCRYPTION_CONTEXT>
 To use SSE-S3 (AES256 encryption managed by S3):
 
 ```bash
-EXTERNAL_S3_SSE_TYPE=SSE-S3
-EXTERNAL_S3_SSE_KMS_KEY_ID=
-EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=
+ov stack config set EXTERNAL_S3_SSE_TYPE=SSE-S3 EXTERNAL_S3_SSE_KMS_KEY_ID= EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=
 ```
 
 ### SSE-KMS Example
@@ -122,9 +111,10 @@ EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT=
 To use SSE-KMS with a specific AWS KMS key and an optional encryption context:
 
 ```bash
-EXTERNAL_S3_SSE_TYPE=SSE-KMS
-EXTERNAL_S3_SSE_KMS_KEY_ID=arn:aws:kms:eu-west-1:123456789012:key/12345678-1234-1234-1234-123456789012
-EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT={"department":"engineering","project":"openvidu"}
+ov stack config set \
+  EXTERNAL_S3_SSE_TYPE=SSE-KMS \
+  EXTERNAL_S3_SSE_KMS_KEY_ID=arn:aws:kms:eu-west-1:123456789012:key/12345678-1234-1234-1234-123456789012 \
+  EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT='{"department":"engineering","project":"openvidu"}'
 ```
 
 ## Troubleshooting
@@ -132,7 +122,4 @@ EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT={"department":"engineering","project":"op
 On any problem, check these sections:
 
 - [Config Troubleshooting](../configuration/changing-config.md#troubleshooting-configuration)
-- The Status and Checking Logs sections under Administration for each deployment type:
-    - [Single Node](../single-node/on-premises/admin.md#checking-the-status-of-services)
-    - [Elastic](../elastic/on-premises/admin.md#checking-the-status-of-services)
-    - [High Availability](../ha/on-premises/admin.md#checking-the-status-of-services)
+- [Status and health checks](../single-node/on-premises/admin.md#status)

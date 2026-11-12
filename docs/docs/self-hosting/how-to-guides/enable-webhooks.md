@@ -9,47 +9,38 @@ If you need to integrate OpenVidu with other services, you can use webhooks to s
 
 ## OpenVidu Server Configuration
 
-1. SSH into one of your Master Nodes (or Single Node).
-2. Add to the file `livekit.yaml` the following configuration:
+The webhook configuration lives in the media server's service file, `livekit.yaml`. Edit it with the CLI, which applies the change and restarts the media server when you save:
 
-    ```yaml
-    webhook:
-        api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
-        urls:
-        ...
-            - https://<YOUR_WEBHOOK_URL>
-    ```
+```bash
+ov stack config file edit livekit.yaml
+```
 
-    The file is located at:
+Add your URL to the `urls` list of its `webhook` section (the section's exact contents differ between editions):
 
-    - **Single Node**: `/opt/openvidu/config/livekit.yaml`
-    - **Elastic / High Availability**: `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+```yaml
+webhook:
+    api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
+    urls:
+    ...
+        - https://<YOUR_WEBHOOK_URL>
+```
 
-    Make sure the `webhook` section exists in the file; if it doesn't, add it as shown in the snippet above. Then, add the URL where you want to receive the webhook notifications. In this example, `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
-
-3. Restart the Master Node (or Single Node) to apply the changes:
-
-    ```bash
-    systemctl restart openvidu
-    ```
-
-    This command will restart the services whose configuration files changed across your entire OpenVidu deployment.
+In this example, `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications. When you save, `ov stack config file apply` validates the document, renders the stack with it and restarts the media server across your entire OpenVidu deployment.
 
 ## **PRO**{ .openvidu-tag .openvidu-pro-tag } V2 Compatibility Configuration
 
-If you are using the V2 Compatibility module, you can also enable webhooks for the V2 Compatibility layer.
+If you are using the V2 Compatibility module, you can also enable webhooks for the V2 Compatibility layer, with these parameters of the V2 Compatibility service:
 
-1. SSH into one of your Master Nodes (or Single Node).
-2. Add to the file `v2compatibility.env` the following parameters:
+<!-- PENDING(docs-integrate): how the V2 Compatibility settings are changed on a stack ov deploys (the PRO chart ships no v2compatibility.env document) -->
 
-    ```
-    V2COMPAT_OPENVIDU_WEBHOOK=true
-    V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=https://<YOUR_WEBHOOK_URL>
-    ```
+```
+V2COMPAT_OPENVIDU_WEBHOOK=true
+V2COMPAT_OPENVIDU_WEBHOOK_ENDPOINT=https://<YOUR_WEBHOOK_URL>
+```
 
-    Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
+Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the notifications.
 
-    Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv) all the webhook events you can receive by setting the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
+Check in the [Configuration Reference](../configuration/reference.md#pro-v2compatibilityenv) all the webhook events you can receive by setting the parameter `V2COMPAT_OPENVIDU_WEBHOOK_EVENTS`.
 
 ## Send Webhooks to a Local Application Server
 

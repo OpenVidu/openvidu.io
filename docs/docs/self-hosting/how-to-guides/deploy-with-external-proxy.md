@@ -75,70 +75,46 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 1935           | 0.0.0.0/0, ::/0 | RTMP with TLS. |
 
 
-    **3. Install OpenVidu Single Node with `--external-proxy` flag**
+    **3. Deploy OpenVidu Single Node with the `--external-proxy` flag**
 
-    To deploy OpenVidu with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu with an external proxy is as follows:
+    Deploy OpenVidu with the [OpenVidu CLI](../openvidu-cli.md) from an empty directory on your machine, passing the `--external-proxy` flag so OpenVidu serves plain HTTP for your proxy to terminate TLS in front of it. `ov` generates every credential; you do not pass them.
 
     === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
         ```bash
-        sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
-            --no-tty --install \
-            --domain-name='openvidu.example.io' \
-            --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,openviduMeet' \
-            --livekit-api-key='xxxxx' \
-            --livekit-api-secret='xxxxx' \
-            --dashboard-admin-user='xxxxx' \
-            --dashboard-admin-password='xxxxx' \
-            --redis-password='xxxxx' \
-            --minio-access-key='xxxxx' \
-            --minio-secret-key='xxxxx' \
-            --mongo-admin-user='xxxxx' \
-            --mongo-admin-password='xxxxx' \
-            --mongo-replica-set-key='xxxxx' \
-            --grafana-admin-user='xxxxx' \
-            --grafana-admin-password='xxxxx' \
-            --meet-initial-admin-password='xxxxx' \
-            --meet-initial-api-key='xxxxx' \
-            --external-proxy
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu \
+            --environment on-premises \
+            --ssh ubuntu@<OPENVIDU_SERVER_IP> --ssh-key ~/.ssh/id_ed25519 \
+            --domain-name openvidu.example.io \
+            --turn-domain-name turn.example.io \
+            --modules observability,meet \
+            --external-proxy \
+            --mode auto
         ```
 
     === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
         ```bash
-        sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
-            --no-tty --install \
-            --openvidu-pro-license='xxxxx' \
-            --domain-name='openvidu.example.io' \
-            --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,openviduMeet,v2compatibility' \
-            --rtc-engine='mediasoup' \
-            --livekit-api-key='xxxxx' \
-            --livekit-api-secret='xxxxx' \
-            --dashboard-admin-user='xxxxx' \
-            --dashboard-admin-password='xxxxx' \
-            --redis-password='xxxxx' \
-            --minio-access-key='xxxxx' \
-            --minio-secret-key='xxxxx' \
-            --mongo-admin-user='xxxxx' \
-            --mongo-admin-password='xxxxx' \
-            --mongo-replica-set-key='xxxxx' \
-            --grafana-admin-user='xxxxx' \
-            --grafana-admin-password='xxxxx' \
-            --meet-initial-admin-password='xxxxx' \
-            --meet-initial-api-key='xxxxx' \
-            --external-proxy
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu \
+            --edition pro --environment on-premises \
+            --ssh ubuntu@<OPENVIDU_SERVER_IP> --ssh-key ~/.ssh/id_ed25519 \
+            --openvidu-pro-license <your-license> \
+            --domain-name openvidu.example.io \
+            --turn-domain-name turn.example.io \
+            --modules observability,meet,v2compatibility \
+            --rtc-engine mediasoup \
+            --external-proxy \
+            --mode auto
         ```
-
-    --8<-- "self-hosting/common/install-version.md"
 
     Notes:
 
-    - Replace `openvidu.example.io` with your FQDN.
-    - Replace `turn.example.io` with your TURN server FQDN.
-    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
-    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
+    - Replace `openvidu.example.io` with your FQDN and `turn.example.io` with your TURN server FQDN. Both must point at the proxy server.
+    - Replace `<OPENVIDU_SERVER_IP>` with the address of the OpenVidu machine. To deploy on the machine itself, log in and use `--this-node` instead of `--ssh`.
+    - With `--external-proxy`, TLS terminates at your proxy, so `--certificate-type` does not apply.
+    - In **PRO**{ .openvidu-tag .openvidu-pro-tag } edition, the `--openvidu-pro-license` parameter is mandatory. You can get your license key [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. Depending on the RTC engine, `--rtc-engine` can be `mediasoup` or `pion`.
 
     **4. Configure the external proxy**
 
@@ -166,7 +142,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     To deploy OpenVidu Elastic with an external proxy, ensure you have the following prerequisites:
 
     - **At least 2 machines** for OpenVidu, each with a minimum of **4GB RAM**, **4 CPU cores**, and **Linux** installed (Ubuntu is recommended). One machine will serve as the Master Node, while the others will function as Media Nodes.
-    - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../elastic/on-premises/install.md#port-rules-master-node), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
+    - An additional machine for the proxy server is recommended. Alternatively, you can use the same machine as the Master Node, but be aware that the proxy server will consume resources. Note that [some ports will be used by OpenVidu](../elastic/on-premises/install.md#port-rules), except for the ports utilized by the proxy server (TCP 80, 443, and 1935).
     - Significant disk space on the **Master Node, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
     - **Each machine must have a Public IP or a reachable IP from the users**.
     - **The proxy server must have a Public IP or a reachable IP from the users**.
@@ -175,7 +151,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **2. Port Rules**
 
-    You can follow the same rule ports of the Elastic Deployment for the [Master Node](../elastic/on-premises/install.md#port-rules-master-node) and for the [Media Nodes](../elastic/on-premises/install.md#port-rules-media-nodes) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
+    You can follow the same rule ports of the Elastic Deployment for the [Master Node](../elastic/on-premises/install.md#port-rules) and for the [Media Nodes](../elastic/on-premises/install.md#port-rules) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
 
     === "Master Node"
 
@@ -186,11 +162,11 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 7880           | External Proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
         | TCP         | 5349           | External Proxy | TURN with TLS. |
         | TCP         | 1945           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
-        | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP         | 9080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
-        | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
+        | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (the `v2compatibility` module). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
+        | TCP         | 9080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (the `meet` module). Media Nodes need access to this port to reach OpenVidu Meet. |
+        | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (the `observability` module) Media Nodes need access to this port to reach Loki. |
         | TCP         | 7880           | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-        | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
+        | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (the `observability` module) Media Nodes need access to this port to reach Mimir. |
         | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
         | TCP         | 9100           | Media Nodes     | Media Nodes need access to this port to reach MinIO. |
         | TCP         | 20000          | Media Nodes     | Media Nodes need access to this port to reach MongoDB. |
@@ -229,65 +205,42 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | TCP         | 443            | 0.0.0.0/0, ::/0 | HTTPS access to the OpenVidu API and TURN with TLS. |
         | TCP         | 1935           | 0.0.0.0/0, ::/0 | RTMP with TLS. |
 
-    **3. Install OpenVidu Elastic with `--external-proxy` flag**
+    **3. Deploy OpenVidu Elastic with the `--external-proxy` flag**
 
-    To deploy OpenVidu Elastic with an external proxy, you must use the CLI installation command with the `--external-proxy` flag. The command to install OpenVidu Elastic with an external proxy is as follows:
+    An Elastic stack is **deployed on one machine** (the master) with `--deployment-type elastic`; every media node then **joins** it. Deploy the master with `--external-proxy`, then join the media nodes from the same directory. `ov` generates every credential, and reads the join address and token from the master itself; you do not pass them.
 
-    === "Install Master Node"
+    === "Deploy the Master Node"
 
         ```bash
-        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-            --no-tty --install \
-            --node-role='master-node' \
-            --openvidu-pro-license='xxxxx' \
-            --domain-name='openvidu.example.io' \
-            --turn-domain-name='turn.example.io' \
-            --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='mediasoup' \
-            --livekit-api-key='xxxxx' \
-            --livekit-api-secret='xxxxx' \
-            --dashboard-admin-user='xxxxx' \
-            --dashboard-admin-password='xxxxx' \
-            --redis-password='xxxxx' \
-            --minio-access-key='xxxxx' \
-            --minio-secret-key='xxxxx' \
-            --mongo-admin-user='xxxxx' \
-            --mongo-admin-password='xxxxx' \
-            --mongo-replica-set-key='xxxxx' \
-            --grafana-admin-user='xxxxx' \
-            --grafana-admin-password='xxxxx' \
-            --meet-initial-admin-password='xxxxx' \
-            --meet-initial-api-key='xxxxx' \
-            --private-ip='<MASTER_NODE_PRIVATE_IP>' \
-            --external-proxy
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu \
+            --edition pro --environment on-premises --deployment-type elastic \
+            --ssh ubuntu@<MASTER_NODE_IP> --ssh-key ~/.ssh/id_ed25519 \
+            --openvidu-pro-license <your-license> \
+            --domain-name openvidu.example.io \
+            --turn-domain-name turn.example.io \
+            --modules observability,v2compatibility,meet \
+            --rtc-engine mediasoup \
+            --external-proxy \
+            --mode auto
         ```
-
-        --8<-- "self-hosting/common/install-version.md"
 
         Notes:
 
         - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}.
-        - Replace `openvidu.example.io` with your FQDN.
-        - Replace `turn.example.io` with your TURN server FQDN.
-        - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
+        - Replace `openvidu.example.io` with your FQDN and `turn.example.io` with your TURN server FQDN. Both must point at the proxy server.
+        - With `--external-proxy`, TLS terminates at your proxy, so `--certificate-type` does not apply.
+        - Depending on the RTC engine, `--rtc-engine` can be `mediasoup` or `pion`.
 
-    === "Install Media Nodes"
+    === "Join the Media Nodes"
 
-        To install a Media Node, you can use the following command:
+        From the same stack directory, join each media node over SSH:
 
         ```bash
-        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
-            --no-tty --install \
-            --node-role='media-node' \
-            --master-node-private-ip='<MASTER_NODE_PRIVATE_IP>' \
-            --redis-password='xxxxx'
+        ov stack join --ssh ubuntu@<MEDIA_NODE_IP> --as media
         ```
 
-        --8<-- "self-hosting/common/install-version.md"
-
-        - The `--master-node-private-ip` is the private IP of the Master Node. Replace `<MASTER_NODE_PRIVATE_IP>` with the private IP of the Master Node.
-        - The `--redis-password` is the password used to connect to the Redis service. Replace `xxxxx` with the same password used in the Master Node installation.
+        `ov` reads the join address and token from the master, checks the node's ports and joins it as a media node. Each media node is one more `ov stack join --ssh`. See [Add a media node](../elastic/on-premises/admin.md#add-a-media-node).
 
     **4. Configure the external proxy**
 

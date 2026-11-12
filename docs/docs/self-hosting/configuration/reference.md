@@ -5,44 +5,48 @@ description: "Reference for every configuration file an OpenVidu deployment uses
 
 # Configuration reference
 
+!!! info "How these settings are changed"
+
+    The parameters of `openvidu.env` now live in the stack's `openvidu.yaml` document, under the key shown in the table. [`ov stack config`](changing-config.md) reads and changes them, and recreates only the services that need it; it accepts both names: `ov stack config set DOMAIN_NAME=video.example.com` is the same as `ov stack config set domain.name=video.example.com`. The other files on this page belong to one service each.
+
 ## `openvidu.env`
 
-This file defines global configuration parameters used by other services, such as the domain name, credentials, etc.
+These are the global configuration parameters used by other services, such as the domain name and credentials. They now live in the `openvidu.yaml` document, under the key in the second column.
 
 <div class="nowrap-first-column" markdown>
 
-| Parameter | Description |
-| --------- | ----------- |
-| **`DOMAIN_NAME`** | The domain name for the deployment. Use this domain name to access OpenVidu APIs and services. |
-| **`LIVEKIT_API_KEY`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
-| **`LIVEKIT_API_SECRET`** | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
-| **`MINIO_ACCESS_KEY`** | Access key for MinIO. |
-| **`MINIO_SECRET_KEY`** | Secret key for MinIO. |
-| **`EXTERNAL_S3_ENDPOINT`** | If defined, Minio will not be used and the deployment will use an external S3 service. This is the endpoint of the external S3 service. |
-| **`EXTERNAL_S3_ACCESS_KEY`** | Access key for the external S3 service if used. |
-| **`EXTERNAL_S3_SECRET_KEY`** | Secret key for the external S3 service if used. |
-| **`EXTERNAL_S3_REGION`** | Region of the external S3 service if used. |
-| **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | If `true`, use path-style access for the external S3 service if used. |
-| **`EXTERNAL_S3_BUCKET_APP_DATA`** | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
-| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | External S3 bucket used in High Availability to store Observability data. |
-| **`EXTERNAL_S3_SSE_TYPE`** | Server-side encryption algorithm for the external S3 service. Supported values: `SSE-S3` (S3-managed AES256) or `SSE-KMS` (AWS KMS-managed). Leave empty to disable SSE. |
-| **`EXTERNAL_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is `SSE-KMS`. |
-| **`EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. |
-| **`MONGO_ADMIN_USERNAME`** | MongoDB admin username. |
-| **`MONGO_ADMIN_PASSWORD`** | MongoDB admin password. |
-| **`DASHBOARD_ADMIN_USERNAME`** | Admin username for OpenVidu Dashboard |
-| **`DASHBOARD_ADMIN_PASSWORD`** | Admin password for OpenVidu Dashboard |
-| **`GRAFANA_ADMIN_USERNAME`** | Admin username for Grafana |
-| **`GRAFANA_ADMIN_PASSWORD`** | Admin password for Grafana |
-| **`OPENVIDU_PRO_LICENSE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Pro license key. Get an OpenVidu Pro License [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. |
-| **`OPENVIDU_RTC_ENGINE`** | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `mediasoup` (default) or `pion`. |
-| **`MEET_BASE_PATH`** | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
+| Parameter | `openvidu.yaml` key | Description |
+| --------- | ------------------- | ----------- |
+| **`DOMAIN_NAME`** | `domain.name` | The domain name for the deployment. Use this domain name to access OpenVidu APIs and services. |
+| **`LIVEKIT_API_KEY`** | `credentials.livekitApiKey` | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
+| **`LIVEKIT_API_SECRET`** | `credentials.livekitApiSecret` | Global LiveKit API Key and Secret used for apps to connect to OpenVidu. |
+| **`MINIO_ACCESS_KEY`** | `credentials.minioAccessKey` | Access key for MinIO. |
+| **`MINIO_SECRET_KEY`** | `credentials.minioSecretKey` | Secret key for MinIO. |
+| **`EXTERNAL_S3_ENDPOINT`** | `externalS3.endpoint` | If defined, Minio will not be used and the deployment will use an external S3 service. This is the endpoint of the external S3 service. |
+| **`EXTERNAL_S3_ACCESS_KEY`** | `externalS3.accessKey` | Access key for the external S3 service if used. |
+| **`EXTERNAL_S3_SECRET_KEY`** | `externalS3.secretKey` | Secret key for the external S3 service if used. |
+| **`EXTERNAL_S3_REGION`** | `externalS3.region` | Region of the external S3 service if used. |
+| **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | `externalS3.pathStyleAccess` | If `true`, use path-style access for the external S3 service if used. |
+| **`EXTERNAL_S3_BUCKET_APP_DATA`** | `externalS3.appDataBucket` | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
+| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | — | External S3 bucket used in High Availability to store Observability data. |
+| **`EXTERNAL_S3_SSE_TYPE`** | `externalS3.sse.type` | Server-side encryption algorithm for the external S3 service. Supported values: `SSE-S3` (S3-managed AES256) or `SSE-KMS` (AWS KMS-managed). Leave empty to disable SSE. |
+| **`EXTERNAL_S3_SSE_KMS_KEY_ID`** | `externalS3.sse.kmsKeyId` | AWS KMS key ID for SSE-KMS encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is `SSE-KMS`. |
+| **`EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | `externalS3.sse.kmsEncryptionContext` | Optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. |
+| **`MONGO_ADMIN_USERNAME`** | `credentials.mongoAdminUser` | MongoDB admin username. |
+| **`MONGO_ADMIN_PASSWORD`** | `credentials.mongoAdminPassword` | MongoDB admin password. |
+| **`DASHBOARD_ADMIN_USERNAME`** | `credentials.dashboardAdminUser` | Admin username for OpenVidu Dashboard |
+| **`DASHBOARD_ADMIN_PASSWORD`** | `credentials.dashboardAdminPassword` | Admin password for OpenVidu Dashboard |
+| **`GRAFANA_ADMIN_USERNAME`** | `credentials.grafanaAdminUser` | Admin username for Grafana |
+| **`GRAFANA_ADMIN_PASSWORD`** | `credentials.grafanaAdminPassword` | Admin password for Grafana |
+| **`OPENVIDU_PRO_LICENSE`** | `license` | **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Pro license key. Get an OpenVidu Pro License [here :fontawesome-solid-external-link:{.external-link-icon}](../../../account.md){:target="_blank"}. |
+| **`OPENVIDU_RTC_ENGINE`** | `rtcEngine` | **PRO**{ .openvidu-tag .openvidu-pro-tag } The WebRTC engine to use. Can be `mediasoup` (default) or `pion`. |
+| **`MEET_BASE_PATH`** | `meet.basePath` | Base path where OpenVidu Meet is served. Default is `/meet`. If set to `/`, OpenVidu Meet will be served at the root path and the automatic proxy to port 6080 for custom applications will not be available. |
 
 </div>
 
 ## `meet.env`
 
-This file defines the configuration parameters for the OpenVidu Meet service.
+This file defines the configuration parameters for the OpenVidu Meet service. On OpenVidu COMMUNITY it is a service file of the stack: edit it with `ov stack config file edit meet.env`.
 
 <div class="nowrap-first-column" markdown>
 
@@ -103,6 +107,8 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
 
+<!-- PENDING(docs-integrate): how these V2 Compatibility settings are changed on a stack ov deploys (the PRO chart ships no v2compatibility.env document) -->
+
 <div class="nowrap-first-column" markdown>
 
 | Parameter | Description |
@@ -145,7 +151,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 
 ## `livekit.yaml`:
 
-As OpenVidu Server is [built on top of LiveKit](../../comparing-openvidu.md#openvidu-vs-livekit), the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/master/config-sample.yaml){:target="_blank"}.
+As OpenVidu Server is [built on top of LiveKit](../../comparing-openvidu.md#openvidu-vs-livekit), the configuration of OpenVidu Server is done in the `livekit.yaml` file in its own `openvidu` section in this file. The rest of the configuration is the same as the [LiveKit server configuration :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/master/config-sample.yaml){:target="_blank"}. It is a service file: edit it with `ov stack config file edit livekit.yaml`.
 
 ### **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } OpenVidu Server Configuration:
 

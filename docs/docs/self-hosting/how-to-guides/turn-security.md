@@ -22,7 +22,7 @@ When a node is **not** publicly reachable, OpenVidu auto-configures itself to ke
 !!! info
     You can see which address a node picked as its relay candidate in the logs:
     ```bash
-    docker logs openvidu 2>&1 | grep "TURN relay address"
+    ov stack logs 2>&1 | grep "TURN relay address"
     # INFO  openvidu  service/turn.go  Using first local IP as TURN relay address  {"relayAddress": "192.168.1.10", ...}
     ```
 
@@ -53,15 +53,11 @@ TURN credentials are not static. They are derived per participant from the deplo
 
 ## Configuration values
 
-All TURN security settings live under the `turn:` section of the LiveKit configuration file:
+All TURN security settings live under the `turn:` section of the media server's `livekit.yaml` service file. Edit it with the CLI, which applies the change and restarts the media server when you save:
 
-=== "Single Node"
-
-    `/opt/openvidu/config/livekit.yaml`
-
-=== "Elastic / High Availability"
-
-    `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+```bash
+ov stack config file edit livekit.yaml
+```
 
 ```yaml
 turn:
@@ -106,11 +102,7 @@ turn:
 
 </div>
 
-After changing any of these values, restart the service:
-
-```bash
-systemctl restart openvidu
-```
+When you save, `ov` validates the document, renders the stack with it and restarts the media server across the deployment.
 
 ### How the relay permission decision is made
 
@@ -131,7 +123,7 @@ Independently, the **relay port restriction** and the **RFC 6062** check are alw
 
 ## Example configurations
 
-The snippets below cover the most common hardening scenarios. They go under the `turn:` section of the LiveKit configuration file [shown above](#configuration-values). After editing, restart the service with `systemctl restart openvidu`.
+The snippets below cover the most common hardening scenarios. They go under the `turn:` section of the `livekit.yaml` service file [shown above](#configuration-values), edited with `ov stack config file edit livekit.yaml`, which applies them on save.
 
 ### Block the cloud metadata endpoint
 
@@ -167,7 +159,7 @@ turn:
 !!! danger "Only for fully public deployments"
     Because `deny_peer_cidrs` overrides the local/cluster allowlist, this configuration **will block media to your own Media Servers** if any node is *not* publicly reachable (behind NAT, behind a proxy, or relaying over a private/Docker IP). Before applying it, confirm that every node picked a **public** relay address:
     ```bash
-    docker logs openvidu 2>&1 | grep "TURN relay address"
+    ov stack logs 2>&1 | grep "TURN relay address"
     ```
     If you see a private IP (e.g. `192.168.x.x`, `10.x.x.x`, `172.x.x.x`), do **not** use this snippet — the node relies on the relay forwarding to a private address. See [Why the relay needs protecting](#why-the-relay-needs-protecting).
 
@@ -223,7 +215,7 @@ Keep in mind:
 - `relay_preferred_interface` is ignored when `relay_address` is set, and also when the node is publicly reachable (a publicly reachable node advertises its public IP, not a local interface IP).
 - After restarting, confirm the address the node actually picked:
   ```bash
-  docker logs openvidu 2>&1 | grep "TURN relay address"
+  ov stack logs 2>&1 | grep "TURN relay address"
   ```
 
 ## Considerations

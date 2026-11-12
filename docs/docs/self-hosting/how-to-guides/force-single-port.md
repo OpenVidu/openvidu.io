@@ -45,11 +45,11 @@ To enforce this configuration, your inbound port rules should look like this:
         | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
         | TCP | 1935 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP | 9000 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to expose MinIO publicly. |
-        | TCP | 4443 | Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP | 9080 | Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
-        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
+        | TCP | 4443 | Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (the `v2compatibility` module). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
+        | TCP | 9080 | Media Nodes | Needed when _'OpenVidu Meet'_ module is used (the `meet` module). Media Nodes need access to this port to reach OpenVidu Meet. |
+        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (the `observability` module) Media Nodes need access to this port to reach Loki. |
         | TCP | 7880 | Media Nodes | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
+        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used. (the `observability` module) Media Nodes need access to this port to reach Mimir. |
         | TCP | 7000 | Media Nodes | Media Nodes need access to this port to reach Redis Service. |
         | TCP | 9100 | Media Nodes | Media Nodes need access to this port to reach MinIO. |
         | TCP | 20000 | Media Nodes | Media Nodes need access to this port to reach MongoDB. |
@@ -94,16 +94,16 @@ To enforce this configuration, your inbound port rules should look like this:
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
         | TCP | 7880 | Load Balancer | Allows access to the following to the Load Balancer: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
-        | TCP | 3000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana. |
-        | TCP | 5000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard. |
+        | TCP | 3000 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used to load balance requests to Grafana. |
+        | TCP | 5000 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used to load balance requests to OpenVidu Dashboard. |
         | TCP | 9101 | Master Nodes | Needed to load balance requests to MinIO Console. |
-        | TCP | 7946-7947 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). Master nodes need access to this port for cluster communication. |
-        | TCP | 9095-9096 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used for Mimir and Loki cluster communication. |
-        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Loki service. |
-        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service. |
+        | TCP | 7946-7947 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). Master nodes need access to this port for cluster communication. |
+        | TCP | 9095-9096 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used for Mimir and Loki cluster communication. |
+        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used by Loki service. |
+        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used by Mimir service. |
         | TCP | 7880 | Media Nodes | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-        | TCP | 4443 | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service. |
-        | TCP | 9080 | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet. |
+        | TCP | 4443 | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (the `v2compatibility` module). It is used by OpenVidu V2 compatibility service. |
+        | TCP | 9080 | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (the `meet` module). It is used by OpenVidu Meet. |
         | TCP | 7000-7001 | Master Nodes, Media Nodes | For internal Redis communication |
         | TCP | 9100 | Master Nodes, Media Nodes | For internal MinIO communication |
         | TCP | 20000 | Master Nodes, Media Nodes | For internal Mongo communication |
@@ -176,11 +176,11 @@ To enforce this configuration, your inbound port rules should look like this:
         | TCP | 443 | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
         | TCP | 1935 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to ingest RTMP streams using Ingress service. |
         | TCP | 9000 | 0.0.0.0/0, ::/0 | (Optional) Needed if you want to expose MinIO publicly. |
-        | TCP | 4443 | Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP | 9080 | Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
-        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
+        | TCP | 4443 | Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (the `v2compatibility` module). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
+        | TCP | 9080 | Media Nodes | Needed when _'OpenVidu Meet'_ module is used (the `meet` module). Media Nodes need access to this port to reach OpenVidu Meet. |
+        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (the `observability` module) Media Nodes need access to this port to reach Loki. |
         | TCP | 7880 | Media Nodes | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
+        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used. (the `observability` module) Media Nodes need access to this port to reach Mimir. |
         | TCP | 7000 | Media Nodes | Media Nodes need access to this port to reach Redis Service. |
         | TCP | 9100 | Media Nodes | Media Nodes need access to this port to reach MinIO. |
         | TCP | 20000 | Media Nodes | Media Nodes need access to this port to reach MongoDB. |
@@ -223,16 +223,16 @@ To enforce this configuration, your inbound port rules should look like this:
         | TCP | 1945 | Load Balancer | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
         | TCP | 5349 | Load Balancer | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
         | TCP | 7880 | Load Balancer | Allows access to the following to the Load Balancer: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
-        | TCP | 3000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana. |
-        | TCP | 5000 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard. |
+        | TCP | 3000 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used to load balance requests to Grafana. |
+        | TCP | 5000 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used to load balance requests to OpenVidu Dashboard. |
         | TCP | 9101 | Master Nodes | Needed to load balance requests to MinIO Console. |
-        | TCP | 7946-7947 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). Master nodes need access to this port for cluster communication. |
-        | TCP | 9095-9096 | Master Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used for Mimir and Loki cluster communication. |
-        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Loki service. |
-        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service. |
+        | TCP | 7946-7947 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). Master nodes need access to this port for cluster communication. |
+        | TCP | 9095-9096 | Master Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used for Mimir and Loki cluster communication. |
+        | TCP | 3100 | Media Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used by Loki service. |
+        | TCP | 9009 | Media Nodes | Needed when _'Observability'_ module is used (the `observability` module). It is used by Mimir service. |
         | TCP | 7880 | Media Nodes | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-        | TCP | 4443 | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service. |
-        | TCP | 9080 | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet. |
+        | TCP | 4443 | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (the `v2compatibility` module). It is used by OpenVidu V2 compatibility service. |
+        | TCP | 9080 | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (the `meet` module). It is used by OpenVidu Meet. |
         | TCP | 7000-7001 | Master Nodes, Media Nodes | For internal Redis communication |
         | TCP | 9100 | Master Nodes, Media Nodes | For internal MinIO communication |
         | TCP | 20000 | Master Nodes, Media Nodes | For internal Mongo communication |
@@ -270,10 +270,10 @@ To enforce this configuration, your inbound port rules should look like this:
 !!! info
     If you are installing OpenVidu for the first time, you can configure the ports before starting the service. In this case, no restart is needed.
 
-After closing ports, all Media Nodes (or the Single Node) must be restarted for the media services to autoconfigure with the new port rules:
+After closing ports, the media services must be restarted so they autoconfigure with the new port rules. Restart the whole stack with the CLI, which restarts the services on every node:
 
 ```bash
-systemctl restart openvidu
+ov stack restart
 ```
 
 ## How it works
@@ -306,7 +306,7 @@ Both ranges must be reachable within the internal network between Media Nodes (o
 By default, OpenVidu automatically detects the best possible private IP of each node to use as the TURN relay address, and in most cases no manual configuration is needed. You can check which address is being used by looking at the OpenVidu logs:
 
 ```bash
-docker logs openvidu 2>&1 | grep "TURN relay address"
+ov stack logs 2>&1 | grep "TURN relay address"
 ```
 
 You should see a log entry like:
@@ -317,35 +317,21 @@ INFO    openvidu    service/turn.go:204    Using first local IP as TURN relay ad
 
 If the `relayAddress` does not match the node's private IP used to communicate with other cluster nodes (e.g., the node has multiple network interfaces), media relay will fail because traffic will be sent to an unreachable address.
 
-To fix this, explicitly set the network interface that TURN should use for relay:
-
-=== "Single Node"
-
-    Edit `/opt/openvidu/config/livekit.yaml` and set:
-
-    ```yaml
-    turn:
-      # ... other properties ...
-      relay_preferred_interface: <interface-name>
-    ```
-
-=== "Elastic / High Availability"
-
-    Edit `/opt/openvidu/config/cluster/media_node/livekit.yaml` and set:
-
-    ```yaml
-    turn:
-      # ... other properties ...
-      relay_preferred_interface: <interface-name>
-    ```
-
-Where `<interface-name>` is the network interface used by the node to communicate with other nodes in the cluster (e.g., `eth0`, `ens5`). For Single Node deployments, it should be the main network interface of the machine.
-
-After making changes, restart the service:
+To fix this, explicitly set the network interface that TURN should use for relay, in the media server's `livekit.yaml` service file. Edit it with the CLI, which applies the change and restarts the media server when you save:
 
 ```bash
-systemctl restart openvidu
+ov stack config file edit livekit.yaml
 ```
+
+Set the interface under the `turn:` section:
+
+```yaml
+turn:
+  # ... other properties ...
+  relay_preferred_interface: <interface-name>
+```
+
+Where `<interface-name>` is the network interface used by the node to communicate with other nodes in the cluster (e.g., `eth0`, `ens5`). For Single Node deployments, it should be the main network interface of the machine.
 
 ## Considerations
 

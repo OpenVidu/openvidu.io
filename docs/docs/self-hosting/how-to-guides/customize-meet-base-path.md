@@ -5,28 +5,17 @@ description: "Serve OpenVidu Meet from a path of your choice instead of the defa
 
 # Customize OpenVidu Meet base path
 
-By default, OpenVidu Meet is served at the `/meet` path (e.g. `https://your-domain/meet`). You can change this by setting the `MEET_BASE_PATH` parameter in `openvidu.env`.
+By default, OpenVidu Meet is served at the `/meet` path (e.g. `https://your-domain/meet`). You can change this by setting the `MEET_BASE_PATH` parameter.
 
 ## Configuration
 
-Edit the `openvidu.env` file on your deployment:
-
-- **Single Node**: `/opt/openvidu/config/openvidu.env`
-- **Elastic / High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
-
-Set the `MEET_BASE_PATH` parameter to your desired path:
+Set the `MEET_BASE_PATH` parameter with [`ov stack config set`](../configuration/changing-config.md#view-get-set-unset), which writes the value and recreates only the services that read it:
 
 ```bash
-MEET_BASE_PATH=/custom-path
+ov stack config set MEET_BASE_PATH=/custom-path
 ```
 
-Then restart OpenVidu to apply the changes:
-
-```bash
-systemctl restart openvidu
-```
-
-After restarting, OpenVidu Meet will be accessible at `https://your-domain/custom-path` instead of `https://your-domain/meet`.
+After the change is applied, OpenVidu Meet will be accessible at `https://your-domain/custom-path` instead of `https://your-domain/meet`.
 
 ## Setting `MEET_BASE_PATH` to `/` { #root-path }
 

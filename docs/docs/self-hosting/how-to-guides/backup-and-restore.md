@@ -670,7 +670,7 @@ To ensure everything works correctly after restoring data, follow these steps:
             MASTER_NODE_PRIVATE_IP=<MASTER_NODE_PRIVATE_IP>
             ```
 
-        - In case you need to reinstall Media Nodes, follow [this command :fontawesome-solid-external-link:{.external-link-icon}](../elastic/on-premises/install.md#non-interactive-installation){:target="_blank"}
+        - In case you need to reinstall Media Nodes, join them again as described in [Add a media node](../elastic/on-premises/admin.md#add-a-media-node)
 
     === "High Availability"
 
@@ -694,7 +694,7 @@ To ensure everything works correctly after restoring data, follow these steps:
             MASTER_NODE_4_PRIVATE_IP=<MASTER_NODE_4_PRIVATE_IP>
             ```
 
-        - In case you need to reinstall Media Nodes, follow [this command :fontawesome-solid-external-link:{.external-link-icon}](../ha/on-premises/install-dlb.md#non-interactive-installation){:target="_blank"}
+        - In case you need to reinstall Media Nodes, join them again as described in [Add a media node](../ha/on-premises/admin.md#add-a-media-node)
 
 
 2. **Check if all containers are running smoothly**

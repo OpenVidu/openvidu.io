@@ -1,156 +1,110 @@
 ---
 title: "Enable and disable OpenVidu modules"
-description: "Turn individual OpenVidu modules on or off so a deployment runs only the services it actually needs, and apply the change safely."
+description: "Turn OpenVidu modules on or off on a running stack with the CLI, so a deployment runs only the services it needs, and let the data services follow."
 ---
 
 # Enable and disable modules
 
-OpenVidu allows you to enable or disable modules to customize your deployment. These modules are:
+A **module** is a feature of OpenVidu you turn on or off; a **service** is the container (or Kubernetes workload) that implements it. You choose modules and the deployment works out which services to run. `ov stack module` changes the selection on a **running** stack, with minimal impact.
 
-- **`openviduMeet`**: The OpenVidu Meet service.
-- **`observability`**: Grafana, Loki, Mimir, and Alloy observability services.
-- **`v2compatibility`**: OpenVidu V2 Compatibility. (Only available in OpenVidu Pro)
+## Modules and services { #modules-and-services }
 
-These modules are configured in the parameter `ENABLED_MODULES`.
+The modules are:
 
-- **Single Node**: `/opt/openvidu/config/openvidu.env`
-- **Elastic / High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
+| Module | What you get | Services it runs |
+| --- | --- | --- |
+| `livekit-server` | The media server, always on | `ov-livekit-server` |
+| `egress` | Recording and streaming out | `ov-egress` |
+| `ingress` | RTMP and WHIP ingest | `ov-ingress` |
+| `dashboard` | OpenVidu Dashboard at `/dashboard` | `ov-dashboard` |
+| `meet` | [OpenVidu Meet](../../../meet/index.md) at `/` | `ov-meet` (it brings `egress`) |
+| `observability` | Metrics, logs and the [Grafana stack](../production-ready/observability/grafana-stack.md) | `grafana`, `loki`, `prometheus` or `mimir`, `alloy` |
+| `v2compatibility` | The OpenVidu 2 REST API (**PRO**{ .openvidu-tag .openvidu-pro-tag } only) | `ov-v2compat` |
 
-The environment variable `ENABLED_MODULES` with all the modules enabled would look like this:
+List the current selection with `ov stack module ls`:
 
-```bash
-ENABLED_MODULES=openviduMeet,observability,v2compatibility
+```console
+$ ov stack module ls
+MODULE           ENABLED   ROLE
+livekit-server   yes       base
+egress           yes       selected
+ingress          yes       selected
+dashboard        yes       selected
+meet             yes       selected
+observability    yes       selected
 ```
 
-Simply go to one of your Master Nodes or the only node in a Single Node deployment, edit the `openvidu.env` file, modify the `ENABLED_MODULES` and restart the Master Node or the Single Node deployment with:
+`base` is always on, `selected` means you enabled it, and `off` means it is not running. On a PRO stack, the listing also shows what each module requires and which data services the selection brings in.
 
-```bash
-systemctl restart openvidu
+Changing the selection is **incremental**: `ov` starts only the new services (and recreates the ones whose configuration changed, such as the media server), or stops the removed ones; nothing else is touched. `--dry-run` previews the change.
+
+```console
+$ ov stack module add meet
+enable:  meet
+modules: livekit-server, egress  →  livekit-server, egress, meet
+incremental change: start mongodb,ov-meet; restart the media server (its config changed); other services keep running.
+✔ updated openvidu-stack.yml
+✓ docker compose up -d --no-deps --force-recreate mongodb ov-livekit-server ov-meet
+modules updated
 ```
 
-## About modules configuration
+Removing is just as incremental:
 
-If you've installed OpenVidu with all modules enabled, you may not need to change these configurations. But in case you've installed OpenVidu with some modules disabled, you may need to configure some parameters when enabling them.
+```console
+$ ov stack module rm meet
+disable: meet
+modules: livekit-server, egress, meet  →  livekit-server, egress
+incremental change: stop mongodb,ov-meet; restart the media server (its config changed); other services keep running.
+✔ updated openvidu-stack.yml
+✓ docker compose rm -sf mongodb ov-meet
+✓ docker compose up -d --no-deps --force-recreate ov-livekit-server
+modules updated
+```
 
-=== "openviduMeet"
+On a Community server the same commands rewrite `modules:` in `config/openvidu.yaml`, render the configuration again and recreate the affected services. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`. `v2compatibility` is PRO only, so a Community stack refuses it (exit `2`).
 
-    You need to configure the LiveKit configuration to send webhooks to the OpenVidu Meet service.
+### Data services follow the modules
 
-    === "Single Node"
+The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them anymore. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both:
 
-        **Location:** `/opt/openvidu/config/livekit.yaml`
+```console
+$ ov stack module add meet
+enable:  egress, meet
+modules: livekit-server  →  livekit-server, egress, meet
+incremental change: start minio,mongodb,ov-egress,ov-meet,redis; restart the media server (its config changed); other services keep running.
+…
+```
 
-        ```yaml
-        webhook:
-            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
-            urls:
-                - http://127.0.0.1:${openvidu.MEET_INTERNAL_PORT:?mandatory}/livekit/webhook
-        ```
+## Agents { #agents }
 
-        With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
+An **agent** is an AI container that runs beside the media server (live captions and the like). Its definition carries the image, an `enabled` flag, the options of what runs it and the agent's own configuration. Agents are not modules: each one is a file of its own, and `ov stack agent` reads and rewrites them.
 
-    === "Elastic"
+```console
+$ ov stack agent ls
+AGENT                     ENABLED   IMAGE                                                  STATE
+agent-speech-processing   no        docker.io/openvidu/agent-speech-processing-vosk:main   -
+```
 
-        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
+Turn one on or off, live. `ov` sets `enabled` in the definition, regenerates the agents' Compose file (or runs a `helm upgrade` on PRO) and creates or removes just that agent's service:
 
-        ```yaml
-        webhook:
-            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
-            urls:
-                - http://master-node:${openvidu.MEET_INTERNAL_PORT:?mandatory}/livekit/webhook
-        ```
+```console
+$ ov stack agent enable speech-processing
+enable: agent-speech-processing (docker.io/openvidu/agent-speech-processing-vosk:main)
+✓ set enabled=true in config/agent-speech-processing.yaml
+✓ sudo ov stack render --this-node
+✓ docker compose --env-file data/runtime/compose.env up -d --force-recreate --no-deps agent-speech-processing
+agent agent-speech-processing enabled
+```
 
-        With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
+Disabling removes the container; the definition stays, so `enable` brings it back. The first start pulls the agent image, which is large (the models are inside it), so allow some time. `<name>` is the file's name without the extension, with or without the `agent-` prefix.
 
-    === "High Availability"
-
-        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
-
-        ```yaml
-        webhook:
-            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
-            urls:
-                - http://127.0.0.1:${openvidu.MEET_INTERNAL_PORT:?mandatory}/livekit/webhook
-        ```
-
-        With this configuration, the LiveKit service will send webhooks to the OpenVidu Meet service, which is necessary.
-
-=== "v2compatibility"
-
-    You need to configure the LiveKit configuration to send webhooks to the OpenVidu V2 Compatibility service.
-
-    === "Elastic"
-
-        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
-
-        ```yaml
-        webhook:
-            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
-            urls:
-                - http://master-node:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
-        ```
-
-        With this configuration, the LiveKit service will send webhooks to the OpenVidu V2 Compatibility service, which is necessary.
-
-    === "High Availability"
-
-        **Location:** `/opt/openvidu/config/cluster/media_node/livekit.yaml`
-
-        ```yaml
-        webhook:
-            api_key: ${openvidu.LIVEKIT_API_KEY:?mandatory}
-            urls:
-                - http://127.0.0.1:${openvidu.OPENVIDU_V2COMPAT_INTERNAL_PORT:?mandatory}/livekit/webhook
-        ```
-
-        With this configuration, the LiveKit service will send webhooks to the OpenVidu V2 Compatibility service, which is necessary.
-
-=== "observability"
-
-    You need the following parameters defined in the `openvidu.env` file.
-    
-    === "Single Node"
-
-        **Location:** `/opt/openvidu/config/openvidu.env`
-
-        ```bash
-        GRAFANA_ADMIN_USERNAME="<GRAFANA_ADMIN_USERNAME>"
-        GRAFANA_ADMIN_PASSWORD="<GRAFANA_ADMIN_PASSWORD>"
-        ```
-
-        With these parameters, you set the username and password for the Grafana admin user.
-    
-    === "Elastic"
-
-        **Location:** `/opt/openvidu/config/cluster/openvidu.env`
-
-        ```bash
-        GRAFANA_ADMIN_USERNAME="<GRAFANA_ADMIN_USERNAME>"
-        GRAFANA_ADMIN_PASSWORD="<GRAFANA_ADMIN_PASSWORD>"
-        ```
-
-        With these parameters, you set the username and password for the Grafana admin user.
-
-    === "High Availability"
-
-        **Location:** `/opt/openvidu/config/cluster/openvidu.env`
-
-        ```bash
-        GRAFANA_ADMIN_USERNAME="<GRAFANA_ADMIN_USERNAME>"
-        GRAFANA_ADMIN_PASSWORD="<GRAFANA_ADMIN_PASSWORD>"
-        ```
-
-        With these parameters, you set the username and password for the Grafana admin user.
-
-
-These configurations should be valid just by copying and pasting them into the `livekit.yaml` file. If you want to understand the `${openvidu.VARIABLE:?mandatory}` syntax, please refer to the [Configuration](../configuration/in-depth.md) section.
+- On a **Community** stack the definitions are `config/agent-<name>.yaml` on the node, and an agent of your own is one more such file.
+- On a **local** stack they are the `agent-*.yaml` files in the deployment directory.
+- On a **PRO** stack they are configuration documents of the stack (the chart ships `speech-processing`, disabled), and `enable`/`disable` writes the document and runs one `helm upgrade`.
 
 ## Troubleshooting
 
 On any problem, check these sections:
 
 - [Config Troubleshooting](../configuration/changing-config.md#troubleshooting-configuration)
-- The Status and Checking Logs sections under Administration for each deployment type:
-    - [Single Node](../single-node/on-premises/admin.md#checking-the-status-of-services)
-    - [Elastic](../elastic/on-premises/admin.md#checking-the-status-of-services)
-    - [High Availability](../ha/on-premises/admin.md#checking-the-status-of-services)
+- [Status and health checks](../single-node/on-premises/admin.md#status)

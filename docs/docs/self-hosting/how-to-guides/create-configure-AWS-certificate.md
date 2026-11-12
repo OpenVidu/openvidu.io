@@ -57,34 +57,30 @@ The next page will display the certificate status. Here you will need to create 
     Try refreshing until the status changes to Issued (shown in green).
 
 
-Finally, when deploying the HA stack in CloudFormation, follow these steps:
+## Deploy the HA stack with the certificate
 
-=== "Configuration of Load Balancer"
+The High Availability template terminates TLS at a Network Load Balancer with the certificate you just created, so you pass its ARN to the deploy. Copy the **ARN** of the certificate (shown at the top of the certificate's page in AWS Certificate Manager) and give it to `ov stack deploy` as `--param OpenViduCertificateARN=…`, along with your domain:
 
+```bash
+ov stack deploy ha --cloud aws --aws-region <region> \
+  --edition pro --openvidu-pro-license <your-license> \
+  --deployment-type ha \
+  --domain-name yourdesiredname.yourdomain \
+  --param OpenViduCertificateARN=arn:aws:acm:<region>:<account>:certificate/<id> \
+  --mode auto
+```
 
-    ![Load Balancer configuration](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/load-balancer-config.png){ .round-corners loading=lazy }
+Because the load balancer terminates TLS with this ACM certificate, `--certificate-type` does not apply to an HA stack on AWS. For the full AWS deploy options (VPC, subnets and the rest), see [Deploy OpenVidu on AWS](../deployment-types.md#cloud-deployments).
 
-    These are parameters related to the certificate you just created.
+## Point the domain at the load balancer
 
-    You have to fill in the **`DomainName`** field with the domain name that appears in the certificate you created, the one that matches yourdesiredname.yourdomain mentioned earlier.
+When the deploy finishes, **point your domain at the load balancer**: nothing serves the domain until you do. In Route 53 (the Hosted Zone of your domain), create a record for `yourdesiredname.yourdomain`:
 
-    Next, for the **`OpenViduCertificateARN`**, you can find it at the top of the same page mentioned earlier; it is called **`ARN`**, as you can see in the image below.
+![Create Load Balancer record](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-lbrecord.png){ .round-corners loading=lazy }
 
-    ![ARN and domain location](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/domain-arn-location.png){ .round-corners loading=lazy }
-    /// caption
-    Domain name and ARN location
-    ///
+- Enable **Alias**.
+- In **subdomain**, enter the same value you used for `yourdesiredname` when creating the AWS certificate.
+- In **Choose endpoint**, select *Alias to Network Load Balancer*, and in **Choose Region** select the region where the stack is deployed.
+- In the field that appears, select the load balancer that belongs to the stack you deployed (its DNS name is the stack's `NLBDNS` output).
 
-When everything is up and running, you will need to create a new record in the Hosted Zone referring to the Load Balancer resource created in the stack.
-
-=== "Associating the Load Balancer"
-
-    ![Create Load Balancer record](../../../assets/images/platform/self-hosting/how-to-guides/create-configure-cert/create-lbrecord.png){ .round-corners loading=lazy }
-
-    Note that Alias is checked.
-
-    In **`subdomain`**, just enter the same value you used for yourdesiredname when creating the AWS certificate.
-    In **`Choose endpoint`**, select Alias to Network Load Balancer, and in **`Choose Region`**, select the region where the stack is deployed.
-    After selecting the endpoint and region, a new field will appear; select the load balancer that belongs to the stack you have deployed.
-
-    For the other fields, leave them as they are.
+For the other fields, leave them as they are.

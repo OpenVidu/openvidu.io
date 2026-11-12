@@ -40,7 +40,7 @@ In **OpenVidu Elastic** and **OpenVidu High Availability**, work is distributed 
 
 ### Rooms
 
-The Room allocation strategy can be configured in the [**`livekit.yaml`** configuration file](../configuration/changing-config.md#config-files). Specifically, property `node_selector` defines the strategy to select the Media Node where a new Room will be hosted:
+The Room allocation strategy can be configured in the [**`livekit.yaml`** configuration file](../configuration/changing-config.md#where-the-configuration-lives). Specifically, property `node_selector` defines the strategy to select the Media Node where a new Room will be hosted:
 
 ```yaml title="livekit.yaml"
 node_selector:
@@ -79,7 +79,7 @@ Upon a new Room creation request:
 !!! info
     Check out the [Egress reference](../../reference/egress.md) for every Egress type, output format and status value.
 
-The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). 
+The Egress allocation strategy can be configured in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#where-the-configuration-lives). 
 
 ```yaml title="egress.yaml"
 cpu_cost:
@@ -117,7 +117,7 @@ Upon a new Egress request:
         track_cpu_cost: 0.5
     ```
 
-    The minimum free disk space required is configured with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files). Set it to a negative value to disable the disk check altogether:
+    The minimum free disk space required is configured with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#where-the-configuration-lives). Set it to a negative value to disable the disk check altogether:
 
     ```yaml title="egress.yaml"
     openvidu:
@@ -143,7 +143,7 @@ Upon a new Egress request:
 By default the Egress service has the ability to **automatically kill active egresses under sustained high CPU load**. If a >95% CPU load is sustained over 10 seconds, the Egress service will automatically terminate the most CPU-intensive active egress.
 
 This helps prevent an egress process from overloading the entire Media Node.
-Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#config-files):
+Nonetheless, this feature can be disabled by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../configuration/changing-config.md#where-the-configuration-lives):
 
 ```yaml title="egress.yaml"
 openvidu:
@@ -157,7 +157,7 @@ openvidu:
 
 The Ingress allocation strategy is fixed and cannot be changed. Upon a new Ingress request:
 
-1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Ingress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Ingress (RTMP, WHIP, URL). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`ingress.yaml`** configuration file](../configuration/changing-config.md#config-files):
+1. First, OpenVidu filters eligible Media Nodes. A Media Node is eligible to host a new Ingress request if it has enough **free CPUs** to handle it. The amount of free CPUs required depends on the type of Ingress (RTMP, WHIP, URL). Sane defaults are provided by OpenVidu, but you can tweak these values by modifying the following properties in the [**`ingress.yaml`** configuration file](../configuration/changing-config.md#where-the-configuration-lives):
 
     ```yaml title="ingress.yaml"
     cpu_cost:
@@ -230,93 +230,41 @@ The deployment environment determines how the autoscaling is managed:
 
 ### Autoscaling in cloud providers
 
-When deploying in a supported **cloud provider** using our official templates, OpenVidu will automatically add and remove Media Nodes according to load. Depending on the cloud provider:
+When you deploy on a supported **cloud provider** with the [OpenVidu CLI](../openvidu-cli.md), the media nodes **autoscale by default**: the cloud's auto scaling group runs between a minimum and a maximum, and removes nodes gracefully when load drops. The minimum, the maximum and a fixed count are parameters of the cloud template, set at deploy time with `--param` and changed later with `ov stack deploy <name> --cloud <cloud> --param Name=Value` from the stack's directory, which updates the stack with the parameters that changed.
 
-=== ":fontawesome-brands-aws:{.icon .lg-icon .tab-icon} AWS"
+The parameter names differ by cloud:
 
-    Deploy OpenVidu using our official **CloudFormation** template:
+| Cloud | Minimum and maximum | Fixed count (`0` = autoscaling, the default) | Autoscaling mechanism |
+| --- | --- | --- | --- |
+| AWS | `MinNumberOfMediaNodes`, `MaxNumberOfMediaNodes` | `FixedNumberOfMediaNodes` | [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"} |
+| Azure | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | `fixedNumberOfMediaNodes` | [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target="_blank"} |
+| Google Cloud | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | `fixedNumberOfMediaNodes` | [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"} |
+| DigitalOcean | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | `fixedNumberOfMediaNodes` | [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} |
+| Oracle Cloud | `minNumberOfMediaNodes`, `maxNumberOfMediaNodes` | `fixedNumberOfMediaNodes` | [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} + [OCI Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm){:target="_blank"} |
 
-    - [OpenVidu Elastic in AWS](../elastic/aws/install.md)
-    - [OpenVidu High Availability in AWS](../ha/aws/install.md)
+Every cloud also takes `initialNumberOfMediaNodes` (how many nodes the first deploy starts with) and `scaleTargetCPU` (the target CPU utilization that triggers scaling). A `fixedNumberOfMediaNodes` greater than `0` runs exactly that many media nodes with no autoscaling, and the minimum, maximum and `scaleTargetCPU` are ignored.
 
-    The cluster scales automatically thanks to [AWS Auto Scaling Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html){:target="_blank"}. You can configure the Auto Scaling Group parameters when deploying the CloudFormation stack, in section **Media Nodes Autoscaling Group Configuration**.
+For example, raising the ceiling of an Elastic stack on AWS, or running exactly one media node on DigitalOcean:
 
-    --8<-- "self-hosting/aws/media-nodes-asg-config.md"
-  
-=== ":material-microsoft-azure:{.icon .lg-icon .tab-icon} Azure"
+```bash
+ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto -y
+ov stack deploy openvidu --cloud digitalocean --param fixedNumberOfMediaNodes=1 --mode auto -y
+```
 
-    Deploy OpenVidu using our official **ARM** template:
-
-    - [OpenVidu Elastic in Azure](../elastic/azure/install.md)
-    - [OpenVidu High Availability in Azure](../ha/azure/install.md)
-  
-    The cluster scales automatically thanks to [Azure Virtual Machine Scale Sets :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/){:target="_blank"}. You can configure the Scale Set parameters when deploying the ARM template, in section **Media Nodes Virtual Machine Scale Set (VMSS) Configuration**.
-
-    --8<-- "self-hosting/azure/media-nodes-asg-config.md"
-
-=== ":fontawesome-brands-google:{.icon .lg-icon .tab-icon} GCP"
-
-    Deploy OpenVidu using our official **Terraform** template:
-
-    - [OpenVidu Elastic in GCP](../elastic/gcp/install.md)
-    - [OpenVidu High Availability in GCP](../ha/gcp/install.md)
-
-    The cluster scales automatically thanks to [Managed Instance Groups :fontawesome-solid-external-link:{.external-link-icon}](https://docs.cloud.google.com/compute/docs/instance-groups#managed_instance_groups){:target="_blank"}. You can configure the MIG parameters when deploying the Terraform template, by adding the following input values:
-
-    | Input Value | Default Value | Description |
-    |---|---|---|
-    | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
-    | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-    | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-    | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
-    | fixedNumberOfMediaNodes | 0 | If greater than 0, deploys exactly that number of Media Nodes with no autoscaling (initialNumberOfMediaNodes, minNumberOfMediaNodes, maxNumberOfMediaNodes and scaleTargetCPU are ignored). 0 = use autoscaling. |
-
-=== ":fontawesome-brands-digital-ocean:{.icon .lg-icon .tab-icon} DigitalOcean"
-
-    Deploy OpenVidu using our official **Terraform** template:
-
-    - [OpenVidu Elastic in DigitalOcean](../elastic/digitalocean/install.md)
-    - [OpenVidu High Availability in DigitalOcean](../ha/digitalocean/install.md)
-
-    The cluster scales automatically thanks to an automated process using [DigitalOcean Functions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.digitalocean.com/products/functions/){:target="_blank"} (see [Custom scale-in strategy in Digital Ocean](../elastic/digitalocean/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-
-    | Input Value | Default Value | Description |
-    |---|---|---|
-    | initialNumberOfMediaNodes | 1 | Number of Media Nodes to create at initial deployment. On its first run the autoscaler scales the cluster straight to max(minNumberOfMediaNodes, initialNumberOfMediaNodes); afterwards it stays between min and max based on CPU load. Ignored when fixedNumberOfMediaNodes > 0. |
-    | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-    | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-    | scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
-    | fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
-
-=== ":custom-oracle-cloud-infrastructure:{.icon .lg-icon .tab-icon} OCI"
-
-    Deploy OpenVidu using our official **Terraform** template:
-
-    - [OpenVidu Elastic in Oracle Cloud Infrastructure](../elastic/oracle/install.md)
-    - [OpenVidu High Availability in Oracle Cloud Infrastructure](../ha/oracle/install.md)
-
-    The cluster scales automatically thanks to an [OCI Instance Pool :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/creatinginstancepool.htm){:target="_blank"} for scale-out, combined with an [OCI Function :fontawesome-solid-external-link:{.external-link-icon}](https://docs.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm){:target="_blank"} that triggers graceful scale-in actions (see [Custom scale-in strategy in Oracle Cloud Infrastructure](../elastic/oracle/install.md#custom-scale-in-strategy)). You can configure the autoscaling parameters when deploying the Terraform template, by adding the following input values:
-
-    | Input Value | Default Value | Description |
-    |---|---|---|
-    | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
-    | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
-    | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
-    | scaleTargetCPU | 50 | Target CPU percentage to scale up or down. |
-    | fixedNumberOfMediaNodes | 0 | Fixed number of media nodes to create (0 = use autoscaling). |
+A cloud media node that the autoscaler is about to terminate drains itself first, so autoscaling never cuts a live session: the node finishes its rooms before the machine is removed.
 
 ### Autoscaling On Premises
 
-When deploying an OpenVidu cluster **On Premises** you are responsible for monitoring the load of your Media Nodes and triggering the addition of new Media Nodes or removal of existing Media Nodes. Depending on your OpenVidu deployment type, you can do so like this:
+When you run an OpenVidu cluster **On Premises** you add and remove media nodes yourself. From the stack's directory, `ov stack join --ssh [user@]host --as media` joins a new media node over SSH, and a node is taken out gracefully by draining it. Depending on your OpenVidu deployment type:
 
 - For **OpenVidu Elastic On Premises**:
-    - [Add a new Media Node](../elastic/on-premises/admin.md#adding-media-nodes)
-    - [Removing Media Nodes gracefully](../elastic/on-premises/admin.md#removing-media-nodes-gracefully)
-    - [Removing Media Nodes forcefully](../elastic/on-premises/admin.md#removing-media-nodes-forcefully)
+    - [Add a media node](../elastic/on-premises/admin.md#add-a-media-node)
+    - [Take a node out](../elastic/on-premises/admin.md#take-a-node-out)
+    - [Graceful drain](../elastic/on-premises/admin.md#graceful-drain)
 - For **OpenVidu High Availability On Premises**:
-    - [Adding Media Nodes](../ha/on-premises/admin.md#adding-media-nodes)
-    - [Removing Media Nodes gracefully](../ha/on-premises/admin.md#removing-media-nodes-gracefully)
-    - [Removing Media Nodes forcefully](../ha/on-premises/admin.md#removing-media-nodes-forcefully)
+    - [Add a media node](../elastic/on-premises/admin.md#add-a-media-node)
+    - [Take a node out](../elastic/on-premises/admin.md#take-a-node-out)
+    - [Graceful drain](../elastic/on-premises/admin.md#graceful-drain)
 
 <div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Planning for a specific scale target?</h2>
