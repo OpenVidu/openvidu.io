@@ -1,6 +1,6 @@
 ---
 title: "Upgrade OpenVidu High Availability on-premises"
-description: "Upgrade an existing OpenVidu High Availability deployment on your own servers to a newer OpenVidu version, keeping its configuration and data."
+description: "Update an OpenVidu High Availability cluster on your own servers with the OpenVidu CLI, and convert an install.sh cluster, keeping its data."
 ---
 
 # Upgrade OpenVidu High Availability: On-premises
@@ -11,94 +11,33 @@ description: "Upgrade an existing OpenVidu High Availability deployment on your 
 
 </div>
 
-OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
+**A release of `ov` deploys the same release of OpenVidu.** Updating a stack means running the command with the `ov` of the version you want: [install that version](../../openvidu-cli.md#install-the-openvidu-cli) first.
 
-## Upgrading OpenVidu High Availability
+## Update the stack
 
-Upgrading OpenVidu High Availability is very simple. These are the steps you need to follow:
+Run `ov stack update` from the stack's directory, with the new `ov` on your `PATH`. The update changes OpenVidu, not the machines: the four masters, the media nodes and their sizes stay as they are.
 
-1. First, ensure you shut down OpenVidu High Availability. SSH into all the nodes and execute the following command:
+--8<-- "self-hosting/common/ov-update-pro.md"
 
-    ```bash
-    systemctl stop openvidu
-    ```
+## Migrate a deployment installed by install.sh
 
-2. SSH into your Master Nodes and your Media Nodes and execute on each of them the following command:
+With the cluster's nodes named, **`ov stack update`** converts, once, a High Availability cluster installed with the published `install.sh` (3.9.0) into the stack `ov` deploys, on the same machines, keeping the configuration with your edits, the certificates and the data. Run it from an empty directory. This is the same conversion as a [Single Node](../../single-node/upgrade.md#migrate-a-deployment-installed-by-installsh); only the node list and the data hand-over differ.
 
-    ```
-    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
-    ```
-
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
-
-3. In all the nodes, you will see the following output:
-
-    ```
-    Stopping OpenVidu service...
-    Backing up files...
-
-        - Backing up file '/opt/openvidu/config' to '/opt/openvidu/backups/<DATE>_<VERSION>/config'
-        ... More files ...
-
-    --------------------
-    📦 Backup directory: /opt/openvidu/backups/<DATE>_<VERSION>/
-    --------------------
-
-    --------------------
-    🚀 Updating OpenVidu from 3.x.x to 3.y.y
-    --------------------
-
-    ? Do you want to update from 3.x.x to 3.y.y? ›
-    • Yes
-      No
-    ```
-
-4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
-
-    For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
-
-    !!! warning
-        The updater will flag any deployment breaking changes if they are present. Pay special attention to these, as they may require you to update firewall rules, open or close specific ports, or perform other manual configuration changes.
-
-    !!! info "Pulling Docker images"
-        When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
-
-        Any missing images will be pulled automatically when you run `systemctl start openvidu`.
-
-5. After the last intermediate upgrade completes, execute the following command in all the nodes:
+`--ssh` names the master `ov` talks to, `--master-node` names the three other masters, and `--media-node` names each media node, both repeatable and both an address. The masters named must be **exactly the four** the cluster lists, none left out; the SSH user, key and port apply to every node:
 
 ```bash
-systemctl start openvidu && journalctl -f -u openvidu
+ov stack update ha --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key \
+  --master-node 10.0.0.6 --master-node 10.0.0.7 --master-node 10.0.0.8 \
+  --media-node 10.0.0.9 --dry-run
 ```
 
-The `journalctl` command will show you the logs of the OpenVidu services. You can stop the logs by pressing `Ctrl + C`.
+The cluster becomes Kubernetes on the same machines, converted in order: every other node stopped, then the master `ov` talks to, Kubernetes installed on it, OpenVidu deployed, and the rest of the nodes joining (masters first, then media).
 
-## Backups and Rollback
+**The data is handed over to the chart.** HA's masters share the cluster's data, and the chart gives each store its own pods, so the data is **copied out and loaded in**, not left in place: with the installed stack still running, `ov` dumps MongoDB, Redis's RDB and the MinIO application bucket into `/opt/openvidu/data/migrate`, and once the chart is installed and the masters have joined, three pods restore them into the cluster's data services (you will see `▶ Hand the data over to the chart…` in the output). What clients write between the copy and the stop is what is lost: seconds. Grafana's own data is not carried in HA, and the logs and metrics of the `observability` module start anew. On test machines a High Availability conversion took about 20 minutes.
 
-When you finish the upgrade process on each node, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. The backup only contains the previous configuration files that have changed in the upgrade process.
-To roll back to the previous version, you have to copy the files from the backup to the OpenVidu directory. You can do it with the following command:
+A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), a cluster of a size other than the chart's four masters is refused (exit `4`), a node without the disk space it needs stops it (exit `9`), and a failure before `helm install` rolls it back to the unchanged 3.9.0. Because the images become this `ov`'s, converting with the `ov` of the release you want is also the update to it.
 
-```bash
-cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu
-```
+## Next steps
 
-Where `<DATE>` and `<VERSION>` are the date and version of the backup you want to restore. For example:
-
-```
-cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
-```
-
-You need to do this in all the nodes of your OpenVidu High Availability deployment to restore to the previous version.
-
-## Recommendations
-
-- Always upgrade all nodes in your OpenVidu High Availability deployment. Running mismatched versions across nodes may cause compatibility issues.
-- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
-- Keep your Docker and Docker Compose versions up to date.
-- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
-
-  ```bash
-  docker image prune -a
-  ```
-
-  This command removes all images that are not currently in use by any container.
+- [Administer the cluster](admin.md): join and drain nodes, operate the stack.
+- The full [OpenVidu CLI reference](../../openvidu-cli.md#command-reference).

@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu Elastic on-premises"
-description: "Administer OpenVidu Elastic on your own servers: start and stop services, add Media Nodes, change the configuration and back up its data."
+description: "Administer OpenVidu Elastic on your own servers with the OpenVidu CLI: add and drain media nodes, operate the stack, and back up its data."
 ---
 
 # OpenVidu Elastic administration: On-premises
@@ -12,101 +12,59 @@ description: "Administer OpenVidu Elastic on your own servers: start and stop se
 </div>
 
 
-The OpenVidu installer offers an easy way to deploy OpenVidu Elastic on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
+An Elastic stack is operated with the same commands as a Single Node: **[the operations reference](../../single-node/on-premises/admin.md)** covers status, describe, the health test, logs, ports, start/stop/restart, configuration, modules, operating from another machine and destroy, all from the stack's directory. On a PRO stack, `ov stack status` lists every service with the nodes it runs on, and each node's disk. This page covers what is specific to a multi-node stack: adding and removing media nodes.
 
-This section provides details on configuration parameters and common administrative tasks for on-premises OpenVidu Elastic deployments.
+## Add a media node { #add-a-media-node }
 
-## Starting, stopping, and restarting OpenVidu
+Elastic scales by adding media nodes. From the stack's directory, `ov stack join` enrolls a new machine as a media node. There are three ways to run it:
 
-To start, stop, or restart any Node in your OpenVidu Elastic deployment, you can use the following commands:
-
-**Start OpenVidu**
-
-```bash
-sudo systemctl start openvidu
-```
-
-**Stop OpenVidu**
-
-```bash
-sudo systemctl stop openvidu
-```
-
-**Restart OpenVidu**
-
-```bash
-sudo systemctl restart openvidu
-```
-
-
-## Checking the status of services
-
-You can check the status of the OpenVidu services using the following command:
-
-```bash
-cd /opt/openvidu/
-docker compose ps
-```
-
-Depending on the node type, you will see different services running.
-
-=== "Master Node"
-
-    The services are operating correctly if you see an output similar to the following and there are no restarts from any of the services:
+- **Over SSH** (the usual way): `ov stack join --ssh ubuntu@<media-node> --as media`. `ov` reads the join address and token from the master, checks the ports, installs the node agent and joins the machine, returning once the stack sees it ready. See [Join a media node](install.md#join-a-media-node).
+- **On the machine itself**: run `ov stack join --this-node --as media` on the node (as root). It takes the address and token from the master; get them there with `ov stack join-info`, which prints `OPENVIDU_JOIN_ADDRESS` and `OPENVIDU_JOIN_TOKEN` (treat the token as a secret). Pipe them so the token touches no file or command line:
 
     ```bash
-    NAME                       IMAGE                                              COMMAND                  SERVICE                    CREATED          STATUS
-    meet                       docker.io/openvidu/openvidu-meet                   "docker-entrypoint.s…"   openvidu-meet              12 seconds ago   Up 10 seconds
-    caddy                      docker.io/openvidu/openvidu-pro-caddy              "/bin/caddy run --co…"   caddy                      12 seconds ago   Up 10 seconds
-    dashboard                  docker.io/openvidu/openvidu-pro-dashboard          "./openvidu-dashboard"   dashboard                  12 seconds ago   Up 10 seconds
-    grafana                    docker.io/grafana/grafana                          "/run.sh"                grafana                    11 seconds ago   Up 8 seconds
-    loki                       docker.io/grafana/loki                             "/usr/bin/loki -conf…"   loki                       11 seconds ago   Up 9 seconds
-    mimir                      docker.io/grafana/mimir                            "/bin/mimir -config.…"   mimir                      11 seconds ago   Up 9 seconds
-    minio                      docker.io/bitnami/minio                            "/opt/bitnami/script…"   minio                      11 seconds ago   Up 9 seconds
-    mongo                      docker.io/mongo                                    "docker-entrypoint.s…"   mongo                      11 seconds ago   Up 9 seconds
-    openvidu-v2compatibility   docker.io/openvidu/openvidu-v2compatibility        "/bin/server"            openvidu-v2compatibility   12 seconds ago   Up 10 seconds
-    operator                   docker.io/openvidu/openvidu-operator               "/bin/operator"          operator                   12 seconds ago   Up 10 seconds
-    alloy                      docker.io/grafana/alloy                            "/usr/bin/alloy -…"      alloy                      11 seconds ago   Up 9 seconds
-    redis                      docker.io/redis                                    "docker-entrypoint.s…"   redis                      12 seconds ago   Up 10 seconds
+    ssh <master> sudo ov stack join-info | ssh <media-node> sudo ov stack join --this-node --as media --join-info -
     ```
 
-=== "Media Node"
+- **Review the commands first**: `ov stack join --ssh ubuntu@<media-node> --as media --mode assisted` prints the commands that join the machine and runs nothing. (`--this-node` refuses `--mode assisted`.)
 
-    The services are operating correctly if you see an output similar to the following and there are no restarts from any of the services:
+`--as master` is refused on an Elastic stack: its one master is the deployed node, so another machine joins `--as media`. On a cloud stack the media nodes autoscale instead; see [Autoscaling](../../production-ready/scalability.md#autoscaling).
 
-    ```bash
-    NAME         IMAGE                                          COMMAND                  SERVICE      CREATED          STATUS
-    egress       docker.io/livekit/egress                       "/entrypoint.sh"         egress       53 seconds ago   Up 51 seconds
-    ingress      docker.io/livekit/ingress                      "ingress"                ingress      53 seconds ago   Up 52 seconds
-    openvidu     docker.io/openvidu/openvidu-server-pro         "/livekit-server --c…"   openvidu     53 seconds ago   Up 52 seconds
-    prometheus   docker.io/prom/prometheus                      "/bin/prometheus --c…"   prometheus   53 seconds ago   Up 51 seconds
-    alloy        docker.io/grafana/alloy                        "/usr/bin/alloy -…"      alloy        53 seconds ago   Up 52 seconds
-    ```
+## Take a node out { #take-a-node-out }
 
---8<-- "self-hosting/on-premises/openvidu-pro-checking-logs.md"
+`join` leaves `ov` on the server, so the server can leave by itself. Log in to it and drain it:
 
-## Adding Media Nodes
-
-To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](install.md#media-node) on the new Media Node.
-
---8<-- "self-hosting/on-premises/openvidu-pro-removing-media-nodes.md"
-
-## Changing the configuration
-
-You can check how to change the configuration in the [Changing Configuration](../../configuration/changing-config.md) section. Also, there are multiple guides in the [How to Guides](../../how-to-guides/index.md) section that can help you with specific configuration changes.
-
-## Uninstalling OpenVidu
-
-To uninstall any OpenVidu Node, just execute the following commands:
-
-```bash
-sudo su
-systemctl stop openvidu
-rm -rf /opt/openvidu/
-rm /etc/systemd/system/openvidu.service
-rm /etc/sysctl.d/50-openvidu.conf
+```console
+$ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
+⏳ draining node-172-30-0-102: no new rooms come here; waiting, with no time limit, for the ones it holds
+  still serving after 0s: openvidu-elastic/ov-egress-xrcqw openvidu-elastic/ov-ingress-bfxwl openvidu-elastic/ov-livekit-server-4mhmv
+✔ node-172-30-0-102 has no sessions left.
+✔ this machine left the stack.
 ```
 
-## Backup and Restore
+- `ov stack leave --this-node` stops the node agent so the stack sees the node leave and stops scheduling on it.
+- `--uninstall` also removes the node agent (the same server can join again later).
+- `--drain` (media nodes) leaves **gracefully**.
+
+## Graceful drain { #graceful-drain }
+
+A media node that is being removed must not drop the rooms, recordings or ingests it holds. With `--drain`, the stack stops sending new rooms to the node, and the command waits, **with no time limit**, until everything the node holds has ended, then leaves. The stack deletes the node afterwards. If the command is interrupted, the node keeps draining, and running it again resumes the wait.
+
+A cloud media node that the autoscaler is about to terminate runs exactly this on its own. That is why autoscaling never cuts a live session: the node finishes its rooms before the machine is removed.
+
+## Destroy
+
+`ov stack destroy` from the stack's directory uninstalls OpenVidu from the cluster and keeps the machines as they are; the node agent stays on each server, and the joined nodes stay in the cluster:
+
+```console
+$ ov stack destroy -y
+uninstalling OpenVidu…
+removing the stack's resources…
+stack removed
+✔ removed stack "el" from this directory
+```
+
+To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. See the [Destroy](../../single-node/on-premises/admin.md#destroy) section for the flags.
+
+## Backup and restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

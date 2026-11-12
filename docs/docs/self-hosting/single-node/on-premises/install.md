@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu Single Node on-premises"
-description: "Deploy OpenVidu Single Node COMMUNITY or PRO on your own servers with the guided installer, non-interactively or with plain Docker Compose."
+description: "Deploy OpenVidu Single Node COMMUNITY or PRO on your own Linux servers with the OpenVidu CLI, over SSH or on the machine itself."
 ---
 
 # OpenVidu Single Node installation: On-premises
@@ -12,7 +12,9 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on your own servers w
 </div>
 
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on-premises, in either the COMMUNITY or PRO edition. It is based on Docker and Docker Compose, which automatically configure all necessary services for OpenVidu to work properly.
+Deploy OpenVidu Single Node on your own Linux server with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). `ov` installs and starts the stack over SSH, or on the machine it runs on, and generates every credential. It also leaves a copy of itself on the node, so you can operate the stack from the node as well as from the stack's directory on your machine.
+
+Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes, with OpenVidu as a Helm release. **The edition is the only decision you make**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. [How OpenVidu is deployed](../../deployment-types.md#how-openvidu-is-deployed) explains the model (one stack per directory, auto and assisted modes, COMMUNITY and PRO).
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
@@ -35,583 +37,269 @@ All services are deployed on a single machine, which includes:
 - **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 - **OpenVidu V2 Compatibility (v2compatibility module)** **PRO**{ .openvidu-tag .openvidu-pro-tag } is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
 
-## Prerequisites
+## Requirements { #requirements }
 
-Before starting the installation process, make sure you have the following prerequisites:
+- One **Linux server** (Ubuntu recommended), with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, size it as the cloud templates do by default: 4 vCPU and 8 GB.
+- A sudo-capable user on the server, reachable over SSH. Nothing else needs to be pre-installed: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
+- A **domain** pointing at the server, and a **certificate type**:
+    - `letsencrypt` or `zerossl`: a certificate obtained automatically (requires port 80 to be reachable).
+    - `owncert`: bring your own, with `--owncert-public-key` and `--owncert-private-key`.
+    - `selfsigned`: for a throwaway deployment.
 
-- **A machine with at least 4GB RAM and 4 CPU cores** and **Linux installed (Ubuntu recommended)**.
-- **Generous disk space (100GB recommended)** if you are going to record your sessions.
-- The machine **must have a Public IP**. An FQDN (Fully Qualified Domain Name) is optional. If not provided, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it.
+    A server without a `--domain-name`, if it has a public IPv4 address, derives an `sslip.io` name from it so Let's Encrypt has a name to certify.
+- The [ports OpenVidu needs](#port-rules) reachable. `ov` checks them before it installs anything ([Check the ports first](#check-the-ports)).
+- The [OpenVidu CLI](../../openvidu-cli.md#install-the-openvidu-cli) on the machine you deploy from.
+- For PRO, your **OpenVidu PRO license** (`--openvidu-pro-license`): [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get one; there is a 15-day free trial.
 
-## Port rules
+## Port rules { #port-rules }
 
-Ensure all these rules are configured in your firewall, security group, or any network configuration on your machine.
-
-**Inbound port rules**:
-
-| Protocol    | Ports          | <div class="w-8em">Source</div>          | Description                                                |
-| ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-| TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
-| TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
-| UDP         | 443            | 0.0.0.0/0, ::/0 | STUN/TURN server over UDP. |
-| TCP         | 1935           | 0.0.0.0/0, ::/0 | Needed if you want to ingest RTMP streams using Ingress service. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with the Pion engine. |
-| UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
-| TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
-| UDP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | WebRTC Media traffic. |
-| TCP         | 50000 - 60000  | 0.0.0.0/0, ::/0 | **PRO**{ .openvidu-tag .openvidu-pro-tag } (Optional) Needed for WebRTC media traffic over TCP with the Mediasoup engine. Without it, clients that cannot use UDP relay their media through TURN. |
-
-??? warning "Make sure the proper ports are opened in the internal Linux firewall!"
-
-    If a Linux machine has an internal firewall installed, make sure you open the proper ports. For Ubuntu, you can follow these instructions:
-
-    1. Execute the following commands to install firewall-cmd and start it in the machine.
-    ```
-    sudo apt install firewalld -y
-    systemctl enable firewalld
-    systemctl start firewalld
-
-    ```
-    2. Execute the following commands to clear the iptables rules, accept all input, and deactivate iptables at startup:
-    ```
-    sudo iptables -F
-    sudo iptables -P INPUT ACCEPT
-
-    ```
-    3. Execute the following commands to add the firewall rules:
-    ```
-    firewall-cmd --add-port=80/tcp
-    firewall-cmd --permanent --add-port=80/tcp
-
-    ```
-    ```
-    firewall-cmd --add-port=443/tcp
-    firewall-cmd --permanent --add-port=443/tcp
-
-    ```
-    ```
-    firewall-cmd --add-port=443/udp
-    firewall-cmd --permanent --add-port=443/udp
-
-    ```
-    ```
-    firewall-cmd --add-port=1935/tcp
-    firewall-cmd --permanent --add-port=1935/tcp
-
-    ```
-    ```
-    firewall-cmd --add-port=7881/tcp
-    firewall-cmd --permanent --add-port=7881/tcp
-
-    ```
-    ```
-    firewall-cmd --add-port=7885/udp
-    firewall-cmd --permanent --add-port=7885/udp
-
-    ```
-    ```
-    firewall-cmd --add-port=9000/tcp
-    firewall-cmd --permanent --add-port=9000/tcp
-
-    ```
-    ```
-    firewall-cmd --add-port=50000-60000/udp
-    firewall-cmd --permanent --add-port=50000-60000/udp
-
-    ```
-
-    PRO only, optional: to allow WebRTC media over TCP with the Mediasoup engine:
-    ```
-    firewall-cmd --add-port=50000-60000/tcp
-    firewall-cmd --permanent --add-port=50000-60000/tcp
-
-    ```
-
-    Finish with the following commands to apply the rules and verify they are correct:
-    ```
-    firewall-cmd --reload
-    firewall-cmd --runtime-to-permanent
-
-    ```
-    ```
-    firewall-cmd --list-all
-
-    ```
-
-**Outbound port rules**:
-
-Typically, all outbound traffic is allowed.
-
-## Guided Installation
-
-Before the installation, ensure that your machine meets the [prerequisites](#prerequisites) and the [port rules](#port-rules). Then, execute the following command on the machine where you want to deploy OpenVidu:
+These are the inbound ports `ov` checks on a single node, with the names `ov` prints for them. Open them in your firewall, security group, or any network configuration on the machine.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh)
-    ```
-
-    --8<-- "self-hosting/common/install-version.md"
-
-    A wizard will guide you through the installation process. You will be asked for the following information:
-
-    - **Domain name** (Optional): The domain name for your deployment. If left empty, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it. For production environments, it's recommended to provide your own FQDN.
-    - **Select which certificate type to use**:
-        - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
-        - _Let's Encrypt_: It will automatically generate a certificate for your domain.
-        - _ZeroSSL_: It will automatically generate a certificate for your domain using ZeroSSL. An API Key is required and will be asked later in the wizard. **Note**: This option is only available when providing an FQDN (Fully Qualified Domain Name).
-        - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them. **Note**: This option is only available when providing an FQDN (Fully Qualified Domain Name).
-
-        !!! Note
-            If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
-
-    - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
-        - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
-        - _Observability_: Grafana stack, which includes logs and monitoring stats.
-
-    The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
-
-    When the installation process finishes, you will see the following message:
-
-    ```
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    >                                                                             <
-    >  🎉 OpenVidu Community Installation Finished Successfully! 🎉               <
-    >                                                                             <
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    ```
+    | Port | Scope | Level | Description |
+    | --- | --- | --- | --- |
+    | `443/tcp` | public | required | Caddy: LiveKit API, OpenVidu Dashboard, OpenVidu Meet, WHIP API, TURN with TLS, custom layouts. |
+    | `443/udp` | public | recommended | OpenVidu LiveKit Server: STUN/TURN over UDP. |
+    | `80/tcp` | public | recommended | Caddy: HTTP-to-HTTPS redirect and Let's Encrypt validation. |
+    | `50000-60000/udp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over UDP. |
+    | `7881/tcp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over TCP (fallback when UDP is blocked). |
+    | `22/tcp` | admin | required | SSH: the port `ov` administers the stack through. |
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh)
-    ```
+    | Port | Scope | Level | Description |
+    | --- | --- | --- | --- |
+    | `443/tcp` | public | required | Caddy: LiveKit API, OpenVidu Dashboard, OpenVidu Meet, WHIP API, TURN with TLS, custom layouts. |
+    | `443/udp` | public | recommended | OpenVidu LiveKit Server: STUN/TURN over UDP. |
+    | `80/tcp` | public | recommended | Caddy: HTTP-to-HTTPS redirect and Let's Encrypt validation. |
+    | `50000-60000/udp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over UDP. |
+    | `7881/tcp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over TCP (fallback when UDP is blocked). |
+    | `6443/tcp` | admin | required | Stack remote admin control protocol: the port your machine administers the PRO stack through. |
+    | `22/tcp` | admin | required | SSH: the port `ov` reaches the node through to install it. |
 
-    --8<-- "self-hosting/common/install-version.md"
+    On PRO, the node's own firewall must also let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it, or the pods cannot reach the cluster API, LiveKit or the kubelet.
 
-    A wizard will guide you through the installation process. You will be asked for the following information:
+With the `ingress` module, also open `1935/tcp` (RTMP ingest) and `7885/udp` (WHIP). Outbound traffic is typically all allowed.
 
-    - **Domain name** (Optional): The domain name for your deployment. If left empty, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it. For production environments, it's recommended to provide your own FQDN.
-    - **Select which certificate type to use**:
-        - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
-        - _Let's Encrypt_: It will automatically generate a certificate for your domain.
-        - _ZeroSSL_: It will automatically generate a certificate for your domain using ZeroSSL. An API Key is required and will be asked later in the wizard. **Note**: This option is only available when providing an FQDN (Fully Qualified Domain Name).
-        - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them. **Note**: This option is only available when providing an FQDN (Fully Qualified Domain Name).
+## Check the ports first { #check-the-ports }
 
-        !!! Note
-            If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
+The most common reason an on-premises OpenVidu "does not work" is a stack that comes up perfectly but has no media: every service is healthy, yet UDP never reaches the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. This verifies both TCP *and* UDP, which probing a running stack cannot do.
 
-    - **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
-    - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
-        - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
-        - _Observability_: Grafana stack, which includes logs and monitoring stats.
-        - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
-    - **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](../../production-ready/performance.md).
+```console
+$ ov stack check-ports --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+    --domain-name 172-30-0-96.openvidu-local.dev
+checking the inbound ports of 172.30.0.96…
+read-node: reading what is already bound and what the firewall allows
+listener: the node's python3 is holding 9 port(s) for us
+probe: probing 172-30-0-96.openvidu-local.dev: 3 TCP, 6 UDP
+checked in 4.6s
+Inbound ports of 172-30-0-96.openvidu-local.dev (172.30.0.96)
+  state     fresh — nothing of ours is deployed here, so every port was free to measure
+  method    a temporary listener on the node (its own python3; nothing written to disk)
+  verdict   3 of 6 checked port(s) do NOT reach the node: 443/udp, 50000-60000/udp, 7881/tcp
 
-    The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
+Required
+  the stack does not work without these
+  ✓ 443/tcp           open
+      Caddy — the probe arrived at the node — the whole path is open
+  ✓ 22/tcp            open
+      SSH — ov is connected to the node over SSH
 
-    When the installation process finishes, you will see the following message:
-
-    ```
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    >                                                                             <
-    >  🎉 OpenVidu Single Node PRO Installation Finished Successfully! 🎉         <
-    >                                                                             <
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    ```
-
-OpenVidu will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
-
-```bash
-systemctl start openvidu
+Recommended
+  it works without these, but every call is worse
+  ! 443/udp           dropped · host-firewall
+      OpenVidu LiveKit Server — the ufw firewall on the node drops it (deny (incoming), allow (outgoing), allow (routed))
+      Participants behind restrictive networks are relayed over TURN/TLS on 443/tcp instead of UDP.
+      fix (on the node): sudo ufw allow 443/udp
+  ! 50000-60000/udp   dropped · host-firewall
+      OpenVidu LiveKit Server — the ufw firewall on the node drops it (deny (incoming), allow (outgoing), allow (routed)) [sampled: 50000, 52500, 55000, 57500, 60000]
+      Media is relayed through TURN on 443, which adds latency and load and lowers quality under load.
+      fix (on the node): sudo ufw allow 50000:60000/udp
+…
 ```
 
-If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
+The fix is printed, never run: `ov` reads firewalls, it does not change them. Here only recommended ports fail, so the check warns and exits `0`; if a required port fails, it exits `8`. The report goes on to check the DNS name and that the node reaches the registries the deploy pulls from. The same check runs automatically before every remote deploy (`--skip-port-check` turns it off). See [Status and health checks](admin.md#ports) for the full report and its options.
 
-- OpenVidu Meet: `https://openvidu.example.io/`
-- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
-- MinIO: `https://openvidu.example.io/minio-console`
-- Grafana: `https://openvidu.example.io/grafana`
+## Deploy
+
+Each stack lives in its own empty directory on your machine. Choose the edition. The examples use a domain that resolves to a private address, so they bring their own certificate (`owncert`; a path to a PEM file, a base64 PEM or the PEM itself), kept here in `~/certs/`. On a server reachable from the internet on port 80, `--certificate-type letsencrypt` obtains one automatically, and `selfsigned` is enough for a throwaway deployment.
+
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    ```console
+    $ mkdir ov-ce && cd ov-ce
+    $ ov stack deploy web \
+      --environment on-premises \
+      --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+      --domain-name 172-30-0-96.openvidu-local.dev \
+      --certificate-type owncert \
+      --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
+      --mode auto
+    note: generated 11 credential(s) and pinned them in this stack's spec, so a later deploy reuses them instead of replacing them: livekit-api-key, livekit-api-secret, redis-password, minio-access-key, minio-secret-key, mongo-admin-password, mongo-replica-set-key, dashboard-admin-password, grafana-admin-password, meet-initial-admin-password, meet-initial-api-key
+    checking the inbound ports before installing anything…
+      Ports of 172.30.0.96 (Community single node)
+      PORT             SCOPE   LEVEL        STATE  TO OPEN
+      443/tcp          public  required     open
+      443/udp          public  recommended  open
+      80/tcp           public  recommended  open
+      50000-60000/udp  public  recommended  open
+      7881/tcp         public  recommended  open
+      22/tcp           admin   required     open
+      all 6 checked port(s) arrive at the node
+    ✓ [172.30.0.96 single] if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then echo 'docker and the compose plugin are already installed'; else curl -fsSL https://get.docker.com -o /tmp/get-docker.sh && sh /tmp/get-docker.sh && rm -f /tmp/get-docker.sh; fi && systemctl enable --now docker
+    ✓ [172.30.0.96 single] write 44 files to /opt/openvidu (docker-compose.yaml, config/, .ov/base/)
+    ✓ [172.30.0.96 single] write 2 host files (/etc/systemd/system/openvidu.service, /etc/sysctl.d/50-openvidu.conf)
+    ✓ [172.30.0.96 single] install this CLI at /usr/local/bin/ov
+    ✓ [172.30.0.96 single] render config/ into data/runtime/ (ov stack render) — 21 created, 0 updated, 1 unchanged, 0 removed
+    ✓ [172.30.0.96 single] docker compose --env-file data/runtime/compose.env pull --quiet
+    ✓ [172.30.0.96 single] systemctl restart openvidu
+    deploy completed successfully
+    wrote spec to openvidu-stack.yml
+    ✔ stack "web" recorded in this directory
+    ✔ published /opt/openvidu/stack/context.yaml (recover this stack's directory elsewhere with `ov stack import --ssh ubuntu@<host>`)
+    ✔ the node operates this stack itself (`sudo ov stack status` there)
+    waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deployment keeps running)…
+      ⏳ still starting: caddy, openvidu, dashboard, meet, grafana (0s)
+      ⏳ still starting: openvidu, dashboard, meet, grafana (5s)
+      ⏳ still starting: openvidu, dashboard, meet (10s)
+      ⏳ still starting: openvidu (15s)
+    ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
+
+    Inbound ports
+      all 6 checked port(s) arrive at the node
+      measured from the node's own network: this says nothing about the internet path
+      full report: ov stack check-ports
+    ```
+
+    Plain Docker Compose and a systemd unit: no installer image, no operator. The ports are checked before anything is installed, and every credential is generated and **pinned** in `openvidu-stack.yml`, so a later deploy reuses them instead of locking the stack out of its data.
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    The only difference from Community is `--edition pro` and the license; everything else follows from it.
+
+    ```console
+    $ mkdir ov-pro && cd ov-pro
+    $ ov stack deploy prod \
+      --edition pro --environment on-premises \
+      --ssh ubuntu@172.30.0.101 --ssh-key ~/.ssh/id_ed25519 \
+      --openvidu-pro-license <your-license> \
+      --domain-name 172-30-0-101.openvidu-local.dev \
+      --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
+      --mode auto
+
+    ▶ Connect to the VM…
+       · open an SSH session and check root/sudo access
+       ✓ Connect to the VM
+
+    ▶ Check the inbound ports…
+       · bind the ports on the node and probe them from here (nothing is installed yet, so UDP is verifiable)
+           Ports of 172.30.0.101 (Pro single node)
+           PORT             SCOPE   LEVEL        STATE  TO OPEN
+           443/tcp          public  required     open
+           443/udp          public  recommended  open
+           80/tcp           public  recommended  open
+           50000-60000/udp  public  recommended  open
+           7881/tcp         public  recommended  open
+           6443/tcp         admin   required     open
+           22/tcp           admin   required     open
+           ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
+       ✓ Check the inbound ports
+
+    ▶ Install the OpenVidu node agent…
+       · upload the OpenVidu node-agent installer
+       · run the node agent installer (k3s v1.36.4+k3s1)
+       ✓ Install the OpenVidu node agent
+
+    ▶ Deploy OpenVidu…
+       · fetch the node's credentials
+       · read the stack's configuration
+       · generate the deployment
+       · write the stack values (domain, TLS, modules, credentials)
+       · create the configuration documents (openvidu.yaml and the service files)
+       · install OpenVidu (reusing the existing credentials on a redeploy)
+       ✓ Deploy OpenVidu
+
+    ▶ Leave the OpenVidu CLI on the node…
+       · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
+       · give the node its own stack directory
+       ✓ Leave the OpenVidu CLI on the node
+
+    ▶ Check access from outside…
+       · reach https://172-30-0-101.openvidu-local.dev/ (services may still be starting)
+       ✓ Check access from outside
+
+    ✔ deploy completed.
+    wrote spec to openvidu-stack.yml
+    ✔ stack "prod" recorded in this directory
+
+    Inbound ports
+      all 7 checked port(s) arrive at the node
+      measured from the node's own network: this says nothing about the internet path
+      full report: ov stack check-ports
+    ```
+
+    Kubernetes, with OpenVidu as a Helm release. The node needs nothing pre-installed: the node agent and the software it installs come inside `ov`. Services come up over a few minutes after the deploy returns; [`ov stack status --wait`](admin.md#status) blocks until they are ready.
+
+### The port preflight { #the-port-preflight }
+
+Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them, and prints a table of them (`checking the inbound ports before installing anything…` in the output above). If a **required** port is closed (or, on PRO, the node's firewall drops the pod and service networks), the deploy stops with **exit code 6** and prints the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` never runs it (reachability cannot be verified from the node itself).
+
+### Deploying again { #deploying-again }
+
+A deploy to a node that already runs OpenVidu says so and keeps its data: it rewrites `docker-compose.yaml` and `config/` from `openvidu-stack.yml` (your `docker-compose.override.yaml` stays) and reuses the credentials the data was written with:
+
+```text
+172.30.0.96 already runs OpenVidu on 172-30-0-96.openvidu-local.dev (currently stopped). Deploying again rewrites its files from the spec and restarts it.
+  · Its docker-compose.yaml and config/ are rewritten from the spec you are deploying; docker-compose.override.yaml is kept.
+  · Its data is kept — nothing deletes MongoDB, MinIO or recordings.
+  · The credentials in your spec are reused, so the kept data stays readable.
+```
+
+A remote deploy asks which mode to use unless you pass `--mode auto` or `--mode assisted`; with `--non-interactive`, `--mode` is required.
+
+## Install on the server itself { #install-on-the-server-itself }
+
+Instead of `--ssh`, put `ov` on the server, log in, and deploy with **`--this-node`** (*the machine I am running on*). The CLI writes the deployment there and escalates with `sudo`, so a user with passwordless sudo is enough. A `--this-node` stack lives in `/opt/openvidu/stack`:
+
+```console
+$ sudo ov stack deploy web --environment on-premises --this-node \
+  --domain-name 172-30-0-96.openvidu-local.dev \
+  --certificate-type selfsigned
+…
+✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
+```
+
+Either way the server ends up operable from itself: a deploy from your laptop, as its last step, leaves the CLI and a stack directory of its own on the node, so `sudo ov stack status` works there with no directory to name.
+
+## Review the commands first: assisted mode { #assisted-mode }
+
+`--mode assisted` runs **nothing** on the server. It writes the same files and prints the same commands, step by step, for you to review and run yourself. Add it to any deploy above:
+
+```bash
+ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
+  --domain-name 172-30-0-96.openvidu-local.dev --certificate-type selfsigned --mode assisted
+```
+
+Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
 
 ## Configure your application to use the deployment
 
-To point your applications to your OpenVidu deployment, check the following files:
-
-- `/opt/openvidu/config/meet.env`: Contains the OpenVidu Meet parameters.
-- `/opt/openvidu/config/openvidu.env`: Contains all the credentials of services deployed with OpenVidu Platform.
-
-The most relevant parameters are:
-
---8<-- "self-hosting/on-premises/credentials-general.md"
-
---8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
-
-## Non-interactive installation
-
-If you want to automate the installation process, you can generate a command with all the parameters needed to install OpenVidu by answering the wizard questions. You can do this by running the following command:
-
-```
-docker run --pull always --rm -it \
-    openvidu/openvidu-installer:latest \
-    --deployment-type=single_node
-```
-
---8<-- "self-hosting/common/install-version.md"
-
-This is going to generate a command like this, but it may vary depending on the answers you provide. Here are examples of the command you can run depending on the certificate type and domain configuration:
-
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-    === "Without Domain Name"
-
-        === "Let's Encrypt certificates"
-
-            Example using Let's Encrypt certificates without a domain name (the public IP is used as the domain name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --enabled-modules='observability,openviduMeet' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='letsencrypt'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-        === "Self-signed certificates"
-
-            Example using self-signed certificates without a domain name (the public IP is used as the domain name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --enabled-modules='observability,openviduMeet' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='selfsigned'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-    === "With Domain Name"
-
-        === "Let's Encrypt certificates"
-
-            Example using Let's Encrypt certificates with an FQDN (Fully Qualified Domain Name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --domain-name='openvidu.example.io' \
-                --enabled-modules='observability,openviduMeet' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='letsencrypt'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-        === "Self-signed certificates"
-
-            Example using self-signed certificates with an FQDN (Fully Qualified Domain Name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --domain-name='openvidu.example.io' \
-                --enabled-modules='observability,openviduMeet' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='selfsigned'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-        === "Custom certificates"
-
-            Example using custom certificates with an FQDN (Fully Qualified Domain Name):
-
-            ```bash
-            CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
-            CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
-
-            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --domain-name='openvidu.example.io' \
-                --enabled-modules='observability,openviduMeet' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='owncert' \
-                --owncert-private-key="$CERT_PRIVATE_KEY" \
-                --owncert-public-key="$CERT_PUBLIC_KEY"
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-    === "Without Domain Name"
-
-        === "Let's Encrypt certificates"
-
-            Example using Let's Encrypt certificates without a domain name (the public IP is used as the domain name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='letsencrypt'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-
-        === "Self-signed certificates"
-
-            Example using self-signed certificates without a domain name (the public IP is used as the domain name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='selfsigned'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-
-    === "With Domain Name"
-
-        === "Let's Encrypt certificates"
-
-            Example using Let's Encrypt certificates:
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --domain-name='openvidu.example.io' \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='letsencrypt'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-
-        === "Self-signed certificates"
-
-            Example using self-signed certificates:
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --domain-name='openvidu.example.io' \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='selfsigned'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-
-        === "Custom certificates"
-
-            Example using custom certificates:
-
-            ```bash
-            CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
-            CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
-
-            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
-                --no-tty --install \
-                --domain-name='openvidu.example.io' \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --certificate-type='owncert' \
-                --owncert-private-key="$CERT_PRIVATE_KEY" \
-                --owncert-public-key="$CERT_PUBLIC_KEY"
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-            - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-
-You can run that command in a CI/CD pipeline or in a script to automate the installation process.
-
-Some notes about the command:
-
-- The argument `--domain-name` is optional. If not provided, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it.
-- When using autogenerated domains (no FQDN (Fully Qualified Domain Name) provided), only `selfsigned` and `letsencrypt` certificate types are available.
-- In the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and, PRO only, `v2compatibility` (OpenVidu v2 compatibility API).
-- If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media.
-
-To start OpenVidu, remember to run:
+Your application connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. Read them from the stack with `ov stack config get`, from the stack's directory:
 
 ```bash
-systemctl start openvidu
+ov stack config get livekit-api-key
+ov stack config get livekit-api-secret
 ```
 
-## Configuration and administration
+`LIVEKIT_URL` is your domain as `wss://yourdomain.example.io/` or `https://yourdomain.example.io/`, depending on the client library you use. `config get` prints secrets in plain text; [`ov stack config view`](../../configuration/changing-config.md#view-get-set-unset) prints the whole configuration with secrets masked.
 
-Once you have OpenVidu deployed, you can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Single Node deployment.
+For OpenVidu Meet, `MEET_INITIAL_API_KEY` (`ov stack config get meet-initial-api-key`) is the key for OpenVidu Meet Embedded and the OpenVidu Meet REST API; the initial admin user is always `admin`. On PRO, the OpenVidu V2 Compatibility API uses the basic-auth user `OPENVIDUAPP` with the password `LIVEKIT_API_SECRET`.
 
-## Plain Docker Compose installation
+## Next steps
 
-!!! warning "This installation method is targeted to advanced users, and is only available for the **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } edition"
-
-This installation mechanism is more friendly with GitOps procedures, because all the configuration and deployment is managed through plain text files.
-
-Compared to the standard guided installation, it does not include a wizard to guide you through the installation process, so you need to manually edit the configuration files and manage the lifecycle of the deployment using standard Docker Compose commands.
-
-Follow the instructions at this [Git repository :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-docker-compose-deployment){:target="_blank"}.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md).
+- [Administer the deployment](admin.md): status, logs, the health check, start and stop.
+- [Change the configuration](../../configuration/changing-config.md) or [the modules](../../how-to-guides/enable-disable-modules.md).
+- [Update the deployment](../upgrade.md).
+- The full [OpenVidu CLI reference](../../openvidu-cli.md#command-reference).

@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu Elastic on-premises"
-description: "Deploy OpenVidu Elastic on your own servers with the guided or non-interactive installer, then point your application at the result."
+description: "Deploy OpenVidu Elastic on your own servers with the OpenVidu CLI: one master, then any number of media nodes that join it."
 ---
 
 # OpenVidu Elastic installation: On-premises
@@ -12,12 +12,9 @@ description: "Deploy OpenVidu Elastic on your own servers with the guided or non
 </div>
 
 
-!!! info
-    
-    OpenVidu Elastic is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
-    There's a 15-day free trial waiting for you!
+--8<-- "self-hosting/common/elastic-license-intro.md"
 
-This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on-premises. The deployment requires one Master Node and any number of Media Nodes. Media Nodes are elastic and can be scaled up and down according to workload.
+Deploy OpenVidu Elastic on your own Linux servers with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). An Elastic stack is **deployed on one machine** (the master) exactly like a Single Node PRO, with `--deployment-type elastic`; every media node then **joins** it. Media nodes are elastic: add and remove them according to workload. Elastic requires OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }.
 
 === "Architecture overview"
 
@@ -25,450 +22,122 @@ This section contains instructions for deploying a production-ready OpenVidu Ela
 
     ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
 
-    - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
-    - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
+    - The Master Node acts as a load balancer, managing the traffic and distributing it among the Media Nodes and the services on the Master Node.
+    - The Master Node runs Caddy as a Layer 4 (TURN with TLS and RTMPS) and Layer 7 (Dashboard, Meet, APIs) reverse proxy.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
 
-For the Master Node, the following services are configured:
+The Master Node runs the data tier (MinIO, Redis, MongoDB), Caddy, the Dashboard and the optional Meet, observability and v2compatibility services. Each Media Node runs OpenVidu Server PRO, Ingress and Egress, and the observability agents.
 
-- **OpenVidu Dashboard**, a web application interface to visualize your Rooms, Ingress, and Egress services.
-- **MinIO** as an S3 storage service for recordings.
-- **Redis** as a shared database for OpenVidu Server PRO and Ingress/Egress services.
-- **MongoDB** as a database for storing analytics and monitoring data.
-- **Caddy** as a reverse proxy. It can be deployed with self-signed certificates, Let's Encrypt certificates, or custom certificates. Provides optional TLS for the TURN server.
-- **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
-- **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
+## Requirements
 
-For the Media Nodes, the following services are configured:
+Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least two machines**: one Master Node and one or more Media Nodes, each with a minimum of 4 CPU cores and 4 GB of RAM and Linux (Ubuntu recommended). The Master Node needs generous disk (100 GB recommended) for recordings; the nodes must reach each other on their private addresses. Each node runs the OpenVidu PRO license you pass to the master.
 
-- **OpenVidu Server PRO (LiveKit compatible).**
-- **Ingress** and **Egress** services.
-- **Prometheus and Loki (Observability module)**. Used to send metrics and logs to the observability stack.
+## Port rules
 
-## Prerequisites
-
-- **At least 2 machines**, each with a minimum of **4GB RAM**, **4 CPU cores**, and **Linux** installed (Ubuntu is recommended). One machine will serve as the Master Node, while the others will function as Media Nodes.
-- Significant disk space on the **Master Node, with 100GB recommended**, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
-- **Each machine must be assigned a Public IP**. An FQDN (Fully Qualified Domain Name) is optional for the Master Node. If not provided, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it.
-
-- **All machines must have access to the following addresses and ports**:
-
-    | Host                     | Port    |
-    | ------------------------ | ------- |
-    | `accounts.openvidu.io`   | `443`   |
-    | `global.stun.twilio.com` | `3478`  |
-    | `stun.l.google.com`      | `19302` |
-    | `stun1.l.google.com`     | `19302` |
-
-    !!! info
-        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
-
-## Port rules (Master Node)
-
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your Master Node.
-
-**Inbound port rules**:
-
-| Protocol    | Ports          | <div class="w-8em">Source</div> | Description                                                |
-| ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-| TCP         | 80             | 0.0.0.0/0, ::/0 | Redirect HTTP traffic to HTTPS and Let's Encrypt validation. |
-| TCP         | 443            | 0.0.0.0/0, ::/0 | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>TURN with TLS.</li><li>Custom layouts</li></ul> |
-| TCP         | 1935           | 0.0.0.0/0, ::/0 | Needed if you want to ingest RTMP streams using Ingress service. |
-| TCP         | 9000           | 0.0.0.0/0, ::/0 | Needed if you want to expose MinIO publicly. |
-| TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-| TCP         | 9080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). Media Nodes need access to this port to reach OpenVidu Meet. |
-| TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Loki. |
-| TCP         | 7880           | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-| TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (`observability` in `ENABLED_MODULES` global parameter) Media Nodes need access to this port to reach Mimir. |
-| TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
-| TCP         | 9100           | Media Nodes     | Media Nodes need access to this port to reach MinIO. |
-| TCP         | 20000          | Media Nodes     | Media Nodes need access to this port to reach MongoDB. |
-
-**Outbound port rules**:
-
-Typically, all outbound traffic is allowed.
-
-## Port rules (Media Nodes)
-
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your Media Nodes:
-
-**Inbound port rules**:
-
-| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
-| ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-| UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
-| UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
-| UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over UDP. |
-| TCP         | 50000-60000    | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
-| TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
-| TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
-| TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
-| TCP         | 8080           | Master Node     | Needed if you want to ingest WebRTC streams using WHIP. Master Node needs access to this port to reach WHIP HTTP service. |
-
-**Outbound port rules**:
-
-Typically, all outbound traffic is allowed.
-
-## Guided installation
-
-Before the installation, ensure that all your machines meet the [prerequisites](#prerequisites) and the port rules for the [Master Node](#port-rules-master-node) and [Media Nodes](#port-rules-media-nodes) are correctly configured.
-
-To install OpenVidu Elastic, **begin by generating the commands required for setting up all nodes in the cluster**. This is a simple and straightforward process; simply **run the following command on any machine that has Docker installed**:
-
-```bash
-docker run --pull always --rm -it \
-    openvidu/openvidu-installer:latest \
-    --deployment-type=elastic
-```
-
---8<-- "self-hosting/common/install-version.md"
-
-A wizard will guide you through the installation process. You will be asked for the following information:
-
-- **Write the 'Master Node' Private IP**: Write the private IP of the machine where you are going to install the Master Node.
-- **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
-!!! info
-    
-    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-- **Domain name** (Optional): The domain name for your deployment. If left empty, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it. For production environments, it's recommended to provide your own FQDN.
-- **Select which certificate type to use**:
-    - _Self Signed Certificate_: It will generate a self-signed certificate. It is not recommended for production environments, but it is useful for testing or development purposes.
-    - _Let's Encrypt_: It will automatically generate a certificate for your domain. The Let's Encrypt email is required and will be asked later in the wizard.
-    - _ZeroSSL_: It will automatically generate a certificate for your domain using ZeroSSL. An API Key is required and will be asked later in the wizard.
-    - _Own Certificate_: It will ask you for the certificate and key files. Just copy and paste the content of the files when the wizard asks for them.
-
-    !!! Note
-        If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](../../how-to-guides/deploy-with-external-proxy.md).
-
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](../../production-ready/performance.md).
-- **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
-    - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
-    - _Observability_: Grafana stack, which includes logs and monitoring stats.
-    - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
-
-The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
-
-This command will output the following instructions, which you should follow:
-
-1. **Firewall Configuration for 'Master Node'**: These rules are the same as those specified in the instructions. Depending on the modules you have selected, some rules defined at [Port rules (Master Node)](#port-rules-master-node) may not appear (Optional ports). Double-check and modify it if you see something that can be enabled/disabled in your current port rules.
-2. **Installation Commands for 'Master Node'**: This is the command needed to install your Master Node. It should look like this:
-
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-        --no-tty --install \
-        --deployment-type='elastic' \
-        --node-role='master-node' \
-    ...
-    ```
-
-    --8<-- "self-hosting/common/install-version.md"
-
-    Execute that command in your Master Node to install it. When the installation process finishes, you will see the following output:
-
-    ```
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    >                                                                             <
-    >  🎉 OpenVidu Elastic 'Master Node' Installation Finished Successfully! 🎉   <
-    >                                                                             <
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    ```
-
-    The Master Node will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
-
-    ```bash
-    systemctl start openvidu
-    ```
-
-3. **Firewall Configuration for 'Media Nodes'**: These rules are the same as those defined previously as with the Master Node. Double-check the [Port rules (Media Nodes)](#port-rules-media-nodes) and modify them if you see something that can be enabled/disabled in your current port rules.
-
-4. **Installation Commands for 'Media Nodes'**: This is the command needed to install your Media Nodes. It should look like this:
-
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
-        --no-tty --install \
-        --deployment-type='elastic' \
-        --node-role='media-node' \
-    ...
-    ```
-
-    --8<-- "self-hosting/common/install-version.md"
-
-    Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
-
-    ```
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    >                                                                             <
-    >  🎉 OpenVidu Elastic 'Media Node' Installation Finished Successfully! 🎉    <
-    >                                                                             <
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    ```
-
-    The Media Node on each machine will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
-
-    ```
-    systemctl start openvidu
-    ```
-
-If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
-
-- OpenVidu Meet: `https://openvidu.example.io/`
-- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
-- MinIO: `https://openvidu.example.io/minio-console`
-- Grafana: `https://openvidu.example.io/grafana`
-
-OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
-
-- OpenVidu Server PRO: `https://openvidu.example.io/`
-- LiveKit API: `https://openvidu.example.io/` and `wss://openvidu.example.io/`
-
-## Configure your application to use the deployment
-
-To point your applications to your OpenVidu deployment, check the following files:
-
-- `/opt/openvidu/config/cluster/master_node/meet.env`: Contains the OpenVidu Meet parameters.
-- `/opt/openvidu/config/cluster/openvidu.env`: Contains all the credentials of services deployed with OpenVidu Platform.
-
-The most relevant parameters are:
-
---8<-- "self-hosting/on-premises/credentials-general.md"
---8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
-
-## Non-interactive installation
-
-To automate the installation process, run the command specified in the [Guided installation](#guided-installation) section, and then run the generated commands.
-
-Each installation command for each type of node looks like this:
+These are the inbound ports `ov` checks, with the names it prints for them. The master carries the public API; the media nodes carry the media. Open them before deploying; `ov` checks them for you ([Check the ports first](../../single-node/on-premises/install.md#check-the-ports)).
 
 === "Master Node"
 
-    === "Without Domain Name"
+    | Port | Scope | Level | Description |
+    | --- | --- | --- | --- |
+    | `443/tcp` | public | required | Caddy: LiveKit API, Dashboard, Meet, WHIP API, TURN with TLS, custom layouts. |
+    | `80/tcp` | public | recommended | Caddy: HTTP-to-HTTPS redirect and Let's Encrypt validation. |
+    | `6443/tcp` | admin | required | Stack remote admin control protocol: the port your machine administers the stack through. |
+    | `22/tcp` | admin | required | SSH: the port `ov` reaches the node through. |
 
-        The Master Node can be configured with multiple kinds of certificates. Here are the examples for each type of certificate that is allowed when no FQDN is provided:
-
-        === "Let's Encrypt certificates"
-
-            Example using Let's Encrypt certificates without a domain name (the public IP is used as the domain name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-                --no-tty --install \
-                --node-role='master-node' \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --private-ip='1.2.3.4' \
-                --certificate-type='letsencrypt'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-            - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
-
-        === "Self-signed certificates"
-
-            Example using self-signed certificates without a domain name (the public IP is used as the domain name):
-
-            ```bash
-            sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-                --no-tty --install \
-                --node-role='master-node' \
-                --openvidu-pro-license='xxxxx' \
-                --enabled-modules='observability,v2compatibility,openviduMeet' \
-                --rtc-engine='mediasoup' \
-                --livekit-api-key='xxxxx' \
-                --livekit-api-secret='xxxxx' \
-                --dashboard-admin-user='xxxxx' \
-                --dashboard-admin-password='xxxxx' \
-                --redis-password='xxxxx' \
-                --minio-access-key='xxxxx' \
-                --minio-secret-key='xxxxx' \
-                --mongo-admin-user='xxxxx' \
-                --mongo-admin-password='xxxxx' \
-                --mongo-replica-set-key='xxxxx' \
-                --grafana-admin-user='xxxxx' \
-                --grafana-admin-password='xxxxx' \
-                --meet-initial-admin-password='xxxxx' \
-                --meet-initial-api-key='xxxxx' \
-                --private-ip='1.2.3.4' \
-                --certificate-type='selfsigned'
-            ```
-
-            --8<-- "self-hosting/common/install-version.md"
-
-            - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-            - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-            - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
-
-    === "With Domain Name"
-
-    The Master Node can be configured with multiple kinds of certificates. Here are the examples for each type of certificate:
-
-    === "Let's Encrypt certificates"
-
-        Example using Let's Encrypt certificates:
-
-        ```bash
-        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-            --no-tty --install \
-            --node-role='master-node' \
-            --openvidu-pro-license='xxxxx' \
-            --domain-name='openvidu.example.io' \
-            --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='mediasoup' \
-            --livekit-api-key='xxxxx' \
-            --livekit-api-secret='xxxxx' \
-            --dashboard-admin-user='xxxxx' \
-            --dashboard-admin-password='xxxxx' \
-            --redis-password='xxxxx' \
-            --minio-access-key='xxxxx' \
-            --minio-secret-key='xxxxx' \
-            --mongo-admin-user='xxxxx' \
-            --mongo-admin-password='xxxxx' \
-            --mongo-replica-set-key='xxxxx' \
-            --grafana-admin-user='xxxxx' \
-            --grafana-admin-password='xxxxx' \
-            --meet-initial-admin-password='xxxxx' \
-            --meet-initial-api-key='xxxxx' \
-            --private-ip='1.2.3.4' \
-            --certificate-type='letsencrypt'
-        ```
-
-        --8<-- "self-hosting/common/install-version.md"
-
-        Notes:
-
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-        - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
-
-    === "Self-signed certificates"
-
-        Example using self-signed certificates:
-
-        ```bash
-        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-            --no-tty --install \
-            --node-role='master-node' \
-            --openvidu-pro-license='xxxxx' \
-            --domain-name='openvidu.example.io' \
-            --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='mediasoup' \
-            --livekit-api-key='xxxxx' \
-            --livekit-api-secret='xxxxx' \
-            --dashboard-admin-user='xxxxx' \
-            --dashboard-admin-password='xxxxx' \
-            --redis-password='xxxxx' \
-            --minio-access-key='xxxxx' \
-            --minio-secret-key='xxxxx' \
-            --mongo-admin-user='xxxxx' \
-            --mongo-admin-password='xxxxx' \
-            --mongo-replica-set-key='xxxxx' \
-            --grafana-admin-user='xxxxx' \
-            --grafana-admin-password='xxxxx' \
-            --meet-initial-admin-password='xxxxx' \
-            --meet-initial-api-key='xxxxx' \
-            --private-ip='1.2.3.4' \
-            --certificate-type='selfsigned'
-        ```
-
-        --8<-- "self-hosting/common/install-version.md"
-
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-        - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
-
-    === "Custom certificates"
-
-        Example using custom certificates:
-
-        ```bash
-        CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
-        CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
-
-        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
-            --no-tty --install \
-            --node-role='master-node' \
-            --openvidu-pro-license='xxxxx' \
-            --domain-name='openvidu.example.io' \
-            --enabled-modules='observability,v2compatibility,openviduMeet' \
-            --rtc-engine='mediasoup' \
-            --livekit-api-key='xxxxx' \
-            --livekit-api-secret='xxxxx' \
-            --dashboard-admin-user='xxxxx' \
-            --dashboard-admin-password='xxxxx' \
-            --redis-password='xxxxx' \
-            --minio-access-key='xxxxx' \
-            --minio-secret-key='xxxxx' \
-            --mongo-admin-user='xxxxx' \
-            --mongo-admin-password='xxxxx' \
-            --mongo-replica-set-key='xxxxx' \
-            --grafana-admin-user='xxxxx' \
-            --grafana-admin-password='xxxxx' \
-            --meet-initial-admin-password='xxxxx' \
-            --meet-initial-api-key='xxxxx' \
-            --private-ip='1.2.3.4' \
-            --certificate-type='owncert' \
-            --owncert-private-key="$CERT_PRIVATE_KEY" \
-            --owncert-public-key="$CERT_PUBLIC_KEY"
-        ```
-
-        --8<-- "self-hosting/common/install-version.md"
-
-        - Note that you only need to pass `--owncert-private-key` and `--owncert-public-key` with the content of the private and public key files in base64 format. The installation script will decode them and save them in the proper files.
-        - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-        - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-        - `--private-ip` is very important. It should not change and Media Nodes should be able to reach the Master Node using this IP.
+    The master's firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it. The media nodes reach the master's `6443/tcp` and `8472/udp` (Kubernetes cluster traffic).
 
 === "Media Node"
 
-    To install a Media Node, you can use the following command:
+    | Port | Scope | Level | Description |
+    | --- | --- | --- | --- |
+    | `443/udp` | public | recommended | OpenVidu LiveKit Server: STUN/TURN over UDP. |
+    | `50000-60000/udp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over UDP. |
+    | `7881/tcp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over TCP. |
+    | `22/tcp` | admin | required | SSH: the port `ov` reaches the node through. |
+    | `10250/tcp` | internal | required | Kubernetes cluster traffic, from the master only. |
+    | `8472/udp` | internal | required | Kubernetes cluster traffic, from the master only. |
 
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
-        --no-tty --install \
-        --node-role='media-node' \
-        --master-node-private-ip='1.2.3.4' \
-        --redis-password='xxxxx'
-    ```
+With the `ingress` module, also open `1935/tcp` and `7885/udp` on the media nodes. `join` checks these internal ports in both directions and prints the exact `ufw` rule to add, scoped to the source, if one is closed.
 
-    --8<-- "self-hosting/common/install-version.md"
+## Deploy the master
 
-    - The `--master-node-private-ip` is the private IP of the Master Node. Media Nodes should be able to reach the Master Node using this IP.
-    - The `--redis-password` is the password defined in the Master Node installation. It is used to connect to the Redis service in the Master Node and register itself as a Media Node in the cluster.
-    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.nowrap}.
+Deploy the first machine as the master, exactly like a [Single Node PRO](../../single-node/on-premises/install.md#deploy) but with `--deployment-type elastic`:
 
-You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
+```console
+$ mkdir ov-elastic && cd ov-elastic
+$ ov stack deploy el --edition pro --environment on-premises --deployment-type elastic \
+    --ssh ubuntu@172.30.0.101 --ssh-key ~/.ssh/id_ed25519 \
+    --openvidu-pro-license <your-license> \
+    --domain-name 172-30-0-101.openvidu-local.dev \
+    --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
+    --mode auto
 
-Some notes about the Master Node installation command:
+▶ Check the inbound ports…
+       Ports of 172.30.0.101 (master node of an elastic stack)
+       PORT      SCOPE   LEVEL        STATE  TO OPEN
+       443/tcp   public  required     open
+       80/tcp    public  recommended  open
+       6443/tcp  admin   required     open
+       22/tcp    admin   required     open
+       ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
+   ✓ Check the inbound ports
+…
+✔ deploy completed.
+wrote spec to openvidu-stack.yml
+✔ stack "el" recorded in this directory
+```
 
-- The argument `--domain-name` is optional. If not provided, the public IP is used as the domain name, and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it.
-- When using autogenerated domains (no FQDN (Fully Qualified Domain Name) provided), only `selfsigned` and `letsencrypt` certificate types are available.
-- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
+The stack is up with its data tier on the master, but its media services have nowhere to run yet.
 
-To start each node, remember to execute the following command in each node:
+## Join a media node
+
+From the stack's directory, `ov stack join --ssh` reads the join address and token from the master over SSH (the token never appears on screen), checks the ports, installs the node agent and joins the machine:
+
+```console
+$ ov stack join --ssh ubuntu@172.30.0.102 --as media
+→ reading the join address and token from 172.30.0.101
+→ checking the ports of 172.30.0.102 from here and from the stack's masters
+  Ports of 172.30.0.102 (media node of an elastic stack)
+  PORT                      SCOPE     LEVEL        STATE  TO OPEN
+  443/udp                   public    recommended  open
+  50000-60000/udp           public    recommended  open
+  7881/tcp                  public    recommended  open
+  22/tcp                    admin     required     open
+  10250/tcp ← 172.30.0.101  internal  required     open   (only from 172.30.0.101)
+  8472/udp ← 172.30.0.101   internal  required     open   (only from 172.30.0.101)
+
+▶ Join the cluster…
+   · join 172.30.0.102 to the stack as a media node
+   ✓ Join the cluster
+
+▶ Leave the OpenVidu CLI on the node…
+   · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
+   ✓ Leave the OpenVidu CLI on the node
+
+▶ Wait for the stack to see the node…
+   ✓ Wait for the stack to see the node
+
+✔ 172.30.0.102 joined the stack as a media node.
+```
+
+Before installing anything it checks the ports the new node needs, from your machine and from the master: if a required internal port is not reachable, the join stops with exit `6` and prints the `ufw` rule to add on each side. The login, key and port default to the ones the stack recorded. The join returns once the stack sees the node as ready, so the node takes work as soon as the command ends. Each media node is one more `ov stack join --ssh`. See [Add a media node](admin.md#add-a-media-node) for the other ways to join (on the node itself, or in assisted mode).
+
+## Install on the servers themselves, or review the commands first
+
+As on a Single Node, you can put `ov` on the master and deploy with [`--this-node`](../../single-node/on-premises/install.md#install-on-the-server-itself), and [review every command before it runs with `--mode assisted`](../../single-node/on-premises/install.md#assisted-mode). A media node can also [join itself](admin.md#add-a-media-node) from the machine with `ov stack join --this-node`.
+
+## Configure your application to use the deployment
+
+Your application connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. Read them from the stack's directory:
 
 ```bash
-systemctl start openvidu
+ov stack config get livekit-api-key
+ov stack config get livekit-api-secret
 ```
+
+`LIVEKIT_URL` is your domain as `wss://yourdomain.example.io/` or `https://yourdomain.example.io/`.
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](./admin.md) section to learn how to manage your OpenVidu Elastic deployment.
+Once deployed, see [Administration](admin.md) to operate the stack, add and remove media nodes, change the configuration and back up its data.

@@ -1,6 +1,6 @@
 ---
 title: "Administer OpenVidu High Availability on-premises"
-description: "Administer OpenVidu High Availability on your own servers: start and stop services, add Media Nodes, change the configuration and back up its data."
+description: "Administer OpenVidu High Availability on your own servers with the OpenVidu CLI: join and drain nodes, operate the stack, and back up its data."
 ---
 
 # OpenVidu High Availability administration: On-premises
@@ -12,92 +12,45 @@ description: "Administer OpenVidu High Availability on your own servers: start a
 </div>
 
 
-The OpenVidu installer offers an easy way to deploy OpenVidu High Availability on-premises. However, once the deployment is complete, you may need to perform administrative tasks based on your specific requirements, such as changing passwords, specifying custom configurations, and starting or stopping services.
+A High Availability stack is operated with the same commands as a Single Node: **[the operations reference](../../single-node/on-premises/admin.md)** covers status, describe, the health test, logs, ports, start/stop/restart, configuration, modules, operating from another machine and destroy, all from the stack's directory. On a PRO stack, `ov stack status` counts the four masters and the media nodes by tier, lists every service with the nodes it runs on, and shows each node's disk. This page covers what is specific to the cluster: joining and removing nodes.
 
-This section provides details on configuration parameters and common administrative tasks for on-premises OpenVidu High Availability deployments.
+## Add a media node { #add-a-media-node }
 
-## Starting, stopping, and restarting OpenVidu
+From the stack's directory, `ov stack join --ssh ubuntu@<media-node> --as media` reads the join address and token from a master, checks the ports, installs the node agent and joins the machine, returning once the stack sees it ready. There are three ways to run it, exactly as on [Elastic](../../elastic/on-premises/admin.md#add-a-media-node): over SSH, on the machine itself (`--this-node` with `ov stack join-info` for the address and token), or with `--mode assisted` to print the commands and run nothing.
 
-To start, stop, or restart any Node in your OpenVidu High Availability deployment, you can use the following commands:
+## Add a master node
 
-**Start OpenVidu**
-
-```bash
-sudo systemctl start openvidu
-```
-
-**Stop OpenVidu**
+High Availability runs four masters. A master is added with `--as master` (masters 2-4), which takes `--domain`, `--lb-host` and `--public-ip`, the addresses at which the cluster API must remain reachable:
 
 ```bash
-sudo systemctl stop openvidu
+ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>
 ```
 
-**Restart OpenVidu**
+A master join checks the cluster's internal ports in both directions with the masters already in the stack (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) and confirms the node carries the labels the stack schedules by. See [Deploy a test cluster](install-nlb.md#deploy-a-test-cluster) and [In production: behind a load balancer](install-nlb.md#behind-a-load-balancer). A fifth `--as master` is refused before anything runs.
 
-```bash
-sudo systemctl restart openvidu
+## Take a node out { #take-a-node-out }
+
+`join` leaves `ov` on the server, so the server can leave by itself. Log in to it and drain it:
+
+```console
+$ ssh ubuntu@172.30.0.114 sudo ov stack leave --this-node --drain --uninstall
+⏳ draining node-172-30-0-114: no new rooms come here; waiting, with no time limit, for the ones it holds
+✔ node-172-30-0-114 has no sessions left.
+✔ this machine left the stack.
 ```
 
-## Checking the status of services
+- `ov stack leave --this-node` stops the node agent so the stack sees the node leave and stops scheduling on it.
+- `--uninstall` also removes the node agent (the same server can join again later).
+- `--drain` (media nodes) leaves **gracefully**.
 
-You can check the status of the OpenVidu services using the following command:
+## Graceful drain { #graceful-drain }
 
-```bash
-cd /opt/openvidu/
-docker compose ps
-```
+A media node that is being removed must not drop the rooms, recordings or ingests it holds. With `--drain`, the stack stops sending new rooms to the node, and the command waits, **with no time limit**, until everything the node holds has ended, then leaves. The stack deletes the node afterwards. If the command is interrupted, the node keeps draining, and running it again resumes the wait.
 
-Depending on the node type, you will see different services running.
+## Destroy
 
-=== "Master Node"
+`ov stack destroy` from the stack's directory uninstalls OpenVidu from the cluster and keeps the machines as they are; the node agent stays on each server, and the joined nodes stay in the cluster. To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. See the [Destroy](../../single-node/on-premises/admin.md#destroy) section for the flags.
 
-    The services are operating correctly if you see an output similar to the following and there are no restarts from any of the services:
-
-    ```bash
-    NAME                       IMAGE                                              COMMAND                  SERVICE                    CREATED          STATUS
-    openvidu-meet              docker.io/openvidu/openvidu-call                   "docker-entrypoint.s…"   openvidu-meet              12 seconds ago   Up 10 seconds
-    caddy                      docker.io/openvidu/openvidu-pro-caddy              "/bin/caddy run --co…"   caddy                      12 seconds ago   Up 10 seconds
-    dashboard                  docker.io/openvidu/openvidu-pro-dashboard          "./openvidu-dashboard"   dashboard                  12 seconds ago   Up 10 seconds
-    grafana                    docker.io/grafana/grafana                          "/run.sh"                grafana                    11 seconds ago   Up 8 seconds
-    loki                       docker.io/grafana/loki                             "/usr/bin/loki -conf…"   loki                       11 seconds ago   Up 9 seconds
-    mimir                      docker.io/grafana/mimir                            "/bin/mimir -config.…"   mimir                      11 seconds ago   Up 9 seconds
-    minio                      docker.io/bitnami/minio                            "/opt/bitnami/script…"   minio                      11 seconds ago   Up 9 seconds
-    mongo                      docker.io/mongo                                    "docker-entrypoint.s…"   mongo                      11 seconds ago   Up 9 seconds
-    openvidu-v2compatibility   docker.io/openvidu/openvidu-v2compatibility        "/bin/server"            openvidu-v2compatibility   12 seconds ago   Up 10 seconds
-    operator                   docker.io/openvidu/openvidu-operator               "/bin/operator"          operator                   12 seconds ago   Up 10 seconds
-    alloy                      docker.io/grafana/alloy                            "/usr/bin/alloy -…"      alloy                      11 seconds ago   Up 9 seconds
-    redis-sentinel             docker.io/redis                                    "docker-entrypoint.s…"   redis-sentinel             10 seconds ago   Up 10 seconds
-    redis-server               docker.io/redis                                    "docker-entrypoint.s…"   redis-server               10 seconds ago   Up 10 seconds
-    ```
-
-=== "Media Node"
-
-    The services are operating correctly if you see an output similar to the following and there are no restarts from any of the services:
-
-    ```bash
-    NAME         IMAGE                                          COMMAND                  SERVICE      CREATED          STATUS
-    caddy        docker.io/openvidu/openvidu-caddy:main         "/bin/caddy run --co…"   caddy        53 seconds ago   Up 53 seconds
-    egress       docker.io/livekit/egress                       "/entrypoint.sh"         egress       53 seconds ago   Up 51 seconds
-    ingress      docker.io/livekit/ingress                      "ingress"                ingress      53 seconds ago   Up 52 seconds
-    openvidu     docker.io/openvidu/openvidu-server-pro         "/livekit-server --c…"   openvidu     53 seconds ago   Up 52 seconds
-    prometheus   docker.io/prom/prometheus                      "/bin/prometheus --c…"   prometheus   53 seconds ago   Up 51 seconds
-    alloy        docker.io/grafana/alloy                        "/usr/bin/alloy -…"      alloy        53 seconds ago   Up 52 seconds
-    ```
-
---8<-- "self-hosting/on-premises/openvidu-pro-checking-logs.md"
-
-## Adding Media Nodes
-
-To add a new Media Node, simply spin up a new VM and run the OpenVidu installer script to integrate it into the existing cluster. Run the [installation command](./install-nlb.md#media-node) on the new Media Node.
-
---8<-- "self-hosting/on-premises/openvidu-pro-removing-media-nodes.md"
-
-## Changing the configuration
-
-You can check how to change the configuration in the [Changing Configuration](../../configuration/changing-config.md) section. Also, there are multiple guides in the [How to Guides](../../how-to-guides/index.md) section that can help you with specific configuration changes.
-
---8<-- "self-hosting/on-premises/openvidu-pro-uninstall.md"
-
-## Backup and Restore
+## Backup and restore
 
 Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows.

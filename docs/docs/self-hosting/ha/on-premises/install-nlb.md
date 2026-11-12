@@ -1,9 +1,9 @@
 ---
-title: "Install OpenVidu High Availability behind a load balancer"
-description: "Deploy an OpenVidu High Availability cluster on your own servers, behind a network load balancer in front of the four Master Nodes."
+title: "Install OpenVidu High Availability on-premises"
+description: "Deploy an OpenVidu High Availability cluster on your own servers with the OpenVidu CLI: four master nodes and media nodes, behind a load balancer."
 ---
 
-# OpenVidu High Availability installation: On-premises with Network Load Balancer
+# OpenVidu High Availability installation: On-premises
 
 <div class="provider-chip" markdown>
 
@@ -12,453 +12,153 @@ description: "Deploy an OpenVidu High Availability cluster on your own servers, 
 </div>
 
 
-!!! info
+--8<-- "self-hosting/common/ha-license-intro.md"
 
-    OpenVidu High Availability is part of **OpenVidu** **PRO**{ .openvidu-tag .openvidu-pro-tag }. Before deploying, you need to [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"} to get your license key.
-    There's a 15-day free trial waiting for you!
+Deploy OpenVidu High Availability on your own Linux servers with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). High Availability is **four master nodes plus one or more media nodes**: the first master is deployed, then three more masters and the media nodes **join** it. The stack survives the loss of any single master. High Availability requires OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }.
 
-This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
-
-**Advantages of Network Load Balancing:**
-
-- **More control** over the load balancing process.
-- **Possibility to use custom health checks** to determine the status of the nodes.
-
-**Disadvantages of Network Load Balancing:**
-
-- **More complex to set up** than DNS Load Balancing.
-- **Requires a Load Balancer** to be deployed in front of the cluster.
-- **More expensive** than DNS Load Balancing.
+There are two ways to expose the masters. For a **test cluster**, point the domain at the first master. In **production**, put a TCP load balancer in front of the four masters ([In production: behind a load balancer](#behind-a-load-balancer)), so the stack survives the loss of any of them.
 
 === "Architecture overview"
 
-    This is how the architecture of the deployment looks:
+    This is how the architecture of a production deployment looks:
 
     ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .round-corners .dark-img loading=lazy }
 
-    - The Load Balancer must be a Network Load Balancer that supports TCP and UDP traffic.
-    - The Load Balancer distributes traffic across all Master Nodes.
-    - If RTMP or TURN with TLS is enabled, the Load Balancer must also distribute traffic across all Media Nodes. (You can use a different Load Balancer for this purpose)
+    - A Network Load Balancer (TCP/UDP) distributes traffic across all Master Nodes.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
 
-For the Master Node, the following services are configured:
+Each Master Node runs the clustered data tier (MinIO, the MongoDB replica set, Redis behind Sentinel), Caddy, the Dashboard and the optional Meet, observability and v2compatibility services, with one replica of each clustered service per master. Each Media Node runs OpenVidu Server PRO, Ingress and Egress, and the observability agents.
 
-- **OpenVidu Dashboard**, a web application interface to visualize your Rooms, Ingress, and Egress services.
-- **MinIO** as an S3 storage service for recordings.
-- **Redis** as a shared database for OpenVidu Server PRO and Ingress/Egress services.
-- **MongoDB** as a database for storing analytics and monitoring data.
-- **Caddy** as an internal reverse proxy for all services.
-- **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **[OpenVidu Meet](../../../../meet/index.md)**, an optional high-quality video calling service.
-- **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
+## Requirements
 
-For the Media Nodes, the following services are configured:
+Same as a [Single Node](../../single-node/on-premises/install.md#requirements), with **at least six machines**: four Master Nodes and two or more Media Nodes, each with a minimum of 4 CPU cores and 4 GB of RAM and Linux (Ubuntu recommended). The Master Nodes need generous disk (100 GB recommended) for recordings; all nodes must reach each other on their private addresses, and the Media Nodes need a public IP because media is sent directly to them. The whole cluster runs the OpenVidu PRO license you pass to the first master.
 
-- **OpenVidu Server PRO (LiveKit compatible).**
-- **Ingress** and **Egress** services.
-- **Prometheus and Alloy (Observability module)**. Used to send metrics and logs to the observability stack.
+## Port rules
 
-## Prerequisites
-
-- **At least 6 machines**:
-    - 4 machines for the Master Nodes.
-    - 2 machines for the Media Nodes.
-- **Each machine must have**:
-    - A minimum of **4GB RAM** and **4 CPU cores**.
-    - **Linux** installed (Ubuntu is recommended).
-- Significant disk space in all the **Master Nodes**, with 100GB recommended, especially if you plan to record your sessions (Egress). Media Nodes require less space; however, account for the space needed for ongoing recordings on these nodes.
-- **Media Nodes must have a public IP**. This is required because Media traffic is sent directly to these nodes. Master Nodes can have private IPs and will be accessed through the Load Balancer.
-- **A Load Balancer** that supports TCP and UDP traffic. You can use a hardware load balancer or a software load balancer like HAProxy, Nginx, or AWS Network Load Balancer.
-- **A Fully Qualified Domain Name (FQDN)** pointing to the Load Balancer. This domain name will be used to access the OpenVidu services. In this guide, we will use `openvidu.example.io`.
-- **A domain name for the TURN server** pointing to the Load Balancer. In this guide, we will use `turn.example.io`.
-- **All machines must have access to the following addresses and ports**:
-
-    | Host                     | Port    |
-    | ------------------------ | ------- |
-    | `accounts.openvidu.io`   | `443`   |
-    | `global.stun.twilio.com` | `3478`  |
-    | `stun.l.google.com`      | `19302` |
-    | `stun1.l.google.com`     | `19302` |
-
-    !!! info
-        If you are behind a very restrictive corporate firewall that doesn't allow outgoing traffic to those addresses, please contact us through [commercial@openvidu.io](mailto:commercial@openvidu.io){:target="_blank"}.
-
-## Port rules (Master Nodes)
-
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your Master Nodes:
-
-**Inbound port rules**:
-
-| Protocol | <div class="w-8em">Ports</div>      | <div class="w-15em">Source</div>         | Description                                         |
-|----------|-------------|---------------------------|---------------------------------------------------------------------------------------------------|
-| TCP      | 1945        | Load Balancer             | Needed for RTMP Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
-| TCP      | 5349        | Load Balancer             | Needed for TURN with TLS. Master Nodes need access to this port to reach TURN service and expose it using TLS (TURNS). |
-| TCP      | 7880        | Load Balancer             | Allows access to the following to the Load Balancer: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
-| TCP      | 3000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to Grafana.                         |
-| TCP      | 5000        | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used to load balance requests to OpenVidu Dashboard.                                                |
-| TCP      | 9101        | Master Nodes              | Needed to load balance requests to MinIO Console.                                                     |
-| TCP      | 7946-7947   | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). Master nodes need access to this port for cluster communication.                       |
-| TCP      | 9095-9096   | Master Nodes              | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used for Mimir and Loki cluster communication.                       |
-| TCP      | 3100        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Loki service.                                                       |
-| TCP      | 9009        | Media Nodes               | Needed when _'Observability'_ module is used (`observability` in `ENABLED_MODULES` global parameter). It is used by Mimir service.                                                      |
-| TCP      | 7880        | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-| TCP      | 4443        | Master Nodes, Media Nodes | Needed when _'OpenVidu v2 Compatibility'_ module is used (`v2compatibility` in `ENABLED_MODULES` global parameter). It is used by OpenVidu V2 compatibility service.                                                 |
-| TCP      | 9080        | Master Nodes, Media Nodes | Needed when _'OpenVidu Meet'_ module is used (`openviduMeet` in `ENABLED_MODULES` global parameter). It is used by OpenVidu Meet.                                               |
-| TCP      | 7000-7001   | Master Nodes, Media Nodes | For internal Redis communication                                                                  |
-| TCP      | 9100        | Master Nodes, Media Nodes | For internal MinIO communication                                                                  |
-| TCP      | 20000       | Master Nodes, Media Nodes | For internal Mongo communication                                                                  |
-
-**Outbound port rules**:
-
-Typically, all outbound traffic is allowed.
-
-## Port rules (Media Nodes)
-
-Ensure all these rules are configured in your firewall, security group, or any kind of network configuration that you have in your Media Nodes:
-
-**Inbound port rules**:
-
-| Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
-| ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-| UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-| TCP         | 7881           | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
-| UDP         | 7885           | 0.0.0.0/0, ::/0   | Needed if you want to ingest WebRTC using WHIP. |
-| UDP         | 50000-60000    | 0.0.0.0/0, ::/0   | Needed for WebRTC media traffic over UDP. |
-| TCP         | 50000-60000    | 0.0.0.0/0, ::/0   | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
-| TCP         | 1935           | Master Nodes      | Needed if you want to ingest RTMP streams using Ingress service. Master Nodes need access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
-| TCP         | 5349           | Master Nodes     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS. (TURNS)  |
-| TCP         | 7880           | Master Nodes     | LiveKit API. Master Nodes need access to load balance LiveKit API and expose it through HTTPS. |
-| TCP         | 8080           | Master Nodes     | Needed if you want to ingest WebRTC streams using WHIP. Master Nodes need access to this port to reach WHIP HTTP service. |
-
-**Outbound port rules**:
-
-Typically, all outbound traffic is allowed.
-
-## Guided installation
-
-Before the installation, ensure that all your machines meet the [prerequisites](#prerequisites) and the port rules for the [Master Nodes](#port-rules-master-nodes) and [Media Nodes](#port-rules-media-nodes) are correctly configured.
-
-To install OpenVidu High Availability, **begin by generating the commands required for setting up all nodes in the cluster**. This is a simple and straightforward process; simply **run the following command on any machine that has Docker installed**:
-
-```bash
-docker run --pull always --rm -it \
-    openvidu/openvidu-installer:latest \
-    --deployment-type=ha
-```
-
---8<-- "self-hosting/common/install-version.md"
-
-A wizard will guide you through the installation process. You will be asked for the following information:
-
-- **Write all 'Master Node' Private IPs separated by commas**: Write the private IP of each Master Node separated by commas.
-- **Write your OpenVidu PRO License**: Write your OpenVidu PRO License.
-!!! info
-    
-    If you don't have a license key for OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, you can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-- **Do you want to use an external load balancer?**: Select _**Yes**_. We will use a Network Load Balancer in front of the cluster.
-- **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](../../production-ready/performance.md).
-- **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
-    - _Observability_: Grafana stack, which includes logs and monitoring stats.
-    - [_OpenVidu Meet_](../../../../meet/index.md): A high-quality video calling service based on OpenVidu.
-    - _OpenVidu V2 Compatibility_: Compatibility API for applications developed with OpenVidu v2.
-
-The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
-
-This command will output the following instructions, which you should follow:
-
-1. **Firewall Configuration for 'Master Nodes'**: These rules are the same as the ones specified in the instructions. Depending on the modules you have selected, some rules defined at [Port rules (Master Nodes)](#port-rules-master-nodes) may not appear (Optional ports). Double-check and modify them if you see something that can be enabled/disabled in your current port rules.
-2. **Installation Commands for 'Master Nodes'**: This is the command needed to install your Master Node. It should look like this:
-
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
-        --no-tty --install \
-        --deployment-type='ha' \
-        --node-role='master-node' \
-    ...
-    ```
-
-    --8<-- "self-hosting/common/install-version.md"
-
-    Execute that command on all your Master Nodes to install them. When the installation process finishes, you will see the following output:
-
-    ```
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    >                                                                             <
-    >  🎉🎉 OpenVidu HA 'Master Node' Installation Finished Successfully! 🎉🎉    <
-    >                                                                             <
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    ```
-
-    The Master Node will be installed in `/opt/openvidu` and configured as a systemd service. To start the service, use the following command:
-
-    ```bash
-    systemctl start openvidu
-    ```
-
-    Your Master Nodes will be ready once all of them have been started.
-
-3. **Firewall Configuration for 'Media Nodes'**: These rules are the same as the ones defined previously as with Master Nodes. Double-check the [Port rules (Media Nodes)](#port-rules-media-nodes) and modify them if you see something that can be enabled/disabled in your current port rules.
-
-4. **Installation Commands for 'Media Nodes'**: This is the command needed to install your Media Nodes. It should look like this:
-
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
-        --no-tty --install \
-        --deployment-type='ha' \
-        --node-role='media-node' \
-    ...
-    ```
-
-    --8<-- "self-hosting/common/install-version.md"
-
-    Execute that command on your Media Nodes to install them. When the installation process finishes, you will see the following output:
-
-    ```
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    >                                                                             <
-    >  🎉 OpenVidu HA 'Media Node' Installation Finished Successfully! 🎉         <
-    >                                                                             <
-    > - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - <
-    ```
-
-    The Media Node on each machine will be installed at `/opt/openvidu` and configured as a systemd service. You can start the service with the following command:
-
-    ```bash
-    systemctl start openvidu
-    ```
-
-If everything goes well, all containers will be up and running without restarts, and you will be able to access any of the following services:
-
-- OpenVidu Meet: `https://openvidu.example.io/`
-- OpenVidu Dashboard: `https://openvidu.example.io/dashboard`
-- MinIO: `https://openvidu.example.io/minio-console`
-- Grafana: `https://openvidu.example.io/grafana`
-
-OpenVidu Server PRO URL (LiveKit compatible) will be available also in:
-
-- OpenVidu Server PRO: `https://openvidu.example.io/`
-- LiveKit API: `https://openvidu.example.io/` and `wss://openvidu.example.io/`
-
-## Load Balancer Configuration
-
-To configure the Load Balancer, you must create a new TCP listener for each port that the Master Nodes use. The Load Balancer should be set up to distribute traffic evenly across all Master Nodes, targeting their private IP addresses. Additionally, RTMP and TURN with TLS traffic should be directed to use the private IP addresses of the Master Nodes. This ensures that traffic for these services is properly routed.
-
-The Load Balancer uses **SNI-based Layer 4 routing** to separate API and TURN traffic on port `443`. The API domain is routed to a local HTTP reverse-proxy server on port `7880`, which then forwards requests to the Master Nodes. The TURN domain is forwarded directly to port `5349` on the Master Nodes. This gives you an `http` block where you can add custom routing, rate limiting, access control, or additional headers.
-
-Below is an example using NGINX as a Load Balancer:
-
-```nginx
-events {
-    worker_connections 10240;
-}
-
-stream {
-
-    upstream api_backend {
-        server 127.0.0.1:7880;
-    }
-
-    upstream turn_backend {
-        server <MASTER_NODE_IP_1>:5349;
-        server <MASTER_NODE_IP_2>:5349;
-        server <MASTER_NODE_IP_3>:5349;
-        server <MASTER_NODE_IP_4>:5349;
-    }
-
-    upstream rtmp_backend {
-        server <MASTER_NODE_IP_1>:1945;
-        server <MASTER_NODE_IP_2>:1945;
-        server <MASTER_NODE_IP_3>:1945;
-        server <MASTER_NODE_IP_4>:1945;
-    }
-
-    # Use SNI to determine which upstream server to proxy to
-    map $ssl_server_name $upstream {
-        openvidu.example.io api_backend;
-        turn.example.io turn_backend;
-    }
-
-    # Use SNI to determine which certificate to use
-    map $ssl_server_name $certificate {
-        openvidu.example.io /etc/nginx/ssl/openvidu-cert.pem;
-        turn.example.io /etc/nginx/ssl/turn-cert.pem;
-    }
-
-    # Use SNI to determine which private key to use
-    map $ssl_server_name $private_key {
-        openvidu.example.io /etc/nginx/ssl/openvidu-privkey.pem;
-        turn.example.io /etc/nginx/ssl/turn-privkey.pem;
-    }
-
-    # Proxy for API and TURN
-    server {
-        listen 443 ssl;
-        listen [::]:443 ssl;
-        ssl_protocols TLSv1.2 TLSv1.3;
-
-        proxy_connect_timeout 10s;
-        proxy_timeout 30s;
-
-        ssl_certificate $certificate;
-        ssl_certificate_key $private_key;
-
-        proxy_pass $upstream;
-    }
-
-    # RTMP
-    server {
-        listen 1935 ssl;
-        listen [::]:1935 ssl;
-        ssl_protocols TLSv1.2 TLSv1.3;
-
-        proxy_connect_timeout 10s;
-        proxy_timeout 30s;
-
-        ssl_certificate /etc/nginx/ssl/openvidu-cert.pem;
-        ssl_certificate_key /etc/nginx/ssl/openvidu-privkey.pem;
-
-        proxy_pass rtmp_backend;
-    }
-}
-
-# Redirect HTTP to HTTPS and reverse proxy API traffic
-http {
-    server {
-        listen 80;
-        listen [::]:80;
-        return 301 https://$host$request_uri;
-    }
-
-    upstream api_http_backend {
-        server <MASTER_NODE_IP_1>:7880;
-        server <MASTER_NODE_IP_2>:7880;
-        server <MASTER_NODE_IP_3>:7880;
-        server <MASTER_NODE_IP_4>:7880;
-    }
-
-    map $http_upgrade $connection_upgrade {
-        default upgrade;
-        '' close;
-    }
-
-    server {
-        listen 7880;
-
-        location / {
-            proxy_pass http://api_http_backend;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto https;
-        }
-    }
-}
-```
-
-Notes:
-
-- Replace `openvidu.example.io` and `turn.example.io` with your domain names. Both domains should be configured in your DNS to point to the Load Balancer.
-- The SSL certificates (`openvidu-cert.pem`, `openvidu-privkey.pem`, `turn-cert.pem`, `turn-privkey.pem`) must be valid for their respective domains.
-- Replace `<MASTER_NODE_IP_X>` with the private IP addresses of your Master Nodes.
-
-!!! info "Customizable HTTP block"
-    The `http` block gives you full control over HTTP-level routing. You can add custom `location` blocks, rate limiting, access control, or additional headers to suit your infrastructure needs.
-
-If you want to force all traffic including WebRTC to go through the Load Balancer, check the [Force media traffic through port 443](../../how-to-guides/force-single-port.md) guide.
-
-## Configure your application to use the deployment
-
-To point your applications to your OpenVidu deployment, check the following files:
-
-- `/opt/openvidu/config/cluster/master_node/meet.env`: Contains the OpenVidu Meet parameters.
-- `/opt/openvidu/config/cluster/openvidu.env`: Contains all the credentials of services deployed with OpenVidu Platform.
-
-The most relevant parameters are:
-
---8<-- "self-hosting/on-premises/credentials-general.md"
---8<-- "self-hosting/on-premises/credentials-v2compatibility.md"
-
-## Non-interactive installation
-
-To automate the installation process, you just need to execute the specified command in the [Guided installation](#guided-installation) section and execute the generated commands.
-
-Each installation command for each type of node looks like this:
+These are the inbound ports `ov` checks, with the names it prints for them. `join` checks the internal ports in both directions and prints the exact `ufw` rule to add, scoped to the source, if one is closed.
 
 === "Master Node"
 
-    To install a Master Node, you can use the following command:
+    | Port | Scope | Level | Description |
+    | --- | --- | --- | --- |
+    | `443/tcp` | public | required | Caddy: LiveKit API, Dashboard, Meet, WHIP API, TURN with TLS, custom layouts. |
+    | `80/tcp` | public | recommended | Caddy: HTTP-to-HTTPS redirect and Let's Encrypt validation. |
+    | `6443/tcp` | admin | required | Stack remote admin control protocol: the port your machine administers the stack through; also between masters. |
+    | `22/tcp` | admin | required | SSH: the port `ov` reaches the node through. |
+    | `2379-2380/tcp` | internal | required | Kubernetes cluster traffic (cluster state and its replication), between masters. |
+    | `10250/tcp` | internal | required | Kubernetes cluster traffic (node control), between masters and from the media nodes. |
+    | `8472/udp` | internal | required | Kubernetes cluster traffic (overlay network), between all nodes. |
 
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
-        --no-tty --install \
-        --node-role='master-node' \
-        --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
-        --openvidu-pro-license='xxxxx' \
-        --domain-name='openvidu.example.io' \
-        --turn-domain-name='turn.example.io' \
-        --enabled-modules='observability,v2compatibility,openviduMeet' \
-        --rtc-engine='mediasoup' \
-        --livekit-api-key='xxxxx' \
-        --livekit-api-secret='xxxxx' \
-        --dashboard-admin-user='xxxxx' \
-        --dashboard-admin-password='xxxxx' \
-        --redis-password='xxxxx' \
-        --minio-access-key='xxxxx' \
-        --minio-secret-key='xxxxx' \
-        --mongo-admin-user='xxxxx' \
-        --mongo-admin-password='xxxxx' \
-        --mongo-replica-set-key='xxxxx' \
-        --grafana-admin-user='xxxxx' \
-        --grafana-admin-password='xxxxx' \
-        --meet-initial-admin-password='xxxxx' \
-        --meet-initial-api-key='xxxxx' \
-        --external-load-balancer
-    ```
-
-    --8<-- "self-hosting/common/install-version.md"
-
-    Notes:
-
-    - `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
-    - Replace `openvidu.example.io` with your FQDN.
-    - Replace `turn.example.io` with your TURN server FQDN.
-    - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
-    - `--master-node-private-ip-list` is the list of private IPs of all Master Nodes separated by commas. It should not change, and Media Nodes should be able to reach all Master Nodes using these IPs.
+    Each master's firewall must let the pod networks `10.42.0.0/16` and `10.43.0.0/16` reach it.
 
 === "Media Node"
 
-    To install a Media Node, you can use the following command:
+    | Port | Scope | Level | Description |
+    | --- | --- | --- | --- |
+    | `443/udp` | public | recommended | OpenVidu LiveKit Server: STUN/TURN over UDP. |
+    | `50000-60000/udp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over UDP. |
+    | `7881/tcp` | public | recommended | OpenVidu LiveKit Server: WebRTC media over TCP. |
+    | `22/tcp` | admin | required | SSH: the port `ov` reaches the node through. |
+    | `10250/tcp` | internal | required | Kubernetes cluster traffic, from the masters only. |
+    | `8472/udp` | internal | required | Kubernetes cluster traffic, from the masters only. |
 
-    ```bash
-    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
-        --no-tty --install \
-        --node-role='media-node' \
-        --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
-        --redis-password='xxxxx'
-    ```
+With the `ingress` module, also open `1935/tcp` and `7885/udp` on the media nodes.
 
-    --8<-- "self-hosting/common/install-version.md"
+## Deploy a test cluster
 
-    - `--master-node-private-ip` must be the same list of private IPs of all Master Nodes separated by commas. It should not change, and Media Nodes should be able to reach all Master Nodes using these IPs.
-    - `--redis-password` must be the same password as the one used in the Master Nodes. It is used to connect to the Redis service in the Master Nodes and register itself as a Media Node in the cluster.
-    - If no media appears in your conference, reinstall specifying the `--public-ip` parameter with your machine's public IP. OpenVidu usually auto-detects the public IP, but it can fail. This IP is used by clients to send and receive media. If you decide to install the Media Node with `--public-ip`, you must reinstall the Master Node with `--force-media-node-public-ip`{.nowrap}.
-
-You can run these commands in a CI/CD pipeline or in a script to automate the installation process.
-
-Some general notes about all the Master Node commands:
-
-- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](../../../../meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
-
-To start each node, remember to execute the following command in each node:
+Deploy the first master with `--deployment-type ha`, pointing the domain at it, exactly like a [Single Node PRO](../../single-node/on-premises/install.md#deploy). Then join three more masters and the media nodes from the same directory:
 
 ```bash
-systemctl start openvidu
+ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
+  --ssh ubuntu@172.30.0.110 --ssh-key ~/.ssh/id_ed25519 \
+  --openvidu-pro-license <your-license> \
+  --domain-name 172-30-0-110.openvidu-local.dev \
+  --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
+  --mode auto
+ov stack join --ssh ubuntu@172.30.0.111 --as master
+ov stack join --ssh ubuntu@172.30.0.112 --as master
+ov stack join --ssh ubuntu@172.30.0.113 --as master
+ov stack join --ssh ubuntu@172.30.0.114 --as media
 ```
+
+Each master join checks the cluster's internal ports (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) in both directions with the masters already in the stack, then joins the machine and confirms it carries the labels the stack schedules by:
+
+```console
+$ ov stack join --ssh ubuntu@172.30.0.111 --as master
+→ reading the join address and token from 172.30.0.110
+→ checking the ports of 172.30.0.111 from here and from the stack's masters
+  Ports of 172.30.0.111 (master node of an ha stack)
+  PORT                      SCOPE     LEVEL        STATE  TO OPEN
+  443/tcp                   public    required     open
+  80/tcp                    public    recommended  open
+  22/tcp                    admin     required     open
+  6443/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+  8472/udp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+  2379/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+  2380/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
+  10250/tcp ← 172.30.0.110  internal  required     open   (only from 172.30.0.110)
+
+▶ Join the cluster…
+   · join 172.30.0.111 to the stack as a control-plane node
+   ✓ Join the cluster
+
+▶ Confirm the node's labels…
+   ✓ Confirm the node's labels
+
+✔ 172.30.0.111 joined the stack as a master node.
+```
+
+As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir place one replica on each master. The first wait after the joins takes several minutes while the replicas settle:
+
+```console
+$ ov stack status --wait
+waiting for https://172-30-0-110.openvidu-local.dev to be ready (Ctrl-C to stop)…
+  ⏳ master nodes 4/4, media nodes 1/1, services 28/53, restarting: caddy-proxy-75b8b6cbf5-5g5cx, caddy-proxy-75b8b6cbf5-7vjvg (0s)
+…
+✔ ha is ready (https://172-30-0-110.openvidu-local.dev)
+```
+
+On shared or simulated machines the wait can exceed the default 5 minutes; `ov stack status --wait --wait-timeout 15m` is the honest setting there. Before touching any server, `join` rejects any node the stack has no place for: a fifth `--as master`, any join to a single node, and any join to a Community stack. See [Add a media node](admin.md#add-a-media-node).
+
+## In production: behind a load balancer { #behind-a-load-balancer }
+
+Put a load balancer in front of the four masters, so the stack survives losing one:
+
+- **TCP passthrough, not TLS termination.** Pass `443/tcp`, `80/tcp` and `6443/tcp` (the cluster API) through to the four masters, with a TCP health check on `443`; add `1935/tcp` with RTMP ingest. Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: **Let's Encrypt does not work behind a passthrough load balancer**.
+- **The domain points at the load balancer.**
+- **Deploy the first master with the load balancer's domain and `--skip-port-check`.** The port check probes the domain, and nothing behind the load balancer is healthy yet. Before skipping the check, open the ports yourself:
+
+    ```bash
+    ov stack deploy ha --edition pro --environment on-premises --deployment-type ha \
+      --ssh ubuntu@<master-1> --ssh-key ~/.ssh/id_ed25519 \
+      --openvidu-pro-license <your-license> \
+      --domain-name <domain of the load balancer> --certificate-type selfsigned \
+      --skip-port-check --mode auto
+    ```
+
+- **Join the masters with `--lb-host`** (the load balancer in front of the masters) **and `--public-ip`** (the node's public address). The cluster API's certificate covers both, so the API stays reachable at either address:
+
+    ```bash
+    ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>
+    ```
+
+- When the nodes reach each other on a private network and you reach them on public addresses, the join's port check reports the internal ports (`6443`, `8472`, `2379-2380`, `10250`) as closed although they are open between the nodes. Open them between the nodes, then join the masters and the media nodes with `--skip-port-check`.
+
+Expect the stack to be ready about 10 minutes after the last join: wait for it with `ov stack status --wait --wait-timeout 20m`.
+
+If you want to force all traffic including WebRTC through the load balancer, see the [Force media traffic through port 443](../../how-to-guides/force-single-port.md) guide.
+
+## Configure your application to use the deployment
+
+Your application connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`. Read them from the stack's directory:
+
+```bash
+ov stack config get livekit-api-key
+ov stack config get livekit-api-secret
+```
+
+`LIVEKIT_URL` is your domain as `wss://yourdomain.example.io/` or `https://yourdomain.example.io/`.
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](./admin.md) section to learn how to manage your OpenVidu High Availability deployment.
+Once deployed, see [Administration](admin.md) to operate the stack, add and remove media nodes, change the configuration and back up its data.

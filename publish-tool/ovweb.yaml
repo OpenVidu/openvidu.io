@@ -131,6 +131,16 @@ redirects:
       body: "Redirecting to Force media traffic through port 443…"
       versions: ">=3.6"
 
+    - id: removed-ha-on-premises-install-dlb
+      description: >
+        The DNS load balancing install of High Availability on premises was retired in 3.10, when
+        the OpenVidu CLI took over the installs: the HA on-premises install is install-nlb.md.
+      at: "{version}/docs/self-hosting/ha/on-premises/install-dlb/index.html"
+      to: "../install-nlb/"
+      canonical: "{site_url}/latest/docs/self-hosting/ha/on-premises/install-nlb/"
+      body: "Redirecting to the OpenVidu High Availability on-premises installation…"
+      versions: ">=3.10"
+
     - id: removed-oracle-install-tutorial-community
       description: >
         Folded into the install guide. Gated at 3.7 because the page was removed *during* 3.7's

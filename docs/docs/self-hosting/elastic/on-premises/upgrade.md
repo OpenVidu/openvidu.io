@@ -1,6 +1,6 @@
 ---
 title: "Upgrade OpenVidu Elastic on-premises"
-description: "Upgrade an existing OpenVidu Elastic deployment on your own servers to a newer OpenVidu version, keeping its configuration and data."
+description: "Update an OpenVidu Elastic deployment on your own servers with the OpenVidu CLI, and convert an install.sh cluster, keeping its configuration and data."
 ---
 
 # Upgrade OpenVidu Elastic: On-premises
@@ -11,98 +11,30 @@ description: "Upgrade an existing OpenVidu Elastic deployment on your own server
 
 </div>
 
+**A release of `ov` deploys the same release of OpenVidu.** Updating a stack means running the command with the `ov` of the version you want: [install that version](../../openvidu-cli.md#install-the-openvidu-cli) first.
 
-OpenVidu offers an updater that allows you to upgrade your OpenVidu deployment in an easy and automated way. The updater will take care of the whole process, from stopping the services to updating the configuration files.
+## Update the stack
 
-## Upgrading OpenVidu Elastic
+Run `ov stack update` from the stack's directory, with the new `ov` on your `PATH`. The update changes OpenVidu, not the machines: the nodes, their size and the number of media nodes stay as they are.
 
-Upgrading OpenVidu Elastic is very simple. These are the steps you need to follow:
+--8<-- "self-hosting/common/ov-update-pro.md"
 
-1. First, make sure to shut down OpenVidu Elastic. SSH into all the nodes and execute the following command:
+## Migrate a deployment installed by install.sh
 
-    ```bash
-    systemctl stop openvidu
-    ```
+With the cluster's nodes named, **`ov stack update`** converts, once, an Elastic cluster installed with the published `install.sh` (3.9.0) into the stack `ov` deploys, on the same machines, keeping the configuration with your edits, the certificates and the data. Run it from an empty directory. This is the same conversion as a [Single Node](../../single-node/upgrade.md#migrate-a-deployment-installed-by-installsh); only the node list differs.
 
-2. SSH into your Master Node and your Media Nodes and execute on each of them the following command:
-
-    ```
-    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
-    ```
-
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
-
-3. In all the nodes, you will see the following output:
-
-    ```
-    Stopping OpenVidu service...
-    Backing up files...
-
-        - Backing up file '/opt/openvidu/config' to '/opt/openvidu/backups/<DATE>_<VERSION>/config'
-        ... More files ...
-
-    --------------------
-    📦 Backup directory: /opt/openvidu/backups/<DATE>_<VERSION>/
-    --------------------
-
-    --------------------
-    🚀 Updating OpenVidu from 3.x.x to 3.y.y
-    --------------------
-
-    ? Do you want to update from 3.x.x to 3.y.y? ›
-    • Yes
-      No
-    ```
-
-4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
-
-    For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
-
-    !!! warning
-        The updater will flag any deployment breaking changes if they are present. Pay special attention to these, as they may require you to update firewall rules, open or close specific ports, or perform other manual configuration changes.
-
-    !!! info "Pulling Docker images"
-        When upgrading across multiple intermediate versions, answer `No` when the updater asks whether to pull images at each intermediate step. Only answer `Yes` for the final version.
-
-        Any missing images will be pulled automatically when you run `systemctl start openvidu`.
-
-
-5. After the last intermediate upgrade completes, execute the following command in all the nodes:
+`--ssh` names the master `ov` talks to, and `--media-node` names each media node by address (an Elastic cluster has no `--master-node`, since its one master is the `--ssh` node). The media nodes must all be named; the SSH user, key and port apply to every node:
 
 ```bash
-systemctl start openvidu && journalctl -f -u openvidu
+ov stack update el --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key --media-node 10.0.0.7 --dry-run
+ov stack update el --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key --media-node 10.0.0.7
 ```
 
-The `journalctl` command will show you the logs of the OpenVidu services. You can stop the logs by pressing `Ctrl + C`.
+The cluster becomes Kubernetes on the same machines. It is converted in order: the media nodes stop before the master, then `ov` installs Kubernetes on the master, deploys OpenVidu and joins the nodes. **The data stays in place**: the stores keep their directories, which become the chart's volumes (static PersistentVolumes bound to the chart's claims, kept when the stack is destroyed), and MongoDB's one member is renamed to the chart's member 0. Caddy issues its certificates again, and the logs and metrics of the `observability` module start anew (Grafana's own data is kept). On test machines an Elastic conversion took about 5 minutes.
 
+A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), so does a node without the disk space it needs (exit `9`), and a failure rolls it back to the unchanged 3.9.0. Because the images become this `ov`'s, converting with the `ov` of the release you want is also the update to it.
 
+## Next steps
 
-## Backups and Rollback
-
-When you finish the upgrade process on each node, you will have a backup of the previous version in the `/opt/openvidu/backups` directory. The backup only contains the previous configuration files that have changed in the upgrade process.
-To roll back to the previous version, you have to copy the files from the backup to the OpenVidu directory. You can do it with the following command:
-
-```bash
-cp -r /opt/openvidu/backups/<DATE>_<VERSION>/* /opt/openvidu
-```
-
-Where `<DATE>` and `<VERSION>` are the date and version of the backup you want to restore. For example:
-
-```
-cp -r /opt/openvidu/backups/2025-02-12-09-50-46_3.0.0/* /opt/openvidu
-```
-
-You need to do this in all the nodes of your OpenVidu Elastic deployment to restore to the previous version.
-
-## Recommendations
-
-- Always upgrade all nodes in your OpenVidu Elastic deployment. Running mismatched versions across nodes may cause compatibility issues.
-- If you encounter any problems during an upgrade, a full redeployment is always the recommended path to a clean installation.
-- Keep your Docker and Docker Compose versions up to date.
-- Remove unused images and containers to free up disk space. For example, once the upgrade is complete and OpenVidu is running, you can remove old images with the following command:
-
-    ```bash
-    docker image prune -a
-    ```
-
-    This command removes all images that are not currently in use by any container.
+- [Administer the cluster](admin.md): add and drain media nodes, operate the stack.
+- The full [OpenVidu CLI reference](../../openvidu-cli.md#command-reference).
