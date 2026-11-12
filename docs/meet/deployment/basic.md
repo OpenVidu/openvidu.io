@@ -61,7 +61,7 @@ sudo ov stack deploy meet --environment on-premises --this-node \
   --domain-name <your-domain> --certificate-type letsencrypt
 ```
 
-Without `--domain-name`, a server with a public IPv4 address gets an `sslip.io` name derived from it, with a Let's Encrypt certificate. The deploy generates every credential, waits until OpenVidu is ready and prints its URL. OpenVidu Meet is served at that URL; the initial administrator is `admin`, and these commands print its password and the API key of the OpenVidu Meet REST API:
+Deploying over SSH to a public IPv4 address without `--domain-name`, the deploy derives an `sslip.io` name from it, with a Let's Encrypt certificate; otherwise, name your domain. The deploy generates every credential, waits until OpenVidu is ready and prints its URL. OpenVidu Meet is served at that URL; the initial administrator is `admin`, and these commands print its password and the API key of the OpenVidu Meet REST API:
 
 ```bash
 ov stack config get meet-initial-admin-password
