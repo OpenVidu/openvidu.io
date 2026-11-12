@@ -649,67 +649,35 @@ When you use **managed S3-compatible services or managed MongoDB providers**, re
 
 ## After restore
 
-To ensure everything works correctly after restoring data, follow these steps:
+To ensure everything works correctly after restoring data, follow these steps from the stack's directory, with the [OpenVidu CLI](../openvidu-cli.md):
 
-1. **Check that the following parameters are correctly configured**:
-
-    If you are restoring a system with new private and public IPs or domain names, ensure that the configuration files reflect the new values after the restore.
-    === "Single Node"
-
-        - The `DOMAIN_NAME` in `/opt/openvidu/config/openvidu.env` reflects the correct domain name for your deployment, and the domain DNS records or load balancer point to the appropriate node.
-
-    === "Elastic"
-
-        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflects the correct domain name for your deployment, and the domain DNS records or load balancer point to the appropriate master nodes.
-        - Ensure that the master node has the correct private IP configured in `/opt/openvidu/config/node/master-node.env` for the `MASTER_NODE_PRIVATE_IP` variable:
-
-            ```
-            MASTER_NODE_PRIVATE_IP=<MASTER_NODE_PRIVATE_IP>
-            ```
-
-        - Ensure that all media nodes have the correct private IP configured in `/opt/openvidu/config/node/media-node.env` for the `MEDIA_NODE_PRIVATE_IP` variable and `MASTER_NODE_PRIVATE_IP` variable is correctly set:
-
-            ```
-            MEDIA_NODE_PRIVATE_IP=<MEDIA_NODE_PRIVATE_IP>
-            MASTER_NODE_PRIVATE_IP=<MASTER_NODE_PRIVATE_IP>
-            ```
-
-        - In case you need to reinstall Media Nodes, join them again as described in [Add a media node](../elastic/on-premises/admin.md#add-a-media-node)
-
-    === "High Availability"
-
-        - The `DOMAIN_NAME` in `/opt/openvidu/config/cluster/openvidu.env` reflects the correct domain name for your deployment, and the domain DNS records or load balancer point to the appropriate master nodes.
-        - Ensure that all master nodes have the correct private IP configured in `/opt/openvidu/config/node/master-node.env` for the `MASTER_NODE_X_IP` variables:
-
-            ```
-            MASTER_NODE_1_PRIVATE_IP=<MASTER_NODE_1_PRIVATE_IP>
-            MASTER_NODE_2_PRIVATE_IP=<MASTER_NODE_2_PRIVATE_IP>
-            MASTER_NODE_3_PRIVATE_IP=<MASTER_NODE_3_PRIVATE_IP>
-            MASTER_NODE_4_PRIVATE_IP=<MASTER_NODE_4_PRIVATE_IP>
-            ```
-
-        - Ensure that all media nodes have the correct private IP configured in `/opt/openvidu/config/node/media-node.env` for the `MEDIA_NODE_PRIVATE_IP` variables and `MASTER_NODE_X_IP` variables are correctly set:
-
-            ```
-            MEDIA_NODE_PRIVATE_IP=<MEDIA_NODE_PRIVATE_IP>
-            MASTER_NODE_1_PRIVATE_IP=<MASTER_NODE_1_PRIVATE_IP>
-            MASTER_NODE_2_PRIVATE_IP=<MASTER_NODE_2_PRIVATE_IP>
-            MASTER_NODE_3_PRIVATE_IP=<MASTER_NODE_3_PRIVATE_IP>
-            MASTER_NODE_4_PRIVATE_IP=<MASTER_NODE_4_PRIVATE_IP>
-            ```
-
-        - In case you need to reinstall Media Nodes, join them again as described in [Add a media node](../ha/on-premises/admin.md#add-a-media-node)
-
-
-2. **Check if all containers are running smoothly**
+1. **Check the domain**. If you restored onto machines with other public IPs or under another domain name, check the domain the stack serves and change it if needed. The DNS records, or the load balancer, must point at the right node (the master nodes on Elastic and High Availability):
 
     ```bash
-    docker ps
+    ov stack config get domain-name
+    ov stack config set domain-name=openvidu.example.com   # only if it changed
     ```
 
-3. **Verify Data Integrity**: Check that recordings, observability metrics, and operational data are intact and accessible.
+2. **Check the nodes' addresses**.
 
-4. **In any cloud deployment**: If you followed [Method 1](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider), ensure that the restored VMs have the correct security groups, IAM roles, and network configurations.
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        `ov stack describe` shows the address `ov` reaches the node at. If it changed, take the stack over again with `ov stack import --ssh <user>@<new address> --replace`.
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        A PRO stack (Single Node, Elastic or High Availability) runs on a Kubernetes cluster that `ov` built on the nodes' private addresses. Moving the restored nodes to other private addresses is not covered by the OpenVidu CLI: deploy a new stack on the new machines and restore the data into it ([Method 3](#method-3-only-backup-data-from-minios3-and-mongodb)). Media nodes hold no data: if you need to reinstall them, join them again as described in Add a media node ([Elastic](../elastic/on-premises/admin.md#add-a-media-node), [High Availability](../ha/on-premises/admin.md#add-a-media-node)).
+
+3. **Check that every service is running**:
+
+    ```bash
+    ov stack status --wait
+    ov stack test
+    ```
+
+4. **Verify Data Integrity**: Check that recordings, observability metrics, and operational data are intact and accessible.
+
+5. **In any cloud deployment**: If you followed [Method 1](#method-1-direct-snapshots-of-openvidu-nodes-via-your-infrastructure-provider), ensure that the restored VMs have the correct security groups, IAM roles, and network configurations.
 
 ## About restic
 

@@ -8,6 +8,8 @@ Depending on your [OpenVidu deployment type](/docs/self-hosting/deployment-types
 	docker compose restart
 	```
 
+	On Linux, OpenVidu Local is operated with the [OpenVidu CLI](/docs/self-hosting/openvidu-cli.md): follow the other tab, from the local stack's directory.
+
 === "OpenVidu Single Node / Elastic / High Availability"
 
 	Operate the stack with the [OpenVidu CLI](/docs/self-hosting/openvidu-cli.md) from its directory. Turning an agent on or off is a live change with `ov stack agent`, which restarts only that agent across every node of the deployment:

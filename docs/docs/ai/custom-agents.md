@@ -85,13 +85,13 @@ CMD ["python", "agent.py", "start"]
 
 ## 3. Add your custom agent to your OpenVidu deployment
 
-### 1. SSH into an OpenVidu Node and go to configuration folder
+### 1. Open the stack's configuration
 
 --8<-- "self-hosting/common/ssh-openvidu-deployment.md"
 
 ### 2. Add an `agent-AGENT_NAME.yaml` file
 
-Located in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node, create a file named `agent-AGENT_NAME.yaml`, where `AGENT_NAME` must be a unique name for your agent. The minimal content of this file is:
+Create a file named `agent-AGENT_NAME.yaml`, where `AGENT_NAME` must be a unique name for your agent: on OpenVidu Local for Windows or macOS, in the [configuration folder](#1-open-the-stacks-configuration); with the OpenVidu CLI, anywhere on your machine. The minimal content of this file is:
 
 ```yaml
 # Docker image of the agent.
@@ -109,7 +109,13 @@ CUSTOM_CONFIGURATION: ...
 
 - You can add as many other properties as you want to this YAML file. You can access them within your agent's code (see [Accessing the agent's configuration file](#accessing-the-agents-configuration-file)).
 
-### 3. Restart OpenVidu
+With the OpenVidu CLI, add the file to the stack, which validates it and starts the agent:
+
+```bash
+ov stack config file apply agent-AGENT_NAME.yaml
+```
+
+### 3. Restart OpenVidu or the agent
 
 --8<-- "self-hosting/common/restart-openvidu-deployment.md"
 

@@ -13,13 +13,13 @@ The Speech Processing agent provides all the AI services related to transcribing
 
 ## Enable the agent and configure AI services
 
-### 1. SSH into an OpenVidu Node and go to configuration folder
+### 1. Open the stack's configuration
 
 --8<-- "self-hosting/common/ssh-openvidu-deployment.md"
 
 ### 2. Modify file `agent-speech-processing.yaml`
 
-Locate file `agent-speech-processing.yaml` in the [configuration folder](#1-ssh-into-an-openvidu-node-and-go-to-configuration-folder) of your OpenVidu node. Modify this file to enable the agent and configure the desired AI services.
+Open `agent-speech-processing.yaml`: on OpenVidu Local for Windows or macOS, in the [configuration folder](#1-open-the-stacks-configuration); with the OpenVidu CLI, with `ov stack config file edit agent-speech-processing.yaml`, which applies it when you save. Modify it to enable the agent and configure the desired AI services.
 
 #### Enable the agent
 
@@ -33,7 +33,7 @@ You can set up the following AI services in this agent:
 
 - **Live Captions**: see [Live Captions service](../live-captions.md#how-to-enable-live-captions-service-in-your-openvidu-deployment).
 
-### 3. Restart OpenVidu
+### 3. Restart OpenVidu or the agent
 
 --8<-- "self-hosting/common/restart-openvidu-deployment.md"
 

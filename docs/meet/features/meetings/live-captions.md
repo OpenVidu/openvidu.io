@@ -16,15 +16,13 @@ OpenVidu Meet includes a built-in **Live Captions** feature that turns speech in
 
     Live Captions are **not available** in local Meet deployments. You must use either the [OpenVidu Local deployment](../../../docs/self-hosting/local.md) or an [OpenVidu production deployment](../../../docs/self-hosting/deployment-types.md) to enable this feature.
 
-### 1. Connect to your OpenVidu deployment
-
-SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
+### 1. Open the stack's configuration
 
 --8<-- "self-hosting/common/ssh-openvidu-deployment.md"
 
 ### 2. Enable the Speech Processing Agent
 
-Modify file `agent-speech-processing.yaml` to enable the Live Captions Service with `processing: manual`:
+Modify `agent-speech-processing.yaml` (with the OpenVidu CLI, `ov stack config file edit agent-speech-processing.yaml`) to enable the Live Captions Service with `processing: manual`:
 
 ```yaml
 docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.9.0
@@ -50,11 +48,14 @@ live_captions:
 
 ### 3. Enable Captions in OpenVidu Meet configuration
 
-Edit the `meet.env` file and ensure the following configuration variable is set:
+Edit the `meet.env` file (with the OpenVidu CLI, `ov stack config file edit meet.env`) and ensure the following configuration variable is set:
 
 ```
 MEET_CAPTIONS_ENABLED=true
 ```
+
+!!! note
+    A **PRO** stack deployed with the OpenVidu CLI has no `meet.env` document: see [`meet.env`](../../../docs/self-hosting/configuration/reference.md#meetenv) in the configuration reference.
 
 ### 4. Restart OpenVidu
 
