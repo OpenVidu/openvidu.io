@@ -89,16 +89,16 @@ The view says why the wait ended:
 
 In an [embedded](../../embedded/intro.md) meeting, these views offer the same dismiss button as the [End view](lifecycle.md#end-view): pressing it emits `embeddedCloseRequested` to the host application.
 
-**Ask to join again** starts a new wait at the end of the line. Every request to join is a new wait: a participant who asks again, from another tab or another device, goes to the end of the line, and their earlier wait ends. A reload while waiting is not a request to join again: see [Keeping a place](#keeping-a-place). Nobody is blocked: a denied participant can ask again as many times as they like.
+**Ask to join again** starts a new wait at the end of the line. Every request to join is a new wait: a participant who asks again, from another tab or another device, goes to the end of the line, and their earlier wait ends. A reload while waiting asks again on its own: see [Keeping a place](#keeping-a-place). Nobody is blocked: a denied participant can ask again as many times as they like.
 
 ### Keeping a place { #keeping-a-place }
 
 A place in line belongs to the participant's **live connection** to OpenVidu Meet, and it is kept only while the page stays connected.
 
 - A short loss of connection is fine. The participant keeps their place if the connection is back within about a minute.
-- A page that **closes, reloads or navigates away** loses its place about 15 seconds later unless the page connects again, so a moderator sees the participant leave the list within seconds.
-- About a **minute without connection** loses the place, whatever the cause: the network, a phone that suspends the page, a browser that crashes, or a host application that removes the embedded element or iframe.
-- A **reload** continues the same wait if the page connects again within those 15 seconds: the participant returns to the waiting screen with the same place and identity, without asking again. The page remembers the wait of its tab, so another tab asks to join again. A participant who was admitted and reloads the page after joining also asks again at the end of the line.
+- A page that **closes, reloads or navigates away** loses its place at once, reported as `expired` with `reason` `page_closed`: a moderator sees the participant leave the list within seconds.
+- About a **minute without connection** loses the place, whatever the cause: the network, a phone that suspends the page, a browser that crashes, or a host application that removes the web component element.
+- A **reload** asks to join again on its own, without the join screen: the participant waits at the end of the line, as a new wait that moderators are told about again. A member or a user keeps their identity. A participant who was admitted and reloads the page after joining also asks again at the end of the line.
 - **Leave waiting room** ends the wait at once, even while the connection is down.
 
 A page that never manages to connect shows the connection error screen instead of "You lost your place". That points to a network that blocks WebSockets: see the [troubleshooting note](../../deployment/basic.md#troubleshooting).
@@ -119,7 +119,7 @@ Participants with `waitingRoomAdmin` see who waits, live, from the moment each o
 ![Notification below the status rail announcing a participant who asks to join, with Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-dark.webp#only-dark){ .round-corners loading=lazy }
 ![Notification below the status rail announcing a participant who asks to join, with Deny and Admit](../../../assets/images/meet/meetings/waiting-room/knock-notice-light.webp#only-light){ .round-corners loading=lazy }
 
-A participant who is **admitted** joins the meeting. One who is **denied** is told they weren't let in. A participant who closed their page can no longer be admitted: admitting them shows a notification that they already left, and the list drops them within seconds. Denying everyone rejects whoever waits when the request arrives, and whoever asks afterwards waits as usual. There is no block list, and no way to send a participant back to the line.
+A participant who is **admitted** joins the meeting. One who is **denied** is told they weren't let in. Admitting or denying a participant who left an instant before shows a notification that they already left, and the list is read again. Denying everyone rejects whoever waits when the request arrives, and whoever asks afterwards waits as usual. There is no block list, and no way to send a participant back to the line.
 
 The room stays `open` while participants wait: asking to join does not start the meeting, reserve a name or take a place in it. The first participant admitted into a room with no meeting running starts it when they join. Participants can wait before any meeting runs: a moderator who joins sees them, and a backend can also admit them [with the API key](#who-acts). A meeting that empties, because its last participants left or lost their connection, does not end the waits: those waiting keep their place for the next meeting. Only ending the meeting for everyone, or reaching its duration limit, ends them.
 
@@ -171,12 +171,12 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application 
 - `participantKnocked` fires once for each participant who starts waiting while the local participant is in the meeting. The participants already waiting when the element joined, and a participant back in line after an admission that failed, arrive in `waitingRoomUpdated` instead.
 - `waitingRoomUpdated` carries the whole list, `participants` and `availablePlaces`, once after joining and again every time it changes.
 
-**For the participant who waits.** The host of a waiting participant receives `participantWaitingChanged` with the `participant`, the same object the webhooks carry, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks), each with the `origin` of the change when the meeting knows it.
+**For the participant who waits.** The host of a waiting participant receives `participantWaitingChanged` with the `participant`, the same object the webhooks carry, the `status` and, while waiting, the `queuePosition`, starting at 1. The `waiting` status repeats every time the position changes. The other statuses are the ones in the [webhook table](#webhooks), each with the `origin` of the change, and the `reason` where it applies, when the meeting knows them.
 
-- `meetingJoined`, not `admitted`, is what confirms the join. A join that finds the meeting full after `admitted` raises no waiting room event.
+- `meetingJoined`, not `admitted`, is what confirms the join. A join that finds the meeting full after `admitted` reports `waiting` again at once.
 - A waiting participant never produces `meetingLeft`: their host learns how the wait ended from `participantWaitingChanged`.
 - While waiting, `mediaToggleAudio` and `mediaToggleVideo` act on the preview, and `meetingLeave` leaves the waiting room and reports `left`.
-- Removing the element or the iframe while the participant waits is not a leave: the place is lost within about a minute and reported as `expired`.
+- Removing the element or the iframe while the participant waits is not a leave: it is reported as `expired`, at once for an iframe (`reason` `page_closed`) and within about a minute for the element.
 - With an iframe, the host waits for `participantWaitingChanged` with `left` after posting `meetingLeave` before removing the iframe: the command is handled in a later task of the page, so an iframe removed right away never delivers it and the wait ends a minute later as `expired`.
 
 A host page with a Content Security Policy must also allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](../../embedded/reference/webcomponent.md#content-security-policy).
@@ -194,13 +194,14 @@ The waiting room can also be run from your backend with the [Meetings REST API](
 - `participantWaitingList` answers `participants`, those waiting in arrival order, each with its `participantIdentity`, `participantName`, `type`, `knockDate` and, when the client sent them, `externalId` and `metadata`. It also answers `availablePlaces`, the free places, or `null` when the room has no participant limit.
 - `participantWaitingAdmit` and `participantWaitingReject` take `participantIdentities`, from 1 to 100 distinct identities, or no `participantIdentities` for everyone waiting. An empty or repeated list is a `422`, never read as everyone. A decision on named participants applies to all of them or to none: it answers `404`, naming the first identity that no longer waits, and `participantWaitingAdmit` also answers `409` when they outnumber the free places. Both answer the participants decided on.
 - With the waiting room off, `participantWaitingList` answers an empty list, a decision on named participants answers `404`, and a decision on everyone waiting answers an empty list of participants.
+- A refused request names its cause in `error`, a code to tell it apart without reading `message`: `participant_not_waiting`, with the participant in `participantIdentity`, or `not_enough_places`.
 
 ### Webhooks { #webhooks }
 
 Two [webhooks](../../embedded/reference/webhooks.md) report the waiting room:
 
 - The [`participantKnocked` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantKnockedWebhook){:target="_blank"} is sent once for each wait, when the participant asks to join and before their waiting view connects. A participant who never connects therefore produces a `participantKnocked` and, about 20 seconds later, an `expired` status.
-- The [`participantWaitingChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantWaitingChangedWebhook){:target="_blank"} is sent for each later change of the wait, one per participant, also when a decision covers everyone waiting. It carries the participant, a `status` and the `origin` of the change.
+- The [`participantWaitingChanged` webhook :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/webhooks/participantWaitingChangedWebhook){:target="_blank"} is sent for each later change of the wait, one per participant, also when a decision covers everyone waiting. It carries the participant, a `status`, the `origin` of the change and, where `status` and `origin` do not tell why, a `reason`.
 
 | `status`        | What happened                                                                             |
 | --------------- | ----------------------------------------------------------------------------------------- |
@@ -213,6 +214,14 @@ Two [webhooks](../../embedded/reference/webhooks.md) report the waiting room:
 | `room_closed`   | The room was closed or deleted while they waited.                                         |
 
 `admitted` is not the join: the `participantJoined` webhook, with the same `participantIdentity`, confirms it. The `origin` is `participant`, `moderator` or `system`.
+
+| `reason`                | With        | Why                                                                      |
+| ----------------------- | ----------- | ------------------------------------------------------------------------ |
+| `replaced`              | `left`      | The participant asked to join again from another tab or device.          |
+| `page_closed`           | `expired`   | The participant's page closed, reloaded or navigated away.               |
+| `connection_lost`       | `expired`   | The participant's meeting was out of touch for a minute.                 |
+| `admission_unused`      | `expired`   | The participant was admitted and did not join within a minute.           |
+| `waiting_room_disabled` | `admitted`  | The room's waiting room was turned off.                                  |
 
 ```json
 {
