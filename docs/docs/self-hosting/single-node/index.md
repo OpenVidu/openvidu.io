@@ -14,6 +14,8 @@ OpenVidu Single Node is a production-ready deployment option that provides all t
 
     Scalability and fault tolerance require a multi-node setup. If you need them, consider using [OpenVidu Elastic](../elastic/index.md) or [OpenVidu High Availability](../ha/index.md).
 
+OpenVidu Single Node is deployed and operated with the [OpenVidu CLI](../openvidu-cli.md) (`ov`), on your own servers or on any of these clouds: one command creates it, and the same commands check it, change it, update it and take it down. See [How OpenVidu is deployed](../deployment-types.md#how-openvidu-is-deployed).
+
 Choose your provider:
 
 <div class="provider-buttons" markdown>

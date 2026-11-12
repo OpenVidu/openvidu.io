@@ -139,6 +139,7 @@ nav:
           - Ingress: docs/reference/ingress.md
       - Self-hosting:
           - Deployment types: docs/self-hosting/deployment-types.md
+          - The OpenVidu CLI: docs/self-hosting/openvidu-cli.md
           - Production ready:
               - docs/self-hosting/production-ready/index.md
               - Performance: docs/self-hosting/production-ready/performance.md
@@ -200,8 +201,7 @@ nav:
               - docs/self-hosting/ha/index.md
               - On Premises:
                   - docs/self-hosting/ha/on-premises/index.md
-                  - Install with DNS Load Balancing: docs/self-hosting/ha/on-premises/install-dlb.md
-                  - Install with Network Load Balancer: docs/self-hosting/ha/on-premises/install-nlb.md
+                  - Install: docs/self-hosting/ha/on-premises/install-nlb.md
                   - Administration: docs/self-hosting/ha/on-premises/admin.md
                   - Upgrade: docs/self-hosting/ha/on-premises/upgrade.md
               - AWS:
@@ -506,6 +506,7 @@ plugins:
 
         OpenVidu Platform self-hosting:
         - docs/self-hosting/deployment-types.md
+        - docs/self-hosting/openvidu-cli.md
         - docs/self-hosting/local.md
         - docs/self-hosting/single-node/index.md
         - docs/self-hosting/elastic/index.md

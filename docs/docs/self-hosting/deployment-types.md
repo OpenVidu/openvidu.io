@@ -5,7 +5,7 @@ description: "The four OpenVidu deployment types side by side: local for develop
 
 # Deployment types
 
-OpenVidu offers **user-friendly installers** that facilitate quick **on-premises deployments**, so you can self-host your real-time solution in your own infrastructure or any cloud provider.
+OpenVidu is self-hosted with the **[OpenVidu CLI](openvidu-cli.md)** (`ov`): one tool deploys and operates every deployment type on this page, on your laptop, on your own servers or on AWS, Azure, Google Cloud, Oracle Cloud and DigitalOcean.
 
 There are different deployment options available, depending on your needs:
 
@@ -63,9 +63,82 @@ It is composed of two different types of nodes running on two separate clusters:
 
   ![OpenVidu High Availability cluster](../../assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture.svg){ .round-corners .dark-img loading=lazy }
 
+## How OpenVidu is deployed { #how-openvidu-is-deployed }
+
+Every deployment type is deployed and operated with the [OpenVidu CLI](openvidu-cli.md) (`ov`), with the same commands wherever it runs:
+
+```bash
+mkdir my-stack && cd my-stack
+ov stack deploy --environment local      # OpenVidu on this machine, with Docker
+ov stack status                          # operate it from this directory
+ov stack destroy --delete-data           # and take it down again
+```
+
+On a cloud, one command creates the machines, and the machines then deploy OpenVidu themselves:
+
+```bash
+ov stack deploy my-stack --cloud aws --aws-region us-east-1 --mode auto
+```
+
+| Where OpenVidu runs | Single Node | Elastic | High Availability |
+| --- | :---: | :---: | :---: |
+| **Local**: this machine, with Docker, for development | [COMMUNITY and PRO](local.md) | — | — |
+| **On premises**: your own Linux servers, over SSH | [COMMUNITY and PRO](single-node/on-premises/install.md) | [PRO](elastic/on-premises/install.md) | [PRO](ha/on-premises/install-nlb.md) |
+| **AWS** | [COMMUNITY and PRO](single-node/aws/install.md) | [PRO](elastic/aws/install.md) | [PRO](ha/aws/install.md) |
+| **Azure** | [COMMUNITY and PRO](single-node/azure/install.md) | [PRO](elastic/azure/install.md) | [PRO](ha/azure/install.md) |
+| **Google Cloud** | [COMMUNITY and PRO](single-node/gcp/install.md) | [PRO](elastic/gcp/install.md) | [PRO](ha/gcp/install.md) |
+| **Oracle Cloud** | [COMMUNITY and PRO](single-node/oracle/install.md) | [PRO](elastic/oracle/install.md) | [PRO](ha/oracle/install.md) |
+| **DigitalOcean** | [COMMUNITY and PRO](single-node/digitalocean/install.md) | [PRO](elastic/digitalocean/install.md) | [PRO](ha/digitalocean/install.md) |
+
+Elastic and High Availability span more than one machine, so they require OpenVidu PRO.
+
+### COMMUNITY and PRO: the same commands { #community-and-pro }
+
+Choosing `--edition community` (the default) or `--edition pro` is the only decision you make. How OpenVidu is installed and run on the machine follows from the edition; you do not configure it:
+
+| | OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } | OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } |
+| --- | --- | --- |
+| Deployed with | `ov stack deploy --edition community` | `ov stack deploy --edition pro --openvidu-pro-license <key>` (no license needed on a local stack) |
+| Runs on the server as | Docker Compose and a systemd unit | Kubernetes, with OpenVidu as a Helm release |
+| Topologies | Single Node | Single Node, Elastic, High Availability |
+| Where the configuration lives | In the node's files (`/opt/openvidu/config/`) | In the cluster (`openvidu.yaml` and the service files), which any administrator can read |
+| Administrators | Each administrator's directory keeps a copy of the desired state; if they differ, the node's files take precedence | Every administrator reads and writes the same configuration in the cluster |
+
+A local stack runs on Docker Compose with either edition. This lets you develop against OpenVidu PRO on your laptop without Kubernetes, in evaluation mode and without a license. The [pricing page](../../pricing.md) explains what the PRO license includes; to get one, [create an OpenVidu account :fontawesome-solid-external-link:{.external-link-icon}](../../account.md){:target="_blank"} (there is a 15-day free trial).
+
+### The stack directory { #the-stack-directory }
+
+`ov` operates **one stack per directory**. The directory you deploy from becomes the stack: every later command finds the stack in the directory you run it from, with no name and no flags. From anywhere else, `--dir <path>` points to it. Two stacks are two directories.
+
+The directory holds two things:
+
+- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it. The deploy flags (`--domain-name`, `--certificate-type`, `--modules`…), `--set key=value` and `-f file.yml` write into it, and the deploy fills in the rest with defaults. It also **generates every credential the stack needs** and pins them here, so a redeploy reuses them.
+- **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it (SSH key, kubeconfig), the template and variables it applied on a cloud, and its secrets. Keep it private.
+
+Every deployed node also gets a copy of `ov` and a stack directory of its own, so `sudo ov stack status` works on the node too. A lost directory is recreated with `ov stack import` ([I lost the stack's directory](openvidu-cli.md#lost-the-stack-directory)).
+
+### Auto and assisted modes { #auto-and-assisted-modes }
+
+Every deploy can run in two modes:
+
+- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and prints every command before running any. It asks for confirmation first; `-y` confirms in advance.
+- **`--mode assisted`** runs **nothing**. It writes the same files and prints the same commands for you to review and run yourself. On a cloud, once you have run them, `ov stack deploy --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack, with no other flags, because everything is already written in `openvidu-stack.yml`. Until then the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
+
+Both modes print the same commands, so what you review in assisted mode is exactly what auto mode runs.
+
+### Cloud deployments { #cloud-deployments }
+
+`--cloud aws|azure|gcp|oracle|digitalocean` makes the deploy create the machines first, from the infrastructure template embedded in the CLI: CloudFormation on AWS, Bicep on Azure and Terraform on Google Cloud, Oracle Cloud and DigitalOcean. Then:
+
+1. **The machines deploy OpenVidu themselves.** Each one downloads the same `ov` build, checks it against the published checksums, and deploys the stack (the first node) or joins it (every other node). No SSH from your machine is part of the installation.
+2. **Your `ov` waits** until OpenVidu is up: on Community, until its URL answers; on PRO, until the stack publishes its kubeconfig and the cluster API answers.
+3. **Your `ov` registers the stack** in your directory: OpenVidu PRO through the cluster credentials (kubeconfig) the stack publishes, OpenVidu COMMUNITY over SSH with the key pair the machine was created with.
+
+From then on, `ov stack status`, `ov stack config`, `ov stack logs` and `ov stack destroy` work from that directory. Recordings and OpenVidu Meet data go to the cloud's object storage (S3, Azure Blob Storage, Cloud Storage, Object Storage or Spaces), so they outlive the machines. `--remote-state` also keeps the stack on its cloud, so another machine can take it over ([Remote state](openvidu-cli.md#remote-state)).
+
 ## Node services
 
-OpenVidu is composed of several services that work together to provide a complete videoconferencing solution. Every service runs as a Docker container, coordinated with Docker Compose.
+OpenVidu is composed of several services that work together to provide a complete videoconferencing solution. Every service runs as a container: with Docker Compose on OpenVidu COMMUNITY and on a local deployment, and on Kubernetes on OpenVidu PRO.
 
 ### Master Node services
 
@@ -73,7 +146,6 @@ OpenVidu is composed of several services that work together to provide a complet
 | :--------------------- | :---------- |
 | **[OpenVidu Meet](../../meet/index.md)**      | A high-quality video calling service based on OpenVidu. |
 | **OpenVidu Dashboard** | Web application interface for managing your cluster and visualizing your Rooms. |
-| **OpenVidu Operator**  | Module that supervises the high availability services and updates the loadbalancing configuration dynamically. |
 | **Redis**              | Database used to share transient information between Media Nodes and coordinate them. In [OpenVidu High Availability](#openvidu-high-availability) this is an instance of a [Redis Cluster :fontawesome-solid-external-link:{.external-link-icon}](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/){:target="_blank"}. |
 | **MongoDB**            | Database used to store analytics and monitoring persistent data. In [OpenVidu High Availability](#openvidu-high-availability) this is an instance of a [MongoDB Replica Set :fontawesome-solid-external-link:{.external-link-icon}](https://www.mongodb.com/docs/manual/replication/){:target="_blank"}. |
 | **Minio**              | S3 bucket used to store recordings and common node configurations. In [OpenVidu High Availability](#openvidu-high-availability) this is an instance of a [Minio Multi-Node :fontawesome-solid-external-link:{.external-link-icon}](https://docs.min.io/aistor/installation/linux/){:target="_blank"}. |

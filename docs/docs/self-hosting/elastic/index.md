@@ -7,6 +7,8 @@ description: "A Master Node with autoscaling Media Nodes. Install, upgrade and a
 
 OpenVidu Elastic is part of the **PRO**{ .openvidu-tag .openvidu-pro-tag } edition of OpenVidu. You have the following deployment options:
 
+OpenVidu Elastic is deployed and operated with the [OpenVidu CLI](../openvidu-cli.md) (`ov`), on your own servers or on any of these clouds: one command creates it, and the same commands check it, change it, update it and take it down. See [How OpenVidu is deployed](../deployment-types.md#how-openvidu-is-deployed).
+
 Choose your provider:
 
 <div class="provider-buttons" markdown>
