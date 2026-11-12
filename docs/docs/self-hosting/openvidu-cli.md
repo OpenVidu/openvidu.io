@@ -69,6 +69,14 @@ ov completion bash | sudo tee /etc/bash_completion.d/ov > /dev/null
 
 `ov help stack` lists the commands, and `ov help stack <command>` prints every flag of one of them. The [command reference](#command-reference) below describes all of them.
 
+### Files `ov` keeps on your machine { #files-ov-keeps-on-your-machine }
+
+| File | What it holds |
+| --- | --- |
+| `.openvidu/` in each stack directory | The state of that stack: how to reach it, the template and variables applied on a cloud, and its secrets. Keep it private. |
+| `~/.config/openvidu/known_hosts` (or `$OV_KNOWN_HOSTS`) | The SSH host keys of the machines `ov` has connected to, separate from your own `known_hosts`. A machine is trusted on the first connection; from then on a different key stops the command before anything runs, and the message says how to remove the old key when you know why it changed. A destroy that deletes a cloud stack's machines removes their keys. |
+| `~/.cache/openvidu/image-sizes.json` | The size of each image `ov` has read from the registry for an update's disk check, so a later estimate does not use up the registry's pull limit. |
+
 ## Global flags { #global-flags }
 
 Every `ov stack` command operates on **the stack in a directory**: the current one, or the one `--dir` names.
@@ -187,8 +195,7 @@ Adopts a deployed stack into the directory, so every command works afterwards. S
 | Flag | Source |
 | --- | --- |
 | `--this-node` | The stack on this machine. |
-| `--ssh [user@]host` | A node over SSH (`--ssh-key`, `--ssh-port`). |
-| `--kubeconfig <path>` | A PRO stack, from its cluster credential (`--kube-context`). |
+| `--ssh [user@]host` | A node over SSH (`--ssh-key`, `--ssh-port`): a Community server, or a master node of a PRO stack (on High Availability, any of the four). |
 | `-f <file>` | A description document (what `ov stack export --bundle --out <file>` writes). |
 | `--cloud <cloud> --stack-name <name>` | A stack deployed with `--remote-state`, from its cloud record, infrastructure included ([Remote state](#remote-state)). |
 | `--replace` | Overwrite the stack recorded in this directory. |
@@ -210,17 +217,19 @@ Tears the deployment down and removes the directory's record. Without `-y` it as
 
 ## Remote state { #remote-state }
 
-By default everything that drives a cloud stack stays in its directory: the Terraform state (on the clouds that use Terraform), the stack's record and the SSH private key. If you lose the directory, you can still import the stack and administer OpenVidu on it (over SSH, or with its kubeconfig), but `ov` can no longer change or delete its machines.
+By default everything that drives a cloud stack stays in its directory: the Terraform state (on the clouds that use Terraform), the stack's record and the SSH private key. If you lose the directory, you can still import the stack and administer OpenVidu on it (`ov stack import --ssh` to the server or to a master node), but `ov` can no longer change or delete its machines.
 
 `--remote-state` on the deploy also keeps the stack on its cloud, so any machine with credentials for that cloud can take it over with `ov stack import --cloud <cloud> --stack-name openvidu-<name>` (the name on the deploy's `record:` line). From then on, `ov stack status`, `ov stack deploy <name> --cloud <cloud> --param …` and `ov stack destroy` work there as they did in the directory that deployed the stack (a destroy from the imported directory deletes the machines too).
 
 | Where it is kept | AWS | Azure | Google Cloud, Oracle Cloud, DigitalOcean |
 | --- | --- | --- | --- |
-| **Terraform state** | (CloudFormation; no state file) | (Bicep; no state file) | a dedicated bucket (`<stack>-terraform-state`) |
-| **The record** (infrastructure, no secrets) | the template bucket (`<stack>/registry/`) | a Key Vault secret (`OPENVIDU-REGISTRY`) | the state bucket (`openvidu/registry/`) |
+| **Terraform state** | (CloudFormation; no state file) | (Bicep; no state file) | a dedicated bucket: `<project>-<stack>-<hash>-terraform-state` on Google Cloud, `<stack>-<8 hex>-terraform-state` on Oracle Cloud and DigitalOcean |
+| **The record** (infrastructure, no secrets) | the template bucket (`<stack>/registry/`) | a Blob container (`openvidu-registry`) of a storage account the template creates in the stack's resource group (`ovreg<hash>`) | the state bucket (`openvidu/registry/`) |
 | **The SSH private key** `ov` generated | a Secrets Manager secret (`openvidu/<stack>/ssh-private-key`) | the stack's Key Vault (`OPENVIDU-SSH-PRIVATE-KEY`) | in the Terraform state |
 
-A Community stack is imported the same way, with no license: the import takes the SSH private key from where `--remote-state` kept it and operates the stack over SSH. On a PRO stack, without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the only way back is the directory that deployed it, or `--kubeconfig` for the cluster alone. `ov stack destroy` deletes everything `--remote-state` kept. Each cloud's administration page shows an import with real output.
+On Azure, the record is written with the storage account's key: where an Azure Policy of your organization forbids shared key access, the deploy warns that `--remote-state` cannot keep it, and the way to carry the stack is `ov stack export --bundle --out <file>` and `ov stack import -f <file>`.
+
+A Community stack is imported the same way, with no license: the import takes the SSH private key from where `--remote-state` kept it and operates the stack over SSH. On a PRO stack, without `--openvidu-pro-license` the import stops before registering anything and says which flag is missing; `--mode assisted` prints the reads and runs nothing. A stack deployed **without** `--remote-state` has no record to read: the only way back is the directory that deployed it; `ov stack import --ssh` to the server or to a master node (or `-f` with a copy made by `ov stack export --bundle --out <file>`) adopts OpenVidu, not the machines. `ov stack destroy` deletes everything `--remote-state` kept. Each cloud's administration page shows an import with real output.
 
 ## Troubleshooting { #troubleshooting }
 
@@ -268,7 +277,7 @@ This is almost always a blocked **UDP** port (`443/udp` or the media range). HTT
 ov stack stop && ov stack check-ports && ov stack start
 ```
 
-Open the ports the report flags on the node and on any perimeter firewall (cloud security group, router). `check-ports` needs SSH access to the node, so it does not run against a PRO cloud stack registered through its kubeconfig (exit `2`); there, the template opens the ports, and the cloud's firewall rules for the stack are the place to look.
+Open the ports the report flags on the node and on any perimeter firewall (cloud security group, router). `check-ports` needs SSH access to the node. A PRO stack on a cloud keeps none in its record: on AWS and Azure the check logs in to the master as `ubuntu` with the key pair `ov` generated, when the directory holds its private half; on the other clouds it exits `2` and prints the command to run, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>`.
 
 ### Let's Encrypt fails: port 80 must be reachable
 
@@ -284,17 +293,17 @@ A deploy with no `--domain-name` on a machine with a public IPv4 address derives
 
 ### A cloud quota blocked the deploy
 
-When the quota in the region cannot hold the stack, the deploy stops before touching the cloud (exit `10`) on the clouds where `ov` can read it. Otherwise, the cloud refuses to create the machines (an instance-type or vCPU quota, an address or disk limit) and the error comes from your cloud CLI, which `ov` runs as you. Request a quota increase, pick a smaller instance type (`--aws-instance-type` on AWS, `--param instanceType=<type>` on the other clouds), or deploy in another region. If a region does not offer the default instance type, `ov` substitutes the same size in another family and says so. A type you chose yourself is never replaced: the deploy stops before creating anything.
+When the quota in the region cannot hold the stack, the deploy stops before touching the cloud (exit `10`) on the clouds where `ov` can read it. Otherwise, the cloud refuses to create the machines (an instance-type or vCPU quota, an address or disk limit) and the error comes from your cloud CLI, which `ov` runs as you. Request a quota increase, pick a smaller size with the parameter of your cloud and topology (`--aws-instance-type` on AWS; on the other clouds, the size parameters each installation guide names), or deploy in another region. If a region does not offer the default instance type, `ov` substitutes the same size in another family and says so. A type you chose yourself is never replaced: the deploy stops before creating anything.
 
 ### A cloud deploy timed out while waiting for OpenVidu
 
 The machines were created but did not finish deploying OpenVidu within the wait window (`--wait-timeout`, default 40 minutes with `--cloud`). The infrastructure already exists, so simply **resume**: it waits and registers the stack, reusing what is there:
 
 ```bash
-ov stack deploy --cloud <cloud> --mode auto
+ov stack deploy <name> --cloud <cloud> --mode auto
 ```
 
-No other flag is needed: everything is already in `openvidu-stack.yml`, and a cloud stack that already exists is reused, not created again.
+Name the stack (without the name it would be registered as `openvidu`); no other flag is needed: everything is already in `openvidu-stack.yml`, and a cloud stack that already exists is reused, not created again.
 
 ### A cloud create failed partway
 
@@ -317,6 +326,6 @@ ov stack test                 # active health check
 
 The directory holds the handle to the stack, not the stack itself. Recreate it with [`ov stack import`](single-node/on-premises/admin.md#operate-from-another-machine):
 
-- **PRO:** `ov stack import --kubeconfig <file>` (the cluster holds its own state), with the kubeconfig a cloud stack keeps in its secret store (the `credentials:` line of the deploy); or run `sudo ov stack import --this-node` on the master itself.
+- **PRO:** `ov stack import --ssh <user>@<master>` (on High Availability, any of the four masters), or `sudo ov stack import --this-node` on the master itself. The stack holds its own state, so nothing is lost.
 - **Community:** `ov stack import --ssh ubuntu@<host> --ssh-key <key>` (rebuilt from the node's files if needed).
 - **A cloud stack deployed with `--remote-state`:** `ov stack import --cloud <cloud> --stack-name openvidu-<name>` brings back the infrastructure too, so `ov stack destroy` and `--param` redeploys work again ([Remote state](#remote-state)). Without `--remote-state`, only the deploying directory can drive the machines.

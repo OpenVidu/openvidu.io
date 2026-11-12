@@ -17,6 +17,8 @@ An OpenVidu Elastic stack on Azure is an OpenVidu **PRO**{ .openvidu-tag .openvi
 
 --8<-- "self-hosting/common/ov-update-pro.md"
 
-<!-- PENDING(docs-integrate): upgrade path for deployments created from the 3.9.0 cloud templates (waiting for Carlos) -->
+## A deployment from the 3.9.0 cloud templates { #a-deployment-from-the-390-cloud-templates }
+
+--8<-- "self-hosting/common/ov-upgrade-cloud-templates.md"
 
 Once the stack is updated, go on operating it from its [Administration](./admin.md) page.

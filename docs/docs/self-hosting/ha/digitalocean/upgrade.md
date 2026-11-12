@@ -17,6 +17,8 @@ An OpenVidu High Availability stack on DigitalOcean is a PRO stack, operated fro
 
 --8<-- "self-hosting/common/ov-update-pro.md"
 
-<!-- PENDING(docs-integrate): upgrade path for deployments created from the 3.9.0 cloud templates (waiting for Carlos) -->
+## A deployment from the 3.9.0 cloud templates { #a-deployment-from-the-390-cloud-templates }
+
+--8<-- "self-hosting/common/ov-upgrade-cloud-templates.md"
 
 Once the update finishes, operate the stack as usual from its [administration page](./admin.md).

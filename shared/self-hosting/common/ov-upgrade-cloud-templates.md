@@ -1,0 +1,7 @@
+!!! warning "Deployments created from the 3.9.0 cloud templates"
+
+    **There is no supported way yet to move a deployment created by a 3.9.0 cloud template** (CloudFormation, ARM or Bicep, Terraform) to the OpenVidu CLI. `ov stack deploy --cloud` creates a new stack, but moving the data of the 3.9.0 installation into it has no tool or guide yet. `ov stack import --cloud` does not help either: it only adopts a stack that `ov stack deploy --cloud --remote-state` created.
+
+    `ov stack update` converts a deployment that `install.sh` 3.9.0 made on your own servers, but not one created by a cloud template. Such a node records its cloud in `deployment-info.yaml` (`environment`: `aws`, `azure`, `gcp`, `oracle` or `digitalocean`), and the update refuses it with exit `4`, having read the node's files and done nothing else, `--dry-run` included. Converting it would change the software of the nodes and nothing of what the template created around them: its autoscaling would keep launching media nodes of the installed release, its firewall rules would not open what the nodes of the new stack use between them, and its boot scripts would keep writing the old stack's files.
+
+    `--skip-cloud-check` converts it all the same, with no guarantee: it is meant for a machine on a cloud where `install.sh` was run by hand, or for when you take care of the rest yourself. A node whose `environment` is `on_premise` is converted as usual, wherever the machine runs.
