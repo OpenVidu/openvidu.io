@@ -13,6 +13,7 @@ page_features:
   - landingstyles
   - homestyles
   - revealonscroll
+  - setupcarousel
 ---
 
 <section class="ov-wrap ov-doors" aria-label="Choose a product" data-sal="slide-up">
@@ -311,31 +312,45 @@ page_features:
 
 <section class="ov-wrap ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
   <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams that already picked a door.</h2>
-  <div class="ov-stories__grid ov-stories__grid--four">
-    <figure class="ov-story">
-      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
-      <blockquote class="ov-story__text"><p>“With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Matteo Resconi</strong><span>IT &amp; Development Area Manager, Mega Italia Media</span></span><a class="ov-story__link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a></figcaption>
-    </figure>
-    <figure class="ov-story">
-      <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Live English lessons · EdTech</span>
-      <blockquote class="ov-story__text"><p>“OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Andrei Iakimov</strong><span>DevOps Lead, Novakid</span></span><a class="ov-story__link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a></figcaption>
-    </figure>
-    <figure class="ov-story">
-      <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Private video calls · Consulting</span>
-      <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
-    </figure>
-    <figure class="ov-story">
-      <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/eventials-logo.svg" loading="lazy" alt="Eventials" width="343" height="57"></span>
-      <span class="ov-story__tag ov-story__tag--neutral">Live streaming · Webinars</span>
-      <blockquote class="ov-story__text"><p>“Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities.”</p></blockquote>
-      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Henrique Otsuka</strong><span>Head of Information Technology, Eventials</span></span><a class="ov-story__link" href="/blog/2026/11/10/eventials-live-streaming-openvidu/">Read the full story →</a></figcaption>
-    </figure>
+  <!-- Splide (page_features: setupcarousel): a looping row of three cards, two below 1100px, one below
+     700px, autoplaying every 5s and paused on hover or focus. Adding a story is one more slide. -->
+  <div class="splide ov-stories__carousel" aria-label="Customer success stories" data-splide='{"type": "loop", "autoWidth": false, "autoHeight": false, "perPage": 3, "perMove": 1, "focus": 0, "gap": "20px", "padding": "2.5rem", "autoplay": true, "interval": 5000, "pauseOnHover": true, "pauseOnFocus": true, "breakpoints": {"1100": {"perPage": 2}, "700": {"perPage": 1}}}'>
+    <div class="splide__track">
+      <div class="splide__list">
+        <div class="splide__slide">
+        <figure class="ov-story">
+          <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
+          <blockquote class="ov-story__text"><p>“With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Matteo Resconi</strong><span>IT &amp; Development Area Manager, Mega Italia Media</span></span><a class="ov-story__link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a></figcaption>
+        </figure>
+        </div>
+        <div class="splide__slide">
+        <figure class="ov-story">
+          <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Live English lessons · EdTech</span>
+          <blockquote class="ov-story__text"><p>“OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Andrei Iakimov</strong><span>DevOps Lead, Novakid</span></span><a class="ov-story__link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a></figcaption>
+        </figure>
+        </div>
+        <div class="splide__slide">
+        <figure class="ov-story">
+          <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Private video calls · Consulting</span>
+          <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
+        </figure>
+        </div>
+        <div class="splide__slide">
+        <figure class="ov-story">
+          <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/eventials-logo.svg" loading="lazy" alt="Eventials" width="343" height="57"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Live streaming · Webinars</span>
+          <blockquote class="ov-story__text"><p>“Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Henrique Otsuka</strong><span>Head of Information Technology, Eventials</span></span><a class="ov-story__link" href="/blog/2026/11/10/eventials-live-streaming-openvidu/">Read the full story →</a></figcaption>
+        </figure>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -1129,22 +1129,33 @@
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
 }
 
-/* Four stories: one row on a wide screen, two by two on a laptop, one column on a phone;
-   fixed counts rather than auto-fit, so no card is left alone on a row */
-.ov-stories__grid--four {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+/* The stories ride a Splide carousel (carousel.css styles the arrows and the dots; its slide
+   rules are written for the Meet landing's wide use-case panels, so here each slide is just its
+   card, fully visible, stretched to the row's height). The list and the slides are divs, not
+   ul/li: Material's typesetting sets display: flow-root on every ul and would undo Splide's
+   flex row. If every story ever fits at once Splide leaves out .is-overflow: the row centres,
+   with no arrows or dots. */
+.ov-stories .splide {
+  margin: 0 0 40px; /* room for the dots, which sit below the track */
 }
 
-@media (max-width: 1180px) {
-  .ov-stories__grid--four {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.ov-stories .splide__slide {
+  width: auto;
+  opacity: 1;
 }
 
-@media (max-width: 640px) {
-  .ov-stories__grid--four {
-    grid-template-columns: 1fr;
-  }
+.ov-stories .splide__slide figure.ov-story {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.ov-stories .splide:not(.is-overflow) .splide__list {
+  justify-content: center;
+}
+
+.ov-stories .splide:not(.is-overflow) .splide__arrows,
+.ov-stories .splide:not(.is-overflow) .splide__pagination {
+  display: none;
 }
 
 .ov-story {
