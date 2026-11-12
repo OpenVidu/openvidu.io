@@ -89,7 +89,7 @@ The view says why the wait ended:
 
 In an [embedded](../../embedded/intro.md) meeting, these views offer the same dismiss button as the [End view](lifecycle.md#end-view): pressing it emits `embeddedCloseRequested` to the host application.
 
-**Ask to join again** starts a new wait at the end of the line. Every request to join is a new wait: a participant who asks again, from a reload, another tab or another device, goes to the end of the line, and their earlier wait ends. Nobody is blocked: a denied participant can ask again as many times as they like.
+**Ask to join again** starts a new wait at the end of the line. Every request to join is a new wait: a participant who asks again, from another tab or another device, goes to the end of the line, and their earlier wait ends. A reload while waiting is not a request to join again: see [Keeping a place](#keeping-a-place). Nobody is blocked: a denied participant can ask again as many times as they like.
 
 ### Keeping a place { #keeping-a-place }
 
@@ -97,7 +97,7 @@ A place in line belongs to the participant's **live connection** to OpenVidu Mee
 
 - A short loss of connection is fine. The participant keeps their place if the connection is back within about a minute.
 - About a **minute without connection** loses the place, whatever the cause: the network, a closed tab, a phone that suspends the page, or a host application that removes the embedded element or iframe.
-- A **reload** asks again at the end of the line, also for a participant who was admitted and reloads the page.
+- A **reload** continues the same wait: the participant returns to the waiting screen with the same place and identity, without asking again. The page remembers the wait of its tab, so another tab asks to join again. A participant who was admitted and reloads the page after joining also asks again at the end of the line.
 - **Leave waiting room** ends the wait at once, even while the connection is down.
 
 A page that never manages to connect shows the connection error screen instead of "You lost your place". That points to a network that blocks WebSockets: see the [troubleshooting note](../../deployment/basic.md#troubleshooting).
@@ -159,10 +159,6 @@ A **host application acting for itself**, such as a dashboard or an admission ba
 !!! warning "A leaked link can keep the waiting room full"
 
     Whoever holds a shared link of the room can open up to 100 waits and keep each one alive, so real participants see "The waiting room is full". **Deny all** only clears the line until they ask again. During a meeting, the waiting room cannot be turned off and an access link cannot be changed. The remedy is to **end the meeting** and then disable the leaked [access link](../rooms/access.md).
-
-!!! info "An anonymous participant who reloads shows twice"
-
-    A participant who asked with a shared link has no identity that persists across reloads. After a reload, their earlier wait stays listed for up to a minute next to the new one, with the same name and a different arrival time. Admit the row that arrived last: admitting the earlier one does not let the person in, and the new wait keeps waiting.
 
 ## From your application { #embedded }
 
