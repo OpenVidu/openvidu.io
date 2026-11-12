@@ -1129,6 +1129,24 @@
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
 }
 
+/* Four stories: one row on a wide screen, two by two on a laptop, one column on a phone;
+   fixed counts rather than auto-fit, so no card is left alone on a row */
+.ov-stories__grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1180px) {
+  .ov-stories__grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .ov-stories__grid--four {
+    grid-template-columns: 1fr;
+  }
+}
+
 .ov-story {
   gap: 20px;
   padding: clamp(26px, 3vw, 36px);

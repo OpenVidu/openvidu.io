@@ -311,7 +311,7 @@ page_features:
 
 <section class="ov-wrap ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
   <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams that already picked a door.</h2>
-  <div class="ov-stories__grid ov-stories__grid--three">
+  <div class="ov-stories__grid ov-stories__grid--four">
     <figure class="ov-story">
       <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
       <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
@@ -329,6 +329,12 @@ page_features:
       <span class="ov-story__tag ov-story__tag--neutral">Private video calls · Consulting</span>
       <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
       <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
+    </figure>
+    <figure class="ov-story">
+      <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/eventials-logo.svg" loading="lazy" alt="Eventials" width="343" height="57"></span>
+      <span class="ov-story__tag ov-story__tag--neutral">Live streaming · Webinars</span>
+      <blockquote class="ov-story__text"><p>“Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities.”</p></blockquote>
+      <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Henrique Otsuka</strong><span>Head of Information Technology, Eventials</span></span><a class="ov-story__link" href="/blog/2026/11/10/eventials-live-streaming-openvidu/">Read the full story →</a></figcaption>
     </figure>
   </div>
 </section>
