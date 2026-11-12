@@ -18,7 +18,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 The deployed services are the same as in the [On Premises High Availability installation](../on-premises/install-nlb.md); on Azure, `ov` creates the infrastructure for you, with four master nodes behind a load balancer and the media nodes in a Virtual Machine Scale Set that autoscales on load.
 
 !!! info
-    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open. The exception is the `v2compatibility` module: with it on, the chart runs MinIO even beside Azure Blob Storage.
 
 === "Architecture overview"
 

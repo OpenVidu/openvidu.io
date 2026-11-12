@@ -65,7 +65,7 @@ These are the inbound ports `ov` checks, with the names it prints for them. `joi
     | `10250/tcp` | internal | required | Kubernetes cluster traffic, from the masters only. |
     | `8472/udp` | internal | required | Kubernetes cluster traffic, from the masters only. |
 
-With the `ingress` module, also open `1935/tcp` and `7885/udp` on the media nodes.
+With the `ingress` module, also open `1935/tcp` (RTMP) on the masters and `7885/udp` (WHIP) on the media nodes.
 
 ## Deploy with a DNS record per master { #deploy-with-a-dns-record-per-master }
 

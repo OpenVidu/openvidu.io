@@ -58,7 +58,7 @@ These are the inbound ports `ov` checks, with the names it prints for them. The 
     | `10250/tcp` | internal | required | Kubernetes cluster traffic, from the master only. |
     | `8472/udp` | internal | required | Kubernetes cluster traffic, from the master only. |
 
-With the `ingress` module, also open `1935/tcp` and `7885/udp` on the media nodes. `join` checks these internal ports in both directions and prints the exact `ufw` rule to add, scoped to the source, if one is closed.
+With the `ingress` module, also open `1935/tcp` (RTMP) on the master and `7885/udp` (WHIP) on the media nodes. `join` checks these internal ports in both directions and prints the exact `ufw` rule to add, scoped to the source, if one is closed.
 
 ## Deploy the master
 

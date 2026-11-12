@@ -78,4 +78,4 @@ Try it:
   ov stack logs --tail 50
 ```
 
-The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. The VM gets the template's size, `Standard_D4s_v3`, and a 100 GB OS disk unless you pass `--param instanceType=<size>`.
+The `retargeted` note is expected: the machine deployed OpenVidu on itself, and `ov` points your directory at its public address. The VM gets the template's size, `Standard_D4s_v3`, and its OS disk, 100 GB on Community and 200 GB on PRO, which runs Kubernetes and its data tier there. On Single Node `--param instanceType=<size>` picks another size; on Elastic and High Availability the sizes are `masterNodeInstanceType` (`Standard_D4s_v3`) and `mediaNodeInstanceType` (`Standard_F8s_v2`), with a 100 GB disk on each media node.

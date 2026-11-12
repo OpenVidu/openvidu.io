@@ -22,7 +22,7 @@ note: Oracle does not delete a vault at once: the stack's vault stays pending de
 ✔ removed stack "ce12o" from this directory
 ```
 
-`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` first removes it from the Terraform state, so the destroy leaves it in place and names it. A bucket of your own (`--param bucketName=<name>`) stays either way.
+`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` first removes it from the Terraform state, so the destroy leaves it in place and names it. A bucket of your own (`--param bucketName=<name>`; on High Availability, `bucketAppDataName` and `bucketClusterDataName`) stays either way.
 
 On Elastic and High Availability, media nodes the scale-in detached from their pool are no longer in the Terraform state; the template's destroy finds them by their tags and terminates them with `oci` and `jq`. Nothing drains then: the whole stack goes.
 
