@@ -232,7 +232,7 @@ This guide deploys **OpenVidu Single Node Community**, which is perfect for fami
 - **[OpenVidu Elastic](/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
 - **[OpenVidu High Availability](/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
 - **[OpenVidu Local](/docs/self-hosting/local.md)**: a development setup for your own laptop. 
-- **[Plain Docker Compose](/docs/self-hosting/single-node/on-premises/install.md)**: install the same single node from plain config files, less automated and opinionated.
+- **[Assisted mode](/docs/self-hosting/single-node/on-premises/install.md#assisted-mode)**: install the same single node, but have the OpenVidu CLI print every command so you review and run them yourself.
 
 And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](/meet/deployment/basic.md#other-deployment-options).
 

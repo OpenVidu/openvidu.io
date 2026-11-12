@@ -133,8 +133,9 @@ redirects:
 
     - id: removed-ha-on-premises-install-dlb
       description: >
-        The DNS load balancing install of High Availability on premises was retired in 3.10, when
-        the OpenVidu CLI took over the installs: the HA on-premises install is install-nlb.md.
+        The DNS load balancing install of High Availability on premises was folded into
+        install-nlb.md in 3.10, when the OpenVidu CLI took over the installs: that page covers both
+        ways to expose the masters, a DNS record per master and a TCP load balancer.
       at: "{version}/docs/self-hosting/ha/on-premises/install-dlb/index.html"
       to: "../install-nlb/"
       canonical: "{site_url}/latest/docs/self-hosting/ha/on-premises/install-nlb/"

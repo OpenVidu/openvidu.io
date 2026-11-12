@@ -198,7 +198,7 @@ And if this was just a test, remember to **delete the server** in the Hetzner co
 
 ## Need more than this? { #need-more-than-this }
 
-This post took the shortest honest path, which means it skipped options you might need. The [on-premises installation guide](/docs/self-hosting/single-node/on-premises/install.md) covers all of them: custom and ZeroSSL certificates, running behind your own proxy, plain Docker Compose installation, and a [non-interactive mode](/docs/self-hosting/single-node/on-premises/install.md#deploy) to bake the whole install into cloud-init or Terraform.
+This post took the shortest honest path, which means it skipped options you might need. The [on-premises installation guide](/docs/self-hosting/single-node/on-premises/install.md) covers all of them: custom and ZeroSSL certificates, running behind your own proxy, an assisted mode that prints every command for you to review and run, and a [non-interactive mode](/docs/self-hosting/single-node/on-premises/install.md#deploy) to bake the whole install into cloud-init or Terraform.
 
 And a single node is only the first of the [deployment types](/docs/self-hosting/deployment-types.md). When one machine stops being enough, [OpenVidu Elastic](/docs/self-hosting/elastic/index.md) scales media nodes with demand and [OpenVidu High Availability](/docs/self-hosting/ha/index.md) removes the single points of failure. The single node deployed here uses the same configuration model, so nothing learned today gets thrown away.
 
