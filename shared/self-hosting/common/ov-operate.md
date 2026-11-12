@@ -86,12 +86,10 @@ The check needs SSH access to the node. A Community stack keeps it in its record
 Against a running stack, `ov` can only connect to the ports, and it says so rather than reporting a false result: an open UDP port and a dropped one look the same while the stack holds them. To verify the media path end to end, take the ports back for a few seconds, and start the stack again **whatever the check reports**:
 
 ```bash
-ov stack stop
-ov stack check-ports   # a PRO stack on Google Cloud, Oracle Cloud or DigitalOcean: add --ssh <user>@<master> --ssh-key <key>
-ov stack start
+ov stack stop && ov stack check-ports; ov stack start
 ```
 
-Do not chain the three with `&&`: when the check finds a problem it exits non-zero, and the stack would stay stopped.
+The `;` before `start` matters: the check exits non-zero when it finds a problem, and with `&&` there the stack would stay stopped. On a PRO stack on Google Cloud, Oracle Cloud or DigitalOcean, give the check the master and its key: `ov stack check-ports --ssh <user>@<master> --ssh-key <key>`.
 
 It exits `8` when a required port fails (a recommended one is a warning, exit `0`), and never changes a firewall: the fix is printed for you to run. Useful flags: `--ports required|all`, `--domain-name <name>` to probe another address, `--ssh [user@]host` to check a machine before deploying to it, `-o json` for every verdict. `ov stack ports`, which reads the published host ports live, is for a **local** stack only.
 

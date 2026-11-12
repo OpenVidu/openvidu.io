@@ -71,7 +71,7 @@ What becomes of the data depends on the edition:
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    The destroy uninstalls OpenVidu from the cluster **and deletes its data with it**: MongoDB, Redis, MinIO with the recordings, and the rest of what the stack's services store in the cluster. `--keep-data`, `--delete-data` and `--delete-config` do not change that. The machines, the node agent and the cluster's nodes stay as they are. The destroy waits for the stack's namespace to go, up to ten minutes. `--dry-run` says it before anything happens: `would remove OpenVidu from the stack's nodes: its services and their data`.
+    The destroy uninstalls OpenVidu from the cluster **and deletes its data with it**: MongoDB, Redis, MinIO with the recordings, and the rest of what the stack's services store in the cluster. The machines, the node agent and the cluster's nodes stay as they are. The destroy waits for the stack's namespace to go, up to ten minutes. `--dry-run` says it before anything happens: `would remove OpenVidu from the stack's nodes: its services and their data`.
 
     !!! warning
         Back up what you need **before** you destroy a PRO stack: the MongoDB and S3 data with [Method 3](../../how-to-guides/backup-and-restore.md#method-3-only-backup-data-from-minios3-and-mongodb), or the external services' own backups ([Method 4](../../how-to-guides/backup-and-restore.md#method-4-only-snapshots-provided-by-external-services-used-for-s3-or-mongodb)). Data in an external MongoDB or S3 is not touched by the destroy.

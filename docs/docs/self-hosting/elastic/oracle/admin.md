@@ -46,7 +46,7 @@ ov stack deploy openvidu --cloud oracle --param fixedNumberOfMediaNodes=0 \
       --length 1000000 --file - | grep openvidu-scalein-watch
     ```
 
-`--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count, on the first deploy or on a redeploy. To check the node's inbound ports, use `ov stack check-ports`: a cloud PRO stack keeps no SSH access in its record, so the command exits `2` and prints the one that does work, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>` (the master's public address, and the private key the template keeps in Object Storage, at the object the `ssh_private_key_object` output names: see [Access OpenVidu](install.md#access-openvidu)). Run that command between `ov stack stop` and `ov stack start` to verify the media ports too.
+`--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count, on the first deploy or on a redeploy. To check the node's inbound ports, use `ov stack check-ports`: a cloud PRO stack keeps no SSH access in its record, so the command exits `2` and prints the one that does work, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>` (the master's public address, and the private key the template keeps in Object Storage, at the object the `ssh_private_key_object` output names: see [Access OpenVidu](install.md#access-openvidu)). To verify the media ports too, run it as `ov stack stop && ov stack check-ports --ssh … ; ov stack start`, so the stack starts again whatever the check reports.
 
 ## Operate from another machine { #operate-from-another-machine }
 

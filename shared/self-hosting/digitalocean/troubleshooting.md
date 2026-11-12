@@ -26,20 +26,16 @@ A High Availability stack sits behind a load balancer that passes TLS through to
 
 This is almost always a blocked **UDP** port (`443/udp` or the media range `50000-60000/udp`). HTTPS works and the stack looks fine, but media never arrives. On DigitalOcean the template opens the ports in the stack's firewall; if you narrowed it, open them there. Probing a running stack cannot prove this (the media range is dialable only while a participant holds it), so stop the stack for a few seconds and run the full check.
 
-On a **Community** single node the stack's record keeps SSH to the node, so `check-ports` runs between stop and start. Start the stack again whatever the check reports (do not chain the three with `&&`: a failed check would leave the stack stopped):
+On a **Community** single node the stack's record keeps SSH to the node, so `check-ports` runs between stop and start. The `;` starts the stack again whatever the check reports (with `&&` there, a failed check would leave it stopped):
 
 ```bash
-ov stack stop
-ov stack check-ports
-ov stack start
+ov stack stop && ov stack check-ports; ov stack start
 ```
 
 A **PRO** stack is operated through its admin control protocol, not SSH, so `ov stack check-ports` on its own exits `2` there and prints the command that does reach the node, as `root` at the master's address. The key is not a file in the stack directory: `terraform -chdir=.openvidu/digitalocean output -raw sshPrivateKey > openvidu-key.pem` writes it (then `chmod 600 openvidu-key.pem`). Run the check between stop and start:
 
 ```bash
-ov stack stop
-ov stack check-ports --ssh root@<master> --ssh-key openvidu-key.pem
-ov stack start
+ov stack stop && ov stack check-ports --ssh root@<master> --ssh-key openvidu-key.pem; ov stack start
 ```
 
 ### The deploy timed out while waiting for OpenVidu
