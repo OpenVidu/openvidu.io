@@ -1,6 +1,21 @@
-Before it touches your subscription, the deploy prints exactly what it will run and asks for confirmation (`-y` confirms in advance; the list is printed anyway). This is the output of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
+Before it touches your subscription, the deploy prints a short plan, one line per step, and asks for confirmation (`-y` confirms in advance; the plan is printed anyway). This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
 
-??? example "The full plan (click to expand)"
+```text
+note: recorded this stack's infrastructure in openvidu-stack.yml, so the command that continues this deploy needs no flags
+This is what ov does in your Azure subscription (location northeurope); --debug shows every command:
+
+  1. SSH key: the stack's own key pair, its public half handed to the template (.openvidu/azure/openvidu-ce12a-key.pub)
+  2. Template: render the single node template into .openvidu/azure/cf-openvidu-singlenode.bicep
+  3. Resource group: create openvidu-ce12a-rg in northeurope
+  4. Machines: Create the deployment openvidu-ce12a with the machine, which installs OpenVidu Community on itself (about 4 minutes)
+  5. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+
+Run these in your account? Only yes or y goes ahead [y/N]:
+```
+
+Every command is shown with `--debug`, and `--mode assisted` prints them all too. Azure takes its parameters on the `az deployment group create` line itself; there is no separate parameters file:
+
+??? example "Every command (`--debug` and assisted mode)"
 
     ```text
     This is what will be done in your Azure subscription (location northeurope):
@@ -22,7 +37,7 @@ Before it touches your subscription, the deploy prints exactly what it will run 
       az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
     ```
 
-Azure takes its parameters inline on the `az deployment group create` line; there is no separate parameters file. Then `ov` runs the commands, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks that the published URL passes Caddy's health check:
+Then `ov` runs the commands, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks that the published URL passes Caddy's health check:
 
 ```text
 ▶ Create the machines on Azure…

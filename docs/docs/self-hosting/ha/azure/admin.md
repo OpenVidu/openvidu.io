@@ -11,11 +11,9 @@ description: "Administer an OpenVidu High Availability stack on Azure with the C
 
 </div>
 
-The Azure stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The day-to-day operations are documented once, for an on-premises deployment, and apply here unchanged:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a High Availability stack on Azure.
 
-- [Status](../../single-node/on-premises/admin.md#status), [describe](../../single-node/on-premises/admin.md#describe) and the [health test](../../single-node/on-premises/admin.md#health-test).
-- [Logs](../../single-node/on-premises/admin.md#logs), and [start, stop and restart](../../single-node/on-premises/admin.md#start-stop-and-restart).
-- [Change its configuration](../../configuration/changing-config.md) and [enable or disable modules](../../how-to-guides/enable-disable-modules.md).
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack
 
@@ -29,22 +27,14 @@ The master nodes are a fixed four; High Availability does not change that. The m
 
 ## Scale the media nodes { #scale-the-media-nodes }
 
-On Azure the media nodes **autoscale** by default: the Virtual Machine Scale Set runs between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, and a media node being removed drains gracefully, so autoscaling never cuts a live session. The minimum, the maximum and a fixed count are template parameters:
+On Azure the media nodes **autoscale** by default: the Virtual Machine Scale Set runs between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, and a media node being removed drains gracefully, so autoscaling never cuts a live session. The range and a fixed count are template parameters, set when you deploy:
 
 - `minNumberOfMediaNodes`, `maxNumberOfMediaNodes`: the autoscaling range.
-- `fixedNumberOfMediaNodes` (`0` = autoscaling, the default): a value greater than `0` pins the scale set to exactly that many media nodes, and CPU usage no longer changes the count.
+- `fixedNumberOfMediaNodes` (`0` = autoscaling, the default): a value greater than `0` pins the scale set to exactly that many media nodes, and CPU usage no longer changes the count. At the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets it too.
 
-Change any of them from the stack's directory:
+!!! warning "Changing the count on an existing Azure stack is not verified yet"
 
-```bash
-ov stack deploy openvidu --cloud azure --param maxNumberOfMediaNodes=3 --mode auto -y
-```
-
-At the **first** deploy, `--set infrastructure.mediaNodes.fixedCount=N` sets the fixed count as well.
-
-!!! note "Lowering the count on Azure"
-
-    Each media node protects itself from scale-in, and Azure refuses an autoscale update whose minimum or maximum falls below the protected instances. So a redeploy fails while more media nodes are running than the new minimum (`UnsupportedCapacity`). Drain the extra media nodes gracefully first, then redeploy with the lower number.
+    Changing the media node count or the autoscaling limits of an Azure stack that is already running, by redeploying with new values, has not been verified on Azure yet. This page will cover it once it has.
 
 See [Autoscaling](../../production-ready/scalability.md#autoscaling) for how autoscaling works across clouds.
 

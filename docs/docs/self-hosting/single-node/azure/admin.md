@@ -11,11 +11,9 @@ description: "Administer an OpenVidu Single Node stack on Azure with the CLI: ch
 
 </div>
 
-The Azure stack is operated from the directory that deployed it, with the same `ov stack` commands as any other OpenVidu stack. The day-to-day operations are documented once, for an on-premises deployment, and apply here unchanged:
+The sections up to [Export the desired state](#export) are the operations every OpenVidu stack shares, with the same commands wherever it runs. The rest of the page is specific to a Single Node stack on Azure.
 
-- [Status](../on-premises/admin.md#status), [describe](../on-premises/admin.md#describe) and the [health test](../on-premises/admin.md#health-test).
-- [Logs](../on-premises/admin.md#logs), and [start, stop and restart](../on-premises/admin.md#start-stop-and-restart).
-- [Change its configuration](../../configuration/changing-config.md) and [enable or disable modules](../../how-to-guides/enable-disable-modules.md).
+--8<-- "self-hosting/common/ov-operate.md"
 
 ## Change a parameter of the stack
 

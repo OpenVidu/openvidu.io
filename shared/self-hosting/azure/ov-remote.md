@@ -6,11 +6,11 @@ By default, the stack's directory is the only place that drives the machines: lo
 The deploy prints where, on its `record:` line. From an empty directory on another machine, `ov stack import --cloud azure` reads that record and registers the stack, infrastructure included, so `ov stack destroy` and `--param` redeploys work from there too:
 
 ```bash
-ov stack import --cloud azure --azure-resource-group <group> --stack-name openvidu-<name> \
+ov stack import --cloud azure --azure-resource-group <group> --stack-name <name> \
   --openvidu-pro-license <license> -y
 ```
 
-`--stack-name` is the stack's name **on the cloud**, exactly as the `record:` line prints it (`openvidu-<name>` for a stack deployed as `<name>`, not the name of the directory). The record holds no secret, so the license (and any other parameter the template marks sensitive) must be passed again, exactly as it was given to the deploy. A Community stack is imported the same way, with no license. See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general command and how `--remote-state` works across clouds.
+`--stack-name` is the name you deployed the stack as (`<name>`), not the name of the directory. From it `ov` resolves the stack's name **on the cloud**, which the `record:` line prints: `openvidu-<name>`, or `ov-<name>` where Azure shortens the prefix to fit the Key Vault's 24-character limit (so `ov-openvidu` for the `openvidu` of these examples). You can pass that cloud name directly too. The record holds no secret, so the license (and any other parameter the template marks sensitive) must be passed again, exactly as it was given to the deploy. A Community stack is imported the same way, with no license. See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general command and how `--remote-state` works across clouds.
 
 !!! warning "Azure Policy may forbid shared key access"
 

@@ -18,7 +18,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md); on Azure, `ov` creates the infrastructure for you, with the media nodes in a Virtual Machine Scale Set that autoscales on load.
 
 !!! info
-    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open. The exception is the `v2compatibility` module: with it on, the chart runs MinIO even beside Azure Blob Storage.
 
 === "Architecture overview"
 
@@ -46,19 +46,23 @@ ov stack deploy openvidu --cloud azure --azure-location northeurope \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and a scale set of media nodes, with OpenVidu PRO on Kubernetes as a Helm release. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and a scale set of media nodes, with OpenVidu PRO on Kubernetes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. For changing the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
 
-This is how the deploy of a stack named `dpaz2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+This is how the deploy of a stack named `dpaz2` ends: `ov` waits until OpenVidu is up, then registers it:
 
 ```text
 …
-   · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 52.138.152.30:6443
+   · OpenVidu is up
+   ✓ Wait for the machines to deploy OpenVidu
 …
 ✔ OpenVidu Pro (elastic) is up on Azure
   URL:          https://openvidu-i4mxo8-52-138-152-30.sslip.io/
   credentials:  az keyvault secret show --vault-name openvidu-dpaz2-keyvault --name OPENVIDU-URL --query value -o tsv
-  kubeconfig:   .openvidu/azure/kubeconfig.yaml
 ```
+
+## Use your own domain
+
+--8<-- "self-hosting/azure/ov-domain.md"
 
 ## What the deploy runs
 

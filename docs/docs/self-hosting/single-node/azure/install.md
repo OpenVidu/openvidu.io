@@ -50,19 +50,23 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
       --certificate-type letsencrypt --mode auto
     ```
 
-    One virtual machine running OpenVidu PRO on Kubernetes, with OpenVidu as a Helm release. `--param kubeApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    One virtual machine running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who may reach port 6443, the stack's remote admin control protocol, which `ov` administers the stack through. It gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
-    This is how the deploy of a stack named `dpaz1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
+    This is how the deploy of a stack named `dpaz1` ends: `ov` waits until OpenVidu is up, then registers it:
 
     ```text
     …
-       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 104.41.221.2:6443
+       · OpenVidu is up
+       ✓ Wait for the machines to deploy OpenVidu
     …
     ✔ OpenVidu Pro (single node) is up on Azure
       URL:          https://openvidu-j064da-104-41-221-2.sslip.io/
       credentials:  az keyvault secret show --vault-name openvidu-dpaz1-keyvault --name OPENVIDU-URL --query value -o tsv
-      kubeconfig:   .openvidu/azure/kubeconfig.yaml
     ```
+
+## Use your own domain
+
+--8<-- "self-hosting/azure/ov-domain.md"
 
 ## What the deploy runs
 

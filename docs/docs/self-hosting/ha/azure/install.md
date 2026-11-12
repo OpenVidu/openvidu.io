@@ -49,7 +49,7 @@ ov stack deploy openvidu --cloud azure --azure-location northeurope \
   --mode auto
 ```
 
-Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes as a Helm release.
+Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes.
 
 The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
@@ -75,7 +75,6 @@ This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack st
 ✔ OpenVidu Pro (high availability) is up on Azure
   URL:          https://openvidu-zksfiv-20-107-185-207.sslip.io/
   credentials:  az keyvault secret show --vault-name ov-demo-ha-keyvault --name OPENVIDU-URL --query value -o tsv
-  kubeconfig:   .openvidu/azure/kubeconfig.yaml
 
 $ ov stack status --wait
 waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C to stop)…
