@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu Elastic on Azure"
-description: "Deploy OpenVidu Elastic on Azure from an Azure Resource Manager template spec, then point your application at the result."
+description: "Deploy OpenVidu Elastic on Azure with one command of the OpenVidu CLI: a master node and an autoscaling scale set of media nodes."
 ---
 
 # OpenVidu Elastic installation: Azure
@@ -11,19 +11,14 @@ description: "Deploy OpenVidu Elastic on Azure from an Azure Resource Manager te
 
 </div>
 
-
 --8<-- "self-hosting/common/elastic-license-intro.md"
 
-This section describes how to deploy a production-ready OpenVidu Elastic instance on Azure. The deployed services are identical to those in the [On Premises Elastic installation](../on-premises/install.md), but are provisioned as Azure resources and can be automated through an ARM Template Spec.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Bicep template embedded in its own binary for the Elastic topology and applies it with **your own `az` CLI** (which compiles the Bicep). The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there. See [how a deployment works](../../deployment-types.md#how-openvidu-is-deployed) for the shape shared by every cloud.
+
+The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md); on Azure, `ov` creates the infrastructure for you, with the media nodes in a Virtual Machine Scale Set that autoscales on load.
 
 !!! info
     Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
-
-To import the template into Azure, click the button below and you will be redirected to Azure.
-
-<div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2Fcf-openvidu-elastic.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fpro%2Felastic%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
-</div>
 
 === "Architecture overview"
 
@@ -36,104 +31,56 @@ To import the template into Azure, click the button below and you will be redire
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.
     - A Virtual Machine Scale Set (VMSS) of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
---8<-- "self-hosting/azure/custom-scale-in.md"
+## Requirements
 
-## Template Parameters
+--8<-- "self-hosting/azure/ov-requirements.md"
 
-To deploy the template, you need to fill in the following parameters.
+## Deploy
 
---8<-- "self-hosting/azure/resource-group-stack-name.md"
+The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
---8<-- "self-hosting/azure/ssl-domain.md"
+```bash
+mkdir openvidu && cd openvidu
+ov stack deploy openvidu --cloud azure --azure-location northeurope \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+  --certificate-type letsencrypt --mode auto
+```
 
---8<-- "self-hosting/azure/meet.md"
+One master node and a scale set of media nodes, with OpenVidu PRO on Kubernetes as a Helm release. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
 
-### OpenVidu Elastic Configuration
+This is how the deploy of a stack named `dpaz2` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
-In this section, you need to specify some properties needed for the OpenVidu Elastic deployment.
+```text
+…
+   · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 52.138.152.30:6443
+…
+✔ OpenVidu Pro (elastic) is up on Azure
+  URL:          https://openvidu-i4mxo8-52-138-152-30.sslip.io/
+  credentials:  az keyvault secret show --vault-name openvidu-dpaz2-keyvault --name OPENVIDU-URL --query value -o tsv
+  kubeconfig:   .openvidu/azure/kubeconfig.yaml
+```
 
-=== "OpenVidu Elastic Configuration"
+## What the deploy runs
 
-    Parameters of this section look like this:
+--8<-- "self-hosting/azure/ov-deploy-plan.md"
 
-    ![OpenVidu Elastic Configuration](../../../../assets/images/platform/self-hosting/elastic/azure/openvidu-elastic-config.png){ .round-corners loading=lazy }
+## What the deploy creates
 
-    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
+--8<-- "self-hosting/azure/ov-resources.md"
 
-    For the **RTC Engine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
+## Access OpenVidu
 
-### Azure Instance Configuration
+--8<-- "self-hosting/azure/ov-access.md"
 
-You need to specify some properties for the Azure instances that will be created.
+## Review the commands first: assisted mode
 
-=== "Azure Instance configuration"
+--8<-- "self-hosting/azure/ov-assisted.md"
 
-    Parameters in this section look like this:
-
-    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/elastic/azure/instance-config.png){ .round-corners loading=lazy }
-
-    Simply select the type of instance you want for your Master Node in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
- 
-### Media Nodes Virtual Machine Scale Set (VMSS) Configuration
-
-The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
-
---8<-- "self-hosting/azure/media-nodes-asg-config.md"
-
---8<-- "self-hosting/azure/scale-in-config.md"
-
---8<-- "self-hosting/azure/storage-account.md"
-
---8<-- "self-hosting/azure/additional-flags.md"
-
-## Deploying the stack
-
-Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 8 minutes).
-
-!!! warning
-
-    In case of failure, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
-
-When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
-
-=== "Check deployment outputs in Azure Key Vault"
-
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
-
-    2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
-
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners loading=lazy }
-
-    3. Click the secret you want to inspect, then click the current version of that secret.
-
-        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .round-corners loading=lazy }
-
-    4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
-
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .round-corners loading=lazy }
-
-=== "Check deployment outputs in the instance"
-
-    SSH to the Master Node instance and navigate to the config folder `/opt/openvidu/config/cluster`. Files with the access credentials outputs are:
-
-    - `openvidu.env`
-    - `master_node/meet.env`
-
-## Configure your application to use the deployment
-
-You need your Azure deployment outputs to configure your OpenVidu application. If you have permissions to access the Key Vault you will be able to check there all the outputs ([Check deployment outputs in Azure Key Vault](#check-deployment-outputs-in-azure-key-vault)). If you don't have permissions to access the Key Vault you can still check the outputs directly in the instance through SSH ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
-
-Your authentication credentials and the URL to point your applications to are:
-
---8<-- "self-hosting/azure/credentials-general.md"
---8<-- "self-hosting/azure/credentials-v2compatibility.md"
- 
-## Troubleshooting initial Azure stack creation
+## Troubleshooting
 
 --8<-- "self-hosting/azure/troubleshooting.md"
 
-3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
+## Next steps
 
-## Configuration and administration
-
-When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 3 to 6 minutes for the instances to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+- [Administer the deployment](./admin.md): change a parameter, scale the media nodes, operate it from another machine, destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).

@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu High Availability on Azure"
-description: "Deploy OpenVidu High Availability on Azure from an Azure Resource Manager template spec, then point your application at the result."
+description: "Deploy OpenVidu High Availability on Azure with the OpenVidu CLI: four master nodes behind a load balancer and an autoscaling scale set of media nodes."
 ---
 
 # OpenVidu High Availability installation: Azure
@@ -11,24 +11,18 @@ description: "Deploy OpenVidu High Availability on Azure from an Azure Resource 
 
 </div>
 
-
-
 --8<-- "self-hosting/common/ha-license-intro.md"
 
-This section describes how to deploy a production-ready OpenVidu High Availability setup on Azure. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Azure resources and automated through an ARM Template Spec.
+One command creates the machines and OpenVidu comes up on them. `ov` renders the Bicep template embedded in its own binary for the High Availability topology and applies it with **your own `az` CLI** (which compiles the Bicep). The machines then deploy OpenVidu themselves with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there. See [how a deployment works](../../deployment-types.md#how-openvidu-is-deployed) for the shape shared by every cloud.
+
+The deployed services are the same as in the [On Premises High Availability installation](../on-premises/install-nlb.md); on Azure, `ov` creates the infrastructure for you, with four master nodes behind a load balancer and the media nodes in a Virtual Machine Scale Set that autoscales on load.
 
 !!! info
     Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
 
-To import the template into Azure, click the button below and you will be redirected to Azure.   
-
-<div class="center-align deploy-button deploy-to-azure-btn" markdown>
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2Fcf-openvidu-ha.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fpro%2Fha%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
-</div>
-
-This is what the deployment architecture looks like:
-
 === "Architecture overview"
+
+    This is what the deployment architecture looks like:
 
     ![OpenVidu High Availability Azure Architecture](../../../../assets/images/platform/self-hosting/ha/azure/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
 
@@ -38,131 +32,77 @@ This is what the deployment architecture looks like:
     - 4 fixed Virtual Machine Instances are created for the Master Nodes. It must always be 4 Master Nodes to ensure high availability.
     - A Virtual Machine Scale Set (VMSS) of Media Nodes is created to scale the number of Media Nodes based on the system load.
 
---8<-- "self-hosting/azure/custom-scale-in.md"
+## Requirements
 
-## Template Parameters
+--8<-- "self-hosting/azure/ov-requirements.md"
 
-To deploy the template, you need to fill in the following parameters.
+High Availability needs more vCPU quota than a single node, because it creates five machines at once (four masters and the initial media nodes). If the location's quota does not fit the default sizes, set smaller ones with `--param masterNodeInstanceType=<size> --param mediaNodeInstanceType=<size>`.
 
---8<-- "self-hosting/azure/resource-group-stack-name.md"
+## Deploy
 
---8<-- "self-hosting/azure/ssl-domain.md"
+The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
---8<-- "self-hosting/azure/meet.md"
+```bash
+mkdir openvidu && cd openvidu
+ov stack deploy openvidu --cloud azure --azure-location northeurope \
+  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+  --mode auto
+```
 
-### OpenVidu HA Configuration
+Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes as a Helm release.
 
-In this section, you need to specify some properties needed for the OpenVidu HA deployment.
+The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-=== "OpenVidu HA Configuration"
+- **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
+- **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
-    Parameters of this section look like this:
+    ```bash
+    --domain-name openvidu.example.com --certificate-type owncert \
+      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+      --owncert-private-key "$(base64 -w0 privkey.pem)"
+    ```
 
-    ![OpenVidu HA Configuration](../../../../assets/images/platform/self-hosting/ha/azure/openvidu-ha-config.png){ .round-corners loading=lazy }
+    On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-    Make sure to provide the **OpenVidu License** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
+Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
 
-    For the **RTC Engine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
+Five machines need more vCPU quota than a single node: the run below passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit within the location's quota.
 
-### Azure Instance Configuration
+This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
 
-You need to specify some properties for the Azure instances that will be created.
+```text
+…
+✔ OpenVidu Pro (high availability) is up on Azure
+  URL:          https://openvidu-zksfiv-20-107-185-207.sslip.io/
+  credentials:  az keyvault secret show --vault-name ov-demo-ha-keyvault --name OPENVIDU-URL --query value -o tsv
+  kubeconfig:   .openvidu/azure/kubeconfig.yaml
 
-=== "Azure Instance configuration"
+$ ov stack status --wait
+waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C to stop)…
+✔ demo-ha is ready (https://openvidu-zksfiv-20-107-185-207.sslip.io)
+```
 
-    Parameters in this section look like this:
+## What the deploy runs
 
-    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/ha/azure/instance-config.png){ .round-corners loading=lazy }
+--8<-- "self-hosting/azure/ov-deploy-plan.md"
 
-    Simply select the type of instance you want for your Master Nodes in **Master Node Instance Type** and the type for your Media Nodes in **Media Node Instance Type**. Fill in **Admin Username**, which will be set as the admin username on the instances. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instances.
+## What the deploy creates
 
-### Media Nodes Virtual Machine Scale Set (VMSS) Configuration
+--8<-- "self-hosting/azure/ov-resources.md"
 
-The number of Media Nodes can scale up based on the system load. You can configure the minimum and maximum number of Media Nodes and a target CPU utilization to trigger the scaling up.
+## Access OpenVidu
 
---8<-- "self-hosting/azure/media-nodes-asg-config.md"
+--8<-- "self-hosting/azure/ov-access.md"
 
---8<-- "self-hosting/azure/scale-in-config.md"
+## Review the commands first: assisted mode
 
---8<-- "self-hosting/azure/storage-account.md"
+--8<-- "self-hosting/azure/ov-assisted.md"
 
---8<-- "self-hosting/azure/additional-flags.md"
-
-## Deploying the stack
-
-Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 9 to 12 minutes).
-
-!!! warning
-
-    If deployment fails, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
-
-    If the error is related to a conflict when creating a network interface, redeploy in another resource group with a different **Stack Name**.
-
-When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
-
-=== "Check deployment outputs in Azure Key Vault"
-
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
-
-    2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
-
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners loading=lazy }
-
-    3. Click the secret you want to inspect, then click the current version of that secret.
-
-        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .round-corners loading=lazy }
-
-    4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
-
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .round-corners loading=lazy }
-
-=== "Check deployment outputs in the instance"
-
-    You must connect through SSH to any of the Master Nodes. This is not a regular SSH process, because Master Nodes do not have a public IP address. The easiest way is to connect through a **Bastion** resource:
-
-    1. Go to the resource group where you deployed OpenVidu High Availability and click one of the Master Node virtual machines.
-    2. Inside the Virtual Machine resource, click on _"Connect"_ 🡒 _"Connect via Bastion"_.
-
-            ![Connect via bastion](../../../../assets/images/platform/self-hosting/ha/azure/connect-bastion.png){ .round-corners loading=lazy }
-
-    3. Click on _"Deploy Bastion"_ button.
-
-            ![Deploy bastion](../../../../assets/images/platform/self-hosting/ha/azure/bastion-deploy.png){ .round-corners loading=lazy }
-
-    4. Change **Authentication Type** to _"SSH Private Key from Local File"_, set the same username used when you deployed OpenVidu, and select the local file corresponding to the SSH Private Key of the SSH Key used when deploying.
-
-            ![Bastion parameters](../../../../assets/images/platform/self-hosting/ha/azure/bastion-parameters.png){ .round-corners loading=lazy }
-
-    5. Click on connect and you will be inside the Virtual Machine of the Master Node. This process works the same way for any of the Master Nodes.
-
-    Once inside the Master Node, navigate to the config folder `/opt/openvidu/config/cluster`. Files with the access credentials outputs are:
-
-    - `openvidu.env`
-    - `master_node/meet.env`
-
-    !!! warning
-
-        We recommend deleting the **Bastion** resource once you no longer require SSH access to your Master Node, as it will incur additional costs in your Azure account.
-
-## Configure your application to use the deployment
-
-You need your Azure deployment outputs to configure your OpenVidu application. If you have permissions to access the Key Vault you will be able to check there all the outputs ([Check deployment outputs in Azure Key Vault](#check-deployment-outputs-in-azure-key-vault)). If you don't have permissions to access the Key Vault you can still check the outputs directly in the instance through SSH ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
-
-Your authentication credentials and the URL to point your applications to are:
-
---8<-- "self-hosting/azure/credentials-general.md"
---8<-- "self-hosting/azure/credentials-v2compatibility.md"
-
-## Troubleshooting initial Azure stack creation
-
-!!! info
-
-    If you need to connect through SSH to a Master Node check [Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance).
+## Troubleshooting
 
 --8<-- "self-hosting/azure/troubleshooting.md"
 
-3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
+## Next steps
 
-## Configuration and administration
-
-When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 5 to 8 minutes for the instance to install OpenVidu. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+- [Administer the deployment](./admin.md): change a parameter, scale the media nodes, operate it from another machine, destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).

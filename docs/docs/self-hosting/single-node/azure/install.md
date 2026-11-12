@@ -1,6 +1,6 @@
 ---
 title: "Install OpenVidu Single Node on Azure"
-description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Azure from an Azure Resource Manager template spec, then point your application at the result."
+description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Azure with one command of the OpenVidu CLI, then operate and destroy the stack from its directory."
 ---
 
 # OpenVidu Single Node installation: Azure
@@ -11,24 +11,11 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Azure from an Azur
 
 </div>
 
+One command creates the machine and OpenVidu comes up on it. `ov` renders the Bicep template embedded in its own binary for the edition you choose and applies it with **your own `az` CLI** (which compiles the Bicep). The machine then deploys OpenVidu itself with the same `ov` build. When OpenVidu answers, `ov` registers the stack in your directory, and you operate it from there. See [how a deployment works](../../deployment-types.md#how-openvidu-is-deployed) for the shape shared by every cloud.
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Azure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md), but the process is automated through ARM Template Specs.
+The deployed services are the same as in the [On Premises Single Node installation](../on-premises/install.md); on Azure, `ov` creates the infrastructure for you.
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
-
-To use the Azure template, click the button below (you will be redirected to Azure).
-
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
-
-    /// html | div.center-align.deploy-button.deploy-to-azure-btn
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fcommunity%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
-    ///
-
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
-
-    /// html | div.center-align.deploy-button.deploy-to-azure-btn
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton){ loading=lazy }](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2Fcf-openvidu-singlenode.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FOpenVidu%2Fopenvidu%2Frefs%2Ftags%2Fv3.9.0%2Fopenvidu-deployment%2Fpro%2Fsinglenode%2Fazure%2FcreateUiDefinition.json){:target="_blank"}
-    ///
 
 === "Architecture overview"
 
@@ -36,95 +23,70 @@ To use the Azure template, click the button below (you will be redirected to Azu
 
     ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
 
-## Template Parameters
+## Requirements
 
-To deploy the template, you need to fill in the following parameters.
+--8<-- "self-hosting/azure/ov-requirements.md"
 
---8<-- "self-hosting/azure/resource-group-stack-name.md"
+## Deploy
 
---8<-- "self-hosting/azure/ssl-domain.md"
+Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-## OpenVidu Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag } configuration
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-If you are deploying the PRO edition, you need to specify some additional properties.
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-=== "OpenVidu Single Node PRO Configuration"
+    One virtual machine (`Standard_D4s_v3` by default, `--param instanceType=<size>` to change it) running OpenVidu on Docker Compose.
 
-    Parameters of this section look like this:
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    ![OpenVidu Single Node Pro Configuration](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-pro-config.png){ .round-corners loading=lazy }
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-    Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here :fontawesome-solid-external-link:{.external-link-icon}](../../../../account.md){:target="_blank"}.
+    One virtual machine running OpenVidu PRO on Kubernetes, with OpenVidu as a Helm release. `--param kubeApiAllowedCidr=<cidr>` limits who can reach the cluster API on port 6443. That API gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
 
-    For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](../../production-ready/performance.md).
+    This is how the deploy of a stack named `dpaz1` ends: `ov` waits until the stack publishes its kubeconfig and the cluster answers, then registers it:
 
---8<-- "self-hosting/azure/meet.md"
+    ```text
+    …
+       · OpenVidu is up: the stack published its kubeconfig and the cluster API answers at 104.41.221.2:6443
+    …
+    ✔ OpenVidu Pro (single node) is up on Azure
+      URL:          https://openvidu-j064da-104-41-221-2.sslip.io/
+      credentials:  az keyvault secret show --vault-name openvidu-dpaz1-keyvault --name OPENVIDU-URL --query value -o tsv
+      kubeconfig:   .openvidu/azure/kubeconfig.yaml
+    ```
 
-### Azure Instance Configuration
+## What the deploy runs
 
-Specify properties for the Azure instance that will host OpenVidu.
+--8<-- "self-hosting/azure/ov-deploy-plan.md"
 
-=== "Azure Instance configuration"
+## What the deploy creates
 
-    Parameters in this section look like this:
+--8<-- "self-hosting/azure/ov-resources.md"
 
-    ![Azure Instance configuration](../../../../assets/images/platform/self-hosting/single-node/azure/instance-config.png){ .round-corners loading=lazy }
+## Access OpenVidu { #check-deployment-outputs-in-azure-key-vault }
 
-    Simply select the type of instance you want to deploy in **Type of Instance**. Fill in **Admin Username**, which will be set as the admin username on the instance. Select the SSH key you created previously in **SSH public key source** (or create a new one in the same drop-down) to allow SSH access to the instance.
+<span id="check-deployment-outputs-in-the-instance"></span>
 
---8<-- "self-hosting/azure/storage-account.md"
+--8<-- "self-hosting/azure/ov-access.md"
 
---8<-- "self-hosting/azure/additional-flags.md"
+## Review the commands first: assisted mode
 
-## Deploying the stack
+--8<-- "self-hosting/azure/ov-assisted.md"
 
-Whenever you are satisfied with your Template parameters, just click on _"Next"_ to trigger the validation process. If correct, click on _"Create"_ to start the deployment process (which will take about 5 to 10 minutes).
-
-!!! warning
-
-    In case of failure, it may be due to a role creation failure. In this case, redeploy in a new resource group and change the **Stack Name**. To remove a role in a resource group, visit [Remove Azure role assignments :fontawesome-solid-external-link:{.external-link-icon}](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove){:target="_blank"}.
-
-When everything is ready, you can check the output secrets on the Key Vault or by connecting through SSH to the instance:
-
-=== "Check deployment outputs in Azure Key Vault"
-
-    1. Go to the Key Vault created called **yourstackname-keyvault** in the Resource Group that you deployed. You can access it from the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"}.
-
-    2. Once you are in the Key Vault, click _"Objects"_ 🡒 _"Secrets"_ in the left panel.
-
-        ![Azure Key Vault secrets location](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secrets-location.png){ .round-corners loading=lazy }
-
-    3. Click the secret you want to inspect, then click the current version of that secret.
-
-        ![Azure Key Vault Secret Version](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-secret-version.png){ .round-corners loading=lazy }
-
-    4. You will see many properties, but the value you need is at the bottom. Click _"Show Secret Value"_ to reveal it.
-
-        ![Check deployment outputs in Azure Key Vault](../../../../assets/images/platform/self-hosting/shared/azure/keyvault-output.png){ .round-corners loading=lazy }
-
-=== "Check deployment outputs in the instance"
-
-    SSH to the instance and navigate to the config folder `/opt/openvidu/config`. Files with the deployment outputs are:
-
-    - `openvidu.env`
-    - `meet.env`
-
-## Configure your application to use the deployment 
-
-You need your Azure deployment outputs to configure your OpenVidu application. If you have permissions to access the Key Vault you will be able to check there all the outputs ([Check deployment outputs in Azure Key Vault](#check-deployment-outputs-in-azure-key-vault)). If you don't have permissions to access the Key Vault you can still check the outputs directly in the instance through SSH ([Check deployment outputs in the instance](#check-deployment-outputs-in-the-instance)).
-
-Your authentication credentials and the URL to point your applications to are:
-
---8<-- "self-hosting/azure/credentials-general.md"
-
---8<-- "self-hosting/azure/credentials-v2compatibility.md"
-
-## Troubleshooting initial Azure stack creation
+## Troubleshooting
 
 --8<-- "self-hosting/azure/troubleshooting.md"
 
-3. If everything seems fine, check the [status](../on-premises/admin.md#checking-the-status-of-services) and the [logs](../on-premises/admin.md#checking-logs) of the installed OpenVidu services.
+## Next steps
 
-## Configuration and administration
-
-When your Azure stack reaches the **`Succeeded`** status, it means that all resources have been created. You will need to wait about 5 to 10 minutes for the instance to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](./admin.md) section to learn how to manage your deployment.
+- [Administer the deployment](./admin.md): change a parameter, operate it from another machine, destroy it.
+- [Build your app](../../../build-your-app/index.md) against it, or follow a [tutorial](../../../tutorials/application-server/index.md): it connects with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` (`ov stack config get livekit-api-key` and `livekit-api-secret` print them).
