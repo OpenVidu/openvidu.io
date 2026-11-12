@@ -39,7 +39,7 @@ This is the first post in a series of per-cloud quick starts. Hetzner comes firs
 
 The deployment is **OpenVidu Single Node Community**. One VM running the OpenVidu server (LiveKit protocol compatible), OpenVidu Meet as a ready-to-use video calling app, an administration dashboard, MinIO for recordings, Redis, MongoDB, and Caddy as a reverse proxy that handles the TLS certificate. It is the same production-ready setup the official docs describe, not a stripped-down demo. It's free and open source, and a single node has far more headroom than a test call needs.
 
-The [minimum requirements](/docs/self-hosting/single-node/on-premises/install.md#prerequisites) are 4 GB of RAM, 4 CPU cores, Linux and a public IP. On Hetzner, the plan that covers them is the **CPX32**, from the *Regular Performance* shared line (the name shifts slightly by region; in the US datacenters it is CPX31):
+The [minimum requirements](/docs/self-hosting/single-node/on-premises/install.md#requirements) are 4 GB of RAM, 4 CPU cores, Linux and a public IP. On Hetzner, the plan that covers them is the **CPX32**, from the *Regular Performance* shared line (the name shifts slightly by region; in the US datacenters it is CPX31):
 
 | | CPX32 |
 |---|---|
@@ -193,7 +193,7 @@ And if this was just a test, remember to **delete the server** in the Hetzner co
 
 ## Need more than this? { #need-more-than-this }
 
-This post took the shortest honest path, which means it skipped options you might need. The [on-premises installation guide](/docs/self-hosting/single-node/on-premises/install.md) covers all of them: custom and ZeroSSL certificates, running behind your own proxy, plain Docker Compose installation, and a [non-interactive mode](/docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation) to bake the whole install into cloud-init or Terraform.
+This post took the shortest honest path, which means it skipped options you might need. The [on-premises installation guide](/docs/self-hosting/single-node/on-premises/install.md) covers all of them: custom and ZeroSSL certificates, running behind your own proxy, plain Docker Compose installation, and a [non-interactive mode](/docs/self-hosting/single-node/on-premises/install.md#deploy) to bake the whole install into cloud-init or Terraform.
 
 And a single node is only the first of the [deployment types](/docs/self-hosting/deployment-types.md). When one machine stops being enough, [OpenVidu Elastic](/docs/self-hosting/elastic/index.md) scales media nodes with demand and [OpenVidu High Availability](/docs/self-hosting/ha/index.md) removes the single points of failure. The single node deployed here uses the same configuration model, so nothing learned today gets thrown away.
 

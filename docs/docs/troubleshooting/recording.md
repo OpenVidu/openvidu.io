@@ -61,7 +61,7 @@ There are not enough free CPU cores to start a new egress.
 
 - Scale out your OpenVidu deployment: deploy it in nodes with more CPU cores or add more Media Nodes to your cluster.
 - Consider using a less CPU intensive egress type: [Track Egress](../reference/egress.md#egress-types) does not require transcoding and composition, so it is much less CPU intensive than other egress types such as [Room Composite Egress](../reference/egress.md#egress-types).
-- Review your [`egress.yaml` configuration file](../self-hosting/configuration/changing-config.md#config-files), specifically the properties within `cpu_cost`:
+- Review your [`egress.yaml` configuration file](../self-hosting/configuration/changing-config.md#where-the-configuration-lives), specifically the properties within `cpu_cost`:
 
     ```yaml
     cpu_cost:
@@ -86,7 +86,7 @@ There are not enough free CPU cores to start a new egress.
 
 **Description**
 
-By default, OpenVidu will automatically create a new room when a user tries to connect to a room that does not exist yet. This behavior can be disabled in [`livekit.yaml` configuration file](../self-hosting/configuration/changing-config.md#config-files):
+By default, OpenVidu will automatically create a new room when a user tries to connect to a room that does not exist yet. This behavior can be disabled in [`livekit.yaml` configuration file](../self-hosting/configuration/changing-config.md#where-the-configuration-lives):
 
 ```yaml
 room:
@@ -98,7 +98,7 @@ When a room is auto-created on participant join, OpenVidu uses the room settings
 A common problem appears when these chain of events happens:
 
 1. Your application's backend explicitly creates a room with a specific `RoomConfiguration`. For example, with an `egress` field to enable auto-egress.
-2. The room is unexpectedly deleted because of a timeout (properties `departure_timeout` or `empty_timeout` in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#config-files)).
+2. The room is unexpectedly deleted because of a timeout (properties `departure_timeout` or `empty_timeout` in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#where-the-configuration-lives)).
 3. A participant tries to join the room using a token that does not include the same `egress` field in its `RoomConfiguration`.
 4. OpenVidu auto-creates the room again, but now using the token’s `RoomConfiguration`, not the original one.
 
@@ -139,7 +139,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
 **Solutions**
 
 - Consider using [on-demand egress requests](#on-demand-vs-automatic-recordings) instead of auto egress to record rooms.
-- Consider disabling auto-creation of rooms in file [`livekit.yaml`](../self-hosting/configuration/changing-config.md#config-files). This enforces rooms to always be created explicitly from your backend before a participant can join to it with a token. Of course, it also requires handling connection errors in the frontend if a participant tries to join a non-existing room.
+- Consider disabling auto-creation of rooms in file [`livekit.yaml`](../self-hosting/configuration/changing-config.md#where-the-configuration-lives). This enforces rooms to always be created explicitly from your backend before a participant can join to it with a token. Of course, it also requires handling connection errors in the frontend if a participant tries to join a non-existing room.
 
     ```yaml
     room:
@@ -147,7 +147,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
     ```
 
 - If you want both auto-egress and auto-creation of rooms, make sure to include the same `egress` field in the room configuration of both the [`CreateRoom`](../reference/room-service-api.md#rooms) request and the [participant's access token](../reference/access-tokens.md#token-claims) (its `roomConfig` claim). In this way rooms will always behave the same way, no matter if they are explicitly created from your backend or auto-created when a participant tries to join.
-- Increase the room timeout properties in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#config-files). This can reduce the probability of rooms being cleaned up before a participant tries to join:
+- Increase the room timeout properties in [`livekit.yaml`](../self-hosting/configuration/changing-config.md#where-the-configuration-lives). This can reduce the probability of rooms being cleaned up before a participant tries to join:
 
     ```yaml
     room:
@@ -163,7 +163,7 @@ You encounter this set of logs related to a room (in this example, room `DailyMe
 
 You have configured an external storage for your recordings, but the recording files are not being uploaded to it. This can be caused by a misconfiguration or a connectivity issue between OpenVidu nodes and the external storage.
 
-External storage is configured in the [`egress.yaml` configuration file](../self-hosting/configuration/changing-config.md#config-files) globally (with `storage` property):
+External storage is configured in the [`egress.yaml` configuration file](../self-hosting/configuration/changing-config.md#where-the-configuration-lives) globally (with `storage` property):
 
 ```yaml
 storage:
@@ -202,7 +202,7 @@ You can also configure external storage programmatically on a per-request basis 
 
 **Solutions**
 
-- Review the configuration of the external storage: in the [`egress.yaml`](../self-hosting/configuration/changing-config.md#config-files) if you are using the global declarative configuration, or in the body of the `CreateRoom` or `StartEgress` operations if you are using the programmatic per-request configuration.
+- Review the configuration of the external storage: in the [`egress.yaml`](../self-hosting/configuration/changing-config.md#where-the-configuration-lives) if you are using the global declarative configuration, or in the body of the `CreateRoom` or `StartEgress` operations if you are using the programmatic per-request configuration.
 - Review the connectivity between your OpenVidu nodes and the external storage. Check if there are any network issues or firewall rules preventing OpenVidu nodes from reaching the external storage.
 
 ### No disk space free
@@ -229,7 +229,7 @@ There is not enough free disk space in the node hosting the egress to start a ne
 **Solutions**
 
 - Increase disk space in the node hosting the egress.
-- If needed, tune the minimum free disk space a Media Node requires to accept new Egress requests with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](../self-hosting/configuration/changing-config.md#config-files). It defaults to 512 MB, and a negative value disables the check altogether, which means a Media Node that cannot write a recording will accept egresses again. See [how OpenVidu distributes Egress requests](../self-hosting/production-ready/scalability.md#egress) for how this check combines with the CPU criteria.
+- If needed, tune the minimum free disk space a Media Node requires to accept new Egress requests with property `openvidu.min_disk_space_mb` in the [**`egress.yaml`** configuration file](../self-hosting/configuration/changing-config.md#where-the-configuration-lives). It defaults to 512 MB, and a negative value disables the check altogether, which means a Media Node that cannot write a recording will accept egresses again. See [how OpenVidu distributes Egress requests](../self-hosting/production-ready/scalability.md#egress) for how this check combines with the CPU criteria.
 
 ### Egress CPU overload killer
 
@@ -244,7 +244,7 @@ By default, OpenVidu will kill active egresses under sustained high CPU load (se
 
 **Solutions**
 
-- You can disable the Egress CPU overload killer by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../self-hosting/configuration/changing-config.md#config-files). This must be done with caution and care, as it could lead to overloading the entire Media Node and affecting the performance of other processes.
+- You can disable the Egress CPU overload killer by setting property `openvidu.disable_cpu_overload_killer` to `true` in the [**`egress.yaml`** configuration file](../self-hosting/configuration/changing-config.md#where-the-configuration-lives). This must be done with caution and care, as it could lead to overloading the entire Media Node and affecting the performance of other processes.
 - In the end this is just an under-provisioning issue: consider scaling out your OpenVidu deployment. Deploy it in nodes with more CPU cores or add more Media Nodes to your cluster.
 
 ### Track disappears before the recorder attaches (`track not found`)

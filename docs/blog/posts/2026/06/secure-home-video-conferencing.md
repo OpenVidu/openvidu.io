@@ -140,7 +140,7 @@ If both ports show "Success", proceed to Step 3.
 
 If either port fails, your ISP is blocking inbound connections on it. Automatic Let's Encrypt won't work in that case, because validating a certificate requires one of those ports to be reachable from the internet. You won't be able to follow Step 3 as written; use this alternative instead.
 
-Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md#custom-certificates)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
+Install the full **[OpenVidu Platform installer](/docs/self-hosting/single-node/on-premises/install.md#deploy)** (instead of the simple Meet one) and choose its **"Own Certificate"** option, `--certificate-type='owncert'`, supplying a valid certificate obtained either:
 
 - via a Let's Encrypt **DNS-01 challenge**, which proves you own the domain through a DNS TXT record and needs no open ports at all. DuckDNS supports TXT records, so a tool like [acme.sh :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/acmesh-official/acme.sh){:target="_blank"} (or certbot with a DuckDNS plugin) can issue it for you; or
 - any **certificate you already own**, however it was issued.
@@ -217,7 +217,7 @@ You've just put a server on the internet, so a few minutes of good habits go a l
 Once your server is up and running, there are a few things you can do to get more out of it. OpenVidu exposes additional ports that improve media quality and reduce latency, and opening them is worth it if you want the best possible call experience. And if the one-command installer felt too opinionated, the full OpenVidu Platform installer gives you fine-grained control over which modules to enable, how to configure them, and how to automate the whole process.
 
 - **[Full port list](/docs/self-hosting/single-node/on-premises/install.md#port-rules)**: open additional ports for better media performance or to match your Linux firewall rules.
-- **[Non-interactive install](/docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
+- **[Non-interactive install](/docs/self-hosting/single-node/on-premises/install.md#deploy)**: `install_meet.sh` is the quick path; for disabling modules, enabling only specific ones, or scripting the install, use the full OpenVidu Platform installer.
 
 ## Need more than this? { #need-more-than-this }
 
@@ -227,7 +227,7 @@ This guide deploys **OpenVidu Single Node Community**, which is perfect for fami
 - **[OpenVidu Elastic](/docs/self-hosting/elastic/index.md)**: adds a cluster of media servers that scale up and down with demand.
 - **[OpenVidu High Availability](/docs/self-hosting/ha/index.md)**: adds fault tolerance so a single failure never takes your calls down.
 - **[OpenVidu Local](/docs/self-hosting/local.md)**: a development setup for your own laptop. 
-- **[Plain Docker Compose](/docs/self-hosting/single-node/on-premises/install.md#plain-docker-compose-installation)**: install the same single node from plain config files, less automated and opinionated.
+- **[Plain Docker Compose](/docs/self-hosting/single-node/on-premises/install.md)**: install the same single node from plain config files, less automated and opinionated.
 
 And it's not limited to a Raspberry Pi at home: you can deploy on-premises or on **AWS, Azure, Google Cloud, DigitalOcean or Oracle Cloud** with the same ease. See the [OpenVidu Meet deployment options](/meet/deployment/basic.md#other-deployment-options).
 

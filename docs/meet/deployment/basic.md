@@ -80,16 +80,16 @@ sudo systemctl restart openvidu
 
 OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refer to the [OpenVidu Platform Single Node administration guide](../../docs/self-hosting/single-node/on-premises/admin.md) for more advanced management tasks, including:
 
-- [Check the status of services](../../docs/self-hosting/single-node/on-premises/admin.md#checking-the-status-of-services)
-- [Check logs](../../docs/self-hosting/single-node/on-premises/admin.md#checking-logs)
+- [Check the status of services](../../docs/self-hosting/single-node/on-premises/admin.md#status)
+- [Check logs](../../docs/self-hosting/single-node/on-premises/admin.md#logs)
 - [Upgrade OpenVidu Meet to a newer version](../../docs/self-hosting/single-node/upgrade.md)
-- [Uninstall OpenVidu Meet](../../docs/self-hosting/single-node/on-premises/admin.md#uninstalling-openvidu)
+- [Uninstall OpenVidu Meet](../../docs/self-hosting/single-node/on-premises/admin.md#destroy)
 
 ## Other deployment options
 
 This guide has covered the manual installation of OpenVidu Meet as a single-node deployment in a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:
 
-- **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](../../docs/self-hosting/single-node/on-premises/install.md#non-interactive-installation) guide for OpenVidu Platform.
+- **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](../../docs/self-hosting/single-node/on-premises/install.md#deploy) guide for OpenVidu Platform.
 
 - If you prefer a cloud deployment, choose your provider and follow the corresponding guide:
 
