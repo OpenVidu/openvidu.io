@@ -1,4 +1,4 @@
-One command deletes the machines too. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves them, `--delete-data` deletes them; with neither (or both) nothing is deleted and the command stops (exit `2`). The whole stack is one resource group, so deleting it is the teardown:
+One command deletes the machines too. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves them, `--delete-data` deletes them; with neither (or both) nothing is deleted and the command stops (exit `2`). The whole stack is one resource group, so deleting it is the teardown. This example destroys a Single Node stack:
 
 ```console
 $ ov stack destroy -y --delete-data
