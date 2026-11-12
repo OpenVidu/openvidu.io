@@ -13,7 +13,7 @@ There are two options:
 - [**Deploy in a separate environment**](#deploy-in-a-separate-environment): Run your application on its own infrastructure and connect it to your OpenVidu deployment remotely.
 
 !!! info
-    All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it using the `MEET_BASE_PATH` parameter in `openvidu.env`, replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](../../docs/self-hosting/how-to-guides/customize-meet-base-path.md) how-to guide for more details.
+    All examples in this guide use the default OpenVidu Meet base path `/meet`. If you have changed it with the `MEET_BASE_PATH` parameter (set with `ov stack config set MEET_BASE_PATH=…`), replace `/meet` with your configured path in all URLs mentioned below. See the [Customize OpenVidu Meet base path](../../docs/self-hosting/how-to-guides/customize-meet-base-path.md) how-to guide for more details.
 
 ---
 
@@ -156,19 +156,13 @@ If your application uses [OpenVidu Meet webhooks](./reference/webhooks.md), conf
 
 ### Configuring API key and webhooks via `meet.env`
 
-As an alternative to using the OpenVidu Meet app, you can configure the initial API key and webhook settings directly in the `meet.env` configuration file:
+As an alternative to using the OpenVidu Meet app, you can configure the initial API key and webhook settings in the `meet.env` service file. On OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } it is a service file of the stack, edited with the [OpenVidu CLI](../../docs/self-hosting/openvidu-cli.md) from the stack's directory:
 
-=== "Single Node"
+```bash
+ov stack config file edit meet.env
+```
 
-    **Location:** `/opt/openvidu/config/meet.env`
-
-=== "Elastic"
-
-    **Location:** `/opt/openvidu/config/cluster/master_node/meet.env`
-
-=== "High Availability"
-
-    **Location:** `/opt/openvidu/config/cluster/master_node/meet.env`
+On a **PRO**{ .openvidu-tag .openvidu-pro-tag } stack deployed with `ov`, the chart ships no `meet.env` document, and how these settings are changed is not documented yet; configure the API key and webhooks from the OpenVidu Meet app or the [REST API](reference/rest-api.md) instead.
 
 The relevant parameters are:
 

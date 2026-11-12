@@ -28,7 +28,7 @@ These are the global configuration parameters used by other services, such as th
 | **`EXTERNAL_S3_REGION`** | `externalS3.region` | Region of the external S3 service if used. |
 | **`EXTERNAL_S3_PATH_STYLE_ACCESS`** | `externalS3.pathStyleAccess` | If `true`, use path-style access for the external S3 service if used. |
 | **`EXTERNAL_S3_BUCKET_APP_DATA`** | `externalS3.appDataBucket` | External S3 bucket name for OpenVidu App Data. This is the bucket where application data like recordings, etc. will be stored. |
-| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | — | External S3 bucket used in High Availability to store Observability data. |
+| **`EXTERNAL_S3_BUCKET_CLUSTER_DATA`** | `externalS3.clusterDataBucket` | **PRO**{ .openvidu-tag .openvidu-pro-tag } External S3 bucket used in High Availability to store Observability data. This key has no `openvidu.env` alias: set it by its `openvidu.yaml` key. |
 | **`EXTERNAL_S3_SSE_TYPE`** | `externalS3.sse.type` | Server-side encryption algorithm for the external S3 service. Supported values: `SSE-S3` (S3-managed AES256) or `SSE-KMS` (AWS KMS-managed). Leave empty to disable SSE. |
 | **`EXTERNAL_S3_SSE_KMS_KEY_ID`** | `externalS3.sse.kmsKeyId` | AWS KMS key ID for SSE-KMS encryption. **Required** when `EXTERNAL_S3_SSE_TYPE` is `SSE-KMS`. |
 | **`EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | `externalS3.sse.kmsEncryptionContext` | Optional JSON object representing the KMS encryption context. **Only used with `SSE-KMS`**. |
@@ -47,6 +47,10 @@ These are the global configuration parameters used by other services, such as th
 ## `meet.env`
 
 This file defines the configuration parameters for the OpenVidu Meet service. On OpenVidu COMMUNITY it is a service file of the stack: edit it with `ov stack config file edit meet.env`.
+
+!!! note "PRO deployments"
+
+    On a **PRO**{ .openvidu-tag .openvidu-pro-tag } stack deployed with `ov`, the chart ships no `meet.env` document. How these OpenVidu Meet settings are changed on a PRO stack deployed with `ov` is not documented yet.
 
 <div class="nowrap-first-column" markdown>
 
@@ -107,7 +111,9 @@ This file defines the configuration parameters for the OpenVidu Meet service. On
 
 This file defines the configuration parameters for the OpenVidu V2 Compatibility Server. They resemble the configuration parameters of [**OpenVidu 2** :fontawesome-solid-external-link:{.external-link-icon}](https://docs.openvidu.io/en/stable/reference-docs/openvidu-config/){:target="_blank"}, adding the prefix `V2COMPAT_` to the parameter name.
 
-<!-- PENDING(docs-integrate): how these V2 Compatibility settings are changed on a stack ov deploys (the PRO chart ships no v2compatibility.env document) -->
+!!! note
+
+    The PRO chart ships no `v2compatibility.env` document. How these V2 Compatibility settings are changed on a PRO stack deployed with `ov` is not documented yet.
 
 <div class="nowrap-first-column" markdown>
 

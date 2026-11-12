@@ -16,7 +16,7 @@ When you supply an external connection string, the bundled MongoDB service is no
 A minimal URI looks like the following:
 
 ```text
-mongodb://<USERNAME>:<PASSWORD>@<HOST>:27017/?authSource=admin?replicaSet=<REPLICA_SET_NAME>
+mongodb://<USERNAME>:<PASSWORD>@<HOST>:27017/?authSource=admin&replicaSet=<REPLICA_SET_NAME>
 ```
 
 You can also use `mongodb+srv://` URIs for Atlas or DNS SRV-based clusters.
@@ -48,14 +48,15 @@ wget -O mongodb_tls_ca.pem https://truststore.pki.rds.amazonaws.com/global/globa
 
 ### 2. Copy the trust store to the node
 
-On a **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } server, place the downloaded file under the node's configuration directory so OpenVidu mounts it into `/config` for every service:
-
-- **Single Node**: `/opt/openvidu/config/`
-- **Elastic / High Availability**: `/opt/openvidu/config/cluster/`
+On a **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Single Node server, SSH into the node and place the downloaded file under its configuration directory (`/opt/openvidu/config/`), so OpenVidu mounts it into `/config` for every service:
 
 ```bash
 sudo mv mongodb_tls_ca.pem /opt/openvidu/config/
 ```
+
+!!! note "PRO deployments"
+
+    OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } stacks (Single Node PRO, Elastic and High Availability) run on Kubernetes, with no `/opt/openvidu/config/cluster/` directory on the nodes. How to add a custom CA bundle so the OpenVidu services trust it on a PRO stack deployed with `ov` is not documented yet.
 
 ### 3. Configure and apply
 

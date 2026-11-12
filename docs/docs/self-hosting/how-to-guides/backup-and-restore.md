@@ -31,17 +31,21 @@ You can back up and restore OpenVidu deployments using one of the following four
 3. Only backup data from MinIO/S3 and MongoDB.
 4. Only snapshots provided by external services used for S3 or MongoDB.
 
+!!! warning "PRO deployments on Kubernetes"
+
+    Methods 1 and 2 copy the `/opt/openvidu/` tree of a node, where a **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Single Node keeps its configuration, MinIO data and MongoDB volumes. On a **PRO**{ .openvidu-tag .openvidu-pro-tag } stack (Single Node PRO, Elastic and High Availability), OpenVidu runs on Kubernetes and does not keep that data in `/opt/openvidu/`, so these two file-level methods are not verified for PRO on Kubernetes. On a PRO deployment, back up your S3 and MongoDB data directly ([Method 3](#method-3-only-backup-data-from-minios3-and-mongodb) and [Method 4](#method-4-only-snapshots-provided-by-external-services-used-for-s3-or-mongodb)).
+
 ## Which backup method should I use?
 
-First, identify where your S3 and MongoDB services run. SSH to your OpenVidu deployment node (or any master node) and inspect these environment variables:
+First, identify where your S3 and MongoDB services run. From the stack's directory, read both values with [`ov stack config get`](../configuration/changing-config.md#view-get-set-unset), which works on every deployment type and edition:
+
+```bash
+ov stack config get EXTERNAL_S3_ENDPOINT
+ov stack config get EXTERNAL_MONGO_URI
+```
 
 - `EXTERNAL_S3_ENDPOINT`: blank when MinIO runs internally within the deployment.
 - `EXTERNAL_MONGO_URI`: blank when MongoDB runs internally within the deployment.
-
-Find both variables in the OpenVidu configuration files:
-
-- **Single Node**: `/opt/openvidu/config/openvidu.env`
-- **Elastic & High Availability**: `/opt/openvidu/config/cluster/openvidu.env`
 
 With that information, pick the backup approach that best fits your scenario:
 
@@ -329,7 +333,7 @@ export AWS_SECRET_ACCESS_KEY="<BACKUP_S3_SECRET_KEY>"
 export AWS_DEFAULT_REGION="<S3_REGION>"
 ```
 
-Replace the placeholders with values from your deployment. All credentials are available in the `openvidu.env` file(s).
+Replace the placeholders with values from your deployment. Read any of these values with `ov stack config get <KEY>` from the stack's directory.
 
 About the exported variables:
 
@@ -430,8 +434,8 @@ About the exported variables:
             export OPENVIDU_AWS_DEFAULT_REGION=<YOUR_S3_REGION>
             export OPENVIDU_S3_ENDPOINT="https://s3.${OPENVIDU_AWS_DEFAULT_REGION}.amazonaws.com"
 
-            # The name of these buckets can be found in the openvidu.env file as
-            # EXTERNAL_S3_BUCKET_APP_DATA and EXTERNAL_S3_BUCKET_CLUSTER_DATA
+            # The name of these buckets can be read with
+            # ov stack config get EXTERNAL_S3_BUCKET_APP_DATA (and, for HA, externalS3.clusterDataBucket)
             export EXTERNAL_S3_BUCKET_APP_DATA="openvidu-appdata-xxxxx"
 
             # (Optional) EXTERNAL_S3_BUCKET_CLUSTER_DATA is only needed for High Availability deployments
@@ -589,8 +593,8 @@ About the exported variables:
             export OPENVIDU_AWS_DEFAULT_REGION=<YOUR_S3_REGION>
             export OPENVIDU_S3_ENDPOINT="https://s3.${OPENVIDU_AWS_DEFAULT_REGION}.amazonaws.com"
 
-            # The name of these buckets can be found in the openvidu.env file as
-            # EXTERNAL_S3_BUCKET_APP_DATA and EXTERNAL_S3_BUCKET_CLUSTER_DATA
+            # The name of these buckets can be read with
+            # ov stack config get EXTERNAL_S3_BUCKET_APP_DATA (and, for HA, externalS3.clusterDataBucket)
             export EXTERNAL_S3_BUCKET_APP_DATA="openvidu-appdata-xxxxx"
             # (Optional) EXTERNAL_S3_BUCKET_CLUSTER_DATA is only needed for High Availability deployments
             # and usually can be skipped because it only contains internal metrics cluster data.

@@ -17,7 +17,7 @@ The modules are:
 | `egress` | Recording and streaming out | `ov-egress` |
 | `ingress` | RTMP and WHIP ingest | `ov-ingress` |
 | `dashboard` | OpenVidu Dashboard at `/dashboard` | `ov-dashboard` |
-| `meet` | [OpenVidu Meet](../../../meet/index.md) at `/` | `ov-meet` (it brings `egress`) |
+| `meet` | [OpenVidu Meet](../../../meet/index.md) at `/meet` | `ov-meet` (it brings `egress`) |
 | `observability` | Metrics, logs and the [Grafana stack](../production-ready/observability/grafana-stack.md) | `grafana`, `loki`, `prometheus` or `mimir`, `alloy` |
 | `v2compatibility` | The OpenVidu 2 REST API (**PRO**{ .openvidu-tag .openvidu-pro-tag } only) | `ov-v2compat` |
 
@@ -34,9 +34,9 @@ meet             yes       selected
 observability    yes       selected
 ```
 
-`base` is always on, `selected` means you enabled it, and `off` means it is not running. On a PRO stack, the listing also shows what each module requires and which data services the selection brings in.
+`base` is always on, `selected` means you enabled it, `dependency` means another module requires it (such as `egress` under `meet`), and `off` means it is not running. On a PRO stack, the listing also shows what each module requires and which data services the selection brings in.
 
-Changing the selection is **incremental**: `ov` starts only the new services (and recreates the ones whose configuration changed, such as the media server), or stops the removed ones; nothing else is touched. `--dry-run` previews the change.
+Changing the selection is **incremental**: `ov` starts only the new services (and recreates the ones whose configuration changed, such as the media server), or stops the removed ones; nothing else is touched. `--dry-run` previews the change. The example below is from a local stack; the exact command lines differ by deployment type, as explained after the examples.
 
 ```console
 $ ov stack module add meet

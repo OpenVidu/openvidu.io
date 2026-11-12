@@ -23,8 +23,6 @@ ov stack config set \
   EXTERNAL_S3_REGION=<YOUR_S3_REGION> \
   EXTERNAL_S3_PATH_STYLE_ACCESS=<YOUR_S3_PATH_STYLE_ACCESS> \
   EXTERNAL_S3_BUCKET_APP_DATA=<YOUR_APP_DATA_BUCKET>
-# For High Availability deployments only
-ov stack config set EXTERNAL_S3_BUCKET_CLUSTER_DATA=<YOUR_CLUSTER_DATA_BUCKET>
 ```
 
 **Parameter Details:**
@@ -35,11 +33,11 @@ ov stack config set EXTERNAL_S3_BUCKET_CLUSTER_DATA=<YOUR_CLUSTER_DATA_BUCKET>
 - `EXTERNAL_S3_REGION`: Region of your S3 provider.
 - `EXTERNAL_S3_PATH_STYLE_ACCESS`: Use path-style access for the S3 bucket (`true` or `false` based on provider requirements).
 - `EXTERNAL_S3_BUCKET_APP_DATA`: Bucket for storing OpenVidu recordings and data related to the OpenVidu Meet service.
-- `EXTERNAL_S3_BUCKET_CLUSTER_DATA` (High Availability only): Bucket for storing observability data and other data specific to a High Availability deployment.
+- `externalS3.clusterDataBucket` (PRO High Availability only): Bucket for storing observability data and other data specific to a High Availability deployment. It is set when the stack is deployed and cannot be applied to a running stack, so pass it to `ov stack deploy` with `--set openviduStack.externalS3.clusterDataBucket=<YOUR_CLUSTER_DATA_BUCKET>`. It has no `openvidu.env` name.
 
 !!! info
 
-    When using an external S3 bucket, the bundled MinIO service is not started. On a Community server it appears as `Exited (0)` when checking the status of the services.
+    When using an external S3 bucket, the bundled MinIO service is not started, since the deployment stores its data in your external S3 provider instead.
 
 ## Example with AWS S3
 
@@ -75,7 +73,7 @@ Usually the value `false` is compatible with all S3 providers, but some provider
 
 ## Server-Side Encryption
 
-When using an external S3 provider, you can optionally enable **Server-Side Encryption (SSE)** for data at rest. This applies to both the application data bucket (`EXTERNAL_S3_BUCKET_APP_DATA`) and, in High Availability deployments, the cluster data bucket (`EXTERNAL_S3_BUCKET_CLUSTER_DATA`).
+When using an external S3 provider, you can optionally enable **Server-Side Encryption (SSE)** for data at rest. This applies to both the application data bucket (`EXTERNAL_S3_BUCKET_APP_DATA`) and, in High Availability deployments, the cluster data bucket (`externalS3.clusterDataBucket`).
 
 Set the following parameters:
 

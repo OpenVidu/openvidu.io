@@ -251,6 +251,10 @@ ov stack deploy openvidu --cloud aws --param MaxNumberOfMediaNodes=3 --mode auto
 ov stack deploy openvidu --cloud digitalocean --param fixedNumberOfMediaNodes=1 --mode auto -y
 ```
 
+!!! warning "Azure"
+
+    Changing the media node count, or its minimum and maximum, on an existing Azure stack with a redeploy has not been verified on Azure yet.
+
 A cloud media node that the autoscaler is about to terminate drains itself first, so autoscaling never cuts a live session: the node finishes its rooms before the machine is removed.
 
 ### Autoscaling On Premises
@@ -262,9 +266,9 @@ When you run an OpenVidu cluster **On Premises** you add and remove media nodes 
     - [Take a node out](../elastic/on-premises/admin.md#take-a-node-out)
     - [Graceful drain](../elastic/on-premises/admin.md#graceful-drain)
 - For **OpenVidu High Availability On Premises**:
-    - [Add a media node](../elastic/on-premises/admin.md#add-a-media-node)
-    - [Take a node out](../elastic/on-premises/admin.md#take-a-node-out)
-    - [Graceful drain](../elastic/on-premises/admin.md#graceful-drain)
+    - [Add a media node](../ha/on-premises/admin.md#add-a-media-node)
+    - [Take a node out](../ha/on-premises/admin.md#take-a-node-out)
+    - [Graceful drain](../ha/on-premises/admin.md#graceful-drain)
 
 <div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Planning for a specific scale target?</h2>

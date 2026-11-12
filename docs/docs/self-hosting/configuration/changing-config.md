@@ -109,6 +109,8 @@ restart: [caddy-proxy ov-livekit-server]
 
 `--detailed-exitcode` exits `5` when the plan is not empty, which is useful as a pipeline gate.
 
+On a **PRO**{ .openvidu-tag .openvidu-pro-tag } stack, the services a change restarts are the ones the chart computes, the same set that [`ov stack config set --dry-run`](#view-get-set-unset) of that change reports: `ov stack plan` writes the change into the stack's `openvidu.yaml` as `config set` would and renders the chart with and without it, so the `restart:` line names the services whose pods would roll out. When the stack cannot be reached, or `config set` would refuse the change, the plan prints `restart: not computed (<why>)` instead and a note on standard error says why.
+
 ## Where the configuration lives { #where-the-configuration-lives }
 
 This is the main operational difference between the editions.

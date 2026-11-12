@@ -31,7 +31,9 @@ In this example, `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the n
 
 If you are using the V2 Compatibility module, you can also enable webhooks for the V2 Compatibility layer, with these parameters of the V2 Compatibility service:
 
-<!-- PENDING(docs-integrate): how the V2 Compatibility settings are changed on a stack ov deploys (the PRO chart ships no v2compatibility.env document) -->
+!!! note
+
+    The PRO chart ships no `v2compatibility.env` document. How these V2 Compatibility settings are changed on a PRO stack deployed with `ov` is not documented yet.
 
 ```
 V2COMPAT_OPENVIDU_WEBHOOK=true

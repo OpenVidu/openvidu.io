@@ -2,7 +2,7 @@ Depending on your [OpenVidu deployment type](/docs/self-hosting/deployment-types
 
 === "OpenVidu Local (Development)"
 
-	If you are using [OpenVidu Local (Development)](/docs/self-hosting/deployment-types.md#openvidu-local-development), simply navigate to the configuration folder of the project:
+	If you are using [OpenVidu Local (Development)](/docs/self-hosting/deployment-types.md#openvidu-local-development) on Windows or macOS, the stack runs with Docker Compose. Navigate to the configuration folder of the project, where the `agent-<name>.yaml` files live:
 
 	```bash
 	# For OpenVidu Local COMMUNITY
@@ -12,26 +12,13 @@ Depending on your [OpenVidu deployment type](/docs/self-hosting/deployment-types
 	cd openvidu-local-deployment/pro
 	```
 
-=== "OpenVidu Single Node"
+=== "OpenVidu Single Node / Elastic / High Availability"
 
-	If you are using [OpenVidu Single Node](/docs/self-hosting/deployment-types.md#openvidu-single-node), SSH into the only OpenVidu node and navigate to:
+	These deployments are operated with the [OpenVidu CLI](/docs/self-hosting/openvidu-cli.md) from the directory where you deployed the stack. You do not SSH into a node or edit files on it by hand: `ov stack config` reads and changes the stack's configuration on every node for you, and the agent definition files `agent-<name>.yaml` are documents of the stack.
 
-	```bash
-	cd /opt/openvidu/config
-	```
-
-=== "OpenVidu Elastic"
-
-	If you are using [OpenVidu Elastic](/docs/self-hosting/deployment-types.md#openvidu-elastic), SSH into the only Master Node and navigate to:
+	List the configuration documents, agents included, and open the one you need in your editor (`ov` applies it when you save):
 
 	```bash
-	cd /opt/openvidu/config/cluster/media_node
-	```
-
-=== "OpenVidu High Availability"
-
-	If you are using [OpenVidu High Availability](/docs/self-hosting/deployment-types.md#openvidu-high-availability), SSH into any of your Master Nodes (doesn't matter which one) and navigate to:
-
-	```bash
-	cd /opt/openvidu/config/cluster/media_node
+	ov stack config file ls
+	ov stack config file edit agent-speech-processing.yaml
 	```

@@ -60,6 +60,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
         | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
 
+        Also keep the admin ports open to the machine you run `ov` from, as in the [install port rules](../single-node/on-premises/install.md#port-rules): `22/tcp` (SSH) and, on a **PRO**{ .openvidu-tag .openvidu-pro-tag } single node, `6443/tcp` (stack remote admin control protocol).
+
         **Outbound Rules**
 
         Typically, all outbound traffic is allowed.
@@ -88,7 +90,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --ssh ubuntu@<OPENVIDU_SERVER_IP> --ssh-key ~/.ssh/id_ed25519 \
             --domain-name openvidu.example.io \
             --turn-domain-name turn.example.io \
-            --modules observability,meet \
+            --enabled-modules egress,ingress,dashboard,meet,observability \
             --external-proxy \
             --mode auto
         ```
@@ -103,7 +105,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --openvidu-pro-license <your-license> \
             --domain-name openvidu.example.io \
             --turn-domain-name turn.example.io \
-            --modules observability,meet,v2compatibility \
+            --enabled-modules egress,ingress,dashboard,meet,observability,v2compatibility \
             --rtc-engine mediasoup \
             --external-proxy \
             --mode auto
@@ -151,49 +153,23 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     **2. Port Rules**
 
-    You can follow the same rule ports of the Elastic Deployment for the [Master Node](../elastic/on-premises/install.md#port-rules) and for the [Media Nodes](../elastic/on-premises/install.md#port-rules) but some ports are used by the proxy server and others are not needed. The inbound rules for the OpenVidu proxy would be as follows:
+    Follow the [Elastic port rules](../elastic/on-premises/install.md#port-rules) for the Master Node and the Media Nodes, with one change on the master: because the external proxy terminates TLS, the master does not serve `443/tcp` publicly. Open these ports to the proxy server instead, and keep the admin ports (`6443/tcp`, `22/tcp`), the Kubernetes cluster traffic between nodes, and all the Media Node ports exactly as the install guide describes. An Elastic stack is PRO on Kubernetes, so the data services (Redis, MongoDB, MinIO) run as pods and communicate over the pod network, not over host ports between nodes.
 
-    === "Master Node"
+    === "Master Node (to the proxy)"
 
         **Inbound Rules**
 
         | Protocol    | Ports          | <div class="w-8em">Source</div> | Description                                                |
         | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-        | TCP         | 7880           | External Proxy | Allows access to the following: <ul><li>LiveKit API.</li><li>OpenVidu v2 Compatibility API</li><li>OpenVidu Dashboard.</li><li>OpenVidu Meet.</li><li>WHIP API.</li><li>Custom layouts</li></ul> |
+        | TCP         | 7880           | External Proxy | HTTP API: LiveKit API, OpenVidu v2 Compatibility API, Dashboard, Meet, WHIP API, custom layouts. |
         | TCP         | 5349           | External Proxy | TURN with TLS. |
-        | TCP         | 1945           | External Proxy | Needed if you want to ingest RTMP streams using Ingress service. |
-        | TCP         | 4443           | Media Nodes     | Needed when _'OpenVidu v2 Compatibility'_ module is used (the `v2compatibility` module). Media Nodes need access to this port to reach OpenVidu V2 compatibility service |
-        | TCP         | 9080           | Media Nodes     | Needed when _'OpenVidu Meet'_  module is used (the `meet` module). Media Nodes need access to this port to reach OpenVidu Meet. |
-        | TCP         | 3100           | Media Nodes     | Needed when _'Observability'_ module is used (the `observability` module) Media Nodes need access to this port to reach Loki. |
-        | TCP         | 7880           | Media Nodes     | Media Nodes need access to this port for Ingress, Egress and Agents to reach load balanced LiveKit API. |
-        | TCP         | 9009           | Media Nodes     | Needed when _'Observability'_ module is used. (the `observability` module) Media Nodes need access to this port to reach Mimir. |
-        | TCP         | 7000           | Media Nodes     | Media Nodes need access to this port to reach Redis Service. |
-        | TCP         | 9100           | Media Nodes     | Media Nodes need access to this port to reach MinIO. |
-        | TCP         | 20000          | Media Nodes     | Media Nodes need access to this port to reach MongoDB. |
+        | TCP         | 1945           | External Proxy | RTMP ingest, with the `ingress` module. |
 
-        **Outbound Rules**
-
-        Typically, all outbound traffic is allowed.
+        The admin ports (`6443/tcp`, `22/tcp`) and the Kubernetes cluster traffic between the master and the media nodes are unchanged from the [install guide](../elastic/on-premises/install.md#port-rules).
 
     === "Media Nodes"
 
-        **Inbound Rules**
-
-        | Protocol    | <div class="w-8em">Ports</div>          | <div class="w-8em">Source</div> | Description                                                |
-        | ----------- | -------------- | --------------- | ---------------------------------------------------------- |
-        | UDP         | 443            | 0.0.0.0/0, ::/0   | STUN/TURN over UDP. |
-        | TCP         | 7881           | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Pion. |
-        | UDP         | 7885           | 0.0.0.0/0, ::/0 | Needed if you want to ingest WebRTC using WHIP. |
-        | UDP         | 50000-60000    | 0.0.0.0/0, ::/0 | Needed for WebRTC media traffic over UDP. |
-        | TCP         | 50000-60000    | 0.0.0.0/0, ::/0 | (Optional) Needed for WebRTC media traffic over TCP with Mediasoup. Without it, clients that cannot use UDP relay their media through TURN. |
-        | TCP         | 1935           | Master Node     | Needed if you want to ingest RTMP streams using Ingress service. Master Node needs access to this port to reach Ingress RTMP service and expose it using TLS (RTMPS). |
-        | TCP         | 5349           | Master Node     | Needed if you have configured TURN with a domain for TLS. Master Node needs access to this port to reach TURN service and expose it using TLS (TURNS). |
-        | TCP         | 7880           | Master Node     | LiveKit API. Master Node needs access to load balance LiveKit API and expose it through HTTPS. |
-        | TCP         | 8080           | Master Node     | Needed if you want to ingest WebRTC streams using WHIP. Master Node needs access to this port to reach WHIP HTTP service. |
-
-        **Outbound Rules**
-
-        Typically, all outbound traffic is allowed.
+        Unchanged from the [install guide](../elastic/on-premises/install.md#port-rules): the media nodes carry the public media ports and the Kubernetes cluster traffic from the master. The external proxy does not connect to them.
 
     === "Proxy Server"
 
@@ -219,7 +195,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
             --openvidu-pro-license <your-license> \
             --domain-name openvidu.example.io \
             --turn-domain-name turn.example.io \
-            --modules observability,v2compatibility,meet \
+            --enabled-modules egress,ingress,dashboard,meet,observability,v2compatibility \
             --rtc-engine mediasoup \
             --external-proxy \
             --mode auto

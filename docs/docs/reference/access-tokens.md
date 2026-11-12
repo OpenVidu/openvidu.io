@@ -21,10 +21,10 @@ Tokens are signed with the key pair configured in your OpenVidu deployment:
 
 <div class="nowrap-first-column" markdown>
 
-| Parameter | Where it lives |
+| Parameter | How to read it |
 | --- | --- |
-| `LIVEKIT_API_KEY` | `openvidu.env`: see the [configuration reference](../self-hosting/configuration/reference.md) |
-| `LIVEKIT_API_SECRET` | `openvidu.env`: same file |
+| `LIVEKIT_API_KEY` | `ov stack config get LIVEKIT_API_KEY` (see the [configuration reference](../self-hosting/configuration/reference.md)) |
+| `LIVEKIT_API_SECRET` | `ov stack config get LIVEKIT_API_SECRET` |
 
 </div>
 

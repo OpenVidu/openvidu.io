@@ -9,7 +9,7 @@ OpenVidu keeps its settings in one global document, **`openvidu.yaml`**, and the
 
 ## How variable interpolation works
 
-A service file (such as `livekit.yaml` or `caddy.yaml`) is rendered once per node, from these sources:
+A service file (such as `livekit.yaml` or `caddy.yaml`) is rendered on each node that runs it (on **PRO**{ .openvidu-tag .openvidu-pro-tag }, in each pod that mounts it), from these sources:
 
 1. **Text with no placeholder** stands as it is.
 2. **`${openvidu.<path>}`** reads the global document `openvidu.yaml`, by path (`${openvidu.domain.name}`) or by the old `openvidu.env` name (`${openvidu.DOMAIN_NAME}`). A key the document does not have takes the model's default, so a newer `ov` can read a key an older document never wrote. No other namespace exists: a bare `${FOO}` is an error, not a value from the environment.
@@ -25,10 +25,10 @@ An example from a Media Node's `livekit.yaml`:
 
 ```yaml
 openvidu:
-    license: ${openvidu.OPENVIDU_PRO_LICENSE:?mandatory}
-    cluster_id: ${openvidu.DOMAIN_NAME:?mandatory}
-    node:
-        private_ip: ${node.privateIp:?mandatory}
+    license: ${openvidu.license}
+    cluster_id: ${openvidu.domain.name}
+    # On PRO, openvidu.node.private_ip is supplied per-pod by the
+    # LIVEKIT_OPENVIDU_NODE_PRIVATE_IP environment variable, not by a placeholder.
 ```
 
 !!! info "Two values that behave differently"
