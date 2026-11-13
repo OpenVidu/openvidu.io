@@ -48,6 +48,7 @@ We believe that by combining the best of the LiveKit stack with a top-notch WebR
 When choosing mediasoup as the WebRTC engine, these are the only differences with respect to pion:
 
 - Audio codec `red` is not supported. REDundant Encoding is available when using pion (see [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/advanced/#audio-red){:target="_blank"}), but mediasoup simply does not implement it yet ([#481 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/issues/481){:target="_blank"}).
+- Media statistics are not reported. [OpenVidu Dashboard](observability/openvidu-dashboard.md#deployments-using-mediasoup) shows no data transferred, bitrate or quality figures for the media nodes that run mediasoup. Rooms, participants, tracks, events, egresses and ingresses are reported as with pion.
 
 ## Benchmarking
 
