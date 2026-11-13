@@ -10,7 +10,7 @@ ov stack import --cloud azure --azure-resource-group <group> --stack-name <name>
   --openvidu-pro-license <license> -y
 ```
 
-`--stack-name` is the name you deployed the stack as (`<name>`), not the name of the directory. From it `ov` resolves the stack's name **on the cloud**, which the `record:` line prints: `openvidu-<name>`, or `ov-<name>` where Azure shortens the prefix to fit the Key Vault's 24-character limit. The record holds no secret, so the license (and any other parameter the template marks sensitive) must be passed again, exactly as it was given to the deploy. A Community stack is imported the same way, with no license. See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general command and how `--remote-state` works across clouds.
+`--stack-name` is the name you deployed the stack as (`<name>`), not the name of the directory. From it `ov` resolves the stack's name **on the cloud**, which the `record:` line prints: `openvidu-<name>`, or `ov-<name>` cut to 15 characters when `openvidu-<name>` is longer than that. The record holds no secret, so the license (and any other parameter the template marks sensitive) must be passed again, exactly as it was given to the deploy. A Community stack is imported the same way, with no license. See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general command and how `--remote-state` works across clouds.
 
 !!! warning "Azure Policy may forbid shared key access"
 

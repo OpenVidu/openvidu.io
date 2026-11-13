@@ -1,4 +1,4 @@
-One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** first moves the storage account to a resource group of its own, `<group>-data`, so it survives; **`--delete-data`** deletes it with the stack. With neither, nothing is deleted. The whole stack is one resource group, so deleting it is the teardown. This example destroys a Single Node stack:
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** first moves the storage account to a resource group of its own, `<group>-data`, so it survives; **`--delete-data`** deletes it with the stack. With neither, the destroy is refused and nothing is touched. The whole stack is one resource group, so deleting it is the teardown. This example destroys a Single Node stack:
 
 ```console
 $ ov stack destroy -y --delete-data

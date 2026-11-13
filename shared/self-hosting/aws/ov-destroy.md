@@ -1,4 +1,4 @@
-One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the S3 bucket, **`--delete-data`** empties and deletes it. With neither, nothing is deleted. The destroy deletes only what the stack's record lists, never anything matched by name.
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the S3 bucket, **`--delete-data`** empties and deletes it. With neither, the destroy is refused and nothing is touched. The destroy deletes only what the stack's record lists, never anything matched by name.
 
 ```console
 $ ov stack destroy -y --delete-data

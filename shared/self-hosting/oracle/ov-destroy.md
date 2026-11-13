@@ -1,4 +1,4 @@
-One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Object Storage bucket and names it, **`--delete-data`** empties and deletes it. With neither, nothing is deleted. This example destroys a Single Node stack:
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Object Storage bucket and names it, **`--delete-data`** empties and deletes it. With neither, the destroy is refused and nothing is touched. This example destroys a Single Node stack:
 
 ```console
 $ ov stack destroy -y --delete-data

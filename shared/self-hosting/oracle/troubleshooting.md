@@ -22,7 +22,7 @@ The stack's dynamic groups, policies and (with `--remote-state`) its state bucke
 
 ### A quota blocked the deploy { #a-quota-blocked-the-deploy }
 
-Before creating anything, the deploy compares what a first deploy needs against what the tenancy has free, and stops when something does not fit: OCPUs and memory of the shapes in the availability domain, a free vault, and a free Customer Secret Key slot (OCI allows two per user). Ask Oracle for higher limits (console: **Governance & Administration → Limits, Quotas and Usage**), deploy in another region, delete a Customer Secret Key or a pending-deletion vault you no longer use, or choose smaller shapes (`--param masterNodeOcpus=<n> --param masterNodeMemory=<gb> --param masterNodeShape=<shape>`, and the `mediaNode…` equivalents).
+Before creating anything, the deploy compares what a first deploy needs against what the tenancy has free, and stops when something does not fit: OCPUs and memory of the shapes in the availability domain, a free vault, and a free Customer Secret Key slot (OCI allows two per user). Ask Oracle for higher limits (console: **Governance & Administration → Limits, Quotas and Usage**), deploy in another region, delete a Customer Secret Key or a pending-deletion vault you no longer use, or choose smaller shapes: the message names the `--param` to lower (`instanceOCPUs`, `instanceMemory` and `instanceType` on Single Node; `masterNodeOcpus`, `masterNodeMemory`, `masterNodeShape` and the `mediaNode…` equivalents on Elastic and High Availability).
 
 ### High Availability never gets ready with Let's Encrypt { #ha-never-gets-ready-with-lets-encrypt }
 

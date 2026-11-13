@@ -1,6 +1,6 @@
 Without `--domain-name` the stack answers at an `sslip.io` name derived from its public address, certified by Let's Encrypt (or self-signed with `--certificate-type selfsigned`). That is enough to try OpenVidu out. For anything else, use your own domain.
 
-No Oracle template touches DNS, so you create the record yourself. Pass `--domain-name`, with `letsencrypt` or with `owncert` and your own certificate (base64-encoded, since on a cloud it travels as a template parameter):
+No Oracle template touches DNS, so you create the record yourself. Add `--domain-name` to your deploy command, with `letsencrypt` or with `owncert` and your own certificate (base64-encoded, since on a cloud it travels as a template parameter). On a Single Node COMMUNITY deploy:
 
 ```bash
 ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \

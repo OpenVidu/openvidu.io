@@ -1,4 +1,4 @@
-One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Space and names it, **`--delete-data`** empties and deletes it. With neither, nothing is deleted. Every DigitalOcean destroy needs `$DIGITALOCEAN_TOKEN`.
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Space and names it, **`--delete-data`** empties and deletes it. With neither, the destroy is refused and nothing is touched. Every DigitalOcean destroy needs `$DIGITALOCEAN_TOKEN`.
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -23,7 +23,7 @@ On Elastic and High Availability the destroy also deletes the autoscaler's Funct
 
 - **`--keep-infrastructure`** removes OpenVidu but leaves the machines running (and still costing money). It needs `--keep-data` or `--delete-data` too, which then act on the machines as on [your own servers](/docs/self-hosting/single-node/on-premises/admin.md#destroy); the Space stays either way.
 - A stack deployed with **`--remote-state`** also loses what it kept on DigitalOcean: its state Space.
-- A Space of your own (`--param spaceName=<name>`) is not the stack's, so it stays either way.
+- A Space of your own (`--param spaceName=<name>`, or `spaceAppDataName` and `spaceClusterDataName` on High Availability) is not the stack's, so it stays either way.
 
 !!! warning "A kept Space holds the stack's credentials"
 

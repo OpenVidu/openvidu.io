@@ -1,4 +1,4 @@
-One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Cloud Storage bucket and names it, **`--delete-data`** empties and deletes it. With neither, nothing is deleted. On High Availability there are two buckets (application data and cluster data), and both flags name them apart.
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Cloud Storage bucket and names it, **`--delete-data`** empties and deletes it. With neither, the destroy is refused and nothing is touched. On High Availability there are two buckets (application data and cluster data), and both flags name them apart.
 
 ```console
 $ ov stack destroy -y --delete-data
