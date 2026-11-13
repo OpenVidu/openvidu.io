@@ -20,11 +20,11 @@ Without `-y`, it asks for confirmation; with no terminal, `-y` is required. A st
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    **Your edits survive a three-way merge.** Every file `ov` manages (`docker-compose.yaml` and `config/`) is merged three ways: the file as the installed version wrote it (kept on the node under `.ov/base/<version>/`), the file on the node now, and the new version's file. `config/openvidu.yaml` is merged by values, the other files by lines. A file nobody edited becomes the new version's. An edit to lines the new version does not change is kept. An edit on the **same lines** (or the same value) is a conflict: the update stops before touching anything (exit `4`) and names the file.
+    **Your edits are kept.** `docker-compose.yaml` and `config/` are merged three ways with the new version's files. An edit on the same lines (or the same value) that the new version changes is a conflict: the update stops before touching anything and names the file.
 
-    **The disk is checked first.** For each filesystem on the node, the plan compares what the update writes there (the backup, the new files, the new images), plus a margin, with the free space. If one does not have enough room, the update stops before anything changes (exit `9`) and says how much space is missing and where.
+    **The disk is checked first.** If the node lacks the space the update needs, it stops before anything changes and says how much is missing and where.
 
-    With no conflict, the update backs up, writes the new files, pulls the new images **while the old version still runs**, renders and restarts, so the stack is down only for the restart:
+    The update pulls the new images **while the old version still runs**, so the stack is down only for the restart:
 
     ```console
     $ ov stack update -y
@@ -39,7 +39,7 @@ Without `-y`, it asks for confirmation; with no terminal, `-y` is required. A st
     ✔ stack "web" updated from main to main
     ```
 
-    **A failure rolls back.** If a step fails once the update has started, the backup under `.ov/update/<version it ran>/` is restored (the previous `ov` included) and the stack is started again at the version it ran. The command then fails and says so.
+    **A failure rolls back** to the version the stack ran, and so does Ctrl-C during the update. A second Ctrl-C stops the rollback and leaves the stack as it is at that moment, so let it finish.
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 

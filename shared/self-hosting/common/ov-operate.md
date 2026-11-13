@@ -77,7 +77,7 @@ Nov 04 03:26:58 node-172-30-0-96 docker[4229]: ov-livekit-server  | 2026-11-04T0
 …
 ```
 
-On a PRO stack, `ov stack logs SERVICE` fetches one service's logs: `ov stack logs ov-meet --since 30m` (the `ov-` prefix is optional, so `logs meet` works too; `--since` takes a duration such as `30m` or `2h`). On a Community server, per-service logs through `ov` are not available yet: read one service's logs with Docker Compose, from the deployment directory on the node (`/opt/openvidu`), with the stack's env file: `docker compose --env-file data/runtime/compose.env logs <service>`.
+On a PRO stack, `ov stack logs SERVICE` fetches one service's logs: `ov stack logs ov-meet --since 30m` (the `ov-` prefix is optional, so `logs meet` works too; `--since` takes a duration such as `30m` or `2h`). On a Community server, per-service logs through `ov` are not available yet: read one service's logs with Docker Compose, from the deployment directory on the node (`/opt/openvidu`), as root: `sudo docker compose --env-file data/runtime/compose.env logs <service>`.
 
 ## Ports { #ports }
 

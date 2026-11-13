@@ -61,11 +61,11 @@ incremental change: stop mongodb,ov-meet; restart the media server (its config c
 modules updated
 ```
 
-On a Community server the same commands rewrite `modules:` in `config/openvidu.yaml`, render the configuration again and recreate the affected services. On PRO the change is a `helm upgrade`, and the components whose configuration changed roll out after the command returns; follow them with `ov stack status`. `v2compatibility` is PRO only, so a Community stack refuses it (exit `2`).
+The same commands work on a Community server and on PRO. On PRO the components whose configuration changed roll out after the command returns; follow them with `ov stack status`. `v2compatibility` is PRO only, so a Community stack refuses it (exit `2`).
 
 ### Data services follow the modules
 
-The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them anymore. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both:
+The data services (**`redis`, `mongodb` and `minio`**) are never named directly. They come up because a module needs them and go away when no module needs them anymore. **Their data stays**: `module add` finds it again, and only `ov stack destroy --delete-data` deletes it. Dependencies between modules are handled for you too: `meet` needs `egress`, so adding `meet` to a stack without `egress` enables both:
 
 ```console
 $ ov stack module add meet
