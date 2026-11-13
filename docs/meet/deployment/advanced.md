@@ -72,3 +72,9 @@ It is composed of two different types of nodes running on two separate clusters:
 - **A cluster of Master Nodes** hosting all the support services in their high availability format. Your deployment is fault-tolerant thanks to this cluster. The minimum number of nodes in this cluster is **4**, and it is designed to have a fixed number of nodes at all times.
 
   ![OpenVidu High Availability cluster](../../assets/images/platform/self-hosting/deployment-types/openvidu-ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+
+## Proxies, load balancers and Redis
+
+Any OpenVidu Meet replica can serve any participant, so a load balancer in front of several replicas needs no sticky sessions. A proxy or load balancer of your own has the same [networking requirements](./basic.md#networking) as in a single server.
+
+The replicas relay realtime messages to each other through Redis publish/subscribe. If OpenVidu Meet connects to an external Redis with a user restricted by ACL (`MEET_REDIS_USERNAME`), grant that user the channel permission `&ov_meet:*`.

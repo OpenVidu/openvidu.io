@@ -71,7 +71,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
         | Input Value | Default Value | Description |
         |---|---|---|
         | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
-        | `masterNodesInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Node. |
+        | `masterNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Nodes. The former name `masterNodesInstanceType` is still accepted but deprecated. |
         | `mediaNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Media Nodes. |
         | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Number of Media Nodes to create at initial deployment. On its first run the autoscaler brings the cluster straight to `max(minNumberOfMediaNodes, initialNumberOfMediaNodes)` Media Nodes; afterwards the number stays between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` based on CPU load. Ignored when `fixedNumberOfMediaNodes` > 0. |
         | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of media nodes. The autoscaler never scales below this value. |

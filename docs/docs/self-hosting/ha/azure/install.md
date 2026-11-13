@@ -17,6 +17,9 @@ description: "Deploy OpenVidu High Availability on Azure from an Azure Resource 
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Azure. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Azure resources and automated through an ARM Template Spec.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Azure Blob Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 To import the template into Azure, click the button below and you will be redirected to Azure.   
 
 <div class="center-align deploy-button deploy-to-azure-btn" markdown>

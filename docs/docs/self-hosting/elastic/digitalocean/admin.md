@@ -90,7 +90,7 @@ Media Nodes are removed through the `<STACK_NAME>-draining` tag. Every Media Nod
 
 !!! info
 
-    With a fixed number of Media Nodes (`fixedNumberOfMediaNodes` greater than 0) the tag watcher is not installed, so tagging has no effect. Instead, SSH into the Media Node and run `/usr/local/bin/graceful_shutdown.sh`: it waits for the active Rooms to end and then deletes the droplet. Run `terraform apply` afterwards to re-create it.
+    With a fixed number of Media Nodes (`fixedNumberOfMediaNodes` greater than 0) the tag watcher is not installed, so tagging has no effect. Instead, SSH into the Media Node and run `sudo systemd-run --unit=openvidu-graceful-shutdown --setenv=HOME=/root /usr/local/bin/graceful_shutdown.sh`: it waits for the active Rooms to end and then deletes the droplet, and `systemd-run` keeps it running after you close the SSH session. Run `terraform apply` afterwards to re-create it.
 
 ## Change the instance size
 
@@ -171,11 +171,17 @@ You can change the fixed number of Media Nodes **in case you put a number of fix
     ```
     terraform apply
     ```
-    3. Confirm the change that Terraform proposes. Terraform creates or destroys `<STACK_NAME>-media-node-<N>` Droplets until their number matches the new value.
+    3. Confirm the change that Terraform proposes. Terraform creates or destroys `<STACK_NAME>-media-node-<N>` Droplets until their number matches the new value, and leaves the Droplets that stay untouched.
 
     !!! warning
 
-        Lowering the value destroys Droplets without draining them, so the Rooms running on them are interrupted. To avoid this, SSH into the highest-numbered Media Nodes (they are the ones Terraform removes first) and run the `/usr/local/bin/graceful_shutdown.sh` script, which waits for the active Rooms to end and then deletes the droplet. Then lower **fixedNumberOfMediaNodes** and run `terraform apply`.
+        Lowering the value destroys Droplets without draining them, so the Rooms running on them are interrupted. To avoid this, drain first the Droplets that Terraform removes, the highest-numbered ones (`<STACK_NAME>-media-node-<N>` with N above the new value). SSH into each of them and run:
+
+        ```bash
+        sudo systemd-run --unit=openvidu-graceful-shutdown --setenv=HOME=/root /usr/local/bin/graceful_shutdown.sh
+        ```
+
+        The Media Node stops accepting new Rooms and deletes its own Droplet when its ongoing Rooms, recordings and ingests end. `systemd-run` keeps the drain running after you close the SSH session, however long the Rooms last. When those Droplets are gone, lower **fixedNumberOfMediaNodes** and run `terraform apply`.
 
 ### Activate Scale In when Fixed Number of Media Nodes
 

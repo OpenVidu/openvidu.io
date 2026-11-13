@@ -400,6 +400,66 @@ def test_the_register_pages_icon_font_is_not_held_to_the_contract(tmp_path):
     assert findings_of(tmp_path, "font-loading") == []
 
 
+# -- announcement bar ------------------------------------------------------------------------
+
+
+def announce_block(
+    until='{%- set announce_until = "2999-01-01" -%}\n', bar='<div id="announce">News</div>\n'
+):
+    return (
+        '{% extends "base.html" %}\n\n{% block announce -%}\n'
+        f"{until}"
+        '{%- if build_date_utc.strftime("%Y-%m-%d") < announce_until -%}\n'
+        f"{bar}"
+        "{%- endif -%}\n{%- endblock %}\n"
+    )
+
+
+def test_an_announcement_ending_in_the_future_is_silent(tmp_path):
+    write(tmp_path, "overrides/main.html", announce_block())
+
+    assert findings_of(tmp_path, "announce-expiry") == []
+
+
+def test_an_announcement_past_its_end_date_warns(tmp_path):
+    write(
+        tmp_path,
+        "overrides/main.html",
+        announce_block(until='{%- set announce_until = "2000-01-01" -%}\n'),
+    )
+
+    (finding,) = findings_of(tmp_path, "announce-expiry")
+    assert finding.severity == "warn"
+    assert "2000-01-01" in finding.message
+    assert finding.line == 4
+
+
+def test_an_announcement_without_an_end_date_warns(tmp_path):
+    write(tmp_path, "overrides/main.html", announce_block(until=""))
+
+    (finding,) = findings_of(tmp_path, "announce-expiry")
+    assert finding.severity == "warn"
+    assert "no end date" in finding.message
+
+
+def test_an_end_date_the_script_cannot_parse_is_an_error(tmp_path):
+    write(
+        tmp_path,
+        "overrides/main.html",
+        announce_block(until='{%- set announce_until = "20990101" -%}\n'),
+    )
+
+    (finding,) = findings_of(tmp_path, "announce-expiry")
+    assert finding.severity == "error"
+
+
+def test_an_empty_or_commented_out_announce_block_is_silent(tmp_path):
+    commented = '{# {% block announce %}\n<div id="announce">News</div>\n{% endblock %} #}\n'
+    write(tmp_path, "overrides/main.html", commented + "{% block announce %}\n{% endblock %}\n")
+
+    assert findings_of(tmp_path, "announce-expiry") == []
+
+
 def test_a_blog_post_with_a_scalar_date_is_an_error(tmp_path):
     write(tmp_path, "docs/blog/posts/2026/08/post.md", "---\ndate: 2026-08-04\n---\n")
 

@@ -84,7 +84,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
         | `masterNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Master Node. |
         | `masterNodeOcpus` | `2`{ .nowrap } | Number of OCPUs for the Master Node (applies to Flex shapes only). |
         | `masterNodeMemory` | `8`{ .nowrap } | Memory in GB for the Master Node (applies to Flex shapes only). |
-        | `masterNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for the Master Node. |
+        | `masterNodeDiskSize` | `200`{ .nowrap } | Boot disk size in GB for the Master Node. |
         | `mediaNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
         | `mediaNodeOcpus` | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
         | `mediaNodeMemory` | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |

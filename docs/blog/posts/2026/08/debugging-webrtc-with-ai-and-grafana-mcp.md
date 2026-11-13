@@ -3,6 +3,7 @@ title: Debugging WebRTC with an AI agent and Grafana MCP
 draft: false
 date:
   created: 2026-08-25
+  updated: 2026-10-07
 slug: debugging-webrtc-with-ai-and-grafana-mcp
 description: >-
   We give a Claude Code agent nothing but read-only Grafana and a broken
@@ -245,6 +246,6 @@ But it doesn't replace your judgment. An agent that only reads Grafana inherits 
 
 As for that developer who has never handled a media stream in their life: our bet is that tools like this lower the bar enormously. You no longer need to master ICE, DTLS, or the guts of the SFU to start understanding what's failing; you just need observability turned on and an agent to ask. It's all in a repo ready to reproduce, so break your own deployment, wire up Claude, and see for yourself.
 
-One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. Follow OpenVidu's releases and the blog if you want to see the rest as it lands.
+One last thing: this is only a preview. We're preparing a set of MCPs and skills so coding agents can manage and operate OpenVidu stacks, and help you build applications on top of OpenVidu. The first of them is already here: the [OpenVidu Agent Plugin](/blog/posts/2026/10/openvidu-agent-plugin.md). Follow OpenVidu's releases and the blog if you want to see the rest as it lands.
 
 *Now it's your turn: [tell us what you find :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/openvidu-labs/openvidu-grafana-mcp-lab/issues){:target="_blank"}. And may your on-calls be boring.* 😉

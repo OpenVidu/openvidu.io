@@ -149,7 +149,7 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh)
+    sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh)
     ```
 
     --8<-- "self-hosting/common/install-version.md"
@@ -185,7 +185,7 @@ Before the installation, ensure that your machine meets the [prerequisites](#pre
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh)
+    sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh)
     ```
 
     --8<-- "self-hosting/common/install-version.md"
@@ -270,7 +270,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using Let's Encrypt certificates without a domain name (the public IP is used as the domain name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --enabled-modules='observability,openviduMeet' \
                 --livekit-api-key='xxxxx' \
@@ -297,7 +297,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using self-signed certificates without a domain name (the public IP is used as the domain name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --enabled-modules='observability,openviduMeet' \
                 --livekit-api-key='xxxxx' \
@@ -326,7 +326,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using Let's Encrypt certificates with an FQDN (Fully Qualified Domain Name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --domain-name='openvidu.example.io' \
                 --enabled-modules='observability,openviduMeet' \
@@ -354,7 +354,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using self-signed certificates with an FQDN (Fully Qualified Domain Name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --domain-name='openvidu.example.io' \
                 --enabled-modules='observability,openviduMeet' \
@@ -385,7 +385,7 @@ This is going to generate a command like this, but it may vary depending on the 
             CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
             CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
 
-            sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --domain-name='openvidu.example.io' \
                 --enabled-modules='observability,openviduMeet' \
@@ -421,7 +421,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using Let's Encrypt certificates without a domain name (the public IP is used as the domain name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
@@ -453,7 +453,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using self-signed certificates without a domain name (the public IP is used as the domain name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --openvidu-pro-license='xxxxx' \
                 --enabled-modules='observability,v2compatibility,openviduMeet' \
@@ -487,7 +487,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using Let's Encrypt certificates:
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --domain-name='openvidu.example.io' \
                 --openvidu-pro-license='xxxxx' \
@@ -520,7 +520,7 @@ This is going to generate a command like this, but it may vary depending on the 
             Example using self-signed certificates:
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --domain-name='openvidu.example.io' \
                 --openvidu-pro-license='xxxxx' \
@@ -556,7 +556,7 @@ This is going to generate a command like this, but it may vary depending on the 
             CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
             CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
 
-            sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
                 --no-tty --install \
                 --domain-name='openvidu.example.io' \
                 --openvidu-pro-license='xxxxx' \

@@ -27,14 +27,14 @@ These links can be shared freely with anyone, unless anonymous access for that r
 
 #### From the OpenVidu Meet app
 
-Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page.
+Users with permission to manage a room or share access links can copy and share the anonymous access link for each role from the **"Rooms"** or **"Room Details"** page. A user who shares access links without managing the room is offered only the links whose permissions they hold: a user with the `Speaker` permissions and `roomShareAccessLinks` can share the speaker link, never the moderator one.
 
 <a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 #### From an active meeting
 
-Participants with the `roomShareAccessLinks` permission can share the room access link from the active meeting view.
+Participants with the `roomShareAccessLinks` permission can share the room's anonymous speaker link from the active meeting view, provided they also hold every permission of the `Speaker` role. Otherwise no link is offered, as when the anonymous speaker link is disabled.
 
 ![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-dark.png#only-dark){ .round-corners loading=lazy }
 ![Sharing the room access link from an active meeting](../../../assets/images/meet/rooms/access/meeting-share-link-light.png#only-light){ .round-corners loading=lazy }
@@ -71,7 +71,9 @@ Grants full meeting permissions by default:
 
 - **Meeting management**: join the meeting, read its live state and end it for all participants.
 - **Recording control**: start and stop recordings, and list, play, download and delete them.
+- **Live broadcast control**: start and stop the [live broadcast](../meetings/live-broadcast.md) of the meeting to the room's destinations, and stream it to destinations the room does not have.
 - **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, [lower their raised hands](../meetings/raise-hand.md#lowering-hands), kick them, and share room access links.
+- **Waiting room**: `waitingRoomBypass` to join [without waiting](../meetings/waiting-room.md#who-waits) and `waitingRoomAdmin` to [admit or reject](../meetings/waiting-room.md#admitting-and-rejecting) the participants who wait, in rooms that have the waiting room on.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 
@@ -81,9 +83,10 @@ Grants basic participation permissions by default:
 
 - **Meeting access**: join the meeting and read its live state.
 - **Recording access**: list, play and download the room's recordings — but not start, stop or delete them.
+- **Waiting room**: neither `waitingRoomBypass` nor `waitingRoomAdmin`, so in a room with the [waiting room](../meetings/waiting-room.md) on, a speaker asks to join and waits to be admitted.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 
 !!! info
 
-    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. Every permission is independent: none is implied by another. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"} schema.
+    The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](management.md#create-rooms) or [editing](management.md#edit-rooms) it, and per member through custom permissions. Every permission is set independently: none is implied by another. A few only take effect together with another one: sending chat messages needs reading the chat, changing the virtual background needs publishing video, and streaming to destinations the room does not have needs live broadcast control. For the complete list of available permissions, see the [MeetPermissions :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/schemas/MeetPermissions){:target="_blank"} schema.

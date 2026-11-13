@@ -10,7 +10,7 @@ Upgrade OpenVidu Single Node is very simple. These are the steps you need to fol
 2. Execute the following command:
 
     ```
-    sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
+    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
     ```
 
     To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).

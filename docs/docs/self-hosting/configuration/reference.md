@@ -50,13 +50,13 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | --------- | ----------- |
 | **`SERVER_PORT`** | Port where the OpenVidu Meet service will be running. |
 | **`SERVER_CORS_ORIGIN`** | CORS origin for the OpenVidu Meet service. It is `*` by default, allowing all origins. |
-| **`SERVER_TRUST_PROXY`** | Configures whether the OpenVidu Meet service trusts the `X-Forwarded-*` headers from reverse proxies. This is essential for proper rate limiting and obtaining the real client IP address. Supported values: `true` (trust all proxies), `false` (disable), or a number (number of hops to trust). This is required when OpenVidu Meet is behind a reverse proxy. Default is `true`. |
+| **`SERVER_TRUST_PROXY`** | Configures whether the OpenVidu Meet service trusts the `X-Forwarded-*` headers from reverse proxies. This is essential for proper rate limiting and obtaining the real client IP address. Supported values: `true` (trust all proxies), `false` (disable), a number (number of hops to trust), or a comma-separated list of the addresses and subnets of the proxies to trust (for example `10.0.0.1,172.16.0.0/12`). This is required when OpenVidu Meet is behind a reverse proxy. Default is `true`. |
 | **`LIVEKIT_URL`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. |
-| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created. |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. It must be at least 5 characters long, or OpenVidu Meet does not start. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created, and then it must be at least 5 characters long, or OpenVidu Meet does not start. |
 | **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Registered on start when the service has no API key. |
 | **`MEET_ACCESS_TOKEN_EXPIRATION`** | Expiration time for access tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_REFRESH_TOKEN_EXPIRATION`** | Expiration time for refresh tokens issued by OpenVidu Meet. Default is `1d`. |
@@ -65,19 +65,19 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
 | **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered. |
 | **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.|
-| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). |
-| **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_S3_SUBBUCKET`** | Path for the S3 bucket where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage), in any letter case. Default is `s3`. With any other value, OpenVidu Meet does not start. With `gcs`, OpenVidu Meet uses the bucket of `MEET_S3_BUCKET` and the path of `MEET_S3_SUBBUCKET`, and authenticates with Google Application Default Credentials: the service account key file named by `GOOGLE_APPLICATION_CREDENTIALS`, or else the service account attached to the machine. |
+| **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the Google Cloud Storage bucket. Default is `openvidu-appdata`. |
+| **`MEET_S3_SUBBUCKET`** | Path inside the bucket where the recordings of OpenVidu Meet are stored. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the path inside the Google Cloud Storage bucket. With `abs`, it has no effect: the path comes from `MEET_AZURE_SUBCONTAINER_NAME`. Default is `openvidu-meet`. |
 | **`MEET_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for OpenVidu Meet service. |
 | **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
 | **`MEET_AWS_REGION`** | AWS region of the S3 Bucket application. |
 | **`MEET_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
-| **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm for the OpenVidu Meet S3 bucket. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). |
-| **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`. |
-| **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context for the OpenVidu Meet S3 bucket. **Only used with `SSE-KMS`**. |
+| **`MEET_S3_SSE_TYPE`** | Server-side encryption algorithm. Supported values: `SSE-S3` (S3-managed AES256), `SSE-KMS` (AWS KMS-managed). OpenVidu Meet writes nothing to the bucket, so this setting encrypts nothing: recordings are written by the egress, which follows `EXTERNAL_S3_SSE_TYPE`, `EXTERNAL_S3_SSE_KMS_KEY_ID` and `EXTERNAL_S3_SSE_KMS_ENCRYPTION_CONTEXT` of `openvidu.env`. With `MEET_BLOB_STORAGE_MODE` set to `s3`, OpenVidu Meet only validates the three `MEET_S3_SSE_*` variables at startup, and does not start when their combination is invalid. |
+| **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`, and not allowed otherwise. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
+| **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only allowed with `SSE-KMS`**. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path for the Azure Blob Storage container where OpenVidu Meet service will store recordings and user preferences. |
+| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path inside the Azure Blob Storage container where OpenVidu Meet stores its recordings. It decides both where new recordings are written and where they are read from. Default is `openvidu-meet`. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
 | **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. Leave it empty to authenticate with the managed identity of the VM or pod running Meet, which needs a data role on the storage account, such as Storage Blob Data Contributor. |
 | **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |
@@ -128,6 +128,7 @@ This file defines the configuration parameters for the OpenVidu V2 Compatibility
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_WITH_PATH_STYLE_ACCESS`{.nowrap}** | If `true`, use path-style access for S3. |
 | **`V2COMPAT_OPENVIDU_RECORDING_ZIP_FILES`** | If `true`, save individual recordings as zip files |
 | **`V2COMPAT_OPENVIDU_RECORDING_RAW_FILES`** | If `true`, save individual recordings as files directly |
+| **`V2COMPAT_OPENVIDU_RECORDING_AUTOSTOP_TIMEOUT`** | Number of seconds that a session, and therefore its recording, remains active after the last participant leaves. It must be an integer greater than or equal to `1`; any other value is ignored and the default is used. Default value is `1`. <br>In OpenVidu 3 a recording is tied to its session, so keeping the recording active requires keeping the session alive. In OpenVidu 2 the session was destroyed immediately when the last participant left, while the recording continued independently. The OpenVidu 2 equivalent is `120`, but the default is `1` to preserve the session lifecycle of OpenVidu 2. It applies to the sessions created after the service starts with the new value. |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_BUCKET`** | Default bucket name for recordings |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for the recordings |
 | **`V2COMPAT_OPENVIDU_PRO_AWS_ACCESS_KEY`** | Access key for the recordings S3 bucket |

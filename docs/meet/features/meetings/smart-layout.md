@@ -1,6 +1,6 @@
 ---
 title: "Smart layout in OpenVidu Meet"
-description: "The OpenVidu Meet meeting view arranges participants in a responsive grid that adapts to how many people are present, and each participant chooses the layout, how many people are shown and where their own video goes."
+description: "OpenVidu Meet arranges participants in a responsive grid, and each participant chooses the layout, how many people are shown and where their own video goes."
 keywords: video meeting layout, adaptive video grid, active speaker, mosaic layout, OpenVidu Meet
 page_features:
   - lazyvideo
@@ -18,7 +18,7 @@ The meeting view uses a responsive grid that automatically adapts to the number 
 Each participant can change how the grid is built from the **Layout** tab of the meeting settings panel, which **More options → Adjust Layout** opens directly. Only your own view changes: the other participants keep the layout they chose.
 
 - **Mosaic**: shows all participants in a single grid, in equal tiles.
-- **Smart Mosaic** (default): displays a limited number of participants (up to 4 by default) and prioritizes active speakers, keeping the current conversation in focus.
+- **Smart Mosaic** (default): displays a limited number of participants (up to 4 remote participants by default, 2 on phones and tablets) and prioritizes active speakers, keeping the current conversation in focus.
 
 ![Layout tab of the settings panel with the Mosaic and Smart Mosaic modes, the visible participants and the own video position](../../../assets/images/meet/meetings/smart-layout/layout-settings-dark.webp#only-dark){ .round-corners loading=lazy }
 ![Layout tab of the settings panel with the Mosaic and Smart Mosaic modes, the visible participants and the own video position](../../../assets/images/meet/meetings/smart-layout/layout-settings-light.webp#only-light){ .round-corners loading=lazy }

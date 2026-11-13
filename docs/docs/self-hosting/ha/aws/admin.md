@@ -191,27 +191,27 @@ To configure the Auto Scaling settings for the Media Nodes, follow the steps out
 
 ## Fixed Number of Media Nodes
 
-If you need to maintain a fixed number of Media Nodes instead of allowing the Auto Scaling Group to dynamically adjust based on CPU utilization, you can configure the desired capacity settings accordingly. Follow the steps below to set a fixed number of Media Nodes:
+You can switch between **autoscaling mode** (the Auto Scaling Group adds and removes Media Nodes based on CPU usage) and **fixed mode** (a constant number of Media Nodes with no autoscaling) with the **`FixedNumberOfMediaNodes`** parameter of the CloudFormation stack. With a value greater than `0`, CloudFormation sets the minimum, maximum and desired capacity of the Auto Scaling Group to that number and removes its scaling policy, so **InitialNumberOfMediaNodes**, **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **ScaleTargetCPU** are ignored.
 
-=== "Set Fixed Number of Media Nodes"
+=== "Set a Fixed Number of Media Nodes"
 
     1. Navigate to the [CloudFormation Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://console.aws.amazon.com/cloudformation/home){:target="_blank"} on AWS.
-    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability.
-    3. In the _"Resources"_ tab, locate the resource with the logical ID: **`OpenViduMediaNodeASG`** and click on it to go to the Auto Scaling Group Dashboard.
+    2. Select the CloudFormation Stack that you used to deploy OpenVidu High Availability and click on _"Update"_.
+    3. Choose _"Use existing template"_ and click on _"Next"_.
+    4. Set **FixedNumberOfMediaNodes** to the number of Media Nodes you want, keep the rest of the parameters as they are, and continue until you can click on _"Submit"_.
+    5. Wait until the stack reaches the _"UPDATE_COMPLETE"_ status.
 
-        ![Select Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-select-media-asg.png){ .round-corners loading=lazy }
+=== "Back to Autoscaling"
 
-    4. Click on _"Actions > Edit"_.
+    Follow the same steps and set **FixedNumberOfMediaNodes** to `0`. The Auto Scaling Group goes back to **MinNumberOfMediaNodes**, **MaxNumberOfMediaNodes** and **InitialNumberOfMediaNodes**, and its scaling policy based on **ScaleTargetCPU** is created again. The group starts again from **InitialNumberOfMediaNodes**: if more Media Nodes are running, the extra ones are drained and removed as in a scale-in, and autoscaling adds Media Nodes again when the load requires them.
 
-        ![Edit Auto Scaling Group](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-edit-media-asg.png){ .round-corners loading=lazy }
+!!! info
 
-    5. Set the _"Desired capacity"_, _"Min desired capacity"_, and _"Max desired capacity"_ to the fixed number of Media Nodes you require, and click on _"Update"_. In this example, we set the desired capacity to 2.
+    Media Nodes removed because the number goes down are drained gracefully, exactly as in an automatic scale-in: they stop accepting new Rooms and are terminated when their ongoing work ends (up to the 48-hour limit AWS puts on a lifecycle hook).
 
-        ![Set Fixed Desired Capacity](../../../../assets/images/platform/self-hosting/shared/aws/admin-set-desired-capacity-start.png){ .round-corners loading=lazy }
+!!! warning
 
-    6. Wait until the _"Instance Management"_ tab shows that the Auto Scaling Group has the fixed number of instances running.
-
-        ![Instance Management](../../../../assets/images/platform/self-hosting/ha/aws/ha-admin-instance-management-media-start.png){ .round-corners loading=lazy }
+    Do not edit the capacity of the Auto Scaling Group by hand: the next stack update resets it to what the parameters say.
 
 ## Administration and configuration
 

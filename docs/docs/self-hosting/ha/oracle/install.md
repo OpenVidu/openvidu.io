@@ -87,7 +87,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
         | `masterNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for each OpenVidu Master Node. All 4 Master Nodes use the same shape and size. |
         | `masterNodeOcpus` | `2`{ .nowrap } | Number of OCPUs per Master Node (applies to Flex shapes only). |
         | `masterNodeMemory` | `8`{ .nowrap } | Memory in GB per Master Node (applies to Flex shapes only). |
-        | `masterNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for each Master Node. |
+        | `masterNodeDiskSize` | `200`{ .nowrap } | Boot disk size in GB for each Master Node. |
         | `mediaNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
         | `mediaNodeOcpus` | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
         | `mediaNodeMemory` | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |

@@ -145,23 +145,53 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
 ## Fixed Number of Media Nodes
 
-If you prefer to maintain a fixed number of Media Nodes instead of allowing the Virtual Machine Scale Set to perform dynamic scaling:
+The **Fixed Number Of Media Nodes** parameter of the template selects how the number of Media Nodes is managed:
 
-=== "Set Fixed Number of Media Nodes"
+- **Autoscaling mode** (`0`, the default): the autoscale setting of the Virtual Machine Scale Set adds and removes Media Nodes based on CPU usage, between **Min Number Of Media Nodes** and **Max Number Of Media Nodes**, as described in [Media Nodes Autoscaling Configuration](#media-nodes-autoscaling-configuration).
+- **Fixed mode** (a value greater than `0`): the autoscale profile of the Scale Set is pinned to that number, with its minimum, maximum and default instance counts all set to it, so CPU usage never changes the number of Media Nodes. **Initial Number Of Media Nodes**, **Min Number Of Media Nodes**, **Max Number Of Media Nodes** and **Scale Target CPU** are ignored.
+
+=== "Change Fixed Number of Media Nodes"
 
     1. Go to the [Azure Portal Dashboard :fontawesome-solid-external-link:{.external-link-icon}](https://portal.azure.com/#home){:target="_blank"} on Azure.
-    2. Select the Resource Group where you deployed OpenVidu Elastic, locate the resource with the name _"stackName-mediaNodeScaleSet"_ and click on it
-    3. On the left panel click on _"Availability + scale"_ and then in _"Scaling"_ tab.
+    2. Select the Resource Group where you deployed OpenVidu Elastic, and on the left panel click on _"Settings"_ > _"Deployments"_.
+    3. Select the deployment of OpenVidu and click on _"Redeploy"_.
+    4. Set **Fixed Number Of Media Nodes** to the number of Media Nodes you want, keep the rest of the parameters as they are, and click on _"Review + create"_ and then on _"Create"_.
+    5. Wait for the deployment to complete. The autoscale setting then brings the Scale Set to the new number. You can follow the Media Nodes in the _"Instances"_ tab of the resource _"stackName-mediaNodeScaleSet"_.
 
-        ![Selecting scaling menu Scale Set](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-scaling-tab.png){ .round-corners loading=lazy }
+    Raising the number adds Media Nodes. To lower it, first remove the extra Media Nodes gracefully as described in [Lower the number of Media Nodes](#lower-the-number-of-media-nodes), and then redeploy with the new number.
 
-    4. On this tab, scroll to the bottom and modify the _"Instance Limits"_ to the value of fixed number of Media Nodes you want. In this case it is set to 2.
+### Lower the number of Media Nodes
 
-        ![Edit Scaling Set Group](../../../../assets/images/platform/self-hosting/elastic/azure/elastic-admin-edit-media-ss-fixed.png){ .round-corners loading=lazy }
+Media Nodes protect themselves from scale-in, so that only a graceful drain removes them, and Azure does not accept an autoscale setting whose minimum or maximum is below the number of Media Nodes that are running. A redeploy that sets **Fixed Number Of Media Nodes**, **Min Number Of Media Nodes** or **Max Number Of Media Nodes** below that number fails with `UnsupportedCapacity`. Remove the extra Media Nodes first:
 
-    5. Click _"Save"_ and wait for it to complete. You can check the progress in the _"Instances"_ tab.
+1. Go to the Resource Group where you deployed OpenVidu Elastic, click into the Virtual Machine Scale Set resource called _"stackName-mediaNodeScaleSet"_ and click _"Availability + scale"_ on the left panel, then click the _"Scaling"_ option.
+2. Select _"Manual scale"_, keep the instance count as it is and click _"Save"_. The autoscale setting no longer adds or removes Media Nodes.
+3. For each Media Node to remove, select it in the _"Instances"_ tab, click on _"Run command"_ > _"RunShellScript"_, and run:
 
-        ![Location Instance Tab](../../../../assets/images/platform/self-hosting/shared/azure/admin-instance-tab.png){ .round-corners loading=lazy }
+    ```bash
+    sudo systemd-run --unit=openvidu-stop-media-node --setenv=HOME=/root /usr/local/bin/stop_media_node.sh
+    ```
+
+    The Media Node stops accepting new Rooms and removes itself from the Scale Set when its ongoing Rooms, recordings and ingests end. `systemd-run` keeps the drain running after the Run command returns, however long the Rooms last.
+
+4. When the Scale Set has the number of Media Nodes you want, redeploy with it as described in the _"Change Fixed Number of Media Nodes"_ tab above, or with the new **Min Number Of Media Nodes** in autoscaling mode. The redeploy turns autoscaling back on.
+
+### Switch between autoscaling and a fixed number
+
+=== "Back to autoscaling"
+
+    1. Follow the steps of the _"Change Fixed Number of Media Nodes"_ tab above, setting **Fixed Number Of Media Nodes** to `0`. Change **Min Number Of Media Nodes**, **Max Number Of Media Nodes** and **Scale Target CPU** too if you do not want their current values.
+    2. When the deployment completes, the autoscale setting scales on CPU usage again, starting from the Media Nodes that are running, and adds Media Nodes if there are fewer than **Min Number Of Media Nodes**. **Min Number Of Media Nodes** and **Max Number Of Media Nodes** cannot be below the Media Nodes that are running: to go lower, remove the extra ones first as described in [Lower the number of Media Nodes](#lower-the-number-of-media-nodes).
+
+=== "From autoscaling to a fixed number"
+
+    1. Follow the steps of the _"Change Fixed Number of Media Nodes"_ tab above, setting **Fixed Number Of Media Nodes** to the number of Media Nodes you want.
+    2. When the deployment completes, the autoscale setting is pinned to that number, and Media Nodes are added if fewer are running. If more Media Nodes are running than the number you set, remove the extra ones first as described in [Lower the number of Media Nodes](#lower-the-number-of-media-nodes): Azure does not accept the deployment otherwise.
+
+!!! info "What a redeploy changes"
+
+    - A redeploy never changes the number of Media Nodes by itself: the template does not set the instance count of the Scale Set, only the limits of its autoscale setting, which then adds Media Nodes up to its minimum. **Initial Number Of Media Nodes** applies only when the deployment is created.
+    - The autoscale setting is rewritten from the template parameters, so changes made by hand to its rules or instance limits in the portal (see [Media Nodes Autoscaling Configuration](#media-nodes-autoscaling-configuration)) are replaced.
 
 ## Administration and configuration
 

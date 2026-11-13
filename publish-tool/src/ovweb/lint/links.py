@@ -22,6 +22,8 @@ VERSION_PIN = re.compile(
 LATEST_LINK = re.compile(r"https://openvidu\.io/latest/|\]\(/latest/|(?:href|src)=\"/latest/")
 MORE_MARKER = re.compile(r"<!--\s*more\s*-->")
 MINOR = re.compile(r"\d+\.\d+")
+# The blog plugin's default post_url_format, `{date}/{slug}` with dates as yyyy/MM/dd.
+BLOG_POST_URL = re.compile(r"blog/(\d{4})/(\d{2})/(\d{2})/([^/]+)/?")
 
 SKIP_SCHEMES = ("http://", "https://", "mailto:", "tel:", "data:", "javascript:", "//")
 
@@ -38,6 +40,21 @@ def _md_targets(text: str):
         yield match.start(), match.group(1).strip("<>")
 
 
+def _serves_blog_post(path: str, corpus: Corpus) -> bool:
+    """Whether a post's frontmatter `date.created` and `slug` produce this URL path."""
+    match = BLOG_POST_URL.fullmatch(path)
+    if not match:
+        return False
+    year, month, day, slug = match.groups()
+    return any(
+        isinstance(dates := source.meta.get("date"), dict)
+        and str(dates.get("created", ""))[:10] == f"{year}-{month}-{day}"
+        and source.meta.get("slug") == slug
+        for relpath, source in corpus.docs.items()
+        if relpath.startswith("docs/blog/posts/")
+    )
+
+
 def resolves(target: str, corpus: Corpus, layout: SiteLayout) -> bool:
     """Whether a root-absolute URL path is served by a file in the source tree."""
     path = target.partition("#")[0].partition("?")[0].lstrip("/")
@@ -45,6 +62,8 @@ def resolves(target: str, corpus: Corpus, layout: SiteLayout) -> bool:
         path = path[len("latest/") :]
     if path == "":
         return corpus.is_file("docs/index.md")
+    if _serves_blog_post(path, corpus):
+        return True
     first = path.split("/", 1)[0]
     if first in layout.assets:
         return not path.endswith("/") and corpus.is_file(f"docs/{path}")
@@ -201,7 +220,9 @@ def _is_release_post(source: Source) -> bool:
 
 
 def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
-    """Version-pinned links live only on the releases pages and in Release blog posts."""
+    """Version-pinned links live only on the releases pages and in Release blog posts, no
+    versioned page or snippet links to `latest` by hand, and a Release post's links into the
+    documentation are pinned."""
     findings = []
     releases = _release_files(layout)
     for collection in (corpus.docs, corpus.snippets):
@@ -220,6 +241,48 @@ def check_version_pins(corpus: Corpus, layout: SiteLayout) -> list[Finding]:
                         "pin versions only on the releases pages and in Release blog posts",
                     )
                 )
+
+    # Nor does a versioned page reach `latest` by hand: the publish points the newest version's
+    # exports at /latest/ and pins them back when it is superseded, rewriting every such link.
+    sections = tuple(f"docs/{section}/" for section in layout.versioned_pages)
+    versioned = [
+        source
+        for source in corpus.docs.values()
+        if source.path.startswith(sections) and source.path not in releases
+    ]
+    for source in (*versioned, *corpus.snippets.values()):
+        for match in LATEST_LINK.finditer(source.visible):
+            findings.append(
+                Finding(
+                    "latest-in-versioned-page",
+                    ERROR,
+                    source.path,
+                    source.line_of(match.start()),
+                    "versioned page links to `latest` by hand",
+                    "link relatively inside the version; the publish decides where /latest/ goes",
+                )
+            )
+
+    # And a Release post reaches the documentation pinned to the version it announces: its HTML
+    # keeps those pins, and so does its Markdown export, where the publish keeps them whole.
+    sections_pattern = "|".join(re.escape(section) for section in layout.versioned_pages)
+    unpinned = re.compile(
+        rf"(?:\]\(|(?:href|src)=\")(?:https://openvidu\.io)?/(?:latest/)?(?:{sections_pattern})/"
+    )
+    for source in corpus.docs.values():
+        if not _is_release_post(source):
+            continue
+        for match in unpinned.finditer(source.visible):
+            findings.append(
+                Finding(
+                    "release-post-unpinned-link",
+                    ERROR,
+                    source.path,
+                    source.line_of(match.start()),
+                    "Release post links into the documentation without pinning a version",
+                    "write https://openvidu.io/X.Y/docs/… with the version the post announces",
+                )
+            )
 
     # The inverse rule: the releases pages must never point at `latest` — the publish fails on it.
     for path in releases:

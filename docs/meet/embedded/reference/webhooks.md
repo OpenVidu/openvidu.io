@@ -24,9 +24,14 @@ Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-i
 - [`participantLeft` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantLeftWebhook){:target="_blank"}
 - [`participantRoleChanged` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantRoleChangedWebhook){:target="_blank"}
 - [`participantHandChanged` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantHandChangedWebhook){:target="_blank"}
+- [`participantKnocked` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantKnockedWebhook){:target="_blank"}
+- [`participantWaitingChanged` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantWaitingChangedWebhook){:target="_blank"}
 - [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){:target="_blank"}
 - [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingUpdatedWebhook){:target="_blank"}
 - [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingEndedWebhook){:target="_blank"}
+- [`broadcastStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastStartedWebhook){:target="_blank"}
+- [`broadcastUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastUpdatedWebhook){:target="_blank"}
+- [`broadcastEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastEndedWebhook){:target="_blank"}
 
 ## Configuration
 

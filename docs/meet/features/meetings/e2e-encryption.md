@@ -17,6 +17,8 @@ E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/man
 !!! warning "E2EE Limitations"
 
     - **Recording is not available** for encrypted rooms: the server cannot decrypt the content, so it cannot produce a [recording](../recordings/overview.md). To record, disable E2EE for the room.
+    - **Live broadcast is not available** for encrypted rooms either: the server cannot decrypt the meeting to stream it to a [live broadcast](live-broadcast.md) destination. Turning live broadcast on disables E2EE for the room.
+    - **Live captions are not available** for encrypted rooms: the captions assistant cannot decrypt the audio, so it cannot produce [live captions](live-captions.md). Turning E2EE on turns live captions off for the room.
     - All participants must use **exactly the same passphrase** — there is no per-role or partial access.
 
 ## What is protected
@@ -53,7 +55,7 @@ When E2EE is active, everything participants share is encrypted on their device 
 
 ## Joining an encrypted meeting
 
-Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device and never sent to the server.
+Every participant must enter the same **secret passphrase** to join. The encryption key is derived from it locally on each device, and a passphrase typed in the Join view never leaves the device. A passphrase given as the `e2ee-key` query parameter of a direct link or of an iframe `src` does reach the OpenVidu Meet server, with the request for the page, before the meeting removes it from the address bar.
 
 When a member accesses an E2E-encrypted room, the [Join view](lifecycle.md#join-view) shows an **"end-to-end encrypted"** badge and a required passphrase field. With the correct passphrase, the meeting works like any other.
 

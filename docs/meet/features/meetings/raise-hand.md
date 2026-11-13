@@ -11,7 +11,7 @@ Participants **raise their hand** to ask for a turn without interrupting whoever
 
 ## Raising your hand { #raising-your-hand }
 
-Click the **Raise hand** button in the toolbar, or press the `R` key anywhere outside a text field. Click it or press `R` again to lower your hand. On phones, the button is in the **More options** menu.
+Click the **Raise hand** button in the toolbar, or press the `R` key anywhere outside a text field. Click it or press `R` again to lower your hand. In a meeting embedded with the Web Component, the key works once you have clicked inside the meeting, not while you are using the rest of the page. On phones, the button is in the **More options** menu.
 
 Your camera tile is highlighted and shows your place in the queue. When a hand ahead of yours goes down, your place moves up.
 
@@ -43,7 +43,7 @@ The participant is told that a moderator lowered their hand.
 <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/lower-hands-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/lower-hands-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/lower-hands-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/lower-hands-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
-`participantHandLower` is granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room created. Rooms and room members that existed before start without it, so it has to be granted explicitly in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member).
+`participantHandLower` is granted by default to the `Moderator` [predefined role](../rooms/access.md#predefined-roles) of every room, including the rooms created before this feature existed, and to the room members with that role. It can be revoked or granted to other participants in the room's role permissions or in the member's [custom permissions](../room-members/management.md#edit-a-member).
 
 ## Enable or disable raise hand for a room { #enable-or-disable }
 

@@ -77,6 +77,7 @@ iframe.contentWindow.postMessage(
 );
 ```
 
+The iframe listens for commands from the moment it loads, but a command runs only from the device setup screen onwards. A command posted earlier is rejected with a warning in the browser console: wait for the `meetingJoined` event before sending meeting commands.
 
 ### Events
 

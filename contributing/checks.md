@@ -28,7 +28,10 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
   recognized), and the `page.md/#anchor` stray-slash form.
 - **Version-pin discipline**: `/X.Y/` links are allowed only on the two releases pages and in
   `Release` blog posts; the releases pages themselves must never link `latest` (the publish
-  refuses it — lint catches it at PR time instead).
+  refuses it — lint catches it at PR time instead), and neither may any other versioned page or
+  shared snippet: the publish decides where `/latest/` goes in the Markdown exports
+  ([`link-rewriting.md`](../publish-tool/docs/link-rewriting.md)). A `Release` post's links into
+  the documentation must be absolute and pinned to the version it announces.
 - **SEO budgets** (warn): `title` over 57 characters (70 for posts), `description` over 160 or
   not a sentence, duplicated titles/descriptions site-wide. Presence stays a build error in
   `llmstxt_entries_hook.py` — a missing field must kill CI, but a long one must not kill
@@ -45,6 +48,9 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
 - **Font loading**: `overrides/main.html` loads the font stylesheet render-blocking with
   `display=block`, and every `{# Family NNN #}` preload hint names a weight the URL requests
   and carries `crossorigin` — the no-flicker contract the template's own comment describes.
+- **Announcement bar** (warn): the `announce` block in `overrides/main.html` sets an
+  `announce_until` day that is still ahead; a value that is not `YYYY-MM-DD` is an error, since
+  the bar would never end ([page-composition.md](page-composition.md#announcement-bar)).
 - **Commented-out dead links** (info): janitorial, since MkDocs skips comments too.
 
 Findings live in code fences, inline code and HTML comments are excluded before matching, so a

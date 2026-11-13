@@ -7,7 +7,7 @@ page_features:
 
 # Meetings
 
-A **Meeting** is a temporary session within a [room](../rooms/overview.md) where participants join in real-time to communicate, share content, and collaborate. It starts when the first participant joins and ends when the last one leaves — or when a moderator explicitly ends it for all participants. Unlike rooms (which are persistent), a meeting only exists while at least one participant is connected. The same room can host many meetings over time, but only one at a time.
+A **Meeting** is a temporary session within a [room](../rooms/overview.md) where participants join in real-time to communicate, share content, and collaborate. It starts when the first participant presses the join button, and ends 20 seconds after the last participant leaves, or as soon as it is ended for everyone. A participant who joins within those 20 seconds enters the same meeting. Unlike rooms, which are persistent, meetings are temporary: the same room can host many meetings over time, but only one at a time.
 
 ## How to join a meeting
 
@@ -27,11 +27,13 @@ The access link for an [identified guest](../room-members/overview.md) is unique
 
 ## In this section
 
-- [Meeting lifecycle](lifecycle.md) — the series of views a room member moves through, from opening a room access link until the meeting ends: Join, Device, Meeting, Recordings and End.
+- [Meeting lifecycle](lifecycle.md): the series of views a room member moves through, from opening a room access link until the meeting ends: Join, Device, Waiting, Meeting, Recordings and End.
 - [Meeting configuration](configuration.md) — the participant and duration limits of the meetings held in a room, and whether participants join with the microphone and camera on.
 - [Meeting Moderation](moderation.md) — mute a participant's microphone, camera or screen share, or everyone's at once, and remove participants from the meeting.
+- [Waiting Room](waiting-room.md): participants ask to join and wait until a moderator admits or rejects them, from the meeting, the REST API or your app.
 - [Raise Hand](raise-hand.md) — participants raise their hand to ask for a turn, everyone sees the queue, and moderators lower hands.
 - [Reactions](reactions.md): participants react with an emoji that everyone sees for a few seconds, on their tile, in the participants panel and in the status rail.
+- [Live Broadcast](live-broadcast.md): stream the meeting live to YouTube, Twitch or any RTMP server, to several destinations at once.
 - [Live Captions](live-captions.md) — real-time speech-to-text transcription powered by the OpenVidu Speech Processing Agent.
 - [Smart Layout](smart-layout.md) — dynamic layout that adapts automatically to the number of active participants.
 - [Role Management](role-management.md) — promote participants to moderator during a meeting to give them special permissions, or demote them back to their original permissions.

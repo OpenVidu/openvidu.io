@@ -230,24 +230,89 @@ With all the features you need to fine-tune your perfect video calling service.
 
 <div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
 
+-   :material-hand-back-left:{ .feature-icon .padding-icon } __Raise hand__{ .feature-name }
 
--   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Broadcasting__{ .feature-name .coming-soon-overlay  }
+    ---
+
+    Let participants raise their hand to ask for the floor without interrupting, so moderators can keep large meetings orderly.
+
+-   :material-emoticon-outline:{ .feature-icon .padding-icon } __Reactions__{ .feature-name }
+
+    ---
+
+    React with emojis in real time to share quick feedback and keep everyone engaged without unmuting.
+
+-   :material-tune:{ .feature-icon .padding-icon } __Redesigned settings panel__{ .feature-name }
+
+    ---
+
+    A cleaner settings panel to configure your devices, audio, video and preferences in a couple of clicks.
+
+</div>
+
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
+
+-   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Live broadcasting__{ .feature-name }
 
     ---
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-door-sliding-lock:{ .feature-icon .padding-icon } __Locked rooms__{ .feature-name .coming-soon-overlay }
+-   :material-account-clock-outline:{ .feature-icon .padding-icon } __Waiting room__{ .feature-name }
 
     ---
 
-    Keep your meetings secure by blocking unwanted guests and requiring moderator approval to join.
+    Keep your meetings secure by holding guests until a moderator admits or rejects them, from the meeting, the REST API or your own app.
 
--   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay }
+-   :material-message-text-clock-outline:{ .feature-icon .padding-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+
+    ---
+
+    Chat history is kept across sessions, so participants who join late or reconnect never miss a message.
+
+</div>
+
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
+
+-   :material-message-reply-text-outline:{ .feature-icon .padding-icon } __Chat reactions, mentions and editing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+
+    ---
+
+    React to messages, mention other participants, and edit or delete messages you have already sent.
+
+-   :material-message-lock-outline:{ .feature-icon .padding-icon } __Private chats__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+
+    ---
+
+    Send direct messages to a single participant during the call, without leaving the meeting.
+
+-   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     Enable participants to share files easily during calls with a simple drag-and-drop feature.
+
+</div>
+
+<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
+
+-   :material-draw:{ .feature-icon .padding-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+
+    ---
+
+    Sketch ideas together on a shared whiteboard, with every stroke synced in real time for all participants.
+
+-   :material-note-multiple-outline:{ .feature-icon .padding-icon } __Shared notes__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
+
+    ---
+
+    Write collaborative notes with all participants during the call, keeping decisions and action items in one place.
+
+-   :material-account-group-outline:{ .feature-icon .padding-icon } __Breakout rooms__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
+
+    ---
+
+    Split participants into smaller groups for focused discussions and bring them back to the main room whenever you want.
 
 </div>
 
@@ -407,7 +472,7 @@ Deliver a seamless learning experience by embedding OpenVidu Meet in your LMS or
 
 <div class="grid cards use-cases-inner-cards no-border no-shadow" markdown>
 
--	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools: students raise their hand to ask for a turn and react with an emoji instead of interrupting. Locked rooms, breakout groups and many more features coming soon to enhance the learning experience.
+-	With OpenVidu Meet, **instructors** can engage with **students** through high quality video & audio, as well as advanced interactive tools: students raise their hand to ask for a turn and react with an emoji instead of interrupting. Breakout groups and many more features coming soon to enhance the learning experience.
 
 ![Use case e-learning](../assets/images/meet/embedded/use-cases/elearning.png){ .round-corners loading=lazy width=1920 height=1079 }
 
@@ -458,7 +523,7 @@ The most secure videoconference platform is the one you host on your own servers
 
     ---
 
-    End-to-end encryption for audio, video, and chat. Locked rooms and administrator-controlled access. No third-party data routing.
+    End-to-end encryption for audio, video, and chat. A waiting room and administrator-controlled access. No third-party data routing.
 
 -   __Accessibility and trust__{ .feature-name }
 

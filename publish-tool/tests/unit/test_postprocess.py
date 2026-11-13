@@ -17,7 +17,7 @@ import pytest
 from ovweb.pipeline.postprocess import PostprocessError, postprocess
 from ovweb.plan import build_plan
 from ovweb.redirects import RedirectError, is_generated_redirect, resolve_file_redirects
-from ovweb.releases import ARTICLE_MARKER, TOC_MARKER
+from ovweb.releases import ARTICLE_MARKER, TOC_MARKER, SourceRegionError
 from ovweb.report import Reporter
 
 VERSION = "3.9"
@@ -157,6 +157,20 @@ def build_tree(root: Path, layout, *, version: str, modern: bool = True, config=
         f'<link rel="canonical" href="https://openvidu.io/{version}/blog/">'
         f'<a href="https://openvidu.io/3.4/docs/releases/">3.4 notes</a>',
         encoding="utf-8",
+    )
+    # A Release post, whose links pin the version it announces on purpose, and the blog's listing
+    # of that category, which is how the publish tells it from any other post.
+    post = base / "blog" / "2026" / "09" / "30" / "release-390"
+    post.mkdir(parents=True)
+    (post / "index.html").write_text(
+        f'<a href="https://openvidu.io/{version}/docs/">Docs</a>', encoding="utf-8"
+    )
+    (post / "index.md").write_text(
+        f"[Docs](https://openvidu.io/{version}/docs/index.md)\n", encoding="utf-8"
+    )
+    (base / "blog" / "category" / "release").mkdir(parents=True)
+    (base / "blog" / "category" / "release" / "index.html").write_text(
+        '<a href="../../2026/09/30/release-390/">OpenVidu 3.9.0</a>', encoding="utf-8"
     )
     (base / "search" / "search_index.json").write_text(
         json.dumps(
@@ -374,6 +388,73 @@ def test_a_past_version_keeps_its_own_llms_txt_and_leaves_the_root_alone(
     assert not (modern_past_tree / "llms.txt").exists()
 
 
+def versioned_exports(tree: Path, version: str) -> dict[str, str]:
+    return {
+        path.relative_to(tree).as_posix(): path.read_text()
+        for page in ("docs", "meet")
+        for path in sorted((tree / version / page).rglob("*.md"))
+    }
+
+
+def test_a_past_publish_pins_its_exports_and_leaves_the_newest_alone(
+    modern_past_tree, config, report
+):
+    newest = versioned_exports(modern_past_tree, VERSION)
+    postprocess(
+        modern_past_tree, config=config, version=PAST_VERSION, update_latest=False, report=report
+    )
+
+    export = (modern_past_tree / PAST_VERSION / "docs" / "index.md").read_text()
+    assert f"https://openvidu.io/{PAST_VERSION}/docs/releases/index.md" in export
+    assert "/latest/" not in export
+    assert versioned_exports(modern_past_tree, VERSION) == newest
+
+
+def test_a_past_publish_of_the_version_latest_points_at_links_through_latest(
+    modern_past_tree, config, report
+):
+    """`past` rebuilds from the version branch and leaves the alias where it is, which may be on
+    the version being rebuilt."""
+    postprocess(
+        modern_past_tree, config=config, version=VERSION, update_latest=False, report=report
+    )
+
+    export = (modern_past_tree / VERSION / "docs" / "index.md").read_text()
+    assert "https://openvidu.io/latest/docs/releases/index.md" in export
+
+
+def test_moving_latest_pins_the_previous_versions_exports_again(tmp_path, layout, config, report):
+    """A `new` publish takes the alias from a version whose exports link to /latest/, which now
+    leads to the new one. They end exactly as a `past` publish of their own version leaves them."""
+    build_tree(tmp_path, layout, version=PAST_VERSION, config=config)
+    (tmp_path / "versions.json").write_text(
+        json.dumps([{"version": PAST_VERSION, "aliases": ["latest"]}]), encoding="utf-8"
+    )
+    postprocess(tmp_path, config=config, version=PAST_VERSION, update_latest=True, report=report)
+    assert "/latest/docs/" in (tmp_path / PAST_VERSION / "docs" / "index.md").read_text()
+
+    build_tree(tmp_path, layout, version=VERSION, config=config)
+    (tmp_path / "versions.json").write_text(
+        json.dumps(
+            [{"version": VERSION, "aliases": ["latest"]}, {"version": PAST_VERSION, "aliases": []}]
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "latest").symlink_to(VERSION)
+    postprocess(tmp_path, config=config, version=VERSION, update_latest=True, report=report)
+
+    reference = tmp_path / "reference"
+    build_tree(reference, layout, version=VERSION, config=config)
+    build_tree(reference, layout, version=PAST_VERSION, config=config)
+    (reference / "versions.json").write_text((tmp_path / "versions.json").read_text())
+    postprocess(reference, config=config, version=VERSION, update_latest=True, report=report)
+    (reference / "latest").symlink_to(VERSION)
+    postprocess(reference, config=config, version=PAST_VERSION, update_latest=False, report=report)
+
+    assert versioned_exports(tmp_path, PAST_VERSION) == versioned_exports(reference, PAST_VERSION)
+    assert "/latest/docs/" in (tmp_path / VERSION / "docs" / "index.md").read_text()
+
+
 def test_rewrites_the_home_page_markdown_export(latest_tree, config, report):
     """`index.md` is a root file, so the walk over the promoted page folders misses it."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
@@ -393,17 +474,46 @@ def test_rewrites_the_exports_of_promoted_pages(latest_tree, config, report):
     assert f"/{VERSION}/" not in export
 
 
-def test_versioned_export_keeps_its_version_but_not_for_root_pages(latest_tree, config, report):
-    """The same asymmetry as the search index: an in-version reader keeps reading that version,
-    while a link to a root-served page has no versioned URL to keep."""
+def test_a_release_posts_export_keeps_the_version_it_announces(latest_tree, config, report):
+    """Its HTML keeps the author's pins, and in Markdown they are the plugin's bytes too, so the
+    post is known by the blog's Release listing; any other post points at /latest/."""
+    other = latest_tree / VERSION / "blog" / "2026" / "09" / "29" / "howto"
+    other.mkdir(parents=True)
+    (other / "index.md").write_text(
+        f"[Docs](https://openvidu.io/{VERSION}/docs/index.md)\n", encoding="utf-8"
+    )
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    release = (latest_tree / "blog" / "2026" / "09" / "30" / "release-390" / "index.md").read_text()
+    assert release == f"[Docs](https://openvidu.io/{VERSION}/docs/index.md)\n"
+    howto = (latest_tree / "blog" / "2026" / "09" / "29" / "howto" / "index.md").read_text()
+    assert howto == "[Docs](https://openvidu.io/latest/docs/index.md)\n"
+
+
+def test_the_newest_versions_export_links_through_latest_but_not_to_root_pages(
+    latest_tree, config, report
+):
+    """One file answers at /3.9/ and /latest/, and the root llms.txt hands assistants the
+    /latest/ URL, so its links into the version follow the alias. A root-served page has no
+    versioned URL at all."""
     postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
 
     export = (latest_tree / VERSION / "docs" / "index.md").read_text()
-    assert f"https://openvidu.io/{VERSION}/docs/releases/index.md" in export
+    assert "https://openvidu.io/latest/docs/releases/index.md" in export
+    assert f"/{VERSION}/" not in export
     assert "https://openvidu.io/pricing/index.md" in export
     assert "https://openvidu.io/index.md" in export
     # Root-relative targets are made absolute in every export, not just the llms files.
     assert "[PRO](https://openvidu.io/pricing/#openvidu-pro)" in export
+
+
+def test_the_releases_exports_keep_their_pins(latest_tree, config, report):
+    """Release notes link to the version they describe on purpose, in the HTML and the export."""
+    notes = f"[{VERSION}.0 guide](https://openvidu.io/{VERSION}/docs/index.md)\n"
+    (latest_tree / VERSION / "docs" / "releases" / "index.md").write_text(notes, encoding="utf-8")
+    postprocess(latest_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert (latest_tree / VERSION / "docs" / "releases" / "index.md").read_text() == notes
 
 
 def test_repairs_links_to_exports_that_do_not_exist(latest_tree, config, report):
@@ -415,10 +525,10 @@ def test_repairs_links_to_exports_that_do_not_exist(latest_tree, config, report)
 
     export = (latest_tree / VERSION / "docs" / "index.md").read_text()
     # This tree exports no docs/self-hosting page, so the link goes to the page itself.
-    assert f"https://openvidu.io/{VERSION}/docs/self-hosting/)" in export
+    assert "https://openvidu.io/latest/docs/self-hosting/)" in export
     assert "self-hosting/index.md" not in export
     # ...while an export that does exist is left alone.
-    assert f"https://openvidu.io/{VERSION}/docs/releases/index.md" in export
+    assert "https://openvidu.io/latest/docs/releases/index.md" in export
 
 
 def test_repair_reaches_the_promoted_exports_too(latest_tree, config, report):
@@ -657,6 +767,53 @@ def test_latest_version_pushes_its_release_notes_out(mixed_tree, config, report)
     page = (mixed_tree / OLD_VERSION / "docs" / "releases" / "index.html").read_text()
     assert f"{VERSION}.0 notes" in page
     assert f'<a class="chrome" href="/{OLD_VERSION}/assets/logo.png">{OLD_VERSION}</a>' in page
+
+
+def releases_exports(tree: Path, notes: str) -> tuple[Path, Path]:
+    """The two versions' docs releases exports, the newest one holding `notes`."""
+    newest = tree / VERSION / "docs" / "releases" / "index.md"
+    newest.write_text(notes, encoding="utf-8")
+    return newest, tree / OLD_VERSION / "docs" / "releases" / "index.md"
+
+
+NOTES_EXPORT = (
+    f"# Releases\n\n## {VERSION}.0\n\n[Guide](https://openvidu.io/{VERSION}/docs/index.md)\n\n"
+    "## 3.2.0\n\n[Guide](https://openvidu.io/3.2/docs/index.md) · [3.2.0](#320)\n"
+)
+
+
+def test_latest_version_pushes_its_release_notes_export_out(mixed_tree, config, report):
+    """The docs MCP server indexes every version's export, so it carries the same notes as the
+    HTML beside it."""
+    _, old = releases_exports(mixed_tree, NOTES_EXPORT)
+    postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert old.read_text() == NOTES_EXPORT
+
+
+def test_past_version_pulls_the_newest_release_notes_export_in(mixed_tree, config, report):
+    _, old = releases_exports(mixed_tree, NOTES_EXPORT)
+    postprocess(mixed_tree, config=config, version=OLD_VERSION, update_latest=False, report=report)
+
+    assert old.read_text() == NOTES_EXPORT
+
+
+def test_a_version_without_a_releases_export_gets_none(mixed_tree, config, report):
+    """The versions before 3.4 build no exports at all."""
+    _, old = releases_exports(mixed_tree, NOTES_EXPORT)
+    old.unlink()
+    postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
+
+    assert not old.exists()
+
+
+def test_a_relocatable_link_in_the_newest_releases_export_fails_the_publish(
+    mixed_tree, config, report
+):
+    releases_exports(mixed_tree, "## 3.9.0\n\n[Guide](../getting-started/)\n")
+
+    with pytest.raises(SourceRegionError, match="relative to the version folder"):
+        postprocess(mixed_tree, config=config, version=VERSION, update_latest=True, report=report)
 
 
 def test_prunes_only_the_published_version_sitemap(mixed_tree, config, report):

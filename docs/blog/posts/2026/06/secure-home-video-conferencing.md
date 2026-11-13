@@ -152,7 +152,7 @@ You'll also serve the app on a non-standard port. In your router, **forward port
 This is the easy part. On your server, run:
 
 ```bash
-sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install_meet.sh)
+sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install_meet.sh)
 ```
 
 The installer takes care of everything (it even installs Docker for you) and asks just three things.

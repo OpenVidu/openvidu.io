@@ -69,6 +69,9 @@ Captions are enabled by default when a room is [created](../rooms/management.md#
 ![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
 ![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
+!!! info
+    Live captions and [end-to-end encryption](e2e-encryption.md) are mutually exclusive: a room cannot have both enabled at the same time.
+
 ## Using Live Captions in a Meeting
 
 Once live captions are enabled for a room, any participant can turn them on during the meeting by clicking the **captions button** in the toolbar. Captions then appear instantly at the bottom of the screen as participants speak, with no additional configuration required. The interface is designed to be easy to read without blocking the video feed.

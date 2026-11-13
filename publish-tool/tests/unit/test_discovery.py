@@ -9,7 +9,12 @@ from __future__ import annotations
 
 import json
 
-from ovweb.discovery import latest_in_tree, version_folders, versions_in_tree
+from ovweb.discovery import (
+    latest_in_tree,
+    release_post_exports,
+    version_folders,
+    versions_in_tree,
+)
 
 
 def tree(tmp_path, *versions: str, published=None, alias: str | None = None):
@@ -85,3 +90,40 @@ def test_another_alias_can_be_asked_for(tmp_path):
 
     assert latest_in_tree(root, alias="stable") == "3.8"
     assert latest_in_tree(root) is None
+
+
+# -- Release posts -----------------------------------------------------------------------
+
+
+def listing_page(root, relpath: str, *hrefs: str) -> None:
+    page = root / "blog" / "category" / "release" / relpath / "index.html"
+    page.parent.mkdir(parents=True, exist_ok=True)
+    page.write_text("".join(f'<a href="{href}">post</a>' for href in hrefs), encoding="utf-8")
+
+
+def post(root, path: str, *, export: bool = True):
+    folder = root / "blog" / path
+    folder.mkdir(parents=True)
+    if export:
+        (folder / "index.md").write_text("# Post\n", encoding="utf-8")
+    return folder / "index.md"
+
+
+def test_release_posts_are_read_off_every_page_of_the_category_listing(tmp_path):
+    newest = post(tmp_path, "2026/09/30/release-390")
+    older = post(tmp_path, "2026/07/09/release-380")
+    listing_page(tmp_path, "", "../../2026/09/30/release-390/", "../../2026/09/30/release-390/#x")
+    listing_page(tmp_path, "page/2", "../../../../2026/07/09/release-380/")
+
+    assert release_post_exports(tmp_path) == {newest, older}
+
+
+def test_a_listed_post_without_an_export_and_other_links_are_ignored(tmp_path):
+    post(tmp_path, "2026/09/30/release-390", export=False)
+    listing_page(tmp_path, "", "../../2026/09/30/release-390/", "../../../pricing/", "../../")
+
+    assert release_post_exports(tmp_path) == frozenset()
+
+
+def test_a_tree_without_a_release_listing_has_no_release_posts(tmp_path):
+    assert release_post_exports(tmp_path) == frozenset()

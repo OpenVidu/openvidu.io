@@ -56,7 +56,7 @@ Replace your environment with a ready-to-use image selected to match different m
 ### During a meeting
 
 1. Open the **More Options** menu in the toolbar
-2. Select **Virtual Background**
+2. Select **Background effects**
 3. Choose an effect to apply it instantly
 
 <a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>

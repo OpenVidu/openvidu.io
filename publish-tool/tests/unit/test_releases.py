@@ -10,6 +10,7 @@ from ovweb.releases import (
     DestinationRegionError,
     RegionError,
     SourceRegionError,
+    check_releases_export,
     find_region,
     splice_releases,
 )
@@ -115,3 +116,26 @@ def test_reports_the_spliced_size():
     source = page("3.9.0 notes", "3.9.0")
     result = splice_releases(source, page("old", "old", chrome="3.4"))
     assert result.article_bytes > len(ARTICLE_MARKER)
+
+
+# -- the Markdown export, copied whole ---------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "target",
+    [
+        "https://openvidu.io/3.4/docs/releases/#340",
+        "#390",
+        "mailto:openvidu@gmail.com",
+        "https://github.com/OpenVidu/openvidu/releases",
+    ],
+)
+def test_an_export_of_absolute_and_anchor_links_is_copied_as_it_is(target):
+    text = f"## 3.9.0\n\n[x]({target})\n"
+    assert check_releases_export(text) == text
+
+
+@pytest.mark.parametrize("target", ["../getting-started/", "/pricing/", "img/x.png"])
+def test_an_export_with_a_relocatable_link_is_rejected(target):
+    with pytest.raises(SourceRegionError, match="relative to the version folder"):
+        check_releases_export(f"## 3.9.0\n\n[x]({target})\n")

@@ -82,7 +82,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     === "Single Node **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install.sh) \
             --no-tty --install \
             --domain-name='openvidu.example.io' \
             --turn-domain-name='turn.example.io' \
@@ -107,7 +107,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     === "Single Node **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/singlenode/latest/install.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/singlenode/latest/install.sh) \
             --no-tty --install \
             --openvidu-pro-license='xxxxx' \
             --domain-name='openvidu.example.io' \
@@ -236,7 +236,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
     === "Install Master Node"
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
@@ -277,7 +277,7 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
         To install a Media Node, you can use the following command:
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
             --no-tty --install \
             --node-role='media-node' \
             --master-node-private-ip='<MASTER_NODE_PRIVATE_IP>' \
