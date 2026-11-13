@@ -70,9 +70,9 @@ steps on the node:
 (dry run — nothing changed; the node still runs the installed 3.9.0)
 ```
 
-Running it (type the stack name, or `-y`) stops the installed stack, backs it up to `.ov/migrate/3.9.0/`, converts `config/openvidu.env` into `config/openvidu.yaml`, moves MongoDB's files to the layout `ov` runs, removes the installer's leftovers, and then does what a deploy does. Your edits are merged three ways against the file the 3.9.0 installer wrote, which `ov` reproduces byte for byte; an edit on the lines `ov` changes is a conflict that stops the conversion before anything runs (exit `4`), and a node without the disk space it needs stops it too (exit `9`). A Community node rolls back completely on a failure, to the unchanged 3.9.0. A PRO single node becomes Kubernetes: a failure **before `helm install`** rolls back to the unchanged 3.9.0, but from `helm install` on nothing is rolled back (the chart's pods have run on the data). The stack is then recorded, the installed stack left stopped but not retired, and the command exits `1` with both the commands to retire it once `ov stack status --wait` passes and the commands to put it back on the node. Your edits to the Meet service in `docker-compose.override.yaml` carry over as an `ov-meet` entry of the new override; an application of your own in Meet's place stays yours, with the `meet` module off.
+Running it (type the stack name, or `-y`) stops the installed stack, backs it up on the node, converts its configuration and then does what a deploy does. Your edits are merged as in an update: an edit on the lines `ov` changes is a conflict that stops the conversion before anything runs. A Community node rolls back completely on a failure, or on Ctrl-C, to the unchanged 3.9.0. On a PRO single node: A failure before OpenVidu is installed rolls back to the unchanged 3.9.0. Past that point nothing is rolled back: the command fails with the installed stack stopped, and prints the commands to retire it once `ov stack status --wait` passes and the commands to put it back.
 
-Because **the images become this `ov`'s**, migrating with the `ov` of the release you want is also the update to it. A node at a release older than 3.9.0 updates to 3.9.0 with its own updater first. A node that already runs the stack `ov` deploys is not converted: the error says to update it from its own directory, or to record it here first with `ov stack import --ssh …`. Nothing of the installer remains on a node that has already been converted, so a second run is refused.
+Converting with the `ov` of the release you want is also the update to it. A node at a release older than 3.9.0 updates to 3.9.0 with its own updater first.
 
 --8<-- "self-hosting/common/ov-upgrade-cloud-templates.md"
 
@@ -80,4 +80,4 @@ Because **the images become this `ov`'s**, migrating with the `ov` of the releas
 
 - [Administer the deployment](on-premises/admin.md): status, logs, the health check.
 - [Change the configuration](../configuration/changing-config.md) or [the modules](../how-to-guides/enable-disable-modules.md).
-- The full [OpenVidu CLI reference](../openvidu-cli.md#command-reference).
+- The [OpenVidu CLI commands](../openvidu-cli.md#command-reference).

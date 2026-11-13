@@ -43,10 +43,7 @@ On **Linux**, the [OpenVidu CLI](openvidu-cli.md) (`ov`) deploys it: it material
       OpenVidu Meet API: https://192-168-0-27.openvidu-local.dev:9443
     waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
       ⏳ still starting: OpenVidu, Meet, Dashboard, MinIO (0s)
-      ⏳ still starting: Meet, Dashboard (2s)
-      ⏳ still starting: Meet, Dashboard (5s)
-      ⏳ still starting: Meet, Dashboard (7s)
-      ⏳ still starting: Meet, Dashboard (9s)
+      …
 
     ====================================================
     🎉 OpenVidu is ready! 🎉
@@ -88,68 +85,22 @@ On **Linux**, the [OpenVidu CLI](openvidu-cli.md) (`ov`) deploys it: it material
     Operate this deployment with `ov stack ...`.
     ```
 
-    `ov` waits for the endpoints itself and then prints a banner with the URLs and credentials (`--no-wait` skips the wait). The banner lists only what the enabled modules serve. LAN access is on by default: `ov` detects this machine's private IP and adds the `openvidu-local.dev` URLs ([Access it over your LAN](#accessing-your-local-deployment-from-other-devices-on-your-network)). Without a name, `ov` names the stack `stack1` and materializes it in `./openvidu-local-stack1`; `ov stack deploy <name>` sets the name and `--local-dir` the directory.
-
-    The deployment is a normal `docker compose` project inside the stack directory (`./openvidu-local-<name>` by default). Its files are real and yours to edit: the configuration is `config/openvidu.yaml` and the service files beside it, and `ov stack config` changes them for you ([Configuration](configuration/changing-config.md)). After editing a file by hand, `ov stack deploy` applies it.
+    `ov` waits for OpenVidu and then prints the URLs and credentials. LAN access is on by default ([Access it over your LAN](#accessing-your-local-deployment-from-other-devices-on-your-network)). `ov stack deploy <name>` names the stack (`stack1` by default), and `--local-dir` sets where its `docker compose` project goes (`./openvidu-local-<name>` by default). Its files are yours to edit: `ov stack config` changes them for you ([Configuration](configuration/changing-config.md)), and after editing a file by hand, `ov stack deploy` applies it.
 
     #### OpenVidu PRO locally
 
-    `--edition pro` runs OpenVidu PRO on the same Docker Compose engine (not Kubernetes): the PRO media server, Egress, Ingress and the OpenVidu 2 compatibility API, locally. It needs **no license**:
+    `--edition pro` runs OpenVidu PRO on the same Docker Compose engine, with **no license**, and prints the same banner:
 
-    ```console
-    $ mkdir labp-stack && cd labp-stack
-    $ ov stack deploy labp --environment local --edition pro --local-dir ./labp --no-lan
-    materializing the deployment into ./labp and starting it (the first run downloads images)…
-    wrote spec to openvidu-stack.yml
-    ✓ docker compose up -d --remove-orphans
-    ✔ OpenVidu compose deployment started in ./labp
-    ✔ stack "labp" recorded in this directory
-      OpenVidu Meet API: http://localhost:9080
-    waiting for OpenVidu to be ready (Ctrl-C to stop waiting; the deployment keeps running)…
-      ⏳ still starting: Meet, Dashboard (0s)
-      ⏳ still starting: Meet, Dashboard (2s)
-      ⏳ still starting: Meet, Dashboard (4s)
-
-    ====================================================
-    🎉 OpenVidu is ready! 🎉
-    ====================================================
-
-    This deployment is for local development only. Do not use it in production.
-
-    ------------------ OpenVidu Meet -------------------
-      - Access from this machine:
-          - http://localhost:9080
-      - Credentials:
-          - Username: admin
-          - Password: admin
-          - API Key:  meet-api-key
-
-    ----------------- LiveKit Server API ---------------
-      - Access from this machine:
-          - http://localhost:7880
-          - ws://localhost:7880
-      - Credentials:
-          - API Key:    devkey
-          - API Secret: secret
-
-    ------------------- Other Services -----------------
-      - OpenVidu Dashboard:
-          - URL:      http://localhost:7880/dashboard
-          - Username: admin
-          - Password: admin
-      - MinIO Console:
-          - URL:      http://localhost:7880/minio-console
-          - Username: minioadmin
-          - Password: minioadmin
-    ====================================================
-    Operate this deployment with `ov stack ...`.
+    ```bash
+    mkdir labp-stack && cd labp-stack
+    ov stack deploy labp --environment local --edition pro
     ```
 
-    A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. It does not accept a license: `--openvidu-pro-license` is rejected (exit `4`, `license (--openvidu-pro-license) cannot be set on a local stack`) before any container starts. Every module is on by default, `v2compatibility` included. A licensed deployment belongs on a server or a cloud: see the [pricing page](../../pricing.md) for what the license includes. The OpenVidu Dashboard of a local stack is the Community one, because the PRO dashboard checks the license when it starts.
+    A local OpenVidu PRO deployment runs in **evaluation mode**, for development and testing: at most 8 participants across all rooms and 5 minutes per room. It does not accept a license; a licensed deployment belongs on a server or a cloud (see the [pricing page](../../pricing.md)). The OpenVidu Dashboard of a local stack is the Community one.
 
     !!! warning "One local OpenVidu runs at a time"
 
-        Each stack is **namespaced** by its compose project (its containers, volumes and network are per-stack), so you can keep several side by side, each in its own directory, and `ov stack destroy --delete-data` on one never touches another's data. But all stacks bind the **same host ports** (7880, 9080, 9000, and, since local is dev-only, Redis 6379 and MongoDB 27017), so only one can run at a time. Deploying a new one while another runs fails, naming the reason (`a local OpenVidu stack is already running — only one runs at a time`); `--free-ports` stops the running one first and keeps its data; it asks for confirmation unless you pass `-y`.
+        You can keep several local stacks side by side, each in its own directory and with its own data, but they all bind the **same host ports**, so only one can run at a time. Deploying a new one while another runs fails; `--free-ports` stops the running one first and keeps its data.
 
 === ":fontawesome-brands-windows:{.icon .lg-icon .tab-icon} Windows and :simple-apple:{.icon .lg-icon .tab-icon} macOS"
 
@@ -406,7 +357,7 @@ WebRTC     7881        tcp     WebRTC media over TCP (fallback when UDP is block
 WebRTC     7900-7999   udp     WebRTC media (UDP)
 ```
 
-Only the ports the enabled modules use are listed: a stack without `ingress` has no **Ingest** group. Meet's 9080 and the **LAN** ports are always listed, even without `meet` or with `--no-lan`: the container publishes them, and they answer once `meet` and LAN access are on. The **Debug** group exposes Redis, MongoDB and MinIO on the host because local is dev-only. Add `-o wide` for the compose service that owns each port.
+The **Debug** group exposes Redis, MongoDB and MinIO on the host because local is dev-only. Add `-o wide` for the compose service that owns each port.
 
 ### Add and remove modules on the running stack
 
@@ -428,22 +379,7 @@ incremental change: start mongodb,ov-meet; restart the media server (its config 
 modules updated
 ```
 
-The command returns once the new services are started, not once they answer: OpenVidu Meet needs a few more seconds; `ov stack status --wait` waits for it.
-
-Only the new services start (and the media server restarts because its config changed); nothing else is touched. Removing a module is just as incremental:
-
-```console
-$ ov stack module rm meet
-disable: meet
-modules: livekit-server, egress, meet  →  livekit-server, egress
-incremental change: stop mongodb,ov-meet; restart the media server (its config changed); other services keep running.
-✔ updated openvidu-stack.yml
-✓ docker compose rm -sf mongodb ov-meet
-✓ docker compose up -d --no-deps --force-recreate ov-livekit-server
-modules updated
-```
-
-Dependencies are handled for you: `meet` needs `egress`, so adding `meet` to a stack without it enables both, and `module rm egress` while `meet` is on leaves `egress` running and says so (`nothing to do: … still required by another enabled module`). See [Enable and disable modules](how-to-guides/enable-disable-modules.md) for the full picture.
+Only the new services start; nothing else is touched. `ov stack status --wait` waits until Meet answers. `ov stack module rm meet` removes it just as incrementally, and dependencies are handled for you. See [Enable and disable modules](how-to-guides/enable-disable-modules.md).
 
 ### Read the logs
 
@@ -477,7 +413,7 @@ local deployment torn down
 
 ### Operate it by hand: assisted mode
 
-Nothing here is magic: every operation can be done by hand in the deployment directory with `docker compose`, and that is exactly what `--mode assisted` prints instead of running. It writes the files and prints the single command that starts them:
+`--mode assisted` writes the files and prints the command that starts them, instead of running it:
 
 ```console
 $ ov stack deploy dev --environment local --no-lan --mode assisted
@@ -489,7 +425,7 @@ wrote spec to openvidu-stack.yml
   OpenVidu Meet API: http://localhost:9080
 ```
 
-From there you drive the project yourself: `docker compose config --services` is the source of truth for what is enabled, `COMPOSE_PROFILES` in `.env` selects the modules, and `COMPOSE_PROFILES='*' docker compose down` tears everything down regardless of the current selection. Turning a module off by hand takes more than editing `.env`: Compose does not stop a container when its profile stops being active, and the media server's `livekit.yaml` must change with the data services. `ov stack module add/rm` does that bookkeeping for you.
+From there you drive the project yourself with `docker compose`. To change the modules, use `ov stack module add/rm`, which also updates the configuration the services read.
 
 ## About `openvidu-local.dev` domain and SSL certificates
 

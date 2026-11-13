@@ -38,7 +38,7 @@ Same as a [Single Node](../../single-node/on-premises/install.md#requirements), 
 
 ## Port rules
 
-These are the inbound ports `ov` checks, with the names it prints for them. `join` checks the internal ports in both directions and prints the exact `ufw` rule to add, scoped to the source, if one is closed.
+These are the inbound ports `ov` checks. `join` checks the internal ports in both directions and prints the rule to add if one is closed.
 
 === "Master Node"
 
@@ -84,34 +84,22 @@ ov stack join --ssh ubuntu@172.30.0.113 --as master
 ov stack join --ssh ubuntu@172.30.0.114 --as media
 ```
 
-Each master join checks the cluster's internal ports (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) in both directions with the masters already in the stack, then joins the machine and confirms it carries the labels the stack schedules by:
+Each master join checks the internal ports with the masters already in the stack, then joins the machine:
 
 ```console
 $ ov stack join --ssh ubuntu@172.30.0.111 --as master
 → reading the join address and token from 172.30.0.110
 → checking the ports of 172.30.0.111 from here and from the stack's masters
-  Ports of 172.30.0.111 (master node of an ha stack)
-  PORT                      SCOPE     LEVEL        STATE  TO OPEN
-  443/tcp                   public    required     open
-  80/tcp                    public    recommended  open
-  22/tcp                    admin     required     open
-  6443/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
-  8472/udp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
-  2379/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
-  2380/tcp ← 172.30.0.110   internal  required     open   (only from 172.30.0.110)
-  10250/tcp ← 172.30.0.110  internal  required     open   (only from 172.30.0.110)
+  …
 
 ▶ Join the cluster…
-   · join 172.30.0.111 to the stack as a master node
    ✓ Join the cluster
-
-▶ Confirm the node's labels…
-   ✓ Confirm the node's labels
+…
 
 ✔ 172.30.0.111 joined the stack as a master node.
 ```
 
-As the masters join, Redis Sentinel, the MongoDB replica set, MinIO and the clustered Loki and Mimir place one replica on each master. The first wait after the joins takes several minutes while the replicas settle:
+As the masters join, the clustered services place one replica on each master. The first wait after the joins takes several minutes:
 
 ```console
 $ ov stack status --wait
@@ -121,13 +109,13 @@ waiting for https://ha.example.com to be ready (Ctrl-C to stop)…
 ✔ ha is ready (https://ha.example.com)
 ```
 
-On shared or simulated machines the wait can exceed the default 5 minutes; `ov stack status --wait --wait-timeout 15m` is the honest setting there. While the cluster is still being assembled, `ov stack status --wait --joined` waits only for the masters that have joined and says how many are missing; the assisted runbook of each join ends with `ov stack status --wait --joined --wait-timeout 15m`. Before touching any server, `join` rejects a join the stack has no place for: `--as master` on an Elastic stack, any join to a single node, and any join to a Community stack. See [Add a media node](admin.md#add-a-media-node).
+If it exceeds the default 5 minutes, use `ov stack status --wait --wait-timeout 15m`. While the cluster is still being assembled, `ov stack status --wait --joined` waits only for the masters that have joined. See [Add a media node](admin.md#add-a-media-node).
 
 ## In production: behind a load balancer { #behind-a-load-balancer }
 
 Put a load balancer in front of the four masters, so the stack survives losing one:
 
-- **TCP passthrough, not TLS termination.** Pass `443/tcp`, `80/tcp` and `6443/tcp` (the stack's remote admin control protocol) through to the four masters, with a TCP health check on `443`; add `1935/tcp` with RTMP ingest. Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: **Let's Encrypt does not work behind a passthrough load balancer**. TCP passthrough is the default and needs no proxy flag. For a load balancer that terminates TLS instead, deploy with `--external-load-balancer` (Caddy then gets plain HTTP on `7880` and plain RTMP on `1935`); adding `--internal-tls-termination` keeps a declared load balancer in TCP passthrough while Caddy terminates TLS.
+- **TCP passthrough, not TLS termination.** Pass `443/tcp`, `80/tcp` and `6443/tcp` (the stack's remote admin control protocol) through to the four masters, with a TCP health check on `443`; add `1935/tcp` with RTMP ingest. Caddy on the masters terminates TLS, so the certificate is `selfsigned` or `owncert`: **Let's Encrypt does not work behind a passthrough load balancer**. For a load balancer that terminates TLS instead, deploy with `--external-load-balancer`.
 - **The domain points at the load balancer.**
 - **Deploy the first master with the load balancer's domain and `--skip-port-check`.** The port check probes the domain, and nothing behind the load balancer is healthy yet. Before skipping the check, open the ports yourself:
 

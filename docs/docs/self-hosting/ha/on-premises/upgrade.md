@@ -31,13 +31,11 @@ ov stack update ha --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key \
   --media-node 10.0.0.9 --dry-run
 ```
 
-The cluster becomes Kubernetes on the same machines, converted in order: every other node stopped, then the master `ov` talks to, Kubernetes installed on it, OpenVidu deployed, and the rest of the nodes joining (masters first, then media).
+**The data is copied over.** With the installed stack still running, `ov` copies MongoDB, Redis and the MinIO application bucket, and loads them into the new stack once its masters have joined. What clients write between the copy and the stop is lost: seconds. The copy of MongoDB uses the official `mongo:<version>` image, so a registry mirror (`images.registry`) must hold it. Grafana's own data and the logs and metrics of the `observability` module start anew. On test machines a High Availability conversion took about 20 minutes.
 
-**The data is handed over to the chart.** HA's masters share the cluster's data, and the chart gives each store its own pods, so the data is **copied out and loaded in**, not left in place: with the installed stack still running, `ov` dumps MongoDB, Redis's RDB and the MinIO application bucket into `/opt/openvidu/data/migrate`, and once the chart is installed and the masters have joined, three pods restore them into the cluster's data services (you will see `▶ Hand the data over to the chart…` in the output). MongoDB's dump and restore are the one step that does not run the chart's image: they use the official `mongo:<version>` image of the same server version, so a registry mirror (`images.registry`) must hold it for the conversion. What clients write between the copy and the stop is what is lost: seconds. Grafana's own data is not carried in HA, and the logs and metrics of the `observability` module start anew. On test machines a High Availability conversion took about 20 minutes.
-
-A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), a cluster of a size other than the chart's four masters is refused (exit `4`), a node without the disk space it needs stops it (exit `9`). A failure **before `helm install`** rolls it back to the unchanged 3.9.0; from `helm install` on nothing is rolled back (the chart's pods have run on the data), and the command exits `1` with the installed stack left stopped but not retired, naming the commands to retire it once `ov stack status --wait` passes and the commands to put it back. Because the images become this `ov`'s, converting with the `ov` of the release you want is also the update to it.
+A conflict (an edit on the lines `ov` changes) stops it before anything runs. A failure before OpenVidu is installed rolls back to the unchanged 3.9.0. Past that point nothing is rolled back: the command fails with the installed stack stopped, and prints the commands to retire it once `ov stack status --wait` passes and the commands to put it back.
 
 ## Next steps
 
 - [Administer the cluster](admin.md): join and drain nodes, operate the stack.
-- The full [OpenVidu CLI reference](../../openvidu-cli.md#command-reference).
+- The [OpenVidu CLI commands](../../openvidu-cli.md#command-reference).

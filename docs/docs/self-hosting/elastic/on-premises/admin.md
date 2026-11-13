@@ -19,16 +19,16 @@ The sections up to [Export the desired state](#export) are the operations every 
 
 Elastic scales by adding media nodes. From the stack's directory, `ov stack join` enrolls a new machine as a media node. There are three ways to run it:
 
-- **Over SSH** (the usual way): `ov stack join --ssh ubuntu@<media-node> --as media`. `ov` reads the join address and token from the master, checks the ports, installs the node agent and joins the machine, returning once the stack sees it ready. See [Join a media node](install.md#join-a-media-node).
-- **On the machine itself**: run `ov stack join --this-node --as media` on the node (as root). It takes the address and token from the master; get them there with `ov stack join-info`, which prints `OPENVIDU_JOIN_ADDRESS` and `OPENVIDU_JOIN_TOKEN` (treat the token as a secret). Pipe them so the token touches no file or command line:
+- **Over SSH** (the usual way): `ov stack join --ssh ubuntu@<media-node> --as media`. See [Join a media node](install.md#join-a-media-node).
+- **On the machine itself**: run `ov stack join --this-node --as media` on the node, as root, with the address and token `ov stack join-info` prints on the master (treat the token as a secret). Pipe them so the token touches no file or command line:
 
     ```bash
     ssh <master> sudo ov stack join-info | ssh <media-node> sudo ov stack join --this-node --as media --join-info -
     ```
 
-- **Review the commands first**: `ov stack join --ssh ubuntu@<media-node> --as media --mode assisted` prints the commands that join the machine and runs nothing; the runbook ends with `ov stack status --wait --joined --wait-timeout 15m`. (`--this-node` refuses `--mode assisted`.)
+- **Review the commands first**: add `--mode assisted` to the SSH form; it prints the commands and runs nothing.
 
-`--as master` is refused on an Elastic stack: its one master is the deployed node, so another machine joins `--as media`. On a cloud stack the media nodes autoscale instead; see [Autoscaling](../../production-ready/scalability.md#autoscaling).
+An Elastic stack has one master, so every other machine joins `--as media`. On a cloud stack the media nodes autoscale instead; see [Autoscaling](../../production-ready/scalability.md#autoscaling).
 
 ## Take a media node out { #take-a-node-out }
 
@@ -37,7 +37,7 @@ Elastic scales by adding media nodes. From the stack's directory, `ov stack join
 ```console
 $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
 ⏳ draining node-172-30-0-102: no new rooms come here; waiting, with no time limit, for the ones it holds
-  still serving after 0s: openvidu-elastic/ov-egress-xrcqw openvidu-elastic/ov-ingress-bfxwl openvidu-elastic/ov-livekit-server-4mhmv
+  …
 ✔ node-172-30-0-102 has no sessions left.
 ✔ this machine left the stack.
 ```

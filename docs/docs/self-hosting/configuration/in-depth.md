@@ -57,7 +57,7 @@ The updated files are those that read the changed value; they belong to the same
 
 ## Settings only one edition has { #settings-only-one-edition-has }
 
-COMMUNITY and PRO run the same features on different engines, so almost every setting exists in both, under the same key and meaning; only where it is written changes. `ov stack deploy` and `ov stack config set` reject a setting that belongs to the other edition and name the setting and its flag (exit `4`). The exceptions are a handful of settings one edition does not have:
+COMMUNITY and PRO run the same features on different engines, so almost every setting exists in both, under the same key and meaning; only where it is written changes. `ov stack deploy` and `ov stack config set` reject a setting that belongs to the other edition and name the setting and its flag. The exceptions are a handful of settings one edition does not have:
 
 | Setting | Edition | Why |
 | --- | --- | --- |
@@ -114,7 +114,7 @@ For the environments the default deployment cannot adapt to. This is not a way t
             memory: 4Gi
     ```
 
-    Nothing tied to licensing can be changed through it: the license, the licensing daemon and the licensed services' command, mounts and configuration render are refused (exit `4`). For a private image mirror, one line of `values` changes the registry of every image the stack runs:
+    Nothing tied to licensing can be changed through it: the license, the licensing daemon and the licensed services' command, mounts and configuration render are refused. For a private image mirror, one line of `values` changes the registry of every image the stack runs:
 
     ```yaml
     values:

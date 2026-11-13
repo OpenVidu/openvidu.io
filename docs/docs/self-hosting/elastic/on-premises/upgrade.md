@@ -30,11 +30,11 @@ ov stack update el --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key --media-node 10.0.
 ov stack update el --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key --media-node 10.0.0.7
 ```
 
-The cluster becomes Kubernetes on the same machines. It is converted in order: the media nodes stop before the master, then `ov` installs Kubernetes on the master, deploys OpenVidu and joins the nodes. **The data stays in place**: the stores keep their directories, which become the chart's volumes (static PersistentVolumes bound to the chart's claims, kept when the stack is destroyed), and MongoDB's one member is renamed to the chart's member 0. Caddy issues its certificates again, and the logs and metrics of the `observability` module start anew (Grafana's own data is kept). On test machines an Elastic conversion took about 5 minutes.
+**The data stays in place**, in its directories on the master (even a later `ov stack destroy --delete-data` keeps them). The logs and metrics of the `observability` module start anew. On test machines an Elastic conversion took about 5 minutes.
 
-A conflict (an edit on the lines `ov` changes) stops it before anything runs (exit `4`), so does a node without the disk space it needs (exit `9`). A failure **before `helm install`** rolls it back to the unchanged 3.9.0; from `helm install` on nothing is rolled back (the chart's pods have run on the data), and the command exits `1` with the installed stack left stopped but not retired, naming the commands to retire it once `ov stack status --wait` passes and the commands to put it back. Because the images become this `ov`'s, converting with the `ov` of the release you want is also the update to it.
+A conflict (an edit on the lines `ov` changes) stops it before anything runs. A failure before OpenVidu is installed rolls back to the unchanged 3.9.0. Past that point nothing is rolled back: the command fails with the installed stack stopped, and prints the commands to retire it once `ov stack status --wait` passes and the commands to put it back.
 
 ## Next steps
 
 - [Administer the cluster](admin.md): add and drain media nodes, operate the stack.
-- The full [OpenVidu CLI reference](../../openvidu-cli.md#command-reference).
+- The [OpenVidu CLI commands](../../openvidu-cli.md#command-reference).

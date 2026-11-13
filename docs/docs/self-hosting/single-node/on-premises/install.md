@@ -12,9 +12,7 @@ description: "Deploy OpenVidu Single Node COMMUNITY or PRO on your own Linux ser
 </div>
 
 
-Deploy OpenVidu Single Node on your own Linux server with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). `ov` installs and starts the stack over SSH, or on the machine it runs on, and generates every credential. It also leaves a copy of itself on the node, so you can operate the stack from the node as well as from the stack's directory on your machine.
-
-Community runs on Docker Compose and a systemd unit; PRO runs on Kubernetes. **The edition is the only decision you make**: `--edition community` (the default) or `--edition pro`. How OpenVidu is installed and run on the server follows from it. [How OpenVidu is deployed](../../deployment-types.md#how-openvidu-is-deployed) explains the model (one stack per directory, auto and assisted modes, COMMUNITY and PRO).
+Deploy OpenVidu Single Node on your own Linux server with the [OpenVidu CLI](../../openvidu-cli.md) (`ov`). `ov` installs and starts the stack over SSH, or on the machine it runs on, and generates every credential. **The edition is the only decision you make**: `--edition community` (the default) or `--edition pro`. [How OpenVidu is deployed](../../deployment-types.md#how-openvidu-is-deployed) explains the model.
 
 --8<-- "self-hosting/common/single-node-pro-license-intro.md"
 
@@ -84,19 +82,13 @@ With the `ingress` module, also open `1935/tcp` (RTMP ingest) and `7885/udp` (WH
 
 ## Check the ports first { #check-the-ports }
 
-The most common reason an on-premises OpenVidu "does not work" is a stack that comes up perfectly but has no media: every service is healthy, yet UDP never reaches the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, by running a temporary listener on the node and probing it. This verifies both TCP *and* UDP, which probing a running stack cannot do.
+The most common reason an on-premises OpenVidu "does not work" is a stack that comes up perfectly but has no media, because UDP never reaches the node. `ov stack check-ports` finds that in seconds, **before deploying anything**, for TCP *and* UDP:
 
 ```console
 $ ov stack check-ports --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 \
     --domain-name 172-30-0-96.openvidu-local.dev
 checking the inbound ports of 172.30.0.96…
-read-node: reading what is already bound and what the firewall allows
-listener: the node's python3 is holding 9 port(s) for us
-probe: probing 172-30-0-96.openvidu-local.dev: 3 TCP, 6 UDP
-checked in 4.6s
-Inbound ports of 172-30-0-96.openvidu-local.dev (172.30.0.96)
-  state     fresh — nothing of ours is deployed here, so every port was free to measure
-  method    a temporary listener on the node (its own python3; nothing written to disk)
+…
   verdict   3 of 6 checked port(s) do NOT reach the node: 443/udp, 50000-60000/udp, 7881/tcp
 
 Required
@@ -119,7 +111,7 @@ Recommended
 …
 ```
 
-The fix is printed, never run: `ov` reads firewalls, it does not change them. Here only recommended ports fail, so the check warns and exits `0`; if a required port fails, it exits `8`. The report goes on to check the DNS name and that the node reaches the registries the deploy pulls from. The same check runs automatically before every remote deploy (`--skip-port-check` turns it off). See [Status and health checks](admin.md#ports) for the full report and its options.
+The fix is printed, never run: `ov` does not change firewalls. The same check runs automatically before every remote deploy. See [Ports](admin.md#ports) to run it on a running stack.
 
 ## Deploy
 
@@ -147,12 +139,9 @@ Each stack lives in its own empty directory on your machine. Choose the edition.
       7881/tcp         public  recommended  open
       22/tcp           admin   required     open
       all 6 checked port(s) arrive at the node
-    ✓ [172.30.0.96 single] if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then echo 'docker and the compose plugin are already installed'; else curl -fsSL https://get.docker.com -o /tmp/get-docker.sh && sh /tmp/get-docker.sh && rm -f /tmp/get-docker.sh; fi && systemctl enable --now docker
+    …
     ✓ [172.30.0.96 single] write 44 files to /opt/openvidu (docker-compose.yaml, config/, .ov/base/)
-    ✓ [172.30.0.96 single] write 2 host files (/etc/systemd/system/openvidu.service, /etc/sysctl.d/50-openvidu.conf)
-    ✓ [172.30.0.96 single] install this CLI at /usr/local/bin/ov
-    ✓ [172.30.0.96 single] render config/ into data/runtime/ (ov stack render) — 21 created, 0 updated, 1 unchanged, 0 removed
-    ✓ [172.30.0.96 single] docker compose --env-file data/runtime/compose.env pull --quiet
+    …
     ✓ [172.30.0.96 single] systemctl restart openvidu
     deploy completed successfully
     wrote spec to openvidu-stack.yml
@@ -161,18 +150,12 @@ Each stack lives in its own empty directory on your machine. Choose the edition.
     ✔ the node operates this stack itself (`sudo ov stack status` there)
     waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deployment keeps running)…
       ⏳ still starting: caddy, openvidu, dashboard, meet, grafana (0s)
-      ⏳ still starting: openvidu, dashboard, meet, grafana (5s)
-      ⏳ still starting: openvidu, dashboard, meet (10s)
-      ⏳ still starting: openvidu (15s)
+      …
     ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
-
-    Inbound ports
-      all 6 checked port(s) arrive at the node
-      measured from the node's own network: this says nothing about the internet path
-      full report: ov stack check-ports
+    …
     ```
 
-    Plain Docker Compose and a systemd unit: no installer image, no operator. The ports are checked before anything is installed, and every credential is generated and **pinned** in `openvidu-stack.yml`, so a later deploy reuses them instead of locking the stack out of its data.
+    Every credential is generated and **pinned** in `openvidu-stack.yml`, so a later deploy reuses them instead of locking the stack out of its data. Keep that file private.
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
@@ -189,65 +172,38 @@ Each stack lives in its own empty directory on your machine. Choose the edition.
       --mode auto
 
     ▶ Connect to the VM…
-       · open an SSH session and check root/sudo access
        ✓ Connect to the VM
 
     ▶ Check the inbound ports…
-       · bind the ports on the node and probe them from here (nothing is installed yet, so UDP is verifiable)
-           Ports of 172.30.0.101 (Pro single node)
-           PORT             SCOPE   LEVEL        STATE  TO OPEN
-           443/tcp          public  required     open
-           443/udp          public  recommended  open
-           80/tcp           public  recommended  open
-           50000-60000/udp  public  recommended  open
-           7881/tcp         public  recommended  open
-           6443/tcp         admin   required     open
-           22/tcp           admin   required     open
-           ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
        ✓ Check the inbound ports
 
     ▶ Install the OpenVidu node agent…
-       · upload the OpenVidu node-agent installer
-       · run the node agent installer (k3s v1.37.2+k3s1)
        ✓ Install the OpenVidu node agent
 
     ▶ Deploy OpenVidu…
-       · fetch the node's credentials
-       · read the stack's configuration
-       · generate the deployment
-       · write the stack values (domain, TLS, modules, credentials)
-       · create the configuration documents (openvidu.yaml and the service files)
-       · install OpenVidu (reusing the existing credentials on a redeploy)
        ✓ Deploy OpenVidu
 
     ▶ Leave the OpenVidu CLI on the node…
-       · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
-       · give the node its own stack directory
        ✓ Leave the OpenVidu CLI on the node
 
     ▶ Check access from outside…
-       · reach https://172-30-0-101.openvidu-local.dev/ (services may still be starting)
        ✓ Check access from outside
 
     ✔ deploy completed.
     wrote spec to openvidu-stack.yml
     ✔ stack "prod" recorded in this directory
-
-    Inbound ports
-      all 7 checked port(s) arrive at the node
-      measured from the node's own network: this says nothing about the internet path
-      full report: ov stack check-ports
+    …
     ```
 
-    Kubernetes. The node needs nothing pre-installed: the node agent and the software it installs come inside `ov`. Services come up over a few minutes after the deploy returns; [`ov stack status --wait`](admin.md#status) blocks until they are ready.
+    The node needs nothing pre-installed. Services come up over a few minutes after the deploy returns; [`ov stack status --wait`](admin.md#status) blocks until they are ready.
 
 ### The port preflight { #the-port-preflight }
 
-Before anything is installed, a remote deploy binds the node's ports with a temporary listener and probes them, and prints a table of them (`checking the inbound ports before installing anything…` in the output above). If a **required** port is closed (or, on PRO, the node's firewall drops the pod and service networks), the deploy stops with **exit code 6** and prints the exact rule to add for the detected firewall. A recommended port only warns and the deploy continues. `--skip-port-check` deploys without the check; `--this-node` never runs it (reachability cannot be verified from the node itself).
+A remote deploy checks the node's ports before installing anything. If a **required** port is closed, it stops (exit `6`) and prints the rule to add; a recommended port only warns. `--skip-port-check` deploys without the check.
 
 ### Deploying again { #deploying-again }
 
-A deploy to a node that already runs OpenVidu says so and keeps its data: it rewrites `docker-compose.yaml` and `config/` from `openvidu-stack.yml` (your `docker-compose.override.yaml` stays) and reuses the credentials the data was written with:
+A deploy to a node that already runs the same stack says so and keeps its data: it rewrites `docker-compose.yaml` and `config/` from `openvidu-stack.yml` (your `docker-compose.override.yaml` stays) and reuses the credentials the data was written with. If it cannot read the node's configuration, it stops before writing anything and says how to fix it:
 
 ```text
 172.30.0.96 already runs OpenVidu on 172-30-0-96.openvidu-local.dev (currently stopped). Deploying again rewrites its files from the spec and restarts it.
@@ -255,6 +211,8 @@ A deploy to a node that already runs OpenVidu says so and keeps its data: it rew
   · Its data is kept — nothing deletes MongoDB, MinIO or recordings.
   · The credentials in your spec are reused, so the kept data stays readable.
 ```
+
+A PRO deploy refuses a machine that already runs another OpenVidu stack (a Community one, or another topology): destroy that stack first. A deployment installed by `install.sh` is converted with [`ov stack update`](../upgrade.md#migrate-a-deployment-installed-by-installsh) instead.
 
 A remote deploy asks which mode to use unless you pass `--mode auto` or `--mode assisted`; with `--non-interactive`, `--mode` is required.
 
@@ -270,7 +228,7 @@ $ sudo ov stack deploy web --environment on-premises --this-node \
 ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet, grafana)
 ```
 
-Either way the server ends up operable from itself: a deploy from your laptop, as its last step, leaves the CLI and a stack directory of its own on the node, so `sudo ov stack status` works there with no directory to name.
+Either way, a deploy leaves `ov` and a stack directory on the node, so `sudo ov stack status` works there with no directory to name.
 
 ## Review the commands first: assisted mode { #assisted-mode }
 
@@ -281,7 +239,7 @@ ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 --ssh-key
   --domain-name 172-30-0-96.openvidu-local.dev --certificate-type selfsigned --mode assisted
 ```
 
-The runbook is the `ssh`, `scp` and `ov` commands that carry out the deploy, and it ends by recording the stack in this directory and waiting for it (`ov stack import … --ssh … --replace -y`, then `ov stack status --wait --wait-timeout 15m`). Auto mode does that same work itself, printing each step as it completes.
+The runbook is the `ssh`, `scp` and `ov` commands that carry out the deploy, ending with the ones that record the stack in this directory and wait for it.
 
 ## Configure your application to use the deployment
 
@@ -302,4 +260,4 @@ For OpenVidu Meet, `MEET_INITIAL_API_KEY` (`ov stack config get meet-initial-api
 - [Administer the deployment](admin.md): status, logs, the health check, start and stop.
 - [Change the configuration](../../configuration/changing-config.md) or [the modules](../../how-to-guides/enable-disable-modules.md).
 - [Update the deployment](../upgrade.md).
-- The full [OpenVidu CLI reference](../../openvidu-cli.md#command-reference).
+- The [OpenVidu CLI commands](../../openvidu-cli.md#command-reference).

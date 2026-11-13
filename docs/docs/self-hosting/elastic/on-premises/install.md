@@ -58,7 +58,7 @@ These are the inbound ports `ov` checks, with the names it prints for them. The 
     | `10250/tcp` | internal | required | Kubernetes cluster traffic, from the master only. |
     | `8472/udp` | internal | required | Kubernetes cluster traffic, from the master only. |
 
-With the `ingress` module, also open `1935/tcp` (RTMP) on the master and `7885/udp` (WHIP) on the media nodes. `join` checks these internal ports in both directions and prints the exact `ufw` rule to add, scoped to the source, if one is closed.
+With the `ingress` module, also open `1935/tcp` (RTMP) on the master and `7885/udp` (WHIP) on the media nodes. `join` checks the internal ports in both directions and prints the rule to add if one is closed.
 
 ## Deploy the master
 
@@ -73,14 +73,7 @@ $ ov stack deploy el --edition pro --environment on-premises --deployment-type e
     --certificate-type owncert --owncert-public-key ~/certs/fullchain.pem --owncert-private-key ~/certs/privkey.pem \
     --mode auto
 
-▶ Check the inbound ports…
-       Ports of 172.30.0.101 (master node of an elastic stack)
-       PORT      SCOPE   LEVEL        STATE  TO OPEN
-       443/tcp   public  required     open
-       80/tcp    public  recommended  open
-       6443/tcp  admin   required     open
-       22/tcp    admin   required     open
-       ✓ host firewall: the ufw firewall lets 10.42.0.0/16 and 10.43.0.0/16 reach the node
+…
    ✓ Check the inbound ports
 …
 ✔ deploy completed.
@@ -92,42 +85,26 @@ The stack is up with its data tier on the master, but its media services have no
 
 ## Join a media node
 
-From the stack's directory, `ov stack join --ssh` reads the join address and token from the master over SSH (the token never appears on screen), checks the ports, installs the node agent and joins the machine:
+From the stack's directory, `ov stack join --ssh` checks the new machine's ports, installs the node agent and joins it:
 
 ```console
 $ ov stack join --ssh ubuntu@172.30.0.102 --as media
 → reading the join address and token from 172.30.0.101
 → checking the ports of 172.30.0.102 from here and from the stack's masters
-  Ports of 172.30.0.102 (media node of an elastic stack)
-  PORT                      SCOPE     LEVEL        STATE  TO OPEN
-  443/udp                   public    recommended  open
-  50000-60000/udp           public    recommended  open
-  7881/tcp                  public    recommended  open
-  22/tcp                    admin     required     open
-  10250/tcp ← 172.30.0.101  internal  required     open   (only from 172.30.0.101)
-  8472/udp ← 172.30.0.101   internal  required     open   (only from 172.30.0.101)
+  …
 
 ▶ Join the cluster…
-   · join 172.30.0.102 to the stack as a media node
    ✓ Join the cluster
-
-▶ Leave the OpenVidu CLI on the node…
-   · copy this CLI (ov-admin, 63 MB) to /usr/local/bin/ov
-   ✓ Leave the OpenVidu CLI on the node
-
-▶ Wait for the stack to see the node…
-   ✓ Wait for the stack to see the node
+…
 
 ✔ 172.30.0.102 joined the stack as a media node.
 ```
 
-Before installing anything it checks the ports the new node needs, from your machine and from the master: if a required internal port is not reachable, the join stops with exit `6` and prints the `ufw` rule to add on each side. The login, key and port default to the ones the stack recorded. The join returns once the stack sees the node as ready, so the node takes work as soon as the command ends. Each media node is one more `ov stack join --ssh`. See [Add a media node](admin.md#add-a-media-node) for the other ways to join (on the node itself, or in assisted mode).
+If a required port is not reachable, the join stops before installing anything and prints the rule to add. The login and key default to the ones the stack recorded. The join returns once the node takes work. Each media node is one more `ov stack join --ssh`; see [Add a media node](admin.md#add-a-media-node) for the other ways to join.
 
 ## Install on the servers themselves, or review the commands first
 
-As on a Single Node, you can put `ov` on the master and deploy with [`--this-node`](../../single-node/on-premises/install.md#install-on-the-server-itself), and [review every command before it runs with `--mode assisted`](../../single-node/on-premises/install.md#assisted-mode) (on Elastic the assisted runbooks of the deploy and of a join end with `ov stack status --wait --joined --wait-timeout 15m`). A media node can also [join itself](admin.md#add-a-media-node) from the machine with `ov stack join --this-node`.
-
-A master deployed with `--this-node` records no SSH to itself, so `ov stack join --ssh <media-node>` from its directory cannot read the join address and token from the master over SSH. Pass them with `--address` and `--token` from `ov stack join-info` (run on the master), or join each media node on the machine itself with `ov stack join --this-node`.
+As on a Single Node, you can put `ov` on the master and deploy with [`--this-node`](../../single-node/on-premises/install.md#install-on-the-server-itself), and [review every command before it runs with `--mode assisted`](../../single-node/on-premises/install.md#assisted-mode). With a master deployed with `--this-node`, join each media node on the machine itself with `ov stack join --this-node` ([Add a media node](admin.md#add-a-media-node)).
 
 ## Configure your application to use the deployment
 

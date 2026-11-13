@@ -112,8 +112,8 @@ A local stack runs on Docker Compose with either edition. This lets you develop 
 
 The directory holds two things:
 
-- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it. The deploy flags (`--domain-name`, `--certificate-type`, `--enabled-modules`, or `--modules` on a local stack…), `--set key=value` and `-f file.yml` write into it, and the deploy fills in the rest with defaults. It also **generates every credential the stack needs** and pins them here, so a redeploy reuses them.
-- **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it (an SSH key, or the access a PRO stack publishes), the template and variables it applied on a cloud, and its secrets. Keep it private.
+- **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it: the deploy flags write into it, and the deploy fills in the rest, **including every credential the stack needs**, so a redeploy reuses them.
+- **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it and its secrets. Keep both private.
 
 Every deployed node also gets a copy of `ov` and a stack directory of its own, so `sudo ov stack status` works on the node too. A lost directory is recreated with `ov stack import` ([I lost the stack's directory](openvidu-cli.md#lost-the-stack-directory)).
 
@@ -121,18 +121,16 @@ Every deployed node also gets a copy of `ov` and a stack directory of its own, s
 
 Every deploy can run in two modes:
 
-- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated. Before creating anything it shows the plan, one numbered line per step, and asks whether to run it: only `yes` or `y` goes ahead, and `-y` answers in advance (it skips the question, never the plan). `--debug` shows the commands themselves instead.
-- **`--mode assisted`** runs **nothing**. It writes the same files and prints the commands for you to review and run yourself. On a cloud, once you have run them, `ov stack deploy <name> --cloud <cloud> --mode auto` resumes the deploy: it waits for OpenVidu and registers the stack. It needs the stack's name (without it the stack would be registered as `openvidu`) and no other flag, because everything is already written in `openvidu-stack.yml`. Until then the directory holds the plan but no stack: `ov stack status` answers `no stack in this directory` (exit `3`).
-
-What assisted mode prints is the list of commands auto mode runs, so what you review is what auto mode would do.
+- **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and shows the plan and asks before creating anything (`-y` answers yes).
+- **`--mode assisted`** runs **nothing**. It writes the same files and prints the commands auto mode would run, for you to review and run yourself. On a cloud, once you have run them, `ov stack deploy <name> --cloud <cloud> --mode auto` waits for OpenVidu and registers the stack.
 
 ### Cloud deployments { #cloud-deployments }
 
 `--cloud aws|azure|gcp|oracle|digitalocean` makes the deploy create the machines first, from the infrastructure template embedded in the CLI: CloudFormation on AWS, Bicep on Azure and Terraform on Google Cloud, Oracle Cloud and DigitalOcean. Then:
 
-1. **The machines deploy OpenVidu themselves.** Each one downloads the same `ov` build, checks it against the published checksums, and deploys the stack (the first node) or joins it (every other node). No SSH from your machine is part of the installation.
-2. **Your `ov` waits** until OpenVidu is up: on Community, until its URL answers; on PRO, until the stack publishes its access and answers on it.
-3. **Your `ov` registers the stack** in your directory: OpenVidu PRO through the access the stack publishes, OpenVidu COMMUNITY over SSH with the key pair the machine was created with.
+1. **The machines deploy OpenVidu themselves.** Each one downloads the same `ov` build and deploys the stack (the first node) or joins it (every other node).
+2. **Your `ov` waits** until OpenVidu is up.
+3. **Your `ov` registers the stack** in your directory.
 
 From then on, `ov stack status`, `ov stack config`, `ov stack logs` and `ov stack destroy` work from that directory. Recordings and OpenVidu Meet data go to the cloud's object storage (S3, Azure Blob Storage, Cloud Storage, Object Storage or Spaces), so they outlive the machines. `--remote-state` also keeps the stack on its cloud, so another machine can take it over ([Remote state](openvidu-cli.md#remote-state)).
 

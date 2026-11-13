@@ -17,7 +17,7 @@ The sections up to [Export the desired state](#export) are the operations every 
 
 ## Add a media node { #add-a-media-node }
 
-From the stack's directory, `ov stack join --ssh ubuntu@<media-node> --as media` reads the join address and token from a master, checks the ports, installs the node agent and joins the machine, returning once the stack sees it ready. There are three ways to run it, exactly as on [Elastic](../../elastic/on-premises/admin.md#add-a-media-node): over SSH, on the machine itself (`--this-node` with `ov stack join-info` for the address and token), or with `--mode assisted` to print the commands and run nothing.
+From the stack's directory, `ov stack join --ssh ubuntu@<media-node> --as media` joins a new media node. As on [Elastic](../../elastic/on-premises/admin.md#add-a-media-node), it can also run on the machine itself (`--this-node`) or print the commands with `--mode assisted`.
 
 ## Add a master node
 
@@ -27,7 +27,7 @@ High Availability runs four masters. A master is added with `--as master` (maste
 ov stack join --ssh ubuntu@<master> --as master --lb-host <load-balancer> --public-ip <master's public IP>
 ```
 
-A master join checks the cluster's internal ports in both directions with the masters already in the stack (the API on `6443/tcp`, etcd on `2379-2380/tcp`, the kubelet on `10250/tcp`, the overlay on `8472/udp`) and confirms the node carries the labels the stack schedules by. See [Deploy with a DNS record per master](install-nlb.md#deploy-with-a-dns-record-per-master) and [In production: behind a load balancer](install-nlb.md#behind-a-load-balancer).
+See [Deploy with a DNS record per master](install-nlb.md#deploy-with-a-dns-record-per-master) and [In production: behind a load balancer](install-nlb.md#behind-a-load-balancer).
 
 ## Take a media node out { #take-a-node-out }
 
