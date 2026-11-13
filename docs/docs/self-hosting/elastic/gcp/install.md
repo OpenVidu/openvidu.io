@@ -37,28 +37,45 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud gcp --gcp-project my-project \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-  --certificate-type letsencrypt --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them with no autoscaler. Either works on the first deploy and on a redeploy; to change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+    The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until OpenVidu is up, then registers the stack:
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-```text
-…
-   · waiting for OpenVidu to come up (1m12s elapsed): OpenVidu is still installing
-   · OpenVidu is up
-…
-✔ OpenVidu Pro (elastic) is up on Google Cloud
-  URL:          https://openvidu-pwvcha-34-153-183-72.sslip.io/
-  credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp2-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp2-)
-```
+    One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them with no autoscaler. Either works on the first deploy and on a redeploy; to change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+
+    This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until OpenVidu is up, then registers the stack:
+
+    ```text
+    …
+       · waiting for OpenVidu to come up (1m12s elapsed): OpenVidu is still installing
+       · OpenVidu is up
+    …
+    ✔ OpenVidu Pro (elastic) is up on Google Cloud
+      URL:          https://openvidu-pwvcha-34-153-183-72.sslip.io/
+      credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp2-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp2-)
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode assisted
+    ```
+
+    --8<-- "self-hosting/gcp/ov-assisted.md"
 
 ## Use your own domain { #use-your-own-domain }
 
@@ -75,10 +92,6 @@ This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until OpenVidu
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/gcp/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/gcp/ov-assisted.md"
 
 ## Troubleshooting { #troubleshooting }
 

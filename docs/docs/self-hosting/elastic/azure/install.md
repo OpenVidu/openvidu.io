@@ -39,28 +39,45 @@ The deployed services are the same as in the [On Premises Elastic installation](
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud azure --azure-location northeurope \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-  --certificate-type letsencrypt --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-One master node and a scale set of media nodes, with OpenVidu PRO on Kubernetes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. For changing the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+    The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
-This is how the deploy of a stack named `dpaz2` ends: `ov` waits until OpenVidu is up, then registers it:
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-```text
-…
-   · OpenVidu is up
-   ✓ Wait for the machines to deploy OpenVidu
-…
-✔ OpenVidu Pro (elastic) is up on Azure
-  URL:          https://openvidu-i4mxo8-52-138-152-30.sslip.io/
-  credentials:  az keyvault secret show --vault-name openvidu-dpaz2-keyvault --name OPENVIDU-URL --query value -o tsv
-```
+    One master node and a scale set of media nodes, with OpenVidu PRO on Kubernetes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or, at the first deploy, `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them. For changing the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+
+    This is how the deploy of a stack named `dpaz2` ends: `ov` waits until OpenVidu is up, then registers it:
+
+    ```text
+    …
+       · OpenVidu is up
+       ✓ Wait for the machines to deploy OpenVidu
+    …
+    ✔ OpenVidu Pro (elastic) is up on Azure
+      URL:          https://openvidu-i4mxo8-52-138-152-30.sslip.io/
+      credentials:  az keyvault secret show --vault-name openvidu-dpaz2-keyvault --name OPENVIDU-URL --query value -o tsv
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode assisted
+    ```
+
+    --8<-- "self-hosting/azure/ov-assisted.md"
 
 ## Use your own domain
 
@@ -77,10 +94,6 @@ This is how the deploy of a stack named `dpaz2` ends: `ov` waits until OpenVidu 
 ## Access OpenVidu
 
 --8<-- "self-hosting/azure/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/azure/ov-assisted.md"
 
 ## Troubleshooting
 

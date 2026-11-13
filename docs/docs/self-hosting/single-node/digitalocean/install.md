@@ -29,42 +29,69 @@ One command creates the machine and OpenVidu comes up on it. `ov` renders the Te
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud digitalocean \
-      --certificate-type letsencrypt --mode auto
-    ```
+    Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-    One Droplet (`s-4vcpu-8gb` by default: 4 vCPU, 8 GB, 160 GB disk; `--param instanceType=<slug>` to change it) running OpenVidu on Docker Compose.
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud digitalocean \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud digitalocean \
-      --edition pro --openvidu-pro-license <your-license> \
-      --certificate-type letsencrypt --mode auto
-    ```
+        One Droplet (`s-4vcpu-8gb` by default: 4 vCPU, 8 GB, 160 GB disk; `--param instanceType=<slug>` to change it) running OpenVidu on Docker Compose.
 
-    One Droplet running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    This is how the deploy of a stack named `dpdo1` ends: `ov` waits until OpenVidu is up, then registers the stack:
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud digitalocean \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```text
-    ▶ Wait for the machines to deploy OpenVidu…
-       · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-dpdo1-space-ef16b466b1 yet (the machine writes it as it installs)
-       · waiting for OpenVidu to come up (1m5s elapsed): OpenVidu is still installing
-       · OpenVidu is up
-       ✓ Wait for the machines to deploy OpenVidu
-    …
-    ✔ OpenVidu Pro (single node) is up on DigitalOcean
-      URL:          https://openvidu-wakvlb-188-166-126-9.sslip.io/
-      credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo1-space-ef16b466b1/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-    ```
+        One Droplet running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+
+        This is how the deploy of a stack named `dpdo1` ends: `ov` waits until OpenVidu is up, then registers the stack:
+
+        ```text
+        ▶ Wait for the machines to deploy OpenVidu…
+           · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-dpdo1-space-ef16b466b1 yet (the machine writes it as it installs)
+           · waiting for OpenVidu to come up (1m5s elapsed): OpenVidu is still installing
+           · OpenVidu is up
+           ✓ Wait for the machines to deploy OpenVidu
+        …
+        ✔ OpenVidu Pro (single node) is up on DigitalOcean
+          URL:          https://openvidu-wakvlb-188-166-126-9.sslip.io/
+          credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo1-space-ef16b466b1/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+        ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud digitalocean \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud digitalocean \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    --8<-- "self-hosting/digitalocean/ov-assisted.md"
 
 ## Use your own domain
 
@@ -81,10 +108,6 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 ## Access OpenVidu
 
 --8<-- "self-hosting/digitalocean/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/digitalocean/ov-assisted.md"
 
 ## Troubleshooting
 

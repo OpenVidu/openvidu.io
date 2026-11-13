@@ -42,44 +42,61 @@ High Availability needs more vCPU quota than a single node, because it creates f
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud azure --azure-location northeurope \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
-
-The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
-
-- **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
-- **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+    The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
     ```bash
-    --domain-name openvidu.example.com --certificate-type owncert \
-      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
-      --owncert-private-key "$(base64 -w0 privkey.pem)"
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --mode auto
     ```
 
-    On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
+    Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
-Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
+    The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-This is how the deploy of a stack named `demo-ha` ends (it passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit the location's quota), followed by `ov stack status --wait` confirming that every node and service is ready:
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
+    - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
-```text
-…
-✔ OpenVidu Pro (high availability) is up on Azure
-  URL:          https://openvidu-zksfiv-20-107-185-207.sslip.io/
-  credentials:  az keyvault secret show --vault-name ov-demo-ha-keyvault --name OPENVIDU-URL --query value -o tsv
+        ```bash
+        --domain-name openvidu.example.com --certificate-type owncert \
+          --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+          --owncert-private-key "$(base64 -w0 privkey.pem)"
+        ```
 
-$ ov stack status --wait
-waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C to stop)…
-✔ demo-ha is ready (https://openvidu-zksfiv-20-107-185-207.sslip.io)
-```
+        On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
+
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address; with your own domain, point it at that address (the deployment's `publicIp` output: `az deployment group show --resource-group <group> --name <deployment> --query properties.outputs.publicIp.value -o tsv`, with the group and deployment names the plan printed). Do it as soon as the deploy ends: `ov stack status --wait` waits until the stack answers at its domain, and reports `URL not answering yet` until then.
+
+    This is how the deploy of a stack named `demo-ha` ends (it passed `--param masterNodeInstanceType=Standard_D2s_v3 --param mediaNodeInstanceType=Standard_F4s_v2` to fit the location's quota), followed by `ov stack status --wait` confirming that every node and service is ready:
+
+    ```text
+    …
+    ✔ OpenVidu Pro (high availability) is up on Azure
+      URL:          https://openvidu-zksfiv-20-107-185-207.sslip.io/
+      credentials:  az keyvault secret show --vault-name ov-demo-ha-keyvault --name OPENVIDU-URL --query value -o tsv
+
+    $ ov stack status --wait
+    waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C to stop)…
+    ✔ demo-ha is ready (https://openvidu-zksfiv-20-107-185-207.sslip.io)
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud azure --azure-location northeurope \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --mode assisted
+    ```
+
+    --8<-- "self-hosting/azure/ov-assisted.md"
 
 ## What the deploy runs
 
@@ -92,10 +109,6 @@ waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C 
 ## Access OpenVidu
 
 --8<-- "self-hosting/azure/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/azure/ov-assisted.md"
 
 ## Troubleshooting
 

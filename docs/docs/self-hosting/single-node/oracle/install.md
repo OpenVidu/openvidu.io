@@ -25,30 +25,59 @@ Community runs on Docker Compose; PRO runs on Kubernetes. The edition is the onl
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-    ```bash
-    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
-      --certificate-type letsencrypt --mode auto
-    ```
+    The stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-    One compute instance (`VM.Standard.E4.Flex` with 4 OCPUs and 8 GB by default, `--param instanceType=<shape>` to change it) running OpenVidu on Docker Compose.
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+        ```bash
+        export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```bash
-    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
-      --edition pro --openvidu-pro-license <your-license> \
-      --certificate-type letsencrypt --mode auto
-    ```
+        One compute instance (`VM.Standard.E4.Flex` with 4 OCPUs and 8 GB by default, `--param instanceType=<shape>` to change it) running OpenVidu on Docker Compose.
 
-    One compute instance running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the stack's remote admin control protocol, where `ov` administers it from your machine. It gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode auto
+        ```
+
+        One compute instance running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the stack's remote admin control protocol, where `ov` administers it from your machine. It gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ```bash
+        export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    --8<-- "self-hosting/oracle/ov-assisted.md"
 
 ## Use your own domain { #use-your-own-domain }
 
@@ -65,10 +94,6 @@ The stack lives in its own empty directory. Choose the edition. The commands nam
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/oracle/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/oracle/ov-assisted.md"
 
 ## Troubleshooting { #troubleshooting }
 

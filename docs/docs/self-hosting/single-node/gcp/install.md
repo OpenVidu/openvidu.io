@@ -29,40 +29,67 @@ One command creates the machine and OpenVidu comes up on it. `ov` renders the Te
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud gcp --gcp-project my-project \
-      --certificate-type letsencrypt --mode auto
-    ```
+    Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-    One Compute Engine instance (`e2-standard-4` by default, `--param instanceType=<type>` to change it) running OpenVidu on Docker Compose.
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud gcp --gcp-project my-project \
-      --edition pro --openvidu-pro-license <your-license> \
-      --certificate-type letsencrypt --mode auto
-    ```
+        One Compute Engine instance (`e2-standard-4` by default, `--param instanceType=<type>` to change it) running OpenVidu on Docker Compose.
 
-    One Compute Engine instance running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the port your machine administers the stack through. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    This is how the deploy of a stack named `dpgcp1` ends: `ov` waits until OpenVidu is up, then registers the stack:
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```text
-    …
-       · waiting for OpenVidu to come up (1m12s elapsed): OpenVidu is still installing
-       · OpenVidu is up
-    …
-    ✔ OpenVidu Pro (single node) is up on Google Cloud
-      URL:          https://openvidu-eos260-35-234-130-186.sslip.io/
-      credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp1-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp1-)
-    ```
+        One Compute Engine instance running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach port 6443, the port your machine administers the stack through. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+
+        This is how the deploy of a stack named `dpgcp1` ends: `ov` waits until OpenVidu is up, then registers the stack:
+
+        ```text
+        …
+           · waiting for OpenVidu to come up (1m12s elapsed): OpenVidu is still installing
+           · OpenVidu is up
+        …
+        ✔ OpenVidu Pro (single node) is up on Google Cloud
+          URL:          https://openvidu-eos260-35-234-130-186.sslip.io/
+          credentials:  gcloud secrets versions access latest --secret=openvidu-dpgcp1-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-dpgcp1-)
+        ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    --8<-- "self-hosting/gcp/ov-assisted.md"
 
 ## Use your own domain { #use-your-own-domain }
 
@@ -79,10 +106,6 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/gcp/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/gcp/ov-assisted.md"
 
 ## Troubleshooting { #troubleshooting }
 

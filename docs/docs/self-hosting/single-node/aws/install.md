@@ -31,41 +31,68 @@ The deployed services are the same as in the [On Premises Single Node installati
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
-      --certificate-type letsencrypt --mode auto
-    ```
+    Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-    One EC2 instance (`c6a.xlarge` by default, `--aws-instance-type` to change it) running OpenVidu on Docker Compose.
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
-      --edition pro --openvidu-pro-license <your-license> \
-      --certificate-type letsencrypt --mode auto
-    ```
+        One EC2 instance (`c6a.xlarge` by default, `--aws-instance-type` to change it) running OpenVidu on Docker Compose.
 
-    One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-cluster-api-cidr` limits who can reach the stack's remote admin control protocol on port 6443. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    This is how the deploy of a stack named `pro` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```text
-    …
-    ▶ Wait for the machines to deploy OpenVidu…
-       · OpenVidu is up
-       ✓ Wait for the machines to deploy OpenVidu
-    …
-    ✔ OpenVidu Pro (single node) is up on AWS
-      URL:          https://openvidu-geepav-89-60-28-34.sslip.io/
-      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-eu-south-2-openvidu-pro --query SecretString --output text --region eu-south-2
-    ```
+        One EC2 instance running OpenVidu PRO on Kubernetes. `--aws-cluster-api-cidr` limits who can reach the stack's remote admin control protocol on port 6443. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+
+        This is how the deploy of a stack named `pro` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
+
+        ```text
+        …
+        ▶ Wait for the machines to deploy OpenVidu…
+           · OpenVidu is up
+           ✓ Wait for the machines to deploy OpenVidu
+        …
+        ✔ OpenVidu Pro (single node) is up on AWS
+          URL:          https://openvidu-geepav-89-60-28-34.sslip.io/
+          credentials:  aws secretsmanager get-secret-value --secret-id openvidu-eu-south-2-openvidu-pro --query SecretString --output text --region eu-south-2
+        ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    --8<-- "self-hosting/aws/ov-assisted.md"
 
 ## Use your own domain
 
@@ -82,10 +109,6 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 ## Access OpenVidu { #configure-your-application-to-use-the-deployment }
 
 --8<-- "self-hosting/aws/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/aws/ov-assisted.md"
 
 ## Troubleshooting
 

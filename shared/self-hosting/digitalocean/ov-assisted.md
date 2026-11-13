@@ -1,9 +1,4 @@
-`--mode assisted` runs **nothing at all** in your account. It writes the rendered template and its variables to `.openvidu/digitalocean/` and prints the commands, for you to read, change and run yourself:
-
-```bash
-ov stack deploy openvidu --cloud digitalocean \
-  --certificate-type letsencrypt --mode assisted
-```
+**`ov` prints the commands and runs none of them.** It writes the rendered template and its variables to `.openvidu/digitalocean/`. This is the plan of a COMMUNITY stack named `openvidu`:
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
@@ -20,7 +15,9 @@ stack. It creates nothing in your account.
 ── end of plan ────────────────────────────────────────────────────────
 ```
 
-Once your commands have finished, run the command it ends with. It carries the stack's name, which `openvidu-stack.yml` keeps along with every parameter: without it the stack is registered again as `openvidu`. When the Terraform state is there and `terraform plan` changes nothing, the deploy ends without asking anything:
+**Run them yourself**, with your own credentials. Read them first, and change them if you need to.
+
+**Then run the command the plan ends with.** It carries the stack's name, which `openvidu-stack.yml` keeps along with every parameter: without it the stack is registered again as `openvidu`. When the Terraform state is there and `terraform plan` changes nothing, `ov` finds the machines, waits for OpenVidu and registers the stack, creating nothing:
 
 ```text
 The machines on DigitalOcean are there, as this deploy asks for them (applied): it ends here,

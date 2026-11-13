@@ -1,4 +1,4 @@
-Before it touches your project, `--mode auto` shows a **short plan**: one numbered line per step, what is done and where, without the commands. Then it asks whether to run it, and only `yes` or `y` goes ahead (`-y` answers in advance, and the plan still appears; no answer or any other answer creates nothing). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
+Before it touches your project, `--mode auto` shows a **short plan**: one numbered line per step, what is done and where, without the commands. Then it asks whether to run it, and only `yes` or `y` goes ahead (`-y` answers in advance, and the plan still appears; no answer or any other answer creates nothing). `--debug` prints the commands themselves, and [assisted mode](#assisted) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12g` (europe-west2, 2026-10-29):
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────

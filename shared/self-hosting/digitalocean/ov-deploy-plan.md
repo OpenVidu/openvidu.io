@@ -1,4 +1,4 @@
-Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
+Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). `--debug` prints the commands themselves, and [assisted mode](#assisted) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────

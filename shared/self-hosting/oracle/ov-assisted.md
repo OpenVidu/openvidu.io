@@ -1,8 +1,4 @@
-`--mode assisted` runs **nothing at all** in your tenancy. It writes the rendered template and its variables to `.openvidu/oracle/` and prints the commands, for you to read, change and run yourself:
-
-```bash
-ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 --mode assisted
-```
+**`ov` prints the commands and runs none of them.** It writes the rendered template and its variables to `.openvidu/oracle/`. This is the plan of a COMMUNITY stack named `openvidu`:
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
@@ -19,7 +15,9 @@ stack. It creates nothing in your account.
 ── end of plan ────────────────────────────────────────────────────────
 ```
 
-Once your commands have finished, run the command it ends with. It needs no other flags: every parameter is already in `openvidu-stack.yml`. When the Terraform state is there and `terraform plan` changes nothing, the deploy ends without asking anything:
+**Run them yourself**, with your own credentials. Read them first, and change them if you need to.
+
+**Then run the command the plan ends with.** It needs no other flags: every parameter is already in `openvidu-stack.yml`. When the Terraform state is there and `terraform plan` changes nothing, `ov` finds the machines, waits for OpenVidu and registers the stack, creating nothing:
 
 ```text
 The machines on Oracle Cloud are there, as this deploy asks for them (applied): it ends here,

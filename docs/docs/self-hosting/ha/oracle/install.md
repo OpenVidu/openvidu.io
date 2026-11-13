@@ -33,40 +33,58 @@ High Availability adds a few requirements of its own:
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. To try it, with no domain and a self-signed certificate:
+=== "Auto"
 
-```bash
-export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --certificate-type selfsigned --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-Four master nodes behind a passthrough network load balancer, plus an autoscaling pool of media nodes (`--param minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU`, or `fixedNumberOfMediaNodes=N` for exactly N with no autoscaling). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+    The stack lives in its own empty directory. To try it, with no domain and a self-signed certificate:
 
-For production, bring your own certificate for your domain, base64-encoded (on a cloud the certificate travels as a template parameter, so pass its content, not the path to the file):
+    ```bash
+    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --certificate-type selfsigned --mode auto
+    ```
 
-```bash
-ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --domain-name openvidu.example.com --certificate-type owncert \
-  --owncert-public-key "$(base64 -w0 fullchain.pem)" \
-  --owncert-private-key "$(base64 -w0 privkey.pem)" --mode auto
-```
+    Four master nodes behind a passthrough network load balancer, plus an autoscaling pool of media nodes (`--param minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU`, or `fixedNumberOfMediaNodes=N` for exactly N with no autoscaling). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
-Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address. With your own domain, **point it at the load balancer**: as soon as the masters exist the deploy prints the `A` record to create (`<domain> A <nlb_public_ip>`, the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`), and, if the name does not point at the stack when it is up, ends with that step left instead of `is up`:
+    For production, bring your own certificate for your domain, base64-encoded (on a cloud the certificate travels as a template parameter, so pass its content, not the path to the file):
 
-```text
-! OpenVidu Pro (high availability) is deployed on Oracle Cloud, with one step left: openvidu.example.com does not point at it yet.
-  Create this DNS record where its zone is hosted, and it is up:
-    openvidu.example.com.                    A      <nlb_public_ip>
-  URL:          https://openvidu.example.com/ (once the record resolves)
-  Meanwhile `ov stack status` works (it reaches the stack by its address), and
-  `ov stack status --wait` waits for the record too.
-```
+    ```bash
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --domain-name openvidu.example.com --certificate-type owncert \
+      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+      --owncert-private-key "$(base64 -w0 privkey.pem)" --mode auto
+    ```
 
-Create the record as soon as the deploy prints it: `ov stack status --wait` reports `URL not answering yet` until the name resolves to the load balancer. With a `sslip.io` name nothing is needed.
+    Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address. With your own domain, **point it at the load balancer**: as soon as the masters exist the deploy prints the `A` record to create (`<domain> A <nlb_public_ip>`, the `nlb_public_ip` output of `terraform -chdir=.openvidu/oracle output`), and, if the name does not point at the stack when it is up, ends with that step left instead of `is up`:
+
+    ```text
+    ! OpenVidu Pro (high availability) is deployed on Oracle Cloud, with one step left: openvidu.example.com does not point at it yet.
+      Create this DNS record where its zone is hosted, and it is up:
+        openvidu.example.com.                    A      <nlb_public_ip>
+      URL:          https://openvidu.example.com/ (once the record resolves)
+      Meanwhile `ov stack status` works (it reaches the stack by its address), and
+      `ov stack status --wait` waits for the record too.
+    ```
+
+    Create the record as soon as the deploy prints it: `ov stack status --wait` reports `URL not answering yet` until the name resolves to the load balancer. With a `sslip.io` name nothing is needed.
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --certificate-type selfsigned --mode assisted
+    ```
+
+    --8<-- "self-hosting/oracle/ov-assisted.md"
 
 ## What the deploy runs { #what-the-deploy-runs }
 
@@ -79,10 +97,6 @@ Create the record as soon as the deploy prints it: `ov stack status --wait` repo
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/oracle/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/oracle/ov-assisted.md"
 
 ## Troubleshooting { #troubleshooting }
 

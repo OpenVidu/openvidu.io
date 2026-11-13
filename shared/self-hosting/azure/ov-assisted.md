@@ -1,9 +1,4 @@
-`--mode assisted` runs **nothing at all** in your subscription. It writes the rendered template to `.openvidu/azure/` and prints the commands, for you to read, change and run yourself:
-
-```bash
-ov stack deploy openvidu --cloud azure --azure-location northeurope \
-  --certificate-type letsencrypt --mode assisted
-```
+**`ov` prints the commands and runs none of them.** It writes the rendered template to `.openvidu/azure/`. This is the plan of a COMMUNITY stack named `openvidu`:
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
@@ -23,7 +18,9 @@ stack. It creates nothing in your account.
 
 On OpenVidu PRO the commands also write the license into a `0600` parameters file (`.openvidu/azure/secure-parameters.json`) instead of the command line.
 
-Once your commands have finished, run the command it ends with. It carries the stack's name, and `openvidu-stack.yml` keeps every parameter. When the deployment has succeeded with the parameters this deploy asks for, the deploy ends without asking anything:
+**Run them yourself**, with your own credentials. Read them first, and change them if you need to.
+
+**Then run the command the plan ends with.** It carries the stack's name, and `openvidu-stack.yml` keeps every parameter. When the deployment has succeeded with the parameters this deploy asks for, `ov` finds the machines, waits for OpenVidu and registers the stack, creating nothing:
 
 ```text
 The machines on Azure are there, as this deploy asks for them (Succeeded): it ends here,

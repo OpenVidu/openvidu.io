@@ -33,30 +33,47 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud digitalocean \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-  --certificate-type letsencrypt --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them (at the first deploy or on a redeploy). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). The VPC is a `/24` the template derives from the stack's name inside `10.64.0.0`-`10.99.255.0`, so several stacks share an account and a region; `--param vpcIpRange=<cidr>` picks another (keep it clear of the ranges DigitalOcean reserves in the region and of `10.42.0.0/16` and `10.43.0.0/16`, which the cluster uses inside the nodes). A stack that exists keeps its range. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol (default `0.0.0.0/0`).
+    The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
-This is how the deploy of a stack named `dpdo2` ends: `ov` waits until OpenVidu is up, then registers the stack:
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud digitalocean \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-```text
-▶ Wait for the machines to deploy OpenVidu…
-   · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-dpdo2-space-d15fca9b1c yet (the machine writes it as it installs)
-   · waiting for OpenVidu to come up (2m10s elapsed): OpenVidu is still installing
-   · OpenVidu is up
-   ✓ Wait for the machines to deploy OpenVidu
-…
-✔ OpenVidu Pro (elastic) is up on DigitalOcean
-  URL:          https://openvidu-7qr30p-142-93-224-169.sslip.io/
-  credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo2-space-d15fca9b1c/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-```
+    One master node and an autoscaling pool of media nodes, in a VPC the template creates. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them (at the first deploy or on a redeploy). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). The VPC is a `/24` the template derives from the stack's name inside `10.64.0.0`-`10.99.255.0`, so several stacks share an account and a region; `--param vpcIpRange=<cidr>` picks another (keep it clear of the ranges DigitalOcean reserves in the region and of `10.42.0.0/16` and `10.43.0.0/16`, which the cluster uses inside the nodes). A stack that exists keeps its range. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol (default `0.0.0.0/0`).
+
+    This is how the deploy of a stack named `dpdo2` ends: `ov` waits until OpenVidu is up, then registers the stack:
+
+    ```text
+    ▶ Wait for the machines to deploy OpenVidu…
+       · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-dpdo2-space-d15fca9b1c yet (the machine writes it as it installs)
+       · waiting for OpenVidu to come up (2m10s elapsed): OpenVidu is still installing
+       · OpenVidu is up
+       ✓ Wait for the machines to deploy OpenVidu
+    …
+    ✔ OpenVidu Pro (elastic) is up on DigitalOcean
+      URL:          https://openvidu-7qr30p-142-93-224-169.sslip.io/
+      credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-dpdo2-space-d15fca9b1c/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud digitalocean \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode assisted
+    ```
+
+    --8<-- "self-hosting/digitalocean/ov-assisted.md"
 
 ## Use your own domain
 
@@ -73,10 +90,6 @@ This is how the deploy of a stack named `dpdo2` ends: `ov` waits until OpenVidu 
 ## Access OpenVidu
 
 --8<-- "self-hosting/digitalocean/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/digitalocean/ov-assisted.md"
 
 ## Troubleshooting
 

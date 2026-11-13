@@ -1,4 +1,4 @@
-Before it touches your account, `ov` prints a **short plan**, one numbered line per step, and asks to go ahead. `-y` answers yes in advance: it skips the question, not the plan. `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce10` (region `us-east-1`):
+Before it touches your account, `ov` prints a **short plan**, one numbered line per step, and asks to go ahead. `-y` answers yes in advance: it skips the question, not the plan. `--debug` prints the commands themselves, and [assisted mode](#assisted) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce10` (region `us-east-1`):
 
 ```text
 note: recorded this stack's infrastructure in openvidu-stack.yml, so the command that continues this deploy needs no flags

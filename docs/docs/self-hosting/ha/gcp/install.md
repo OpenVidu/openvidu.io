@@ -43,57 +43,74 @@ High Availability adds two requirements for a production deployment:
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud gcp --gcp-project my-project \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-Four master nodes behind a passthrough TCP load balancer, plus a managed instance group of media nodes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
-
-The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
-
-- **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
-- **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+    The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
     ```bash
-    --domain-name openvidu.example.com --certificate-type owncert \
-      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
-      --owncert-private-key "$(base64 -w0 privkey.pem)"
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --mode auto
     ```
 
-    On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
+    Four master nodes behind a passthrough TCP load balancer, plus a managed instance group of media nodes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
-Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address.
+    The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-With your own domain, **point it at the load balancer**. The deploy does it for you up to the DNS record: as soon as the load balancer exists the deploy prints the `A` record to create (`<domain> A <load_balancer_ip>`), so you can create it while OpenVidu installs. If the name does not point at the stack when OpenVidu is up, the deploy ends with one step left instead of `is up`, and prints the record again:
+    - **`selfsigned`**, the default on High Availability: a certificate the four masters share. Browsers warn about it, so use it only to try out the topology.
+    - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
-```text
-! OpenVidu Pro (high availability) is deployed on Google Cloud, with one step left: openvidu.example.com does not point at it yet.
-  Create this DNS record where its zone is hosted, and it is up:
-    openvidu.example.com.                    A      34.39.52.221
-  URL:          https://openvidu.example.com/ (once the record resolves)
-  Meanwhile `ov stack status` works (it reaches the stack by its address), and
-  `ov stack status --wait` waits for the record too.
-```
+        ```bash
+        --domain-name openvidu.example.com --certificate-type owncert \
+          --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+          --owncert-private-key "$(base64 -w0 privkey.pem)"
+        ```
 
-Create the record as soon as `ov` prints it: `ov stack status --wait` reports `URL not answering yet` until the name resolves to the load balancer.
+        On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
 
-This is how the deploy of a stack named `demo-ha` ends with an `sslip.io` name (nothing to point), followed by `ov stack status --wait` confirming that every node and service is ready:
+    Let's Encrypt and ZeroSSL do **not** work on this topology: their HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address.
 
-```text
-…
-✔ OpenVidu Pro (high availability) is up on Google Cloud
-  URL:          https://openvidu-3jjbjv-34-39-52-221.sslip.io/
-  credentials:  gcloud secrets versions access latest --secret=openvidu-demo-ha-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-demo-ha-)
+    With your own domain, **point it at the load balancer**. The deploy does it for you up to the DNS record: as soon as the load balancer exists the deploy prints the `A` record to create (`<domain> A <load_balancer_ip>`), so you can create it while OpenVidu installs. If the name does not point at the stack when OpenVidu is up, the deploy ends with one step left instead of `is up`, and prints the record again:
 
-$ ov stack status --wait
-waiting for https://openvidu-3jjbjv-34-39-52-221.sslip.io to be ready (Ctrl-C to stop)…
-✔ demo-ha is ready (https://openvidu-3jjbjv-34-39-52-221.sslip.io)
-```
+    ```text
+    ! OpenVidu Pro (high availability) is deployed on Google Cloud, with one step left: openvidu.example.com does not point at it yet.
+      Create this DNS record where its zone is hosted, and it is up:
+        openvidu.example.com.                    A      34.39.52.221
+      URL:          https://openvidu.example.com/ (once the record resolves)
+      Meanwhile `ov stack status` works (it reaches the stack by its address), and
+      `ov stack status --wait` waits for the record too.
+    ```
+
+    Create the record as soon as `ov` prints it: `ov stack status --wait` reports `URL not answering yet` until the name resolves to the load balancer.
+
+    This is how the deploy of a stack named `demo-ha` ends with an `sslip.io` name (nothing to point), followed by `ov stack status --wait` confirming that every node and service is ready:
+
+    ```text
+    …
+    ✔ OpenVidu Pro (high availability) is up on Google Cloud
+      URL:          https://openvidu-3jjbjv-34-39-52-221.sslip.io/
+      credentials:  gcloud secrets versions access latest --secret=openvidu-demo-ha-OPENVIDU_URL --project=my-project  (every secret starts with openvidu-demo-ha-)
+
+    $ ov stack status --wait
+    waiting for https://openvidu-3jjbjv-34-39-52-221.sslip.io to be ready (Ctrl-C to stop)…
+    ✔ demo-ha is ready (https://openvidu-3jjbjv-34-39-52-221.sslip.io)
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud gcp --gcp-project my-project \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --mode assisted
+    ```
+
+    --8<-- "self-hosting/gcp/ov-assisted.md"
 
 ## What the deploy runs { #what-the-deploy-runs }
 
@@ -106,10 +123,6 @@ waiting for https://openvidu-3jjbjv-34-39-52-221.sslip.io to be ready (Ctrl-C to
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/gcp/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/gcp/ov-assisted.md"
 
 ## Troubleshooting { #troubleshooting }
 

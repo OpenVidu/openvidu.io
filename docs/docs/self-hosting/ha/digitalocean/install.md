@@ -39,44 +39,61 @@ On High Availability there are two topology-specific points:
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud digitalocean \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-Four master nodes behind a passthrough load balancer, plus an autoscaling pool of media nodes, in a VPC the template creates. The VPC is a `/24` the template derives from the stack's name inside `10.64.0.0`-`10.99.255.0`, so several stacks share an account and a region; `--param vpcIpRange=<cidr>` picks another (keep it clear of the ranges DigitalOcean reserves in the region and of `10.42.0.0/16` and `10.43.0.0/16`, which the cluster uses inside the nodes). A stack that exists keeps its range. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol (default `0.0.0.0/0`).
-
-The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
-
-- **`selfsigned`**, the default: a certificate the four masters share. Browsers warn about it, so use it only to try the topology out.
-- **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
+    The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
     ```bash
-    --domain-name openvidu.example.com --certificate-type owncert \
-      --owncert-public-key "$(base64 -w0 fullchain.pem)" \
-      --owncert-private-key "$(base64 -w0 privkey.pem)"
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud digitalocean \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --mode auto
     ```
 
-    On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
+    Four master nodes behind a passthrough load balancer, plus an autoscaling pool of media nodes, in a VPC the template creates. The VPC is a `/24` the template derives from the stack's name inside `10.64.0.0`-`10.99.255.0`, so several stacks share an account and a region; `--param vpcIpRange=<cidr>` picks another (keep it clear of the ranges DigitalOcean reserves in the region and of `10.42.0.0/16` and `10.43.0.0/16`, which the cluster uses inside the nodes). A stack that exists keeps its range. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol (default `0.0.0.0/0`).
 
-Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address. With your own domain, point an `A` record at that address: the deploy prints the record to create (`openvidu.example.com. A <loadBalancerIp>`) as soon as the load balancer exists, while it waits for the machines, so create it then. If the domain does not resolve yet when OpenVidu is up, the deploy ends with `! OpenVidu Pro (high availability) is deployed on DigitalOcean, with one step left: openvidu.example.com does not point at it yet.` and the record again, and `ov stack status --wait` reports `URL not answering yet` until the record resolves. The address is also the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`.
+    The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 
-This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
+    - **`selfsigned`**, the default: a certificate the four masters share. Browsers warn about it, so use it only to try the topology out.
+    - **`owncert`**, for production: your own certificate for your domain, base64-encoded. Add these flags to the command above:
 
-```text
-…
-✔ OpenVidu Pro (high availability) is up on DigitalOcean
-  URL:          https://openvidu-j78sfb-129-212-214-216.sslip.io/
-  credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-demo-ha-space-appdata-b62adba1a3/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+        ```bash
+        --domain-name openvidu.example.com --certificate-type owncert \
+          --owncert-public-key "$(base64 -w0 fullchain.pem)" \
+          --owncert-private-key "$(base64 -w0 privkey.pem)"
+        ```
 
-$ ov stack status --wait
-waiting for https://openvidu-j78sfb-129-212-214-216.sslip.io to be ready (Ctrl-C to stop)…
-✔ demo-ha is ready (https://openvidu-j78sfb-129-212-214-216.sslip.io)
-```
+        On a cloud the certificate travels as a template parameter, so pass its content, base64-encoded as above, not the path to the file.
+
+    Without `--domain-name` the stack answers at an `sslip.io` name derived from the load balancer's address. With your own domain, point an `A` record at that address: the deploy prints the record to create (`openvidu.example.com. A <loadBalancerIp>`) as soon as the load balancer exists, while it waits for the machines, so create it then. If the domain does not resolve yet when OpenVidu is up, the deploy ends with `! OpenVidu Pro (high availability) is deployed on DigitalOcean, with one step left: openvidu.example.com does not point at it yet.` and the record again, and `ov stack status --wait` reports `URL not answering yet` until the record resolves. The address is also the `loadBalancerIp` output of `terraform -chdir=.openvidu/digitalocean output`.
+
+    This is how the deploy of a stack named `demo-ha` ends, followed by `ov stack status --wait` confirming that every node and service is ready:
+
+    ```text
+    …
+    ✔ OpenVidu Pro (high availability) is up on DigitalOcean
+      URL:          https://openvidu-j78sfb-129-212-214-216.sslip.io/
+      credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-demo-ha-space-appdata-b62adba1a3/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
+
+    $ ov stack status --wait
+    waiting for https://openvidu-j78sfb-129-212-214-216.sslip.io to be ready (Ctrl-C to stop)…
+    ✔ demo-ha is ready (https://openvidu-j78sfb-129-212-214-216.sslip.io)
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud digitalocean \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --mode assisted
+    ```
+
+    --8<-- "self-hosting/digitalocean/ov-assisted.md"
 
 ## What the deploy runs
 
@@ -89,10 +106,6 @@ waiting for https://openvidu-j78sfb-129-212-214-216.sslip.io to be ready (Ctrl-C
 ## Access OpenVidu
 
 --8<-- "self-hosting/digitalocean/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/digitalocean/ov-assisted.md"
 
 ## Troubleshooting
 

@@ -1,10 +1,4 @@
-`--mode assisted` runs **nothing at all** in your account. It only reads what it needs to write the plan (the default VPC, the instance types the region offers, and, with a domain, the Route 53 zone), writes the rendered template and its parameters to `.openvidu/aws/`, and prints the commands, for you to read, change and run yourself:
-
-```bash
-ov stack deploy pro --cloud aws --aws-region us-east-1 \
-  --edition pro --openvidu-pro-license <your-license> \
-  --certificate-type letsencrypt --mode assisted
-```
+**`ov` prints the commands and runs none of them.** It only reads what it needs to write them (the default VPC, the instance types the region offers, and, with a domain, the Route 53 zone) and writes the rendered template and its parameters to `.openvidu/aws/`. This is the plan of a PRO stack named `pro`:
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
@@ -23,7 +17,9 @@ stack. It creates nothing in your account.
 ── end of plan ────────────────────────────────────────────────────────
 ```
 
-Once your commands have finished, run the command it ends with. It needs no other flags, since every parameter is already in `openvidu-stack.yml`, but it **carries the stack's name** (`pro`): without it the stack would be registered as `openvidu`. When the CloudFormation stack is there as this deploy asks for it (complete, with the same parameters), the deploy ends without asking anything:
+**Run them yourself**, with your own credentials. Read them first, and change them if you need to.
+
+**Then run the command the plan ends with.** It needs no other flags, since every parameter is already in `openvidu-stack.yml`, but it **carries the stack's name** (`pro`): without it the stack would be registered as `openvidu`. When the CloudFormation stack is there as this deploy asks for it (complete, with the same parameters), `ov` finds the machines, waits for OpenVidu and registers the stack, creating nothing:
 
 ```text
 The machines on AWS are there, as this deploy asks for them (CREATE_COMPLETE): it ends here,

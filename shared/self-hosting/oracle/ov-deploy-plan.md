@@ -1,4 +1,4 @@
-Before it touches your tenancy, auto mode prints a short plan, one line per step, and waits for a yes (`-y` answers in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29; OCIDs and the Object Storage namespace shown as placeholders):
+Before it touches your tenancy, auto mode prints a short plan, one line per step, and waits for a yes (`-y` answers in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#assisted) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29; OCIDs and the Object Storage namespace shown as placeholders):
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────

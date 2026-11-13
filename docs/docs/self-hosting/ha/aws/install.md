@@ -40,52 +40,69 @@ High Availability also needs three things of your own:
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. With the domain in a Route 53 hosted zone of your account, one command does everything, the DNS record and the ACM certificate included:
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --domain-name openvidu.example.com --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-This uses the region's default VPC, the masters spread across its availability zones and the media nodes across all of them. To use a VPC and subnets of your own, pass them with `--param` (a region's default VPC has one subnet per availability zone, so this picks them):
+    The stack lives in its own empty directory. With the domain in a Route 53 hosted zone of your account, one command does everything, the DNS record and the ACM certificate included:
 
-```bash
-mkdir openvidu && cd openvidu
-VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
-  --query 'Vpcs[0].VpcId' --output text --region us-east-1)
-SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
-  --query 'Subnets[].SubnetId' --output text --region us-east-1 | tr '\t' ,)
-ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
-  --domain-name openvidu.example.com \
-  --param OpenViduVPC=$VPC \
-  --param OpenViduMasterNodeSubnets=$SUBNETS \
-  --param OpenViduMediaNodeSubnets=$SUBNETS \
-  --mode auto
-```
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --domain-name openvidu.example.com --mode auto
+    ```
 
-Four master nodes behind a Network Load Balancer, plus an auto scaling group of media nodes. TLS terminates at the load balancer with the ACM certificate, so `--certificate-type` does not apply (if you pass one, the deploy warns and goes on). The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`); see [Scale the media nodes](./admin.md#scale-the-media-nodes). To serve TURN over TLS on a domain of its own, with its own load balancer, add `--turn-domain-name turn.example.com` (and `--param TurnCertificateARN=<arn>` when you bring its certificate). `--aws-cluster-api-cidr <cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+    This uses the region's default VPC, the masters spread across its availability zones and the media nodes across all of them. To use a VPC and subnets of your own, pass them with `--param` (a region's default VPC has one subnet per availability zone, so this picks them):
 
-**If your domain is not in Route 53** (another provider or another account), pass the certificate with `--param OpenViduCertificateARN=<arn>`, and once the stack exists, **point the domain at the load balancer**: a CNAME (or a Route 53 alias record) to the stack's `NLBDNS` output. Nothing serves the domain until you do. The deploy prints the record as soon as the machines exist, so you can create it while they deploy. This prints the `NLBDNS` output (the CloudFormation stack is `openvidu-<name>`):
+    ```bash
+    mkdir openvidu && cd openvidu
+    VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
+      --query 'Vpcs[0].VpcId' --output text --region us-east-1)
+    SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
+      --query 'Subnets[].SubnetId' --output text --region us-east-1 | tr '\t' ,)
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --domain-name openvidu.example.com \
+      --param OpenViduVPC=$VPC \
+      --param OpenViduMasterNodeSubnets=$SUBNETS \
+      --param OpenViduMediaNodeSubnets=$SUBNETS \
+      --mode auto
+    ```
 
-```bash
-aws cloudformation describe-stacks --stack-name openvidu-openvidu --region us-east-1 \
-  --query "Stacks[0].Outputs[?OutputKey=='NLBDNS'].OutputValue" --output text
-```
+    Four master nodes behind a Network Load Balancer, plus an auto scaling group of media nodes. TLS terminates at the load balancer with the ACM certificate, so `--certificate-type` does not apply (if you pass one, the deploy warns and goes on). The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`); see [Scale the media nodes](./admin.md#scale-the-media-nodes). To serve TURN over TLS on a domain of its own, with its own load balancer, add `--turn-domain-name turn.example.com` (and `--param TurnCertificateARN=<arn>` when you bring its certificate). `--aws-cluster-api-cidr <cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
-Because the load balancer terminates TLS, `ov stack status --wait` only counts nodes and services; the URL is checked at the load balancer. This is the wait of a stack named `demo-ha`:
+    **If your domain is not in Route 53** (another provider or another account), pass the certificate with `--param OpenViduCertificateARN=<arn>`, and once the stack exists, **point the domain at the load balancer**: a CNAME (or a Route 53 alias record) to the stack's `NLBDNS` output. Nothing serves the domain until you do. The deploy prints the record as soon as the machines exist, so you can create it while they deploy. This prints the `NLBDNS` output (the CloudFormation stack is `openvidu-<name>`):
 
-```console
-$ ov stack status --wait
-note: the stack runs behind a proxy that terminates TLS, so its URL is checked at that proxy: the wait counts nodes and services only
-waiting for https://openvidu.example.com to be ready (Ctrl-C to stop)…
-  ⏳ master nodes 4/4, media nodes 1/1, services 41/49 (0s)
-…
-  ⏳ master nodes 4/4, media nodes 1/1, services 48/49 (44s)
-✔ demo-ha is ready (every node and service; its URL answers at the proxy in front of it)
-```
+    ```bash
+    aws cloudformation describe-stacks --stack-name openvidu-openvidu --region us-east-1 \
+      --query "Stacks[0].Outputs[?OutputKey=='NLBDNS'].OutputValue" --output text
+    ```
+
+    Because the load balancer terminates TLS, `ov stack status --wait` only counts nodes and services; the URL is checked at the load balancer. This is the wait of a stack named `demo-ha`:
+
+    ```console
+    $ ov stack status --wait
+    note: the stack runs behind a proxy that terminates TLS, so its URL is checked at that proxy: the wait counts nodes and services only
+    waiting for https://openvidu.example.com to be ready (Ctrl-C to stop)…
+      ⏳ master nodes 4/4, media nodes 1/1, services 41/49 (0s)
+    …
+      ⏳ master nodes 4/4, media nodes 1/1, services 48/49 (44s)
+    ✔ demo-ha is ready (every node and service; its URL answers at the proxy in front of it)
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type ha \
+      --domain-name openvidu.example.com --mode assisted
+    ```
+
+    --8<-- "self-hosting/aws/ov-assisted.md"
 
 ## What the deploy runs
 
@@ -98,10 +115,6 @@ waiting for https://openvidu.example.com to be ready (Ctrl-C to stop)…
 ## Access OpenVidu
 
 --8<-- "self-hosting/aws/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/aws/ov-assisted.md"
 
 ## Troubleshooting
 

@@ -31,40 +31,67 @@ The deployed services are the same as in the [On Premises Single Node installati
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
+=== "Auto"
 
-=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud azure --azure-location northeurope \
-      --certificate-type letsencrypt --mode auto
-    ```
+    Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
-    One virtual machine (`Standard_D4s_v3` by default, `--param instanceType=<size>` to change it) running OpenVidu on Docker Compose.
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud azure --azure-location northeurope \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```bash
-    mkdir openvidu && cd openvidu
-    ov stack deploy openvidu --cloud azure --azure-location northeurope \
-      --edition pro --openvidu-pro-license <your-license> \
-      --certificate-type letsencrypt --mode auto
-    ```
+        One virtual machine (`Standard_D4s_v3` by default, `--param instanceType=<size>` to change it) running OpenVidu on Docker Compose.
 
-    One virtual machine running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who may reach port 6443, the stack's remote admin control protocol, which `ov` administers the stack through. It gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    This is how the deploy of a stack named `dpaz1` ends: `ov` waits until OpenVidu is up, then registers it:
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud azure --azure-location northeurope \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode auto
+        ```
 
-    ```text
-    …
-       · OpenVidu is up
-       ✓ Wait for the machines to deploy OpenVidu
-    …
-    ✔ OpenVidu Pro (single node) is up on Azure
-      URL:          https://openvidu-j064da-104-41-221-2.sslip.io/
-      credentials:  az keyvault secret show --vault-name openvidu-dpaz1-keyvault --name OPENVIDU-URL --query value -o tsv
-    ```
+        One virtual machine running OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who may reach port 6443, the stack's remote admin control protocol, which `ov` administers the stack through. It gives full control of the stack, so do not leave it open to `0.0.0.0/0` in production.
+
+        This is how the deploy of a stack named `dpaz1` ends: `ov` waits until OpenVidu is up, then registers it:
+
+        ```text
+        …
+           · OpenVidu is up
+           ✓ Wait for the machines to deploy OpenVidu
+        …
+        ✔ OpenVidu Pro (single node) is up on Azure
+          URL:          https://openvidu-j064da-104-41-221-2.sslip.io/
+          credentials:  az keyvault secret show --vault-name openvidu-dpaz1-keyvault --name OPENVIDU-URL --query value -o tsv
+        ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud azure --azure-location northeurope \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+        ```bash
+        mkdir openvidu && cd openvidu
+        ov stack deploy openvidu --cloud azure --azure-location northeurope \
+          --edition pro --openvidu-pro-license <your-license> \
+          --certificate-type letsencrypt --mode assisted
+        ```
+
+    --8<-- "self-hosting/azure/ov-assisted.md"
 
 ## Use your own domain
 
@@ -83,10 +110,6 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 <span id="check-deployment-outputs-in-the-instance"></span>
 
 --8<-- "self-hosting/azure/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/azure/ov-assisted.md"
 
 ## Troubleshooting
 

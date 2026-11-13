@@ -31,17 +31,35 @@ Elastic adds one requirement when the media nodes autoscale:
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory:
+=== "Auto"
 
-```bash
-export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-  --certificate-type letsencrypt --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-One master node and an autoscaling pool of media nodes: one to start with, between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, adding one when their average CPU goes over `scaleTargetCPU` (all `--param`). `--set infrastructure.mediaNodes.fixedCount=N` (or `--param fixedNumberOfMediaNodes=N`) runs exactly N media nodes with no autoscaling and no scale-in Function, on this deploy or on a later redeploy. To change the count, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+    The stack lives in its own empty directory:
+
+    ```bash
+    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode auto
+    ```
+
+    One master node and an autoscaling pool of media nodes: one to start with, between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, adding one when their average CPU goes over `scaleTargetCPU` (all `--param`). `--set infrastructure.mediaNodes.fixedCount=N` (or `--param fixedNumberOfMediaNodes=N`) runs exactly N media nodes with no autoscaling and no scale-in Function, on this deploy or on a later redeploy. To change the count, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    export OCI_COMPARTMENT_OCID=ocid1.compartment.oc1..<compartment>
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode assisted
+    ```
+
+    --8<-- "self-hosting/oracle/ov-assisted.md"
 
 ## Use your own domain { #use-your-own-domain }
 
@@ -58,10 +76,6 @@ One master node and an autoscaling pool of media nodes: one to start with, betwe
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/oracle/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/oracle/ov-assisted.md"
 
 ## Troubleshooting { #troubleshooting }
 

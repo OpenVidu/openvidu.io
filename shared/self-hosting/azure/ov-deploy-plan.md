@@ -1,4 +1,4 @@
-Before it touches your subscription, the deploy prints a short plan, one line per step, and asks for confirmation (`-y` confirms in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
+Before it touches your subscription, the deploy prints a short plan, one line per step, and asks for confirmation (`-y` confirms in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#assisted) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
 
 ```text
 note: recorded this stack's infrastructure in openvidu-stack.yml, so the command that continues this deploy needs no flags

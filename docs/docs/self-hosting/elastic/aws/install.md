@@ -41,47 +41,64 @@ Elastic also needs a **VPC** with public subnets, one for the master node and on
 
 --8<-- "self-hosting/common/ov-cloud-modes.md"
 
-The stack lives in its own empty directory. With no network parameters, Elastic uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
+=== "Auto"
 
-```bash
-mkdir openvidu && cd openvidu
-ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-  --certificate-type letsencrypt --mode auto
-```
+    --8<-- "self-hosting/common/ov-cloud-auto.md"
 
-To run in a VPC of your own, pass **all three** network parameters (`ov` then uses them as they are and reads nothing). The reads below pick the default VPC's IDs; point them at your own, and keep `--region` the same as the deploy:
+    The stack lives in its own empty directory. With no network parameters, Elastic uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
 
-```bash
-mkdir openvidu && cd openvidu
-VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
-  --query 'Vpcs[0].VpcId' --output text --region us-east-1)
-SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
-  --query 'Subnets[].SubnetId' --output text --region us-east-1 | tr '\t' ,)
-ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
-  --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
-  --param OpenViduVPC=$VPC \
-  --param OpenViduMasterNodeSubnet=${SUBNETS%%,*} \
-  --param OpenViduMediaNodeSubnets=$SUBNETS \
-  --certificate-type letsencrypt --mode auto
-```
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-Pass the three together or none: `ov` refuses part of a network (exit `2`), and the template checks that every subnet is in that VPC.
+    To run in a VPC of your own, pass **all three** network parameters (`ov` then uses them as they are and reads nothing). The reads below pick the default VPC's IDs; point them at your own, and keep `--region` the same as the deploy:
 
-One master node and an auto scaling group of media nodes. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--param FixedNumberOfMediaNodes=N` (equivalently `--set infrastructure.mediaNodes.fixedCount=N`) runs exactly N of them, on the first deploy and on a redeploy. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--aws-cluster-api-cidr <cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+    ```bash
+    mkdir openvidu && cd openvidu
+    VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true \
+      --query 'Vpcs[0].VpcId' --output text --region us-east-1)
+    SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$VPC Name=default-for-az,Values=true \
+      --query 'Subnets[].SubnetId' --output text --region us-east-1 | tr '\t' ,)
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --param OpenViduVPC=$VPC \
+      --param OpenViduMasterNodeSubnet=${SUBNETS%%,*} \
+      --param OpenViduMediaNodeSubnets=$SUBNETS \
+      --certificate-type letsencrypt --mode auto
+    ```
 
-This is how the deploy of a stack named `el` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
+    Pass the three together or none: `ov` refuses part of a network (exit `2`), and the template checks that every subnet is in that VPC.
 
-```text
-…
-▶ Wait for the machines to deploy OpenVidu…
-   · OpenVidu is up
-   ✓ Wait for the machines to deploy OpenVidu
-…
-✔ OpenVidu Pro (elastic) is up on AWS
-  URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
-  credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-el --query SecretString --output text --region eu-south-2
-```
+    One master node and an auto scaling group of media nodes. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--param FixedNumberOfMediaNodes=N` (equivalently `--set infrastructure.mediaNodes.fixedCount=N`) runs exactly N of them, on the first deploy and on a redeploy. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--aws-cluster-api-cidr <cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
+
+    This is how the deploy of a stack named `el` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
+
+    ```text
+    …
+    ▶ Wait for the machines to deploy OpenVidu…
+       · OpenVidu is up
+       ✓ Wait for the machines to deploy OpenVidu
+    …
+    ✔ OpenVidu Pro (elastic) is up on AWS
+      URL:          https://openvidu-239b62-51-95-197-8.sslip.io/
+      credentials:  aws secretsmanager get-secret-value --secret-id openvidu-elastic-eu-south-2-openvidu-el --query SecretString --output text --region eu-south-2
+    ```
+
+=== "Assisted"
+
+    **Run the deploy with `--mode assisted`**; every other flag is as in the Auto tab:
+
+    ```bash
+    mkdir openvidu && cd openvidu
+    ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
+      --edition pro --openvidu-pro-license <your-license> --deployment-type elastic \
+      --certificate-type letsencrypt --mode assisted
+    ```
+
+    --8<-- "self-hosting/aws/ov-assisted.md"
 
 ## Use your own domain
 
@@ -98,10 +115,6 @@ This is how the deploy of a stack named `el` (in `eu-south-2`) ends: `ov` waits 
 ## Access OpenVidu
 
 --8<-- "self-hosting/aws/ov-access.md"
-
-## Assisted mode: run the commands yourself { #assisted-mode }
-
---8<-- "self-hosting/aws/ov-assisted.md"
 
 ## Troubleshooting
 
