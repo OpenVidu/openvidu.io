@@ -17,6 +17,8 @@ A few settings of a [room](../rooms/overview.md) shape every meeting held in it.
 !!! info
     The **Features** section of the same step toggles the in-meeting features that have their own page: [End-to-End Encryption](e2e-encryption.md), [Live Captions](live-captions.md), chat and [Virtual Backgrounds](virtual-background.md).
 
+    The **Room Access** step holds one more setting that shapes who enters every meeting: the [waiting room](waiting-room.md), the `waitingRoom` property of the room configuration, which makes participants ask to join and wait until a moderator admits them.
+
 ## Participant limit { #participant-limit }
 
 The **participant limit** caps how many participants may be in the meeting at the same time, from 1 to 30. Once it is reached, anyone else trying to join is told the meeting is full. Leave it empty for no limit.

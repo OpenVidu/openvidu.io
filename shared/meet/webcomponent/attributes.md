@@ -13,6 +13,6 @@
 | `language` | Language the interface starts in, on the meeting and recording screens alike: `en`, `es`, `de`, `fr`, `zh` (Simplified), `hi`, `it`, `ja`, `nl` or `pt` (European). A regional variant uses its language (`pt-BR` is `pt`). `auto` uses the browser's preferred languages, and English when none is available. It **overrides the participant's previous choice**, which they can still change unless `show-language-selector` is `false`. An unsupported value is ignored. | No |
 | `show-language-selector` | Show the language selectors (`true` by default). `"false"` hides them, so the participant cannot change the language. | No |
 | `e2ee-key` | Secret key for end-to-end encryption (E2EE). Used only in a room whose `config.e2ee.enabled` is `true`, where it fills the join screen's encryption key; ignored otherwise. | No |
-| `leave-redirect-url` | URL to redirect to when the participant dismisses the post-meeting, join, error or recording screen, right after the **`embeddedCloseRequested` event** fires. | No |
+| `leave-redirect-url` | URL to redirect to when the participant dismisses the post-meeting, join, error or recording screen, or the end screen of the waiting room, right after the **`embeddedCloseRequested` event** fires. | No |
 | `show-only-recordings` | Show only the recordings instead of the live meeting. A bare attribute or any value other than `"false"` is `true`. | No |
 | `show-recording` | Identifier of the recording to display. When provided along with `room-url`, the app redirects to the recording view. | No |

@@ -27,9 +27,10 @@ The access link for an [identified guest](../room-members/overview.md) is unique
 
 ## In this section
 
-- [Meeting lifecycle](lifecycle.md) — the series of views a room member moves through, from opening a room access link until the meeting ends: Join, Device, Meeting, Recordings and End.
+- [Meeting lifecycle](lifecycle.md): the series of views a room member moves through, from opening a room access link until the meeting ends: Join, Device, Waiting, Meeting, Recordings and End.
 - [Meeting configuration](configuration.md) — the participant and duration limits of the meetings held in a room, and whether participants join with the microphone and camera on.
 - [Meeting Moderation](moderation.md) — mute a participant's microphone, camera or screen share, or everyone's at once, and remove participants from the meeting.
+- [Waiting Room](waiting-room.md): participants ask to join and wait until a moderator admits or rejects them, from the meeting, the REST API or your app.
 - [Raise Hand](raise-hand.md) — participants raise their hand to ask for a turn, everyone sees the queue, and moderators lower hands.
 - [Reactions](reactions.md): participants react with an emoji that everyone sees for a few seconds, on their tile, in the participants panel and in the status rail.
 - [Live Broadcast](live-broadcast.md): stream the meeting live to YouTube, Twitch or any RTMP server, to several destinations at once.

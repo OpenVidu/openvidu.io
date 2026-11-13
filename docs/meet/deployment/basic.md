@@ -40,6 +40,8 @@ This section contains the instructions to deploy a production-ready deployment o
 
     The [port rules of OpenVidu Single Node](../../docs/self-hosting/single-node/on-premises/install.md#port-rules) explain each one.
 
+- A proxy or load balancer of your own in front of OpenVidu Meet must let WebSocket upgrades through on the Meet path (`/meet` by default), passing the `Upgrade` and `Connection` headers, and keep idle connections open for more than 20 seconds. The proxy and load balancers that OpenVidu deploys already do.
+
 ## Installation
 
 OpenVidu Meet is installed with the [OpenVidu CLI](../../docs/self-hosting/openvidu-cli.md) (`ov`), which deploys an OpenVidu Single Node with OpenVidu Meet on. [Install the CLI](../../docs/self-hosting/openvidu-cli.md#install-the-openvidu-cli) on your machine or on the server, then deploy from an empty directory.
@@ -87,6 +89,10 @@ OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refe
 - [Check logs](../../docs/self-hosting/single-node/on-premises/admin.md#logs)
 - [Upgrade OpenVidu Meet to a newer version](../../docs/self-hosting/single-node/upgrade.md)
 - [Uninstall OpenVidu Meet](../../docs/self-hosting/single-node/on-premises/admin.md#destroy)
+
+## Troubleshooting { #troubleshooting }
+
+**A meeting shows the connection error screen while a participant waits to be let in**, and the browser console shows an error naming a WebSocket URL. A proxy or network between the browser and OpenVidu Meet blocks WebSocket upgrades. The proxy and load balancers that OpenVidu deploys already let them through, so look at a proxy or load balancer of your own, or at the participant's network: it must pass the `Upgrade` and `Connection` headers on the Meet path (`/meet` by default) and keep idle connections open for more than 20 seconds, as the [networking requirements](#networking) say. In a multi-node deployment, see also [Proxies, load balancers and Redis](./advanced.md#proxies-load-balancers-and-redis).
 
 ## Other deployment options
 
