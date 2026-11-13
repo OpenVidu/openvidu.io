@@ -23,7 +23,7 @@ The sections up to [Export the desired state](#export) are the operations every 
 ov stack deploy openvidu --cloud azure --param instanceType=Standard_D8s_v3 --mode auto -y
 ```
 
-See [Changing configuration](../../configuration/changing-config.md) for OpenVidu's own settings, which change without touching the machine.
+See [Changing configuration](../../configuration/changing-config.md) for OpenVidu's own settings, which change without touching the machine. The settings a redeploy gives as flags (`--domain-name`, `--certificate-type`, the license, `--set`) are applied the same way, in the running stack.
 
 ## Operate from another machine
 

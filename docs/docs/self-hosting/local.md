@@ -345,7 +345,7 @@ API        9080        tcp     OpenVidu Meet on localhost (listed always: the co
 LAN        6443        tcp     Your application backend (localhost:6080) over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
 LAN        5443        tcp     Your application frontend (localhost:5080) over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
 LAN        7443        tcp     OpenVidu / LiveKit server API over HTTPS/WSS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
-LAN        9443        tcp     OpenVidu Meet over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access is on)
+LAN        9443        tcp     OpenVidu Meet over HTTPS for the LAN (listed always: the container publishes it; it answers once LAN access and meet are on)
 Debug      27017       tcp     MongoDB
 Debug      6379        tcp     Redis
 Debug      9000        tcp     MinIO S3 API (recordings storage)

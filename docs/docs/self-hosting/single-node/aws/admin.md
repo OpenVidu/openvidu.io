@@ -23,7 +23,7 @@ The sections up to [Export the desired state](#export) are the operations every 
 ov stack deploy openvidu --cloud aws --param InstanceType=c6a.2xlarge --mode auto -y
 ```
 
-The stack that exists is updated with the parameters that changed; a redeploy with the same parameters reuses it as it is. For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md).
+The stack that exists is updated with the parameters that changed; a redeploy with the same parameters reuses it as it is. A new instance type stops the machine for a few minutes and starts it with the new type. For OpenVidu's own settings, which change without touching the machine, see [Changing configuration](../../configuration/changing-config.md). The settings a redeploy gives as flags (`--domain-name`, `--certificate-type`, the license, `--set`) are applied the same way, in the running stack.
 
 ## Operate from another machine
 

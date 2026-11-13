@@ -4,7 +4,7 @@
 | Virtual machines | One for Single Node; master nodes and a scale set of media nodes for Elastic and High Availability |
 | A static public IP and a network security group | The ports OpenVidu needs, open to the internet |
 | A load balancer | High Availability only |
-| A Storage Account and a Blob container (`openvidu-appdata`) | Recordings and OpenVidu Meet data. `--param storageAccountName=<name>` uses your own |
+| A Storage Account and a Blob container (`openvidu-appdata`) | Recordings and OpenVidu Meet data. `--param storageAccountName=<name>` uses your own, which on High Availability must also hold a container named `openvidu-clusterdata` |
 | A Key Vault, `openvidu-<name>-keyvault` | What the stack publishes: URL and credentials (and, on PRO, the access `ov` administers it with) |
 | An SSH key pair | `ov` generates it; the private half stays in `.openvidu/azure/` |
 
