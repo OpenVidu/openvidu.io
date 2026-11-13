@@ -10,4 +10,4 @@ You need neither an SSH key nor a domain. On **COMMUNITY**{ .openvidu-tag .openv
 
 !!! warning "Service-account key creation (COMMUNITY)"
 
-    On **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } the template mints a Cloud Storage service-account key that egress uses to upload recordings. An organization policy that blocks key creation (`iam.disableServiceAccountKeyCreation`) stops the apply. Allow key creation in the project, or the deploy cannot finish. **PRO**{ .openvidu-tag .openvidu-pro-tag } does not need it: it reaches Cloud Storage through its S3-compatible API with HMAC keys, so this policy does not block a PRO deploy.
+    On **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } the deploy mints a Cloud Storage service-account key for egress to upload recordings with, so an organization policy that blocks key creation (`iam.disableServiceAccountKeyCreation`) stops the apply: allow key creation in the project. **PRO**{ .openvidu-tag .openvidu-pro-tag } does not need it (it uses HMAC keys over the S3-compatible API).

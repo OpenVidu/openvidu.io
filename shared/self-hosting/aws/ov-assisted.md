@@ -18,4 +18,4 @@ From there the deploy waits for OpenVidu to come up, reads the access the stack
 published and registers this directory as the stack, exactly as it would have done here.
 ```
 
-The continuation **carries the stack's name** (`pro`): without it the stack would be registered as `openvidu`. It needs no other flags: the desired state, the CloudFormation stack's name and every parameter are already in `openvidu-stack.yml`, and a CloudFormation stack that already exists is **reused**, not created again.
+The continuation **carries the stack's name** (`pro`): without it the stack would be registered as `openvidu`. It needs no other flags, since every parameter is already in `openvidu-stack.yml`, and a CloudFormation stack that already exists is **reused**, not created again.

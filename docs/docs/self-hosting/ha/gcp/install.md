@@ -36,7 +36,7 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 High Availability adds two requirements for a production deployment:
 
-- **Your own domain and certificate.** The four masters sit behind a passthrough TCP load balancer that passes TLS through untouched, so Let's Encrypt and ZeroSSL cannot be issued on this topology (their HTTP challenge reaches a port 80 that only redirects to HTTPS). Use the default `selfsigned` certificate only to try the topology out, and `owncert` with your own domain for production.
+- **Your own domain and certificate.** The four masters sit behind a passthrough TCP load balancer, so Let's Encrypt and ZeroSSL cannot be issued on this topology (see [Deploy](#deploy)). Use the default `selfsigned` certificate only to try the topology out, and `owncert` with your own domain for production.
 - **A DNS record you point at the load balancer**, which `ov` prints as soon as the load balancer exists (see below). No Google Cloud template points a domain for you.
 
 ## Deploy { #deploy }

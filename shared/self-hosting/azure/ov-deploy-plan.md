@@ -20,50 +20,33 @@ Every command is shown with `--debug`, and `--mode assisted` prints them all too
     ```text
     This is what will be done in your Azure subscription (location northeurope):
 
-      # SSH access: the key pair for this stack, its public half handed to the template.
-      #   .openvidu/azure/openvidu-ce12a-key.pub
-      # The template, rendered from the one embedded in this CLI for the single node topology,
-      # written out for you to read (az compiles the Bicep itself):
-      #   .openvidu/azure/cf-openvidu-singlenode.bicep
+      # The key pair for this stack, its public half handed to the template (.openvidu/azure/openvidu-ce12a-key.pub).
+      # Render the template (az compiles the Bicep itself): .openvidu/azure/cf-openvidu-singlenode.bicep
       az group create --name openvidu-ce12a-rg --location northeurope --only-show-errors -o none
-      # Create the machine. deployedBy=instance: it installs OpenVidu on itself with the
-      # OpenVidu CLI. The command returns when Azure is done (about 4 minutes); OpenVidu comes up after.
+      # Create the machine; it installs OpenVidu on itself. The command returns when Azure is done (about 4 minutes); OpenVidu comes up after.
       az deployment group create --resource-group openvidu-ce12a-rg --name openvidu-ce12a --template-file .openvidu/azure/cf-openvidu-singlenode.bicep --only-show-errors --query properties.provisioningState -o tsv --parameters certificateType=letsencrypt deployedBy=instance … stackName=openvidu-ce12a 'publicIpAddressObject={"newOrExistingOrNone":"new","name":"openvidu-ce12a-pip"}' adminSshKey="{\"sshPublicKey\":\"$(cat .openvidu/azure/openvidu-ce12a-key.pub)\"}"
 
-      # What the stack published: URL and credentials, as secrets in the Key Vault the deployment outputs (OPENVIDU_URL appears once
-      # OpenVidu serves: until then this read fails, and the command that continues the deploy waits for it).
+      # What the stack published: URL and credentials, as secrets in the Key Vault the deployment outputs (OPENVIDU_URL appears once OpenVidu serves).
       az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs -o json
       KV="$(az deployment group show --resource-group openvidu-ce12a-rg --name openvidu-ce12a --query properties.outputs.sharedInfoKeyVault.value -o tsv)"
       az keyvault secret show --vault-name $KV --name OPENVIDU-URL --query value -o tsv
     ```
 
-Then `ov` runs the commands, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so most of the waiting comes afterwards: `ov` polls the Key Vault for the stack's `OPENVIDU-URL` secret, then checks that the published URL passes Caddy's health check:
+Then `ov` runs the commands, waits for OpenVidu and registers the stack. The `az deployment group create` returns in about four minutes, once Azure has provisioned the VM but before OpenVidu is installed, so most of the waiting comes afterwards:
 
 ```text
 ▶ Create the machines on Azure…
-   · create the resource group openvidu-ce12a-rg in northeurope
-   · create the machines from .openvidu/azure/cf-openvidu-singlenode.bicep (this returns when Azure is done)
+   …
 note: recorded this stack's infrastructure in openvidu-stack.yml, so `ov stack destroy` removes it even if the wait below fails
    ✓ Create the machines on Azure
 
 ▶ Wait for the machines to deploy OpenVidu…
-   · waiting for OpenVidu to come up (2s elapsed): the published values are not readable yet: no secret exists in openvidu-ce12a-keyvault yet
-   · waiting for OpenVidu to come up (1m11s elapsed): the stack has not published its URL yet (OpenVidu is still installing)
+   · waiting for OpenVidu to come up: the stack has not published its URL yet (OpenVidu is still installing)
    …
    · OpenVidu is up: the stack published its URL and https://openvidu-zclupo-40-112-77-3.sslip.io/health/caddy answers 200
    ✓ Wait for the machines to deploy OpenVidu
 
 ▶ Register the stack…
-
-Stack described by the deployment:
-  name         ce12a
-  deployment   single_node · azure · community
-  version      ov-admin
-  modules      dashboard, egress, ingress, meet, observability
-  dashboard    https://openvidu-zclupo-40-112-77-3.sslip.io
-  nodes        40.112.77.3
-  published    by ov/ov-admin on 2026-10-29 16:37 UTC (generation 1)
-
 note: this stack was deployed on the machine itself, so its desired state named 127.0.0.1; retargeted at 40.112.77.3, the host this import reached
 ✔ registered stack "ce12a" in /home/me/ce12a
    ✓ Register the stack

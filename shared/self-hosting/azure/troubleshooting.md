@@ -14,16 +14,6 @@ ov: this Azure subscription cannot hold the stack in northeurope, so nothing was
 Request more vCPU quota for the subscription in northeurope (Azure portal: Quotas > Compute), or deploy smaller or other sizes with --param masterNodeInstanceType=<size> --param mediaNodeInstanceType=<size>.
 ```
 
-Request more quota, pick smaller sizes with `--param`, or deploy in another location.
-
-The check also runs on a redeploy of an Elastic or High Availability stack that raises the number of media nodes it makes sure of (`fixedNumberOfMediaNodes`, or else `minNumberOfMediaNodes`): `ov` reads how many media nodes the scale set holds and checks the quota of the ones it adds, before changing anything (exit `10`):
-
-```text
-ov: this Azure subscription cannot hold the media nodes this deploy adds in northeurope, so nothing was changed:
-  - Standard FSv2 Family vCPUs: 8 needed (1 more media node, Standard_F8s_v2), 2 free (limit 10, 8 in use)
-Request more vCPU quota for the subscription in northeurope (Azure portal: Quotas > Compute), or ask for fewer media nodes.
-```
-
-A higher `maxNumberOfMediaNodes` or `initialNumberOfMediaNodes` is not checked: the media nodes the autoscaler adds later count against the media family's quota when Azure creates them, and do not come up if the subscription cannot hold them.
+Request more quota, pick smaller sizes with `--param`, or deploy in another location. The same check runs on a redeploy that raises the number of media nodes the stack keeps, and stops with exit `10` before changing anything if the media family is short.
 
 **High Availability never gets ready with Let's Encrypt.** On Azure a High Availability stack sits behind a load balancer that passes TLS through to the masters, and Let's Encrypt's HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Deploy High Availability with the default `selfsigned` certificate, or with `owncert` for production.
