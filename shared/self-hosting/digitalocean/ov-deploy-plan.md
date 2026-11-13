@@ -1,4 +1,4 @@
-Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
+Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). `--debug` prints the commands themselves, and [assisted mode](#review-the-commands-first-assisted-mode) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
 
 ```text
 This is what ov does in your DigitalOcean account (region ams3, Spaces in ams3); --debug shows every command:
@@ -11,49 +11,12 @@ This is what ov does in your DigitalOcean account (region ams3, Spaces in ams3);
 Run these in your account? Only yes or y goes ahead [y/N]:
 ```
 
-`--debug` and `--mode assisted` print every command of that plan instead:
+On Elastic the **Machines** step creates the master and the media nodes; on High Availability, the four masters and the media nodes.
 
-??? example "The full command list (click to expand)"
-
-    ```text
-      # Terraform authenticates with the token in the variables file (from DIGITALOCEAN_TOKEN). It
-      # renders the template and its variables (0600, they can carry secrets) under .openvidu/digitalocean/:
-      terraform -chdir=.openvidu/digitalocean init -input=false -no-color -force-copy
-      # Create the machine, which installs OpenVidu on itself (about 1 minute, then OpenVidu installs).
-      terraform -chdir=.openvidu/digitalocean apply -auto-approve -input=false -no-color
-
-      # Read back where the stack is, and what it published (URL and credentials in secrets.env,
-      # in the stack's Space, read with the Spaces keys; it appears once OpenVidu serves).
-      terraform -chdir=.openvidu/digitalocean output
-      SPACE="$(terraform -chdir=.openvidu/digitalocean output -raw appDataBucket)"
-      env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://$SPACE/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
-    ```
-
-Then it runs them, waits for OpenVidu (the `apply` returns in about a minute, before OpenVidu is installed, so most of the wait comes afterwards) and registers the stack:
+Then `ov` creates the machines, waits for OpenVidu and registers the stack in this directory. The machines take a few minutes; most of the wait is OpenVidu installing on them. The deploy ends with the stack's address and how to read its credentials:
 
 ```text
-▶ Create the machines on DigitalOcean…
-   · apply .openvidu/digitalocean (this returns when Terraform is done)
-note: recorded this stack's infrastructure in openvidu-stack.yml, so `ov stack destroy` removes it even if the wait below fails
-   ✓ Create the machines on DigitalOcean
-
-▶ Wait for the machines to deploy OpenVidu…
-   · waiting for OpenVidu to come up (1s elapsed): the published values are not readable yet: secrets.env is not in the Space openvidu-ce12d2-space-dae2e06c8c yet (the machine writes it as it installs)
-   …
-   · OpenVidu is up: the stack published its URL and https://openvidu-324jl8-164-92-159-209.sslip.io/health/caddy answers 200
-   ✓ Wait for the machines to deploy OpenVidu
-
-▶ Register the stack…
-
-Stack described by the deployment:
-  name         ce12d2
-  deployment   single_node · digitalocean · community
-  modules      dashboard, egress, ingress, meet, observability
-  dashboard    https://openvidu-324jl8-164-92-159-209.sslip.io
-  nodes        164.92.159.209
-✔ registered stack "ce12d2" in /home/me/ce12d2
-   ✓ Register the stack
-
+…
 ✔ OpenVidu Community (single node) is up on DigitalOcean
   URL:          https://openvidu-324jl8-164-92-159-209.sslip.io/
   credentials:  env AWS_ACCESS_KEY_ID=$SPACES_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SPACES_SECRET_ACCESS_KEY AWS_SESSION_TOKEN= aws s3 cp s3://openvidu-ce12d2-space-dae2e06c8c/secrets.env - --endpoint-url https://ams3.digitaloceanspaces.com
