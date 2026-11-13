@@ -1,4 +1,4 @@
-`--mode assisted` runs **nothing at all** in your account. It only reads what it needs to write the plan (the default VPC, the instance types the region offers, and, with a domain, the Route 53 zone), writes the rendered template and its parameters to `.openvidu/aws/`, and prints the same commands, for you to read, change and run yourself:
+`--mode assisted` runs **nothing at all** in your account. It only reads what it needs to write the plan (the default VPC, the instance types the region offers, and, with a domain, the Route 53 zone), writes the rendered template and its parameters to `.openvidu/aws/`, and prints the commands, for you to read, change and run yourself:
 
 ```bash
 ov stack deploy pro --cloud aws --aws-region us-east-1 \
@@ -6,16 +6,36 @@ ov stack deploy pro --cloud aws --aws-region us-east-1 \
   --certificate-type letsencrypt --mode assisted
 ```
 
-It ends with the command that continues the deploy once you have run them. On OpenVidu PRO the continuation reads the access the stack published; on Community it reads the stack from the machine over SSH. This output is from a PRO Single Node deploy of a stack named `pro`:
-
 ```text
-Nothing above has been run. Run it yourself, then continue the deploy with this
-command; this CLI reads everything else back from the stack:
+── PLAN · nothing below has run ───────────────────────────────────────
+Run these commands yourself in your AWS account (region us-east-1); ov runs none of them:
 
-  ov stack deploy pro --cloud aws --mode auto
+  # SSH access: the key pair for this stack (.openvidu/aws/openvidu-pro-key.pem), its public half imported here.
+  aws ec2 import-key-pair --key-name openvidu-pro-key --public-key-material fileb://.openvidu/aws/openvidu-pro-key.pub --region us-east-1
+  …
 
-From there the deploy waits for OpenVidu to come up, reads the access the stack
-published and registers this directory as the stack, exactly as it would have done here.
+Nothing above has been run. Once these commands have finished, run this same command again:
+
+  ov stack deploy pro --cloud aws --mode assisted
+
+It finds the machines, waits for OpenVidu to come up and registers this directory as the
+stack. It creates nothing in your account.
+── end of plan ────────────────────────────────────────────────────────
 ```
 
-The continuation **carries the stack's name** (`pro`): without it the stack would be registered as `openvidu`. It needs no other flags, since every parameter is already in `openvidu-stack.yml`, and a CloudFormation stack that already exists is **reused**, not created again.
+Once your commands have finished, run the command it ends with. It needs no other flags, since every parameter is already in `openvidu-stack.yml`, but it **carries the stack's name** (`pro`): without it the stack would be registered as `openvidu`. When the CloudFormation stack is there as this deploy asks for it (complete, with the same parameters), the deploy ends without asking anything:
+
+```text
+The machines on AWS are there, as this deploy asks for them (CREATE_COMPLETE): it ends here,
+creating nothing. It waits for OpenVidu to come up and registers this directory as the stack.
+
+▶ Find the machines on AWS…
+…
+▶ Wait for the machines to deploy OpenVidu…
+…
+▶ Register the stack…
+…
+✔ OpenVidu Pro (single node) is up on AWS
+```
+
+While CloudFormation is still working (a status ending in `_IN_PROGRESS`), it says so and asks you to run the same command again later. If there is no stack yet, or its parameters differ from the ones this deploy asks for, it prints the commands again (the update ones, on a stack that exists). With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.

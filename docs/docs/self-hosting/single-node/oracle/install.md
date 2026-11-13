@@ -23,6 +23,8 @@ Community runs on Docker Compose; PRO runs on Kubernetes. The edition is the onl
 
 ## Deploy { #deploy }
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
@@ -64,7 +66,7 @@ The stack lives in its own empty directory. Choose the edition. The commands nam
 
 --8<-- "self-hosting/oracle/ov-access.md"
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/oracle/ov-assisted.md"
 

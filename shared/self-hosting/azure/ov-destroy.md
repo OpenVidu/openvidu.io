@@ -2,6 +2,7 @@ One command deletes the machines too, and it must be told what happens to the re
 
 ```console
 $ ov stack destroy -y --delete-data
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what will be deleted from your Azure subscription:
 
   # The resource group, which holds everything the stack is: the virtual machine, its
@@ -10,6 +11,7 @@ This is what will be deleted from your Azure subscription:
   az group delete --name openvidu-ce12a-rg --yes --only-show-errors
 
 --delete-data: the recordings and Meet data are in the storage account: this deletes them.
+── end of plan ────────────────────────────────────────────────────────
 
 ▶ Delete the machine on Azure…
    · delete the resource group openvidu-ce12a-rg (the virtual machine, its disk, public IP, network, security group, Key Vault, the storage account with the recordings and Meet data; this returns when Azure is done)

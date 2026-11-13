@@ -1,7 +1,8 @@
-Before it touches your subscription, the deploy prints a short plan, one line per step, and asks for confirmation (`-y` confirms in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#review-the-commands-first-assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
+Before it touches your subscription, the deploy prints a short plan, one line per step, and asks for confirmation (`-y` confirms in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce12a` (northeurope, 2026-10-29):
 
 ```text
 note: recorded this stack's infrastructure in openvidu-stack.yml, so the command that continues this deploy needs no flags
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what ov does in your Azure subscription (location northeurope); --debug shows every command:
 
   1. SSH key: the stack's own key pair, its public half handed to the template (.openvidu/azure/openvidu-ce12a-key.pub)
@@ -9,6 +10,7 @@ This is what ov does in your Azure subscription (location northeurope); --debug 
   3. Resource group: create openvidu-ce12a-rg in northeurope
   4. Machines: Create the deployment openvidu-ce12a with the machine, which installs OpenVidu Community on itself (about 4 minutes)
   5. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+── end of plan ────────────────────────────────────────────────────────
 
 Run these in your account? Only yes or y goes ahead [y/N]:
 ```

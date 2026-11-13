@@ -46,7 +46,7 @@ The Droplets were created but did not finish deploying OpenVidu within the wait 
 ov stack deploy <name> --cloud digitalocean --mode auto
 ```
 
-Name the stack: without the name it would be registered as `openvidu`.
+Name the stack: without the name it would be registered as `openvidu`. A deploy in assisted mode resumes with `--mode assisted` instead: the error prints the command to run.
 
 ### A create failed partway
 

@@ -38,6 +38,8 @@ High Availability also needs three things of your own:
 
 ## Deploy
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. With the domain in a Route 53 hosted zone of your account, one command does everything, the DNS record and the ACM certificate included:
 
 ```bash
@@ -97,7 +99,7 @@ waiting for https://openvidu.example.com to be ready (Ctrl-C to stop)…
 
 --8<-- "self-hosting/aws/ov-access.md"
 
-## Review the commands first: assisted mode
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/aws/ov-assisted.md"
 

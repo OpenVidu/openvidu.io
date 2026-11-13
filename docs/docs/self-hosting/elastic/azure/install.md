@@ -37,6 +37,8 @@ The deployed services are the same as in the [On Premises Elastic installation](
 
 ## Deploy
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
 ```bash
@@ -76,7 +78,7 @@ This is how the deploy of a stack named `dpaz2` ends: `ov` waits until OpenVidu 
 
 --8<-- "self-hosting/azure/ov-access.md"
 
-## Review the commands first: assisted mode
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/azure/ov-assisted.md"
 

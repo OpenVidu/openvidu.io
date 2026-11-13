@@ -1,7 +1,8 @@
-Before it touches your account, `ov` prints a **short plan**, one numbered line per step, and asks to go ahead. `-y` answers yes in advance: it skips the question, not the plan. `--debug` prints the commands themselves, and [assisted mode](#review-the-commands-first-assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce10` (region `us-east-1`):
+Before it touches your account, `ov` prints a **short plan**, one numbered line per step, and asks to go ahead. `-y` answers yes in advance: it skips the question, not the plan. `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is the plan of a Single Node COMMUNITY deploy of a stack named `ce10` (region `us-east-1`):
 
 ```text
 note: recorded this stack's infrastructure in openvidu-stack.yml, so the command that continues this deploy needs no flags
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what ov does in your AWS account (region us-east-1); --debug shows every command:
 
   1. SSH key: import the stack's own key pair into the region (.openvidu/aws/openvidu-ce10-key.pem)
@@ -11,6 +12,7 @@ This is what ov does in your AWS account (region us-east-1); --debug shows every
   4. Network: the region's default VPC, vpc-0a1b2c3d4e5f60789 (the template places the machine there)
   5. Machines: Create the CloudFormation stack openvidu-ce10 with the machine, which installs OpenVidu Community on itself (about 10 minutes)
   6. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+── end of plan ────────────────────────────────────────────────────────
 
 Run these in your account? Only yes or y goes ahead [y/N]:
 ```

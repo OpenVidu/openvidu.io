@@ -2,6 +2,7 @@ One command deletes the machines too, and it must be told what happens to the re
 
 ```console
 $ ov stack destroy -y --delete-data
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what will be deleted from your DigitalOcean account:
 
   # Everything the Terraform state in .openvidu/digitalocean holds: the Droplet, its
@@ -10,6 +11,7 @@ This is what will be deleted from your DigitalOcean account:
   …
 
 --delete-data: the recordings and Meet data are in the Space: this deletes them.
+── end of plan ────────────────────────────────────────────────────────
 
 ▶ Delete the machine on DigitalOcean…
    · destroy .openvidu/digitalocean (this returns when Terraform is done)

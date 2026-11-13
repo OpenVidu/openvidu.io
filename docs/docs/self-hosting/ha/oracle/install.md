@@ -31,6 +31,8 @@ High Availability adds a few requirements of its own:
 
 ## Deploy { #deploy }
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. To try it, with no domain and a self-signed certificate:
 
 ```bash
@@ -78,7 +80,7 @@ Create the record as soon as the deploy prints it: `ov stack status --wait` repo
 
 --8<-- "self-hosting/oracle/ov-access.md"
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/oracle/ov-assisted.md"
 

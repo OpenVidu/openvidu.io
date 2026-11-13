@@ -39,6 +39,8 @@ Elastic also needs a **VPC** with public subnets, one for the master node and on
 
 ## Deploy
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. With no network parameters, Elastic uses the region's default VPC, the master in its first subnet and the media nodes spread over all of them:
 
 ```bash
@@ -97,7 +99,7 @@ This is how the deploy of a stack named `el` (in `eu-south-2`) ends: `ov` waits 
 
 --8<-- "self-hosting/aws/ov-access.md"
 
-## Review the commands first: assisted mode
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/aws/ov-assisted.md"
 

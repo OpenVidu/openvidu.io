@@ -33,6 +33,8 @@ The machines were created but did not finish deploying OpenVidu within the wait 
 ov stack deploy <name> --cloud gcp --mode auto
 ```
 
+A deploy in assisted mode resumes with `--mode assisted` instead: the error prints the command to run.
+
 ### High Availability never gets ready with Let's Encrypt
 
 A High Availability stack sits behind a load balancer that passes TLS through to the masters. Let's Encrypt's HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Deploy High Availability with the default `selfsigned` certificate, or with `owncert` for production.

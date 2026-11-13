@@ -8,6 +8,8 @@ The infrastructure already exists, so once the cause is fixed you simply resume,
 ov stack deploy openvidu --cloud oracle --mode auto
 ```
 
+A deploy in assisted mode resumes with `--mode assisted` instead: the error prints the command to run.
+
 ### What the stack publishes cannot be read { #what-the-stack-publishes-cannot-be-read }
 
 Oracle answers `NotAuthorizedOrNotFound` both for a secret not published yet and for one the user may not read. If the stack's secrets cannot be read at all, the wait ends with the permission to grant:

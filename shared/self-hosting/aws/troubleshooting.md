@@ -12,6 +12,8 @@ To see why the machine itself did not finish deploying OpenVidu, SSH into the in
 ov stack deploy <name> --cloud aws --mode auto
 ```
 
+A deploy in assisted mode resumes with `--mode assisted` instead: the error prints the command to run.
+
 **Deploying fails because the stack name is still in use.** Secrets Manager keeps a deleted secret for a recovery window, so for several days after a destroy a new stack with the **same name in the same region** cannot be created. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name on the deploy's `credentials:` line, or deploy with a different name or region.
 
 For closed ports, Let's Encrypt and port 80, cloud quotas and the other generic cases, see [Troubleshooting the OpenVidu CLI](/docs/self-hosting/openvidu-cli.md#troubleshooting).

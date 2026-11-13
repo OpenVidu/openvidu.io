@@ -1,12 +1,14 @@
 Before it touches your tenancy, auto mode prints a short plan, one line per step, and waits for a yes (`-y` answers in advance; the plan is printed anyway). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12o` (eu-madrid-1, 2026-10-29; OCIDs and the Object Storage namespace shown as placeholders):
 
 ```text
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what ov does in your Oracle Cloud tenancy (region eu-madrid-1, compartment ocid1.compartment.oc1..<compartment>); --debug shows every command:
 
   1. Template: render the single node template into .openvidu/oracle/tf-oracle-openvidu-singlenode.tf
      and its variables into .openvidu/oracle/openvidu.auto.tfvars.json (0600)
   2. Machines: create the machine, which installs OpenVidu Community on itself with Terraform (about 3 minutes, then OpenVidu installs)
   3. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+── end of plan ────────────────────────────────────────────────────────
 
 Run these in your account? Only yes or y goes ahead [y/N]:
 ```

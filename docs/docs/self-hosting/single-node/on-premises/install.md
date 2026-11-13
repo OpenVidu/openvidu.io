@@ -230,7 +230,7 @@ $ sudo ov stack deploy web --environment on-premises --this-node \
 
 Either way, a deploy leaves `ov` and a stack directory on the node, so `sudo ov stack status` works there with no directory to name.
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 `--mode assisted` runs **nothing** on the server. It writes the files and prints the runbook, step by step, for you to review and run yourself. Add it to any deploy above:
 

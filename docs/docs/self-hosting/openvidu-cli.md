@@ -203,7 +203,7 @@ The machines were created but did not finish deploying OpenVidu within the wait 
 ov stack deploy <name> --cloud <cloud> --mode auto
 ```
 
-Name the stack; no other flag is needed, because everything is already in `openvidu-stack.yml`.
+Name the stack; no other flag is needed, because everything is already in `openvidu-stack.yml`. A deploy in assisted mode resumes with `--mode assisted` instead: the error prints the command to run.
 
 ### A cloud create failed partway
 

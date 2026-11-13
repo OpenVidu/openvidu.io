@@ -29,6 +29,8 @@ Elastic adds one requirement when the media nodes autoscale:
 
 ## Deploy { #deploy }
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory:
 
 ```bash
@@ -57,7 +59,7 @@ One master node and an autoscaling pool of media nodes: one to start with, betwe
 
 --8<-- "self-hosting/oracle/ov-access.md"
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/oracle/ov-assisted.md"
 

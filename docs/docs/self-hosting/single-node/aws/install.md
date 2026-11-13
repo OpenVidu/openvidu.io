@@ -29,6 +29,8 @@ The deployed services are the same as in the [On Premises Single Node installati
 
 ## Deploy
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
@@ -81,7 +83,7 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 
 --8<-- "self-hosting/aws/ov-access.md"
 
-## Review the commands first: assisted mode
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/aws/ov-assisted.md"
 

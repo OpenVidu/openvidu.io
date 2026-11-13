@@ -40,6 +40,8 @@ High Availability needs more vCPU quota than a single node, because it creates f
 
 ## Deploy
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. The command names the stack `openvidu`; the output comes from a real run of a stack with another name.
 
 ```bash
@@ -91,7 +93,7 @@ waiting for https://openvidu-zksfiv-20-107-185-207.sslip.io to be ready (Ctrl-C 
 
 --8<-- "self-hosting/azure/ov-access.md"
 
-## Review the commands first: assisted mode
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/azure/ov-assisted.md"
 

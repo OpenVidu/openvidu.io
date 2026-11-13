@@ -1,12 +1,14 @@
-Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). `--debug` prints the commands themselves, and [assisted mode](#review-the-commands-first-assisted-mode) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
+Before it touches your account, `ov` prints a **short plan**, one line per step, and waits for a yes: only `yes` or `y` goes ahead (`-y` answers in advance; it skips the question, never the plan). `--debug` prints the commands themselves, and [assisted mode](#assisted-mode) prints them and runs nothing. This is a Single Node COMMUNITY deploy of a stack named `ce12d2` (ams3, 2026-10-29):
 
 ```text
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what ov does in your DigitalOcean account (region ams3, Spaces in ams3); --debug shows every command:
 
   1. Template: render the single node template into .openvidu/digitalocean/tf-do-openvidu-singlenode.tf
      and its variables into .openvidu/digitalocean/openvidu.auto.tfvars.json (0600)
   2. Machines: create the machine, which installs OpenVidu Community on itself with Terraform (about 1 minute, then OpenVidu installs)
   3. Wait for OpenVidu to answer, read the stack over SSH and register this directory as the stack
+── end of plan ────────────────────────────────────────────────────────
 
 Run these in your account? Only yes or y goes ahead [y/N]:
 ```

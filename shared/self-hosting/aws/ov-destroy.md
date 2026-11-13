@@ -2,13 +2,21 @@ One command deletes the machines too, and it must be told what happens to the re
 
 ```console
 $ ov stack destroy -y --delete-data
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what will be deleted from your AWS account:
 
   # The machines (for elastic/HA also their auto-scaling group and load balancer),
   # the Elastic IP, the security groups and the secret.
   …
   aws cloudformation delete-stack --stack-name openvidu-ce10 --region us-east-1
-…
+  …
+
+With --delete-data the S3 data bucket goes too, with your recordings and Meet data, after the stack (the template marks it Retain,
+so the stack alone would leave it):
+  aws s3 rb s3://<each data bucket of the stack> --force --region us-east-1
+The destroy leaves the per-account bucket the deploy stages its template in
+(openvidu-cfn-templates-<account>-<region>): every stack in the region shares it.
+── end of plan ────────────────────────────────────────────────────────
 
 ▶ Delete the machine on AWS…
    · delete the CloudFormation stack openvidu-ce10 (instance, Elastic IP, security group, secret)

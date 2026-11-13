@@ -27,6 +27,8 @@ One command creates the machine and OpenVidu comes up on it. `ov` renders the Te
 
 ## Deploy { #deploy }
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 Each stack lives in its own empty directory. Choose the edition. The commands name the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
@@ -78,7 +80,7 @@ Each stack lives in its own empty directory. Choose the edition. The commands na
 
 --8<-- "self-hosting/gcp/ov-access.md"
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/gcp/ov-assisted.md"
 

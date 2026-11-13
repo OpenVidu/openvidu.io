@@ -41,6 +41,8 @@ High Availability adds two requirements for a production deployment:
 
 ## Deploy { #deploy }
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 ```bash
@@ -105,7 +107,7 @@ waiting for https://openvidu-3jjbjv-34-39-52-221.sslip.io to be ready (Ctrl-C to
 
 --8<-- "self-hosting/gcp/ov-access.md"
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/gcp/ov-assisted.md"
 

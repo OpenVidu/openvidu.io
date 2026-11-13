@@ -2,6 +2,7 @@ One command deletes the machines too, and it must be told what happens to the re
 
 ```console
 $ ov stack destroy -y --delete-data
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what will be deleted from your Google Cloud project my-project:
 
   # Everything the Terraform state in .openvidu/gcp holds: the machine, its disk, its
@@ -10,6 +11,7 @@ This is what will be deleted from your Google Cloud project my-project:
   terraform -chdir=.openvidu/gcp destroy -auto-approve -input=false -no-color
   …
 --delete-data: the recordings and Meet data are in the Cloud Storage bucket: this deletes them.
+── end of plan ────────────────────────────────────────────────────────
 
 ▶ Delete the machine on Google Cloud…
    · destroy .openvidu/gcp (this returns when Terraform is done)

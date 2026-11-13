@@ -122,7 +122,7 @@ Every deployed node also gets a copy of `ov` and a stack directory of its own, s
 Every deploy can run in two modes:
 
 - **`--mode auto`** runs the deployment. On a cloud it uses **your own cloud tools** (`aws`, `az`, `terraform`…), already authenticated, and shows the plan and asks before creating anything (`-y` answers yes).
-- **`--mode assisted`** runs **nothing**. It writes the same files and prints the commands auto mode would run, for you to review and run yourself. On a cloud, once you have run them, `ov stack deploy <name> --cloud <cloud> --mode auto` waits for OpenVidu and registers the stack.
+- **`--mode assisted`** runs **nothing**. It writes the same files and prints the commands auto mode would run, for you to review and run yourself. On a cloud, once you have run them, you run the same `ov stack deploy <name> --cloud <cloud> --mode assisted` again: it finds the machines, waits for OpenVidu and registers the stack, creating nothing.
 
 ### Cloud deployments { #cloud-deployments }
 

@@ -35,6 +35,8 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 ## Deploy { #deploy }
 
+--8<-- "self-hosting/common/ov-cloud-modes.md"
+
 The stack lives in its own empty directory. The command names the stack `openvidu`; the outputs come from real runs of stacks with other names.
 
 ```bash
@@ -74,7 +76,7 @@ This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until OpenVidu
 
 --8<-- "self-hosting/gcp/ov-access.md"
 
-## Review the commands first: assisted mode { #assisted-mode }
+## Assisted mode: run the commands yourself { #assisted-mode }
 
 --8<-- "self-hosting/gcp/ov-assisted.md"
 

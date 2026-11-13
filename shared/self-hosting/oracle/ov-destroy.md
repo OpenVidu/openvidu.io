@@ -2,6 +2,7 @@ One command deletes the machines too, and it must be told what happens to the re
 
 ```console
 $ ov stack destroy -y --delete-data
+── PLAN · nothing below has run ───────────────────────────────────────
 This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.compartment.oc1..<compartment>):
 
   # Everything the Terraform state in .openvidu/oracle holds: the instances (and, on Elastic
@@ -15,6 +16,7 @@ This is what will be deleted from your Oracle Cloud tenancy (compartment ocid1.c
 
 --delete-data: the recordings and Meet data are in the Object Storage bucket: this deletes them.
 note: Oracle does not delete a vault at once: the stack's vault stays pending deletion, with its secrets, for 7 days or more, and a deploy with the same name meanwhile creates another one
+── end of plan ────────────────────────────────────────────────────────
 
 ▶ Delete the machine on Oracle Cloud…
    · destroy .openvidu/oracle (this returns when Terraform is done)
