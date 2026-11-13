@@ -239,7 +239,17 @@ ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 --ssh-key
   --domain-name 172-30-0-96.openvidu-local.dev --certificate-type selfsigned --mode assisted
 ```
 
-The runbook is the `ssh`, `scp` and `ov` commands that carry out the deploy, ending with the ones that record the stack in this directory and wait for it.
+=== "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
+
+    Each block of the runbook says on its first line where it runs: on your machine, or on the node as root. The last one waits for the stack on the node. Then connect this directory to the stack, so `ov stack` operates it from here:
+
+    ```bash
+    ov stack import web --ssh ubuntu@172.30.0.96 --ssh-key ~/.ssh/id_ed25519 --replace
+    ```
+
+=== "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
+
+    Every command of the runbook runs on your machine (`ssh`, `scp` and `ov`). The last two record the stack in this directory and wait for it.
 
 ## Configure your application to use the deployment
 

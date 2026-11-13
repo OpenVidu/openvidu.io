@@ -30,7 +30,7 @@ ov stack update el --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key --media-node 10.0.
 ov stack update el --ssh ubuntu@10.0.0.5 --ssh-key ~/.ssh/key --media-node 10.0.0.7
 ```
 
-**The data stays in place**, in its directories on the master (even a later `ov stack destroy --delete-data` keeps them). The logs and metrics of the `observability` module start anew. On test machines an Elastic conversion took about 5 minutes.
+**The data stays in place**, in its directories on the master. The logs and metrics of the `observability` module start anew. On test machines an Elastic conversion took about 5 minutes.
 
 A conflict (an edit on the lines `ov` changes) stops it before anything runs. A failure before OpenVidu is installed rolls back to the unchanged 3.9.0. Past that point nothing is rolled back: the command fails with the installed stack stopped, and prints the commands to retire it once `ov stack status --wait` passes and the commands to put it back.
 

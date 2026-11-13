@@ -81,7 +81,7 @@ With neither flag, the destroy touches nothing and says where the stack's data i
 
     `--keep-data` removes OpenVidu's services and keeps their volumes (MongoDB, MinIO with the recordings, Redis, the certificates, metrics and logs) on the nodes, with the configuration and credentials they were written with. `--delete-data` removes the services, the volumes, the configuration and the credentials. Data in an external MongoDB or S3 is never touched.
 
-    An Elastic stack converted from a 3.9.0 installation keeps its stores in their directories on the master even with `--delete-data` ([Migrate a deployment installed by install.sh](../../elastic/on-premises/upgrade.md#migrate-a-deployment-installed-by-installsh)).
+    The one exception is a Single Node or Elastic stack converted from an `install.sh` installation: `--delete-data` does not delete the data of that installation, which stays in `/opt/openvidu/data` on the node.
 
 !!! warning
     `--delete-data` cannot be undone. Back up what you need first: see [Backup and restore](#backup-and-restore).

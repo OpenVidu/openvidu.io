@@ -52,7 +52,7 @@ A cloud media node that the autoscaler is about to terminate runs exactly this o
 
 ## Destroy
 
-`ov stack destroy` from the stack's directory removes OpenVidu from the cluster; the machines and their node agents stay. As on a [single node](../../single-node/on-premises/admin.md#destroy), it must be told what happens to the data: `--keep-data` keeps the stack's data, configuration and credentials on the master and leaves the media nodes joined, so the same `ov stack deploy` brings the stack back; `--delete-data` removes all of it. A stack converted from a 3.9.0 installation keeps its stores in their directories on the master even with `--delete-data`.
+`ov stack destroy` from the stack's directory removes OpenVidu from the cluster; the machines and their node agents stay. As on a [single node](../../single-node/on-premises/admin.md#destroy), it must be told what happens to the data: `--keep-data` keeps the stack's data, configuration and credentials on the master and leaves the media nodes joined, so the same `ov stack deploy` brings the stack back; `--delete-data` removes all of it.
 
 ```console
 $ ov stack destroy --delete-data -y
