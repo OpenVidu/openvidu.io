@@ -339,7 +339,7 @@ About the exported variables:
 
 - `<OPENVIDU_NODE_IP>`: IP address used to reach the OpenVidu node from the backup machine. In Single Node deployments this is the node’s own IP; in Elastic/HA deployments use the IP of any master node.
 - `<MONGO_ADMIN_USER>` and `<MONGO_ADMIN_PASSWORD>`: MongoDB admin credentials (`MONGO_ADMIN_USERNAME`, `MONGO_ADMIN_PASSWORD`).
-- `<MINIO_ADMIN_USER>` and `<MINIO_ADMIN_PASSWORD>`: MinIO credentials (`MINIO_ADMIN_USERNAME`, `MINIO_ADMIN_PASSWORD`). Use them only if you are using the default MinIO instance that comes with OpenVidu deployments. If you are using AWS S3 or any other external S3-compatible service, skip these two variables.
+- `<MINIO_ADMIN_USER>` and `<MINIO_ADMIN_PASSWORD>`: MinIO credentials (`MINIO_ACCESS_KEY`, `MINIO_SECRET_KEY`). Use them only if you are using the default MinIO instance that comes with OpenVidu deployments. If you are using AWS S3 or any other external S3-compatible service, skip these two variables.
 - `RESTIC_REPOSITORY`: S3 endpoint where the encrypted restic backup repository will live (for example, `s3:https://s3.amazonaws.com/<bucket>` or `s3:http://minio-backup.local:9000/<bucket>`).
 - `RESTIC_PASSWORD`: Strong password that encrypts the restic backup repository. Keep it safe; you need it for every restore.
 - `RESTIC_HOST_TAG`: Label that identifies the host in restic snapshots. Adjust it if you manage several OpenVidu environments from the same backup machine.

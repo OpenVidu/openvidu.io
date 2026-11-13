@@ -46,30 +46,43 @@ DocumentDB presents a TLS certificate signed by the AWS global trust store. Down
 wget -O mongodb_tls_ca.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
 ```
 
-### 2. Copy the trust store to the node
+### 2. Give the trust store to the services
 
-On a **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Single Node server, SSH into the node and place the downloaded file under its configuration directory (`/opt/openvidu/config/`), so OpenVidu mounts it into `/config` for every service:
+On a **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } Single Node server, SSH into the node and copy the downloaded file next to the deployment:
 
 ```bash
-sudo mv mongodb_tls_ca.pem /opt/openvidu/config/
+sudo mv mongodb_tls_ca.pem /opt/openvidu/mongodb_tls_ca.pem
+```
+
+Each service only sees its own configuration, so mount the file into the three services that connect to MongoDB. Add them to `/opt/openvidu/docker-compose.override.yaml`, the file of your own additions that `ov` never rewrites ([Emergency overrides](../configuration/in-depth.md#emergency-overrides)):
+
+```yaml
+services:
+  ov-livekit-server:
+    volumes:
+      - ./mongodb_tls_ca.pem:/certs/mongodb_tls_ca.pem:ro
+  ov-dashboard:
+    volumes:
+      - ./mongodb_tls_ca.pem:/certs/mongodb_tls_ca.pem:ro
+  ov-meet:
+    volumes:
+      - ./mongodb_tls_ca.pem:/certs/mongodb_tls_ca.pem:ro
 ```
 
 !!! note "PRO deployments"
 
-    OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } stacks (Single Node PRO, Elastic and High Availability) run on Kubernetes, with no `/opt/openvidu/config/cluster/` directory on the nodes. How to add a custom CA bundle so the OpenVidu services trust it on a PRO stack deployed with `ov` is not documented yet.
+    OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } stacks (Single Node PRO, Elastic and High Availability) run on Kubernetes and have no such file on the nodes. How to add a custom CA bundle so the OpenVidu services trust it on a PRO stack deployed with `ov` is not documented yet.
 
 ### 3. Configure and apply
 
-Point `EXTERNAL_MONGO_URI` at your DocumentDB cluster, referencing the trust store at the path it is mounted at (`/config/mongodb_tls_ca.pem`):
+Point `EXTERNAL_MONGO_URI` at your DocumentDB cluster, referencing the trust store at the path it is mounted at (`/certs/mongodb_tls_ca.pem`):
 
 ```bash
-ov stack config set EXTERNAL_MONGO_URI='mongodb://<USERNAME>:<PASSWORD>@<CLUSTER_DOMAIN>.<AWS_REGION>.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=/config/mongodb_tls_ca.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false'
+ov stack config set EXTERNAL_MONGO_URI='mongodb://<USERNAME>:<PASSWORD>@<CLUSTER_DOMAIN>.<AWS_REGION>.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=/certs/mongodb_tls_ca.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false'
 ```
 
-Because the trust store is a file you added by hand on the node (not a document `ov` manages), apply it together with the configuration change:
+Then restart the stack, so every service starts with the new mount:
 
 ```bash
 ov stack restart
 ```
-
-The **`tlsCAFile=/config/mongodb_tls_ca.pem`** parameter is required because OpenVidu mounts the certificate bundle into `/config` for every service, regardless of where you copied the file initially.
