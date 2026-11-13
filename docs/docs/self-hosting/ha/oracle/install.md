@@ -41,7 +41,7 @@ ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
   --certificate-type selfsigned --mode auto
 ```
 
-Four master nodes behind a passthrough network load balancer, plus an autoscaling pool of media nodes (`--param minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU`, or `fixedNumberOfMediaNodes=N` for exactly N with no autoscaling). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+Four master nodes behind a passthrough network load balancer, plus an autoscaling pool of media nodes (`--param minNumberOfMediaNodes`, `maxNumberOfMediaNodes`, `scaleTargetCPU`, or `fixedNumberOfMediaNodes=N` for exactly N with no autoscaling). To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
 For production, bring your own certificate for your domain, base64-encoded (on a cloud the certificate travels as a template parameter, so pass its content, not the path to the file):
 

@@ -66,7 +66,7 @@ ov stack deploy openvidu --cloud aws --aws-region us-east-1 \
 
 Pass the three together or none: `ov` refuses part of a network (exit `2`), and the template checks that every subnet is in that VPC.
 
-One master node and an auto scaling group of media nodes. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--param FixedNumberOfMediaNodes=N` (equivalently `--set infrastructure.mediaNodes.fixedCount=N`) runs exactly N of them, on the first deploy and on a redeploy. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and an auto scaling group of media nodes. The media nodes scale between `MinNumberOfMediaNodes` and `MaxNumberOfMediaNodes` (`--param`), or `--param FixedNumberOfMediaNodes=N` (equivalently `--set infrastructure.mediaNodes.fixedCount=N`) runs exactly N of them, on the first deploy and on a redeploy. To change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--aws-cluster-api-cidr <cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
 This is how the deploy of a stack named `el` (in `eu-south-2`) ends: `ov` waits until OpenVidu is up, then registers the stack:
 

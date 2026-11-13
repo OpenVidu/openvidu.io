@@ -49,7 +49,7 @@ ov stack deploy openvidu --cloud azure --azure-location northeurope \
   --mode auto
 ```
 
-Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes.
+Four master nodes behind a passthrough load balancer, plus a scale set of media nodes, with OpenVidu PRO on Kubernetes. `--param clusterApiAllowedCidr=<cidr>` limits who can reach the masters' port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
 The load balancer passes TLS through untouched, and Caddy on the masters terminates it with the certificate type you choose:
 

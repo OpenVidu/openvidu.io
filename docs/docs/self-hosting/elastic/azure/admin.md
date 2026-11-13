@@ -23,7 +23,7 @@ The sections up to [Export the desired state](#export) are the operations every 
 ov stack deploy openvidu --cloud azure --param mediaNodeInstanceType=Standard_F16s_v2 --mode auto -y
 ```
 
-The media node **count** is a parameter too; see [Scale the media nodes](#scale-the-media-nodes) below. See [Changing configuration](../../configuration/changing-config.md) for OpenVidu's own settings, which change without touching the machines.
+The media node **count** is a parameter too; see [Scale the media nodes](#scale-the-media-nodes) below. See [Changing configuration](../../configuration/changing-config.md) for OpenVidu's own settings, which change without touching the machines. The settings a redeploy gives as flags (`--domain-name`, `--certificate-type`, the license, `--set`) are applied the same way, in the running stack.
 
 !!! warning
     Every redeploy of an Elastic or High Availability stack on Azure, not only one that changes the media nodes, also decides what happens to the media nodes' autoscale setting, and that part has not been verified on Azure yet. Check the deployment with `az deployment group what-if` (or `--mode assisted`) before you apply a redeploy to a stack in production.

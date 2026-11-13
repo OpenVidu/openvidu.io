@@ -39,7 +39,7 @@ ov stack deploy openvidu --cloud oracle --oci-region eu-madrid-1 \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and an autoscaling pool of media nodes: one to start with, between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, adding one when their average CPU goes over `scaleTargetCPU` (all `--param`). `--set infrastructure.mediaNodes.fixedCount=N` (or `--param fixedNumberOfMediaNodes=N`) runs exactly N media nodes with no autoscaling and no scale-in Function, on this deploy or on a later redeploy. To change the count, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and an autoscaling pool of media nodes: one to start with, between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes`, adding one when their average CPU goes over `scaleTargetCPU` (all `--param`). `--set infrastructure.mediaNodes.fixedCount=N` (or `--param fixedNumberOfMediaNodes=N`) runs exactly N media nodes with no autoscaling and no scale-in Function, on this deploy or on a later redeploy. To change the count, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
 ## Use your own domain { #use-your-own-domain }
 

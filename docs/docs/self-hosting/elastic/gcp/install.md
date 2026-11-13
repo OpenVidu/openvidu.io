@@ -44,7 +44,7 @@ ov stack deploy openvidu --cloud gcp --gcp-project my-project \
   --certificate-type letsencrypt --mode auto
 ```
 
-One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them with no autoscaler. Either works on the first deploy and on a redeploy; to change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes).
+One master node and a managed instance group of media nodes. The media nodes scale between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` (`--param`), or `--set infrastructure.mediaNodes.fixedCount=N` runs exactly N of them with no autoscaler. Either works on the first deploy and on a redeploy; to change the count later, see [Scale the media nodes](./admin.md#scale-the-media-nodes). `--param clusterApiAllowedCidr=<cidr>` limits who can reach the master's port 6443, the stack's remote admin control protocol. That port gives full control of the stack, so do not leave it open to `0.0.0.0/0`, the default, in production.
 
 This is how the deploy of a stack named `dpgcp2` ends: `ov` waits until OpenVidu is up, then registers the stack:
 
