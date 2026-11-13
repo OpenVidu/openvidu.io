@@ -36,17 +36,9 @@ ov stack deploy openvidu --cloud oracle --param fixedNumberOfMediaNodes=0 \
 
 !!! info "The media nodes that go drain first"
 
-    No live session is cut. Lowering `fixedNumberOfMediaNodes`, narrowing the autoscaling range, or moving between a fixed count and the autoscaler (whose start sets the pool to `initialNumberOfMediaNodes`) detaches the nodes that go, newest first. Each one takes no new rooms, waits for the rooms, recordings and ingests on it to end, leaves the cluster and terminates itself, and the apply waits for that, up to `$OPENVIDU_MEDIA_DRAIN_TIMEOUT` seconds (7200 by default). This runs on your machine, with `oci` and `jq`. Raising the count adds media nodes and leaves the running ones untouched. The destroy of the whole stack drains nothing.
+    No live session is cut. Lowering the count or narrowing the autoscaling range detaches the nodes that go, newest first: each one takes no new rooms, waits for the rooms, recordings and ingests on it to end, leaves the cluster and terminates itself, and the apply waits for that, up to `$OPENVIDU_MEDIA_DRAIN_TIMEOUT` seconds (7200 by default), using `oci` and `jq` on your machine. Raising the count leaves the running nodes untouched, and destroying the whole stack drains nothing. To follow a node that drains, read its `openvidu-scale-in` tag (`draining`, then `left`) in the OCI console.
 
-    A media node takes no SSH, so to follow one that drains, read its `openvidu-scale-in` tag (`draining`, then `left`) in the OCI console, or its watcher's log on its serial console:
-
-    ```bash
-    oci compute console-history capture --instance-id <node-ocid>   # prints the history's id
-    oci compute console-history get-content --instance-console-history-id <id> \
-      --length 1000000 --file - | grep openvidu-scalein-watch
-    ```
-
-`--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count, on the first deploy or on a redeploy. To check a node's inbound ports, use `ov stack check-ports`: a cloud PRO stack keeps no SSH access in its record, so the command exits `2` and prints the one that does work, `ov stack check-ports --ssh <user>@<master> --ssh-key <key>` (any master's public address, and the private key the template keeps in Object Storage, at the object the `ssh_private_key_object` output names: see [Access OpenVidu](install.md#access-openvidu)). To verify the media ports too, run it as `ov stack stop && ov stack check-ports --ssh …; ov stack start`, so the stack starts again whatever the check reports.
+`--set infrastructure.mediaNodes.fixedCount=N` sets the same fixed count, on the first deploy or on a redeploy. To check a node's inbound ports with `ov stack check-ports`, a cloud PRO stack keeps no SSH access in its record, so the command prints the one that does work: `ov stack check-ports --ssh <user>@<master> --ssh-key <key>` (any master's public address, and the private key the template keeps in Object Storage, see [Access OpenVidu](install.md#access-openvidu)). To verify the media ports too, run it as `ov stack stop && ov stack check-ports --ssh …; ov stack start`, so the stack starts again whatever the check reports.
 
 A change of the number of media nodes returns when the cloud has taken it: the new machines boot and join on their own, minutes later. `ov stack status --wait` waits for them, since on a cloud it counts the media nodes the stack asks for, not only the ones that have joined (`media nodes 1/2` until the second is in).
 

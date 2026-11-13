@@ -36,7 +36,7 @@ S3_APP_DATA_BUCKET             openvidu-ce12o-appdata-9f79dd
 …
 ```
 
-That vault copy is made at deploy time and is not updated afterwards: after a later `ov stack config set`, the stack's configuration is the source of truth (the node's files on Community, `openvidu.yaml` in the cluster on PRO), not the copy.
+That vault copy is made at deploy time and is not updated afterwards: after a later `ov stack config set`, the stack's configuration is the source of truth, not the copy.
 
 Your applications connect with `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`, as with any other OpenVidu deployment.
 

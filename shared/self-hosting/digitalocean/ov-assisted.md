@@ -5,7 +5,7 @@ ov stack deploy openvidu --cloud digitalocean \
   --certificate-type letsencrypt --mode assisted
 ```
 
-It also prints the reads of the account, the Droplet limit, the region and the sizes as `curl` commands, so nothing stays hidden. It ends with the command that continues the deploy once you have run them. This is the end for Community, which reads the stack from the machine over SSH:
+It ends with the command that continues the deploy once you have run them. This is the end for Community, which reads the stack from the machine over SSH:
 
 ```text
 Nothing above has been run. Run it yourself, then continue the deploy — the Terraform
@@ -18,4 +18,4 @@ over SSH (as `ov stack import --ssh` does) with the key the template generated (
 this directory as the stack, exactly as it would have done here.
 ```
 
-The continuation carries the stack's name, which `openvidu-stack.yml` keeps: without it the stack is registered again as `openvidu`. On OpenVidu PRO it reads the access the stack published instead of using SSH. Every parameter is already in place, and `terraform apply` is idempotent, so a resume applies the same state again (a no-op that refreshes the outputs) and then waits for OpenVidu.
+The continuation carries the stack's name, which `openvidu-stack.yml` keeps: without it the stack is registered again as `openvidu`. On OpenVidu PRO it reads the access the stack published instead of using SSH. Every parameter is already in place, so a resume applies the same state again and then waits for OpenVidu.

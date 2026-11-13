@@ -52,7 +52,7 @@ Or run exactly one media node:
 ov stack deploy openvidu --cloud digitalocean --param fixedNumberOfMediaNodes=1 --mode auto -y
 ```
 
-A media node that a change removes is never cut: the template marks it with the stack's draining tag, its watcher drains it (it takes no new rooms and waits for the rooms, recordings and ingests it holds to end) and then it leaves the cluster and is deleted. The redeploy's `terraform apply` waits for that drain, up to `$OPENVIDU_MEDIA_DRAIN_TIMEOUT` seconds (7200 by default; set it in the redeploy's environment), and past that limit the node is deleted as it is. This is the same graceful drain the autoscaler runs on a scale-in. The four master nodes are fixed and never scale. See [Autoscaling](../../production-ready/scalability.md#autoscaling) for the general model.
+A media node that a change removes is never cut: it takes no new rooms, waits for the rooms, recordings and ingests it holds to end, then leaves the cluster and is deleted. The redeploy's `terraform apply` waits for that drain, up to `$OPENVIDU_MEDIA_DRAIN_TIMEOUT` seconds (7200 by default; set it in the redeploy's environment), and past that limit the node is deleted as it is. The four master nodes are fixed and never scale. See [Autoscaling](../../production-ready/scalability.md#autoscaling) for the general model.
 
 A change of the number of media nodes returns when the cloud has taken it: the new machines boot and join on their own, minutes later. `ov stack status --wait` waits for them, since on a cloud it counts the media nodes the stack asks for, not only the ones that have joined (`media nodes 1/2` until the second is in).
 

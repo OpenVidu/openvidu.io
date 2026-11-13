@@ -8,7 +8,7 @@ ov: the DigitalOcean account cannot hold the stack in ams3, so nothing was creat
 Ask DigitalOcean for a higher Droplet limit (control panel: Settings > Team > Droplet limit, or a support ticket), delete Droplets you no longer use, or deploy another region with --do-region.
 ```
 
-A size the region does not offer is a line of its own, and the way out names the size's `--param` and how to list the sizes the region offers. A region DigitalOcean does not have is exit `2`. The media nodes the autoscaler adds later are not in the check; when the limit leaves no room for `maxNumberOfMediaNodes`, a note says so.
+A size the region does not offer is a line of its own, naming the size's `--param`. The media nodes the autoscaler adds later are not in the check; when the limit leaves no room for `maxNumberOfMediaNodes`, a note says so.
 
 ### The stack name is too long for its Spaces
 

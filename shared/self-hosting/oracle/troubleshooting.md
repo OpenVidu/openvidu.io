@@ -10,7 +10,7 @@ ov stack deploy openvidu --cloud oracle --mode auto
 
 ### What the stack publishes cannot be read { #what-the-stack-publishes-cannot-be-read }
 
-Oracle answers `NotAuthorizedOrNotFound` both for a secret not published yet and for one the user may not read. While no secret can be read, the wait lists the compartment's secrets in the vault; a list Oracle refuses three times in a row ends the wait with the permission to ask for:
+Oracle answers `NotAuthorizedOrNotFound` both for a secret not published yet and for one the user may not read. If the stack's secrets cannot be read at all, the wait ends with the permission to grant:
 
 ```text
 ov: the machines exist, but what they publish cannot be read from here: the user of your oci configuration may not read the stack's secrets (listing them answers NotAuthorizedOrNotFound): a group of that user needs `allow group <group> to read secret-family in compartment id ocid1.compartment.oc1..c` (your tenancy's administrator grants it)
@@ -18,11 +18,11 @@ ov: the machines exist, but what they publish cannot be read from here: the user
 
 ### A name is already in use { #a-name-is-already-in-use }
 
-The stack's dynamic groups, policies and (with `--remote-state`) its state bucket are named after the stack and a hash of the tenancy and compartment. A name that already exists (a stack of the same name in the same compartment, deployed from another directory, or what an earlier deploy left) stops the deploy with exit `2` before anything is created, and names the resource. Deploy this one with another name (`--param stackName=<another name>`), import the other stack (`ov stack import`), or delete what an earlier attempt left.
+The stack's dynamic groups, policies and (with `--remote-state`) its state bucket are named after the stack and a hash of the tenancy and compartment. A name that already exists (a stack of the same name in the same compartment, deployed from another directory, or what an earlier deploy left) stops the deploy before anything is created, and names the resource. Deploy this one with another name (`--param stackName=<another name>`), import the other stack (`ov stack import`), or delete what an earlier attempt left.
 
 ### A quota blocked the deploy { #a-quota-blocked-the-deploy }
 
-Before creating anything, the deploy compares what a first deploy needs against what the tenancy has free, and stops with exit `10` when something does not fit: OCPUs and memory of the shapes in the availability domain, a free vault, and a free Customer Secret Key slot (OCI allows two per user). Ask Oracle for higher limits (console: **Governance & Administration → Limits, Quotas and Usage**), deploy in another region, delete a Customer Secret Key or a pending-deletion vault you no longer use, or choose smaller shapes (`--param masterNodeOcpus=<n> --param masterNodeMemory=<gb> --param masterNodeShape=<shape>`, and the `mediaNode…` equivalents).
+Before creating anything, the deploy compares what a first deploy needs against what the tenancy has free, and stops when something does not fit: OCPUs and memory of the shapes in the availability domain, a free vault, and a free Customer Secret Key slot (OCI allows two per user). Ask Oracle for higher limits (console: **Governance & Administration → Limits, Quotas and Usage**), deploy in another region, delete a Customer Secret Key or a pending-deletion vault you no longer use, or choose smaller shapes (`--param masterNodeOcpus=<n> --param masterNodeMemory=<gb> --param masterNodeShape=<shape>`, and the `mediaNode…` equivalents).
 
 ### High Availability never gets ready with Let's Encrypt { #ha-never-gets-ready-with-lets-encrypt }
 
