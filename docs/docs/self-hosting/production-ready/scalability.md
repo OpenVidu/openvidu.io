@@ -263,11 +263,11 @@ When you run an OpenVidu cluster **On Premises** you add and remove media nodes 
 
 - For **OpenVidu Elastic On Premises**:
     - [Add a media node](../elastic/on-premises/admin.md#add-a-media-node)
-    - [Take a node out](../elastic/on-premises/admin.md#take-a-node-out)
+    - [Take a media node out](../elastic/on-premises/admin.md#take-a-node-out)
     - [Graceful drain](../elastic/on-premises/admin.md#graceful-drain)
 - For **OpenVidu High Availability On Premises**:
     - [Add a media node](../ha/on-premises/admin.md#add-a-media-node)
-    - [Take a node out](../ha/on-premises/admin.md#take-a-node-out)
+    - [Take a media node out](../ha/on-premises/admin.md#take-a-node-out)
     - [Graceful drain](../ha/on-premises/admin.md#graceful-drain)
 
 <div class="second-slogan cta-section" data-sal="slide-up">

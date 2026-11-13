@@ -8,4 +8,4 @@
 | Secret Manager secrets | What the stack publishes: one secret per key, prefixed with the stack name (PRO also publishes the stack's access there) |
 | An SSH key pair (**COMMUNITY**{ .openvidu-tag .openvidu-community-tag }) | The template generates it and `ov` keeps the private half in `.openvidu/gcp/`. **PRO**{ .openvidu-tag .openvidu-pro-tag } keeps no key pair: its node is reached with `gcloud compute ssh` |
 
-`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy --delete-data` (or `--keep-data`) in the directory removes whatever a failed deploy left behind.

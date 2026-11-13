@@ -30,9 +30,9 @@ Elastic scales by adding media nodes. From the stack's directory, `ov stack join
 
 `--as master` is refused on an Elastic stack: its one master is the deployed node, so another machine joins `--as media`. On a cloud stack the media nodes autoscale instead; see [Autoscaling](../../production-ready/scalability.md#autoscaling).
 
-## Take a node out { #take-a-node-out }
+## Take a media node out { #take-a-node-out }
 
-`join` leaves `ov` on the server, so the server can leave by itself. Log in to it and drain it:
+`join` leaves `ov` on the server, so a media node can leave by itself. Log in to it and drain it:
 
 ```console
 $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
@@ -42,9 +42,7 @@ $ ssh ubuntu@172.30.0.102 sudo ov stack leave --this-node --drain --uninstall
 ✔ this machine left the stack.
 ```
 
-- `ov stack leave --this-node` stops the node agent so the stack sees the node leave and stops scheduling on it.
-- `--uninstall` also removes the node agent (the same server can join again later).
-- `--drain` (media nodes) leaves **gracefully**.
+`ov stack leave --this-node` stops the node agent, so the stack sees the node leave; `--uninstall` also removes the agent (the server can join again later). Only a media node leaves: on the master the command is refused and touches nothing.
 
 ## Graceful drain { #graceful-drain }
 
@@ -54,17 +52,17 @@ A cloud media node that the autoscaler is about to terminate runs exactly this o
 
 ## Destroy
 
-`ov stack destroy` from the stack's directory uninstalls OpenVidu from the cluster and keeps the machines as they are; the node agent stays on each server, and the joined nodes stay in the cluster:
+`ov stack destroy` from the stack's directory removes OpenVidu from the cluster; the machines and their node agents stay. As on a [single node](../../single-node/on-premises/admin.md#destroy), it must be told what happens to the data: `--keep-data` keeps the stack's data, configuration and credentials on the master and leaves the media nodes joined, so the same `ov stack deploy` brings the stack back; `--delete-data` removes all of it. A stack converted from a 3.9.0 installation keeps its stores in their directories on the master even with `--delete-data`.
 
 ```console
-$ ov stack destroy -y
+$ ov stack destroy --delete-data -y
 uninstalling OpenVidu…
 removing the stack's resources…
-stack removed
+stack removed, with its data and its configuration
 ✔ removed stack "el" from this directory
 ```
 
-To take a joined node out afterwards, run `sudo ov stack leave --this-node --uninstall` on it. The destroy **deletes the stack's data** (MongoDB, Redis, MinIO and the recordings), except the static volumes of a stack converted from a 3.9.0 installation: back it up first. See [Destroy](../../single-node/on-premises/admin.md#destroy).
+`--delete-data` cannot be undone: back up first. To take a media node out of the cluster afterwards, run `sudo ov stack leave --this-node --uninstall` on it.
 
 ## Backup and restore
 

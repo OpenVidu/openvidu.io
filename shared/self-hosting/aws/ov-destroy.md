@@ -1,4 +1,4 @@
-One command deletes the machines too. The destroy deletes **only what belongs to the stack according to its record**, never anything matched by name. You must choose what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the S3 bucket (the template marks it `Retain`), `--delete-data` empties and deletes it. With neither flag, or both, nothing is deleted and the command stops (exit `2`).
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the S3 bucket, **`--delete-data`** empties and deletes it. With neither, nothing is deleted. The destroy deletes only what the stack's record lists, never anything matched by name.
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -8,13 +8,6 @@ This is what will be deleted from your AWS account:
   # the Elastic IP, the security groups and the secret.
   …
   aws cloudformation delete-stack --stack-name openvidu-ce10 --region us-east-1
-
-  # The key pair this stack's deploy imported.
-  aws ec2 delete-key-pair --key-name openvidu-ce10-key --region us-east-1
-
-  # The template this stack's deploy staged (the bucket stays: every stack in the
-  # region shares it).
-  aws s3 rm s3://openvidu-cfn-templates-123456789012-us-east-1/openvidu-ce10/ --recursive --only-show-errors --region us-east-1
 …
 
 ▶ Delete the machine on AWS…
@@ -27,14 +20,10 @@ This is what will be deleted from your AWS account:
 ✔ removed stack "ce10" from this directory
 ```
 
-A bucket of your own (named with `--param`) is not the stack's, so it stays either way. The bucket `openvidu-cfn-templates-<account>-<region>` stays too, because every stack of the region shares it.
-
-- **`--keep-infrastructure`** tears the OpenVidu deployment down but leaves the instances running (and says so, because they still cost money). Use it to reinstall onto the same machines.
-- **`--dry-run`** asks nothing and changes nothing: it prints exactly what the destroy would do with the same flags.
-- A stack deployed with **`--remote-state`** also keeps its record and SSH key on AWS. The destroy deletes those too: the stack's objects in the template bucket and the Secrets Manager secret that held the SSH private key.
-
-See [`ov stack destroy`](/docs/self-hosting/openvidu-cli.md#teardown-ov-stack-destroy) for the flags every deployment shares.
+- **`--keep-infrastructure`** removes OpenVidu but leaves the machines running (and still costing money). It needs `--keep-data` or `--delete-data` too, which then act on the machines as on [your own servers](/docs/self-hosting/single-node/on-premises/admin.md#destroy); the S3 bucket stays either way.
+- A stack deployed with **`--remote-state`** also loses what it kept on AWS: its objects in the template bucket and the secret that held the SSH private key.
+- A bucket of your own (named with `--param`) and the shared `openvidu-cfn-templates-<account>-<region>` bucket are not the stack's, so they stay.
 
 !!! warning "Reusing a stack name"
 
-    Secrets Manager deletes a secret only after a recovery window, so its name remains in use for several days. Until then, deploying a new stack with the same name in the same region fails. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name the deploy printed on its `credentials:` line: `openvidu-<region>-openvidu-<name>` for a single node, `openvidu-elastic-<region>-openvidu-<name>` for Elastic, `openvidu-ha-<region>-openvidu-<name>` for High Availability. Or deploy with a different name, or in a different region.
+    Secrets Manager deletes a secret only after a recovery window, so for several days a new stack with the **same name in the same region** fails to deploy. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery` (`<secret>` is the name on the deploy's `credentials:` line), or deploy with a different name or region.

@@ -1,4 +1,4 @@
-One command deletes the machines too. A destroy that deletes machines **must** say what happens to the recordings and OpenVidu Meet data: `--keep-data` leaves the Object Storage bucket, `--delete-data` deletes it. With neither (or both), nothing is deleted and the command stops (exit `2`). This example destroys a Single Node stack:
+One command deletes the machines too, and it must be told what happens to the recordings and OpenVidu Meet data: **`--keep-data`** leaves the Object Storage bucket and names it, **`--delete-data`** empties and deletes it. With neither, nothing is deleted. This example destroys a Single Node stack:
 
 ```console
 $ ov stack destroy -y --delete-data
@@ -22,14 +22,9 @@ note: Oracle does not delete a vault at once: the stack's vault stays pending de
 ✔ removed stack "ce12o" from this directory
 ```
 
-`--delete-data` empties and deletes the Object Storage bucket the template created, recordings and all; `--keep-data` first removes it from the Terraform state, so the destroy leaves it in place and names it. A bucket of your own (`--param bucketName=<name>`; on High Availability, `bucketAppDataName` and `bucketClusterDataName`) stays either way.
+On Elastic and High Availability the destroy also terminates the media nodes the scale-in detached from their pool, which needs `oci` and `jq` on your machine.
 
-On Elastic and High Availability, media nodes the scale-in detached from their pool are no longer in the Terraform state; the template's destroy finds them by their tags and terminates them with `oci` and `jq`. Nothing drains then: the whole stack goes.
-
-A few points specific to Oracle Cloud:
-
-- **The vault waits.** A vault the template created (no `--oci-vault`) is not deleted immediately: OCI schedules it for deletion after a waiting period of at least 7 days. A deploy with the same name meanwhile creates another one. A vault of yours (`--oci-vault`) is not the stack's, so the destroy leaves it, with the stack's secrets still in it.
-- **Keep the machines.** `--keep-infrastructure` tears the OpenVidu deployment down but leaves the machines running (and says so, because they still cost money). Use it to reinstall onto the same machines.
-- **Remote-state cleanup.** A stack deployed with `--remote-state` also keeps its Terraform state and record in a bucket of its own; `ov stack destroy` deletes that too (kept with `--keep-infrastructure`). If the state bucket already existed under that name, the destroy removes only this stack's objects and leaves the bucket.
-
-See [`ov stack destroy`](/docs/self-hosting/openvidu-cli.md#teardown-ov-stack-destroy) for the flags every deployment shares.
+- **`--keep-infrastructure`** removes OpenVidu but leaves the machines running (and still costing money). It needs `--keep-data` or `--delete-data` too, which then act on the machines as on [your own servers](/docs/self-hosting/single-node/on-premises/admin.md#destroy); the bucket stays either way.
+- A stack deployed with **`--remote-state`** also loses what it kept on Oracle Cloud: its state bucket (kept with `--keep-infrastructure`).
+- A bucket of your own (`--param bucketName=<name>`; on High Availability, `bucketAppDataName` and `bucketClusterDataName`) and a vault of your own (`--oci-vault`) are not the stack's, so they stay either way.
+- **The vault waits.** Oracle deletes a vault the template created only after at least 7 days; a deploy with the same name meanwhile creates another one.

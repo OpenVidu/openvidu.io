@@ -48,36 +48,46 @@ For a cloud stack kept on its cloud with `--remote-state`, any machine with that
 
 ## Destroy { #destroy }
 
-`ov stack destroy` tears the deployment down and removes the directory's record. It asks for confirmation (type the stack name, or pass `-y`); `--dry-run` changes nothing and prints exactly what it would do.
+`ov stack destroy` tears the stack down and removes the directory's record. It must be told what happens to the data, with one of two flags:
 
-What becomes of the data depends on the edition:
+- **`--keep-data`**: the stack is removed, and its data, configuration and credentials stay on its machines. The same `ov stack deploy` from the directory brings it back as it was.
+- **`--delete-data`**: nothing of the stack stays on its machines.
+
+With neither flag, the destroy touches nothing and says where the stack's data is. It asks you to type the stack's name unless you pass `-y`, and `--dry-run` prints what it would do without changing anything. Neither flag uninstalls Docker, the cluster software or `ov` from the machines.
 
 === "OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }"
 
-    The stack is stopped and disabled; its files and data stay under `/opt/openvidu`, so `ov stack deploy --mode auto` in the same directory brings it back with its data and configuration:
-
     ```console
-    $ ov stack destroy -y
+    $ ov stack destroy --keep-data -y
     ✓ [172.30.0.96 single] systemctl stop openvidu
     ✓ [172.30.0.96 single] systemctl disable openvidu
     stack stopped and disabled on all nodes (its files and data stay under /opt/openvidu)
+      `ov stack deploy` from this directory brings it back as it was; to delete what stayed, destroy the stack with --delete-data (once its record is gone, deploy it again from this directory first)
     ✔ removed stack "web" from this directory
     ```
 
-    Two flags go further:
-
-    - `--delete-data` removes the deployment's data after teardown (`/opt/openvidu/data`: MongoDB, MinIO, Redis, recordings, metrics and logs, certificates).
-    - `--delete-config` removes the deployment directory (`/opt/openvidu` with the systemd unit), so the data goes with it.
+    `--keep-data` leaves `/opt/openvidu` on the node with its files and data. `--delete-data` removes the whole `/opt/openvidu` (data, configuration and credentials), the systemd unit and the sysctl settings, so a later deploy there is a first deploy.
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
 
-    The destroy uninstalls OpenVidu from the cluster **and deletes its data with it**: MongoDB, Redis, MinIO with the recordings, and the rest of what the stack's services store in the cluster. The machines, the node agent and the cluster's nodes stay as they are. The destroy waits for the stack's namespace to go, up to ten minutes. `--dry-run` says it before anything happens: `would remove OpenVidu from the stack's nodes: its services and their data`.
+    ```console
+    $ ov stack destroy --keep-data -y
+    uninstalling OpenVidu…
+    waiting for the stack's services to stop…
+    stack removed; its data (caddy-proxy, grafana, loki, mimir, minio, mongodb, redis) stays on its nodes, with the configuration and credentials it was written with
+      `ov stack deploy` from this directory brings it back as it was; to delete what stayed, destroy the stack with --delete-data (once its record is gone, deploy it again from this directory first)
+    ✔ removed stack "prod" from this directory
+    ```
 
-    !!! warning
-        Back up what you need **before** you destroy a PRO stack: the MongoDB and S3 data with [Method 3](../../how-to-guides/backup-and-restore.md#method-3-only-backup-data-from-minios3-and-mongodb), or the external services' own backups ([Method 4](../../how-to-guides/backup-and-restore.md#method-4-only-snapshots-provided-by-external-services-used-for-s3-or-mongodb)). Data in an external MongoDB or S3 is not touched by the destroy.
+    `--keep-data` removes OpenVidu's services and keeps their volumes (MongoDB, MinIO with the recordings, Redis, the certificates, metrics and logs) on the nodes, with the configuration and credentials they were written with. `--delete-data` removes the services, the volumes, the configuration and the credentials. Data in an external MongoDB or S3 is never touched.
 
-    The exception is an Elastic stack converted from a 3.9.0 installation: its stores kept their directories on the master as static volumes, and those are kept when the stack is destroyed ([Migrate a deployment installed by install.sh](../../elastic/on-premises/upgrade.md#migrate-a-deployment-installed-by-installsh)).
+    An Elastic stack converted from a 3.9.0 installation keeps its stores in their directories on the master even with `--delete-data` ([Migrate a deployment installed by install.sh](../../elastic/on-premises/upgrade.md#migrate-a-deployment-installed-by-installsh)).
+
+!!! warning
+    `--delete-data` cannot be undone. Back up what you need first: see [Backup and restore](#backup-and-restore).
+
+To delete what a `--keep-data` destroy left, deploy the stack again from its directory and destroy it with `--delete-data`.
 
 ## Backup and restore { #backup-and-restore }
 
-Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows. On a COMMUNITY server, a destroy without `--delete-data` keeps the data under `/opt/openvidu/data`, so a later deploy in the same directory brings the stack back as it was. A PRO destroy deletes the data (see [Destroy](#destroy)), so back it up first.
+Review the [Backup and restore OpenVidu deployments](../../how-to-guides/backup-and-restore.md) guide for recommended backup workflows. On PRO, back up the MongoDB and S3 data with [Method 3](../../how-to-guides/backup-and-restore.md#method-3-only-backup-data-from-minios3-and-mongodb), or rely on the external services' own backups ([Method 4](../../how-to-guides/backup-and-restore.md#method-4-only-snapshots-provided-by-external-services-used-for-s3-or-mongodb)).

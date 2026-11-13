@@ -9,4 +9,4 @@
 | An EC2 key pair, `openvidu-<name>-key` | Only its public half; the private half stays in `.openvidu/aws/` |
 | The bucket `openvidu-cfn-templates-<account>-<region>` | Stages the template, shared by every stack of the account in that region |
 
-`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy --delete-data` (or `--keep-data`) in the directory removes whatever a failed deploy left behind.

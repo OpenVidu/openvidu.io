@@ -8,4 +8,4 @@
 | A Key Vault, `openvidu-<name>-keyvault` | What the stack publishes: URL and credentials (and, on PRO, the access `ov` administers it with) |
 | An SSH key pair | `ov` generates it; the private half stays in `.openvidu/azure/` |
 
-`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy --delete-data` (or `--keep-data`) in the directory removes whatever a failed deploy left behind.

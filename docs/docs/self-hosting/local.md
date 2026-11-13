@@ -463,16 +463,17 @@ Follow them live with `ov stack logs -f`. Per-service logs through `ov` are not 
 
 ### Destroy
 
-Destroying the stack also removes its record from the directory (here, the `labc` stack from the module examples):
+Every destroy must say what happens to the data (here, the `labc` stack from the module examples, deployed with `--local-dir ./labc`):
 
 ```console
 $ ov stack destroy --delete-data -y
 ✓ docker compose --profile * down -v
+✓ rm -rf ./labc
 local deployment torn down
 ✔ removed stack "labc" from this directory
 ```
 
-`--delete-data` removes the Docker volumes (recordings, rooms, Meet's configuration); `--delete-config` removes the deployment directory (`docker-compose.yaml` and `config/`). Locally they are independent: `--delete-config` alone leaves the volumes. The desired-state file (`openvidu-stack.yml`) stays and records the stack's name, so `ov stack deploy` in the same directory brings the stack back, with its data unless you deleted it.
+`--keep-data` keeps the Docker volumes (recordings, rooms, Meet's configuration) and the deployment directory, so the next `ov stack deploy` returns the stack as it was. `--delete-data` removes both. With neither, nothing is touched. Either way, `openvidu-stack.yml` stays and records the stack's name, so `ov stack deploy` in the same directory brings the stack back.
 
 ### Operate it by hand: assisted mode
 

@@ -9,4 +9,4 @@
 | Dynamic groups and policies | In the tenancy and the compartment, named `<stack>-<hash>-…` so two stacks of the same name in different compartments do not collide |
 | An SSH key pair | The template generates it. On Community `ov` saves the private half in `.openvidu/oracle/`; on PRO it stays in Object Storage (the `ssh_private_key_object` output) |
 
-`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy` in the directory removes whatever a failed deploy left behind.
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating it, so `ov stack destroy --delete-data` (or `--keep-data`) in the directory removes whatever a failed deploy left behind.
