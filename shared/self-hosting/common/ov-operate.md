@@ -22,7 +22,7 @@ waiting for OpenVidu to be ready on the node (Ctrl-C to stop waiting; the deploy
 ✔ OpenVidu is ready at https://172-30-0-96.openvidu-local.dev (caddy, openvidu, dashboard, meet)
 ```
 
-Right after a first PRO deploy the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`. On PRO it prints the counts as they change (`master nodes 1/4, media nodes 0/1, services 30/40`); on a cloud it also waits for the media nodes the stack asks for, which join on their own minutes after the deploy. `--wait --joined` is for a High Availability stack still being put together: it waits only for the nodes that have joined so far.
+Right after a first PRO deploy the wait can take longer than the default 5 minutes: raise it with `--wait-timeout 15m`. On PRO it prints the counts as they change (`services 14/16` on a Single Node, `master nodes 1/4, media nodes 0/1, services 30/40` on Elastic and High Availability); on a cloud it also waits for the media nodes the stack asks for, which join on their own minutes after the deploy. `--wait --joined` is for a High Availability stack still being put together: it waits only for the nodes that have joined so far.
 
 ## Describe { #describe }
 
