@@ -2,7 +2,8 @@
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
-Run these commands yourself in your AWS account (region us-east-1); ov runs none of them:
+Run these commands yourself in your AWS account (region us-east-1); ov runs none of them.
+Once they have finished, run this same command again: ov finds the machines and ends the deploy.
 
   # SSH access: the key pair for this stack (.openvidu/aws/openvidu-pro-key.pem), its public half imported here.
   aws ec2 import-key-pair --key-name openvidu-pro-key --public-key-material fileb://.openvidu/aws/openvidu-pro-key.pub --region us-east-1
@@ -34,4 +35,4 @@ creating nothing. It waits for OpenVidu to come up and registers this directory 
 ✔ OpenVidu Pro (single node) is up on AWS
 ```
 
-While CloudFormation is still working (a status ending in `_IN_PROGRESS`), it says so and asks you to run the same command again later. If there is no stack yet, or its parameters differ from the ones this deploy asks for, it prints the commands again (the update ones, on a stack that exists). With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.
+While CloudFormation is still working (a status ending in `_IN_PROGRESS`), it says so and asks you to run the same command again later. If there is no stack yet, or its parameters differ from the ones this deploy asks for, it prints the commands again, saying first what differs when something does (the parameters, or what Terraform would change) (the update ones, on a stack that exists). With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.

@@ -2,7 +2,8 @@
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
-Run these commands yourself in your Azure subscription (location northeurope); ov runs none of them:
+Run these commands yourself in your Azure subscription (location northeurope); ov runs none of them.
+Once they have finished, run this same command again: ov finds the machines and ends the deploy.
 
   # SSH access: the key pair for this stack, its public half handed to the template.
   …
@@ -35,4 +36,4 @@ creating nothing. It waits for OpenVidu to come up and registers this directory 
 ✔ OpenVidu Community (single node) is up on Azure
 ```
 
-While the deployment is still running (`Running`, `Accepted`…), it says so and asks you to run the same command again later. If there is no deployment yet, or a parameter changed, it prints the commands again (the update ones, on a deployment that exists). With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.
+While the deployment is still running (`Running`, `Accepted`…), it says so and asks you to run the same command again later. If there is no deployment yet, or a parameter changed, it prints the commands again, saying first what differs when something does (the parameters, or what Terraform would change) (the update ones, on a deployment that exists). With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.

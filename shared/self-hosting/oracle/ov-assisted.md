@@ -2,7 +2,8 @@
 
 ```text
 ── PLAN · nothing below has run ───────────────────────────────────────
-Run these commands yourself in your Oracle Cloud tenancy (region eu-madrid-1, compartment ocid1.compartment.oc1..<compartment>); ov runs none of them:
+Run these commands yourself in your Oracle Cloud tenancy (region eu-madrid-1, compartment ocid1.compartment.oc1..<compartment>); ov runs none of them.
+Once they have finished, run this same command again: ov finds the machines and ends the deploy.
 
   …
 
@@ -32,4 +33,4 @@ creating nothing. It waits for OpenVidu to come up and registers this directory 
 ✔ OpenVidu Community (single node) is up on Oracle Cloud
 ```
 
-If there is no state yet, or the plan would change something, it prints the commands again. With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.
+If there is no state yet, or the plan would change something, it prints the commands again, saying first what differs when something does (the parameters, or what Terraform would change). With `--remote-state` it also prints the commands that save the stack's record, without running them, and settings a redeploy applies inside the stack (as `ov stack config set` does) are printed for you to run, not applied.
