@@ -153,13 +153,13 @@ All of these operations can also be performed programmatically with the [OpenVid
 
 | Operation                           | HTTP Method | Reference                                                                                                                                             |
 | ----------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create a room                       | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}       |
-| List rooms                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRooms){:target="_blank"}         |
-| Bulk delete rooms                   | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRooms){:target="_blank"}  |
-| Get a room                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoom){:target="_blank"}          |
-| Delete a room                       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoom){:target="_blank"}       |
-| Get room config                     | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="_blank"}    |
-| Update room config                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="_blank"} |
-| Update roles permissions for a room | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomRoles){:target="_blank"}  |
-| Update room access config           | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomAccess){:target="_blank"} |
-| Update room status                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomStatus){:target="_blank"} |
+| Create a room                       | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomCreate){:target="_blank"}       |
+| List rooms                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomList){:target="_blank"}         |
+| Bulk delete rooms                   | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomBulkDelete){:target="_blank"}  |
+| Get a room                          | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomGet){:target="_blank"}          |
+| Delete a room                       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomDelete){:target="_blank"}       |
+| Get room config                     | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomGetConfig){:target="_blank"}    |
+| Update room config                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateConfig){:target="_blank"} |
+| Update roles permissions for a room | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateRoles){:target="_blank"}  |
+| Update room access config           | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateAccess){:target="_blank"} |
+| Update room status                  | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateStatus){:target="_blank"} |

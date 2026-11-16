@@ -36,18 +36,18 @@ Clicking the counts opens the **Participants** panel, where each reaction takes 
 
 ## Who can react { #who-can-react }
 
-Sending reactions requires the `participantReactionSend` permission. Seeing the reactions of others is never restricted. The permission is granted by default to the `Moderator` and `Speaker` [predefined roles](../rooms/access.md#predefined-roles). It can be revoked in the room's role permissions or in a member's [custom permissions](../room-members/management.md#edit-a-member), which hides the **Reactions** button for those participants.
+Sending reactions requires the `participantSendReaction` permission. Seeing the reactions of others is never restricted. The permission is granted by default to the `Moderator` and `Speaker` [predefined roles](../rooms/access.md#predefined-roles). It can be revoked in the room's role permissions or in a member's [custom permissions](../room-members/management.md#edit-a-member), which hides the **Reactions** button for those participants.
 
 ## Enable or disable reactions for a room { #enable-or-disable }
 
-Reactions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. They can be turned off per room from the **Features** section of the **Meeting** step of the room configuration wizard, using the **Reactions** toggle, or with the room config `reactions.enabled`. In a room with reactions turned off, the button is not shown and every reaction is rejected.
+Reactions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomCreate){:target="_blank"}. They can be turned off per room from the **Features** section of the **Meeting** step of the room configuration wizard, using the **Reactions** toggle, or with the room config `reactions.enabled`. In a room with reactions turned off, the button is not shown and every reaction is rejected.
 
 ![Room wizard step with the reactions toggle](../../../assets/images/meet/meetings/reactions/room-wizard-reactions-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
 ![Room wizard step with the reactions toggle](../../../assets/images/meet/meetings/reactions/room-wizard-reactions-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
 ## From your application { #embedded }
 
-When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application sends a reaction on behalf of the local participant with the `participantReactionSend` [command](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. The `participantReactionSent` [event](../../embedded/reference/webcomponent.md#events) tells the host about every reaction sent in the meeting, the local participant's included, with who sent it.
+When OpenVidu Meet is [embedded](../../embedded/intro.md), the host application sends a reaction on behalf of the local participant with the `participantSendReaction` [command](../../embedded/reference/webcomponent.md#commands) of the Web Component and the iframe. The `participantReactionSent` [event](../../embedded/reference/webcomponent.md#events) tells the host about every reaction sent in the meeting, the local participant's included, with who sent it.
 
 Both name each reaction with a plain string: the [Unicode CLDR short name :fontawesome-solid-external-link:{.external-link-icon}](https://unicode.org/emoji/charts/full-emoji-list.html){:target="_blank"} of its emoji, in snake_case. The host application compares and stores these values without writing any emoji in its code, and shows each reaction with the emoji or icon of its choice.
 
@@ -67,7 +67,7 @@ The values are listed in the order the picker offers them, the same order as the
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');
 
-openviduMeet.participantReactionSend('thumbs_up');
+openviduMeet.participantSendReaction('thumbs_up');
 
 openviduMeet.on('participantReactionSent', (event) => {
 	if (event.reaction === 'thumbs_up') {

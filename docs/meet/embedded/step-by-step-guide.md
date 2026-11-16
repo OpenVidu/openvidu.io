@@ -29,7 +29,7 @@ You can create a room from the **"Rooms"** page in OpenVidu Meet:
 
 You can automate the room creation process by using the [OpenVidu Meet REST API](reference/rest-api.md). This allows you to create rooms programmatically from your application's backend, without manual intervention.
 
-Check out the [API reference for creating rooms :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/createRoom){:target="_blank"}. Below you have copy-paste snippets for most common languages.
+Check out the [API reference for creating rooms :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/roomCreate){:target="_blank"}. Below you have copy-paste snippets for most common languages.
 
 !!! info
     Remember to replace **`YOUR_DOMAIN`** and **`YOUR_API_KEY`** in the snippets below.
@@ -315,9 +315,9 @@ To embed a room into your application's frontend you need a **room URL**, which 
 
 You can get the room URLs programmatically using the [OpenVidu Meet REST API](reference/rest-api.md). The anonymous links are available in properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` — and the user access link in `access.user.url` — of object [MeetRoom :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/schemas/MeetRoom){:target="_blank"}. This object is returned as a JSON response from methods:
 
-- [Create a room :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/createRoom){:target="_blank"}
-- [Get a room :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/getRoom){:target="_blank"}
-- [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/getRooms){:target="_blank"}
+- [Create a room :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/roomCreate){:target="_blank"}
+- [Get a room :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/roomGet){:target="_blank"}
+- [Get all rooms :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/roomList){:target="_blank"}
 
 ## 4. Embed the room into your application
 
@@ -430,7 +430,7 @@ This will show the list of recordings for the specified room:
 To show the player for a specific recording, replace attribute `room-url` with **`recording-url`** in the embedding element. The recording URL can be obtained from:
 
 - [OpenVidu Meet app](../features/recordings/management.md#sharing-recordings)
-- [Programmatically via REST API :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/getRecordingUrl){:target="_blank"}
+- [Programmatically via REST API :fontawesome-solid-external-link:{.external-link-icon}](reference/api.html#/operations/recordingGetUrl){:target="_blank"}
 
 ```html
 <openvidu-meet recording-url="{{ your-recording-url }}"></openvidu-meet>

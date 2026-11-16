@@ -14,7 +14,7 @@ Rooms are unlocked by default. Lock a room from the **Locked room** section of t
 ![Room Access step of the room wizard with the locked room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/locked-room/room-wizard-locked-room-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
 ![Room Access step of the room wizard with the locked room turned on and a message for the participants who wait](../../../assets/images/meet/meetings/locked-room/room-wizard-locked-room-light.webp#only-light){ .control-height .round-corners loading=lazy }
 
-With the REST API, the lock is the `lock` property of the room's [access settings](../rooms/access.md), sent to [`updateRoomAccess` :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomAccess){:target="_blank"} or [`createRoom` :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. A `message` of `null` removes it:
+With the REST API, the lock is the `lock` property of the room's [access settings](../rooms/access.md), sent to [`roomUpdateAccess` :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateAccess){:target="_blank"} or [`roomCreate` :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomCreate){:target="_blank"}. A `message` of `null` removes it:
 
 ```json
 { "access": { "lock": { "enabled": true, "message": "The class starts at 10:00. We will let you in shortly." } } }
@@ -119,7 +119,7 @@ A backend runs a locked room with the [Meetings REST API](../../embedded/referen
 | Admit a waiting participant        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingParticipantAdmit){:target="_blank"}        |
 | Admit all the waiting participants | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingParticipantAdmitAll){:target="_blank"}     |
 | Reject a waiting participant       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingParticipantReject){:target="_blank"}       |
-| Bulk reject waiting participants   | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkRejectWaitingParticipants){:target="_blank"} |
+| Bulk reject waiting participants   | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingParticipantBulkReject){:target="_blank"} |
 
 ### Webhooks { #webhooks }
 

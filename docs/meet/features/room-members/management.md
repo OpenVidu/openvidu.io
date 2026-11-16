@@ -75,9 +75,9 @@ All of these operations can also be performed programmatically with the [OpenVid
 
 | Operation           | HTTP Method | Reference                                                                                                                                                  |
 | ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Add a member        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="_blank"}         |
-| List members        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMembers){:target="_blank"}        |
-| Bulk delete members | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRoomMembers){:target="_blank"} |
-| Get a member        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="_blank"}         |
-| Update a member     | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomMember){:target="_blank"}      |
-| Delete a member     | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="_blank"}      |
+| Add a member        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomAddMember){:target="_blank"}         |
+| List members        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomListMembers){:target="_blank"}        |
+| Bulk delete members | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomBulkDeleteMembers){:target="_blank"} |
+| Get a member        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomGetMember){:target="_blank"}         |
+| Update a member     | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateMember){:target="_blank"}      |
+| Delete a member     | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomDeleteMember){:target="_blank"}      |

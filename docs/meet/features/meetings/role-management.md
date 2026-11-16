@@ -43,7 +43,7 @@ A participant's role in the live meeting can also be changed from your backend w
 
 | Operation                         | HTTP Method | Reference                                                                                                                                                      |
 | --------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Update a participant's role       | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantRoleUpdate){:target="_blank"}     |
+| Update a participant's role       | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantUpdateRole){:target="_blank"}     |
 
 ## From your application { #embedded }
 

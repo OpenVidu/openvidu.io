@@ -76,10 +76,10 @@ All of these operations can also be performed programmatically with the [OpenVid
 
 | Operation               | HTTP Method | Reference                                                                                                                                              |
 | ----------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Create a user           | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createUser){:target="_blank"}        |
-| List users              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getUsers){:target="_blank"}          |
-| Bulk delete users       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteUsers){:target="_blank"}   |
-| Get a user              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getUser){:target="_blank"}           |
-| Delete a user           | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteUser){:target="_blank"}        |
-| Reset a user's password | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/resetUserPassword){:target="_blank"} |
-| Update a user's role    | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateUserRole){:target="_blank"}    |
+| Create a user           | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userCreate){:target="_blank"}        |
+| List users              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userList){:target="_blank"}          |
+| Bulk delete users       | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userBulkDelete){:target="_blank"}   |
+| Get a user              | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userGet){:target="_blank"}           |
+| Delete a user           | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userDelete){:target="_blank"}        |
+| Reset a user's password | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userResetPassword){:target="_blank"} |
+| Update a user's role    | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/userUpdateRole){:target="_blank"}    |

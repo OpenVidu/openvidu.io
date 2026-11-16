@@ -50,5 +50,5 @@ All of these settings live in the room configuration, managed with the [OpenVidu
 
 | Operation          | HTTP Method | Reference                                                                                                                                             |
 | ------------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Get room config    | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="_blank"}    |
-| Update room config | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="_blank"} |
+| Get room config    | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomGetConfig){:target="_blank"}    |
+| Update room config | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateConfig){:target="_blank"} |

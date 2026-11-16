@@ -9,7 +9,7 @@ The **Participants** panel of the [Meeting view](lifecycle.md#meeting-view) list
 
 - **Mute** another participant's microphone, turn off their camera or stop their screen share, one device at a time (`participantMute` permission).
 - **Turn off for everyone**: mute every microphone, turn off every camera or stop every screen share at once (`participantMute` permission).
-- **Lower** a participant's raised hand, or every raised hand at once (`participantHandLower` permission). See [Raise Hand](raise-hand.md#lowering-hands).
+- **Lower** a participant's raised hand, or every raised hand at once (`participantLowerHand` permission). See [Raise Hand](raise-hand.md#lowering-hands).
 - **Remove** a participant from the meeting (`participantKick` permission).
 - **Promote** a participant to moderator, or demote them back (`participantPromote` permission). See [Role Management](role-management.md).
 
@@ -45,4 +45,4 @@ Live meetings can be read and moderated from your backend with the [Meetings RES
 | Kick a participant          | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantKick){:target="_blank"}        |
 | Mute a participant          | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantMute){:target="_blank"}        |
 | Mute all participants       | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantMuteAll){:target="_blank"}     |
-| Update a participant's role | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantRoleUpdate){:target="_blank"}  |
+| Update a participant's role | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantUpdateRole){:target="_blank"}  |
