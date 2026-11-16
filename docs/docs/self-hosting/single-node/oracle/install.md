@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Single Node on Oracle Cloud"
 description: "Create the machine and deploy OpenVidu Single Node Community or PRO on Oracle Cloud with one command of the OpenVidu CLI, then operate it."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Single Node installation: Oracle Cloud Infrastructure
@@ -94,6 +96,12 @@ Community runs on Docker Compose; PRO runs on Kubernetes. The edition is the onl
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/oracle/ov-access.md"
+
+## See it in action { #see-it-in-action }
+
+//// html | div.ov-rec-set[data-rec-prefix="oracle"]
+--8<-- "self-hosting/common/ov-recordings-single-node.md"
+////
 
 ## Troubleshooting { #troubleshooting }
 

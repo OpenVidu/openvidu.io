@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Elastic on DigitalOcean"
 description: "Deploy OpenVidu Elastic on DigitalOcean with one command of the OpenVidu CLI: a master and an autoscaling media-node pool, then operate it."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Elastic installation: DigitalOcean
@@ -90,6 +92,12 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 ## Access OpenVidu
 
 --8<-- "self-hosting/digitalocean/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="digitalocean-elastic"]
+--8<-- "self-hosting/common/ov-recordings-elastic.md"
+////
 
 ## Troubleshooting
 

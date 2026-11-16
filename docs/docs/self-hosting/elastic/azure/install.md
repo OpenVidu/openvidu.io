@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Elastic on Azure"
 description: "Deploy OpenVidu Elastic on Azure with one command of the OpenVidu CLI: a master node and an autoscaling scale set of media nodes."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Elastic installation: Azure
@@ -94,6 +96,12 @@ The deployed services are the same as in the [On Premises Elastic installation](
 ## Access OpenVidu
 
 --8<-- "self-hosting/azure/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="azure-elastic"]
+--8<-- "self-hosting/common/ov-recordings-elastic.md"
+////
 
 ## Troubleshooting
 

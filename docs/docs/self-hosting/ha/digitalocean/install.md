@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu High Availability on DigitalOcean"
 description: "Deploy OpenVidu High Availability on DigitalOcean with one command of the OpenVidu CLI: four masters behind a load balancer, then operate it."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu High Availability installation: DigitalOcean
@@ -106,6 +108,12 @@ On High Availability there are two topology-specific points:
 ## Access OpenVidu
 
 --8<-- "self-hosting/digitalocean/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="digitalocean-ha"]
+--8<-- "self-hosting/common/ov-recordings-ha.md"
+////
 
 ## Troubleshooting
 

@@ -20,7 +20,8 @@ shared/
 │   └── webcomponent/       → WebComponent API reference (attributes, commands, events)
 ├── self-hosting/       → OpenVidu Platform self-hosting docs (docs/docs/self-hosting/**)
 │   ├── common/             → provider-agnostic content (license intros, install-version note,
-│   │                         nginx proxy guides, production-ready intro, restart/SSH instructions...)
+│   │                         nginx proxy guides, production-ready intro, restart/SSH instructions,
+│   │                         the terminal recordings of the cloud install guides...)
 │   ├── aws/                → AWS-specific content
 │   ├── azure/              → Azure-specific content
 │   ├── digitalocean/       → DigitalOcean-specific content

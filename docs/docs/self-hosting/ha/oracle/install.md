@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu High Availability on Oracle Cloud"
 description: "Create the machines and deploy OpenVidu High Availability behind a load balancer on Oracle Cloud with the OpenVidu CLI, then operate it."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu High Availability installation: Oracle Cloud Infrastructure
@@ -97,6 +99,12 @@ High Availability adds a few requirements of its own:
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/oracle/ov-access.md"
+
+## See it in action { #see-it-in-action }
+
+//// html | div.ov-rec-set[data-rec-prefix="oracle-ha"]
+--8<-- "self-hosting/common/ov-recordings-ha.md"
+////
 
 ## Troubleshooting { #troubleshooting }
 

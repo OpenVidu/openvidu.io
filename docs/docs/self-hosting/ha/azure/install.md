@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu High Availability on Azure"
 description: "Deploy OpenVidu High Availability on Azure with the OpenVidu CLI: four master nodes behind a load balancer and an autoscaling scale set of media nodes."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu High Availability installation: Azure
@@ -109,6 +111,12 @@ High Availability needs more vCPU quota than a single node, because it creates f
 ## Access OpenVidu
 
 --8<-- "self-hosting/azure/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="azure-ha"]
+--8<-- "self-hosting/common/ov-recordings-ha.md"
+////
 
 ## Troubleshooting
 

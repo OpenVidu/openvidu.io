@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Single Node on Azure"
 description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Azure with one command of the OpenVidu CLI, then operate and destroy the stack from its directory."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Single Node installation: Azure
@@ -110,6 +112,12 @@ The deployed services are the same as in the [On Premises Single Node installati
 <span id="check-deployment-outputs-in-the-instance"></span>
 
 --8<-- "self-hosting/azure/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="azure"]
+--8<-- "self-hosting/common/ov-recordings-single-node.md"
+////
 
 ## Troubleshooting
 

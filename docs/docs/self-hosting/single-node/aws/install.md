@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Single Node on AWS"
 description: "Create the EC2 machine and deploy OpenVidu Single Node COMMUNITY or PRO on AWS with one command of the OpenVidu CLI, then operate the stack."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Single Node installation: AWS
@@ -109,6 +111,12 @@ The deployed services are the same as in the [On Premises Single Node installati
 ## Access OpenVidu { #configure-your-application-to-use-the-deployment }
 
 --8<-- "self-hosting/aws/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="aws"]
+--8<-- "self-hosting/common/ov-recordings-single-node.md"
+////
 
 ## Troubleshooting
 

@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Elastic on Oracle Cloud"
 description: "Create the machines and deploy OpenVidu Elastic with autoscaling media nodes on Oracle Cloud with one command of the OpenVidu CLI, then operate it."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Elastic installation: Oracle Cloud Infrastructure
@@ -76,6 +78,12 @@ Elastic adds one requirement when the media nodes autoscale:
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/oracle/ov-access.md"
+
+## See it in action { #see-it-in-action }
+
+//// html | div.ov-rec-set[data-rec-prefix="oracle-elastic"]
+--8<-- "self-hosting/common/ov-recordings-elastic.md"
+////
 
 ## Troubleshooting { #troubleshooting }
 

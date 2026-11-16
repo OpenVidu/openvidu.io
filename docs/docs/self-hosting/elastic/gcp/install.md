@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Elastic on Google Cloud"
 description: "Deploy OpenVidu Elastic on Google Cloud with one OpenVidu CLI command: a master node and an autoscaling managed instance group of media nodes."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Elastic installation: Google Cloud Platform
@@ -92,6 +94,12 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/gcp/ov-access.md"
+
+## See it in action { #see-it-in-action }
+
+//// html | div.ov-rec-set[data-rec-prefix="gcp-elastic"]
+--8<-- "self-hosting/common/ov-recordings-elastic.md"
+////
 
 ## Troubleshooting { #troubleshooting }
 

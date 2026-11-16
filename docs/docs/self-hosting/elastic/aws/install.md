@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Elastic on AWS"
 description: "Create the EC2 machines and deploy OpenVidu Elastic on AWS with one command of the OpenVidu CLI, then operate the stack from its directory."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Elastic installation: AWS
@@ -115,6 +117,12 @@ Elastic also needs a **VPC** with public subnets, one for the master node and on
 ## Access OpenVidu
 
 --8<-- "self-hosting/aws/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="aws-elastic"]
+--8<-- "self-hosting/common/ov-recordings-elastic.md"
+////
 
 ## Troubleshooting
 

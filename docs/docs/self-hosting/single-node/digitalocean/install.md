@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Single Node on DigitalOcean"
 description: "Deploy OpenVidu Single Node COMMUNITY or PRO on DigitalOcean with one command of the OpenVidu CLI, then operate and destroy the stack."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Single Node installation: DigitalOcean
@@ -108,6 +110,12 @@ One command creates the machine and OpenVidu comes up on it. `ov` renders the Te
 ## Access OpenVidu
 
 --8<-- "self-hosting/digitalocean/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="digitalocean"]
+--8<-- "self-hosting/common/ov-recordings-single-node.md"
+////
 
 ## Troubleshooting
 

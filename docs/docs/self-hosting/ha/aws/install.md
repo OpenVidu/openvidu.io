@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu High Availability on AWS"
 description: "Create the EC2 machines and deploy OpenVidu High Availability on AWS with one command of the OpenVidu CLI, then operate the stack from its directory."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu High Availability installation: AWS
@@ -115,6 +117,12 @@ High Availability also needs three things of your own:
 ## Access OpenVidu
 
 --8<-- "self-hosting/aws/ov-access.md"
+
+## See it in action
+
+//// html | div.ov-rec-set[data-rec-prefix="aws-ha"]
+--8<-- "self-hosting/common/ov-recordings-ha.md"
+////
 
 ## Troubleshooting
 

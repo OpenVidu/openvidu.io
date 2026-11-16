@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu Single Node on Google Cloud"
 description: "Deploy OpenVidu Single Node COMMUNITY or PRO on Google Cloud with one OpenVidu CLI command, then operate it from the directory that deployed it."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu Single Node installation: Google Cloud Platform
@@ -106,6 +108,12 @@ One command creates the machine and OpenVidu comes up on it. `ov` renders the Te
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/gcp/ov-access.md"
+
+## See it in action { #see-it-in-action }
+
+//// html | div.ov-rec-set[data-rec-prefix="gcp"]
+--8<-- "self-hosting/common/ov-recordings-single-node.md"
+////
 
 ## Troubleshooting { #troubleshooting }
 

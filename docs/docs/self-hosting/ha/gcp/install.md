@@ -1,6 +1,8 @@
 ---
 title: "Install OpenVidu High Availability on Google Cloud"
 description: "Deploy OpenVidu High Availability on Google Cloud with one OpenVidu CLI command: four master nodes behind a load balancer and autoscaling media nodes."
+page_features:
+  - terminalrecording
 ---
 
 # OpenVidu High Availability installation: Google Cloud Platform
@@ -123,6 +125,12 @@ High Availability adds two requirements for a production deployment:
 ## Access OpenVidu { #access-openvidu }
 
 --8<-- "self-hosting/gcp/ov-access.md"
+
+## See it in action { #see-it-in-action }
+
+//// html | div.ov-rec-set[data-rec-prefix="gcp-ha"]
+--8<-- "self-hosting/common/ov-recordings-ha.md"
+////
 
 ## Troubleshooting { #troubleshooting }
 
