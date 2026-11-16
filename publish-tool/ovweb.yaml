@@ -251,6 +251,14 @@ redirects:
       body: "Redirecting to OpenVidu Meet recordings…"
       versions: ">=3.8"
 
+    # The waiting room page became the locked room page in 3.10.
+    - id: renamed-meet-feature-waiting-room
+      at: "{version}/meet/features/meetings/waiting-room/index.html"
+      to: "../locked-room/"
+      canonical: "{site_url}/latest/meet/features/meetings/locked-room/"
+      body: "Redirecting to OpenVidu Meet locked room…"
+      versions: ">=3.10"
+
     # OpenVidu Meet replaced OpenVidu Call in 3.4. The release notes link
     # /3.0/docs/openvidu-call/ on purpose: 3.0 is below the gate, so those keep resolving.
     - id: removed-openvidu-call

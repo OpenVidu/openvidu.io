@@ -258,11 +258,11 @@ With all the features you need to fine-tune your perfect video calling service.
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-account-clock-outline:{ .feature-icon .padding-icon } __Waiting room__{ .feature-name }
+-   :material-account-clock-outline:{ .feature-icon .padding-icon } __Locked room__{ .feature-name }
 
     ---
 
-    Keep your meetings secure by holding guests until a moderator admits or rejects them, from the meeting, the REST API or your own app.
+    Keep your meetings secure by locking the room, so guests wait until a moderator admits or rejects them, from the meeting, the REST API or your own app.
 
 -   :material-message-text-clock-outline:{ .feature-icon .padding-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
@@ -523,7 +523,7 @@ The most secure videoconference platform is the one you host on your own servers
 
     ---
 
-    End-to-end encryption for audio, video, and chat. A waiting room and administrator-controlled access. No third-party data routing.
+    End-to-end encryption for audio, video, and chat. Locked rooms and administrator-controlled access. No third-party data routing.
 
 -   __Accessibility and trust__{ .feature-name }
 
