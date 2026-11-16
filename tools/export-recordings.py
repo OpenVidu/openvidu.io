@@ -143,8 +143,17 @@ def read_rec_js(path: Path) -> dict:
         data = json.loads(text[start : end + 1])
     except ValueError as e:
         raise CastError(f"{path}: the OVCT_REC object is not JSON ({e})") from e
-    if not isinstance(data.get("cast"), str):
+    cast = data.get("cast")
+    # The tester writes the edited copy as asciicast text (older webs) or, since its pacing
+    # for reading, as a list [header, ...events]: both become text here.
+    if isinstance(cast, list) and cast and isinstance(cast[0], dict):
+        data["cast"] = "".join(json.dumps(x, ensure_ascii=False) + "\n" for x in cast)
+    elif not isinstance(cast, str):
         raise CastError(f"{path}: OVCT_REC has no `cast` (the edited recording)")
+    # `raw` is the raw recording's text in some webs, and the name of the script that
+    # carries it (raw.js) in newer ones: only the text is a recording.
+    if isinstance(data.get("raw"), str) and not data["raw"].lstrip().startswith("{"):
+        data.pop("raw")
     return data
 
 
