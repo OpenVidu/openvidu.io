@@ -139,6 +139,7 @@ nav:
           - Egress: docs/reference/egress.md
           - Ingress: docs/reference/ingress.md
       - Self-hosting:
+          - Overview: docs/self-hosting/index.md
           - Deployment types: docs/self-hosting/deployment-types.md
           - The OpenVidu CLI: docs/self-hosting/openvidu-cli.md
           - Production ready:
@@ -506,6 +507,7 @@ plugins:
         - docs/ai/*.md
 
         OpenVidu Platform self-hosting:
+        - docs/self-hosting/index.md
         - docs/self-hosting/deployment-types.md
         - docs/self-hosting/openvidu-cli.md
         - docs/self-hosting/local.md
