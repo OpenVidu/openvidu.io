@@ -1,0 +1,162 @@
+/* Terminal recordings (page feature `terminalrecording`, javascripts/terminal-recording.js): the
+   Edited / Full real time switch, the stage the player mounts in, the notice of a cut wait, and
+   the player's colours in both palettes. */
+
+.md-typeset .ov-rec {
+  margin: 1em 0 1.6em;
+}
+
+.ov-rec-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em 0.9em;
+  margin-bottom: 0.6em;
+}
+
+.ov-rec-switch {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 999px;
+}
+
+.ov-rec-switch button {
+  padding: 0.35em 1em;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.ov-rec-switch button:hover {
+  color: var(--md-default-fg-color);
+}
+
+.ov-rec-switch button[aria-pressed="true"] {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.ov-rec-switch button:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 1px;
+}
+
+.ov-rec-note {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+}
+
+.ov-rec-stage {
+  position: relative;
+}
+
+/* The player draws its own background; before it mounts, the stage keeps its place (a
+   120 x 36 terminal is about 3:2) so the page does not jump. */
+.ov-rec-term {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.ov-rec-term:empty {
+  aspect-ratio: 3 / 2;
+  background-color: var(--md-code-bg-color);
+}
+
+.ov-rec-term div.ap-wrapper div.ap-player {
+  border-radius: 8px;
+}
+
+.ov-rec-status {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.75rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ov-rec-status:empty {
+  display: none;
+}
+
+.ov-rec-gap {
+  position: absolute;
+  top: 0.8em;
+  right: 0.8em;
+  z-index: 40;
+  padding: 0.35em 0.8em;
+  border-radius: 6px;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.ov-rec-gap.on {
+  opacity: 1;
+}
+
+.ov-rec-gap small {
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+/* The player's palette, on the background of the site's code blocks. It accepts hex colours
+   only, and reads them once when it mounts (the script mounts it again on a palette change).
+   The scheme attribute outranks the player's own `.ap-player` defaults, which its stylesheet,
+   injected later, would otherwise win with. The recordings use green (Terraform's +), bold,
+   faint grey, yellow warnings and red errors. */
+[data-md-color-scheme="default"] .asciinema-player-theme-openvidu {
+  --term-color-foreground: #36464e;
+  --term-color-background: #f5f5f5;
+  --term-color-0: #1f2328;
+  --term-color-1: #c62828;
+  --term-color-2: #2e7d32;
+  --term-color-3: #8a5a00;
+  --term-color-4: #1565c0;
+  --term-color-5: #8e24aa;
+  --term-color-6: #007394;
+  --term-color-7: #6b7280;
+  --term-color-8: #6b7280;
+  --term-color-9: #d32f2f;
+  --term-color-10: #388e3c;
+  --term-color-11: #9a6700;
+  --term-color-12: #1976d2;
+  --term-color-13: #9c27b0;
+  --term-color-14: #0088aa;
+  --term-color-15: #1f2328;
+}
+
+[data-md-color-scheme="slate"] .asciinema-player-theme-openvidu {
+  --term-color-foreground: #c9ccd6;
+  --term-color-background: #272a35;
+  --term-color-0: #3b3f4c;
+  --term-color-1: #ff7b72;
+  --term-color-2: #7ee08a;
+  --term-color-3: #e3b341;
+  --term-color-4: #79c0ff;
+  --term-color-5: #d2a8ff;
+  --term-color-6: #00c8f7;
+  --term-color-7: #c9ccd6;
+  --term-color-8: #8b90a0;
+  --term-color-9: #ffa198;
+  --term-color-10: #a5eea0;
+  --term-color-11: #f2cc60;
+  --term-color-12: #a5d6ff;
+  --term-color-13: #e2c5ff;
+  --term-color-14: #56d4f5;
+  --term-color-15: #ffffff;
+}

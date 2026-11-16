@@ -181,6 +181,12 @@
 <script src="{{ 'javascripts/releases-scroll-to-version.js' | url }}"></script>
 {% endif %}
 
+{% if page.meta and page.meta.page_features and "terminalrecording" in page.meta.page_features %}
+{# Terminal recordings (.ov-rec): the script loads the asciinema player and each recording
+   itself, the first time a recording scrolls into view #}
+<script src="{{ 'javascripts/terminal-recording.js' | url }}"></script>
+{% endif %}
+
 {{ super() }}
 
 {% if page.meta and page.meta.page_features and "openviduregister" in page.meta.page_features %}
@@ -276,6 +282,10 @@
 
 {% if page.meta.page_features and "leadform" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/lead-form.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "terminalrecording" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/terminal-recording.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "openviduregister" in page.meta.page_features %}

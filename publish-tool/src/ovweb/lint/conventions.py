@@ -36,6 +36,12 @@ TAG_CONTRACT = (
     (_class_token("splide"), 'class="splide"', "setupcarousel"),
     (_class_token("lazy-video"), 'class="lazy-video"', "lazyvideo"),
     (_class_token("lead-form"), 'class="lead-form"', "leadform"),
+    # The players live in tabs, where they are written as `/// html | div.ov-rec[…]` blocks.
+    (
+        re.compile(_class_token("ov-rec").pattern + r"|/// html \| div\.ov-rec(?![\w-])"),
+        'class="ov-rec"',
+        "terminalrecording",
+    ),
     (re.compile(r'\bdata-sal="'), 'data-sal="..."', "revealonscroll"),
 )
 

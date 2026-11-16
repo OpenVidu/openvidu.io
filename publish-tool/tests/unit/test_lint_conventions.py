@@ -149,6 +149,37 @@ def test_the_class_token_matches_among_other_classes(tmp_path):
     assert "lazyvideo" in finding.message
 
 
+def test_a_terminal_recording_needs_terminalrecording(tmp_path):
+    write(tmp_path, "docs/docs/landing.md", '<div class="ov-rec" data-rec="aws-ha-auto"></div>')
+
+    (finding,) = findings_of(tmp_path, "tag-contract")
+    assert "terminalrecording" in finding.message
+
+
+def test_a_terminal_recording_block_in_a_snippet_needs_terminalrecording(tmp_path):
+    """Inside a tab the player is an html block, and the page that includes it needs the key."""
+    write(
+        tmp_path,
+        "shared/self-hosting/common/recordings.md",
+        '=== "Auto"\n\n    /// html | div.ov-rec[data-rec-suffix="auto"]\n    ///\n',
+    )
+    write(tmp_path, "docs/docs/install.md", '--8<-- "self-hosting/common/recordings.md"\n')
+
+    (finding,) = findings_of(tmp_path, "tag-contract")
+    assert finding.file == "docs/docs/install.md"
+    assert "terminalrecording" in finding.message
+
+
+def test_the_recording_wrapper_is_not_a_recording(tmp_path):
+    write(
+        tmp_path,
+        "docs/docs/install.md",
+        '//// html | div.ov-rec-set[data-rec-prefix="aws"]\n////\n',
+    )
+
+    assert findings_of(tmp_path, "tag-contract") == []
+
+
 def test_reveal_markup_needs_revealonscroll(tmp_path):
     write(tmp_path, "docs/pricing.md", '<div class="second-slogan" data-sal="slide-up">x</div>')
 

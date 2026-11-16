@@ -88,6 +88,37 @@ page, copy its feature keys too.** These are the keys currently used:
   video pattern below). Loads [`lazy-video.js`](../docs/javascripts/lazy-video.js), which plays
   each video only while it is on screen and never downloads the hidden theme variant.
 
+- `terminalrecording`: the page has terminal recordings of the `ov` end-to-end tests (the
+  self-hosting landing and the 15 cloud installation guides). Loads
+  [`terminal-recording.css`](../docs/stylesheets/terminal-recording.css) and
+  [`terminal-recording.js`](../docs/javascripts/terminal-recording.js), which turns every
+  `.ov-rec` element into an [asciinema player](https://docs.asciinema.org/manual/player/) of
+  `assets/recordings/<cell>.edited.cast` (the long waits cut, each cut announced as it plays)
+  with a switch to `<cell>.raw.cast`, the full run in real time. The cell is named on the
+  element, or composed from a wrapper, which is how a shared snippet serves every cloud:
+
+  ```html
+  <div class="ov-rec" data-rec="aws-elastic-auto"></div>
+  ```
+
+  ```markdown
+  //// html | div.ov-rec-set[data-rec-prefix="aws-elastic"]
+  --8<-- "self-hosting/common/ov-recordings-elastic.md"
+  ////
+  ```
+
+  The snippets (`ov-recordings-{single-node,elastic,ha}.md`) hold the tabs and one
+  `/// html | div.ov-rec[data-rec-suffix="auto"]` block per recording (an html block, because
+  `md_in_html` does not work inside a tab), so the wrapper takes four slashes. Nothing heavy
+  loads with the page: the player (asciinema-player 3.17.0, Apache-2.0, vendored unmodified
+  from the npm tarball as `docs/javascripts/asciinema-player.min.js`,
+  `docs/stylesheets/asciinema-player.css` and its `asciinema-player.LICENSE`) and the edited
+  recording load when a recording first scrolls into view, the real-time one only when it is
+  asked for. The player reads its colours once, as hex values, so `terminal-recording.css`
+  sets them per palette and the script mounts the player again when the palette changes. The
+  recordings themselves come from `tools/export-recordings.py`
+  ([authoring.md](authoring.md#terminal-recordings)).
+
 - `scrolltoversion`: releases pages only — auto-scrolls to the `## X.Y.0` heading of the version
   being viewed. Loads
   [`releases-scroll-to-version.js`](../docs/javascripts/releases-scroll-to-version.js).
@@ -130,8 +161,8 @@ page, copy its feature keys too.** These are the keys currently used:
   automatically.
 
 The `page_features:`↔HTML contract is checked by `ovweb lint` (a page whose content carries
-`feature-cards`, `splide`, `lazy-video`, `lead-form` or `data-sal` markup must declare the matching
-feature key) — see [checks.md](checks.md).
+`feature-cards`, `splide`, `lazy-video`, `lead-form`, `ov-rec` or `data-sal` markup must declare
+the matching feature key) — see [checks.md](checks.md).
 
 ### Images
 
@@ -316,9 +347,10 @@ Material overrides, utilities, components, page areas, then one `@media` block p
 [`unsemantic-grid.css`](../docs/stylesheets/unsemantic-grid.css) (the complete grid build: use any
 of its classes, never edit it). Everything else is linked by a feature key from `main.html`'s
 `styles` block, which MkDocs emits *before* those three, in this order: `home.css`, `product.css`
-with `meet.css`/`platform.css` on top, `carousel.css`, `sal.css`, `lead-form.css` and the account
-page's bundle styles (Splide's own `splide.min.css` alone precedes even Material's stylesheet). So at
-equal specificity a feature sheet loses to `extra.css`, and `meet.css` beats `home.css`.
+with `meet.css`/`platform.css` on top, `carousel.css`, `sal.css`, `lead-form.css`,
+`terminal-recording.css` and the account page's bundle styles (Splide's own `splide.min.css` alone
+precedes even Material's stylesheet; `asciinema-player.css` is appended at run time by its script).
+So at equal specificity a feature sheet loses to `extra.css`, and `meet.css` beats `home.css`.
 
 Where a rule goes:
 

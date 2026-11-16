@@ -38,8 +38,9 @@ authoring conventions `mkdocs build --strict` cannot see, in about a second and 
   `mkdocs serve`.
 - **Page composition**: `!!!warning`-without-space admonitions; the `page_features:` contract
   (a page whose content — snippets included — carries `feature-cards`, `splide`, `lazy-video`,
-  `lead-form` or `data-sal` markup must list the matching feature key — `setupcardglow`,
-  `setupcarousel`, `lazyvideo`, `leadform` or `revealonscroll` — in its `page_features:`
+  `lead-form`, `ov-rec` or `data-sal` markup must list the matching feature key —
+  `setupcardglow`, `setupcarousel`, `lazyvideo`, `leadform`, `terminalrecording` or
+  `revealonscroll` — in its `page_features:`
   frontmatter; `tags:` is blog taxonomy and does not count); `<img>` elements without `alt` text; files at the
   `assets/images|videos/` root; unpaired `#only-light`/`#only-dark`; blog posts referencing
   another post's asset folder; snippet filenames repeating their folder; a blog post whose `date`
