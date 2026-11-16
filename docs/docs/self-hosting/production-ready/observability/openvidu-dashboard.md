@@ -283,7 +283,7 @@ The dashboard keeps those figures and charts in place and marks them with a :mat
 ## Settings
 
 - **Preferences**: theme, default time zone, default time range, rows per page and auto-refresh interval. They are stored in the browser.
-- **About**: the OpenVidu version and edition, the progress of a data migration while it runs, the retention in effect for each class of data and the storage each collection uses.
+- **Data**: the storage of each class of data with its retention, documents and size, and the collections that hold it; for a class that has not reached its retention yet, an estimate of its size once it does. It also shows the progress of a data migration while it runs.
 
 ![About tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-about-light.png#only-light){ .round-corners loading=lazy }
 ![About tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-about-dark.png#only-dark){ .round-corners loading=lazy }
@@ -318,6 +318,8 @@ Each class of data is kept for its own time, after which MongoDB deletes it:
 | Daily rollups | Forever | `openvidu.analytics.retention.rollups_daily` |
 
 The details of a room or participant show their charts, events and tracks only while that data is retained, and say so when it is not; the Analytics page keeps showing the figures of that time from the rollups.
+
+The **Data** tab of [Settings](#settings) shows how much space each class takes and, while a class has not reached its retention yet, estimates its size at full retention from the data so far, which helps to size each retention. A new `entities` or `tracks` retention applies to what closes after the restart; the other classes follow the new value at once.
 
 ## Configuration
 
