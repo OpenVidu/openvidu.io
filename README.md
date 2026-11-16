@@ -55,6 +55,7 @@ Everything else — full builds, validating like CI, previewing the versioned la
 | [`shared/`](shared/) | Reusable Markdown snippets, included with `--8<--` |
 | `docs/assets/`, `docs/stylesheets/`, `docs/javascripts/` | Images/videos (organized by consuming page), CSS, JS |
 | [`publish-tool/`](publish-tool/) | `ovweb`, the publishing CLI, plus `ovweb.yaml` (site layout + every redirect) |
+| [`tools/`](tools/) | Helper scripts: `export-recordings.py` exports the `ov` e2e terminal recordings into `docs/assets/recordings/` |
 | [`contributing/`](contributing/) | The contributor documentation (index below) |
 | [`.claude/`](.claude/) | The AI tooling: skills, commands, agents, hooks, permissions |
 | [`.github/workflows/`](.github/workflows/) | CI: PR validation, manual publish, weekly link check, tool tests |

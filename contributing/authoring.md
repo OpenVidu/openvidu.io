@@ -118,6 +118,29 @@ asset in the folder matching its page:
   in a subfolder per cloud provider (`aws/`, `azure/`, `digitalocean/`, `gcp/`, `oracle/`)
   mirroring the [`shared/self-hosting`](../shared/self-hosting) snippet folders.
 
+## Terminal recordings
+
+`docs/assets/recordings/` holds the terminal recordings of the `ov` end-to-end tests that the
+self-hosting landing and the cloud installation guides play (the `terminalrecording` feature,
+[page-composition.md](page-composition.md#page-features-per-page-jscss)): for each of the 40
+cloud cells, `<cloud>-<ce|pro|elastic|ha>-<auto|assisted>`, an edited copy with the long waits
+cut (`<cell>.edited.cast`) and the full run in real time (`<cell>.raw.cast`), both asciicast v2.
+Never edit them by hand: they are exported from the recordings web that ov-cloud-tester
+(openvidu-deployment, `tests/ov-cloud-tester`) writes, one directory per cell:
+
+```bash
+tools/export-recordings.py <recordings-web-dir>            # writes docs/assets/recordings/
+tools/export-recordings.py <recordings-web-dir> --dry-run  # checks and reports, writes nothing
+```
+
+The script needs only Python 3. It takes the edited copy from each cell's `rec.js` and the raw
+recording from `<cell>.cast`, adds to the edited copy's header what the player shows (the real
+duration and the cut waits), and removes any other `.cast` from the folder. Before writing
+anything it checks every recording for what must never be published: an unmasked cloud account
+or project, a key or a token, a PRO license, a home directory, this machine's user or host name.
+A hit names the cell and the event, writes nothing and exits `1`. The 80 files weigh about
+6 MB; a page downloads only the edited recording on screen, and the raw one when asked.
+
 ## Sync changes between _openvidu.io_ and _livekit-tutorials.openvidu.io_
 
 Whenever any changes are made to the tutorials documentation, these changes must also be
