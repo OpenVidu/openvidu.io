@@ -26,7 +26,7 @@ authors:
 
 # How to choose a video codec for video conferencing
 
-![How to choose a video codec for video conferencing: AV1, VP9, H.264 and VP8 each win in a different room, and the right pick depends on your users' devices and network](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/poster.webp){ .round-corners width=100% }
+![How to choose a video codec for video conferencing: AV1, VP9, H.264 and VP8 each win in a different room, and the right pick depends on your users' devices and network](/assets/images/blog/2026/11/best-video-codec-video-conferencing/poster.webp){ .round-corners width=100% }
 
 Picking the codec that compresses best and eats the least bandwidth looks, at first glance, like the obvious call when you build a video conferencing application. And yet **the codec that saves the most bandwidth can be the one that performs worst for your users**.
 
@@ -150,8 +150,8 @@ Take them as a starting point, not a verdict: the devices you have to support an
 
 6. **Instrument and review.** Do not settle for lab tests alone. WebRTC metrics can help you spot when a device is limiting performance, and why.
 
-![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/codec-selection-process-light.webp#only-light "The six steps to choose a video codec"){ .round-corners loading=lazy }
-![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/YYYY/MM/best-video-codec-video-conferencing/codec-selection-process-dark.webp#only-dark "The six steps to choose a video codec"){ .round-corners loading=lazy }
+![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/2026/11/best-video-codec-video-conferencing/codec-selection-process-light.webp#only-light "The six steps to choose a video codec"){ .round-corners loading=lazy }
+![The six-step process for choosing a video codec: list your clients, profile the worst device, check hardware acceleration, measure sustained performance, test real scenarios, and instrument and review](/assets/images/blog/2026/11/best-video-codec-video-conferencing/codec-selection-process-dark.webp#only-dark "The six steps to choose a video codec"){ .round-corners loading=lazy }
 
 The important idea is that **you do not have to pick the codec that is most efficient on paper**. You have to pick the one that offers the best balance between **compatibility, efficiency, computational cost and quality on the devices your users actually have**.
 
