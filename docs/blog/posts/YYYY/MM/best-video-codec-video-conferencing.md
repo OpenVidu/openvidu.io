@@ -1,7 +1,8 @@
 ---
 title: How to choose a video codec for video conferencing
 draft: false
-date: 2026-09-14T00:00:00.000Z
+date:
+  created: 2026-11-17
 slug: best-video-codec-video-conferencing
 description: >-
   Why AV1, VP9, H.264 and VP8 each win in different rooms, and how to pick a
