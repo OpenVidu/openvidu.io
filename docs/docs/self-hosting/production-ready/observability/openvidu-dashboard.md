@@ -285,8 +285,8 @@ The dashboard keeps those figures and charts in place and marks them with a :mat
 - **Preferences**: theme, default time zone, default time range, rows per page and auto-refresh interval. They are stored in the browser.
 - **Data**: the storage of each class of data with its retention, documents and size, and the collections that hold it; for a class that has not reached its retention yet, an estimate of its size once it does. It also shows the progress of a data migration while it runs.
 
-![About tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-about-light.png#only-light){ .round-corners loading=lazy }
-![About tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-about-dark.png#only-dark){ .round-corners loading=lazy }
+![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-light.png#only-light){ .round-corners loading=lazy }
+![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-dark.png#only-dark){ .round-corners loading=lazy }
 
 ## Analytics data
 
