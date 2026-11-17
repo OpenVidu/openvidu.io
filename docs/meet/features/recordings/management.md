@@ -28,7 +28,7 @@ To stop the recording, a participant with the `recordingControl` permission must
     Recordings can also be started and stopped, in an **active meeting** only (starting one in a room with no ongoing meeting returns an error), through:
 
     - The [REST API](#rest-api-reference), which can also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that recording.
-    - The `recordingStart` and `recordingStop` [commands](../../embedded/reference/webcomponent.md#commands) of an [embedded](../../embedded/intro.md) application, which require the local participant to hold the `recordingControl` permission. The status of the recording is reported by the `recordingStatusChanged` event.
+    - The `recordingStart` and `recordingStop` [commands](../../embedded/reference/webcomponent.md#commands) of an [embedded](../../embedded/intro.md) application, which require the local participant to hold the `recordingControl` permission. The progress of the recording is reported by the `recordingStarted`, `recordingUpdated` and `recordingEnded` [events](../../embedded/reference/webcomponent.md#events).
 
     As in the app, the start is refused in a room with recording disabled or with an automatic [recording trigger](configuration.md#recording-trigger).
 
