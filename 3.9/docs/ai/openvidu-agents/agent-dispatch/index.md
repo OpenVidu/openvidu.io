@@ -13,7 +13,7 @@ AI_SERVICE:
 
 > **Tip**
 >
-> For example, for the [Live Captions](https://openvidu.io/3.9/docs/ai/live-captions/index.md) service:
+> For example, for the [Live Captions](https://openvidu.io/latest/docs/ai/live-captions/index.md) service:
 >
 > ```yaml
 > live_captions:
@@ -35,7 +35,7 @@ AI_SERVICE:
 
 > **Tip**
 >
-> For example, for the [Live Captions](https://openvidu.io/3.9/docs/ai/live-captions/index.md) service:
+> For example, for the [Live Captions](https://openvidu.io/latest/docs/ai/live-captions/index.md) service:
 >
 > ```yaml
 > live_captions:
@@ -214,7 +214,7 @@ If your backend technology does not have its own SDK, you have two different opt
         -d '{"agent_name": "AGENT_NAME", "room": "my-room"}'
    ```
 
-   > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. See [Generating a token](https://openvidu.io/3.9/docs/reference/access-tokens/#generating-a-token)
+   > You need as `VALID_AUTHORIZATION_TOKEN` a token with `room` and `roomAdmin` permissions. See [Generating a token](https://openvidu.io/latest/docs/reference/access-tokens/#generating-a-token)
 
 1. Use the [livekit-cli](https://docs.livekit.io/intro/basics/cli/) :
 
@@ -237,4 +237,4 @@ If your backend technology does not have its own SDK, you have two different opt
 
 You can configure a Participant's token to trigger the dispatch of an agent right at the moment that Participant connects to a Room. This is very useful to dispatch an agent to a specific Room only when a specific Participant joins.
 
-To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. See the [`roomConfig`](https://openvidu.io/3.9/docs/reference/access-tokens/#token-claims) token claim.
+To create a Participant's token with Agent dispatch, you just need to include in the token the proper `RoomConfiguration` options, specifically the **`agents`** property. See the [`roomConfig`](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims) token claim.

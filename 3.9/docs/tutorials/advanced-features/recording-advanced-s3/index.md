@@ -2,7 +2,7 @@
 
 [Source code](https://github.com/OpenVidu/openvidu-livekit-tutorials/tree/3.9.0/advanced-features/openvidu-recording-advanced-node)
 
-This tutorial improves the [basic recording tutorial](https://openvidu.io/3.9/docs/tutorials/advanced-features/recording-basic-s3/index.md) by doing the following:
+This tutorial improves the [basic recording tutorial](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-s3/index.md) by doing the following:
 
 - **Complete recording metadata**: Listen to webhook events and save all necessary metadata in a separate file.
 - **Real time recording status notification**: Implement a custom notification system to inform participants about the recording status by listening to webhook events and updating room metadata.
@@ -13,7 +13,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 - When running OpenVidu **locally** or **On-Premises**, recordings are stored in a **local S3 MinIO bucket**.
 - When running OpenVidu in **AWS**, recordings are stored in an **AWS S3 bucket**.
-- When running OpenVidu in **Azure**, recordings are stored in an **Azure Blob Storage container**. If this is your case, follow the [Recording Advanced Azure tutorial](https://openvidu.io/3.9/docs/tutorials/advanced-features/recording-advanced-azure/index.md) instead.
+- When running OpenVidu in **Azure**, recordings are stored in an **Azure Blob Storage container**. If this is your case, follow the [Recording Advanced Azure tutorial](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-advanced-azure/index.md) instead.
 
 ## Running this tutorial
 
@@ -58,7 +58,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 **Deploy OpenVidu**
 
-1. Deploy OpenVidu Single Node in AWS following these instructions [to deploy in AWS](https://openvidu.io/3.9/docs/self-hosting/single-node/aws/install/index.md).
+1. Deploy OpenVidu Single Node in AWS following these instructions [to deploy in AWS](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/index.md).
 
    > **CPUs to be able to record**
    >
@@ -66,7 +66,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 1. Point the tutorial to your AWS deployment:
 
-   - Modify file [`.env`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-advanced-node/.env) to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](https://openvidu.io/3.9/docs/self-hosting/single-node/aws/install/#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) ).
+   - Modify file [`.env`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-advanced-node/.env) to update the LiveKit and AWS configuration to the values of your AWS deployment. You can get the values of `LIVEKIT_URL`, `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` from the [Configure your application to use the deployment](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/#configure-your-application-to-use-the-deployment) section. You can get the values of `S3_ENDPOINT`, `AWS_REGION` and `S3_BUCKET` from the `openvidu.env` file of your deployment by making ssh to the instance. For the `S3_ACCESS_KEY` and `S3_SECRET_KEY` you will need to create an access key in the IAM section of AWS to be able to use them in the tutorial (check [Manage access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) ).
    - Modify file [`app.js`](https://github.com/OpenVidu/openvidu-livekit-tutorials/blob/3.9.0/advanced-features/openvidu-recording-advanced-node/public/app.js#L3) to update the value of `LIVEKIT_URL` with your `LIVEKIT_URL`.
 
 > **Warning**
@@ -75,7 +75,7 @@ Recordings are always persisted in some kind of storage system. This type of sto
 
 > **Configure Webhooks**
 >
-> All [application servers](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
+> All [application servers](https://openvidu.io/latest/docs/tutorials/application-server/index.md) have an endpoint to receive webhooks from OpenVidu. For this reason, when using a production deployment you need to configure webhooks to point to your local application server in order to make it work. Check the [Send Webhooks to a Local Application Server](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/#send-webhooks-to-a-local-application-server) section for more information.
 
 ### 2. Download the tutorial code
 
@@ -111,7 +111,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 >
 > One advantage of [running OpenVidu locally](#run-openvidu-locally) is that you can test your application with other devices in your local network very easily without worrying about SSL certificates.
 >
-> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/3.9/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
+> Access your application client through `https://xxx-yyy-zzz-www.openvidu-local.dev:6443`, where `xxx-yyy-zzz-www` part of the domain is your LAN private IP address with dashes (-) instead of dots (.). For more information, see section [Accessing your local deployment from other devices on your network](https://openvidu.io/latest/docs/self-hosting/local/#accessing-your-local-deployment-from-other-devices-on-your-network) .
 >
 > **Limitation**: Playing recordings with the `S3` strategy from other devices in your local network is not possible due to MinIO not being exposed. To play recordings from other devices, you need to change the environment variable `RECORDING_PLAYBACK_STRATEGY` to `PROXY`.
 
@@ -480,7 +480,7 @@ This method does the following:
 
    > **Getting recording metadata**
    >
-   > In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](https://openvidu.io/3.9/docs/tutorials/advanced-features/recording-basic-s3/index.md), we are now storing additional details such as the **recording name**, **duration** and **size**.
+   > In this tutorial, we can access detailed information about the recording directly from the metadata file stored in the S3 bucket, without needing to make additional requests. This is made possible by saving all the necessary data retrieved from the egress info object. Compared to the [basic recording tutorial](https://openvidu.io/latest/docs/tutorials/advanced-features/recording-basic-s3/index.md), we are now storing additional details such as the **recording name**, **duration** and **size**.
 
 1. Gets the metadata key from the recordings path and the recordings metadata path, both defined in the `config.js` file, and the recording name replacing the `.mp4` extension with `.json`:
 

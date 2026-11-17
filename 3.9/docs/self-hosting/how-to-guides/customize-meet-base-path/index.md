@@ -25,13 +25,13 @@ After restarting, OpenVidu Meet will be accessible at `https://your-domain/custo
 
 ## Setting `MEET_BASE_PATH` to `/`
 
-You can set `MEET_BASE_PATH=/` to serve OpenVidu Meet at the root path of your domain. However, this has an important side effect: the automatic proxy from `/` to port **6080** will no longer be available. This means you **cannot** [deploy a custom application alongside OpenVidu](https://openvidu.io/3.9/meet/embedded/deploy-your-app/#deploy-alongside-openvidu) using port 6080, because the root path is already taken by OpenVidu Meet.
+You can set `MEET_BASE_PATH=/` to serve OpenVidu Meet at the root path of your domain. However, this has an important side effect: the automatic proxy from `/` to port **6080** will no longer be available. This means you **cannot** [deploy a custom application alongside OpenVidu](https://openvidu.io/latest/meet/embedded/deploy-your-app/#deploy-alongside-openvidu) using port 6080, because the root path is already taken by OpenVidu Meet.
 
-If you need to deploy a custom application with `MEET_BASE_PATH=/`, you must [deploy it in a separate environment](https://openvidu.io/3.9/meet/embedded/deploy-your-app/#deploy-in-a-separate-environment) instead.
+If you need to deploy a custom application with `MEET_BASE_PATH=/`, you must [deploy it in a separate environment](https://openvidu.io/latest/meet/embedded/deploy-your-app/#deploy-in-a-separate-environment) instead.
 
 ## Update your application
 
-If you have an application built with [OpenVidu Meet Embedded](https://openvidu.io/3.9/meet/embedded/intro/index.md), you need to update it to use the new base path. Replace `/meet` with your configured path in:
+If you have an application built with [OpenVidu Meet Embedded](https://openvidu.io/latest/meet/embedded/intro/index.md), you need to update it to use the new base path. Replace `/meet` with your configured path in:
 
 - **REST API URLs**: e.g. `https://your-domain/<MEET_BASE_PATH>/api/v1/rooms` instead of `https://your-domain/meet/api/v1/rooms`.
 

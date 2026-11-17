@@ -8,7 +8,7 @@ The **OpenVidu Agent Plugin** brings the official OpenVidu documentation into yo
 
   The OpenVidu Meet and OpenVidu Platform documentation of every release from 3.4, for your agent to search and read.
 
-  [OpenVidu MCP servers](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/index.md)
+  [OpenVidu MCP servers](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/index.md)
 
 - **OpenVidu skills**
 
@@ -16,13 +16,13 @@ The **OpenVidu Agent Plugin** brings the official OpenVidu documentation into yo
 
   Procedures your agent follows, such as finding out which OpenVidu your project uses when an answer depends on it.
 
-  [OpenVidu skills](https://openvidu.io/3.9/docs/building-with-ai/skills/index.md)
+  [OpenVidu skills](https://openvidu.io/latest/docs/building-with-ai/skills/index.md)
 
 ## What is an agent plugin?
 
 An agent plugin is a package that a coding agent installs in one step, bundling MCP servers and skills. Its format is the [Agent Plugins specification](https://agent-plugins.org/specification) , an open standard implemented by VS Code, Cursor, GitHub Copilot, Codex, Kiro and other clients. Claude Code has a format of its own, and the OpenVidu Agent Plugin ships in both from [OpenVidu/openvidu-agent-plugin](https://github.com/OpenVidu/openvidu-agent-plugin) .
 
-The plugin helps you build *with* OpenVidu. To add AI agents to your rooms, see [AI Services](https://openvidu.io/3.9/docs/ai/overview/index.md).
+The plugin helps you build *with* OpenVidu. To add AI agents to your rooms, see [AI Services](https://openvidu.io/latest/docs/ai/overview/index.md).
 
 ## Install
 
@@ -76,7 +76,7 @@ codex plugin marketplace add OpenVidu/openvidu-agent-plugin
 codex plugin add openvidu@openvidu
 ```
 
-The Codex IDE extension doesn't load plugins: there, [add the MCP server](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/#add-it-to-your-client).
+The Codex IDE extension doesn't load plugins: there, [add the MCP server](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/#add-it-to-your-client).
 
 **Updates.** `codex plugin marketplace upgrade openvidu`.
 
@@ -96,11 +96,11 @@ Any client that implements Agent Plugins installs it from `https://github.com/Op
 
 **Updates.** Use the client's own update command.
 
-Your client doesn't load plugins, or you would rather not install one? Add the [MCP server](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/#add-it-to-your-client) and the [skills](https://openvidu.io/3.9/docs/building-with-ai/skills/#install) on their own.
+Your client doesn't load plugins, or you would rather not install one? Add the [MCP server](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/#add-it-to-your-client) and the [skills](https://openvidu.io/latest/docs/building-with-ai/skills/#install) on their own.
 
 ## Tell your agent which OpenVidu you run
 
-Many answers depend on three facts about the deployment your project talks to: its **version**, its **edition** (COMMUNITY or PRO) and the **product** your app uses, [OpenVidu Platform](https://openvidu.io/3.9/docs/index.md) or [OpenVidu Meet](https://openvidu.io/3.9/meet/index.md). When an answer needs them, your agent works them out with the [`openvidu-version-edition-product`](https://openvidu.io/3.9/docs/building-with-ai/skills/#available-skills) skill and offers to write them into `AGENTS.md`, so later sessions start from them. You can also write them yourself:
+Many answers depend on three facts about the deployment your project talks to: its **version**, its **edition** (COMMUNITY or PRO) and the **product** your app uses, [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) or [OpenVidu Meet](https://openvidu.io/latest/meet/index.md). When an answer needs them, your agent works them out with the [`openvidu-version-edition-product`](https://openvidu.io/latest/docs/building-with-ai/skills/#available-skills) skill and offers to write them into `AGENTS.md`, so later sessions start from them. You can also write them yourself:
 
 AGENTS.md
 
@@ -125,16 +125,16 @@ Ask as you would about any other code, and your agent reads the documentation wh
 
 ## Privacy
 
-The plugin collects nothing itself. The documentation server it connects to records each request your agent makes, never your code or your conversation: see [what it records and for how long](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/#privacy).
+The plugin collects nothing itself. The documentation server it connects to records each request your agent makes, never your code or your conversation: see [what it records and for how long](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/#privacy).
 
 ## Troubleshooting
 
 > **No OpenVidu tools appear after installing**
 >
-> Reload or restart the client, and check that the plugin is enabled. In Claude Code, `/plugin` lists it, and its **Errors** tab shows a failed MCP connection. If your client is up to date and still shows no tools, [add the server by hand](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/#add-it-to-your-client).
+> Reload or restart the client, and check that the plugin is enabled. In Claude Code, `/plugin` lists it, and its **Errors** tab shows a failed MCP connection. If your client is up to date and still shows no tools, [add the server by hand](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/#add-it-to-your-client).
 
 > **The answers are for the wrong version**
 >
 > Pin the version in `AGENTS.md`, as in [Tell your agent which OpenVidu you run](#tell-your-agent-which-openvidu-you-run), or name it in your prompt.
 
-More in the troubleshooting of the [MCP server](https://openvidu.io/3.9/docs/building-with-ai/mcp-servers/#troubleshooting) and the [skills](https://openvidu.io/3.9/docs/building-with-ai/skills/#troubleshooting). Problems with the plugin itself can be reported in the [openvidu-agent-plugin repository](https://github.com/OpenVidu/openvidu-agent-plugin/issues) .
+More in the troubleshooting of the [MCP server](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/#troubleshooting) and the [skills](https://openvidu.io/latest/docs/building-with-ai/skills/#troubleshooting). Problems with the plugin itself can be reported in the [openvidu-agent-plugin repository](https://github.com/OpenVidu/openvidu-agent-plugin/issues) .

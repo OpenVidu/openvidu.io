@@ -1,6 +1,6 @@
 # TURN server security
 
-OpenVidu embeds a [TURN](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT) server so that clients on restrictive networks can still exchange WebRTC media: when a direct WebRTC connection is not possible, media is relayed through the TURN server on port `443` (UDP) or over `443` TLS. See [Force media traffic through port 443](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/force-single-port/index.md) for the networking side of this.
+OpenVidu embeds a [TURN](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT) server so that clients on restrictive networks can still exchange WebRTC media: when a direct WebRTC connection is not possible, media is relayed through the TURN server on port `443` (UDP) or over `443` TLS. See [Force media traffic through port 443](https://openvidu.io/latest/docs/self-hosting/how-to-guides/force-single-port/index.md) for the networking side of this.
 
 A TURN relay is, by design, a packet forwarder. Left unrestricted, an authenticated client could try to use it as an open proxy to reach hosts and ports it should never touch — a well-documented class of attack (see [TURN security best practices](https://www.enablesecurity.com/blog/turn-security-best-practices/) by Enable Security). To prevent this, OpenVidu's TURN server ships with several **security mechanisms enabled by default**. This guide explains that behavior and the configuration values that control it.
 
@@ -239,6 +239,6 @@ Keep in mind:
 
 ## Related guides
 
-- [Force media traffic through port 443](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/force-single-port/index.md)
-- [Deploy and configure with an external proxy](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md)
+- [Force media traffic through port 443](https://openvidu.io/latest/docs/self-hosting/how-to-guides/force-single-port/index.md)
+- [Deploy and configure with an external proxy](https://openvidu.io/latest/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md)
 - [TURN security best practices](https://www.enablesecurity.com/blog/turn-security-best-practices/)

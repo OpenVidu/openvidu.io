@@ -2,7 +2,7 @@
 
 [Source code](https://github.com/OpenVidu/openvidu-meet-tutorials/tree/3.9.0/access/meet-identified-guests)
 
-This tutorial extends the [Anonymous Access tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/access/anonymous-access/index.md) to show how to add **identified guests** to an OpenVidu Meet room.
+This tutorial extends the [Anonymous Access tutorial](https://openvidu.io/latest/meet/embedded/tutorials/access/anonymous-access/index.md) to show how to add **identified guests** to an OpenVidu Meet room.
 
 An identified guest is a room member with a **fixed name** and a **unique access link** that grants access to the room without any login. Each link is meant to be delivered privately to a single person and can be revoked individually.
 
@@ -13,11 +13,11 @@ Building on the Anonymous Access tutorial, it keeps the shared anonymous access 
 - List and remove the members of a room, revoking their access.
 - Access the room through a guest's unique link, with no login required.
 
-The application uses the [OpenVidu Meet API](https://openvidu.io/3.9/meet/embedded/reference/rest-api/index.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](https://openvidu.io/3.9/meet/embedded/reference/webcomponent/index.md) to embed the meeting.
+The application uses the [OpenVidu Meet API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md) to manage rooms and room members, and the [OpenVidu Meet WebComponent](https://openvidu.io/latest/meet/embedded/reference/webcomponent/index.md) to embed the meeting.
 
 > **Anonymous guests vs. explicit members**
 >
-> OpenVidu Meet rooms can be accessed either through **shared anonymous links** (the moderator/speaker links from the [Anonymous Access tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/access/anonymous-access/index.md)) or by adding **explicit room members** with personalized access and permissions. Identified guests are one of the two kinds of explicit room members (the other being [users](https://openvidu.io/3.9/meet/embedded/tutorials/access/users/index.md)). See the [Room Members](https://openvidu.io/3.9/meet/features/room-members/overview/index.md) feature for the full picture.
+> OpenVidu Meet rooms can be accessed either through **shared anonymous links** (the moderator/speaker links from the [Anonymous Access tutorial](https://openvidu.io/latest/meet/embedded/tutorials/access/anonymous-access/index.md)) or by adding **explicit room members** with personalized access and permissions. Identified guests are one of the two kinds of explicit room members (the other being [users](https://openvidu.io/latest/meet/embedded/tutorials/access/users/index.md)). See the [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md) feature for the full picture.
 
 ## Running this tutorial
 
@@ -33,7 +33,7 @@ docker compose -p openvidu-meet -f oci://openvidu/local-meet:3.9.0 up -y openvid
 
 > **Info**
 >
-> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/3.9/meet/deployment/local/index.md) .
+> For a detailed guide on how to run OpenVidu Meet locally, visit [Try OpenVidu Meet locally](https://openvidu.io/latest/meet/deployment/local/index.md) .
 
 ### 2. Download the tutorial code
 
@@ -67,7 +67,7 @@ Once the server is up and running, you can test the application by visiting [`ht
 
 ## Understanding the code
 
-This tutorial builds upon the [Anonymous Access tutorial](https://openvidu.io/3.9/meet/embedded/tutorials/access/anonymous-access/index.md), adding identified guest management. We'll focus on the new features and modifications related to identified guests; the room creation/listing/deletion, the anonymous access links and the WebComponent embedding are inherited from the Anonymous Access tutorial.
+This tutorial builds upon the [Anonymous Access tutorial](https://openvidu.io/latest/meet/embedded/tutorials/access/anonymous-access/index.md), adding identified guest management. We'll focus on the new features and modifications related to identified guests; the room creation/listing/deletion, the anonymous access links and the WebComponent embedding are inherited from the Anonymous Access tutorial.
 
 ______________________________________________________________________
 
@@ -123,7 +123,7 @@ This endpoint adds the identified guest by sending a `POST` request to the `room
 
 > **Info**
 >
-> You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation](https://openvidu.io/3.9/meet/embedded/reference/api.html#/operations/addRoomMember) in the REST API reference for the full list of permissions.
+> You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/addRoomMember) in the REST API reference for the full list of permissions.
 
 ______________________________________________________________________
 
@@ -434,7 +434,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 1. **Ensure network connectivity**: Make sure your device (computer or phone) is connected to the same network as the machine running OpenVidu Meet and this tutorial.
 
-1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/3.9/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
+1. **Configure OpenVidu Meet for network access**: Start OpenVidu Meet by following the instructions in the [Accessing OpenVidu Meet from other computers or phones](https://openvidu.io/latest/meet/deployment/local/#accessing-openvidu-meet-from-other-computers-or-phones) section.
 
 1. **Update the OpenVidu Meet server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in your `.env` file to match the URL shown when OpenVidu Meet starts.
 
@@ -459,7 +459,7 @@ To access this tutorial from other computers or phones, follow these steps:
 
 ## Connecting this tutorial to an OpenVidu Meet production deployment
 
-If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/3.9/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
+If you have a production deployment of OpenVidu Meet (installed in a server following [deployment steps](https://openvidu.io/latest/meet/deployment/basic/index.md) ), you can connect this tutorial to it by following these steps:
 
 1. **Update the server URL**: Modify the `OV_MEET_SERVER_URL` environment variable in the `.env` file to point to your OpenVidu Meet production deployment URL.
 
@@ -468,7 +468,7 @@ If you have a production deployment of OpenVidu Meet (installed in a server foll
    OV_MEET_SERVER_URL=https://your-openvidu-meet-domain.com/meet
    ```
 
-1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/3.9/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
+1. **Update the API key**: Ensure the `OV_MEET_API_KEY` environment variable in the `.env` file matches the API key configured in your production deployment. See [Generate an API Key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key) section to learn how to obtain it.
 
    ```text
    OV_MEET_API_KEY=your-production-api-key
