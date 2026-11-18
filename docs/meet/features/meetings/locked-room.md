@@ -139,6 +139,7 @@ Reading a live meeting with `extraFields=waitingParticipants` also returns its w
       "participantIdentity": "ana-a1b2c3",
       "participantName": "Ana",
       "type": "anonymous",
+      "role": "speaker",
       "knockDate": 1620000000000
     },
     "status": "admitted",
