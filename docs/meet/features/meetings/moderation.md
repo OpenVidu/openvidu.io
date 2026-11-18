@@ -34,7 +34,7 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the same actions are 
 
 ## REST API reference { #rest-api-reference }
 
-Live meetings can be read and moderated from your backend with the [Meetings REST API](../../embedded/reference/rest-api.md). Reading a meeting or its participants requires the `meetingRead` permission, and each moderation action the permission named above; a request authenticated with the API key is not subject to them. In a [locked room](locked-room.md#who-acts), a request authenticated with a room member token also needs its holder to have been let into the meeting, besides `meetingRead` and the permission of the action.
+Live meetings can be read and moderated from your backend with the [Meetings REST API](../../embedded/reference/rest-api.md). Reading a meeting or its participants requires the `meetingRead` permission, and each moderation action the permission named above; a request authenticated with the API key is not subject to them. Reading a meeting can also return its participants in the same request, with `extraFields=participants`. In a [locked room](locked-room.md#who-acts), a request authenticated with a room member token also needs its holder to have been let into the meeting, besides `meetingRead` and the permission of the action.
 
 | Operation                   | HTTP Method | Reference                                                                                                                                                    |
 | --------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

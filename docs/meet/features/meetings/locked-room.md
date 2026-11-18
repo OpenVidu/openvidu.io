@@ -112,6 +112,8 @@ A host page with a Content Security Policy must allow the WebSocket connection t
 
 A backend runs a locked room with the [Meetings REST API](../../embedded/reference/rest-api.md), under `/api/v1/meetings/{roomId}/waiting-participants`. These operations require `waitingParticipantAdmin` and work whether or not a meeting is running.
 
+Reading a live meeting with `extraFields=waitingParticipants` also returns its waiting participants, only while a meeting is running and only to a caller holding `waitingParticipantAdmin`: without it the request succeeds and the field is left out.
+
 | Operation                          | HTTP Method | Reference                                                                                                                                                         |
 | ---------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | List the waiting participants      | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/waitingParticipantList){:target="_blank"}         |
