@@ -283,7 +283,7 @@ The dashboard keeps those figures and charts in place and marks them with a :mat
 ## Settings
 
 - **Preferences**: theme, default time zone, default time range, rows per page and auto-refresh interval. They are stored in the browser.
-- **Data**: the storage of each class of data with its retention, documents and size, and the collections that hold it; for a class that has not reached its retention yet, an estimate of its size once it does. It also shows the progress of a data migration while it runs.
+- **Data**: the storage of each class of data with its retention, documents and size, and the collections that hold it; for a class that has not reached its retention yet, an estimate of its size once it does. It also shows the progress of a data migration while it runs and, after an upgrade from a version before 3.10, the analytics data of that version while OpenVidu Server keeps it for a rollback.
 
 ![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-light.png#only-light){ .round-corners loading=lazy }
 ![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-dark.png#only-dark){ .round-corners loading=lazy }
@@ -302,6 +302,16 @@ Credentials such as TURN passwords, storage keys, stream keys or tokens in URLs 
 When the end of a room, participant session, egress or ingress session never arrives (for example, because a node crashed), OpenVidu Server closes it itself with an estimated end time: participants within about two minutes, and rooms once the cluster has given up on their node. The dashboard marks these entities as estimated.
 
 The first start of OpenVidu Server 3.10 or later on a deployment upgraded from a previous version migrates its analytics data in the background, while new data is written as usual. The dashboard shows the progress of the migration in a banner, in the Overview and in Settings.
+
+After the migration, OpenVidu Server keeps the analytics data of the previous version, the `legacy_events` and `stats` collections, so that a rollback to that version still finds it. That data keeps expiring with its own retention (32 days with the installers up to 3.9), and once the date shown in the **Data** tab of [Settings](#settings) has passed, OpenVidu Server removes both collections and frees their disk space. To free it earlier when you will not roll back, wait until the **Data** tab reads **Kept until … for rollback** or **Being removed by the server**, and drop both collections from the OpenVidu node, or from any master node in Elastic and High Availability deployments:
+
+```bash
+docker exec -it mongo mongosh \
+  "mongodb://<MONGO_ADMIN_USERNAME>:<MONGO_ADMIN_PASSWORD>@127.0.0.1:20000/openvidu?replicaSet=rs0" \
+  --eval 'db.getCollection("legacy_events").drop(); db.getCollection("stats").drop()'
+```
+
+Take `MONGO_ADMIN_USERNAME` and `MONGO_ADMIN_PASSWORD` from `openvidu.env` (`/opt/openvidu/config/openvidu.env` in Single Node, `/opt/openvidu/config/cluster/openvidu.env` in Elastic and High Availability). With an [external MongoDB](../../how-to-guides/external-mongodb.md), run the same `--eval` against `EXTERNAL_MONGO_URI`; if `openvidu.analytics.database` names another database, use it instead of `openvidu`. Dropping the collections frees their disk space at once.
 
 ### Retention
 
