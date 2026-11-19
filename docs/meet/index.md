@@ -242,12 +242,6 @@ Unique secure links give access to your rooms with different permission levels.
 
     React with emojis in real time to share quick feedback and keep everyone engaged without unmuting.
 
--   :material-tune:{ .feature-icon } __Redesigned settings panel__{ .feature-name }
-
-    ---
-
-    A cleaner settings panel to configure your devices, audio, video and preferences in a couple of clicks.
-
 -   :octicons-broadcast-24:{ .feature-icon } __Live broadcasting__{ .feature-name }
 
     ---
@@ -284,7 +278,7 @@ Unique secure links give access to your rooms with different permission levels.
 
     Enable participants to share files easily during calls with a simple drag-and-drop feature.
 
--   :material-draw:{ .feature-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-draw:{ .feature-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
 
     ---
 
