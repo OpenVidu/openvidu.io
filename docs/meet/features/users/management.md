@@ -41,7 +41,7 @@ Generate a new temporary password for a user from the user list (for example, if
 
 ## List & filter users
 
-The **"Users"** page lists every user with their role and registration date. You can search by name and filter by role.
+The **"Users"** page lists every user with their role and registration date. Above the list it shows how many users there are in total and how many have each role; selecting a role filters the list by it. You can also search by name and filter by role.
 
 ![Users page listing users with role and registration date](../../../assets/images/meet/users/management/users-list-dark.png#only-dark){ .round-corners loading=lazy }
 ![Users page listing users with role and registration date](../../../assets/images/meet/users/management/users-list-light.png#only-light){ .round-corners loading=lazy }

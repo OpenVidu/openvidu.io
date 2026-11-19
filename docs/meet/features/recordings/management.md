@@ -36,7 +36,7 @@ To stop the recording, a participant with the `recordingControl` permission must
 
 A saved recording can be **listed**, **played**, **shared**, **downloaded** and **deleted** (individually or in bulk). All of these actions are available — subject to your [recording permissions](overview.md#recording-permissions) — from any of the places where recordings appear in the app:
 
-- The general **"Recordings"** page, which lists every recording you can access.
+- The general **"Recordings"** page, which lists every recording you can access. Above the list it shows how many of them there are in total, in progress, complete and failed, and selecting one of those figures filters the list by its statuses. The list can also be filtered by one or several statuses.
 
 ![Recordings page listing every accessible recording](../../../assets/images/meet/recordings/management/recording-list-dark.png#only-dark){ .round-corners loading=lazy }
 ![Recordings page listing every accessible recording](../../../assets/images/meet/recordings/management/recording-list-light.png#only-light){ .round-corners loading=lazy }
