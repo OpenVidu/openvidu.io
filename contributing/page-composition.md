@@ -97,8 +97,8 @@ page, copy its feature keys too.** These are the keys currently used:
   [`lead-form.css`](../docs/stylesheets/lead-form.css) and
   [`lead-form.js`](../docs/javascripts/lead-form.js), which submits to the leads endpoint and
   redirects to `/support/thanks/`. The field names are the endpoint's contract — changing them
-  requires changing the backend too (the `CreateLead` function in
-  [openvidu-deployments-manager](https://github.com/OpenVidu/openvidu-deployments-manager)).
+  requires changing the backend too (the lead intake of
+  [openvidu-crm](https://github.com/OpenVidu/openvidu-crm)).
 
 - `openviduregister`: the page embeds the `<openvidu-register>` web component — sign-in, sign-up
   and the account dashboard (only [`account.md`](../docs/account.md)). Loads
