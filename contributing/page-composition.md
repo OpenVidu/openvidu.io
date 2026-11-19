@@ -305,7 +305,9 @@ announcement names the UTC day it ends on, so it disappears without another edit
 - Keep every whitespace trim (`-`): Material renders the bar whenever the block yields any text,
   so a stray newline leaves an empty bar with a close button.
 - `ovweb lint` warns when the bar has no `announce_until` or its day has passed, and fails on a
-  date that is not `YYYY-MM-DD`. Delete an expired announcement from the block.
+  date that is not `YYYY-MM-DD`. When the bar ends, delete the announcement and leave the block
+  as it is between announcements: the explanatory comment plus these lines inside a Jinja comment,
+  with a placeholder day and bar.
 
 ## Stylesheets
 
