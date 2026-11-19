@@ -11,7 +11,8 @@ The **openvidu-custom-stream** tutorial demonstrates how to replace the default 
 
 Customizing the video stream component is made simple with the **StreamDirective**, which offers a straightforward way to replace and adapt the **StreamComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/stream.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/stream-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/stream-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 

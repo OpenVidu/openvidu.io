@@ -38,7 +38,8 @@ This is what the deployment architecture looks like.
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Media Nodes.
@@ -245,7 +246,8 @@ Each layout includes its pros and cons to help you choose the one that fits your
 
 === "1. Dedicated TURN Load Balancer"
 
-    ![Network layout: dedicated TURN Load Balancer in front of the Media Nodes](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-turn-lb.svg){ .round-corners .dark-img loading=lazy }
+    ![Network layout: dedicated TURN Load Balancer in front of the Media Nodes](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-turn-lb-light.svg#only-light){ .round-corners loading=lazy }
+    ![Network layout: dedicated TURN Load Balancer in front of the Media Nodes](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-turn-lb-dark.svg#only-dark){ .round-corners loading=lazy }
 
     Use it when many of your clients are on networks that block UDP. Their TURN over TLS traffic goes to **TurnDomainName**, and a dedicated TURN Load Balancer forwards it directly to the Media Nodes. The example is the layout in the diagram, with every node in public subnets.
 
@@ -276,7 +278,8 @@ Each layout includes its pros and cons to help you choose the one that fits your
 
 === "2. Private Master Nodes"
 
-    ![Network layout: Master Nodes in private subnets, Media Nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-masters.svg){ .round-corners .dark-img loading=lazy }
+    ![Network layout: Master Nodes in private subnets, Media Nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-masters-light.svg#only-light){ .round-corners loading=lazy }
+    ![Network layout: Master Nodes in private subnets, Media Nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-masters-dark.svg#only-dark){ .round-corners loading=lazy }
 
     Use it when your security policy does not allow public IPs on the nodes that hold the cluster's services and data. The Master Nodes have no public IP. The Load Balancer stays public in its own subnets, and clients still send media over UDP directly to the Media Nodes.
 
@@ -300,7 +303,8 @@ Each layout includes its pros and cons to help you choose the one that fits your
 
 === "3. All private"
 
-    ![Network layout: all nodes in private subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private.svg){ .round-corners .dark-img loading=lazy }
+    ![Network layout: all nodes in private subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-light.svg#only-light){ .round-corners loading=lazy }
+    ![Network layout: all nodes in private subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-dark.svg#only-dark){ .round-corners loading=lazy }
 
     Use it when no node can have a public IP. Only the Load Balancer is public. Clients cannot reach the Media Nodes directly, so all media goes through TURN over TLS on **DomainName**: the Load Balancer forwards it to the Master Nodes, which relay it to the Media Nodes.
 
@@ -326,7 +330,8 @@ Each layout includes its pros and cons to help you choose the one that fits your
 
 === "4. All private + Dedicated TURN Load Balancer"
 
-    ![Network layout: all nodes in private subnets with a dedicated TURN Load Balancer](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-turn-lb.svg){ .round-corners .dark-img loading=lazy }
+    ![Network layout: all nodes in private subnets with a dedicated TURN Load Balancer](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-turn-lb-light.svg#only-light){ .round-corners loading=lazy }
+    ![Network layout: all nodes in private subnets with a dedicated TURN Load Balancer](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-private-turn-lb-dark.svg#only-dark){ .round-corners loading=lazy }
 
     Use it when no node can have a public IP but you want media over UDP. Clients cannot reach the Media Nodes directly, so the stack places two Load Balancers in front of them:
 

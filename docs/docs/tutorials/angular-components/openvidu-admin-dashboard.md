@@ -12,11 +12,13 @@ The **openvidu-admin-dashboard** tutorial demonstrates how to create an admin da
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-login.svg){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-login-light.svg#only-light){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-login-dark.svg#only-dark){ loading=lazy }
 </div>
 
 <div class="grid-50" markdown>
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-dashboard.svg){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-dashboard-light.svg#only-light){ loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/admin-dashboard-dark.svg#only-dark){ loading=lazy }
 </div>
 
 </div>

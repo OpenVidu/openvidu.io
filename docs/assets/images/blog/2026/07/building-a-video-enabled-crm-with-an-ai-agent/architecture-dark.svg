@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 484" width="880" height="484" role="img" aria-label="Architecture: the CRM server provisions rooms and members in OpenVidu Meet through its REST API and gives the browser the member&#x27;s personal room link; the browser embeds the meeting with the openvidu-meet webcomponent, which exchanges the meeting UI and WebRTC media with OpenVidu Meet">
+<title>Architecture: the CRM server provisions rooms and members in OpenVidu Meet through its REST API and gives the browser the member&#x27;s personal room link; the browser embeds the meeting with the openvidu-meet webcomponent, which exchanges the meeting UI and WebRTC media with OpenVidu Meet</title>
+<rect x="30" y="30" width="330" height="200" rx="22" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="195" y="62" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#eef2f3" text-anchor="middle">Browser — your app&#x27;s UI</text>
+<rect x="60" y="84" width="270" height="116" rx="16" fill="#06d362" />
+<text x="195" y="128" font-family="JetBrains Mono, ui-monospace, monospace" font-size="16" font-weight="600" fill="#062a15" text-anchor="middle">&lt;openvidu-meet&gt;</text>
+<text x="195" y="154" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#062a15" text-anchor="middle">webcomponent · room-url =</text>
+<text x="195" y="173" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#062a15" text-anchor="middle">the member&#x27;s personal link</text>
+<rect x="520" y="30" width="330" height="200" rx="22" fill="#eef2f3" />
+<g transform="translate(612 46) scale(0.8)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<text x="650" y="70" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f1517" text-anchor="start">OpenVidu Meet</text>
+<text x="685" y="94" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">self-hosted deployment</text>
+<rect x="550" y="112" width="130" height="42" rx="12" fill="#06d362" />
+<text x="615" y="138" font-family="Instrument Sans, system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#062a15" text-anchor="middle">Rooms</text>
+<rect x="690" y="112" width="130" height="42" rx="12" fill="#06d362" />
+<text x="755" y="138" font-family="Instrument Sans, system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#062a15" text-anchor="middle">Members</text>
+<rect x="550" y="164" width="130" height="42" rx="12" fill="#06d362" />
+<text x="615" y="190" font-family="Instrument Sans, system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#062a15" text-anchor="middle">Meetings</text>
+<rect x="690" y="164" width="130" height="42" rx="12" fill="#06d362" />
+<text x="755" y="190" font-family="Instrument Sans, system-ui, sans-serif" font-size="13.5" font-weight="600" fill="#062a15" text-anchor="middle">Recordings</text>
+<rect x="215" y="370" width="450" height="84" rx="18" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="440" y="410" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#eef2f3" text-anchor="middle">Your app&#x27;s server (the CRM)</text>
+<text x="440" y="428.1" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#eef2f3" text-anchor="middle" opacity="0.8">one room per client · one invited guest per person</text>
+<path d="M367 130 L513 130" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M520 130 L511.6 125.1 L511.6 134.9 Z" fill="#a3b1b6" />
+<path d="M360 130 L368.4 125.1 L368.4 134.9 Z" fill="#a3b1b6" />
+<rect x="369.8" y="96.8" width="140.4" height="22.5" rx="11.2" fill="#1f292d" />
+<text x="440" y="112.1" font-family="Instrument Sans, system-ui, sans-serif" font-size="11.5" font-weight="600" fill="#eef2f3" text-anchor="middle">meeting UI + WebRTC</text>
+<path d="M250 370 L250 237" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M250 230 L245.1 238.4 L254.9 238.4 Z" fill="#a3b1b6" />
+<rect x="154.1" y="288.8" width="191.9" height="22.5" rx="11.2" fill="#ffcc00" />
+<text x="250" y="304.1" font-family="Instrument Sans, system-ui, sans-serif" font-size="11.5" font-weight="600" fill="#1f1800" text-anchor="middle">member&#x27;s personal room link</text>
+<path d="M630 370 L630 237" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M630 230 L625.1 238.4 L634.9 238.4 Z" fill="#a3b1b6" />
+<rect x="549.7" y="288.8" width="160.6" height="22.5" rx="11.2" fill="#00c8f7" />
+<text x="630" y="304.1" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11.5" font-weight="500" fill="#00283a" text-anchor="middle">REST API · X-API-KEY</text>
+</svg>

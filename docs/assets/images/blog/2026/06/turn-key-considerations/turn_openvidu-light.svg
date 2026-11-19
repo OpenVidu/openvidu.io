@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 672" width="920" height="672" role="img" aria-label="OpenVidu connectivity with TURN: on non-restrictive networks clients connect directly to the media; on restrictive corporate networks the firewall blocks direct traffic, so TURN traffic is encapsulated on port 443 TCP/TLS to the OpenVidu HA Master Node (Demux HTTP + TURN), which forwards it to the Media Nodes (media server and TURN server)">
+<title>OpenVidu connectivity with TURN: on non-restrictive networks clients connect directly to the media; on restrictive corporate networks the firewall blocks direct traffic, so TURN traffic is encapsulated on port 443 TCP/TLS to the OpenVidu HA Master Node (Demux HTTP + TURN), which forwards it to the Media Nodes (media server and TURN server)</title>
+<text x="460" y="34" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#4a5a60" text-anchor="middle">OpenVidu Connectivity</text>
+<text x="460" y="64" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="25" font-weight="800" fill="#101618" text-anchor="middle">Overcoming Network Restrictions with TURN</text>
+<g transform="translate(0 34)">
+<text x="225" y="94" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#101618" text-anchor="middle">Scenario A: Non-Restrictive Networks</text>
+<text x="690" y="94" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#101618" text-anchor="middle">Scenario B: Restrictive Corporate Networks</text>
+<path d="M455 76 V300" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="30" y="112" width="170" height="132" rx="24" fill="none" stroke="#4a5a60" stroke-width="1.8" stroke-dasharray="6 8" />
+<g transform="translate(52 132) scale(1)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="56" height="36" rx="5"/><path d="M20 46 h16 M28 36 v10"/></g>
+<g transform="translate(140 130) scale(1)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="22" height="40" rx="5"/><path d="M8 34 h6"/></g>
+<circle cx="108" cy="132" r="9" fill="#06d362" />
+<path d="M104 132.5 l3.3 3.3 l6.6 -7.2" fill="none" stroke="#062a15" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+<circle cx="162" cy="130" r="9" fill="#06d362" />
+<path d="M158.1 130.5 l3.3 3.3 l6.6 -7.2" fill="none" stroke="#062a15" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="115" y="210" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">Domestic &amp; Mobile</text>
+<text x="115" y="228" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">Environments</text>
+<path d="M207 150 L425 150 L425 391" fill="none" stroke="#007a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M425 398 L420.1 389.6 L429.9 389.6 Z" fill="#007a3d" />
+<path d="M200 150 L208.4 145.1 L208.4 154.9 Z" fill="#007a3d" />
+<path d="M207 186 L395 186 L395 391" fill="none" stroke="#007a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M395 398 L390.1 389.6 L399.9 389.6 Z" fill="#007a3d" />
+<path d="M200 186 L208.4 181.1 L208.4 190.9 Z" fill="#007a3d" />
+<text x="312" y="138" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">Direct Peer-to-Media Connection</text>
+<text x="296" y="226" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">Audio and video traffic flows</text>
+<text x="296" y="244" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">without obstacles via</text>
+<text x="296" y="262" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">standard ports.</text>
+<rect x="530" y="116" width="110" height="84" rx="10" fill="#e9eef0" stroke="#4a5a60" stroke-width="1.8" />
+<path d="M530 137 H640" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M530 158 H640" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M530 179 H640" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M548 116 V137" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M584 116 V137" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M620 116 V137" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M566 137 V158" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M602 137 V158" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M548 158 V179" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M584 158 V179" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M620 158 V179" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M566 179 V200" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M602 179 V200" fill="none" stroke="#4a5a60" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="585" y="222" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">Strict Corporate</text>
+<text x="585" y="240" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">Firewall</text>
+<rect x="720" y="112" width="180" height="132" rx="24" fill="none" stroke="#4a5a60" stroke-width="1.8" stroke-dasharray="6 8" />
+<g transform="translate(738 132) scale(1)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="0" width="48" height="30" rx="4"/><path d="M0 36 h60 l-2 4 h-56z"/></g>
+<g transform="translate(818 130) scale(0.8)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="56" height="36" rx="5"/><path d="M20 46 h16 M28 36 v10"/></g>
+<text x="810" y="210" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">Guaranteed Connectivity</text>
+<text x="810" y="228" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">in Businesses</text>
+<path d="M718 146 L653 146" fill="none" stroke="#8a979c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M646 146 L654.4 141.1 L654.4 150.9 Z" fill="#8a979c" />
+<path d="M646 176 L711 176" fill="none" stroke="#8a979c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M718 176 L709.6 171.1 L709.6 180.9 Z" fill="#8a979c" />
+<path d="M677.2 141.2 l9.6 9.6 M686.8 141.2 l-9.6 9.6" fill="none" stroke="#d93025" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M677.2 171.2 l9.6 9.6 M686.8 171.2 l-9.6 9.6" fill="none" stroke="#d93025" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M528 158 L480 158 L480 391" fill="none" stroke="#8a979c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M480 398 L475.1 389.6 L484.9 389.6 Z" fill="#8a979c" />
+<path d="M499.2 153.2 l9.6 9.6 M508.8 153.2 l-9.6 9.6" fill="none" stroke="#d93025" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M810 246 V540 H676" fill="none" stroke="#005f78" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity="0.2" />
+<path d="M810 246 L810 540 L683 540" fill="none" stroke="#005f78" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M676 540 L684.4 535.1 L684.4 544.9 Z" fill="#005f78" />
+<rect x="734" y="438.5" width="151.9" height="23" rx="11.5" fill="#ffcc00" />
+<text x="810" y="454.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#1f1800" text-anchor="middle">Port 443 · TCP/TLS</text>
+<text x="560" y="300" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="700" fill="#101618" text-anchor="start">Firewall Bypassing via TURN</text>
+<text x="560" y="320" font-family="Instrument Sans, system-ui, sans-serif" font-size="12.5" font-weight="500" fill="#4a5a60" text-anchor="start">Traffic is encapsulated on port 443</text>
+<text x="560" y="337" font-family="Instrument Sans, system-ui, sans-serif" font-size="12.5" font-weight="500" fill="#4a5a60" text-anchor="start">to overcome network restrictions.</text>
+<text x="560" y="360" font-family="Instrument Sans, system-ui, sans-serif" font-size="12.5" font-weight="500" fill="#4a5a60" text-anchor="start">The use of TLS ensures the firewall</text>
+<text x="560" y="377" font-family="Instrument Sans, system-ui, sans-serif" font-size="12.5" font-weight="500" fill="#4a5a60" text-anchor="start">identifies traffic as secure.</text>
+<rect x="150" y="400" width="540" height="222" rx="24" fill="none" stroke="#4a5a60" stroke-width="1.8" stroke-dasharray="6 8" />
+<g transform="translate(170 412) scale(0.7)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<text x="202" y="432" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#005f78" text-anchor="start">OpenVidu HA</text>
+<rect x="180" y="456" width="170" height="56" rx="18" fill="#101618" />
+<text x="265" y="489.2" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#f4f6f7" text-anchor="middle">Master Nodes</text>
+<rect x="180" y="542" width="170" height="56" rx="18" fill="#005f78" />
+<text x="265" y="575.2" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Media Nodes</text>
+<rect x="494" y="500" width="176" height="80" rx="18" fill="#101618" />
+<text x="582" y="538" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#f4f6f7" text-anchor="middle">Master Node</text>
+<text x="582" y="554.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#f4f6f7" text-anchor="middle" opacity="0.8">(Demux HTTP + TURN)</text>
+<path d="M492 570 L359 570" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M352 570 L360.4 565.1 L360.4 574.9 Z" fill="#4a5a60" />
+<text x="422" y="558" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">&quot;TURN&quot; Traffic</text>
+<rect x="16" y="538" width="122" height="64" rx="14" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="28" y="564" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#101618" text-anchor="start">1. Media Server</text>
+<text x="28" y="586" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#101618" text-anchor="start">2. Turn Server</text>
+<path d="M138 570 H178" fill="none" stroke="#4a5a60" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" />
+</g>
+</svg>

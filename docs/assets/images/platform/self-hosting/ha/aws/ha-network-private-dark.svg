@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 742" width="860" height="742" role="img" aria-label="OpenVidu High Availability on AWS: four Master Nodes and a Media Nodes Autoscaling Group of four EC2 nodes, connected to each other; all nodes in private subnets with outbound internet, the Network Load Balancer in public subnets; a Network Load Balancer receives TCP/TLS (HTTPS/RTMPS/TURNS) from the clients and forwards HTTP and TCP (TURN) to the Master Nodes and TCP (RTMP) to the Media Nodes; clients send UDP (SRTP/SCTP/STUN/TURN) directly to the Media Nodes">
+<title>OpenVidu High Availability on AWS: four Master Nodes and a Media Nodes Autoscaling Group of four EC2 nodes, connected to each other; all nodes in private subnets with outbound internet, the Network Load Balancer in public subnets; a Network Load Balancer receives TCP/TLS (HTTPS/RTMPS/TURNS) from the clients and forwards HTTP and TCP (TURN) to the Master Nodes and TCP (RTMP) to the Media Nodes; clients send UDP (SRTP/SCTP/STUN/TURN) directly to the Media Nodes</title>
+<rect x="30" y="40" width="360" height="268" rx="24" fill="none" stroke="#a3b1b6" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="210" y="66" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Master Nodes</text>
+<rect x="50" y="84" width="150" height="76" rx="18" fill="#eef2f3" />
+<text x="125" y="120" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f1517" text-anchor="middle">Master Node</text>
+<text x="125" y="136.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="220" y="84" width="150" height="76" rx="18" fill="#eef2f3" />
+<text x="295" y="120" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f1517" text-anchor="middle">Master Node</text>
+<text x="295" y="136.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="50" y="180" width="150" height="76" rx="18" fill="#eef2f3" />
+<text x="125" y="216" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f1517" text-anchor="middle">Master Node</text>
+<text x="125" y="232.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="220" y="180" width="150" height="76" rx="18" fill="#eef2f3" />
+<text x="295" y="216" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f1517" text-anchor="middle">Master Node</text>
+<text x="295" y="232.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="93.2" y="275" width="233.6" height="22" rx="11" fill="#1f292d" />
+<text x="210" y="290" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="600" fill="#eef2f3" text-anchor="middle">Private subnets + outbound internet</text>
+<rect x="470" y="40" width="360" height="268" rx="24" fill="none" stroke="#a3b1b6" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="650" y="66" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Media Nodes Autoscaling Group</text>
+<rect x="490" y="84" width="150" height="76" rx="18" fill="#00c8f7" />
+<text x="565" y="120" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#00283a" text-anchor="middle">Media Node</text>
+<text x="565" y="136.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#00283a" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="660" y="84" width="150" height="76" rx="18" fill="#00c8f7" />
+<text x="735" y="120" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#00283a" text-anchor="middle">Media Node</text>
+<text x="735" y="136.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#00283a" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="490" y="180" width="150" height="76" rx="18" fill="#00c8f7" />
+<text x="565" y="216" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#00283a" text-anchor="middle">Media Node</text>
+<text x="565" y="232.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#00283a" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="660" y="180" width="150" height="76" rx="18" fill="#00c8f7" />
+<text x="735" y="216" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#00283a" text-anchor="middle">Media Node</text>
+<text x="735" y="232.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#00283a" text-anchor="middle" opacity="0.8">AWS EC2</text>
+<rect x="533.2" y="275" width="233.6" height="22" rx="11" fill="#1f292d" />
+<text x="650" y="290" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="600" fill="#eef2f3" text-anchor="middle">Private subnets + outbound internet</text>
+<rect x="695.4" y="29" width="116.6" height="22" rx="11" fill="#1f292d" />
+<text x="753.7" y="44" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="600" fill="#eef2f3" text-anchor="middle">AWS Auto Scaling</text>
+<path d="M397 170 L463 170" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M470 170 L461.6 165.1 L461.6 174.9 Z" fill="#a3b1b6" />
+<path d="M390 170 L398.4 165.1 L398.4 174.9 Z" fill="#a3b1b6" />
+<rect x="310" y="612" width="240" height="110" rx="24" fill="none" stroke="#a3b1b6" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="430" y="638" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Clients</text>
+<g transform="translate(340 654) scale(0.9)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="56" height="36" rx="5"/><path d="M20 46 h16 M28 36 v10"/></g>
+<g transform="translate(420 652) scale(0.9)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="22" height="40" rx="5"/><path d="M8 34 h6"/></g>
+<g transform="translate(465 658) scale(0.9)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="0" width="48" height="30" rx="4"/><path d="M0 36 h60 l-2 4 h-56z"/></g>
+<rect x="210" y="408" width="180" height="84" rx="18" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="300" y="437" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#eef2f3" text-anchor="middle">Network</text>
+<text x="300" y="456" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#eef2f3" text-anchor="middle">Load Balancer</text>
+<text x="300" y="476" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#a3b1b6" text-anchor="middle">AWS Elastic Load Balancing</text>
+<rect x="222" y="481" width="104.2" height="22" rx="11" fill="#1f292d" />
+<text x="274.1" y="496" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="600" fill="#eef2f3" text-anchor="middle">Public subnets</text>
+<path d="M210 450 L120 450 L120 315" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M120 308 L115.1 316.4 L124.9 316.4 Z" fill="#a3b1b6" />
+<rect x="97.4" y="347" width="45.3" height="22" rx="11" fill="#1f292d" />
+<text x="120" y="362" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">HTTP</text>
+<path d="M300 408 L300 315" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M300 308 L295.1 316.4 L304.9 316.4 Z" fill="#a3b1b6" />
+<rect x="256.9" y="347" width="86.2" height="22" rx="11" fill="#1f292d" />
+<text x="300" y="362" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">TCP (TURN)</text>
+<path d="M390 450 L540 450 L540 315" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M540 308 L535.1 316.4 L544.9 316.4 Z" fill="#a3b1b6" />
+<rect x="496.9" y="347" width="86.2" height="22" rx="11" fill="#1f292d" />
+<text x="540" y="362" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">TCP (RTMP)</text>
+<path d="M350 612 L350 499" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M350 492 L345.1 500.4 L354.9 500.4 Z" fill="#a3b1b6" />
+<rect x="276.2" y="533.5" width="147.6" height="37" rx="11" fill="#1f292d" />
+<text x="350" y="548.5" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">TCP/TLS</text>
+<text x="350" y="563.5" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">(HTTPS/RTMPS/TURNS)</text>
+<path d="M550 652 L700 652 L700 315" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M700 308 L695.1 316.4 L704.9 316.4 Z" fill="#a3b1b6" />
+<rect x="619.4" y="409.5" width="161.2" height="37" rx="11" fill="#1f292d" />
+<text x="700" y="424.5" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">UDP</text>
+<text x="700" y="439.5" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#eef2f3" text-anchor="middle">(SRTP/SCTP/STUN/TURN)</text>
+</svg>

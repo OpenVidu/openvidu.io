@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" width="720" height="540" role="img" aria-label="OpenVidu Components Angular layout: video area, side panel and toolbar, highlighting two new toolbar buttons">
+<title>OpenVidu Components Angular layout: video area, side panel and toolbar, highlighting two new toolbar buttons</title>
+<rect x="10" y="10" width="700" height="520" rx="32" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<rect x="30" y="30" width="480" height="380" rx="22" fill="#e9eef0" stroke="#d9e0e3" stroke-width="1.5" />
+<g transform="translate(249.3 212.2) scale(1.1)" opacity="0.55"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<g transform="translate(279.2 228.3) scale(1.1)" opacity="1"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<rect x="530" y="30" width="160" height="380" rx="16" fill="#e9eef0" stroke="#d9e0e3" stroke-width="1.5" />
+<path d="M10 424 L710 424" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<g transform="translate(36 458) scale(1)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<circle cx="125" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="173" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="221" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="269" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<defs><clipPath id="clip-toolbar-buttons-c4-light"><rect x="298" y="458" width="38" height="38" rx="19" fill="#000" /></clipPath></defs>
+<rect x="298" y="458" width="38" height="38" rx="19" fill="#ffcc00" opacity="0.4" />
+<rect x="299.2" y="459.2" width="35.6" height="35.6" rx="18" fill="none" stroke="#ffcc00" stroke-width="3" stroke-dasharray="5 4" />
+<defs><clipPath id="clip-toolbar-buttons-c5-light"><rect x="346" y="458" width="38" height="38" rx="19" fill="#000" /></clipPath></defs>
+<rect x="346" y="458" width="38" height="38" rx="19" fill="#ffcc00" opacity="0.4" />
+<rect x="347.2" y="459.2" width="35.6" height="35.6" rx="18" fill="none" stroke="#ffcc00" stroke-width="3" stroke-dasharray="5 4" />
+<rect x="398" y="461" width="56" height="32" rx="8" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="575" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="623" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="671" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+</svg>

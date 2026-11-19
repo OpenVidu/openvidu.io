@@ -114,7 +114,8 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ### Deployment details
 

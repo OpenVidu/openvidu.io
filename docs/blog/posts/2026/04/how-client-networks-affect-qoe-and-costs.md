@@ -17,8 +17,8 @@ authors:
 
 # How the networks of your clients affect their user experience and your server infrastructure costs in a WebRTC platform
 
-![WebRTC connectivity paths](/assets/images/blog/2026/04/how-client-networks-affect-qoe-and-costs/webrtc-network-paths-light.png#only-light){ align=left }
-![WebRTC connectivity paths](/assets/images/blog/2026/04/how-client-networks-affect-qoe-and-costs/webrtc-network-paths-dark.png#only-dark){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/04/how-client-networks-affect-qoe-and-costs/webrtc-network-paths-light.svg#only-light){ align=left }
+![WebRTC connectivity paths](/assets/images/blog/2026/04/how-client-networks-affect-qoe-and-costs/webrtc-network-paths-dark.svg#only-dark){ align=left }
 
 Real-time video applications seem fairly simple at first glance. A user clicks "Join", video and audio start flowing, and everyone can see and hear each other.
 

@@ -30,7 +30,8 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
     The deployment architecture is as follows:
 
-    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Network Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Network Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.

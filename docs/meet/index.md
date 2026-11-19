@@ -1,314 +1,302 @@
 ---
 title: "OpenVidu Meet: Self-Hosted Video Conferencing"
 description: "Self-hosted video conferencing, ready to use: deploy OpenVidu Meet on your servers in minutes, record meetings and embed video calls in any app."
+hide:
+  - toc
 page_features:
-  - homestyles
+  - landingstyles
   - lazyvideo
   - revealonscroll
-  - setupcardglow
   - setupcarousel
 ---
 
-## Intro { .hide-without-display }
+<div class="ov-landing ov-landing--product" markdown>
 
-<div class="logo-header meet-header" markdown="span">
-![](../assets/images/logos/meet_greyfont_transback.png#only-light){ .img-title .skip-gallery .not-selectable loading=lazy width=1441 height=345 }
-![](../assets/images/logos/meet_whitefont_transback.png#only-dark){ .img-title .skip-gallery .not-selectable loading=lazy width=1441 height=345 }
+<section class="ov-hero" markdown>
+
+![](../assets/images/logos/meet_2lines_greyfont_transback_cropped.png#only-light){ .ov-hero__logo .ov-hero__logo--meet .skip-gallery .not-selectable width=953 height=356 }
+![](../assets/images/logos/meet_2lines_whitefont_transback_cropped.png#only-dark){ .ov-hero__logo .ov-hero__logo--meet .skip-gallery .not-selectable width=953 height=356 }
+
+<h1 class="ov-hero__title">Self-hosted video conferencing, ready in minutes</h1>
+
+<p class="ov-hero__lead" markdown="span">**OpenVidu Meet is an open-source, self-hosted video conferencing application** — a ready-to-use alternative to Zoom, Google Meet or Jitsi Meet that runs on your own servers, needs no code to deploy, and can be embedded in your product through a web component, REST API and webhooks.</p>
+
+<div class="ov-actions" markdown>
+[Deploy Meet in minutes](./getting-started.md){ .ov-btn .ov-btn--meet-ink title="Get started with OpenVidu Meet" }
+[Try the live demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .ov-link target="_blank" }
 </div>
 
-<h1 class="meetplatform-slogan">
-OpenVidu Meet: self-hosted video conferencing, ready in minutes
-</h1>
-
-**OpenVidu Meet is an open-source, self-hosted video conferencing application** — a ready-to-use alternative to Zoom, Google Meet or Jitsi Meet that runs on your own servers, needs no code to deploy, and can be embedded in your product through a web component, REST API and webhooks.
-{ .meetplatform-intro }
-
-<div>
+<div class="ov-hero__visual">
     <a class="glightbox" href="/assets/videos/meet/home/demo.mp4" data-type="video"><video class="round-corners" src="/assets/videos/meet/home/demo-preview.mp4" poster="/assets/videos/meet/home/demo-poster.jpg" muted playsinline autoplay loop></video></a>
 </div>
 
-<div class="centered-section-lg" markdown>
+</section>
 
-[Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary style="font-size: 1.1em; padding: 0.8em 2em;" }
-[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" style="font-size: 1.1em; padding: 0.8em 2em;" }
 
-</div>
+<section class="ov-section" data-sal="slide-up" markdown>
 
-<div class="feature-cards" markdown>
-<div class="grid cards two-columns" data-sal="slide-up" style="margin: 5em 0 0 0" markdown>
+<div class="grid cards ov-cards" markdown>
 
--   :material-video-box:{ .more-padding-icon .ov-meet-commercial-icon } __Feature-rich for videoconferencing__{ .feature-name }
+-   :material-video-box:{ .feature-icon } __Feature-rich for videoconferencing__{ .feature-name }
 
     ---
 
     OpenVidu Meet brings all the **features** you expect from a professional video calling solution: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
--   :material-code-tags:{ .more-padding-icon .ov-meet-commercial-icon } __Integrate right into your app__{ .feature-name }
+-   :material-code-tags:{ .feature-icon } __Integrate right into your app__{ .feature-name }
 
     ---
 
     OpenVidu Meet can be used out-of-the-box via web, but it also offers everything you need to **embed it into your existing application**: a web component, a REST API and webhooks.
 
-</div>
-
-<div class="grid cards two-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
-
--   :material-server:{ .more-padding-icon .ov-meet-commercial-icon } __Secure, self-hosted deployments__{ .feature-name }
+-   :material-server:{ .feature-icon } __Secure, self-hosted deployments__{ .feature-name }
 
     ---
 
     OpenVidu Meet is designed from the ground up to be **self-hosted** on your own servers (with ready-made templates for AWS, Azure, Google Cloud, DigitalOcean and Oracle Cloud). It provides the highest level of **privacy and security** for your video calls.
 
--   :fontawesome-solid-user-md:{ .more-padding-icon .ov-meet-commercial-icon } __Designed for most common use cases__{ .feature-name }
+-   :fontawesome-solid-user-md:{ .feature-icon } __Designed for most common use cases__{ .feature-name }
 
     ---
 
     OpenVidu Meet perfectly fits most common videoconferencing use cases: **e-learning, telehealth, remote collaboration, customer support**... And you can customize its **branding** to match your organization’s identity.
 
 </div>
-</div>
 
-<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0">
-Built for all purposes.<br>
-Customizable for your particular use case.
-</h2>
+</section>
 
-## Features
+<section class="ov-section" markdown>
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
+<h2 class="ov-h2" id="features">Built for all purposes. Customizable for your particular use case.</h2>
 
-__Multi-Party smart layout__{ .ov-meet-commercial-card-title data-sal="slide-up" }
+<div class="ov-showcase ov-showcase--stack" data-sal="slide-up" markdown>
+<div markdown>
+### Multi-Party smart layout
 
 Connect dozens of participants in a room. OpenVidu Meet automatically adapts to provide the best experience.
-{data-sal="slide-up"}
-
+</div>
+<div class="ov-card__media" markdown>
 ![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-light.png#only-light){ .round-corners loading=lazy width=1920 height=1080 }
 ![OpenVidu Meet Multiparty](../assets/images/meet/home/multiparty-dark.png#only-dark){ .round-corners loading=lazy width=1920 height=1080 }
 </div>
+</div>
 
-<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
+<div class="ov-grid ov-grid--2" data-sal="slide-up" markdown>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Raise hand
 
-- __Raise hand__{ .ov-meet-commercial-card-title }
-
-    Participants ask for a turn without interrupting, and everyone sees the queue.
-
+Participants ask for a turn without interrupting, and everyone sees the queue.
+</div>
+<div class="ov-card__media">
     <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/raise-hand-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/raise-hand-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/meetings/raise-hand/raise-hand-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/raise-hand/raise-hand-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+</div>
+</div>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Reactions
 
-- __Reactions__{ .ov-meet-commercial-card-title }
-
-    A quick emoji on their tile tells whoever is speaking what the room thinks, without a word.
-
+A quick emoji on their tile tells whoever is speaking what the room thinks, without a word.
+</div>
+<div class="ov-card__media">
     <a class="glightbox" href="/assets/videos/meet/meetings/reactions/send-reaction-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/reactions/send-reaction-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/meetings/reactions/send-reaction-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/reactions/send-reaction-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
-
+</div>
+</div>
 </div>
 
-<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
+<div class="ov-grid ov-grid--2" data-sal="slide-up" markdown>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Pre-join view
 
-- __Pre-join view__{ .ov-meet-commercial-card-title }
+Participants can set up their video/audio devices, virtual background and language before joining the meeting.
+</div>
+<div class="ov-card__media" markdown>
+![OpenVidu Meet Device](../assets/images/meet/meetings/lifecycle/device-view-dark.png#only-dark){ .round-corners loading=lazy width=580 height=554 }
+![OpenVidu Meet Device](../assets/images/meet/meetings/lifecycle/device-view-light.png#only-light){ .round-corners loading=lazy width=580 height=554 }
+</div>
+</div>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Background filters
 
-    Participants can set up their video/audio devices, virtual background and language before joining the meeting.
-
-    ![OpenVidu Meet Device](../assets/images/meet/meetings/lifecycle/device-view-dark.png#only-dark){ .round-corners loading=lazy width=580 height=554 }
-    ![OpenVidu Meet Device](../assets/images/meet/meetings/lifecycle/device-view-light.png#only-light){ .round-corners loading=lazy width=580 height=554 }
-
-- __Background filters__{ .ov-meet-commercial-card-title }
-
-    Allow participants to easily replace their video background with a blur effect or an image.
-
+Allow participants to easily replace their video background with a blur effect or an image.
+</div>
+<div class="ov-card__media">
     <a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/meetings/virtual-background/virtual-bg-meeting-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
-
+</div>
+</div>
 </div>
 
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards" markdown>
-
-__Record and share__{ .ov-meet-commercial-card-title data-sal="slide-up" }
+<div class="ov-showcase ov-showcase--stack" data-sal="slide-up" markdown>
+<div markdown>
+### Record and share
 
 OpenVidu Meet offers high-quality recordings and greatly simplifies their storage and access control.
-{data-sal="slide-up"}
-
-<div data-sal="slide-up">
+</div>
+<div class="ov-card__media">
     <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 </div>
-
 </div>
 
-<div class="grid cards no-border no-shadow ov-meet-commercial-feature-grid" data-sal="slide-up" markdown>
+<div class="ov-grid ov-grid--2" data-sal="slide-up" markdown>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Pre-configure your rooms
 
-- __Pre-configure your rooms__{ .ov-meet-commercial-card-title }
-
-    Create and customize the behavior of your rooms in a few clicks: look-and-feel, access and permissions, recording, chat and more.
-
+Create and customize the behavior of your rooms in a few clicks: look-and-feel, access and permissions, recording, chat and more.
+</div>
+<div class="ov-card__media">
     <a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/management/create-room-wizard-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+</div>
+</div>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Share room links
 
-- __Share room links__{ .ov-meet-commercial-card-title }
-
-    Unique secure links give access to your rooms with different permission levels.
-
+Unique secure links give access to your rooms with different permission levels.
+</div>
+<div class="ov-card__media">
     <a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
     <a class="glightbox" href="/assets/videos/meet/rooms/access/share-link-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/rooms/access/share-link-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
-
+</div>
+</div>
 </div>
 
----
+</section>
 
-<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0 3em 0">
-With all the features you need to fine-tune your perfect video calling service.
-</h2>
+<section class="ov-section" markdown>
 
-<div class="feature-cards" markdown>
-<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 3em; margin-bottom: 0" markdown>
+<h2 class="ov-h2">With all the features you need to fine-tune your perfect video calling service.</h2>
 
--   :material-cursor-default-click:{ .feature-icon .padding-icon } __One-click video calls__{ .feature-name }
+<div class="grid cards ov-cards" data-sal="slide-up" markdown>
+
+-   :material-cursor-default-click:{ .feature-icon } __One-click video calls__{ .feature-name }
 
     ---
 
     Share meeting links so anyone can instantly join your video calls from any browser — no downloads or setup needed.
 
--   :material-registered-trademark:{ .feature-icon .padding-icon } __Your own branding__{ .feature-name }
+-   :material-registered-trademark:{ .feature-icon } __Your own branding__{ .feature-name }
 
     ---
 
     Create a professional look by branding OpenVidu Meet with your own domain, and custom colors.
 
--   :material-video-4k-box:{ .feature-icon .padding-icon } __Up to 4K video and HiFi audio__{ .feature-name }
+-   :material-video-4k-box:{ .feature-icon } __Up to 4K video and HiFi audio__{ .feature-name }
 
     ---
 
     Enjoy up to 4K video quality and crystal-clear audio enhanced with noise cancellation and echo suppression.
 
-</div>
-
-<div class="grid cards three-columns" data-sal="slide-up" markdown>
-
--   :material-monitor-share:{ .feature-icon .padding-icon } __Screen Sharing__{ .feature-name }
+-   :material-monitor-share:{ .feature-icon } __Screen Sharing__{ .feature-name }
 
     ---
 
     Share your screen in stunning quality for flawless presentations and smooth collaboration every time.
 
--   :material-shield-account-outline:{ .feature-icon .padding-icon } __Meeting moderation__{ .feature-name }
+-   :material-shield-account-outline:{ .feature-icon } __Meeting moderation__{ .feature-name }
 
     ---
 
     Mute participants, lower their hands, remove them from the call or promote them to moderator.
 
--   :material-account-key-outline:{ .feature-icon .padding-icon } __Roles and permissions__{ .feature-name }
+-   :material-account-key-outline:{ .feature-icon } __Roles and permissions__{ .feature-name }
 
     ---
 
     Decide per room and per member who can record, share their screen, chat, react or moderate.
 
-</div>
-
-<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
-
--   :material-chat-outline:{ .feature-icon .padding-icon } __Chat__{ .feature-name }
+-   :material-chat-outline:{ .feature-icon } __Chat__{ .feature-name }
 
     ---
 
     Send and receive text messages during your calls for clear communication.
 
--   :material-wifi-lock:{ .feature-icon .padding-icon } __E2E Encryption__{ .feature-name }
+-   :material-wifi-lock:{ .feature-icon } __E2E Encryption__{ .feature-name }
 
     ---
 
     Protect your calls from man-in-the-middle attacks, ensuring only meeting participants can decrypt audio, video, and chat.
 
-
--   :material-subtitles-outline:{ .feature-icon .padding-icon } __Live Captions__{ .feature-name }
+-   :material-subtitles-outline:{ .feature-icon } __Live Captions__{ .feature-name }
 
     ---
 
     Access a wide range of speech-to-text providers for accurate and flexible real-time transcription.
 
-</div>
-
-<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
-
--   :material-hand-back-left:{ .feature-icon .padding-icon } __Raise hand__{ .feature-name }
+-   :material-hand-back-left:{ .feature-icon } __Raise hand__{ .feature-name }
 
     ---
 
     Let participants raise their hand to ask for the floor without interrupting, so moderators can keep large meetings orderly.
 
--   :material-emoticon-outline:{ .feature-icon .padding-icon } __Reactions__{ .feature-name }
+-   :material-emoticon-outline:{ .feature-icon } __Reactions__{ .feature-name }
 
     ---
 
     React with emojis in real time to share quick feedback and keep everyone engaged without unmuting.
 
--   :material-tune:{ .feature-icon .padding-icon } __Redesigned settings panel__{ .feature-name }
+-   :material-tune:{ .feature-icon } __Redesigned settings panel__{ .feature-name }
 
     ---
 
     A cleaner settings panel to configure your devices, audio, video and preferences in a couple of clicks.
 
-</div>
-
-<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
-
--   :octicons-broadcast-24:{ .feature-icon .padding-icon } __Live broadcasting__{ .feature-name }
+-   :octicons-broadcast-24:{ .feature-icon } __Live broadcasting__{ .feature-name }
 
     ---
 
     Easily broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-account-clock-outline:{ .feature-icon .padding-icon } __Locked room__{ .feature-name }
+-   :material-account-clock-outline:{ .feature-icon } __Locked room__{ .feature-name }
 
     ---
 
     Keep your meetings secure by locking the room, so guests wait until a moderator admits or rejects them, from the meeting, the REST API or your own app.
 
--   :material-message-text-clock-outline:{ .feature-icon .padding-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-message-text-clock-outline:{ .feature-icon } __Persisted chat__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     Chat history is kept across sessions, so participants who join late or reconnect never miss a message.
 
-</div>
-
-<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
-
--   :material-message-reply-text-outline:{ .feature-icon .padding-icon } __Chat reactions, mentions and editing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-message-reply-text-outline:{ .feature-icon } __Chat reactions, mentions and editing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     React to messages, mention other participants, and edit or delete messages you have already sent.
 
--   :material-message-lock-outline:{ .feature-icon .padding-icon } __Private chats__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-message-lock-outline:{ .feature-icon } __Private chats__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     Send direct messages to a single participant during the call, without leaving the meeting.
 
--   :material-file-send:{ .feature-icon .padding-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-file-send:{ .feature-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     Enable participants to share files easily during calls with a simple drag-and-drop feature.
 
-</div>
-
-<div class="grid cards three-columns" data-sal="slide-up" style="margin-top: 0;" markdown>
-
--   :material-draw:{ .feature-icon .padding-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-draw:{ .feature-icon } __Whiteboard__{ .feature-name .coming-soon-overlay .eta-2026-12 }
 
     ---
 
     Sketch ideas together on a shared whiteboard, with every stroke synced in real time for all participants.
 
--   :material-note-multiple-outline:{ .feature-icon .padding-icon } __Shared notes__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
+-   :material-note-multiple-outline:{ .feature-icon } __Shared notes__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
 
     ---
 
     Write collaborative notes with all participants during the call, keeping decisions and action items in one place.
 
--   :material-account-group-outline:{ .feature-icon .padding-icon } __Breakout rooms__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
+-   :material-account-group-outline:{ .feature-icon } __Breakout rooms__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
 
     ---
 
@@ -316,39 +304,39 @@ With all the features you need to fine-tune your perfect video calling service.
 
 </div>
 
+<div class="ov-actions" markdown>
+[Deploy Meet in minutes](./getting-started.md){ .ov-btn .ov-btn--meet-ink }
+[Try the live demo :fontawesome-solid-external-link:{.external-link-icon}](https://meet-demo-app.openvidu.io){ .ov-link target="_blank" }
 </div>
 
-<div class="centered-section-lg" markdown>
+</section>
 
-[Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
-[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
+<section class="ov-section" markdown>
 
-</div>
+<h2 class="ov-h2" id="integrations">Integrations</h2>
 
-<hr class="my-4em">
+<p class="ov-lead">OpenVidu Meet can be easily integrated with your existing applications and workflows.</p>
 
-## Integrations
-
-OpenVidu Meet can be easily integrated with your existing applications and workflows:
-
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards" data-sal="slide-up" markdown>
-
-__Pre-built web component__{ .ov-meet-commercial-card-title }
+<div class="ov-grid ov-grid--2" data-sal="slide-up" markdown>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### Pre-built web component
 
 Embed the OpenVidu Meet UI right into your app.
-
+</div>
+<div class="ov-card__media" markdown>
 <a class="glightbox" href="/assets/videos/meet/home/embed-html.mp4" data-type="video"><video class="round-corners lazy-video" src="/assets/videos/meet/home/embed-html.mp4" preload="none" muted playsinline loop></video></a>
 
 ![OpenVidu Meet embedded meeting](../assets/images/meet/embedded/use-cases/support-meeting.png){ .round-corners loading=lazy width=1920 height=1080 }
-
 </div>
-
-<div class="cards no-border no-shadow ov-meet-commercial-feature-cards commercial-code-blocks" data-sal="slide-up" markdown>
-
-__REST API and webhooks__{ .ov-meet-commercial-card-title }
+</div>
+<div class="ov-showcase ov-showcase--stack" markdown>
+<div markdown>
+### REST API and webhooks
 
 Control your meetings from your backend.
-
+</div>
+<div class="ov-card__media ov-codewin" markdown>
 ```bash
 curl --request POST \
     --url https://YOUR_DOMAIN/meet/api/v1/rooms \
@@ -357,68 +345,71 @@ curl --request POST \
     --header 'X-API-KEY: YOUR_API_KEY' \
     --data '{"roomName": "My Room"}'
 ```
-
+</div>
+</div>
 </div>
 
-<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0">
-Explore <a href="./embedded/intro"><strong>OpenVidu Meet Embedded</strong></a> to integrate video calls into your application.
-</h2>
+<div class="ov-actions" markdown>
+[Explore OpenVidu Meet Embedded](./embedded/intro.md){ .ov-btn .ov-btn--ink }
+</div>
 
-<hr class="my-4em">
+</section>
 
-## Deployments
+<section class="ov-section" markdown>
 
-Self-host OpenVidu Meet on your own infrastructure for maximum security and cost-effectiveness. It is easy to deploy, protect, maintain, and scale. No advanced DevOps skills are required to run it in production.
+<h2 class="ov-h2" id="deployments">Deployments</h2>
 
-<div class="feature-cards" markdown>
-<div class="grid cards two-columns" data-sal="slide-up" style="margin: 5em 0 0 0" markdown>
+<p class="ov-lead">Self-host OpenVidu Meet on your own infrastructure for maximum security and cost-effectiveness. It is easy to deploy, protect, maintain, and scale. No advanced DevOps skills are required to run it in production.</p>
 
--   :material-server:{ .more-padding-icon .ov-meet-commercial-icon .bare-metal-icon } __On Premises__{ .feature-name }
+<div class="grid cards ov-cards" data-sal="slide-up" markdown>
+
+-   :material-server:{ .feature-icon .bare-metal-icon } __On Premises__{ .feature-name }
 
     ---
 
     Deploy on your own bare-metal servers
 
--   :material-aws:{ .more-padding-icon .ov-meet-commercial-icon .aws-icon } __AWS__{ .feature-name }
+-   :material-aws:{ .feature-icon .aws-icon } __AWS__{ .feature-name }
 
     ---
 
     Deploy with AWS CloudFormation
 
--   :material-microsoft-azure:{ .more-padding-icon .ov-meet-commercial-icon .azure-icon } __Azure__{ .feature-name }
+-   :material-microsoft-azure:{ .feature-icon .azure-icon } __Azure__{ .feature-name }
 
     ---
 
     Deploy with Azure Resource Manager
 
--   :material-google-cloud:{ .more-padding-icon .ov-meet-commercial-icon .gcp-icon } __GCP__{ .feature-name }
+-   :material-google-cloud:{ .feature-icon .gcp-icon } __GCP__{ .feature-name }
 
     ---
 
     Deploy in GCP with Terraform
 
--   :material-digital-ocean:{ .more-padding-icon .ov-meet-commercial-icon .digitalocean-icon } __DigitalOcean__{ .feature-name }
+-   :material-digital-ocean:{ .feature-icon .digitalocean-icon } __DigitalOcean__{ .feature-name }
 
     ---
 
     Deploy in DigitalOcean through the web console or with Terraform CLI
 
--   :custom-oracle-cloud-infrastructure:{ .more-padding-icon .ov-meet-commercial-icon .oracle-icon } __Oracle Cloud Infrastructure__{ .feature-name }
+-   :custom-oracle-cloud-infrastructure:{ .feature-icon .oracle-icon } __Oracle Cloud Infrastructure__{ .feature-name }
 
     ---
 
     Deploy in Oracle Cloud Infrastructure through the web console
 
 </div>
+
+<div class="ov-actions" markdown>
+[Check out the deployment documentation](./deployment/overview.md){ .ov-btn .ov-btn--ink }
 </div>
 
-<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 3em 0 3em 0">
-Check out the <a href="./deployment/overview"><strong>deployment documentation</strong></a>.
-</h2>
+</section>
 
-<hr class="my-4em">
+<section class="ov-section" markdown>
 
-## Use cases
+<h2 class="ov-h2" id="use-cases">Use cases</h2>
 
 <div class="splide" data-sal="slide-up" markdown>
 <div class="splide__track" markdown>
@@ -584,39 +575,48 @@ Build trust with instant, reliable support through embedded video calls that per
 </div>
 </div>
 
-<div class="centered-section-lg" markdown>
+</section>
 
-[Deploy Meet in minutes](./getting-started.md){ .md-button .md-button--primary }
-[Try OpenVidu Meet Demo](https://meet-demo-app.openvidu.io){ .md-button target="_blank" }
+<section class="ov-section" markdown>
 
-</div>
+<h2 class="ov-h2" id="free-open-source-edition-vs-commercial-edition">Free open-source edition vs Commercial edition</h2>
 
-<hr style="margin: 5em 0 2em 0">
+<p class="ov-lead" markdown="span">OpenVidu Meet is available in two editions. You can choose the one that best fits your needs when [deploying OpenVidu Meet](./deployment/overview.md).</p>
 
-## Free open-source edition vs Commercial edition
+<div class="ov-grid ov-grid--2" data-sal="slide-up" markdown>
+<div class="ov-card" markdown>
+<span class="ov-tag ov-tag--community">COMMUNITY</span>
 
-OpenVidu Meet is available in two editions:
-
-### OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }
+### OpenVidu COMMUNITY
 
 It is completely **open-source and free to use**. It includes all the features you need for your video conferencing solution. Everything listed in the [Features](#features) section is available in OpenVidu Meet COMMUNITY: HD video, HiFi audio, recording, screen sharing, chat, virtual backgrounds, and more.
 
 OpenVidu Meet COMMUNITY is perfect for production deployments with moderate user load. It can be easily deployed on your own servers, and you can customize its branding to match your organization’s identity. If necessary, upgrading to OpenVidu PRO is seamless and non-disruptive.
+</div>
+<div class="ov-card" markdown>
+<span class="ov-tag ov-tag--pro">PRO</span>
 
-### OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }
+### OpenVidu PRO
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
 OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](../pricing.md) for more details.
+</div>
+</div>
 
-<h2 class="meetplatform-slogan" data-sal="slide-up" style="margin: 2em 0 4em 0">
-You can choose the OpenVidu edition that best fits your needs when <a href="./deployment/overview/">deploying OpenVidu Meet</a>.
-</h2>
+</section>
 
-<hr style="margin: 5em 0 2em 0">
+<section class="ov-section ov-closing" data-sal="slide-up" markdown>
+<div class="ov-closing__panel" markdown>
+<h2 class="ov-closing__title">Video calls on your servers, this week.</h2>
+<div class="ov-closing__actions" markdown>
+[Deploy OpenVidu Meet](./getting-started.md){ .ov-btn .ov-btn--lg .ov-btn--meet title="Get started with OpenVidu Meet" }
+</div>
+[Or talk to an expert](../support/index.md){ .ov-closing__link }
+</div>
 
-<h2 class="meetplatform-slogan my-4em" data-sal="slide-up">
-Need total control and advanced SDKs to build your custom real-time application?
-Check out <a href="../docs/"><strong>OpenVidu Platform</strong></a>.<br>
-Not sure which one fits? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>.
-</h2>
+<p class="ov-compare" markdown="span">Need total control and advanced SDKs to build your custom real-time application? Check out [OpenVidu Platform](../docs/index.md). Not sure which one fits? [Compare Meet vs Platform](../openvidu-meet-vs-openvidu-platform.md).</p>
+
+</section>
+
+</div>

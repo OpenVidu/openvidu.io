@@ -45,7 +45,8 @@ Three moving parts:
 
 The data flows like this:
 
-![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow.png){ .round-corners loading=lazy }
+![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow-light.svg#only-light){ .round-corners loading=lazy }
+![Data flow: participant audio through the transcriber agent to disk, UI, and latecomer summary](/assets/images/blog/2026/08/transcriber-summarizer-agent/data-flow-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## Running the demo
 
