@@ -9,11 +9,11 @@ There are two ways to upgrade an OpenVidu Single Node deployment:
 
 | Provider         | Redeploy with the latest version                                                                                                  |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **AWS**          | [OpenVidu Single Node CloudFormation](https://openvidu.io/3.9/docs/self-hosting/single-node/aws/install/index.md)                 |
-| **Azure**        | [OpenVidu Single Node Azure](https://openvidu.io/3.9/docs/self-hosting/single-node/azure/install/index.md)                        |
-| **Google Cloud** | [OpenVidu Single Node Google Cloud Platform](https://openvidu.io/3.9/docs/self-hosting/single-node/gcp/install/index.md)          |
-| **DigitalOcean** | [OpenVidu Single Node DigitalOcean](https://openvidu.io/3.9/docs/self-hosting/single-node/digitalocean/install/index.md)          |
-| **Oracle Cloud** | [OpenVidu Single Node Oracle Cloud Infrastructure](https://openvidu.io/3.9/docs/self-hosting/single-node/oracle/install/index.md) |
+| **AWS**          | [OpenVidu Single Node CloudFormation](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/index.md)                 |
+| **Azure**        | [OpenVidu Single Node Azure](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/index.md)                        |
+| **Google Cloud** | [OpenVidu Single Node Google Cloud Platform](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/index.md)          |
+| **DigitalOcean** | [OpenVidu Single Node DigitalOcean](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/install/index.md)          |
+| **Oracle Cloud** | [OpenVidu Single Node Oracle Cloud Infrastructure](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/install/index.md) |
 
 If you prefer not to redeploy, the in-place procedure below works on all of these providers too.
 

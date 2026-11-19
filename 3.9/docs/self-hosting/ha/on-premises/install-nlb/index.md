@@ -4,7 +4,7 @@ On-premises
 
 > **Info**
 >
-> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/3.9/account/index.md) to get your license key. There's a 15-day free trial waiting for you!
+> OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
 This section provides instructions for deploying a production-ready OpenVidu High Availability setup on-premises, utilizing a Network Load Balancer in front of the cluster. Network Load Balancing is a method of distributing incoming network traffic across multiple servers. It is a highly available, scalable, and fault-tolerant solution that ensures your OpenVidu deployment is always up and running. Compared to DNS Load Balancing, Network Load Balancing is more reliable for health checks and ensures that traffic is evenly distributed across all nodes.
 
@@ -36,7 +36,7 @@ For the Master Node, the following services are configured:
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as an internal reverse proxy for all services.
 - **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **[OpenVidu Meet](https://openvidu.io/3.9/meet/index.md)**, an optional high-quality video calling service.
+- **[OpenVidu Meet](https://openvidu.io/latest/meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 For the Media Nodes, the following services are configured:
@@ -154,14 +154,14 @@ A wizard will guide you through the installation process. You will be asked for 
 
 > **Info**
 >
-> If you don't have a license key for OpenVidu **PRO**, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+> If you don't have a license key for OpenVidu **PRO**, you can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 
 - **Do you want to use an external load balancer?**: Select ***Yes***. We will use a Network Load Balancer in front of the cluster.
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
   - *Observability*: Grafana stack, which includes logs and monitoring stats.
-  - [*OpenVidu Meet*](https://openvidu.io/3.9/meet/index.md): A high-quality video calling service based on OpenVidu.
+  - [*OpenVidu Meet*](https://openvidu.io/latest/meet/index.md): A high-quality video calling service based on OpenVidu.
   - *OpenVidu V2 Compatibility*: Compatibility API for applications developed with OpenVidu v2.
 
 The rest of the parameters are secrets, usernames, and passwords. If empty, the wizard will generate random values for them.
@@ -375,7 +375,7 @@ Notes:
 >
 > The `http` block gives you full control over HTTP-level routing. You can add custom `location` blocks, rate limiting, access control, or additional headers to suit your infrastructure needs.
 
-If you want to force all traffic including WebRTC to go through the Load Balancer, check the [Force media traffic through port 443](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/force-single-port/index.md) guide.
+If you want to force all traffic including WebRTC to go through the Load Balancer, check the [Force media traffic through port 443](https://openvidu.io/latest/docs/self-hosting/how-to-guides/force-single-port/index.md) guide.
 
 ## Configure your application to use the deployment
 
@@ -453,7 +453,7 @@ sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) 
 
 Notes:
 
-- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/3.9/account/index.md) .
+- `--openvidu-pro-license` is mandatory. You can get a 15-day free trial license key by [creating an OpenVidu account](https://openvidu.io/account/) .
 - Replace `openvidu.example.io` with your FQDN.
 - Replace `turn.example.io` with your TURN server FQDN.
 - Depending on the RTC engine, the argument `--rtc-engine` can be `mediasoup` or `pion`.
@@ -483,7 +483,7 @@ You can run these commands in a CI/CD pipeline or in a script to automate the in
 
 Some general notes about all the Master Node commands:
 
-- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](https://openvidu.io/3.9/meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
+- At the argument `--enabled-modules`, you can enable the modules you want to deploy. You can enable `openviduMeet` [OpenVidu Meet service](https://openvidu.io/latest/meet/index.md), `observability` (Grafana stack) and `v2compatibility` (OpenVidu v2 compatibility API).
 
 To start each node, remember to execute the following command in each node:
 
@@ -493,4 +493,4 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/index.md) section to learn how to manage your OpenVidu High Availability deployment.
+Once you have OpenVidu deployed, you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/index.md) section to learn how to manage your OpenVidu High Availability deployment.

@@ -6,7 +6,7 @@ With a single click, individuals can replace distracting surroundings with a **b
 
 This feature works both before joining a meeting and while already inside one, giving participants full flexibility at any moment.
 
-Virtual backgrounds can be enabled or disabled per room from the **Features** section of the **Meeting** step of the room configuration wizard, when [creating](https://openvidu.io/3.9/meet/features/rooms/management/#create-rooms) or [editing a room](https://openvidu.io/3.9/meet/features/rooms/management/#edit-rooms), allowing room managers to decide when and where the feature is available. The same step also sets the room's [participant and duration limits](https://openvidu.io/3.9/meet/features/meetings/configuration/index.md), and toggles [End-to-End Encryption](https://openvidu.io/3.9/meet/features/meetings/e2e-encryption/index.md), Live Captions and Chat.
+Virtual backgrounds can be enabled or disabled per room from the **Features** section of the **Meeting** step of the room configuration wizard, when [creating](https://openvidu.io/latest/meet/features/rooms/management/#create-rooms) or [editing a room](https://openvidu.io/latest/meet/features/rooms/management/#edit-rooms), allowing room managers to decide when and where the feature is available. The same step also sets the room's [participant and duration limits](https://openvidu.io/latest/meet/features/meetings/configuration/index.md), and toggles [End-to-End Encryption](https://openvidu.io/latest/meet/features/meetings/e2e-encryption/index.md), Live Captions and Chat.
 
 ## Key Benefits
 

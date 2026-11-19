@@ -7,4 +7,4 @@ Any production software needs to be observable. But in real-time applications th
 - Analyze the load in your hardware to detect bottlenecks and scale your deployment accordingly.
 - Store historical data to analyze past issues and trends to make future decisions based on them.
 
-OpenVidu brings everything you need to fulfill these requirements. We collect **events**, **metrics** and **logs** from your deployment and provide [**OpenVidu Dashboard**](https://openvidu.io/3.9/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) and a [**Grafana stack**](https://openvidu.io/3.9/docs/self-hosting/production-ready/observability/grafana-stack/index.md) to navigate them.
+OpenVidu brings everything you need to fulfill these requirements. We collect **events**, **metrics** and **logs** from your deployment and provide [**OpenVidu Dashboard**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) and a [**Grafana stack**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/index.md) to navigate them.

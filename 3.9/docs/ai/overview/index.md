@@ -6,13 +6,13 @@ These are the currently available OpenVidu agents:
 
 - **Speech Processing agent**: provides all the AI services related to transcribing audio speech to text and processing the results in various ways.
 
-[List of provided AI services](#speech-processing-agent) [Enable the agent](https://openvidu.io/3.9/docs/ai/openvidu-agents/speech-processing-agent/index.md)
+[List of provided AI services](#speech-processing-agent) [Enable the agent](https://openvidu.io/latest/docs/ai/openvidu-agents/speech-processing-agent/index.md)
 
 > **Tutorials**
 >
-> Working examples of these AI services live under **Tutorials → AI Services**, starting with the [Live Captions tutorial](https://openvidu.io/3.9/docs/tutorials/ai-services/openvidu-live-captions/index.md).
+> Working examples of these AI services live under **Tutorials → AI Services**, starting with the [Live Captions tutorial](https://openvidu.io/latest/docs/tutorials/ai-services/openvidu-live-captions/index.md).
 
-Looking for an AI coding agent to help you write OpenVidu code instead? See the [OpenVidu Agent Plugin](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/index.md).
+Looking for an AI coding agent to help you write OpenVidu code instead? See the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md).
 
 ## Speech Processing agent
 
@@ -22,7 +22,7 @@ Looking for an AI coding agent to help you write OpenVidu code instead? See the 
 
   Generate live captions for your users' speech with great accuracy and display the results in your frontend.
 
-  [Go to Live Captions](https://openvidu.io/3.9/docs/ai/live-captions/index.md)
+  [Go to Live Captions](https://openvidu.io/latest/docs/ai/live-captions/index.md)
 
 - **Transcription**
 

@@ -29,7 +29,7 @@ You may want to disable the bundled MongoDB service to use only OpenVidu Core Pl
    MONGO_ENABLED=false
    ```
 
-   If you want to use an external MongoDB, check the [Configure an external MongoDB](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/external-mongodb/index.md) guide for more details.
+   If you want to use an external MongoDB, check the [Configure an external MongoDB](https://openvidu.io/latest/docs/self-hosting/how-to-guides/external-mongodb/index.md) guide for more details.
 
 ## Apply the change
 
