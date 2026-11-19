@@ -21,7 +21,8 @@ authors:
 
 Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.
 
-![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down.png){ .round-corners .dark-img }
+![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down-light.svg#only-light){ .round-corners }
+![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down-dark.svg#only-dark){ .round-corners }
 
 This post dives into the **scale-in problem**: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.
 
@@ -35,7 +36,8 @@ Scaling _in_ is where the illusion shatters. Your CPU drops, the policy fires in
 
 The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.
 
-![Scale Out](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up.png){ .round-corners .dark-img loading=lazy }
+![Scale Out](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up-light.svg#only-light){ .round-corners loading=lazy }
+![Scale Out](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## The "Stateful" Trap: Why Media Servers Aren't Web Servers
 
@@ -65,7 +67,8 @@ The idea is straightforward:
 
 The challenge is integrating this logic with the autoscaling mechanisms of each cloud provider, all of which have their own opinions about how termination should work.
 
-![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy.png){ .round-corners .dark-img loading=lazy }
+![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy-light.svg#only-light){ .round-corners loading=lazy }
+![Scale In](/assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## Bringing Scale-In to the Major Clouds
 

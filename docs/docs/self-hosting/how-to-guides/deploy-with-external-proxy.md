@@ -26,7 +26,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     This is what the architecture of the deployment looks like:
 
-    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/single-node-external-proxy-dark.svg#only-dark){ .round-corners loading=lazy }
 
     **1. Prerequisites**
 
@@ -137,7 +138,8 @@ For those needing to deploy OpenVidu using an external proxy, this guide offers 
 
     This is what the architecture of the deployment looks like:
 
-    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic On Premises Architecture with External Proxy](../../../assets/images/platform/self-hosting/how-to-guides/external-proxy/elastic-external-proxy-dark.svg#only-dark){ .round-corners loading=lazy }
 
     **1. Prerequisites**
 

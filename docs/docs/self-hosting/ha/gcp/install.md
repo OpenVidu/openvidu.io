@@ -24,7 +24,8 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.

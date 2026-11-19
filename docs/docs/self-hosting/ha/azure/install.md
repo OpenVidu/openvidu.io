@@ -26,7 +26,8 @@ The deployed services are the same as in the [On Premises High Availability inst
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability Azure Architecture](../../../../assets/images/platform/self-hosting/ha/azure/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Azure Architecture](../../../../assets/images/platform/self-hosting/ha/azure/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Azure Architecture](../../../../assets/images/platform/self-hosting/ha/azure/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge due to a limitation on Azure.

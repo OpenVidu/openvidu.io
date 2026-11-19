@@ -25,7 +25,8 @@ There are two ways to expose the four masters:
 
     This is how the architecture of a production deployment looks:
 
-    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - A Network Load Balancer (TCP/UDP) distributes traffic across all Master Nodes.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the Media Nodes.

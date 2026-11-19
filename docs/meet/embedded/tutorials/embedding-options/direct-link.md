@@ -181,7 +181,7 @@ This endpoint does the following:
 
     !!! info
 
-        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/createRoom){:target="_blank"}.
+        You can customize the room configuration (e.g. chat, recording or virtual background settings) by including a `config` object in the request. The reference for the room configuration options can be found in the [OpenVidu Meet REST API reference :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/roomCreate){:target="_blank"}.
 
     To send requests to the OpenVidu Meet API, we use the `httpRequest` function:
 

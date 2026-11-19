@@ -41,7 +41,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install safe-chain
-        uses: OpenVidu/actions/install-safe-chain@26a149ff32c72503a7c7ce4fb5fa4d000cb3262d # 1.0.25
+        uses: OpenVidu/actions/install-safe-chain@000cbf6a8b545a5588f11028f71fe18a54c18579 # v1.0.27
 
       - name: Install the tool and its test dependencies
         # Editable here on purpose, unlike the publish workflow: the tests import the package

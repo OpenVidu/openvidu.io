@@ -11,7 +11,8 @@ The **openvidu-custom-chat-panel** tutorial demonstrates how to customize the ch
 
 Replacing the default chat panel is made simple with the **ChatPanelDirective**, which offers a straightforward way to replace and adapt the **ChatPanelComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/chat-panel.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/chat-panel-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/chat-panel-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 

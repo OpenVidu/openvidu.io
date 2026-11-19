@@ -21,7 +21,8 @@ The deployed services are the same as in the [On Premises High Availability inst
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability AWS Architecture: all nodes in public subnets](../../../../assets/images/platform/self-hosting/ha/aws/ha-network-public-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - Four master nodes run behind a Network Load Balancer that terminates TLS with your ACM certificate and distributes HTTPS traffic to them.
     - An autoscaling group of Media Nodes is created to scale the number of Media Nodes based on the system load.

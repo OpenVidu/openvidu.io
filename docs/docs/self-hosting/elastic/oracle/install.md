@@ -15,7 +15,8 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 === "Architecture overview"
 
-    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The master node runs a Caddy reverse proxy (Layer 4 for TURN with TLS and RTMPS, Layer 7 for the APIs, OpenVidu Dashboard and OpenVidu Meet) and distributes traffic to the media nodes.
     - WebRTC traffic (SRTP/SCTP/STUN/TURN) is routed directly to the media nodes.

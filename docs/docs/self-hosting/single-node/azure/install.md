@@ -23,7 +23,8 @@ The deployed services are the same as in the [On Premises Single Node installati
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node Azure Architecture](../../../../assets/images/platform/self-hosting/single-node/azure/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## Requirements
 

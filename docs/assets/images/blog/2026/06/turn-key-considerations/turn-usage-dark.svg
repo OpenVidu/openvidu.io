@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" width="960" height="570" role="img" aria-label="WebRTC traffic distribution, percentage of sessions by connection type: no TURN (direct P2P) 82.3%, TURN/UDP 12.1%, TURN/TCP 5.1%, TURN/TLS 0.5%. The 17.7% routed through TURN breaks down into UDP (68.6%), TCP (28.7%) and TLS (2.7%)">
+<title>WebRTC traffic distribution, percentage of sessions by connection type: no TURN (direct P2P) 82.3%, TURN/UDP 12.1%, TURN/TCP 5.1%, TURN/TLS 0.5%. The 17.7% routed through TURN breaks down into UDP (68.6%), TCP (28.7%) and TLS (2.7%)</title>
+<text x="480" y="44" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="26" font-weight="800" fill="#eef2f3" text-anchor="middle">WebRTC traffic distribution</text>
+<text x="480" y="72" font-family="Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="500" fill="#a3b1b6" text-anchor="middle">Percentage of sessions by connection type</text>
+<path d="M300 300 L300 110 A190 190 0 1 1 129.6 215.9 Z" fill="#06d362" stroke="#0f1517" stroke-width="2" stroke-linejoin="round" />
+<path d="M300 300 L129.6 215.9 A190 190 0 0 1 234.5 121.6 Z" fill="#00c8f7" stroke="#0f1517" stroke-width="2" stroke-linejoin="round" />
+<path d="M300 300 L234.5 121.6 A190 190 0 0 1 294 110.1 Z" fill="#a3b1b6" stroke="#0f1517" stroke-width="2" stroke-linejoin="round" />
+<path d="M300 300 L294 110.1 A190 190 0 0 1 300 110 Z" fill="#ffcc00" stroke="#0f1517" stroke-width="2" stroke-linejoin="round" />
+<rect x="590" y="196" width="22" height="22" rx="6" fill="#06d362" />
+<text x="626" y="213" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="start">No TURN (direct P2P)</text>
+<text x="626" y="238" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" font-weight="500" fill="#a3b1b6" text-anchor="start">82.3%</text>
+<rect x="590" y="258" width="22" height="22" rx="6" fill="#00c8f7" />
+<text x="626" y="275" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="start">TURN/UDP</text>
+<text x="626" y="300" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" font-weight="500" fill="#a3b1b6" text-anchor="start">12.1%</text>
+<rect x="590" y="320" width="22" height="22" rx="6" fill="#a3b1b6" />
+<text x="626" y="337" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="start">TURN/TCP</text>
+<text x="626" y="362" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" font-weight="500" fill="#a3b1b6" text-anchor="start">5.1%</text>
+<rect x="590" y="382" width="22" height="22" rx="6" fill="#ffcc00" />
+<text x="626" y="399" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="start">TURN/TLS</text>
+<text x="626" y="424" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" font-weight="500" fill="#a3b1b6" text-anchor="start">0.5%</text>
+<text x="480" y="540" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#a3b1b6" text-anchor="middle">The 17.7% routed through TURN breaks down into UDP (68.6%), TCP (28.7%) and TLS (2.7%)</text>
+</svg>

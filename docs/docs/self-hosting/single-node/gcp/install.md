@@ -21,7 +21,8 @@ One command creates the machine and OpenVidu comes up on it. `ov` renders the Te
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/single-node/gcp/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## Requirements { #requirements }
 

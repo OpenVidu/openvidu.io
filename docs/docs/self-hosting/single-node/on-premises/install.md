@@ -20,7 +20,8 @@ Deploy OpenVidu Single Node on your own Linux server with the [OpenVidu CLI](../
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node On Premises Architecture](../../../../assets/images/platform/self-hosting/single-node/on-premises/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 All services are deployed on a single machine, which includes:
 

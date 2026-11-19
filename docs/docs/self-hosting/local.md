@@ -270,7 +270,8 @@ On **Linux**, the [OpenVidu CLI](openvidu-cli.md) (`ov`) deploys it: it material
 
 Testing WebRTC applications can be challenging because devices require a secure context (HTTPS) to access the camera and microphone. When using LiveKit Open Source, this isn't an issue if you access your app from the same computer where the LiveKit Server is running, as `localhost` is considered a secure context even over plain HTTP. Consider the following architecture:
 
-  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture.svg){ width="450" style="border-radius: 8px" loading=lazy }
+  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture-light.svg#only-light){ width="450" style="border-radius: 8px" loading=lazy }
+  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture-dark.svg#only-dark){ width="450" style="border-radius: 8px" loading=lazy }
 
 The simplest way to test your application is:
 

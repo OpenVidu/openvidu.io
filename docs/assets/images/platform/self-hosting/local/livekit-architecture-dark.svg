@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 410" width="540" height="410" role="img" aria-label="LiveKit architecture: an Application Client with the LiveKit Client SDK connects to an Application Server with the LiveKit Server SDK and to the LiveKit Server">
+<title>LiveKit architecture: an Application Client with the LiveKit Client SDK connects to an Application Server with the LiveKit Server SDK and to the LiveKit Server</title>
+<path d="M250 30 L250 390" fill="none" stroke="#a3b1b6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 7" />
+<rect x="30" y="150" width="190" height="120" rx="24" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="125" y="178" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Application Client</text>
+<rect x="55" y="192" width="140" height="60" rx="14" fill="#eef2f3" />
+<text x="125" y="220" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f1517" text-anchor="middle">LiveKit</text>
+<text x="125" y="238.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">Client SDK</text>
+<rect x="300" y="30" width="210" height="120" rx="24" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<text x="405" y="58" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Application Server</text>
+<rect x="335" y="72" width="140" height="60" rx="14" fill="#eef2f3" />
+<text x="405" y="100" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f1517" text-anchor="middle">LiveKit</text>
+<text x="405" y="118.2" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#0f1517" text-anchor="middle" opacity="0.8">Server SDK</text>
+<rect x="300" y="270" width="210" height="110" rx="18" fill="#00c8f7" />
+<text x="405" y="323" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="20" font-weight="700" fill="#00283a" text-anchor="middle">LiveKit</text>
+<text x="405" y="344" font-family="Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="500" fill="#00283a" text-anchor="middle" opacity="0.8">Server</text>
+<path d="M220 180 L270 180 L270 90 L300 90" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M220 240 L270 240 L270 325 L300 325" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M405 150 L405 270" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

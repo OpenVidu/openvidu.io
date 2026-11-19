@@ -15,7 +15,8 @@ One command creates the machines and OpenVidu comes up on them. `ov` renders the
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - An OCI Network Load Balancer is the public entry point. It passes HTTPS (443), HTTP (80) and RTMPS (1935) through to the four master nodes.
     - Four master nodes run behind the load balancer; they spread across availability domains and fault domains, so the stack keeps serving with a master, a fault domain, or (in a region of three) an availability domain down.

@@ -9,7 +9,7 @@ The **Participants** panel of the [Meeting view](lifecycle.md#meeting-view) list
 
 - **Mute** another participant's microphone, turn off their camera or stop their screen share, one device at a time (`participantMute` permission).
 - **Turn off for everyone**: mute every microphone, turn off every camera or stop every screen share at once (`participantMute` permission).
-- **Lower** a participant's raised hand, or every raised hand at once (`participantHandLower` permission). See [Raise Hand](raise-hand.md#lowering-hands).
+- **Lower** a participant's raised hand, or every raised hand at once (`participantLowerHand` permission). See [Raise Hand](raise-hand.md#lowering-hands).
 - **Remove** a participant from the meeting (`participantKick` permission).
 - **Promote** a participant to moderator, or demote them back (`participantPromote` permission). See [Role Management](role-management.md).
 
@@ -26,7 +26,7 @@ Muting only ever turns a device **off**: a moderator can never turn on somebody 
 
 A participant with the `participantKick` permission can **remove** other participants from the meeting. The Participants panel offers **Remove from meeting** for every participant who is not a moderator in their own right, and for every participant promoted to moderator during the meeting, but never for original moderators, the room owner or administrators. The [REST API](#rest-api-reference) and the `participantKick` [command](#embedded) can remove any participant. The removed participant is taken to the [End view](lifecycle.md#end-view), which tells them they were removed, and both the [`participantLeft` webhook](../../embedded/reference/webhooks.md) and the `participantLeft` [embedded event](../../embedded/reference/webcomponent.md#events) report `participant_kicked` as the reason. Removing a participant does not block them: the tokens they held stop working, so they come back only by opening their link again, which gives them a new one.
 
-Removing a participant does not take away their access to the room: with the same link, room member record or user account they can join the meeting again at once. The exception is a room with the [waiting room](waiting-room.md) on, where a removed participant without the `waitingRoomBypass` permission asks to join again and waits to be admitted. To keep someone out, revoke that access: delete their [room member](../room-members/management.md) record, or disable the [access link](../rooms/access.md) they entered with. Access links can only be changed while no meeting is running, so a participant who entered through an anonymous link can join again until the meeting ends.
+Removing a participant does not take away their access to the room: with the same link, room member record or user account they can join the meeting again at once. The exception is a [locked room](locked-room.md), where a removed participant without the `accessBypassLock` permission asks to join again and waits to be admitted. To keep someone out, revoke that access: delete their [room member](../room-members/management.md) record, or disable the [access link](../rooms/access.md) they entered with. Access links can only be changed while no meeting is running, so a participant who entered through an anonymous link can join again until the meeting ends.
 
 ## From your application { #embedded }
 
@@ -34,7 +34,7 @@ When OpenVidu Meet is [embedded](../../embedded/intro.md), the same actions are 
 
 ## REST API reference { #rest-api-reference }
 
-Live meetings can be read and moderated from your backend with the [Meetings REST API](../../embedded/reference/rest-api.md). Reading a meeting or its participants requires the `meetingRead` permission, and each moderation action the permission named above; a request authenticated with the API key is not subject to them. In a room with the [waiting room](waiting-room.md#who-acts) on, a request authenticated with a room member token also needs its holder to have been let into the meeting, besides `meetingRead` and the permission of the action.
+Live meetings can be read and moderated from your backend with the [Meetings REST API](../../embedded/reference/rest-api.md). Reading a meeting or its participants requires the `meetingRead` permission, and each moderation action the permission named above; a request authenticated with the API key is not subject to them. Reading a meeting can also return its participants in the same request, with `extraFields=participants`. In a [locked room](locked-room.md#who-acts), a request authenticated with a room member token also needs its holder to have been let into the meeting, besides `meetingRead` and the permission of the action.
 
 | Operation                   | HTTP Method | Reference                                                                                                                                                    |
 | --------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -45,4 +45,4 @@ Live meetings can be read and moderated from your backend with the [Meetings RES
 | Kick a participant          | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantKick){:target="_blank"}        |
 | Mute a participant          | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantMute){:target="_blank"}        |
 | Mute all participants       | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantMuteAll){:target="_blank"}     |
-| Update a participant's role | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantRoleUpdate){:target="_blank"}  |
+| Update a participant's role | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/participantUpdateRole){:target="_blank"}  |

@@ -55,14 +55,16 @@ The following images illustrate the difference between an unreachable and a reac
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
-![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail.svg){ loading=lazy }
+![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail-light.svg#only-light){ loading=lazy }
+![Unreachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-fail-dark.svg#only-dark){ loading=lazy }
 /// caption
 Unreachable local application server
 ///
 </div>
 
 <div class="grid-50" markdown>
-![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success.svg){ loading=lazy }
+![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success-light.svg#only-light){ loading=lazy }
+![Reachable local server](../../../assets/images/platform/self-hosting/how-to-guides/enable-webhooks/webhook-success-dark.svg#only-dark){ loading=lazy }
 /// caption
 Reachable local application server
 ///

@@ -13,7 +13,8 @@ The toggle hand feature allows participants to raise and lower their hand during
 
 This tutorial combines the use of the **ToolbarAdditionalButtonsDirective**, the **StreamDirective** and the **ParticipantsPanelItemElementsDirective** to create a custom toolbar button, a custom stream component element and a custom participant panel item element. Check the [openvidu-toolbar-buttons](./openvidu-toolbar-buttons.md) and the [openvidu-custom-stream](./openvidu-custom-stream.md) tutorials documentation for learning more about these directives.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toggle-hand.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toggle-hand-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toggle-hand-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 

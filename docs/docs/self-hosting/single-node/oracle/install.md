@@ -17,7 +17,8 @@ Community runs on Docker Compose; PRO runs on Kubernetes. The edition is the onl
 
 === "Architecture overview"
 
-    ![OpenVidu Single Node Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/single-node/oracle/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/single-node/oracle/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/single-node/oracle/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## Requirements { #requirements }
 

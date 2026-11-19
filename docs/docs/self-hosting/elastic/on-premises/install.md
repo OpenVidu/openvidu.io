@@ -20,7 +20,8 @@ Deploy OpenVidu Elastic on your own Linux servers with the [OpenVidu CLI](../../
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Master Node acts as a load balancer, managing the traffic and distributing it among the Media Nodes and the services on the Master Node.
     - The Master Node runs Caddy as a Layer 4 (TURN with TLS and RTMPS) and Layer 7 (Dashboard, Meet, APIs) reverse proxy.

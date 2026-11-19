@@ -11,7 +11,8 @@ The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default
 
 Customizing the toolbar is made simple with the **ToolbarDirective**, which offers a straightforward way to replace and adapt the **ToolbarComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 
