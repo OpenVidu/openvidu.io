@@ -69,7 +69,7 @@ page_features:
     <div class="ov-card ov-card--key">
       <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="7" rx="2"></rect><rect x="3" y="13.5" width="18" height="7" rx="2"></rect><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"></path></svg></span>
       <h3>Data sovereignty</h3>
-      <p>Media, recordings and chat live only on servers you run, in the country you choose. Nothing routes through us, and no vendor cloud holds your data.</p>
+      <p>Your calls live only on servers you run, in the country you choose. No media, recordings or user data ever reach us.</p>
     </div>
     <div class="ov-card ov-card--key">
       <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5M12 14.5v2.5"></path></svg></span>
