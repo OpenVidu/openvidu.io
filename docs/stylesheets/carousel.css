@@ -71,9 +71,19 @@ button.splide__arrow:disabled {
   display: none;
 }
 
-/* dots are lines, below the carousel */
-ul.splide__pagination {
+/* dots are lines, centred below the carousel: Material's `.md-typeset ul` margin and `li`
+   indent would otherwise push them to the left of the row (hence the .md-typeset prefix) */
+.md-typeset ul.splide__pagination {
   bottom: -30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.md-typeset ul.splide__pagination li {
+  margin: 0;
 }
 
 .splide__pagination__page {
