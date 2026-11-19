@@ -61,13 +61,33 @@ page_features:
 
 <p class="ov-wrap ov-compare">Not sure which door? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet and Platform</a></p>
 
-<section class="ov-wrap ov-section ov-shared" aria-label="What both share" data-sal="slide-up">
+<section class="ov-wrap ov-section ov-shared" aria-labelledby="data-sovereignty" data-sal="slide-up">
   <p class="ov-eyebrow">Same engine behind both doors</p>
+  <h2 class="ov-h2" id="data-sovereignty">Self-hosted means <span class="ov-mark">sovereign.</span></h2>
+  <p class="ov-lead">Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.</p>
+  <div class="ov-grid ov-grid--3 ov-shared__pillars">
+    <div class="ov-card ov-card--key">
+      <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="7" rx="2"></rect><rect x="3" y="13.5" width="18" height="7" rx="2"></rect><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"></path></svg></span>
+      <h3>Data sovereignty</h3>
+      <p>Media, recordings and chat live only on servers you run, in the country you choose. Nothing routes through us, and no vendor cloud holds your data.</p>
+    </div>
+    <div class="ov-card ov-card--key">
+      <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5M12 14.5v2.5"></path></svg></span>
+      <h3>Privacy by design</h3>
+      <p>No third party joins, routes or stores your calls. Every stream is encrypted in transit, with end-to-end encryption when you need it.</p>
+    </div>
+    <div class="ov-card ov-card--key">
+      <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17M7.5 20.5h9M4.5 7h15M6 7l-3.2 7.2a3.4 3.4 0 0 0 6.4 0zM18 7l-3.2 7.2a3.4 3.4 0 0 0 6.4 0z"></path></svg></span>
+      <h3>GDPR and EU data residency</h3>
+      <p>Host in the EU and call data stays in the EU, with no transfers to a foreign vendor to justify under <strong>GDPR</strong>. Residency is your setting, not a promise.</p>
+    </div>
+  </div>
+  <p class="ov-shared__proof"><span class="ov-shared__quote">“Privacy was one of our most important selection criteria.”</span> <span class="ov-shared__by">Janne Sikiö, CEO at Dicode.</span> <a href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Why GDPR and EU data residency decided it for Dicode →</a></p>
   <div class="ov-shared__grid">
-    <div class="ov-shared__item"><span class="ov-shared__title">Self-hosted</span><span class="ov-shared__text">Your servers, your users' data. Nothing routes through us.</span></div>
     <div class="ov-shared__item"><span class="ov-shared__title">Any cloud</span><span class="ov-shared__text">AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises.</span></div>
     <div class="ov-shared__item"><span class="ov-shared__title">LiveKit compatible</span><span class="ov-shared__text">Familiar APIs and SDKs, with mediasoup at the core.</span></div>
     <div class="ov-shared__item"><span class="ov-shared__title">Open source</span><span class="ov-shared__text">COMMUNITY is free under Apache 2.0. PRO when you scale.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">Made in Europe</span><span class="ov-shared__text">Built in Madrid, Spain, by a company that answers to EU law.</span></div>
   </div>
 </section>
 

@@ -434,6 +434,72 @@
   color: var(--ov-muted);
 }
 
+/* Sovereignty, privacy and regulation are why a self-hosted engine gets picked, so they lead
+   the section as cards. They wear the logo's yellow, the one brand colour that belongs to
+   neither door. */
+.ov-landing .ov-shared .ov-eyebrow {
+  margin-bottom: 14px !important;
+}
+
+.ov-mark {
+  display: inline-block;
+  padding: 0.02em 0.14em 0.1em;
+  border-radius: 0.16em;
+  line-height: 1;
+  background: var(--ov-yellow);
+  color: var(--ov-yellow-ink);
+}
+
+.ov-card--key {
+  gap: 14px;
+  padding: 32px;
+}
+
+.ov-card--key .ov-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--ov-yellow);
+  color: var(--ov-yellow-ink);
+}
+
+.ov-card--key .ov-card__icon svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+}
+
+.md-typeset .ov-landing .ov-card--key h3 {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.md-typeset .ov-landing .ov-card--key > p {
+  font-size: 16px;
+}
+
+.md-typeset .ov-landing .ov-shared__proof {
+  margin: 24px 0 0;
+  font-size: 16px;
+  color: var(--ov-muted);
+}
+
+.ov-shared__quote {
+  color: var(--ov-text);
+  font-weight: 600;
+}
+
+.md-typeset .ov-landing .ov-shared__proof a {
+  color: var(--ov-text);
+  font-weight: 600;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+.ov-shared__pillars ~ .ov-shared__grid {
+  margin-top: 56px;
+}
+
 /* What are you building? */
 .ov-cases {
   display: flex;
