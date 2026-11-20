@@ -16,4 +16,6 @@ A deploy in assisted mode resumes with `--mode assisted` instead: the error prin
 
 **Deploying fails because the stack name is still in use.** Secrets Manager keeps a deleted secret for a recovery window, so for several days after a destroy a new stack with the **same name in the same region** cannot be created. Free the name with `aws secretsmanager delete-secret --secret-id <secret> --force-delete-without-recovery`, where `<secret>` is the name on the deploy's `credentials:` line, or deploy with a different name or region.
 
-For closed ports, Let's Encrypt and port 80, cloud quotas and the other generic cases, see [Troubleshooting the OpenVidu CLI](/docs/self-hosting/openvidu-cli.md#troubleshooting).
+**A quota blocked the deploy.** `ov` does not read AWS quotas, so a stack the account's limits cannot hold ends in `CREATE_FAILED`, as an error from your own `aws` CLI. Request a quota increase, pick a smaller size (the size parameters of the installation guide), or deploy in another region, after cleaning up the failed attempt as above.
+
+**No media, but every service is healthy.** This is almost always a blocked **UDP** port (`443/udp` or the media range): HTTPS works and the stack looks fine, but media never arrives. [Ports](/docs/self-hosting/single-node/aws/admin.md#ports) in the administration guide shows how to run the full check, and [Logs](/docs/self-hosting/single-node/aws/admin.md#logs) how to read the logs of every service.

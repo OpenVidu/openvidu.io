@@ -80,4 +80,3 @@ Converting with the `ov` of the release you want is also the update to it. A nod
 
 - [Administer the deployment](on-premises/admin.md): status, logs, the health check.
 - [Change the configuration](../configuration/changing-config.md) or [the modules](../how-to-guides/enable-disable-modules.md).
-- The [OpenVidu CLI commands](../openvidu-cli.md#command-reference).

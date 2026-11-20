@@ -161,4 +161,4 @@ If a change does not take effect or a service fails to start:
     ov stack plan
     ```
 
-For the health check, see [Status](../single-node/on-premises/admin.md#status). For generic CLI troubleshooting, see [Troubleshooting](../openvidu-cli.md#troubleshooting).
+For the health check, see [Status](../single-node/on-premises/admin.md#status); for the logs of every service, [Logs](../single-node/on-premises/admin.md#logs).

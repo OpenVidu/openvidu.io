@@ -130,7 +130,7 @@ ov stack update                       # bring the stack to this ov's version
 ov stack destroy --delete-data        # take it down (--keep-data keeps it for a redeploy)
 ```
 
-`ov stack config set` changes the running configuration and recreates only what reads it, `ov stack module` turns features on and off live, and `ov stack logs` shows every service in one stream. [The OpenVidu CLI](openvidu-cli.md#command-reference) lists every command.
+`ov stack config set` changes the running configuration and recreates only what reads it, `ov stack module` turns features on and off live, and `ov stack logs` shows every service in one stream. `ov help stack` lists every command, and each deployment's administration guide shows them at work.
 
 ## See it in action
 

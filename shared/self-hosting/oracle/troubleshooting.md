@@ -30,6 +30,14 @@ Before creating anything, the deploy compares what a first deploy needs against 
 
 A High Availability stack sits behind a network load balancer that passes TLS through to the masters. Let's Encrypt's (and ZeroSSL's) HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Deploy High Availability with the default `selfsigned` certificate, or with `owncert` for production.
 
----
+### A create failed partway { #a-create-failed-partway }
 
-For problems common to every cloud (closed ports, exit codes, timed-out waits, quotas), see the [generic CLI troubleshooting](/docs/self-hosting/openvidu-cli.md#troubleshooting).
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating anything, so a failed attempt can always be cleaned up from the directory:
+
+```bash
+ov stack destroy --delete-data   # or --keep-data
+```
+
+### No media, but every service is healthy { #no-media-but-every-service-is-healthy }
+
+This is almost always a blocked **UDP** port (`443/udp` or the media range): HTTPS works and the stack looks fine, but media never arrives. [Ports](/docs/self-hosting/single-node/oracle/admin.md#ports) in the administration guide shows how to run the full check (on PRO, with the `--ssh … --ssh-key …` it prints), and [Logs](/docs/self-hosting/single-node/oracle/admin.md#logs) how to read the logs of every service.

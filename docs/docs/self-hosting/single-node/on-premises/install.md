@@ -39,9 +39,9 @@ All services are deployed on a single machine, which includes:
 ## Requirements { #requirements }
 
 - One **Linux server** (Ubuntu recommended), with at least **4 CPU cores and 4 GB of RAM** for Community, and generous disk (100 GB recommended) if you record sessions. For PRO, which runs Kubernetes, at least **8 GB of RAM**, 16 GB recommended. With speech to text from a local provider (`vosk` or `sherpa` in the [speech processing agent](../../../ai/live-captions.md)), give the server 8 to 16 GB. These figures are estimates, not measured limits.
-- A sudo-capable user on the server, reachable over SSH. Nothing else needs to be pre-installed: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing.
+- A sudo-capable user on the server, reachable over SSH. Nothing else needs to be pre-installed: the deploy brings Docker and the Compose plugin (Community) or the OpenVidu node agent (PRO) when they are missing. `ov` keeps the SSH host keys of the machines it connects to in its own `~/.config/openvidu/known_hosts` (or `$OV_KNOWN_HOSTS`), apart from yours: a machine is trusted on the first connection, and a different key later stops the command before anything runs.
 - A **domain** pointing at the server, and a **certificate type**:
-    - `letsencrypt` or `zerossl`: a certificate obtained automatically (requires port 80 to be reachable).
+    - `letsencrypt` or `zerossl`: a certificate obtained automatically over HTTP, so **port 80 must reach the server** from the internet. If it does not, the certificate is never issued, even with 443 open.
     - `owncert`: bring your own, with `--owncert-public-key` and `--owncert-private-key`.
     - `selfsigned`: for a throwaway deployment.
 
@@ -200,7 +200,25 @@ Each stack lives in its own empty directory on your machine. Choose the edition.
 
 ### The port preflight { #the-port-preflight }
 
-A remote deploy checks the node's ports before installing anything. If a **required** port is closed, it stops (exit `6`) and prints the rule to add; a recommended port only warns. `--skip-port-check` deploys without the check.
+A remote deploy (and `ov stack join`) checks the node's ports before installing anything. If a **required** port does not reach the node (`443/tcp`, or `22/tcp` for `ov` itself), it stops with exit `6` and prints the rule to add for the firewall it found:
+
+```console
+$ ov stack deploy web --environment on-premises --ssh ubuntu@172.30.0.96 …
+…
+checking the inbound ports before installing anything…
+  Ports of 172.30.0.96 (Community single node)
+  PORT             SCOPE   LEVEL        STATE   TO OPEN
+  443/tcp          public  required     closed  sudo ufw allow 443/tcp
+  443/udp          public  recommended  open
+  80/tcp           public  recommended  open
+  50000-60000/udp  public  recommended  open
+  7881/tcp         public  recommended  open
+  22/tcp           admin   required     open
+  1 of 6 checked port(s) do NOT reach the node: 443/tcp
+ov: nothing was installed: 443/tcp must reach the node first. ov changes no firewall: add the rules above and deploy again (--skip-port-check deploys anyway)
+```
+
+On PRO, the node's own firewall must also let the stack's internal networks (`10.42.0.0/16` and `10.43.0.0/16`) reach it, and the check prints the rules to add when it does not. `ov` never changes a firewall: run the printed fix on the node, then deploy again. A **recommended** port that does not reach the node only warns. `--skip-port-check` deploys without the check.
 
 ### Deploying again { #deploying-again }
 
@@ -271,4 +289,3 @@ For OpenVidu Meet, `MEET_INITIAL_API_KEY` (`ov stack config get meet-initial-api
 - [Administer the deployment](admin.md): status, logs, the health check, start and stop.
 - [Change the configuration](../../configuration/changing-config.md) or [the modules](../../how-to-guides/enable-disable-modules.md).
 - [Update the deployment](../upgrade.md).
-- The [OpenVidu CLI commands](../../openvidu-cli.md#command-reference).

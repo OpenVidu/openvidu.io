@@ -1,4 +1,4 @@
-These are the problems specific to a Google Cloud deploy. For the ones common to every cloud (closed ports and exit codes, blocked UDP and no media, reused names, runtime logs), see the [generic troubleshooting](/docs/self-hosting/openvidu-cli.md#troubleshooting).
+These are the problems a Google Cloud deploy can run into, and their fixes.
 
 ### The project has no `default` network
 
@@ -35,6 +35,14 @@ ov stack deploy <name> --cloud gcp --mode auto
 
 A deploy in assisted mode resumes with `--mode assisted` instead: the error prints the command to run.
 
+### A create failed partway
+
+`ov` records the stack's infrastructure in `openvidu-stack.yml` **before** creating anything, so a failed attempt can always be cleaned up from the directory:
+
+```bash
+ov stack destroy --delete-data   # or --keep-data
+```
+
 ### High Availability never gets ready with Let's Encrypt
 
 A High Availability stack sits behind a load balancer that passes TLS through to the masters. Let's Encrypt's HTTP challenge reaches a port 80 that only redirects to HTTPS, so the certificate is never issued and `ov stack status --wait` times out. Deploy High Availability with the default `selfsigned` certificate, or with `owncert` for production.
@@ -48,3 +56,7 @@ ov: the state bucket gs://<bucket> already keeps the state of the stack openvidu
 ```
 
 Take the existing stack over to operate it here, or redeploy this one under another name (`--param stackName=<name>`).
+
+### No media, but every service is healthy
+
+This is almost always a blocked **UDP** port (`443/udp` or the media range): HTTPS works and the stack looks fine, but media never arrives. [Ports](/docs/self-hosting/single-node/gcp/admin.md#ports) in the administration guide shows how to run the full check (on PRO, with the `--ssh … --ssh-key …` it prints), and [Logs](/docs/self-hosting/single-node/gcp/admin.md#logs) how to read the logs of every service.

@@ -23,4 +23,4 @@ A stack deployed **without** `--remote-state` has no record to read, so `ov` can
 - `sudo ov stack import --this-node` on the node itself;
 - `ov stack import -f <file>`, from a bundle you saved earlier with `ov stack export --bundle --out <file>`.
 
-Each adopts **OpenVidu, not the machines**: `status`, `logs` and `config` work, but a `--param` redeploy or an `ov stack destroy` of the infrastructure does not. For the general mechanics of `ov stack import` and remote state, see [the CLI reference](/docs/self-hosting/openvidu-cli.md#remote-state).
+Each adopts **OpenVidu, not the machines**: `status`, `logs` and `config` work, but a `--param` redeploy or an `ov stack destroy` of the infrastructure does not.

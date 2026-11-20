@@ -119,7 +119,7 @@ The directory holds two things:
 - **`openvidu-stack.yml`**: the desired state of the deployment. You never have to write it: the deploy flags write into it, and the deploy fills in the rest, **including every credential the stack needs**, so a redeploy reuses them.
 - **`.openvidu/`**: the state the CLI keeps for the stack: how to reach it and its secrets. Keep both private.
 
-Every deployed node also gets a copy of `ov` and a stack directory of its own, so `sudo ov stack status` works on the node too. A lost directory is recreated with `ov stack import` ([I lost the stack's directory](openvidu-cli.md#lost-the-stack-directory)).
+Every deployed node also gets a copy of `ov` and a stack directory of its own, so `sudo ov stack status` works on the node too. A lost directory is recreated with `ov stack import` ([Operate from another machine](single-node/on-premises/admin.md#operate-from-another-machine)).
 
 ### Auto and assisted modes { #auto-and-assisted-modes }
 
@@ -136,7 +136,7 @@ Every deploy can run in two modes:
 2. **Your `ov` waits** until OpenVidu is up.
 3. **Your `ov` registers the stack** in your directory.
 
-From then on, `ov stack status`, `ov stack config`, `ov stack logs` and `ov stack destroy` work from that directory. Recordings and OpenVidu Meet data go to the cloud's object storage (S3, Azure Blob Storage, Cloud Storage, Object Storage or Spaces), so they outlive the machines. `--remote-state` also keeps the stack on its cloud, so another machine can take it over ([Remote state](openvidu-cli.md#remote-state)).
+From then on, `ov stack status`, `ov stack config`, `ov stack logs` and `ov stack destroy` work from that directory. Recordings and OpenVidu Meet data go to the cloud's object storage (S3, Azure Blob Storage, Cloud Storage, Object Storage or Spaces), so they outlive the machines. `--remote-state` also keeps the stack on its cloud, so another machine can take it over (*Operate from another machine* in each cloud's administration guide, for example [AWS](single-node/aws/admin.md#operate-from-another-machine)).
 
 ## Node services
 

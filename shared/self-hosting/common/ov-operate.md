@@ -109,6 +109,24 @@ Restarting a single service is not available yet.
 
 A **module** is a feature of OpenVidu you turn on or off while the stack runs (`meet`, `observability`, `ingress`…): `ov stack module ls` lists them and `ov stack module add|rm` changes the selection. An **agent** adds AI capabilities to rooms: `ov stack agent ls` lists the stack's agents and `ov stack agent enable|disable <name>` turns one on or off, live. See [Enable and disable modules](/docs/self-hosting/how-to-guides/enable-disable-modules.md).
 
+## Scripts and exit codes { #exit-codes }
+
+Every command runs unattended as well. `-o json` (or `yaml`, `jsonpath=<expr>`, `go-template=<expr>`) prints what a command reports in a form a script reads, `--non-interactive` turns a missing value into an error instead of a question, and `-y` answers the confirmations (never the `--keep-data` or `--delete-data` a destroy must be told). `ov --help` lists the flags every command takes. The exit code says what happened:
+
+| Code | Meaning |
+| :---: | --- |
+| `0` | Success |
+| `1` | Error |
+| `2` | Usage error |
+| `3` | No stack in the directory |
+| `4` | Configuration validation failed |
+| `5` | Plan not empty (`plan --detailed-exitcode`), or `config file apply\|edit --dry-run` would change something |
+| `6` | A deploy or join stopped before touching the node: a required port does not reach it, or (PRO) the node's firewall drops the stack's internal networks |
+| `7` | A configuration document changed since it was read (`config file apply` without `--force`) |
+| `8` | `stack test` failed, or `stack check-ports` found what would stop a deploy with `6` |
+| `9` | An update stopped before touching the node: a filesystem there lacks the space it needs |
+| `10` | A cloud deploy, destroy or import stopped before touching the cloud: a tool is missing on this machine, the cloud's CLI has no session, or the region's quota cannot hold the stack |
+
 ## Export the desired state { #export }
 
 `ov stack export` prints the stack's desired state (`openvidu-stack.yml`) with its secrets as `***`; `--show-secrets` prints them, and `--out <file>` writes a file only you can read. `--gitops` turns the secrets into `secrets://` references, so the file can go to a Git repository. `ov stack export --bundle --out <file>` writes the description another machine adopts the stack from, with `ov stack import -f <file>`.

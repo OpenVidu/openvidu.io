@@ -44,7 +44,7 @@ The two editions store their configuration in different places, so importing beh
 
     The stack holds its own desired state, so two clients **cannot drift apart**: both read and write the same release, and `ov stack config view` always answers from it. Any administrator who can reach a master node adopts the stack with `ov stack import --ssh <user>@<master>` (the one master on Elastic, any of the four on HA; a Single Node's own node) and operates it from their own directory, which makes PRO a **team** product. On a master itself, `sudo ov stack import --this-node` rebuilds the directory; a copy exported with `ov stack export --bundle --out <file>` is imported elsewhere with `ov stack import -f <file>`.
 
-For a cloud stack kept on its cloud with `--remote-state`, any machine with that cloud's credentials can take it over completely: see [Remote state](../../openvidu-cli.md#remote-state).
+For a cloud stack kept on its cloud with `--remote-state`, any machine with that cloud's credentials can take it over completely: see *Operate from another machine* in that cloud's administration guide, for example [AWS](../aws/admin.md#operate-from-another-machine).
 
 ## Destroy { #destroy }
 

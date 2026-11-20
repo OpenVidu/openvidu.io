@@ -56,4 +56,6 @@ Name the stack: without the name it would be registered as `openvidu`. A deploy 
 ov stack destroy --delete-data   # or --keep-data
 ```
 
-For closed ports and exit codes, the `sslip.io` fallback, a lost stack directory and the other cases shared by every cloud, see the generic [Troubleshooting](/docs/self-hosting/openvidu-cli.md#troubleshooting).
+### I lost the stack's directory
+
+A directory is recreated with `ov stack import`: see [Operate from another machine](/docs/self-hosting/single-node/digitalocean/admin.md#operate-from-another-machine) in the administration guide.

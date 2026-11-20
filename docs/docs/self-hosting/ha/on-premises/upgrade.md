@@ -38,4 +38,3 @@ A conflict (an edit on the lines `ov` changes) stops it before anything runs. A 
 ## Next steps
 
 - [Administer the cluster](admin.md): join and drain nodes, operate the stack.
-- The [OpenVidu CLI commands](../../openvidu-cli.md#command-reference).

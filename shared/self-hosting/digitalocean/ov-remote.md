@@ -17,5 +17,3 @@ What `--remote-state` keeps on DigitalOcean, where the stack's infrastructure al
 | **The machines' SSH private key**, which the template generates | the Terraform state |
 
 `ov stack destroy` deletes all of it. A stack deployed **without** `--remote-state` has no record to read: the way back is the directory that deployed it. If that directory is gone, a PRO stack is still adopted from one of its nodes with `ov stack import --ssh <user>@<master>` (any master on High Availability), with `sudo ov stack import --this-node` run on the node itself, or with `ov stack import -f <file>` of a bundle written beforehand by `ov stack export --bundle --out <file>`. That adopts OpenVidu, so `ov stack status`, `config` and `logs` work, but not the infrastructure: there is no `--param` redeploy and no `ov stack destroy` of the machines from that directory.
-
-See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general part.

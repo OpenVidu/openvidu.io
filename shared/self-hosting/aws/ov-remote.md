@@ -1,4 +1,4 @@
-By default, the stack's directory is the only place that drives the machines: if you lose it, you lose control of them. To operate the stack from another machine, deploy it (or redeploy it) with **`--remote-state`**, which keeps everything that drives the stack on AWS itself, so another machine with your AWS credentials can take it over completely. See [Remote state](/docs/self-hosting/openvidu-cli.md#remote-state) for the general picture.
+By default, the stack's directory is the only place that drives the machines: if you lose it, you lose control of them. To operate the stack from another machine, deploy it (or redeploy it) with **`--remote-state`**, which keeps everything that drives the stack on AWS itself, so another machine with your AWS credentials can take it over completely.
 
 On AWS, `--remote-state` keeps:
 
