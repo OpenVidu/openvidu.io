@@ -21,10 +21,10 @@ In OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, the **PRO**{
 
 ## Access
 
-Go to `https://your.domain/dashboard/` and **log in** with the admin credentials of your deployment: `DASHBOARD_ADMIN_USERNAME` and `DASHBOARD_ADMIN_PASSWORD` in `openvidu.env`. A session lasts while it is used and expires after 7 days without use.
+Go to `https://your.domain/dashboard/` and **log in** with the admin credentials of your deployment: `DASHBOARD_ADMIN_USERNAME` and `DASHBOARD_ADMIN_PASSWORD` in `openvidu.env`. A session lasts while it is used and expires after 7 days without use. That time, the log level and the other optional settings of the dashboard service are in [`dashboard.env`](../../configuration/reference.md#dashboardenv).
 
-![OpenVidu Dashboard login page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login-light.png#only-light){ .round-corners loading=lazy }
-![OpenVidu Dashboard login page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login-dark.png#only-dark){ .round-corners loading=lazy }
+![OpenVidu Dashboard login page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login-light.png#only-light){ .round-corners style="max-width: 480px" loading=lazy }
+![OpenVidu Dashboard login page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/login-dark.png#only-dark){ .round-corners style="max-width: 480px" loading=lazy }
 
 ## Finding your way around
 
@@ -34,14 +34,14 @@ The side menu holds one entry per page, and the header holds the controls that e
 
 **Live pages refresh on their own**, every 10 seconds by default. The control next to the range picker changes the interval or turns it off, and refreshing pauses while the browser tab is hidden. The label next to the title of a live page tells you how far to trust what you see: **LIVE** while data keeps arriving, **paused** while auto-refresh is off, and **stale** when OpenVidu Server has stopped writing data. If no analytics data arrives for over a minute, a banner says so on every page, whatever the auto-refresh setting.
 
-**Search takes you straight to an entity.** Press `/` or click the search box in the header and type a name, an identity or an identifier. An exact identifier (the SID of a Room, Participant or Track, or the ID of an Egress or Ingress) opens that entity whatever its age; any other text lists the rooms, participants, egresses and ingresses whose name starts with it. Every list also has its own search box, which follows the same rule.
+**Search takes you straight to an entity.** Press `/` or click the search box in the header and type a name, an identity or an identifier. An exact identifier (the SID of a Room, Participant or Track, or the ID of an Egress or Ingress) opens that entity whatever its age, and any other text lists the rooms, participants, egresses and ingresses whose name starts with it. Every list also has its own search box, which follows the same rule.
 
 **What you see is in the URL.** The time range, time zone, filters, sort order and page of every view are part of its address. Copy the URL to share exactly what you are looking at with a colleague, bookmark a view you check often (a preset such as "last 24 hours" stays relative), and use the browser's **Back** button to return to a list as you left it.
 
 A few details are common to every page:
 
 - An :material-information-outline: icon next to a figure, chart or column explains what it counts. Hover it, focus it with the keyboard or tap it.
-- Identifiers have a copy button, and every Room, Participant, Egress and Ingress links to its details.
+- Identifiers have a copy button, and every Room, Participant, Egress, Ingress and [media node](#media-nodes) links to its details.
 - Tables let you choose their columns, and several of them can be sorted by duration, end time or other figures. Sorting by those figures is offered for ranges of up to 7 days (24 hours for participant sessions).
 - The theme is light or dark, following the operating system by default.
 - The bottom of the side menu shows the OpenVidu version and edition, with a link to this documentation.
@@ -64,7 +64,7 @@ The **Data pipeline** card tells you whether the dashboard itself can be trusted
 
 ## Analytics
 
-The Analytics page shows how the deployment is used over the selected time range. Use it to follow growth, to size your infrastructure against the busiest moments, and to compare one period with another. Charts are drawn in buckets from 5 minutes to 1 day; the granularity is chosen for you from the range, and you can change it. This page does not refresh on its own: it loads when you open it and when you press the refresh button.
+The Analytics page shows how the deployment is used over the selected time range. Use it to follow growth, to size your infrastructure against the busiest moments, and to compare one period with another. Charts are drawn in buckets from 5 minutes to 1 day. The dashboard chooses the granularity from the range, and you can change it. This page does not refresh on its own: it loads when you open it and when you press the refresh button.
 
 A row of figures summarizes the range: rooms created, participant sessions, unique identities, data transferred, connection success, egresses and ingresses. Below it, each section looks at one subject:
 
@@ -85,6 +85,8 @@ OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } adds three sections:
 - **Diagnostics**: why participants disconnected, why rooms ended, failed subscriptions over time, and the API calls and errors of each method. It tells apart a network problem of your users from a problem in your application.
 - **Top rooms**: the rooms of the range with most unique identities, longest duration, most data transferred or worst quality, each linking to its details.
 
+In Elastic and High Availability deployments, it also adds a **Scope** selector to the header, to see every section for all nodes or for a single [media node](#media-nodes). Egress and ingress are always counted for the whole deployment.
+
 <div class="grid-container" markdown>
 
 <div class="grid-50" markdown>
@@ -103,7 +105,7 @@ OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } adds three sections:
 
 The Rooms page lists the rooms that started in the selected time range, active and closed, and refreshes live. The figures above the table say how many rooms and participants are active now, and how many rooms and participant sessions the range holds.
 
-Filter the list by status, search a room by the start of its name or by its SID, and keep only the rooms that used egress, ingress or agents. Each row shows the room's status, start and end, duration, unique identities, active participants, data transferred and the services it used. Sort by start, end, duration, unique identities or active participants to find, for example, the longest or the busiest rooms of the week.
+Filter the list by status, search a room by the start of its name or by its SID, and keep only the rooms that used egress, ingress or agents. Each row shows the room's status, start and end, duration, unique identities, active participants, data transferred and the services it used. Sort by start, end, duration, unique identities or active participants to find, for example, the longest or the busiest rooms of the week. In OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } Elastic and High Availability deployments, a **Node** filter and column show the rooms of each [media node](#media-nodes).
 
 ![Rooms page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms-light.png#only-light){ .round-corners loading=lazy }
 ![Rooms page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/rooms-dark.png#only-dark){ .round-corners loading=lazy }
@@ -112,7 +114,7 @@ Filter the list by status, search a room by the start of its name or by its SID,
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
-The page of a room tells its whole story. The header shows its status, its topology (1:1, 1:N, N:M...), whether it was recorded, and when and why it ended. The figures below sum it up: duration, participants (with the most connected at once), unique identities, data transferred, connection success, average quality and services.
+The page of a room tells its whole story. The header shows its status, its topology (1:1, 1:N, N:M...), whether it was recorded, and when and why it ended. In Elastic and High Availability deployments, it also names the media node that hosted the room. The figures below sum it up: duration, participants (with the most connected at once), unique identities, data transferred, connection success, average quality and services.
 
 Three charts cover the life of the room: **active participants**, **bitrate** and **quality**. Joins, leaves, aborted connections and the start and end of each egress are marked on them, so you can relate a drop in quality or bitrate to what was happening in the room at that moment.
 
@@ -145,7 +147,7 @@ The figures above the table show the participants active now, the services activ
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
-The page of a participant session shows what that person experienced. The figures give its duration, data transferred, quality and how many times the connection had to be resumed. Two cards describe the **client** (SDK, operating system, browser, device, network) and the **connection** (type, time to connect and, once it ended, the reason of the disconnection).
+The page of a participant session shows what that person experienced. The header names its room and, in Elastic and High Availability deployments, its media node. The figures give its duration, data transferred, quality and how many times the connection had to be resumed. Two cards describe the **client** (SDK, operating system, browser, device, network) and the **connection** (type, time to connect and, once it ended, the reason of the disconnection).
 
 The charts follow the session over time: **quality**, **bitrate**, **round-trip time**, **jitter** and **packets lost**. Below them are the **tracks it published** and the **tracks it subscribed to**, the other sessions of the same identity (in this room or in any room), and the timeline of its events.
 
@@ -167,7 +169,7 @@ Selecting a published track opens the **track panel**: its source, codec, resolu
 
 ## Agents
 
-The Agents page lists the sessions of [agent](../../../ai/openvidu-agents/overview.md) participants in the selected time range, with their room, status and duration, a live counter of the agents connected now and the number of agent sessions in the range. Agents join rooms as participants of kind Agent, so their sessions also appear in the Participants page when filtering by that kind.
+The Agents page lists the sessions of agent participants in the selected time range, with their agent name, room, status and duration, a live counter of the agents connected now and the number of agent sessions in the range. The agents of the official collection of [OpenVidu agents](../../../ai/openvidu-agents/overview.md) carry an **OpenVidu** tag, and the **Origin** filter keeps only them or only third-party agents. Agents join rooms as participants of kind Agent, so their sessions also appear in the Participants page when filtering by that kind.
 
 ![Agents page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/agents-light.png#only-light){ .round-corners loading=lazy }
 ![Agents page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/agents-dark.png#only-dark){ .round-corners loading=lazy }
@@ -185,7 +187,7 @@ Search by the start of a room name or by egress ID, and filter by type (room com
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
-The page of an egress shows, while it runs and after it ends: its error, if any, with an explanation when the egress was lost with its node; its **outputs** (files, streams, segments or images) with their location, duration and size; the **timeline of its status changes**; a summary of the **request** that started it (layout, preset, recorded participant and tracks...), with the full request available on demand; and its events. Credentials in URLs and storage settings are never shown.
+The page of an egress follows it while it runs and keeps its record once it ends. If the egress failed, the page shows its error, with an explanation when it was lost together with its node. The **outputs** are the files, streams, segments or images it produced, with their location, duration and size, and the **timeline of its status changes** tells when it reached each status. A summary of the **request** that started it gives its layout, preset, recorded participant and tracks, and the full request is available on demand. The page also lists the events of the egress. Credentials in URLs and storage settings are never shown.
 
 ![Egress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-detail-light.png#only-light){ .round-corners loading=lazy }
 ![Egress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/egress-detail-dark.png#only-dark){ .round-corners loading=lazy }
@@ -203,7 +205,7 @@ Search by the start of a name or by ID, and filter by input type (RTMP, WHIP or 
 
 !!! info "This view is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../../../pricing.md#openvidu-pro) edition."
 
-The page of an ingress shows its last error, if any; its definition; and each of its **sessions**, with the participant it published as, its room, its video and audio details and its error. An RTSP camera pulled by a URL ingress reads **URL (RTSP)**. Stream keys and credentials in URLs are never shown.
+The page of an ingress shows its definition, its events and, if it has one, its last error. Each of its **sessions** is listed with the participant it published as, its room, its video and audio details and the error it ended with, if any. An RTSP camera pulled by a URL ingress reads **URL (RTSP)**. Stream keys and credentials in URLs are never shown.
 
 ![Ingress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress-detail-light.png#only-light){ .round-corners loading=lazy }
 ![Ingress details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/ingress-detail-dark.png#only-dark){ .round-corners loading=lazy }
@@ -216,33 +218,23 @@ In deployments with several media nodes, the dashboard tells you what each of th
 
 The **Media nodes** page lists every media node with its IP, RTC engine, version, state, active rooms and participants, and how many times its server restarted. A node is **alive** while its analytics data keeps arriving, **draining** while it waits for its rooms to end before it stops, **not reporting** when its data stopped arriving without a clean stop, and **stopped** once it was shut down. The figures above the table tell how many nodes are reporting and how many rooms OpenVidu Server had to close itself because their node disappeared, which points to crashes.
 
-The page of a media node shows its recent activity (rooms, participant sessions, minutes, data transferred and connection success), the rooms it hosts or hosted, and the history of its servers: when each one started and stopped, and whether it stopped cleanly.
-
-<div class="grid-container" markdown>
-
-<div class="grid-50" markdown>
 ![Media nodes page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/media-nodes-light.png#only-light){ .round-corners loading=lazy }
 ![Media nodes page of OpenVidu Dashboard](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/media-nodes-dark.png#only-dark){ .round-corners loading=lazy }
-</div>
 
-<div class="grid-50" markdown>
+### Media node details
+
+The page of a media node shows its state, its IP, RTC engine and version, and counts its active rooms and participants, the rooms OpenVidu Server had to close itself and the restarts of its server. A card sums up its recent activity: rooms, participant sessions, minutes, data transferred and connection success over the last 24 hours, or over the 24 hours before it stopped, with a link to the Analytics page scoped to that node.
+
+Below them, the **Rooms** section lists the rooms the node hosts or hosted, and the **Servers** section tells the history of its servers: when each one started and stopped, and whether it stopped cleanly.
+
 ![Media node details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/media-node-light.png#only-light){ .round-corners loading=lazy }
 ![Media node details page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/media-node-dark.png#only-dark){ .round-corners loading=lazy }
-</div>
-
-</div>
-
-The rest of the dashboard follows the media nodes too:
-
-- The Overview shows the **By node** table, with the state of each media node.
-- The Analytics page has a **Scope** selector, to see every section for all nodes or for a single one. Egress and ingress are counted for the whole deployment only.
-- The Rooms page has a **Node** filter and column, and the details of rooms and participants name their media node. Every media node name links to its page.
 
 ## Exporting data
 
 Every list and every Analytics section can be taken out of the dashboard, to work on it in a spreadsheet or to feed a report:
 
-- **Export CSV**, in the toolbar of each list (Rooms, Participants, Agents, Egress and Ingress), downloads what the list shows: the same time range, search, filters and sort order, across all its pages and not only the one on screen. An export holds up to 10,000 rows; when the list has more, the dashboard says so and you can narrow the range or the filters to export the rest.
+- **Export CSV**, in the toolbar of each list (Rooms, Participants, Agents, Egress and Ingress), downloads what the list shows: the same time range, search, filters and sort order, across all its pages and not only the one on screen. An export holds up to 10,000 rows. When the list has more, the dashboard says so and you can narrow the range or the filters to export the rest.
 - **Export XLSX**, in the header of each Analytics section, saves an Excel workbook with the data of its charts: one sheet per time resolution, one per breakdown, and an Info sheet with the range, time zone and scope of the export.
 - In OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, the Participants section of a [room's page](#room-details) exports its **attendance** as CSV: one row per identity, with the total time it spent in the room.
 
@@ -277,18 +269,18 @@ Every list and every Analytics section can be taken out of the dashboard, to wor
 ## Settings
 
 - **Preferences**: theme, default time zone, default time range, rows per page and auto-refresh interval. They are stored in the browser.
-- **Data**: the storage of each class of data with its retention, documents and size, and the collections that hold it; for a class that has not reached its retention yet, an estimate of its size once it does. It also shows the progress of a data migration while it runs and, after an upgrade from a version before 3.10, the analytics data of that version while OpenVidu Server keeps it for a rollback.
+- **Data**: the retention of each class of data, the collections that hold it, and their documents and size. While a class has not reached its retention yet, the tab estimates the size it will take once it does. It also shows the progress of a data migration while it runs and, after an upgrade from a version before 3.10, the analytics data of that version while OpenVidu Server keeps it for a rollback.
 
 ![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-light.png#only-light){ .round-corners loading=lazy }
 ![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-dark.png#only-dark){ .round-corners loading=lazy }
 
 ## Analytics data
 
-OpenVidu Server writes the analytics data the dashboard shows to MongoDB, in its `openvidu` database:
+OpenVidu Server writes the analytics data the dashboard shows to MongoDB, in its `openvidu` database. What it stores and for how long is configured in the `openvidu.analytics` section of `livekit.yaml`: see [Analytics settings](../../configuration/reference.md#analytics-settings), and [Changing configuration](../../configuration/changing-config.md) to apply a change. OpenVidu Server stores:
 
 - **Rooms, participant sessions, tracks, subscriptions, egresses, ingresses and ingress sessions**, updated as their events arrive.
 - **Events** as emitted by OpenVidu Server, for the timelines.
-- **Statistics** every 30 seconds: quality score, bytes, packets, loss, jitter and round-trip time. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } stores them per participant and direction; OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } stores them per track, which the track panel needs.
+- **Statistics** every 30 seconds: quality score, bytes, packets, loss, jitter and round-trip time. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } stores them per participant and direction, and OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } per track, which the track panel needs.
 - **Rollups** every 5 minutes, hour and day, which the Analytics page and the Overview read.
 
 Credentials such as TURN passwords, storage keys, stream keys or tokens in URLs are never stored. Client IP addresses are stored only when `anonymize_ip` is set to `false`, and room and participant metadata only when `store_metadata` is enabled.
@@ -297,15 +289,7 @@ When the end of a room, participant session, egress or ingress session never arr
 
 The first start of OpenVidu Server 3.10 or later on a deployment upgraded from a previous version migrates its analytics data in the background, while new data is written as usual. The dashboard shows the progress of the migration in a banner, in the Overview and in Settings.
 
-After the migration, OpenVidu Server keeps the analytics data of the previous version, the `legacy_events` and `stats` collections, so that a rollback to that version still finds it. That data keeps expiring with its own retention (32 days with the installers up to 3.9), and once the date shown in the **Data** tab of [Settings](#settings) has passed, OpenVidu Server removes both collections and frees their disk space. To free it earlier when you will not roll back, wait until the **Data** tab reads **Kept until … for rollback** or **Being removed by the server**, and drop both collections from the OpenVidu node, or from any master node in Elastic and High Availability deployments:
-
-```bash
-docker exec -it mongo mongosh \
-  "mongodb://<MONGO_ADMIN_USERNAME>:<MONGO_ADMIN_PASSWORD>@127.0.0.1:20000/openvidu?replicaSet=rs0" \
-  --eval 'db.getCollection("legacy_events").drop(); db.getCollection("stats").drop()'
-```
-
-Take `MONGO_ADMIN_USERNAME` and `MONGO_ADMIN_PASSWORD` from `openvidu.env` (`/opt/openvidu/config/openvidu.env` in Single Node, `/opt/openvidu/config/cluster/openvidu.env` in Elastic and High Availability). With an [external MongoDB](../../how-to-guides/external-mongodb.md), run the same `--eval` against `EXTERNAL_MONGO_URI`; if `openvidu.analytics.database` names another database, use it instead of `openvidu`. Dropping the collections frees their disk space at once.
+After the migration, OpenVidu Server keeps the analytics data of the previous version, the `legacy_events` and `stats` collections, so that a rollback to that version still finds it. That data keeps expiring with its own retention (32 days with the installers up to 3.9), and once the date shown in the **Data** tab of [Settings](#settings) has passed, OpenVidu Server removes both collections and frees their disk space.
 
 ### Retention
 
@@ -321,13 +305,6 @@ Each class of data is kept for its own time, after which MongoDB deletes it:
 | Hourly rollups | 400 days | `openvidu.analytics.retention.rollups_hourly` |
 | Daily rollups | Forever | `openvidu.analytics.retention.rollups_daily` |
 
-The details of a room or participant show their charts, events and tracks only while that data is retained, and say so when it is not; the Analytics page keeps showing the figures of that time from the rollups.
+The details of a room or participant show their charts, events and tracks only while that data is retained, and say so when it is not. The Analytics page keeps showing the figures of that time from the rollups.
 
-The **Data** tab of [Settings](#settings) shows how much space each class takes and, while a class has not reached its retention yet, estimates its size at full retention from the data so far, which helps to size each retention. A new `entities` or `tracks` retention applies to what closes after the restart; the other classes follow the new value at once.
-
-## Configuration
-
-- The analytics data (retention, stored detail, privacy options) is configured in the `openvidu.analytics` section of `livekit.yaml`: see [Analytics settings](../../configuration/reference.md#analytics-settings).
-- The dashboard service has its own optional settings in `dashboard.env`: see [`dashboard.env`](../../configuration/reference.md#dashboardenv).
-
-[Changing configuration](../../configuration/changing-config.md) explains where these files are and how to apply a change.
+The **Data** tab of [Settings](#settings) shows how much space each class takes and, while a class has not reached its retention yet, estimates its size at full retention from the data so far, which helps to size each retention. A new `entities` or `tracks` retention applies to what closes after the restart, while the other classes follow the new value at once.
