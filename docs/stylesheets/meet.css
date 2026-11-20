@@ -213,10 +213,6 @@ li:has(.coming-soon-overlay)::after {
 
 /* Estimated release date (month and year) replaces the generic label
    when the feature card also carries an .eta-YYYY-MM class */
-li:has(.coming-soon-overlay.eta-2026-12)::after {
-  content: 'December 2026';
-}
-
 li:has(.coming-soon-overlay.eta-2027-01)::after {
   content: 'January 2027';
 }

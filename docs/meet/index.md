@@ -300,13 +300,13 @@ page_features:
 
     Broadcast your video calls live to platforms like YouTube or Twitch, reaching a wider audience directly from OpenVidu Meet.
 
--   :material-message-text-clock-outline:{ .feature-icon } __A richer chat__{ .feature-name .coming-soon-overlay .eta-2027-01 }
+-   :material-message-text-clock-outline:{ .feature-icon } __Advanced Chat__{ .feature-name .coming-soon-overlay .eta-2027-01 }
 
     ---
 
     Chat history across sessions, private messages, mentions, reactions and editing of sent messages.
 
--   :material-file-send:{ .feature-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2026-12 }
+-   :material-file-send:{ .feature-icon } __File sharing__{ .feature-name .coming-soon-overlay .eta-2027-q1 }
 
     ---
 
