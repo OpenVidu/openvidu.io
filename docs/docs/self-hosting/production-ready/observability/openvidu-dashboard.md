@@ -269,7 +269,7 @@ Every list and every Analytics section can be taken out of the dashboard, to wor
 ## Settings
 
 - **Preferences**: theme, default time zone, default time range, rows per page and auto-refresh interval. They are stored in the browser.
-- **Data**: the retention of each class of data, the collections that hold it, and their documents and size. While a class has not reached its retention yet, the tab estimates the size it will take once it does. It also shows the progress of a data migration while it runs and, after an upgrade from a version before 3.10, the analytics data of that version while OpenVidu Server keeps it for a rollback.
+- **Data**: the retention of each class of data, the collections that hold it, and their documents and size. While a class has not reached its retention yet, the tab estimates the size it will take once it does. It also shows the progress of a data migration while it runs and, after an upgrade from a version before 3.10, the analytics data of that version while OpenVidu Server keeps it for a rollback. Each class has a delete button, and the one of the **Total** row deletes them all: see [Deleting analytics data](#deleting-analytics-data).
 
 ![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-light.png#only-light){ .round-corners loading=lazy }
 ![Data tab of the Settings page](../../../../assets/images/platform/self-hosting/production-ready/observability/openvidu-dashboard/settings-data-dark.png#only-dark){ .round-corners loading=lazy }
@@ -289,7 +289,7 @@ When the end of a room, participant session, egress or ingress session never arr
 
 The first start of OpenVidu Server 3.10 or later on a deployment upgraded from a previous version migrates its analytics data in the background, while new data is written as usual. The dashboard shows the progress of the migration in a banner, in the Overview and in Settings.
 
-After the migration, OpenVidu Server keeps the analytics data of the previous version, the `legacy_events` and `stats` collections, so that a rollback to that version still finds it. That data keeps expiring with its own retention (32 days with the installers up to 3.9), and once the date shown in the **Data** tab of [Settings](#settings) has passed, OpenVidu Server removes both collections and frees their disk space.
+After the migration, OpenVidu Server keeps the analytics data of the previous version, the `legacy_events` and `stats` collections, so that a rollback to that version still finds it. That data keeps expiring with its own retention (32 days with the installers up to 3.9), and once the date shown in the **Data** tab of [Settings](#settings) has passed, OpenVidu Server removes both collections and frees their disk space. You can also drop them earlier from the **Data** tab of Settings, as explained in [Deleting analytics data](#deleting-analytics-data).
 
 ### Retention
 
@@ -308,3 +308,67 @@ Each class of data is kept for its own time, after which MongoDB deletes it:
 The details of a room or participant show their charts, events and tracks only while that data is retained, and say so when it is not. The Analytics page keeps showing the figures of that time from the rollups.
 
 The **Data** tab of [Settings](#settings) shows how much space each class takes and, while a class has not reached its retention yet, estimates its size at full retention from the data so far, which helps to size each retention. A new `entities` or `tracks` retention applies to what closes after the restart, while the other classes follow the new value at once.
+
+### Deleting analytics data
+
+The **Data** tab of [Settings](#settings) deletes the stored data of a class before its retention does, to make room for new data or to start again from a clean history. Each class has its delete button, and the one of the **Total** row deletes every class at once. A confirmation dialog says what the deletion removes and what it keeps:
+
+| Class | What its deletion removes |
+| --- | --- |
+| Events | The events of rooms, participant sessions, egresses and ingresses that have ended. Their records stay, with empty timelines. |
+| Stats | The statistics of the sessions and tracks that have ended. Their charts become empty, and the Analytics page keeps its figures. |
+| Tracks and subscriptions | The tracks and subscriptions that have ended, with the statistics stored per track. |
+| Entities | The rooms, participant sessions, egresses and ingress sessions that have ended, with their events, statistics, tracks and subscriptions. |
+| 5-minute, hourly and daily rollups | The rollups before the previous 5 minutes, hour or day. The Analytics charts that read them become empty for that time. |
+
+Every deletion keeps the data of the rooms in progress, the data that ended in the last 5 minutes, the latest rollups, the ingresses that were not deleted and the records of the media nodes. A deletion cannot be undone.
+
+A deletion runs in the background, in batches that leave room for the writes of OpenVidu Server, and only one runs at a time. It goes on if you close the browser: the tab shows its progress, and a banner on the other pages says it is running. Once it ends, the tab shows when each class was deleted. If the dashboard stops in the middle of a deletion, the deletion is marked as interrupted and what it deleted stays deleted: start it again to finish.
+
+After an upgrade from a version before 3.10, the **Legacy data** row deletes the analytics data that OpenVidu Server keeps for a rollback, before its date. Its two collections are dropped and their disk space is freed at once, and a rollback to the previous version finds no analytics data. The dialog of the **Total** row offers to delete it as well.
+
+OpenVidu deployments include MongoDB 8.0. With an [external MongoDB](../../how-to-guides/external-mongodb.md), deleting statistics needs MongoDB 7.0 or later, because they are stored in a time-series collection.
+
+#### Freeing disk space
+
+Deleting documents does not make the database files smaller. MongoDB keeps the space they used inside each collection and reuses it for new data of that collection, so the disk usage stops growing until new data fills that space. About a minute after a deletion, the **Data** tab shows under each deleted class how much space MongoDB keeps free for new data.
+
+To give that space back to the operating system, run the MongoDB `compact` command on the collections of the deleted classes, which the **Data** tab lists under each class. `compact` rewrites a collection and loads the disk while it runs, so run it at a quiet time.
+
+Connect to MongoDB with `mongosh` from a machine that reaches port 20000 of the node that runs it:
+
+```bash
+docker run --rm -it --network host mongo:8.0 mongosh \
+    "mongodb://<MONGO_ADMIN_USERNAME>:<MONGO_ADMIN_PASSWORD>@<NODE_IP>:20000/openvidu?authSource=admin&directConnection=true"
+```
+
+Replace the placeholders with values from your deployment. `<MONGO_ADMIN_USERNAME>` and `<MONGO_ADMIN_PASSWORD>` are the MongoDB admin credentials in the `openvidu.env` file, and `<NODE_IP>` is the IP address of the node, as explained below for each deployment.
+
+Then estimate how much space each collection would give back, and compact it. For example, for the `events` collection:
+
+```javascript
+db.runCommand({ compact: "events", dryRun: true, force: true })  // estimatedBytesFreed
+db.runCommand({ compact: "events", force: true })                // bytesFreed
+```
+
+Repeat it for each collection of the deleted classes. The statistics collection, `track_stats`, takes the same form.
+
+=== "Single Node"
+
+    `<NODE_IP>` is the IP address of the OpenVidu node. MongoDB runs there as a replica set with a single member, its primary, and `compact` needs `force: true` to run on a primary.
+
+=== "Elastic"
+
+    `<NODE_IP>` is the IP address of the master node. MongoDB runs there as a replica set with a single member, its primary, and `compact` needs `force: true` to run on a primary.
+
+=== "High Availability"
+
+    MongoDB runs as a replica set with a member on each master node, and `compact` only applies to the member you are connected to. Compact the members one by one, setting `<NODE_IP>` to the IP address of each master node:
+
+    1. Connect to each secondary member and compact its collections without `force: true`. `rs.status()` tells which member is the primary.
+    2. Connect to the primary member and run `rs.stepDown()`, so that another member becomes the primary.
+    3. Connect again to that former primary, now a secondary, and compact its collections without `force: true`.
+
+=== "External MongoDB"
+
+    Follow the procedure of your MongoDB provider to compact collections or to reclaim disk space.
