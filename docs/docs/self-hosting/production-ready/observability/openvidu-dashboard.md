@@ -274,12 +274,6 @@ Every list and every Analytics section can be taken out of the dashboard, to wor
 2. Copy the URL, or export the sections you are interested in.
 3. Select the second period. With both URLs open in two browser tabs you can compare them side by side, and with the exported workbooks you can chart them together.
 
-## Deployments using mediasoup
-
-OpenVidu Server reports no media statistics when it runs with the [mediasoup](../performance.md#limitations) RTC engine: there are no figures of data transferred, bitrate or quality for the rooms and participants of those media nodes. Everything else (rooms, participants, tracks, events, egresses and ingresses) is reported as with Pion.
-
-The dashboard keeps those figures and charts in place and marks them with a :material-alert-outline: icon that explains why they are empty, dimming them when there is no data at all. On the Analytics page and on the page of a media node, the icon tells whether none or only some of the servers of the range reported media statistics. In the Media nodes page, the **RTC engine** column tells which engine each media node runs.
-
 ## Settings
 
 - **Preferences**: theme, default time zone, default time range, rows per page and auto-refresh interval. They are stored in the browser.
