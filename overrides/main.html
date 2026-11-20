@@ -167,6 +167,11 @@
 <script src="{{ 'javascripts/lazy-video.js' | url }}"></script>
 {% endif %}
 
+{% if page.meta and page.meta.page_features and "meetlanding" in page.meta.page_features %}
+{# The Meet landing's security section: the left menu drives the screenshots on the right #}
+<script src="{{ 'javascripts/meet-landing.js' | url }}"></script>
+{% endif %}
+
 {% if page.meta and page.meta.page_features and "leadform" in page.meta.page_features %}
 <script src="{{ 'javascripts/lead-form.js' | url }}"></script>
 {% endif %}
@@ -238,6 +243,10 @@
 
 {% if page.meta.page_features and "Meet" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "meetlanding" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/meet-landing.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "setupcarousel" in page.meta.page_features %}

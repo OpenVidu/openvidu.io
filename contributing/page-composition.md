@@ -121,6 +121,12 @@ page, copy its feature keys too.** These are the keys currently used:
   content in `<div class="ov-landing" markdown>`; the sheet's resets are scoped to the
   components, so prose between them keeps Material's spacing.
 
+- `meetlanding`: the Meet landing only ([`meet/index.md`](../docs/meet/index.md)). Loads
+  [`meet-landing.css`](../docs/stylesheets/meet-landing.css) (the `.ovp-*` sections: two ways to
+  use it, use-case cards, the security rotator, the screenshot stages) after `meet.css`, and
+  [`meet-landing.js`](../docs/javascripts/meet-landing.js), which turns the `[data-ovp-rotator]`
+  block's left menu into the switch of the screenshots on its right.
+
 - `homestyles`: loads [`home.css`](../docs/stylesheets/home.css): the `.feature-cards`
   component with its `two-columns` / `three-columns` layouts (the `setupcardglow` cards) and
   the main landing's page-level rules (full-width column). It is linked after `landing.css`
