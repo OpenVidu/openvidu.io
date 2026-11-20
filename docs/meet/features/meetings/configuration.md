@@ -17,7 +17,7 @@ A few settings of a [room](../rooms/overview.md) shape every meeting held in it.
 !!! info
     The **Features** section of the same step toggles the in-meeting features that have their own page: [End-to-End Encryption](e2e-encryption.md), [Live Captions](live-captions.md), chat and [Virtual Backgrounds](virtual-background.md).
 
-    The **Room Access** step holds one more setting that shapes who enters every meeting: the [waiting room](waiting-room.md), the `waitingRoom` property of the room configuration, which makes participants ask to join and wait until a moderator admits them.
+    The **Room Access** step holds one more setting that shapes who enters every meeting: the [locked room](locked-room.md), the `lock` property of the room access settings, which makes participants ask to join and wait until a moderator admits them.
 
 ## Participant limit { #participant-limit }
 
@@ -50,5 +50,5 @@ All of these settings live in the room configuration, managed with the [OpenVidu
 
 | Operation          | HTTP Method | Reference                                                                                                                                             |
 | ------------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Get room config    | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomConfig){:target="_blank"}    |
-| Update room config | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomConfig){:target="_blank"} |
+| Get room config    | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomGetConfig){:target="_blank"}    |
+| Update room config | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateConfig){:target="_blank"} |

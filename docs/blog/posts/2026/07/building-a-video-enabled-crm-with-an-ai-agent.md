@@ -95,7 +95,8 @@ The agent read them, cloned the official tutorials for the exact API contracts, 
 
 This is how the three pieces fit together — your app server drives the Meet REST API, and the webcomponent turns each member's personal link into the meeting UI:
 
-![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture.svg "How the CRM, the browser and OpenVidu Meet fit together"){ loading=lazy }
+![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture-light.svg#only-light "How the CRM, the browser and OpenVidu Meet fit together"){ loading=lazy }
+![Architecture: the CRM server provisions rooms and members through the OpenVidu Meet REST API; the browser embeds the meeting with the webcomponent](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/architecture-dark.svg#only-dark "How the CRM, the browser and OpenVidu Meet fit together"){ loading=lazy }
 
 ![An issue with its planned and past meetings](/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png "Each issue tracks its meetings — with a Join button that opens the meeting in-app"){ .round-corners loading=lazy }
 

@@ -88,7 +88,8 @@ The OpenVidu Components Demo App architecture is divided into two main component
 * **frontend**: which is the client-side application built with Angular and OpenVidu Components.
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
-![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy }
+![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture-light.svg#only-light){ loading=lazy }
+![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture-dark.svg#only-dark){ loading=lazy }
 
 === ":simple-angular:{.icon .lg-icon .tab-icon} Demo App frontend"
 

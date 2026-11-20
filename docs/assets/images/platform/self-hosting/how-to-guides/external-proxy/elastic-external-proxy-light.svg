@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 580" width="720" height="580" role="img" aria-label="OpenVidu Elastic on premises with an external proxy: clients reach a Proxy Server over TLS (HTTPS/TURNS/RTMPS), the proxy forwards TCP (HTTP/TURN/RTMP) to the Master Node, the Master Node talks to a group of four Media Nodes, and clients send UDP (SRTP/SCTP/STUN/TURN) straight to the Media Nodes">
+<title>OpenVidu Elastic on premises with an external proxy: clients reach a Proxy Server over TLS (HTTPS/TURNS/RTMPS), the proxy forwards TCP (HTTP/TURN/RTMP) to the Master Node, the Master Node talks to a group of four Media Nodes, and clients send UDP (SRTP/SCTP/STUN/TURN) straight to the Media Nodes</title>
+<rect x="330" y="30" width="360" height="238" rx="24" fill="none" stroke="#4a5a60" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="510" y="56" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#4a5a60" text-anchor="middle">Media Nodes</text>
+<rect x="350" y="74" width="150" height="76" rx="18" fill="#005f78" />
+<text x="425" y="117.2" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Media Node</text>
+<rect x="520" y="74" width="150" height="76" rx="18" fill="#005f78" />
+<text x="595" y="117.2" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Media Node</text>
+<rect x="350" y="170" width="150" height="76" rx="18" fill="#005f78" />
+<text x="425" y="213.2" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Media Node</text>
+<rect x="520" y="170" width="150" height="76" rx="18" fill="#005f78" />
+<text x="595" y="213.2" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Media Node</text>
+<rect x="30" y="113" width="190" height="90" rx="18" fill="#101618" />
+<text x="125" y="163.6" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f4f6f7" text-anchor="middle">Master Node</text>
+<path d="M227 158 L323 158" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M330 158 L321.6 153.1 L321.6 162.9 Z" fill="#4a5a60" />
+<path d="M220 158 L228.4 153.1 L228.4 162.9 Z" fill="#4a5a60" />
+<rect x="240" y="440" width="240" height="110" rx="24" fill="none" stroke="#4a5a60" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="360" y="466" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#4a5a60" text-anchor="middle">Clients</text>
+<g transform="translate(270 482) scale(0.9)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="56" height="36" rx="5"/><path d="M20 46 h16 M28 36 v10"/></g>
+<g transform="translate(350 480) scale(0.9)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="22" height="40" rx="5"/><path d="M8 34 h6"/></g>
+<g transform="translate(395 486) scale(0.9)" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="0" width="48" height="30" rx="4"/><path d="M0 36 h60 l-2 4 h-56z"/></g>
+<rect x="30" y="300" width="190" height="80" rx="18" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="125" y="344.5" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#101618" text-anchor="middle">Proxy Server</text>
+<path d="M125 300 L125 210" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M125 203 L120.1 211.4 L129.9 211.4 Z" fill="#4a5a60" />
+<rect x="47.8" y="241" width="154.4" height="22" rx="11" fill="#e9eef0" />
+<text x="125" y="256" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#101618" text-anchor="middle">TCP (HTTP/TURN/RTMP)</text>
+<path d="M240 495 L125 495 L125 387" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M125 380 L120.1 388.4 L129.9 388.4 Z" fill="#4a5a60" />
+<rect x="37.6" y="407" width="174.9" height="22" rx="11" fill="#e9eef0" />
+<text x="125" y="422" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#101618" text-anchor="middle">TLS (HTTPS/TURNS/RTMPS)</text>
+<path d="M480 495 L510 495 L510 275" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M510 268 L505.1 276.4 L514.9 276.4 Z" fill="#4a5a60" />
+<rect x="429.4" y="353" width="161.2" height="37" rx="11" fill="#e9eef0" />
+<text x="510" y="368" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#101618" text-anchor="middle">UDP</text>
+<text x="510" y="383" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#101618" text-anchor="middle">(SRTP/SCTP/STUN/TURN)</text>
+</svg>

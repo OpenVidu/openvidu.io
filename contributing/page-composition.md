@@ -115,10 +115,22 @@ page, copy its feature keys too.** These are the keys currently used:
   [`overrides/partials/tabs.html`](../overrides/partials/tabs.html) from the nav item's
   page (or the first child of a nav group).
 
-- `homestyles`: loads [`home.css`](../docs/stylesheets/home.css) (the landing and Meet landing
-  pages only): the hero, the products section and the `.feature-cards` component with its
-  `two-columns` / `three-columns` layouts. It is linked before the product sheets, so `meet.css`
-  restyles those cards on the Meet landing by cascade order alone.
+- `landingstyles`: loads [`landing.css`](../docs/stylesheets/landing.css), the landing
+  components (`.ov-*`: hero, doors, cards, use-case picker with screenshot and feature pills, provider cards, stack diagram, deployment cards, edition plans, track record, success stories, code window, closing panel)
+  shared by the main landing, the Meet landing and the Platform landing. The page wraps its
+  content in `<div class="ov-landing" markdown>`; the sheet's resets are scoped to the
+  components, so prose between them keeps Material's spacing.
+
+- `meetlanding`: the Meet landing only ([`meet/index.md`](../docs/meet/index.md)). Loads
+  [`meet-landing.css`](../docs/stylesheets/meet-landing.css) (the `.ovp-*` sections: two ways to
+  use it, use-case cards, the security rotator, the screenshot stages) after `meet.css`, and
+  [`meet-landing.js`](../docs/javascripts/meet-landing.js), which turns the `[data-ovp-rotator]`
+  block's left menu into the switch of the screenshots on its right.
+
+- `homestyles`: loads [`home.css`](../docs/stylesheets/home.css): the `.feature-cards`
+  component with its `two-columns` / `three-columns` layouts (the `setupcardglow` cards) and
+  the main landing's page-level rules (full-width column). It is linked after `landing.css`
+  and before the product sheets, so `meet.css` can restyle by cascade order alone.
 
 - `Meet` / `Platform`: load [`meet.css`](../docs/stylesheets/meet.css) /
   [`platform.css`](../docs/stylesheets/platform.css) (each on top of the shared

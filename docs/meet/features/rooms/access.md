@@ -61,6 +61,12 @@ In addition to users added explicitly as room members, other users can also acce
 
 See the [Room Members](../room-members/overview.md) feature to add and manage users and identified guests, and the [Users](../users/overview.md) feature to manage the accounts themselves.
 
+## Locked room { #locked-room }
+
+An access link lets a participant reach the room. **Locking** the room adds one more step before they enter the meeting: whoever lacks the `accessBypassLock` permission **asks to join** and waits until a participant with `waitingParticipantAdmin` admits or rejects them. Admins and the room owner never wait.
+
+Lock a room from the **Room Access** step of the room wizard, or with the `access.lock` property of the REST API. See [Locked Room](../meetings/locked-room.md) for the whole feature.
+
 ## Predefined roles { #predefined-roles }
 
 Every room member has a role that determines their default set of permissions. The role comes from the link used (for anonymous guests) or from the base role assigned to the member (for users and identified guests).
@@ -73,7 +79,7 @@ Grants full meeting permissions by default:
 - **Recording control**: start and stop recordings, and list, play, download and delete them.
 - **Live broadcast control**: start and stop the [live broadcast](../meetings/live-broadcast.md) of the meeting to the room's destinations, and stream it to destinations the room does not have.
 - **Participant management**: promote other participants to moderator, [mute](../meetings/moderation.md) their microphone, camera or screen share, [lower their raised hands](../meetings/raise-hand.md#lowering-hands), kick them, and share room access links.
-- **Waiting room**: `waitingRoomBypass` to join [without waiting](../meetings/waiting-room.md#who-waits) and `waitingRoomAdmin` to [admit or reject](../meetings/waiting-room.md#admitting-and-rejecting) the participants who wait, in rooms that have the waiting room on.
+- **Locked room**: `accessBypassLock` to join a locked room [without waiting](../meetings/locked-room.md#who-waits) and `waitingParticipantAdmin` to [admit or reject](../meetings/locked-room.md#admitting-and-rejecting) the participants who wait.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 
@@ -83,7 +89,7 @@ Grants basic participation permissions by default:
 
 - **Meeting access**: join the meeting and read its live state.
 - **Recording access**: list, play and download the room's recordings — but not start, stop or delete them.
-- **Waiting room**: neither `waitingRoomBypass` nor `waitingRoomAdmin`, so in a room with the [waiting room](../meetings/waiting-room.md) on, a speaker asks to join and waits to be admitted.
+- **Locked room**: neither `accessBypassLock` nor `waitingParticipantAdmin`, so in a [locked room](../meetings/locked-room.md) a speaker asks to join and waits to be admitted.
 - **Media publishing**: publish video, audio, and share screen.
 - **Communication**: send chat messages and [reactions](../meetings/reactions.md), change virtual background.
 

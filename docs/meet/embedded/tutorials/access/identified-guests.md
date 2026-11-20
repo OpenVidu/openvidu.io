@@ -128,7 +128,7 @@ This endpoint adds the identified guest by sending a `POST` request to the `room
 
 !!! info
 
-    You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`addRoomMember` operation :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/addRoomMember){:target="_blank"} in the REST API reference for the full list of permissions.
+    You can fine-tune the member's permissions beyond the base role by including a `customPermissions` object in the request. See the [`roomAddMember` operation :fontawesome-solid-external-link:{.external-link-icon}](../../reference/api.html#/operations/roomAddMember){:target="_blank"} in the REST API reference for the full list of permissions.
 
 ---
 

@@ -41,7 +41,7 @@ page_features:
   <tr>
     <td class="first-column border-right">Price</td>
     <td class="border-right price-cell">Free</td>
-    <td colspan="3" class="border-right price-cell"><div><span style="font-weight: bold"><span style="font-family: system-ui; font-size: 1.3em">0.0006$</span> core/minute</span></div></td>
+    <td colspan="3" class="border-right price-cell"><div><span class="price-cell__pro"><span class="price-cell__amount">0.0006$</span> core/minute</span></div></td>
   </tr>
   <tr>
     <td class="first-column border-right">Type of deployment</td>
@@ -95,8 +95,8 @@ OpenVidu offers two solutions: **OpenVidu Meet** and **OpenVidu Platform**. They
 
 OpenVidu Pro follows a simple pricing model based on the number of cores used by the OpenVidu Pro cluster:
 
-<div class="pricing-text" style="text-align: center; font-size: 1.5em">
-<div class="pricing-quant" style="font-size: 3em; font-family: system-ui;">$0.0006</div>
+<div class="pricing-text">
+<div class="pricing-quant">$0.0006</div>
 per core per minute available<br>
 for your OpenVidu <span class="openvidu-tag openvidu-pro-tag">PRO</span> cluster
 </div>
@@ -168,7 +168,8 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 2 Media Nodes
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Diagram of an OpenVidu Elastic deployment with 12 cores in total](assets/images/pricing/elastic.svg){ .round-corners .dark-img loading=lazy }
+![Diagram of an OpenVidu Elastic deployment with 12 cores in total](assets/images/pricing/elastic-light.svg#only-light){ .round-corners loading=lazy }
+![Diagram of an OpenVidu Elastic deployment with 12 cores in total](assets/images/pricing/elastic-dark.svg#only-dark){ .round-corners loading=lazy }
 </div>
 
 ---
@@ -189,7 +190,8 @@ This OpenVidu Pro Elastic cluster has 1 Master Node of 4 cores and 4 Media Nodes
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Diagram of an OpenVidu Elastic deployment with 20 cores in total](assets/images/pricing/elastic-big.svg){ .round-corners .dark-img loading=lazy }
+![Diagram of an OpenVidu Elastic deployment with 20 cores in total](assets/images/pricing/elastic-big-light.svg#only-light){ .round-corners loading=lazy }
+![Diagram of an OpenVidu Elastic deployment with 20 cores in total](assets/images/pricing/elastic-big-dark.svg#only-dark){ .round-corners loading=lazy }
 </div>
 
 ---
@@ -210,7 +212,8 @@ This OpenVidu Pro HA cluster has 4 Master Nodes of 4 cores each and 4 Media Node
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Diagram of an OpenVidu High Availability deployment with 32 cores in total](assets/images/pricing/ha.svg){ .round-corners .dark-img loading=lazy }
+![Diagram of an OpenVidu High Availability deployment with 32 cores in total](assets/images/pricing/ha-light.svg#only-light){ .round-corners loading=lazy }
+![Diagram of an OpenVidu High Availability deployment with 32 cores in total](assets/images/pricing/ha-dark.svg#only-dark){ .round-corners loading=lazy }
 </div>
 
 ---
@@ -235,7 +238,8 @@ This OpenVidu Pro Elastic cluster takes advantage of the elasticity of the platf
 </div>
 
 <div class="grid-50 tablet-grid-50" markdown="span">
-![Diagram of an OpenVidu Elastic deployment with a variable number of cores](assets/images/pricing/elastic-variable.svg){ .round-corners .dark-img loading=lazy }
+![Diagram of an OpenVidu Elastic deployment with a variable number of cores](assets/images/pricing/elastic-variable-light.svg#only-light){ .round-corners loading=lazy }
+![Diagram of an OpenVidu Elastic deployment with a variable number of cores](assets/images/pricing/elastic-variable-dark.svg#only-dark){ .round-corners loading=lazy }
 </div>
 
 </div>

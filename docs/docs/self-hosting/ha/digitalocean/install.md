@@ -32,7 +32,8 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
