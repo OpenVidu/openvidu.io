@@ -13,19 +13,23 @@ For working examples, see the [recording tutorials](../tutorials/advanced-featur
 
 ## Egress types
 
-Five request types, each starting a different kind of export:
+Six kinds of export. Each has its own request type, except the last one, which is a Participant request with the `PASSTHROUGH` preset:
 
-| Type | SDK method | What it produces |
-| --- | --- | --- |
-| **Room Composite** | [`StartRoomCompositeEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startroomcompositeegress){:target="_blank"} | One output with every participant composited in a layout. The usual choice for "record the meeting". It follows the Room, stopping on its own when the Room ends |
-| **Web** | [`StartWebEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startwebegress){:target="_blank"} | One output from an arbitrary web page URL, rather than from a Room. Nothing stops it but you |
-| **Participant** | [`StartParticipantEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/participant/){:target="_blank"} | One output per participant, identified by `identity`. It waits for them to publish, copes with tracks being muted or unpublished, and stops when they leave. Set `screen_share` to capture their screen share instead of their camera |
-| **Track Composite** | [`StartTrackCompositeEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#starttrackcompositeegress){:target="_blank"} | One output combining a chosen audio track and video track, selected by track id. Both must already be published when the Egress starts |
-| **Track** | [`StartTrackEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#starttrackegress){:target="_blank"} | One output per individual track, written without transcoding |
+| Type | SDK method | Transcoding | What it produces |
+| --- | --- | --- | --- |
+| **Room Composite** | [`StartRoomCompositeEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startroomcompositeegress){:target="_blank"} | Yes | One output with every participant composited in a layout. The usual choice for "record the meeting". It follows the Room, stopping on its own when the Room ends |
+| **Web** | [`StartWebEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startwebegress){:target="_blank"} | Yes | One output from an arbitrary web page URL, rather than from a Room. Nothing stops it but you |
+| **Participant** | [`StartParticipantEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/participant/){:target="_blank"} | Yes | One output per participant, identified by `identity`. It waits for them to publish, copes with tracks being muted or unpublished, and stops when they leave. Set `screen_share` to capture their screen share instead of their camera |
+| **Track Composite** | [`StartTrackCompositeEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#starttrackcompositeegress){:target="_blank"} | Yes | One output combining a chosen audio track and video track, selected by track id. Both must already be published when the Egress starts |
+| **Track** | [`StartTrackEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#starttrackegress){:target="_blank"} | No | One output per individual track, written without transcoding |
+| **Participant Passthrough** | [`StartParticipantEgress` + preset `PASSTHROUGH`](#participant-passthrough-egress) | No | Up to three `.webm` or `.mkv` files per participant holding every track they publish, written without transcoding and honoring track synchronization. It follows the participant like Participant Egress does |
 
 !!! warning "Egress and transcoding"
 
-    Egress is a heavy operation. It consumes lots of CPU, many orders of magnitude more CPU cycles than the rooms themselves. **Track Egress** is the only type that does not transcode: it directly dumps the published track to the server as-is. Use it if possible to reduce hardware requirements.
+    There are two kinds of Egress: the ones that transcode, and the ones that don't transcode:
+    
+      - **Room Composite**, **Web**, **Participant** and **Track Composite** transcode: they decode the published tracks, compose them and encode the result again. This is a heavy operation, many orders of magnitude more CPU cycles than the Rooms themselves, and it is what sizes the hardware of an Egress deployment.
+      - **Track Egress** and **Participant Passthrough Egress** do not transcode: they write the tracks to the output as published, at a small fraction of the cost. Use them when possible to maximize recording capacity.
 
 ## Starting an Egress
 
@@ -251,10 +255,11 @@ Egress can write to files, push RTMP and SRT streams, generate HLS segments and 
 
 A transcoded Egress encodes once and fans out, so a single request can write a file, push a stream and generate thumbnails at the same time. Which outputs are available depends on the type of egress:
 
-| Egress type | File | HLS segments | RTMP / SRT stream | Images | WebSocket |
+| Egress type | File | HLS segments | RTMP / SRT stream | Images (thumbnails) | WebSocket |
 | --- | :---: | :---: | :---: | :---: | :---: |
 | Room Composite, Web, Participant, Track Composite | ✅ | ✅ | ✅ | ✅ | |
 | Track | ✅ (pass-through, as published) | | | | ✅ (audio only) |
+| Participant Passthrough | ✅ (up to three files, as published) | | | | |
 
 Set one or more of these fields on the start egress request:
 
@@ -269,7 +274,7 @@ Set one or more of these fields on the start egress request:
 
 </div>
 
-Each list holds a single item: one Egress cannot write two files, but it can write a file *and* HLS segments *and* a stream. Track Egress is the exception, taking neither these lists nor encoding options, just a `file` ([`DirectFileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#directfileoutput){:target="_blank"}) or a `websocket_url`.
+Each list holds a single item: one Egress cannot write two files, but it can write a file *and* HLS segments *and* a stream. Track Egress is the exception, taking neither these lists nor encoding options, just a `file` ([`DirectFileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#directfileoutput){:target="_blank"}) or a `websocket_url`. [Participant Passthrough Egress](#participant-passthrough-egress) takes only `file_outputs`, with a single entry of the default file type.
 
 Because Track Egress never transcodes, the container follows the codec the track was published with: MP4 for H.264, WebM for VP8 and Ogg for Opus. With a `websocket_url` instead of a file, an audio track is streamed to a server of yours as raw `pcm_s16le` binary frames, with JSON text frames such as `{"muted": true}` reporting track events. The connection closes when the track is unpublished.
 
@@ -283,20 +288,21 @@ Both accept template variables, though not every variable makes sense for every 
 
 | Variable | Value | Available in |
 | --- | --- | --- |
-| `{room_name}` | Name of the Room | Room Composite, Participant, Track Composite, Track |
-| `{room_id}` | Unique id of the Room | Room Composite, Participant, Track Composite, Track |
-| `{time}` | Timestamp of when the recording started | Room Composite, Web, Participant, Track Composite, Track |
-| `{publisher_identity}` | Identity of the participant publishing the track | Participant, Track Composite, Track |
+| `{room_name}` | Name of the Room | Room Composite, Participant, Participant Passthrough, Track Composite, Track |
+| `{room_id}` | Unique id of the Room | Room Composite, Participant, Participant Passthrough, Track Composite, Track |
+| `{time}` | Timestamp of when the recording started | Room Composite, Web, Participant, Participant Passthrough, Track Composite, Track |
+| `{publisher_identity}` | Identity of the participant publishing the track | Participant, Participant Passthrough, Track Composite, Track |
 | `{track_id}` | Unique id of the track | Track |
 | `{track_type}` | `audio` or `video` | Track |
 | `{track_source}` | Source of the track, such as `camera` or `microphone` | Track |
 
 </div>
 
-Two notes:
+Three notes:
 
 - With no filename, you get `{room_name}-{time}`.
 - A value ending in `/` is treated as a directory, and the default filename is appended inside it.
+- Participant Passthrough Egress always replaces the extension with `.webm` or `.mkv`, and names its extra files by adding `-screen` and `-other` to the filename. See [Recording files](#recording-files).
 
 Some examples of how the template variables are expanded:
 
@@ -321,7 +327,7 @@ Stream outputs push RTMP or SRT. URLs can be added to and removed from a running
 
 ## Encoding
 
-All Egress types that require transcoding (Room Composite, Web, Participant, Track Composite) can define their resolution, framerate, codecs, bitrates and more. When calling the start Egress operation, you can set encoding options in two ways:
+All Egress types that require transcoding (Room Composite, Web, Participant, Track Composite) can define their resolution, framerate, codecs, bitrates and more. Track Egress and [Participant Passthrough Egress](#participant-passthrough-egress) take no encoding options, since they write the tracks as published. When calling the start Egress operation, you can set encoding options in two ways:
 
 - Using a preset: field `preset` of type [`EncodingOptionsPreset` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#encodingoptionspreset){:target="_blank"}.
 - Explicitly: field `advanced` of type [`EncodingOptions` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#encodingoptions){:target="_blank"}.
@@ -903,6 +909,377 @@ A Room can record itself from the moment it is created, with no call to the Egre
 
 Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](../self-hosting/how-to-guides/enable-webhooks.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](../troubleshooting/recording.md) when auto egress does not produce the expected output.
 
+## Participant Passthrough Egress
+
+!!! info "Participant Passthrough Egress is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../pricing.md#openvidu-pro) edition."
+
+**Participant Passthrough Egress** allows recording a Participant without transcoding. It brings the benefits of *Track Egress* (extremely light in terms of CPU usage) and the benefits of *Participant Egress* (syncs multiple tracks of a participant into a single file).
+
+Participant Passthrough Egress follows the participant activity: waits for them to publish, copes with tracks being muted, unpublished and published again, stops when they leave. But instead of decoding, compositing and encoding their media again, it writes every track exactly as published into video files that share one timeline. It costs a small fraction of the CPU of a transcoding Egress, and the files play directly in a browser.
+
+For a single composited video, an RTMP/SRT stream, and HLS playlist or thumbnails, use one of the [transcoding Egress types](#egress-types) instead. If you only need one specific track, with no synchronization with the participant's other tracks, Track Egress is enough.
+
+The request for a Participant Passthrough Egress is a regular [`StartParticipantEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startparticipantegress){:target="_blank"} with `preset` set to `PASSTHROUGH` and a single `file_outputs` entry of the default file type. The example below records participant `alice` of Room `my-room`:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
+
+    ```javascript
+    import { EgressClient, EncodedFileOutput, EncodingOptionsPreset } from 'livekit-server-sdk';
+
+    const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const fileOutput = new EncodedFileOutput({
+      filepath: 'recordings/alice.webm'
+    });
+
+    const egressInfo = await egressClient.startParticipantEgress('my-room', 'alice', { file: fileOutput }, {
+      encodingOptions: EncodingOptionsPreset.PASSTHROUGH
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    egressInfo, err := egressClient.StartParticipantEgress(context.Background(), &livekit.ParticipantEgressRequest{
+        RoomName: "my-room",
+        Identity: "alice",
+        Options: &livekit.ParticipantEgressRequest_Preset{
+            Preset: livekit.EncodingOptionsPreset_PASSTHROUGH,
+        },
+        FileOutputs: []*livekit.EncodedFileOutput{{
+            Filepath: "recordings/alice.webm",
+        }},
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    ```ruby
+    require 'livekit'
+
+    egress_client = LiveKit::EgressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    output = LiveKit::Proto::EncodedFileOutput.new(
+      filepath: "recordings/alice.webm"
+    )
+    egress_info = egress_client.start_participant_egress(
+      "my-room",
+      "alice",
+      output,
+      preset: LiveKit::Proto::EncodingOptionsPreset::PASSTHROUGH
+    )
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+
+    ```java
+    import io.livekit.server.EgressServiceClient;
+    import io.livekit.server.EncodedOutputs;
+    import livekit.LivekitEgress;
+
+    EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    LivekitEgress.EncodedFileOutput fileOutput = LivekitEgress.EncodedFileOutput.newBuilder()
+            .setFilepath("recordings/alice.webm")
+            .build();
+    EncodedOutputs outputs = new EncodedOutputs(fileOutput, null, null, null);
+
+    LivekitEgress.EgressInfo egressInfo = egressClient
+            .startParticipantEgress("my-room", "alice", outputs, false,
+                    LivekitEgress.EncodingOptionsPreset.PASSTHROUGH)
+            .execute().body();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    egress_info = await lkapi.egress.start_participant_egress(
+        api.ParticipantEgressRequest(
+            room_name="my-room",
+            identity="alice",
+            preset=api.EncodingOptionsPreset.PASSTHROUGH,
+            file_outputs=[api.EncodedFileOutput(
+                filepath="recordings/alice.webm",
+            )],
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
+
+    The Rust SDK sends explicit encoding options only, never a preset, so it cannot request `PASSTHROUGH`. Call the Egress API directly instead, as in the Server API tab.
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    ```php
+    <?php
+    use Agence104\LiveKit\EgressServiceClient;
+    use Livekit\EncodedFileOutput;
+    use Livekit\EncodingOptionsPreset;
+
+    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $fileOutput = new EncodedFileOutput([
+        'filepath' => 'recordings/alice.webm',
+    ]);
+    $egressInfo = $egressClient->startParticipantEgress('my-room', 'alice', $fileOutput, EncodingOptionsPreset::PASSTHROUGH);
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var request = new ParticipantEgressRequest
+    {
+        RoomName = "my-room",
+        Identity = "alice",
+        Preset = EncodingOptionsPreset.Passthrough,
+    };
+    request.FileOutputs.Add(new EncodedFileOutput
+    {
+        Filepath = "recordings/alice.webm",
+    });
+    EgressInfo egressInfo = await egressClient.StartParticipantEgress(request);
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two options:
+
+    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartParticipantEgress` is a POST to `/twirp/livekit.Egress/StartParticipantEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+
+        ```bash
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartParticipantEgress' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "room_name": "my-room",
+                "identity": "alice",
+                "preset": "PASSTHROUGH",
+                "file_outputs": [
+                  { "filepath": "recordings/alice.webm" }
+                ]
+              }'
+        ```
+
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
+
+        Create a file at `egress.json` with the following content:
+
+        ```json
+        {
+          "room_name": "my-room",
+          "identity": "alice",
+          "preset": "PASSTHROUGH",
+          "file_outputs": [
+            {
+              "filepath": "recordings/alice.webm"
+            }
+          ]
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=api-secret
+
+        lk egress start --type participant egress.json
+        ```
+
+### Recording files
+
+Participants can publish as many tracks as they want. So Participant Passthrough Egress groups them in up to 3 separate files:
+
+| File | Name | Holds |
+| --- | --- | --- |
+| **Camera** |`{filepath}.webm` | The camera and microphone tracks |
+| **Screen** | `{filepath}-screen.webm` | The screen share track, and its audio track if available |
+| **Other** | `{filepath}-other.webm` | Any other track |
+
+Each file is created on demand as tracks reach the server. The resulting [`EgressInfo`](#egressinfo) object will contain in its `fileResults` field the created files.
+
+- A participant with a camera and a microphone produces one file `{filepath}.webm`.
+- Only if the participant publishes a screen share track, file `{filepath}-screen.webm` is created.
+- Only if any other extra track is published and it does not fit the camera or screen files, file `{filepath}-other.webm` is created. This includes:
+    - A second camera, microphone or screen track published **while the first is still published**.
+    - A new camera, microphone or screen track that replaces a previous one, but has **a different codec**. Tracks that are muted-unmuted, or republished again with the same codec, keep their place in their file.
+    - Any track with **`UNKNOWN` as `TrackSource`** (see below).
+
+!!! warning "How Participant Passthrough Egress identifies track types"
+    
+    Track types are identified by their [`TrackSource` field :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#tracksource){:target="_blank"}. This field is automatically set by all LiveKit client SDKs when publishing tracks, but it can also be overwritten manually. With Participant Passthrough Egress, the recording file in which each track will end up depends on this `TrackSource` field. Keep this in mind in your client logic when publishing tracks.
+
+The resulting files of Participant Passthrough Egress may have 2 different extensions: `.webm` or `.mkv`. Extensions cannot be configured on-demand: they are automatically assigned by the Egress service.
+
+- `.webm`: WebM files are a natural fit for WebRTC and directly playable by browsers. It is automatically selected when video codec VP8, VP9 or AV1 and audio codec OPUS are received.
+- `.mkv`: MKV multimedia container is a superset of WebM. It replaces WebM when video codec H.264 or audio codec G.711 are received.
+
+### Manifest file
+
+A manifest file named **`<egress_id>.json`** and placed next to the recording files lists all the files and tracks generated by the Participant Passthrough Egress. It includes start and end times for each track, so you can align different tracks and participants when replaying or post-processing.
+
+For example, below is the manifest of participant `alice` who joined with a microphone and a VP8 camera, shared the screen 5 seconds later and, 10 seconds in, replaced the camera with an H.264 one:
+
+```json
+{
+  "egress_id": "EG_H6jJwvWk99vs",
+  "room_id": "RM_HBog6ZkND3QC",
+  "room_name": "my-room",
+  "started_at": 1793040422232000000,
+  "ended_at": 1793040437732000000,
+  "publisher_identity": "alice",
+  "tracks": [
+    {
+      "group": "camera",
+      "file": "recordings/alice.webm",
+      "number": 1,
+      "kind": "audio",
+      "codec": "A_OPUS",
+      "source": "microphone",
+      "default": true,
+      "track_ids": ["TR_AMeheVigB8wYYr"],
+      "start_ms": 0,
+      "end_ms": 15000,
+      "first_frame_at": 1793040422532000000,
+      "last_frame_at": 1793040437532000000
+    },
+    {
+      "group": "camera",
+      "file": "recordings/alice.webm",
+      "number": 2,
+      "kind": "video",
+      "codec": "V_VP8",
+      "source": "camera",
+      "default": true,
+      "track_ids": ["TR_VCTvgyD3UtUSDJ"],
+      "start_ms": 200,
+      "end_ms": 9900,
+      "first_frame_at": 1793040422732000000,
+      "last_frame_at": 1793040432432000000
+    },
+    {
+      "group": "screen",
+      "file": "recordings/alice-screen.webm",
+      "number": 1,
+      "kind": "video",
+      "codec": "V_VP8",
+      "source": "screen_share",
+      "default": true,
+      "track_ids": ["TR_VS8hC7T5ZrCGjq"],
+      "start_ms": 0,
+      "end_ms": 9960,
+      "first_frame_at": 1793040427532000000,
+      "last_frame_at": 1793040437492000000
+    },
+    {
+      "group": "other",
+      "file": "recordings/alice-other.mkv",
+      "number": 1,
+      "kind": "video",
+      "codec": "V_MPEG4/ISO/AVC",
+      "source": "camera",
+      "default": true,
+      "track_ids": ["TR_VC3Jxgmn5Fcu2Q"],
+      "start_ms": 0,
+      "end_ms": 4980,
+      "first_frame_at": 1793040432532000000,
+      "last_frame_at": 1793040437512000000
+    }
+  ],
+  "files": [
+    {
+      "filename": "recordings/alice.webm",
+      "location": "https://my-s3-endpoint/my-bucket/recordings/alice.webm"
+    },
+    {
+      "filename": "recordings/alice-screen.webm",
+      "location": "https://my-s3-endpoint/my-bucket/recordings/alice-screen.webm"
+    },
+    {
+      "filename": "recordings/alice-other.mkv",
+      "location": "https://my-s3-endpoint/my-bucket/recordings/alice-other.mkv"
+    }
+  ]
+}
+```
+
+<div class="nowrap-first-column" markdown>
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `tracks` | list of [Track entry](#track-entry) | One entry per track of each file |
+| `files` | list of [File entry](#file-entry) | The files produced, in the same order as `fileResults` |
+
+</div>
+
+#### Track entry
+
+<div class="nowrap-first-column" markdown>
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `group` | string | The file the track is in: `camera`, `screen` or `other`. With `screen_share` set, every track is in `{filepath}` and its group is `screen` |
+| `file` | string | The `filename` of that file in `files` |
+| `number` | uint64 | Position of the track in its file |
+| `kind` | string | `audio` or `video` |
+| `codec` | string | Matroska codec ID, such as `V_VP8` or `A_OPUS` |
+| `source` | string | `camera`, `microphone`, `screen_share`, `screen_share_audio` or `unknown` |
+| `default` | bool | Whether players show the track by default |
+| `track_ids` | list of string | The LiveKit tracks that wrote to it, in order. More than one if the participant published the track again with the same codec |
+| `start_ms` | int64 | First frame of the track in the file's own time, in milliseconds. The file's time starts at 0 with its first frame |
+| `end_ms` | int64 | Last frame of the track in the file's own time, in milliseconds |
+| `first_frame_at` | int64 | The first frame on the wall clock, in nanoseconds like `started_at`. The instant the file starts is `first_frame_at` minus `start_ms` × 1,000,000, which is how files line up |
+| `last_frame_at` | int64 | The last frame on the wall clock, in nanoseconds |
+
+</div>
+
+#### File entry
+
+<div class="nowrap-first-column" markdown>
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `filename` | string | The storage path of the file |
+| `location` | string | The URL of the file in the storage |
+
+</div>
+
 ## Egress lifecycle
 
 ### Managing a running Egress
@@ -949,7 +1326,7 @@ The fields that matter most while an application is running:
 - `egressId`: the identifier every operation above takes.
 - `status`: where the Egress is in its lifecycle. See [below](#status).
 - `startedAt`, `endedAt` and `updatedAt`: timestamps in **nanoseconds** (divide by 1,000,000 for milliseconds).
-- `fileResults`, `streamResults`, `segmentResults` and `imageResults`: one entry per output, carrying the final location, size and duration of what was produced.
+- `fileResults`, `streamResults`, `segmentResults` and `imageResults`: one entry per output, carrying the final location, size and duration of what was produced. A Participant Passthrough Egress has one `fileResults` entry per file it produced.
 - `error`, `errorCode` and `details`: populated when something went wrong.
 - `backupStorageUsed`: the output was written to the node's disk instead of the upload target.
 
