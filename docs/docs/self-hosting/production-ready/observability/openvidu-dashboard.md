@@ -325,6 +325,8 @@ Every deletion keeps the data of the rooms in progress, the data that ended in t
 
 A deletion runs in the background, in batches that leave room for the writes of OpenVidu Server, and only one runs at a time. It goes on if you close the browser: the tab shows its progress, and a banner on the other pages says it is running. Once it ends, the tab shows when each class was deleted. If the dashboard stops in the middle of a deletion, the deletion is marked as interrupted and what it deleted stays deleted: start it again to finish.
 
+In OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, once a deletion ends, the details of a room, participant session, track, egress or ingress whose events, statistics, tracks or subscriptions it removed say so above the empty timeline, charts or tracks section, with the date the deletion finished and a link to the **Data** tab, so that an empty section is not taken for a room without activity.
+
 After an upgrade from a version before 3.10, the **Legacy data** row deletes the analytics data that OpenVidu Server keeps for a rollback, before its date. Its two collections are dropped and their disk space is freed at once, and a rollback to the previous version finds no analytics data. The dialog of the **Total** row offers to delete it as well.
 
 OpenVidu deployments include MongoDB 8.0. With an [external MongoDB](../../how-to-guides/external-mongodb.md), deleting statistics needs MongoDB 7.0 or later, because they are stored in a time-series collection.
