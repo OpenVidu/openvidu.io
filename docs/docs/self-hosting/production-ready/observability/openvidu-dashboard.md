@@ -283,7 +283,7 @@ OpenVidu Server writes the analytics data the dashboard shows to MongoDB, in its
 - **Statistics** every 30 seconds: quality score, bytes, packets, loss, jitter and round-trip time. OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } stores them per participant and direction, and OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag } per track, which the track panel needs.
 - **Rollups** every 5 minutes, hour and day, which the Analytics page and the Overview read.
 
-Credentials such as TURN passwords, storage keys, stream keys or tokens in URLs are never stored. Client IP addresses are stored only when `anonymize_ip` is set to `false`, and room and participant metadata only when `store_metadata` is enabled.
+Credentials such as TURN passwords, storage keys, stream keys or tokens in URLs are never stored. Client IP addresses are stored only when `anonymize_ip` is set to `false`, and room and participant metadata only when `store_metadata` is enabled. The analytics data kept from a version before 3.10 is the exception: see [Personal data](#personal-data).
 
 When the end of a room, participant session, egress or ingress session never arrives (for example, because a node crashed), OpenVidu Server closes it itself with an estimated end time: participants within about two minutes, and rooms once the cluster has given up on their node. The dashboard marks these entities as estimated.
 
@@ -374,3 +374,101 @@ Repeat it for each collection of the deleted classes. The statistics collection,
 === "External MongoDB"
 
     Follow the procedure of your MongoDB provider to compact collections or to reclaim disk space.
+
+### Personal data
+
+The analytics data describes the people who use your applications, so the MongoDB of your deployment holds personal data about them. OpenVidu does not receive any of it: it stays in your deployment, and you decide how long it is kept and who can see it. If your organization keeps a record of the personal data it processes, or tells its users what it stores about them, this section lists what to include.
+
+| Data | What it holds about a person | Kept by default |
+| --- | --- | --- |
+| Participant sessions | Identity and name, room name, join and leave times, how the session ended, region, connection type (UDP, TCP or TURN), SDK, operating system, browser and device model with their versions, and the quality of the connection | 90 days |
+| Rooms | The room name, which your application chooses and may contain the name of a person or a customer | 90 days |
+| Egresses | The room name, the identity of the recorded participant if there is one, and the file names and storage paths of the outputs, which often contain the room name | 90 days |
+| Ingresses and ingress sessions | The ingress name, the room name, and the identity and name of the participant the ingress publishes as | 90 days |
+| Tracks and subscriptions | The identity of each publisher, and which participants received each track and when | 7 days |
+| Events | The identity, the room name and the content of each event | 7 days |
+| Statistics | Connection quality every 30 seconds, linked to a participant session | 7 days |
+| Rollups | Counts and totals only, such as the number of participants or of distinct identities in a day. They name no one | 7 days, 400 days or forever |
+
+**Identities and names come from your application.** OpenVidu stores the identity and name that your application gives each participant. With OpenVidu Meet, the name is the one the participant joins with, and the identity is the member or user ID of the room member when it has one, or otherwise a value made from the name. In your own application, prefer an opaque ID as the identity rather than an email address or an employee number: the dashboard works just as well, and it stores less about each person.
+
+**Two settings store more.** With `anonymize_ip: false`, each participant's IP address is stored as well. With `store_metadata: true`, the metadata and attributes your application sets on rooms and participants are stored as they are, whatever they contain. Both are off by default.
+
+**Shortening the retention.** Each [retention](#retention) can be shortened in `livekit.yaml`. Participant sessions and the other entities are kept for at least 2 days, which OpenVidu Server needs to count the distinct identities of each day. A shorter `entities` or `tracks` retention applies only to what closes after the restart: to remove older data at once, delete it from the **Data** tab of [Settings](#settings).
+
+**One person's data.** The **Data** tab deletes a class of data up to the current time, for everyone. To find or delete the data of one person, for example to answer a request from that person, connect with `mongosh` as explained in [Freeing disk space](#freeing-disk-space) and run the following with the identity they had in your application. In a High Availability deployment, connect to the primary member: `rs.status()` tells which one it is.
+
+```javascript
+const identity = "<IDENTITY>";
+const closed = { expiresAt: { $ne: null } };
+const sids = db.participants.distinct("_id", { identity });
+const closedSids = db.participants.distinct("_id", { ...closed, identity });
+const activeSids = db.participants.distinct("_id", { identity, expiresAt: null });
+
+// Where an egress request can name the person: in events under "payload.egress.request", in egresses under "rawRequest"
+const requestPaths = ["participant.identity",
+  "egress.source.media.video.participant_video.identity", "egress.source.media.audio.routes.match.participant_identity",
+  "replay.source.media.video.participant_video.identity", "replay.source.media.audio.routes.match.participant_identity"];
+const events = { $or: [{ participantSid: { $in: sids } },
+  ...["identity", "payload.participant.identity", "payload.publisher.identity", "payload.ingress.participant_identity",
+    ...requestPaths.map((path) => "payload.egress.request." + path)].map((path) => ({ [path]: identity }))] };
+const egresses = { $or: [{ "request.participantIdentity": identity },
+  ...requestPaths.map((path) => ({ ["rawRequest." + path]: identity }))] };
+
+// List what is stored about this identity
+db.participants.find({ identity });
+db.tracks.find({ participantSid: { $in: sids } });
+db.track_subscriptions.find({ $or: [{ subscriberSid: { $in: sids } }, { publisherSid: { $in: sids } }] });
+db.events.find(events);
+db.egresses.find(egresses);
+db.ingresses.find({ participantIdentity: identity });
+db.ingress_sessions.find({ participantIdentity: identity });
+db.rooms.find({ "internal.identities": identity }, { name: 1, createdAt: 1 });
+
+// Delete it, except what belongs to something still in progress: a session, a recording or an ingress
+const inProgress = [
+  { participantSid: { $in: activeSids } },
+  { "payload.publisher.sid": { $in: activeSids } },
+  { egressId: { $in: db.egresses.distinct("_id", { expiresAt: null }) } },
+  { ingressSessionId: { $in: db.ingress_sessions.distinct("_id", { expiresAt: null }) } },
+  { ingressSessionId: null, ingressId: { $in: db.ingresses.distinct("_id", { expiresAt: null }) } }
+];
+db.events.deleteMany({ $and: [events, { $nor: inProgress }] });
+db.track_stats.deleteMany({ "meta.participantSid": { $in: closedSids } });
+db.track_subscriptions.deleteMany({ $and: [closed, { $or: [{ subscriberSid: { $in: closedSids } }, { publisherSid: { $in: closedSids } }] }] });
+db.tracks.deleteMany({ ...closed, participantSid: { $in: closedSids } });
+db.egresses.deleteMany({ $and: [closed, egresses] });
+db.ingress_sessions.deleteMany({ ...closed, participantIdentity: identity });
+db.ingresses.deleteMany({ ...closed, participantIdentity: identity });
+db.participants.deleteMany({ ...closed, identity });
+// Rooms keep their counts: the identity is replaced by an anonymous value, except where the person is still connected
+db.rooms.updateMany(
+  { "internal.identities": identity, _id: { $nin: db.participants.distinct("roomSid", { identity, expiresAt: null }) } },
+  { $set: { "internal.identities.$": "deleted-" + new ObjectId() } });
+
+// Data of a version before 3.10, kept for some days after an upgrade to roll back (legacy_events and stats)
+const legacySids = [...new Set([...sids, ...db.legacy_events.distinct("participant.sid", { "participant.identity": identity })])];
+db.legacy_events.deleteMany({ $or: [
+  { participant_id: { $in: legacySids } }, { "participant.sid": { $in: legacySids } }, { "webhook.participant_id": { $in: legacySids } },
+  ...["participant.identity", "publisher.identity", "ingress.participant_identity", "webhook.participant_identity",
+    "egress.Request.Participant.identity"].map((path) => ({ [path]: identity }))] });
+db.getCollection("stats").deleteMany({ participant_id: { $in: legacySids } });
+```
+
+The script keeps what belongs to something still in progress: a session the person is still connected to, or a recording or an ingress that is still running. Run it again once they have ended.
+
+Rooms are not deleted, because they hold data about everyone who took part. The script lists the rooms the person took part in and replaces their identity in them with an anonymous value, so the counts of those rooms stay right. The room name stays as it is: if it contains the person's name, look for it with `db.rooms.find({ nameLower: /<name>/ })`. The rollups keep their counts, which name no one.
+
+After an upgrade from a version before 3.10, the script also deletes the person's data that OpenVidu Server keeps from that version for a rollback.
+
+**Who can see it.** Anyone with the dashboard's administrator credentials can see every room and participant session that is retained and export it. The dashboard has a single administrator account and does not log who viewed or exported what, so share those credentials only with the people who need them.
+
+**Copies that retention does not reach.** Retention and deletions act on the MongoDB of your deployment only. They do not reach:
+
+- the files exported from the dashboard (see [Exporting data](#exporting-data));
+- backups or snapshots of your MongoDB or its disks;
+- the analytics data of a version before 3.10, which OpenVidu Server keeps for a rollback after an upgrade. It was written before `anonymize_ip` applied to it, so it may contain client IP addresses. Delete it from the **Legacy data** row of the **Data** tab once you no longer need to roll back.
+
+With an [external MongoDB](../../how-to-guides/external-mongodb.md), the data is stored by whoever runs that database.
+
+None of this data is sent to OpenVidu.
