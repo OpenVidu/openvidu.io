@@ -118,7 +118,7 @@ page_features:
       <span class="ovp-case__more">Embed it in your patient portal<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
       <img class="ovp-case__shot skip-gallery" src="/assets/images/home/use-cases/telehealth.webp" alt="A telehealth consultation: the doctor and the patient on camera, a shared X-ray on screen and the session notes beside it" width="1920" height="994" loading="lazy" />
     </a>
-    <a class="ovp-case ovp-case--green" href="/meet/getting-started/">
+    <a class="ovp-case ovp-case--green" href="/meet/deployment/overview/">
       <span class="ovp-case__tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"></path><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v6"></path></svg>Online classes</span>
       <span class="ovp-case__title">A classroom with recording and raised hands.</span>
       <span class="ovp-case__more">Run your first class<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
@@ -234,17 +234,11 @@ page_features:
 
 <div class="grid cards ov-cards" data-sal="slide-up" markdown>
 
--   :material-cursor-default-click:{ .feature-icon } __One-click video calls__{ .feature-name }
+-   :material-lock-outline:{ .feature-icon } __Locked rooms__{ .feature-name }
 
     ---
 
-    Share meeting links so anyone can instantly join your video calls from any browser, with no downloads or setup.
-
--   :material-video-4k-box:{ .feature-icon } __Up to 4K video and HiFi audio__{ .feature-name }
-
-    ---
-
-    Enjoy up to 4K video quality and crystal-clear audio enhanced with noise cancellation and echo suppression.
+    Guests wait until a moderator admits them, from the meeting, the REST API or your own app.
 
 -   :material-monitor-share:{ .feature-icon } __Screen Sharing__{ .feature-name }
 
@@ -293,6 +287,18 @@ page_features:
     ---
 
     Access a wide range of speech-to-text providers for accurate and flexible real-time transcription.
+
+-   :material-shield-lock-outline:{ .feature-icon } __End-to-end encryption__{ .feature-name }
+
+    ---
+
+    Only participants with the room key see and hear the meeting. Not even your server can.
+
+-   :material-view-dashboard-outline:{ .feature-icon } __Smart layout__{ .feature-name }
+
+    ---
+
+    A video grid that adapts to the active speakers and the number of participants.
 
 -   :octicons-broadcast-24:{ .feature-icon } __Live broadcasting__{ .feature-name }
 

@@ -51,7 +51,7 @@
 .ovp-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
 .md-typeset .ov-landing .ovp-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .md-typeset .ov-landing .ovp-points li { margin: 0; padding: 14px 16px; border-radius: 16px; border: 1px solid transparent; transition: background 0.3s, border-color 0.3s; }
-.md-typeset .ov-landing .ovp-points li.is-active { background: var(--ov-surface); border-color: var(--ov-border); box-shadow: inset 4px 0 0 var(--ov-meet-accent); }
+.md-typeset .ov-landing .ovp-points li.is-active { background: var(--ov-surface); border-color: var(--ov-border); }
 .md-typeset .ov-landing .ovp-points button { display: grid; grid-template-columns: 44px 1fr; gap: 16px; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
 .ovp-points__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: rgba(var(--ov-meet-accent-rgb), 0.18); color: var(--ov-meet-primary); }
 [data-md-color-scheme="slate"] .ovp-points__icon { color: var(--ov-meet-accent); }
