@@ -29,7 +29,13 @@ Upgrading OpenVidu High Availability is very simple. These are the steps you nee
     sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
     ```
 
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`), or, from OpenVidu 3.10 on, with a minor version (e.g. `3.10`) to upgrade to its latest patch release.
+
+    To only apply the latest patch release of the version you have installed (for example, from `3.x.0` to `3.x.2`), add `--latest-patch`. This option is available from OpenVidu 3.10.0:
+
+    ```
+    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh) --latest-patch
+    ```
 
 3. In all the nodes, you will see the following output:
 
@@ -53,7 +59,7 @@ Upgrading OpenVidu High Availability is very simple. These are the steps you nee
       No
     ```
 
-4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
+4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence. From OpenVidu 3.10.0 on, the updater only goes through the latest patch release of each intermediate minor version.
 
     For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
 
