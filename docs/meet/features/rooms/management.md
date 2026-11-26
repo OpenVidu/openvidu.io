@@ -66,7 +66,7 @@ Managers can **close** or **reopen** a room at any time from the **"Rooms"** pag
 
 ## List & filter rooms { #list-rooms }
 
-The **"Rooms"** page lists every room available to you, with its owner, status, creation date and auto-deletion date. From here you can:
+The **"Rooms"** page lists every room available to you, with its owner, status, creation date and auto-deletion date. Above the list it shows how many of those rooms there are in total, in a meeting now, open and closed, and how many reach their auto-deletion date within the next 7 days, naming the first of them. Selecting one of the status figures filters the list by that status, and selecting it again clears the filter. From here you can:
 
 - **Search and filter** rooms by name, status, owner, membership or whether they are open to all OpenVidu Meet users.
 - **Copy the room ID**, the identifier the [REST API](#rest-api-reference) and the webhooks refer to the room by.

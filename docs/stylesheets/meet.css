@@ -209,12 +209,13 @@ li:has(.coming-soon-overlay)::after {
   white-space: nowrap;
   min-width: fit-content;
   width: auto;
+  transition: opacity 0.3s ease;
 }
 
 /* Estimated release date (month and year) replaces the generic label
    when the feature card also carries an .eta-YYYY-MM class */
-li:has(.coming-soon-overlay.eta-2026-12)::after {
-  content: 'December 2026';
+li:has(.coming-soon-overlay.eta-2027-01)::after {
+  content: 'January 2027';
 }
 
 li:has(.coming-soon-overlay.eta-2027-q1)::after {
@@ -228,8 +229,7 @@ li:has(.coming-soon-overlay):hover::before{
 }
 
 li:has(.coming-soon-overlay):hover::after {
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  opacity: 0.2;
 }
 
 .commercial-code-blocks code {
