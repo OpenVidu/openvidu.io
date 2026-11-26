@@ -31,7 +31,7 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 !!! info
     
-    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy, or, from OpenVidu 3.10 on, with a minor version (e.g. `3.10`) to deploy its latest patch release. For example, to deploy version `3.9.0`, use the following URL:
 
     ```
     https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.9.0/aws/cf-openvidu-elastic.yaml
