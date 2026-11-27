@@ -84,9 +84,9 @@ page_features:
   </div>
   <p class="ov-shared__proof"><span class="ov-shared__quote">“Privacy was one of our most important selection criteria.”</span> <span class="ov-shared__by">Janne Sikiö, CEO at Dicode.</span> <a href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Why GDPR and EU data residency decided it for Dicode →</a></p>
   <div class="ov-shared__grid">
-    <div class="ov-shared__item"><span class="ov-shared__title">Any cloud</span><span class="ov-shared__text">AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises.</span></div>
-    <div class="ov-shared__item"><span class="ov-shared__title">LiveKit compatible</span><span class="ov-shared__text">Familiar APIs and SDKs, with mediasoup at the core.</span></div>
-    <div class="ov-shared__item"><span class="ov-shared__title">Open source</span><span class="ov-shared__text">COMMUNITY is free under Apache 2.0. PRO when you scale.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">Any infra or cloud</span><span class="ov-shared__text">On-premises in your own hardware, or in any cloud: AWS, Azure, GCP, DigitalOcean, OCI.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">LiveKit compatible</span><span class="ov-shared__text">Familiar APIs and SDKs, with the power of mediasoup at the core.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">Open source</span><span class="ov-shared__text">COMMUNITY is free under Apache-2.0. PRO when you scale.</span></div>
     <div class="ov-shared__item"><span class="ov-shared__title">Made in Europe</span><span class="ov-shared__text">Built in Madrid, Spain, by a company that answers to EU law.</span></div>
   </div>
 </section>
