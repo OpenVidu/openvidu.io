@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 200" width="1010" height="200" role="img" aria-label="Scale down: as demand drops, three servers become two and then one">
+<title>Scale down: as demand drops, three servers become two and then one</title>
+<rect x="20" y="46" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="32" cy="61" r="3" fill="#f4f6f7" />
+<path d="M86 56 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 61 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 66 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="20" y="81" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="32" cy="96" r="3" fill="#f4f6f7" />
+<path d="M86 91 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 96 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 101 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="20" y="116" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="32" cy="131" r="3" fill="#f4f6f7" />
+<path d="M86 126 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 131 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 136 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="134" y="46" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="146" cy="61" r="3" fill="#f4f6f7" />
+<path d="M200 56 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 61 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 66 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="134" y="81" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="146" cy="96" r="3" fill="#f4f6f7" />
+<path d="M200 91 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 96 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 101 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="134" y="116" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="146" cy="131" r="3" fill="#f4f6f7" />
+<path d="M200 126 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 131 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 136 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="248" y="46" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="260" cy="61" r="3" fill="#f4f6f7" />
+<path d="M314 56 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 61 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 66 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="248" y="81" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="260" cy="96" r="3" fill="#f4f6f7" />
+<path d="M314 91 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 96 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 101 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="248" y="116" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="260" cy="131" r="3" fill="#f4f6f7" />
+<path d="M314 126 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 131 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 136 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M366 96 L484 96" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M492 96 L482.4 90.4 L482.4 101.6 Z" fill="#4a5a60" />
+<text x="429" y="80" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#101618" text-anchor="middle">Low Demand</text>
+<rect x="514" y="46" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="526" cy="61" r="3" fill="#f4f6f7" />
+<path d="M580 56 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 61 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 66 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="514" y="81" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="526" cy="96" r="3" fill="#f4f6f7" />
+<path d="M580 91 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 96 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 101 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="514" y="116" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="526" cy="131" r="3" fill="#f4f6f7" />
+<path d="M580 126 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 131 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 136 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="628" y="46" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="640" cy="61" r="3" fill="#f4f6f7" />
+<path d="M694 56 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 61 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 66 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="628" y="81" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="640" cy="96" r="3" fill="#f4f6f7" />
+<path d="M694 91 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 96 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 101 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="628" y="116" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="640" cy="131" r="3" fill="#f4f6f7" />
+<path d="M694 126 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 131 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 136 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M746 96 L864 96" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M872 96 L862.4 90.4 L862.4 101.6 Z" fill="#4a5a60" />
+<text x="809" y="80" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#101618" text-anchor="middle">Low Demand</text>
+<rect x="894" y="46" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="906" cy="61" r="3" fill="#f4f6f7" />
+<path d="M960 56 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M960 61 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M960 66 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="894" y="81" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="906" cy="96" r="3" fill="#f4f6f7" />
+<path d="M960 91 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M960 96 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M960 101 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="894" y="116" width="96" height="30" rx="7" fill="#101618" />
+<circle cx="906" cy="131" r="3" fill="#f4f6f7" />
+<path d="M960 126 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M960 131 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M960 136 h18" fill="none" stroke="#f4f6f7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<text x="505" y="193" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="20" font-weight="700" fill="#4a5a60" text-anchor="middle">Scale Down</text>
+</svg>

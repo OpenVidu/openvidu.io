@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1238 170" width="1238" height="170" role="img" aria-label="Draining strategy: on scale-in, one of three servers is marked DRAINING and keeps serving its meeting; it is removed only when the meeting has finished, leaving two servers">
+<title>Draining strategy: on scale-in, one of three servers is marked DRAINING and keeps serving its meeting; it is removed only when the meeting has finished, leaving two servers</title>
+<rect x="20" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="32" cy="61" r="3" fill="#0f1517" />
+<path d="M86 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="20" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="32" cy="96" r="3" fill="#0f1517" />
+<path d="M86 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="20" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="32" cy="131" r="3" fill="#0f1517" />
+<path d="M86 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M86 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="134" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="146" cy="61" r="3" fill="#0f1517" />
+<path d="M200 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="134" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="146" cy="96" r="3" fill="#0f1517" />
+<path d="M200 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="134" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="146" cy="131" r="3" fill="#0f1517" />
+<path d="M200 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M200 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="248" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="260" cy="61" r="3" fill="#0f1517" />
+<path d="M314 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="248" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="260" cy="96" r="3" fill="#0f1517" />
+<path d="M314 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="248" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="260" cy="131" r="3" fill="#0f1517" />
+<path d="M314 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M314 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M366 96 L484 96" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M492 96 L482.4 90.4 L482.4 101.6 Z" fill="#a3b1b6" />
+<text x="429" y="80" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="middle">Scale-in</text>
+<rect x="514" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="526" cy="61" r="3" fill="#0f1517" />
+<path d="M580 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="514" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="526" cy="96" r="3" fill="#0f1517" />
+<path d="M580 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="514" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="526" cy="131" r="3" fill="#0f1517" />
+<path d="M580 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M580 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="628" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="640" cy="61" r="3" fill="#0f1517" />
+<path d="M694 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="628" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="640" cy="96" r="3" fill="#0f1517" />
+<path d="M694 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="628" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="640" cy="131" r="3" fill="#0f1517" />
+<path d="M694 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M694 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="742" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="754" cy="61" r="3" fill="#0f1517" />
+<path d="M808 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M808 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M808 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="742" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="754" cy="96" r="3" fill="#0f1517" />
+<path d="M808 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M808 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M808 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="742" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="754" cy="131" r="3" fill="#0f1517" />
+<path d="M808 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M808 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M808 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="747.4" y="11" width="85.2" height="26" rx="13" fill="#ffcc00" />
+<text x="790" y="29.4" font-family="Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#1f1800" text-anchor="middle">DRAINING</text>
+<path d="M860 96 L978 96" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M986 96 L976.4 90.4 L976.4 101.6 Z" fill="#a3b1b6" />
+<text x="923" y="59" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="middle">Meeting</text>
+<text x="923" y="80" font-family="Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="600" fill="#eef2f3" text-anchor="middle">finished</text>
+<rect x="1008" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="1020" cy="61" r="3" fill="#0f1517" />
+<path d="M1074 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1074 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1074 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1008" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="1020" cy="96" r="3" fill="#0f1517" />
+<path d="M1074 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1074 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1074 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1008" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="1020" cy="131" r="3" fill="#0f1517" />
+<path d="M1074 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1074 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1074 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1122" y="46" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="1134" cy="61" r="3" fill="#0f1517" />
+<path d="M1188 56 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1188 61 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1188 66 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1122" y="81" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="1134" cy="96" r="3" fill="#0f1517" />
+<path d="M1188 91 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1188 96 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1188 101 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1122" y="116" width="96" height="30" rx="7" fill="#eef2f3" />
+<circle cx="1134" cy="131" r="3" fill="#0f1517" />
+<path d="M1188 126 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1188 131 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1188 136 h18" fill="none" stroke="#0f1517" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
