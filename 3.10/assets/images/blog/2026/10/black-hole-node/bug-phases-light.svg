@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 1248" width="920" height="1248" role="img" aria-label="How a full disk made OpenVidu route every recording to the one node that couldn&#x27;t record, in six phases: healthy cluster, media-node-1 disk fills up, the paradox (score 1.0), every recording goes to node 1, every recording fails with EGRESS_FAILED, and the fix (a min_disk_space_mb check makes node 1 reject work so egress flows to the healthy nodes)">
+<title>How a full disk made OpenVidu route every recording to the one node that couldn&#x27;t record, in six phases: healthy cluster, media-node-1 disk fills up, the paradox (score 1.0), every recording goes to node 1, every recording fails with EGRESS_FAILED, and the fix (a min_disk_space_mb check makes node 1 reject work so egress flows to the healthy nodes)</title>
+<text x="20" y="38" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="22" font-weight="800" fill="#101618" text-anchor="start">How a full disk made OpenVidu route every recording</text>
+<text x="20" y="66" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="22" font-weight="800" fill="#101618" text-anchor="start">to the one node that couldn&#x27;t record</text>
+<text x="20" y="92" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="start">Egress node selection uses a &quot;cpuload&quot; affinity score: the node reporting the most free CPU wins.</text>
+<text x="20" y="111" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="start">The phases of the bug.</text>
+<rect x="20" y="132" width="430" height="352" rx="22" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="50" cy="164" r="13" fill="#ffcc00" />
+<text x="50" y="169" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">1</text>
+<text x="72" y="170" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#101618" text-anchor="start">Healthy cluster</text>
+<rect x="130" y="190" width="210" height="32" rx="16" fill="#005f78" />
+<text x="235" y="211" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Egress router · cpuload</text>
+<path d="M235 222 L235 238 L100 238 L100 251" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M100 258 L95.1 249.6 L104.9 249.6 Z" fill="#4a5a60" />
+<path d="M235 222 L235 251" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M235 258 L230.1 249.6 L239.9 249.6 Z" fill="#4a5a60" />
+<path d="M235 222 L235 238 L370 238 L370 251" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M370 258 L365.1 249.6 L374.9 249.6 Z" fill="#4a5a60" />
+<rect x="38" y="260" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="100" y="282" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-1</text>
+<text x="50" y="300" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="50" y="306" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="50" y="306" width="38" height="7" rx="3.5" fill="#005f78" />
+<text x="50" y="328" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="50" y="334" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="50" y="334" width="70" height="7" rx="3.5" fill="#005f78" />
+<rect x="79.8" y="346.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="100" y="362.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.7</text>
+<text x="100" y="386" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#007a3d" text-anchor="middle">recording ✓</text>
+<rect x="173" y="260" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="235" y="282" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-2</text>
+<text x="185" y="300" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="185" y="306" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="185" y="306" width="42" height="7" rx="3.5" fill="#005f78" />
+<text x="185" y="328" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="185" y="334" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="185" y="334" width="70" height="7" rx="3.5" fill="#005f78" />
+<rect x="214.8" y="346.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="235" y="362.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.7</text>
+<text x="235" y="386" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#007a3d" text-anchor="middle">recording ✓</text>
+<rect x="308" y="260" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="370" y="282" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-3</text>
+<text x="320" y="300" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="320" y="306" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="320" y="306" width="46" height="7" rx="3.5" fill="#005f78" />
+<text x="320" y="328" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="320" y="334" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="320" y="334" width="60" height="7" rx="3.5" fill="#005f78" />
+<rect x="349.8" y="346.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="370" y="362.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.6</text>
+<text x="370" y="386" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#007a3d" text-anchor="middle">recording ✓</text>
+<path d="M40 418 H430" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="235" y="440" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">Recordings are spread evenly across the media</text>
+<text x="235" y="458" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">nodes. Everyone is working, so scores stay</text>
+<text x="235" y="476" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">similar and balanced.</text>
+<rect x="470" y="132" width="430" height="352" rx="22" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="500" cy="164" r="13" fill="#ffcc00" />
+<text x="500" y="169" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">2</text>
+<text x="522" y="170" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#101618" text-anchor="start">media-node-1 disk fills up</text>
+<rect x="580" y="190" width="210" height="32" rx="16" fill="#005f78" />
+<text x="685" y="211" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Egress router · cpuload</text>
+<path d="M685 222 L685 238 L550 238 L550 251" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M550 258 L545.1 249.6 L554.9 249.6 Z" fill="#4a5a60" />
+<path d="M685 222 L685 251" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M685 258 L680.1 249.6 L689.9 249.6 Z" fill="#4a5a60" />
+<path d="M685 222 L685 238 L820 238 L820 251" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M820 258 L815.1 249.6 L824.9 249.6 Z" fill="#4a5a60" />
+<rect x="488" y="260" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="550" y="282" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-1</text>
+<text x="500" y="300" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="500" y="306" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="500" y="306" width="100" height="7" rx="3.5" fill="#d93025" />
+<text x="550" y="328" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#d93025" text-anchor="middle">100% FULL</text>
+<text x="500" y="346" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="500" y="352" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="500" y="352" width="70" height="7" rx="3.5" fill="#005f78" />
+<rect x="529.8" y="364.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="550" y="380.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.7</text>
+<rect x="623" y="260" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="685" y="282" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-2</text>
+<text x="635" y="300" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="635" y="306" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="635" y="306" width="42" height="7" rx="3.5" fill="#005f78" />
+<text x="635" y="328" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="635" y="334" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="635" y="334" width="70" height="7" rx="3.5" fill="#005f78" />
+<rect x="664.8" y="346.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="685" y="362.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.7</text>
+<rect x="758" y="260" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="820" y="282" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-3</text>
+<text x="770" y="300" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="770" y="306" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="770" y="306" width="46" height="7" rx="3.5" fill="#005f78" />
+<text x="770" y="328" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="770" y="334" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="770" y="334" width="60" height="7" rx="3.5" fill="#005f78" />
+<rect x="799.8" y="346.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="820" y="362.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.6</text>
+<path d="M490 418 H880" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="685" y="440" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">The recording temp disk on node 1 runs out of</text>
+<text x="685" y="458" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">space. It can no longer START any new egress.</text>
+<rect x="20" y="504" width="430" height="352" rx="22" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="50" cy="536" r="13" fill="#ffcc00" />
+<text x="50" y="541" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">3</text>
+<text x="72" y="542" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#101618" text-anchor="start">The paradox</text>
+<rect x="130" y="562" width="210" height="32" rx="16" fill="#005f78" />
+<text x="235" y="583" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Egress router · cpuload</text>
+<path d="M235 594 L235 610 L100 610 L100 623" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M100 630 L95.1 621.6 L104.9 621.6 Z" fill="#4a5a60" />
+<path d="M235 594 L235 623" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M235 630 L230.1 621.6 L239.9 621.6 Z" fill="#4a5a60" />
+<path d="M235 594 L235 610 L370 610 L370 623" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M370 630 L365.1 621.6 L374.9 621.6 Z" fill="#4a5a60" />
+<rect x="38" y="632" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="100" y="654" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-1</text>
+<text x="50" y="672" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="50" y="678" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="50" y="678" width="100" height="7" rx="3.5" fill="#d93025" />
+<text x="100" y="700" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">0 active egress</text>
+<text x="100" y="715" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">→ CPU looks free</text>
+<rect x="54" y="729" width="92" height="26" rx="13" fill="#ffcc00" />
+<text x="100" y="746" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#1f1800" text-anchor="middle">score 1.0 ★</text>
+<rect x="173" y="632" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="235" y="654" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-2</text>
+<text x="185" y="672" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="185" y="678" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="185" y="678" width="42" height="7" rx="3.5" fill="#005f78" />
+<text x="235" y="700" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">busy recording</text>
+<text x="185" y="718" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="185" y="724" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="185" y="724" width="70" height="7" rx="3.5" fill="#005f78" />
+<rect x="214.8" y="736.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="235" y="752.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.7</text>
+<rect x="308" y="632" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="370" y="654" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-3</text>
+<text x="320" y="672" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="320" y="678" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="320" y="678" width="42" height="7" rx="3.5" fill="#005f78" />
+<text x="370" y="700" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">busy recording</text>
+<text x="320" y="718" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">score</text>
+<rect x="320" y="724" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="320" y="724" width="60" height="7" rx="3.5" fill="#005f78" />
+<rect x="349.8" y="736.5" width="40.3" height="23" rx="11.5" fill="#e9eef0" />
+<text x="370" y="752.3" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" font-weight="500" fill="#101618" text-anchor="middle">0.6</text>
+<path d="M40 790 H430" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="235" y="812" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">Because node 1 runs 0 recordings, it reports</text>
+<text x="235" y="830" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">maximum free CPU → the highest affinity score.</text>
+<text x="235" y="848" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">It looks &quot;least loaded&quot;.</text>
+<rect x="470" y="504" width="430" height="352" rx="22" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="500" cy="536" r="13" fill="#ffcc00" />
+<text x="500" y="541" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">4</text>
+<text x="522" y="542" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#101618" text-anchor="start">Every recording goes to node 1</text>
+<rect x="580" y="562" width="210" height="32" rx="16" fill="#005f78" />
+<text x="685" y="583" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Egress router · cpuload</text>
+<path d="M685 594 L685 610 L550 610 L550 623" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M550 630 L545.1 621.6 L554.9 621.6 Z" fill="#4a5a60" />
+<rect x="488" y="632" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="550" y="654" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-1</text>
+<text x="500" y="672" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="500" y="678" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="500" y="678" width="100" height="7" rx="3.5" fill="#d93025" />
+<text x="550" y="700" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#d93025" text-anchor="middle">ALL egress</text>
+<text x="550" y="715" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#d93025" text-anchor="middle">here</text>
+<rect x="504" y="729" width="92" height="26" rx="13" fill="#ffcc00" />
+<text x="550" y="746" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#1f1800" text-anchor="middle">score 1.0 ★</text>
+<rect x="623.8" y="632.8" width="122.5" height="138.5" rx="14" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-dasharray="5 5" />
+<text x="685" y="654" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#8a979c" text-anchor="middle">media-node-2</text>
+<text x="685" y="756" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#8a979c" text-anchor="middle">idle</text>
+<rect x="758.8" y="632.8" width="122.5" height="138.5" rx="14" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-dasharray="5 5" />
+<text x="820" y="654" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#8a979c" text-anchor="middle">media-node-3</text>
+<text x="820" y="756" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#8a979c" text-anchor="middle">idle</text>
+<path d="M490 790 H880" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="685" y="812" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">The affinity keeps picking node 1 for every new</text>
+<text x="685" y="830" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">recording. The healthy nodes sit idle.</text>
+<rect x="20" y="876" width="430" height="352" rx="22" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="50" cy="908" r="13" fill="#ffcc00" />
+<text x="50" y="913" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">5</text>
+<text x="72" y="914" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#101618" text-anchor="start">…and every recording fails</text>
+<rect x="130" y="934" width="210" height="32" rx="16" fill="#005f78" />
+<text x="235" y="955" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Egress router · cpuload</text>
+<path d="M235 966 L235 982 L100 982 L100 995" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M100 1002 L95.1 993.6 L104.9 993.6 Z" fill="#4a5a60" />
+<rect x="38" y="1004" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="100" y="1026" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-1</text>
+<path d="M95.2 1037.2 l9.6 9.6 M104.8 1037.2 l-9.6 9.6" fill="none" stroke="#d93025" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="100" y="1066" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="600" fill="#d93025" text-anchor="middle">EGRESS_FAILED</text>
+<text x="100" y="1085" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">no space left</text>
+<text x="100" y="1100" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">on device</text>
+<rect x="173.8" y="1004.8" width="122.5" height="138.5" rx="14" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-dasharray="5 5" />
+<text x="235" y="1026" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#8a979c" text-anchor="middle">media-node-2</text>
+<text x="235" y="1128" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#8a979c" text-anchor="middle">idle</text>
+<rect x="308.8" y="1004.8" width="122.5" height="138.5" rx="14" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-dasharray="5 5" />
+<text x="370" y="1026" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#8a979c" text-anchor="middle">media-node-3</text>
+<text x="370" y="1128" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#8a979c" text-anchor="middle">idle</text>
+<path d="M40 1162 H430" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="235" y="1184" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">Node 1 can&#x27;t write, so it dies with ENOSPC. From</text>
+<text x="235" y="1202" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">the user&#x27;s side, the whole cluster stops recording.</text>
+<rect x="470" y="876" width="430" height="352" rx="22" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="500" cy="908" r="13" fill="#ffcc00" />
+<text x="500" y="913" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">6</text>
+<text x="522" y="914" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#101618" text-anchor="start">The fix</text>
+<rect x="580" y="934" width="210" height="32" rx="16" fill="#005f78" />
+<text x="685" y="955" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">Egress router · cpuload</text>
+<path d="M685 966 L685 982 L550 982 L550 995" fill="none" stroke="#8a979c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6" />
+<path d="M550 1002 L545.1 993.6 L554.9 993.6 Z" fill="#8a979c" />
+<path d="M685 966 L685 995" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M685 1002 L680.1 993.6 L689.9 993.6 Z" fill="#4a5a60" />
+<path d="M685 966 L685 982 L820 982 L820 995" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M820 1002 L815.1 993.6 L824.9 993.6 Z" fill="#4a5a60" />
+<rect x="488" y="1004" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="550" y="1026" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-1</text>
+<text x="500" y="1044" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="500" y="1050" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="500" y="1050" width="100" height="7" rx="3.5" fill="#d93025" />
+<text x="550" y="1072" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="500" fill="#4a5a60" text-anchor="middle">rejects up front</text>
+<rect x="504" y="1086" width="92" height="26" rx="13" fill="none" stroke="#d93025" stroke-width="1.5" />
+<text x="550" y="1103" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#d93025" text-anchor="middle">reason: disk</text>
+<rect x="623" y="1004" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="685" y="1026" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-2</text>
+<text x="635" y="1044" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="635" y="1050" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="635" y="1050" width="42" height="7" rx="3.5" fill="#005f78" />
+<text x="685" y="1130" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#007a3d" text-anchor="middle">recording ✓</text>
+<rect x="758" y="1004" width="124" height="140" rx="14" fill="#e9eef0" />
+<text x="820" y="1026" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#101618" text-anchor="middle">media-node-3</text>
+<text x="770" y="1044" font-family="Instrument Sans, system-ui, sans-serif" font-size="11" font-weight="500" fill="#4a5a60" text-anchor="start">disk</text>
+<rect x="770" y="1050" width="100" height="7" rx="3.5" fill="#d9e0e3" />
+<rect x="770" y="1050" width="42" height="7" rx="3.5" fill="#005f78" />
+<text x="820" y="1130" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="700" fill="#007a3d" text-anchor="middle">recording ✓</text>
+<path d="M490 1162 H880" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="685" y="1184" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">A disk-space check (min_disk_space_mb) makes</text>
+<text x="685" y="1202" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">node 1 refuse work, so egress flows to the</text>
+<text x="685" y="1220" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle">healthy nodes again.</text>
+</svg>

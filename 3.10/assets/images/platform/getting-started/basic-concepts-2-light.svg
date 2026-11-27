@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420" role="img" aria-label="Room &quot;Remote support&quot;: Dan publishes nothing and receives every track; Erin receives only Mic from Carol">
+<title>Room &quot;Remote support&quot;: Dan publishes nothing and receives every track; Erin receives only Mic from Carol</title>
+<defs>
+<marker id="blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#005f78" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#e5484d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#06d362" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="20" y="20" width="680" height="300" rx="28" fill="#e9eef0" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="360" y="62" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="24" font-weight="700" fill="#101618" text-anchor="middle" >Room "Remote support"</text>
+<rect x="44" y="90" width="200" height="200" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="144" y="124" font-family="Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="600" fill="#101618" text-anchor="middle" >Participant "Carol"</text>
+<rect x="64" y="146" width="160" height="36" rx="10" fill="#101618" />
+<text x="144.0" y="169" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#f4f6f7" text-anchor="middle" >Track "Screen"</text>
+<rect x="64" y="200" width="160" height="36" rx="10" fill="#101618" />
+<text x="144.0" y="223" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#f4f6f7" text-anchor="middle" >Track "Mic"</text>
+<rect x="260" y="90" width="200" height="200" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="360" y="124" font-family="Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="600" fill="#101618" text-anchor="middle" >Participant "Dan"</text>
+<text x="360" y="196" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle" >no tracks published</text>
+<rect x="476" y="90" width="200" height="200" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<text x="576" y="124" font-family="Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="600" fill="#101618" text-anchor="middle" >Participant "Erin"</text>
+<rect x="496" y="146" width="160" height="36" rx="10" fill="#101618" />
+<text x="576.0" y="169" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#f4f6f7" text-anchor="middle" >Track "Mic"</text>
+<path d="M200 182 L200 340 L330 340 L330 296" fill="none" stroke="#e5484d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#red)" />
+<path d="M130 236 L130 360 L360 360 L360 296" fill="none" stroke="#005f78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)" />
+<path d="M130 360 L130 360 M360 360 L560 360 L560 296" fill="none" stroke="#005f78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)" />
+<path d="M620 182 L620 385 L390 385 L390 296" fill="none" stroke="#06d362" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#green)" />
+<path d="M390 385 L80 385 L80 296" fill="none" stroke="#06d362" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#green)" />
+<text x="360" y="410" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="middle" >Arrows: who receives which track</text>
+</svg>

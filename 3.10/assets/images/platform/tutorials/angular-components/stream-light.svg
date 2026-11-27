@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" width="720" height="540" role="img" aria-label="OpenVidu Components Angular layout: video area, side panel and toolbar, highlighting every participant stream in the layout">
+<title>OpenVidu Components Angular layout: video area, side panel and toolbar, highlighting every participant stream in the layout</title>
+<rect x="10" y="10" width="700" height="520" rx="32" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<rect x="30" y="30" width="480" height="380" rx="22" fill="#e9eef0" stroke="#d9e0e3" stroke-width="1.5" />
+<rect x="50" y="50" width="210" height="160" rx="14" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<g transform="translate(145.1 129.4) scale(0.6)" opacity="0.55"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<g transform="translate(159.4 137.1) scale(0.6)" opacity="1"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<defs><clipPath id="clip-stream-t0-light"><rect x="50" y="50" width="210" height="160" rx="14" fill="#000" /></clipPath></defs>
+<rect x="50" y="50" width="210" height="160" rx="14" fill="#ffcc00" opacity="0.2" />
+<g clip-path="url(#clip-stream-t0-light)"><path d="M-110 210 L50 50 M-88 210 L72 50 M-66 210 L94 50 M-44 210 L116 50 M-22 210 L138 50 M0 210 L160 50 M22 210 L182 50 M44 210 L204 50 M66 210 L226 50 M88 210 L248 50 M110 210 L270 50 M132 210 L292 50 M154 210 L314 50 M176 210 L336 50 M198 210 L358 50 M220 210 L380 50 M242 210 L402 50" fill="none" stroke="#ffcc00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" /></g>
+<rect x="51.2" y="51.2" width="207.6" height="157.6" rx="13" fill="none" stroke="#ffcc00" stroke-width="3" stroke-dasharray="9 6" />
+<rect x="280" y="50" width="210" height="160" rx="14" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<g transform="translate(375.1 129.4) scale(0.6)" opacity="0.55"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<g transform="translate(389.4 137.1) scale(0.6)" opacity="1"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<defs><clipPath id="clip-stream-t1-light"><rect x="280" y="50" width="210" height="160" rx="14" fill="#000" /></clipPath></defs>
+<rect x="280" y="50" width="210" height="160" rx="14" fill="#ffcc00" opacity="0.2" />
+<g clip-path="url(#clip-stream-t1-light)"><path d="M120 210 L280 50 M142 210 L302 50 M164 210 L324 50 M186 210 L346 50 M208 210 L368 50 M230 210 L390 50 M252 210 L412 50 M274 210 L434 50 M296 210 L456 50 M318 210 L478 50 M340 210 L500 50 M362 210 L522 50 M384 210 L544 50 M406 210 L566 50 M428 210 L588 50 M450 210 L610 50 M472 210 L632 50" fill="none" stroke="#ffcc00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" /></g>
+<rect x="281.2" y="51.2" width="207.6" height="157.6" rx="13" fill="none" stroke="#ffcc00" stroke-width="3" stroke-dasharray="9 6" />
+<rect x="50" y="230" width="210" height="160" rx="14" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<g transform="translate(145.1 309.4) scale(0.6)" opacity="0.55"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<g transform="translate(159.4 317.1) scale(0.6)" opacity="1"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<defs><clipPath id="clip-stream-t2-light"><rect x="50" y="230" width="210" height="160" rx="14" fill="#000" /></clipPath></defs>
+<rect x="50" y="230" width="210" height="160" rx="14" fill="#ffcc00" opacity="0.2" />
+<g clip-path="url(#clip-stream-t2-light)"><path d="M-110 390 L50 230 M-88 390 L72 230 M-66 390 L94 230 M-44 390 L116 230 M-22 390 L138 230 M0 390 L160 230 M22 390 L182 230 M44 390 L204 230 M66 390 L226 230 M88 390 L248 230 M110 390 L270 230 M132 390 L292 230 M154 390 L314 230 M176 390 L336 230 M198 390 L358 230 M220 390 L380 230 M242 390 L402 230" fill="none" stroke="#ffcc00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" /></g>
+<rect x="51.2" y="231.2" width="207.6" height="157.6" rx="13" fill="none" stroke="#ffcc00" stroke-width="3" stroke-dasharray="9 6" />
+<rect x="280" y="230" width="210" height="160" rx="14" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<g transform="translate(375.1 309.4) scale(0.6)" opacity="0.55"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<g transform="translate(389.4 317.1) scale(0.6)" opacity="1"><circle cx="0" cy="-26" r="17" fill="#8a979c"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#8a979c"/></g>
+<defs><clipPath id="clip-stream-t3-light"><rect x="280" y="230" width="210" height="160" rx="14" fill="#000" /></clipPath></defs>
+<rect x="280" y="230" width="210" height="160" rx="14" fill="#ffcc00" opacity="0.2" />
+<g clip-path="url(#clip-stream-t3-light)"><path d="M120 390 L280 230 M142 390 L302 230 M164 390 L324 230 M186 390 L346 230 M208 390 L368 230 M230 390 L390 230 M252 390 L412 230 M274 390 L434 230 M296 390 L456 230 M318 390 L478 230 M340 390 L500 230 M362 390 L522 230 M384 390 L544 230 M406 390 L566 230 M428 390 L588 230 M450 390 L610 230 M472 390 L632 230" fill="none" stroke="#ffcc00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" /></g>
+<rect x="281.2" y="231.2" width="207.6" height="157.6" rx="13" fill="none" stroke="#ffcc00" stroke-width="3" stroke-dasharray="9 6" />
+<rect x="530" y="30" width="160" height="380" rx="16" fill="#e9eef0" stroke="#d9e0e3" stroke-width="1.5" />
+<path d="M10 424 L710 424" fill="none" stroke="#d9e0e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<g transform="translate(36 458) scale(1)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<circle cx="173" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="221" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="269" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="317" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<rect x="350" y="461" width="56" height="32" rx="8" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="575" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="623" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+<circle cx="671" cy="477" r="19" fill="none" stroke="#8a979c" stroke-width="1.8" />
+</svg>
