@@ -63,7 +63,7 @@ page_features:
 
 <section class="ov-wrap ov-section ov-shared" aria-labelledby="data-sovereignty" data-sal="slide-up">
   <h2 class="ov-h2" id="data-sovereignty">Self-hosted means <span class="ov-mark">sovereign.</span></h2>
-  <p class="ov-lead">Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.</p>
+  <p class="ov-lead">OpenVidu Meet and OpenVidu Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.</p>
   <div class="ov-grid ov-grid--3 ov-shared__pillars">
     <div class="ov-card ov-card--key">
       <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="7" rx="2"></rect><rect x="3" y="13.5" width="18" height="7" rx="2"></rect><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"></path></svg></span>
@@ -308,7 +308,7 @@ page_features:
       <div class="ov-plan__price"><span class="ov-plan__amount">Free</span><span class="ov-plan__unit">open source, Apache 2.0</span></div>
       <ul class="ov-plan__list">
         <li>Single Node deployment for medium user load</li>
-        <li>Meet and Platform included</li>
+        <li>OpenVidu Meet and OpenVidu Platform included</li>
         <li>Recording, ingress and S3 storage</li>
         <li>Built-in observability</li>
       </ul>
@@ -326,7 +326,7 @@ page_features:
       <a class="ov-btn ov-btn--yellow" href="/account/" title="Get an OpenVidu License">Start your 15-day free trial</a>
     </div>
   </div>
-  <p class="ov-plans__note">Both editions run Meet and Platform. You pay only while a PRO cluster runs, never per participant. <a href="/pricing/">See pricing</a></p>
+  <p class="ov-plans__note">Both editions run OpenVidu Meet and OpenVidu Platform. You pay only while a PRO cluster is up and running. <a href="/pricing/">See pricing</a></p>
 </section>
 
 <section class="ov-wrap ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
