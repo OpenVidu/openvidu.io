@@ -7,51 +7,40 @@ description: "Export media out of an OpenVidu Room with Egress: recording and st
 
 **Egress** exports media out of a Room. Recording a meeting to MP4, streaming it to RTMP, producing HLS segments, capturing periodic thumbnails: all of it is Egress. Your application server starts and stops Egress through the API; the Egress service joins the Room as a hidden participant of kind `EGRESS` and subscribes only to the tracks it needs.
 
-OpenVidu ships Egress already wired to the bundled S3-compatible storage, so a recording has somewhere to land with no extra setup.
+OpenVidu ships Egress already wired to the storage of the deployment (the bundled S3-compatible MinIO, or the cloud provider's object storage), so a recording has somewhere to land with no extra setup.
 
-For working examples, see the [recording tutorials](../tutorials/advanced-features/index.md).
-
-## Egress types
-
-Six kinds of export. Each has its own request type, except the last one, which is a Participant request with the `PASSTHROUGH` preset:
-
-| Type | SDK method | Transcoding | What it produces |
-| --- | --- | --- | --- |
-| **Room Composite** | [`StartRoomCompositeEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startroomcompositeegress){:target="_blank"} | Yes | One output with every participant composited in a layout. The usual choice for "record the meeting". It follows the Room, stopping on its own when the Room ends |
-| **Web** | [`StartWebEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startwebegress){:target="_blank"} | Yes | One output from an arbitrary web page URL, rather than from a Room. Nothing stops it but you |
-| **Participant** | [`StartParticipantEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/participant/){:target="_blank"} | Yes | One output per participant, identified by `identity`. It waits for them to publish, copes with tracks being muted or unpublished, and stops when they leave. Set `screen_share` to capture their screen share instead of their camera |
-| **Track Composite** | [`StartTrackCompositeEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#starttrackcompositeegress){:target="_blank"} | Yes | One output combining a chosen audio track and video track, selected by track id. Both must already be published when the Egress starts |
-| **Track** | [`StartTrackEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#starttrackegress){:target="_blank"} | No | One output per individual track, written without transcoding |
-| **Participant Passthrough** | [`StartParticipantEgress` + preset `PASSTHROUGH`](#participant-passthrough-egress) | No | Up to three `.webm` or `.mkv` files per participant holding every track they publish, written without transcoding and honoring track synchronization. It follows the participant like Participant Egress does |
-
-!!! warning "Egress and transcoding"
-
-    There are two kinds of Egress: the ones that transcode, and the ones that don't transcode:
-    
-      - **Room Composite**, **Web**, **Participant** and **Track Composite** transcode: they decode the published tracks, compose them and encode the result again. This is a heavy operation, many orders of magnitude more CPU cycles than the Rooms themselves, and it is what sizes the hardware of an Egress deployment.
-      - **Track Egress** and **Participant Passthrough Egress** do not transcode: they write the tracks to the output as published, at a small fraction of the cost. Use them when possible to maximize recording capacity.
+For copy-paste code snippets, see [Recording examples](#recording-examples). For working tutorials, see the [Recording tutorials](../tutorials/advanced-features/index.md).
 
 ## Starting an Egress
 
-Egress are started by making a request to the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} from your application server. Requests to the Egress API require a token with the [`roomRecord` grant](./access-tokens.md#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
+Egress are started by making a `StartEgress` request to the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} from your application server. Requests to the Egress API require a token with the [`roomRecord` grant](./access-tokens.md#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
 
-The example below records `"my-room"` to an MP4 file. The output carries no explicit upload target, so OpenVidu sends it to the bundled MinIO S3 storage:
+!!! note "SDK requirements"
+
+    - **.NET and PHP:** both SDKs refuse an API secret shorter than 32 characters. The .NET SDK throws an error, and the PHP SDK sends the request without a token, which fails with `permissions denied`. The [local deployment](../self-hosting/local.md) uses a shorter secret by default.
+    - **Rust:** to call an `https://` URL, enable one of the TLS features of crate `livekit-api`, for example `features = ["rustls-tls-native-roots"]`. With the default features, requests fail with `invalid URL, scheme is not http`.
+
+The example below records `"my-room"` to an MP4 file: a `template` source with layout `grid`, and one `file` output. The output carries no explicit storage, so OpenVidu sends it to the storage of the deployment:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
     Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
-    import { EgressClient, EncodedFileOutput, EncodedFileType } from 'livekit-server-sdk';
+    import { EgressClient, EncodedFileType, FileOutput, Output, StartEgressRequest, TemplateSource } from 'livekit-server-sdk';
 
     const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
 
-    const fileOutput = new EncodedFileOutput({
-      fileType: EncodedFileType.MP4,
-      filepath: 'my-room-recording.mp4'
-    });
-
-    const egressInfo = await egressClient.startRoomCompositeEgress('my-room', { file: fileOutput }, { layout: 'grid' });
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: { case: 'template', value: new TemplateSource({ layout: 'grid' }) },
+      outputs: [new Output({
+        config: {
+          case: 'file',
+          value: new FileOutput({ fileType: EncodedFileType.MP4, filepath: 'my-room-recording.mp4' }),
+        },
+      })],
+    }));
     ```
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
@@ -68,12 +57,18 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
 
     egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
 
-    egressInfo, err := egressClient.StartRoomCompositeEgress(context.Background(), &livekit.RoomCompositeEgressRequest{
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
         RoomName: "my-room",
-        Layout:   "grid",
-        FileOutputs: []*livekit.EncodedFileOutput{{
-            FileType: livekit.EncodedFileType_MP4,
-            Filepath: "my-room-recording.mp4",
+        Source: &livekit.StartEgressRequest_Template{
+            Template: &livekit.TemplateSource{Layout: "grid"},
+        },
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{
+                    FileType: livekit.EncodedFileType_MP4,
+                    Filepath: "my-room-recording.mp4",
+                },
+            },
         }},
     })
     ```
@@ -81,6 +76,8 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
     Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_room_composite_egress` method.
 
     ```ruby
     require 'livekit'
@@ -100,17 +97,22 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
 
     ```java
     import io.livekit.server.EgressServiceClient;
+    import java.util.List;
     import livekit.LivekitEgress;
 
     EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    LivekitEgress.EncodedFileOutput fileOutput = LivekitEgress.EncodedFileOutput.newBuilder()
-            .setFileType(LivekitEgress.EncodedFileType.MP4)
-            .setFilepath("my-room-recording.mp4")
+    LivekitEgress.TemplateSource template = LivekitEgress.TemplateSource.newBuilder()
+            .setLayout("grid")
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFileType(LivekitEgress.EncodedFileType.MP4)
+                    .setFilepath("my-room-recording.mp4"))
             .build();
 
     LivekitEgress.EgressInfo egressInfo = egressClient
-            .startRoomCompositeEgress("my-room", fileOutput, "grid")
+            .startEgress("my-room", template, List.of(output))
             .execute().body();
     ```
 
@@ -124,14 +126,14 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
     lkapi = api.LiveKitAPI(
         url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
     )
-    egress_info = await lkapi.egress.start_room_composite_egress(
-        api.RoomCompositeEgressRequest(
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
             room_name="my-room",
-            layout="grid",
-            file_outputs=[api.EncodedFileOutput(
+            template=api.TemplateSource(layout="grid"),
+            outputs=[api.Output(file=api.FileOutput(
                 file_type=api.EncodedFileType.MP4,
                 filepath="my-room-recording.mp4",
-            )],
+            ))],
         )
     )
     ```
@@ -141,7 +143,7 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
     Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
 
     ```rust
-    use livekit_api::services::egress::{EgressClient, EgressOutput, RoomCompositeOptions};
+    use livekit_api::services::egress::EgressClient;
     use livekit_protocol as proto;
 
     let egress_client = EgressClient::with_api_key(
@@ -150,25 +152,29 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
         "api-secret",
     );
 
-    let file_output = proto::EncodedFileOutput {
-        file_type: proto::EncodedFileType::Mp4 as i32,
-        filepath: "my-room-recording.mp4".to_string(),
-        ..Default::default()
-    };
-
-    let egress_info = egress_client.start_room_composite_egress(
-        "my-room",
-        vec![EgressOutput::File(file_output)],
-        RoomCompositeOptions {
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Template(proto::TemplateSource {
             layout: "grid".to_string(),
             ..Default::default()
-        },
-    ).await?;
+        })),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                file_type: proto::EncodedFileType::Mp4 as i32,
+                filepath: "my-room-recording.mp4".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
     ```
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
     Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    The PHP SDK does not support method `StartEgress` yet, so this example uses its deprecated `startRoomCompositeEgress` method.
 
     ```php
     <?php
@@ -194,30 +200,33 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
 
     var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    var request = new RoomCompositeEgressRequest { RoomName = "my-room", Layout = "grid" };
-    request.FileOutputs.Add(new EncodedFileOutput
+    var request = new StartEgressRequest
     {
-        FileType = EncodedFileType.Mp4,
-        Filepath = "my-room-recording.mp4",
+        RoomName = "my-room",
+        Template = new TemplateSource { Layout = "grid" },
+    };
+    request.Outputs.Add(new Output
+    {
+        File = new FileOutput { FileType = EncodedFileType.Mp4, Filepath = "my-room-recording.mp4" },
     });
-    EgressInfo egressInfo = await egressClient.StartRoomCompositeEgress(request);
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
     ```
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
     If your backend technology does not have its own SDK, you have two options:
 
-    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
 
         ```bash
-        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartRoomCompositeEgress' \
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
           -H 'Authorization: Bearer <TOKEN>' \
           -H 'Content-Type: application/json' \
           -d '{
                 "room_name": "my-room",
-                "layout": "grid",
-                "file_outputs": [
-                  { "file_type": "MP4", "filepath": "my-room-recording.mp4" }
+                "template": { "layout": "grid" },
+                "outputs": [
+                  { "file": { "file_type": "MP4", "filepath": "my-room-recording.mp4" } }
                 ]
               }'
         ```
@@ -229,12 +238,9 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
         ```json
         {
           "room_name": "my-room",
-          "layout": "grid",
-          "file_outputs": [
-            {
-              "file_type": "MP4",
-              "filepath": "my-room-recording.mp4"
-            }
+          "template": { "layout": "grid" },
+          "outputs": [
+            { "file": { "file_type": "MP4", "filepath": "my-room-recording.mp4" } }
           ]
         }
         ```
@@ -246,41 +252,73 @@ The example below records `"my-room"` to an MP4 file. The output carries no expl
         export LIVEKIT_API_KEY=api-key
         export LIVEKIT_API_SECRET=api-secret
 
-        lk egress start --type room-composite egress.json
+        lk egress start egress.json
         ```
 
-## Outputs
+## How it works
+
+Every Egress is started with [`StartEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startegress){:target="_blank"}. This operation requires specifying:
+
+- A **source** (`template`, `web`, `media`): what gets captured.
+- One or more **outputs** (`file`, `stream`, `segments`, `images`): where the source is exported to, and in which format.
+
+### Egress sources
+
+| Source | Description | Use cases |
+| --- | --- | --- |
+| [`template` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#templatesource){:target="_blank"} | Exports a whole Room's video and/or audio, composited with a web layout rendered by Chrome. It is tied to the Room's lifecycle, and stops on its own when the Room ends. Layouts are customizable web pages: see [Layouts and custom templates](#layouts-and-custom-templates) | Record meetings in composite format, with all their participants and interactions, in a single file ready for playback |
+| [`web` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#websource){:target="_blank"} | Records any web page. It is similar to `template` source, but not tied to a Room: it can record content from outside OpenVidu | Restreaming third-party content to YouTube or Twitch, recording external web applications |
+| [`media` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#mediasource){:target="_blank"} | Captures tracks straight from the Room, with no browser: a participant's camera or screen share (`participant_video`), or a video track by ID (`video_track_id`), plus the audio chosen with [`AudioConfig` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#audioconfig){:target="_blank"} routes, each in the channel you want. The participant or track IDs it names must be in the Room when it starts, or within 30 seconds. It runs until you stop it or the Room ends, even after the participant leaves (with the `PASSTHROUGH` preset, it ends when its track is unpublished) | Recording individual participants, exporting specific tracks, recording an AI Agent and a caller on separate channels |
+
+OpenVidu also offers a way of exporting participants without transcoding: [**Participant Passthrough Egress**](#participant-passthrough-egress) records every track a participant publishes in `.webm` or `.mkv` files that honor track synchronization, and ends when the participant leaves the Room. It is a `media` source with the `PASSTHROUGH` preset that names a whole participant.
+
+!!! warning "Egress and transcoding"
+
+    There are two kinds of Egress based on their source: the ones that transcode, and the ones that don't transcode:
+
+      - **`template`, `web` and `media` sources** transcode by default: they decode the published tracks, compose them and encode the result again. This is a heavy operation, many orders of magnitude more CPU cycles than the Rooms themselves, and it is what sizes the hardware of an Egress deployment.
+      - **A `media` source with the `PASSTHROUGH` preset** and [**Participant Passthrough Egress**](#participant-passthrough-egress) do not transcode: they write the tracks to the output as published, at a small fraction of the cost. Use them when possible to maximize recording capacity.
+
+### Egress outputs
 
 Egress can write to files, push RTMP and SRT streams, generate HLS segments and capture still images (thumbnails).
 
 A transcoded Egress encodes once and fans out, so a single request can write a file, push a stream and generate thumbnails at the same time. Which outputs are available depends on the type of egress:
 
-| Egress type | File | HLS segments | RTMP / SRT stream | Images (thumbnails) | WebSocket |
+| Egress | File | HLS segments | RTMP / SRT stream | Images (thumbnails) | WebSocket |
 | --- | :---: | :---: | :---: | :---: | :---: |
-| Room Composite, Web, Participant, Track Composite | ✅ | ✅ | ✅ | ✅ | |
-| Track | ✅ (pass-through, as published) | | | | ✅ (audio only) |
-| Participant Passthrough | ✅ (up to three files, as published) | | | | |
+| `template`, `web` and `media` sources | ✅ | ✅ | ✅ | ✅ | ✅ (audio only) |
+| `media` source with the **`PASSTHROUGH`** preset | ✅ (one track, as published) | | | | |
+| **Participant Passthrough** | ✅ (several files, as published) | | | | |
 
-Set one or more of these fields on the start egress request:
+A `StartEgress` request lists its outputs in array `outputs`. Each [`Output` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#output){:target="_blank"} sets one of these fields:
 
 <div class="nowrap-first-column" markdown>
 
 | Field | Produces | Type |
 | --- | --- | --- |
-| `file_outputs` | A single media file | [`EncodedFileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#encodedfileoutput){:target="_blank"} |
-| `stream_outputs` | A live stream pushed to one or more URLs | [`StreamOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#streamoutput){:target="_blank"} |
-| `segment_outputs` | Segmented output plus a playlist (HLS) | [`SegmentedFileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#segmentedfileoutput){:target="_blank"} |
-| `image_outputs` | Still images captured at an interval. You can use it to generate thumbnails | [`ImageOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#imageoutput){:target="_blank"} |
+| `file` | A single media file | [`FileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#fileoutput){:target="_blank"} |
+| `stream` | A live stream pushed to one or more RTMP or SRT URLs, or raw audio sent to a WebSocket | [`StreamOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#streamoutput){:target="_blank"} |
+| `segments` | Segmented output plus a playlist (HLS) | [`SegmentedFileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#segmentedfileoutput){:target="_blank"} |
+| `images` | Still images captured at an interval. You can use it to generate thumbnails | [`ImageOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#imageoutput){:target="_blank"} |
 
 </div>
 
-Each list holds a single item: one Egress cannot write two files, but it can write a file *and* HLS segments *and* a stream. Track Egress is the exception, taking neither these lists nor encoding options, just a `file` ([`DirectFileOutput` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#directfileoutput){:target="_blank"}) or a `websocket_url`. [Participant Passthrough Egress](#participant-passthrough-egress) takes only `file_outputs`, with a single entry of the default file type.
+Some notes on egress outputs:
 
-Because Track Egress never transcodes, the container follows the codec the track was published with: MP4 for H.264, WebM for VP8 and Ogg for Opus. With a `websocket_url` instead of a file, an audio track is streamed to a server of yours as raw `pcm_s16le` binary frames, with JSON text frames such as `{"muted": true}` reporting track events. The connection closes when the track is unpublished.
+- A `StartEgress` request can hold one `file`, one `stream` and one `segments` output, plus any number of `images` outputs: one Egress cannot write two files, but it can write a file *and* HLS segments *and* a stream. Each output can also set its own `storage` (see [Storage](#storage)).
+- A `media` source with the **`PASSTHROUGH`** preset capturing a single track (a `video_track_id`, or one `audio` route matching a `track_id`) requires a single `file` output of the default file type. The container follows the codec the track was published with:
+    - MP4 for H.264.
+    - WebM for VP8 and VP9.
+    - Ogg for Opus.
+    - AV1 tracks are transcoded to MP4 in OpenVidu **COMMUNITY**{ .openvidu-tag .openvidu-community-tag } and are stored directly without transcoding to WebM in OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }.
+    - G.711 audio is always transcoded to Opus, in Ogg.
+- [Participant Passthrough Egress](#participant-passthrough-egress) requires a single `file` output of the default file type.
+- A `stream` output with protocol `WEBSOCKET` sends audio to a server of yours as raw `pcm_s16le` binary frames, and makes the whole Egress audio-only. With a `media` source, JSON text frames such as `{"muted": true}` also report track events.
 
-### Filenames
+#### Filenames
 
-When outputting to files (`file_outputs`, `segment_outputs` or `image_outputs`), you can customize the path and filename using `filepath` and `filename_prefix` fields.
+When outputting to files (`file`, `segments` or `images` outputs), you can customize the path and filename using `filepath` and `filename_prefix` fields.
 
 Both accept template variables, though not every variable makes sense for every Egress type:
 
@@ -288,21 +326,21 @@ Both accept template variables, though not every variable makes sense for every 
 
 | Variable | Value | Available in |
 | --- | --- | --- |
-| `{room_name}` | Name of the Room | Room Composite, Participant, Participant Passthrough, Track Composite, Track |
-| `{room_id}` | Unique id of the Room | Room Composite, Participant, Participant Passthrough, Track Composite, Track |
-| `{time}` | Timestamp of when the recording started | Room Composite, Web, Participant, Participant Passthrough, Track Composite, Track |
-| `{publisher_identity}` | Identity of the participant publishing the track | Participant, Participant Passthrough, Track Composite, Track |
-| `{track_id}` | Unique id of the track | Track |
-| `{track_type}` | `audio` or `video` | Track |
-| `{track_source}` | Source of the track, such as `camera` or `microphone` | Track |
+| `{room_name}` | Name of the Room | `template` and `media` sources, Participant Passthrough |
+| `{room_id}` | Unique id of the Room | `template` and `media` sources, Participant Passthrough |
+| `{time}` | Timestamp of when the recording started | Every Egress |
+| `{publisher_identity}` | Identity of the participant publishing the track | Participant Passthrough, `PASSTHROUGH` preset |
+| `{track_id}` | Unique id of the track | `PASSTHROUGH` preset |
+| `{track_type}` | `audio` or `video` | `PASSTHROUGH` preset |
+| `{track_source}` | Source of the track, such as `camera` or `microphone` | `PASSTHROUGH` preset |
 
 </div>
 
 Three notes:
 
-- With no filename, you get `{room_name}-{time}`.
+- With no filename, you get `{room_name}-{time}` (`web-{time}` for a `web` source). Participant Passthrough Egress uses `{publisher_identity}-{time}` instead, and the `PASSTHROUGH` preset `{track_id}-{time}`.
 - A value ending in `/` is treated as a directory, and the default filename is appended inside it.
-- Participant Passthrough Egress always replaces the extension with `.webm` or `.mkv`, and names its extra files by adding `-screen` and `-other` to the filename. See [Recording files](#recording-files).
+- Participant Passthrough Egress always replaces the extension with `.webm` or `.mkv`, and names its extra files by adding `-screen`, or the source and the track ID of a single track (`-camera-TR_xxx`), to the filename. See [Recording files](#recording-files).
 
 Some examples of how the template variables are expanded:
 
@@ -313,45 +351,59 @@ Some examples of how the template variables are expanded:
 | `""` | `my-room-2026-08-24T173012.mp4` |
 | `"recordings/"` | `recordings/my-room-2026-08-24T173012.mp4` |
 | `"{room_name}/{time}"` | `my-room/2026-08-24T173012.mp4` |
-| `"{track_type}_{publisher_identity}.mp4"` | `audio_my-participant.mp4` |
+| `"{track_type}_{publisher_identity}.mp4"` | `audio_my-participant.ogg` (an Opus track: the wrong extension is replaced) |
 | `"{track_source}-{track_id}"` | `microphone-TR_VCa8sTgxQpMv.ogg` |
 
 </div>
 
-### Streams
+#### Streams
 
-Stream outputs push RTMP or SRT. URLs can be added to and removed from a running Egress with [`UpdateStream` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatestream){:target="_blank"}. To start an Egress that will only stream later, include a `StreamOutput` with the right `protocol` and an empty `urls` list.
+Stream outputs push RTMP or SRT. URLs can be added to and removed from a running Egress with [`UpdateStream` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatestream){:target="_blank"}. To start an Egress that will stream later, include a `StreamOutput` with the right `protocol` and an empty `urls` list, next to another output such as a file: an Egress cannot start with no output at all. `UpdateStream` applies to RTMP and SRT streams only.
 
 !!! warning
     RTMP and SRT streaming is very sensitive to long distances. Locate your ingest endpoints close to the servers running your Egress for best results.
 
 ## Encoding
 
-All Egress types that require transcoding (Room Composite, Web, Participant, Track Composite) can define their resolution, framerate, codecs, bitrates and more. Track Egress and [Participant Passthrough Egress](#participant-passthrough-egress) take no encoding options, since they write the tracks as published. When calling the start Egress operation, you can set encoding options in two ways:
+An Egress that transcodes can define its resolution, framerate, codecs, bitrates and more. Egress sources `template`, `web` and `media` transcode by default. When calling `StartEgress`, you can set encoding options in two ways:
 
 - Using a preset: field `preset` of type [`EncodingOptionsPreset` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#encodingoptionspreset){:target="_blank"}.
 - Explicitly: field `advanced` of type [`EncodingOptions` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#encodingoptions){:target="_blank"}.
 
-For example, this starts a Room Composite Egress recording to an MP4 file with the `H264_720P_30` preset:
+!!! info "Avoid transcoding"
+
+    You can record individual tracks without transcoding with the `PASSTHROUGH` preset when using a `media` source, or you can record whole participants by using [**Participant Passthrough Egress**](#participant-passthrough-egress). These kinds of recordings are much cheaper than transcoding, and should be preferred whenever possible.
+
+For example, this records a Room with a `template` source to an MP4 file, transcoding with the `H264_720P_30` preset:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
     Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
-    import { EgressClient, EncodedFileOutput, EncodedFileType, EncodingOptionsPreset } from 'livekit-server-sdk';
+    import {
+      EgressClient,
+      EncodedFileType,
+      EncodingOptionsPreset,
+      FileOutput,
+      Output,
+      StartEgressRequest,
+      TemplateSource,
+    } from 'livekit-server-sdk';
 
     const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
 
-    const fileOutput = new EncodedFileOutput({
-      fileType: EncodedFileType.MP4,
-      filepath: 'my-room-recording.mp4'
-    });
-
-    const egressInfo = await egressClient.startRoomCompositeEgress('my-room', { file: fileOutput }, {
-      layout: 'grid',
-      encodingOptions: EncodingOptionsPreset.H264_720P_30
-    });
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: { case: 'template', value: new TemplateSource({ layout: 'grid' }) },
+      encoding: { case: 'preset', value: EncodingOptionsPreset.H264_720P_30 },
+      outputs: [new Output({
+        config: {
+          case: 'file',
+          value: new FileOutput({ fileType: EncodedFileType.MP4, filepath: 'my-room-recording.mp4' }),
+        },
+      })],
+    }));
     ```
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
@@ -368,15 +420,21 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
 
     egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
 
-    egressInfo, err := egressClient.StartRoomCompositeEgress(context.Background(), &livekit.RoomCompositeEgressRequest{
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
         RoomName: "my-room",
-        Layout:   "grid",
-        Options: &livekit.RoomCompositeEgressRequest_Preset{
+        Source: &livekit.StartEgressRequest_Template{
+            Template: &livekit.TemplateSource{Layout: "grid"},
+        },
+        Encoding: &livekit.StartEgressRequest_Preset{
             Preset: livekit.EncodingOptionsPreset_H264_720P_30,
         },
-        FileOutputs: []*livekit.EncodedFileOutput{{
-            FileType: livekit.EncodedFileType_MP4,
-            Filepath: "my-room-recording.mp4",
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{
+                    FileType: livekit.EncodedFileType_MP4,
+                    Filepath: "my-room-recording.mp4",
+                },
+            },
         }},
     })
     ```
@@ -384,6 +442,8 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
     Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_room_composite_egress` method.
 
     ```ruby
     require 'livekit'
@@ -408,17 +468,22 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
 
     ```java
     import io.livekit.server.EgressServiceClient;
+    import java.util.List;
     import livekit.LivekitEgress;
 
     EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    LivekitEgress.EncodedFileOutput fileOutput = LivekitEgress.EncodedFileOutput.newBuilder()
-            .setFileType(LivekitEgress.EncodedFileType.MP4)
-            .setFilepath("my-room-recording.mp4")
+    LivekitEgress.TemplateSource template = LivekitEgress.TemplateSource.newBuilder()
+            .setLayout("grid")
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFileType(LivekitEgress.EncodedFileType.MP4)
+                    .setFilepath("my-room-recording.mp4"))
             .build();
 
     LivekitEgress.EgressInfo egressInfo = egressClient
-            .startRoomCompositeEgress("my-room", fileOutput, "grid",
+            .startEgress("my-room", template, List.of(output),
                     LivekitEgress.EncodingOptionsPreset.H264_720P_30)
             .execute().body();
     ```
@@ -433,15 +498,15 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
     lkapi = api.LiveKitAPI(
         url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
     )
-    egress_info = await lkapi.egress.start_room_composite_egress(
-        api.RoomCompositeEgressRequest(
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
             room_name="my-room",
-            layout="grid",
+            template=api.TemplateSource(layout="grid"),
             preset=api.EncodingOptionsPreset.H264_720P_30,
-            file_outputs=[api.EncodedFileOutput(
+            outputs=[api.Output(file=api.FileOutput(
                 file_type=api.EncodedFileType.MP4,
                 filepath="my-room-recording.mp4",
-            )],
+            ))],
         )
     )
     ```
@@ -450,11 +515,8 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
 
     Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
 
-    The Rust SDK does not expose presets. Set the equivalent explicit encoding options instead.
-
     ```rust
-    use livekit_api::services::egress::encoding::EncodingOptions;
-    use livekit_api::services::egress::{EgressClient, EgressOutput, RoomCompositeOptions};
+    use livekit_api::services::egress::EgressClient;
     use livekit_protocol as proto;
 
     let egress_client = EgressClient::with_api_key(
@@ -463,51 +525,64 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
         "api-secret",
     );
 
-    let file_output = proto::EncodedFileOutput {
-        file_type: proto::EncodedFileType::Mp4 as i32,
-        filepath: "my-room-recording.mp4".to_string(),
-        ..Default::default()
-    };
-
-    let egress_info = egress_client.start_room_composite_egress(
-        "my-room",
-        vec![EgressOutput::File(file_output)],
-        RoomCompositeOptions {
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Template(proto::TemplateSource {
             layout: "grid".to_string(),
-            encoding: EncodingOptions {
-                width: 1280,
-                height: 720,
-                framerate: 30,
-                video_bitrate: 3000,
-                ..Default::default()
-            },
             ..Default::default()
-        },
-    ).await?;
+        })),
+        encoding: Some(proto::start_egress_request::Encoding::Preset(
+            proto::EncodingOptionsPreset::H264720p30 as i32,
+        )),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                file_type: proto::EncodedFileType::Mp4 as i32,
+                filepath: "my-room-recording.mp4".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
     ```
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
     Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
 
+    The PHP SDK does not support method `StartEgress` yet, and its `startRoomCompositeEgress` method cannot take a preset, so this example calls its generated Egress client with the deprecated Room Composite request.
+
     ```php
     <?php
-    use Agence104\LiveKit\EgressServiceClient;
+    use Agence104\LiveKit\AccessToken;
+    use Agence104\LiveKit\AccessTokenOptions;
+    use Agence104\LiveKit\VideoGrant;
+    use Livekit\EgressClient;
     use Livekit\EncodedFileOutput;
     use Livekit\EncodedFileType;
     use Livekit\EncodingOptionsPreset;
+    use Livekit\RoomCompositeEgressRequest;
+    use Twirp\Context;
 
-    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+    $token = (new AccessToken("api-key", "api-secret"))
+        ->init((new AccessTokenOptions())->setTtl(600))
+        ->setGrant((new VideoGrant())->setRoomRecord())
+        ->toJwt();
+    $egressClient = new EgressClient("https://my-openvidu-host");
 
-    $fileOutput = new EncodedFileOutput([
-        'file_type' => EncodedFileType::MP4,
-        'filepath' => 'my-room-recording.mp4',
-    ]);
-    $egressInfo = $egressClient->startRoomCompositeEgress(
-        'my-room',
-        'grid',
-        $fileOutput,
-        EncodingOptionsPreset::H264_720P_30
+    $egressInfo = $egressClient->StartRoomCompositeEgress(
+        Context::withHttpRequestHeaders([], ['Authorization' => 'Bearer ' . $token]),
+        new RoomCompositeEgressRequest([
+            'room_name' => 'my-room',
+            'layout' => 'grid',
+            'preset' => EncodingOptionsPreset::H264_720P_30,
+            'file_outputs' => [
+                new EncodedFileOutput([
+                    'file_type' => EncodedFileType::MP4,
+                    'filepath' => 'my-room-recording.mp4',
+                ]),
+            ],
+        ])
     );
     ```
 
@@ -520,36 +595,35 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
 
     var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    var request = new RoomCompositeEgressRequest
+    var request = new StartEgressRequest
     {
         RoomName = "my-room",
-        Layout = "grid",
+        Template = new TemplateSource { Layout = "grid" },
         Preset = EncodingOptionsPreset.H264720P30,
     };
-    request.FileOutputs.Add(new EncodedFileOutput
+    request.Outputs.Add(new Output
     {
-        FileType = EncodedFileType.Mp4,
-        Filepath = "my-room-recording.mp4",
+        File = new FileOutput { FileType = EncodedFileType.Mp4, Filepath = "my-room-recording.mp4" },
     });
-    EgressInfo egressInfo = await egressClient.StartRoomCompositeEgress(request);
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
     ```
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
     If your backend technology does not have its own SDK, you have two options:
 
-    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
 
         ```bash
-        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartRoomCompositeEgress' \
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
           -H 'Authorization: Bearer <TOKEN>' \
           -H 'Content-Type: application/json' \
           -d '{
                 "room_name": "my-room",
-                "layout": "grid",
+                "template": { "layout": "grid" },
                 "preset": "H264_720P_30",
-                "file_outputs": [
-                  { "file_type": "MP4", "filepath": "my-room-recording.mp4" }
+                "outputs": [
+                  { "file": { "file_type": "MP4", "filepath": "my-room-recording.mp4" } }
                 ]
               }'
         ```
@@ -561,13 +635,10 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
         ```json
         {
           "room_name": "my-room",
-          "layout": "grid",
+          "template": { "layout": "grid" },
           "preset": "H264_720P_30",
-          "file_outputs": [
-            {
-              "file_type": "MP4",
-              "filepath": "my-room-recording.mp4"
-            }
+          "outputs": [
+            { "file": { "file_type": "MP4", "filepath": "my-room-recording.mp4" } }
           ]
         }
         ```
@@ -579,12 +650,12 @@ For example, this starts a Room Composite Egress recording to an MP4 file with t
         export LIVEKIT_API_KEY=api-key
         export LIVEKIT_API_SECRET=api-secret
 
-        lk egress start --type room-composite egress.json
+        lk egress start egress.json
         ```
 
-## Where the output goes
+## Storage
 
-You can send Egress output to any S3-compatible service, Google Cloud Storage, Azure Blob Storage or Alibaba Cloud OSS:
+You can send Egress output to any S3-compatible service, Google Cloud Storage, Azure Blob Storage or Alibaba Cloud OSS. Set the target in a `storage` field of type [`StorageConfig` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#storageconfig){:target="_blank"}, either on one output or on the whole `StartEgress` request, where it applies to every output that sets none. With neither, the output goes to the storage configured in OpenVidu:
 
 <div class="nowrap-first-column" markdown>
 
@@ -597,31 +668,46 @@ You can send Egress output to any S3-compatible service, Google Cloud Storage, A
 
 </div>
 
-For example, this sends a Room Composite recording to an Azure Blob Storage container:
+For example, this sends the recording of a `template` source to an Azure Blob Storage container, set on its `file` output:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
     Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
-    import { EgressClient, EncodedFileOutput, EncodedFileType, AzureBlobUpload } from 'livekit-server-sdk';
+    import {
+      AzureBlobUpload,
+      EgressClient,
+      EncodedFileType,
+      FileOutput,
+      Output,
+      StartEgressRequest,
+      StorageConfig,
+      TemplateSource,
+    } from 'livekit-server-sdk';
 
     const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
 
-    const fileOutput = new EncodedFileOutput({
-      fileType: EncodedFileType.MP4,
-      filepath: 'my-room-recording.mp4',
-      output: {
-        case: 'azure',
-        value: new AzureBlobUpload({
-          accountName: 'my-storage-account',
-          accountKey: 'my-account-key',
-          containerName: 'my-container'
-        })
-      }
-    });
-
-    const egressInfo = await egressClient.startRoomCompositeEgress('my-room', { file: fileOutput }, { layout: 'grid' });
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: { case: 'template', value: new TemplateSource({ layout: 'grid' }) },
+      outputs: [new Output({
+        config: {
+          case: 'file',
+          value: new FileOutput({ fileType: EncodedFileType.MP4, filepath: 'my-room-recording.mp4' }),
+        },
+        storage: new StorageConfig({
+          provider: {
+            case: 'azure',
+            value: new AzureBlobUpload({
+              accountName: 'mystorageaccount',
+              accountKey: 'my-account-key',
+              containerName: 'my-container',
+            }),
+          },
+        }),
+      })],
+    }));
     ```
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
@@ -638,17 +724,25 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
 
     egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
 
-    egressInfo, err := egressClient.StartRoomCompositeEgress(context.Background(), &livekit.RoomCompositeEgressRequest{
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
         RoomName: "my-room",
-        Layout:   "grid",
-        FileOutputs: []*livekit.EncodedFileOutput{{
-            FileType: livekit.EncodedFileType_MP4,
-            Filepath: "my-room-recording.mp4",
-            Output: &livekit.EncodedFileOutput_Azure{
-                Azure: &livekit.AzureBlobUpload{
-                    AccountName:   "my-storage-account",
-                    AccountKey:    "my-account-key",
-                    ContainerName: "my-container",
+        Source: &livekit.StartEgressRequest_Template{
+            Template: &livekit.TemplateSource{Layout: "grid"},
+        },
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{
+                    FileType: livekit.EncodedFileType_MP4,
+                    Filepath: "my-room-recording.mp4",
+                },
+            },
+            Storage: &livekit.StorageConfig{
+                Provider: &livekit.StorageConfig_Azure{
+                    Azure: &livekit.AzureBlobUpload{
+                        AccountName:   "mystorageaccount",
+                        AccountKey:    "my-account-key",
+                        ContainerName: "my-container",
+                    },
                 },
             },
         }},
@@ -659,6 +753,8 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
 
     Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
 
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_room_composite_egress` method.
+
     ```ruby
     require 'livekit'
 
@@ -668,7 +764,7 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
       file_type: LiveKit::Proto::EncodedFileType::MP4,
       filepath: "my-room-recording.mp4",
       azure: LiveKit::Proto::AzureBlobUpload.new(
-        account_name: "my-storage-account",
+        account_name: "mystorageaccount",
         account_key: "my-account-key",
         container_name: "my-container"
       )
@@ -682,22 +778,27 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
 
     ```java
     import io.livekit.server.EgressServiceClient;
+    import java.util.List;
     import livekit.LivekitEgress;
 
     EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    LivekitEgress.EncodedFileOutput fileOutput = LivekitEgress.EncodedFileOutput.newBuilder()
-            .setFileType(LivekitEgress.EncodedFileType.MP4)
-            .setFilepath("my-room-recording.mp4")
-            .setAzure(LivekitEgress.AzureBlobUpload.newBuilder()
-                    .setAccountName("my-storage-account")
-                    .setAccountKey("my-account-key")
-                    .setContainerName("my-container")
-                    .build())
+    LivekitEgress.TemplateSource template = LivekitEgress.TemplateSource.newBuilder()
+            .setLayout("grid")
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFileType(LivekitEgress.EncodedFileType.MP4)
+                    .setFilepath("my-room-recording.mp4"))
+            .setStorage(LivekitEgress.StorageConfig.newBuilder()
+                    .setAzure(LivekitEgress.AzureBlobUpload.newBuilder()
+                            .setAccountName("mystorageaccount")
+                            .setAccountKey("my-account-key")
+                            .setContainerName("my-container")))
             .build();
 
     LivekitEgress.EgressInfo egressInfo = egressClient
-            .startRoomCompositeEgress("my-room", fileOutput, "grid")
+            .startEgress("my-room", template, List.of(output))
             .execute().body();
     ```
 
@@ -711,18 +812,20 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
     lkapi = api.LiveKitAPI(
         url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
     )
-    egress_info = await lkapi.egress.start_room_composite_egress(
-        api.RoomCompositeEgressRequest(
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
             room_name="my-room",
-            layout="grid",
-            file_outputs=[api.EncodedFileOutput(
-                file_type=api.EncodedFileType.MP4,
-                filepath="my-room-recording.mp4",
-                azure=api.AzureBlobUpload(
-                    account_name="my-storage-account",
+            template=api.TemplateSource(layout="grid"),
+            outputs=[api.Output(
+                file=api.FileOutput(
+                    file_type=api.EncodedFileType.MP4,
+                    filepath="my-room-recording.mp4",
+                ),
+                storage=api.StorageConfig(azure=api.AzureBlobUpload(
+                    account_name="mystorageaccount",
                     account_key="my-account-key",
                     container_name="my-container",
-                ),
+                )),
             )],
         )
     )
@@ -733,7 +836,7 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
     Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
 
     ```rust
-    use livekit_api::services::egress::{EgressClient, EgressOutput, RoomCompositeOptions};
+    use livekit_api::services::egress::EgressClient;
     use livekit_protocol as proto;
 
     let egress_client = EgressClient::with_api_key(
@@ -742,27 +845,35 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
         "api-secret",
     );
 
-    let file_output = proto::EncodedFileOutput {
-        file_type: proto::EncodedFileType::Mp4 as i32,
-        filepath: "my-room-recording.mp4".to_string(),
-        output: Some(proto::encoded_file_output::Output::Azure(proto::AzureBlobUpload {
-            account_name: "my-storage-account".to_string(),
-            account_key: "my-account-key".to_string(),
-            container_name: "my-container".to_string(),
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Template(proto::TemplateSource {
+            layout: "grid".to_string(),
+            ..Default::default()
         })),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                file_type: proto::EncodedFileType::Mp4 as i32,
+                filepath: "my-room-recording.mp4".to_string(),
+                ..Default::default()
+            })),
+            storage: Some(proto::StorageConfig {
+                provider: Some(proto::storage_config::Provider::Azure(proto::AzureBlobUpload {
+                    account_name: "mystorageaccount".to_string(),
+                    account_key: "my-account-key".to_string(),
+                    container_name: "my-container".to_string(),
+                })),
+            }),
+        }],
         ..Default::default()
-    };
-
-    let egress_info = egress_client.start_room_composite_egress(
-        "my-room",
-        vec![EgressOutput::File(file_output)],
-        RoomCompositeOptions { layout: "grid".to_string(), ..Default::default() },
-    ).await?;
+    }).await?;
     ```
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
     Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    The PHP SDK does not support method `StartEgress` yet, so this example uses its deprecated `startRoomCompositeEgress` method.
 
     ```php
     <?php
@@ -777,7 +888,7 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
         'file_type' => EncodedFileType::MP4,
         'filepath' => 'my-room-recording.mp4',
         'azure' => new AzureBlobUpload([
-            'account_name' => 'my-storage-account',
+            'account_name' => 'mystorageaccount',
             'account_key' => 'my-account-key',
             'container_name' => 'my-container',
         ]),
@@ -794,42 +905,49 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
 
     var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    var request = new RoomCompositeEgressRequest { RoomName = "my-room", Layout = "grid" };
-    request.FileOutputs.Add(new EncodedFileOutput
+    var request = new StartEgressRequest
     {
-        FileType = EncodedFileType.Mp4,
-        Filepath = "my-room-recording.mp4",
-        Azure = new AzureBlobUpload
+        RoomName = "my-room",
+        Template = new TemplateSource { Layout = "grid" },
+    };
+    request.Outputs.Add(new Output
+    {
+        File = new FileOutput { FileType = EncodedFileType.Mp4, Filepath = "my-room-recording.mp4" },
+        Storage = new StorageConfig
         {
-            AccountName = "my-storage-account",
-            AccountKey = "my-account-key",
-            ContainerName = "my-container",
+            Azure = new AzureBlobUpload
+            {
+                AccountName = "mystorageaccount",
+                AccountKey = "my-account-key",
+                ContainerName = "my-container",
+            },
         },
     });
-    EgressInfo egressInfo = await egressClient.StartRoomCompositeEgress(request);
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
     ```
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
     If your backend technology does not have its own SDK, you have two options:
 
-    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartRoomCompositeEgress` is a POST to `/twirp/livekit.Egress/StartRoomCompositeEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
 
         ```bash
-        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartRoomCompositeEgress' \
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
           -H 'Authorization: Bearer <TOKEN>' \
           -H 'Content-Type: application/json' \
           -d '{
                 "room_name": "my-room",
-                "layout": "grid",
-                "file_outputs": [
+                "template": { "layout": "grid" },
+                "outputs": [
                   {
-                    "file_type": "MP4",
-                    "filepath": "my-room-recording.mp4",
-                    "azure": {
-                      "account_name": "my-storage-account",
-                      "account_key": "my-account-key",
-                      "container_name": "my-container"
+                    "file": { "file_type": "MP4", "filepath": "my-room-recording.mp4" },
+                    "storage": {
+                      "azure": {
+                        "account_name": "mystorageaccount",
+                        "account_key": "my-account-key",
+                        "container_name": "my-container"
+                      }
                     }
                   }
                 ]
@@ -843,15 +961,16 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
         ```json
         {
           "room_name": "my-room",
-          "layout": "grid",
-          "file_outputs": [
+          "template": { "layout": "grid" },
+          "outputs": [
             {
-              "file_type": "MP4",
-              "filepath": "my-room-recording.mp4",
-              "azure": {
-                "account_name": "my-storage-account",
-                "account_key": "my-account-key",
-                "container_name": "my-container"
+              "file": { "file_type": "MP4", "filepath": "my-room-recording.mp4" },
+              "storage": {
+                "azure": {
+                  "account_name": "mystorageaccount",
+                  "account_key": "my-account-key",
+                  "container_name": "my-container"
+                }
               }
             }
           ]
@@ -865,7 +984,7 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
         export LIVEKIT_API_KEY=api-key
         export LIVEKIT_API_SECRET=api-secret
 
-        lk egress start --type room-composite egress.json
+        lk egress start egress.json
         ```
 
 !!! tip "Output files may survive crashes"
@@ -874,69 +993,100 @@ For example, this sends a Room Composite recording to an Azure Blob Storage cont
 
 ## Layouts and custom templates
 
-A Room Composite Egress records a web page rendered in a headless Chrome instance, which is what makes the output look like your application instead of a grid of raw tracks. The `layout` field of the start request chooses between the built-in layouts: `grid`, `speaker` and `single-speaker`. Add a `-light` suffix (`grid-light`) for a white background. [`UpdateLayout` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatelayout){:target="_blank"} changes it while the Egress runs.
+A `template` source records a web page rendered in a headless Chrome instance, which is what makes the output look like your application instead of a grid of raw tracks. Its `layout` field chooses between the built-in layouts: `grid`, `speaker`, `single-speaker`:
 
-A custom template is a web application you host and point `custom_base_url` at, so a Room Composite Egress records your view instead of a built-in layout. Visit the [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/custom-template/){:target="_blank"} for the full specification.
+![The grid, speaker and single-speaker Egress layouts](../../assets/images/platform/reference/egress/layouts-dark.svg#only-dark){ width="760" height="215" loading=lazy }
+![The grid, speaker and single-speaker Egress layouts](../../assets/images/platform/reference/egress/layouts-light.svg#only-light){ width="760" height="215" loading=lazy }
+
+Two notes on the built-in layouts:
+
+- Add a `-light` suffix (`grid-light`, `speaker-light`, `single-speaker-light`) for a white background.
+- The layout is fixed when the Egress starts. Method [`UpdateLayout` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatelayout){:target="_blank"} changes it on a running Egress only with a custom template that handles layout changes (`EgressHelper.onLayoutChanged`).
+
+A custom template is a web application you host and point the `template` source's `custom_base_url` at, so the Egress records your view instead of one of the built-in layouts. Visit the [LiveKit docs :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/transport/media/ingress-egress/egress/custom-template/){:target="_blank"} for the full specification.
 
 ## Audio-only and video-only egress
 
-When starting a **Room Composite Egress** or a **Web Egress**, you can set `audio_only` parameter to true to generate an output with no video at all: one audio file with every participant of the Room mixed into it. The opposite parameter `video_only` drops the audio instead.
+In a `template` or `web` source, you can set `audio_only` to true to generate an output with no video at all. With a `template` source, that is one audio file with every participant of the Room mixed into it. The opposite parameter `video_only` drops the audio instead.
 
-This is not just a matter of what ends up in the file. An audio-only Egress skips the browser compositor and the video encoder, which is where nearly all of the CPU cost of an Egress lives.
+This is not just a matter of what ends up in the file. An audio-only `template` Egress skips the browser compositor and the video encoder, which is where nearly all of the CPU cost of an Egress lives. An audio-only `web` Egress still runs the browser, and only skips the video encoder.
 
 !!! warning
 
-    For `audio_only` to actually skip the video pipeline, leave `layout` and `custom_base_url` unset. Setting either of them routes the recording through the compositor anyway.
+    For an audio-only `template` Egress to actually skip the browser, leave `layout` and `custom_base_url` unset. Setting either of them routes the recording through the compositor anyway.
 
-If `audio_only` is set, parameter `audio_mixing` of type [`AudioMixing` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#audiomixing){:target="_blank"} defines how the audio of the participants is combined:
+To choose which audio is captured, and which channel each participant or track lands in, use a `media` source with no video and an `audio` field of type [`AudioConfig` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#audioconfig){:target="_blank"}. Its `routes` are evaluated in order, the first match wins, and each one sends the matching audio to `AUDIO_CHANNEL_LEFT`, `AUDIO_CHANNEL_RIGHT` or both channels (the default). Audio that no route matches is captured only with `capture_all`, in both channels. A route can also set two more fields:
+
+- `track_name` narrows the route to the audio tracks published with that name. Alone, with nothing else to match, it takes the tracks of that name from any participant.
+- `exclude` drops the audio the route matches, whatever `capture_all` and the other routes say.
 
 <div class="nowrap-first-column" markdown>
 
-| Mode | Result |
+| `audio` | Result |
 | --- | --- |
-| `DEFAULT_MIXING` | Every participant mixed together. This is the default |
-| `DUAL_CHANNEL_AGENT` | AI Agent audio in the left channel, every other participant in the right channel |
-| `DUAL_CHANNEL_ALTERNATE` | Each new audio track alternates between the left and right channels |
+| `capture_all: true` | Every participant mixed together |
+| `capture_all: true`, and a route matching a `participant_identity` with `exclude: true` | Every participant mixed together, except that one |
+| A route matching `participant_kind` `AGENT` to the left channel, and another matching `STANDARD` to the right channel | AI Agent audio in the left channel, standard participants in the right channel |
+| Routes matching a `participant_identity` or a `track_id` | Each chosen participant or track in the channel of its route |
+| A route with only `track_name` | The audio tracks published with that name, from every participant |
 
 </div>
-
-## Auto Egress
-
-A Room can record itself from the moment it is created, with no call to the Egress API at all. Pass an `egress` configuration when calling method [CreateRoom :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#createroom){:target="_blank"}. This `egress` configuration is an object of type [RoomEgress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#roomegress){:target="_blank"}, and lets you record the Room with Room Composite Egress or Track Egress.
-
-!!! tip
-    You can also include the same `egress` field in the `roomConfig` claim of [access tokens](./access-tokens.md#token-claims), in case you are letting participants create Rooms when they join.
-
-Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](../self-hosting/how-to-guides/enable-webhooks.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](../troubleshooting/recording.md) when auto egress does not produce the expected output.
 
 ## Participant Passthrough Egress
 
 !!! info "Participant Passthrough Egress is part of OpenVidu [**PRO**{ .openvidu-tag .openvidu-pro-tag }](../../pricing.md#openvidu-pro) edition."
 
-**Participant Passthrough Egress** allows recording a Participant without transcoding. It brings the benefits of *Track Egress* (extremely light in terms of CPU usage) and the benefits of *Participant Egress* (syncs multiple tracks of a participant into a single file).
+**Participant Passthrough Egress** records a whole participant without transcoding: every track they publish is written to video files as it arrives.
 
-Participant Passthrough Egress follows the participant activity: waits for them to publish, copes with tracks being muted, unpublished and published again, stops when they leave. But instead of decoding, compositing and encoding their media again, it writes every track exactly as published into video files that share one timeline. It costs a small fraction of the CPU of a transcoding Egress, and the files play directly in a browser.
+Participant Passthrough Egress gives you:
 
-For a single composited video, an RTMP/SRT stream, and HLS playlist or thumbnails, use one of the [transcoding Egress types](#egress-types) instead. If you only need one specific track, with no synchronization with the participant's other tracks, Track Egress is enough.
+- **The whole participant in one request.** Recording individual tracks with the `PASSTHROUGH` preset requires one request per track, and their lifecycle is tied to each track's publication. Participant Passthrough Egress automatically records every track a participant publishes (camera, microphone, screen share, ...), and automatically manages mutes, republishes and reconnections.
+- **File synchronization.** Recording individual tracks with the `PASSTHROUGH` preset writes audio and video to separate files, each with its own timeline. Participant Passthrough Egress keeps camera, microphone and screen share tracks together, properly synced. All files share one timeline, and its [manifest](#manifest-file) lines them up with those of other participants. This facilitates post-processing tasks, making it easier to combine and composite multiple participants after the Room ends.
+- **Original quality at a fraction of the cost.** Every other Egress that is not a single track with the `PASSTHROUGH` preset decodes and encodes the media again, potentially losing quality and always spending a lot of CPU. Participant Passthrough Egress stores every frame as published, in its original codec, resolution and frame rate, and uses a fraction of the CPU, comparable to the `PASSTHROUGH` preset.
 
-The request for a Participant Passthrough Egress is a regular [`StartParticipantEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startparticipantegress){:target="_blank"} with `preset` set to `PASSTHROUGH` and a single `file_outputs` entry of the default file type. The example below records participant `alice` of Room `my-room`:
+For a single composited video, an RTMP/SRT stream, an HLS playlist or thumbnails, use a [transcoding Egress source](#egress-sources) instead. If you only need one specific track, with no synchronization with the participant's other tracks, a `media` source with the `PASSTHROUGH` preset is enough.
+
+A Participant Passthrough Egress is started with [`StartEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startegress){:target="_blank"}, like any other Egress. The request needs 3 things:
+
+- A `media` source naming the participant twice, with the same identity: in `participant_video` (field `identity` of [`ParticipantVideo` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#participantvideo){:target="_blank"}) and in its only `audio` route (field `participant_identity` of [`AudioRoute` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#audioroute){:target="_blank"}).
+- `preset` set to `PASSTHROUGH`.
+- A single `file` output of the default file type.
+
+That `media` source is the one that records a participant with transcoding. With the `PASSTHROUGH` preset, instead of mixing the participant's camera and audio into one file, the Egress records every track the participant publishes, as published, until the participant leaves the Room. With `prefer_screen_share` set in `participant_video`, it records only the participant's screen share and its audio, in file `{filepath}.webm`.
+
+The example below records participant `alice` of Room `my-room`:
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
     Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
 
     ```javascript
-    import { EgressClient, EncodedFileOutput, EncodingOptionsPreset } from 'livekit-server-sdk';
+    import {
+      EgressClient,
+      EncodingOptionsPreset,
+      FileOutput,
+      MediaSource,
+      Output,
+      ParticipantVideo,
+      StartEgressRequest,
+    } from 'livekit-server-sdk';
 
     const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
 
-    const fileOutput = new EncodedFileOutput({
-      filepath: 'recordings/alice.webm'
-    });
-
-    const egressInfo = await egressClient.startParticipantEgress('my-room', 'alice', { file: fileOutput }, {
-      encodingOptions: EncodingOptionsPreset.PASSTHROUGH
-    });
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: {
+        case: 'media',
+        value: new MediaSource({
+          video: { case: 'participantVideo', value: new ParticipantVideo({ identity: 'alice' }) },
+          audio: { routes: [{ match: { case: 'participantIdentity', value: 'alice' } }] },
+        }),
+      },
+      encoding: { case: 'preset', value: EncodingOptionsPreset.PASSTHROUGH },
+      outputs: [new Output({
+        config: { case: 'file', value: new FileOutput({ filepath: 'recordings/alice.webm' }) },
+      })],
+    }));
     ```
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
@@ -953,14 +1103,27 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
 
     egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
 
-    egressInfo, err := egressClient.StartParticipantEgress(context.Background(), &livekit.ParticipantEgressRequest{
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
         RoomName: "my-room",
-        Identity: "alice",
-        Options: &livekit.ParticipantEgressRequest_Preset{
+        Source: &livekit.StartEgressRequest_Media{
+            Media: &livekit.MediaSource{
+                Video: &livekit.MediaSource_ParticipantVideo{
+                    ParticipantVideo: &livekit.ParticipantVideo{Identity: "alice"},
+                },
+                Audio: &livekit.AudioConfig{
+                    Routes: []*livekit.AudioRoute{{
+                        Match: &livekit.AudioRoute_ParticipantIdentity{ParticipantIdentity: "alice"},
+                    }},
+                },
+            },
+        },
+        Encoding: &livekit.StartEgressRequest_Preset{
             Preset: livekit.EncodingOptionsPreset_PASSTHROUGH,
         },
-        FileOutputs: []*livekit.EncodedFileOutput{{
-            Filepath: "recordings/alice.webm",
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{Filepath: "recordings/alice.webm"},
+            },
         }},
     })
     ```
@@ -968,6 +1131,8 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
     Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_participant_egress` method, which records the same.
 
     ```ruby
     require 'livekit'
@@ -981,7 +1146,7 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
       "my-room",
       "alice",
       output,
-      preset: LiveKit::Proto::EncodingOptionsPreset::PASSTHROUGH
+      preset: 8 # PASSTHROUGH, not yet a constant of this SDK
     )
     ```
 
@@ -991,18 +1156,25 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
 
     ```java
     import io.livekit.server.EgressServiceClient;
-    import io.livekit.server.EncodedOutputs;
+    import java.util.List;
     import livekit.LivekitEgress;
 
     EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    LivekitEgress.EncodedFileOutput fileOutput = LivekitEgress.EncodedFileOutput.newBuilder()
-            .setFilepath("recordings/alice.webm")
+    LivekitEgress.MediaSource media = LivekitEgress.MediaSource.newBuilder()
+            .setParticipantVideo(LivekitEgress.ParticipantVideo.newBuilder()
+                    .setIdentity("alice"))
+            .setAudio(LivekitEgress.AudioConfig.newBuilder()
+                    .addRoutes(LivekitEgress.AudioRoute.newBuilder()
+                            .setParticipantIdentity("alice")))
             .build();
-    EncodedOutputs outputs = new EncodedOutputs(fileOutput, null, null, null);
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFilepath("recordings/alice.webm"))
+            .build();
 
     LivekitEgress.EgressInfo egressInfo = egressClient
-            .startParticipantEgress("my-room", "alice", outputs, false,
+            .startEgress("my-room", media, List.of(output),
                     LivekitEgress.EncodingOptionsPreset.PASSTHROUGH)
             .execute().body();
     ```
@@ -1017,14 +1189,19 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
     lkapi = api.LiveKitAPI(
         url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
     )
-    egress_info = await lkapi.egress.start_participant_egress(
-        api.ParticipantEgressRequest(
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
             room_name="my-room",
-            identity="alice",
+            media=api.MediaSource(
+                participant_video=api.ParticipantVideo(identity="alice"),
+                audio=api.AudioConfig(
+                    routes=[api.AudioRoute(participant_identity="alice")],
+                ),
+            ),
             preset=api.EncodingOptionsPreset.PASSTHROUGH,
-            file_outputs=[api.EncodedFileOutput(
+            outputs=[api.Output(file=api.FileOutput(
                 filepath="recordings/alice.webm",
-            )],
+            ))],
         )
     )
     ```
@@ -1033,24 +1210,81 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
 
     Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
 
-    The Rust SDK sends explicit encoding options only, never a preset, so it cannot request `PASSTHROUGH`. Call the Egress API directly instead, as in the Server API tab.
+    ```rust
+    use livekit_api::services::egress::EgressClient;
+    use livekit_protocol as proto;
+
+    let egress_client = EgressClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "api-secret",
+    );
+
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Media(proto::MediaSource {
+            video: Some(proto::media_source::Video::ParticipantVideo(proto::ParticipantVideo {
+                identity: "alice".to_string(),
+                ..Default::default()
+            })),
+            audio: Some(proto::AudioConfig {
+                routes: vec![proto::AudioRoute {
+                    r#match: Some(proto::audio_route::Match::ParticipantIdentity(
+                        "alice".to_string(),
+                    )),
+                    ..Default::default()
+                }],
+                ..Default::default()
+            }),
+            ..Default::default()
+        })),
+        encoding: Some(proto::start_egress_request::Encoding::Preset(
+            proto::EncodingOptionsPreset::Passthrough as i32,
+        )),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                filepath: "recordings/alice.webm".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
+    ```
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
     Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
 
+    The PHP SDK does not support method `StartEgress` yet, and its `startParticipantEgress` method cannot take a preset, so this example calls its generated Egress client with the deprecated `StartParticipantEgress` request, which records the same:
+
     ```php
     <?php
-    use Agence104\LiveKit\EgressServiceClient;
+    use Agence104\LiveKit\AccessToken;
+    use Agence104\LiveKit\AccessTokenOptions;
+    use Agence104\LiveKit\VideoGrant;
+    use Livekit\EgressClient;
     use Livekit\EncodedFileOutput;
-    use Livekit\EncodingOptionsPreset;
+    use Livekit\ParticipantEgressRequest;
+    use Twirp\Context;
 
-    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+    $token = (new AccessToken("api-key", "api-secret"))
+        ->init((new AccessTokenOptions())->setTtl(600))
+        ->setGrant((new VideoGrant())->setRoomRecord())
+        ->toJwt();
+    $egressClient = new EgressClient("https://my-openvidu-host");
 
-    $fileOutput = new EncodedFileOutput([
-        'filepath' => 'recordings/alice.webm',
-    ]);
-    $egressInfo = $egressClient->startParticipantEgress('my-room', 'alice', $fileOutput, EncodingOptionsPreset::PASSTHROUGH);
+    $egressInfo = $egressClient->StartParticipantEgress(
+        Context::withHttpRequestHeaders([], ['Authorization' => 'Bearer ' . $token]),
+        new ParticipantEgressRequest([
+            'room_name' => 'my-room',
+            'identity' => 'alice',
+            'preset' => 8, // PASSTHROUGH, not yet a constant of this SDK
+            'file_outputs' => [
+                new EncodedFileOutput(['filepath' => 'recordings/alice.webm']),
+            ],
+        ])
+    );
     ```
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
@@ -1062,35 +1296,45 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
 
     var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
 
-    var request = new ParticipantEgressRequest
+    var request = new StartEgressRequest
     {
         RoomName = "my-room",
-        Identity = "alice",
+        Media = new MediaSource
+        {
+            ParticipantVideo = new ParticipantVideo { Identity = "alice" },
+            Audio = new AudioConfig
+            {
+                Routes = { new AudioRoute { ParticipantIdentity = "alice" } },
+            },
+        },
         Preset = EncodingOptionsPreset.Passthrough,
     };
-    request.FileOutputs.Add(new EncodedFileOutput
+    request.Outputs.Add(new Output
     {
-        Filepath = "recordings/alice.webm",
+        File = new FileOutput { Filepath = "recordings/alice.webm" },
     });
-    EgressInfo egressInfo = await egressClient.StartParticipantEgress(request);
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
     ```
 
 === ":material-api:{.icon .lg-icon .tab-icon} Server API"
 
     If your backend technology does not have its own SDK, you have two options:
 
-    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartParticipantEgress` is a POST to `/twirp/livekit.Egress/StartParticipantEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
 
         ```bash
-        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartParticipantEgress' \
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
           -H 'Authorization: Bearer <TOKEN>' \
           -H 'Content-Type: application/json' \
           -d '{
                 "room_name": "my-room",
-                "identity": "alice",
+                "media": {
+                  "participant_video": { "identity": "alice" },
+                  "audio": { "routes": [ { "participant_identity": "alice" } ] }
+                },
                 "preset": "PASSTHROUGH",
-                "file_outputs": [
-                  { "filepath": "recordings/alice.webm" }
+                "outputs": [
+                  { "file": { "filepath": "recordings/alice.webm" } }
                 ]
               }'
         ```
@@ -1102,12 +1346,13 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
         ```json
         {
           "room_name": "my-room",
-          "identity": "alice",
+          "media": {
+            "participant_video": { "identity": "alice" },
+            "audio": { "routes": [ { "participant_identity": "alice" } ] }
+          },
           "preset": "PASSTHROUGH",
-          "file_outputs": [
-            {
-              "filepath": "recordings/alice.webm"
-            }
+          "outputs": [
+            { "file": { "filepath": "recordings/alice.webm" } }
           ]
         }
         ```
@@ -1119,31 +1364,38 @@ The request for a Participant Passthrough Egress is a regular [`StartParticipant
         export LIVEKIT_API_KEY=api-key
         export LIVEKIT_API_SECRET=api-secret
 
-        lk egress start --type participant egress.json
+        lk egress start egress.json
         ```
+
+!!! note "Deprecated `StartParticipantEgress`"
+
+    A Participant Passthrough Egress can also be started with the deprecated [`StartParticipantEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startparticipantegress){:target="_blank"} request, with `preset` set to `PASSTHROUGH` and a single `file_outputs` entry of the default file type (`screen_share` stands for `prefer_screen_share`). It records the same. It is the form that [Auto Egress](#one-egress-per-participant) uses, and the only one for SDKs without `StartEgress`.
 
 ### Recording files
 
-Participants can publish as many tracks as they want. So Participant Passthrough Egress groups them in up to 3 separate files:
+Participants can publish as many tracks as they want (see [Publish a Track](./client-sdk.md#publish-a-track)). Participant Passthrough Egress never puts more than one video track and one audio track in the same file. It groups them by source like this:
 
 | File | Name | Holds |
 | --- | --- | --- |
-| **Camera** |`{filepath}.webm` | The camera and microphone tracks |
+| **Camera** | `{filepath}.webm` | The camera and microphone tracks |
 | **Screen** | `{filepath}-screen.webm` | The screen share track, and its audio track if available |
-| **Other** | `{filepath}-other.webm` | Any other track |
+| **Single tracks** | `{filepath}-{source}-{track_id}.webm` | Any other published track |
 
-Each file is created on demand as tracks reach the server. The resulting [`EgressInfo`](#egressinfo) object will contain in its `fileResults` field the created files.
+Each file is created on demand as tracks reach the server:
 
 - A participant with a camera and a microphone produces one file `{filepath}.webm`.
 - Only if the participant publishes a screen share track, file `{filepath}-screen.webm` is created.
-- Only if any other extra track is published and it does not fit the camera or screen files, file `{filepath}-other.webm` is created. This includes:
+- Any other track gets a file of its own, named after its source and its track ID: for example `{filepath}-camera-TR_VC3Jxgmn5Fcu2Q.webm`. This includes:
     - A second camera, microphone or screen track published **while the first is still published**.
     - A new camera, microphone or screen track that replaces a previous one, but has **a different codec**. Tracks that are muted-unmuted, or republished again with the same codec, keep their place in their file.
-    - Any track with **`UNKNOWN` as `TrackSource`** (see below).
+    - Any track with **`UNKNOWN` as `TrackSource`** (see below), in a file named `{filepath}-unknown-{track_id}.webm`.
 
 !!! warning "How Participant Passthrough Egress identifies track types"
     
-    Track types are identified by their [`TrackSource` field :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#tracksource){:target="_blank"}. This field is automatically set by all LiveKit client SDKs when publishing tracks, but it can also be overwritten manually. With Participant Passthrough Egress, the recording file in which each track will end up depends on this `TrackSource` field. Keep this in mind in your client logic when publishing tracks.
+    Track types are identified by their [`TrackSource` field :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/enums/Track.Source.html){:target="_blank"}. This field is automatically set by all LiveKit client SDKs when publishing tracks, but it can also be overwritten manually. With Participant Passthrough Egress, the recording file in which each track will end up depends on this `TrackSource` field. Keep this in mind in your client logic when publishing tracks.
+
+!!! tip "Give a name to the tracks you publish"
+    Reconnecting tracks (for example during a network interruption) will try their best to continue their previous file, as long as they have the same codec and source. You can help Participant Passthrough Egress with this decision by setting a `name` to each track when publishing it (property `name` of the [TrackPublishOptions :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-js/interfaces/TrackPublishOptions.html#name){:target="_blank"} in every LiveKit client SDK). This is especially important if your participant may publish two cameras or two screen shares at the same time.
 
 The resulting files of Participant Passthrough Egress may have 2 different extensions: `.webm` or `.mkv`. Extensions cannot be configured on-demand: they are automatically assigned by the Egress service.
 
@@ -1154,7 +1406,7 @@ The resulting files of Participant Passthrough Egress may have 2 different exten
 
 A manifest file named **`<egress_id>.json`** and placed next to the recording files lists all the files and tracks generated by the Participant Passthrough Egress. It includes start and end times for each track, so you can align different tracks and participants when replaying or post-processing.
 
-For example, below is the manifest of participant `alice` who joined with a microphone and a VP8 camera, shared the screen 5 seconds later and, 10 seconds in, replaced the camera with an H.264 one:
+For example, below is the manifest of participant `alice` who joined with a microphone and a VP8 camera, shared the screen 5 seconds later and, 10 seconds in, replaced the camera with an H.264 one, which gets a file of its own:
 
 ```json
 {
@@ -1208,8 +1460,8 @@ For example, below is the manifest of participant `alice` who joined with a micr
       "last_frame_at": 1793040437492000000
     },
     {
-      "group": "other",
-      "file": "recordings/alice-other.mkv",
+      "group": "track",
+      "file": "recordings/alice-camera-TR_VC3Jxgmn5Fcu2Q.mkv",
       "number": 1,
       "kind": "video",
       "codec": "V_MPEG4/ISO/AVC",
@@ -1232,8 +1484,8 @@ For example, below is the manifest of participant `alice` who joined with a micr
       "location": "https://my-s3-endpoint/my-bucket/recordings/alice-screen.webm"
     },
     {
-      "filename": "recordings/alice-other.mkv",
-      "location": "https://my-s3-endpoint/my-bucket/recordings/alice-other.mkv"
+      "filename": "recordings/alice-camera-TR_VC3Jxgmn5Fcu2Q.mkv",
+      "location": "https://my-s3-endpoint/my-bucket/recordings/alice-camera-TR_VC3Jxgmn5Fcu2Q.mkv"
     }
   ]
 }
@@ -1243,8 +1495,15 @@ For example, below is the manifest of participant `alice` who joined with a micr
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `egress_id` | string | ID of the Egress that wrote the manifest |
+| `room_id` | string | Unique id of the Room |
+| `room_name` | string | Name of the Room |
+| `started_at` | int64 | When the Egress started, on the wall clock, in nanoseconds since the Unix epoch |
+| `ended_at` | int64 | When the Egress ended, in nanoseconds since the Unix epoch |
+| `publisher_identity` | string | Identity of the recorded participant. Not in a [whole-Room manifest](#whole-room-manifest), whose entries carry it instead |
 | `tracks` | list of [Track entry](#track-entry) | One entry per track of each file |
-| `files` | list of [File entry](#file-entry) | The files produced, in the same order as `fileResults` |
+| `files` | list of [File entry](#file-entry) | The files produced. With one Egress per participant, in the same order as `file_results` |
+| `errors` | list of [Error entry](#error-entry) | Only in a [whole-Room manifest](#whole-room-manifest), and only if a recording failed |
 
 </div>
 
@@ -1254,7 +1513,8 @@ For example, below is the manifest of participant `alice` who joined with a micr
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `group` | string | The file the track is in: `camera`, `screen` or `other`. With `screen_share` set, every track is in `{filepath}` and its group is `screen` |
+| `publisher_identity` | string | Identity of the participant who published the track. Only in a [whole-Room manifest](#whole-room-manifest) |
+| `group` | string | The file the track is in: `camera`, `screen` or `track` (a file of its own). With `prefer_screen_share` set, the requested file's tracks report `screen` |
 | `file` | string | The `filename` of that file in `files` |
 | `number` | uint64 | Position of the track in its file |
 | `kind` | string | `audio` or `video` |
@@ -1275,16 +1535,1380 @@ For example, below is the manifest of participant `alice` who joined with a micr
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `publisher_identity` | string | Identity of the participant the file belongs to. Only in a [whole-Room manifest](#whole-room-manifest) |
 | `filename` | string | The storage path of the file |
 | `location` | string | The URL of the file in the storage |
 
 </div>
 
+#### Error entry
+
+<div class="nowrap-first-column" markdown>
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `publisher_identity` | string | Identity of the participant whose recording failed |
+| `error` | string | Why it failed |
+
+</div>
+
+#### Whole-Room manifest
+
+[One Egress for the whole Room](#one-egress-for-the-whole-room) writes a single manifest for every participant. It has the same fields, with three differences:
+
+- There is no top-level `publisher_identity`. Every track entry and every file entry carries the `publisher_identity` of its participant instead.
+- `tracks` and `files` hold the entries of all the participants, so group them by `publisher_identity` to get each participant's files.
+- `errors` lists the participants whose recording failed. The Egress itself keeps recording the others.
+
+For example, this is the manifest of a Room where `alice` and `bob` were recorded and the recording of `charlie` failed, shortened to one track entry:
+
+```json
+{
+  "egress_id": "EG_Rm8cTn4WqLzA",
+  "room_id": "RM_HBog6ZkND3QC",
+  "room_name": "my-room",
+  "started_at": 1793040422232000000,
+  "ended_at": 1793040472732000000,
+  "tracks": [
+    {
+      "publisher_identity": "alice",
+      "group": "camera",
+      "file": "recordings/my-room/alice.webm",
+      "number": 1,
+      "kind": "audio",
+      "codec": "A_OPUS",
+      "source": "microphone",
+      "default": true,
+      "track_ids": ["TR_AMeheVigB8wYYr"],
+      "start_ms": 0,
+      "end_ms": 40000,
+      "first_frame_at": 1793040422532000000,
+      "last_frame_at": 1793040462532000000
+    }
+  ],
+  "files": [
+    {
+      "publisher_identity": "alice",
+      "filename": "recordings/my-room/alice.webm",
+      "location": "https://my-s3-endpoint/my-bucket/recordings/my-room/alice.webm"
+    },
+    {
+      "publisher_identity": "bob",
+      "filename": "recordings/my-room/bob.webm",
+      "location": "https://my-s3-endpoint/my-bucket/recordings/my-room/bob.webm"
+    }
+  ],
+  "errors": [
+    {
+      "publisher_identity": "charlie",
+      "error": "failed to subscribe to track"
+    }
+  ]
+}
+```
+
+### Recording a whole Room with Participant Passthrough
+
+Every participant of a Room can be recorded with Participant Passthrough in two ways: with one Egress per participant, or with one Egress for the whole Room. Each way can be started by your application, whenever it wants, or automatically with the Room (using Auto Egress):
+
+| | One Egress per participant | One Egress for the whole Room |
+| --- | --- | --- |
+| **Started by your application**, at any moment | `StartEgress` with a `media` source, once for each participant. [See](#started-by-your-application) | `StartEgress` with a `template` source whose layout is `PARTICIPANT_PASSTHROUGH`. [See](#started-by-your-application_1) |
+| **Started with the Room**, from its creation ([Auto Egress](#auto-egress)) | Field `participant` of the Room's `egress` configuration. [See](#started-with-the-room) | Field `room` of the Room's `egress` configuration, with layout `PARTICIPANT_PASSTHROUGH`. [See](#started-with-the-room_1) |
+
+The four of them write the same files for every participant: the [recording files](#recording-files) and the [manifest](#manifest-file) of a Participant Passthrough Egress. What changes is how the recording is managed:
+
+- **One Egress per participant:** each participant has an Egress of their own, with its own ID, status, webhooks and manifest. Each one can run on a different egress node, and a failure affects only that participant. To rebuild the Room, you combine the manifests of all of them.
+- **One Egress for the whole Room:** a single Egress, with one ID, one status, one manifest and one `file_results` list with every participant's files. One egress node records the whole Room.
+- **Started by your application:** you decide when the recording starts and stops, for a Room that already exists. With one Egress per participant, you also decide which participants are recorded.
+- **Started with the Room:** the recording is set when the Room is created, with [`CreateRoom` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#createroom){:target="_blank"} or with the `roomConfig` claim of an [access token](./access-tokens.md#token-claims), and it records every participant who publishes for the whole life of the Room.
+
+#### One Egress per participant
+
+##### Started by your application
+
+To record one or more specific participants, simply start a [Participant Passthrough Egress](#participant-passthrough-egress) for each one of them.
+
+##### Started with the Room
+
+To have the Room record every participant on its own, use [Auto Egress](#auto-egress): in the Room's `egress` configuration, set field `participant` with `preset` set to `PASSTHROUGH` and a single `file_outputs` entry. The Room then starts one Participant Passthrough Egress per participant whenever they publish their first track.
+
+All participants share the same `filepath`, so make it different for each of them with the `{publisher_identity}` and `{time}` [template variables](#filenames), for example `recordings/{room_name}/{publisher_identity}-{time}`. With no `filepath`, or with just a directory, each participant's files are named `{publisher_identity}-{time}`.
+
+Each Egress uploads its own [manifest file](#manifest-file), and all of them share the same wall clock: a file starts at the `first_frame_at` of any of its tracks minus its `start_ms`. With the manifests of all the Egresses of a Room, you can place every file of every participant on the same timeline, and rebuild the whole Room. To find those Egresses, list them by Room name with [`ListEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#listegress){:target="_blank"}, or watch the `egress_started` and `egress_ended` [webhooks](#webhooks).
+
+The example below creates Room `my-room`, recording each of its participants under `recordings/my-room/`:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
+
+    ```javascript
+    import {
+      AutoParticipantEgress,
+      EncodedFileOutput,
+      EncodingOptionsPreset,
+      RoomEgress,
+      RoomServiceClient,
+    } from 'livekit-server-sdk';
+
+    const roomService = new RoomServiceClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const room = await roomService.createRoom({
+      name: 'my-room',
+      egress: new RoomEgress({
+        participant: new AutoParticipantEgress({
+          options: { case: 'preset', value: EncodingOptionsPreset.PASSTHROUGH },
+          fileOutputs: [
+            new EncodedFileOutput({
+              filepath: 'recordings/{room_name}/{publisher_identity}-{time}',
+            }),
+          ],
+        }),
+      }),
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    roomClient := lksdk.NewRoomServiceClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    room, err := roomClient.CreateRoom(context.Background(), &livekit.CreateRoomRequest{
+        Name: "my-room",
+        Egress: &livekit.RoomEgress{
+            Participant: &livekit.AutoParticipantEgress{
+                Options: &livekit.AutoParticipantEgress_Preset{
+                    Preset: livekit.EncodingOptionsPreset_PASSTHROUGH,
+                },
+                FileOutputs: []*livekit.EncodedFileOutput{{
+                    Filepath: "recordings/{room_name}/{publisher_identity}-{time}",
+                }},
+            },
+        },
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    ```ruby
+    require 'livekit'
+
+    room_service = LiveKit::RoomServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    egress = LiveKit::Proto::RoomEgress.new(
+      participant: LiveKit::Proto::AutoParticipantEgress.new(
+        preset: 8, # PASSTHROUGH, not yet a constant of this SDK
+        file_outputs: [
+          LiveKit::Proto::EncodedFileOutput.new(
+            filepath: "recordings/{room_name}/{publisher_identity}-{time}"
+          )
+        ]
+      )
+    )
+    room = room_service.create_room("my-room", egress: egress)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+
+    The Kotlin SDK's `createRoom` takes no `egress` configuration, so it cannot create a Room that records itself. Call the Room Service API directly instead, as in the Server API tab.
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    room = await lkapi.room.create_room(
+        api.CreateRoomRequest(
+            name="my-room",
+            egress=api.RoomEgress(
+                participant=api.AutoParticipantEgress(
+                    preset=api.EncodingOptionsPreset.PASSTHROUGH,
+                    file_outputs=[api.EncodedFileOutput(
+                        filepath="recordings/{room_name}/{publisher_identity}-{time}",
+                    )],
+                ),
+            ),
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
+
+    ```rust
+    use livekit_api::services::room::{CreateRoomOptions, RoomClient};
+    use livekit_protocol as proto;
+
+    let room_client = RoomClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "api-secret",
+    );
+
+    let room = room_client.create_room(
+        "my-room",
+        CreateRoomOptions {
+            egress: Some(proto::RoomEgress {
+                participant: Some(proto::AutoParticipantEgress {
+                    options: Some(proto::auto_participant_egress::Options::Preset(
+                        proto::EncodingOptionsPreset::Passthrough as i32,
+                    )),
+                    file_outputs: vec![proto::EncodedFileOutput {
+                        filepath: "recordings/{room_name}/{publisher_identity}-{time}".to_string(),
+                        ..Default::default()
+                    }],
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+    ).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    ```php
+    <?php
+    use Agence104\LiveKit\RoomCreateOptions;
+    use Agence104\LiveKit\RoomServiceClient;
+    use Livekit\AutoParticipantEgress;
+    use Livekit\EncodedFileOutput;
+    use Livekit\RoomEgress;
+
+    $roomService = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $egress = new RoomEgress([
+        'participant' => new AutoParticipantEgress([
+            'preset' => 8, // PASSTHROUGH, not yet a constant of this SDK
+            'file_outputs' => [
+                new EncodedFileOutput([
+                    'filepath' => 'recordings/{room_name}/{publisher_identity}-{time}',
+                ]),
+            ],
+        ]),
+    ]);
+    $room = $roomService->createRoom((new RoomCreateOptions())->setName('my-room')->setEgress($egress));
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var roomClient = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var participantEgress = new AutoParticipantEgress
+    {
+        Preset = EncodingOptionsPreset.Passthrough,
+    };
+    participantEgress.FileOutputs.Add(new EncodedFileOutput
+    {
+        Filepath = "recordings/{room_name}/{publisher_identity}-{time}",
+    });
+    Room room = await roomClient.CreateRoom(new CreateRoomRequest
+    {
+        Name = "my-room",
+        Egress = new RoomEgress { Participant = participantEgress },
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two options:
+
+    1. Call the [Room Service API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/){:target="_blank"} directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](./access-tokens.md#video-grants):
+
+        ```bash
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "name": "my-room",
+                "egress": {
+                  "participant": {
+                    "preset": "PASSTHROUGH",
+                    "file_outputs": [
+                      { "filepath": "recordings/{room_name}/{publisher_identity}-{time}" }
+                    ]
+                  }
+                }
+              }'
+        ```
+
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
+
+        Create a file at `egress.json` with the following content:
+
+        ```json
+        {
+          "preset": "PASSTHROUGH",
+          "file_outputs": [
+            {
+              "filepath": "recordings/{room_name}/{publisher_identity}-{time}"
+            }
+          ]
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=api-secret
+
+        lk room create --participant-egress-file egress.json my-room
+        ```
+
+#### One Egress for the whole Room
+
+An Egress with a `template` source whose layout is **`PARTICIPANT_PASSTHROUGH`** records every participant of a Room as a single Egress, just like a `template` Egress that composites the Room. The difference is that it writes each participant's [Participant Passthrough files](#recording-files) instead of one composited video, and transcodes nothing. Being a single Egress for the whole Room means:
+
+- **One Egress to manage:** one ID, one status and one set of webhooks. `ListEgress` and `StopEgress` act on the whole Room, never on a single participant. It ends with `StopEgress` or when the Room ends, and a participant's failed recording does not end it.
+- **File names:** `filepath` must contain `{publisher_identity}`, so that each participant gets files of their own. With no `filepath`, or with just a directory ending in `/`, files are named `{publisher_identity}-{time}`.
+- **One `file_results` list and one [manifest](#manifest-file)** with every participant's files. The manifest's entries carry their `publisher_identity`, and its `errors` list the participants whose recording failed (see [Whole-Room manifest](#whole-room-manifest)). It is `<egress_id>.json`, stored in the directory of `filepath` shared by all participants, and `manifest_location` points to it.
+
+##### Started by your application
+
+Call [`StartEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#startegress){:target="_blank"} with a `template` source whose `layout` is `PARTICIPANT_PASSTHROUGH`, a single `file` output of the default file type, and no encoding options (or the `PASSTHROUGH` preset). To stop it, call `StopEgress` with its ID, as for any Egress:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
+
+    ```javascript
+    import { EgressClient, FileOutput, Output, StartEgressRequest, TemplateSource } from 'livekit-server-sdk';
+
+    const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: { case: 'template', value: new TemplateSource({ layout: 'PARTICIPANT_PASSTHROUGH' }) },
+      outputs: [new Output({
+        config: {
+          case: 'file',
+          value: new FileOutput({ filepath: 'recordings/{room_name}/{publisher_identity}-{time}' }),
+        },
+      })],
+    }));
+
+    // ...later, to stop recording the Room:
+    await egressClient.stopEgress(egressInfo.egressId);
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
+        RoomName: "my-room",
+        Source: &livekit.StartEgressRequest_Template{
+            Template: &livekit.TemplateSource{Layout: "PARTICIPANT_PASSTHROUGH"},
+        },
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{
+                    Filepath: "recordings/{room_name}/{publisher_identity}-{time}",
+                },
+            },
+        }},
+    })
+
+    // ...later, to stop recording the Room:
+    _, err = egressClient.StopEgress(context.Background(), &livekit.StopEgressRequest{
+        EgressId: egressInfo.EgressId,
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_room_composite_egress` method, which records the same. The output goes in an array, so that the SDK sends it only in field `file_outputs`.
+
+    ```ruby
+    require 'livekit'
+
+    egress_client = LiveKit::EgressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    output = LiveKit::Proto::EncodedFileOutput.new(
+      filepath: "recordings/{room_name}/{publisher_identity}-{time}"
+    )
+    egress_info = egress_client.start_room_composite_egress("my-room", [output], layout: "PARTICIPANT_PASSTHROUGH")
+
+    # ...later, to stop recording the Room:
+    egress_client.stop_egress(egress_info.egress_id)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+
+    ```java
+    import io.livekit.server.EgressServiceClient;
+    import java.util.List;
+    import livekit.LivekitEgress;
+
+    EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    LivekitEgress.TemplateSource template = LivekitEgress.TemplateSource.newBuilder()
+            .setLayout("PARTICIPANT_PASSTHROUGH")
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFilepath("recordings/{room_name}/{publisher_identity}-{time}"))
+            .build();
+
+    LivekitEgress.EgressInfo egressInfo = egressClient
+            .startEgress("my-room", template, List.of(output))
+            .execute().body();
+
+    // ...later, to stop recording the Room:
+    egressClient.stopEgress(egressInfo.getEgressId()).execute();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
+            room_name="my-room",
+            template=api.TemplateSource(layout="PARTICIPANT_PASSTHROUGH"),
+            outputs=[api.Output(file=api.FileOutput(
+                filepath="recordings/{room_name}/{publisher_identity}-{time}",
+            ))],
+        )
+    )
+
+    # ...later, to stop recording the Room:
+    await lkapi.egress.stop_egress(api.StopEgressRequest(egress_id=egress_info.egress_id))
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
+
+    ```rust
+    use livekit_api::services::egress::EgressClient;
+    use livekit_protocol as proto;
+
+    let egress_client = EgressClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "api-secret",
+    );
+
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Template(proto::TemplateSource {
+            layout: "PARTICIPANT_PASSTHROUGH".to_string(),
+            ..Default::default()
+        })),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                filepath: "recordings/{room_name}/{publisher_identity}-{time}".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
+
+    // ...later, to stop recording the Room:
+    egress_client.stop_egress(&egress_info.egress_id).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    The PHP SDK does not support method `StartEgress` yet, so this example uses its deprecated `startRoomCompositeEgress` method, which records the same. The file output goes inside an `EncodedOutputs`, so that the SDK sends it only in field `file_outputs`.
+
+    ```php
+    <?php
+    use Agence104\LiveKit\EgressServiceClient;
+    use Agence104\LiveKit\EncodedOutputs;
+    use Livekit\EncodedFileOutput;
+
+    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $fileOutput = new EncodedFileOutput([
+        'filepath' => 'recordings/{room_name}/{publisher_identity}-{time}',
+    ]);
+    $outputs = (new EncodedOutputs())->setFile($fileOutput);
+    $egressInfo = $egressClient->startRoomCompositeEgress('my-room', 'PARTICIPANT_PASSTHROUGH', $outputs);
+
+    // ...later, to stop recording the Room:
+    $egressClient->stopEgress($egressInfo->getEgressId());
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var request = new StartEgressRequest
+    {
+        RoomName = "my-room",
+        Template = new TemplateSource { Layout = "PARTICIPANT_PASSTHROUGH" },
+    };
+    request.Outputs.Add(new Output
+    {
+        File = new FileOutput { Filepath = "recordings/{room_name}/{publisher_identity}-{time}" },
+    });
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
+
+    // ...later, to stop recording the Room:
+    await egressClient.StopEgress(new StopEgressRequest { EgressId = egressInfo.EgressId });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two options:
+
+    1. Call the [Egress API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/){:target="_blank"} directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, and `StopEgress` a POST to `/twirp/livekit.Egress/StopEgress`, both authenticated with a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+
+        ```bash
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "room_name": "my-room",
+                "template": { "layout": "PARTICIPANT_PASSTHROUGH" },
+                "outputs": [
+                  { "file": { "filepath": "recordings/{room_name}/{publisher_identity}-{time}" } }
+                ]
+              }'
+
+        # ...later, to stop recording the Room:
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StopEgress' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{ "egress_id": "<EGRESS_ID>" }'
+        ```
+
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
+
+        Create a file at `egress.json` with the following content:
+
+        ```json
+        {
+          "room_name": "my-room",
+          "template": { "layout": "PARTICIPANT_PASSTHROUGH" },
+          "outputs": [
+            { "file": { "filepath": "recordings/{room_name}/{publisher_identity}-{time}" } }
+          ]
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=api-secret
+
+        lk egress start egress.json
+
+        # ...later, to stop recording the Room:
+        lk egress stop --id <EGRESS_ID>
+        ```
+
+##### Started with the Room
+
+In the Room's `egress` configuration ([Auto Egress](#auto-egress)), set field `room` with `layout` to `PARTICIPANT_PASSTHROUGH` and a single `file_outputs` entry. The Egress starts when the Room is created, waits in `EGRESS_STARTING` until someone publishes, and ends with the Room (as `EGRESS_ABORTED` if nobody ever published). The example below creates Room `my-room`, recording every participant under `recordings/my-room/`:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
+
+    ```javascript
+    import { EncodedFileOutput, RoomCompositeEgressRequest, RoomEgress, RoomServiceClient } from 'livekit-server-sdk';
+
+    const roomService = new RoomServiceClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const room = await roomService.createRoom({
+      name: 'my-room',
+      egress: new RoomEgress({
+        room: new RoomCompositeEgressRequest({
+          layout: 'PARTICIPANT_PASSTHROUGH',
+          fileOutputs: [
+            new EncodedFileOutput({ filepath: 'recordings/{room_name}/{publisher_identity}-{time}' }),
+          ],
+        }),
+      }),
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    roomClient := lksdk.NewRoomServiceClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    room, err := roomClient.CreateRoom(context.Background(), &livekit.CreateRoomRequest{
+        Name: "my-room",
+        Egress: &livekit.RoomEgress{
+            Room: &livekit.RoomCompositeEgressRequest{
+                Layout: "PARTICIPANT_PASSTHROUGH",
+                FileOutputs: []*livekit.EncodedFileOutput{{
+                    Filepath: "recordings/{room_name}/{publisher_identity}-{time}",
+                }},
+            },
+        },
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    ```ruby
+    require 'livekit'
+
+    room_service = LiveKit::RoomServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    egress = LiveKit::Proto::RoomEgress.new(
+      room: LiveKit::Proto::RoomCompositeEgressRequest.new(
+        layout: "PARTICIPANT_PASSTHROUGH",
+        file_outputs: [
+          LiveKit::Proto::EncodedFileOutput.new(
+            filepath: "recordings/{room_name}/{publisher_identity}-{time}"
+          )
+        ]
+      )
+    )
+    room = room_service.create_room("my-room", egress: egress)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+
+    The Kotlin SDK's `createRoom` takes no `egress` configuration, so it cannot create a Room that records itself. Call the Room Service API directly instead, as in the Server API tab.
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    room = await lkapi.room.create_room(
+        api.CreateRoomRequest(
+            name="my-room",
+            egress=api.RoomEgress(
+                room=api.RoomCompositeEgressRequest(
+                    layout="PARTICIPANT_PASSTHROUGH",
+                    file_outputs=[api.EncodedFileOutput(
+                        filepath="recordings/{room_name}/{publisher_identity}-{time}",
+                    )],
+                ),
+            ),
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
+
+    ```rust
+    use livekit_api::services::room::{CreateRoomOptions, RoomClient};
+    use livekit_protocol as proto;
+
+    let room_client = RoomClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "api-secret",
+    );
+
+    let room = room_client.create_room(
+        "my-room",
+        CreateRoomOptions {
+            egress: Some(proto::RoomEgress {
+                room: Some(proto::RoomCompositeEgressRequest {
+                    layout: "PARTICIPANT_PASSTHROUGH".to_string(),
+                    file_outputs: vec![proto::EncodedFileOutput {
+                        filepath: "recordings/{room_name}/{publisher_identity}-{time}".to_string(),
+                        ..Default::default()
+                    }],
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+    ).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    ```php
+    <?php
+    use Agence104\LiveKit\RoomCreateOptions;
+    use Agence104\LiveKit\RoomServiceClient;
+    use Livekit\EncodedFileOutput;
+    use Livekit\RoomCompositeEgressRequest;
+    use Livekit\RoomEgress;
+
+    $roomService = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $egress = new RoomEgress([
+        'room' => new RoomCompositeEgressRequest([
+            'layout' => 'PARTICIPANT_PASSTHROUGH',
+            'file_outputs' => [
+                new EncodedFileOutput([
+                    'filepath' => 'recordings/{room_name}/{publisher_identity}-{time}',
+                ]),
+            ],
+        ]),
+    ]);
+    $room = $roomService->createRoom((new RoomCreateOptions())->setName('my-room')->setEgress($egress));
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var roomClient = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var roomComposite = new RoomCompositeEgressRequest { Layout = "PARTICIPANT_PASSTHROUGH" };
+    roomComposite.FileOutputs.Add(new EncodedFileOutput
+    {
+        Filepath = "recordings/{room_name}/{publisher_identity}-{time}",
+    });
+    Room room = await roomClient.CreateRoom(new CreateRoomRequest
+    {
+        Name = "my-room",
+        Egress = new RoomEgress { Room = roomComposite },
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two options:
+
+    1. Call the [Room Service API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/){:target="_blank"} directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](./access-tokens.md#video-grants):
+
+        ```bash
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "name": "my-room",
+                "egress": {
+                  "room": {
+                    "layout": "PARTICIPANT_PASSTHROUGH",
+                    "file_outputs": [
+                      { "filepath": "recordings/{room_name}/{publisher_identity}-{time}" }
+                    ]
+                  }
+                }
+              }'
+        ```
+
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
+
+        Create a file at `egress.json` with the following content:
+
+        ```json
+        {
+          "layout": "PARTICIPANT_PASSTHROUGH",
+          "file_outputs": [
+            {
+              "filepath": "recordings/{room_name}/{publisher_identity}-{time}"
+            }
+          ]
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=api-secret
+
+        lk room create --room-egress-file egress.json my-room
+        ```
+
+### Post-processing
+
+Participant Passthrough Egress records each participant in files of their own. You can compose them into a single video in a post-processing step, using the [manifest file](#manifest-file) information to know when each video starts and ends.
+
+Let's see a working example: a Room recorded with [one Egress for the whole Room](#one-egress-for-the-whole-room), with `filepath` set to `recordings/{room_name}/{publisher_identity}`. Its 4 participants publish their camera and microphone:
+
+- `alice` and `bob` join the Room and talk for 20 seconds.
+- `charlie` and `dave` join, and the 4 of them talk for 20 seconds more.
+- `alice` leaves, and the other 3 talk for 10 more seconds before the Room is closed.
+
+The Egress writes `alice.webm`, `bob.webm`, `charlie.webm` and `dave.webm` in `recordings/my-room/`, next to its manifest `EG_Rm8cTn4WqLzA.json`.
+
+First, get from the manifest when each file starts, in seconds since the first one started. A file starts at the `first_frame_at` of any of its tracks minus its `start_ms`. With [jq :fontawesome-solid-external-link:{.external-link-icon}](https://jqlang.org/){:target="_blank"}:
+
+```bash
+jq -r '[.tracks[] | {file, start: (.first_frame_at - .start_ms * 1e6)}]
+  | (map(.start) | min) as $first
+  | unique_by(.file)[] | "\(.file) \((.start - $first) / 1e6 | round / 1e3)"' \
+  recordings/my-room/EG_Rm8cTn4WqLzA.json
+```
+
+This outputs for each file the delay in seconds that must be added to its start time:
+
+```text
+recordings/my-room/alice.webm 0
+recordings/my-room/bob.webm 0.35
+recordings/my-room/charlie.webm 20.12
+recordings/my-room/dave.webm 20.71
+```
+
+We can now compose a single file using those start times. In the examples below, we do so with both **FFmpeg** and **GStreamer**:
+
+- A 1280x720 grid with a 640x360 tile per participant, delaying each file by its start, and mixing their audio.
+- Each participant keeps their tile, which is empty while they are not in the Room.
+- Both examples write `room.mp4`, with H.264 video and AAC audio.
+
+=== ":simple-ffmpeg:{.icon .lg-icon .tab-icon} FFmpeg"
+
+    ```bash
+    ffmpeg \
+      -reinit_filter 0 -itsoffset 0     -i recordings/my-room/alice.webm \
+      -reinit_filter 0 -itsoffset 0.35  -i recordings/my-room/bob.webm \
+      -reinit_filter 0 -itsoffset 20.12 -i recordings/my-room/charlie.webm \
+      -reinit_filter 0 -itsoffset 20.71 -i recordings/my-room/dave.webm \
+      -filter_complex "
+        color=black:size=1280x720:rate=30[bg];
+        [0:v]scale=640:360[v0]; [1:v]scale=640:360[v1]; [2:v]scale=640:360[v2]; [3:v]scale=640:360[v3];
+        [bg][v0]overlay=0:0:eof_action=pass[t0];
+        [t0][v1]overlay=640:0:eof_action=pass[t1];
+        [t1][v2]overlay=0:360:eof_action=pass[t2];
+        [t2][v3]overlay=640:360:eof_action=pass[video];
+        [0:a]aresample=async=1:first_pts=0[a0]; [1:a]aresample=async=1:first_pts=0[a1];
+        [2:a]aresample=async=1:first_pts=0[a2]; [3:a]aresample=async=1:first_pts=0[a3];
+        [a0][a1][a2][a3]amix=inputs=4:normalize=0[audio]" \
+      -map "[video]" -map "[audio]" -shortest room.mp4
+    ```
+
+    - `-itsoffset` delays each file by its start.
+    - `-reinit_filter 0` keeps the filters running when a video changes resolution, as published videos do with the publisher's network and CPU. Without it, FFmpeg restarts all the filters and the audio gets out of sync.
+    - `aresample=async=1:first_pts=0` fills with silence the time before each participant's audio, and the gaps left by their mutes.
+    - `eof_action=pass` empties the tile of a participant who left, and `-shortest` ends the video, whose black background never ends, with the audio.
+
+=== ":simple-gstreamer:{.icon .lg-icon .tab-icon} GStreamer"
+
+    ```bash
+    gst-launch-1.0 -e \
+      compositor name=video background=black \
+        sink_0::xpos=0   sink_0::ypos=0   sink_0::width=640 sink_0::height=360 \
+        sink_1::xpos=640 sink_1::ypos=0   sink_1::width=640 sink_1::height=360 sink_1::offset=350000000 \
+        sink_2::xpos=0   sink_2::ypos=360 sink_2::width=640 sink_2::height=360 sink_2::offset=20120000000 \
+        sink_3::xpos=640 sink_3::ypos=360 sink_3::width=640 sink_3::height=360 sink_3::offset=20710000000 \
+      ! video/x-raw,width=1280,height=720,framerate=30/1 ! x264enc ! mp4mux name=mux ! filesink location=room.mp4 \
+      audiomixer name=audio sink_1::offset=350000000 sink_2::offset=20120000000 sink_3::offset=20710000000 \
+      ! audioconvert ! avenc_aac ! mux. \
+      filesrc location=recordings/my-room/alice.webm ! decodebin name=d0 \
+        d0. ! videoconvert ! queue ! video.sink_0  d0. ! audioconvert ! audioresample ! queue ! audio.sink_0 \
+      filesrc location=recordings/my-room/bob.webm ! decodebin name=d1 \
+        d1. ! videoconvert ! queue ! video.sink_1  d1. ! audioconvert ! audioresample ! queue ! audio.sink_1 \
+      filesrc location=recordings/my-room/charlie.webm ! decodebin name=d2 \
+        d2. ! videoconvert ! queue ! video.sink_2  d2. ! audioconvert ! audioresample ! queue ! audio.sink_2 \
+      filesrc location=recordings/my-room/dave.webm ! decodebin name=d3 \
+        d3. ! videoconvert ! queue ! video.sink_3  d3. ! audioconvert ! audioresample ! queue ! audio.sink_3
+    ```
+
+    - The `offset` of each `compositor` and `audiomixer` pad delays a file by its start, in nanoseconds.
+    - `compositor` scales each video to its tile, whatever its resolution at each moment, and leaves the tile of a participant who left empty.
+
+## Auto Egress
+
+A Room can record itself automatically from the moment it is created, until the Room is closed or the Egress is manually stopped. Pass an `egress` configuration when creating the Room (method [CreateRoom :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#createroom){:target="_blank"}). This `egress` configuration is an object of type [RoomEgress :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/#roomegress){:target="_blank"}, and lets you record the Room:
+
+### Composite
+
+Field `room` records the whole Room composited into a single output, like a `template` source. The example below creates Room `my-room`, recording it to an MP4 file:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
+
+    ```javascript
+    import { EncodedFileOutput, RoomCompositeEgressRequest, RoomEgress, RoomServiceClient } from 'livekit-server-sdk';
+
+    const roomService = new RoomServiceClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const room = await roomService.createRoom({
+      name: 'my-room',
+      egress: new RoomEgress({
+        room: new RoomCompositeEgressRequest({
+          fileOutputs: [new EncodedFileOutput({ filepath: 'my-room-recording.mp4' })],
+        }),
+      }),
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    roomClient := lksdk.NewRoomServiceClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    room, err := roomClient.CreateRoom(context.Background(), &livekit.CreateRoomRequest{
+        Name: "my-room",
+        Egress: &livekit.RoomEgress{
+            Room: &livekit.RoomCompositeEgressRequest{
+                FileOutputs: []*livekit.EncodedFileOutput{{
+                    Filepath: "my-room-recording.mp4",
+                }},
+            },
+        },
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    ```ruby
+    require 'livekit'
+
+    room_service = LiveKit::RoomServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    egress = LiveKit::Proto::RoomEgress.new(
+      room: LiveKit::Proto::RoomCompositeEgressRequest.new(
+        file_outputs: [LiveKit::Proto::EncodedFileOutput.new(filepath: "my-room-recording.mp4")]
+      )
+    )
+    room = room_service.create_room("my-room", egress: egress)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+
+    The Kotlin SDK's `createRoom` takes no `egress` configuration, so it cannot create a Room that records itself. Call the Room Service API directly instead, as in the Server API tab.
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    room = await lkapi.room.create_room(
+        api.CreateRoomRequest(
+            name="my-room",
+            egress=api.RoomEgress(
+                room=api.RoomCompositeEgressRequest(
+                    file_outputs=[api.EncodedFileOutput(filepath="my-room-recording.mp4")],
+                ),
+            ),
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
+
+    ```rust
+    use livekit_api::services::room::{CreateRoomOptions, RoomClient};
+    use livekit_protocol as proto;
+
+    let room_client = RoomClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "api-secret",
+    );
+
+    let room = room_client.create_room(
+        "my-room",
+        CreateRoomOptions {
+            egress: Some(proto::RoomEgress {
+                room: Some(proto::RoomCompositeEgressRequest {
+                    file_outputs: vec![proto::EncodedFileOutput {
+                        filepath: "my-room-recording.mp4".to_string(),
+                        ..Default::default()
+                    }],
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+    ).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    ```php
+    <?php
+    use Agence104\LiveKit\RoomCreateOptions;
+    use Agence104\LiveKit\RoomServiceClient;
+    use Livekit\EncodedFileOutput;
+    use Livekit\RoomCompositeEgressRequest;
+    use Livekit\RoomEgress;
+
+    $roomService = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $egress = new RoomEgress([
+        'room' => new RoomCompositeEgressRequest([
+            'file_outputs' => [new EncodedFileOutput(['filepath' => 'my-room-recording.mp4'])],
+        ]),
+    ]);
+    $room = $roomService->createRoom((new RoomCreateOptions())->setName('my-room')->setEgress($egress));
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var roomClient = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var roomComposite = new RoomCompositeEgressRequest();
+    roomComposite.FileOutputs.Add(new EncodedFileOutput { Filepath = "my-room-recording.mp4" });
+    Room room = await roomClient.CreateRoom(new CreateRoomRequest
+    {
+        Name = "my-room",
+        Egress = new RoomEgress { Room = roomComposite },
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two options:
+
+    1. Call the [Room Service API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/){:target="_blank"} directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](./access-tokens.md#video-grants):
+
+        ```bash
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "name": "my-room",
+                "egress": {
+                  "room": {
+                    "file_outputs": [
+                      { "filepath": "my-room-recording.mp4" }
+                    ]
+                  }
+                }
+              }'
+        ```
+
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
+
+        Create a file at `egress.json` with the following content:
+
+        ```json
+        {
+          "file_outputs": [
+            {
+              "filepath": "my-room-recording.mp4"
+            }
+          ]
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=api-secret
+
+        lk room create --room-egress-file egress.json my-room
+        ```
+
+### Individual tracks
+
+Field `tracks` records every track published in the Room to a file of its own, without transcoding, like the `PASSTHROUGH` preset. The example below creates Room `my-room`, naming each file after its track:
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    Using [LiveKit Node SDK :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/server-sdk-js/){:target="_blank"}
+
+    ```javascript
+    import { AutoTrackEgress, RoomEgress, RoomServiceClient } from 'livekit-server-sdk';
+
+    const roomService = new RoomServiceClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const room = await roomService.createRoom({
+      name: 'my-room',
+      egress: new RoomEgress({
+        tracks: new AutoTrackEgress({ filepath: '{room_name}/{track_source}-{track_id}' }),
+      }),
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    Using [LiveKit Go SDK :fontawesome-solid-external-link:{.external-link-icon}](https://pkg.go.dev/github.com/livekit/server-sdk-go/v2){:target="_blank"}
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    roomClient := lksdk.NewRoomServiceClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    room, err := roomClient.CreateRoom(context.Background(), &livekit.CreateRoomRequest{
+        Name: "my-room",
+        Egress: &livekit.RoomEgress{
+            Tracks: &livekit.AutoTrackEgress{
+                Filepath: "{room_name}/{track_source}-{track_id}",
+            },
+        },
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    Using [LiveKit Ruby SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-ruby){:target="_blank"}
+
+    ```ruby
+    require 'livekit'
+
+    room_service = LiveKit::RoomServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    egress = LiveKit::Proto::RoomEgress.new(
+      tracks: LiveKit::Proto::AutoTrackEgress.new(filepath: "{room_name}/{track_source}-{track_id}")
+    )
+    room = room_service.create_room("my-room", egress: egress)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    Using [LiveKit Kotlin SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-kotlin){:target="_blank"}
+
+    The Kotlin SDK's `createRoom` takes no `egress` configuration, so it cannot create a Room that records itself. Call the Room Service API directly instead, as in the Server API tab.
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    Using [LiveKit Python SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/python-sdks){:target="_blank"}
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    room = await lkapi.room.create_room(
+        api.CreateRoomRequest(
+            name="my-room",
+            egress=api.RoomEgress(
+                tracks=api.AutoTrackEgress(filepath="{room_name}/{track_source}-{track_id}"),
+            ),
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    Using [LiveKit Rust SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/rust-sdks){:target="_blank"}
+
+    ```rust
+    use livekit_api::services::room::{CreateRoomOptions, RoomClient};
+    use livekit_protocol as proto;
+
+    let room_client = RoomClient::with_api_key(
+        "https://my-openvidu-host",
+        "api-key",
+        "api-secret",
+    );
+
+    let room = room_client.create_room(
+        "my-room",
+        CreateRoomOptions {
+            egress: Some(proto::RoomEgress {
+                tracks: Some(proto::AutoTrackEgress {
+                    filepath: "{room_name}/{track_source}-{track_id}".to_string(),
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+    ).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    Using [LiveKit PHP SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/agence104/livekit-server-sdk-php){:target="_blank"}
+
+    ```php
+    <?php
+    use Agence104\LiveKit\RoomCreateOptions;
+    use Agence104\LiveKit\RoomServiceClient;
+    use Livekit\AutoTrackEgress;
+    use Livekit\RoomEgress;
+
+    $roomService = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $egress = new RoomEgress([
+        'tracks' => new AutoTrackEgress(['filepath' => '{room_name}/{track_source}-{track_id}']),
+    ]);
+    $room = $roomService->createRoom((new RoomCreateOptions())->setName('my-room')->setEgress($egress));
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    Using [LiveKit .NET SDK :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/pabloFuente/livekit-server-sdk-dotnet){:target="_blank"}
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var roomClient = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    Room room = await roomClient.CreateRoom(new CreateRoomRequest
+    {
+        Name = "my-room",
+        Egress = new RoomEgress
+        {
+            Tracks = new AutoTrackEgress { Filepath = "{room_name}/{track_source}-{track_id}" },
+        },
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    If your backend technology does not have its own SDK, you have two options:
+
+    1. Call the [Room Service API :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/roomservice-api/){:target="_blank"} directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](./access-tokens.md#video-grants):
+
+        ```bash
+        curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
+          -H 'Authorization: Bearer <TOKEN>' \
+          -H 'Content-Type: application/json' \
+          -d '{
+                "name": "my-room",
+                "egress": {
+                  "tracks": { "filepath": "{room_name}/{track_source}-{track_id}" }
+                }
+              }'
+        ```
+
+    2. Use the [livekit-cli :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/intro/basics/cli/){:target="_blank"}:
+
+        Create a file at `egress.json` with the following content:
+
+        ```json
+        {
+          "filepath": "{room_name}/{track_source}-{track_id}"
+        }
+        ```
+
+        Then run the following commands:
+
+        ```bash
+        export LIVEKIT_URL=https://my-openvidu-host
+        export LIVEKIT_API_KEY=api-key
+        export LIVEKIT_API_SECRET=api-secret
+
+        lk room create --track-egress-file egress.json my-room
+        ```
+
+### Participant Passthrough
+
+A Room can also record the [Participant Passthrough files](#recording-files) of every participant who publishes, without transcoding, in either of two ways:
+
+- **Field `participant`** with `preset` set to `PASSTHROUGH`: one Participant Passthrough Egress per participant. See [One Egress per participant](#one-egress-per-participant).
+- **Field `room`** with layout `PARTICIPANT_PASSTHROUGH`: one Egress for the whole Room. See [One Egress for the whole Room](#one-egress-for-the-whole-room).
+
+[Recording a whole Room with Participant Passthrough](#recording-a-whole-room-with-participant-passthrough) compares them, with examples for every SDK.
+
+!!! tip
+    You can also include the same `egress` field in the `roomConfig` claim of [access tokens](./access-tokens.md#token-claims), in case you are letting participants create Rooms when they join.
+
+!!! warning
+    Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](../self-hosting/how-to-guides/enable-webhooks.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](../troubleshooting/recording.md) when auto egress does not produce the expected output.
+
 ## Egress lifecycle
 
 ### Managing a running Egress
 
-The operations that **start** an Egress are the ones listed under [Egress types](#egress-types), one per type. Once an Egress is running, four more operations act on it, all of them identifying it by its `egress_id`:
+`StartEgress` **starts** an Egress with any of the [Egress sources](#egress-sources). Four more operations find and act on running Egress. The last three identify an Egress by its `egress_id`:
 
 <div class="nowrap-first-column" markdown>
 
@@ -1292,24 +2916,24 @@ The operations that **start** an Egress are the ones listed under [Egress types]
 | --- | --- |
 | [`ListEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#listegress){:target="_blank"} | Lists Egress, optionally filtered by Room or to only the active ones |
 | [`StopEgress` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#stopegress){:target="_blank"} | Stops an Egress before it ends on its own |
-| [`UpdateLayout` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatelayout){:target="_blank"} | Changes the layout of a running Room Composite Egress |
+| [`UpdateLayout` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatelayout){:target="_blank"} | Changes the layout of a running Egress whose custom template handles layout changes (see [Layouts and custom templates](#layouts-and-custom-templates)) |
 | [`UpdateStream` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#updatestream){:target="_blank"} | Adds or removes stream URLs on a running Egress |
 
 </div>
 
 ### EgressInfo
 
-Every one of those operations returns an [`EgressInfo` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#egressinfo){:target="_blank"}, and so does every Egress webhook. It is the complete state of an Egress at that moment:
+Every one of those operations returns an [`EgressInfo` :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/other/egress/api/#egressinfo){:target="_blank"} (`ListEgress`, a list of them), and so does every Egress webhook. It is the complete state of an Egress at that moment:
 
 ```json
 {
-  "egressId": "EG_AbCdEfGhIjKl",
-  "roomId": "RM_GmENxWJemFqL",
-  "roomName": "my-room",
+  "egress_id": "EG_AbCdEfGhIjKl",
+  "room_id": "RM_GmENxWJemFqL",
+  "room_name": "my-room",
   "status": "EGRESS_COMPLETE",
-  "startedAt": "1755678000000000000",
-  "endedAt": "1755681600000000000",
-  "fileResults": [
+  "started_at": "1755678000000000000",
+  "ended_at": "1755681600000000000",
+  "file_results": [
     {
       "filename": "my-room-recording.mp4",
       "location": "https://my-s3-endpoint/my-bucket/my-room-recording.mp4",
@@ -1317,18 +2941,18 @@ Every one of those operations returns an [`EgressInfo` :fontawesome-solid-extern
       "duration": "3600000000000"
     }
   ],
-  "backupStorageUsed": false
+  "backup_storage_used": false
 }
 ```
 
 The fields that matter most while an application is running:
 
-- `egressId`: the identifier every operation above takes.
+- `egress_id`: the identifier every operation above takes.
 - `status`: where the Egress is in its lifecycle. See [below](#status).
-- `startedAt`, `endedAt` and `updatedAt`: timestamps in **nanoseconds** (divide by 1,000,000 for milliseconds).
-- `fileResults`, `streamResults`, `segmentResults` and `imageResults`: one entry per output, carrying the final location, size and duration of what was produced. A Participant Passthrough Egress has one `fileResults` entry per file it produced.
-- `error`, `errorCode` and `details`: populated when something went wrong.
-- `backupStorageUsed`: the output was written to the node's disk instead of the upload target.
+- `started_at`, `ended_at` and `updated_at`: timestamps in **nanoseconds** (divide by 1,000,000 for milliseconds).
+- `file_results`, `stream_results`, `segment_results` and `image_results`: one entry per output, carrying the final location, size and duration of what was produced. A Participant Passthrough Egress has one `file_results` entry per file it produced.
+- `error`, `error_code` and `details`: populated when something went wrong.
+- `backup_storage_used`: the output was written to the node's disk instead of the upload target.
 
 ### Webhooks
 
@@ -1361,6 +2985,1188 @@ Rather than polling `ListEgress`, let OpenVidu tell you. Three [webhook events](
 </div>
 
 **A recording is only complete at `EGRESS_COMPLETE`.** Until then the file may not exist at its final location, and its `location` may not be final either. This is why an application waits for the `egress_ended` webhook rather than acting on the `EgressInfo` returned by `StopEgress`, which reports `EGRESS_ENDING`.
+
+## Recording examples
+
+The basic form of the most common recordings. All of them upload to the storage configured in OpenVidu: see [Storage](#storage) to send them elsewhere. For .NET, PHP and Rust, check the [SDK requirements](#starting-an-egress) first.
+
+### Record a whole Room with transcoding
+
+- Output: a single MP4 file with all participants, mixed and composited.
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    ```javascript
+    import { EgressClient, EncodedFileType, FileOutput, Output, StartEgressRequest, TemplateSource } from 'livekit-server-sdk';
+
+    const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: { case: 'template', value: new TemplateSource({ layout: 'grid' }) },
+      outputs: [new Output({
+        config: { case: 'file', value: new FileOutput({ fileType: EncodedFileType.MP4, filepath: 'my-room.mp4' }) },
+      })],
+    }));
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
+        RoomName: "my-room",
+        Source: &livekit.StartEgressRequest_Template{
+            Template: &livekit.TemplateSource{Layout: "grid"},
+        },
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{FileType: livekit.EncodedFileType_MP4, Filepath: "my-room.mp4"},
+            },
+        }},
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_room_composite_egress` method.
+
+    ```ruby
+    require 'livekit'
+
+    egress_client = LiveKit::EgressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    output = LiveKit::Proto::EncodedFileOutput.new(file_type: LiveKit::Proto::EncodedFileType::MP4, filepath: "my-room.mp4")
+    egress_info = egress_client.start_room_composite_egress("my-room", output, layout: "grid")
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    ```java
+    import io.livekit.server.EgressServiceClient;
+    import java.util.List;
+    import livekit.LivekitEgress;
+
+    EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    LivekitEgress.TemplateSource template = LivekitEgress.TemplateSource.newBuilder()
+            .setLayout("grid")
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFileType(LivekitEgress.EncodedFileType.MP4)
+                    .setFilepath("my-room.mp4"))
+            .build();
+
+    LivekitEgress.EgressInfo egressInfo = egressClient
+            .startEgress("my-room", template, List.of(output))
+            .execute().body();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
+            room_name="my-room",
+            template=api.TemplateSource(layout="grid"),
+            outputs=[api.Output(file=api.FileOutput(
+                file_type=api.EncodedFileType.MP4,
+                filepath="my-room.mp4",
+            ))],
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    ```rust
+    use livekit_api::services::egress::EgressClient;
+    use livekit_protocol as proto;
+
+    let egress_client = EgressClient::with_api_key("https://my-openvidu-host", "api-key", "api-secret");
+
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Template(proto::TemplateSource {
+            layout: "grid".to_string(),
+            ..Default::default()
+        })),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                file_type: proto::EncodedFileType::Mp4 as i32,
+                filepath: "my-room.mp4".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    The PHP SDK does not support method `StartEgress` yet, so this example uses its deprecated `startRoomCompositeEgress` method.
+
+    ```php
+    <?php
+    use Agence104\LiveKit\EgressServiceClient;
+    use Livekit\EncodedFileOutput;
+    use Livekit\EncodedFileType;
+
+    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $fileOutput = new EncodedFileOutput(['file_type' => EncodedFileType::MP4, 'filepath' => 'my-room.mp4']);
+    $egressInfo = $egressClient->startRoomCompositeEgress('my-room', 'grid', $fileOutput);
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var request = new StartEgressRequest
+    {
+        RoomName = "my-room",
+        Template = new TemplateSource { Layout = "grid" },
+    };
+    request.Outputs.Add(new Output
+    {
+        File = new FileOutput { FileType = EncodedFileType.Mp4, Filepath = "my-room.mp4" },
+    });
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    With a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+
+    ```bash
+    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
+      -H 'Authorization: Bearer <TOKEN>' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "room_name": "my-room",
+            "template": { "layout": "grid" },
+            "outputs": [
+              { "file": { "file_type": "MP4", "filepath": "my-room.mp4" } }
+            ]
+          }'
+    ```
+
+### Record an individual track
+
+- Output: a single file with one track as published, without transcoding (MP4 for H.264, WebM for VP8 and VP9, Ogg for Opus, and for AV1 the container of [your edition](#egress-outputs)).
+
+The examples record a video track. To record an audio track, replace `video_track_id` with an `audio` route matching its `track_id`.
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    ```javascript
+    import { EgressClient, EncodingOptionsPreset, FileOutput, MediaSource, Output, StartEgressRequest } from 'livekit-server-sdk';
+
+    const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: { case: 'media', value: new MediaSource({ video: { case: 'videoTrackId', value: 'TR_VCTvgyD3UtUSDJ' } }) },
+      encoding: { case: 'preset', value: EncodingOptionsPreset.PASSTHROUGH },
+      outputs: [new Output({
+        config: { case: 'file', value: new FileOutput({ filepath: '{room_name}/{track_source}-{track_id}' }) },
+      })],
+    }));
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
+        RoomName: "my-room",
+        Source: &livekit.StartEgressRequest_Media{
+            Media: &livekit.MediaSource{
+                Video: &livekit.MediaSource_VideoTrackId{VideoTrackId: "TR_VCTvgyD3UtUSDJ"},
+            },
+        },
+        Encoding: &livekit.StartEgressRequest_Preset{Preset: livekit.EncodingOptionsPreset_PASSTHROUGH},
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{Filepath: "{room_name}/{track_source}-{track_id}"},
+            },
+        }},
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_track_egress` method, which records the same.
+
+    ```ruby
+    require 'livekit'
+
+    egress_client = LiveKit::EgressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    output = LiveKit::Proto::DirectFileOutput.new(filepath: "{room_name}/{track_source}-{track_id}")
+    egress_info = egress_client.start_track_egress("my-room", output, "TR_VCTvgyD3UtUSDJ")
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    ```java
+    import io.livekit.server.EgressServiceClient;
+    import java.util.List;
+    import livekit.LivekitEgress;
+
+    EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    LivekitEgress.MediaSource media = LivekitEgress.MediaSource.newBuilder()
+            .setVideoTrackId("TR_VCTvgyD3UtUSDJ")
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFilepath("{room_name}/{track_source}-{track_id}"))
+            .build();
+
+    LivekitEgress.EgressInfo egressInfo = egressClient
+            .startEgress("my-room", media, List.of(output),
+                    LivekitEgress.EncodingOptionsPreset.PASSTHROUGH)
+            .execute().body();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
+            room_name="my-room",
+            media=api.MediaSource(video_track_id="TR_VCTvgyD3UtUSDJ"),
+            preset=api.EncodingOptionsPreset.PASSTHROUGH,
+            outputs=[api.Output(file=api.FileOutput(
+                filepath="{room_name}/{track_source}-{track_id}",
+            ))],
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    ```rust
+    use livekit_api::services::egress::EgressClient;
+    use livekit_protocol as proto;
+
+    let egress_client = EgressClient::with_api_key("https://my-openvidu-host", "api-key", "api-secret");
+
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Media(proto::MediaSource {
+            video: Some(proto::media_source::Video::VideoTrackId("TR_VCTvgyD3UtUSDJ".to_string())),
+            ..Default::default()
+        })),
+        encoding: Some(proto::start_egress_request::Encoding::Preset(
+            proto::EncodingOptionsPreset::Passthrough as i32,
+        )),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                filepath: "{room_name}/{track_source}-{track_id}".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    The PHP SDK does not support method `StartEgress` yet, so this example uses its deprecated `startTrackEgress` method, which records the same.
+
+    ```php
+    <?php
+    use Agence104\LiveKit\EgressServiceClient;
+    use Livekit\DirectFileOutput;
+
+    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $fileOutput = new DirectFileOutput(['filepath' => '{room_name}/{track_source}-{track_id}']);
+    $egressInfo = $egressClient->startTrackEgress('my-room', $fileOutput, 'TR_VCTvgyD3UtUSDJ');
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var request = new StartEgressRequest
+    {
+        RoomName = "my-room",
+        Media = new MediaSource { VideoTrackId = "TR_VCTvgyD3UtUSDJ" },
+        Preset = EncodingOptionsPreset.Passthrough,
+    };
+    request.Outputs.Add(new Output
+    {
+        File = new FileOutput { Filepath = "{room_name}/{track_source}-{track_id}" },
+    });
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    With a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+
+    ```bash
+    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
+      -H 'Authorization: Bearer <TOKEN>' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "room_name": "my-room",
+            "media": { "video_track_id": "TR_VCTvgyD3UtUSDJ" },
+            "preset": "PASSTHROUGH",
+            "outputs": [
+              { "file": { "filepath": "{room_name}/{track_source}-{track_id}" } }
+            ]
+          }'
+    ```
+
+### Record all the tracks of a Room automatically
+
+- Output: one file per track published in the Room, each one as published, without transcoding, from the moment the Room is created.
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    ```javascript
+    import { AutoTrackEgress, RoomEgress, RoomServiceClient } from 'livekit-server-sdk';
+
+    const roomService = new RoomServiceClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const room = await roomService.createRoom({
+      name: 'my-room',
+      egress: new RoomEgress({
+        tracks: new AutoTrackEgress({ filepath: '{room_name}/{track_source}-{track_id}' }),
+      }),
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    roomClient := lksdk.NewRoomServiceClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    room, err := roomClient.CreateRoom(context.Background(), &livekit.CreateRoomRequest{
+        Name: "my-room",
+        Egress: &livekit.RoomEgress{
+            Tracks: &livekit.AutoTrackEgress{Filepath: "{room_name}/{track_source}-{track_id}"},
+        },
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    ```ruby
+    require 'livekit'
+
+    room_service = LiveKit::RoomServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    egress = LiveKit::Proto::RoomEgress.new(
+      tracks: LiveKit::Proto::AutoTrackEgress.new(filepath: "{room_name}/{track_source}-{track_id}")
+    )
+    room = room_service.create_room("my-room", egress: egress)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    The Kotlin SDK's `createRoom` takes no `egress` configuration. Call the Room Service API directly instead, as in the Server API tab.
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    room = await lkapi.room.create_room(
+        api.CreateRoomRequest(
+            name="my-room",
+            egress=api.RoomEgress(
+                tracks=api.AutoTrackEgress(filepath="{room_name}/{track_source}-{track_id}"),
+            ),
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    ```rust
+    use livekit_api::services::room::{CreateRoomOptions, RoomClient};
+    use livekit_protocol as proto;
+
+    let room_client = RoomClient::with_api_key("https://my-openvidu-host", "api-key", "api-secret");
+
+    let room = room_client.create_room(
+        "my-room",
+        CreateRoomOptions {
+            egress: Some(proto::RoomEgress {
+                tracks: Some(proto::AutoTrackEgress {
+                    filepath: "{room_name}/{track_source}-{track_id}".to_string(),
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+    ).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    ```php
+    <?php
+    use Agence104\LiveKit\RoomCreateOptions;
+    use Agence104\LiveKit\RoomServiceClient;
+    use Livekit\AutoTrackEgress;
+    use Livekit\RoomEgress;
+
+    $roomService = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $egress = new RoomEgress([
+        'tracks' => new AutoTrackEgress(['filepath' => '{room_name}/{track_source}-{track_id}']),
+    ]);
+    $room = $roomService->createRoom((new RoomCreateOptions())->setName('my-room')->setEgress($egress));
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var roomClient = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    Room room = await roomClient.CreateRoom(new CreateRoomRequest
+    {
+        Name = "my-room",
+        Egress = new RoomEgress
+        {
+            Tracks = new AutoTrackEgress { Filepath = "{room_name}/{track_source}-{track_id}" },
+        },
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    With a token carrying the [`roomCreate` grant](./access-tokens.md#video-grants):
+
+    ```bash
+    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
+      -H 'Authorization: Bearer <TOKEN>' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "name": "my-room",
+            "egress": {
+              "tracks": { "filepath": "{room_name}/{track_source}-{track_id}" }
+            }
+          }'
+    ```
+
+### Record a Participant with transcoding
+
+- Output: a single MP4 file with the participant's camera and audio.
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    ```javascript
+    import {
+      EgressClient,
+      EncodedFileType,
+      FileOutput,
+      MediaSource,
+      Output,
+      ParticipantVideo,
+      StartEgressRequest,
+    } from 'livekit-server-sdk';
+
+    const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: {
+        case: 'media',
+        value: new MediaSource({
+          video: { case: 'participantVideo', value: new ParticipantVideo({ identity: 'alice' }) },
+          audio: { routes: [{ match: { case: 'participantIdentity', value: 'alice' } }] },
+        }),
+      },
+      outputs: [new Output({
+        config: { case: 'file', value: new FileOutput({ fileType: EncodedFileType.MP4, filepath: 'alice.mp4' }) },
+      })],
+    }));
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
+        RoomName: "my-room",
+        Source: &livekit.StartEgressRequest_Media{
+            Media: &livekit.MediaSource{
+                Video: &livekit.MediaSource_ParticipantVideo{
+                    ParticipantVideo: &livekit.ParticipantVideo{Identity: "alice"},
+                },
+                Audio: &livekit.AudioConfig{
+                    Routes: []*livekit.AudioRoute{{
+                        Match: &livekit.AudioRoute_ParticipantIdentity{ParticipantIdentity: "alice"},
+                    }},
+                },
+            },
+        },
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{FileType: livekit.EncodedFileType_MP4, Filepath: "alice.mp4"},
+            },
+        }},
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_participant_egress` method, which records the same but ends when the participant leaves the Room.
+
+    ```ruby
+    require 'livekit'
+
+    egress_client = LiveKit::EgressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    output = LiveKit::Proto::EncodedFileOutput.new(file_type: LiveKit::Proto::EncodedFileType::MP4, filepath: "alice.mp4")
+    egress_info = egress_client.start_participant_egress("my-room", "alice", output)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    ```java
+    import io.livekit.server.EgressServiceClient;
+    import java.util.List;
+    import livekit.LivekitEgress;
+
+    EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    LivekitEgress.MediaSource media = LivekitEgress.MediaSource.newBuilder()
+            .setParticipantVideo(LivekitEgress.ParticipantVideo.newBuilder()
+                    .setIdentity("alice"))
+            .setAudio(LivekitEgress.AudioConfig.newBuilder()
+                    .addRoutes(LivekitEgress.AudioRoute.newBuilder()
+                            .setParticipantIdentity("alice")))
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFileType(LivekitEgress.EncodedFileType.MP4)
+                    .setFilepath("alice.mp4"))
+            .build();
+
+    LivekitEgress.EgressInfo egressInfo = egressClient
+            .startEgress("my-room", media, List.of(output))
+            .execute().body();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
+            room_name="my-room",
+            media=api.MediaSource(
+                participant_video=api.ParticipantVideo(identity="alice"),
+                audio=api.AudioConfig(
+                    routes=[api.AudioRoute(participant_identity="alice")],
+                ),
+            ),
+            outputs=[api.Output(file=api.FileOutput(
+                file_type=api.EncodedFileType.MP4,
+                filepath="alice.mp4",
+            ))],
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    ```rust
+    use livekit_api::services::egress::EgressClient;
+    use livekit_protocol as proto;
+
+    let egress_client = EgressClient::with_api_key("https://my-openvidu-host", "api-key", "api-secret");
+
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Media(proto::MediaSource {
+            video: Some(proto::media_source::Video::ParticipantVideo(proto::ParticipantVideo {
+                identity: "alice".to_string(),
+                ..Default::default()
+            })),
+            audio: Some(proto::AudioConfig {
+                routes: vec![proto::AudioRoute {
+                    r#match: Some(proto::audio_route::Match::ParticipantIdentity(
+                        "alice".to_string(),
+                    )),
+                    ..Default::default()
+                }],
+                ..Default::default()
+            }),
+            ..Default::default()
+        })),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                file_type: proto::EncodedFileType::Mp4 as i32,
+                filepath: "alice.mp4".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    The PHP SDK does not support method `StartEgress` yet, so this example uses its deprecated `startParticipantEgress` method, which records the same but ends when the participant leaves the Room. The file output goes inside an `EncodedOutputs`, which is the form this method accepts for files.
+
+    ```php
+    <?php
+    use Agence104\LiveKit\EgressServiceClient;
+    use Agence104\LiveKit\EncodedOutputs;
+    use Livekit\EncodedFileOutput;
+    use Livekit\EncodedFileType;
+
+    $egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $fileOutput = new EncodedFileOutput(['file_type' => EncodedFileType::MP4, 'filepath' => 'alice.mp4']);
+    $outputs = (new EncodedOutputs())->setFile($fileOutput);
+    $egressInfo = $egressClient->startParticipantEgress('my-room', 'alice', $outputs);
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var request = new StartEgressRequest
+    {
+        RoomName = "my-room",
+        Media = new MediaSource
+        {
+            ParticipantVideo = new ParticipantVideo { Identity = "alice" },
+            Audio = new AudioConfig
+            {
+                Routes = { new AudioRoute { ParticipantIdentity = "alice" } },
+            },
+        },
+    };
+    request.Outputs.Add(new Output
+    {
+        File = new FileOutput { FileType = EncodedFileType.Mp4, Filepath = "alice.mp4" },
+    });
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    With a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+
+    ```bash
+    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
+      -H 'Authorization: Bearer <TOKEN>' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "room_name": "my-room",
+            "media": {
+              "participant_video": { "identity": "alice" },
+              "audio": { "routes": [ { "participant_identity": "alice" } ] }
+            },
+            "outputs": [
+              { "file": { "file_type": "MP4", "filepath": "alice.mp4" } }
+            ]
+          }'
+    ```
+
+### Record a Participant without transcoding **PRO**{ .openvidu-tag .openvidu-pro-tag }
+
+- Output: a `.webm` or `.mkv` file with the participant's camera and microphone as published, one more per screen share or extra track, and a [manifest](#manifest-file) that lines them up.
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    ```javascript
+    import {
+      EgressClient,
+      EncodingOptionsPreset,
+      FileOutput,
+      MediaSource,
+      Output,
+      ParticipantVideo,
+      StartEgressRequest,
+    } from 'livekit-server-sdk';
+
+    const egressClient = new EgressClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const egressInfo = await egressClient.startEgress(new StartEgressRequest({
+      roomName: 'my-room',
+      source: {
+        case: 'media',
+        value: new MediaSource({
+          video: { case: 'participantVideo', value: new ParticipantVideo({ identity: 'alice' }) },
+          audio: { routes: [{ match: { case: 'participantIdentity', value: 'alice' } }] },
+        }),
+      },
+      encoding: { case: 'preset', value: EncodingOptionsPreset.PASSTHROUGH },
+      outputs: [new Output({
+        config: { case: 'file', value: new FileOutput({ filepath: 'alice' }) },
+      })],
+    }));
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    egressClient := lksdk.NewEgressClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    egressInfo, err := egressClient.StartEgress(context.Background(), &livekit.StartEgressRequest{
+        RoomName: "my-room",
+        Source: &livekit.StartEgressRequest_Media{
+            Media: &livekit.MediaSource{
+                Video: &livekit.MediaSource_ParticipantVideo{
+                    ParticipantVideo: &livekit.ParticipantVideo{Identity: "alice"},
+                },
+                Audio: &livekit.AudioConfig{
+                    Routes: []*livekit.AudioRoute{{
+                        Match: &livekit.AudioRoute_ParticipantIdentity{ParticipantIdentity: "alice"},
+                    }},
+                },
+            },
+        },
+        Encoding: &livekit.StartEgressRequest_Preset{Preset: livekit.EncodingOptionsPreset_PASSTHROUGH},
+        Outputs: []*livekit.Output{{
+            Config: &livekit.Output_File{
+                File: &livekit.FileOutput{Filepath: "alice"},
+            },
+        }},
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    The Ruby SDK does not support method `StartEgress` yet, so this example uses its deprecated `start_participant_egress` method, which records the same.
+
+    ```ruby
+    require 'livekit'
+
+    egress_client = LiveKit::EgressServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    output = LiveKit::Proto::EncodedFileOutput.new(filepath: "alice")
+    egress_info = egress_client.start_participant_egress(
+      "my-room",
+      "alice",
+      output,
+      preset: 8 # PASSTHROUGH, not yet a constant of this SDK
+    )
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    ```java
+    import io.livekit.server.EgressServiceClient;
+    import java.util.List;
+    import livekit.LivekitEgress;
+
+    EgressServiceClient egressClient = EgressServiceClient.createClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    LivekitEgress.MediaSource media = LivekitEgress.MediaSource.newBuilder()
+            .setParticipantVideo(LivekitEgress.ParticipantVideo.newBuilder()
+                    .setIdentity("alice"))
+            .setAudio(LivekitEgress.AudioConfig.newBuilder()
+                    .addRoutes(LivekitEgress.AudioRoute.newBuilder()
+                            .setParticipantIdentity("alice")))
+            .build();
+    LivekitEgress.Output output = LivekitEgress.Output.newBuilder()
+            .setFile(LivekitEgress.FileOutput.newBuilder()
+                    .setFilepath("alice"))
+            .build();
+
+    LivekitEgress.EgressInfo egressInfo = egressClient
+            .startEgress("my-room", media, List.of(output),
+                    LivekitEgress.EncodingOptionsPreset.PASSTHROUGH)
+            .execute().body();
+    ```
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    egress_info = await lkapi.egress.start_egress(
+        api.StartEgressRequest(
+            room_name="my-room",
+            media=api.MediaSource(
+                participant_video=api.ParticipantVideo(identity="alice"),
+                audio=api.AudioConfig(
+                    routes=[api.AudioRoute(participant_identity="alice")],
+                ),
+            ),
+            preset=api.EncodingOptionsPreset.PASSTHROUGH,
+            outputs=[api.Output(file=api.FileOutput(filepath="alice"))],
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    ```rust
+    use livekit_api::services::egress::EgressClient;
+    use livekit_protocol as proto;
+
+    let egress_client = EgressClient::with_api_key("https://my-openvidu-host", "api-key", "api-secret");
+
+    let egress_info = egress_client.start_egress(proto::StartEgressRequest {
+        room_name: "my-room".to_string(),
+        source: Some(proto::start_egress_request::Source::Media(proto::MediaSource {
+            video: Some(proto::media_source::Video::ParticipantVideo(proto::ParticipantVideo {
+                identity: "alice".to_string(),
+                ..Default::default()
+            })),
+            audio: Some(proto::AudioConfig {
+                routes: vec![proto::AudioRoute {
+                    r#match: Some(proto::audio_route::Match::ParticipantIdentity(
+                        "alice".to_string(),
+                    )),
+                    ..Default::default()
+                }],
+                ..Default::default()
+            }),
+            ..Default::default()
+        })),
+        encoding: Some(proto::start_egress_request::Encoding::Preset(
+            proto::EncodingOptionsPreset::Passthrough as i32,
+        )),
+        outputs: vec![proto::Output {
+            config: Some(proto::output::Config::File(proto::FileOutput {
+                filepath: "alice".to_string(),
+                ..Default::default()
+            })),
+            ..Default::default()
+        }],
+        ..Default::default()
+    }).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    The PHP SDK does not support method `StartEgress` yet, and its `startParticipantEgress` method cannot take a preset, so this example calls its generated Egress client with the deprecated `StartParticipantEgress` request, which records the same.
+
+    ```php
+    <?php
+    use Agence104\LiveKit\AccessToken;
+    use Agence104\LiveKit\AccessTokenOptions;
+    use Agence104\LiveKit\VideoGrant;
+    use Livekit\EgressClient;
+    use Livekit\EncodedFileOutput;
+    use Livekit\ParticipantEgressRequest;
+    use Twirp\Context;
+
+    $token = (new AccessToken("api-key", "api-secret"))
+        ->init((new AccessTokenOptions())->setTtl(600))
+        ->setGrant((new VideoGrant())->setRoomRecord())
+        ->toJwt();
+    $egressClient = new EgressClient("https://my-openvidu-host");
+
+    $egressInfo = $egressClient->StartParticipantEgress(
+        Context::withHttpRequestHeaders([], ['Authorization' => 'Bearer ' . $token]),
+        new ParticipantEgressRequest([
+            'room_name' => 'my-room',
+            'identity' => 'alice',
+            'preset' => 8, // PASSTHROUGH, not yet a constant of this SDK
+            'file_outputs' => [new EncodedFileOutput(['filepath' => 'alice'])],
+        ])
+    );
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var egressClient = new EgressServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var request = new StartEgressRequest
+    {
+        RoomName = "my-room",
+        Media = new MediaSource
+        {
+            ParticipantVideo = new ParticipantVideo { Identity = "alice" },
+            Audio = new AudioConfig
+            {
+                Routes = { new AudioRoute { ParticipantIdentity = "alice" } },
+            },
+        },
+        Preset = EncodingOptionsPreset.Passthrough,
+    };
+    request.Outputs.Add(new Output { File = new FileOutput { Filepath = "alice" } });
+    EgressInfo egressInfo = await egressClient.StartEgress(request);
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    With a token carrying the [`roomRecord` grant](./access-tokens.md#video-grants):
+
+    ```bash
+    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
+      -H 'Authorization: Bearer <TOKEN>' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "room_name": "my-room",
+            "media": {
+              "participant_video": { "identity": "alice" },
+              "audio": { "routes": [ { "participant_identity": "alice" } ] }
+            },
+            "preset": "PASSTHROUGH",
+            "outputs": [
+              { "file": { "filepath": "alice" } }
+            ]
+          }'
+    ```
+
+### Record a whole Room without transcoding automatically **PRO**{ .openvidu-tag .openvidu-pro-tag }
+
+- Output: the [Participant Passthrough files](#recording-files) of every participant who publishes, as published, and one [manifest](#manifest-file) for the whole Room.
+
+=== ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
+
+    ```javascript
+    import { EncodedFileOutput, RoomCompositeEgressRequest, RoomEgress, RoomServiceClient } from 'livekit-server-sdk';
+
+    const roomService = new RoomServiceClient('https://my-openvidu-host', 'api-key', 'api-secret');
+
+    const room = await roomService.createRoom({
+      name: 'my-room',
+      egress: new RoomEgress({
+        room: new RoomCompositeEgressRequest({
+          layout: 'PARTICIPANT_PASSTHROUGH',
+          fileOutputs: [new EncodedFileOutput({ filepath: '{room_name}/{publisher_identity}-{time}' })],
+        }),
+      }),
+    });
+    ```
+
+=== ":simple-goland:{.icon .lg-icon .tab-icon} Go"
+
+    ```go
+    import (
+      "context"
+
+      livekit "github.com/livekit/protocol/livekit"
+      lksdk "github.com/livekit/server-sdk-go/v2"
+    )
+
+    roomClient := lksdk.NewRoomServiceClient("https://my-openvidu-host", "api-key", "api-secret")
+
+    room, err := roomClient.CreateRoom(context.Background(), &livekit.CreateRoomRequest{
+        Name: "my-room",
+        Egress: &livekit.RoomEgress{
+            Room: &livekit.RoomCompositeEgressRequest{
+                Layout: "PARTICIPANT_PASSTHROUGH",
+                FileOutputs: []*livekit.EncodedFileOutput{{
+                    Filepath: "{room_name}/{publisher_identity}-{time}",
+                }},
+            },
+        },
+    })
+    ```
+
+=== ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
+
+    ```ruby
+    require 'livekit'
+
+    room_service = LiveKit::RoomServiceClient.new("https://my-openvidu-host", api_key: "api-key", api_secret: "api-secret")
+
+    egress = LiveKit::Proto::RoomEgress.new(
+      room: LiveKit::Proto::RoomCompositeEgressRequest.new(
+        layout: "PARTICIPANT_PASSTHROUGH",
+        file_outputs: [LiveKit::Proto::EncodedFileOutput.new(filepath: "{room_name}/{publisher_identity}-{time}")]
+      )
+    )
+    room = room_service.create_room("my-room", egress: egress)
+    ```
+
+=== ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
+
+    The Kotlin SDK's `createRoom` takes no `egress` configuration. Call the Room Service API directly instead, as in the Server API tab.
+
+=== ":fontawesome-brands-python:{.icon .lg-icon .tab-icon} Python"
+
+    ```python
+    from livekit import api
+
+    lkapi = api.LiveKitAPI(
+        url="https://my-openvidu-host", api_key="api-key", api_secret="api-secret"
+    )
+    room = await lkapi.room.create_room(
+        api.CreateRoomRequest(
+            name="my-room",
+            egress=api.RoomEgress(
+                room=api.RoomCompositeEgressRequest(
+                    layout="PARTICIPANT_PASSTHROUGH",
+                    file_outputs=[api.EncodedFileOutput(
+                        filepath="{room_name}/{publisher_identity}-{time}",
+                    )],
+                ),
+            ),
+        )
+    )
+    ```
+
+=== ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
+
+    ```rust
+    use livekit_api::services::room::{CreateRoomOptions, RoomClient};
+    use livekit_protocol as proto;
+
+    let room_client = RoomClient::with_api_key("https://my-openvidu-host", "api-key", "api-secret");
+
+    let room = room_client.create_room(
+        "my-room",
+        CreateRoomOptions {
+            egress: Some(proto::RoomEgress {
+                room: Some(proto::RoomCompositeEgressRequest {
+                    layout: "PARTICIPANT_PASSTHROUGH".to_string(),
+                    file_outputs: vec![proto::EncodedFileOutput {
+                        filepath: "{room_name}/{publisher_identity}-{time}".to_string(),
+                        ..Default::default()
+                    }],
+                    ..Default::default()
+                }),
+                ..Default::default()
+            }),
+            ..Default::default()
+        },
+    ).await?;
+    ```
+
+=== ":simple-php:{.icon .lg-icon .tab-icon} PHP"
+
+    ```php
+    <?php
+    use Agence104\LiveKit\RoomCreateOptions;
+    use Agence104\LiveKit\RoomServiceClient;
+    use Livekit\EncodedFileOutput;
+    use Livekit\RoomCompositeEgressRequest;
+    use Livekit\RoomEgress;
+
+    $roomService = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    $egress = new RoomEgress([
+        'room' => new RoomCompositeEgressRequest([
+            'layout' => 'PARTICIPANT_PASSTHROUGH',
+            'file_outputs' => [new EncodedFileOutput(['filepath' => '{room_name}/{publisher_identity}-{time}'])],
+        ]),
+    ]);
+    $room = $roomService->createRoom((new RoomCreateOptions())->setName('my-room')->setEgress($egress));
+    ```
+
+=== ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
+
+    ```csharp
+    using Livekit.Server.Sdk.Dotnet;
+
+    var roomClient = new RoomServiceClient("https://my-openvidu-host", "api-key", "api-secret");
+
+    var roomComposite = new RoomCompositeEgressRequest { Layout = "PARTICIPANT_PASSTHROUGH" };
+    roomComposite.FileOutputs.Add(new EncodedFileOutput { Filepath = "{room_name}/{publisher_identity}-{time}" });
+    Room room = await roomClient.CreateRoom(new CreateRoomRequest
+    {
+        Name = "my-room",
+        Egress = new RoomEgress { Room = roomComposite },
+    });
+    ```
+
+=== ":material-api:{.icon .lg-icon .tab-icon} Server API"
+
+    With a token carrying the [`roomCreate` grant](./access-tokens.md#video-grants):
+
+    ```bash
+    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
+      -H 'Authorization: Bearer <TOKEN>' \
+      -H 'Content-Type: application/json' \
+      -d '{
+            "name": "my-room",
+            "egress": {
+              "room": {
+                "layout": "PARTICIPANT_PASSTHROUGH",
+                "file_outputs": [
+                  { "filepath": "{room_name}/{publisher_identity}-{time}" }
+                ]
+              }
+            }
+          }'
+    ```
 
 ## Related
 

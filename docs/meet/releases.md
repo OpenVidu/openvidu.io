@@ -7,6 +7,101 @@ page_features:
 
 # OpenVidu Meet release notes
 
+## 3.10.0
+
+!!! info "For the Release Notes of OpenVidu Platform 3.10.0, please visit here: [OpenVidu Platform 3.10.0 :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/docs/releases/#3100){:target="_blank" .platform-link-color}"
+
+OpenVidu Meet 3.10.0 brings live streaming (to YouTube, Twitch or any RTMP server) straight from a meeting. Administrators can also decide who gets in a meeting with locked rooms, and participants may raise their hand or react without interrupting the speaker. Embedded applications get more control than ever, the interface is more polished, and a broad round of security fixes makes every meeting safer.
+
+### Added
+
+#### Integration
+
+- **Live broadcasting:** Added support for streaming meetings to one or more RTMP destinations. Includes the new `broadcastControl` and `broadcastEdit` permissions. See the [Live Broadcast documentation](https://openvidu.io/3.10/meet/features/meetings/live-broadcast/).
+    - **Room config:** enabled per room with `config.broadcast`, which also holds the room's saved destinations. It is disabled by default.
+    - **REST API:** the new `/api/v1/broadcasts` endpoints start, list, read and stop broadcasts. See [`broadcastStart` :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/broadcastStart){:target="_blank"}.
+    - **Embedded commands:** `broadcastStart`, `broadcastStop` and `broadcastStopAll`.
+    - **Webhooks and embedded events:** `broadcastStarted`, `broadcastUpdated` and `broadcastEnded`.
+- **Locked rooms:** Added support for restricting room access and managing participants through a waiting room. Configured via `access.lock`. Includes the new `accessBypassLock` permission, to join without waiting, and `waitingParticipantAdmin`, to admit and reject those who wait. See the [Room Access documentation](https://openvidu.io/3.10/meet/features/rooms/access/#locked-room).
+    - **REST API:** the new `/api/v1/meetings/{roomId}/waiting-participants` endpoints list, read, admit and reject waiting participants. See [`waitingParticipantList` :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantList){:target="_blank"}.
+    - **Embedded commands:** `waitingParticipantAdmit`, `waitingParticipantAdmitAll`, `waitingParticipantReject` and `waitingParticipantRejectAll`.
+    - **Webhooks and embedded events:** `waitingParticipantKnocked` and `waitingParticipantStatusChanged`. Embedded applications also get the whole waiting list in the `waitingParticipantListUpdated` event.
+- **Raise hand:** Added support for participants to raise and lower their hands. Includes the new `participantLowerHand` permission, needed only to lower someone else's hand. See the [Raise Hand documentation](https://openvidu.io/3.10/meet/features/meetings/raise-hand/).
+    - **Room config:** enabled per room with `config.raiseHand`. It is enabled by default.
+    - **REST API:** [`participantUpdateHand` :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/participantUpdateHand){:target="_blank"} raises or lowers the hand of a participant, and [`participantLowerAllHands` :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/participantLowerAllHands){:target="_blank"} lowers every raised hand.
+    - **Embedded commands:** `participantRaiseHand`, `participantLowerHand` and `participantLowerAllHands`.
+    - **Webhook and embedded event:** `participantHandChanged`.
+- **Reactions:** Added support for participants to send reactions during meetings. Includes the new `participantSendReaction` permission. See the [Reactions documentation](https://openvidu.io/3.10/meet/features/meetings/reactions/).
+    - **Room config:** enabled per room with `config.reactions`. It is enabled by default.
+    - **Embedded command and event:** `participantSendReaction` sends a reaction, and `participantReactionSent` reports every reaction sent in the meeting.
+- **Participant roles:** Added the `participantUpdateRole` command to promote or demote participants. Role changes are reported by the new `participantRoleChanged` webhook and embedded event. See the [Participant Role documentation](https://openvidu.io/3.10/meet/features/meetings/role-management/#embedded).
+- **Recording controls:** Added the `recordingStart` and `recordingStop` embedded commands, and the `recordingStarted`, `recordingUpdated` and `recordingEnded` embedded events. See the Web Component [commands](https://openvidu.io/3.10/meet/embedded/reference/webcomponent/#commands) and [events](https://openvidu.io/3.10/meet/embedded/reference/webcomponent/#events).
+- **Language settings:** Added the `language` and `show-language-selector` embedded attributes.
+- **Meeting information:** Extended `meetingGet` to include participant and waiting room information. User responses now include `isRootAdmin`.
+- **New permissions in existing rooms:** The six new permissions do not all reach the rooms and room members created before 3.10.0:
+    - `accessBypassLock`, `waitingParticipantAdmin` and `participantLowerHand` are granted to the `Moderator` role, in existing rooms and members too.
+    - `participantSendReaction` is granted to the `Moderator` and `Speaker` roles, in existing rooms and members too.
+    - `broadcastControl` and `broadcastEdit` are granted to the `Moderator` role of rooms created from 3.10.0 on. Rooms and members created before need them granted explicitly.
+
+#### UI
+
+- **Live broadcasting:** Added broadcast configuration to the room wizard and live broadcast indicators during meetings.
+- **Locked rooms:** Added waiting room screens and participant management indicators, along with room access configuration in the room wizard.
+- **Participant interactions:** Added raise hand and reactions to the meeting interface.
+- **Device setup:** Improved the device setup screen with microphone level indicators and separate controls for camera, microphone and background effects.
+- **Room members:** Added a Regenerate link action to the Room Members tab that gives an identified guest a link of the current form, keeping their `memberId`.
+
+#### Deployment
+
+- **Live broadcasting:** Requires OpenVidu Egress to be enabled.
+- **Azure Blob Storage:** Added support for managed identity authentication, allowing deployments to authenticate without configuring an account key.
+
+### Improved
+
+#### Integration
+
+- **Participant information:** Participants now report their `type` (`user`, `identified_guest` or `anonymous`) in the REST API, webhooks and embedded events, and whether their hand is raised (`handRaised` and `handRaiseDate`). The embedded `participantLeft` event now includes `leaveReason`, as the `participantLeft` webhook already did. See the [Participant API documentation :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/participantList){:target="_blank"}.
+- **Permission dependencies:** Improved permission validation to ensure that related permissions, such as `chatRead` and `chatWrite`, are used consistently.
+- **Recording management:** Enhanced `recordingList` to support filtering by multiple statuses. See the [Recording API documentation :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/recordingList){:target="_blank"}.
+
+#### UI
+
+- **Meeting settings:** Reorganized settings into three tabs (Audio & video, Layout and General), with previews for camera and microphone changes.
+- **Audio quality:** Improved microphone audio quality and screen-sharing audio capture.
+- **Console lists:** Improved list navigation and usability, including key figures, persistent search and filters, URL-based state and more responsive loading.
+- **Console overview:** Added room and recording statistics grouped by status, with automatic refresh.
+
+### Fixed
+
+#### Integration
+
+- **Access security:** Fixed several issues affecting room access, guest links and authentication. Room member tokens are now invalidated when access rights or roles change, guest access links use independent secrets, and user tokens are revoked after logout or password changes.
+- **API authorization:** Fixed access control issues affecting room and recording links, chat functionality and participant information. Sensitive resources and operations are now properly protected by server-side permission checks.
+- **Room and participant management:** Fixed issues with room status changes, member permissions, moderation requests and participant removal during meetings.
+- **Recording management:** Fixed issues affecting recording lifecycle events, playback and downloads, including failed recording processes and large or cancelled ZIP downloads. Improved access restrictions and bulk operation handling.
+- **Meeting lifecycle and events:** Fixed inconsistencies in meeting and participant events, including incorrect timestamps and leave reasons, as well as duplicate events caused by concurrent operations.
+- **API consistency:** Fixed incorrect HTTP status codes, access-related error responses, pagination filters and scope handling. Bulk recording operations are now limited to 100 items.
+- **Embedded integration:** Fixed event listener registration, iframe communication, command handling, redirection and isolation issues in the `<openvidu-meet>` component.
+- **Captions and encryption:** Fixed an issue that allowed live captions to be enabled in rooms using end-to-end encryption.
+- **Configuration and validation:** Fixed issues with recording-only mode and invalid participant data.
+
+#### UI
+
+- **Meeting state:** Fixed issues where recording indicators, chat messages and room information could carry over between meetings in the same tab or embedded component.
+- **Participant management:** Fixed issues with role and permission updates, participant reconnections and system notifications.
+- **Meeting controls:** Fixed issues affecting microphone and recording controls, fullscreen menus and chat interactions.
+- **Responsive layout:** Fixed toolbar, status rail and notification overflow issues on narrow screens and mobile devices.
+- **Chat and captions:** Fixed issues with links, message sending and caption display when multiple speakers are present. Also prevented participants from impersonating system messages.
+- **Recording permissions:** Fixed an issue that exposed playback and sharing actions to users without the required permissions.
+- **Console:** Fixed issues with administrator protection, navigation, overview error handling, translations and API key information.
+
+#### Deployment
+
+- **Proxy configuration:** Fixed an issue where certain IPv4-mapped IPv6 subnet configurations could cause untrusted clients to be treated as trusted proxies.
+- **Request handling:** Fixed a server stability issue caused by malformed compressed request bodies.
+- **Azure storage:** Fixed playback, download and deletion of recordings stored in Azure Blob Storage, including recordings stored in subdirectories.
+- **URL configuration:** Fixed access URL generation when using custom ports or base paths through `MEET_BASE_URL` and `MEET_BASE_PATH`.
+
 ## 3.9.0
 
 !!! info "For the Release Notes of OpenVidu Platform 3.9.0, please visit here: [OpenVidu Platform 3.9.0 :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.9/docs/releases/#390){:target="_blank" .platform-link-color}"

@@ -285,16 +285,16 @@ Every key can also be set with an environment variable of OpenVidu Server named 
 OpenVidu comes with other services configured to work in the deployment. These are the configuration files for each service.
 
 !!! info
-    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.9.0). To see the version number of each service, refer to the *"Version table"* of release 3.9.0 on the [Releases](../../releases.md) page.
+    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.10.0). To see the version number of each service, refer to the *"Version table"* of release 3.10.0 on the [Releases](../../releases.md) page.
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
-| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.13.7/config-sample.yaml){:target="_blank"}</li></ul>
-| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/e9330a4#config){:target="_blank"} |
-| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/a9d870c#config){:target="_blank"} |
+| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.13.11/config-sample.yaml){:target="_blank"}</li></ul>
+| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/1f99030#config){:target="_blank"} |
+| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/11c61d3#config){:target="_blank"} |
 | **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json){:target="_blank"} |
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/v12.4/setup-grafana/configure-grafana/){:target="_blank"} |
 | **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.2.x/configure/){:target="_blank"} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.7.x/configure/){:target="_blank"} |
-| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.14/configuration/configuration/){:target="_blank"} |
-| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://archive.grafana.com/docs/alloy/v1.19/configure/){:target="_blank"} |
+| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.16/configuration/configuration/){:target="_blank"} |
+| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/alloy/v1.22/configure/){:target="_blank"} |

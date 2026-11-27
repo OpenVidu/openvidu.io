@@ -60,7 +60,7 @@ There are not enough free CPU cores to start a new egress.
 **Solutions**
 
 - Scale out your OpenVidu deployment: deploy it in nodes with more CPU cores or add more Media Nodes to your cluster.
-- Consider using a less CPU intensive egress type: [Track Egress](../reference/egress.md#egress-types) does not require transcoding and composition, so it is much less CPU intensive than other egress types such as [Room Composite Egress](../reference/egress.md#egress-types).
+- Consider using a less CPU intensive egress type: [Track Egress](../reference/egress.md#egress-sources) does not require transcoding and composition, so it is much less CPU intensive than other egress types such as [Room Composite Egress](../reference/egress.md#egress-sources).
 - Review your [`egress.yaml` configuration file](../self-hosting/configuration/changing-config.md#config-files), specifically the properties within `cpu_cost`:
 
     ```yaml
@@ -251,7 +251,7 @@ By default, OpenVidu will kill active egresses under sustained high CPU load (se
 
 **Description**
 
-When recording individual tracks with [Track Egress](../reference/egress.md#egress-types) (on-demand via `StartTrackEgress`, or with per-track auto-egress), OpenVidu launches **one egress per published track, shortly after the track is published**. The recorder then needs a moment to connect to the room and subscribe to the track: usually well under a second, occasionally a little longer. If the track is unpublished during that window, the recorder never finds it, and the egress fails after waiting up to 30 seconds.
+When recording individual tracks with [Track Egress](../reference/egress.md#egress-sources) (on-demand via `StartTrackEgress`, or with per-track auto-egress), OpenVidu launches **one egress per published track, shortly after the track is published**. The recorder then needs a moment to connect to the room and subscribe to the track: usually well under a second, occasionally a little longer. If the track is unpublished during that window, the recorder never finds it, and the egress fails after waiting up to 30 seconds.
 
 The most common trigger is **participant reconnection**: when a client reconnects, its camera and microphone are republished with new track IDs, so the egress that was launched for the old track ID is orphaned. Other triggers are very short-lived publishes and quick unpublishes. This is a startup race tied to the track lifecycle, **not a capacity problem**.
 

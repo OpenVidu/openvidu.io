@@ -127,7 +127,7 @@ sudo rm /etc/openvidu/media-health.disabled
 
 !!! info "This only applies to OpenVidu High Availability"
 
-If 2 Master Nodes crash, the Egress process won't be able to use the Minio storage. This has different consequences depending on the [configured outputs](../../reference/egress.md#outputs) for your Egress process:
+If 2 Master Nodes crash, the Egress process won't be able to use the Minio storage. This has different consequences depending on the [configured outputs](../../reference/egress.md#egress-outputs) for your Egress process:
 
 - For **MP4, OGG or WEBM files**, if the Egress is stopped when 2 Master Nodes are down, the output files will not be uploaded to Minio.
 - For **HLS**, the segments will stop being uploaded to Minio. If you are consuming these segments from another process, note that new segments will stop appearing.
@@ -140,7 +140,7 @@ In both cases, files are not lost and can be recovered. They will be available i
 
 If the Media Node hosting an ongoing Egress process crashes, then the Egress process will be immediately interrupted. But as long as the disk of the crashed Media Node is still accessible, you may recover the output files. They will be available in the Media Node at path `/opt/openvidu/egress_data/home/egress/tmp`.
 
-It is possible that if the crashed Egress had **MP4** as [configured output](../../reference/egress.md#outputs) (which is an option available for [Room Composite](../../reference/egress.md#egress-types) and [Track Composite](../../reference/egress.md#egress-types)) the recovered file may not be directly playable and it may require a repair process.
+If the crashed Egress was writing an **MP4** file, the recovered file may not be directly playable and it may require a repair process. MP4 is a common [configured output](../../reference/egress.md#egress-outputs) of the [`template`, `web` and `media` sources](../../reference/egress.md#egress-sources), and the container that the `PASSTHROUGH` preset uses for H.264 tracks.
 
 <div class="second-slogan cta-section" data-sal="slide-up">
   <h2 class="cta-title">Need specific uptime or SLA guarantees?</h2>
