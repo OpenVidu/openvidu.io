@@ -17,6 +17,8 @@ E2EE can be enabled or disabled on a per-room basis when [creating](../rooms/man
 !!! warning "E2EE Limitations"
 
     - **Recording is not available** for encrypted rooms: the server cannot decrypt the content, so it cannot produce a [recording](../recordings/overview.md). To record, disable E2EE for the room.
+    - **Live broadcast is not available** for encrypted rooms either: the server cannot decrypt the meeting to stream it to a [live broadcast](live-broadcast.md) destination. Turning live broadcast on disables E2EE for the room.
+    - **Live captions are not available** for encrypted rooms: the captions assistant cannot decrypt the audio, so it cannot produce [live captions](live-captions.md). Turning E2EE on turns live captions off for the room.
     - All participants must use **exactly the same passphrase** — there is no per-role or partial access.
 
 ## What is protected

@@ -34,7 +34,8 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Architecture with DNS Load Balancing](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-dlb-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Master Nodes act as Load Balancers, managing the traffic and distributing it among the other Master Nodes and Media Nodes.
     - Each Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -178,7 +179,7 @@ This command will output the following instructions, which you should follow:
 2. **Installation Commands for 'Master Nodes'**: This is the command needed to install your Master Node. It should look like this:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
         --no-tty --install \
         --deployment-type='ha' \
         --node-role='master-node' \
@@ -210,7 +211,7 @@ This command will output the following instructions, which you should follow:
 4. **Installation Commands for 'Media Nodes'**: This is the command needed to install your Media Nodes. It should look like this:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --deployment-type='ha' \
         --node-role='media-node' \
@@ -274,7 +275,7 @@ Each installation command for each type of node looks like this:
         Example using Let's Encrypt certificates:
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
@@ -312,7 +313,7 @@ Each installation command for each type of node looks like this:
         Example using self-signed certificates:
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
@@ -351,7 +352,7 @@ Each installation command for each type of node looks like this:
         CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
         CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
 
-        sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
@@ -390,7 +391,7 @@ Each installation command for each type of node looks like this:
     To install a Media Node, you can use the following command:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --node-role='media-node' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \

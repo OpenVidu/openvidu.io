@@ -55,8 +55,8 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`LIVEKIT_URL_PRIVATE`** | LiveKit URL for the OpenVidu Meet service to connect to the LiveKit server internally. This is used in High Availability deployments. |
 | **`LIVEKIT_API_KEY`** | LiveKit API Key for the OpenVidu Meet service to connect to the LiveKit server. |
 | **`LIVEKIT_API_SECRET`** | LiveKit API Secret for the OpenVidu Meet service to connect to the LiveKit server. |
-| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. |
-| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created. |
+| **`MEET_INITIAL_ADMIN_USER`** | Username for the Admin user of the OpenVidu Meet service. The user is created on start when it does not exist. It must be at least 5 characters long, or OpenVidu Meet does not start. |
+| **`MEET_INITIAL_ADMIN_PASSWORD`** | Password for the Admin user of the OpenVidu Meet service. Only used when the Admin user is created, and then it must be at least 5 characters long, or OpenVidu Meet does not start. |
 | **`MEET_INITIAL_API_KEY`** | API Key for the OpenVidu Meet service. This is used by applications developed with OpenVidu Meet. Registered on start when the service has no API key. |
 | **`MEET_ACCESS_TOKEN_EXPIRATION`** | Expiration time for access tokens issued by OpenVidu Meet. Default is `2h`. |
 | **`MEET_REFRESH_TOKEN_EXPIRATION`** | Expiration time for refresh tokens issued by OpenVidu Meet. Default is `1d`. |
@@ -65,9 +65,9 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_REFRESH_TOKEN_ROTATION_ENABLED`** | If `true`, refresh tokens are rotated when used by OpenVidu Meet. Default is `true`. |
 | **`MEET_INITIAL_WEBHOOK_ENABLED`** | If `true`, the [webhook](../../../meet/embedded/reference/webhooks.md) registered from `MEET_INITIAL_WEBHOOK_URL` starts active (it also requires `MEET_INITIAL_API_KEY`, which signs the deliveries); otherwise it starts paused. Only used when the webhook is registered. |
 | **`MEET_INITIAL_WEBHOOK_URL`** | URL of the first webhook registered in the OpenVidu Meet service, receiving every event of every room. More webhooks can be registered later from the OpenVidu Meet app or the REST API.|
-| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage). Default is `s3`. With `gcs`, OpenVidu Meet uses the bucket of `MEET_S3_BUCKET` and the path of `MEET_S3_SUBBUCKET`, and authenticates with Google Application Default Credentials: the service account key file named by `GOOGLE_APPLICATION_CREDENTIALS`, or else the service account attached to the machine. |
+| **`MEET_BLOB_STORAGE_MODE`** | Storage mode for saving blobs in OpenVidu Meet. Valid values are: `s3` (S3 bucket), `abs` (Azure Blob Storage) and `gcs` (Google Cloud Storage), in any letter case. Default is `s3`. With any other value, OpenVidu Meet does not start. With `gcs`, OpenVidu Meet uses the bucket of `MEET_S3_BUCKET` and the path of `MEET_S3_SUBBUCKET`, and authenticates with Google Application Default Credentials: the service account key file named by `GOOGLE_APPLICATION_CREDENTIALS`, or else the service account attached to the machine. |
 | **`MEET_S3_BUCKET`** | S3 bucket name for OpenVidu Meet service. It is used to store recordings. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the Google Cloud Storage bucket. Default is `openvidu-appdata`. |
-| **`MEET_S3_SUBBUCKET`** | Path inside the bucket where the recordings of OpenVidu Meet are stored. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the path inside the Google Cloud Storage bucket. With `abs`, the recordings are also written under this path, so it must have the same value as `MEET_AZURE_SUBCONTAINER_NAME`. Default is `openvidu-meet`. |
+| **`MEET_S3_SUBBUCKET`** | Path inside the bucket where the recordings of OpenVidu Meet are stored. With `MEET_BLOB_STORAGE_MODE` set to `gcs`, it is the path inside the Google Cloud Storage bucket. With `abs`, it has no effect: the path comes from `MEET_AZURE_SUBCONTAINER_NAME`. Default is `openvidu-meet`. |
 | **`MEET_S3_SERVICE_ENDPOINT`{.nowrap}** | S3 service endpoint for OpenVidu Meet service. |
 | **`MEET_S3_ACCESS_KEY`** | S3 access key for OpenVidu Meet service. |
 | **`MEET_S3_SECRET_KEY`** | S3 secret key for OpenVidu Meet service. |
@@ -77,9 +77,9 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_S3_SSE_KMS_KEY_ID`** | AWS KMS key ID for SSE-KMS encryption. **Required** when `MEET_S3_SSE_TYPE` is `SSE-KMS`, and not allowed otherwise. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
 | **`MEET_S3_SSE_KMS_ENCRYPTION_CONTEXT`** | Optional JSON object representing the KMS encryption context. **Only allowed with `SSE-KMS`**. Only validated, as explained for `MEET_S3_SSE_TYPE`. |
 | **`MEET_AZURE_CONTAINER_NAME`** | Azure Blob Storage container name for OpenVidu Meet service. It is used to store recordings. |
-| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path inside the Azure Blob Storage container from which OpenVidu Meet reads its recordings. The recordings are written under `MEET_S3_SUBBUCKET`, so both must have the same value. Default is `openvidu-meet`. |
+| **`MEET_AZURE_SUBCONTAINER_NAME`** | Path inside the Azure Blob Storage container where OpenVidu Meet stores its recordings. It decides both where new recordings are written and where they are read from. Default is `openvidu-meet`. |
 | **`MEET_AZURE_ACCOUNT_NAME`** | Azure Blob Storage account name for OpenVidu Meet service. |
-| **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. |
+| **`MEET_AZURE_ACCOUNT_KEY`** | Azure Blob Storage account key for OpenVidu Meet service. Leave it empty to authenticate with the managed identity of the VM or pod running Meet, which needs a data role on the storage account, such as Storage Blob Data Contributor. |
 | **`MEET_REDIS_HOST`** | Redis host used by the OpenVidu Meet service to store session data. |
 | **`MEET_REDIS_PORT`** | Redis port used by the OpenVidu Meet service to connect to the Redis server. |
 | **`MEET_REDIS_USERNAME`** | Redis username used by the OpenVidu Meet service to connect to the Redis server. |
@@ -91,6 +91,25 @@ This file defines the configuration parameters for the OpenVidu Meet service.
 | **`MEET_BASE_PATH`** | Base path where the OpenVidu Meet application is served. Default is `/meet`. |
 | **`MEET_CAPTIONS_ENABLED`** | Enable live captions in OpenVidu Meet using the OpenVidu Speech to Text agent. When set to `true`, participants can activate real-time speech-to-text transcription during meetings. Requires the Speech Processing Agent to be enabled. Default is `false`. See [Live Captions in OpenVidu Meet](../../../meet/features/meetings/live-captions.md). |
 | **`MEET_LOG_LEVEL`** | Log level for OpenVidu Meet service. Valid values are: `error`, `warn`, `info`, `verbose`, `debug`, `silly`. |
+
+</div>
+
+## `dashboard.env`
+
+This file defines the configuration parameters for the [OpenVidu Dashboard](../production-ready/observability/openvidu-dashboard.md) service. The OpenVidu installer fills in the parameters that connect the dashboard to the deployment (port, admin credentials from `openvidu.env`, MongoDB connection and, in OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }, the license). The following parameters are optional and can be added to the file:
+
+<div class="nowrap-first-column" markdown>
+
+| Parameter | Default | Description |
+| --------- | ------- | ----------- |
+| **`LOG_LEVEL`** | `info` | Log level of the service: `error`, `warn`, `info`, `http`, `verbose` or `debug`. |
+| **`DATABASE_TLS_CA_FILE`** | | Path, inside the container, to the PEM file of a private certificate authority for the MongoDB connection. It enables TLS. |
+| **`DASHBOARD_JWT_SECRET`** | Generated once and stored in MongoDB | Key that signs the session tokens, at least 32 bytes long. |
+| **`DASHBOARD_REFRESH_TOKEN_TTL`** | `604800` | Seconds a session lasts without use (7 days by default). |
+| **`DASHBOARD_COOKIE_SECURE`** | `auto` | Whether the session cookie requires HTTPS: `auto` (when the request is HTTPS), `true` or `false`. |
+| **`DASHBOARD_TRUST_PROXY`** | Private networks | Proxies whose `X-Forwarded-*` headers are trusted: `false`, a number of hops, or a comma-separated list of addresses and CIDR ranges. Login attempts are limited per client IP address, which the dashboard reads from these headers. |
+| **`DASHBOARD_LIST_TOTAL_MAX_RANGE`** | `7d` | Longest time range for which the lists count their total number of items and offer every sort order. |
+| **`DASHBOARD_ANALYTICS_CACHE_TTL`** | `60` | Seconds the Analytics page figures of completed periods are cached; `0` disables the cache. |
 
 </div>
 
@@ -155,14 +174,20 @@ openvidu:
         enabled: true # (2)
         mongo_url: mongodb://<MONGO_ADMIN_USERNAME>:<MONGO_ADMIN_PASSWORD>@localhost:20000/ # (3)
         interval: 10s # (4)
-        expiration: 768h # (5)
+        retention: # (5)
+            events: 7d
+            stats: 7d
+            tracks: 7d
+            entities: 90d
+            rollups_5min: 7d
+            rollups_hourly: 400d
 ```
 
 1. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 2. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
 3. MongoDB connection string. In OpenVidu Single Node, the MongoDB service is running on the same machine, so you can use `localhost` as the hostname. The default port in OpenVidu for MongoDB is `20000`. `MONGO_ADMIN_USERNAME` and `MONGO_ADMIN_PASSWORD` are the credentials to access the MongoDB database.
 4. Time interval to send analytics data to MongoDB.
-5. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
+5. Time to keep each class of analytics data in MongoDB: raw events, statistics, closed tracks and subscriptions, closed rooms, participants, egresses and ingresses, and 5-minute and hourly rollups. Daily rollups are kept forever unless `rollups_daily` is set. See [Analytics settings](#analytics-settings).
 
 ### **PRO**{ .openvidu-tag .openvidu-pro-tag } OpenVidu Server Configuration:
 
@@ -179,7 +204,13 @@ openvidu:
     analytics: # (3)
         enabled: true # (4)
         interval: 10s # (5)
-        expiration: 768h # (6)
+        retention: # (6)
+            events: 7d
+            stats: 7d
+            tracks: 7d
+            entities: 90d
+            rollups_5min: 7d
+            rollups_hourly: 400d
         mongo_url: <MONGO_URL> # (7)
     rtc:
         engine: mediasoup # (8)
@@ -194,7 +225,7 @@ openvidu:
 3. The `analytics` configuration should be defined at the `openvidu` level in the `livekit.yaml` file.
 4. This must be set to `true` to send analytics data to MongoDB. If set to `false`, no analytics data will be sent.
 5. Time interval to send analytics data to MongoDB.
-6. Time to keep the analytics data in MongoDB. In this example, it is set to 32 days.
+6. Time to keep each class of analytics data in MongoDB: raw events, statistics, closed tracks and subscriptions, closed rooms, participants, egresses and ingresses, and 5-minute and hourly rollups. Daily rollups are kept forever unless `rollups_daily` is set. See [Analytics settings](#analytics-settings).
 7. MongoDB URL. This is the connection string to the MongoDB database where the analytics data will be stored.
 8. The `rtc.engine` parameter is set to `mediasoup` by default. This is the WebRTC engine used by OpenVidu. Depending on your requirements, you can use:
     - `mediasoup`
@@ -208,21 +239,62 @@ openvidu:
     - Valid values are: `info`, `ice`, `dtls`, `rtp`, `srtp`, `rtcp`, `rtx`, `bwe`, `score`, `simulcast`, `svc`, `sctp`, `message`.
     - Default is `[info, ice, rtp, rtcp, message]`.
 
+### Analytics settings
+
+Every key of the `openvidu.analytics` section of `livekit.yaml`. OpenVidu Server writes the analytics data to MongoDB, and [OpenVidu Dashboard](../production-ready/observability/openvidu-dashboard.md#analytics-data) reads it from there.
+
+<div class="nowrap-first-column" markdown>
+
+| Key | Default | Description |
+| --- | --- | --- |
+| **`enabled`** | `false` | Write analytics data to MongoDB. Every OpenVidu installation sets it to `true`. |
+| **`mongo_url`** | | MongoDB connection string. Analytics needs MongoDB: with a database that is only compatible with it, such as Amazon DocumentDB, OpenVidu Server starts with analytics disabled and logs why. |
+| **`database`** | `openvidu` | MongoDB database. |
+| **`interval`** | `10s` | Period of the writes to MongoDB, from `1s` to `60s`. |
+| **`retention.events`** | `7d` | Time raw events are kept. |
+| **`retention.stats`** | `7d` | Time the statistics of participants and tracks are kept. |
+| **`retention.tracks`** | `7d` | Time closed tracks and subscriptions are kept. |
+| **`retention.entities`** | `90d` | Time closed rooms, participants, egresses and ingresses are kept. At least `2d`. |
+| **`retention.rollups_5min`** | `7d` | Time 5-minute rollups are kept. |
+| **`retention.rollups_hourly`** | `400d` | Time hourly rollups are kept. |
+| **`retention.rollups_daily`** | Forever | Time daily rollups are kept. It cannot be shorter than `retention.rollups_hourly`. |
+| **`stats_detail`** | `participant` in **COMMUNITY**{ .openvidu-tag .openvidu-community-tag }, `track` in **PRO**{ .openvidu-tag .openvidu-pro-tag } | `participant` stores one statistics document per participant and direction every 30 seconds; `track`, one per track and direction. |
+| **`anonymize_ip`** | `true` | Leave client IP addresses out. Set it to `false` to store them. |
+| **`store_metadata`** | `false` | Store room and participant metadata and attributes. |
+| **`events.store_types`** | All but `TRACK_PUBLISHED_UPDATE`, `TRACK_MAX_SUBSCRIBED_VIDEO_QUALITY` and `TRACK_SUBSCRIBE_REQUESTED` | Event types kept as raw events, as a list. Every event updates rooms, participants and rollups whatever this list says. |
+| **`queue.max_events`** | `20000` | Events a node keeps in memory between two writes, at least `1000`. When the queue is full the new ones are dropped, and the server logs how many. |
+| **`queue.max_stats`** | `50000` | The same for statistics. |
+| **`validation_action`** | `warn` | What MongoDB does with a document that does not match the schema of its collection: `warn` stores it and logs a warning, `error` rejects it. |
+| **`reconciler.enabled`** | `true` | Close the rooms, participants, egresses and ingress sessions whose end event never arrived, for example because their node crashed. |
+| **`reconciler.interval`** | `60s` | Period of those checks. It cannot be shorter than `interval`. |
+| **`reconciler.max_closures_per_run`** | `500` | Entities closed in one check at most. |
+| **`migration.enabled`** | `true` | Migrate the analytics data of versions before 3.10 at the first start. |
+| **`migration.rate`** | `2000` | Documents migrated per second at most; `0` removes the limit. |
+| **`migration.batch_size`** | `500` | Documents migrated in each write, from `1` to `10000`. |
+| **`expiration`** | | **Deprecated**. Sets `retention.events` and `retention.stats` when neither is set. |
+| **`fixer_interval`** | | **Deprecated**. Sets `reconciler.interval` when it is not set. |
+
+</div>
+
+Durations are written as Go durations (`10s`, `168h`), as whole days (`7d`, `400d`) or as both (`1d12h`). A retention is at least `1h` and at most 2<sup>31</sup>−1 seconds (about 68 years), the limit of a MongoDB TTL index. OpenVidu Server does not start with an invalid value and names the key in its log.
+
+Every key can also be set with an environment variable of OpenVidu Server named `LIVEKIT_OPENVIDU_ANALYTICS_` plus the key in upper case, with `_` instead of `.`; for example, `LIVEKIT_OPENVIDU_ANALYTICS_RETENTION_EVENTS=30d`.
+
 ## Other Services Configuration
 
 OpenVidu comes with other services configured to work in the deployment. These are the configuration files for each service.
 
 !!! info
-    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.9.0). To see the version number of each service, refer to the *"Version table"* of release 3.9.0 on the [Releases](../../releases.md) page.
+    The links below point to the official documentation for each service, matching the exact versions used in this specific OpenVidu release (3.10.0). To see the version number of each service, refer to the *"Version table"* of release 3.10.0 on the [Releases](../../releases.md) page.
 
 | Service             | Description | Reference documentation |
 | ------------------- | ----------- | ------------------ |
-| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.13.7/config-sample.yaml){:target="_blank"}</li></ul>
-| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/e9330a4#config){:target="_blank"} |
-| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/a9d870c#config){:target="_blank"} |
+| **OpenVidu Server**     | Manage Rooms and Media Streams. | <ul><li>[OpenVidu Config](#livekityaml)</li><li>[LiveKit Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/blob/v1.13.11/config-sample.yaml){:target="_blank"}</li></ul>
+| **Egress Service**      | Exports video from OpenVidu rooms for recording or streaming. | [LiveKit Egress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/tree/1f99030#config){:target="_blank"} |
+| **Ingress Service**     | Imports video from other sources into OpenVidu rooms. | [LiveKit Ingress Config :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/tree/11c61d3#config){:target="_blank"} |
 | **Caddy Server** | Serves OpenVidu services and handles HTTPS. | [Caddy JSON Structure :fontawesome-solid-external-link:{.external-link-icon}](https://caddyserver.com/docs/json){:target="_blank"} |
 | **Grafana Service**     | Used for visualizing monitoring data. | [Grafana Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/grafana/v12.4/setup-grafana/configure-grafana/){:target="_blank"} |
 | **Mimir Service** | Service for long-term Prometheus storage | [Mimir Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/mimir/v3.2.x/configure/){:target="_blank"} |
 | **Loki Service**        | Used for log aggregation. | [Loki Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/loki/v3.7.x/configure/){:target="_blank"} |
-| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.14/configuration/configuration/){:target="_blank"} |
-| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://archive.grafana.com/docs/alloy/v1.19/configure/){:target="_blank"} |
+| **Prometheus Service**  | Used for monitoring. | [Prometheus Config :fontawesome-solid-external-link:{.external-link-icon}](https://prometheus.io/docs/prometheus/3.16/configuration/configuration/){:target="_blank"} |
+| **Alloy Service**    | Collects logs and sends them to Loki. | [Alloy Config :fontawesome-solid-external-link:{.external-link-icon}](https://grafana.com/docs/alloy/v1.22/configure/){:target="_blank"} |

@@ -22,9 +22,16 @@ Visit [OpenVidu Meet Webhooks :fontawesome-solid-external-link:{.external-link-i
 - [`meetingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/meetingEndedWebhook){:target="_blank"}
 - [`participantJoined` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantJoinedWebhook){:target="_blank"}
 - [`participantLeft` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantLeftWebhook){:target="_blank"}
+- [`participantRoleChanged` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantRoleChangedWebhook){:target="_blank"}
+- [`participantHandChanged` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/participantHandChangedWebhook){:target="_blank"}
+- [`waitingParticipantKnocked` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/waitingParticipantKnockedWebhook){:target="_blank"}
+- [`waitingParticipantStatusChanged` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/waitingParticipantStatusChangedWebhook){:target="_blank"}
 - [`recordingStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingStartedWebhook){:target="_blank"}
 - [`recordingUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingUpdatedWebhook){:target="_blank"}
 - [`recordingEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/recordingEndedWebhook){:target="_blank"}
+- [`broadcastStarted` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastStartedWebhook){:target="_blank"}
+- [`broadcastUpdated` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastUpdatedWebhook){:target="_blank"}
+- [`broadcastEnded` :fontawesome-solid-external-link:{.external-link-icon}](api.html#/webhooks/broadcastEndedWebhook){:target="_blank"}
 
 ## Configuration
 
@@ -70,7 +77,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-nodedotjs:{.icon .lg-icon .tab-icon} Node.js"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/node){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/node){:target="_blank"}
 
     ```javascript
     import crypto from "crypto";
@@ -116,7 +123,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":fontawesome-brands-java:{.icon .lg-icon .tab-icon} Java"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/java){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/java){:target="_blank"}
 
     ```java
     package com.example;
@@ -201,7 +208,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-goland:{.icon .lg-icon .tab-icon} Go"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/go){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/go){:target="_blank"}
 
     ```go
     package main
@@ -264,7 +271,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-python:{.icon .lg-icon .tab-icon} Python"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/python){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/python){:target="_blank"}
 
     ```python
     import hmac
@@ -310,7 +317,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-php:{.icon .lg-icon .tab-icon} PHP"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/php){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/php){:target="_blank"}
 
     ```php
     <?php
@@ -356,7 +363,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-dotnet:{.icon .lg-icon .tab-icon} .NET"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/dotnet){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/dotnet){:target="_blank"}
 
     ```csharp
     using System.Security.Cryptography;
@@ -409,7 +416,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-ruby:{.icon .lg-icon .tab-icon} Ruby"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/ruby){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/ruby){:target="_blank"}
 
     ```ruby
     require 'openssl'
@@ -450,7 +457,7 @@ Below there are code snippets in different languages, showing the exact implemen
 
 === ":simple-rust:{.icon .lg-icon .tab-icon} Rust"
 
-    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.9.0/webhooks-snippets/rust){:target="_blank"}
+    Checkout [working example :fontawesome-brands-github: :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu-meet/tree/v3.10.0/webhooks-snippets/rust){:target="_blank"}
 
     ```rust
     use chrono::Utc;

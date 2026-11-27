@@ -5,13 +5,14 @@ description: "Replace the default activities panel with a component of your own 
 
 # Custom activities panel using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-custom-activities-panel){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.10.0/openvidu-components-angular/openvidu-custom-activities-panel){ .md-button target="_blank" }
 
 The **openvidu-custom-activities-panel** tutorial demonstrates how to customize the activities panel, providing a more tailored user experience.
 
 Replacing the default activities panel is made simple with the **ActivitiesPanelDirective**, which offers a straightforward way to replace and adapt the **ActivitiesPanelComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/activities-panel.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/activities-panel-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/activities-panel-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 
@@ -22,8 +23,8 @@ Replacing the default activities panel is made simple with the **ActivitiesPanel
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.10.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.10.0
 ```
 
 ### 3. Run a server application

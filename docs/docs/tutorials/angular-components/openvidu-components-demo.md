@@ -5,7 +5,7 @@ description: "Run, deploy and customize the OpenVidu Components Demo App, the re
 
 # Demo App using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-demo-app){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.10.0/openvidu-components-angular/openvidu-demo-app){ .md-button target="_blank" }
 
 Introducing **OpenVidu Components Demo App**, the premier videoconference application that showcases the full potential of the OpenVidu platform. OpenVidu Components Demo App is not just any videoconferencing tool; it’s the default and flagship app built with the robust and versatile [OpenVidu Components](../../ui-components/angular-components.md).
 
@@ -32,7 +32,7 @@ Introducing **OpenVidu Components Demo App**, the premier videoconference applic
 ### 2. Download the demo code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.10.0
 ```
 
 ### 3. Run the Components Demo App backend
@@ -88,7 +88,8 @@ The OpenVidu Components Demo App architecture is divided into two main component
 * **frontend**: which is the client-side application built with Angular and OpenVidu Components.
 * **backend**: which is the server-side application built with Node.js and Express and uses the LiveKit Server SDK library to interact with the OpenVidu Server.
 
-![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture.png){ loading=lazy }
+![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture-light.svg#only-light){ loading=lazy }
+![OpenVidu Components Demo App Architecture](../../../assets/images/platform/tutorials/angular-components/openvidu-demo-app-architecture-dark.svg#only-dark){ loading=lazy }
 
 === ":simple-angular:{.icon .lg-icon .tab-icon} Demo App frontend"
 

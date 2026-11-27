@@ -23,7 +23,8 @@ This section contains instructions for deploying a production-ready OpenVidu Ela
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic On Premises](../../../../assets/images/platform/self-hosting/elastic/on-premises/elastic-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -156,7 +157,7 @@ This command will output the following instructions, which you should follow:
 2. **Installation Commands for 'Master Node'**: This is the command needed to install your Master Node. It should look like this:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
         --no-tty --install \
         --deployment-type='elastic' \
         --node-role='master-node' \
@@ -186,7 +187,7 @@ This command will output the following instructions, which you should follow:
 4. **Installation Commands for 'Media Nodes'**: This is the command needed to install your Media Nodes. It should look like this:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --deployment-type='elastic' \
         --node-role='media-node' \
@@ -252,7 +253,7 @@ Each installation command for each type of node looks like this:
             Example using Let's Encrypt certificates without a domain name (the public IP is used as the domain name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
                 --no-tty --install \
                 --node-role='master-node' \
                 --openvidu-pro-license='xxxxx' \
@@ -287,7 +288,7 @@ Each installation command for each type of node looks like this:
             Example using self-signed certificates without a domain name (the public IP is used as the domain name):
 
             ```bash
-            sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+            sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
                 --no-tty --install \
                 --node-role='master-node' \
                 --openvidu-pro-license='xxxxx' \
@@ -326,7 +327,7 @@ Each installation command for each type of node looks like this:
         Example using Let's Encrypt certificates:
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
@@ -364,7 +365,7 @@ Each installation command for each type of node looks like this:
         Example using self-signed certificates:
 
         ```bash
-        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
@@ -403,7 +404,7 @@ Each installation command for each type of node looks like this:
         CERT_PRIVATE_KEY=$(cat privkey.pem | base64 -w 0)
         CERT_PUBLIC_KEY=$(cat fullchain.pem | base64 -w 0)
 
-        sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
+        sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_master_node.sh) \
             --no-tty --install \
             --node-role='master-node' \
             --openvidu-pro-license='xxxxx' \
@@ -442,7 +443,7 @@ Each installation command for each type of node looks like this:
     To install a Media Node, you can use the following command:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/elastic/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --node-role='media-node' \
         --master-node-private-ip='1.2.3.4' \

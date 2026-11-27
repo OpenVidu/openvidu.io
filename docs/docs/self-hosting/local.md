@@ -33,7 +33,7 @@ To install OpenVidu locally, follow these steps:
     1.  Clone the following repository:
 
         ```bash
-        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.9.0
+        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.10.0
         ```
 
         !!! info
@@ -74,7 +74,7 @@ To install OpenVidu locally, follow these steps:
     1.  Clone the following repository:
 
         ```bash
-        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.9.0
+        git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.10.0
         ```
 
         !!! info
@@ -213,7 +213,8 @@ Where `<YOUR_WEBHOOK_URL>` is the URL where you want to receive the events.
 
 Testing WebRTC applications can be challenging because devices require a secure context (HTTPS) to access the camera and microphone. When using LiveKit Open Source, this isn't an issue if you access your app from the same computer where the LiveKit Server is running, as `localhost` is considered a secure context even over plain HTTP. Consider the following architecture:
 
-  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture.svg){ width="450" style="border-radius: 8px" loading=lazy }
+  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture-light.svg#only-light){ width="450" style="border-radius: 8px" loading=lazy }
+  ![Image title](../../assets/images/platform/self-hosting/local/livekit-architecture-dark.svg#only-dark){ width="450" style="border-radius: 8px" loading=lazy }
 
 The simplest way to test your application is:
 

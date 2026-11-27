@@ -27,7 +27,7 @@ SSH into an OpenVidu Node and navigate to your OpenVidu deployment directory.
 Modify file `agent-speech-processing.yaml` to enable the Live Captions Service with `processing: manual`:
 
 ```yaml
-docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.9.0
+docker_image: docker.io/openvidu/agent-speech-processing-vosk:3.10.0
 
 enabled: true # (1)!
 
@@ -64,10 +64,13 @@ Apply your changes by restarting OpenVidu. This ensures the system recognizes th
 
 ### 5. Enable/Disable Captions for specific Rooms
 
-Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/createRoom){:target="_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Features** section of the **Meeting** step of the room configuration wizard, using the **Live captions** toggle. The same step also sets the room's [participant and duration limits](configuration.md), and toggles [End-to-End Encryption](e2e-encryption.md), Chat and [Virtual Background](virtual-background.md).
+Captions are enabled by default when a room is [created](../rooms/management.md#create-rooms), whether through the UI or the [REST API :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomCreate){:target="_blank"}. This behavior can be overridden to enable or disable captions on a per-room basis from the **Features** section of the **Meeting** step of the room configuration wizard, using the **Live captions** toggle. The same step also sets the room's [participant and duration limits](configuration.md), and toggles [End-to-End Encryption](e2e-encryption.md), Chat and [Virtual Background](virtual-background.md).
 
 ![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-dark.webp#only-dark){ .control-height .round-corners loading=lazy }
 ![Room wizard step enabling live captions for the room](../../../assets/images/meet/meetings/live-captions/room-wizard-captions-light.webp#only-light){ .control-height .round-corners loading=lazy }
+
+!!! info
+    Live captions and [end-to-end encryption](e2e-encryption.md) are mutually exclusive: a room cannot have both enabled at the same time.
 
 ## Using Live Captions in a Meeting
 

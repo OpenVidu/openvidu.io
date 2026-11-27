@@ -41,14 +41,11 @@ Any attempt to create a permission for an IP outside this set (a public host, th
 
 ### Relay port restriction
 
-Every relayed packet is validated **at the packet level** against the configured WebRTC media port range (`rtc.port_range_start`–`rtc.port_range_end`, `50000`–`60000` by default). Packets destined to a port outside this range are dropped.
-
-!!! warning
-    If no media port range is configured, **all** relay ports are denied. The relay only ever forwards to the media port range used by the Media Servers.
+Every relayed packet is validated **at the packet level** against the UDP ports the Media Servers receive media on, and packets destined to any other port are dropped. Those ports are the WebRTC media port range (`rtc.port_range_start`–`rtc.port_range_end`, `50000`–`60000` by default) or, if no range is configured, `rtc.udp_port` (plus `3478` when `rtc.use_stun_port_as_ice` is enabled).
 
 ### TCP relay disabled (RFC 6062)
 
-[RFC 6062 :fontawesome-solid-external-link:{.external-link-icon}](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"} (TURN Extensions for TCP Allocations) lets a client ask the server to relay traffic to a peer over an **outbound TCP connection** (`Connect` / `ConnectionBind`). OpenVidu **disables this by default**: clients can only allocate UDP relays, which is all WebRTC media needs. TCP allocation requests are rejected.
+[RFC 6062 :fontawesome-solid-external-link:{.external-link-icon}](https://datatracker.ietf.org/doc/html/rfc6062){:target="_blank"} (TURN Extensions for TCP Allocations) lets a client ask the server to relay traffic to a peer over an **outbound TCP connection** (`Connect` / `ConnectionBind`). OpenVidu **disables this by default**: clients can only allocate UDP relays, which is all WebRTC media needs. TCP allocation requests are rejected. If you enable it with [`enable_rfc6062`](#configuration-values), TCP relays follow the same peer IP allowlist, and outbound TCP connections can only reach the WebRTC media port range (every one is refused when no range is configured).
 
 ### Time-limited, per-participant credentials
 
@@ -77,8 +74,9 @@ turn:
     # Peer CIDRs explicitly allowed to be relayed to. Any peer IP in one of these
     # CIDRs is permitted, regardless of whether it is private, public or a cluster
     # node. In addition, when this list is non-empty, restricted peer IPs
-    # (loopback, link-local, multicast, private, unspecified) that are NOT listed
-    # here are denied. Empty by default.
+    # (private, loopback, link-local, multicast, unspecified, carrier-grade NAT,
+    # NAT64 and other special-purpose ranges) that are NOT listed here are
+    # denied. Empty by default.
     allow_restricted_peer_cidrs:
         - 10.0.0.0/8
 
@@ -120,9 +118,11 @@ For a given peer IP, the TURN server decides whether to allow a relay permission
 
 1. The IP matches `deny_peer_cidrs` → **denied**.
 2. The IP matches `allow_restricted_peer_cidrs` → **allowed**.
-3. An allow list is configured **and** the IP is restricted (private, loopback, link-local, multicast, unspecified) and not listed → **denied**.
+3. An allow list is configured **and** the IP is restricted (see below) and not listed → **denied**.
 4. The IP is one of the node's local interface IPs or a registered cluster node → **allowed**.
 5. Otherwise → **denied**.
+
+**Restricted** IPs are the addresses that are not publicly routable: private (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`), loopback, link-local, multicast and unspecified addresses, plus `0.0.0.0/8`, carrier-grade NAT (`100.64.0.0/10`), benchmarking (`198.18.0.0/15`), reserved (`240.0.0.0/4`, broadcast included) and NAT64 (`64:ff9b::/96`, `64:ff9b:1::/48`).
 
 Independently, the **relay port restriction** and the **RFC 6062** check are always applied when forwarding packets and when allocating relays, respectively.
 
@@ -173,9 +173,9 @@ turn:
 
 ### Allow only specific peer ranges
 
-Use `allow_restricted_peer_cidrs` when you want the relay to forward to a specific set of internal ranges and nothing else. Setting an allow list does two things at once: it **permits** the listed ranges, and it **denies every other restricted IP** (private, loopback, link-local, multicast, unspecified) that is not listed. Public peer IPs are unaffected and still follow the default cluster/local allowlist.
+Use `allow_restricted_peer_cidrs` when you want the relay to forward to a specific set of internal ranges and nothing else. Setting an allow list does two things at once: it **permits** the listed ranges, and it **denies every other [restricted IP](#how-the-relay-permission-decision-is-made)** (private, loopback, link-local, carrier-grade NAT, …) that is not listed. Public peer IPs are unaffected and still follow the default cluster/local allowlist.
 
-Because the allow list is evaluated **before** the built-in local/cluster allowlist, you must list **every internal range OpenVidu legitimately relays to** — your cluster nodes' / Media Servers' subnet *and* each node's local interfaces (for example the Docker bridge, often `172.17.0.0/16`). Otherwise you lock out your own media:
+Because the allow list is evaluated **before** the built-in local/cluster allowlist, you must list **every internal range OpenVidu legitimately relays to** — your cluster nodes' / Media Servers' subnet *and* each node's local interfaces (for example the Docker bridge, often `172.17.0.0/16`, or a VPN such as Tailscale, whose addresses are in `100.64.0.0/10`). Otherwise you lock out your own media:
 
 ```yaml
 turn:

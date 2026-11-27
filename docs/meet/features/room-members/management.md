@@ -46,15 +46,25 @@ Update a member's **base role** or **custom permissions** from the member list. 
 
 Every member's access link can be copied from the member list:
 
-- **Identified guests** have a **unique personal access link**. Copy it and deliver it privately to the intended individual.
+- **Identified guests** have a **unique personal access link**. Copy it and deliver it privately to the intended individual. The link is the only thing that grants the guest's access: the guest's member ID, which other participants can see in the meeting, does not.
 - **Users** do not have a personal link, but their link can also be copied from the member list — it is the shared [user access link](../rooms/access.md#member-access-links) that every user of the room logs in through.
 
 ![Member list with the action to copy a member's access link](../../../assets/images/meet/room-members/management/copy-member-link-dark.png#only-dark){ .round-corners loading=lazy }
 ![Member list with the action to copy a member's access link](../../../assets/images/meet/room-members/management/copy-member-link-light.png#only-light){ .round-corners loading=lazy }
 
+## Regenerate a guest's link
+
+OpenVidu Meet lets you regenerate the link of an identified guest from the console. This is useful if a link has leaked or has a security problem. Open the **more options** menu of the guest's row, choose **"Regenerate link"** and confirm. Keep in mind the following behavior when a link is regenerated:
+
+- The previous link stops working. Nobody can use it to access the room.
+- If the guest is in the meeting when the link is regenerated, they are not expelled.
+- The **new link is shown in a dialog** to copy and deliver privately to the guest.
+
+Only admins and the room owner can regenerate a link.
+
 ## Remove members
 
-Members can be removed individually or in bulk from the **"Room Members"** tab.
+Members can be removed individually or in bulk from the **"Room Members"** tab. To remove one member, use the **more options** menu of their row.
 
 <a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/remove-member-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/room-members/management/remove-member-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/room-members/management/remove-member-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
@@ -69,9 +79,9 @@ All of these operations can also be performed programmatically with the [OpenVid
 
 | Operation           | HTTP Method | Reference                                                                                                                                                  |
 | ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Add a member        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/addRoomMember){:target="_blank"}         |
-| List members        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMembers){:target="_blank"}        |
-| Bulk delete members | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRoomMembers){:target="_blank"} |
-| Get a member        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRoomMember){:target="_blank"}         |
-| Update a member     | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/updateRoomMember){:target="_blank"}      |
-| Delete a member     | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRoomMember){:target="_blank"}      |
+| Add a member        | POST        | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomAddMember){:target="_blank"}         |
+| List members        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomListMembers){:target="_blank"}        |
+| Bulk delete members | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomBulkDeleteMembers){:target="_blank"} |
+| Get a member        | GET         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomGetMember){:target="_blank"}         |
+| Update a member     | PUT         | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomUpdateMember){:target="_blank"}      |
+| Delete a member     | DELETE      | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/roomDeleteMember){:target="_blank"}      |

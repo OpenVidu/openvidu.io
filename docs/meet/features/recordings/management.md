@@ -24,14 +24,19 @@ To stop the recording, a participant with the `recordingControl` permission must
 ![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-dark.png#only-dark){ .round-corners loading=lazy }
 ![Stop recording button in the meeting toolbar](../../../assets/images/meet/recordings/management/stop-recording-light.png#only-light){ .round-corners loading=lazy }
 
-!!! info "Starting and stopping recordings via REST API"
-    Recordings can also be started and stopped with the [REST API](#rest-api-reference). There must be an **active meeting** in the target room — starting a recording in a room with no ongoing meeting returns an error. When starting a recording via the API, you may also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that specific recording.
+!!! info "Starting and stopping recordings from outside the meeting view"
+    Recordings can also be started and stopped, in an **active meeting** only (starting one in a room with no ongoing meeting returns an error), through:
+
+    - The [REST API](#rest-api-reference), which can also **override** the room's default [layout](configuration.md#recording-layouts) and [encoding](configuration.md#recording-encoding) for that recording.
+    - The `recordingStart` and `recordingStop` [commands](../../embedded/reference/webcomponent.md#commands) of an [embedded](../../embedded/intro.md) application, which require the local participant to hold the `recordingControl` permission. The progress of the recording is reported by the `recordingStarted`, `recordingUpdated` and `recordingEnded` [events](../../embedded/reference/webcomponent.md#events).
+
+    As in the app, the start is refused in a room with recording disabled or with an automatic [recording trigger](configuration.md#recording-trigger).
 
 ## Managing recordings { #managing-recordings }
 
 A saved recording can be **listed**, **played**, **shared**, **downloaded** and **deleted** (individually or in bulk). All of these actions are available — subject to your [recording permissions](overview.md#recording-permissions) — from any of the places where recordings appear in the app:
 
-- The general **"Recordings"** page, which lists every recording you can access.
+- The general **"Recordings"** page, which lists every recording you can access. Above the list it shows how many of them there are in total, in progress, complete and failed, and selecting one of those figures filters the list by its statuses. The list can also be filtered by one or several statuses.
 
 ![Recordings page listing every accessible recording](../../../assets/images/meet/recordings/management/recording-list-dark.png#only-dark){ .round-corners loading=lazy }
 ![Recordings page listing every accessible recording](../../../assets/images/meet/recordings/management/recording-list-light.png#only-light){ .round-corners loading=lazy }
@@ -63,6 +68,8 @@ When you create a shareable link for a recording, you choose **who can access it
 - **OpenVidu Meet users**: any logged-in OpenVidu Meet user can view the recording — even if they have no recording permissions in that room, or no access to the room at all.
 - **Anyone**: any individual with the link can view it without logging in. This option is available only when the room has [anonymous recording sharing](configuration.md#anonymous-recording-sharing) enabled.
 
+A link offers the download only when the person who created it holds the download permission. A link created without it plays the recording but does not offer to download it.
+
 <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
 <a class="glightbox" href="/assets/videos/meet/recordings/management/share-recording-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/meet/recordings/management/share-recording-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
@@ -72,13 +79,13 @@ All of these operations can also be performed programmatically with the [OpenVid
 
 | Operation | HTTP Method | Reference |
 |-----------|-------------|-----------|
-| Start a recording | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/startRecording){:target="_blank"} |
-| Stop a recording | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/stopRecording){:target="_blank"} |
-| Get all recordings | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordings){:target="_blank"} |
-| Download recordings | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/downloadRecordings){:target="_blank"} |
-| Bulk delete recordings | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/bulkDeleteRecordings){:target="_blank"} |
-| Get a recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecording){:target="_blank"} |
-| Delete a recording | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/deleteRecording){:target="_blank"} |
-| Get recording media | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingMedia){:target="_blank"} |
-| Download a recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/downloadRecording){:target="_blank"} |
-| Get recording URL | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/getRecordingUrl){:target="_blank"} |
+| Start a recording | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingStart){:target="_blank"} |
+| Stop a recording | POST | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingStop){:target="_blank"} |
+| Get all recordings | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingList){:target="_blank"} |
+| Download recordings | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingBulkDownload){:target="_blank"} |
+| Bulk delete recordings | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingBulkDelete){:target="_blank"} |
+| Get a recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingGet){:target="_blank"} |
+| Delete a recording | DELETE | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingDelete){:target="_blank"} |
+| Get recording media | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingGetMedia){:target="_blank"} |
+| Download a recording | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingDownload){:target="_blank"} |
+| Get recording URL | GET | [Reference :fontawesome-solid-external-link:{.external-link-icon}](../../embedded/reference/api.html#/operations/recordingGetUrl){:target="_blank"} |

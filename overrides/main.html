@@ -110,27 +110,21 @@
 {# Fonts. `theme.font` is false, so this is the site's only font stylesheet. The privacy
    plugin vendors every URL below at build time, preload hrefs included; in the `CI=false`
    validation build they stay remote.
-   No-flicker contract: break any one and text paints twice (fallback, then Tomorrow).
+   No-flicker contract: break any one and text paints twice (fallback, then the web font).
      1. A render-blocking `rel="stylesheet"`, never the preload-as-style + onload trick.
      2. `display=block`, not `swap` (swap paints the fallback first by design).
-     3. Preload every face the first viewport needs, or `block` shows invisible text instead:
-        Tomorrow 300 (Material h1), 400, 500, 700 and 800 (`bolder` in the pricing tables),
-        Roboto Mono (one latin file serves 400/500/700), Arciform (header title, same href as
-        extra.css). Latin subset only; `crossorigin` must match the CSS's CORS fetch or the
-        hint becomes a second download.
+     3. Preload every face the first viewport needs, or `block` shows invisible text instead.
+        The three families are variable fonts: one latin file each serves every upright weight
+        (Bricolage Grotesque 500/700/800 with its optical-size axis, Instrument Sans 400/500/600,
+        JetBrains Mono 400/500). Latin subset only; `crossorigin` must match the CSS's CORS
+        fetch or the hint becomes a second download.
    `ovweb lint` checks 1 and 2 and that every preloaded weight is in the URL. #}
-{# Tomorrow 300 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-{# Tomorrow 400 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-{# Tomorrow 500 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-{# Tomorrow 700 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-{# Tomorrow 800 #}<link rel="preload" href="https://fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-{# Roboto Mono #}<link rel="preload" href="https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-{# Arciform carries the header page title (extra.css). Already self-hosted, so this href is
-   the one extra.css uses — a different form would fetch the same file a second time. #}
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Lexend 800 #}<link rel="preload" href="https://fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# Instrument Sans 400 #}<link rel="preload" href="https://fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+{# JetBrains Mono 400 #}<link rel="preload" href="https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400&display=block"
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=block"
 />
 
 {% include "partials/og.html" %}
@@ -170,6 +164,11 @@
 
 {% if page.meta and page.meta.page_features and "lazyvideo" in page.meta.page_features %}
 <script src="{{ 'javascripts/lazy-video.js' | url }}"></script>
+{% endif %}
+
+{% if page.meta and page.meta.page_features and "meetlanding" in page.meta.page_features %}
+{# The Meet landing's security section: the left menu drives the screenshots on the right #}
+<script src="{{ 'javascripts/meet-landing.js' | url }}"></script>
 {% endif %}
 
 {% if page.meta and page.meta.page_features and "leadform" in page.meta.page_features %}
@@ -222,8 +221,13 @@
 {% endif %}
 {% endif %}
 
-{# home.css owns the landing components (.feature-cards). It comes before the product sheets
-   so meet.css can restyle them on the Meet landing by cascade order, without !important. #}
+{# landing.css holds the landing components (.ov-*) the main, Meet and Platform landings share;
+   home.css the .feature-cards component and the main landing's page rules. Both come before
+   the product sheets so meet.css can restyle them by cascade order, without !important. #}
+{% if page.meta.page_features and "landingstyles" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/landing.css' | url }}" />
+{% endif %}
+
 {% if page.meta.page_features and "homestyles" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}" />
 {% endif %}
@@ -238,6 +242,10 @@
 
 {% if page.meta.page_features and "Meet" in page.meta.page_features %}
 <link rel="stylesheet" href="{{ 'stylesheets/meet.css' | url }}" />
+{% endif %}
+
+{% if page.meta.page_features and "meetlanding" in page.meta.page_features %}
+<link rel="stylesheet" href="{{ 'stylesheets/meet-landing.css' | url }}" />
 {% endif %}
 
 {% if page.meta.page_features and "setupcarousel" in page.meta.page_features %}

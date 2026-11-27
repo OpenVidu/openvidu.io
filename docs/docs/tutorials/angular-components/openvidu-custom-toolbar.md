@@ -5,13 +5,14 @@ description: "Replace the default meeting toolbar with a component of your own u
 
 # Custom toolbar using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.10.0/openvidu-components-angular/openvidu-custom-toolbar){ .md-button target="_blank" }
 
 The **openvidu-custom-toolbar** tutorial demonstrates how to replace the default toolbar with a custom one, providing a more tailored user experience.
 
 Customizing the toolbar is made simple with the **ToolbarDirective**, which offers a straightforward way to replace and adapt the **ToolbarComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/toolbar-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 
@@ -22,8 +23,8 @@ Customizing the toolbar is made simple with the **ToolbarDirective**, which offe
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.10.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.10.0
 ```
 
 ### 3. Run a server application

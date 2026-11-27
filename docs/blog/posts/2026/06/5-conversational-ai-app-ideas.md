@@ -232,8 +232,8 @@ Technically, all of them share the same pipeline:
 
 **Speech-to-text (STT) → Large language model (LLM) → Text-to-speech (TTS)**
 
-![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-light.webp#only-light "Conversational AI pipeline"){ .round-corners loading=lazy }
-![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-dark.webp#only-dark "Conversational AI pipeline"){ .round-corners loading=lazy }
+![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-light.svg#only-light "Conversational AI pipeline"){ .round-corners loading=lazy }
+![Conversational AI pipeline](/assets/images/blog/2026/06/5-conversational-ai-app-ideas/conversational-ai-pipeline-dark.svg#only-dark "Conversational AI pipeline"){ .round-corners loading=lazy }
 
 The model listens, the model thinks, the model speaks. Add vision or sensor data when the idea calls for it, and the structure barely changes.
 

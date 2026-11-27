@@ -5,13 +5,14 @@ description: "Replace the default side panels with components of your own using 
 
 # Custom panels using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-custom-panels){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.10.0/openvidu-components-angular/openvidu-custom-panels){ .md-button target="_blank" }
 
 The **openvidu-custom-panels** tutorial demonstrates how to replace the default panels with a custom ones, providing a more tailored user experience.
 
 Customizing the videoconference panels is made simple with the **PanelDirective**, which offers a straightforward way to replace and adapt the **PanelComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/panels.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/panels-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/panels-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 
@@ -22,8 +23,8 @@ Customizing the videoconference panels is made simple with the **PanelDirective*
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.10.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.10.0
 ```
 
 ### 3. Run a server application

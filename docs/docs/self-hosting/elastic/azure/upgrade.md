@@ -22,10 +22,16 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
 2. Execute the following command in the Master Node:
 
     ```
-    sh <(curl -fsSL http://get.openvidu.io/update/latest/update.sh)
+    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh)
     ```
 
-    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`).
+    To upgrade to a specific version instead, replace `latest` with the version number (e.g. `3.x.y`), or, from OpenVidu 3.10 on, with a minor version (e.g. `3.10`) to upgrade to its latest patch release.
+
+    To only apply the latest patch release of the version you have installed (for example, from `3.x.0` to `3.x.2`), add `--latest-patch`. This option is available from OpenVidu 3.10.0:
+
+    ```
+    sh <(curl -fsSL https://get.openvidu.io/update/latest/update.sh) --latest-patch
+    ```
 
 3. This will execute an update script that will guide you from the version you have installed to the latest one. The first thing you will see in the output is the following:
 
@@ -49,7 +55,7 @@ However, if you prefer not to redeploy, it is also possible to upgrade OpenVidu 
       No
     ```
 
-4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence.
+4. **Confirm each version upgrade.** You can jump straight to the latest release no matter how far behind you are, the updater will automatically apply every intermediate upgrade in sequence. From OpenVidu 3.10.0 on, the updater only goes through the latest patch release of each intermediate minor version.
 
     For each intermediate version, the updater will ask you to confirm the upgrade, display a diff of configuration file changes, ask whether to apply the diff, and ask whether to pull updated Docker images. You must confirm each step.
 

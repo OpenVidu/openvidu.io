@@ -7,6 +7,100 @@ page_features:
 
 # OpenVidu Platform release notes
 
+## 3.10.0
+
+!!! info "For the Release Notes of OpenVidu Meet 3.10.0, please visit here: [OpenVidu Meet 3.10.0 :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/releases/#3100){:target="_blank" .meet-link-color}"
+
+### Changelog
+
+- **New OpenVidu Dashboard**: there has been a complete redesign of the [OpenVidu Dashboard](https://openvidu.io/3.10/docs/self-hosting/production-ready/observability/openvidu-dashboard/) and its whole analytics model.
+    - The UI has been completely revamped with a cleaner, more modern look.
+    - New Overview, Participants and Agents pages, with live refresh, one time range for every page, global search and export to CSV/XLSX.
+    - Analytics for any time range, from 5-minute to daily detail: activity, clients, data transferred, Egress, Ingress and the topology of each Room (1:1, 1:N, N:M).
+    - OpenVidu PRO adds per-track details and quality charts, Quality, Diagnostics and Top rooms analytics, and a page for every Media Node in Elastic and High Availability deployments. Media statistics were only available when using `pion` as RTC engine; now they are available for `mediasoup` too.
+    - Rooms, Participants, Egress and Ingress whose end was never reported (for example after a node crash) are closed automatically with an estimated end time.
+    - Each kind of analytics data has its own retention time, and can be reviewed and deleted from the Dashboard settings.
+    - The analytics data of previous versions is migrated automatically in the background.
+- **Participant Passthrough Egress** (OpenVidu PRO): records a participant's video and audio tracks without transcoding, at a fraction of the CPU cost. Every track they publish is recorded in WebM or MKV files that share one timeline, with a manifest to line them up with the other participants of the Room. This provides efficient recording that allows easier post-processing jobs to create composite videos. See [Participant Passthrough Egress](https://openvidu.io/3.10/docs/reference/egress/#participant-passthrough-egress).
+- **Other Egress improvements** (see [Egress](https://openvidu.io/3.10/docs/reference/egress/)):
+    - Room Composite Egress was forcing all participants to always send their highest quality layer. Now the Room Composite layout only requires the optimal layer for each recorded video (see [Adaptive Stream](https://openvidu.io/3.10/docs/reference/client-sdk/#bandwidth-optimizations)).
+    - Room Composite and Web Egress no longer fail with `"websocket url timeout reached"` on slow or busy disks: the Egress service now loads Chrome into memory right after it starts, and gives Chrome 60 seconds to start instead of 20.
+    - AV1 tracks can be recorded without transcoding (OpenVidu PRO).
+    - Auto Participant Egress no longer records a participant twice after a full reconnection.
+    - A recording stopped during a brief Redis stall is no longer reported as failed.
+- **mediasoup improvements**:
+    - A participant connected over ICE-TCP no longer crashes the whole server when it leaves, reconnects or its room closes.
+    - A participant can no longer crash the server with crafted RTP or SCTP packets.
+    - Sender and Receiver Reports of Producers and Consumers with many streams are no longer rejected.
+    - A subscriber that joins a multi-layered track (SVC or simulcast) paused by dynacast no longer sometimes stays without video.
+    - Subscribers of a simulcast track whose lowest layer is above 600 kbps no longer freeze on the first keyframe.
+    - AV1 SVC subscribers and recordings no longer get an undecodable frame when the forwarded temporal layer goes up.
+    - AV1 SVC video received above its lowest spatial layer no longer has frames that cannot be decoded.
+    - A WebRTC connection that carries audio but no video is no longer probed for bandwidth, so the video gets its full quality as soon as it starts.
+    - Backup codecs now work with mediasoup, and each client gets LiveKit's codec rules for its browser: for example, a Firefox subscriber to an AV1 track gets the backup codec instead of AV1.
+    - A track published already muted, as livekit-client does after a full reconnection, no longer sends silence or black frames to its subscribers and recordings.
+    - A subscriber no longer gets stuck when a track is unpublished just as it subscribes.
+    - Configuration parameter `rtc.force_tcp` is now honored: mediasoup only listens on TCP, as Pion already did.
+    - Fixed several rare crashes and hangs of the server: a subscriber changing its video settings right after subscribing, participants joining a just-started server at once, data channels opened while their participant leaves or receiving malformed messages, and mediasoup workers slow to answer.
+- **OpenVidu Server**:
+    - Participants get back right away to the Rooms of a crashed and restarted server, instead of failing for about 30 seconds. The Rooms keep their state, and their recordings go on (OpenVidu PRO).
+    - Live nodes are no longer removed right after a Redis outage or stall.
+    - Shared screens stay sharp when the shared window is resized (VP8 and H.264).
+    - Backup codecs, such as VP8 behind AV1, are sent with the bitrates of their own layers instead of those of the track's first codec.
+    - Idle TURN TCP and TLS connections are closed after 60 seconds (configurable via parameter `turn.tcp_connection_idle_timeout_seconds`).
+    - The embedded TURN relay follows LiveKit's new relay policy. If your nodes reach each other through carrier-grade NAT or similar ranges (for example, with Tailscale), list them in `turn.allow_restricted_peer_cidrs`.
+    - Fixed a bug of 3.9.0 in which analytics could stop the server.
+- **Deployments**:
+    - Elastic and High Availability deployments replace unhealthy Media Nodes automatically, on every cloud.
+    - Elastic and High Availability deployments on AWS, Azure and Google Cloud can run a fixed number of Media Nodes, as DigitalOcean and Oracle Cloud already could.
+    - AWS High Availability supports TURN over UDP for Media Nodes in private subnets.
+    - The Single Node and the Master Nodes get a 200 GB disk by default.
+    - Template parameters have the same names on every cloud. The old names still work, but are deprecated.
+    - Google Cloud deployments boot the latest Ubuntu 24.04 image.
+    - Fixed WHIP ingestion without transcoding with Ingress module: it failed with a `502` error, and so did the `DELETE` request that closes the WHIP session.
+    - Fixed ingesting RTMP with Ingress module in High Availability deployments: the load balancer now accepts RTMPS on port 1945.
+    - Fixed the Packet Loss Percentage and Quality Score panels of the OpenVidu Server Metrics and Media Nodes dashboards in Grafana: they showed cumulative values instead of the average of each interval. Updating a deployment fixes them, unless their queries were edited by hand.
+    - Fixed two Caddy issues: STUN messages whose length low byte was `0x80` or above were taken for HTTP and hung, and TURN clients that resolve the server name again after the TLS handshake, as Pion does, were cut on slow DNS lookups.
+    - Fixed redeploying Azure Elastic and High Availability templates, which always failed.
+    - Fixed two DigitalOcean issues: the autoscaler could drain the Media Node hosting the Rooms right after a scale-out, and a deployment could fail because its VPC range fell in a range that DigitalOcean reserves.
+    - Small fixes on:
+        - AWS: Elastic IP attached before installing, and High Availability stacks no longer complete when OpenVidu failed to install.
+        - Azure: whole WebRTC over TCP port range opened, port 9000 closed.
+        - Google Cloud: `rtcEngine` parameter of Single Node.
+        - DigitalOcean: v2 compatibility enabled by default, and changing the fixed number of Media Nodes no longer replaces every one.
+- **OpenVidu Agents**:
+    - Smaller images, with fixed CVEs: the base image goes from 563 MB to 123 MB, the cloud image from 1168 MB to 722 MB and the Sherpa image from 1242 MB to 816 MB.
+    - Less memory and CPU per agent: about 124 MiB at idle instead of 338 MiB (Vosk English model), and voice activity detection with less than half the CPU.
+    - sherpa-onnx updated to 2.0.1, and Vosk to its latest version.
+- **v2compatibility module**:
+    - Media device errors reach the application as the `OpenViduError` that the v2 API documents, so it can tell a camera in use from a denied permission.
+    - The `initPublisher` completion handler runs before `accessAllowed` or `accessDenied` are dispatched, and `Publisher.accessAllowed` is `false` until access is granted.
+- **Upstream dependency upgrades**:
+    - **LiveKit Server**: updated from v1.13.7 to v1.13.11 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/livekit/compare/v1.13.7...v1.13.11){:target="_blank"}).
+    - **mediasoup**: updated from 3.26.0 to 3.32.2 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/versatica/mediasoup/compare/3.26.0...3.32.2){:target="_blank"}).
+    - **Egress**: updated from v1.14.1 to v1.15.0 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/compare/e9330a4...1f99030){:target="_blank"}).
+    - **Ingress**: updated from v1.5.0-a9d870c to v1.6.0-11c61d3 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/compare/a9d870c...11c61d3){:target="_blank"}).
+    - **Agents**: updated from 1.8.2 to 1.8.12 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/compare/livekit-agents%401.8.2...livekit-agents%401.8.12){:target="_blank"}).
+
+### Version table
+
+| Artifact               | Version | Info | Link         |
+| ---------------------- | ------- | ---- | ---------- |
+| livekit/livekit-server | v1.13.11  | :material-information-outline:{ title="Version of livekit-server in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/livekit/livekit/releases/tag/v1.13.11){:target="_blank"} |
+| mediasoup              | 3.32.2 | :material-information-outline:{ title="Version of mediasoup in which OpenVidu is based on" } | [:octicons-link-24:](https://github.com/versatica/mediasoup/releases/tag/3.32.2){:target="_blank"} |
+| livekit/egress         | v1.15.0 (commit [#1f99030 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/commit/1f99030){:target="_blank"}) | :material-information-outline:{ title="Egress version used by OpenVidu deployments. Used to export media from a Room (for example, recordings or RTMP broadcasting)" } | [:octicons-link-24:](https://github.com/livekit/egress/releases/tag/v1.15.0){:target="_blank"} |
+| livekit/ingress        | v1.6.0 (commit [#11c61d3 :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/commit/11c61d3){:target="_blank"})  | :material-information-outline:{ title="Ingress version used by OpenVidu deployments. Used to import media into a Room (for example, an MP4 video or an RTSP stream)" } | [:octicons-link-24:](https://github.com/livekit/ingress/releases/tag/v1.6.0){:target="_blank"} |
+| livekit/agents        | v1.8.12  | :material-information-outline:{ title="LiveKit Agents framework version. Used to add AI capabilities to your Rooms" } | [:octicons-link-24:](https://github.com/livekit/agents/releases/tag/livekit-agents%401.8.12){:target="_blank"} |
+| MinIO | 2026-11-16T00-11-40Z | :material-information-outline:{ title="Version of S3 MinIO used by OpenVidu deployments. Used to store recordings and common node configurations. In OpenVidu High Availability this is an instance of a Minio Multi-Node" } | [:octicons-link-24:](https://github.com/chainguard-forks/minio/releases/tag/RELEASE.2026-11-16T00-11-40Z){:target="_blank"} |
+| Caddy | 2.11.9 | :material-information-outline:{ title="Version of Caddy used by OpenVidu deployments. It is a reverse proxy used as a load balancer to distribute client connections across your nodes and automatically manage your TLS certificate" } | [:octicons-link-24:](https://github.com/caddyserver/caddy/releases/tag/v2.11.9){:target="_blank"}|
+| MongoDB | 8.0.38 | :material-information-outline:{ title="Version of MongoDB used by OpenVidu deployments. Used to store analytics and monitoring persistent data. In OpenVidu High Availability this is an instance of a MongoDB Replica Set" } | [:octicons-link-24:](https://www.mongodb.com/docs/manual/release-notes/8.0/#8038---nov-10-2026){:target="_blank"} |
+| Redis | 8.10.3 | :material-information-outline:{ title="Version of Redis used by OpenVidu deployments. Used to share transient information between Media Nodes and coordinate them. In OpenVidu High Availability this is an instance of a Redis Cluster" } | [:octicons-link-24:](https://github.com/redis/redis/releases/tag/8.10.3){:target="_blank"} |
+| Grafana | 12.4.15 | :material-information-outline:{ title="Version of Grafana used by OpenVidu deployments. Observability platform used to query and visualize metrics and logs through dashboards" } | [:octicons-link-24:](https://github.com/grafana/grafana/releases/tag/v12.4.15){:target="_blank"} |
+| Prometheus | 3.16.0 | :material-information-outline:{ title="Version of Prometheus used by OpenVidu deployments. Monitoring system that scrapes metrics from Media Nodes and other services, and forwards them to Mimir for long-term storage" } | [:octicons-link-24:](https://github.com/prometheus/prometheus/releases/tag/v3.16.0){:target="_blank"} |
+| Mimir | 3.2.6 | :material-information-outline:{ title="Version of Mimir used by OpenVidu deployments. Horizontally scalable, Prometheus-compatible metrics database used for long-term storage and querying of metrics" } | [:octicons-link-24:](https://github.com/grafana/mimir/releases/tag/mimir-3.2.6){:target="_blank"} |
+| Alloy | 1.22.0 | :material-information-outline:{ title="Version of Grafana Alloy used by OpenVidu deployments. Telemetry collector used to collect logs from OpenVidu services and forward them to Loki" } | [:octicons-link-24:](https://github.com/grafana/alloy/releases/tag/v1.22.0){:target="_blank"} |
+| Loki | 3.7.10 | :material-information-outline:{ title="Version of Loki used by OpenVidu deployments. Log aggregation system used for long-term storage and querying of logs" } | [:octicons-link-24:](https://github.com/grafana/loki/releases/tag/v3.7.10){:target="_blank"} |
+
 ## 3.9.0
 
 !!! info "For the Release Notes of OpenVidu Meet 3.9.0, please visit here: [OpenVidu Meet 3.9.0 :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.9/meet/releases/#390){:target="_blank" .meet-link-color}"

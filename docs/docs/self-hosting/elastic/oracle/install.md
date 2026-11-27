@@ -29,7 +29,8 @@ This section describes how to deploy a production-ready OpenVidu Elastic instanc
 
     The deployment architecture is as follows:
 
-    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/elastic/oracle/elastic-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing traffic and distributing it among the Media Nodes and the services running on the Master Node itself.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
@@ -53,7 +54,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
 
     ```bash
     git clone https://github.com/OpenVidu/openvidu-oracle.git
-    git -C openvidu-oracle checkout 3.9.0
+    git -C openvidu-oracle checkout 3.10.0
     cd openvidu-oracle/pro/elastic
     ```
 
@@ -84,7 +85,7 @@ Scale-out is handled natively by the OCI Instance Pool autoscaling configuration
         | `masterNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Master Node. |
         | `masterNodeOcpus` | `2`{ .nowrap } | Number of OCPUs for the Master Node (applies to Flex shapes only). |
         | `masterNodeMemory` | `8`{ .nowrap } | Memory in GB for the Master Node (applies to Flex shapes only). |
-        | `masterNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for the Master Node. |
+        | `masterNodeDiskSize` | `200`{ .nowrap } | Boot disk size in GB for the Master Node. |
         | `mediaNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
         | `mediaNodeOcpus` | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
         | `mediaNodeMemory` | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |

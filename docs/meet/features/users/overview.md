@@ -25,7 +25,7 @@ Every user has one of the following roles:
 
 ## Root administrator { #root-administrator }
 
-The root administrator is a special user with the fixed `userId` **`admin`**. This user has full control over OpenVidu Meet and **cannot be deleted**. Its password is set during installation:
+The root administrator is the account whose `userId` is the `MEET_INITIAL_ADMIN_USER` of the [`meet.env` configuration](../../../docs/self-hosting/configuration/reference.md#meetenv), **`admin`** by default. This user has full control over OpenVidu Meet, and other administrators **cannot delete it, change its role or reset its password**. Its password is set during installation:
 
 - In **local deployments**: the password is always **`admin`**.
 - In **production deployments**: the password is specified during installation (or randomly generated if not provided).

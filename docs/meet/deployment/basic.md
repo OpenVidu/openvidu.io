@@ -37,12 +37,14 @@ This section contains the instructions to deploy a production-ready deployment o
     | TCP      | 7881          | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
     | UDP      | 50000 - 60000 | 0.0.0.0/0, ::/0 | Optional, but recommended for optimal perfomance and media quality |
 
+- A proxy or load balancer of your own in front of OpenVidu Meet must let WebSocket upgrades through on the Meet path (`/meet` by default), passing the `Upgrade` and `Connection` headers, and keep idle connections open for more than 20 seconds. The proxy and load balancers that OpenVidu deploys already do.
+
 ## Installation
 
 Run this command in your server to start the installation wizard:
 
 ```bash
-sh <(curl -fsSL http://get.openvidu.io/community/singlenode/latest/install_meet.sh)
+sh <(curl -fsSL https://get.openvidu.io/community/singlenode/latest/install_meet.sh)
 ```
 
 Follow the instructions of the installation wizard. They are self-explanatory, but here is a breakdown:
@@ -84,6 +86,10 @@ OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refe
 - [Check logs](../../docs/self-hosting/single-node/on-premises/admin.md#checking-logs)
 - [Upgrade OpenVidu Meet to a newer version](../../docs/self-hosting/single-node/upgrade.md)
 - [Uninstall OpenVidu Meet](../../docs/self-hosting/single-node/on-premises/admin.md#uninstalling-openvidu)
+
+## Troubleshooting { #troubleshooting }
+
+**A meeting shows the connection error screen while a participant waits to be let in**, and the browser console shows an error naming a WebSocket URL. A proxy or network between the browser and OpenVidu Meet blocks WebSocket upgrades. The proxy and load balancers that OpenVidu deploys already let them through, so look at a proxy or load balancer of your own, or at the participant's network: it must pass the `Upgrade` and `Connection` headers on the Meet path (`/meet` by default) and keep idle connections open for more than 20 seconds, as the [networking requirements](#networking) say. In a multi-node deployment, see also [Proxies, load balancers and Redis](./advanced.md#proxies-load-balancers-and-redis).
 
 ## Other deployment options
 

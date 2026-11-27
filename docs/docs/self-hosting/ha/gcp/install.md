@@ -16,6 +16,9 @@ description: "Deploy OpenVidu High Availability on Google Cloud from a deploymen
 
 This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Google Cloud Storage instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console. Then follow these steps and fill in your preferred parameters.
 
@@ -23,7 +26,8 @@ This is what the deployment architecture looks like:
 
 === "Architecture overview"
 
-    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Google Cloud Platform Architecture](../../../../assets/images/platform/self-hosting/ha/gcp/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
@@ -90,7 +94,7 @@ Once you click the button, you will see this window.
 * For the **Git ref**, use the version you want to deploy:
 
     ```
-    v3.9.0
+    v3.10.0
     ```
 
 Finally, click Continue.
@@ -111,26 +115,27 @@ In Google Cloud Platform, there is no built-in template with parameters. You nee
 |---|---|---|
 | region | "europe-west2" | GCP region where resources will be created. |
 | zone | "europe-west2-b" | GCP zone that some resources will use. |
-| certificateType | "letsEncrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
+| certificateType | "letsencrypt" | Certificate type for OpenVidu deployment. Options: <ul> <li>**[selfsigned]** Not recommended for production use. Just for testing purposes or development environments. You don't need a FQDN to use this option.</li> <li>**[owncert]** Valid for production environments. Use your own certificate. You need a FQDN to use this option.</li> <li>**[letsencrypt]** Valid for production environments. Can be used with or without a FQDN (if no FQDN is provided, the public IP is used as the domain name and a [Let's Encrypt :fontawesome-solid-external-link:{.external-link-icon}](https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability){:target="_blank"} certificate is issued for it).</li> </ul> |
 | publicIpAddress | (none) | Previously created Public IP address for the OpenVidu Deployment. Blank will generate a public IP. |
 | domainName | (none) | Domain name for the OpenVidu Deployment. |
 | ownPublicCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the public certificate in base64 format. |
 | ownPrivateCertificate | (none) | If certificate type is 'owncert', this parameter will be used to specify the private certificate in base64 format. |
 | initialMeetAdminPassword | (none) | Initial password for the 'admin' user in OpenVidu Meet. If not provided, a random password will be generated. |
 | initialMeetApiKey | (none) | Initial API key for OpenVidu Meet. If not provided, no API key will be set and the user can set it later from Meet Console. |
-| masterNodesInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Master Node. |
-| masterNodesDiskSize | 100 | Size of the disk in GB for master nodes |
-| mediaNodeInstanceType | "e2-standard-2" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
+| masterNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Master Nodes. The former name `masterNodesInstanceType` is still accepted but deprecated. |
+| masterNodesDiskSize | 200 | Size of the disk in GB for master nodes |
+| mediaNodeInstanceType | "e2-standard-4" | Specifies the GCE machine type for your OpenVidu Media Nodes. |
 | initialNumberOfMediaNodes | 1 | Number of initial media nodes to deploy. |
 | minNumberOfMediaNodes | 1 | Minimum number of media nodes to deploy. |
 | maxNumberOfMediaNodes | 5 | Maximum number of media nodes to deploy. |
 | scaleTargetCPU | 50 | Target CPU percentage to scale out or in. |
+| fixedNumberOfMediaNodes | 0 | If greater than 0, deploys exactly that number of Media Nodes with no autoscaling (initialNumberOfMediaNodes, minNumberOfMediaNodes, maxNumberOfMediaNodes and scaleTargetCPU are ignored). 0 = use autoscaling. |
 | GCSAppDataBucketName | (none) | Name of the GCS bucket to store application data and recordings. If empty, a bucket will be created |
 | GCSClusterDataBucketName | (none) | Name of the GCS bucket to store cluster data. If empty, a bucket will be created |
 | rtcEngine | "mediasoup" | RTCEngine media engine to use. Allowed values are 'pion' and 'mediasoup'. |
 | additionalInstallFlags | (none) | Additional optional flags to pass to the OpenVidu installer (comma-separated, e.g., '--flag1=value, --flag2'). |
 
-For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.9.0/openvidu-deployment/pro/ha/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
+For more details, you can check the [variables.tf :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/OpenVidu/openvidu/blob/v3.10.0/openvidu-deployment/pro/ha/gcp/variables.tf){:target="_blank"} file to see additional information about the inputs.   
 
 !!! warning
     It's important that you enter the input variables with the exact same names as they appear in the table, as shown in the next image.

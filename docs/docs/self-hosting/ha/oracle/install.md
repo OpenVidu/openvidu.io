@@ -12,7 +12,7 @@ description: "Deploy OpenVidu High Availability on Oracle Cloud Infrastructure w
 
 This section describes how to deploy a production-ready OpenVidu High Availability cluster on Oracle Cloud Infrastructure (OCI). The deployed services are identical to those in the [On Premises High Availability installation](../on-premises/install-nlb.md), but are provisioned as OCI resources and the process is fully automated using the Terraform CLI.
 
-- An **OCI Network Load Balancer (NLB)** is the public entry point for the cluster. It distributes HTTPS (443), HTTP (80) and RTMP (1935) traffic across the 4 Master Nodes.
+- An **OCI Network Load Balancer (NLB)** is the public entry point for the cluster. It distributes HTTPS (443), HTTP (80) and RTMPS (1945) traffic across the 4 Master Nodes.
 - **OCI Object Storage** (S3-compatible via Customer Secret Keys) is used through two buckets: one for application data and recordings, and another for cluster-wide shared state (including the generated SSH key).
 - **OCI Vault** is used to securely store deployment secrets shared across the cluster.
 - Media Node scalability is managed through an **OCI Function** that handles scale-in actions, while the OCI Instance Pool itself takes care of scale-out based on system load.
@@ -30,7 +30,8 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
     The deployment architecture is as follows:
 
-    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Oracle Cloud Infrastructure Architecture](../../../../assets/images/platform/self-hosting/ha/oracle/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Network Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Network Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
@@ -56,7 +57,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
 
     ```bash
     git clone https://github.com/OpenVidu/openvidu-oracle.git
-    git -C openvidu-oracle checkout 3.9.0
+    git -C openvidu-oracle checkout 3.10.0
     cd openvidu-oracle/pro/ha
     ```
 
@@ -87,7 +88,7 @@ We use a custom scale-in strategy to enable the graceful shutdown of Media Nodes
         | `masterNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for each OpenVidu Master Node. All 4 Master Nodes use the same shape and size. |
         | `masterNodeOcpus` | `2`{ .nowrap } | Number of OCPUs per Master Node (applies to Flex shapes only). |
         | `masterNodeMemory` | `8`{ .nowrap } | Memory in GB per Master Node (applies to Flex shapes only). |
-        | `masterNodeDiskSize` | `100`{ .nowrap } | Boot disk size in GB for each Master Node. |
+        | `masterNodeDiskSize` | `200`{ .nowrap } | Boot disk size in GB for each Master Node. |
         | `mediaNodeShape` | `"VM.Standard.E4.Flex"`{ .nowrap } | OCI Compute shape for the OpenVidu Media Nodes. |
         | `mediaNodeOcpus` | `3`{ .nowrap } | Number of OCPUs for each Media Node (applies to Flex shapes only). |
         | `mediaNodeMemory` | `4`{ .nowrap } | Memory in GB for each Media Node (applies to Flex shapes only). |

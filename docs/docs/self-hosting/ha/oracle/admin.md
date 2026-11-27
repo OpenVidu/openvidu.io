@@ -153,6 +153,30 @@ Switching modes does **not** recreate the Master Nodes. Each Master Node carries
 
         ![Terraform output activate fixed media nodes](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-fixed.png){ .round-corners loading=lazy }
 
+### Lower the number of Media Nodes
+
+A smaller Instance Pool terminates Media Nodes without their graceful shutdown, so lowering **`fixedNumberOfMediaNodes`** with `terraform apply` cuts the Rooms running on the Media Nodes it removes. To lower it without interrupting them, remove the extra Media Nodes first:
+
+1. For each Media Node to remove, SSH into it and run:
+
+    ```bash
+    sudo systemd-run --unit=openvidu-graceful-shutdown --setenv=HOME=/root /usr/local/bin/graceful_shutdown.sh
+    ```
+
+    The Media Node stops accepting new Rooms and its drain ends when its ongoing Rooms, recordings and ingests end. `systemd-run` keeps the drain running after you close the SSH session, however long the Rooms last. `systemctl is-active openvidu-graceful-shutdown` prints `inactive` once it is over.
+
+2. When the drain of a Media Node is over, detach it from the Instance Pool called `<STACK_NAME>-media-pool`, decreasing the pool size, and terminate it. In the OCI Cloud Shell, or in a terminal with the OCI CLI:
+
+    ```bash
+    oci compute-management instance-pool-instance detach \
+      --instance-pool-id <INSTANCE_POOL_OCID> --instance-id <INSTANCE_OCID> \
+      --is-decrement-size true --is-auto-terminate true
+    ```
+
+3. Set **`fixedNumberOfMediaNodes`** to the new number in `terraform.tfvars` and run `terraform apply`. The Instance Pool already has that size, so nothing else changes.
+
+Raising **`fixedNumberOfMediaNodes`** adds Media Nodes to the Instance Pool and leaves the running ones untouched.
+
 ## Activate Scale In
 
 Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automatic Media Node scaling and the scale-in OCI Function.
@@ -174,6 +198,9 @@ Switch a fixed-size deployment back to **autoscaling mode**, re-enabling automat
 
         ![Terraform output activate scale in](../../../../assets/images/platform/self-hosting/ha/oracle/terraform-output-activate-scalein.png){ .round-corners loading=lazy }
 
+!!! warning "`terraform apply` in autoscaling mode"
+
+    In autoscaling mode, every `terraform apply` sets the Instance Pool back to **`initialNumberOfMediaNodes`**: if the autoscaler has added Media Nodes, the extra ones are terminated without their graceful shutdown and their Rooms are cut. Before applying any change in autoscaling mode, set **`initialNumberOfMediaNodes`** in `terraform.tfvars` to the number of Media Nodes running.
 
 ## Administration and configuration
 

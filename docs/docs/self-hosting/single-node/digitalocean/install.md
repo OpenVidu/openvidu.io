@@ -114,7 +114,8 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/single-node/digitalocean/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ### Deployment details
 
@@ -124,7 +125,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
         ```bash
         git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-        git -C openvidu-digitalocean checkout 3.9.0
+        git -C openvidu-digitalocean checkout 3.10.0
         cd openvidu-digitalocean/community/singlenode
         ```
 
@@ -132,7 +133,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
         ```bash
         git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-        git -C openvidu-digitalocean checkout 3.9.0
+        git -C openvidu-digitalocean checkout 3.10.0
         cd openvidu-digitalocean/pro/singlenode
         ```
 

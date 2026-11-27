@@ -5,13 +5,14 @@ description: "Add or replace the elements inside a participants panel row with O
 
 # Custom participants panel item element using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-custom-participant-panel-item-elements){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.10.0/openvidu-components-angular/openvidu-custom-participant-panel-item-elements){ .md-button target="_blank" }
 
 The **openvidu-custom-participant-panel-item-element** tutorial demonstrates how to replace the default participant item element inside of the participants panel with a custom one, providing a more tailored user experience.
 
 Replacing the default participant item element is made simple with the **ParticipantsPanelItemElementsDirective**, which offers a straightforward way to replace and adapt the **ParticipantsPanelItemComponent** to your needs.
 
-![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/participant-panel-item-element.svg){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/participant-panel-item-element-light.svg#only-light){ .control-height loading=lazy }
+![OpenVidu Components Angular](../../../assets/images/platform/tutorials/angular-components/participant-panel-item-element-dark.svg#only-dark){ .control-height loading=lazy }
 
 ## Running this tutorial
 
@@ -22,8 +23,8 @@ Replacing the default participant item element is made simple with the **Partici
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.10.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.10.0
 ```
 
 ### 3. Run a server application

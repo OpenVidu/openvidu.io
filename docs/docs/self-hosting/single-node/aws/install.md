@@ -30,10 +30,10 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     !!! info
 
-        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
+        If you want to deploy a specific version of OpenVidu Single Node, replace `latest` with the version you want to deploy, or, from OpenVidu 3.10 on, with a minor version (e.g. `3.10`) to deploy its latest patch release. For example, to deploy version `3.10.0`, use the following URL:
 
         ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/community/singlenode/3.10.0/aws/cf-openvidu-singlenode.yaml
         ```
 
 === "OpenVidu **PRO**{ .openvidu-tag .openvidu-pro-tag }"
@@ -48,17 +48,18 @@ First, import the template in the AWS CloudFormation console. You can click the 
 
     !!! info
 
-        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
+        If you want to deploy a specific version of OpenVidu Single Node PRO, replace `latest` with the version you want to deploy, or, from OpenVidu 3.10 on, with a minor version (e.g. `3.10`) to deploy its latest patch release. For example, to deploy version `3.10.0`, use the following URL:
 
         ```
-        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.9.0/aws/cf-openvidu-singlenode.yaml
+        https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/singlenode/3.10.0/aws/cf-openvidu-singlenode.yaml
         ```
 
 === "Architecture overview"
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Single Node AWS Architecture](../../../../assets/images/platform/self-hosting/single-node/aws/single-node-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
 ## CloudFormation Parameters
 

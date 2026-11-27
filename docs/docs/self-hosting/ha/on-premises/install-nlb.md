@@ -34,7 +34,8 @@ This section provides instructions for deploying a production-ready OpenVidu Hig
 
     This is how the architecture of the deployment looks:
 
-    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability Architecture with Network Load Balancer](../../../../assets/images/platform/self-hosting/ha/on-premises/ha-nlb-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer must be a Network Load Balancer that supports TCP and UDP traffic.
     - The Load Balancer distributes traffic across all Master Nodes.
@@ -171,7 +172,7 @@ This command will output the following instructions, which you should follow:
 2. **Installation Commands for 'Master Nodes'**: This is the command needed to install your Master Node. It should look like this:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
         --no-tty --install \
         --deployment-type='ha' \
         --node-role='master-node' \
@@ -203,7 +204,7 @@ This command will output the following instructions, which you should follow:
 4. **Installation Commands for 'Media Nodes'**: This is the command needed to install your Media Nodes. It should look like this:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --deployment-type='ha' \
         --node-role='media-node' \
@@ -393,7 +394,7 @@ Each installation command for each type of node looks like this:
     To install a Master Node, you can use the following command:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_master_node.sh) \
         --no-tty --install \
         --node-role='master-node' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \
@@ -434,7 +435,7 @@ Each installation command for each type of node looks like this:
     To install a Media Node, you can use the following command:
 
     ```bash
-    sh <(curl -fsSL http://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
+    sh <(curl -fsSL https://get.openvidu.io/pro/ha/latest/install_ov_media_node.sh) \
         --no-tty --install \
         --node-role='media-node' \
         --master-node-private-ip-list='10.5.0.1,10.5.0.2,10.5.0.3,10.5.0.4' \

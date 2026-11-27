@@ -53,6 +53,9 @@ After the restart, verify that OpenVidu services can reach the external cluster.
 Amazon DocumentDB is protocol-compatible with MongoDB and can be used as the external database. Create a DocumentDB cluster with a username and password that OpenVidu will use for authentication, then follow these steps:
 
 !!! warning
+    Analytics need MongoDB itself. With Amazon DocumentDB, OpenVidu Server starts with its analytics disabled, and [OpenVidu Dashboard](../production-ready/observability/openvidu-dashboard.md) has no data to show. Use a MongoDB deployment, such as MongoDB Atlas, if you need the dashboard.
+
+!!! warning
     DocumentDB instances are only reachable inside the associated AWS VPC by default. Ensure that the security groups attached to the OpenVidu nodes and the DocumentDB cluster allow traffic so that the nodes can reach the database endpoint.
 
 ### 1. Download the AWS trust store

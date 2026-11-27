@@ -32,7 +32,8 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 
     This is what the deployment architecture looks like:
 
-    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu High Availability DigitalOcean Architecture](../../../../assets/images/platform/self-hosting/ha/digitalocean/ha-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Load Balancer distributes HTTPS traffic to the Master Nodes.
     - If RTMP media is ingested, the Load Balancer also routes this traffic to the Master Nodes, which act as a bridge.
@@ -48,7 +49,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
 1. Clone the OpenVidu repository with the terraform files:
     ```bash
     git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-    git -C openvidu-digitalocean checkout 3.9.0
+    git -C openvidu-digitalocean checkout 3.10.0
     cd openvidu-digitalocean/pro/ha
     ```
 2. Copy **terraform.tfvars.example** to **terraform.tfvars**, update the required parameters with your values, and optionally adjust defaults.
@@ -71,7 +72,7 @@ This section describes how to deploy a production-ready OpenVidu High Availabili
         | Input Value | Default Value | Description |
         |---|---|---|
         | `region` | `"ams3"`{ .nowrap } | DigitalOcean region where resources will be created. |
-        | `masterNodesInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Node. |
+        | `masterNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Master Nodes. The former name `masterNodesInstanceType` is still accepted but deprecated. |
         | `mediaNodeInstanceType` | `"s-4vcpu-8gb"`{ .nowrap } | Specifies the DigitalOcean Droplet size for your Media Nodes. |
         | `initialNumberOfMediaNodes` | `1`{ .nowrap } | Number of Media Nodes to create at initial deployment. On its first run the autoscaler brings the cluster straight to `max(minNumberOfMediaNodes, initialNumberOfMediaNodes)` Media Nodes; afterwards the number stays between `minNumberOfMediaNodes` and `maxNumberOfMediaNodes` based on CPU load. Ignored when `fixedNumberOfMediaNodes` > 0. |
         | `minNumberOfMediaNodes` | `1`{ .nowrap } | Minimum number of media nodes. The autoscaler never scales below this value. |

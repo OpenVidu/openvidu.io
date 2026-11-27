@@ -20,6 +20,10 @@ Internally, the Google Cloud Platform Elastic deployment mirrors the On Premises
 
 The Master Node is a Virtual Machine Instance, while the Media Nodes are part of a Managed Instance Group. The process for starting and stopping these components differs:
 
+!!! info "Deployments with a fixed number of Media Nodes"
+
+    With **`fixedNumberOfMediaNodes`** greater than `0` (see [Fixed Number of Media Nodes](#fixed-number-of-media-nodes)) there is no autoscaler to edit, and the scale-in Cloud Run Function brings the group back to the fixed number within 5 minutes. To shut the cluster down, first pause the Cloud Scheduler job `<STACK_NAME>-scale-scheduler` in [Cloud Scheduler :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target="_blank"}, then set the _"Number of instances"_ of the Managed Instance Group to `0` instead of its minimum and maximum. To start it up, set the number of instances back and resume the job.
+
 === "Shutting down the cluster"
 
     To shut down the cluster, you need to stop the Media Nodes and then stop the Master Node.
@@ -135,31 +139,35 @@ You can modify the autoscaling configuration of the Media Nodes by adjusting the
 
 ## Fixed Number of Media Nodes
 
-If you prefer to maintain a fixed number of Media Nodes instead of allowing the Managed Instance Group to perform dynamic scaling:
+The **`fixedNumberOfMediaNodes`** input value selects how the number of Media Nodes in the Managed Instance Group `<STACK_NAME>-media-node-group` is managed:
 
-=== "Set Fixed Number of Media Nodes"
+- **Autoscaling mode** (`0`, the default): an autoscaler adds Media Nodes based on CPU usage, between **minNumberOfMediaNodes** and **maxNumberOfMediaNodes**, and a scale-in Cloud Run Function, run every 5 minutes by a Cloud Scheduler job, drains the Media Nodes above the autoscaler's recommendation.
+- **Fixed mode** (a value greater than `0`): no autoscaler is deployed. The same scale-in Cloud Run Function keeps the group at that number of Media Nodes: it drains the extra ones and adds the missing ones. **initialNumberOfMediaNodes**, **minNumberOfMediaNodes**, **maxNumberOfMediaNodes** and **scaleTargetCPU** are ignored.
 
-    1. Go to the [Google Cloud Platform Console :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/compute/overview){:target="_blank"}.
-    2. Go to the _"Instance Groups"_ tab, and there click into the Managed Instance Group resource called `<STACK_NAME>-media-node-group` and click on _"Edit"_.
+=== "Change Fixed Number of Media Nodes"
 
-        ![Edit Button Location MIG](../../../../assets/images/platform/self-hosting/elastic/gcp/elastic-mig-edit-tab.png){ .round-corners loading=lazy }
+    1. Go to [Infrastructure Manager :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/infra-manager/deployments){:target="_blank"} in the GCP Console and select the deployment of OpenVidu Elastic.
+    2. Edit the deployment, set the input value **`fixedNumberOfMediaNodes`** to the number of Media Nodes you want, keep the rest of the input values as they are, and update the deployment. If you deployed with the Terraform CLI instead, set the variable and run `terraform apply`.
+    3. Wait for the update to complete. The scale-in Cloud Run Function brings the group to the new number on its next run, within 5 minutes. You can follow the Media Nodes in the Managed Instance Group called `<STACK_NAME>-media-node-group`.
 
-    3. On this tab, go to _"Group size & autoscaling"_ and change the _"Auto-scaling mode"_ to **Off**, then set the _"Number of instances"_ on the top to the value of fixed number of Media Nodes you want. In this case it is set to 3. Click _"Save"_ and wait for the changes to be applied.
+    Raising the number adds Media Nodes. Lowering it drains the extra Media Nodes gracefully, with the same mechanism as an automatic scale-in: they leave the Managed Instance Group but keep running in _"VM instances"_ while they drain, stop accepting new Rooms, and delete themselves when their ongoing Rooms, recordings and ingests end. The drain starts within about 5 minutes of the update: the function runs every 5 minutes, and each Media Node notices within a minute that it has left the group.
 
-        ![Fixed Number Media Nodes](../../../../assets/images/platform/self-hosting/shared/gcp/fixed-media-nodes.png){ .round-corners loading=lazy }
+### Activate or Deactivate Autoscaling
 
-    !!! info
+=== "Activate Autoscaling"
 
-        This will delete the media nodes if you have set the count lower than the existing number. If you want to stop them gracefully, check the [Shutdown the Cluster](#shutting-down-the-cluster) tab.
+    1. Follow the steps of the _"Change Fixed Number of Media Nodes"_ tab above, setting **`fixedNumberOfMediaNodes`** to `0`. Change **minNumberOfMediaNodes**, **maxNumberOfMediaNodes** and **scaleTargetCPU** too if you do not want their current values.
+    2. When the update completes, the autoscaler is deployed again and scales on CPU usage, starting from the Media Nodes that are running. If there are fewer than **minNumberOfMediaNodes**, the autoscaler adds Media Nodes up to it. If there are more than **maxNumberOfMediaNodes**, the scale-in Cloud Run Function drains the extra ones gracefully, down to the autoscaler's recommendation.
 
-### Deactivate Scale In
-If you want a fixed number of Media Nodes you probably want to deactivate the Cloud Run Function that controls scale in actions. Follow these steps to do it:
+=== "Deactivate Autoscaling"
 
-=== "Deactivate Cloud Run Function"
+    1. Follow the steps of the _"Change Fixed Number of Media Nodes"_ tab above, setting **`fixedNumberOfMediaNodes`** to the number of Media Nodes you want.
+    2. When the update completes, the autoscaler is removed, and the scale-in Cloud Run Function brings the group to that number on its next run: if more Media Nodes are running, the extra ones are drained gracefully; if fewer are running, Media Nodes are added.
 
-    1. Go to the [Cloud Scheduler Jobs :fontawesome-solid-external-link:{.external-link-icon}](https://console.cloud.google.com/cloudscheduler){:target="_blank"} and select the scheduler that controls the trigger of the Cloud Run Function you want to deactivate, then click on *"Pause"* and it will not execute more until you click on *"Resume"* whenever you want to make the cluster scale in again.
+!!! info "What an update changes"
 
-        ![Deactivate Scale In](../../../../assets/images/platform/self-hosting/elastic/gcp/scalein-deactivate.png){ .round-corners loading=lazy }
+    - An update never resizes the Managed Instance Group by itself: Terraform sets its size only when the deployment is created, to **initialNumberOfMediaNodes** (or to **fixedNumberOfMediaNodes** in fixed mode). After that, only the autoscaler and the scale-in Cloud Run Function change it, as described above.
+    - In fixed mode, if the size of the group is changed by other means, for example by hand in the GCP Console, the scale-in Cloud Run Function brings it back to **fixedNumberOfMediaNodes** on its next run.
 
 ## Administration and configuration
 

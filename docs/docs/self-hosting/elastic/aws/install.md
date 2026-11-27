@@ -16,6 +16,9 @@ description: "Deploy OpenVidu Elastic on AWS from a CloudFormation stack, then p
 
 This section contains instructions for deploying a production-ready OpenVidu Elastic deployment on AWS. The deployed services are the same as in the [On Premises Elastic installation](../on-premises/install.md), but the process is automated through AWS CloudFormation.
 
+!!! info
+    Port `9000` is MinIO's port. This deployment stores recordings and application data in Amazon S3 instead of MinIO, so MinIO is not deployed and port `9000` does not need to be open.
+
 First, import the template in the AWS CloudFormation console. You can click the following button...
 
 [:fontawesome-brands-aws:{.deploy-button-icon} Deploy to AWS](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=OpenViduElastic&templateURL=https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-openvidu-elastic.yaml){.md-button .deploy-button .deploy-to-aws-btn target="_blank"}
@@ -28,17 +31,18 @@ https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/latest/aws/cf-ope
 
 !!! info
     
-    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy. For example, to deploy version `3.9.0`, use the following URL:
+    If you want to deploy a specific version of OpenVidu Elastic, replace `latest` with the version you want to deploy, or, from OpenVidu 3.10 on, with a minor version (e.g. `3.10`) to deploy its latest patch release. For example, to deploy version `3.10.0`, use the following URL:
 
     ```
-    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.9.0/aws/cf-openvidu-elastic.yaml
+    https://s3.eu-west-1.amazonaws.com/get.openvidu.io/pro/elastic/3.10.0/aws/cf-openvidu-elastic.yaml
     ```
 
 === "Architecture overview"
 
     This is how the architecture of the deployment looks:
 
-    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-architecture.svg){ .round-corners .dark-img loading=lazy }
+    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-architecture-light.svg#only-light){ .round-corners loading=lazy }
+    ![OpenVidu Elastic AWS Architecture](../../../../assets/images/platform/self-hosting/elastic/aws/elastic-architecture-dark.svg#only-dark){ .round-corners loading=lazy }
 
     - The Master Node acts as a Load Balancer, managing the traffic and distributing it among the Media Nodes and deployed services in the Master Node.
     - The Master Node has its own Caddy server acting as a Layer 4 (for TURN with TLS and RTMPS) and Layer 7 (for OpenVidu Dashboard, OpenVidu Meet, etc., APIs) reverse proxy.
