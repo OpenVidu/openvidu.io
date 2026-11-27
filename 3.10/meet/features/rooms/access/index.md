@@ -1,6 +1,6 @@
 # Room Access
 
-Only **room members** can access a room — to view its recordings or to join a meeting in it, becoming a participant. Room members can be **users**, **identified guests** or **anonymous guests**, all described in detail in the [Room Members](https://openvidu.io/3.10/meet/features/room-members/overview/index.md) feature.
+Only **room members** can access a room — to view its recordings or to join a meeting in it, becoming a participant. Room members can be **users**, **identified guests** or **anonymous guests**, all described in detail in the [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md) feature.
 
 Each kind of member reaches the room through a different kind of **access link**, and gets a set of permissions determined by a role:
 
@@ -14,7 +14,7 @@ Anonymous guests access the room through **shared anonymous access links** that 
 - The **`Moderator`** link, which grants the moderator role.
 - The **`Speaker`** link, which grants the speaker role.
 
-These links can be shared freely with anyone, unless anonymous access for that role has been disabled for the room. You can enable or disable anonymous access per role when [creating](https://openvidu.io/3.10/meet/features/rooms/management/#create-rooms) or [editing](https://openvidu.io/3.10/meet/features/rooms/management/#edit-rooms) a room. Before joining the meeting, each anonymous guest is asked to **choose a name**.
+These links can be shared freely with anyone, unless anonymous access for that role has been disabled for the room. You can enable or disable anonymous access per role when [creating](https://openvidu.io/latest/meet/features/rooms/management/#create-rooms) or [editing](https://openvidu.io/latest/meet/features/rooms/management/#edit-rooms) a room. Before joining the meeting, each anonymous guest is asked to **choose a name**.
 
 ### Sharing the anonymous links
 
@@ -28,31 +28,31 @@ Participants with the `roomShareAccessLinks` permission can share the room's ano
 
 > **Info**
 >
-> Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `participantPromote` permission can promote others to `Moderator` during the meeting. See [Role Management](https://openvidu.io/3.10/meet/features/meetings/role-management/#promoting-participants-to-moderator).
+> Links copied from the meeting view grant anonymous access with `Speaker` role. Participants with the `participantPromote` permission can promote others to `Moderator` during the meeting. See [Role Management](https://openvidu.io/latest/meet/features/meetings/role-management/#promoting-participants-to-moderator).
 
 #### From the REST API
 
-The anonymous access links are available in the properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` of the [MeetRoom](https://openvidu.io/3.10/meet/embedded/reference/api.html#/schemas/MeetRoom) object.
+The anonymous access links are available in the properties `access.anonymous.moderator.url` and `access.anonymous.speaker.url` of the [MeetRoom](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoom) object.
 
 ## User and identified guest access
 
-Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](https://openvidu.io/3.10/meet/features/room-members/management/#rest-api-reference). They access the room through different links:
+Unlike anonymous guests, **users** and **identified guests** are explicitly added to the room as members — from the **"Room Members"** tab or the [Room Members REST API](https://openvidu.io/latest/meet/features/room-members/management/#rest-api-reference). They access the room through different links:
 
-- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom](https://openvidu.io/3.10/meet/embedded/reference/api.html#/schemas/MeetRoom) ). They must **log in** with their OpenVidu Meet credentials.
+- **Users** all access the room through the same **user access link** (property `access.user.url` of [MeetRoom](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoom) ). They must **log in** with their OpenVidu Meet credentials.
 - **Identified guests** each receive a **unique personal access link** (property `accessUrl` of their member object) that grants access with **no login** and should be delivered privately to that person.
 
 In addition to users added explicitly as room members, other users can also access the room:
 
 - **Admins** and the **room owner** (the user who created the room) always have access to the room, with all permissions granted.
-- If a room is [configured](https://openvidu.io/3.10/meet/features/rooms/management/#create-rooms) to be **accessible to all users**, any user can access — even without being an explicit member — with `Speaker` permissions.
+- If a room is [configured](https://openvidu.io/latest/meet/features/rooms/management/#create-rooms) to be **accessible to all users**, any user can access — even without being an explicit member — with `Speaker` permissions.
 
-See the [Room Members](https://openvidu.io/3.10/meet/features/room-members/overview/index.md) feature to add and manage users and identified guests, and the [Users](https://openvidu.io/3.10/meet/features/users/overview/index.md) feature to manage the accounts themselves.
+See the [Room Members](https://openvidu.io/latest/meet/features/room-members/overview/index.md) feature to add and manage users and identified guests, and the [Users](https://openvidu.io/latest/meet/features/users/overview/index.md) feature to manage the accounts themselves.
 
 ## Locked room
 
 An access link lets a participant reach the room. **Locking** the room adds one more step before they enter the meeting: whoever lacks the `accessBypassLock` permission **asks to join** and waits until a participant with `waitingParticipantAdmin` admits or rejects them. Admins and the room owner never wait.
 
-Lock a room from the **Room Access** step of the room wizard, or with the `access.lock` property of the REST API. See [Locked Room](https://openvidu.io/3.10/meet/features/meetings/locked-room/index.md) for the whole feature.
+Lock a room from the **Room Access** step of the room wizard, or with the `access.lock` property of the REST API. See [Locked Room](https://openvidu.io/latest/meet/features/meetings/locked-room/index.md) for the whole feature.
 
 ## Predefined roles
 
@@ -64,11 +64,11 @@ Grants full meeting permissions by default:
 
 - **Meeting management**: join the meeting, read its live state and end it for all participants.
 - **Recording control**: start and stop recordings, and list, play, download and delete them.
-- **Live broadcast control**: start and stop the [live broadcast](https://openvidu.io/3.10/meet/features/meetings/live-broadcast/index.md) of the meeting to the room's destinations, and stream it to destinations the room does not have.
-- **Participant management**: promote other participants to moderator, [mute](https://openvidu.io/3.10/meet/features/meetings/moderation/index.md) their microphone, camera or screen share, [lower their raised hands](https://openvidu.io/3.10/meet/features/meetings/raise-hand/#lowering-hands), kick them, and share room access links.
-- **Locked room**: `accessBypassLock` to join a locked room [without waiting](https://openvidu.io/3.10/meet/features/meetings/locked-room/#who-waits) and `waitingParticipantAdmin` to [admit or reject](https://openvidu.io/3.10/meet/features/meetings/locked-room/#admitting-and-rejecting) the participants who wait.
+- **Live broadcast control**: start and stop the [live broadcast](https://openvidu.io/latest/meet/features/meetings/live-broadcast/index.md) of the meeting to the room's destinations, and stream it to destinations the room does not have.
+- **Participant management**: promote other participants to moderator, [mute](https://openvidu.io/latest/meet/features/meetings/moderation/index.md) their microphone, camera or screen share, [lower their raised hands](https://openvidu.io/latest/meet/features/meetings/raise-hand/#lowering-hands), kick them, and share room access links.
+- **Locked room**: `accessBypassLock` to join a locked room [without waiting](https://openvidu.io/latest/meet/features/meetings/locked-room/#who-waits) and `waitingParticipantAdmin` to [admit or reject](https://openvidu.io/latest/meet/features/meetings/locked-room/#admitting-and-rejecting) the participants who wait.
 - **Media publishing**: publish video, audio, and share screen.
-- **Communication**: send chat messages and [reactions](https://openvidu.io/3.10/meet/features/meetings/reactions/index.md), change virtual background.
+- **Communication**: send chat messages and [reactions](https://openvidu.io/latest/meet/features/meetings/reactions/index.md), change virtual background.
 
 ### Speaker
 
@@ -76,10 +76,10 @@ Grants basic participation permissions by default:
 
 - **Meeting access**: join the meeting and read its live state.
 - **Recording access**: list, play and download the room's recordings — but not start, stop or delete them.
-- **Locked room**: neither `accessBypassLock` nor `waitingParticipantAdmin`, so in a [locked room](https://openvidu.io/3.10/meet/features/meetings/locked-room/index.md) a speaker asks to join and waits to be admitted.
+- **Locked room**: neither `accessBypassLock` nor `waitingParticipantAdmin`, so in a [locked room](https://openvidu.io/latest/meet/features/meetings/locked-room/index.md) a speaker asks to join and waits to be admitted.
 - **Media publishing**: publish video, audio, and share screen.
-- **Communication**: send chat messages and [reactions](https://openvidu.io/3.10/meet/features/meetings/reactions/index.md), change virtual background.
+- **Communication**: send chat messages and [reactions](https://openvidu.io/latest/meet/features/meetings/reactions/index.md), change virtual background.
 
 > **Info**
 >
-> The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](https://openvidu.io/3.10/meet/features/rooms/management/#create-rooms) or [editing](https://openvidu.io/3.10/meet/features/rooms/management/#edit-rooms) it, and per member through custom permissions. Every permission is set independently: none is implied by another. A few only take effect together with another one: sending chat messages needs reading the chat, changing the virtual background needs publishing video, and streaming to destinations the room does not have needs live broadcast control. For the complete list of available permissions, see the [MeetPermissions](https://openvidu.io/3.10/meet/embedded/reference/api.html#/schemas/MeetPermissions) schema.
+> The default permissions for `Moderator` and `Speaker` can be customized per room when [creating](https://openvidu.io/latest/meet/features/rooms/management/#create-rooms) or [editing](https://openvidu.io/latest/meet/features/rooms/management/#edit-rooms) it, and per member through custom permissions. Every permission is set independently: none is implied by another. A few only take effect together with another one: sending chat messages needs reading the chat, changing the virtual background needs publishing video, and streaming to destinations the room does not have needs live broadcast control. For the complete list of available permissions, see the [MeetPermissions](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetPermissions) schema.

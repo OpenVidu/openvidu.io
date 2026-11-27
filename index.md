@@ -47,11 +47,11 @@ Host in the EU and call data stays in the EU, with no transfers to a foreign ven
 
 “Privacy was one of our most important selection criteria.” Janne Sikiö, CEO at Dicode. [Why GDPR and EU data residency decided it for Dicode →](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/)
 
-Any cloudAWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises.
+Any infra or cloudOn-premises in your own hardware, or in any cloud: AWS, Azure, GCP, DigitalOcean, OCI.
 
-LiveKit compatibleFamiliar APIs and SDKs, with mediasoup at the core.
+LiveKit compatibleFamiliar APIs and SDKs, with the power of mediasoup at the core.
 
-Open sourceCOMMUNITY is free under Apache 2.0. PRO when you scale.
+Open sourceCOMMUNITY is free under Apache-2.0. PRO when you scale.
 
 Made in EuropeBuilt in Madrid, Spain, by a company that answers to EU law.
 
