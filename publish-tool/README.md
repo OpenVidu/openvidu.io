@@ -264,10 +264,10 @@ commit both:
 
 ```bash
 uv pip compile pyproject.toml --extra build --universal --generate-hashes \
-  --python-version 3.11 --no-header -o requirements-publish.txt
+  --python-version 3.11.5 --no-header -o requirements-publish.txt
 ```
 
-`--universal` keeps the environment markers, so the same file installs on the 3.11 floor and on
+`--universal` keeps the environment markers, so the same file installs on the 3.11.5 floor and on
 the 3.14 the workflow runs. `test-tools.yaml` resolves the lock with `--require-hashes` on every
 change under `publish-tool/`, so a lock pip cannot satisfy fails there rather than in the publish.
 

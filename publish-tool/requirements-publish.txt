@@ -315,16 +315,13 @@ charset-normalizer==3.5.1 \
 click==8.5.0 \
     --hash=sha256:255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360 \
     --hash=sha256:ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34
-    # via
-    #   mkdocs
-    #   properdocs
+    # via mkdocs
 colorama==0.4.6 \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
     # via
     #   mkdocs
     #   mkdocs-material
-    #   properdocs
     #   typer
 cssselect2==0.10.1 \
     --hash=sha256:25cc4494d55985d6a6da359be48da6ce98c28dcbafa2314c383ace3fc32ec868 \
@@ -341,9 +338,7 @@ filelock==4.2.4 \
 ghp-import==2.1.0 \
     --hash=sha256:8337dd7b50877f163d4c0289bc1f1c7f127550241988d568c1db512c4324a619 \
     --hash=sha256:9c535c4c61193c2df8871222567d7fd7e5014d835f97dc7b7439069e2413d343
-    # via
-    #   mkdocs
-    #   properdocs
+    # via mkdocs
 gitdb==4.0.12 \
     --hash=sha256:5ef71f855d191a3326fcfbc0d5da835f26b13fbcba60c32c21091c349ffdb571 \
     --hash=sha256:67073e15955400952c6565cc3e707c554a4eea2e428946f7a4c162fab9bd9bcf
@@ -370,14 +365,12 @@ jinja2==3.1.6 \
     #   mike
     #   mkdocs
     #   mkdocs-material
-    #   properdocs
 markdown==3.10.3 \
     --hash=sha256:3589362618f743188b4d955b874402bc814f4f83f544dc207719f4baa7d9c45f \
     --hash=sha256:fa6c92a00a4a3c98b22728c64a935ae1928250ae65058a6ded814d2cc29a4cea
     # via
     #   mkdocs
     #   mkdocs-material
-    #   properdocs
     #   pymdown-extensions
 markdown-it-py==3.0.0 \
     --hash=sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1 \
@@ -482,7 +475,6 @@ markupsafe==3.0.3 \
     # via
     #   jinja2
     #   mkdocs
-    #   properdocs
 mdformat==0.7.22 \
     --hash=sha256:61122637c9e1d9be1329054f3fa216559f0d1f722b7919b060a8c2a4ae1850e5 \
     --hash=sha256:eef84fa8f233d3162734683c2a8a6222227a229b9206872e6139658d99acb1ea
@@ -514,7 +506,6 @@ mkdocs==1.6.1 \
     #   ovweb (pyproject.toml)
     #   mike
     #   mkdocs-material
-    #   mkdocs-rss-plugin
 mkdocs-get-deps==0.2.2 \
     --hash=sha256:8ee8d5f316cdbbb2834bc1df6e69c08fe769a83e040060de26d3c19fad3599a1 \
     --hash=sha256:e7878cbeac04860b8b5e0ca31d3abad3df9411a75a32cde82f8e44b6c16ff650
@@ -527,9 +518,9 @@ mkdocs-llmstxt==0.5.1 \
     --hash=sha256:bc3ffa62f0e511159918554f18e9495d60b4fd704695704e9bdb3bf5985d745d \
     --hash=sha256:c890b3af4a9d0dad155bdca8cc632c778d9340e7b9d480142f26a7ea38a10862
     # via ovweb (pyproject.toml)
-mkdocs-material==9.8.1 \
-    --hash=sha256:2115af67ee680e1398bdd0ea02e517721e4bba88b342503a93f97ea8eb3de51c \
-    --hash=sha256:cddae7d77bb98d1d347aa68ee252ab40926171a1b34ba8777c44e16de9629f00
+mkdocs-material==9.8.2 \
+    --hash=sha256:005d942bdbfa22efa049f4818c31d42fb36bed6d362adb641dd7a2e948078f9d \
+    --hash=sha256:ef1414cab33d64fcc13387e972af5ba4620f55f93482d1842933399ed2c69b02
     # via ovweb (pyproject.toml)
 mkdocs-material-extensions==1.3.1 \
     --hash=sha256:10c9511cea88f568257f960358a467d12b970e1f7b2c0e5fb2bb48cab1928443 \
@@ -639,7 +630,6 @@ packaging==26.3 \
     #   ovweb (pyproject.toml)
     #   hatchling
     #   mkdocs
-    #   properdocs
 paginate==0.5.7 \
     --hash=sha256:22bd083ab41e1a8b4f3690544afb2c60c25e5c9a63a30fa2f483f6c60c8e5945 \
     --hash=sha256:b885e2af73abcf01d9559fd5216b57ef722f8c42affbb63942377668e35c7591
@@ -650,7 +640,6 @@ pathspec==1.1.1 \
     # via
     #   hatchling
     #   mkdocs
-    #   properdocs
 pillow==13.0.0 \
     --hash=sha256:02464da86f561f410e13b061ec37c3068a9cb557a095494157742d07b3c24a27 \
     --hash=sha256:04a63720f79e22fd54d897c233a68314c50ca0603360f54ce2bd5db8f0f43782 \
@@ -741,17 +730,11 @@ pillow==13.0.0 \
 platformdirs==4.11.8 \
     --hash=sha256:52f2f181bbfde907966932cc8312d967d02976422d66d537ea16092b8e291081 \
     --hash=sha256:f23abafea7dd4276d1f29104b83598d7dcc567cafd07c9c951e66665645437fc
-    # via
-    #   mkdocs-get-deps
-    #   properdocs
+    # via mkdocs-get-deps
 pluggy==1.6.0 \
     --hash=sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3 \
     --hash=sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746
     # via hatchling
-properdocs==1.6.7 \
-    --hash=sha256:6fa0cfa2e01bf338f684892c8a506cf70ea88ae7f3479c933b6fa20168101cbd \
-    --hash=sha256:adc7b16e562890af0e098a7e5b02e3a81c20894a87d6a28d345c9300de73c26e
-    # via mkdocs-rss-plugin
 pycparser==3.0 ; implementation_name != 'PyPy' \
     --hash=sha256:600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29 \
     --hash=sha256:b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992
@@ -856,7 +839,6 @@ pyyaml==6.0.3 \
     #   mike
     #   mkdocs
     #   mkdocs-get-deps
-    #   properdocs
     #   pymdown-extensions
     #   pyyaml-env-tag
 pyyaml-env-tag==1.1 \
@@ -865,7 +847,6 @@ pyyaml-env-tag==1.1 \
     # via
     #   mike
     #   mkdocs
-    #   properdocs
 requests==2.34.2 \
     --hash=sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0 \
     --hash=sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed
@@ -1026,9 +1007,7 @@ watchdog==6.0.0 \
     --hash=sha256:e6f0e77c9417e7cd62af82529b10563db3423625c5fce018430b249bf977f9e8 \
     --hash=sha256:e7631a77ffb1f7d2eefa4445ebbee491c720a5661ddf6df3498ebecae5ed375c \
     --hash=sha256:ef810fbf7b781a5a593894e4f439773830bdecb885e6880d957d5b9382a960d2
-    # via
-    #   mkdocs
-    #   properdocs
+    # via mkdocs
 wcwidth==0.8.3 \
     --hash=sha256:d128512515fbf4612e0ff21fd6380399210318b7b54a9af59dff8454cf9730eb \
     --hash=sha256:d5b73dba6158a595ec9370350e7f2637bcac8d6c5e4fde34f30fcffb6103a5e4
