@@ -50,7 +50,7 @@ Amazon DocumentDB is protocol-compatible with MongoDB and can be used as the ext
 
 > **Warning**
 >
-> Analytics need MongoDB itself. With Amazon DocumentDB, OpenVidu Server starts with its analytics disabled, and [OpenVidu Dashboard](https://openvidu.io/3.10/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) has no data to show. Use a MongoDB deployment, such as MongoDB Atlas, if you need the dashboard.
+> Analytics need MongoDB itself. With Amazon DocumentDB, OpenVidu Server starts with its analytics disabled, and [OpenVidu Dashboard](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) has no data to show. Use a MongoDB deployment, such as MongoDB Atlas, if you need the dashboard.
 
 > **Warning**
 >

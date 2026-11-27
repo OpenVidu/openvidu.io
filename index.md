@@ -166,7 +166,7 @@ OpenVidu COMMUNITYPRO LiveKit-compatible APIs · mediasoup media engine
 
 Your infra
 
-AWSAzureGoogle CloudDigitalOceanOracle CloudOn-premises
+On-premisesAWSAzureGCPDigitalOceanOCI
 
 ### Four deployments, one set of APIs.
 

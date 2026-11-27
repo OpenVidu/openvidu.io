@@ -12,7 +12,7 @@
   /* Surfaces and ink (light values; slate overrides below) */
   --ov-ground: #f4f6f7;
   --ov-surface: #ffffff;
-  --ov-surface-2: #e9eef0;
+  --ov-surface-2: #dfe6e9;
   --ov-text: #101618;
   --ov-muted: #4a5a60;
   --ov-border: #d9e0e3;
@@ -150,7 +150,7 @@
   color-scheme: dark;
   --ov-ground: #0f1517;
   --ov-surface: #171f22;
-  --ov-surface-2: #1f292d;
+  --ov-surface-2: #283439;
   --ov-text: #eef2f3;
   --ov-muted: #a3b1b6;
   --ov-border: #2a3539;

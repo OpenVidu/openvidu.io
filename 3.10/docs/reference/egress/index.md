@@ -4,15 +4,15 @@
 
 OpenVidu ships Egress already wired to the storage of the deployment (the bundled S3-compatible MinIO, or the cloud provider's object storage), so a recording has somewhere to land with no extra setup.
 
-For copy-paste code snippets, see [Recording examples](#recording-examples). For working tutorials, see the [Recording tutorials](https://openvidu.io/3.10/docs/tutorials/advanced-features/index.md).
+For copy-paste code snippets, see [Recording examples](#recording-examples). For working tutorials, see the [Recording tutorials](https://openvidu.io/latest/docs/tutorials/advanced-features/index.md).
 
 ## Starting an Egress
 
-Egress are started by making a `StartEgress` request to the [Egress API](https://docs.livekit.io/reference/other/egress/api/) from your application server. Requests to the Egress API require a token with the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
+Egress are started by making a `StartEgress` request to the [Egress API](https://docs.livekit.io/reference/other/egress/api/) from your application server. Requests to the Egress API require a token with the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants) (any LiveKit server SDK automatically generates it from your `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET`).
 
 > **SDK requirements**
 >
-> - **.NET and PHP:** both SDKs refuse an API secret shorter than 32 characters. The .NET SDK throws an error, and the PHP SDK sends the request without a token, which fails with `permissions denied`. The [local deployment](https://openvidu.io/3.10/docs/self-hosting/local/index.md) uses a shorter secret by default.
+> - **.NET and PHP:** both SDKs refuse an API secret shorter than 32 characters. The .NET SDK throws an error, and the PHP SDK sends the request without a token, which fails with `permissions denied`. The [local deployment](https://openvidu.io/latest/docs/self-hosting/local/index.md) uses a shorter secret by default.
 > - **Rust:** to call an `https://` URL, enable one of the TLS features of crate `livekit-api`, for example `features = ["rustls-tls-native-roots"]`. With the default features, requests fail with `invalid URL, scheme is not http`.
 
 The example below records `"my-room"` to an MP4 file: a `template` source with layout `grid`, and one `file` output. The output carries no explicit storage, so OpenVidu sends it to the storage of the deployment:
@@ -211,7 +211,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -596,7 +596,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -910,7 +910,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -969,7 +969,7 @@ If your backend technology does not have its own SDK, you have two options:
 
 > **Output files may survive crashes**
 >
-> If the Egress process crashes, the output is not necessarily lost: OpenVidu keeps a copy on the node's disk. Visit [Recovering Egress from node failures](https://openvidu.io/3.10/docs/self-hosting/production-ready/fault-tolerance/#recovering-egress-from-node-failures) for how to retrieve it.
+> If the Egress process crashes, the output is not necessarily lost: OpenVidu keeps a copy on the node's disk. Visit [Recovering Egress from node failures](https://openvidu.io/latest/docs/self-hosting/production-ready/fault-tolerance/#recovering-egress-from-node-failures) for how to retrieve it.
 
 ## Layouts and custom templates
 
@@ -1293,7 +1293,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -1346,7 +1346,7 @@ If your backend technology does not have its own SDK, you have two options:
 
 ### Recording files
 
-Participants can publish as many tracks as they want (see [Publish a Track](https://openvidu.io/3.10/docs/reference/client-sdk/#publish-a-track)). Participant Passthrough Egress never puts more than one video track and one audio track in the same file. It groups them by source like this:
+Participants can publish as many tracks as they want (see [Publish a Track](https://openvidu.io/latest/docs/reference/client-sdk/#publish-a-track)). Participant Passthrough Egress never puts more than one video track and one audio track in the same file. It groups them by source like this:
 
 | File              | Name                                  | Holds                                                    |
 | ----------------- | ------------------------------------- | -------------------------------------------------------- |
@@ -1579,7 +1579,7 @@ The four of them write the same files for every participant: the [recording file
 - **One Egress per participant:** each participant has an Egress of their own, with its own ID, status, webhooks and manifest. Each one can run on a different egress node, and a failure affects only that participant. To rebuild the Room, you combine the manifests of all of them.
 - **One Egress for the whole Room:** a single Egress, with one ID, one status, one manifest and one `file_results` list with every participant's files. One egress node records the whole Room.
 - **Started by your application:** you decide when the recording starts and stops, for a Room that already exists. With one Egress per participant, you also decide which participants are recorded.
-- **Started with the Room:** the recording is set when the Room is created, with [`CreateRoom`](https://docs.livekit.io/reference/other/roomservice-api/#createroom) or with the `roomConfig` claim of an [access token](https://openvidu.io/3.10/docs/reference/access-tokens/#token-claims), and it records every participant who publishes for the whole life of the Room.
+- **Started with the Room:** the recording is set when the Room is created, with [`CreateRoom`](https://docs.livekit.io/reference/other/roomservice-api/#createroom) or with the `roomConfig` claim of an [access token](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims), and it records every participant who publishes for the whole life of the Room.
 
 #### One Egress per participant
 
@@ -1799,7 +1799,7 @@ Room room = await roomClient.CreateRoom(new CreateRoomRequest
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
@@ -2070,7 +2070,7 @@ await egressClient.StopEgress(new StopEgressRequest { EgressId = egressInfo.Egre
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, and `StopEgress` a POST to `/twirp/livekit.Egress/StopEgress`, both authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Egress API](https://docs.livekit.io/reference/other/egress/api/) directly. `StartEgress` is a POST to `/twirp/livekit.Egress/StartEgress`, and `StopEgress` a POST to `/twirp/livekit.Egress/StopEgress`, both authenticated with a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -2309,7 +2309,7 @@ Room room = await roomClient.CreateRoom(new CreateRoomRequest
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
@@ -2614,7 +2614,7 @@ Room room = await roomClient.CreateRoom(new CreateRoomRequest
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
@@ -2813,7 +2813,7 @@ Room room = await roomClient.CreateRoom(new CreateRoomRequest
 
 If your backend technology does not have its own SDK, you have two options:
 
-1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+1. Call the [Room Service API](https://docs.livekit.io/reference/other/roomservice-api/) directly. `CreateRoom` is a POST to `/twirp/livekit.RoomService/CreateRoom`, authenticated with a token carrying the [`roomCreate` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
    ```bash
    curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
@@ -2858,11 +2858,11 @@ A Room can also record the [Participant Passthrough files](#recording-files) of 
 
 > **Tip**
 >
-> You can also include the same `egress` field in the `roomConfig` claim of [access tokens](https://openvidu.io/3.10/docs/reference/access-tokens/#token-claims), in case you are letting participants create Rooms when they join.
+> You can also include the same `egress` field in the `roomConfig` claim of [access tokens](https://openvidu.io/latest/docs/reference/access-tokens/#token-claims), in case you are letting participants create Rooms when they join.
 
 > **Warning**
 >
-> Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](https://openvidu.io/3.10/docs/self-hosting/how-to-guides/enable-webhooks/index.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](https://openvidu.io/3.10/docs/troubleshooting/recording/index.md) when auto egress does not produce the expected output.
+> Automatic recordings fail silently, since no API call of yours returns their error. [Enable webhooks](https://openvidu.io/latest/docs/self-hosting/how-to-guides/enable-webhooks/index.md) and watch `egress_ended`, and see [Troubleshoot OpenVidu recordings](https://openvidu.io/latest/docs/troubleshooting/recording/index.md) when auto egress does not produce the expected output.
 
 ## Egress lifecycle
 
@@ -2912,7 +2912,7 @@ The fields that matter most while an application is running:
 
 ### Webhooks
 
-Rather than polling `ListEgress`, let OpenVidu tell you. Three [webhook events](https://openvidu.io/3.10/docs/reference/webhooks/#events) track an Egress, and all of them carry the full `egressInfo`:
+Rather than polling `ListEgress`, let OpenVidu tell you. Three [webhook events](https://openvidu.io/latest/docs/reference/webhooks/#events) track an Egress, and all of them carry the full `egressInfo`:
 
 | Event            | Fires when                                  |
 | ---------------- | ------------------------------------------- |
@@ -3102,7 +3102,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 **Server API**
 
-With a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+With a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
 ```bash
 curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -3289,7 +3289,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 **Server API**
 
-With a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+With a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
 ```bash
 curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -3438,7 +3438,7 @@ Room room = await roomClient.CreateRoom(new CreateRoomRequest
 
 **Server API**
 
-With a token carrying the [`roomCreate` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+With a token carrying the [`roomCreate` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
 ```bash
 curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
@@ -3669,7 +3669,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 **Server API**
 
-With a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+With a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
 ```bash
 curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -3922,7 +3922,7 @@ EgressInfo egressInfo = await egressClient.StartEgress(request);
 
 **Server API**
 
-With a token carrying the [`roomRecord` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+With a token carrying the [`roomRecord` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
 ```bash
 curl -X POST 'https://my-openvidu-host/twirp/livekit.Egress/StartEgress' \
@@ -4097,7 +4097,7 @@ Room room = await roomClient.CreateRoom(new CreateRoomRequest
 
 **Server API**
 
-With a token carrying the [`roomCreate` grant](https://openvidu.io/3.10/docs/reference/access-tokens/#video-grants):
+With a token carrying the [`roomCreate` grant](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants):
 
 ```bash
 curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
@@ -4118,9 +4118,9 @@ curl -X POST 'https://my-openvidu-host/twirp/livekit.RoomService/CreateRoom' \
 
 ## Related
 
-- [Recording tutorials](https://openvidu.io/3.10/docs/tutorials/advanced-features/index.md): Egress in a working application, with S3 and Azure variants.
-- [Configure external S3](https://openvidu.io/3.10/docs/self-hosting/how-to-guides/external-s3/index.md): sending recordings to your own bucket.
-- [Troubleshoot OpenVidu recordings](https://openvidu.io/3.10/docs/troubleshooting/recording/index.md): missing recordings, 503s, CPU pressure.
-- [Access tokens reference](https://openvidu.io/3.10/docs/reference/access-tokens/index.md): the `roomRecord` grant gates these operations.
-- [Webhooks reference](https://openvidu.io/3.10/docs/reference/webhooks/index.md): the Egress events and their payloads.
-- [Ingress reference](https://openvidu.io/3.10/docs/reference/ingress/index.md): media in the other direction.
+- [Recording tutorials](https://openvidu.io/latest/docs/tutorials/advanced-features/index.md): Egress in a working application, with S3 and Azure variants.
+- [Configure external S3](https://openvidu.io/latest/docs/self-hosting/how-to-guides/external-s3/index.md): sending recordings to your own bucket.
+- [Troubleshoot OpenVidu recordings](https://openvidu.io/latest/docs/troubleshooting/recording/index.md): missing recordings, 503s, CPU pressure.
+- [Access tokens reference](https://openvidu.io/latest/docs/reference/access-tokens/index.md): the `roomRecord` grant gates these operations.
+- [Webhooks reference](https://openvidu.io/latest/docs/reference/webhooks/index.md): the Egress events and their payloads.
+- [Ingress reference](https://openvidu.io/latest/docs/reference/ingress/index.md): media in the other direction.
