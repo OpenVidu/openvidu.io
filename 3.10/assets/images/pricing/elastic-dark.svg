@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 386" width="700" height="386" role="img" aria-label="OpenVidu Elastic deployment with 12 cores in total: a Master Node with 4 cores and two Media Nodes with 4 cores each, serving the clients">
+<title>OpenVidu Elastic deployment with 12 cores in total: a Master Node with 4 cores and two Media Nodes with 4 cores each, serving the clients</title>
+<rect x="40" y="70" width="200" height="90" rx="18" fill="#eef2f3" />
+<text x="140" y="120.6" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#0f1517" text-anchor="middle">Master Node</text>
+<rect x="168.3" y="59" width="65.7" height="22" rx="11" fill="#ffcc00" />
+<text x="201.1" y="74" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#1f1800" text-anchor="middle">4 cores</text>
+<rect x="330" y="30" width="360" height="156" rx="24" fill="none" stroke="#a3b1b6" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="510" y="56" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Media Nodes</text>
+<rect x="350" y="74" width="150" height="76" rx="18" fill="#00c8f7" />
+<text x="425" y="117.6" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#00283a" text-anchor="middle">Media Node</text>
+<rect x="428.3" y="63" width="65.7" height="22" rx="11" fill="#ffcc00" />
+<text x="461.1" y="78" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#1f1800" text-anchor="middle">4 cores</text>
+<rect x="520" y="74" width="150" height="76" rx="18" fill="#00c8f7" />
+<text x="595" y="117.6" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#00283a" text-anchor="middle">Media Node</text>
+<rect x="598.3" y="63" width="65.7" height="22" rx="11" fill="#ffcc00" />
+<text x="631.1" y="78" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" font-weight="500" fill="#1f1800" text-anchor="middle">4 cores</text>
+<path d="M240 115 L330 115" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M140 160 L140 311 L250 311" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M510 186 L510 311 L490 311" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="250" y="256" width="240" height="110" rx="24" fill="none" stroke="#a3b1b6" stroke-width="1.8" stroke-dasharray="6 8" />
+<text x="370" y="282" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#a3b1b6" text-anchor="middle">Clients</text>
+<g transform="translate(280 298) scale(0.9)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="56" height="36" rx="5"/><path d="M20 46 h16 M28 36 v10"/></g>
+<g transform="translate(360 296) scale(0.9)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="22" height="40" rx="5"/><path d="M8 34 h6"/></g>
+<g transform="translate(405 302) scale(0.9)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="0" width="48" height="30" rx="4"/><path d="M0 36 h60 l-2 4 h-56z"/></g>
+</svg>

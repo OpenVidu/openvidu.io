@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480" width="1100" height="480" role="img" aria-label="Data flow: participant audio goes to the OpenVidu audio room and on to the transcriber agent, which writes transcript.txt to disk, sends live transcripts back to the UI and feeds an LLM catch-up summary to latecomers">
+<title>Data flow: participant audio goes to the OpenVidu audio room and on to the transcriber agent, which writes transcript.txt to disk, sends live transcripts back to the UI and feeds an LLM catch-up summary to latecomers</title>
+<rect x="60" y="30" width="260" height="110" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<g transform="translate(172 46) scale(1)" fill="none" stroke="#101618" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="0" width="16" height="28" rx="8"/><path d="M4 20 a14 14 0 0 0 28 0 M18 34 v8 M11 42 h14"/></g>
+<text x="190" y="118" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="700" fill="#101618" text-anchor="middle">Participant audio</text>
+<rect x="420" y="30" width="260" height="110" rx="20" fill="#101618" />
+<g transform="translate(528 42) scale(1.1)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<text x="550" y="118" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="700" fill="#f4f6f7" text-anchor="middle">Audio room</text>
+<rect x="780" y="30" width="260" height="110" rx="20" fill="#005f78" />
+<g transform="translate(892 44) scale(1)" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="12" width="32" height="24" rx="7"/><path d="M18 12 v-6"/><circle cx="18" cy="4" r="2.5"/><circle cx="12" cy="24" r="2.5" fill="#ffffff"/><circle cx="24" cy="24" r="2.5" fill="#ffffff"/></g>
+<text x="910" y="118" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">Transcriber agent</text>
+<path d="M320 85 L413 85" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M420 85 L411.6 80.1 L411.6 89.9 Z" fill="#4a5a60" />
+<path d="M680 85 L773 85" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M780 85 L771.6 80.1 L771.6 89.9 Z" fill="#4a5a60" />
+<path d="M910 140 L910 190" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M910 190 L550 190 L550 240" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M190 240 L910 240" fill="none" stroke="#4a5a60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M190 240 L190 312" fill="none" stroke="#ffcc00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M190 320 L184.4 310.4 L195.6 310.4 Z" fill="#ffcc00" />
+<rect x="60" y="320" width="260" height="140" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<rect x="90" y="320" width="200" height="5" rx="2.5" fill="#ffcc00" />
+<g transform="translate(174 342) scale(1)" fill="none" stroke="#101618" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2 h16 l8 8 v26 h-24z M20 2 v8 h8"/><path d="M10 18 h12 M10 24 h12 M10 30 h8"/></g>
+<text x="190" y="410" font-family="JetBrains Mono, ui-monospace, monospace" font-size="18" font-weight="600" fill="#101618" text-anchor="middle">transcript.txt</text>
+<text x="190" y="436" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="middle">(on disk)</text>
+<path d="M550 240 L550 312" fill="none" stroke="#06d362" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M550 320 L544.4 310.4 L555.6 310.4 Z" fill="#06d362" />
+<rect x="420" y="320" width="260" height="140" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<rect x="450" y="320" width="200" height="5" rx="2.5" fill="#06d362" />
+<g transform="translate(530 342) scale(1)" fill="none" stroke="#101618" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 h28 a4 4 0 0 1 4 4 v18 a4 4 0 0 1 -4 4 h-16 l-8 7 v-7 h-4 a4 4 0 0 1 -4 -4 v-18 a4 4 0 0 1 4 -4z"/><path d="M10 13 h20 M10 20 h14"/></g>
+<text x="550" y="410" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="700" fill="#101618" text-anchor="middle">Live transcripts</text>
+<text x="550" y="436" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="middle">(back to the UI)</text>
+<path d="M910 240 L910 312" fill="none" stroke="#005f78" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M910 320 L904.4 310.4 L915.6 310.4 Z" fill="#005f78" />
+<rect x="780" y="320" width="260" height="140" rx="20" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<rect x="810" y="320" width="200" height="5" rx="2.5" fill="#005f78" />
+<g transform="translate(892 342) scale(1)"><path d="M18 0 C20 12 24 16 36 18 C24 20 20 24 18 36 C16 24 12 20 0 18 C12 16 16 12 18 0z" fill="#101618"/></g>
+<text x="910" y="410" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="18" font-weight="700" fill="#101618" text-anchor="middle">LLM catch-up</text>
+<text x="910" y="436" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="middle">(to latecomers)</text>
+</svg>
