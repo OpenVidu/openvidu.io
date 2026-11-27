@@ -2016,8 +2016,8 @@
   background: #c74634;
 }
 
-/* Body text inside cards is justified; quotes, titles and tags are not */
-.md-typeset .ov-landing :is(.ov-card, .ov-door, .ov-showcase, .ov-provider, .ov-shared__item, .ov-topo__card, .ov-usecase, .ov-pick, .ov-plan, .ov-arch) :is(p, li, .ov-shared__text, .ov-provider__text, .ov-topo__text, .ov-arch__text) {
+/* Body text inside cards is justified; quotes, titles, tags and the short shared-engine cards are not */
+.md-typeset .ov-landing :is(.ov-card, .ov-door, .ov-showcase, .ov-provider, .ov-topo__card, .ov-usecase, .ov-pick, .ov-plan, .ov-arch) :is(p, li, .ov-provider__text, .ov-topo__text, .ov-arch__text) {
   text-align: justify;
   hyphens: auto;
 }
