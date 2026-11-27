@@ -33,6 +33,7 @@ OpenVidu is API-compatible with LiveKit, so the LiveKit client SDKs work unchang
     - [C++ :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/client-sdk-cpp/){:target="_blank"}
     - [Python :fontawesome-solid-external-link:{.external-link-icon}](https://docs.livekit.io/reference/python/livekit/rtc/index.html){:target="_blank"}
     - [Go :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/server-sdk-go){:target="_blank"}
+    - [.NET :fontawesome-solid-external-link:{.external-link-icon}](https://pablofuente.github.io/livekit-server-sdk-dotnet/api-rtc/LiveKit.Rtc.html){:target="_blank"}
     - [ESP32 :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.github.io/client-sdk-esp32/){:target="_blank"}
 
     </div>
