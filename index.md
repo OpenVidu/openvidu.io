@@ -29,7 +29,7 @@ Not sure which door? [Compare Meet and Platform](https://openvidu.io/openvidu-me
 
 ## Self-hosted means sovereign.
 
-Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.
+OpenVidu Meet and OpenVidu Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.
 
 ### Data sovereignty
 
@@ -187,7 +187,7 @@ COMMUNITY
 Freeopen source, Apache 2.0
 
 - Single Node deployment for medium user load
-- Meet and Platform included
+- OpenVidu Meet and OpenVidu Platform included
 - Recording, ingress and S3 storage
 - Built-in observability
 
@@ -204,7 +204,7 @@ $0.0006per core, per minute
 
 [Start your 15-day free trial](https://openvidu.io/account/ "Get an OpenVidu License")
 
-Both editions run Meet and Platform. You pay only while a PRO cluster runs, never per participant. [See pricing](https://openvidu.io/pricing/)
+Both editions run OpenVidu Meet and OpenVidu Platform. You pay only while a PRO cluster is up and running. [See pricing](https://openvidu.io/pricing/)
 
 ## Teams that already picked a door.
 

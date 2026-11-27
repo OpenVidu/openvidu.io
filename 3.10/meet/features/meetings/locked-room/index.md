@@ -6,7 +6,7 @@ In a **locked room**, participants do not enter the meeting directly: they **ask
 
 Rooms are unlocked by default. Lock a room from the **Locked room** section of the **Room Access** step of the room configuration wizard. An optional **message**, up to 500 characters, is shown to everyone who waits: use it to say what the meeting is or when it starts.
 
-With the REST API, the lock is the `lock` property of the room's [access settings](https://openvidu.io/3.10/meet/features/rooms/access/index.md), sent to [`roomUpdateAccess`](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/roomUpdateAccess) or [`roomCreate`](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/roomCreate) . A `message` of `null` removes it:
+With the REST API, the lock is the `lock` property of the room's [access settings](https://openvidu.io/latest/meet/features/rooms/access/index.md), sent to [`roomUpdateAccess`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/roomUpdateAccess) or [`roomCreate`](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/roomCreate) . A `message` of `null` removes it:
 
 ```json
 { "access": { "lock": { "enabled": true, "message": "The class starts at 10:00. We will let you in shortly." } } }
@@ -18,7 +18,7 @@ With the REST API, the lock is the `lock` property of the room's [access setting
 
 ## Who waits
 
-Two independent [permissions](https://openvidu.io/3.10/meet/features/rooms/access/#predefined-roles) decide it:
+Two independent [permissions](https://openvidu.io/latest/meet/features/rooms/access/#predefined-roles) decide it:
 
 | Permission                | Name in the interface | What it allows                                     |
 | ------------------------- | --------------------- | -------------------------------------------------- |
@@ -27,13 +27,13 @@ Two independent [permissions](https://openvidu.io/3.10/meet/features/rooms/acces
 
 The `Moderator` role has both by default and the `Speaker` role neither, so speakers wait. Admins and the room owner never wait. A participant with `waitingParticipantAdmin` but without `accessBypassLock` waits like anyone else, and admits the others once inside.
 
-The usual join checks (closed room, disabled link, `meetingJoin`) run before anyone waits. The [participant limit](https://openvidu.io/3.10/meet/features/meetings/configuration/#participant-limit) is checked when the participant is let in.
+The usual join checks (closed room, disabled link, `meetingJoin`) run before anyone waits. The [participant limit](https://openvidu.io/latest/meet/features/meetings/configuration/#participant-limit) is checked when the participant is let in.
 
 ## Waiting to be let in
 
-In the [Join view](https://openvidu.io/3.10/meet/features/meetings/lifecycle/#join-view), the button of a participant who has to wait reads **Ask to join**. Pressing it starts the wait at once, without the [Device view](https://openvidu.io/3.10/meet/features/meetings/lifecycle/#device-view).
+In the [Join view](https://openvidu.io/latest/meet/features/meetings/lifecycle/#join-view), the button of a participant who has to wait reads **Ask to join**. Pressing it starts the wait at once, without the [Device view](https://openvidu.io/latest/meet/features/meetings/lifecycle/#device-view).
 
-While waiting, the participant sees how long they have waited, the room's message, whether the meeting has started, a **Stop waiting** button and a camera preview to set up their camera, microphone and [virtual background](https://openvidu.io/3.10/meet/features/meetings/virtual-background/index.md). They see nothing of the others who wait. Once admitted, they join **without reloading the page**, with the devices they chose.
+While waiting, the participant sees how long they have waited, the room's message, whether the meeting has started, a **Stop waiting** button and a camera preview to set up their camera, microphone and [virtual background](https://openvidu.io/latest/meet/features/meetings/virtual-background/index.md). They see nothing of the others who wait. Once admitted, they join **without reloading the page**, with the devices they chose.
 
 When the wait ends without a place, the view says why: they were **rejected**, they **lost their place**, the **meeting ended**, the room was **closed**, they **stopped waiting**, or **too many people are waiting** (100 at most). Most of these offer **Ask to join again**, which starts a new wait: nobody is blocked.
 
@@ -45,7 +45,7 @@ A wait lasts while the participant's page stays connected:
 - **Closing, reloading or leaving the page** ends the wait at once. A reload asks to join again on its own, as a new wait.
 - Asking again from **another tab or device** ends the earlier wait.
 
-A page that never manages to connect shows a connection error instead: see the [troubleshooting note](https://openvidu.io/3.10/meet/deployment/basic/#troubleshooting).
+A page that never manages to connect shows a connection error instead: see the [troubleshooting note](https://openvidu.io/latest/meet/deployment/basic/#troubleshooting).
 
 ## Admitting and rejecting
 
@@ -66,7 +66,7 @@ Participants can wait before any meeting runs; the first one admitted starts it 
 
 ## Acting on a locked room
 
-In a locked room, a **room member token** acts on the meeting (reads it, moderates it, controls recordings and broadcasts, admits) only if its holder was let in. A token obtained without joining keeps only the recording permissions and `roomShareAccessLinks`, so a waiting participant cannot admit anyone, themselves included. A backend acting on its own uses the [API key](https://openvidu.io/3.10/meet/embedded/reference/rest-api/#generate-an-api-key), which keeps full access.
+In a locked room, a **room member token** acts on the meeting (reads it, moderates it, controls recordings and broadcasts, admits) only if its holder was let in. A token obtained without joining keeps only the recording permissions and `roomShareAccessLinks`, so a waiting participant cannot admit anyone, themselves included. A backend acting on its own uses the [API key](https://openvidu.io/latest/meet/embedded/reference/rest-api/#generate-an-api-key), which keeps full access.
 
 > **externalId and metadata prove nothing**
 >
@@ -74,36 +74,36 @@ In a locked room, a **room member token** acts on the meeting (reads it, moderat
 
 > **A leaked link can keep the waiting list full**
 >
-> Anyone with a shared link can open up to 100 waits. The remedy is to **end the meeting** and disable the leaked [access link](https://openvidu.io/3.10/meet/features/rooms/access/index.md).
+> Anyone with a shared link can open up to 100 waits. The remedy is to **end the meeting** and disable the leaked [access link](https://openvidu.io/latest/meet/features/rooms/access/index.md).
 
 ## From your application
 
-When OpenVidu Meet is [embedded](https://openvidu.io/3.10/meet/embedded/intro/index.md), the host application uses the [commands](https://openvidu.io/3.10/meet/embedded/reference/webcomponent/#commands) and [events](https://openvidu.io/3.10/meet/embedded/reference/webcomponent/#events) of the Web Component and the iframe:
+When OpenVidu Meet is [embedded](https://openvidu.io/latest/meet/embedded/intro/index.md), the host application uses the [commands](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#commands) and [events](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#events) of the Web Component and the iframe:
 
 - **For those who admit** (holding `waitingParticipantAdmin`, in the meeting): the `waitingParticipantAdmit`, `waitingParticipantAdmitAll`, `waitingParticipantReject` and `waitingParticipantRejectAll` commands, and the `waitingParticipantKnocked` (a new request), `waitingParticipantListUpdated` (the whole list) and `waitingParticipantStatusChanged` (how each wait changed, whoever changed it) events.
 - **For the participant who waits**: `waitingParticipantStatusChanged` reports their own wait, and `meetingJoined` confirms the admission. `meetingLeave` stops the wait.
 
-A host page with a Content Security Policy must allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](https://openvidu.io/3.10/meet/embedded/reference/webcomponent/#content-security-policy).
+A host page with a Content Security Policy must allow the WebSocket connection to OpenVidu Meet: see [Content Security Policy](https://openvidu.io/latest/meet/embedded/reference/webcomponent/#content-security-policy).
 
 ## REST API and webhooks
 
-A backend runs a locked room with the [Meetings REST API](https://openvidu.io/3.10/meet/embedded/reference/rest-api/index.md), under `/api/v1/meetings/{roomId}/waiting-participants`. These operations require `waitingParticipantAdmin` and work whether or not a meeting is running.
+A backend runs a locked room with the [Meetings REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md), under `/api/v1/meetings/{roomId}/waiting-participants`. These operations require `waitingParticipantAdmin` and work whether or not a meeting is running.
 
 Reading a live meeting with `extraFields=waitingParticipants` also returns its waiting participants, only while a meeting is running and only to a caller holding `waitingParticipantAdmin`: without it the request succeeds and the field is left out.
 
 | Operation                          | HTTP Method | Reference                                                                                                       |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
-| List the waiting participants      | GET         | [Reference](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantList)       |
-| Get a waiting participant          | GET         | [Reference](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantGet)        |
-| Admit a waiting participant        | POST        | [Reference](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantAdmit)      |
-| Admit all the waiting participants | POST        | [Reference](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantAdmitAll)   |
-| Reject a waiting participant       | DELETE      | [Reference](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantReject)     |
-| Bulk reject waiting participants   | DELETE      | [Reference](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/waitingParticipantBulkReject) |
+| List the waiting participants      | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/waitingParticipantList)       |
+| Get a waiting participant          | GET         | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/waitingParticipantGet)        |
+| Admit a waiting participant        | POST        | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/waitingParticipantAdmit)      |
+| Admit all the waiting participants | POST        | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/waitingParticipantAdmitAll)   |
+| Reject a waiting participant       | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/waitingParticipantReject)     |
+| Bulk reject waiting participants   | DELETE      | [Reference](https://openvidu.io/latest/meet/embedded/reference/api.html#/operations/waitingParticipantBulkReject) |
 
 ### Webhooks
 
-- [`waitingParticipantKnocked`](https://openvidu.io/3.10/meet/embedded/reference/api.html#/webhooks/waitingParticipantKnockedWebhook) : a participant asked to join.
-- [`waitingParticipantStatusChanged`](https://openvidu.io/3.10/meet/embedded/reference/api.html#/webhooks/waitingParticipantStatusChangedWebhook) : a wait changed, one per participant. Its `status` is `admitted`, `rejected`, `left`, `expired`, `meeting_ended`, `room_closed`, or `waiting` for an admitted participant who found the meeting full. `origin` tells who caused it, and `reason` adds why when needed.
+- [`waitingParticipantKnocked`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/waitingParticipantKnockedWebhook) : a participant asked to join.
+- [`waitingParticipantStatusChanged`](https://openvidu.io/latest/meet/embedded/reference/api.html#/webhooks/waitingParticipantStatusChangedWebhook) : a wait changed, one per participant. Its `status` is `admitted`, `rejected`, `left`, `expired`, `meeting_ended`, `room_closed`, or `waiting` for an admitted participant who found the meeting full. `origin` tells who caused it, and `reason` adds why when needed.
 
 ```json
 {

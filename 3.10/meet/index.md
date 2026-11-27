@@ -2,7 +2,7 @@
 
 **OpenVidu Meet is an open-source video conferencing app that runs on your own servers.** Use it as it is, with rooms, links and recordings managed from its console, or embed it in your product with one tag, a REST API and webhooks.
 
-[Deploy Meet in minutes](/meet/getting-started/ "Get started with OpenVidu Meet") [Try the live demo](https://meet-demo-app.openvidu.io "Try the OpenVidu Meet demo (opens in a new tab)")
+[Deploy Meet in minutes](https://openvidu.io/meet/getting-started/ "Get started with OpenVidu Meet") [Try the live demo](https://meet-demo-app.openvidu.io "Try the OpenVidu Meet demo (opens in a new tab)")
 
 Standalone or embedded
 
@@ -18,7 +18,7 @@ Deploy it and your team is meeting the same day. Nobody writes a line of code.
 - Guests join from the browser, with nothing to install
 - Recordings, users and permissions in one place
 
-[Deploy Meet](/meet/getting-started/ "Get started with OpenVidu Meet") [Try the live demo](https://meet-demo-app.openvidu.io "Try the OpenVidu Meet demo (opens in a new tab)")
+[Deploy Meet](https://openvidu.io/meet/getting-started/ "Get started with OpenVidu Meet") [Try the live demo](https://meet-demo-app.openvidu.io "Try the OpenVidu Meet demo (opens in a new tab)")
 
 Embedded
 
@@ -30,7 +30,7 @@ Your users never leave your app, and your backend decides who meets, when and wi
 - Rooms, members and recordings from your backend with the REST API
 - Webhooks when meetings start, end or get recorded
 
-[Explore Meet Embedded](/meet/embedded/intro/ "Explore OpenVidu Meet Embedded") [Step-by-step guide](/meet/embedded/step-by-step-guide/ "Embed OpenVidu Meet step by step")
+[Explore Meet Embedded](https://openvidu.io/meet/embedded/intro/ "Explore OpenVidu Meet Embedded") [Step-by-step guide](https://openvidu.io/meet/embedded/step-by-step-guide/ "Embed OpenVidu Meet step by step")
 
 ```
 <!-- your page -->
@@ -47,28 +47,28 @@ Calls, recordings and user data live only on servers you run, in the country you
 
 ### A cost you can predict
 
-COMMUNITY is free. PRO is priced by the cores of your deployment, never by participant or by meeting minute, so the bill follows the size of your servers. [See pricing](/pricing/)
+COMMUNITY is free. PRO is priced by the cores of your deployment, never by participant or by meeting minute, so the bill follows the size of your servers. [See pricing](https://openvidu.io/pricing/)
 
 ### Up in minutes, on any cloud
 
-A single server is ready in 5 to 10 minutes on any of the clouds below, or on your own hardware. [We timed it](/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/)
+A single server is ready in 5 to 10 minutes on any of the clouds below, or on your own hardware. [We timed it](https://openvidu.io/blog/2026/07/07/deploy-and-scale-in-times-across-clouds/)
 
-Deploy on [On-premises](/meet/deployment/basic/) [AWS](/docs/self-hosting/single-node/aws/install/) [Azure](/docs/self-hosting/single-node/azure/install/) [Google Cloud](/docs/self-hosting/single-node/gcp/install/) [DigitalOcean](/docs/self-hosting/single-node/digitalocean/install/) [Oracle Cloud](/docs/self-hosting/single-node/oracle/install/)
+Deploy on [On-premises](https://openvidu.io/meet/deployment/basic/) [AWS](https://openvidu.io/docs/self-hosting/single-node/aws/install/) [Azure](https://openvidu.io/docs/self-hosting/single-node/azure/install/) [Google Cloud](https://openvidu.io/docs/self-hosting/single-node/gcp/install/) [DigitalOcean](https://openvidu.io/docs/self-hosting/single-node/digitalocean/install/) [Oracle Cloud](https://openvidu.io/docs/self-hosting/single-node/oracle/install/)
 
 Use cases
 
 ## What are you building?
 
-[Telehealth Patient calls that never leave your servers. Embed the consultation room in your patient portal with one tag. Patients wait until the practitioner admits them, and you decide who can record or share. Embed with one tagLocked roomRoles and permissionsEnd-to-end encryption Embed it in your patient portal](/meet/embedded/intro/) [Online classes A classroom with recording and raised hands. Run your first class](/meet/deployment/overview/) [Customer support Turn a support ticket into a video call. Create rooms from your help desk](/meet/embedded/reference/rest-api/)
+[Telehealth Patient calls that never leave your servers. Embed the consultation room in your patient portal with one tag. Patients wait until the practitioner admits them, and you decide who can record or share. Embed with one tagLocked roomRoles and permissionsEnd-to-end encryption Embed it in your patient portal](https://openvidu.io/meet/embedded/intro/) [Online classes A classroom with recording and raised hands. Run your first class](https://openvidu.io/meet/deployment/overview/) [Customer support Turn a support ticket into a video call. Create rooms from your help desk](https://openvidu.io/meet/embedded/reference/rest-api/)
 
 Security and access
 
 ## Decide who gets in, and what they can do
 
-- Locked roomGuests wait until a moderator admits them, from the meeting, the REST API or your own app. [How the locked room works](/meet/features/meetings/locked-room/)
-- End-to-end encryptionOnly participants with the room key see and hear the meeting. Not even your server can. [About end-to-end encryption](/meet/features/meetings/e2e-encryption/)
-- Roles and permissionsMake each member a moderator or a speaker, and decide who can record, share their screen, chat or react. [Room members and permissions](/meet/features/room-members/overview/)
-- A link for each roleShare a link for members, for anonymous speakers or for anonymous moderators. The link sets what each guest can do. [Room access](/meet/features/rooms/access/)
+- Locked roomGuests wait until a moderator admits them, from the meeting, the REST API or your own app. [How the locked room works](https://openvidu.io/meet/features/meetings/locked-room/)
+- End-to-end encryptionOnly participants with the room key see and hear the meeting. Not even your server can. [About end-to-end encryption](https://openvidu.io/meet/features/meetings/e2e-encryption/)
+- Roles and permissionsMake each member a moderator or a speaker, and decide who can record, share their screen, chat or react. [Room members and permissions](https://openvidu.io/meet/features/room-members/overview/)
+- A link for each roleShare a link for members, for anonymous speakers or for anonymous moderators. The link sets what each guest can do. [Room access](https://openvidu.io/meet/features/rooms/access/)
 
 The console
 
@@ -186,11 +186,11 @@ In the meeting
 
   Split participants into smaller groups for focused discussions and bring them back to the main room whenever you want.
 
-[Deploy Meet in minutes](https://openvidu.io/3.10/meet/getting-started/index.md) [Try the live demo](https://meet-demo-app.openvidu.io)
+[Deploy Meet in minutes](https://openvidu.io/latest/meet/getting-started/index.md) [Try the live demo](https://meet-demo-app.openvidu.io)
 
 ## Free open-source edition vs Commercial edition
 
-OpenVidu Meet is available in two editions. You can choose the one that best fits your needs when [deploying OpenVidu Meet](https://openvidu.io/3.10/meet/deployment/overview/index.md).
+OpenVidu Meet is available in two editions. You can choose the one that best fits your needs when [deploying OpenVidu Meet](https://openvidu.io/latest/meet/deployment/overview/index.md).
 
 COMMUNITY
 
@@ -206,12 +206,12 @@ PRO
 
 It is OpenVidu's **commercial edition** and requires a license. It is meant for high demanding environments with significant user load. On top of every functional feature available in OpenVidu COMMUNITY, OpenVidu PRO brings **2x performance**, **advanced observability**, **scalability** and **fault tolerance** features. As well as **priority support** from our team of experts.
 
-OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/3.10/pricing/index.md) for more details.
+OpenVidu PRO follows a simple pricing model based on the size of your deployment (number of CPU cores). Check the [OpenVidu pricing page](https://openvidu.io/pricing/index.md) for more details.
 
 ## Video calls on your servers, this week.
 
-[Deploy OpenVidu Meet](https://openvidu.io/3.10/meet/getting-started/index.md "Get started with OpenVidu Meet")
+[Deploy OpenVidu Meet](https://openvidu.io/latest/meet/getting-started/index.md "Get started with OpenVidu Meet")
 
-[Or talk to an expert](https://openvidu.io/3.10/support/index.md)
+[Or talk to an expert](https://openvidu.io/support/index.md)
 
-Need total control and advanced SDKs to build your custom real-time application? Check out [OpenVidu Platform](https://openvidu.io/3.10/docs/index.md). Not sure which one fits? [Compare Meet vs Platform](https://openvidu.io/3.10/openvidu-meet-vs-openvidu-platform/index.md).
+Need total control and advanced SDKs to build your custom real-time application? Check out [OpenVidu Platform](https://openvidu.io/latest/docs/index.md). Not sure which one fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).

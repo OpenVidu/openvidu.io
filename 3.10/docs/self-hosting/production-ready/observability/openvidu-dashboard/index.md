@@ -1,6 +1,6 @@
 # OpenVidu Dashboard
 
-OpenVidu Dashboard is a web application for the **administrators** of an OpenVidu deployment. It answers two kinds of questions: what is happening **right now** (which rooms are open, who is connected, which recordings are running) and what happened **over time** (how much the deployment is used, how well calls went, what failed and why). It is included by default in any [OpenVidu deployment](https://openvidu.io/3.10/docs/self-hosting/deployment-types/index.md) and reads the [analytics data](#analytics-data) that OpenVidu Server stores in MongoDB.
+OpenVidu Dashboard is a web application for the **administrators** of an OpenVidu deployment. It answers two kinds of questions: what is happening **right now** (which rooms are open, who is connected, which recordings are running) and what happened **over time** (how much the deployment is used, how well calls went, what failed and why). It is included by default in any [OpenVidu deployment](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md) and reads the [analytics data](#analytics-data) that OpenVidu Server stores in MongoDB.
 
 |                                                                                                                       | **COMMUNITY** | **PRO** |
 | --------------------------------------------------------------------------------------------------------------------- | ------------- | ------- |
@@ -16,7 +16,7 @@ In OpenVidu **COMMUNITY**, the **PRO** pages and cards stay visible but locked, 
 
 ## Access
 
-Go to `https://your.domain/dashboard/` and **log in** with the admin credentials of your deployment: `DASHBOARD_ADMIN_USERNAME` and `DASHBOARD_ADMIN_PASSWORD` in `openvidu.env`. A session lasts while it is used and expires after 7 days without use. That time, the log level and the other optional settings of the dashboard service are in [`dashboard.env`](https://openvidu.io/3.10/docs/self-hosting/configuration/reference/#dashboardenv).
+Go to `https://your.domain/dashboard/` and **log in** with the admin credentials of your deployment: `DASHBOARD_ADMIN_USERNAME` and `DASHBOARD_ADMIN_PASSWORD` in `openvidu.env`. A session lasts while it is used and expires after 7 days without use. That time, the log level and the other optional settings of the dashboard service are in [`dashboard.env`](https://openvidu.io/latest/docs/self-hosting/configuration/reference/#dashboardenv).
 
 ## Finding your way around
 
@@ -104,7 +104,7 @@ Selecting a published track opens the **track panel**: its source, codec, resolu
 
 ## Agents
 
-The Agents page lists the sessions of agent participants in the selected time range, with their agent name, room, status and duration, a live counter of the agents connected now and the number of agent sessions in the range. The agents of the official collection of [OpenVidu agents](https://openvidu.io/3.10/docs/ai/openvidu-agents/overview/index.md) carry an **OpenVidu** tag, and the **Origin** filter keeps only them or only third-party agents. Agents join rooms as participants of kind Agent, so their sessions also appear in the Participants page when filtering by that kind.
+The Agents page lists the sessions of agent participants in the selected time range, with their agent name, room, status and duration, a live counter of the agents connected now and the number of agent sessions in the range. The agents of the official collection of [OpenVidu agents](https://openvidu.io/latest/docs/ai/openvidu-agents/overview/index.md) carry an **OpenVidu** tag, and the **Origin** filter keeps only them or only third-party agents. Agents join rooms as participants of kind Agent, so their sessions also appear in the Participants page when filtering by that kind.
 
 ## Egress
 
@@ -188,7 +188,7 @@ Every list and every Analytics section can be taken out of the dashboard, to wor
 
 ## Analytics data
 
-OpenVidu Server writes the analytics data the dashboard shows to MongoDB, in its `openvidu` database. What it stores and for how long is configured in the `openvidu.analytics` section of `livekit.yaml`: see [Analytics settings](https://openvidu.io/3.10/docs/self-hosting/configuration/reference/#analytics-settings), and [Changing configuration](https://openvidu.io/3.10/docs/self-hosting/configuration/changing-config/index.md) to apply a change. OpenVidu Server stores:
+OpenVidu Server writes the analytics data the dashboard shows to MongoDB, in its `openvidu` database. What it stores and for how long is configured in the `openvidu.analytics` section of `livekit.yaml`: see [Analytics settings](https://openvidu.io/latest/docs/self-hosting/configuration/reference/#analytics-settings), and [Changing configuration](https://openvidu.io/latest/docs/self-hosting/configuration/changing-config/index.md) to apply a change. OpenVidu Server stores:
 
 - **Rooms, participant sessions, tracks, subscriptions, egresses, ingresses and ingress sessions**, updated as their events arrive.
 - **Events** as emitted by OpenVidu Server, for the timelines.
@@ -241,7 +241,7 @@ In OpenVidu **PRO**, once a deletion ends, the details of a room, participant se
 
 After an upgrade from a version before 3.10, the **Legacy data** row deletes the analytics data that OpenVidu Server keeps for a rollback, before its date. Its two collections are dropped and their disk space is freed at once, and a rollback to the previous version finds no analytics data. The dialog of the **Total** row offers to delete it as well.
 
-OpenVidu deployments include MongoDB 8.0. With an [external MongoDB](https://openvidu.io/3.10/docs/self-hosting/how-to-guides/external-mongodb/index.md), deleting statistics needs MongoDB 7.0 or later, because they are stored in a time-series collection.
+OpenVidu deployments include MongoDB 8.0. With an [external MongoDB](https://openvidu.io/latest/docs/self-hosting/how-to-guides/external-mongodb/index.md), deleting statistics needs MongoDB 7.0 or later, because they are stored in a time-series collection.
 
 #### Freeing disk space
 
@@ -381,6 +381,6 @@ After an upgrade from a version before 3.10, the script also deletes the person'
 - backups or snapshots of your MongoDB or its disks;
 - the analytics data of a version before 3.10, which OpenVidu Server keeps for a rollback after an upgrade. It was written before `anonymize_ip` applied to it, so it may contain client IP addresses. Delete it from the **Legacy data** row of the **Data** tab once you no longer need to roll back.
 
-With an [external MongoDB](https://openvidu.io/3.10/docs/self-hosting/how-to-guides/external-mongodb/index.md), the data is stored by whoever runs that database.
+With an [external MongoDB](https://openvidu.io/latest/docs/self-hosting/how-to-guides/external-mongodb/index.md), the data is stored by whoever runs that database.
 
 None of this data is sent to OpenVidu.
