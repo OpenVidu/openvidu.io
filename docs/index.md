@@ -62,7 +62,6 @@ page_features:
 <p class="ov-wrap ov-compare">Not sure which door? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet and Platform</a></p>
 
 <section class="ov-wrap ov-section ov-shared" aria-labelledby="data-sovereignty" data-sal="slide-up">
-  <p class="ov-eyebrow">Same engine behind both doors</p>
   <h2 class="ov-h2" id="data-sovereignty">Self-hosted means <span class="ov-mark">sovereign.</span></h2>
   <p class="ov-lead">Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.</p>
   <div class="ov-grid ov-grid--3 ov-shared__pillars">
