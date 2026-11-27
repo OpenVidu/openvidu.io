@@ -281,7 +281,7 @@ OpenVidu includes built-in security layers in its TURN server implementation to 
 
 - **Cluster-aware IP allowlist**: TURN only permits relay traffic to IPs belonging to registered cluster nodes. In multi-node deployments, this is dynamically maintained via the shared cluster state, so only legitimate nodes can receive relayed media.
 - **Port range enforcement**: Every relayed packet is validated against the configured RTC port range at the packet level. Traffic destined to ports outside this range is rejected.
-- **TCP relay denial**: TCP relay allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062) ) are denied by default ([`turn.enable_rfc6062`](https://openvidu.io/3.10/docs/self-hosting/how-to-guides/turn-security/#tcp-relay-disabled-rfc-6062)), limiting TURN to its intended use for UDP media relay.
+- **TCP relay denial**: TCP relay allocations ([RFC 6062](https://datatracker.ietf.org/doc/html/rfc6062) ) are denied by default ([`turn.enable_rfc6062`](https://openvidu.io/latest/docs/self-hosting/how-to-guides/turn-security/#tcp-relay-disabled-rfc-6062)), limiting TURN to its intended use for UDP media relay.
 
 ## Troubleshooting: media not flowing
 

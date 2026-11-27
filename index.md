@@ -27,8 +27,6 @@ Build it with your AI coding agent: the [OpenVidu Agent Plugin](https://openvidu
 
 Not sure which door? [Compare Meet and Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/)
 
-Same engine behind both doors
-
 ## Self-hosted means sovereign.
 
 Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.
