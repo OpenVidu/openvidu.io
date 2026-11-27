@@ -23,7 +23,6 @@ page_features:
     - The analytics data of previous versions is migrated automatically in the background.
 - **Participant Passthrough Egress** (OpenVidu PRO): records a participant's video and audio tracks without transcoding, at a fraction of the CPU cost. Every track they publish is recorded in WebM or MKV files that share one timeline, with a manifest to line them up with the other participants of the Room. This provides efficient recording that allows easier post-processing jobs to create composite videos. See [Participant Passthrough Egress](https://openvidu.io/3.10/docs/reference/egress/#participant-passthrough-egress).
 - **Other Egress improvements** (see [Egress](https://openvidu.io/3.10/docs/reference/egress/)):
-    - Room Composite Egress was forcing all participants to always send their highest quality layer. Now the Room Composite layout only requires the optimal layer for each recorded video (see [Adaptive Stream](https://openvidu.io/3.10/docs/reference/client-sdk/#bandwidth-optimizations)).
     - Room Composite and Web Egress no longer fail with `"websocket url timeout reached"` on slow or busy disks: the Egress service now loads Chrome into memory right after it starts, and gives Chrome 60 seconds to start instead of 20.
     - AV1 tracks can be recorded without transcoding (OpenVidu PRO).
     - Auto Participant Egress no longer records a participant twice after a full reconnection.

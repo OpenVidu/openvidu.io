@@ -200,7 +200,6 @@ Replace `<your-openvidu-domain>` with the domain of your deployment, and `<api-k
 
 ### Smarter recordings
 
-- **Publishers save upload bandwidth**: Room Composite Egress no longer forces every participant to send their highest quality. It now asks for the quality each recorded video needs, like any other subscriber.
 - **AV1 recordings without transcoding** (OpenVidu PRO): individual AV1 tracks are recorded as published.
 - **Recordings that start every time**: Room Composite and Web Egress no longer fail with `"websocket url timeout reached"` on slow or busy disks.
 - **No duplicates, no false alarms**: Auto Participant Egress no longer records a participant twice after a full reconnection, and a recording stopped during a brief Redis stall is no longer reported as failed.
