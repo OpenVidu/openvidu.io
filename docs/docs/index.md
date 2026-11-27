@@ -75,7 +75,7 @@ OpenVidu is based on WebRTC technology and allows developing any kind of use cas
 OpenVidu gives you **client and server SDKs from our LiveKit fork** for every major language — so you build with familiar, battle-tested APIs — powered at its core by **mediasoup**'s best-in-class media routing. 100% API compatibility, improved performance, and a platform built to be **self-hosted**.
 </div>
 
-<div class="ov-stack" role="img" aria-label="The OpenVidu stack: your app on top, OpenVidu Meet or OpenVidu Platform below it, the OpenVidu engine under both, running on AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises" data-sal="slide-up">
+<div class="ov-stack" role="img" style="max-width: 760px" aria-label="The OpenVidu stack: your app on top, OpenVidu Meet or OpenVidu Platform below it, the OpenVidu engine under both, running on AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises" data-sal="slide-up">
 <div class="ov-stack__row">
 <span aria-hidden="true" class="ov-stack__label">Your app</span>
 <div class="ov-stack__app"><span class="ov-stack__name">Your product</span><span class="ov-stack__sub">your UI, your users</span></div>
@@ -98,7 +98,7 @@ OpenVidu gives you **client and server SDKs from our LiveKit fork** for every ma
 <div class="ov-stack__row">
 <span aria-hidden="true" class="ov-stack__label">Your infra</span>
 <div class="ov-stack__infra">
-<span class="ov-stack__host">AWS</span><span class="ov-stack__host">Azure</span><span class="ov-stack__host">Google Cloud</span><span class="ov-stack__host">DigitalOcean</span><span class="ov-stack__host">Oracle Cloud</span><span class="ov-stack__host">On-premises</span>
+<span class="ov-stack__host">On-premises</span><span class="ov-stack__host">AWS</span><span class="ov-stack__host">Azure</span><span class="ov-stack__host">GCP</span><span class="ov-stack__host">DigitalOcean</span><span class="ov-stack__host">OCI</span>
 </div>
 </div>
 </div>

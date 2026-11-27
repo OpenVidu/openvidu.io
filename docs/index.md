@@ -252,7 +252,7 @@ page_features:
       <div class="ov-stack__row">
         <span aria-hidden="true" class="ov-stack__label">Your infra</span>
         <div class="ov-stack__infra">
-          <span class="ov-stack__host">AWS</span><span class="ov-stack__host">Azure</span><span class="ov-stack__host">Google Cloud</span><span class="ov-stack__host">DigitalOcean</span><span class="ov-stack__host">Oracle Cloud</span><span class="ov-stack__host">On-premises</span>
+          <span class="ov-stack__host">On-premises</span><span class="ov-stack__host">AWS</span><span class="ov-stack__host">Azure</span><span class="ov-stack__host">GCP</span><span class="ov-stack__host">DigitalOcean</span><span class="ov-stack__host">OCI</span>
         </div>
       </div>
     </div>
