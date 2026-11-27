@@ -229,7 +229,7 @@ The [OpenVidu agents](https://openvidu.io/3.10/docs/ai/openvidu-agents/overview/
 
 ### And a lot more
 
-- **TURN**: idle TCP and TLS connections are closed after 60 seconds. If your nodes reach each other through carrier-grade NAT, for example with Tailscale, list those ranges in the new `turn.allow_restricted_peer_cidrs`.
+- **TURN**: idle TCP and TLS connections are closed after 60 seconds. If you set `turn.allow_restricted_peer_cidrs`, carrier-grade NAT and similar ranges now count as restricted too: if your nodes reach each other through them, for example with Tailscale, add those ranges to the list.
 - **Sharper screen shares**: shared screens stay sharp when the shared window is resized.
 - **OpenVidu 2 compatibility**: media device errors reach your application as the `OpenViduError` the v2 API documents, so it can tell a camera in use from a denied permission.
 - **Fresh dependencies**: LiveKit v1.13.11, mediasoup 3.32.2, Egress v1.15.0, Ingress v1.6.0 and Agents 1.8.12.
@@ -241,6 +241,11 @@ There are no breaking changes in this release, but a few things are worth knowin
 - **Identified guest links**: regenerate the links created before 3.10.0, as explained in [Stronger security](#stronger-security).
 - **OpenVidu Meet configuration**: Meet no longer starts when `MEET_INITIAL_ADMIN_USER` or `MEET_INITIAL_ADMIN_PASSWORD` is shorter than 5 characters, or when `MEET_BLOB_STORAGE_MODE` is not `s3`, `gcs` or `abs`.
 - **Cloud template parameters**: the old parameter names still work, but they are deprecated in favor of the new ones, which are the same on every cloud.
+- **Master Node disk size**: when updating a cloud deployment, keep the Master Node disk size where it is a parameter. The default is now 200 GB, and a Master Node whose disk size changes is recreated.
+- **Media Nodes replaced once**: the first update of Google Cloud Elastic and High Availability, and of DigitalOcean Elastic and High Availability with more than one fixed Media Node, replaces their Media Nodes.
+- **RTMP in High Availability**: RTMP ingress is published on port 1945. Allow it in any firewall in front of the publishers if you are ingesting RTMP streams using the Ingress module.
+
+All the details are in the upgrade notes of the [OpenVidu Platform](https://openvidu.io/3.10/docs/releases/#3100) and [OpenVidu Meet](https://openvidu.io/3.10/meet/releases/#3100) release notes.
 
 ## Read the full Release Notes of OpenVidu 3.10.0
 

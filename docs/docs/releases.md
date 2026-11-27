@@ -48,7 +48,7 @@ page_features:
     - Shared screens stay sharp when the shared window is resized (VP8 and H.264).
     - Backup codecs, such as VP8 behind AV1, are sent with the bitrates of their own layers instead of those of the track's first codec.
     - Idle TURN TCP and TLS connections are closed after 60 seconds (configurable via parameter `turn.tcp_connection_idle_timeout_seconds`).
-    - The embedded TURN relay follows LiveKit's new relay policy. If your nodes reach each other through carrier-grade NAT or similar ranges (for example, with Tailscale), list them in `turn.allow_restricted_peer_cidrs`.
+    - The embedded TURN relay follows LiveKit's new relay policy. If you set `turn.allow_restricted_peer_cidrs`, more ranges now count as restricted and are only relayed to when listed, cluster nodes included: carrier-grade NAT (`100.64.0.0/10`), `198.18.0.0/15`, `240.0.0.0/4` and the NAT64 prefixes, among others. If your nodes reach each other through one of them (for example, with Tailscale), add it to the list. Without an allow list nothing changes.
     - Fixed a bug of 3.9.0 in which analytics could stop the server.
 - **Deployments**:
     - Elastic and High Availability deployments replace unhealthy Media Nodes automatically, on every cloud.
@@ -81,6 +81,14 @@ page_features:
     - **Egress**: updated from v1.14.1 to v1.15.0 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/egress/compare/e9330a4...1f99030){:target="_blank"}).
     - **Ingress**: updated from v1.5.0-a9d870c to v1.6.0-11c61d3 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/ingress/compare/a9d870c...11c61d3){:target="_blank"}).
     - **Agents**: updated from 1.8.2 to 1.8.12 (see [changes :fontawesome-solid-external-link:{.external-link-icon}](https://github.com/livekit/agents/compare/livekit-agents%401.8.2...livekit-agents%401.8.12){:target="_blank"}).
+
+### Upgrade notes
+
+- **Cloud deployments**:
+    - When updating an existing deployment, keep its Master Node disk size where it is a parameter (`MasterNodesDiskSize` on AWS High Availability, `masterNodesDiskSize` on Azure and Google Cloud High Availability, `masterNodeDiskSize` on Oracle Cloud Elastic and High Availability). The default is now 200 GB, and a Master Node whose disk size changes is recreated.
+    - Google Cloud Elastic and High Availability: the first update replaces the Media Nodes once, to move them to the `ubuntu-2404-lts` image family.
+    - DigitalOcean Elastic and High Availability with more than one fixed Media Node: the first update replaces them once.
+    - High Availability: RTMP ingress is published on port 1945 (`rtmps://<your-domain>:1945/rtmp`, the URL that OpenVidu returns). Allow that port in any firewall in front of the publishers if you want to ingest RTMP streams using the Ingress module.
 
 ### Version table
 

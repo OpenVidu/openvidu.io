@@ -102,6 +102,11 @@ OpenVidu Meet 3.10.0 brings live streaming (to YouTube, Twitch or any RTMP serve
 - **Azure storage:** Fixed playback, download and deletion of recordings stored in Azure Blob Storage, including recordings stored in subdirectories.
 - **URL configuration:** Fixed access URL generation when using custom ports or base paths through `MEET_BASE_URL` and `MEET_BASE_PATH`.
 
+### Upgrade notes
+
+- **Identified guest links:** the access links of identified guests created before 3.10.0 are insecure and must be regenerated, with the **Regenerate link** action of the Room Members tab or by removing the guest and adding them again. The old link stops working once it is regenerated. From 3.13.0 on, this will be done automatically. See [Regenerate a guest's link](https://openvidu.io/3.10/meet/features/room-members/management/#regenerate-a-guests-link).
+- **Configuration checks:** OpenVidu Meet does not start when `MEET_INITIAL_ADMIN_USER` or `MEET_INITIAL_ADMIN_PASSWORD` is shorter than 5 characters, or when `MEET_BLOB_STORAGE_MODE` is not `s3`, `gcs` or `abs` (3.9 took any other value as `s3`).
+
 ## 3.9.0
 
 !!! info "For the Release Notes of OpenVidu Platform 3.9.0, please visit here: [OpenVidu Platform 3.9.0 :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.9/docs/releases/#390){:target="_blank" .platform-link-color}"
