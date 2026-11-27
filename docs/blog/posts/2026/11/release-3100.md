@@ -2,7 +2,7 @@
 title: "OpenVidu 3.10.0 release notes"
 draft: false
 date:
-  created: 2026-11-26
+  created: 2026-11-27
 slug: release-3100
 description: "OpenVidu 3.10.0 is out with live broadcasts, locked rooms and reactions in Meet, plus a new Dashboard and Participant Passthrough Egress."
 cover_image: poster-light.webp
@@ -47,8 +47,8 @@ Webinars, classes and town halls rarely stay inside the meeting: the people who 
 
 Each room saves its default destinations, and a meeting can stream to several of them at once. Every destination is a broadcast of its own: if one channel drops, the others keep going, and you can retry the failed one from the meeting. Everyone in the meeting sees a **LIVE** mark while it is on air.
 
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-3100/go-live-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-3100/go-live-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-3100/go-live-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-3100/go-live-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/11/release-3100/go-live-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/11/release-3100/go-live-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/11/release-3100/go-live-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/11/release-3100/go-live-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 Your backend can go live too, with the new [Broadcasts REST API :fontawesome-solid-external-link:{.external-link-icon}](https://openvidu.io/3.10/meet/embedded/reference/api.html#/operations/broadcastStart){:target="_blank"}. This call streams the live meeting of a room to every destination saved in it:
 
@@ -68,8 +68,8 @@ Replace `<your-openvidu-domain>` with the domain of your deployment, `<room-id>`
 
 A shared link is great until the wrong person uses it. In a [locked room](https://openvidu.io/3.10/meet/features/meetings/locked-room/), participants ask to join and wait until a host admits or rejects them. It suits classes, medical consultations and public meetings, where you want to see who is asking before letting anyone in.
 
-![On the left, a participant waiting to be let in, with the room's message and a camera preview. On the right, the host's Participants panel with three people waiting to join and their Admit and Deny buttons](/assets/images/blog/YYYY/MM/release-3100/locked-room-light.webp#only-light){ .round-corners loading=lazy }
-![On the left, a participant waiting to be let in, with the room's message and a camera preview. On the right, the host's Participants panel with three people waiting to join and their Admit and Deny buttons](/assets/images/blog/YYYY/MM/release-3100/locked-room-dark.webp#only-dark){ .round-corners loading=lazy }
+![On the left, a participant waiting to be let in, with the room's message and a camera preview. On the right, the host's Participants panel with three people waiting to join and their Admit and Deny buttons](/assets/images/blog/2026/11/release-3100/locked-room-light.webp#only-light){ .round-corners loading=lazy }
+![On the left, a participant waiting to be let in, with the room's message and a camera preview. On the right, the host's Participants panel with three people waiting to join and their Admit and Deny buttons](/assets/images/blog/2026/11/release-3100/locked-room-dark.webp#only-dark){ .round-corners loading=lazy }
 
 While they wait, participants see the room's message and set up their camera and microphone, so they are ready the moment they get in. Hosts admit or reject people one by one or all at once. Moderators join directly by default, speakers wait, and two new permissions, `accessBypassLock` and `waitingParticipantAdmin`, let you change who does what.
 
@@ -83,13 +83,13 @@ Locking a room is a toggle in the room wizard, or a single property of the room'
 
 Big meetings need a way to ask for a turn without interrupting whoever is talking. Participants can now [raise their hand](https://openvidu.io/3.10/meet/features/meetings/raise-hand/), with a button or the `R` key. Raised hands form a queue that everyone sees in the same order, and moderators hear a sound, get a notice and can lower one hand or all of them.
 
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-3100/raise-hand-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-3100/raise-hand-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-3100/raise-hand-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-3100/raise-hand-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/11/release-3100/raise-hand-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/11/release-3100/raise-hand-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/11/release-3100/raise-hand-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/11/release-3100/raise-hand-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 And sometimes a 👍 says it all. With [reactions](https://openvidu.io/3.10/meet/features/meetings/reactions/), participants send one of eight emojis that shows on their camera tile for 10 seconds. The status rail adds them up across the meeting, so whoever leads it can read the room at a glance: "who understood that?" now has an answer in two seconds.
 
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-3100/reactions-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-3100/reactions-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
-<a class="glightbox" href="/assets/videos/blog/YYYY/MM/release-3100/reactions-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/YYYY/MM/release-3100/reactions-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/11/release-3100/reactions-dark.mp4" data-type="video" data-gallery="dark"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/11/release-3100/reactions-dark.mp4#only-dark" preload="none" muted playsinline loop></video></a>
+<a class="glightbox" href="/assets/videos/blog/2026/11/release-3100/reactions-light.mp4" data-type="video" data-gallery="light"><video class="round-corners lazy-video" src="/assets/videos/blog/2026/11/release-3100/reactions-light.mp4#only-light" preload="none" muted playsinline loop></video></a>
 
 Both features are on by default and can be turned off per room, with `config.raiseHand` and `config.reactions`.
 
@@ -148,8 +148,8 @@ This one is invisible to participants, but it matters a lot. 3.10.0 closes a bro
 
 Running video in production means answering questions like "what happened in that Room last Tuesday?" or "why did that participant disconnect?". The [OpenVidu Dashboard](https://openvidu.io/3.10/docs/self-hosting/production-ready/observability/openvidu-dashboard/) has been rebuilt from scratch to answer them, with a cleaner design on top of a completely new analytics model.
 
-![OpenVidu Dashboard overview page, with live counters of rooms, participants, egress and ingress, today's totals and the state of every Media Node](/assets/images/blog/YYYY/MM/release-3100/dashboard-overview-light.webp#only-light){ .round-corners loading=lazy }
-![OpenVidu Dashboard overview page, with live counters of rooms, participants, egress and ingress, today's totals and the state of every Media Node](/assets/images/blog/YYYY/MM/release-3100/dashboard-overview-dark.webp#only-dark){ .round-corners loading=lazy }
+![OpenVidu Dashboard overview page, with live counters of rooms, participants, egress and ingress, today's totals and the state of every Media Node](/assets/images/blog/2026/11/release-3100/dashboard-overview-light.webp#only-light){ .round-corners loading=lazy }
+![OpenVidu Dashboard overview page, with live counters of rooms, participants, egress and ingress, today's totals and the state of every Media Node](/assets/images/blog/2026/11/release-3100/dashboard-overview-dark.webp#only-dark){ .round-corners loading=lazy }
 
 - **Live overview**: what is running right now in your deployment, refreshed automatically.
 - **Analytics for any time range**, from 5-minute to daily detail: activity, clients, data transferred, Egress, Ingress and the topology of each Room (1:1, 1:N or N:M).
@@ -158,8 +158,8 @@ Running video in production means answering questions like "what happened in tha
 
 OpenVidu PRO goes deeper, down to every single track: codecs, layers, packet loss, jitter and subscribers. It also adds Quality, Diagnostics and Top rooms analytics, and a page for every Media Node in Elastic and High Availability deployments. And media statistics now work with both RTC engines, Pion and mediasoup.
 
-![A camera track in the OpenVidu PRO Dashboard, with its codecs and simulcast layers, publish statistics and the list of its subscribers](/assets/images/blog/YYYY/MM/release-3100/dashboard-participant-track-light.webp#only-light){ .round-corners loading=lazy }
-![A camera track in the OpenVidu PRO Dashboard, with its codecs and simulcast layers, publish statistics and the list of its subscribers](/assets/images/blog/YYYY/MM/release-3100/dashboard-participant-track-dark.webp#only-dark){ .round-corners loading=lazy }
+![A camera track in the OpenVidu PRO Dashboard, with its codecs and simulcast layers, publish statistics and the list of its subscribers](/assets/images/blog/2026/11/release-3100/dashboard-participant-track-light.webp#only-light){ .round-corners loading=lazy }
+![A camera track in the OpenVidu PRO Dashboard, with its codecs and simulcast layers, publish statistics and the list of its subscribers](/assets/images/blog/2026/11/release-3100/dashboard-participant-track-dark.webp#only-dark){ .round-corners loading=lazy }
 
 Upgrading from a previous version? The analytics data you already have is migrated to the new model automatically, in the background.
 
