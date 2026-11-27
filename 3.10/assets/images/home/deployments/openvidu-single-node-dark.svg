@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="OpenVidu Single Node: one server hosts every service and serves the clients">
-<title>OpenVidu Single Node: one server hosts every service and serves the clients</title>
-<rect x="100" y="22" width="200" height="70" rx="16" fill="#eef2f3"/><text x="200.0" y="65.64" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="24" font-weight="700" fill="#0f1517" text-anchor="middle">OpenVidu</text>
-<line x1="200" y1="92" x2="200" y2="150" stroke="#a3b1b6" stroke-width="2.4" stroke-linecap="round"/>
-<rect x="50" y="150" width="300" height="130" rx="22" fill="none" stroke="#a3b1b6" stroke-width="2" stroke-dasharray="6 7"/>
-<text x="200" y="178" font-family="Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#a3b1b6" text-anchor="middle">Clients</text>
-<g transform="translate(95.35000000000001 204.6) scale(1.15)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="0" width="48" height="30" rx="4"/><path d="M0 36 h60 l-2 4 h-56z"/></g><g transform="translate(189.65 200) scale(1.15)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="22" height="40" rx="5"/><path d="M8 34 h6"/></g><g transform="translate(240.25 202.3) scale(1.15)" fill="none" stroke="#a3b1b6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0" y="0" width="56" height="36" rx="5"/><path d="M20 46 h16 M28 36 v10"/></g>
-</svg>
