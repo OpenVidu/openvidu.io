@@ -22,13 +22,13 @@ One of **`room-url`** or **`recording-url`** is required: the former determines 
 
 > **A room URL is a room access link**
 >
-> The **room URL** is simply a [room access link](https://openvidu.io/3.10/meet/features/rooms/access/index.md): the URL an individual opens to access a room. The role and identity a participant gets depend on **which** access link you use. This guide and most examples use the **anonymous** moderator/speaker links for simplicity, but a room also has **user** and **identified-guest** links — see [Room Access](https://openvidu.io/3.10/meet/features/rooms/access/index.md) for the full picture.
+> The **room URL** is simply a [room access link](https://openvidu.io/latest/meet/features/rooms/access/index.md): the URL an individual opens to access a room. The role and identity a participant gets depend on **which** access link you use. This guide and most examples use the **anonymous** moderator/speaker links for simplicity, but a room also has **user** and **identified-guest** links — see [Room Access](https://openvidu.io/latest/meet/features/rooms/access/index.md) for the full picture.
 >
-> You can obtain a room's access links programmatically from your backend with the [REST API](https://openvidu.io/3.10/meet/embedded/reference/rest-api/index.md): the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the [MeetRoom](https://openvidu.io/3.10/meet/embedded/reference/api.html#/schemas/MeetRoom) object, or the unique `accessUrl` of an [identified-guest member](https://openvidu.io/3.10/meet/features/room-members/overview/#users-vs-identified-guests).
+> You can obtain a room's access links programmatically from your backend with the [REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md): the `access.anonymous.moderator.url`, `access.anonymous.speaker.url` and `access.user.url` properties of the [MeetRoom](https://openvidu.io/latest/meet/embedded/reference/api.html#/schemas/MeetRoom) object, or the unique `accessUrl` of an [identified-guest member](https://openvidu.io/latest/meet/features/room-members/overview/#users-vs-identified-guests).
 
 ## Content Security Policy
 
-The Web Component runs in your page and opens its connections to OpenVidu Meet from it. If your page sets a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) , allow the OpenVidu Meet origin in `connect-src` for HTTPS requests and for WebSocket too (`wss://`). The realtime connection of a participant [waiting to be admitted](https://openvidu.io/3.10/meet/features/meetings/locked-room/index.md) uses the WebSocket one.
+The Web Component runs in your page and opens its connections to OpenVidu Meet from it. If your page sets a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) , allow the OpenVidu Meet origin in `connect-src` for HTTPS requests and for WebSocket too (`wss://`). The realtime connection of a participant [waiting to be admitted](https://openvidu.io/latest/meet/features/meetings/locked-room/index.md) uses the WebSocket one.
 
 ```text
 Content-Security-Policy: connect-src 'self' https://{{ your-domain }} wss://{{ your-domain }}
@@ -71,7 +71,7 @@ Example:
 
 > **Identify your own users**
 >
-> `participant-external-id` and `participant-metadata` are never interpreted by OpenVidu Meet: they travel untouched as the `externalId` and `metadata` properties of every participant payload, in the `participantJoined` / `participantLeft` events and webhooks and in the [Meetings REST API](https://openvidu.io/3.10/meet/embedded/reference/rest-api/index.md), so your backend can correlate a participant with one of its own users.
+> `participant-external-id` and `participant-metadata` are never interpreted by OpenVidu Meet: they travel untouched as the `externalId` and `metadata` properties of every participant payload, in the `participantJoined` / `participantLeft` events and webhooks and in the [Meetings REST API](https://openvidu.io/latest/meet/embedded/reference/rest-api/index.md), so your backend can correlate a participant with one of its own users.
 
 ### Commands
 
@@ -184,7 +184,7 @@ openviduMeet.once('meetingLeft', (event) => {
 > - With the native **`addEventListener`** method, the callback receives a standard [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) , so the payload is available in its **`detail`** property (e.g. `event.detail`).
 > - With the **`on`** | **`once`** | **`off`** API, the callback receives the payload **directly** as its argument (e.g. `event`), without needing to access any `detail` property.
 
-When the participant asks to close OpenVidu Meet, the component emits `embeddedCloseRequested`: that is the moment to remove it or show one of your own screens. Leaving the meeting does not emit it: `meetingLeft` fires and OpenVidu Meet shows its [End view](https://openvidu.io/3.10/meet/features/meetings/lifecycle/#end-view), and `embeddedCloseRequested` follows when the participant closes that view. The meeting may still be running for everyone else.
+When the participant asks to close OpenVidu Meet, the component emits `embeddedCloseRequested`: that is the moment to remove it or show one of your own screens. Leaving the meeting does not emit it: `meetingLeft` fires and OpenVidu Meet shows its [End view](https://openvidu.io/latest/meet/features/meetings/lifecycle/#end-view), and `embeddedCloseRequested` follows when the participant closes that view. The meeting may still be running for everyone else.
 
 ```javascript
 const openviduMeet = document.querySelector('openvidu-meet');

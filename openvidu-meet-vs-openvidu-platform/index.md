@@ -10,22 +10,22 @@ Both OpenVidu Meet and OpenVidu Platform provide **production-grade performance,
 - Give [**OpenVidu Meet**](https://openvidu.io/latest/meet/index.md) a try if your use case falls under the category of "video conferencing application": e-learning, telehealth, team collaboration, customer support, etc. Don't mistake the simplicity for a lack of possibilities: OpenVidu Meet offers branding customizations and many features out-of-the-box, such as screen-sharing, recording, chat, virtual backgrounds, E2E encryption, and more coming soon: broadcasting, AI agents...
 - Choose [**OpenVidu Platform**](https://openvidu.io/latest/docs/index.md) if you really need total control and flexibility to build your own custom real-time app, either from scratch or integrating OpenVidu Platform into your existing app. OpenVidu Platform provides low-level WebRTC SDKs for any language, and full control over features like audio/video/data streaming, media ingestion, telephony and AI integrations.
 
-|                                                   | OpenVidu Meet                                          | OpenVidu Platform                                          |
-| ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
-| Self-hosted                                       | Yes                                                    | Yes                                                        |
-| Cloud templates for AWS, Azure, GCP, DO, OCI      | Yes                                                    | Yes                                                        |
-| HQ real-time video and crisp audio                | Yes                                                    | Yes                                                        |
-| Recording                                         | Yes                                                    | Yes                                                        |
-| Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
-| Tutorials available                               | Yes                                                    | Yes                                                        |
-| Agent Plugin for AI-assisted development          | Yes                                                    | Yes                                                        |
-| Customer support                                  | Yes                                                    | Yes                                                        |
-| Ready-to-use application                          | Yes                                                    | No                                                         |
-| No-code & Low-code options available              | Yes                                                    | No                                                         |
-| Low-level SDKs                                    | No                                                     | Yes                                                        |
-| High control over real-time features              | No                                                     | Yes                                                        |
-| AI agents                                         | In progress                                            | Yes                                                        |
-| Models                                            | Rooms & Meetings                                       | Audio tracks & Video tracks                                |
+|                                                   | OpenVidu Meet                                           | OpenVidu Platform                                           |
+| ------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------- |
+| Self-hosted                                       | Yes                                                     | Yes                                                         |
+| Cloud templates for AWS, Azure, GCP, DO, OCI      | Yes                                                     | Yes                                                         |
+| HQ real-time video and crisp audio                | Yes                                                     | Yes                                                         |
+| Recording                                         | Yes                                                     | Yes                                                         |
+| Performant, Scalable, Fault-Tolerant & Observable | Yes                                                     | Yes                                                         |
+| Tutorials available                               | Yes                                                     | Yes                                                         |
+| Agent Plugin for AI-assisted development          | Yes                                                     | Yes                                                         |
+| Customer support                                  | Yes                                                     | Yes                                                         |
+| Ready-to-use application                          | Yes                                                     | No                                                          |
+| No-code & Low-code options available              | Yes                                                     | No                                                          |
+| Low-level SDKs                                    | No                                                      | Yes                                                         |
+| High control over real-time features              | No                                                      | Yes                                                         |
+| AI agents                                         | In progress                                             | Yes                                                         |
+| Models                                            | Rooms & Meetings                                        | Audio tracks & Video tracks                                 |
 | Links                                             | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md) | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
 
 ## Frequently asked questions

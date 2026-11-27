@@ -89,6 +89,10 @@
 
 
 
+
+
+
+
     
       
     
@@ -121,15 +125,10 @@
 
 
 
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.84d667f7.css">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.a6c283b5.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -323,9 +322,9 @@
     <a href="../../../../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        
-  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
-
+      
+        <img src="../../../../../assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png" alt="OpenVidu" class="ov-logo--light">
+        <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="OpenVidu" class="ov-logo--dark">
       
     </a>
 
@@ -415,9 +414,9 @@
             openvidu/openvidu
             
               <ul class="md-source__facts">
-                <li class="md-source__fact md-source__fact--version">v3.9.0</li>
-                <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">482</li>
+                <li class="md-source__fact md-source__fact--version">v3.10.0</li>
+                <li class="md-source__fact md-source__fact--stars">2.2k</li>
+                <li class="md-source__fact md-source__fact--forks">483</li>
               </ul>
             
           </div>
@@ -1808,7 +1807,7 @@
 <p>Every snippet below is trimmed to the lines that carry the idea. The complete, runnable version lives in <a href="https://github.com/openvidu-labs/openvidu-integration-levels" target="_blank" rel="noopener"><strong>openvidu-integration-levels</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>, where each level is an <strong>independent application</strong> with its own backend, frontend and README. Clone it, pick a folder, and run two commands. Each section below links to the code it comes from.</p>
 <p>The scenario is the same throughout: a <strong>support desk</strong> where an agent starts a call and a customer joins.</p>
 <p>All three levels need an OpenVidu deployment, and one is enough for the three of them. <a href="/latest/docs/self-hosting/local/">OpenVidu Local</a> brings up both products with Docker:</p>
-<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/OpenVidu/openvidu-local-deployment<span class="w"> </span>-b<span class="w"> </span><span class="m">3</span>.9.0
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/OpenVidu/openvidu-local-deployment<span class="w"> </span>-b<span class="w"> </span><span class="m">3</span>.10.0
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>openvidu-local-deployment/community
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>./configure_lan_private_ip_linux.sh<span class="w">   </span><span class="c1"># configure_lan_private_ip_macos.sh | .bat on Windows</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>up
@@ -2276,6 +2275,8 @@
 
 
 <script src="../../../../../javascripts/glightbox-gallery.js"></script>
+
+
 
 
 

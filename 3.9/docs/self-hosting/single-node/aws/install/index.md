@@ -2,7 +2,7 @@
 
 AWS
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on AWS, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md), but the process is automated through AWS CloudFormation.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on AWS, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On Premises Single Node installation](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/index.md), but the process is automated through AWS CloudFormation.
 
 > **Info**
 >
@@ -109,7 +109,7 @@ Parameters of this section look like this:
 
 Make sure to provide the **OpenViduLicense** parameter with the license key. If you don't have one, you can request one [here](https://openvidu.io/account/) .
 
-For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
+For the **RTCEngine** parameter, **Mediasoup** (with a boost in performance) is the default, and you can also choose **Pion** (the engine of LiveKit Open Source). Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
 
 ### OpenVidu Meet Credentials
 
@@ -218,8 +218,8 @@ If something goes wrong during the initial CloudFormation stack creation, your s
 
    These logs will give you more information about the CloudFormation stack creation process.
 
-1. If everything seems fine, check the [status](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything seems fine, check the [status](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ## Configuration and administration
 
-When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node deployment is ready to use. You can check the [Administration](https://openvidu.io/latest/docs/self-hosting/single-node/aws/admin/index.md) section to learn how to manage your deployment.
+When your CloudFormation stack reaches the **`CREATE_COMPLETE`** status, your OpenVidu Single Node deployment is ready to use. You can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/aws/admin/index.md) section to learn how to manage your deployment.

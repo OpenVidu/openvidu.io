@@ -1,17 +1,18 @@
 /* Product pages: maps the --product-* palette that meet.css or platform.css defines onto
-   Material's variables (see the layering note in colors.css). :root:root outranks
-   colors.css's :root, and the !importants outrank Material's own unlayered declarations. */
+   the accent variables (see the layering note in colors.css). The header and the tabs take
+   the product's bar colour, as on the public site; the product also shows through the links,
+   the solid buttons and the admonitions. :root:root outranks colors.css's :root, and the
+   !importants outrank Material's own unlayered declarations. */
 
 :root:root {
-  --md-primary-fg-color: var(--product-primary-color) !important;
   --md-primary-fg-color--light: var(--product-primary-color-light) !important;
   --md-primary-fg-color--dark: var(--product-primary-color) !important;
-  --md-primary-bg-color: rgb(255, 255, 255) !important;
   --md-primary-bg-color--dark: var(--product-primary-color) !important;
-  --md-accent-fg-color: rgba(var(--product-primary-color-rgb), 0.8) !important;
-  --md-accent-fg-color--transparent: var(--ov-grey-muted) !important;
-  --md-accent-bg-color: rgb(255, 255, 255) !important;
-  --md-accent-bg-color--light: rgb(255, 255, 255) !important;
+  --md-accent-fg-color: var(--product-primary-color) !important;
+  --md-accent-fg-color--transparent: rgba(var(--product-primary-color-rgb), 0.1) !important;
+  --ov-accent: var(--product-primary-color) !important;
+  --ov-accent-rgb: var(--product-primary-color-rgb) !important;
+  --ov-btn-primary-hover: var(--product-primary-dark) !important;
 
   --gradient: conic-gradient(
     from 60deg at 50% 50%,
@@ -24,10 +25,131 @@
   --plyr-color-main: var(--product-primary-color-light);
 }
 
-[data-md-color-scheme="slate"] {
-  --md-default-bg-color: hsla(var(--md-hue), 15%, 14%, 1);
+/* The solid button: colors.css declares its default on <body>, so the product value goes on
+   the same element to win */
+body[data-md-color-scheme] {
+  --ov-btn-primary-bg: var(--product-primary-color) !important;
+  --ov-btn-primary-fg: #ffffff !important;
+}
+
+/* In the dark scheme the deep product tone has no contrast on the dark ground: the links,
+   accents and solid buttons take the product's bright tone and the button ink darkens. */
+body[data-md-color-scheme="slate"] {
+  --md-primary-fg-color--dark: var(--product-primary-color-light) !important;
+  --md-accent-fg-color: var(--product-primary-color-light) !important;
+  --ov-accent: var(--product-primary-color-light) !important;
+  --ov-accent-rgb: var(--product-primary-color-light-rgb) !important;
+  --ov-btn-primary-bg: var(--product-primary-color-light) !important;
+  --ov-btn-primary-fg: var(--product-body-color-dark) !important;
+  --ov-btn-primary-hover: var(--product-primary-color-light-hover) !important;
 }
 
 [data-md-color-scheme="default"] {
   --product-body-color-dark: #f5f5f5;
+}
+
+/* The header bar: Material paints the header, the tabs and the mobile drawer title with
+   --md-primary-fg-color and writes on them with --md-primary-bg-color. colors.css declares
+   both on <body>, so the product values go on the same element. The bar is the same colour
+   in both schemes, as on the public site. */
+body[data-md-color-scheme] {
+  --md-primary-fg-color: var(--product-header-color) !important;
+  --md-primary-bg-color: #ffffff !important;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* This sheet loads before extra.css, so every rule below carries one selector more than its
+   extra.css counterpart (the header or tabs element, or the header class) to outrank it. The
+   tabs render after the header element, not inside it. */
+header.md-header,
+nav.md-tabs {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+header.md-header--shadow {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* The all-white wordmark file is cropped tighter than the grey/white pair, so it takes a
+   smaller box to render the lettering at the same size */
+.md-header .md-header__button.md-logo > img.custom-logo {
+  height: 1.4rem !important;
+}
+
+/* White text on the bar: the tabs, the page title on scroll, the version button */
+nav.md-tabs .md-tabs__link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+nav.md-tabs .md-tabs__link:hover,
+nav.md-tabs .md-tabs__link:focus,
+nav.md-tabs .md-tabs__item--active .md-tabs__link,
+nav.md-tabs .md-tabs__link--active {
+  color: #ffffff;
+}
+
+nav.md-tabs .md-tabs__item--active .md-tabs__link,
+nav.md-tabs .md-tabs__link--active {
+  border-bottom-color: #ffffff;
+}
+
+.md-header .md-version__current {
+  color: #ffffff;
+}
+
+/* The search pill goes translucent on the bar and turns back into the white card when open */
+.md-header .md-search__form {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: transparent;
+}
+
+.md-header .md-search__form:hover {
+  background-color: rgba(255, 255, 255, 0.26);
+}
+
+.md-header .md-search__input {
+  color: #ffffff;
+}
+
+.md-header .md-search__input::placeholder,
+.md-header .md-search__input ~ .md-search__icon {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__form {
+  background-color: var(--ov-surface);
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__input {
+  color: var(--ov-text);
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__input::placeholder,
+[data-md-toggle="search"]:checked ~ .md-header .md-search__input ~ .md-search__icon {
+  color: var(--ov-muted);
+}
+
+/* The account pill: white on the bar, lettered in the product colour */
+.md-header .md-typeset .md-button.sign-btn-in-styles,
+.md-header .md-typeset .md-button.sign-btn-out-styles {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: var(--product-primary-color);
+}
+
+.md-header .md-typeset .md-button.sign-btn-in-styles:hover,
+.md-header .md-typeset .md-button.sign-btn-out-styles:hover,
+.md-header .md-typeset .md-button.sign-btn-in-styles:focus,
+.md-header .md-typeset .md-button.sign-btn-out-styles:focus {
+  background-color: #e9eef0;
+  border-color: #e9eef0;
+  color: var(--product-primary-dark);
+}
+
+.md-header a#account-btn {
+  color: #ffffff;
+}
+
+.md-header a#account-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
 }

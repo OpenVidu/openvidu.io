@@ -1,16 +1,17 @@
-/* OpenVidu Meet pages: the product's --product-* palette (mapped onto Material by product.css)
+/* OpenVidu Meet pages: the product's --product-* palette (mapped onto the accents by product.css)
    plus Meet-only components. Brand values come from colors.css. */
 
 :root:root {
   --product-primary-color: var(--ov-meet-primary) !important;
   --product-primary-color-rgb: var(--ov-meet-primary-rgb) !important;
-  --product-primary-dark: rgb(0, 95, 48) !important;
-  --product-primary-dark-rgb: 0, 95, 48 !important;
+  --product-primary-dark: var(--ov-meet-primary-dark) !important;
+  --product-primary-dark-rgb: var(--ov-meet-primary-dark-rgb) !important;
   --product-primary-color-light: var(--ov-meet-accent) !important;
   --product-primary-color-light-rgb: var(--ov-meet-accent-rgb) !important;
-  --product-body-color-dark: rgb(0, 37, 19) !important;
-  --product-body-color-dark-rgb: 0, 37, 19 !important;
-  --md-hue: 140deg !important;
+  --product-primary-color-light-hover: var(--ov-meet-accent-hover) !important;
+  --product-body-color-dark: var(--ov-meet-ink) !important;
+  --product-body-color-dark-rgb: 6, 42, 21 !important;
+  --product-header-color: var(--ov-meet-header) !important;
 }
 
 /* START: MkDocs Material custom admonition styles */
@@ -68,7 +69,7 @@
 }
 
 .ov-meet-commercial-icon {
-  background-color: var(--md-primary-fg-color);
+  background-color: var(--product-primary-color);
   color: white;
   font-size: 2em !important;
   padding: 0.5rem !important;
@@ -208,16 +209,13 @@ li:has(.coming-soon-overlay)::after {
   white-space: nowrap;
   min-width: fit-content;
   width: auto;
+  transition: opacity 0.3s ease;
 }
 
 /* Estimated release date (month and year) replaces the generic label
    when the feature card also carries an .eta-YYYY-MM class */
-li:has(.coming-soon-overlay.eta-2026-11)::after {
-  content: 'November 2026';
-}
-
-li:has(.coming-soon-overlay.eta-2026-12)::after {
-  content: 'December 2026';
+li:has(.coming-soon-overlay.eta-2027-01)::after {
+  content: 'January 2027';
 }
 
 li:has(.coming-soon-overlay.eta-2027-q1)::after {
@@ -231,8 +229,7 @@ li:has(.coming-soon-overlay):hover::before{
 }
 
 li:has(.coming-soon-overlay):hover::after {
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  opacity: 0.2;
 }
 
 .commercial-code-blocks code {

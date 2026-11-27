@@ -27,9 +27,9 @@ That said, Janus ships more out of the box than a bare media engine:
 
 ## OpenVidu already built all of this — on top of its own stack
 
-|                    | **OpenVidu**                                                                                                                                | **Janus**                                             |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| License            | Apache 2.0**COMMUNITY** / commercial**PRO**                                                                                                 | GPL v3 (commercial license available)                 |
+|                    | **OpenVidu**                                                                                                                                 | **Janus**                                             |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| License            | Apache 2.0**COMMUNITY** / commercial**PRO**                                                                                                  | GPL v3 (commercial license available)                 |
 | Room/session model | [Bundled](https://openvidu.io/latest/docs/reference/room-service-api/#rooms)                                                                   | Basic, via the VideoRoom plugin only                  |
 | Authentication     | [JWT tokens with grants](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants), bundled                                       | Not provided for application rooms                    |
 | Recording (Egress) | [Bundled](https://openvidu.io/latest/docs/reference/egress/index.md), S3-compatible storage                                                    | Raw `.mjr` dumps, manual post-processing              |

@@ -1,5 +1,106 @@
 # OpenVidu Platform release notes
 
+## 3.10.0
+
+> **For the Release Notes of OpenVidu Meet 3.10.0, please visit here: OpenVidu Meet 3.10.0**
+
+### Changelog
+
+- **New OpenVidu Dashboard**: there has been a complete redesign of the [OpenVidu Dashboard](https://openvidu.io/3.10/docs/self-hosting/production-ready/observability/openvidu-dashboard/) and its whole analytics model.
+  - The UI has been completely revamped with a cleaner, more modern look.
+  - New Overview, Participants and Agents pages, with live refresh, one time range for every page, global search and export to CSV/XLSX.
+  - Analytics for any time range, from 5-minute to daily detail: activity, clients, data transferred, Egress, Ingress and the topology of each Room (1:1, 1:N, N:M).
+  - OpenVidu PRO adds per-track details and quality charts, Quality, Diagnostics and Top rooms analytics, and a page for every Media Node in Elastic and High Availability deployments. Media statistics were only available when using `pion` as RTC engine; now they are available for `mediasoup` too.
+  - Rooms, Participants, Egress and Ingress whose end was never reported (for example after a node crash) are closed automatically with an estimated end time.
+  - Each kind of analytics data has its own retention time, and can be reviewed and deleted from the Dashboard settings.
+  - The analytics data of previous versions is migrated automatically in the background.
+- **Participant Passthrough Egress** (OpenVidu PRO): records a participant's video and audio tracks without transcoding, at a fraction of the CPU cost. Every track they publish is recorded in WebM or MKV files that share one timeline, with a manifest to line them up with the other participants of the Room. This provides efficient recording that allows easier post-processing jobs to create composite videos. See [Participant Passthrough Egress](https://openvidu.io/3.10/docs/reference/egress/#participant-passthrough-egress).
+- **Other Egress improvements** (see [Egress](https://openvidu.io/3.10/docs/reference/egress/)):
+  - Room Composite and Web Egress no longer fail with `"websocket url timeout reached"` on slow or busy disks: the Egress service now loads Chrome into memory right after it starts, and gives Chrome 60 seconds to start instead of 20.
+  - AV1 tracks can be recorded without transcoding (OpenVidu PRO).
+  - Auto Participant Egress no longer records a participant twice after a full reconnection.
+  - A recording stopped during a brief Redis stall is no longer reported as failed.
+- **mediasoup improvements**:
+  - A participant connected over ICE-TCP no longer crashes the whole server when it leaves, reconnects or its room closes.
+  - A participant can no longer crash the server with crafted RTP or SCTP packets.
+  - Sender and Receiver Reports of Producers and Consumers with many streams are no longer rejected.
+  - A subscriber that joins a multi-layered track (SVC or simulcast) paused by dynacast no longer sometimes stays without video.
+  - Subscribers of a simulcast track whose lowest layer is above 600 kbps no longer freeze on the first keyframe.
+  - AV1 SVC subscribers and recordings no longer get an undecodable frame when the forwarded temporal layer goes up.
+  - AV1 SVC video received above its lowest spatial layer no longer has frames that cannot be decoded.
+  - A WebRTC connection that carries audio but no video is no longer probed for bandwidth, so the video gets its full quality as soon as it starts.
+  - Backup codecs now work with mediasoup, and each client gets LiveKit's codec rules for its browser: for example, a Firefox subscriber to an AV1 track gets the backup codec instead of AV1.
+  - A track published already muted, as livekit-client does after a full reconnection, no longer sends silence or black frames to its subscribers and recordings.
+  - A subscriber no longer gets stuck when a track is unpublished just as it subscribes.
+  - Configuration parameter `rtc.force_tcp` is now honored: mediasoup only listens on TCP, as Pion already did.
+  - Fixed several rare crashes and hangs of the server: a subscriber changing its video settings right after subscribing, participants joining a just-started server at once, data channels opened while their participant leaves or receiving malformed messages, and mediasoup workers slow to answer.
+- **OpenVidu Server**:
+  - Participants get back right away to the Rooms of a crashed and restarted server, instead of failing for about 30 seconds. The Rooms keep their state, and their recordings go on (OpenVidu PRO).
+  - Live nodes are no longer removed right after a Redis outage or stall.
+  - Shared screens stay sharp when the shared window is resized (VP8 and H.264).
+  - Backup codecs, such as VP8 behind AV1, are sent with the bitrates of their own layers instead of those of the track's first codec.
+  - Idle TURN TCP and TLS connections are closed after 60 seconds (configurable via parameter `turn.tcp_connection_idle_timeout_seconds`).
+  - The embedded TURN relay follows LiveKit's new relay policy. If you set `turn.allow_restricted_peer_cidrs`, more ranges now count as restricted and are only relayed to when listed, cluster nodes included: carrier-grade NAT (`100.64.0.0/10`), `198.18.0.0/15`, `240.0.0.0/4` and the NAT64 prefixes, among others. If your nodes reach each other through one of them (for example, with Tailscale), add it to the list. Without an allow list nothing changes.
+  - Fixed a bug of 3.9.0 in which analytics could stop the server.
+- **Deployments**:
+  - Elastic and High Availability deployments replace unhealthy Media Nodes automatically, on every cloud.
+  - Elastic and High Availability deployments on AWS, Azure and Google Cloud can run a fixed number of Media Nodes, as DigitalOcean and Oracle Cloud already could.
+  - AWS High Availability supports TURN over UDP for Media Nodes in private subnets.
+  - The Single Node and the Master Nodes get a 200 GB disk by default.
+  - Template parameters have the same names on every cloud. The old names still work, but are deprecated.
+  - Google Cloud deployments boot the latest Ubuntu 24.04 image.
+  - Fixed WHIP ingestion without transcoding with Ingress module: it failed with a `502` error, and so did the `DELETE` request that closes the WHIP session.
+  - Fixed ingesting RTMP with Ingress module in High Availability deployments: the load balancer now accepts RTMPS on port 1945.
+  - Fixed the Packet Loss Percentage and Quality Score panels of the OpenVidu Server Metrics and Media Nodes dashboards in Grafana: they showed cumulative values instead of the average of each interval. Updating a deployment fixes them, unless their queries were edited by hand.
+  - Fixed two Caddy issues: STUN messages whose length low byte was `0x80` or above were taken for HTTP and hung, and TURN clients that resolve the server name again after the TLS handshake, as Pion does, were cut on slow DNS lookups.
+  - Fixed redeploying Azure Elastic and High Availability templates, which always failed.
+  - Fixed two DigitalOcean issues: the autoscaler could drain the Media Node hosting the Rooms right after a scale-out, and a deployment could fail because its VPC range fell in a range that DigitalOcean reserves.
+  - Small fixes on:
+    - AWS: Elastic IP attached before installing, and High Availability stacks no longer complete when OpenVidu failed to install.
+    - Azure: whole WebRTC over TCP port range opened, port 9000 closed.
+    - Google Cloud: `rtcEngine` parameter of Single Node.
+    - DigitalOcean: v2 compatibility enabled by default, and changing the fixed number of Media Nodes no longer replaces every one.
+- **OpenVidu Agents**:
+  - Smaller images, with fixed CVEs: the base image goes from 563 MB to 123 MB, the cloud image from 1168 MB to 722 MB and the Sherpa image from 1242 MB to 816 MB.
+  - Less memory and CPU per agent: about 124 MiB at idle instead of 338 MiB (Vosk English model), and voice activity detection with less than half the CPU.
+  - sherpa-onnx updated to 2.0.1, and Vosk to its latest version.
+- **v2compatibility module**:
+  - Media device errors reach the application as the `OpenViduError` that the v2 API documents, so it can tell a camera in use from a denied permission.
+  - The `initPublisher` completion handler runs before `accessAllowed` or `accessDenied` are dispatched, and `Publisher.accessAllowed` is `false` until access is granted.
+- **Upstream dependency upgrades**:
+  - **LiveKit Server**: updated from v1.13.7 to v1.13.11 (see [changes](https://github.com/livekit/livekit/compare/v1.13.7...v1.13.11) ).
+  - **mediasoup**: updated from 3.26.0 to 3.32.2 (see [changes](https://github.com/versatica/mediasoup/compare/3.26.0...3.32.2) ).
+  - **Egress**: updated from v1.14.1 to v1.15.0 (see [changes](https://github.com/livekit/egress/compare/e9330a4...1f99030) ).
+  - **Ingress**: updated from v1.5.0-a9d870c to v1.6.0-11c61d3 (see [changes](https://github.com/livekit/ingress/compare/a9d870c...11c61d3) ).
+  - **Agents**: updated from 1.8.2 to 1.8.12 (see [changes](https://github.com/livekit/agents/compare/livekit-agents%401.8.2...livekit-agents%401.8.12) ).
+
+### Upgrade notes
+
+- **Cloud deployments**:
+  - When updating an existing deployment, keep its Master Node disk size where it is a parameter (`MasterNodesDiskSize` on AWS High Availability, `masterNodesDiskSize` on Azure and Google Cloud High Availability, `masterNodeDiskSize` on Oracle Cloud Elastic and High Availability). The default is now 200 GB, and a Master Node whose disk size changes is recreated.
+  - Google Cloud Elastic and High Availability: the first update replaces the Media Nodes once, to move them to the `ubuntu-2404-lts` image family.
+  - DigitalOcean Elastic and High Availability with more than one fixed Media Node: the first update replaces them once.
+  - High Availability: RTMP ingress is published on port 1945 (`rtmps://<your-domain>:1945/rtmp`, the URL that OpenVidu returns). Allow that port in any firewall in front of the publishers if you want to ingest RTMP streams using the Ingress module.
+
+### Version table
+
+| Artifact               | Version                                                                        | Info | Link |
+| ---------------------- | ------------------------------------------------------------------------------ | ---- | ---- |
+| livekit/livekit-server | v1.13.11                                                                       |      |      |
+| mediasoup              | 3.32.2                                                                         |      |      |
+| livekit/egress         | v1.15.0 (commit [#1f99030](https://github.com/livekit/egress/commit/1f99030) ) |      |      |
+| livekit/ingress        | v1.6.0 (commit [#11c61d3](https://github.com/livekit/ingress/commit/11c61d3) ) |      |      |
+| livekit/agents         | v1.8.12                                                                        |      |      |
+| MinIO                  | 2026-11-16T00-11-40Z                                                           |      |      |
+| Caddy                  | 2.11.9                                                                         |      |      |
+| MongoDB                | 8.0.38                                                                         |      |      |
+| Redis                  | 8.10.3                                                                         |      |      |
+| Grafana                | 12.4.15                                                                        |      |      |
+| Prometheus             | 3.16.0                                                                         |      |      |
+| Mimir                  | 3.2.6                                                                          |      |      |
+| Alloy                  | 1.22.0                                                                         |      |      |
+| Loki                   | 3.7.10                                                                         |      |      |
+
 ## 3.9.0
 
 > **For the Release Notes of OpenVidu Meet 3.9.0, please visit here: OpenVidu Meet 3.9.0**

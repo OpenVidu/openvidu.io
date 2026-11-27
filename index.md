@@ -1,209 +1,243 @@
-## Trusted by teams building real-time video
+OpenVidu Meet Customizable ready-made app
 
-______________________________________________________________________
+## A finished meeting app. Customizable. Embed it today.
 
-> "With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience."
+Rooms, recordings, roles and your branding, out of the box. Drop it into your product with one tag, a REST API and webhooks.
 
-Matteo Resconi, IT & Development Area Manager, Mega Italia Media
+[Deploy Meet](https://openvidu.io/latest/meet/ "Get started with OpenVidu Meet") [Try the live demo](https://meet-demo-app.openvidu.io "Try the OpenVidu Meet demo (opens in a new tab)")
 
-[Read the full story →](https://openvidu.io/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/)
+OpenVidu Platform SDKs and APIs
 
-______________________________________________________________________
+## The raw engine. Build anything.
 
-> "OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain."
+Client and server SDKs from our LiveKit fork, for every major language, with full control over tracks, codecs and layouts.
 
-Andrei Iakimov, DevOps Lead, Novakid
+```
+import { Room } from "livekit-client";
 
-[Read the full story →](https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/)
+const room = new Room();
+await room.connect("wss://your-deployment", token);
+await room.localParticipant
+  .enableCameraAndMicrophone();
+```
 
-______________________________________________________________________
+Build it with your AI coding agent: the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/) puts this documentation inside Claude Code, Cursor, VS Code, Copilot, Codex or Kiro.
 
-> "From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams."
+[Start building](https://openvidu.io/latest/docs/ "Build with OpenVidu Platform SDKs") [Browse tutorials](https://openvidu.io/latest/docs/tutorials/application-server/ "OpenVidu Platform tutorials")
 
-Janne Sikiö, CEO, Dicode
+Not sure which door? [Compare Meet and Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/)
 
-[Read the full story →](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/)
+Same engine behind both doors
 
-______________________________________________________________________
+## Self-hosted means sovereign.
 
-> "Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities."
+Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.
 
-Henrique Otsuka, Head of Information Technology, Eventials
+### Data sovereignty
 
-[Read the full story →](https://openvidu.io/blog/2026/11/10/eventials-live-streaming-openvidu/)
+Your calls live only on servers you run, in the country you choose. No media, recordings or user data ever reach us.
 
-## Choose the ideal OpenVidu solution for your real-time needs
+### Privacy by design
 
-### 
+No third party joins, routes or stores your calls. Every stream is encrypted in transit, with end-to-end encryption when you need it.
 
-Ready-to-use videoconferencing solution
+### GDPR and EU data residency
 
-For teams, businesses and organizations that need a reliable and secure video conferencing solution running on their servers.
+Host in the EU and call data stays in the EU, with no transfers to a foreign vendor to justify under **GDPR**. Residency is your setting, not a promise.
 
-- Multi-party HQ video conferencing
-- Customize with your branding and corporate colors
-- Feature rich: screen sharing, chat, virtual background, recording...
-- Ready to use AI integrations
-- Embed right into your app with pre-built components
+“Privacy was one of our most important selection criteria.” Janne Sikiö, CEO at Dicode. [Why GDPR and EU data residency decided it for Dicode →](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/)
 
-[Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md)
+Any cloudAWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises.
 
-### 
+LiveKit compatibleFamiliar APIs and SDKs, with mediasoup at the core.
 
-Developer-oriented SDKs for custom apps
+Open sourceCOMMUNITY is free under Apache 2.0. PRO when you scale.
 
-For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
+Made in EuropeBuilt in Madrid, Spain, by a company that answers to EU law.
 
-- Programmable client and server SDKs for all languages, from our LiveKit fork
-- Build your custom UI from scratch with total freedom
-- Low level control of real time media: codecs, protocols, bitrates...
-- Precise control of recording and streaming with custom layouts
-- Advanced telephony and AI integrations
+## What are you building?
 
-[Start building with the SDKs](https://openvidu.io/latest/docs/index.md)
+Telehealth Online classes Customer support Live events Cameras and drones AI voice agents
 
-|                                                   | OpenVidu Meet                                          | OpenVidu Platform                                          |
-| ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- |
-| Self-hosted                                       | Yes                                                    | Yes                                                        |
-| Cloud templates for AWS, Azure, GCP, DO, OCI      | Yes                                                    | Yes                                                        |
-| HQ real-time video and crisp audio                | Yes                                                    | Yes                                                        |
-| Recording                                         | Yes                                                    | Yes                                                        |
-| Performant, Scalable, Fault-Tolerant & Observable | Yes                                                    | Yes                                                        |
-| Tutorials available                               | Yes                                                    | Yes                                                        |
-| Agent Plugin for AI-assisted development          | Yes                                                    | Yes                                                        |
-| Customer support                                  | Yes                                                    | Yes                                                        |
-| Ready-to-use application                          | Yes                                                    | No                                                         |
-| No-code & Low-code options available              | Yes                                                    | No                                                         |
-| Low-level SDKs                                    | No                                                     | Yes                                                        |
-| High control over real-time features              | No                                                     | Yes                                                        |
-| AI agents                                         | In progress                                            | Yes                                                        |
-| Models                                            | Rooms & Meetings                                       | Audio tracks & Video tracks                                |
-| Links                                             | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md) | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
+Best fit: OpenVidu Meet
 
-*[Learn more about OpenVidu Meet vs OpenVidu Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)*
+Patient calls that never leave your servers.
 
-______________________________________________________________________
+Embed the consultation room in your patient portal with one tag, and control who can join, record or share.
 
-## Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
+[Deploy OpenVidu Meet](https://openvidu.io/latest/meet/)
 
-- **Self-hosted**
+- Embed with one tag
+- Roles and permissions
+- Recording
+- End-to-end encryption
 
-  ______________________________________________________________________
+Best fit: OpenVidu Meet
 
-  OpenVidu is designed from the ground up to be [**self-hosted**](https://openvidu.io/latest/docs/self-hosting/production-ready/index.md) in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!
+A classroom with recording, screen sharing and raised hands.
 
-- **Professional support**
+Moderation, roles and recordings come ready. Brand it with your school colors.
 
-  ______________________________________________________________________
+[Deploy OpenVidu Meet](https://openvidu.io/latest/meet/)
 
-  We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! [**Contact us**](https://openvidu.io/support/index.md) now.
+- Recording
+- Screen sharing
+- Raise hand
+- Virtual backgrounds
+- Your branding
 
-- **Easy to deploy**
+Best fit: OpenVidu Meet
 
-  ______________________________________________________________________
+Turn a support ticket into a video call with a link.
 
-  What could take a whole DevOps team days of work, with OpenVidu you can have it ready in minutes: an easy installation, configuration and administration experience to your self-hosted, production grade, real-time solution. [**Install now**](https://openvidu.io/latest/docs/self-hosting/deployment-types/index.md).
+Create rooms from your help desk through the REST API, and get webhooks when calls start, end or get recorded.
 
-- **Cost effective**
+[Deploy OpenVidu Meet](https://openvidu.io/latest/meet/)
 
-  ______________________________________________________________________
+- REST API
+- Webhooks
+- Shareable links
+- Recordings
 
-  OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See [**Pricing**](https://openvidu.io/pricing/index.md).
+Best fit: OpenVidu Platform
 
-- **Performant**
+Low-latency streams for hundreds of viewers.
 
-  ______________________________________________________________________
+Control every track and layout, and broadcast to YouTube or Twitch at the same time.
 
-  OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: [**LiveKit**](https://livekit.com/) and [**mediasoup**](https://mediasoup.org/) . By combining the best of both worlds, OpenVidu provides outstanding [**performance**](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
+[Build with OpenVidu Platform](https://openvidu.io/latest/docs/)
 
-- **Scalable**
+- WHIP ingest
+- Sub-second latency
+- Simulcast
+- RTMP out to YouTube and Twitch
 
-  ______________________________________________________________________
+Best fit: OpenVidu Platform
 
-  OpenVidu has been designed from the outset with [**scalability**](https://openvidu.io/latest/docs/self-hosting/production-ready/scalability/index.md) in mind. Host videoconference rooms and large live streams with hundreds of participants. Autoscale your cluster to adapt to the demand and optimize your resources.
+Ingest and process camera feeds in real time.
 
-- **Fault tolerant**
+Bring in external streams and run server-side pipelines on the video and audio.
 
-  ______________________________________________________________________
+[Build with OpenVidu Platform](https://openvidu.io/latest/docs/)
 
-  OpenVidu offers [**fault tolerance**](https://openvidu.io/latest/docs/self-hosting/production-ready/fault-tolerance/index.md) in all its components. Deploy a reliable cluster knowing that if one of your node goes down, others will be able to continue working with no downtime.
+- WHIP and RTMP ingest
+- Server-side pipelines
+- Python and Node agents
+- Any codec
 
-- **Observable**
+Best fit: OpenVidu Platform
 
-  ______________________________________________________________________
+Put an AI agent in the room.
 
-  OpenVidu brings everything necessary to monitor the status, health, load and history of your deployment. It automatically collects events, metrics and logs and provides [**OpenVidu Dashboard**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/index.md) and a [**Grafana stack**](https://openvidu.io/latest/docs/self-hosting/production-ready/observability/grafana-stack/index.md) to navigate them.
+Transcription, voice assistants and telephony, built on the same SDKs as the rest of your app.
 
-______________________________________________________________________
+[Build with OpenVidu Platform](https://openvidu.io/latest/docs/)
 
-## All the features you need to quickly build your perfect real-time application
+- Live transcription
+- Voice agents
+- SIP telephony
+- Agents framework
 
-- **WebRTC**
+## Deploy where you already run.
 
-  ______________________________________________________________________
+Ready-made templates for every major cloud, or one installer for your own servers. Your users' data never leaves your infrastructure.
 
-  Achieve ultra-low latency in your videoconference or live-streaming app thanks to [WebRTC](https://webrtc.org/) .
+[On-premisesOne-line installer](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/) [AWSCloudFormation](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/) [AzureResource Manager](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/) [Google CloudTerraform](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/) [DigitalOceanTerraform](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/install/) [Oracle CloudWeb console](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/install/)
 
-- **Security at all levels**
+### One stack under both doors.
 
-  ______________________________________________________________________
+Your product sits on top. Below it, OpenVidu Meet or the OpenVidu Platform SDKs, then the OpenVidu engine with LiveKit-compatible APIs and mediasoup. All of it runs on infrastructure you control.
 
-  Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.
+[How the Platform works](https://openvidu.io/latest/docs/)
 
-- **Multiplatform**
+Your app
 
-  ______________________________________________________________________
+Your productyour UI, your users
 
-  Chrome, Firefox, Safari, Android, iOS, Unity, Windows, macOS, Linux... OpenVidu is compatible with all of them.
+Pick one
 
-- **Up to 4K video and HQ audio**
+Meetfinished app, embed it
 
-  ______________________________________________________________________
+PlatformSDKs, build it
 
-  HD up to 4K video resolution, and crisp audio quality with noise cancellation and echo suppression.
+Engine
 
-- **Recording**
+OpenVidu COMMUNITYPRO LiveKit-compatible APIs · mediasoup media engine
 
-  ______________________________________________________________________
+Your infra
 
-  Record your video calls with complete freedom. You can use predefined layouts or easily build your own.
+AWSAzureGoogle CloudDigitalOceanOracle CloudOn-premises
 
-- **Broadcast to YouTube/Twitch**
+### Four deployments, one set of APIs.
 
-  ______________________________________________________________________
+Start on your laptop or a single server. Move to a cluster when you need more rooms per server, autoscaling or fault tolerance, without changing your app.
 
-  OpenVidu allows you to easily broadcast your sessions to live-streaming platforms such as YouTube or Twitch.
+\[DEVELOPMENT
 
-- **Screen sharing**
+Local Docker Compose on your machine, with certificates for every device on your network.\](https://openvidu.io/latest/docs/self-hosting/local/) \[COMMUNITYPRO
 
-  ______________________________________________________________________
+Single Node One server for medium user load. Free with COMMUNITY. PRO doubles the media performance on the same hardware.\](https://openvidu.io/latest/docs/self-hosting/single-node/) \[PRO
 
-  Screen share from browsers or native applications with ease, always with the best quality.
+Elastic Media nodes come and go with demand. You pay for what runs.\](https://openvidu.io/latest/docs/self-hosting/elastic/) \[PRO
 
-- **Virtual Backgrounds**
+High Availability Replicated master nodes. A failed server never stops a call.\](https://openvidu.io/latest/docs/self-hosting/ha/)
 
-  ______________________________________________________________________
+## Start free. Scale when you need to.
 
-  Apply effects to your videos, blurring the background or replacing it with an image.
+COMMUNITY
 
-- **Server side processing**
+Freeopen source, Apache 2.0
 
-  ______________________________________________________________________
+- Single Node deployment for medium user load
+- Meet and Platform included
+- Recording, ingress and S3 storage
+- Built-in observability
 
-  For the most advanced use cases: you can add pipelines to process video and audio streams in real time in your servers.
+[Deploy free](https://openvidu.io/latest/meet/ "Get started with OpenVidu Meet")
 
-- **AI-assisted development**
+PRO
 
-  ______________________________________________________________________
+$0.0006per core, per minute
 
-  Build with Claude Code, Cursor, VS Code or Codex: the [**OpenVidu Agent Plugin**](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md) gives your coding agent the official OpenVidu documentation, so the code it writes is up to date and accurate.
+- 2x performance with mediasoup
+- Elastic: add media nodes as load grows
+- High Availability: no single point of failure
+- Advanced observability
 
-[Deploy Meet in minutes](https://openvidu.io/latest/meet/index.md "Get started with OpenVidu Meet") [Start building with the SDKs](https://openvidu.io/latest/docs/index.md "Build with OpenVidu Platform SDKs")
+[Start your 15-day free trial](https://openvidu.io/account/ "Get an OpenVidu License")
 
-Not sure which fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md)
+Both editions run Meet and Platform. You pay only while a PRO cluster runs, never per participant. [See pricing](https://openvidu.io/pricing/)
 
-______________________________________________________________________
+## Teams that already picked a door.
 
-## Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.
+Virtual classrooms · LMS
 
-[Talk to an expert](https://openvidu.io/support/)
+> “With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”
+
+**Matteo Resconi**IT & Development Area Manager, Mega Italia Media[Read the full story →](https://openvidu.io/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/)
+
+Live English lessons · EdTech
+
+> “OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain.”
+
+**Andrei Iakimov**DevOps Lead, Novakid[Read the full story →](https://openvidu.io/blog/2026/09/15/novakid-live-english-lessons/)
+
+Private video calls · Consulting
+
+> “From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”
+
+**Janne Sikiö**CEO, Dicode[Read the full story →](https://openvidu.io/blog/2026/10/27/dicode-private-video-calls-openvidu/)
+
+Live streaming · Webinars
+
+> “Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities.”
+
+**Henrique Otsuka**Head of Information Technology, Eventials[Read the full story →](https://openvidu.io/blog/2026/11/10/eventials-live-streaming-openvidu/)
+
+[12+years building WebRTC](https://openvidu.io/research/) [19peer-reviewed research publications](https://openvidu.io/research/) [500+academic citations](https://openvidu.io/research/) [3open source media stacks we contribute to: Kurento, LiveKit and mediasoup](https://github.com/OpenVidu "OpenVidu on GitHub (opens in a new tab)")
+
+## Pick your door.
+
+[Deploy OpenVidu Meet](https://openvidu.io/latest/meet/ "Get started with OpenVidu Meet") [Build with OpenVidu Platform](https://openvidu.io/latest/docs/ "Build with OpenVidu Platform SDKs")
+
+[Or talk to an expert](https://openvidu.io/support/)

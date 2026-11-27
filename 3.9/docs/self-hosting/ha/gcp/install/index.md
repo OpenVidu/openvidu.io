@@ -6,7 +6,7 @@ Google Cloud Platform
 >
 > OpenVidu High Availability is part of **OpenVidu** **PRO**. Before deploying, you need to [create an OpenVidu account](https://openvidu.io/account/) to get your license key. There's a 15-day free trial waiting for you!
 
-This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/install-nlb/index.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
+This section describes how to deploy a production-ready OpenVidu High Availability setup on Google Cloud Platform. The deployed services are equivalent to those in the [On Premises High Availability installation](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/install-nlb/index.md), but are provisioned as Google Cloud Platform resources and automated through the Google Cloud Console.
 
 To deploy OpenVidu on Google Cloud Platform, log in to [Infrastructure Manager](https://console.cloud.google.com/infra-manager/deployments) in the GCP Console. Then follow these steps and fill in your preferred parameters.
 
@@ -196,8 +196,8 @@ If something goes wrong during the initial GCP deployment creation, your stack m
 
    These logs will give you more information about the GCP deployment creation process.
 
-1. If everything seems fine, check the [status](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything seems fine, check the [status](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-the-status-of-services) and the [logs](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ## Configuration and administration
 
-When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait about 4 to 7 minutes for the instances to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/ha/gcp/admin/index.md) section to learn how to manage your deployment.
+When your Google Cloud Platform deployment reaches the **`Active`** state, it means that all resources have been created. You will need to wait about 4 to 7 minutes for the instances to install OpenVidu, as mentioned before. After this time, try connecting to the deployment URL. If it doesn't work, we recommend checking the previous section. Once everything is ready, you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/ha/gcp/admin/index.md) section to learn how to manage your deployment.

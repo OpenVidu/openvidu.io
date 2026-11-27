@@ -2,11 +2,11 @@
 
 OpenVidu Platform enables you to build real-time applications. You can build your new OpenVidu application from scratch, but it is also very easy to integrate OpenVidu in your already existing application.
 
-[Get started](https://openvidu.io/3.10/docs/getting-started/index.md "Get started with OpenVidu Platform") [Start with a tutorial](https://openvidu.io/3.10/docs/tutorials/application-server/index.md) [Build your app](https://openvidu.io/3.10/docs/build-your-app/index.md)
+[Get started](https://openvidu.io/latest/docs/getting-started/index.md "Get started with OpenVidu Platform") [Start with a tutorial](https://openvidu.io/latest/docs/tutorials/application-server/index.md) [Build your app](https://openvidu.io/latest/docs/build-your-app/index.md)
 
 Your first lines of code LiveKit-compatible SDKs
 
-Real-time video in your app takes a few lines with our LiveKit fork's SDKs. Building with an AI coding agent? Install the [OpenVidu Agent Plugin](https://openvidu.io/3.10/docs/building-with-ai/agent-plugin/index.md).
+Real-time video in your app takes a few lines with our LiveKit fork's SDKs. Building with an AI coding agent? Install the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md).
 
 **Application client (browser)**
 
@@ -69,7 +69,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 > **Info**
 >
-> If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.10/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/3.10/openvidu-meet-vs-openvidu-platform/index.md).
+> If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/latest/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ### Live-streaming
 
@@ -158,17 +158,17 @@ OpenVidu ships an **agent plugin** for Claude Code, Cursor, VS Code, GitHub Copi
 
 ### Agent plugin
 
-One install brings the OpenVidu MCP server and skills into your coding agent, in the format of the Agent Plugins specification. [Install the plugin](https://openvidu.io/3.10/docs/building-with-ai/agent-plugin/index.md).
+One install brings the OpenVidu MCP server and skills into your coding agent, in the format of the Agent Plugins specification. [Install the plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md).
 
 ### Documentation MCP server
 
-Searches and reads the OpenVidu Meet and OpenVidu Platform documentation of every release from 3.4, with no account or API key. [Add the MCP server](https://openvidu.io/3.10/docs/building-with-ai/mcp-servers/index.md).
+Searches and reads the OpenVidu Meet and OpenVidu Platform documentation of every release from 3.4, with no account or API key. [Add the MCP server](https://openvidu.io/latest/docs/building-with-ai/mcp-servers/index.md).
 
 ### Skills
 
-Procedures your agent follows, such as finding out which OpenVidu version, edition and product your project uses before it answers. [Browse the skills](https://openvidu.io/3.10/docs/building-with-ai/skills/index.md).
+Procedures your agent follows, such as finding out which OpenVidu version, edition and product your project uses before it answers. [Browse the skills](https://openvidu.io/latest/docs/building-with-ai/skills/index.md).
 
-[Set up your coding agent](https://openvidu.io/3.10/docs/building-with-ai/agent-plugin/index.md "Install the OpenVidu Agent Plugin")
+[Set up your coding agent](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md "Install the OpenVidu Agent Plugin")
 
 ## OpenVidu Editions
 
@@ -176,13 +176,13 @@ OpenVidu is available in two editions. You can start with OpenVidu Community and
 
 COMMUNITY
 
-### [OpenVidu COMMUNITY](https://openvidu.io/3.10/pricing/#openvidu-community)
+### [OpenVidu COMMUNITY](https://openvidu.io/pricing/#openvidu-community)
 
 Free to use. It is a single-server deployment and provides a custom LiveKit distribution with Egress, Ingress, S3 storage and monitoring. Ideal for development and testing, but also for medium-scale production deployments. You can host hundreds of simultaneous participants in your rooms by running OpenVidu Community in a sufficiently powerful server!
 
 PRO
 
-### [OpenVidu PRO](https://openvidu.io/3.10/pricing/#openvidu-pro)
+### [OpenVidu PRO](https://openvidu.io/pricing/#openvidu-pro)
 
 OpenVidu commercial edition. It is a multi-server deployment with all the features of OpenVidu Community plus 2x performance, scalability, fault tolerance and improved monitoring and observability. Ideal for large-scale production deployments with heavy traffic that require the highest standards.
 
@@ -192,12 +192,12 @@ OpenVidu commercial edition. It is a multi-server deployment with all the featur
 | **Suitability**               | For local development in your laptop                                                                                                                                  | For applications with medium user load                                                                                                                                                   | For applications with dynamic user load that require scalability                                              | For applications where both scalability and fault tolerance are critical |
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | **COMMUNITY** Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability. **PRO** Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance**               |
 | **Number of servers**         | Your laptop                                                                                                                                                           | 1 Node                                                                                                                                                                                   | 1 Master Node + N Media Nodes                                                                                 | 4 Master Nodes + N Media Nodes                                           |
-| **Installation instructions** | [Install](https://openvidu.io/3.10/docs/self-hosting/local/index.md)                                                                                                  | [Install](https://openvidu.io/3.10/docs/self-hosting/single-node/index.md)                                                                                                               | [Install](https://openvidu.io/3.10/docs/self-hosting/elastic/index.md)                                        | [Install](https://openvidu.io/3.10/docs/self-hosting/ha/index.md)        |
+| **Installation instructions** | [Install](https://openvidu.io/latest/docs/self-hosting/local/index.md)                                                                                                  | [Install](https://openvidu.io/latest/docs/self-hosting/single-node/index.md)                                                                                                               | [Install](https://openvidu.io/latest/docs/self-hosting/elastic/index.md)                                        | [Install](https://openvidu.io/latest/docs/self-hosting/ha/index.md)        |
 
 ## Build your first app.
 
-[Tutorials in your favorite programming language](https://openvidu.io/3.10/docs/tutorials/application-server/index.md "Build your first app with the OpenVidu Platform tutorials") [Run OpenVidu locally](https://openvidu.io/3.10/docs/self-hosting/local/index.md)
+[Tutorials in your favorite programming language](https://openvidu.io/latest/docs/tutorials/application-server/index.md "Build your first app with the OpenVidu Platform tutorials") [Run OpenVidu locally](https://openvidu.io/latest/docs/self-hosting/local/index.md)
 
-[Or talk to an expert](https://openvidu.io/3.10/support/index.md)
+[Or talk to an expert](https://openvidu.io/support/index.md)
 
-Need a ready-made video calling app instead? Check out [OpenVidu Meet](https://openvidu.io/3.10/meet/index.md). Not sure which one fits? [Compare Meet vs Platform](https://openvidu.io/3.10/openvidu-meet-vs-openvidu-platform/index.md).
+Need a ready-made video calling app instead? Check out [OpenVidu Meet](https://openvidu.io/latest/meet/index.md). Not sure which one fits? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).

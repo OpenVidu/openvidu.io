@@ -1,6 +1,6 @@
 # OpenVidu MCP servers
 
-An MCP server gives a coding agent tools it can call. OpenVidu provides the documentation server below, included in the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md). Add it on its own when your client doesn't load plugins, or when you would rather not install one.
+An MCP server gives a coding agent tools it can call. OpenVidu provides the documentation server below, included in the [OpenVidu Agent Plugin](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/index.md). Add it on its own when your client doesn't load plugins, or when you would rather not install one.
 
 ## OpenVidu documentation server
 
@@ -164,4 +164,4 @@ When your agent reads LiveKit's documentation, it fetches those pages from docs.
 
 ## Without MCP
 
-Every page of this site is also published as Markdown: add `index.md` to a page's URL, as in `https://openvidu.io/latest/docs/getting-started/index.md`. [`https://openvidu.io/llms.txt`](https://openvidu.io/llms.txt) indexes them for the latest release, and `https://openvidu.io/<version>/llms.txt` for each version, following the [llms.txt](https://llmstxt.org/) convention. Where your agent supports MCP, the server is the better option: it searches, and it answers for the version you ask for.
+Every page of this site is also published as Markdown: add `index.md` to a page's URL, as in `https://openvidu.io/3.9/docs/getting-started/index.md`. [`https://openvidu.io/llms.txt`](https://openvidu.io/llms.txt) indexes them for the latest release, and `https://openvidu.io/<version>/llms.txt` for each version, following the [llms.txt](https://llmstxt.org/) convention. Where your agent supports MCP, the server is the better option: it searches, and it answers for the version you ask for.

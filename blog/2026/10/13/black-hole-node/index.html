@@ -89,6 +89,10 @@
 
 
 
+
+
+
+
     
       
     
@@ -121,15 +125,10 @@
 
 
 
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.84d667f7.css">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.a6c283b5.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -323,9 +322,9 @@
     <a href="../../../../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        
-  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
-
+      
+        <img src="../../../../../assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png" alt="OpenVidu" class="ov-logo--light">
+        <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="OpenVidu" class="ov-logo--dark">
       
     </a>
 
@@ -415,9 +414,9 @@
             openvidu/openvidu
             
               <ul class="md-source__facts">
-                <li class="md-source__fact md-source__fact--version">v3.9.0</li>
-                <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">482</li>
+                <li class="md-source__fact md-source__fact--version">v3.10.0</li>
+                <li class="md-source__fact md-source__fact--stars">2.2k</li>
+                <li class="md-source__fact md-source__fact--forks">483</li>
               </ul>
             
           </div>
@@ -1661,8 +1660,8 @@
 <li>A Media Node with zero active Egresses reports maximum free CPU, giving it the highest possible <code>cpuload</code> score.</li>
 <li>The algorithm, doing exactly what it was told, sees the Media Node as the most available and sends it the next recording. It fails, leaving the Media Node idle once more, and the cycle continues as it wins the next assignment too...</li>
 </ol>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="The loop that makes the node with the full disk win all the recordings" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-cycle-dark.png#only-dark"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="The loop that makes the node with the full disk win all the recordings" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-cycle-light.png#only-light"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="The loop that makes the node with the full disk win all the recordings" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-cycle-dark.svg#only-dark"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="The loop that makes the node with the full disk win all the recordings" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-cycle-light.svg#only-light"></a></p>
 <p>The broken Media Node had become a black hole: <strong>the more it failed, the more idle it appeared, and the more work it attracted</strong>. The healthy Media Nodes, fully capable of recording, sat there doing nothing.</p>
 <p>The underlying problem is the signal used for load balancing. Free CPU indicates if a Media Node is idle, not if it is capable of recording. A Media Node that fails instantly consumes almost no CPU: the more broken it is, the more available it appears. By looking only at CPU, a Media Node without disk space always wins exactly when it is the worst possible candidate. We needed to make our Egress placement algorithm smarter.</p>
 <h2 id="the-fix">The fix<a class="headerlink" href="#the-fix" title="Anchor link to this section for reference">#</a></h2>
@@ -1675,8 +1674,8 @@
 </code></pre></div>
 <p>Because the full node steps aside, the algorithm routes the recordings to the healthy Media Nodes, where they complete without issue.</p>
 <p>The following diagram illustrates the entire lifecycle: from how the bug dragged almost all recordings toward the full Media Node, to how that same Media Node behaves now with the fix in place.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="The journey of the bug and the behavior of the full node with the fix" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-phases-dark.png#only-dark"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="The journey of the bug and the behavior of the full node with the fix" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-phases-light.png#only-light"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="The journey of the bug and the behavior of the full node with the fix" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-phases-dark.svg#only-dark"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="The journey of the bug and the behavior of the full node with the fix" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/10/black-hole-node/bug-phases-light.svg#only-light"></a></p>
 <h2 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Anchor link to this section for reference">#</a></h2>
 <p>Two takeaways, one for each half of the story.</p>
 <p>First: recording WebRTC involves many moving parts, and a full disk was just one of them. <strong>The real failure wasn't the disk itself, but how three components that worked fine on their own fit together</strong>: real-time recording, the temporary storage directory, and load-based distribution.</p>
@@ -1962,6 +1961,8 @@
 
 
 <script src="../../../../../javascripts/glightbox-gallery.js"></script>
+
+
 
 
 

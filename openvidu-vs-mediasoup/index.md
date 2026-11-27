@@ -24,10 +24,10 @@ mediasoup's own documentation is direct about what's intentionally left out — 
 
 OpenVidu runs on mediasoup for exactly the performance reasons you'd choose it yourself, and ships everything on top of it ready to use:
 
-|                    | **OpenVidu**                                                                                                                                | **mediasoup**                         |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+|                    | **OpenVidu**                                                                                                                                 | **mediasoup**                         |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | Media engine       | [mediasoup](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md), integrated                                    | The library itself                    |
-| Signaling          | Bundled                                                                                                                                     | Build it yourself                     |
+| Signaling          | Bundled                                                                                                                                      | Build it yourself                     |
 | Room/session model | [Bundled](https://openvidu.io/latest/docs/reference/room-service-api/#rooms)                                                                   | Not provided                          |
 | Authentication     | [JWT tokens with grants](https://openvidu.io/latest/docs/reference/access-tokens/#video-grants), bundled                                       | Not provided                          |
 | Recording (Egress) | [Bundled](https://openvidu.io/latest/docs/reference/egress/index.md) (S3-compatible storage)                                                   | Manual RTP piping to GStreamer/FFmpeg |

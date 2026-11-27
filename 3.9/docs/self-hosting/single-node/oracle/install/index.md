@@ -61,7 +61,7 @@ ______________________________________________________________________
 
 OpenVidu and WebRTC require specific inbound rules on both the instance network security (OCI NSG or subnet security list) and the instance firewall (configured later).
 
-The [minimum inbound ports to allow](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#port-rules) must be included in the security list rules.
+The [minimum inbound ports to allow](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/#port-rules) must be included in the security list rules.
 
 > **Info**
 >
@@ -148,18 +148,18 @@ ______________________________________________________________________
    firewall-cmd --list-all
    ```
 
-1. Follow the [On-Premises install instructions](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md) to install OpenVidu on the instance.
+1. Follow the [On-Premises install instructions](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/index.md) to install OpenVidu on the instance.
 
 ______________________________________________________________________
 
 ### 5. Administration and upgrade
 
-- For administration of this OpenVidu Single Node deployment, see the [Administration](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/index.md) section.
-- To upgrade OpenVidu, see the [Upgrade](https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/index.md) section.
+- For administration of this OpenVidu Single Node deployment, see the [Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/oracle/admin/index.md) section.
+- To upgrade OpenVidu, see the [Upgrade](https://openvidu.io/3.9/docs/self-hosting/single-node/upgrade/index.md) section.
 
 ## Terraform
 
-This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On-Premises Single Node installation](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/index.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
+This section contains instructions for deploying a production-ready OpenVidu Single Node deployment on Oracle Cloud Infrastructure, in either the COMMUNITY or PRO edition. The deployed services are the same as in the [On-Premises Single Node installation](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/install/index.md), but the process is fully automated through the Terraform CLI. OCI Object Storage is used to store recordings and other persistent data.
 
 > **Info**
 >
@@ -333,8 +333,8 @@ If something goes wrong during the initial Oracle Cloud Infrastructure deploymen
 
    These logs contain detailed information about the Oracle Cloud Infrastructure deployment process.
 
-1. If everything appears to be in order, check the [status](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and [logs](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
+1. If everything appears to be in order, check the [status](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services) and [logs](https://openvidu.io/3.9/docs/self-hosting/single-node/on-premises/admin/#checking-logs) of the installed OpenVidu services.
 
 ### Configuration and administration
 
-Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/admin/index.md) section to learn how to manage your deployment.
+Once **OPENVIDU_URL** is reachable, the deployment is complete and working. See the [Administration](https://openvidu.io/3.9/docs/self-hosting/single-node/oracle/admin/index.md) section to learn how to manage your deployment.

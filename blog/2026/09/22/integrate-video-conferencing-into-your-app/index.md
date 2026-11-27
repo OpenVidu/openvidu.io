@@ -10,13 +10,13 @@ This post walks through the three, with working code for each, so you can choose
 
 Here is the overview before we get into the details. Each level gives you more speed in exchange for less control, and the three build on each other: OpenVidu Meet is built with Angular Components, and Angular Components are built on the same client SDK you would use at the lowest level. Whichever one you pick, the media flows through your own OpenVidu deployment.
 
-|                    | Embed OpenVidu Meet                                                                               | Angular Components                                                   | Low-level SDKs                                             |
-| ------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------- |
-| **What you write** | One HTML tag and a REST call                                                                      | An Angular template built from prebuilt components                   | Everything: connection, tracks, layout                     |
-| **What you get**   | The complete OpenVidu Meet UI: chat, recording, screen share, virtual backgrounds, captions, E2EE | A working meeting screen you adapt, extend or replace piece by piece | A Room object and its tracks                               |
-| **Customization**  | Colors, per-room features, permissions                                                            | Any component: toolbar, layout, streams, panels, CSS variables       | Unlimited                                                  |
-| **Platforms**      | Web                                                                                               | Angular web apps                                                     | Browsers, iOS, Android, Flutter, React Native, Unity...    |
-| **Product**        | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md)                                            | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md)           | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
+|                    | Embed OpenVidu Meet                                                                               | Angular Components                                                   | Low-level SDKs                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------- |
+| **What you write** | One HTML tag and a REST call                                                                      | An Angular template built from prebuilt components                   | Everything: connection, tracks, layout                      |
+| **What you get**   | The complete OpenVidu Meet UI: chat, recording, screen share, virtual backgrounds, captions, E2EE | A working meeting screen you adapt, extend or replace piece by piece | A Room object and its tracks                                |
+| **Customization**  | Colors, per-room features, permissions                                                            | Any component: toolbar, layout, streams, panels, CSS variables       | Unlimited                                                   |
+| **Platforms**      | Web                                                                                               | Angular web apps                                                     | Browsers, iOS, Android, Flutter, React Native, Unity...     |
+| **Product**        | [OpenVidu Meet](https://openvidu.io/latest/meet/index.md)                                           | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md)          | [OpenVidu Platform](https://openvidu.io/latest/docs/index.md) |
 
 None of this changes what you pay. Both products work in OpenVidu COMMUNITY and OpenVidu PRO, and the [pricing](https://openvidu.io/pricing/index.md) depends on the deployment, not on how you integrate.
 
@@ -29,7 +29,7 @@ The scenario is the same throughout: a **support desk** where an agent starts a 
 All three levels need an OpenVidu deployment, and one is enough for the three of them. [OpenVidu Local](https://openvidu.io/latest/docs/self-hosting/local/index.md) brings up both products with Docker:
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-local-deployment -b 3.10.0
 cd openvidu-local-deployment/community
 ./configure_lan_private_ip_linux.sh   # configure_lan_private_ip_macos.sh | .bat on Windows
 docker compose up

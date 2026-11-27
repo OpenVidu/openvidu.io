@@ -34,9 +34,9 @@ token.addGrant({ roomJoin: true, room: "my-room" });
 return await token.toJwt();
 ```
 
-[Get started](https://openvidu.io/latest/docs/getting-started/index.md) [Start with a tutorial](https://openvidu.io/latest/docs/tutorials/application-server/index.md) [Build your app](https://openvidu.io/latest/docs/build-your-app/index.md)
+[Get started](https://openvidu.io/3.9/docs/getting-started/index.md) [Start with a tutorial](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) [Build your app](https://openvidu.io/3.9/docs/build-your-app/index.md)
 
-Building with an AI coding agent? Install the [OpenVidu Agent Plugin](https://openvidu.io/latest/docs/building-with-ai/agent-plugin/index.md).
+Building with an AI coding agent? Install the [OpenVidu Agent Plugin](https://openvidu.io/3.9/docs/building-with-ai/agent-plugin/index.md).
 
 ## Use cases
 
@@ -53,7 +53,7 @@ Video conferencing rooms are virtual spaces where two or more users can send vid
 
 > **Info**
 >
-> If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/latest/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
+> If your use case actually fits into the video conferencing category, [**OpenVidu Meet**](https://openvidu.io/3.9/meet/index.md) may be the perfect solution for you. Give it a try! Still not sure? [Compare Meet vs Platform](https://openvidu.io/openvidu-meet-vs-openvidu-platform/index.md).
 
 ### Live-streaming
 
@@ -131,6 +131,6 @@ OpenVidu is available in two editions:
 | **Suitability**               | For local development in your laptop                                                                                                                                  | For applications with medium user load                                                                                                                                                   | For applications with dynamic user load that require scalability                                              | For applications where both scalability and fault tolerance are critical |
 | **Features**                  | Friendly Docker Compose setup with Redis, Egress, Ingress, S3 storage and observability. With automatic certificate management to test across devices in your network | **COMMUNITY** Custom LiveKit distribution with Redis, Egress, Ingress, S3 storage and observability. **PRO** Same features but adding **2x performance** and **advanced observability**. | Same benefits as OpenVidu Single Node plus **2x performance**, **advanced observability** and **scalability** | Same benefits as OpenVidu Elastic plus **fault tolerance**               |
 | **Number of servers**         | Your laptop                                                                                                                                                           | 1 Node                                                                                                                                                                                   | 1 Master Node + N Media Nodes                                                                                 | 4 Master Nodes + N Media Nodes                                           |
-| **Installation instructions** | [Install](https://openvidu.io/latest/docs/self-hosting/local/index.md)                                                                                                   | [Install](https://openvidu.io/latest/docs/self-hosting/single-node/index.md)                                                                                                                | [Install](https://openvidu.io/latest/docs/self-hosting/elastic/index.md)                                         | [Install](https://openvidu.io/latest/docs/self-hosting/ha/index.md)         |
+| **Installation instructions** | [Install](https://openvidu.io/3.9/docs/self-hosting/local/index.md)                                                                                                   | [Install](https://openvidu.io/3.9/docs/self-hosting/single-node/index.md)                                                                                                                | [Install](https://openvidu.io/3.9/docs/self-hosting/elastic/index.md)                                         | [Install](https://openvidu.io/3.9/docs/self-hosting/ha/index.md)         |
 
-[Build your first app — tutorials in 8 languages](https://openvidu.io/latest/docs/tutorials/application-server/index.md) [Run OpenVidu locally](https://openvidu.io/latest/docs/self-hosting/local/index.md)
+[Build your first app — tutorials in 8 languages](https://openvidu.io/3.9/docs/tutorials/application-server/index.md) [Run OpenVidu locally](https://openvidu.io/3.9/docs/self-hosting/local/index.md)

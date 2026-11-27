@@ -35,7 +35,7 @@ For the Master Node, the following services are configured:
 - **MongoDB** as a database for storing analytics and monitoring data.
 - **Caddy** as an internal reverse proxy for all services.
 - **OpenVidu V2 Compatibility (v2compatibility module)** is an optional service that provides an API designed to maintain compatibility for applications developed with OpenVidu version 2.
-- **[OpenVidu Meet](https://openvidu.io/latest/meet/index.md)**, an optional high-quality video calling service.
+- **[OpenVidu Meet](https://openvidu.io/3.9/meet/index.md)**, an optional high-quality video calling service.
 - **Grafana, Mimir, Alloy, and Loki (Observability module)** form an optional observability stack for monitoring, allowing you to keep track of logs and deployment statistics for OpenVidu.
 
 For the Media Nodes, the following services are configured:
@@ -163,15 +163,15 @@ A wizard will guide you through the installation process. You will be asked for 
 
   > **Note**
   >
-  > If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](https://openvidu.io/latest/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md).
+  > If you want to manage the certificate in your own proxy server instead of relying in the Caddy server deployed with OpenVidu, take a look to this How-to guide: [How to deploy OpenVidu with an external proxy](https://openvidu.io/3.9/docs/self-hosting/how-to-guides/deploy-with-external-proxy/index.md).
 
 - **Domain name**: The domain name for your deployment. It must be an FQDN pointing to the machine where you are deploying OpenVidu.
 
-- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](https://openvidu.io/latest/docs/self-hosting/production-ready/performance/index.md).
+- **Select which RTC engine to use**: Select the WebRTC engine you want to use. **Mediasoup (with a boost in performance)** is the default option, and you can also choose **Pion (the engine of LiveKit Open Source)**. Learn more about the differences [here](https://openvidu.io/3.9/docs/self-hosting/production-ready/performance/index.md).
 
 - **Modules to enable**: Select the modules you want to enable. You can enable the following modules:
 
-  - [*OpenVidu Meet*](https://openvidu.io/latest/meet/index.md): A high-quality video calling service based on OpenVidu.
+  - [*OpenVidu Meet*](https://openvidu.io/3.9/meet/index.md): A high-quality video calling service based on OpenVidu.
   - *Observability*: Grafana stack, which includes logs and monitoring stats.
   - *OpenVidu V2 Compatibility*: Compatibility API for applications developed with OpenVidu v2.
 
@@ -456,4 +456,4 @@ systemctl start openvidu
 
 ## Configuration and administration
 
-Once you have OpenVidu deployed, you can check the [Administration](https://openvidu.io/latest/docs/self-hosting/ha/on-premises/admin/index.md) section to learn how to manage your OpenVidu High Availability deployment.
+Once you have OpenVidu deployed, you can check the [Administration](https://openvidu.io/3.9/docs/self-hosting/ha/on-premises/admin/index.md) section to learn how to manage your OpenVidu High Availability deployment.

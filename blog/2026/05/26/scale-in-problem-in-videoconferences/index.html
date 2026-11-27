@@ -89,6 +89,10 @@
 
 
 
+
+
+
+
     
       
     
@@ -121,15 +125,10 @@
 
 
 
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.84d667f7.css">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.a6c283b5.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -323,9 +322,9 @@
     <a href="../../../../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        
-  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
-
+      
+        <img src="../../../../../assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png" alt="OpenVidu" class="ov-logo--light">
+        <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="OpenVidu" class="ov-logo--dark">
       
     </a>
 
@@ -415,9 +414,9 @@
             openvidu/openvidu
             
               <ul class="md-source__facts">
-                <li class="md-source__fact md-source__fact--version">v3.9.0</li>
-                <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">482</li>
+                <li class="md-source__fact md-source__fact--version">v3.10.0</li>
+                <li class="md-source__fact md-source__fact--stars">2.2k</li>
+                <li class="md-source__fact md-source__fact--forks">483</li>
               </ul>
             
           </div>
@@ -1701,7 +1700,8 @@
 
 <h1 id="scaling-up-is-easy-the-challenge-is-scaling-down-the-scale-in-problem-in-videoconferences">Scaling Up is easy, the challenge is Scaling Down: The Scale-In problem in videoconferences.<a class="headerlink" href="#scaling-up-is-easy-the-challenge-is-scaling-down-the-scale-in-problem-in-videoconferences" title="Anchor link to this section for reference">#</a></h1>
 <p>Autoscaling is one of the killer features of cloud infrastructure. It promises zero-waste elasticity: when demand rises, you spin up more nodes; when demand drops, you shut them down and stop paying for them. For most cloud workloads, this works beautifully. But for real-time media platforms — videoconferencing systems built on top of media servers — the "shut them down" part is far more dangerous than it first appears.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale In" class="round-corners dark-img" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="Scale In" class="round-corners" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down-light.svg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="Scale In" class="round-corners" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-down-dark.svg#only-dark"></a></p>
 <p>This post dives into the <strong>scale-in problem</strong>: why you can't simply terminate a media server node that has active meetings running inside it, how the broader cloud industry has addressed it, and how OpenVidu implements a robust solution across AWS, Azure, GCP and Digital Ocean.</p>
 <!-- more -->
 
@@ -1709,7 +1709,8 @@
 <p>Scaling <em>out</em> is easy. Your CPU climbs past the alarm threshold, your autoscaling policy fires, a new VM boots, and within a couple of minutes it joins the pool and starts sharing the load. The system designer gets to feel clever.</p>
 <p>Scaling <em>in</em> is where the illusion shatters. Your CPU drops, the policy fires in reverse, and the cloud provider picks a node to terminate. If that node is running a web server, this is fine — kill it, redirect traffic, done. If that node is hosting eight simultaneous videoconferences, you have just murdered forty people's calls mid-sentence.</p>
 <p>The asymmetry runs deeper than just "be careful". Scale-out is a purely additive operation: you are adding capacity to a cluster that continues to work normally. Scale-in is a destructive operation performed against a live system. Getting it wrong doesn't generate a 5xx error you can retry — it breaks a human experience that cannot be rewound.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale Out" class="round-corners dark-img" loading="lazy" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="Scale Out" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up-light.svg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="Scale Out" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/scale-up-dark.svg#only-dark"></a></p>
 <h2 id="the-stateful-trap-why-media-servers-arent-web-servers">The "Stateful" Trap: Why Media Servers Aren't Web Servers<a class="headerlink" href="#the-stateful-trap-why-media-servers-arent-web-servers" title="Anchor link to this section for reference">#</a></h2>
 <p>The reason scale-in is so dangerous for videoconferencing comes down to one word: <strong>state</strong>. This isn't a new insight — anyone who has operated distributed systems knows that stateful workloads are harder to move and terminate than stateless ones. But the nature of state in WebRTC makes it a particularly unforgiving case.</p>
 <p>With a typical web application, session state can be externalized: store it in Redis, a shared database, or a distributed cache, and any node in your fleet can pick up where another left off. The state isn't <em>inside</em> the server — it's alongside it. A web server (or an API gateway, a GraphQL endpoint, a static file server) is fundamentally stateless. Each request arrives, is processed independently, and the response is sent back. If the server handling your HTTP request disappears mid-flight, the client simply retries on another server and nothing is lost. The server holds no lasting obligation to any client.</p>
@@ -1727,7 +1728,8 @@
 <li><strong>Terminate the node once it is empty.</strong> When the last Room ends and the last job completes, the node has zero active load and can be safely shut down.</li>
 </ol>
 <p>The challenge is integrating this logic with the autoscaling mechanisms of each cloud provider, all of which have their own opinions about how termination should work.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Scale In" class="round-corners dark-img" loading="lazy" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="Scale In" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy-light.svg#only-light"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="Scale In" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/05/scale-in-problem-in-videoconferences/draining-strategy-dark.svg#only-dark"></a></p>
 <h2 id="bringing-scale-in-to-the-major-clouds">Bringing Scale-In to the Major Clouds<a class="headerlink" href="#bringing-scale-in-to-the-major-clouds" title="Anchor link to this section for reference">#</a></h2>
 <p>OpenVidu implements the draining strategy on every cloud it supports. The approach differs per provider because each exposes different primitives for intercepting a termination decision.</p>
 <h3 id="1-aws-intercepting-scale-in-with-lifecycle-hooks">1. AWS: Intercepting Scale-In with Lifecycle Hooks<a class="headerlink" href="#1-aws-intercepting-scale-in-with-lifecycle-hooks" title="Anchor link to this section for reference">#</a></h3>
@@ -2091,6 +2093,8 @@
 
 
 <script src="../../../../../javascripts/glightbox-gallery.js"></script>
+
+
 
 
 

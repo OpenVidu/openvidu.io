@@ -89,6 +89,10 @@
 
 
 
+
+
+
+
     
       
     
@@ -121,15 +125,10 @@
 
 
 
-<link rel="preload" href="../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.84d667f7.css">
+<link rel="preload" href="../assets/external/fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../assets/external/fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../assets/external/fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css2.a6c283b5.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -183,6 +182,12 @@
       "inLanguage": "en",
       "publisher": { "@id": "https://openvidu.io/#organization" },
       "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "OpenVidu 3.10.0 release notes",
+          "url": "https://openvidu.io/blog/2026/11/27/release-3100/",
+          "datePublished": "2026-11-27"
+        },
         {
           "@type": "BlogPosting",
           "headline": "How to choose a video codec for video conferencing",
@@ -489,9 +494,9 @@
     <a href=".." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        
-  <img src="../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
-
+      
+        <img src="../assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png" alt="OpenVidu" class="ov-logo--light">
+        <img src="../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="OpenVidu" class="ov-logo--dark">
       
     </a>
 
@@ -581,9 +586,9 @@
             openvidu/openvidu
             
               <ul class="md-source__facts">
-                <li class="md-source__fact md-source__fact--version">v3.9.0</li>
-                <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">482</li>
+                <li class="md-source__fact md-source__fact--version">v3.10.0</li>
+                <li class="md-source__fact md-source__fact--stars">2.2k</li>
+                <li class="md-source__fact md-source__fact--forks">483</li>
               </ul>
             
           </div>
@@ -1651,6 +1656,58 @@
       <nav class="md-post__authors md-typeset">
         
           <span class="md-author">
+            <img src="https://openvidu.io/assets/images/about-us/authorPF.jpg" alt="Pablo Fuente">
+          </span>
+        
+      </nav>
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2026-11-27 00:00:00+00:00">November 27, 2026</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="category/release/" class="md-meta__link">Release</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              11 min read
+            
+          </li>
+        
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="openvidu-3100-is-now-available"><a class="toclink" href="2026/11/27/release-3100/">OpenVidu 3.10.0 is now available</a></h2>
+<p>OpenVidu 3.10.0 brings new exciting features to both <strong>OpenVidu Meet</strong> and <strong>OpenVidu Platform</strong>. It extends OpenVidu Meet with live broadcasting and new controls over who joins a meeting and how participants interact, and it improves the monitoring and recording capabilities of OpenVidu Platform. It also includes security fixes and stability improvements for production deployments.</p>
+<p>On the <strong>OpenVidu Meet</strong> side, meetings become events. Stream any meeting live to any RTMP server, lock a room so that participants wait until a host lets them in, and let everyone raise their hand or react with an emoji. Embedded applications get commands and events for all of it, and a broad round of security fixes makes every meeting safer.</p>
+<p>On the <strong>OpenVidu Platform</strong> side, a completely redesigned OpenVidu Dashboard shows what happens in every Room, and the new Participant Passthrough Egress records every participant without transcoding, at a fraction of the CPU cost. On top of that, mediasoup is tougher in production, deployments heal themselves after a crash, and AI agents need far fewer resources.</p>
+<p>Here are the highlights.</p>
+
+    
+      <nav class="md-post__action">
+        <a href="2026/11/27/release-3100/">
+          Continue reading
+        </a>
+      </nav>
+    
+    
+  </div>
+</article>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+      <nav class="md-post__authors md-typeset">
+        
+          <span class="md-author">
             <img src="https://openvidu.io/assets/images/about-us/authorCS.jpg" alt="Carlos Santos">
           </span>
         
@@ -2120,59 +2177,6 @@
   </div>
 </article>
       
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://openvidu.io/assets/images/about-us/authorFG.jpg" alt="Francisco Gortázar">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-09-15 00:00:00+00:00">September 15, 2026</time></li>
-        
-          <li class="md-meta__item">
-            in
-            
-              <a href="category/success-story/" class="md-meta__link">Success story</a>, 
-              <a href="category/vertical/" class="md-meta__link">Vertical</a></li>
-        
-        
-          
-          <li class="md-meta__item">
-            
-              9 min read
-            
-          </li>
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="how-novakid-runs-30-million-live-english-lessons-on-openvidu"><a class="toclink" href="2026/09/15/novakid-live-english-lessons/">How Novakid runs 30 million live English lessons on OpenVidu</a></h2>
-<p><img alt="Novakid and OpenVidu customer success story" class="round-corners" src="/assets/images/blog/2026/09/novakid-live-english-lessons/poster-light.webp#only-light" title="Novakid + OpenVidu">
-<img alt="Novakid and OpenVidu customer success story" class="round-corners" src="/assets/images/blog/2026/09/novakid-live-english-lessons/poster-dark.webp#only-dark" title="Novakid + OpenVidu"></p>
-<p>Running a live video product where the users are seven years old is a challenge. Adults may tolerate a frozen frame or a reconnect spinner, but a seven-year-old just gives up, and the parent doesn't book a second lesson. That's what <a href="https://www.novakidschool.com/" target="_blank" rel="noopener">Novakid <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>, an online English school for kids aged 4–12, has been doing since 2017. Over a million students, 50+ countries, more than 30 million lessons delivered, and up to 2,300 lessons running at once at peak.</p>
-<p>We talked to <strong>Andrei Iakimov</strong>, DevOps Lead at Novakid, Inc., about moving their live classroom off a self-managed Kurento deployment and onto OpenVidu: why they migrated, why they didn't take the SaaS path, what that migration actually looked like, how they built scheduled autoscaling on top of it, what broke (and got fixed) along the way, and what they value most of.</p>
-
-    
-      <nav class="md-post__action">
-        <a href="2026/09/15/novakid-live-english-lessons/">
-          Continue reading
-        </a>
-      </nav>
-    
-    
-  </div>
-</article>
-      
       
         
           
@@ -2434,6 +2438,8 @@
 
 
 <script src="../javascripts/glightbox-gallery.js"></script>
+
+
 
 
 

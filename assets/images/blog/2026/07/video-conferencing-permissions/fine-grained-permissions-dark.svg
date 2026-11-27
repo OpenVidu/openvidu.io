@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 640" width="920" height="640" role="img" aria-label="Start from a role, tune it per person: 14 OpenVidu Meet permissions in media, communication, meeting management and recording, with Moderator and Speaker toggles; a Speaker allowed to record and a Moderator who cannot delete recordings are customized from the role defaults">
+<title>Start from a role, tune it per person: 14 OpenVidu Meet permissions in media, communication, meeting management and recording, with Moderator and Speaker toggles; a Speaker allowed to record and a Moderator who cannot delete recordings are customized from the role defaults</title>
+<text x="30" y="36" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#00c8f7" text-anchor="start" letter-spacing="2.5">FINE-GRAINED PERMISSIONS</text>
+<text x="30" y="72" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="30" font-weight="800" fill="#eef2f3" text-anchor="start">Start from a role, tune it per person</text>
+<text x="30" y="100" font-family="Instrument Sans, system-ui, sans-serif" font-size="14.5" font-weight="500" fill="#a3b1b6" text-anchor="start">14 permissions across four areas — flip any of them for any member.</text>
+<g transform="translate(750 18) scale(0.8)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<text x="786" y="38" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#eef2f3" text-anchor="start">OpenVidu</text>
+<text x="858" y="38" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#06d362" text-anchor="start">Meet</text>
+<rect x="20" y="124" width="880" height="432" rx="24" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<path d="M460 150 V530" fill="none" stroke="#2a3539" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="318" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a3b1b6" text-anchor="middle" letter-spacing="1.5">MOD</text>
+<text x="398" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a3b1b6" text-anchor="middle" letter-spacing="1.5">SPK</text>
+<path d="M44 174 H432" fill="none" stroke="#2a3539" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="46" y="192" width="3.5" height="15" rx="1.8" fill="#00c8f7" />
+<text x="58" y="204" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#00c8f7" text-anchor="start" letter-spacing="2">MEDIA</text>
+<text x="58" y="242" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canPublishVideo</text>
+<rect x="299" y="228" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="327" cy="238" r="7" fill="#ffffff" />
+<rect x="379" y="228" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="407" cy="238" r="7" fill="#ffffff" />
+<text x="58" y="276" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canPublishAudio</text>
+<rect x="299" y="262" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="327" cy="272" r="7" fill="#ffffff" />
+<rect x="379" y="262" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="407" cy="272" r="7" fill="#ffffff" />
+<text x="58" y="310" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canShareScreen</text>
+<rect x="299" y="296" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="327" cy="306" r="7" fill="#ffffff" />
+<rect x="379" y="296" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="407" cy="306" r="7" fill="#ffffff" />
+<rect x="46" y="338" width="3.5" height="15" rx="1.8" fill="#06d362" />
+<text x="58" y="350" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#06d362" text-anchor="start" letter-spacing="2">COMMUNICATION</text>
+<text x="58" y="388" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canReadChat</text>
+<rect x="299" y="374" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="327" cy="384" r="7" fill="#ffffff" />
+<rect x="379" y="374" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="407" cy="384" r="7" fill="#ffffff" />
+<text x="58" y="422" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canWriteChat</text>
+<rect x="299" y="408" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="327" cy="418" r="7" fill="#ffffff" />
+<rect x="379" y="408" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="407" cy="418" r="7" fill="#ffffff" />
+<text x="58" y="456" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canChangeVirtualBackground</text>
+<rect x="299" y="442" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="327" cy="452" r="7" fill="#ffffff" />
+<rect x="379" y="442" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="407" cy="452" r="7" fill="#ffffff" />
+<text x="758" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a3b1b6" text-anchor="middle" letter-spacing="1.5">MOD</text>
+<text x="838" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a3b1b6" text-anchor="middle" letter-spacing="1.5">SPK</text>
+<path d="M484 174 H872" fill="none" stroke="#2a3539" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="486" y="192" width="3.5" height="15" rx="1.8" fill="#a3b1b6" />
+<text x="498" y="204" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#a3b1b6" text-anchor="start" letter-spacing="2">MEETING MANAGEMENT</text>
+<text x="498" y="242" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canJoinMeeting</text>
+<rect x="739" y="228" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="238" r="7" fill="#ffffff" />
+<rect x="819" y="228" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="847" cy="238" r="7" fill="#ffffff" />
+<text x="498" y="276" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canEndMeeting</text>
+<rect x="739" y="262" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="272" r="7" fill="#ffffff" />
+<rect x="819" y="262" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="829" cy="272" r="7" fill="#6f7f85" />
+<text x="498" y="310" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canKickParticipants</text>
+<rect x="739" y="296" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="306" r="7" fill="#ffffff" />
+<rect x="819" y="296" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="829" cy="306" r="7" fill="#6f7f85" />
+<text x="498" y="344" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canMakeModerator</text>
+<rect x="739" y="330" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="340" r="7" fill="#ffffff" />
+<rect x="819" y="330" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="829" cy="340" r="7" fill="#6f7f85" />
+<text x="498" y="378" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canShareAccessLinks</text>
+<rect x="739" y="364" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="374" r="7" fill="#ffffff" />
+<rect x="819" y="364" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="829" cy="374" r="7" fill="#6f7f85" />
+<rect x="486" y="406" width="3.5" height="15" rx="1.8" fill="#00c8f7" />
+<text x="498" y="418" font-family="Instrument Sans, system-ui, sans-serif" font-size="12" font-weight="700" fill="#00c8f7" text-anchor="start" letter-spacing="2">RECORDING</text>
+<text x="498" y="456" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canRecord</text>
+<rect x="739" y="442" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="452" r="7" fill="#ffffff" />
+<rect x="813" y="437" width="50" height="30" rx="15" fill="none" stroke="#ffcc00" stroke-width="2.4" />
+<rect x="819" y="442" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="847" cy="452" r="7" fill="#ffffff" />
+<circle cx="861" cy="438" r="8" fill="#ffcc00" /><path d="M857.5 441.5 l6 -6" stroke="#1f1800" stroke-width="2.2" stroke-linecap="round"/>
+<text x="498" y="490" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canRetrieveRecordings</text>
+<rect x="739" y="476" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="767" cy="486" r="7" fill="#ffffff" />
+<rect x="819" y="476" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="847" cy="486" r="7" fill="#ffffff" />
+<text x="498" y="524" font-family="JetBrains Mono, ui-monospace, monospace" font-size="13.5" font-weight="500" fill="#eef2f3" text-anchor="start">canDeleteRecordings</text>
+<rect x="733" y="505" width="50" height="30" rx="15" fill="none" stroke="#ffcc00" stroke-width="2.4" />
+<rect x="739" y="510" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="749" cy="520" r="7" fill="#6f7f85" />
+<circle cx="781" cy="506" r="8" fill="#ffcc00" /><path d="M777.5 509.5 l6 -6" stroke="#1f1800" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="819" y="510" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="829" cy="520" r="7" fill="#6f7f85" />
+<rect x="31" y="580" width="38" height="20" rx="10" fill="#06d362" />
+<circle cx="59" cy="590" r="7" fill="#ffffff" />
+<text x="78" y="595" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#eef2f3" text-anchor="start">allowed</text>
+<rect x="156" y="580" width="38" height="20" rx="10" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<circle cx="166" cy="590" r="7" fill="#6f7f85" />
+<text x="203" y="595" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#eef2f3" text-anchor="start">denied</text>
+<circle cx="310" cy="590" r="9" fill="#ffcc00" /><path d="M306.5 593.5 l6 -6" stroke="#1f1800" stroke-width="2.2" stroke-linecap="round"/>
+<text x="326" y="595" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#eef2f3" text-anchor="start">customized from the role default</text>
+<text x="30" y="624" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#a3b1b6" text-anchor="start">e.g. a Speaker allowed to record, a Moderator who cannot delete recordings</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 676" width="920" height="676" role="img" aria-label="The vicious cycle: media-node-1 fills its recording disk, cannot start any recording, reports 0 active egress and looks free (score about 1.0), so the cpuload scheduler picks it and routes every recording there, where it fails again; media-node-2 and media-node-3 stay healthy and never picked">
+<title>The vicious cycle: media-node-1 fills its recording disk, cannot start any recording, reports 0 active egress and looks free (score about 1.0), so the cpuload scheduler picks it and routes every recording there, where it fails again; media-node-2 and media-node-3 stay healthy and never picked</title>
+<text x="30" y="42" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="21" font-weight="800" fill="#101618" text-anchor="start">The vicious cycle: the node that can&#x27;t record keeps winning every recording</text>
+<text x="30" y="68" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="start">Default egress placement is &quot;cpuload&quot;: the node advertising the most free CPU wins.</text>
+<text x="30" y="87" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4a5a60" text-anchor="start">A full disk turns that into a feedback loop.</text>
+<rect x="20" y="112" width="300" height="64" rx="16" fill="#ffffff" stroke="#d93025" stroke-width="1.5" />
+<text x="40" y="138" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#d93025" text-anchor="start">Trigger</text>
+<text x="40" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">media-node-1 fills its recording disk</text>
+<rect x="600" y="112" width="300" height="64" rx="16" fill="#ffffff" stroke="#007a3d" stroke-width="1.5" />
+<text x="620" y="138" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="15" font-weight="700" fill="#007a3d" text-anchor="start">media-node-2 / media-node-3</text>
+<text x="620" y="160" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">healthy, available, and never picked</text>
+<rect x="310" y="200" width="300" height="104" rx="18" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="340" cy="231" r="13" fill="#ffcc00" />
+<text x="340" y="236" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">1</text>
+<text x="362" y="237" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#101618" text-anchor="start">Can&#x27;t start any recording</text>
+<text x="330" y="266" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">the egress pipeline dies the moment it</text>
+<text x="330" y="285" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">writes to the full disk (ENOSPC)</text>
+<rect x="600" y="352" width="300" height="104" rx="18" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="630" cy="383" r="13" fill="#ffcc00" />
+<text x="630" y="388" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">2</text>
+<text x="652" y="389" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#101618" text-anchor="start">0 active egress → looks free</text>
+<text x="620" y="418" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">with nothing running, it reports</text>
+<text x="620" y="437" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">maximum available CPU (score ≈ 1.0)</text>
+<rect x="310" y="504" width="300" height="104" rx="18" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="340" cy="535" r="13" fill="#ffcc00" />
+<text x="340" y="540" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">3</text>
+<text x="362" y="541" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#101618" text-anchor="start">The scheduler picks it</text>
+<text x="330" y="570" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">&quot;cpuload&quot; sees the highest score and</text>
+<text x="330" y="589" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">calls it the least loaded node</text>
+<rect x="20" y="352" width="300" height="104" rx="18" fill="#ffffff" stroke="#d9e0e3" stroke-width="1.5" />
+<circle cx="50" cy="383" r="13" fill="#ffcc00" />
+<text x="50" y="388" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="800" fill="#1f1800" text-anchor="middle">4</text>
+<text x="72" y="389" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="16" font-weight="700" fill="#101618" text-anchor="start">Every recording routed here</text>
+<text x="40" y="418" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">the new egress lands on the one node</text>
+<text x="40" y="437" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4a5a60" text-anchor="start">that fails it → back to 0 active</text>
+<circle cx="460" cy="404" r="82" fill="#101618" stroke="#d93025" stroke-width="2.6" />
+<text x="460" y="384" font-family="Bricolage Grotesque, Instrument Sans, system-ui, sans-serif" font-size="17" font-weight="700" fill="#eef2f3" text-anchor="middle">media-node-1</text>
+<text x="460" y="408" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#c9d3d6" text-anchor="middle">looks the idlest,</text>
+<text x="460" y="426" font-family="Instrument Sans, system-ui, sans-serif" font-size="13" font-weight="500" fill="#c9d3d6" text-anchor="middle">records nothing</text>
+<text x="460" y="452" font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="700" fill="#ff6b5e" text-anchor="middle">(black hole)</text>
+<path d="M320 150 Q 390 150 390 192" fill="none" stroke="#d93025" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M390 200 L384.4 190.4 L395.6 190.4 Z" fill="#d93025" />
+<path d="M612 252 Q 750 252 750 344" fill="none" stroke="#d93025" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M750 352 L744.4 342.4 L755.6 342.4 Z" fill="#d93025" />
+<path d="M750 458 Q 750 556 620 556" fill="none" stroke="#d93025" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M612 556 L621.6 550.4 L621.6 561.6 Z" fill="#d93025" />
+<path d="M308 556 Q 170 556 170 466" fill="none" stroke="#d93025" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M170 458 L164.4 467.6 L175.6 467.6 Z" fill="#d93025" />
+<path d="M170 350 Q 170 252 300 252" fill="none" stroke="#d93025" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M308 252 L298.4 246.4 L298.4 257.6 Z" fill="#d93025" />
+<text x="30" y="650" font-family="Instrument Sans, system-ui, sans-serif" font-size="13.5" font-weight="500" fill="#4a5a60" text-anchor="start">The loop never breaks on its own: because failing keeps the node empty, it always looks like the best choice.</text>
+</svg>

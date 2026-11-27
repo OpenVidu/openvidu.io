@@ -89,6 +89,10 @@
 
 
 
+
+
+
+
     
       
     
@@ -121,15 +125,10 @@
 
 
 
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.84d667f7.css">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../../../assets/external/fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../../../../../assets/external/fonts.googleapis.com/css2.a6c283b5.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -323,9 +322,9 @@
     <a href="../../../../.." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        
-  <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
-
+      
+        <img src="../../../../../assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png" alt="OpenVidu" class="ov-logo--light">
+        <img src="../../../../../assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="OpenVidu" class="ov-logo--dark">
       
     </a>
 
@@ -415,9 +414,9 @@
             openvidu/openvidu
             
               <ul class="md-source__facts">
-                <li class="md-source__fact md-source__fact--version">v3.9.0</li>
-                <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">482</li>
+                <li class="md-source__fact md-source__fact--version">v3.10.0</li>
+                <li class="md-source__fact md-source__fact--stars">2.2k</li>
+                <li class="md-source__fact md-source__fact--forks">483</li>
               </ul>
             
           </div>
@@ -1595,7 +1594,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"></path></svg>
                           <span class="md-ellipsis">
                             
-                              8 min read
+                              9 min read
                             
                           </span>
                         </div>
@@ -1630,8 +1629,8 @@
 <h2 id="why-turn-matters-so-much">Why TURN Matters So Much<a class="headerlink" href="#why-turn-matters-so-much" title="Anchor link to this section for reference">#</a></h2>
 <p>To understand why TURN is important, a little context is necessary: WebRTC enables media transmission between two endpoints. These endpoints can be two users communicating directly (P2P), or a user connecting to a media server, which is the norm on platforms like OpenVidu, Google Meet, or Zoom, where the server receives video from each participant and redistributes it to the rest. In either case, most of these endpoints sit behind a router with NAT that hides their real IP, and that's where STUN and TURN come in. STUN allows an endpoint to discover its public IP address as seen from the outside, so the two endpoints can find each other and attempt a direct connection. TURN is the plan B when that direct connection isn't possible: an intermediate server that receives traffic from one endpoint and relays it to the other, acting as a bridge when NAT or firewall block the direct path. In reality, there are quite a few more nuances (ICE, which is the framework that orchestrates connection attempts; candidate types, SDP negotiation…), but this is enough to understand the rest of the post.</p>
 <p>How many people end up needing that plan B? More than you'd think. <a href="https://medium.com/@fippo/what-kind-of-turn-server-is-being-used-d67dbfc2ff5d" target="_blank" rel="noopener">A small study by Philipp Hancke <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> shows that up to 17.7% of sessions go through a TURN relay. And that data is from 2017: with the rise of CGNAT (large-scale NAT used by mobile carriers to share a single public IP among thousands of users) in mobile networks and increasingly restrictive corporate firewalls, it's reasonable to think that today, in 2026, the figure is even higher.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="WebRTC traffic distribution" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn-usage-light.png#only-light" title="WebRTC traffic distribution" width="70%"></a>
-<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="WebRTC traffic distribution" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn-usage-dark.png#only-dark" title="WebRTC traffic distribution" width="70%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="WebRTC traffic distribution" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn-usage-light.svg#only-light" title="WebRTC traffic distribution" width="70%"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="WebRTC traffic distribution" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn-usage-dark.svg#only-dark" title="WebRTC traffic distribution" width="70%"></a></p>
 <p>The TURN layer is one of those silent but essential pieces of WebRTC: it wrestles daily with firewall policies, is powerful enough to become an attack vector if misconfigured, and drags along so many operational decisions that it ends up being an infrastructure project with its own operations team. This post covers why TURN is inevitable, why operating it well costs more than it seems, and how OpenVidu turns it into part of the platform instead of that classic server no one touches and everyone says "That service is not my problem, mate!"</p>
 <h2 id="running-turn-is-easy-running-turn-right-is-not">Running TURN Is Easy. Running TURN Right Is Not.<a class="headerlink" href="#running-turn-is-easy-running-turn-right-is-not" title="Anchor link to this section for reference">#</a></h2>
 <p>Let's talk about how to deploy a simple TURN server, and then we'll see all the things that can go wrong with it.</p>
@@ -1702,7 +1701,8 @@
 <li><strong>Restricting the relay port range.</strong> In cases where OpenVidu is deployed in a NAT environment, the relay only forwards traffic to destination ports within the configured media port range, rather than the entire ephemeral space. This limits the attack vector to a specific port range, not all possible ports.</li>
 <li><strong>Credentials are short-lived</strong> (see the TTL above) and generated using SHA-256 over a server-side secret, making them unpredictable and difficult to guess.</li>
 </ol>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="OpenVidu TURN architecture" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn_openvidu.png" title="OpenVidu TURN architecture" width="80%"></a></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="light"><img alt="OpenVidu TURN architecture" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn_openvidu-light.svg#only-light" title="OpenVidu TURN architecture" width="80%"></a>
+<a class="glightbox" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom" data-gallery="dark"><img alt="OpenVidu TURN architecture" class="round-corners" loading="lazy" src="../../../../../assets/images/blog/2026/06/turn-key-considerations/turn_openvidu-dark.svg#only-dark" title="OpenVidu TURN architecture" width="80%"></a></p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Anchor link to this section for reference">#</a></h2>
 <p>TURN seems simple on paper and is complex in practice. The protocol is built with the express purpose of forwarding arbitrary packets to arbitrary destinations; scaling and operations are a problem, and achieving a good security level without breaking usability is complicated.</p>
 <p>The right abstraction, and the one OpenVidu uses, is to treat TURN not as a complementary service but as <strong>another part of each node that handles media</strong>: co-located, auto-scaled, hardened by default, and driven by ephemeral credentials. <a href="/latest/docs/self-hosting/deployment-types/">OpenVidu's deployment topology</a> implements exactly that abstraction across Single Node, Elastic, and HA modes. With <a href="/latest/docs/self-hosting/deployment-types/">OpenVidu Platform</a> and <a href="/latest/meet/deployment/overview/">OpenVidu Meet</a> you're already solving:</p>
@@ -1982,6 +1982,8 @@
 
 
 <script src="../../../../../javascripts/glightbox-gallery.js"></script>
+
+
 
 
 

@@ -71,29 +71,29 @@ sudo systemctl stop openvidu
 sudo systemctl restart openvidu
 ```
 
-OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refer to the [OpenVidu Platform Single Node administration guide](https://openvidu.io/3.10/docs/self-hosting/single-node/on-premises/admin/index.md) for more advanced management tasks, including:
+OpenVidu Meet is under the hood an OpenVidu Platform deployment, so you can refer to the [OpenVidu Platform Single Node administration guide](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/index.md) for more advanced management tasks, including:
 
-- [Check the status of services](https://openvidu.io/3.10/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services)
-- [Check logs](https://openvidu.io/3.10/docs/self-hosting/single-node/on-premises/admin/#checking-logs)
-- [Upgrade OpenVidu Meet to a newer version](https://openvidu.io/3.10/docs/self-hosting/single-node/upgrade/index.md)
-- [Uninstall OpenVidu Meet](https://openvidu.io/3.10/docs/self-hosting/single-node/on-premises/admin/#uninstalling-openvidu)
+- [Check the status of services](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-the-status-of-services)
+- [Check logs](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#checking-logs)
+- [Upgrade OpenVidu Meet to a newer version](https://openvidu.io/latest/docs/self-hosting/single-node/upgrade/index.md)
+- [Uninstall OpenVidu Meet](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/admin/#uninstalling-openvidu)
 
 ## Troubleshooting
 
-**A meeting shows the connection error screen while a participant waits to be let in**, and the browser console shows an error naming a WebSocket URL. A proxy or network between the browser and OpenVidu Meet blocks WebSocket upgrades. The proxy and load balancers that OpenVidu deploys already let them through, so look at a proxy or load balancer of your own, or at the participant's network: it must pass the `Upgrade` and `Connection` headers on the Meet path (`/meet` by default) and keep idle connections open for more than 20 seconds, as the [networking requirements](#networking) say. In a multi-node deployment, see also [Proxies, load balancers and Redis](https://openvidu.io/3.10/meet/deployment/advanced/#proxies-load-balancers-and-redis).
+**A meeting shows the connection error screen while a participant waits to be let in**, and the browser console shows an error naming a WebSocket URL. A proxy or network between the browser and OpenVidu Meet blocks WebSocket upgrades. The proxy and load balancers that OpenVidu deploys already let them through, so look at a proxy or load balancer of your own, or at the participant's network: it must pass the `Upgrade` and `Connection` headers on the Meet path (`/meet` by default) and keep idle connections open for more than 20 seconds, as the [networking requirements](#networking) say. In a multi-node deployment, see also [Proxies, load balancers and Redis](https://openvidu.io/latest/meet/deployment/advanced/#proxies-load-balancers-and-redis).
 
 ## Other deployment options
 
 This guide has covered the manual installation of OpenVidu Meet as a single-node deployment in a Linux server. Under the hood OpenVidu Meet is an OpenVidu Platform deployment, so there are further deployment options available:
 
-- **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](https://openvidu.io/3.10/docs/self-hosting/single-node/on-premises/install/#non-interactive-installation) guide for OpenVidu Platform.
+- **Non-interactive installation**: you can run the installation wizard in a non-interactive way, providing all the required parameters in a single command. Check the [Non-interactive installation](https://openvidu.io/latest/docs/self-hosting/single-node/on-premises/install/#non-interactive-installation) guide for OpenVidu Platform.
 
 - If you prefer a cloud deployment, choose your provider and follow the corresponding guide:
 
-  - **AWS**: CloudFormation-based deployment using native AWS resources. [AWS deployment](https://openvidu.io/3.10/docs/self-hosting/single-node/aws/install/index.md)
-  - **Azure**: ARM-based deployment using native Azure resources. [Azure deployment](https://openvidu.io/3.10/docs/self-hosting/single-node/azure/install/index.md)
-  - **GCP**: Terraform-based deployment using native GCP resources. [GCP deployment](https://openvidu.io/3.10/docs/self-hosting/single-node/gcp/install/index.md)
-  - **DigitalOcean**: Terraform-based deployment using native DigitalOcean resources. [DigitalOcean deployment](https://openvidu.io/3.10/docs/self-hosting/single-node/digitalocean/install/index.md)
-  - **OCI**: Terraform-based deployment using native Oracle Cloud Infrastructure resources. [OCI deployment](https://openvidu.io/3.10/docs/self-hosting/single-node/oracle/install/index.md)
+  - **AWS**: CloudFormation-based deployment using native AWS resources. [AWS deployment](https://openvidu.io/latest/docs/self-hosting/single-node/aws/install/index.md)
+  - **Azure**: ARM-based deployment using native Azure resources. [Azure deployment](https://openvidu.io/latest/docs/self-hosting/single-node/azure/install/index.md)
+  - **GCP**: Terraform-based deployment using native GCP resources. [GCP deployment](https://openvidu.io/latest/docs/self-hosting/single-node/gcp/install/index.md)
+  - **DigitalOcean**: Terraform-based deployment using native DigitalOcean resources. [DigitalOcean deployment](https://openvidu.io/latest/docs/self-hosting/single-node/digitalocean/install/index.md)
+  - **OCI**: Terraform-based deployment using native Oracle Cloud Infrastructure resources. [OCI deployment](https://openvidu.io/latest/docs/self-hosting/single-node/oracle/install/index.md)
 
-- **Deploy OpenVidu Meet in a multi-node architecture**: there are multi-node deployment options available to make your OpenVidu Meet installation scalable and fault-tolerant. Check out the [Advanced deployments](https://openvidu.io/3.10/meet/deployment/advanced/index.md) section for more information.
+- **Deploy OpenVidu Meet in a multi-node architecture**: there are multi-node deployment options available to make your OpenVidu Meet installation scalable and fault-tolerant. Check out the [Advanced deployments](https://openvidu.io/latest/meet/deployment/advanced/index.md) section for more information.

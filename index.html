@@ -72,7 +72,13 @@
 
 
 
+<link rel="stylesheet" href="stylesheets/landing.css">
+
+
+
 <link rel="stylesheet" href="stylesheets/home.css">
+
+
 
 
 
@@ -152,15 +158,10 @@
 
 
 
-<link rel="preload" href="assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR15WXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLmrETNbFtZCeGqgRXSe2A.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR0hWHXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR1pXnXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="assets/external/fonts.gstatic.com/s/tomorrow/v19/WBLhrETNbFtZCeGqgR11XXXPDMU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-
-<link rel="preload" href="/assets/fonts/Arciform.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="assets/external/fonts.googleapis.com/css2.84d667f7.css">
+<link rel="preload" href="assets/external/fonts.gstatic.com/s/lexend/v26/wlpwgwvFAVdoq2_v-6QU.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="assets/external/fonts.gstatic.com/s/instrumentsans/v4/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="assets/external/fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/external/fonts.googleapis.com/css2.a6c283b5.css">
 
 
 <meta property="og:site_name" content="OpenVidu">
@@ -374,9 +375,9 @@
     <a href="." title="OpenVidu" class="md-header__button md-logo" aria-label="OpenVidu" data-md-component="logo">
       
       
-        
-  <img src="assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="logo">
-
+      
+        <img src="assets/images/logos/openvidu_vert_grey_bg_transp_cropped.png" alt="OpenVidu" class="ov-logo--light">
+        <img src="assets/images/logos/openvidu_vert_white_bg_trans_cropped2.png" alt="OpenVidu" class="ov-logo--dark">
       
     </a>
 
@@ -466,9 +467,9 @@
             openvidu/openvidu
             
               <ul class="md-source__facts">
-                <li class="md-source__fact md-source__fact--version">v3.9.0</li>
-                <li class="md-source__fact md-source__fact--stars">2.1k</li>
-                <li class="md-source__fact md-source__fact--forks">482</li>
+                <li class="md-source__fact md-source__fact--version">v3.10.0</li>
+                <li class="md-source__fact md-source__fact--stars">2.2k</li>
+                <li class="md-source__fact md-source__fact--forks">483</li>
               </ul>
             
           </div>
@@ -840,47 +841,17 @@
         
       
 
-<section class="top-home-section md-grid md-typeset">
-  <div class="center-align">
-    <img class="top-home-img" src="assets/images/logos/openvidu_white_bg_transp.png" fetchpriority="high" draggable="false" alt="">
+
+<section class="ov-hero ov-wrap md-typeset">
+  <div class="ov-hero__brand">
+    <img class="ov-hero__logo ov-logo--light skip-gallery" src="assets/images/logos/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu" width="1087" height="565" fetchpriority="high" draggable="false">
+    <img class="ov-hero__logo ov-logo--dark skip-gallery" src="assets/images/logos/openvidu_white_bg_transp_cropped.png" alt="OpenVidu" width="1078 561" height="" fetchpriority="high" draggable="false">
   </div>
-  <h1 class="slogan">Ship video conferencing into your app,<br>self-hosted and production-ready in minutes.</h1>
-  <p class="home-description">
-    Launch <strong>OpenVidu Meet</strong> on your own servers in minutes — or
-    build any real-time app with <strong>OpenVidu Platform</strong>'s WebRTC
-    SDKs.<br>Open source, ultra-low latency, and scalable to thousands of
-    participants, with your users' data on your infrastructure.
-  </p>
-  <div class="home-buttons">
-    <a title="Get started with OpenVidu Meet" id="home-primary-button" class="md-button md-button--primary home-meet-button" href="/latest/meet/">
-      Get started with Meet
-    </a>
-    <a title="Build with OpenVidu Platform SDKs" id="home-secondary-button" class="md-button home-platform-button" href="/latest/docs/">
-      Build with Platform SDKs
-    </a>
-  </div>
-  <p class="home-under-cta">
-    Not sure which fits?
-    <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a>
-    <span class="home-under-cta-sep">·</span>
-    <a title="Start a tour" href="#get-started" onclick="event.preventDefault(); event.stopPropagation(); window.scrollTo({ top: (document.getElementById('get-started').getBoundingClientRect().top + window.scrollY - 80), behavior: 'smooth' })">
-      Start a tour
-    </a>
-  </p>
-  
-  <div class="home-trust-block">
-  <p class="home-trust-line">⭐ Free &amp; open source</p>
-  <p class="home-badges">
-    <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/badge/license-Apache 2.0-orange.2cc72723.svg" alt="License: Apache 2.0" loading="lazy"></a>
-    <a href="https://github.com/OpenVidu/openvidu" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/github/stars/OpenVidu/openvidu.2cc72723.svg" alt="GitHub stars" loading="lazy"></a>
-    <a href="https://hub.docker.com/r/openvidu/openvidu-server" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/docker/pulls/openvidu/openvidu-server.2cc72723.svg" alt="Docker pulls" loading="lazy"></a>
-  </p>
-  <p class="home-badges home-credentials-badges">
-    <a href="/research/"><img src="assets/external/img.shields.io/badge/Research publications-19-blue.2cc72723.svg" alt="19 peer-reviewed research publications" loading="lazy"></a>
-    <a href="/research/"><img src="assets/external/img.shields.io/badge/citations-500+-blue.2cc72723.svg" alt="500+ citations" loading="lazy"></a>
-    <a href="/research/"><img src="assets/external/img.shields.io/badge/WebRTC experience-12+ years-blue.2cc72723.svg" alt="12+ years building WebRTC" loading="lazy"></a>
-    <a href="https://github.com/OpenVidu" target="_blank" rel="noopener"><img src="assets/external/img.shields.io/badge/Open source contributors-Kurento, LiveKit &amp; mediasoup-blue.2cc72723.svg" alt="Open source contributors: Kurento, LiveKit and mediasoup" loading="lazy"></a>
-  </p>
+  <div class="ov-hero__copy">
+    <h1 class="ov-hero__title">Video calls inside your product. On&nbsp;your&nbsp;servers.</h1>
+    <p class="ov-hero__lead">
+      Self-hosted real-time video, on any cloud or your own hardware. Pick how much you want to build.
+    </p>
   </div>
 </section>
 
@@ -1418,364 +1389,384 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <div class="success-stories-section" data-sal="slide-up">
-  <div class="success-stories-heading">
-    <h2>Trusted by teams building real-time video</h2>
+<div class="ov-landing ov-home">
+  <section class="ov-wrap ov-doors" aria-label="Choose a product" data-sal="slide-up">
+  <div class="ov-door ov-door--meet">
+    <div class="ov-door__head">
+      <span class="ov-door__name">OpenVidu Meet</span>
+      <span class="ov-door__badge">Customizable ready-made app</span>
+    </div>
+    <h2 class="ov-door__title">A finished meeting app. Customizable. Embed it today.</h2>
+    <p class="ov-door__text">Rooms, recordings, roles and your branding, out of the box. Drop it into your product with one tag, a REST API and webhooks.</p>
+    <div class="ov-door__actions">
+      <a href="/latest/meet/" class="ov-btn ov-btn--meet-ink" title="Get started with OpenVidu Meet">Deploy Meet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <a href="https://meet-demo-app.openvidu.io" class="ov-link" target="_blank" title="Try the OpenVidu Meet demo (opens in a new tab)" rel="noopener">Try the live demo</a>
+    </div>
+    <div class="ov-door__visual">
+      <img class="ov-door__shot skip-gallery" src="/assets/images/meet/home/multiparty-light.png#only-light" alt="OpenVidu Meet call with eight participants in a grid" width="1920" height="1080">
+      <img class="ov-door__shot skip-gallery" src="/assets/images/meet/home/multiparty-dark.png#only-dark" alt="OpenVidu Meet call with eight participants in a grid" width="1920" height="1080">
+    </div>
   </div>
-  <div class="splide" aria-label="Customer success stories" data-splide="{&quot;type&quot;: &quot;loop&quot;, &quot;autoWidth&quot;: false, &quot;perPage&quot;: 3, &quot;perMove&quot;: 1, &quot;focus&quot;: 0, &quot;autoHeight&quot;: false, &quot;gap&quot;: &quot;1.5rem&quot;, &quot;padding&quot;: &quot;2.5rem&quot;, &quot;autoplay&quot;: true, &quot;interval&quot;: 5000, &quot;pauseOnHover&quot;: true, &quot;pauseOnFocus&quot;: true, &quot;breakpoints&quot;: {&quot;1100&quot;: {&quot;perPage&quot;: 2}, &quot;700&quot;: {&quot;perPage&quot;: 1}}}">
+  <div class="ov-door ov-door--platform">
+    <div class="ov-door__head">
+      <span class="ov-door__name">OpenVidu Platform</span>
+      <span class="ov-door__badge">SDKs and APIs</span>
+    </div>
+    <h2 class="ov-door__title">The raw engine. Build anything.</h2>
+    <p class="ov-door__text">Client and server SDKs from our LiveKit fork, for every major language, with full control over tracks, codecs and layouts.</p>
+    <div class="ov-door__visual">
+      <div class="ov-code">
+        <div class="ov-code__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+<pre class="ov-code__pre"><span class="ov-code__kw">import</span> { Room } <span class="ov-code__kw">from</span> <span class="ov-code__str">"livekit-client"</span>;
+
+<span class="ov-code__kw">const</span> room = <span class="ov-code__kw">new</span> Room();
+<span class="ov-code__kw">await</span> room.connect(<span class="ov-code__str">"wss://your-deployment"</span>, token);
+<span class="ov-code__kw">await</span> room.localParticipant
+  .enableCameraAndMicrophone();</pre>
+      </div>
+    </div>
+    <p class="ov-door__ai">Build it with your AI coding agent: the <a href="/latest/docs/building-with-ai/agent-plugin/">OpenVidu Agent Plugin</a> puts this documentation inside Claude Code, Cursor, VS Code, Copilot, Codex or Kiro.</p>
+    <div class="ov-door__actions">
+      <a href="/latest/docs/" class="ov-btn ov-btn--white" title="Build with OpenVidu Platform SDKs">Start building<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <a href="/latest/docs/tutorials/application-server/" class="ov-link" title="OpenVidu Platform tutorials">Browse tutorials</a>
+    </div>
+  </div>
+</section>
+
+<p class="ov-wrap ov-compare">Not sure which door? <a href="/openvidu-meet-vs-openvidu-platform/">Compare Meet and Platform</a></p>
+
+<section class="ov-wrap ov-section ov-shared" aria-labelledby="data-sovereignty" data-sal="slide-up">
+  <p class="ov-eyebrow">Same engine behind both doors</p>
+  <h2 class="ov-h2" id="data-sovereignty">Self-hosted means <span class="ov-mark">sovereign.</span></h2>
+  <p class="ov-lead">Meet and Platform both run on infrastructure you control. Your users' video, recordings and data stay there, under the laws you answer to.</p>
+  <div class="ov-grid ov-grid--3 ov-shared__pillars">
+    <div class="ov-card ov-card--key">
+      <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="7" rx="2"></rect><rect x="3" y="13.5" width="18" height="7" rx="2"></rect><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"></path></svg></span>
+      <h3>Data sovereignty</h3>
+      <p>Your calls live only on servers you run, in the country you choose. No media, recordings or user data ever reach us.</p>
+    </div>
+    <div class="ov-card ov-card--key">
+      <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5M12 14.5v2.5"></path></svg></span>
+      <h3>Privacy by design</h3>
+      <p>No third party joins, routes or stores your calls. Every stream is encrypted in transit, with end-to-end encryption when you need it.</p>
+    </div>
+    <div class="ov-card ov-card--key">
+      <span class="ov-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17M7.5 20.5h9M4.5 7h15M6 7l-3.2 7.2a3.4 3.4 0 0 0 6.4 0zM18 7l-3.2 7.2a3.4 3.4 0 0 0 6.4 0z"></path></svg></span>
+      <h3>GDPR and EU data residency</h3>
+      <p>Host in the EU and call data stays in the EU, with no transfers to a foreign vendor to justify under <strong>GDPR</strong>. Residency is your setting, not a promise.</p>
+    </div>
+  </div>
+  <p class="ov-shared__proof"><span class="ov-shared__quote">“Privacy was one of our most important selection criteria.”</span> <span class="ov-shared__by">Janne Sikiö, CEO at Dicode.</span> <a href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Why GDPR and EU data residency decided it for Dicode →</a></p>
+  <div class="ov-shared__grid">
+    <div class="ov-shared__item"><span class="ov-shared__title">Any cloud</span><span class="ov-shared__text">AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">LiveKit compatible</span><span class="ov-shared__text">Familiar APIs and SDKs, with mediasoup at the core.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">Open source</span><span class="ov-shared__text">COMMUNITY is free under Apache 2.0. PRO when you scale.</span></div>
+    <div class="ov-shared__item"><span class="ov-shared__title">Made in Europe</span><span class="ov-shared__text">Built in Madrid, Spain, by a company that answers to EU law.</span></div>
+  </div>
+</section>
+
+<section class="ov-wrap ov-section ov-cases" data-sal="slide-up">
+  <h2 class="ov-h2">What are you building?</h2>
+  <div class="ov-cases__pills" role="group" aria-label="Use cases">
+    <button type="button" class="ov-case" aria-pressed="true">Telehealth</button>
+    <button type="button" class="ov-case" aria-pressed="false">Online classes</button>
+    <button type="button" class="ov-case" aria-pressed="false">Customer support</button>
+    <button type="button" class="ov-case" aria-pressed="false">Live events</button>
+    <button type="button" class="ov-case" aria-pressed="false">Cameras and drones</button>
+    <button type="button" class="ov-case" aria-pressed="false">AI voice agents</button>
+  </div>
+  <div class="ov-pick ov-pick--meet">
+    <div class="ov-pick__lead">
+      <span class="ov-pick__badge">Best fit: OpenVidu Meet</span>
+      <p class="ov-pick__line">Patient calls that never leave your servers.</p>
+      <p class="ov-pick__why">Embed the consultation room in your patient portal with one tag, and control who can join, record or share.</p>
+      <a href="/latest/meet/" class="ov-btn ov-btn--ink">Deploy OpenVidu Meet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="ov-pick__visual">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/telehealth.webp" alt="A telehealth consultation: the doctor and the patient on camera, a shared X-ray on screen and the session notes beside it" width="1920" height="994" loading="lazy">
+      <ul class="ov-feats" aria-label="Features used">
+        <li class="ov-feat">Embed with one tag</li>
+        <li class="ov-feat">Roles and permissions</li>
+        <li class="ov-feat">Recording</li>
+        <li class="ov-feat">End-to-end encryption</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ov-pick ov-pick--meet" hidden="">
+    <div class="ov-pick__lead">
+      <span class="ov-pick__badge">Best fit: OpenVidu Meet</span>
+      <p class="ov-pick__line">A classroom with recording, screen sharing and raised hands.</p>
+      <p class="ov-pick__why">Moderation, roles and recordings come ready. Brand it with your school colors.</p>
+      <a href="/latest/meet/" class="ov-btn ov-btn--ink">Deploy OpenVidu Meet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="ov-pick__visual">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/meet/home/multiparty-light.png#only-light" alt="An OpenVidu Meet class with eight participants in a grid" width="1920" height="1080" loading="lazy">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/meet/home/multiparty-dark.png#only-dark" alt="An OpenVidu Meet class with eight participants in a grid" width="1920" height="1080" loading="lazy">
+      <ul class="ov-feats" aria-label="Features used">
+        <li class="ov-feat">Recording</li>
+        <li class="ov-feat">Screen sharing</li>
+        <li class="ov-feat">Raise hand</li>
+        <li class="ov-feat">Virtual backgrounds</li>
+        <li class="ov-feat">Your branding</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ov-pick ov-pick--meet" hidden="">
+    <div class="ov-pick__lead">
+      <span class="ov-pick__badge">Best fit: OpenVidu Meet</span>
+      <p class="ov-pick__line">Turn a support ticket into a video call with a link.</p>
+      <p class="ov-pick__why">Create rooms from your help desk through the REST API, and get webhooks when calls start, end or get recorded.</p>
+      <a href="/latest/meet/" class="ov-btn ov-btn--ink">Deploy OpenVidu Meet<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="ov-pick__visual">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/blog/2026/07/building-a-video-enabled-crm-with-an-ai-agent/issue-meetings.png" alt="A support ticket in a CRM with a scheduled video meeting and a Join button" width="1920" height="1200" loading="lazy">
+      <ul class="ov-feats" aria-label="Features used">
+        <li class="ov-feat">REST API</li>
+        <li class="ov-feat">Webhooks</li>
+        <li class="ov-feat">Shareable links</li>
+        <li class="ov-feat">Recordings</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ov-pick ov-pick--platform" hidden="">
+    <div class="ov-pick__lead">
+      <span class="ov-pick__badge">Best fit: OpenVidu Platform</span>
+      <p class="ov-pick__line">Low-latency streams for hundreds of viewers.</p>
+      <p class="ov-pick__why">Control every track and layout, and broadcast to YouTube or Twitch at the same time.</p>
+      <a href="/latest/docs/" class="ov-btn ov-btn--ink">Build with OpenVidu Platform<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="ov-pick__visual">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/live-events-light.webp#only-light" alt="A live concert stream with a multi-camera director view, sub-second playback and the audience chat" width="1600" height="900" loading="lazy">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/live-events-dark.webp#only-dark" alt="A live concert stream with a multi-camera director view, sub-second playback and the audience chat" width="1600" height="900" loading="lazy">
+      <ul class="ov-feats" aria-label="Features used">
+        <li class="ov-feat">WHIP ingest</li>
+        <li class="ov-feat">Sub-second latency</li>
+        <li class="ov-feat">Simulcast</li>
+        <li class="ov-feat">RTMP out to YouTube and Twitch</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ov-pick ov-pick--platform" hidden="">
+    <div class="ov-pick__lead">
+      <span class="ov-pick__badge">Best fit: OpenVidu Platform</span>
+      <p class="ov-pick__line">Ingest and process camera feeds in real time.</p>
+      <p class="ov-pick__why">Bring in external streams and run server-side pipelines on the video and audio.</p>
+      <a href="/latest/docs/" class="ov-btn ov-btn--ink">Build with OpenVidu Platform<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="ov-pick__visual">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/drones-light.webp#only-light" alt="A drone operations console: an aerial feed with flight telemetry, recording, and a list of camera sources" width="1600" height="900" loading="lazy">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/drones-dark.webp#only-dark" alt="A drone operations console: an aerial feed with flight telemetry, recording, and a list of camera sources" width="1600" height="900" loading="lazy">
+      <ul class="ov-feats" aria-label="Features used">
+        <li class="ov-feat">WHIP and RTMP ingest</li>
+        <li class="ov-feat">Server-side pipelines</li>
+        <li class="ov-feat">Python and Node agents</li>
+        <li class="ov-feat">Any codec</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ov-pick ov-pick--platform" hidden="">
+    <div class="ov-pick__lead">
+      <span class="ov-pick__badge">Best fit: OpenVidu Platform</span>
+      <p class="ov-pick__line">Put an AI agent in the room.</p>
+      <p class="ov-pick__why">Transcription, voice assistants and telephony, built on the same SDKs as the rest of your app.</p>
+      <a href="/latest/docs/" class="ov-btn ov-btn--ink">Build with OpenVidu Platform<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="ov-pick__visual">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/voice-agent-light.webp#only-light" alt="A support call with an AI voice agent, the live transcript and a running summary in the side panel" width="1600" height="900" loading="lazy">
+      <img class="ov-pick__shot skip-gallery" src="/assets/images/home/use-cases/voice-agent-dark.webp#only-dark" alt="A support call with an AI voice agent, the live transcript and a running summary in the side panel" width="1600" height="900" loading="lazy">
+      <ul class="ov-feats" aria-label="Features used">
+        <li class="ov-feat">Live transcription</li>
+        <li class="ov-feat">Voice agents</li>
+        <li class="ov-feat">SIP telephony</li>
+        <li class="ov-feat">Agents framework</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ov-wrap ov-section ov-deploy" id="deploy" data-sal="slide-up">
+  <div class="ov-deploy__head">
+    <h2 class="ov-h2 ov-deploy__title">Deploy where you already run.</h2>
+    <p class="ov-deploy__lead">Ready-made templates for every major cloud, or one installer for your own servers. Your users' data never leaves your infrastructure.</p>
+  </div>
+  <div class="ov-where" role="list" aria-label="Deployment targets">
+    <a class="ov-provider ov-provider--onprem" role="listitem" href="/latest/docs/self-hosting/single-node/on-premises/install/"><span class="ov-provider__icon"><svg width="28" height="31" viewBox="2 1 20 22" aria-hidden="true"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"></path></svg></span><span class="ov-provider__body"><span class="ov-provider__name">On-premises</span><span class="ov-provider__text">One-line installer</span></span></a>
+    <a class="ov-provider ov-provider--aws" role="listitem" href="/latest/docs/self-hosting/single-node/aws/install/"><span class="ov-provider__icon"><svg width="50" height="30" viewBox="1.8 5.6 20.8 12.6" aria-hidden="true"><path d="M7.64 10.38c0 .25.02.45.07.62.05.12.12.28.21.46.04.04.05.1.05.15 0 .07-.04.13-.13.2l-.42.28c-.06.04-.12.06-.17.06-.07 0-.13-.04-.2-.1-.09-.1-.17-.2-.24-.31-.06-.11-.13-.24-.2-.39-.52.61-1.17.92-1.96.92-.56 0-1-.16-1.33-.48-.32-.32-.49-.75-.49-1.29 0-.55.2-1 .6-1.36.41-.34.95-.52 1.63-.52.23 0 .44.02.71.06.23.03.5.08.76.14v-.48c0-.51-.1-.84-.31-1.07-.22-.21-.57-.3-1.08-.3-.24 0-.48.03-.72.08-.25.06-.49.13-.72.23-.11.04-.2.07-.23.08-.05.02-.08.02-.11.02-.09 0-.14-.06-.14-.2v-.33c0-.1.01-.18.05-.23q.045-.075.18-.12c.24-.14.51-.24.84-.32a4 4 0 0 1 1.04-.13q1.185 0 1.74.54c.37.36.55.91.55 1.64v2.15zm-2.7 1.02c.22 0 .44-.04.68-.12s.45-.23.63-.43c.11-.13.19-.27.25-.43 0-.16.05-.35.05-.58v-.27c-.2-.07-.4-.07-.62-.12a7 7 0 0 0-.62-.04c-.45 0-.77.09-.99.27s-.32.43-.32.76c0 .32.07.56.24.71.16.17.39.25.7.25m5.34.71a.6.6 0 0 1-.28-.06c-.03-.05-.08-.14-.12-.26L8.32 6.65c-.04-.15-.06-.22-.06-.27 0-.11.05-.17.16-.17h.65c.13 0 .22.02.26.07.06.04.1.13.14.26l1.11 4.4 1.04-4.4c.03-.13.07-.22.13-.26.05-.04.14-.07.25-.07h.55c.12 0 .21.02.26.07.05.04.1.13.13.26L14 11l1.14-4.46c.04-.13.09-.22.13-.26.06-.04.14-.07.26-.07h.62c.11 0 .17.06.17.17 0 .03-.01.07-.02.12 0 0-.02.08-.04.15l-1.61 5.14c-.04.14-.08.21-.15.26-.04.04-.13.07-.24.07h-.57c-.13 0-.19-.02-.27-.07a.45.45 0 0 1-.12-.26L12.27 7.5l-1.03 4.28q-.045.195-.12.27a.5.5 0 0 1-.27.06zm8.55.18c-.33 0-.7-.04-1.03-.12s-.59-.17-.76-.26a.5.5 0 0 1-.21-.19.4.4 0 0 1-.04-.18v-.34c0-.14.05-.2.15-.2h.12c.04 0 .1.05.17.08.22.1.47.18.73.23.27.05.54.08.79.08.42 0 .75-.07.97-.22.23-.17.35-.36.35-.63 0-.19-.07-.34-.18-.47-.12-.12-.35-.24-.67-.34l-.97-.3c-.48-.16-.84-.38-1.06-.68a1.58 1.58 0 0 1-.33-.97c0-.28.06-.52.18-.73.12-.22.28-.4.46-.55.22-.15.44-.26.71-.34q.39-.12.84-.12.21 0 .45.03c.14.02.28.05.42.07.14.04.26.07.38.11s.2.08.28.12c.09.05.16.1.2.16s.06.13.06.22v.32q0 .21-.15.21c-.05 0-.14-.03-.26-.08-.37-.17-.8-.26-1.27-.26-.38 0-.66.06-.89.19-.2.12-.31.32-.31.59 0 .19.07.35.2.47.13.13.38.25.73.37l.95.3c.48.14.82.36 1.03.64q.3.405.3.93c0 .28-.06.54-.17.77-.12.22-.28.42-.5.58-.19.17-.44.29-.72.38s-.62.13-.95.13m1.25 3.24C17.89 17.14 14.71 18 12 18c-3.85 0-7.3-1.42-9.91-3.77-.21-.19-.02-.44.23-.29 2.82 1.63 6.29 2.62 9.89 2.62 2.43 0 5.1-.5 7.55-1.56.37-.15.68.26.32.53M21 14.5c-.29-.37-1.86-.18-2.57-.1-.21.03-.24-.16-.05-.3 1.25-.87 3.31-.6 3.54-.33.24.3-.06 2.36-1.23 3.34-.19.15-.36.07-.28-.11.27-.68.86-2.16.59-2.5"></path></svg></span><span class="ov-provider__body"><span class="ov-provider__name">AWS</span><span class="ov-provider__text">CloudFormation</span></span></a>
+    <a class="ov-provider ov-provider--azure" role="listitem" href="/latest/docs/self-hosting/single-node/azure/install/"><span class="ov-provider__icon"><svg width="40" height="32" viewBox="2 4 20 16" aria-hidden="true"><path d="M13.05 4.24 6.56 18.05 2 18l5.09-8.76zm.7 1.09L22 19.76H6.74l9.3-1.66-4.87-5.79z"></path></svg></span><span class="ov-provider__body"><span class="ov-provider__name">Azure</span><span class="ov-provider__text">Resource Manager</span></span></a>
+    <a class="ov-provider ov-provider--gcp" role="listitem" href="/latest/docs/self-hosting/single-node/gcp/install/"><span class="ov-provider__icon"><svg width="40" height="33" viewBox="1 3 22 18" aria-hidden="true"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span><span class="ov-provider__body"><span class="ov-provider__name">Google Cloud</span><span class="ov-provider__text">Terraform</span></span></a>
+    <a class="ov-provider ov-provider--do" role="listitem" href="/latest/docs/self-hosting/single-node/digitalocean/install/"><span class="ov-provider__icon"><svg width="32" height="32" viewBox="2 2 20 20" aria-hidden="true"><path d="M6 12H2C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10v-4H8v-4h4v4c3.32 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6m2 6v3H5v-3zm-5-2h2v2H3z"></path></svg></span><span class="ov-provider__body"><span class="ov-provider__name">DigitalOcean</span><span class="ov-provider__text">Terraform</span></span></a>
+    <a class="ov-provider ov-provider--oracle" role="listitem" href="/latest/docs/self-hosting/single-node/oracle/install/"><span class="ov-provider__icon"><svg width="46" height="29" viewBox="216.79 178.57 566.43 357.14" aria-hidden="true"><path d="M395.357 535.714c-99.286 0-178.571-79.286-178.571-178.571s79.286-178.571 178.571-178.571h209.286c99.286 0 178.571 79.286 178.571 178.571s-79.286 178.571-178.571 178.571zM599.286 472.5c65 0 115.357-52.323 115.357-115.357 0-65-52.323-115.357-115.357-115.357H400.715c-65 0-115.357 52.323-115.357 115.357S337.681 472.5 400.715 472.5z"></path></svg></span><span class="ov-provider__body"><span class="ov-provider__name">Oracle Cloud</span><span class="ov-provider__text">Web console</span></span></a>
+  </div>
+  <div class="ov-arch">
+    <div class="ov-arch__copy">
+      <h3 class="ov-arch__title">One stack under both doors.</h3>
+      <p class="ov-arch__text">Your product sits on top. Below it, OpenVidu Meet or the OpenVidu Platform SDKs, then the OpenVidu engine with LiveKit-compatible APIs and mediasoup. All of it runs on infrastructure you control.</p>
+      <a href="/latest/docs/" class="ov-link">How the Platform works</a>
+    </div>
+    <div class="ov-stack" role="img" aria-label="The OpenVidu stack: your app on top, OpenVidu Meet or OpenVidu Platform below it, the OpenVidu engine under both, running on AWS, Azure, Google Cloud, DigitalOcean, Oracle Cloud or on-premises">
+      <div class="ov-stack__row">
+        <span aria-hidden="true" class="ov-stack__label">Your app</span>
+        <div class="ov-stack__app"><span class="ov-stack__name">Your product</span><span class="ov-stack__sub">your UI, your users</span></div>
+      </div>
+      <div class="ov-stack__row">
+        <span aria-hidden="true" class="ov-stack__label">Pick one</span>
+        <div class="ov-stack__pick">
+          <div class="ov-stack__product ov-stack__product--meet"><span class="ov-stack__name">Meet</span><span class="ov-stack__sub">finished app, embed it</span></div>
+          <div class="ov-stack__product ov-stack__product--platform"><span class="ov-stack__name">Platform</span><span class="ov-stack__sub">SDKs, build it</span></div>
+        </div>
+      </div>
+      <div class="ov-stack__row">
+        <span aria-hidden="true" class="ov-stack__label">Engine</span>
+        <div class="ov-stack__engine">
+          <span class="ov-stack__name">OpenVidu</span>
+          <span class="ov-stack__chips"><span class="ov-tag ov-tag--community">COMMUNITY</span><span class="ov-tag ov-tag--pro">PRO</span></span>
+          <span class="ov-stack__note">LiveKit-compatible APIs · mediasoup media engine</span>
+        </div>
+      </div>
+      <div class="ov-stack__row">
+        <span aria-hidden="true" class="ov-stack__label">Your infra</span>
+        <div class="ov-stack__infra">
+          <span class="ov-stack__host">AWS</span><span class="ov-stack__host">Azure</span><span class="ov-stack__host">Google Cloud</span><span class="ov-stack__host">DigitalOcean</span><span class="ov-stack__host">Oracle Cloud</span><span class="ov-stack__host">On-premises</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ov-topo">
+    <h3 class="ov-topo__title">Four deployments, one set of APIs.</h3>
+    <p class="ov-topo__lead">Start on your laptop or a single server. Move to a cluster when you need more rooms per server, autoscaling or fault tolerance, without changing your app.</p>
+    <div class="ov-topo__grid">
+      <a class="ov-topo__card" href="/latest/docs/self-hosting/local/">
+        <span class="ov-tag ov-tag--dev">DEVELOPMENT</span>
+        <span class="ov-topo__figure">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-local-light.svg#only-light" alt="OpenVidu Local: everything on your laptop, reachable across your LAN" width="400" height="300" loading="lazy">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-local-dark.svg#only-dark" alt="OpenVidu Local: everything on your laptop, reachable across your LAN" width="400" height="300" loading="lazy">
+        </span>
+        <span class="ov-topo__name">Local</span>
+        <span class="ov-topo__text">Docker Compose on your machine, with certificates for every device on your network.</span>
+      </a>
+      <a class="ov-topo__card" href="/latest/docs/self-hosting/single-node/">
+        <span class="ov-topo__tags"><span class="ov-tag ov-tag--community">COMMUNITY</span><span class="ov-tag ov-tag--pro">PRO</span></span>
+        <span class="ov-topo__figure">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-single-node-light.svg#only-light" alt="OpenVidu Single Node: all services on one server" width="400" height="300" loading="lazy">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-single-node-dark.svg#only-dark" alt="OpenVidu Single Node: all services on one server" width="400" height="300" loading="lazy">
+        </span>
+        <span class="ov-topo__name">Single Node</span>
+        <span class="ov-topo__text">One server for medium user load. Free with COMMUNITY. PRO doubles the media performance on the same hardware.</span>
+      </a>
+      <a class="ov-topo__card" href="/latest/docs/self-hosting/elastic/">
+        <span class="ov-tag ov-tag--pro">PRO</span>
+        <span class="ov-topo__figure">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-elastic-light.svg#only-light" alt="OpenVidu Elastic: one master node and a pool of media nodes that grows with demand" width="400" height="300" loading="lazy">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-elastic-dark.svg#only-dark" alt="OpenVidu Elastic: one master node and a pool of media nodes that grows with demand" width="400" height="300" loading="lazy">
+        </span>
+        <span class="ov-topo__name">Elastic</span>
+        <span class="ov-topo__text">Media nodes come and go with demand. You pay for what runs.</span>
+      </a>
+      <a class="ov-topo__card" href="/latest/docs/self-hosting/ha/">
+        <span class="ov-tag ov-tag--pro">PRO</span>
+        <span class="ov-topo__figure">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-ha-light.svg#only-light" alt="OpenVidu High Availability: four replicated master nodes and a pool of media nodes" width="400" height="300" loading="lazy">
+          <img class="skip-gallery" src="/assets/images/home/deployments/openvidu-ha-dark.svg#only-dark" alt="OpenVidu High Availability: four replicated master nodes and a pool of media nodes" width="400" height="300" loading="lazy">
+        </span>
+        <span class="ov-topo__name">High Availability</span>
+        <span class="ov-topo__text">Replicated master nodes. A failed server never stops a call.</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="ov-wrap ov-section ov-pricing" id="pricing" data-sal="slide-up">
+  <h2 class="ov-h2">Start free. Scale when you need to.</h2>
+  <div class="ov-plans">
+    <div class="ov-plan ov-plan--community">
+      <span class="ov-tag ov-tag--community">COMMUNITY</span>
+      <div class="ov-plan__price"><span class="ov-plan__amount">Free</span><span class="ov-plan__unit">open source, Apache 2.0</span></div>
+      <ul class="ov-plan__list">
+        <li>Single Node deployment for medium user load</li>
+        <li>Meet and Platform included</li>
+        <li>Recording, ingress and S3 storage</li>
+        <li>Built-in observability</li>
+      </ul>
+      <a class="ov-btn ov-btn--ink" href="/latest/meet/" title="Get started with OpenVidu Meet">Deploy free</a>
+    </div>
+    <div class="ov-plan ov-plan--pro">
+      <span class="ov-tag ov-tag--pro">PRO</span>
+      <div class="ov-plan__price"><span class="ov-plan__amount">$0.0006</span><span class="ov-plan__unit">per core, per minute</span></div>
+      <ul class="ov-plan__list">
+        <li>2x performance with mediasoup</li>
+        <li>Elastic: add media nodes as load grows</li>
+        <li>High Availability: no single point of failure</li>
+        <li>Advanced observability</li>
+      </ul>
+      <a class="ov-btn ov-btn--yellow" href="/account/" title="Get an OpenVidu License">Start your 15-day free trial</a>
+    </div>
+  </div>
+  <p class="ov-plans__note">Both editions run Meet and Platform. You pay only while a PRO cluster runs, never per participant. <a href="/pricing/">See pricing</a></p>
+</section>
+
+<section class="ov-wrap ov-section ov-stories" aria-labelledby="success-stories" data-sal="slide-up">
+  <h2 class="ov-h2 ov-stories__title" id="success-stories">Teams that already picked a door.</h2>
+  <!-- Splide (page_features: setupcarousel): a looping row of three cards, two below 1100px, one below
+     700px, autoplaying every 5s and paused on hover or focus. Adding a story is one more slide. -->
+  <div class="splide ov-stories__carousel" aria-label="Customer success stories" data-splide="{&quot;type&quot;: &quot;loop&quot;, &quot;autoWidth&quot;: false, &quot;autoHeight&quot;: false, &quot;perPage&quot;: 3, &quot;perMove&quot;: 1, &quot;focus&quot;: 0, &quot;gap&quot;: &quot;20px&quot;, &quot;padding&quot;: &quot;2.5rem&quot;, &quot;autoplay&quot;: true, &quot;interval&quot;: 5000, &quot;pauseOnHover&quot;: true, &quot;pauseOnFocus&quot;: true, &quot;breakpoints&quot;: {&quot;1100&quot;: {&quot;perPage&quot;: 2}, &quot;700&quot;: {&quot;perPage&quot;: 1}}}">
     <div class="splide__track">
       <div class="splide__list">
         <div class="splide__slide">
-          <div class="carousel-cell-content">
-            <div class="success-story-card">
-              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="382" height="148">
-              <hr class="success-story-separator">
-              <blockquote class="success-story-quote">
-                "With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience."
-              </blockquote>
-              <p class="success-story-attribution">Matteo Resconi, IT &amp; Development Area Manager, Mega Italia Media</p>
-              <a class="success-story-link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a>
-            </div>
-          </div>
+        <figure class="ov-story">
+          <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dyndevice-logo.png" loading="lazy" alt="DynDevice" width="362" height="128"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Virtual classrooms · LMS</span>
+          <blockquote class="ov-story__text"><p>“With OpenVidu integrated directly into DynDevice, users now enjoy a seamless, all-in-one experience.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Matteo Resconi</strong><span>IT &amp; Development Area Manager, Mega Italia Media</span></span><a class="ov-story__link" href="/blog/2026/07/28/dyndevice-virtual-classrooms-openvidu/">Read the full story →</a></figcaption>
+        </figure>
         </div>
         <div class="splide__slide">
-          <div class="carousel-cell-content">
-            <div class="success-story-card">
-              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208">
-              <hr class="success-story-separator">
-              <blockquote class="success-story-quote">
-                "OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain."
-              </blockquote>
-              <p class="success-story-attribution">Andrei Iakimov, DevOps Lead, Novakid</p>
-              <a class="success-story-link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a>
-            </div>
-          </div>
+        <figure class="ov-story">
+          <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/novakid-logo.png" loading="lazy" alt="Novakid" width="783" height="208"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Live English lessons · EdTech</span>
+          <blockquote class="ov-story__text"><p>“OpenVidu let us keep our infrastructure economics and control, and shed a whole layer of custom code we no longer had to maintain.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Andrei Iakimov</strong><span>DevOps Lead, Novakid</span></span><a class="ov-story__link" href="/blog/2026/09/15/novakid-live-english-lessons/">Read the full story →</a></figcaption>
+        </figure>
         </div>
         <div class="splide__slide">
-          <div class="carousel-cell-content">
-            <div class="success-story-card">
-              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085">
-              <hr class="success-story-separator">
-              <blockquote class="success-story-quote">
-                "From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams."
-              </blockquote>
-              <p class="success-story-attribution">Janne Sikiö, CEO, Dicode</p>
-              <a class="success-story-link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a>
-            </div>
-          </div>
+        <figure class="ov-story">
+          <span class="ov-story__logo ov-story__logo--tall"><img class="skip-gallery" src="/assets/images/home/success-stories/dicode-logo.svg" loading="lazy" alt="Dicode" width="2787" height="1085"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Private video calls · Consulting</span>
+          <blockquote class="ov-story__text"><p>“From our clients' perspective, joining video calls is much easier than it would be with a solution such as Teams.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Janne Sikiö</strong><span>CEO, Dicode</span></span><a class="ov-story__link" href="/blog/2026/10/27/dicode-private-video-calls-openvidu/">Read the full story →</a></figcaption>
+        </figure>
         </div>
         <div class="splide__slide">
-          <div class="carousel-cell-content">
-            <div class="success-story-card">
-              <img class="success-story-logo skip-gallery" src="/assets/images/home/success-stories/eventials-logo.svg" loading="lazy" alt="Eventials" width="343" height="57">
-              <hr class="success-story-separator">
-              <blockquote class="success-story-quote">
-                "Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities."
-              </blockquote>
-              <p class="success-story-attribution">Henrique Otsuka, Head of Information Technology, Eventials</p>
-              <a class="success-story-link" href="/blog/2026/11/10/eventials-live-streaming-openvidu/">Read the full story →</a>
-            </div>
-          </div>
+        <figure class="ov-story">
+          <span class="ov-story__logo"><img class="skip-gallery" src="/assets/images/home/success-stories/eventials-logo.svg" loading="lazy" alt="Eventials" width="343" height="57"></span>
+          <span class="ov-story__tag ov-story__tag--neutral">Live streaming · Webinars</span>
+          <blockquote class="ov-story__text"><p>“Adopting OpenVidu allowed us to reduce development complexity and focus our engineering efforts on Eventials' core product capabilities.”</p></blockquote>
+          <figcaption class="ov-story__by"><span class="ov-story__who"><strong>Henrique Otsuka</strong><span>Head of Information Technology, Eventials</span></span><a class="ov-story__link" href="/blog/2026/11/10/eventials-live-streaming-openvidu/">Read the full story →</a></figcaption>
+        </figure>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="second-slogan" data-sal="slide-up">
-  <h2 id="get-started">
-    Choose the ideal OpenVidu solution for your real-time needs
-  </h2>
-</div>
-
-<div class="products-section" data-sal="slide-up">
-  <div class="products-container">
-    <div class="product-card openvidu-meet">
-      <div class="product-header">
-        <h3 class="product-title">
-          <img class="skip-gallery" src="/assets/images/logos/meet_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Meet" width="1441" height="345">
-          <img class="skip-gallery" src="/assets/images/logos/meet_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Meet" width="1441" height="345">
-        </h3>
-        <p class="product-subtitle">Ready-to-use videoconferencing solution</p>
-      </div>
-      <div class="product-content">
-        <p class="product-description">
-          For teams, businesses and organizations that need a reliable and secure video conferencing solution running on their servers.
-        </p>
-        <ul class="product-features">
-          <li>Multi-party HQ video conferencing</li>
-          <li>Customize with your branding and corporate colors</li>
-          <li>Feature rich: screen sharing, chat, virtual background, recording...</li>
-          <li>Ready to use AI integrations</li>
-          <li>Embed right into your app with pre-built components</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <a href="/latest/meet/" class="product-button md-button md-button--primary primary">Deploy Meet in minutes</a>
-      </div>
-    </div>
-    <div class="product-card openvidu-platform">
-      <div class="product-header">
-        <h3 class="product-title">
-          <img class="skip-gallery" src="/assets/images/logos/platform_whitefont_transback.png#only-dark" loading="lazy" alt="OpenVidu Platform" width="1648" height="345">
-          <img class="skip-gallery" src="/assets/images/logos/platform_greyfont_transback.png#only-light" loading="lazy" alt="OpenVidu Platform" width="1648" height="345">
-        </h3>
-        <p class="product-subtitle">Developer-oriented SDKs for custom apps</p>
-      </div>
-      <div class="product-content">
-        <p class="product-description">
-          For developers that need complete freedom to build their real-time application using SDKs and self-host a production-ready solution.
-        </p>
-        <ul class="product-features">
-          <li>Programmable client and server SDKs for all languages, from our LiveKit fork</li>
-          <li>Build your custom UI from scratch with total freedom</li>
-          <li>Low level control of real time media: codecs, protocols, bitrates...</li>
-          <li>Precise control of recording and streaming with custom layouts</li>
-          <li>Advanced telephony and AI integrations</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <a href="/latest/docs/" class="product-button md-button md-button--primary primary">Start building with the SDKs</a>
-      </div>
-    </div>
+<section class="ov-wrap ov-section ov-record" aria-label="Track record" data-sal="slide-up">
+  <div class="ov-record__grid">
+    <a class="ov-stat" href="/research/"><span class="ov-stat__value">12+</span><span class="ov-stat__label">years building WebRTC</span></a>
+    <a class="ov-stat" href="/research/"><span class="ov-stat__value">19</span><span class="ov-stat__label">peer-reviewed research publications</span></a>
+    <a class="ov-stat" href="/research/"><span class="ov-stat__value">500+</span><span class="ov-stat__label">academic citations</span></a>
+    <a class="ov-stat" href="https://github.com/OpenVidu" target="_blank" title="OpenVidu on GitHub (opens in a new tab)" rel="noopener"><span class="ov-stat__value">3</span><span class="ov-stat__label">open source media stacks we contribute to: Kurento, LiveKit and mediasoup</span></a>
   </div>
-</div>
+</section>
 
-<div class="text-center" data-sal="slide-up">
-<table>
-<thead>
-<tr>
-<th></th>
-<th><img alt="OpenVidu Meet" class="compare-table-logo skip-gallery" loading="lazy" src="assets/images/logos/meet_whitefont_transback.png#only-dark"> <img alt="OpenVidu Meet" class="compare-table-logo skip-gallery" loading="lazy" src="assets/images/logos/meet_greyfont_transback.png#only-light"></th>
-<th><img alt="OpenVidu Platform" class="compare-table-logo skip-gallery" loading="lazy" src="assets/images/logos/platform_whitefont_transback.png#only-dark"> <img alt="OpenVidu Platform" class="compare-table-logo skip-gallery" loading="lazy" src="assets/images/logos/platform_greyfont_transback.png#only-light"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Self-hosted</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Cloud templates for AWS, Azure, GCP, DO, OCI</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>HQ real-time video and crisp audio</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Recording</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Performant, Scalable, Fault-Tolerant &amp; Observable</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Tutorials available</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Agent Plugin for AI-assisted development</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Customer support</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Ready-to-use application</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-no"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span> <span class="twemoji" title="OpenVidu Platform offers a collection of SDKs to build your own custom application. Use OpenVidu Meet for a polished, ready-to-use videoconferencing solution"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-</tr>
-<tr>
-<td>No-code &amp; Low-code options available</td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-no"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span> <span class="twemoji" title="OpenVidu Platform offers powerful SDKs and APIs for custom developments. OpenVidu Meet offers embeddable options to integrate its great UI right into your application"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Low-level SDKs</td>
-<td><span class="twemoji compare-table-icon-no"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span> <span class="twemoji" title="OpenVidu Meet offers embeddable options based on a Web Component or iframe, which allows integrating the refined OpenVidu Meet UI into your own app. Use OpenVidu Platform if you need to build your own UI from scratch"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>High control over real-time features</td>
-<td><span class="twemoji compare-table-icon-no"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span> <span class="twemoji" title="OpenVidu Meet defines sane default values for videoconferencing use cases. Use OpenVidu Platform if you need total control over video/audio/data streams"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>AI agents</td>
-<td><span class="twemoji compare-table-icon-progress"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 19.63 13.43 8.2l-.71-.7 1.42-1.43L12 3.89c1.2-1.19 3.09-1.19 4.27 0l3.6 3.61-1.42 1.41h2.84l.71.71-3.55 3.59-.71-.71V9.62l-1.47 1.42-.71-.71L4.13 21.76z"></path></svg></span> <span class="twemoji" title="Work in progress..."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-<td><span class="twemoji compare-table-icon-yes"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Models</td>
-<td>Rooms &amp; Meetings <span class="twemoji" title="High-level abstractions oriented to videoconferencing"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-<td>Audio tracks &amp; Video tracks <span class="twemoji" title="Low-level abstractions for total control over media streams"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"></path></svg></span></td>
-</tr>
-<tr>
-<td>Links</td>
-<td><a class="md-button md-button--primary meet-primary-color" href="/latest/meet/">OpenVidu Meet</a></td>
-<td><a class="md-button md-button--primary platform-primary-color" href="/latest/docs/">OpenVidu Platform</a></td>
-</tr>
-</tbody>
-</table>
-<p><em><a href="openvidu-meet-vs-openvidu-platform/">Learn more about OpenVidu Meet vs OpenVidu Platform</a></em></p>
-</div>
-<hr style="margin: 7em 0;">
-
-<div class="second-slogan" data-sal="slide-up">
-  <h2 id="self-host-platform">
-    Self-host a production-ready live-video platform with advanced capabilities typically reserved for expensive SaaS solutions
-  </h2>
-</div>
-
-<div class="feature-cards">
-<div class="grid cards two-columns" data-sal="slide-up" style="margin-top: 3em;">
-<ul>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"></path></svg></span> <strong class="feature-name">Self-hosted</strong></p>
-<hr>
-<p>OpenVidu is designed from the ground up to be <a class="nowrap" href="/latest/docs/self-hosting/production-ready/"><strong>self-hosted</strong></a> in your own servers. With OpenVidu you can easily deploy and manage a production-ready live-video solution in your own infrastructure, whether it is on premises or in your favorite cloud provider. Leverage your hardware and regain control of your users' data!</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.72 14.76c.35-.85.54-1.76.54-2.76 0-.72-.11-1.41-.3-2.05-.65.15-1.33.23-2.04.23A9.07 9.07 0 0 1 9.5 6.34a9.2 9.2 0 0 1-4.73 4.88c-.04.25-.04.52-.04.78A7.27 7.27 0 0 0 12 19.27c1.05 0 2.06-.23 2.97-.64.57 1.09.83 1.63.81 1.63-1.64.55-2.91.82-3.78.82-2.42 0-4.73-.95-6.43-2.66a9 9 0 0 1-2.24-3.69H2v-4.55h1.09a9.09 9.09 0 0 1 15.33-4.6 9 9 0 0 1 2.47 4.6H22v4.55h-.06L18.38 18l-5.3-.6v-1.67h4.83zm-9.45-2.99c.3 0 .59.12.8.34a1.136 1.136 0 0 1 0 1.6c-.21.21-.5.33-.8.33-.63 0-1.14-.5-1.14-1.13s.51-1.14 1.14-1.14m5.45 0c.63 0 1.13.51 1.13 1.14s-.5 1.13-1.13 1.13-1.14-.5-1.14-1.13a1.14 1.14 0 0 1 1.14-1.14"></path></svg></span> <strong class="feature-name">Professional support</strong></p>
-<hr>
-<p>We are experts in WebRTC. We have been developing real time tools and supporting customers building their solutions for over a decade. Let's work together to make your project a success! <a href="support/"><strong>Contact us</strong></a> now.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2.03v2.02c4.39.54 7.5 4.53 6.96 8.92-.46 3.64-3.32 6.53-6.96 6.96v2c5.5-.55 9.5-5.43 8.95-10.93-.45-4.75-4.22-8.5-8.95-8.97m-2 .03c-1.95.19-3.81.94-5.33 2.2L7.1 5.74c1.12-.9 2.47-1.48 3.9-1.68zM4.26 5.67A9.9 9.9 0 0 0 2.05 11h2c.19-1.42.75-2.77 1.64-3.9zM15.5 8.5l-4.88 4.88-2.12-2.12-1.06 1.06 3.18 3.18 5.94-5.94zM2.06 13c.2 1.96.97 3.81 2.21 5.33l1.42-1.43A8 8 0 0 1 4.06 13zm5.04 5.37-1.43 1.37A10 10 0 0 0 11 22v-2a8 8 0 0 1-3.9-1.63"></path></svg></span> <strong class="feature-name">Easy to deploy</strong></p>
-<hr>
-<p>What could take a whole DevOps team days of work, with OpenVidu you can have it ready in minutes: an easy installation, configuration and administration experience to your self-hosted, production grade, real-time solution. <a href="/latest/docs/self-hosting/deployment-types/"><strong>Install now</strong></a>.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon more-padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M328 112H184l-37.3-74.5c-1.8-3.6-2.7-7.6-2.7-11.6C144 11.6 155.6 0 169.9 0h172.2C356.4 0 368 11.6 368 25.9c0 4-.9 8-2.7 11.6zm-158.4 48h172.8l48.7 40.6C457.6 256 496 338 496 424.5c0 48.3-39.2 87.5-87.5 87.5H103.4C55.2 512 16 472.8 16 424.5 16 338 54.4 256 120.9 200.6zm90.4 64c-11 0-20 9-20 20v4c-28.8.3-52 23.7-52 52.5 0 25.7 18.5 47.6 43.9 51.8l41.7 7c6 1 10.4 6.2 10.4 12.3 0 6.9-5.6 12.5-12.5 12.5L216 384c-11 0-20 9-20 20s9 20 20 20h24v4c0 11 9 20 20 20s20-9 20-20v-4.7c25-4.1 44-25.7 44-51.8 0-25.7-18.5-47.6-43.9-51.8l-41.7-7c-6-1-10.4-6.2-10.4-12.3 0-6.9 5.6-12.5 12.5-12.5H288c11 0 20-9 20-20s-9-20-20-20h-8v-4c0-11-9-20-20-20z"></path></svg></span> <strong class="feature-name">Cost effective</strong></p>
-<hr>
-<p>OpenVidu COMMUNITY is open source, free and can handle a significant user load. With OpenVidu PRO you can handle more simultaneous Rooms in the same hardware thanks to mediasoup integration. This allows reducing the cost of each Room, making OpenVidu PRO truly cost-effective as a self-hosted solution. See <a href="pricing/"><strong>Pricing</strong></a>.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15H6l7-14v8h5l-7 14z"></path></svg></span> <strong class="feature-name">Performant</strong></p>
-<hr>
-<p>OpenVidu is built to be incredibly powerful. It is based on the best open source WebRTC stacks: <a href="https://livekit.com/" target="_blank" rel="noopener"><strong>LiveKit</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a> and <a href="https://mediasoup.org/" target="_blank" rel="noopener"><strong>mediasoup</strong> <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>. By combining the best of both worlds, OpenVidu provides outstanding <a href="/latest/docs/self-hosting/production-ready/performance/"><strong>performance</strong></a>.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 8c-1.5 0-2.3 1.4-1.9 2.5l-3.6 3.6c-.3-.1-.7-.1-1 0l-2.6-2.6c.4-1.1-.4-2.5-1.9-2.5-1.4 0-2.3 1.4-1.9 2.5L3.5 16c-1.1-.3-2.5.5-2.5 2 0 1.1.9 2 2 2 1.4 0 2.3-1.4 1.9-2.5l4.5-4.6c.3.1.7.1 1 0l2.6 2.6c-.3 1 .5 2.5 2 2.5s2.3-1.4 1.9-2.5l3.6-3.6c1.1.3 2.5-.5 2.5-1.9 0-1.1-.9-2-2-2m-6 1 .9-2.1L18 6l-2.1-.9L15 3l-.9 2.1L12 6l2.1.9zM3.5 11 4 9l2-.5L4 8l-.5-2L3 8l-2 .5L3 9z"></path></svg></span> <strong class="feature-name">Scalable</strong></p>
-<hr>
-<p>OpenVidu has been designed from the outset with <a href="/latest/docs/self-hosting/production-ready/scalability/"><strong>scalability</strong></a> in mind. Host videoconference rooms and large live streams with hundreds of participants. Autoscale your cluster to adapt to the demand and optimize your resources.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 12c1 0 2 .2 2.9.7.1-.6.1-1.1.1-1.7V5l-9-4-9 4v6c0 5.5 3.8 10.7 9 12 .4-.1.7-.2 1-.3-1-1.2-1.5-2.7-1.5-4.2 0-3.6 2.9-6.5 6.5-6.5m0 2.5c1.1 0 2.1.4 2.8 1.2l1.2-1.2v4h-4l1.8-1.8c-.5-.4-1.1-.7-1.8-.7-1.4 0-2.5 1.1-2.5 2.5S16.6 21 18 21c.8 0 1.5-.4 2-1h1.7c-.6 1.5-2 2.5-3.7 2.5-2.2 0-4-1.8-4-4s1.8-4 4-4"></path></svg></span> <strong class="feature-name">Fault tolerant</strong></p>
-<hr>
-<p>OpenVidu offers <a href="/latest/docs/self-hosting/production-ready/fault-tolerance/"><strong>fault tolerance</strong></a> in all its components. Deploy a reliable cluster knowing that if one of your node goes down, others will be able to continue working with no downtime.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.46 6.28 11.05 9c-2.58.26-4.55 2.41-4.55 5a5 5 0 0 0 5 5c2.05 0 3.81-1.23 4.58-3H13.5v-2h8v2h-2.25a8.05 8.05 0 0 1-2.46 4h2.71v2h-16v-2h2.71a8 8 0 0 1-2.71-6c0-3.63 2.46-6.8 5.96-7.72m3.28-4.21.76 1.3.86-.5 3.5 6.06-3.47 2-3.5-6.06.87-.5-.76-1.3z"></path></svg></span> <strong class="feature-name">Observable</strong></p>
-<hr>
-<p>OpenVidu brings everything necessary to monitor the status, health, load and history of your deployment. It automatically collects events, metrics and logs and provides <a href="/latest/docs/self-hosting/production-ready/observability/openvidu-dashboard/"><strong>OpenVidu Dashboard</strong></a> and a <a href="/latest/docs/self-hosting/production-ready/observability/grafana-stack/"><strong>Grafana stack</strong></a> to navigate them.</p>
-</li>
-</ul>
-</div>
-</div>
-<hr style="margin: 7em 0;">
-
-<div class="second-slogan" data-sal="slide-up">
-  <h2 id="all-features">
-    All the features you need to quickly build your perfect real-time application
-  </h2>
-</div>
-
-<div class="feature-cards">
-<div class="grid cards center-last" data-sal="slide-up" style="margin-top: 3em;">
-<ul>
-<li>
-<p><span class="twemoji feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c2.44 0 4.5 1.75 4.91 4.07l.84-.07c2.75 0 5 2.24 5 5a5 5 0 0 1-2.59 4.38 5.015 5.015 0 0 1-4.41 7.37A5 5 0 0 1 12 21.06a5 5 0 0 1-3.75 1.69c-2.75 0-5-2.25-5-5 0-.86.22-1.66.59-2.37A5 5 0 0 1 1.25 11c0-2.76 2.25-5 5-5l.84.07C7.5 3.75 9.56 2 12 2M6.75 20.25 13.66 17H17c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1v7c0 .55.45 1 1 1h.77z"></path></svg></span> <strong class="feature-name">WebRTC</strong></p>
-<hr>
-<p>Achieve ultra-low latency in your videoconference or live-streaming app thanks to <a href="https://webrtc.org/" target="_blank" rel="noopener">WebRTC <span class="twemoji external-link-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.3 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32zM80 96c-44.2 0-80 35.8-80 80v256c0 44.2 35.8 80 80 80h256c44.2 0 80-35.8 80-80v-80c0-17.7-14.3-32-32-32s-32 14.3-32 32v80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h80c17.7 0 32-14.3 32-32s-14.3-32-32-32z"></path></svg></span></a>.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="m8.533.133 5.25 1.68A1.75 1.75 0 0 1 15 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.7 1.7 0 0 1-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 0 1 1.217-1.667l5.25-1.68a1.75 1.75 0 0 1 1.066 0m-.61 1.429zl-5.25 1.68a.25.25 0 0 0-.174.237V7c0 1.36.275 2.666 1.057 3.859.784 1.194 2.121 2.342 4.366 3.298a.2.2 0 0 0 .154 0c2.245-.957 3.582-2.103 4.366-3.297C13.225 9.666 13.5 8.358 13.5 7V3.48a.25.25 0 0 0-.174-.238l-5.25-1.68a.25.25 0 0 0-.153 0M11.28 6.28l-3.5 3.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l.97.97 2.97-2.97a.75.75 0 0 1 1.042.018.75.75 0 0 1 .018 1.042"></path></svg></span> <strong class="feature-name">Security at all levels</strong></p>
-<hr>
-<p>Fine-grained access control and highly secure deployments for the most demanding security requirements. E2EE (End-to-End Encryption) support.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117 110">
-<g transform="translate(2.64 4) scale(1.25)"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"></path></g>
-<g transform="translate(42.64 4) scale(1.25)"><path d="M8.824 7.287c.008 0 .004 0 0 0zm-2.8-1.4c.006 0 .003 0 0 0zm16.754 2.161c-.505-1.215-1.53-2.528-2.333-2.943.654 1.283 1.033 2.57 1.177 3.53l.002.02c-1.314-3.278-3.544-4.6-5.366-7.477-.091-.147-.184-.292-.273-.446a3.545 3.545 0 01-.13-.24 2.118 2.118 0 01-.172-.46.03.03 0 00-.027-.03.038.038 0 00-.021 0l-.006.001a.037.037 0 00-.01.005L15.624 0c-2.585 1.515-3.657 4.168-3.932 5.856a6.197 6.197 0 00-2.305.587.297.297 0 00-.147.37c.057.162.24.24.396.17a5.622 5.622 0 012.008-.523l.067-.005a5.847 5.847 0 011.957.222l.095.03a5.816 5.816 0 01.616.228c.08.036.16.073.238.112l.107.055a5.835 5.835 0 01.368.211 5.953 5.953 0 012.034 2.104c-.62-.437-1.733-.868-2.803-.681 4.183 2.09 3.06 9.292-2.737 9.02a5.164 5.164 0 01-1.513-.292 4.42 4.42 0 01-.538-.232c-1.42-.735-2.593-2.121-2.74-3.806 0 0 .537-2 3.845-2 .357 0 1.38-.998 1.398-1.287-.005-.095-2.029-.9-2.817-1.677-.422-.416-.622-.616-.8-.767a3.47 3.47 0 00-.301-.227 5.388 5.388 0 01-.032-2.842c-1.195.544-2.124 1.403-2.8 2.163h-.006c-.46-.584-.428-2.51-.402-2.913-.006-.025-.343.176-.389.206-.406.29-.787.616-1.136.974-.397.403-.76.839-1.085 1.303a9.816 9.816 0 00-1.562 3.52c-.003.013-.11.487-.19 1.073-.013.09-.026.181-.037.272a7.8 7.8 0 00-.069.667l-.002.034-.023.387-.001.06C.386 18.795 5.593 24 12.016 24c5.752 0 10.527-4.176 11.463-9.661.02-.149.035-.298.052-.448.232-1.994-.025-4.09-.753-5.844z"></path></g>
-<g transform="translate(82.64 4) scale(1.25)"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm-.004.953h.006c.063 0 .113.05.113.113v1.842c0 .063-.05.113-.113.113h-.006a.112.112 0 0 1-.113-.113V1.066c0-.063.05-.113.113-.113zm-.941.041c.056.001.104.046.11.104l.077.918a.112.112 0 0 1-.101.12h-.01a.11.11 0 0 1-.12-.1l-.08-.919a.112.112 0 0 1 .102-.12h.01l.012-.003zm1.892 0H12.965a.113.113 0 0 1 .103.121l-.08.92a.111.111 0 0 1-.12.102h-.009a.111.111 0 0 1-.101-.121l.078-.92a.112.112 0 0 1 .111-.102zm-2.838.123a.11.11 0 0 1 .106.092l.32 1.818c.01.06-.03.119-.09.13l-.01.001a.111.111 0 0 1-.128-.09l-.32-1.818a.111.111 0 0 1 .09-.129l.01-.002a.103.103 0 0 1 .022-.002zm3.784.002h.021l.008.002c.061.01.102.07.092.131l-.32 1.814c-.011.062-.07.101-.132.09h-.005a.113.113 0 0 1-.092-.13l.32-1.815a.111.111 0 0 1 .108-.092zm-4.715.203c.048.002.09.035.103.084l.239.893a.112.112 0 0 1-.079.139l-.005.001a.114.114 0 0 1-.14-.08l-.237-.894a.11.11 0 0 1 .078-.137l.006-.002a.123.123 0 0 1 .035-.004zm5.644 0a.11.11 0 0 1 .033.004l.006.002c.06.016.097.079.08.139l-.24.892a.112.112 0 0 1-.137.08l-.005-.002a.114.114 0 0 1-.08-.138l.24-.893a.112.112 0 0 1 .103-.084zm-6.562.285a.11.11 0 0 1 .107.073L9 3.42a.107.107 0 0 1-.064.139l-.012.005a.11.11 0 0 1-.14-.066L8.15 1.76a.11.11 0 0 1 .065-.14l.014-.005a.106.106 0 0 1 .03-.008zm7.469.002c.014 0 .028.001.042.006l.012.006c.057.02.087.082.067.139l-.633 1.738a.11.11 0 0 1-.14.066l-.013-.003A.11.11 0 0 1 15 3.42l.633-1.738a.108.108 0 0 1 .096-.073zm-8.352.366a.112.112 0 0 1 .105.064l.393.838a.112.112 0 0 1-.055.148l-.008.004a.11.11 0 0 1-.146-.054l-.395-.838a.112.112 0 0 1 .055-.149l.008-.004a.11.11 0 0 1 .043-.01zm9.246 0a.11.11 0 0 1 .043.01l.006.003a.11.11 0 0 1 .053.149l-.391.838a.112.112 0 0 1-.148.054l-.006-.002a.112.112 0 0 1-.055-.148l.393-.84a.112.112 0 0 1 .105-.064zm-10.092.44c.04-.002.08.018.102.056l.922 1.597a.113.113 0 0 1-.041.155l-.006.002a.113.113 0 0 1-.154-.041l-.922-1.598a.113.113 0 0 1 .04-.154l.007-.002a.11.11 0 0 1 .052-.016zm10.94.001c.018 0 .035.004.052.014l.004.002a.114.114 0 0 1 .041.156l-.923 1.596a.114.114 0 0 1-.157.04l-.004-.001a.112.112 0 0 1-.04-.155l.925-1.595a.113.113 0 0 1 .102-.057zM5.729 2.93a.11.11 0 0 1 .093.047l.532.753a.114.114 0 0 1-.028.159l-.004.002a.114.114 0 0 1-.158-.028l-.531-.752a.114.114 0 0 1 .027-.158l.006-.002a.113.113 0 0 1 .063-.021zm12.542 0a.11.11 0 0 1 .063.02l.006.003a.112.112 0 0 1 .027.156l-.531.756a.112.112 0 0 1-.156.028l-.006-.004a.112.112 0 0 1-.028-.157l.532-.755a.11.11 0 0 1 .093-.047zm.747.578a.11.11 0 0 1 .08.027l.006.004c.047.04.053.111.013.158L17.932 5.11a.11.11 0 0 1-.157.016l-.005-.006a.11.11 0 0 1-.014-.156l1.185-1.414a.114.114 0 0 1 .077-.041zM4.984 3.51a.11.11 0 0 1 .077.039L6.244 4.96a.112.112 0 0 1-.014.158l-.003.004a.112.112 0 0 1-.159-.014L4.883 3.697a.112.112 0 0 1 .013-.158l.006-.004a.111.111 0 0 1 .082-.025zm-.714.64c.027 0 .055.01.076.032l.658.66a.107.107 0 0 1 0 .152l-.01.01a.107.107 0 0 1-.152 0l-.66-.658a.11.11 0 0 1 0-.155l.01-.01a.111.111 0 0 1 .078-.03zm15.462 0c.028 0 .055.01.077.032l.007.007a.109.109 0 0 1 0 .155l-.658.66a.109.109 0 0 1-.154 0l-.008-.008a.109.109 0 0 1 0-.154l.658-.66a.11.11 0 0 1 .078-.032zm.707.66c.038 0 .071.02.092.075a.112.112 0 0 1-.023.117l-7.606 8.08c-3.084 2.024-6.149 4.04-9.222 6.05-.078.051-.17.082-.211-.028a.112.112 0 0 1 .023-.118l7.594-8.08c3.084-2.023 6.161-4.039 9.234-6.049a.247.247 0 0 1 .12-.046zm-16.824.045a.109.109 0 0 1 .08.026l1.416 1.187a.11.11 0 0 1 .014.157l-.006.005a.11.11 0 0 1-.156.014L3.549 5.057a.109.109 0 0 1-.014-.155l.006-.007a.108.108 0 0 1 .074-.04zm17.336.756c.036 0 .072.017.094.05l.004.003a.114.114 0 0 1-.028.158l-.753.53a.112.112 0 0 1-.157-.028l-.004-.004a.114.114 0 0 1 .028-.158l.754-.53a.113.113 0 0 1 .062-.02zm-17.904.002c.02 0 .042.007.06.02l.76.531c.05.035.06.103.026.152l-.006.01a.109.109 0 0 1-.153.026l-.76-.532a.109.109 0 0 1-.025-.152l.006-.01a.108.108 0 0 1 .092-.045zm-.512.803c.018 0 .036.006.053.016l1.596.923a.111.111 0 0 1 .04.153l-.003.006a.111.111 0 0 1-.153.04L2.473 6.63a.111.111 0 0 1-.041-.152l.004-.006a.11.11 0 0 1 .1-.055zm18.932 0a.11.11 0 0 1 .1.055l.001.004a.113.113 0 0 1-.04.154l-1.596.926a.113.113 0 0 1-.155-.041l-.002-.004a.113.113 0 0 1 .041-.155l1.596-.925a.115.115 0 0 1 .055-.014zm-19.373.846c.014 0 .029.003.043.01l.838.392a.11.11 0 0 1 .052.147l-.004.01a.11.11 0 0 1-.146.052l-.838-.393a.11.11 0 0 1-.053-.146l.004-.01a.109.109 0 0 1 .104-.062zm19.81.002a.11.11 0 0 1 .106.062l.002.008a.11.11 0 0 1-.053.146l-.838.393a.11.11 0 0 1-.146-.053l-.004-.008a.11.11 0 0 1 .052-.146l.838-.393a.11.11 0 0 1 .043-.01zm-20.183.88c.014 0 .028.001.043.006l1.732.631a.112.112 0 0 1 .067.145l-.002.006a.11.11 0 0 1-.143.066l-1.732-.63a.113.113 0 0 1-.069-.145l.002-.004a.115.115 0 0 1 .102-.074zm20.549 0a.113.113 0 0 1 .11.075l.003.004a.115.115 0 0 1-.069.146l-1.732.629a.112.112 0 0 1-.145-.066l-.001-.006a.113.113 0 0 1 .068-.145l1.732-.63a.11.11 0 0 1 .034-.006zm-20.836.909a.11.11 0 0 1 .033.004l.892.24c.06.016.096.077.08.137l-.002.007a.11.11 0 0 1-.136.079l-.895-.239a.113.113 0 0 1-.078-.138l.002-.006a.113.113 0 0 1 .104-.084zm21.13.002a.115.115 0 0 1 .106.084v.004a.112.112 0 0 1-.078.138l-.893.239a.112.112 0 0 1-.138-.079v-.005a.112.112 0 0 1 .078-.14l.892-.237a.11.11 0 0 1 .033-.004zm-21.335.93.023.001 1.814.323c.062.01.101.069.09.13v.006a.111.111 0 0 1-.13.09l-1.815-.322a.113.113 0 0 1-.092-.131l.002-.006a.11.11 0 0 1 .108-.092zm21.519.001h.022c.052.002.1.038.109.092v.006c.01.062-.03.12-.092.13l-1.814.321a.113.113 0 0 1-.131-.092v-.005a.113.113 0 0 1 .092-.131l1.814-.32zm-21.644.944h.011l.922.084a.11.11 0 0 1 .102.119l-.002.01a.11.11 0 0 1-.121.1l-.922-.083a.11.11 0 0 1-.1-.12v-.009a.111.111 0 0 1 .11-.101zm21.779.002h.012c.056 0 .106.043.11.101v.008a.111.111 0 0 1-.1.121l-.923.08a.111.111 0 0 1-.12-.101v-.008a.111.111 0 0 1 .1-.121l.92-.08zm-11.82.73L6.091 16.95c2.02-1.324 4.039-2.646 6.066-3.976l-1.095-1.31zm11.87.219c.063 0 .114.05.114.113v.004c0 .063-.05.113-.113.113l-1.844.004a.113.113 0 0 1-.113-.113v-.004c0-.063.05-.113.113-.113l1.844-.004zm-21.869.002h1.844c.062 0 .112.05.112.111v.008c0 .062-.05.111-.112.111H1.064a.111.111 0 0 1-.11-.111v-.008c0-.061.049-.111.11-.111zm.952.875h.011a.11.11 0 0 1 .11.101v.006a.111.111 0 0 1-.102.121l-.922.08a.11.11 0 0 1-.119-.101l-.002-.006a.111.111 0 0 1 .102-.121l.922-.08zm19.955 0h.011l.922.08a.11.11 0 0 1 .102.119v.008a.112.112 0 0 1-.121.101l-.922-.08a.11.11 0 0 1-.102-.119v-.008a.111.111 0 0 1 .11-.101zm-18.924.705c.053.001.098.04.107.094l.002.004c.011.061-.03.12-.092.13l-1.812.32a.113.113 0 0 1-.13-.091v-.004a.115.115 0 0 1 .09-.133l1.811-.318a.117.117 0 0 1 .024-.002zm17.902 0c.008 0 .016 0 .024.002l1.816.32c.061.011.1.07.09.131v.004a.113.113 0 0 1-.131.092l-1.816-.32a.112.112 0 0 1-.09-.131v-.004a.113.113 0 0 1 .107-.094zM2.332 14.477a.11.11 0 0 1 .104.082l.002.005c.016.06-.02.121-.08.137l-.891.24a.112.112 0 0 1-.137-.08l-.002-.006a.112.112 0 0 1 .08-.136l.89-.239a.112.112 0 0 1 .034-.003zm19.332 0c.011 0 .024 0 .035.003l.893.239c.06.016.096.077.08.136l-.002.006a.111.111 0 0 1-.137.078l-.894-.238a.111.111 0 0 1-.078-.137l.002-.005a.109.109 0 0 1 .101-.082zm-18.213.517a.11.11 0 0 1 .11.074l.002.004a.112.112 0 0 1-.067.145l-1.732.63a.113.113 0 0 1-.145-.068l-.002-.004a.113.113 0 0 1 .069-.144L3.418 15a.11.11 0 0 1 .033-.006zm17.086 0c.015 0 .029 0 .043.006l1.734.63a.111.111 0 0 1 .067.143l-.002.008a.111.111 0 0 1-.143.067l-1.734-.631a.111.111 0 0 1-.066-.143l.002-.008a.111.111 0 0 1 .1-.072zM2.92 16.117a.109.109 0 0 1 .103.063l.004.01a.108.108 0 0 1-.052.144l-.838.393a.11.11 0 0 1-.147-.055l-.004-.008a.11.11 0 0 1 .053-.146l.838-.391a.112.112 0 0 1 .043-.01zm18.158 0a.11.11 0 0 1 .043.01l.838.39c.056.027.08.093.055.149l-.002.004a.112.112 0 0 1-.149.055l-.838-.391a.112.112 0 0 1-.054-.148l.002-.004a.112.112 0 0 1 .105-.065zm-16.957.315c.04-.001.078.02.1.056l.004.004a.11.11 0 0 1-.041.153l-1.596.921a.113.113 0 0 1-.154-.04l-.002-.005a.113.113 0 0 1 .04-.154l1.596-.922a.109.109 0 0 1 .053-.013zm15.756 0c.018 0 .036.004.053.013l1.597.924a.11.11 0 0 1 .041.152l-.002.004a.11.11 0 0 1-.152.041l-1.598-.921a.113.113 0 0 1-.04-.155l.001-.002a.111.111 0 0 1 .1-.056zm.328 1.193a.11.11 0 0 1 .06.021l.758.534c.05.035.061.102.026.152l-.004.008a.111.111 0 0 1-.154.027l-.756-.535a.109.109 0 0 1-.028-.152l.006-.008a.11.11 0 0 1 .092-.047zm-16.412.002c.035 0 .072.016.094.047l.004.008a.109.109 0 0 1-.028.152l-.756.531a.108.108 0 0 1-.152-.025l-.006-.008a.109.109 0 0 1 .028-.152l.755-.534a.107.107 0 0 1 .061-.019zm15.162.102a.112.112 0 0 1 .082.025l1.414 1.187a.11.11 0 0 1 .014.157l-.004.004a.113.113 0 0 1-.158.013L18.89 17.93a.11.11 0 0 1-.014-.157l.004-.005a.108.108 0 0 1 .074-.04zm-12.812 1.12a.11.11 0 0 1 .08.026l.007.008a.11.11 0 0 1 .014.154L5.06 20.451a.11.11 0 0 1-.155.012l-.008-.006a.11.11 0 0 1-.013-.154l1.185-1.414a.11.11 0 0 1 .075-.04zm11.703 0c.032 0 .065.015.088.042l1.181 1.41c.04.048.035.12-.013.16l-.002.002a.114.114 0 0 1-.16-.014l-1.182-1.41a.114.114 0 0 1 .013-.16l.002-.002a.115.115 0 0 1 .073-.027zm-12.928.114c.027 0 .054.01.074.031l.014.012a.107.107 0 0 1 0 .15l-.662.66a.105.105 0 0 1-.149 0l-.011-.011a.105.105 0 0 1 0-.149l.66-.662a.105.105 0 0 1 .074-.031zm14.164 0c.027 0 .053.01.074.031l.66.662a.106.106 0 0 1 0 .15l-.011.012a.106.106 0 0 1-.15-.002l-.66-.66a.106.106 0 0 1 .001-.15l.01-.012a.108.108 0 0 1 .076-.031zm-11.627.797c.018 0 .034.006.05.015l.007.004a.11.11 0 0 1 .04.15l-.921 1.598a.11.11 0 0 1-.15.041l-.008-.004a.111.111 0 0 1-.04-.152l.922-1.596a.113.113 0 0 1 .1-.056zm9.088.002a.11.11 0 0 1 .1.054l.925 1.596a.113.113 0 0 1-.04.154h-.005a.11.11 0 0 1-.152-.039l-.926-1.595a.113.113 0 0 1 .041-.155l.004-.002a.108.108 0 0 1 .053-.013zm-10.285.324c.021 0 .043.008.062.021l.004.002c.051.036.063.106.028.157l-.53.755a.112.112 0 0 1-.156.028l-.004-.002a.112.112 0 0 1-.027-.156l.53-.756a.113.113 0 0 1 .093-.05zm11.484.002c.036 0 .072.015.094.047l.53.756c.035.05.023.12-.028.156l-.004.002a.112.112 0 0 1-.156-.028l-.53-.755a.112.112 0 0 1 .028-.157l.004-.002a.112.112 0 0 1 .062-.02zm-8.863.342a.11.11 0 0 1 .043.006l.012.005c.056.02.084.081.064.137l-.633 1.74a.105.105 0 0 1-.136.063l-.014-.004a.106.106 0 0 1-.065-.137l.633-1.74a.107.107 0 0 1 .096-.07zm6.232 0a.107.107 0 0 1 .106.07l.633 1.738a.107.107 0 0 1-.065.137l-.015.006a.107.107 0 0 1-.137-.065L15 20.578a.107.107 0 0 1 .064-.137l.014-.005a.117.117 0 0 1 .033-.006zm-4.695.41c.008 0 .014 0 .021.002l.006.002c.062.01.101.067.09.129l-.318 1.812a.113.113 0 0 1-.131.092l-.004-.002a.111.111 0 0 1-.092-.129l.32-1.812a.113.113 0 0 1 .108-.094zm3.146.002c.008-.002.015 0 .022 0a.111.111 0 0 1 .107.092l.32 1.812c.012.061-.03.12-.091.131l-.004.002a.113.113 0 0 1-.13-.092l-.321-1.812a.113.113 0 0 1 .092-.131l.005-.002zm-5.79.119a.11.11 0 0 1 .042.01l.004.002a.114.114 0 0 1 .055.15l-.393.834a.112.112 0 0 1-.148.055l-.004-.002a.112.112 0 0 1-.055-.149l.393-.836a.112.112 0 0 1 .105-.064zm8.458 0a.108.108 0 0 1 .104.062l.39.84a.11.11 0 0 1-.052.147l-.008.004a.11.11 0 0 1-.146-.055l-.391-.838a.11.11 0 0 1 .053-.146l.008-.004a.11.11 0 0 1 .042-.01zm-4.236.018H12c.063 0 .115.05.115.113l.002 1.84c0 .063-.05.113-.113.113h-.006a.113.113 0 0 1-.113-.113l-.004-1.838c0-.063.05-.115.113-.115zm-2.592.578c.011 0 .022 0 .034.004l.005.002c.06.016.095.077.079.136l-.24.893a.111.111 0 0 1-.137.078l-.006-.002a.111.111 0 0 1-.078-.137l.24-.89a.113.113 0 0 1 .103-.084zm5.196.002a.11.11 0 0 1 .103.082l.24.89a.11.11 0 0 1-.078.137l-.006.002a.11.11 0 0 1-.136-.078l-.24-.89a.11.11 0 0 1 .078-.138l.005-.002a.112.112 0 0 1 .034-.003zm-3.475.302h.01l.008.002c.061.006.107.06.101.121l-.08.92a.112.112 0 0 1-.121.102h-.008a.11.11 0 0 1-.1-.121l.08-.922a.111.111 0 0 1 .11-.102zm1.736 0h.02a.11.11 0 0 1 .107.102l.08.924a.11.11 0 0 1-.101.119l-.008.002a.11.11 0 0 1-.12-.102l-.08-.924a.112.112 0 0 1 .102-.12z"></path></g>
-<g transform="translate(2.64 42) scale(1.25)"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"></path></g>
-<g transform="translate(42.64 42) scale(1.25)"><path d="M1.1 6.05C.486 6.05 0 6.53 0 7.13A1.08 1.08 0 0 0 1.1 8.21C1.72 8.21 2.21 7.73 2.21 7.13C2.21 6.53 1.72 6.05 1.1 6.05M8.71 6.07C5.35 6.07 3.25 8.36 3.25 12C3.25 15.67 5.35 17.95 8.71 17.95C12.05 17.95 14.16 15.67 14.16 12C14.16 8.36 12.05 6.07 8.71 6.07M19.55 6.07C17.05 6.07 15.27 7.45 15.27 9.5C15.27 11.13 16.28 12.15 18.4 12.64L19.89 13C21.34 13.33 21.93 13.81 21.93 14.64C21.93 15.6 20.96 16.28 19.58 16.28C18.17 16.28 17.11 15.59 17 14.53H15C15.08 16.65 16.82 17.95 19.46 17.95C22.25 17.95 24 16.58 24 14.4C24 12.69 23 11.72 20.68 11.19L19.35 10.89C17.94 10.55 17.36 10.1 17.36 9.34C17.36 8.38 18.24 7.74 19.54 7.74C20.85 7.74 21.75 8.39 21.85 9.46H23.81C23.76 7.44 22.09 6.07 19.55 6.07M8.71 7.82C10.75 7.82 12.06 9.45 12.06 12C12.06 14.57 10.75 16.2 8.71 16.2C6.65 16.2 5.35 14.57 5.35 12C5.35 9.45 6.65 7.82 8.71 7.82M.111 9.31V17.76H2.1V9.31H.11Z"></path></g>
-<g transform="translate(82.64 42) scale(1.25)"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"></path></g>
-<g transform="translate(2.64 79.5) scale(1.0833)"><path d="M0,0H11.377V11.372H0ZM12.623,0H24V11.372H12.623ZM0,12.623H11.377V24H0Zm12.623,0H24V24H12.623"></path></g>
-<g transform="translate(34.64 69.5) scale(1.9167)"><path d="M0 14.727h.941v-2.453c0-.484.318-.835.771-.835.439 0 .71.276.71.722v2.566h.915V12.25c0-.48.31-.812.764-.812.46 0 .718.28.718.77v2.518h.94v-2.748c0-.801-.517-1.334-1.307-1.334-.578 0-1.054.31-1.247.805h-.023c-.147-.514-.552-.805-1.118-.805-.545 0-.968.306-1.142.771H.903v-.695H0v4.006zm7.82-.646c-.408 0-.68-.208-.68-.537 0-.318.26-.522.714-.552l.926-.057v.307c0 .483-.427.839-.96.839zm-.284.71c.514 0 1.017-.268 1.248-.703h.018v.639h.908v-2.76c0-.804-.647-1.33-1.64-1.33-1.021 0-1.66.537-1.701 1.285h.873c.06-.332.344-.548.79-.548.464 0 .748.242.748.662v.287l-1.058.06c-.976.061-1.524.488-1.524 1.199 0 .721.564 1.209 1.338 1.209zm6.305-2.642c-.065-.843-.719-1.512-1.777-1.512-1.164 0-1.92.805-1.92 2.087 0 1.3.756 2.082 1.928 2.082 1.005 0 1.697-.59 1.772-1.485h-.888c-.087.453-.397.725-.873.725-.597 0-.982-.483-.982-1.322 0-.824.381-1.323.975-1.323.502 0 .8.321.876.748h.889zm2.906-2.967c-1.591 0-2.589 1.085-2.589 2.82 0 1.735.998 2.816 2.59 2.816 1.586 0 2.584-1.081 2.584-2.816 0-1.735-.997-2.82-2.585-2.82zm0 .832c.971 0 1.591.77 1.591 1.988 0 1.213-.62 1.984-1.59 1.984-.976 0-1.592-.77-1.592-1.984 0-1.217.616-1.988 1.591-1.988zm2.982 3.178c.042 1.006.866 1.626 2.12 1.626 1.32 0 2.151-.65 2.151-1.686 0-.813-.469-1.27-1.576-1.523l-.627-.144c-.67-.158-.945-.37-.945-.733 0-.453.415-.756 1.032-.756.623 0 1.05.306 1.096.817h.93c-.023-.96-.817-1.61-2.019-1.61-1.187 0-2.03.653-2.03 1.62 0 .78.477 1.263 1.482 1.494l.707.166c.688.163.967.39.967.782 0 .454-.457.779-1.115.779-.665 0-1.167-.329-1.228-.832h-.945z"></path></g>
-<g transform="translate(83.14 78) scale(1.2083)"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.053-.128.082-.264.088-.402v-.02a1.21 1.21 0 00-.061-.4c-.045-.134-.101-.2-.183-.333-.084-.066-.167-.132-.267-.132h-.016c-.093 0-.176.03-.262.132a.8.8 0 00-.205.334 1.18 1.18 0 00-.09.4v.019c.002.089.008.179.02.267-.193-.067-.438-.135-.607-.202a1.635 1.635 0 01-.018-.2v-.02a1.772 1.772 0 01.15-.768c.082-.22.232-.406.43-.533a.985.985 0 01.594-.2zm-2.962.059h.036c.142 0 .27.048.399.135.146.129.264.288.344.465.09.199.14.4.153.667v.004c.007.134.006.2-.002.266v.08c-.03.007-.056.018-.083.024-.152.055-.274.135-.393.2.012-.09.013-.18.003-.267v-.015c-.012-.133-.04-.2-.082-.333a.613.613 0 00-.166-.267.248.248 0 00-.183-.064h-.021c-.071.006-.13.04-.186.132a.552.552 0 00-.12.27.944.944 0 00-.023.33v.015c.012.135.037.2.08.334.046.134.098.2.166.268.01.009.02.018.034.024-.07.057-.117.07-.176.136a.304.304 0 01-.131.068 2.62 2.62 0 01-.275-.402 1.772 1.772 0 01-.155-.667 1.759 1.759 0 01.08-.668 1.43 1.43 0 01.283-.535c.128-.133.26-.2.418-.2zm1.37 1.706c.332 0 .733.065 1.216.399.293.2.523.269 1.052.468h.003c.255.136.405.266.478.399v-.131a.571.571 0 01.016.47c-.123.31-.516.643-1.063.842v.002c-.268.135-.501.333-.775.465-.276.135-.588.292-1.012.267a1.139 1.139 0 01-.448-.067 3.566 3.566 0 01-.322-.198c-.195-.135-.363-.332-.612-.465v-.005h-.005c-.4-.246-.616-.512-.686-.71-.07-.268-.005-.47.193-.6.224-.135.38-.271.483-.336.104-.074.143-.102.176-.131h.002v-.003c.169-.202.436-.47.839-.601.139-.036.294-.065.466-.065zm2.8 2.142c.358 1.417 1.196 3.475 1.735 4.473.286.534.855 1.659 1.102 3.024.156-.005.33.018.513.064.646-1.671-.546-3.467-1.089-3.966-.22-.2-.232-.335-.123-.335.59.534 1.365 1.572 1.646 2.757.13.535.16 1.104.021 1.67.067.028.135.06.205.067 1.032.534 1.413.938 1.23 1.537v-.043c-.06-.003-.12 0-.18 0h-.016c.151-.467-.182-.825-1.065-1.224-.915-.4-1.646-.336-1.77.465-.008.043-.013.066-.018.135-.068.023-.139.053-.209.064-.43.268-.662.669-.793 1.187-.13.533-.17 1.156-.205 1.869v.003c-.02.334-.17.838-.319 1.35-1.5 1.072-3.58 1.538-5.348.334a2.645 2.645 0 00-.402-.533 1.45 1.45 0 00-.275-.333c.182 0 .338-.03.465-.067a.615.615 0 00.314-.334c.108-.267 0-.697-.345-1.163-.345-.467-.931-.995-1.788-1.521-.63-.4-.986-.87-1.15-1.396-.165-.534-.143-1.085-.015-1.645.245-1.07.873-2.11 1.274-2.763.107-.065.037.135-.408.974-.396.751-1.14 2.497-.122 3.854a8.123 8.123 0 01.647-2.876c.564-1.278 1.743-3.504 1.836-5.268.048.036.217.135.289.202.218.133.38.333.59.465.21.201.477.335.876.335.039.003.075.006.11.006.412 0 .73-.134.997-.268.29-.134.52-.334.74-.4h.005c.467-.135.835-.402 1.044-.7zm2.185 8.958c.037.6.343 1.245.882 1.377.588.134 1.434-.333 1.791-.765l.211-.01c.315-.007.577.01.847.268l.003.003c.208.199.305.53.391.876.085.4.154.78.409 1.066.486.527.645.906.636 1.14l.003-.007v.018l-.003-.012c-.015.262-.185.396-.498.595-.63.401-1.746.712-2.457 1.57-.618.737-1.37 1.14-2.036 1.191-.664.053-1.237-.2-1.574-.898l-.005-.003c-.21-.4-.12-1.025.056-1.69.176-.668.428-1.344.463-1.897.037-.714.076-1.335.195-1.814.12-.465.308-.797.641-.984l.045-.022zm-10.814.049h.01c.053 0 .105.005.157.014.376.055.706.333 1.023.752l.91 1.664.003.003c.243.533.754 1.064 1.189 1.637.434.598.77 1.131.729 1.57v.006c-.057.744-.48 1.148-1.125 1.294-.645.135-1.52.002-2.395-.464-.968-.536-2.118-.469-2.857-.602-.369-.066-.61-.2-.723-.4-.11-.2-.113-.602.123-1.23v-.004l.002-.003c.117-.334.03-.752-.027-1.118-.055-.401-.083-.71.043-.94.16-.334.396-.4.69-.533.294-.135.64-.202.915-.47h.002v-.002c.256-.268.445-.601.668-.838.19-.201.38-.336.663-.336zm7.159-9.074c-.435.201-.945.535-1.488.535-.542 0-.97-.267-1.28-.466-.154-.134-.28-.268-.373-.335-.164-.134-.144-.333-.074-.333.109.016.129.134.199.2.096.066.215.2.36.333.292.2.68.467 1.167.467.485 0 1.053-.267 1.398-.466.195-.135.445-.334.648-.467.156-.136.149-.267.279-.267.128.016.034.134-.147.332a8.097 8.097 0 01-.69.468zm-1.082-1.583V5.64c-.006-.02.013-.042.029-.05.074-.043.18-.027.26.004.063 0 .16.067.15.135-.006.049-.085.066-.135.066-.055 0-.092-.043-.141-.068-.052-.018-.146-.008-.163-.065zm-.551 0c-.02.058-.113.049-.166.066-.047.025-.086.068-.14.068-.05 0-.13-.02-.136-.068-.01-.066.088-.133.15-.133.08-.031.184-.047.259-.005.019.009.036.03.03.05v.02h.003z"></path></g>
-</svg>
-</span> <strong class="feature-name">Multiplatform</strong></p>
-<hr>
-<p>Chrome, Firefox, Safari, Android, iOS, Unity, Windows, macOS, Linux... OpenVidu is compatible with all of them.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-7 10.5h-1V15H9.5v-1.5h-3V9H8v3h1.5V9H11v3h1zm6 1.5h-1.8l-1.8-2.2V15H13V9h1.5v2.2L16.2 9H18l-2.2 3z"></path></svg></span> <strong class="feature-name">Up to 4K video and HQ audio</strong></p>
-<hr>
-<p>HD up to 4K video resolution, and crisp audio quality with noise cancellation and echo suppression.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.5 5A7.5 7.5 0 0 0 5 12.5a7.5 7.5 0 0 0 7.5 7.5 7.5 7.5 0 0 0 7.5-7.5A7.5 7.5 0 0 0 12.5 5M7 10h2a1 1 0 0 1 1 1v1c0 .5-.38.9-.86.97L10.31 15H9.15L8 13v2H7m5-5h2v1h-2v1h2v1h-2v1h2v1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m4 0h2v1h-2v3h2v1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1m-8 1v1h1v-1"></path></svg></span> <strong class="feature-name">Recording</strong></p>
-<hr>
-<p>Record your video calls with complete freedom. You can use predefined layouts or easily build your own.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.485 2.515a.75.75 0 0 0-1.06 1.06A10.47 10.47 0 0 1 22.5 11c0 2.9-1.174 5.523-3.075 7.424a.75.75 0 0 0 1.06 1.061A11.97 11.97 0 0 0 24 11c0-3.314-1.344-6.315-3.515-8.485m-15.91 1.06a.75.75 0 0 0-1.06-1.06A11.97 11.97 0 0 0 0 11c0 3.313 1.344 6.314 3.515 8.485a.75.75 0 0 0 1.06-1.06A10.47 10.47 0 0 1 1.5 11c0-2.9 1.174-5.524 3.075-7.425M8.11 7.11a.75.75 0 0 0-1.06-1.06A6.98 6.98 0 0 0 5 11a6.98 6.98 0 0 0 2.05 4.95.75.75 0 0 0 1.06-1.061 5.48 5.48 0 0 1-1.61-3.89 5.48 5.48 0 0 1 1.61-3.888Zm8.84-1.06a.75.75 0 1 0-1.06 1.06A5.48 5.48 0 0 1 17.5 11a5.48 5.48 0 0 1-1.61 3.889.75.75 0 1 0 1.06 1.06A6.98 6.98 0 0 0 19 11a6.98 6.98 0 0 0-2.05-4.949ZM14 11a2 2 0 0 1-1.25 1.855v8.395a.75.75 0 0 1-1.5 0v-8.395A2 2 0 1 1 14 11"></path></svg></span> <strong class="feature-name">Broadcast to YouTube/Twitch</strong></p>
-<hr>
-<p>OpenVidu allows you to easily broadcast your sessions to live-streaming platforms such as YouTube or Twitch.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 4v12c0 1.11-.89 2-2 2h-6v-2h6V4H3v12h6v2H3a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2h18a2 2 0 0 1 2 2m-10 9h3l-4-4-4 4h3v7H8v2h8v-2h-3z"></path></svg></span> <strong class="feature-name">Screen sharing</strong></p>
-<hr>
-<p>Screen share from browsers or native applications with ease, always with the best quality.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.6 9.6 9 15 7.4 9.6 2 8l5.4-1.6L9 1l1.6 5.4L16 8zm6.4 4.6 4-2.2-2.2 4 2.2 4-4-2.2-4 2.2 2.2-4-2.2-4zM10 16l-1.7 3 1.7 3-3-1.7L4 22l1.7-3L4 16l3 1.7z"></path></svg></span> <strong class="feature-name">Virtual Backgrounds</strong></p>
-<hr>
-<p>Apply effects to your videos, blurring the background or replacing it with an image.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M415.9 210.5c12.2-3.3 25 2.5 30.5 13.8l18.6 37.6c10.3 1.4 20.4 4.2 29.9 8.1l35-23.3c10.5-7 24.4-5.6 33.3 3.3l19.2 19.2c8.9 8.9 10.3 22.9 3.3 33.3l-23.3 34.9c1.9 4.7 3.6 9.6 5 14.7s2.3 10.1 3 15.2l37.7 18.6c11.3 5.6 17.1 18.4 13.8 30.5l-7 26.2c-3.3 12.1-14.6 20.3-27.2 19.5l-42-2.7c-6.3 8.1-13.6 15.6-21.9 22l2.7 41.9c.8 12.6-7.4 24-19.5 27.2l-26.2 7c-12.2 3.3-24.9-2.5-30.5-13.8l-18.6-37.6c-10.3-1.4-20.4-4.2-29.9-8.1l-35 23.3c-10.5 7-24.4 5.6-33.3-3.3l-19.2-19.2c-8.9-8.9-10.3-22.8-3.3-33.3l23.3-35c-1.9-4.7-3.6-9.6-5-14.7s-2.3-10.2-3-15.2L288.6 382c-11.3-5.6-17-18.4-13.8-30.5l7-26.2c3.3-12.1 14.6-20.3 27.2-19.5l41.9 2.7c6.3-8.1 13.6-15.6 21.9-22l-2.7-41.8c-.8-12.6 7.4-24 19.5-27.2l26.2-7zM448.4 340a44 44 0 1 0 .1 88 44 44 0 1 0-.1-88M224.9-45.5l26.2 7c12.1 3.3 20.3 14.7 19.5 27.2l-2.7 41.8c8.3 6.4 15.6 13.8 21.9 22l42-2.7c12.5-.8 23.9 7.4 27.2 19.5l7 26.2c3.2 12.1-2.5 24.9-13.8 30.5l-37.7 18.6c-.7 5.1-1.7 10.2-3 15.2s-3.1 10-5 14.7l23.3 35c7 10.5 5.6 24.4-3.3 33.3L307.3 262c-8.9 8.9-22.8 10.3-33.3 3.3L239 242c-9.5 3.9-19.6 6.7-29.9 8.1l-18.6 37.6c-5.6 11.3-18.4 17-30.5 13.8l-26.2-7c-12.2-3.3-20.3-14.7-19.5-27.2l2.7-41.9c-8.3-6.4-15.6-13.8-21.9-22l-42 2.7c-12.5.8-23.9-7.4-27.2-19.5l-7-26.2c-3.2-12.1 2.5-24.9 13.8-30.5l37.7-18.6c.7-5.1 1.7-10.1 3-15.2 1.4-5.1 3-10 5-14.7L55.1 46.5c-7-10.5-5.6-24.4 3.3-33.3L77.6-6c8.9-8.9 22.8-10.3 33.3-3.3l35 23.3c9.5-3.9 19.6-6.7 29.9-8.1l18.6-37.6c5.6-11.3 18.3-17 30.5-13.8M192.4 84a44 44 0 1 0 0 88 44 44 0 1 0 0-88"></path></svg></span> <strong class="feature-name">Server side processing</strong></p>
-<hr>
-<p>For the most advanced use cases: you can add pipelines to process video and audio streams in real time in your servers.</p>
-</li>
-<li>
-<p><span class="twemoji feature-icon padding-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 15.5c0 1.11-.89 2-2 2s-2-.89-2-2 .9-2 2-2 2 .9 2 2m-9-2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.89 2-2-.89-2-2-2M23 15v3c0 .55-.45 1-1 1h-1v1c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2v-1H2c-.55 0-1-.45-1-1v-3c0-.55.45-1 1-1h1c0-3.87 3.13-7 7-7h1V5.73c-.6-.34-1-.99-1-1.73 0-1.1.9-2 2-2s2 .9 2 2c0 .74-.4 1.39-1 1.73V7h1c3.87 0 7 3.13 7 7h1c.55 0 1 .45 1 1m-2 1h-2v-2c0-2.76-2.24-5-5-5h-4c-2.76 0-5 2.24-5 5v2H3v1h2v3h14v-3h2z"></path></svg></span> <strong class="feature-name">AI-assisted development</strong></p>
-<hr>
-<p>Build with Claude Code, Cursor, VS Code or Codex: the <a href="/latest/docs/building-with-ai/agent-plugin/"><strong>OpenVidu Agent Plugin</strong></a> gives your coding agent the official OpenVidu documentation, so the code it writes is up to date and accurate.</p>
-</li>
-</ul>
-<!---   :material-open-source-initiative:{ .feature-icon } __Built on open source__{ .feature-name }
-
-    ---
-
-    OpenVidu is built using the best open source WebRTC technologies: [LiveKit :fontawesome-solid-external-link:{.external-link-icon}](https://livekit.com/){:target="_blank"} and [mediasoup :fontawesome-solid-external-link:{.external-link-icon}](https://mediasoup.org/){:target="_blank"}-->
-</div>
-</div>
-<div class="home-buttons" data-sal="slide-up" style="margin-top: 3em;">
-<a class="md-button md-button--primary home-meet-button" href="/latest/meet/" title="Get started with OpenVidu Meet">Deploy Meet in minutes</a>
-<a class="md-button home-platform-button" href="/latest/docs/" title="Build with OpenVidu Platform SDKs">Start building with the SDKs</a>
-</div>
-<p class="home-under-cta">Not sure which fits? <a href="openvidu-meet-vs-openvidu-platform/">Compare Meet vs Platform</a></p>
-<hr style="margin: 7em 0 3.5em 0;">
-
-<div class="second-slogan cta-section" data-sal="slide-up">
-  <h2>Build, deploy on-premises and scale your videoconferencing or live streaming app with ease. Need a hand? We are here to help.</h2>
-  <div class="home-buttons">
-    <a href="/support/" class="md-button home-secondary-button">Talk to an expert</a>
+<section class="ov-wrap ov-section ov-closing" data-sal="slide-up">
+  <div class="ov-closing__panel">
+    <h2 class="ov-closing__title">Pick your door.</h2>
+    <div class="ov-closing__actions">
+      <a href="/latest/meet/" class="ov-btn ov-btn--lg ov-btn--meet" title="Get started with OpenVidu Meet">Deploy OpenVidu Meet</a>
+      <a href="/latest/docs/" class="ov-btn ov-btn--lg ov-btn--platform" title="Build with OpenVidu Platform SDKs">Build with OpenVidu Platform</a>
+    </div>
+    <a href="/support/" class="ov-closing__link">Or talk to an expert</a>
   </div>
+</section>
 </div>
 
               </article>
@@ -2011,6 +2002,7 @@
     
 
 
+
 <script src="javascripts/glightbox-gallery.js"></script>
 
 
@@ -2021,9 +2013,6 @@
 </script>
 
 
-
-
-<script src="javascripts/card-glow.js"></script>
 
 
 
@@ -2039,12 +2028,17 @@
 
 
 
+
+
       <script src="assets/javascripts/bundle.c21346df.min.js"></script>
       
     
 
 
 
+
+
+<script src="javascripts/home-use-cases.js"></script>
 
   
 <script src="assets/javascripts/glightbox.min.js"></script><script id="init-glightbox">document.querySelectorAll('.glightbox').forEach(function(element) {
