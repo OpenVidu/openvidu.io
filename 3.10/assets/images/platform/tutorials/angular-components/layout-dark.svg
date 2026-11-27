@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" width="720" height="540" role="img" aria-label="OpenVidu Components Angular layout: video area, side panel and toolbar, highlighting the layout (video area)">
+<title>OpenVidu Components Angular layout: video area, side panel and toolbar, highlighting the layout (video area)</title>
+<rect x="10" y="10" width="700" height="520" rx="32" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<rect x="30" y="30" width="480" height="380" rx="22" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<g transform="translate(249.3 212.2) scale(1.1)" opacity="0.55"><circle cx="0" cy="-26" r="17" fill="#6f7f85"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#6f7f85"/></g>
+<g transform="translate(279.2 228.3) scale(1.1)" opacity="1"><circle cx="0" cy="-26" r="17" fill="#6f7f85"/><path d="M-32 34 C-32 6 -18 -4 0 -4 S32 6 32 34 Z" fill="#6f7f85"/></g>
+<defs><clipPath id="clip-layout-v-dark"><rect x="30" y="30" width="480" height="380" rx="22" fill="#000" /></clipPath></defs>
+<rect x="30" y="30" width="480" height="380" rx="22" fill="#ffcc00" opacity="0.1" />
+<g clip-path="url(#clip-layout-v-dark)"><path d="M-350 410 L30 30 M-328 410 L52 30 M-306 410 L74 30 M-284 410 L96 30 M-262 410 L118 30 M-240 410 L140 30 M-218 410 L162 30 M-196 410 L184 30 M-174 410 L206 30 M-152 410 L228 30 M-130 410 L250 30 M-108 410 L272 30 M-86 410 L294 30 M-64 410 L316 30 M-42 410 L338 30 M-20 410 L360 30 M2 410 L382 30 M24 410 L404 30 M46 410 L426 30 M68 410 L448 30 M90 410 L470 30 M112 410 L492 30 M134 410 L514 30 M156 410 L536 30 M178 410 L558 30 M200 410 L580 30 M222 410 L602 30 M244 410 L624 30 M266 410 L646 30 M288 410 L668 30 M310 410 L690 30 M332 410 L712 30 M354 410 L734 30 M376 410 L756 30 M398 410 L778 30 M420 410 L800 30 M442 410 L822 30 M464 410 L844 30 M486 410 L866 30 M508 410 L888 30" fill="none" stroke="#ffcc00" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" /></g>
+<rect x="31.2" y="31.2" width="477.6" height="377.6" rx="21" fill="none" stroke="#ffcc00" stroke-width="2.4" stroke-dasharray="9 6" />
+<rect x="530" y="30" width="160" height="380" rx="16" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<path d="M10 424 L710 424" fill="none" stroke="#2a3539" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<g transform="translate(36 458) scale(1)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<circle cx="173" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<circle cx="221" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<circle cx="269" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<circle cx="317" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<rect x="350" y="461" width="56" height="32" rx="8" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<circle cx="575" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<circle cx="623" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+<circle cx="671" cy="477" r="19" fill="none" stroke="#6f7f85" stroke-width="1.8" />
+</svg>

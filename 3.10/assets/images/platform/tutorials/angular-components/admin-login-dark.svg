@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" width="720" height="540" role="img" aria-label="OpenVidu Components Angular admin login: a sign-in form with two fields and a SIGN IN button">
+<title>OpenVidu Components Angular admin login: a sign-in form with two fields and a SIGN IN button</title>
+<rect x="10" y="10" width="700" height="520" rx="32" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<defs><clipPath id="hdr-dark"><rect x="10" y="10" width="700" height="520" rx="32" /></clipPath></defs>
+<g clip-path="url(#hdr-dark)"><rect x="10" y="10" width="700" height="76" rx="0" fill="#1f292d" /></g>
+<path d="M10 86 L710 86" fill="none" stroke="#2a3539" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+<g transform="translate(38 29) scale(1)"><path d="M4 4 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-9 l-6 6 v-6 h-7 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#ffcc00"/><path d="M14 10 h22 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-7 v6 l-6 -6 h-9 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4z" fill="#0088aa"/><path d="M14 10 h16 v12 h-4 v-6 h-12z M14 10 h12 v12 h-12z" fill="#06d362"/><path d="M22 13.5 l7 4.5 l-7 4.5z" fill="#ffffff"/></g>
+<rect x="240" y="170" width="240" height="220" rx="16" fill="#1f292d" stroke="#2a3539" stroke-width="1.5" />
+<rect x="258" y="192" width="204" height="44" rx="10" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<rect x="258" y="250" width="204" height="44" rx="10" fill="#171f22" stroke="#2a3539" stroke-width="1.5" />
+<rect x="258" y="314" width="204" height="50" rx="25" fill="#00c8f7" />
+<text x="360" y="346" font-family="Instrument Sans, system-ui, sans-serif" font-size="20" font-weight="700" fill="#00283a" text-anchor="middle">SIGN IN</text>
+</svg>
