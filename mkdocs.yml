@@ -150,7 +150,7 @@ nav:
                   - OpenVidu Dashboard: docs/self-hosting/production-ready/observability/openvidu-dashboard.md
                   - Grafana Stack: docs/self-hosting/production-ready/observability/grafana-stack.md
           - Local (Development): docs/self-hosting/local.md
-          - Single Node:
+          - <span class="openvidu-tag-nav openvidu-community-tag">CE</span><span class="openvidu-tag-nav openvidu-pro-tag">PRO</span> Single Node:
               - docs/self-hosting/single-node/index.md
               - On Premises:
                   - Install: docs/self-hosting/single-node/on-premises/install.md
