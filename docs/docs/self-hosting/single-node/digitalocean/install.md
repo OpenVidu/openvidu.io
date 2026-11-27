@@ -125,7 +125,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
         ```bash
         git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-        git -C openvidu-digitalocean checkout 3.9.0
+        git -C openvidu-digitalocean checkout 3.10.0
         cd openvidu-digitalocean/community/singlenode
         ```
 
@@ -133,7 +133,7 @@ This section contains instructions for deploying a production-ready OpenVidu Sin
 
         ```bash
         git clone https://github.com/OpenVidu/openvidu-digitalocean.git
-        git -C openvidu-digitalocean checkout 3.9.0
+        git -C openvidu-digitalocean checkout 3.10.0
         cd openvidu-digitalocean/pro/singlenode
         ```
 

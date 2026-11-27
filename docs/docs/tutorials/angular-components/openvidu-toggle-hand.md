@@ -5,7 +5,7 @@ description: "Add a raise-hand feature to a video conference built with OpenVidu
 
 # Add toggle hand feature using Angular Components
 
-[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.9.0/openvidu-components-angular/openvidu-toggle-hand){ .md-button target="_blank" }
+[Source code :simple-github:](https://github.com/OpenVidu/openvidu-tutorials/tree/3.10.0/openvidu-components-angular/openvidu-toggle-hand){ .md-button target="_blank" }
 
 The **openvidu-toggle-hand** tutorial demonstrates how to add a toggle hand feature to the OpenVidu Components Angular library.
 
@@ -25,8 +25,8 @@ This tutorial combines the use of the **ToolbarAdditionalButtonsDirective**, the
 ### 2. Download the tutorial code
 
 ```bash
-git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.9.0
-git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.9.0
+git clone https://github.com/OpenVidu/openvidu-livekit-tutorials.git -b 3.10.0
+git clone https://github.com/OpenVidu/openvidu-tutorials.git -b 3.10.0
 ```
 
 ### 3. Run a server application

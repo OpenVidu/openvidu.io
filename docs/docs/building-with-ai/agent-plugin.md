@@ -112,8 +112,8 @@ Your client doesn't load plugins, or you would rather not install one? Add the [
 Many answers depend on three facts about the deployment your project talks to: its **version**, its **edition** (COMMUNITY or PRO) and the **product** your app uses, [OpenVidu Platform](../index.md) or [OpenVidu Meet](../../meet/index.md). When an answer needs them, your agent works them out with the [`openvidu-version-edition-product`](skills.md#available-skills) skill and offers to write them into `AGENTS.md`, so later sessions start from them. You can also write them yourself:
 
 ```markdown title="AGENTS.md"
-This project connects to an OpenVidu 3.9.0 pro deployment, using OpenVidu Meet.
-When querying the OpenVidu documentation MCP, always pass version="3.9.0",
+This project connects to an OpenVidu 3.10.0 pro deployment, using OpenVidu Meet.
+When querying the OpenVidu documentation MCP, always pass version="3.10.0",
 and read the answers for that edition and product.
 ```
 
@@ -124,7 +124,7 @@ The same lines work in `CLAUDE.md`. Write facts only, never a credential, and do
 Ask as you would about any other code, and your agent reads the documentation when the task needs it:
 
 - "How do I record a room with individual tracks in OpenVidu?"
-- "We're on OpenVidu 3.9.0. How do I deploy it with fault tolerance?"
+- "We're on OpenVidu 3.10.0. How do I deploy it with fault tolerance?"
 - "Does the OpenVidu Egress service need S3 credentials, and how are they configured?"
 - "In our OpenVidu app, how do I send a data message to a single participant with livekit-client?"
 - "Our LiveKit server reports 1.9.8. Which OpenVidu version is that?"
